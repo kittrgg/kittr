@@ -31,13 +31,13 @@ jobs:
       #       echo "$file was changed"
       #     done
 
-      # - name: Build and push api Docker Image
-      #   # if: contains(steps.changed-files.outputs.all_changed_files, 'api')
-      #   uses: docker/build-push-action@v2
-      #   with:
-      #     context: ./api
-      #     push: true
-      #     tags: ghcr.io/${{github.repository}}/api:${{github.sha}}
+      - name: Build and push api Docker Image
+        # if: contains(steps.changed-files.outputs.all_changed_files, 'api')
+        uses: docker/build-push-action@v2
+        with:
+          context: ./back-end
+          push: true
+          tags: ghcr.io/${{github.repository}}/api:${{github.sha}}
 
       - name: Build and push web Docker Image
         # if: contains(steps.changed-files.outputs.all_changed_files, 'web')
@@ -72,15 +72,15 @@ jobs:
             NEXT_PUBLIC_SOCKET_HOST=${{secrets.NEXT_PUBLIC_SOCKET_HOST}}
             GOOGLE_APPLICATION_CREDENTIALS=${{secrets.GOOGLE_APPLICATION_CREDENTIALS}}
 
-      # - name: Trigger api deployment to Digital Ocean
-      #   # if: contains(steps.changed-files.outputs.all_changed_files, 'api')
-      #   uses: appleboy/ssh-action@master
-      #   with:
-      #     host: ${{secrets.DROPLET_HOST}}
-      #     username: ${{secrets.DOKKU_SSH_USER}}
-      #     key: ${{ secrets.DOKKU_SSH_PRIVATE_KEY }}
-      #     script: |
-      #       dokku git:from-image api ghcr.io/${{github.repository}}/api:${{github.sha}}
+      - name: Trigger api deployment to Digital Ocean
+        # if: contains(steps.changed-files.outputs.all_changed_files, 'api')
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{secrets.DROPLET_HOST}}
+          username: ${{secrets.DOKKU_SSH_USER}}
+          key: ${{ secrets.DOKKU_SSH_PRIVATE_KEY }}
+          script: |
+            dokku git:from-image api ghcr.io/${{github.repository}}/api:${{github.sha}}
 
       - name: Trigger web deployment to Digital Ocean
         # if: contains(steps.changed-files.outputs.all_changed_files, 'web')
