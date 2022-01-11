@@ -69,8 +69,6 @@ export const getStaticProps: GetStaticProps = async () => {
 
 	const featuredChannel = await getTwitchChannelInfo(currentPromo?.channelId || "")
 
-	// Just a little something so I can make a new commit
-
 	return {
 		props: {
 			featuredChannel,
