@@ -1,0 +1,4 @@
+myNextApplication:
+  component: "@sls-next/serverless-component@3.7.0-alpha.3"
+  inputs:
+    domain: ["www", "kittr.gg"]
