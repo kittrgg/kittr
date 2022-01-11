@@ -89,7 +89,7 @@ mongoose
     */
     app.get("/api/streamer", getStreamerByTwitchBroadcasterLoginId);
 
-    http.listen(process.env.PORT || 8000, () =>
-      console.log(`Server is running on PORT: ${process.env.PORT || 8000}...`)
+    http.listen(process.env.PORT || 5000, () =>
+      console.log(`Server is running on PORT: ${process.env.PORT || 5000}...`)
     );
   });
