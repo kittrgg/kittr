@@ -27,7 +27,7 @@ const ChannelProfile = ({ channel, twitchInfo }: Props) => {
 
 	useEffect(() => {
 		if (isPremium && hasCoverPhoto) download(`${channel._id}-profile-cover-photo`, (path) => setCoverPhotoPath(path))
-	}, [])
+	}, [channel._id, hasCoverPhoto, isPremium])
 
 	return (
 		<Container>
