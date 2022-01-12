@@ -19,7 +19,7 @@ const RecentVideos = ({ videos, coverPhotoPath, profileImagePath, brandColor }: 
 
 	return (
 		<section id="videos">
-			<H2>RECENT CHANNELS</H2>
+			<H2>RECENT STREAMS</H2>
 			<SideScroller childMargin="10px" wrapperStyles={{ width: "100vw" }}>
 				{videos.map((clip: any) => {
 					const month = getMonth(new Date(clip.created_at))
