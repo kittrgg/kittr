@@ -1,4 +1,4 @@
-name: Publish kittr
+name: Deploy Production
 
 on:
   push:
@@ -35,7 +35,7 @@ jobs:
         # if: contains(steps.changed-files.outputs.all_changed_files, 'api')
         uses: docker/build-push-action@v2
         with:
-          context: ./back-end
+          context: ./web
           push: true
           tags: ghcr.io/${{github.repository}}/api:${{github.sha}}
 
@@ -43,7 +43,7 @@ jobs:
         # if: contains(steps.changed-files.outputs.all_changed_files, 'web')
         uses: docker/build-push-action@v2
         with:
-          context: ./front-end
+          context: ./api
           push: true
           tags: ghcr.io/${{github.repository}}/web:${{github.sha}}
           build-args: |

@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  api:
+    container_name: api
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+
+  web:
+    container_name: web
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    env_file:
+      - .env

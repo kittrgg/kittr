@@ -1,0 +1,17 @@
+FROM node:16-alpine3.14
+
+ENV PORT 3000
+
+# Create app directory
+RUN mkdir -p /app
+WORKDIR /app
+
+# Installing dependencies
+COPY package*.json .
+RUN npm install
+
+# Copying source files
+COPY . .
+
+# Run in dev mode
+CMD [ "npm", "run", "dev" ]
