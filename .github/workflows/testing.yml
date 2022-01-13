@@ -13,11 +13,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [16.x]
-
-      - run: |
+      - name: Run E2E Tests
+        run: |
           cd web
           npm run ci
         env:
