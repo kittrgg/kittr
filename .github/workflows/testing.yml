@@ -17,22 +17,9 @@ jobs:
       matrix:
         node-version: [16.x]
 
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        name: Use Node.js ${{ matrix.node-version }}
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
-
-      - run: npm install
-
-      - uses: satak/webrequest-action@master
-        with:
-          url: ${{secrets.NEXT_PUBLIC_SOCKET_HOST}}
-          method: GET
-
-      - run: npm run ci
+      - run: |
+          cd web
+          npm run ci
         env:
           DB_CONNECTION_STRING: ${{secrets.CI_DB_CONNECTION_STRING}}
           ENVIRONMENT: ${{secrets.CI_ENVIRONMENT}}
