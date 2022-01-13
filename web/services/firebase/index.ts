@@ -23,6 +23,7 @@ app()
 
 export const auth = firebase.auth()
 if (process.env.NEXT_PUBLIC_ENVIRONMENT === "TESTING" || process.env.NEXT_PUBLIC_ENVIRONMENT === "DEVELOPMENT") {
+	console.log(`http://${process.env.NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST}`)
 	auth.useEmulator(`http://${process.env.NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST}`)
 }
 
