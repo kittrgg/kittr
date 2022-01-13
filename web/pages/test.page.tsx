@@ -33,8 +33,6 @@ export const getStaticProps: GetStaticProps = async () => {
 		getHomeChannelPromo()
 	])
 
-	console.log(currentPromo)
-
 	const featuredChannel = await getTwitchChannelInfo(currentPromo?.channelId || "")
 
 	return {

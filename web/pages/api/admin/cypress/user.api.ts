@@ -11,6 +11,7 @@ const handler = createHandler()
 
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 	if (process.env.ENVIRONMENT === "TESTING") {
+		console.log("Seeding firebase emulators...")
 		admin
 			.deleteUsers([
 				"w5lMLvVLL3uJNRuoqSWvYjNIJ1GF",
@@ -31,6 +32,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 						return res.status(200).json({ success: true })
 					}
 				} catch (error) {
+					console.error(error)
 					return res.status(500).json({ error })
 				}
 			})

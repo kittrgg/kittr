@@ -3,14 +3,14 @@ import "firebase/auth"
 import "firebase/storage"
 
 export const firebaseConfig = {
-	apiKey: process.env.NEXT_PUBLIC_API_KEY || "dev",
-	authDomain: process.env.FIREBASE_AUTH_DOMAIN || "dev",
-	databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL || "dev",
-	projectId: process.env.FIREBASE_PROJECT_ID || "dev",
-	storageBucket: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL || "dev",
-	messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID || "dev",
-	appId: process.env.FIREBASE_APP_ID || "dev",
-	measurementId: process.env.FIREBASE_MEASUREMENT_ID || "dev"
+	apiKey: process.env.NEXT_PUBLIC_API_KEY,
+	authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+	databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
+	projectId: process.env.FIREBASE_PROJECT_ID,
+	storageBucket: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
+	messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+	appId: process.env.FIREBASE_APP_ID,
+	measurementId: process.env.FIREBASE_MEASUREMENT_ID
 }
 
 const app = () => {
@@ -22,9 +22,5 @@ const app = () => {
 app()
 
 export const auth = firebase.auth()
-if (process.env.NEXT_PUBLIC_ENVIRONMENT === "TESTING" || process.env.NEXT_PUBLIC_ENVIRONMENT === "DEVELOPMENT") {
-	console.log(`http://${process.env.NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST}`)
-	auth.useEmulator(`http://${process.env.NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST}`)
-}
 
 export default app
