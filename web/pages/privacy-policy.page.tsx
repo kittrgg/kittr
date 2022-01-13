@@ -165,7 +165,6 @@ const PrivacyPolicy = ({ ...props }) => {
 					<br />
 					anthony@inthezone.dev{" "}
 				</p>
-				<p>Test</p>
 			</Styled.Container>
 		</PageWrapper>
 	)
