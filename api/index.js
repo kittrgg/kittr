@@ -79,7 +79,7 @@ mongoose
     });
 
     app.get("/", (req, res) => {
-      res.send("Hello, kittr!");
+      res.send("Hello from kittr!");
     });
 
     /*
