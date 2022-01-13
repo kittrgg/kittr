@@ -1,8 +1,8 @@
 import admin from "firebase-admin"
 
 if (!admin.apps.length) {
-	if (process.env.ENVIRONMENT === "TESTING") {
-		admin.initializeApp({ projectId: "kittr-dev" })
+	if (process.env.ENVIRONMENT === "DEVELOPMENT" || process.env.ENVIRONMENT === "TESTING") {
+		admin.initializeApp({ projectId: "dev" })
 	} else {
 		try {
 			admin.initializeApp({

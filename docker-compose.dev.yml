@@ -1,22 +1,19 @@
 version: "3"
 
 services:
-  mongo:
-    image: mongo
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-
-  mongo-express:
-    image: mongo-express
-    restart: always
-    ports:
-      - 8081:8081
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: example
-      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+  # Couldn't get connection strings to work correctly locally.
+  # Will continue to use the dev database on Atlas for now...
+  # mongo:
+  #   container_name: mongo
+  #   image: mongo
+  #   restart: always
+  #   ports:
+  #     - 27017:27017
+  #   volumes:
+  #     - /data/db:/data/db
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: root
+  #     MONGO_INITDB_ROOT_PASSWORD: example
 
   firebase-emulators:
     container_name: firebase
@@ -34,7 +31,7 @@ services:
 
   api:
     depends_on:
-      - mongodb
+      # - mongo
       - firebase-emulators
     ports:
       - 5000:5000
@@ -48,7 +45,7 @@ services:
 
   web:
     depends_on:
-      - mongodb
+      # - mongo
       - firebase-emulators
     ports:
       - 3000:3000

@@ -7,34 +7,37 @@ import Rollbar from "rollbar"
 import config from "./config"
 
 const rollbar = new Rollbar(config)
+if (process.env.NEXT_PUBLIC_ENVIRONMENT === "PRODUCTION") {
+	rollbar.configure({
+		checkIgnore: (_, __, payload) => {
+			if (
+				(payload as any).body.telemetry[(payload as any).body.telemetry.length - 1].body.stack.includes(
+					"doubleclick.net"
+				)
+			) {
+				return true
+			}
 
-rollbar.configure({
-	checkIgnore: (_, __, payload) => {
-		if (
-			(payload as any).body.telemetry[(payload as any).body.telemetry.length - 1].body.stack.includes("doubleclick.net")
-		) {
-			return true
+			if (
+				(payload as any).body.telemetry.filter(
+					(elem: any) => elem.level === "error" && elem.type === "network" && !elem.url.includes("kittr.gg")
+				).length > 0
+			) {
+				return true
+			}
+
+			if ((payload as any).trace.frames.filename.includes("mraid.js")) {
+				return true
+			}
+
+			if ((payload as any).client.javascript.browser.includes("OPR/37")) {
+				return true
+			}
+
+			return false
 		}
-
-		if (
-			(payload as any).body.telemetry.filter(
-				(elem: any) => elem.level === "error" && elem.type === "network" && !elem.url.includes("kittr.gg")
-			).length > 0
-		) {
-			return true
-		}
-
-		if ((payload as any).trace.frames.filename.includes("mraid.js")) {
-			return true
-		}
-
-		if ((payload as any).client.javascript.browser.includes("OPR/37")) {
-			return true
-		}
-
-		return false
-	}
-})
+	})
+}
 
 interface Props {
 	children: ReactNode

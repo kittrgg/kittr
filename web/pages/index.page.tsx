@@ -3,6 +3,7 @@ import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
 import { allGamesQuery, topChannelsQuery, totalKitsQuery, risingStarsQuery, getBlogPostsQuery } from "@Services/mongodb"
 import { liveChannelsQuery } from "@Services/twitch/getLiveStreams"
 import { getHomeChannelPromo } from "@Services/mongodb/queries/promos"
+import { getTwitchChannelInfo } from "@Services/twitch/getChannelInfo"
 
 import PageWrapper from "@Components/layouts/PageWrapper"
 import Hero from "./Home/Hero"
@@ -11,7 +12,6 @@ import PlatformInfo from "./Home/PlatformInfo"
 import BlogSection from "./Home/BlogSection"
 import ResponsiveAdBanner from "@Services/venatus/ResponsiveBanner"
 import FrontPageBoostr from "@Features/Promo/FrontPage"
-import { getTwitchChannelInfo } from "@Services/twitch/getChannelInfo"
 
 interface Props {
 	games: IGame[]
