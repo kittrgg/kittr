@@ -47,6 +47,11 @@ mongoose
     useFindAndModify: false,
   })
   .then(async () => {
+    // Just a pinger!
+    app.get("/", (req, res) => {
+      res.send("Hello, kittr!");
+    });
+
     console.log("Server has started.");
     setInterval(() => writeViewCounts(), 3600000); // Once an hour
     setInterval(() => createKitStatsAsInterval(), 86700000); // A little more than once a day
@@ -76,10 +81,6 @@ mongoose
         openSockets = openSockets - 1;
         console.log("Active Socket Count:", openSockets);
       });
-    });
-
-    app.get("/", (req, res) => {
-      res.send("Hello from kittr!");
     });
 
     /*
