@@ -465,7 +465,7 @@ const Terms = ({ ...props }) => {
 				</p>
 
 				<p>
-					<strong>Your Privacy.</strong> Please read our Privacy Policy.
+					<strong>For Your Privacy.</strong> Please read our Privacy Policy.
 				</p>
 
 				<p>
