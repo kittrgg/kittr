@@ -49,7 +49,7 @@ mongoose
   .then(async () => {
     // Just a pinger!
     app.get("/", (req, res) => {
-      res.send("Hello from kittr!");
+      res.send("Hello, kittr!");
     });
 
     console.log("Server has started.");

@@ -21,6 +21,7 @@ export const userAuth = async (req: NextApiRequest, res: NextApiResponse, next: 
 			return next()
 		})
 		.catch((err) => {
+			console.error(err)
 			return res.status(401).json({ error: true, message: "Your authorization was not accepted." })
 		})
 }
