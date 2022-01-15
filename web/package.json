@@ -13,6 +13,7 @@
 		"cypress:run": "cypress run",
 		"emulators": "firebase emulators:start",
 		"emulators:exec": "firebase emulators:exec \"npm run cypress:open\"",
+		"emulators:seed": "node ./services/firebase/auth/seedEmulators.ts",
 		"dev:test-scaffold": "next dev",
 		"dev:test-open": "node ./ci/test.js && concurrently \"npm run dev:test-scaffold\" \"npm run emulators\" \"npm run cypress:open\"",
 		"dev:test-run": "node ./ci/test.js && concurrently \"npm run dev:test-scaffold\" \"npm run emulators\" \"npm run cypress:run\"",
