@@ -3,7 +3,7 @@ import admin from "firebase-admin"
 if (!admin.apps.length) {
 	if (process.env.ENVIRONMENT === "DEVELOPMENT" || process.env.ENVIRONMENT === "TESTING") {
 		console.log("Using admin in emulator mode.")
-		admin.initializeApp({ projectId: "kittr-dev" })
+		admin.initializeApp({ projectId: "dev" })
 	} else {
 		try {
 			admin.initializeApp({

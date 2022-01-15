@@ -26,7 +26,7 @@ import "firebase/auth"
 const firebaseConfig = {
 	// Only apiKey is needed when using an emulator
 	apiKey: process.env.NEXT_PUBLIC_API_KEY || Cypress.env("NEXT_PUBLIC_API_KEY"),
-	projectId: "kittr-dev"
+	projectId: "dev"
 }
 
 firebase.initializeApp(firebaseConfig)
