@@ -14,28 +14,27 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import "./commands"
+import "./commands";
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
-import "@cypress/code-coverage/support"
-import firebase from "firebase/app"
-import "firebase/auth"
+import firebase from "firebase/app";
+import "firebase/auth";
 
 const firebaseConfig = {
-	// Only apiKey is needed when using an emulator
-	apiKey: process.env.NEXT_PUBLIC_API_KEY || Cypress.env("NEXT_PUBLIC_API_KEY"),
-	projectId: "dev"
-}
+  // Only apiKey is needed when using an emulator
+  apiKey: process.env.NEXT_PUBLIC_API_KEY || Cypress.env("NEXT_PUBLIC_API_KEY"),
+  projectId: "dev",
+};
 
-firebase.initializeApp(firebaseConfig)
+firebase.initializeApp(firebaseConfig);
 
-export const auth = firebase.auth()
-auth.useEmulator("http://localhost:9099")
+export const auth = firebase.auth();
+auth.useEmulator(`http://localhost:4001`);
 
 before(() => {
-	cy.request("POST", "http://localhost:3000/api/admin/cypress/user")
+  cy.request("POST", "http://localhost:3000/api/admin/cypress/user");
 
-	cy.request("POST", "http://localhost:3000/api/admin/cypress/seedDatabase")
-})
+  cy.request("POST", "http://localhost:3000/api/admin/cypress/seedDatabase");
+});

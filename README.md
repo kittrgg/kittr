@@ -13,6 +13,8 @@ You may also `npm run dev:build -- -d` if you don't care about seeing logs.
 `npm run dev`
 You may also `npm run dev -- -d` if you don't care about seeing logs.
 
+- To seed the firebase-emulators, you will need to shell into the `web` docker container and use `npm run emulators:seed`.
+
 ## Ports
 
 - Web front-end: 3000
@@ -26,8 +28,7 @@ Firebase:
 
 ## Developer Notes
 
-- You may set environment variables in a `.env` file at the top of the file. The example file already includes the proper firebase-emulators ports. You will need variables for everything but the Stripe stuff for now.
-- To seed the firebase-emulators, you will need to shell into the `web` docker container and use `npm run emulators:seed`.
+- You may set environment variables in a `.env` file at the top of the file. The example file already includes the proper firebase-emulators ports. You will need variables for everything but the Stripe stuff for now (until we need to do more Stripe developmenting).
 
 ## Dev Environment Needed Improvements:
 
