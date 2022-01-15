@@ -34,7 +34,7 @@ export const auth = firebase.auth();
 auth.useEmulator(`http://localhost:4001`);
 
 before(() => {
-  cy.request("POST", "http://localhost:3000/api/admin/cypress/user");
+  cy.request("POST", "http://web:3000/api/admin/cypress/user");
 
-  cy.request("POST", "http://localhost:3000/api/admin/cypress/seedDatabase");
+  cy.request("POST", "http://web:3000/api/admin/cypress/seedDatabase");
 });

@@ -6,18 +6,8 @@
     "dev": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up",
     "dev:build": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build",
     "dev:kill": "docker-compose down",
+    "test": "docker-compose -f docker-compose.yml -f docker-compose.test.yml up",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"
-  },
-  "devDependencies": {
-    "@cypress/schema-tools": "^4.7.9",
-    "@types/node": "^17.0.8",
-    "dotenv": "^12.0.3",
-    "firebase": "^8.7.1",
-    "ts-node": "^10.4.0",
-    "typescript": "^4.5.4"
-  },
-  "dependencies": {
-    "cypress": "^9.2.1"
   }
 }
