@@ -16,7 +16,7 @@ services:
   #     MONGO_INITDB_ROOT_PASSWORD: example
 
   firebase-emulators:
-    container_name: firebase
+    container_name: firebase-emulators
     ports:
       - "4000:4000"
       - "4001:4001"

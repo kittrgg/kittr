@@ -31,7 +31,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 export const auth = firebase.auth();
-auth.useEmulator(`http://localhost:4001`);
+auth.useEmulator(`http://firebase-emulators:4001`);
 
 before(() => {
   cy.request("POST", "http://web:3000/api/admin/cypress/user");

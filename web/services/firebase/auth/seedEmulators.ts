@@ -60,3 +60,6 @@ auth
 			console.error(error)
 		}
 	})
+
+// Just here to satisy the module requirement
+export {}
