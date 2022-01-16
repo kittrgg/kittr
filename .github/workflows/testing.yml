@@ -25,18 +25,31 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # - name: Create .env for docker-compose
-      #   run: |
-      #     touch .env
-      #     echo ENVIRONMENT=TESTING >> .env
-      #     echo NEXT_PUBLIC_ENVIRONMENT=TESTING >> .env
-      #     echo TWITCH_CLIENT_ID=${{secrets.CI_TWITCH_CLIENT_ID}} >> .env
-      #     echo TWITCH_SECRET=${{secrets.TWITCH_SECRET}} >> .env
-      #     echo DB_CONNECTION_STRING=${{secrets.CI_DB_CONNECTION_STRING}} >> .env
-      #     echo FIREBASE_AUTH_EMULATOR_HOST=firebase-emulators:4001 >> .env
-      #     echo FIREBASE_STORAGE_EMULATOR_HOST=firebase-emulators:4002 >> .env
-      #     echo NEXT_PUBLIC_FIREBASE_STORAGE_EMULATOR_HOST=localhost:4002 >> .env
-      #     echo NEXT_PUBLIC_SOCKET_HOST=http://localhost:5000 >> .env
+      - name: Create .env for docker-compose
+        run: |
+          touch .env
+          echo ENVIRONMENT=TESTING >> .env
+          echo NEXT_PUBLIC_ENVIRONMENT=TESTING >> .env
+          echo TWITCH_CLIENT_ID=${{secrets.CI_TWITCH_CLIENT_ID}} >> .env
+          echo TWITCH_SECRET=${{secrets.TWITCH_SECRET}} >> .env
+          echo DB_CONNECTION_STRING=${{secrets.CI_DB_CONNECTION_STRING}} >> .env
+          echo FIREBASE_AUTH_EMULATOR_HOST=firebase-emulators:4001 >> .env
+          echo FIREBASE_STORAGE_EMULATOR_HOST=firebase-emulators:4002 >> .env
+          echo NEXT_PUBLIC_FIREBASE_STORAGE_EMULATOR_HOST=localhost:4002 >> .env
+          echo NEXT_PUBLIC_SOCKET_HOST=http://localhost:5000 >> .env
+
+      - name: Create .env.local for Next.js
+        run: |
+          touch .env
+          echo ENVIRONMENT=TESTING >> .env.local
+          echo NEXT_PUBLIC_ENVIRONMENT=TESTING >> .env.local
+          echo TWITCH_CLIENT_ID=${{secrets.CI_TWITCH_CLIENT_ID}} >> .env.local
+          echo TWITCH_SECRET=${{secrets.TWITCH_SECRET}} >> .env.local
+          echo DB_CONNECTION_STRING=${{secrets.CI_DB_CONNECTION_STRING}} >> .env.local
+          echo FIREBASE_AUTH_EMULATOR_HOST=firebase-emulators:4001 >> .env.local
+          echo FIREBASE_STORAGE_EMULATOR_HOST=firebase-emulators:4002 >> .env.local
+          echo NEXT_PUBLIC_FIREBASE_STORAGE_EMULATOR_HOST=localhost:4002 >> .env.local
+          echo NEXT_PUBLIC_SOCKET_HOST=http://localhost:5000 >> .env.local
 
       # - name: Build and push TEST api Docker Image
       #   uses: docker/build-push-action@v2
