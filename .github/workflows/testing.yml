@@ -40,6 +40,7 @@ jobs:
 
       - name: Create .env.local for Next.js
         run: |
+          cd web
           touch .env
           echo ENVIRONMENT=TESTING >> .env.local
           echo NEXT_PUBLIC_ENVIRONMENT=TESTING >> .env.local
