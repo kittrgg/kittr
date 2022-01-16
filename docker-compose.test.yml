@@ -9,11 +9,10 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - web
+    env_file:
+      - .env
     environment:
       - CYPRESS_baseUrl=http://web:3000
-      - DB_CONNECTION_STRING=${CI_DB_CONNECTION_STRING}
-      - FIREBASE_AUTH_EMULATOR_HOST=firebase-emulators:4001
-      - FIREBASE_STORAGE_EMULATOR_HOST=firebase-emulators:4002
     command: npx cypress run
     volumes:
       - ./cypress:/app/cypress
