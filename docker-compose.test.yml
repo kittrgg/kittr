@@ -48,20 +48,13 @@ services:
 
   api:
     container_name: api
-    build:
-      context: ./api
-      dockerfile: Dockerfile
+    image: ghcr.io/kittrgg/monorepo/api:test
     depends_on:
       # - mongo
       - firebase-emulators
     ports:
       - 5000:5000
       - 5555:5555
-    volumes:
-      - ./api:/usr/app
-    environment:
-      - FIREBASE_AUTH_EMULATOR_HOST=firebase-emulators:4001
-      - FIREBASE_STORAGE_EMULATOR_HOST=firebase-emulators:4002
     command: npm run local
 
   web:
@@ -71,23 +64,4 @@ services:
       - firebase-emulators
     ports:
       - 3000:3000
-    build:
-      context: ./web
-      dockerfile: Dockerfile
-      args:
-        - ENVIRONMENT=TESTING
-        - NEXT_PUBLIC_ENVIRONMENT=TESTING
-        - DB_CONNECTION_STRING=${secrets.CI_DB_CONNECTION_STRING}
-        - TWITCH_CLIENT_ID=${secrets.CI_TWITCH_CLIENT_ID}
-        - TWITCH_SECRET=${secrets.CI_TWITCH_SECRET}
-        - NEXT_PUBLIC_SOCKET_HOST=${secrets.CI_NEXT_PUBLIC_SOCKET_HOST}
-    environment:
-      - ENVIRONMENT=TESTING
-      - NEXT_PUBLIC_ENVIRONMENT=TESTING
-      - FIREBASE_AUTH_EMULATOR_HOST=firebase-emulators:4001
-      - FIREBASE_STORAGE_EMULATOR_HOST=firebase-emulators:4002
-      - NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST=localhost:4001
-      - NEXT_PUBLIC_FIREBASE_STORAGE_EMULATOR_HOST=localhost:4002
-    volumes:
-      - ./web:/app
-      - /web/app/node_modules
+    image: ghcr.io/kittrgg/monorepo/web:test
