@@ -53,7 +53,7 @@ jobs:
           tags: ghcr.io/${{github.repository}}/web:test
           build-args: |
             ENVIRONMENT: ${{secrets.CI_ENVIRONMENT}}
-            DB_CONNECTION_STRING: ${{secrets.CI_DB_CONNECTION_STRING}}
+            DB_CONNECTION_STRING: fartfartfart
             FIREBASE_AUTH_EMULATOR_HOST: ${{secrets.CI_FIREBASE_AUTH_EMULATOR_HOST}}
             NEXT_PUBLIC_API_KEY: ${{secrets.CI_NEXT_PUBLIC_API_KEY}}
             NEXT_PUBLIC_ENVIRONMENT: ${{secrets.CI_ENVIRONMENT}}
