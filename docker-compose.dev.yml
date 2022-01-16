@@ -30,6 +30,10 @@ services:
     command: firebase emulators:start --project dev
 
   api:
+    container_name: api
+    build:
+      context: ./api
+      dockerfile: Dockerfile
     depends_on:
       # - mongo
       - firebase-emulators
@@ -38,6 +42,8 @@ services:
       - 5555:5555
     volumes:
       - ./api:/usr/app
+    env_file:
+      - .env
     environment:
       - FIREBASE_AUTH_EMULATOR_HOST=firebase-emulators:4001
       - FIREBASE_STORAGE_EMULATOR_HOST=firebase-emulators:4002
@@ -52,6 +58,8 @@ services:
     build:
       context: ./web
       dockerfile: Dockerfile.dev
+    env_file:
+      - .env
     environment:
       - ENVIRONMENT = "DEVELOPMENT"
       - NEXT_PUBLIC_ENVIRONMENT = "DEVELOPMENT"

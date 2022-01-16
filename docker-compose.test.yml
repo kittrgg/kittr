@@ -47,6 +47,10 @@ services:
     command: firebase emulators:start --project dev
 
   api:
+    container_name: api
+    build:
+      context: ./api
+      dockerfile: Dockerfile
     depends_on:
       # - mongo
       - firebase-emulators
@@ -61,6 +65,7 @@ services:
     command: npm run local
 
   web:
+    container_name: web
     depends_on:
       # - mongo
       - firebase-emulators
@@ -69,9 +74,16 @@ services:
     build:
       context: ./web
       dockerfile: Dockerfile
+      args:
+        - ENVIRONMENT=TESTING
+        - NEXT_PUBLIC_ENVIRONMENT=TESTING
+        - DB_CONNECTION_STRING=${DB_CONNECTION_STRING}
+        - TWITCH_CLIENT_ID=${TWITCH_CLIENT_ID}
+        - TWITCH_SECRET=${TWITCH_SECRET}
+        - NEXT_PUBLIC_SOCKET_HOST=${NEXT_PUBLIC_SOCKET_HOST}
     environment:
-      - ENVIRONMENT = "TESTING"
-      - NEXT_PUBLIC_ENVIRONMENT = "TESTING"
+      - ENVIRONMENT=TESTING
+      - NEXT_PUBLIC_ENVIRONMENT=TESTING
       - FIREBASE_AUTH_EMULATOR_HOST=firebase-emulators:4001
       - FIREBASE_STORAGE_EMULATOR_HOST=firebase-emulators:4002
       - NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST=localhost:4001

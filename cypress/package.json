@@ -2,10 +2,6 @@
   "name": "kittr",
   "version": "0.0.0",
   "author": "Anthony Shew",
-  "scripts": {
-    "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
-  },
   "devDependencies": {
     "@cypress/schema-tools": "^4.7.9",
     "@types/node": "^17.0.8",
