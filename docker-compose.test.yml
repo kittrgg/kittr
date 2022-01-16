@@ -11,7 +11,7 @@ services:
       - web
     environment:
       - CYPRESS_baseUrl=http://web:3000
-      - DB_CONNECTION_STRING=${secrets.CI_DB_CONNECTION_STRING}
+      - DB_CONNECTION_STRING=${CI_DB_CONNECTION_STRING}
       - FIREBASE_AUTH_EMULATOR_HOST=firebase-emulators:4001
       - FIREBASE_STORAGE_EMULATOR_HOST=firebase-emulators:4002
     command: npx cypress run
@@ -78,10 +78,10 @@ services:
       args:
         - ENVIRONMENT=TESTING
         - NEXT_PUBLIC_ENVIRONMENT=TESTING
-        - DB_CONNECTION_STRING=${secrets.CI_DB_CONNECTION_STRING}
-        - TWITCH_CLIENT_ID=${secrets.CI_TWITCH_CLIENT_ID}
-        - TWITCH_SECRET=${secrets.CI_TWITCH_SECRET}
-        - NEXT_PUBLIC_SOCKET_HOST=${secrets.CI_NEXT_PUBLIC_SOCKET_HOST}
+        - DB_CONNECTION_STRING=${CI_DB_CONNECTION_STRING}
+        - TWITCH_CLIENT_ID=${CI_TWITCH_CLIENT_ID}
+        - TWITCH_SECRET=${CI_TWITCH_SECRET}
+        - NEXT_PUBLIC_SOCKET_HOST=${CI_NEXT_PUBLIC_SOCKET_HOST}
     environment:
       - ENVIRONMENT=TESTING
       - NEXT_PUBLIC_ENVIRONMENT=TESTING
