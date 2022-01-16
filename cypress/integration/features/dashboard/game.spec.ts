@@ -84,9 +84,8 @@ describe("Games & Kits Actions", () => {
     cy.get("[data-cy=EM2-quick-export]").click();
     cy.get("[data-cy=user-toggle] > [data-cy=toggler-value-1]").click();
     cy.get("[data-cy=command-toggle] > [data-cy=toggler-value-1]").click();
-    cy.contains(
-      `!addcom !em2 localhost:3000/c/${channel.urlSafeName}/warzone/?k=EM2`
-    );
+    cy.contains(`!addcom !em2`);
+    cy.contains(`/c/${channel.urlSafeName}/warzone/?k=EM2`);
   });
 
   it("Exports bot commands", () => {
@@ -94,16 +93,14 @@ describe("Games & Kits Actions", () => {
     cy.contains("EXPORT BOT COMMANDS").click();
     cy.contains(`!editcom !loadout $(touser)`);
     cy.get("[data-cy=user-toggle] > [data-cy=toggler-value-1]").click();
-    cy.contains(
-      `!editcom !loadout localhost:3000/c/${channel.urlSafeName}/warzone`
-    );
+    cy.contains(`!editcom !loadout`);
+    cy.contains(`/c/${channel.urlSafeName}/warzone`);
     cy.get("[data-cy=custom-text-builder]")
       .clear()
       .type("{{link}} is the best kit", { parseSpecialCharSequences: false });
     cy.get("[data-cy=save-custom-string]").click();
-    cy.contains(
-      `!editcom !loadout localhost:3000/c/${channel.urlSafeName}/warzone is the best`
-    );
+    cy.contains(`!editcom !loadout`);
+    cy.contains(`/c/${channel.urlSafeName}/warzone is the best`);
     cy.get("[data-cy=custom-text-builder]").clear();
     cy.get("[data-cy=save-custom-string]").click();
   });
