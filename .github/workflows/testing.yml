@@ -25,25 +25,25 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create .env for docker-compose
-        run: |
-          touch .env
-          echo ENVIRONMENT=TESTING >> .env
-          echo NEXT_PUBLIC_ENVIRONMENT=TESTING >> .env
-          echo TWITCH_CLIENT_ID=${{secrets.CI_TWITCH_CLIENT_ID}} >> .env
-          echo TWITCH_SECRET=${{secrets.TWITCH_SECRET}} >> .env
-          echo DB_CONNECTION_STRING=${{secrets.CI_DB_CONNECTION_STRING}} >> .env
-          echo FIREBASE_AUTH_EMULATOR_HOST=firebase-emulators:4001 >> .env
-          echo FIREBASE_STORAGE_EMULATOR_HOST=firebase-emulators:4002 >> .env
-          echo NEXT_PUBLIC_FIREBASE_STORAGE_EMULATOR_HOST=localhost:4002 >> .env
-          echo NEXT_PUBLIC_SOCKET_HOST=http://localhost:5000 >> .env
+      # - name: Create .env for docker-compose
+      #   run: |
+      #     touch .env
+      #     echo ENVIRONMENT=TESTING >> .env
+      #     echo NEXT_PUBLIC_ENVIRONMENT=TESTING >> .env
+      #     echo TWITCH_CLIENT_ID=${{secrets.CI_TWITCH_CLIENT_ID}} >> .env
+      #     echo TWITCH_SECRET=${{secrets.TWITCH_SECRET}} >> .env
+      #     echo DB_CONNECTION_STRING=${{secrets.CI_DB_CONNECTION_STRING}} >> .env
+      #     echo FIREBASE_AUTH_EMULATOR_HOST=firebase-emulators:4001 >> .env
+      #     echo FIREBASE_STORAGE_EMULATOR_HOST=firebase-emulators:4002 >> .env
+      #     echo NEXT_PUBLIC_FIREBASE_STORAGE_EMULATOR_HOST=localhost:4002 >> .env
+      #     echo NEXT_PUBLIC_SOCKET_HOST=http://localhost:5000 >> .env
 
-      - name: Build and push TEST api Docker Image
-        uses: docker/build-push-action@v2
-        with:
-          context: ./api
-          push: true
-          tags: ghcr.io/${{github.repository}}/api:test
+      # - name: Build and push TEST api Docker Image
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     context: ./api
+      #     push: true
+      #     tags: ghcr.io/${{github.repository}}/api:test
 
       - name: Build and push TEST web Docker Image
         uses: docker/build-push-action@v2
@@ -52,8 +52,8 @@ jobs:
           push: true
           tags: ghcr.io/${{github.repository}}/web:test
           build-args: |
-            DB_CONNECTION_STRING: ${{secrets.CI_DB_CONNECTION_STRING}}
             ENVIRONMENT: ${{secrets.CI_ENVIRONMENT}}
+            DB_CONNECTION_STRING: ${{secrets.CI_DB_CONNECTION_STRING}}
             FIREBASE_AUTH_EMULATOR_HOST: ${{secrets.CI_FIREBASE_AUTH_EMULATOR_HOST}}
             NEXT_PUBLIC_API_KEY: ${{secrets.CI_NEXT_PUBLIC_API_KEY}}
             NEXT_PUBLIC_ENVIRONMENT: ${{secrets.CI_ENVIRONMENT}}
@@ -78,106 +78,108 @@ jobs:
             SUBSCRIPTION_PRICE_ID: ${{secrets.CI_SUBSCRIPTION_PRICE_ID}}
             MONTHLY_TIP_PRICE_ID: ${{secrets.CI_MONTHLY_TIP_PRICE_ID}}
 
-      - name: Run E2E Tests
-        run: docker-compose -f docker-compose.test.yml up --build
-        # run: |
-        #   cd web
-        #   npm ci
-        #   npm run ci
-        # env:
-        #   DB_CONNECTION_STRING: ${{secrets.CI_DB_CONNECTION_STRING}}
-        #   ENVIRONMENT: ${{secrets.CI_ENVIRONMENT}}
-        #   FIREBASE_AUTH_EMULATOR_HOST: ${{secrets.CI_FIREBASE_AUTH_EMULATOR_HOST}}
-        #   NEXT_PUBLIC_API_KEY: ${{secrets.CI_NEXT_PUBLIC_API_KEY}}
-        #   NEXT_PUBLIC_ENVIRONMENT: ${{secrets.CI_ENVIRONMENT}}
-        #   NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST: ${{secrets.CI_NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST}}
-        #   NEXT_PUBLIC_FIREBASE_DATABASE_URL: ${{secrets.CI_NEXT_PUBLIC_FIREBASE_DATABASE_URL}}
-        #   FIREBASE_PROJECT_ID: ${{secrets.CI_FIREBASE_PROJECT_ID}}
-        #   FIREBASE_AUTH_DOMAIN: ${{secrets.CI_FIREBASE_AUTH_DOMAIN}}
-        #   FIREBASE_CLIENT_EMAIL: ${{secrets.CI_FIREBASE_CLIENT_EMAIL}}
-        #   FIREBASE_MESSAGING_SENDER_ID: ${{secrets.CI_FIREBASE_MESSAGING_SENDER_ID}}
-        #   FIREBASE_MEASUREMENT_ID: ${{secrets.CI_FIREBASE_MEASUREMENT_ID}}
-        #   FIREBASE_COOKIE_SECRET_PREVIOUS: ${{secrets.CI_FIREBASE_COOKIE_SECRET_PREVIOUS}}
-        #   FIREBASE_COOKIE_SECRET_CURRENT: ${{secrets.CI_FIREBASE_COOKIE_SECRET_CURRENT}}
-        #   NEXT_PUBLIC_SOCKET_HOST: ${{secrets.CI_NEXT_PUBLIC_SOCKET_HOST}}
-        #   NEXT_PUBLIC_GOOGLE_ANALYTICS: ${{secrets.CI_NEXT_PUBLIC_GOOGLE_ANALYTICS}}
-        #   NEXT_PUBLIC_ROLLBAR_ACCESS_TOKEN: ${{secrets.CI_NEXT_PUBLIC_ROLLBAR_ACCESS_TOKEN}}
-        #   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{secrets.CI_NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}}
-        #   FIREBASE_APP_ID: ${{secrets.CI_FIREBASE_APP_ID}}
-        #   TWITCH_CLIENT_ID: ${{secrets.CI_TWITCH_CLIENT_ID}}
-        #   TWITCH_SECRET: ${{secrets.CI_TWITCH_SECRET}}
-        #   STRIPE_SECRET_KEY: ${{secrets.CI_STRIPE_SECRET_KEY}}
-        #   STRIPE_WEBHOOK_SECRET: ${{secrets.CI_STRIPE_WEBHOOK_SECRET}}
-        #   SUBSCRIPTION_PRICE_ID: ${{secrets.CI_SUBSCRIPTION_PRICE_ID}}
-        #   MONTHLY_TIP_PRICE_ID: ${{secrets.CI_MONTHLY_TIP_PRICE_ID}}
+      # - name: Run E2E Tests
+      #   run: docker-compose -f docker-compose.test.yml up --build
 
-      - name: Find Changed files
-        uses: tj-actions/changed-files@v13.1
-        id: changed-files
+# Might be useless now
+# run: |
+#   cd web
+#   npm ci
+#   npm run ci
+# env:
+#   DB_CONNECTION_STRING: ${{secrets.CI_DB_CONNECTION_STRING}}
+#   ENVIRONMENT: ${{secrets.CI_ENVIRONMENT}}
+#   FIREBASE_AUTH_EMULATOR_HOST: ${{secrets.CI_FIREBASE_AUTH_EMULATOR_HOST}}
+#   NEXT_PUBLIC_API_KEY: ${{secrets.CI_NEXT_PUBLIC_API_KEY}}
+#   NEXT_PUBLIC_ENVIRONMENT: ${{secrets.CI_ENVIRONMENT}}
+#   NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST: ${{secrets.CI_NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST}}
+#   NEXT_PUBLIC_FIREBASE_DATABASE_URL: ${{secrets.CI_NEXT_PUBLIC_FIREBASE_DATABASE_URL}}
+#   FIREBASE_PROJECT_ID: ${{secrets.CI_FIREBASE_PROJECT_ID}}
+#   FIREBASE_AUTH_DOMAIN: ${{secrets.CI_FIREBASE_AUTH_DOMAIN}}
+#   FIREBASE_CLIENT_EMAIL: ${{secrets.CI_FIREBASE_CLIENT_EMAIL}}
+#   FIREBASE_MESSAGING_SENDER_ID: ${{secrets.CI_FIREBASE_MESSAGING_SENDER_ID}}
+#   FIREBASE_MEASUREMENT_ID: ${{secrets.CI_FIREBASE_MEASUREMENT_ID}}
+#   FIREBASE_COOKIE_SECRET_PREVIOUS: ${{secrets.CI_FIREBASE_COOKIE_SECRET_PREVIOUS}}
+#   FIREBASE_COOKIE_SECRET_CURRENT: ${{secrets.CI_FIREBASE_COOKIE_SECRET_CURRENT}}
+#   NEXT_PUBLIC_SOCKET_HOST: ${{secrets.CI_NEXT_PUBLIC_SOCKET_HOST}}
+#   NEXT_PUBLIC_GOOGLE_ANALYTICS: ${{secrets.CI_NEXT_PUBLIC_GOOGLE_ANALYTICS}}
+#   NEXT_PUBLIC_ROLLBAR_ACCESS_TOKEN: ${{secrets.CI_NEXT_PUBLIC_ROLLBAR_ACCESS_TOKEN}}
+#   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{secrets.CI_NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}}
+#   FIREBASE_APP_ID: ${{secrets.CI_FIREBASE_APP_ID}}
+#   TWITCH_CLIENT_ID: ${{secrets.CI_TWITCH_CLIENT_ID}}
+#   TWITCH_SECRET: ${{secrets.CI_TWITCH_SECRET}}
+#   STRIPE_SECRET_KEY: ${{secrets.CI_STRIPE_SECRET_KEY}}
+#   STRIPE_WEBHOOK_SECRET: ${{secrets.CI_STRIPE_WEBHOOK_SECRET}}
+#   SUBSCRIPTION_PRICE_ID: ${{secrets.CI_SUBSCRIPTION_PRICE_ID}}
+#   MONTHLY_TIP_PRICE_ID: ${{secrets.CI_MONTHLY_TIP_PRICE_ID}}
 
-      - name: List all changed files
-        run: |
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            echo "$file was changed"
-          done
+# - name: Find Changed files
+#   uses: tj-actions/changed-files@v13.1
+#   id: changed-files
 
-      - name: Build and push api Docker Image
-        if: contains(steps.changed-files.outputs.all_changed_files, 'api')
-        uses: docker/build-push-action@v2
-        with:
-          context: ./api
-          push: true
-          tags: ghcr.io/${{github.repository}}/api:${{github.sha}}
+# - name: List all changed files
+#   run: |
+#     for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+#       echo "$file was changed"
+#     done
 
-      - name: Build and push web Docker Image
-        if: contains(steps.changed-files.outputs.all_changed_files, 'web')
-        uses: docker/build-push-action@v2
-        with:
-          context: ./web
-          push: true
-          tags: ghcr.io/${{github.repository}}/web:${{github.sha}}
-          build-args: |
-            ENVIRONMENT=${{secrets.ENVIRONMENT}}
-            DB_CONNECTION_STRING=${{secrets.DB_CONNECTION_STRING}}
-            NEXT_PUBLIC_GOOGLE_ANALYTICS=${{secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS}}
-            NEXT_PUBLIC_API_KEY=${{secrets.NEXT_PUBLIC_API_KEY}}
-            NEXT_PUBLIC_FIREBASE_DATABASE_URL=${{secrets.NEXT_PUBLIC_FIREBASE_DATABASE_URL}}
-            NEXT_PUBLIC_ROLLBAR_ACCESS_TOKEN=${{secrets.NEXT_PUBLIC_ROLLBAR_ACCESS_TOKEN}}
-            NEXT_PUBLIC_ROLLBAR_ENVIRONMENT=${{secrets.NEXT_PUBLIC_ROLLBAR_ENVIRONMENT}}
-            FIREBASE_PROJECT_ID=${{secrets.FIREBASE_PROJECT_ID}}
-            FIREBASE_AUTH_DOMAIN=${{secrets.FIREBASE_AUTH_DOMAIN}}
-            FIREBASE_CLIENT_EMAIL=${{secrets.FIREBASE_CLIENT_EMAIL}}
-            FIREBASE_MESSAGING_SENDER_ID=${{secrets.FIREBASE_MESSAGING_SENDER_ID}}
-            FIREBASE_APP_ID=${{secrets.FIREBASE_APP_ID}}
-            FIREBASE_MEASUREMENT_ID=${{secrets.FIREBASE_MEASUREMENT_ID}}
-            FIREBASE_COOKIE_SECRET_PREVIOUS=${{secrets.FIREBASE_COOKIE_SECRET_PREVIOUS}}
-            FIREBASE_COOKIE_SECRET_CURRENT=${{secrets.FIREBASE_COOKIE_SECRET_CURRENT}}
-            TWITCH_CLIENT_ID=${{secrets.TWITCH_CLIENT_ID}}
-            TWITCH_SECRET=${{secrets.TWITCH_SECRET}}
-            NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${{secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}}
-            STRIPE_SECRET_KEY=${{secrets.STRIPE_SECRET_KEY}}
-            STRIPE_WEBHOOK_SECRET=${{secrets.STRIPE_WEBHOOK_SECRET}}
-            SUBSCRIPTION_PRICE_ID=${{secrets.SUBSCRIPTION_PRICE_ID}}
-            MONTHLY_TIP_PRICE_ID=${{secrets.MONTHLY_TIP_PRICE_ID}}
-            NEXT_PUBLIC_SOCKET_HOST=${{secrets.NEXT_PUBLIC_SOCKET_HOST}}
-            GOOGLE_APPLICATION_CREDENTIALS=${{secrets.GOOGLE_APPLICATION_CREDENTIALS}}
+# - name: Build and push api Docker Image
+#   if: contains(steps.changed-files.outputs.all_changed_files, 'api')
+#   uses: docker/build-push-action@v2
+#   with:
+#     context: ./api
+#     push: true
+#     tags: ghcr.io/${{github.repository}}/api:${{github.sha}}
 
-      - name: Trigger api deployment to stage
-        if: contains(steps.changed-files.outputs.all_changed_files, 'api')
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{secrets.DROPLET_HOST}}
-          username: ${{secrets.DOKKU_SSH_USER}}
-          key: ${{ secrets.DOKKU_SSH_PRIVATE_KEY }}
-          script: |
-            dokku git:from-image stage-api ghcr.io/${{github.repository}}/api:${{github.sha}}
+# - name: Build and push web Docker Image
+#   if: contains(steps.changed-files.outputs.all_changed_files, 'web')
+#   uses: docker/build-push-action@v2
+#   with:
+#     context: ./web
+#     push: true
+#     tags: ghcr.io/${{github.repository}}/web:${{github.sha}}
+#     build-args: |
+#       ENVIRONMENT=${{secrets.ENVIRONMENT}}
+#       DB_CONNECTION_STRING=${{secrets.DB_CONNECTION_STRING}}
+#       NEXT_PUBLIC_GOOGLE_ANALYTICS=${{secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS}}
+#       NEXT_PUBLIC_API_KEY=${{secrets.NEXT_PUBLIC_API_KEY}}
+#       NEXT_PUBLIC_FIREBASE_DATABASE_URL=${{secrets.NEXT_PUBLIC_FIREBASE_DATABASE_URL}}
+#       NEXT_PUBLIC_ROLLBAR_ACCESS_TOKEN=${{secrets.NEXT_PUBLIC_ROLLBAR_ACCESS_TOKEN}}
+#       NEXT_PUBLIC_ROLLBAR_ENVIRONMENT=${{secrets.NEXT_PUBLIC_ROLLBAR_ENVIRONMENT}}
+#       FIREBASE_PROJECT_ID=${{secrets.FIREBASE_PROJECT_ID}}
+#       FIREBASE_AUTH_DOMAIN=${{secrets.FIREBASE_AUTH_DOMAIN}}
+#       FIREBASE_CLIENT_EMAIL=${{secrets.FIREBASE_CLIENT_EMAIL}}
+#       FIREBASE_MESSAGING_SENDER_ID=${{secrets.FIREBASE_MESSAGING_SENDER_ID}}
+#       FIREBASE_APP_ID=${{secrets.FIREBASE_APP_ID}}
+#       FIREBASE_MEASUREMENT_ID=${{secrets.FIREBASE_MEASUREMENT_ID}}
+#       FIREBASE_COOKIE_SECRET_PREVIOUS=${{secrets.FIREBASE_COOKIE_SECRET_PREVIOUS}}
+#       FIREBASE_COOKIE_SECRET_CURRENT=${{secrets.FIREBASE_COOKIE_SECRET_CURRENT}}
+#       TWITCH_CLIENT_ID=${{secrets.TWITCH_CLIENT_ID}}
+#       TWITCH_SECRET=${{secrets.TWITCH_SECRET}}
+#       NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${{secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}}
+#       STRIPE_SECRET_KEY=${{secrets.STRIPE_SECRET_KEY}}
+#       STRIPE_WEBHOOK_SECRET=${{secrets.STRIPE_WEBHOOK_SECRET}}
+#       SUBSCRIPTION_PRICE_ID=${{secrets.SUBSCRIPTION_PRICE_ID}}
+#       MONTHLY_TIP_PRICE_ID=${{secrets.MONTHLY_TIP_PRICE_ID}}
+#       NEXT_PUBLIC_SOCKET_HOST=${{secrets.NEXT_PUBLIC_SOCKET_HOST}}
+#       GOOGLE_APPLICATION_CREDENTIALS=${{secrets.GOOGLE_APPLICATION_CREDENTIALS}}
 
-      - name: Trigger web deployment to stage
-        if: contains(steps.changed-files.outputs.all_changed_files, 'web')
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{secrets.DROPLET_HOST}}
-          username: ${{secrets.DOKKU_SSH_USER}}
-          key: "${{ secrets.DOKKU_SSH_PRIVATE_KEY }}"
-          script: |
-            dokku git:from-image stage-web ghcr.io/${{github.repository}}/web:${{github.sha}}
+# - name: Trigger api deployment to stage
+#   if: contains(steps.changed-files.outputs.all_changed_files, 'api')
+#   uses: appleboy/ssh-action@master
+#   with:
+#     host: ${{secrets.DROPLET_HOST}}
+#     username: ${{secrets.DOKKU_SSH_USER}}
+#     key: ${{ secrets.DOKKU_SSH_PRIVATE_KEY }}
+#     script: |
+#       dokku git:from-image stage-api ghcr.io/${{github.repository}}/api:${{github.sha}}
+
+# - name: Trigger web deployment to stage
+#   if: contains(steps.changed-files.outputs.all_changed_files, 'web')
+#   uses: appleboy/ssh-action@master
+#   with:
+#     host: ${{secrets.DROPLET_HOST}}
+#     username: ${{secrets.DOKKU_SSH_USER}}
+#     key: "${{ secrets.DOKKU_SSH_PRIVATE_KEY }}"
+#     script: |
+#       dokku git:from-image stage-web ghcr.io/${{github.repository}}/web:${{github.sha}}
