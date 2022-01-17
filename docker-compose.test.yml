@@ -9,8 +9,6 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - web
-    env_file:
-      - .env
     environment:
       - CYPRESS_baseUrl=http://web:3000
     command: npx cypress run
