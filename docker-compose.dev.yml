@@ -44,9 +44,6 @@ services:
       - ./api:/usr/app
     env_file:
       - .env
-    environment:
-      - FIREBASE_AUTH_EMULATOR_HOST=firebase-emulators:4001
-      - FIREBASE_STORAGE_EMULATOR_HOST=firebase-emulators:4002
     command: npm run local
 
   web:
@@ -61,8 +58,8 @@ services:
     env_file:
       - .env
     environment:
-      - ENVIRONMENT = "DEVELOPMENT"
-      - NEXT_PUBLIC_ENVIRONMENT = "DEVELOPMENT"
+      - ENVIRONMENT=DEVELOPMENT
+      - NEXT_PUBLIC_ENVIRONMENT=DEVELOPMENT
       - FIREBASE_AUTH_EMULATOR_HOST=firebase-emulators:4001
       - FIREBASE_STORAGE_EMULATOR_HOST=firebase-emulators:4002
       - NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST=localhost:4001
