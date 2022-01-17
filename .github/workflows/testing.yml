@@ -67,6 +67,7 @@ jobs:
         run: |
           echo ENVIRONMENT=TESTING >> .env
           echo NEXT_PUBLIC_ENVIRONMENT=TESTING >> .env
+          echo DB_CONNECTION_STRING=${{secrets.CI_DB_CONNECTION_STRING}} >> .env
           echo TWITCH_CLIENT_ID=${{secrets.CI_TWITCH_CLIENT_ID}} >> .env
           echo TWITCH_SECRET=${{secrets.CI_TWITCH_SECRET}} >> .env
           echo TWITCH_CLIENT_SECRET=${{secrets.CI_TWITCH_SECRET}} >> .env
@@ -78,18 +79,6 @@ jobs:
           echo NEXT_PUBLIC_SOCKET_HOST=${{secrets.CI_NEXT_PUBLIC_SOCKET_HOST}} >> .env
 
       - name: Run E2E Tests
-        env:
-          ENVIRONMENT: TESTING
-          NEXT_PUBLIC_ENVIRONMENT: TESTING
-          TWITCH_CLIENT_ID: ${{secrets.CI_TWITCH_CLIENT_ID}}
-          TWITCH_SECRET: ${{secrets.CI_TWITCH_SECRET}}
-          TWITCH_CLIENT_SECRET: ${{secrets.CI_TWITCH_SECRET}}
-          DB_CONNECTION_STRING: ${{secrets.CI_DB_CONNECTION_STRING}}
-          FIREBASE_AUTH_EMULATOR_HOST: firebase-emulators:4001
-          FIREBASE_STORAGE_EMULATOR_HOST: firebase-emulators:4002
-          NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST: localhost:4001
-          NEXT_PUBLIC_FIREBASE_STORAGE_EMULATOR_HOST: localhost:4002
-          NEXT_PUBLIC_SOCKET_HOST: ${{secrets.CI_NEXT_PUBLIC_SOCKET_HOST}}
         run: docker-compose -f docker-compose.test.yml up --build
 
       - name: Find Changed files
