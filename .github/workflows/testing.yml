@@ -80,7 +80,7 @@ jobs:
           NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST: localhost:4001
           NEXT_PUBLIC_FIREBASE_STORAGE_EMULATOR_HOST: localhost:4002
           NEXT_PUBLIC_SOCKET_HOST: ${{secrets.CI_NEXT_PUBLIC_SOCKET_HOST}}
-        run: docker-compose -f docker-compose.test.yml -e  up --build
+        run: docker-compose -f docker-compose.test.yml up --build
 
       # Might be useless now
       # run: |
