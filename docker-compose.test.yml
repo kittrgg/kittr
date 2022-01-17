@@ -53,7 +53,7 @@ services:
     ports:
       - 5000:5000
       - 5555:5555
-    command: npm run local
+    command: npm run start
 
   web:
     container_name: web
