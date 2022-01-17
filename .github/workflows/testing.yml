@@ -69,17 +69,17 @@ jobs:
 
       - name: Run E2E Tests
         env:
-          - ENVIRONMENT=TESTING
-          - NEXT_PUBLIC_ENVIRONMENT=TESTING
-          - TWITCH_CLIENT_ID=${{secrets.TWITCH_CLIENT_ID}}
-          - TWITCH_SECRET=${{secrets.TWITCH_SECRET}}
-          - TWITCH_CLIENT_SECRET=${{secrets.TWITCH_SECRET}}
-          - DB_CONNECTION_STRING=${{secrets.CI_DB_CONNECTION-STRING}}
-          - FIREBASE_AUTH_EMULATOR_HOST=firebase-emulators:4001
-          - FIREBASE_STORAGE_EMULATOR_HOST=firebase-emulators:4002
-          - NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST=localhost:4001
-          - NEXT_PUBLIC_FIREBASE_STORAGE_EMULATOR_HOST=localhost:4002
-          - NEXT_PUBLIC_SOCKET_HOST=${{secrets.CI_NEXT_PUBLIC_SOCKET_HOST}}
+          ENVIRONMENT: TESTING
+          NEXT_PUBLIC_ENVIRONMENT: TESTING
+          TWITCH_CLIENT_ID: ${{secrets.TWITCH_CLIENT_ID}}
+          TWITCH_SECRET: ${{secrets.TWITCH_SECRET}}
+          TWITCH_CLIENT_SECRET: ${{secrets.TWITCH_SECRET}}
+          DB_CONNECTION_STRING: ${{secrets.CI_DB_CONNECTION-STRING}}
+          FIREBASE_AUTH_EMULATOR_HOST: firebase-emulators:4001
+          FIREBASE_STORAGE_EMULATOR_HOST: firebase-emulators:4002
+          NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST: localhost:4001
+          NEXT_PUBLIC_FIREBASE_STORAGE_EMULATOR_HOST: localhost:4002
+          NEXT_PUBLIC_SOCKET_HOST: ${{secrets.CI_NEXT_PUBLIC_SOCKET_HOST}}
         run: docker-compose -f docker-compose.test.yml -e  up --build
 
       # Might be useless now
