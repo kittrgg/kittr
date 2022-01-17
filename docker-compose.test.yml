@@ -9,6 +9,8 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - web
+    env_file:
+      - .env
     environment:
       - CYPRESS_baseUrl=http://web:3000
     command: npx cypress run
@@ -33,11 +35,11 @@ services:
   firebase-emulators:
     container_name: firebase-emulators
     ports:
-      - "4000:4000"
-      - "4001:4001"
-      - "4002:4002"
+      - 4000:4000
+      - 4001:4001
+      - 4002:4002
     build:
-      context: .
+      context: ./
       dockerfile: Dockerfile.firebase
     image: firebase-emulator:firebase-emulator
     volumes:
@@ -50,6 +52,8 @@ services:
     depends_on:
       # - mongo
       - firebase-emulators
+    env_file:
+      - .env
     ports:
       - 5000:5000
       - 5555:5555
@@ -60,6 +64,8 @@ services:
     depends_on:
       # - mongo
       - firebase-emulators
+    env_file:
+      - .env
     ports:
       - 3000:3000
     image: ghcr.io/kittrgg/monorepo/web:test
