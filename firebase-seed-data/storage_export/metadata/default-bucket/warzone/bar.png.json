@@ -1,0 +1,19 @@
+{
+  "name": "warzone/bar.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642388416820,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "69f58e8c-b489-48d7-9f2c-b22fd21ad29a"
+  ],
+  "timeCreated": "2022-01-17T03:00:16.819Z",
+  "updated": "2022-01-17T03:00:16.819Z",
+  "size": 14836,
+  "md5Hash": "qEZxt3qiotG6FEMUwus8wg==",
+  "crc32c": "1489666000"
+}

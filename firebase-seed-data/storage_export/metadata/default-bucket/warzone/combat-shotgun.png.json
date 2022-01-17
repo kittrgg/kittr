@@ -1,0 +1,19 @@
+{
+  "name": "warzone/combat-shotgun.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642388417147,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "bf564c51-629c-4d9e-b3a0-3c1ab782da7c"
+  ],
+  "timeCreated": "2022-01-17T03:00:17.146Z",
+  "updated": "2022-01-17T03:00:17.146Z",
+  "size": 11249,
+  "md5Hash": "1TND70Vke1zIM/ze3eP+0w==",
+  "crc32c": "414630290"
+}

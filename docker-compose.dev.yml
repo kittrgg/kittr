@@ -27,7 +27,7 @@ services:
     image: firebase-emulator:firebase-emulator
     volumes:
       - .:/src
-    command: firebase emulators:start --project dev
+    command: firebase emulators:start --project dev --export-on-exit=./firebase-seed-data --import=./firebase-seed-data
 
   api:
     container_name: api

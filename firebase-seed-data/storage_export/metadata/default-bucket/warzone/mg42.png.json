@@ -1,0 +1,19 @@
+{
+  "name": "warzone/mg42.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642388417759,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "0ea538a1-6df8-4e10-8516-8ebb76d6b650"
+  ],
+  "timeCreated": "2022-01-17T03:00:17.758Z",
+  "updated": "2022-01-17T03:00:17.758Z",
+  "size": 13624,
+  "md5Hash": "tnkYhy8z48s0PJP50S6aKA==",
+  "crc32c": "2738772483"
+}

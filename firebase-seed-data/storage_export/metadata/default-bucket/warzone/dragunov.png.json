@@ -1,0 +1,19 @@
+{
+  "name": "warzone/dragunov.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642388417207,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "2ef88260-aa1b-425c-9e30-4ffa7e55297a"
+  ],
+  "timeCreated": "2022-01-17T03:00:17.206Z",
+  "updated": "2022-01-17T03:00:17.206Z",
+  "size": 43906,
+  "md5Hash": "oQaLlKrbIOy+vbHF0BkPxw==",
+  "crc32c": "3007538262"
+}

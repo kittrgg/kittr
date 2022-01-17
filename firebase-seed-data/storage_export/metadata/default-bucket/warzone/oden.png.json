@@ -1,0 +1,19 @@
+{
+  "name": "warzone/oden.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642388417827,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "60c16676-b28e-431f-9148-21d833271a09"
+  ],
+  "timeCreated": "2022-01-17T03:00:17.826Z",
+  "updated": "2022-01-17T03:00:17.827Z",
+  "size": 84183,
+  "md5Hash": "RwPF+b1Pp0pW62jeuU+JAw==",
+  "crc32c": "2752808661"
+}

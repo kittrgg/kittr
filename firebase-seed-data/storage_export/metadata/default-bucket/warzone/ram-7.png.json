@@ -1,0 +1,19 @@
+{
+  "name": "warzone/ram-7.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642388417934,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "977a9e4e-785d-40a3-85a7-e82206f2ae2a"
+  ],
+  "timeCreated": "2022-01-17T03:00:17.933Z",
+  "updated": "2022-01-17T03:00:17.933Z",
+  "size": 81024,
+  "md5Hash": "9mHmIcHr/KAZgPMcGjepCA==",
+  "crc32c": "1082661143"
+}

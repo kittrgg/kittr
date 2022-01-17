@@ -1,0 +1,19 @@
+{
+  "name": "warzone/mp-40.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642388417779,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "6b84c6fa-825a-4a54-b300-1de760d9a81a"
+  ],
+  "timeCreated": "2022-01-17T03:00:17.778Z",
+  "updated": "2022-01-17T03:00:17.778Z",
+  "size": 14297,
+  "md5Hash": "K6DrKbic4Fd0undpQ97lUw==",
+  "crc32c": "1889148646"
+}

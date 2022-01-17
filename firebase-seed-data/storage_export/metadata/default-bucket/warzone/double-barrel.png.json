@@ -1,0 +1,19 @@
+{
+  "name": "warzone/double-barrel.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642388417213,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "621c33ed-96d9-47d9-a9f0-00121146ba03"
+  ],
+  "timeCreated": "2022-01-17T03:00:17.212Z",
+  "updated": "2022-01-17T03:00:17.212Z",
+  "size": 10087,
+  "md5Hash": "2wuGU0vfqzDk/zTHZd0r4Q==",
+  "crc32c": "1255226707"
+}

@@ -1,0 +1,19 @@
+{
+  "name": "warzone/itra-burst.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642388417556,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "c2e2a010-5994-4663-b1df-f337d91bf97d"
+  ],
+  "timeCreated": "2022-01-17T03:00:17.555Z",
+  "updated": "2022-01-17T03:00:17.555Z",
+  "size": 13190,
+  "md5Hash": "BSlXevJo3HBMI+Zqp3CESw==",
+  "crc32c": "3289653611"
+}

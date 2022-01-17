@@ -1,0 +1,19 @@
+{
+  "name": "warzone/dp27.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642388417195,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "85c24653-9cb5-4f2e-a968-41d7a65a81a1"
+  ],
+  "timeCreated": "2022-01-17T03:00:17.194Z",
+  "updated": "2022-01-17T03:00:17.195Z",
+  "size": 12943,
+  "md5Hash": "O5L/A1TU97U9x34QtPsfQQ==",
+  "crc32c": "3063906309"
+}

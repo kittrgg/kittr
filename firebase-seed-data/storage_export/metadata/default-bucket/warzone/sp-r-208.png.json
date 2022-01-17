@@ -1,0 +1,19 @@
+{
+  "name": "warzone/sp-r-208.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642388417980,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "99e07b81-b151-48d6-ae02-c751506a9f27"
+  ],
+  "timeCreated": "2022-01-17T03:00:17.979Z",
+  "updated": "2022-01-17T03:00:17.979Z",
+  "size": 53153,
+  "md5Hash": "Hm9hP18fZ2QZbC25zMETzg==",
+  "crc32c": "1638444808"
+}
