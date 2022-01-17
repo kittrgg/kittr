@@ -1,7 +1,3 @@
-# One day, this will work...
-# This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
 name: E2E Testing & Deploy Stage
 
 on:
@@ -71,9 +67,9 @@ jobs:
         env:
           ENVIRONMENT: TESTING
           NEXT_PUBLIC_ENVIRONMENT: TESTING
-          TWITCH_CLIENT_ID: ${{secrets.TWITCH_CLIENT_ID}}
-          TWITCH_SECRET: ${{secrets.TWITCH_SECRET}}
-          TWITCH_CLIENT_SECRET: ${{secrets.TWITCH_SECRET}}
+          TWITCH_CLIENT_ID: ${{secrets.CI_TWITCH_CLIENT_ID}}
+          TWITCH_SECRET: ${{secrets.CI_TWITCH_SECRET}}
+          TWITCH_CLIENT_SECRET: ${{secrets.CI_TWITCH_SECRET}}
           DB_CONNECTION_STRING: ${{secrets.CI_DB_CONNECTION-STRING}}
           FIREBASE_AUTH_EMULATOR_HOST: firebase-emulators:4001
           FIREBASE_STORAGE_EMULATOR_HOST: firebase-emulators:4002
@@ -81,38 +77,6 @@ jobs:
           NEXT_PUBLIC_FIREBASE_STORAGE_EMULATOR_HOST: localhost:4002
           NEXT_PUBLIC_SOCKET_HOST: ${{secrets.CI_NEXT_PUBLIC_SOCKET_HOST}}
         run: docker-compose -f docker-compose.test.yml up --build
-
-      # Might be useless now
-      # run: |
-      #   cd web
-      #   npm ci
-      #   npm run ci
-      # env:
-      #   DB_CONNECTION_STRING: ${{secrets.CI_DB_CONNECTION_STRING}}
-      #   ENVIRONMENT: ${{secrets.CI_ENVIRONMENT}}
-      #   FIREBASE_AUTH_EMULATOR_HOST: ${{secrets.CI_FIREBASE_AUTH_EMULATOR_HOST}}
-      #   NEXT_PUBLIC_API_KEY: ${{secrets.CI_NEXT_PUBLIC_API_KEY}}
-      #   NEXT_PUBLIC_ENVIRONMENT: ${{secrets.CI_ENVIRONMENT}}
-      #   NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST: ${{secrets.CI_NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST}}
-      #   NEXT_PUBLIC_FIREBASE_DATABASE_URL: ${{secrets.CI_NEXT_PUBLIC_FIREBASE_DATABASE_URL}}
-      #   FIREBASE_PROJECT_ID: ${{secrets.CI_FIREBASE_PROJECT_ID}}
-      #   FIREBASE_AUTH_DOMAIN: ${{secrets.CI_FIREBASE_AUTH_DOMAIN}}
-      #   FIREBASE_CLIENT_EMAIL: ${{secrets.CI_FIREBASE_CLIENT_EMAIL}}
-      #   FIREBASE_MESSAGING_SENDER_ID: ${{secrets.CI_FIREBASE_MESSAGING_SENDER_ID}}
-      #   FIREBASE_MEASUREMENT_ID: ${{secrets.CI_FIREBASE_MEASUREMENT_ID}}
-      #   FIREBASE_COOKIE_SECRET_PREVIOUS: ${{secrets.CI_FIREBASE_COOKIE_SECRET_PREVIOUS}}
-      #   FIREBASE_COOKIE_SECRET_CURRENT: ${{secrets.CI_FIREBASE_COOKIE_SECRET_CURRENT}}
-      #   NEXT_PUBLIC_SOCKET_HOST: ${{secrets.CI_NEXT_PUBLIC_SOCKET_HOST}}
-      #   NEXT_PUBLIC_GOOGLE_ANALYTICS: ${{secrets.CI_NEXT_PUBLIC_GOOGLE_ANALYTICS}}
-      #   NEXT_PUBLIC_ROLLBAR_ACCESS_TOKEN: ${{secrets.CI_NEXT_PUBLIC_ROLLBAR_ACCESS_TOKEN}}
-      #   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{secrets.CI_NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}}
-      #   FIREBASE_APP_ID: ${{secrets.CI_FIREBASE_APP_ID}}
-      #   TWITCH_CLIENT_ID: ${{secrets.CI_TWITCH_CLIENT_ID}}
-      #   TWITCH_SECRET: ${{secrets.CI_TWITCH_SECRET}}
-      #   STRIPE_SECRET_KEY: ${{secrets.CI_STRIPE_SECRET_KEY}}
-      #   STRIPE_WEBHOOK_SECRET: ${{secrets.CI_STRIPE_WEBHOOK_SECRET}}
-      #   SUBSCRIPTION_PRICE_ID: ${{secrets.CI_SUBSCRIPTION_PRICE_ID}}
-      #   MONTHLY_TIP_PRICE_ID: ${{secrets.CI_MONTHLY_TIP_PRICE_ID}}
 
       - name: Find Changed files
         uses: tj-actions/changed-files@v13.1
