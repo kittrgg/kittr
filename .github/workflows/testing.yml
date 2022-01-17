@@ -80,7 +80,7 @@ jobs:
           echo NEXT_PUBLIC_SOCKET_HOST=${{secrets.CI_NEXT_PUBLIC_SOCKET_HOST}} >> .env
 
       - name: Run E2E Tests
-        run: docker-compose -f docker-compose.test.yml --env-file ./.env up --build
+        run: docker-compose -f docker-compose.test.yml up --build --exit-code-from cypress
 
       - name: Find Changed files
         uses: tj-actions/changed-files@v13.1

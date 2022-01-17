@@ -3,7 +3,7 @@ version: "3"
 services:
   cypress:
     container_name: cypress
-    image: cypress
+    image: cypress/included
     build:
       context: ./cypress
       dockerfile: Dockerfile
