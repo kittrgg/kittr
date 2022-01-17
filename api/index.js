@@ -53,7 +53,9 @@ mongoose
     });
 
     console.log("Server has started.");
-    setInterval(() => writeViewCounts(), 3600000); // Once an hour
+    if(process.env.ENVIRONMENT === 'PRODUCTION') {
+      setInterval(() => writeViewCounts(), 3600000); // Once an hour
+    }
     setInterval(() => createKitStatsAsInterval(), 86700000); // A little more than once a day
 
     let openSockets = 0;
