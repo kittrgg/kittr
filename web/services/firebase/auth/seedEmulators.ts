@@ -4,7 +4,8 @@
 
 const admin = require("firebase-admin")
 
-const users = {
+// This is only exported to satisfy the modules requirement for Typescript
+export const users = {
 	anthony: {
 		uid: "w5lMLvVLL3uJNRuoqSWvYjNIJ1GF",
 		displayName: "anthony",
