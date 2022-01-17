@@ -65,6 +65,7 @@ jobs:
 
       - name: Create .env file
         run: |
+          touch .env
           echo ENVIRONMENT=TESTING >> .env
           echo NEXT_PUBLIC_ENVIRONMENT=TESTING >> .env
           echo DB_CONNECTION_STRING=${{secrets.CI_DB_CONNECTION_STRING}} >> .env
