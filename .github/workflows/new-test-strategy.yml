@@ -21,26 +21,26 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Cypress Tests
-        uses: cypress-io/github-action@v2
-        with:
-          start: npm run start
-          wait-on: "http://localhost:3000"
-          wait-on-timeout: 300
-          browser: chrome
-          spec: cypress/integration/*
-        env:
-          ENVIRONMENT=TESTING
-          NEXT_PUBLIC_ENVIRONMENT=TESTING
-          TWITCH_CLIENT_ID=${{secrets.CI_TWITCH_CLIENT_ID}}
-          TWITCH_SECRET=${{secrets.CI_TWITCH_SECRET}}
-          TWITCH_CLIENT_SECRET={{secrets.CI_TWITCH_SECRET}}
-          DB_CONNECTION_STRING=${{secrets.CI_DB_CONNECTION_STRING}}
-          FIREBASE_AUTH_EMULATOR_HOST=firebase-emulators:4001
-          FIREBASE_STORAGE_EMULATOR_HOST=firebase-emulators:4002
-          NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST=localhost:4001
-          NEXT_PUBLIC_FIREBASE_STORAGE_EMULATOR_HOST=localhost:4002
-          NEXT_PUBLIC_SOCKET_HOST=${{secrets.CI_NEXT_PUBLIC_SOCKET_HOST}}
-          # Recommended: pass the GitHub token lets this action correctly
-          # determine the unique run id necessary to re-run the checks
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Cypress Tests
+      #   uses: cypress-io/github-action@v2
+      #   with:
+      #     start: npm run start
+      #     wait-on: "http://localhost:3000"
+      #     wait-on-timeout: 300
+      #     browser: chrome
+      #     spec: cypress/integration/*
+      #   env:
+      #     ENVIRONMENT=TESTING
+      #     NEXT_PUBLIC_ENVIRONMENT=TESTING
+      #     TWITCH_CLIENT_ID=${{secrets.CI_TWITCH_CLIENT_ID}}
+      #     TWITCH_SECRET=${{secrets.CI_TWITCH_SECRET}}
+      #     TWITCH_CLIENT_SECRET={{secrets.CI_TWITCH_SECRET}}
+      #     DB_CONNECTION_STRING=${{secrets.CI_DB_CONNECTION_STRING}}
+      #     FIREBASE_AUTH_EMULATOR_HOST=firebase-emulators:4001
+      #     FIREBASE_STORAGE_EMULATOR_HOST=firebase-emulators:4002
+      #     NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST=localhost:4001
+      #     NEXT_PUBLIC_FIREBASE_STORAGE_EMULATOR_HOST=localhost:4002
+      #     NEXT_PUBLIC_SOCKET_HOST=${{secrets.CI_NEXT_PUBLIC_SOCKET_HOST}}
+      #     # Recommended: pass the GitHub token lets this action correctly
+      #     # determine the unique run id necessary to re-run the checks
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
