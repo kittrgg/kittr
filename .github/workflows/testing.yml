@@ -1,9 +1,9 @@
 name: E2E Testing & Deploy Stage
 
-on:
-  push:
-    branches:
-      - staging
+# on:
+#   push:
+#     branches:
+#       - staging
 
 jobs:
   build:
@@ -78,10 +78,6 @@ jobs:
           echo NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST=localhost:4001 >> .env
           echo NEXT_PUBLIC_FIREBASE_STORAGE_EMULATOR_HOST=localhost:4002 >> .env
           echo NEXT_PUBLIC_SOCKET_HOST=${{secrets.CI_NEXT_PUBLIC_SOCKET_HOST}} >> .env
-
-      - name: Just successfully run the api container.
-        run: |
-          docker run ghcr.io/kittrgg/monorepo/api:test
 
       # - name: Run E2E Tests
       #   run: docker-compose -f docker-compose.test.yml up --build --exit-code-from cypress
