@@ -21,47 +21,47 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push TEST api Docker Image
-        uses: docker/build-push-action@v2
-        with:
-          context: ./api
-          push: true
-          tags: ghcr.io/${{github.repository}}/api:test
+      # - name: Build and push TEST api Docker Image
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     context: ./api
+      #     push: true
+      #     tags: ghcr.io/${{github.repository}}/api:test
 
-      - name: Build and push TEST web Docker Image
-        uses: docker/build-push-action@v2
-        with:
-          context: ./web
-          push: true
-          tags: ghcr.io/${{github.repository}}/web:test
-          build-args: |
-            ENVIRONMENT=${{secrets.CI_ENVIRONMENT}}
-            DB_CONNECTION_STRING=${{secrets.CI_DB_CONNECTION_STRING}}
-            FIREBASE_AUTH_EMULATOR_HOST=${{secrets.CI_FIREBASE_AUTH_EMULATOR_HOST}}
-            NEXT_PUBLIC_API_KEY=${{secrets.CI_NEXT_PUBLIC_API_KEY}}
-            NEXT_PUBLIC_ENVIRONMENT=${{secrets.CI_ENVIRONMENT}}
-            FIREBASE_AUTH_EMULATOR_HOST=${{secrets.CI_FIREBASE_AUTH_EMULATOR_HOST}}
-            NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST=${{secrets.CI_NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST}}
-            NEXT_PUBLIC_FIREBASE_DATABASE_URL=${{secrets.CI_NEXT_PUBLIC_FIREBASE_DATABASE_URL}}
-            FIREBASE_PROJECT_ID=${{secrets.CI_FIREBASE_PROJECT_ID}}
-            FIREBASE_AUTH_DOMAIN=${{secrets.CI_FIREBASE_AUTH_DOMAIN}}
-            FIREBASE_CLIENT_EMAIL=${{secrets.CI_FIREBASE_CLIENT_EMAIL}}
-            FIREBASE_MESSAGING_SENDER_ID=${{secrets.CI_FIREBASE_MESSAGING_SENDER_ID}}
-            FIREBASE_MEASUREMENT_ID=${{secrets.CI_FIREBASE_MEASUREMENT_ID}}
-            FIREBASE_COOKIE_SECRET_PREVIOUS=${{secrets.CI_FIREBASE_COOKIE_SECRET_PREVIOUS}}
-            FIREBASE_COOKIE_SECRET_CURRENT=${{secrets.CI_FIREBASE_COOKIE_SECRET_CURRENT}}
-            NEXT_PUBLIC_SOCKET_HOST=${{secrets.CI_NEXT_PUBLIC_SOCKET_HOST}}
-            NEXT_PUBLIC_GOOGLE_ANALYTICS=${{secrets.CI_NEXT_PUBLIC_GOOGLE_ANALYTICS}}
-            NEXT_PUBLIC_ROLLBAR_ACCESS_TOKEN=${{secrets.CI_NEXT_PUBLIC_ROLLBAR_ACCESS_TOKEN}}
-            NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${{secrets.CI_NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}}
-            FIREBASE_APP_ID=${{secrets.CI_FIREBASE_APP_ID}}
-            TWITCH_CLIENT_ID=${{secrets.CI_TWITCH_CLIENT_ID}}
-            TWITCH_CLIENT_SECRET=${{secrets.CI_TWITCH_SECRET}}
-            TWITCH_SECRET=${{secrets.CI_TWITCH_SECRET}}
-            STRIPE_SECRET_KEY=${{secrets.CI_STRIPE_SECRET_KEY}}
-            STRIPE_WEBHOOK_SECRET=${{secrets.CI_STRIPE_WEBHOOK_SECRET}}
-            SUBSCRIPTION_PRICE_ID=${{secrets.CI_SUBSCRIPTION_PRICE_ID}}
-            MONTHLY_TIP_PRICE_ID=${{secrets.CI_MONTHLY_TIP_PRICE_ID}}
+      # - name: Build and push TEST web Docker Image
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     context: ./web
+      #     push: true
+      #     tags: ghcr.io/${{github.repository}}/web:test
+      #     build-args: |
+      #       ENVIRONMENT=${{secrets.CI_ENVIRONMENT}}
+      #       DB_CONNECTION_STRING=${{secrets.CI_DB_CONNECTION_STRING}}
+      #       FIREBASE_AUTH_EMULATOR_HOST=${{secrets.CI_FIREBASE_AUTH_EMULATOR_HOST}}
+      #       NEXT_PUBLIC_API_KEY=${{secrets.CI_NEXT_PUBLIC_API_KEY}}
+      #       NEXT_PUBLIC_ENVIRONMENT=${{secrets.CI_ENVIRONMENT}}
+      #       FIREBASE_AUTH_EMULATOR_HOST=${{secrets.CI_FIREBASE_AUTH_EMULATOR_HOST}}
+      #       NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST=${{secrets.CI_NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST}}
+      #       NEXT_PUBLIC_FIREBASE_DATABASE_URL=${{secrets.CI_NEXT_PUBLIC_FIREBASE_DATABASE_URL}}
+      #       FIREBASE_PROJECT_ID=${{secrets.CI_FIREBASE_PROJECT_ID}}
+      #       FIREBASE_AUTH_DOMAIN=${{secrets.CI_FIREBASE_AUTH_DOMAIN}}
+      #       FIREBASE_CLIENT_EMAIL=${{secrets.CI_FIREBASE_CLIENT_EMAIL}}
+      #       FIREBASE_MESSAGING_SENDER_ID=${{secrets.CI_FIREBASE_MESSAGING_SENDER_ID}}
+      #       FIREBASE_MEASUREMENT_ID=${{secrets.CI_FIREBASE_MEASUREMENT_ID}}
+      #       FIREBASE_COOKIE_SECRET_PREVIOUS=${{secrets.CI_FIREBASE_COOKIE_SECRET_PREVIOUS}}
+      #       FIREBASE_COOKIE_SECRET_CURRENT=${{secrets.CI_FIREBASE_COOKIE_SECRET_CURRENT}}
+      #       NEXT_PUBLIC_SOCKET_HOST=${{secrets.CI_NEXT_PUBLIC_SOCKET_HOST}}
+      #       NEXT_PUBLIC_GOOGLE_ANALYTICS=${{secrets.CI_NEXT_PUBLIC_GOOGLE_ANALYTICS}}
+      #       NEXT_PUBLIC_ROLLBAR_ACCESS_TOKEN=${{secrets.CI_NEXT_PUBLIC_ROLLBAR_ACCESS_TOKEN}}
+      #       NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${{secrets.CI_NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}}
+      #       FIREBASE_APP_ID=${{secrets.CI_FIREBASE_APP_ID}}
+      #       TWITCH_CLIENT_ID=${{secrets.CI_TWITCH_CLIENT_ID}}
+      #       TWITCH_CLIENT_SECRET=${{secrets.CI_TWITCH_SECRET}}
+      #       TWITCH_SECRET=${{secrets.CI_TWITCH_SECRET}}
+      #       STRIPE_SECRET_KEY=${{secrets.CI_STRIPE_SECRET_KEY}}
+      #       STRIPE_WEBHOOK_SECRET=${{secrets.CI_STRIPE_WEBHOOK_SECRET}}
+      #       SUBSCRIPTION_PRICE_ID=${{secrets.CI_SUBSCRIPTION_PRICE_ID}}
+      #       MONTHLY_TIP_PRICE_ID=${{secrets.CI_MONTHLY_TIP_PRICE_ID}}
 
       - name: Create .env file
         run: |
