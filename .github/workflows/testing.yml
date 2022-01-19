@@ -69,7 +69,7 @@ jobs:
           username: ${{secrets.DOKKU_SSH_USER}}
           key: "${{ secrets.DOKKU_SSH_PRIVATE_KEY }}"
           script: |
-            dokku git:from-image test-api ghcr.io/${{github.repository}}/api:testing
+            dokku git:from-image stage-api ghcr.io/${{github.repository}}/api:testing
 
       - name: Trigger web testing deployment to Digital Ocean
         uses: appleboy/ssh-action@master
@@ -78,7 +78,7 @@ jobs:
           username: ${{secrets.DOKKU_SSH_USER}}
           key: "${{ secrets.DOKKU_SSH_PRIVATE_KEY }}"
           script: |
-            dokku git:from-image test-web ghcr.io/${{github.repository}}/web:testing
+            dokku git:from-image stage-web ghcr.io/${{github.repository}}/web:testing
 
   e2e:
     needs: deploy
