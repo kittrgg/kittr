@@ -10,5 +10,8 @@
     "test:local": "docker-compose -f docker-compose.localtest.yml up",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"
+  },
+  "devDependencies": {
+    "cypress": "^9.3.1"
   }
 }
