@@ -4,7 +4,6 @@ import user from "../fixtures/login.json";
 
 describe("Desktop Authentication Flows", () => {
   beforeEach(() => {
-    cy.logout();
     cy.visit("/dashboard");
     cy.viewport("macbook-16");
   });
