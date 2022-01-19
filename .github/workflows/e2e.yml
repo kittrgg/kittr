@@ -58,23 +58,23 @@ jobs:
       #       NEXT_PUBLIC_SOCKET_HOST=${{secrets.CI_NEXT_PUBLIC_SOCKET_HOST}}
       #       GOOGLE_APPLICATION_CREDENTIALS=${{secrets.CI_GOOGLE_APPLICATION_CREDENTIALS}}
 
-      - name: Trigger api testing deployment to Digital Ocean
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{secrets.DOKKU_HOST}}
-          username: ${{secrets.DOKKU_SSH_USER}}
-          key: "${{ secrets.DOKKU_SSH_PRIVATE_KEY }}"
-          script: |
-            dokku git:from-image stage-api ghcr.io/${{github.repository}}/api:testing
+      # - name: Trigger api testing deployment to Digital Ocean
+      #   uses: appleboy/ssh-action@master
+      #   with:
+      #     host: ${{secrets.DOKKU_HOST}}
+      #     username: ${{secrets.DOKKU_SSH_USER}}
+      #     key: "${{ secrets.DOKKU_SSH_PRIVATE_KEY }}"
+      #     script: |
+      #       dokku git:from-image stage-api ghcr.io/${{github.repository}}/api:testing
 
-      - name: Trigger web testing deployment to Digital Ocean
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{secrets.DOKKU_HOST}}
-          username: ${{secrets.DOKKU_SSH_USER}}
-          key: "${{ secrets.DOKKU_SSH_PRIVATE_KEY }}"
-          script: |
-            dokku git:from-image stage-web ghcr.io/${{github.repository}}/web:testing
+      # - name: Trigger web testing deployment to Digital Ocean
+      #   uses: appleboy/ssh-action@master
+      #   with:
+      #     host: ${{secrets.DOKKU_HOST}}
+      #     username: ${{secrets.DOKKU_SSH_USER}}
+      #     key: "${{ secrets.DOKKU_SSH_PRIVATE_KEY }}"
+      #     script: |
+      #       dokku git:from-image stage-web ghcr.io/${{github.repository}}/web:testing
 
       - name: Cypress run
         uses: cypress-io/github-action@v2
