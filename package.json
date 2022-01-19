@@ -9,7 +9,6 @@
     "test:local:build": "docker-compose -f docker-compose.localtest.yml up --build",
     "test:local": "docker-compose -f docker-compose.localtest.yml up",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run",
-    "e2e:start-apps": "cd api && npm run start && cd .. && cd web && npm run build && npm run serve"
+    "cypress:run": "cypress run"
   }
 }
