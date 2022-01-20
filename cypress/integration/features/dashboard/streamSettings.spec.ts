@@ -125,23 +125,22 @@ describe("Channel Identity", () => {
   });
 
   it("Change channel display name", () => {
-    cy.login(user.email, user.password);
     cy.get("[data-cy=thetestchannel-channel-button]").click();
     cy.get("[name=displayName]").focus().clear().type("someothername");
     cy.get("[data-cy=confirm-name-change]").click();
   });
 
-  // it("Deletes the channel", () => {
-  //   cy.get("[data-cy=thetestchannel-channel-button]").click();
-  //   cy.get("[data-cy=channel-delete]").click();
-  //   cy.get("[name=displayNameDelete").type("thetestchannel");
-  //   cy.contains("DELETE FOREVER").click();
-  //   cy.contains("YOUR CHANNELS");
-  // });
-
   it("Callouts for basic users", () => {
     cy.get("[data-cy=thetestchannel-channel-button]").click();
     cy.get("[data-cy=premium-learn-more]");
+  });
+
+  it("Deletes the channel", () => {
+    cy.get("[data-cy=thetestchannel-channel-button]").click();
+    cy.get("[data-cy=channel-delete]").click();
+    cy.get("[name=displayNameDelete").type("thetestchannel");
+    cy.contains("DELETE FOREVER").click();
+    cy.contains("YOUR CHANNELS");
   });
 });
 
