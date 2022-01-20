@@ -99,7 +99,7 @@ describe("Channel Settings", () => {
     cy.contains("testman3");
   });
 
-  // Particuarly difficult to make pass...I just didn't feel like dealing with it.
+  // TODO: Particuarly difficult to make pass...I just didn't feel like dealing with it.
   // it("Changes channel's owner", () => {
   //   cy.intercept("PUT", "/api/manager/newOwner").as("changeOwner");
   //   cy.intercept("GET", "/api/channel**").as("getChannelData");
