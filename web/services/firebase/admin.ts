@@ -6,6 +6,9 @@ if (!admin.apps.length) {
 		admin.initializeApp({ projectId: "dev" })
 	} else {
 		try {
+			console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS)
+			console.log(JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS as any))
+
 			admin.initializeApp({
 				credential: admin.credential.cert(JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS as any))
 			})
