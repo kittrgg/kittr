@@ -1,8 +1,6 @@
 /// <reference path="index.d.ts" />
 
-import managers from "../fixtures/managers.json";
-
-const user = managers["w5lMLvVLL3uJNRuoqSWvYjNIJ1GF"];
+import user from "../fixtures/login.json";
 
 Cypress.Commands.add("login", (email, password) => {
   cy.visit("/dashboard");

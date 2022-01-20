@@ -4,8 +4,6 @@ import user from "../fixtures/login.json";
 
 describe("Desktop Authentication Flows", () => {
   beforeEach(() => {
-    cy.request("POST", "/api/admin/cypress/user");
-    cy.request("POST", "/api/admin/cypress/seedDatabase");
     cy.visit("/dashboard");
     cy.viewport("macbook-16");
   });
