@@ -21,7 +21,11 @@ describe("Desktop Authentication Flows", () => {
   });
 
   it("Logs out", () => {
-    cy.login(user.email, user.password);
+    cy.contains("LOG IN");
+    cy.get("[name=email]").type(user.email);
+    cy.get("[name=password]").type(user.password);
+    cy.get("[data-cy=login-button]").click();
+    cy.get("[data-cy=your-channels-title]");
     cy.get("[data-cy=profile-container-button]").click();
     cy.get("[data-cy=logout-button]").click();
     cy.contains("get kittd.");
