@@ -8,6 +8,7 @@ if (!admin.apps.length) {
 		try {
 			console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS)
 			console.log(JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS as any))
+			console.log(typeof JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS as any))
 
 			admin.initializeApp({
 				credential: admin.credential.cert(JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS as any))
