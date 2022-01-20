@@ -56,7 +56,7 @@ jobs:
             SUBSCRIPTION_PRICE_ID=${{secrets.CI_SUBSCRIPTION_PRICE_ID}}
             MONTHLY_TIP_PRICE_ID=${{secrets.CI_MONTHLY_TIP_PRICE_ID}}
             NEXT_PUBLIC_SOCKET_HOST=${{secrets.CI_NEXT_PUBLIC_SOCKET_HOST}}
-            GOOGLE_APPLICATION_CREDENTIALS=${{secrets.CI_GOOGLE_APPLICATION_CREDENTIALS}}
+            GOOGLE_APPLICATION_CREDENTIALS="${{secrets.CI_GOOGLE_APPLICATION_CREDENTIALS}}"
 
       - name: Trigger api testing deployment to Digital Ocean
         uses: appleboy/ssh-action@master
