@@ -42,10 +42,6 @@ describe("Mobile Navigation", () => {
 
 describe("Mobile Nav (Authentication)", () => {
   beforeEach(() => {
-    cy.intercept("https://www.googleapis.com/identitytoolkit/**", (req) =>
-      req.reply("")
-    ).as("auth mocks only");
-    cy.logout();
     cy.visit("/");
     cy.viewport("iphone-x");
   });

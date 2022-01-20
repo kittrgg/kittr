@@ -21,9 +21,6 @@ describe("Desktop Authentication Flows", () => {
   // });
 
   it("Logs out", () => {
-    cy.intercept("https://www.googleapis.com/identitytoolkit/**", (req) =>
-      req.reply("")
-    ).as("auth mocks only");
     cy.login(user.email, user.password);
     cy.get("[data-cy=profile-container-button]").click();
     cy.get("[data-cy=logout-button]").click();
