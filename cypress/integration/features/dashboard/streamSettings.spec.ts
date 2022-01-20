@@ -6,16 +6,17 @@ describe("Channel Settings", () => {
   beforeEach(() => {
     cy.visit("/dashboard");
     cy.viewport("macbook-16");
-    cy.get("[data-cy=thetestchannel-channel-button]").click();
   });
 
   it("Modal for more info on managers", () => {
     cy.login(user.email, user.password);
+    cy.get("[data-cy=thetestchannel-channel-button]").click();
     cy.get("[data-cy=managers-info-question]").click();
     cy.contains("ABOUT ACCOUNT MANAGERS");
   });
 
   it("Shows all managers", () => {
+    cy.get("[data-cy=thetestchannel-channel-button]").click();
     cy.get("[data-cy=manager]").should("have.length", 3);
     cy.get("[data-cy=manager] > p")
       .filter(':contains("Owner")')
@@ -29,6 +30,7 @@ describe("Channel Settings", () => {
     cy.intercept("PUT", "/api/manager/promote").as("promote");
     cy.intercept("PUT", "/api/manager/demote").as("demote");
     cy.intercept("GET", "/api/manager/getInfo?uid=*").as("getManagerInfo");
+    cy.get("[data-cy=thetestchannel-channel-button]").click();
     cy.get("[data-cy=manager] > div > [data-cy=promote]").eq(0).click();
     cy.contains("YES, PROMOTE THEM").click();
     cy.contains("Administrator");
@@ -39,6 +41,7 @@ describe("Channel Settings", () => {
   });
 
   it("Adjusts YouTube autoplay", () => {
+    cy.get("[data-cy=thetestchannel-channel-button]").click();
     cy.get("[data-cy=toggler-value-0]").click();
     cy.get("[data-cy=toggler-value-1]").should(
       "have.css",
@@ -54,6 +57,7 @@ describe("Channel Settings", () => {
   });
 
   it("Adds a link", () => {
+    cy.get("[data-cy=thetestchannel-channel-button]").click();
     cy.get("[data-cy=add-link-button]").click();
     cy.get("[data-cy=facebook-add-button]").click();
     cy.get("[name=facebook]").type("https://www.facebook.com/some-test-link");
@@ -66,6 +70,7 @@ describe("Channel Settings", () => {
   });
 
   it("Deletes a link", () => {
+    cy.get("[data-cy=thetestchannel-channel-button]").click();
     cy.get("[data-cy=discord-delete-button]").click();
     cy.contains("https://discord.gg").should("not.exist");
     cy.intercept("PUT", "/api/channel/meta/links").as("updateLinks");
@@ -75,6 +80,7 @@ describe("Channel Settings", () => {
   });
 
   it("Remove a manager", () => {
+    cy.get("[data-cy=thetestchannel-channel-button]").click();
     cy.intercept("GET", "/api/manager/getInfo?uid=*").as("getManagerInfo");
     cy.get("[data-cy=remove-manager]").first().click();
     cy.contains("testman1");
@@ -85,6 +91,7 @@ describe("Channel Settings", () => {
   });
 
   it("Add a manager", () => {
+    cy.get("[data-cy=thetestchannel-channel-button]").click();
     cy.intercept("GET", "/api/manager/getInfo?uid=*").as("getManagerInfo");
     cy.get("[data-cy=add-manager-begin]").click();
     cy.get("[name=email").type("manager3@test.com");
@@ -94,6 +101,7 @@ describe("Channel Settings", () => {
   });
 
   it("Changes channel's owner", () => {
+    cy.get("[data-cy=thetestchannel-channel-button]").click();
     cy.get("[data-cy=change-owner-start]").click();
     cy.get("[data-cy=confirm-changing-owner]").click();
     cy.get("[data-cy=selector-new-manager]").select("testman2");
@@ -111,16 +119,17 @@ describe("Channel Identity", () => {
   beforeEach(() => {
     cy.visit("/dashboard");
     cy.viewport("macbook-16");
-    cy.get("[data-cy=thetestchannel-channel-button]").click();
   });
 
   it("Change channel display name", () => {
     cy.login(user.email, user.password);
+    cy.get("[data-cy=thetestchannel-channel-button]").click();
     cy.get("[name=displayName]").focus().clear().type("someothername");
     cy.get("[data-cy=confirm-name-change]").click();
   });
 
   it("Deletes the channel", () => {
+    cy.get("[data-cy=thetestchannel-channel-button]").click();
     cy.get("[data-cy=channel-delete]").click();
     cy.get("[name=displayNameDelete").type("thetestchannel");
     cy.contains("DELETE FOREVER").click();
@@ -128,6 +137,7 @@ describe("Channel Identity", () => {
   });
 
   it("Callouts for basic users", () => {
+    cy.get("[data-cy=thetestchannel-channel-button]").click();
     cy.get("[data-cy=premium-learn-more]");
   });
 });
@@ -136,11 +146,11 @@ describe("Premium Features", () => {
   beforeEach(() => {
     cy.visit("/dashboard");
     cy.viewport("macbook-16");
-    cy.get("[data-cy=premiumchannel-channel-button]").click();
   });
 
   it("CRUD a spec", () => {
     cy.login(user.email, user.password);
+    cy.get("[data-cy=premiumchannel-channel-button]").click();
     cy.get("[data-cy=add-a-spec]").click();
     cy.get(".spec-select").click();
     cy.contains("CPU").click();
@@ -157,6 +167,7 @@ describe("Premium Features", () => {
   });
 
   it("CRUD an affiliate", () => {
+    cy.get("[data-cy=thetestchannel-channel-button]").click();
     cy.get("[data-cy=add-an-affiliate]").click();
     cy.get("[name=company]").type("Testing With Cypress Inc");
     cy.get("[name=affiliate-description]").type("Da Description");
@@ -175,10 +186,12 @@ describe("Premium Features", () => {
   });
 
   it("Says to choose a kit in Active Kit Overlay preview", () => {
+    cy.get("[data-cy=thetestchannel-channel-button]").click();
     cy.contains("Choose a kit to see a preview.");
   });
 
   it("Remove a chosen kit from primary/secondary list when selected in other list", () => {
+    cy.get("[data-cy=thetestchannel-channel-button]").click();
     cy.contains("AUG (MW)").first().click();
     cy.wait(400);
     cy.contains("AUG (MW)").should("have.length", 1);
