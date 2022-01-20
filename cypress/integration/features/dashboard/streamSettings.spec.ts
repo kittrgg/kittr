@@ -131,14 +131,14 @@ describe("Channel Identity", () => {
   });
 
   it("Callouts for basic users", () => {
-    cy.get("[data-cy=thetestchannel-channel-button]").click();
+    cy.get("[data-cy=someothername-channel-button]").click();
     cy.get("[data-cy=premium-learn-more]");
   });
 
   it("Deletes the channel", () => {
-    cy.get("[data-cy=thetestchannel-channel-button]").click();
+    cy.get("[data-cy=someothername-channel-button]").click();
     cy.get("[data-cy=channel-delete]").click();
-    cy.get("[name=displayNameDelete").type("thetestchannel");
+    cy.get("[name=displayNameDelete").type("someothername");
     cy.contains("DELETE FOREVER").click();
     cy.contains("YOUR CHANNELS");
   });
@@ -151,7 +151,6 @@ describe("Premium Features", () => {
   });
 
   it("CRUD a spec", () => {
-    cy.login(user.email, user.password);
     cy.get("[data-cy=premiumchannel-channel-button]").click();
     cy.get("[data-cy=add-a-spec]").click();
     cy.get(".spec-select").click();
@@ -169,7 +168,7 @@ describe("Premium Features", () => {
   });
 
   it("CRUD an affiliate", () => {
-    cy.get("[data-cy=thetestchannel-channel-button]").click();
+    cy.get("[data-cy=premiumchannel-channel-button]").click();
     cy.get("[data-cy=add-an-affiliate]").click();
     cy.get("[name=company]").type("Testing With Cypress Inc");
     cy.get("[name=affiliate-description]").type("Da Description");
@@ -188,12 +187,12 @@ describe("Premium Features", () => {
   });
 
   it("Says to choose a kit in Active Kit Overlay preview", () => {
-    cy.get("[data-cy=thetestchannel-channel-button]").click();
+    cy.get("[data-cy=premiumchannel-channel-button]").click();
     cy.contains("Choose a kit to see a preview.");
   });
 
   it("Remove a chosen kit from primary/secondary list when selected in other list", () => {
-    cy.get("[data-cy=thetestchannel-channel-button]").click();
+    cy.get("[data-cy=premiumchannel-channel-button]").click();
     cy.contains("AUG (MW)").first().click();
     cy.contains("AUG (MW)").should("have.length", 1);
   });
