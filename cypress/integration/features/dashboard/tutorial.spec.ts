@@ -10,14 +10,12 @@ describe("Dashboard Tutorial", () => {
   });
 
   it('Close tutorial using "Skip Tour" button', () => {
-    cy.intercept("/api/manager", []).as("api/manager");
     cy.login(user.email, user.password);
     cy.get("[data-cy=start-tutorial-button]").click();
     cy.contains("SKIP TOUR").click();
   });
 
   it('Close tutorial using "X"', () => {
-    cy.intercept("/api/manager", []).as("api/manager");
     cy.login(user.email, user.password);
     cy.get("[data-cy=start-tutorial-button]").click();
     cy.get("[data-cy=modal-x-close]").click();
