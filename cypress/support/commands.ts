@@ -10,6 +10,7 @@ Cypress.Commands.add("login", (email, password) => {
 });
 
 Cypress.Commands.add("logout", () => {
+  cy.visit("/dashboard");
   cy.get("[data-cy=profile-container-button]").click();
   cy.get("[data-cy=logout-button]").click();
   cy.contains("get kittd.");
