@@ -131,13 +131,13 @@ describe("Channel Identity", () => {
     cy.get("[data-cy=confirm-name-change]").click();
   });
 
-  it("Deletes the channel", () => {
-    cy.get("[data-cy=thetestchannel-channel-button]").click();
-    cy.get("[data-cy=channel-delete]").click();
-    cy.get("[name=displayNameDelete").type("thetestchannel");
-    cy.contains("DELETE FOREVER").click();
-    cy.contains("YOUR CHANNELS");
-  });
+  // it("Deletes the channel", () => {
+  //   cy.get("[data-cy=thetestchannel-channel-button]").click();
+  //   cy.get("[data-cy=channel-delete]").click();
+  //   cy.get("[name=displayNameDelete").type("thetestchannel");
+  //   cy.contains("DELETE FOREVER").click();
+  //   cy.contains("YOUR CHANNELS");
+  // });
 
   it("Callouts for basic users", () => {
     cy.get("[data-cy=thetestchannel-channel-button]").click();
