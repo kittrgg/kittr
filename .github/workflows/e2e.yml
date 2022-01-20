@@ -23,14 +23,14 @@ jobs:
         with:
           context: ./api
           push: true
-          tags: ghcr.io/${{github.repository}}/api:testing
+          tags: ghcr.io/${{github.repository}}/api:test-${{github.sha}}
 
       - name: Build and push web testing image
         uses: docker/build-push-action@v2
         with:
           context: ./web
           push: true
-          tags: ghcr.io/${{github.repository}}/web:testing
+          tags: ghcr.io/${{github.repository}}/web:test-${{github.sha}}
           build-args: |
             ENVIRONMENT=${{secrets.CI_ENVIRONMENT}}
             NEXT_PUBLIC_ENVIRONMENT=${{secrets.CI_ENVIRONMENT}}
@@ -65,7 +65,7 @@ jobs:
           username: ${{secrets.DOKKU_SSH_USER}}
           key: "${{ secrets.DOKKU_SSH_PRIVATE_KEY }}"
           script: |
-            dokku git:from-image stage-api ghcr.io/${{github.repository}}/api:testing
+            dokku git:from-image stage-api ghcr.io/${{github.repository}}/api:test-${{github.sha}}
 
       - name: Trigger web testing deployment to Digital Ocean
         uses: appleboy/ssh-action@master
@@ -74,7 +74,7 @@ jobs:
           username: ${{secrets.DOKKU_SSH_USER}}
           key: "${{ secrets.DOKKU_SSH_PRIVATE_KEY }}"
           script: |
-            dokku git:from-image stage-web ghcr.io/${{github.repository}}/web:testing
+            dokku git:from-image stage-web ghcr.io/${{github.repository}}/web:test-${{github.sha}}
 
       - name: Cypress run
         uses: cypress-io/github-action@v2
