@@ -4,17 +4,13 @@ import user from "../../../fixtures/login.json";
 
 describe("Channel Settings", () => {
   beforeEach(() => {
-    cy.intercept("https://www.googleapis.com/identitytoolkit/**", (req) =>
-      req.reply("")
-    ).as("auth mocks");
-    cy.logout();
-    cy.login(user.email, user.password);
     cy.visit("/dashboard");
     cy.viewport("macbook-16");
     cy.get("[data-cy=thetestchannel-channel-button]").click();
   });
 
   it("Modal for more info on managers", () => {
+    cy.login(user.email, user.password);
     cy.get("[data-cy=managers-info-question]").click();
     cy.contains("ABOUT ACCOUNT MANAGERS");
   });
@@ -35,7 +31,6 @@ describe("Channel Settings", () => {
     cy.intercept("GET", "/api/manager/getInfo?uid=*").as("getManagerInfo");
     cy.get("[data-cy=manager] > div > [data-cy=promote]").eq(0).click();
     cy.contains("YES, PROMOTE THEM").click();
-    cy.wait("@promote").then(() => {});
     cy.contains("Administrator");
     cy.get("[data-cy=manager] > div > [data-cy=demote]").eq(0).click();
     cy.contains("YES, DEMOTE THEM").click();
@@ -122,9 +117,7 @@ describe("Channel Identity", () => {
   it("Change channel display name", () => {
     cy.login(user.email, user.password);
     cy.get("[name=displayName]").focus().clear().type("someothername");
-    cy.intercept("PUT", "/api/channel/meta/displayName").as("displayNameEdit");
     cy.get("[data-cy=confirm-name-change]").click();
-    cy.wait("@displayNameEdit");
   });
 
   it("Deletes the channel", () => {

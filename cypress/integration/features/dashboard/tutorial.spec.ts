@@ -5,20 +5,7 @@ import tutorialChannel from "../../../fixtures/tutorial-channel.json";
 import managers from "../../../fixtures/managers.json";
 
 describe("Dashboard Tutorial", () => {
-  before(() => {
-    cy.request("POST", "/api/admin/cypress/user");
-
-    cy.request("POST", "/api/admin/cypress/seedDatabase");
-  });
-
   beforeEach(() => {
-    cy.intercept("GET", "http://api:5000").as("socket");
-    cy.intercept("https://www.googleapis.com/identitytoolkit/**", (req) =>
-      req.reply("")
-    ).as("auth mocks only");
-    cy.intercept("/api/manager/getInfo?uid=*", (req) =>
-      req.reply(managers[req.query.uid])
-    ).as("getManagerInfo");
     cy.visit("/dashboard");
     cy.viewport("macbook-16");
   });
