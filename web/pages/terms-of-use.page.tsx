@@ -479,7 +479,6 @@ const Terms = ({ ...props }) => {
 
 				<p>Address: 4957 N Highway 67, Sedalia CO 80135</p>
 				<p>Email: anthony@inthezone.dev</p>
-				<p>Test</p>
 			</Styled.Container>
 		</PageWrapper>
 	)
