@@ -69,7 +69,7 @@ const CreateChannelModal = () => {
 		<Modal backgroundClickToClose title="CREATE NEW CHANNEL">
 			<TextInput
 				type="text"
-				name="displayName"
+				name="displayNameInput"
 				label="Display Name"
 				value={displayName}
 				onChange={(e) => setDisplayName(e.target.value)}

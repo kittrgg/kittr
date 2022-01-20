@@ -29,7 +29,7 @@ describe("Dashboard Tutorial", () => {
     cy.contains("NEXT").click();
     cy.contains("CLICK HERE TO START A NEW CHANNEL ACCOUNT.");
     cy.contains("CREATE A NEW CHANNEL").click();
-    cy.get("[name=displayName]").type(tutorialChannel.displayName);
+    cy.get("[name=displayNameInput]").type(tutorialChannel.displayName);
     cy.get("[data-cy=create-channel-button]").click();
     cy.contains("CLICK ON YOUR NEWLY CREATED CHANNEL.");
     cy.get(`[data-cy=${tutorialChannel.displayName}-channel-button]`).click();
