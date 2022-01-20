@@ -58,6 +58,20 @@ jobs:
             NEXT_PUBLIC_SOCKET_HOST=${{secrets.CI_NEXT_PUBLIC_SOCKET_HOST}}
             GOOGLE_APPLICATION_CREDENTIALS=${{secrets.CI_GOOGLE_APPLICATION_CREDENTIALS}}
 
+    # Just could not get these to work.
+    # - name: Delete old api images
+    #   uses: actions/delete-package-versions@v2
+    #   with:
+    #     package-name: "api"
+    #     token: ${{secrets.GITHUB_TOKEN}}
+    #     min-versions-to-keep: 3
+    # - name: Delete old web images
+    #   uses: actions/delete-package-versions@v2
+    #   with:
+    #     package-name: "web"
+    #     token: ${{secrets.GITHUB_TOKEN}}
+    #     min-versions-to-keep: 3
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -84,24 +98,7 @@ jobs:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-node@v2
-        with:
-          node-version: "14"
+      - uses: actions/checkout@v2
 
       - name: Cypress run
         uses: cypress-io/github-action@v2
-
-      # Just could not get these to work.
-      # - name: Delete old api images
-      #   uses: actions/delete-package-versions@v2
-      #   with:
-      #     package-name: "api"
-      #     token: ${{secrets.GITHUB_TOKEN}}
-      #     min-versions-to-keep: 3
-
-      # - name: Delete old web images
-      #   uses: actions/delete-package-versions@v2
-      #   with:
-      #     package-name: "web"
-      #     token: ${{secrets.GITHUB_TOKEN}}
-      #     min-versions-to-keep: 3
