@@ -3,10 +3,10 @@ import { createHandler } from "@Utils/middlewares/createHandler"
 import { Channel } from "@Services/mongodb/models"
 import mongoose from "mongoose"
 
-import dummyChannelFixture from "../../../../cypress/fixtures/mongoose/newChannel.json"
-import tutorialChannel from "../../../../cypress/fixtures/tutorial-channel.json"
-import channelFixture from "../../../../cypress/fixtures/mongoose/channel.json"
-import premiumChannelFixture from "../../../../cypress/fixtures/mongoose/premiumChannel.json"
+import dummyChannelFixture from "@Utils/fixtures/mongoose/newChannel.json"
+import tutorialChannel from "@Utils/fixtures/tutorial-channel.json"
+import channelFixture from "@Utils/fixtures/mongoose/channel.json"
+import premiumChannelFixture from "@Utils/fixtures/mongoose/premiumChannel.json"
 
 const handler = createHandler()
 

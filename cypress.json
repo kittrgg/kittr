@@ -1,0 +1,5 @@
+{
+  "baseUrl": "https://stage-web.kittr.gg/",
+  "video": false,
+  "screenshotOnRunFailure": false
+}

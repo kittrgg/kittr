@@ -12,6 +12,9 @@ COPY . .
 ARG ENVIRONMENT
 ENV ENVIRONMENT ${ENVIRONMENT}
 
+ARG NEXT_PUBLIC_ENVIRONMENT
+ENV NEXT_PUBLIC_ENVIRONMENT ${NEXT_PUBLIC_ENVIRONMENT}
+
 ARG DB_CONNECTION_STRING
 ENV DB_CONNECTION_STRING ${DB_CONNECTION_STRING}
 
@@ -83,7 +86,8 @@ ENV GOOGLE_APPLICATION_CREDENTIALS ${GOOGLE_APPLICATION_CREDENTIALS}
 
 RUN npm run build
 
-# Production image, copy all the files and run next
+# Production image
+# Copy files from builder and run next
 FROM node:16-alpine AS runner
 WORKDIR /app
 
@@ -94,13 +98,9 @@ RUN adduser -S nextjs -u 1001
 
 COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next ./.next
+COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
-
-COPY --from=builder --chown=nextjs:nodejs /app/.next/ ./.next/
-
-USER nextjs
 
 EXPOSE 3000
 

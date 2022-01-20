@@ -5,7 +5,7 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import { createHandler } from "@Utils/middlewares/createHandler"
 import admin from "@Services/firebase/admin"
-import managersFixture from "../../../../cypress/fixtures/managers.json"
+import managersFixture from "@Utils/fixtures/managers.json"
 
 const handler = createHandler()
 

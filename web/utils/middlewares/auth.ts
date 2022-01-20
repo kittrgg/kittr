@@ -27,22 +27,22 @@ export const userAuth = async (req: NextApiRequest, res: NextApiResponse, next: 
 }
 
 export const adminAuth = async (req: NextApiRequest, res: NextApiResponse, next: any) => {
-	if (process.env.ENVIRONMENT === "TESTING") return next()
+	console.log("This is an admin route.")
 
-	const authorization = req.headers.authorization
+	// const authorization = req.headers.authorization
 
-	if (!authorization) return res.status(401).json({ message: "You must provide authentication to use this endpoint." })
+	// if (!authorization) return res.status(401).json({ message: "You must provide authentication to use this endpoint." })
 
-	const token = authorization.split(" ")[1]
+	// const token = authorization.split(" ")[1]
 
-	auth
-		.verifyIdToken(token)
-		.then((decodedToken) => {
-			return next()
-		})
-		.catch((err) => {
-			return res.status(401).json({ message: "Your authorization was not accepted." })
-		})
+	// auth
+	// 	.verifyIdToken(token)
+	// 	.then((decodedToken) => {
+	// 		return next()
+	// 	})
+	// 	.catch((err) => {
+	// 		return res.status(401).json({ message: "Your authorization was not accepted." })
+	// 	})
 
 	// next()
 }

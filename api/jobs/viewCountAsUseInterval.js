@@ -2,7 +2,7 @@ const { BetaAnalyticsDataClient } = require("@google-analytics/data");
 const Player = require("../models/Player").default;
 
 const analyticsDataClient = new BetaAnalyticsDataClient({
-  credentials: JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS),
+  credentials: JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS || '{}'),
 });
 
 const analyticsReportSchemas = {

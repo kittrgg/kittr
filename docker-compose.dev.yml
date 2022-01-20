@@ -16,7 +16,7 @@ services:
   #     MONGO_INITDB_ROOT_PASSWORD: example
 
   firebase-emulators:
-    container_name: firebase
+    container_name: firebase-emulators
     ports:
       - "4000:4000"
       - "4001:4001"
@@ -30,6 +30,10 @@ services:
     command: firebase emulators:start --project dev
 
   api:
+    container_name: api
+    build:
+      context: ./api
+      dockerfile: Dockerfile
     depends_on:
       # - mongo
       - firebase-emulators
@@ -38,9 +42,8 @@ services:
       - 5555:5555
     volumes:
       - ./api:/usr/app
-    environment:
-      - FIREBASE_AUTH_EMULATOR_HOST=firebase-emulators:4001
-      - FIREBASE_STORAGE_EMULATOR_HOST=firebase-emulators:4002
+    env_file:
+      - .env
     command: npm run local
 
   web:
@@ -52,6 +55,15 @@ services:
     build:
       context: ./web
       dockerfile: Dockerfile.dev
+    env_file:
+      - .env
+    environment:
+      - ENVIRONMENT=DEVELOPMENT
+      - NEXT_PUBLIC_ENVIRONMENT=DEVELOPMENT
+      - FIREBASE_AUTH_EMULATOR_HOST=firebase-emulators:4001
+      - FIREBASE_STORAGE_EMULATOR_HOST=firebase-emulators:4002
+      - NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST=localhost:4001
+      - NEXT_PUBLIC_FIREBASE_STORAGE_EMULATOR_HOST=localhost:4002
     volumes:
       - ./web:/app
       - /web/app/node_modules
