@@ -106,7 +106,6 @@ describe("Channel Settings", () => {
     cy.get("[data-cy=confirm-changing-owner]").click();
     cy.get("[data-cy=selector-new-manager]").select("testman2");
     cy.get("[data-cy=final-change-owner]").click();
-    cy.wait("@changeOwner");
     cy.get("[data-cy=manager] > p")
       .filter(':contains("Owner")')
       .should("have.length", 1);

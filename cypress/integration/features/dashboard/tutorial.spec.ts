@@ -2,7 +2,6 @@
 
 import user from "../../../fixtures/tutorial-login.json";
 import tutorialChannel from "../../../fixtures/tutorial-channel.json";
-import managers from "../../../fixtures/managers.json";
 
 describe("Dashboard Tutorial", () => {
   beforeEach(() => {
