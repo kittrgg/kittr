@@ -92,7 +92,6 @@ describe("Channel Settings", () => {
 
   it("Add a manager", () => {
     cy.get("[data-cy=thetestchannel-channel-button]").click();
-    cy.intercept("GET", "/api/manager/getInfo?uid=*").as("getManagerInfo");
     cy.get("[data-cy=add-manager-begin]").click();
     cy.get("[name=email").type("manager3@test.com");
     cy.get("[data-cy=role-selector]").select("Administrator");
@@ -101,11 +100,14 @@ describe("Channel Settings", () => {
   });
 
   it("Changes channel's owner", () => {
-    cy.get("[data-cy=thetestchannel-channel-button]").click();
+    cy.intercept("PUT", "/api/manager/newOwner").as("changeOwner");
+    cy.intercept("GET", "/api/channel**").as("getChannelData");
     cy.get("[data-cy=change-owner-start]").click();
     cy.get("[data-cy=confirm-changing-owner]").click();
     cy.get("[data-cy=selector-new-manager]").select("testman2");
     cy.get("[data-cy=final-change-owner]").click();
+    cy.wait("@changeOwner");
+    cy.wait("@getChannelData");
     cy.get("[data-cy=manager] > p")
       .filter(':contains("Owner")')
       .should("have.length", 1);
@@ -192,7 +194,6 @@ describe("Premium Features", () => {
   it("Remove a chosen kit from primary/secondary list when selected in other list", () => {
     cy.get("[data-cy=thetestchannel-channel-button]").click();
     cy.contains("AUG (MW)").first().click();
-    cy.wait(400);
     cy.contains("AUG (MW)").should("have.length", 1);
   });
 });
