@@ -76,5 +76,6 @@ jobs:
           script: |
             dokku git:from-image stage-web ghcr.io/${{github.repository}}/web:test-${{github.sha}}
 
+      # Only this!
       - name: Cypress run
         uses: cypress-io/github-action@v2
