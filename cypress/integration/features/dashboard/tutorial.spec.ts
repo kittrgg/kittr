@@ -16,13 +16,11 @@ describe("Dashboard Tutorial", () => {
   });
 
   it('Close tutorial using "X"', () => {
-    cy.login(user.email, user.password);
     cy.get("[data-cy=start-tutorial-button]").click();
     cy.get("[data-cy=modal-x-close]").click();
   });
 
   it("Completes tutorial", () => {
-    cy.login(user.email, user.password);
     cy.get("[data-cy=start-tutorial-button]").click();
     cy.contains("NEXT").click();
     cy.contains("CLICK HERE TO START A NEW CHANNEL ACCOUNT.");
