@@ -99,15 +99,11 @@ describe("Channel Settings", () => {
   });
 
   it("Changes channel's owner", () => {
-    cy.intercept("PUT", "/api/manager/newOwner").as("changeOwner");
-    cy.intercept("GET", "/api/channel**").as("getChannelData");
-    cy.intercept("GET", "/api/manager/getInfo?uid=*").as("getManagerInfo");
     cy.get("[data-cy=change-owner-start]").click();
     cy.get("[data-cy=confirm-changing-owner]").click();
     cy.get("[data-cy=selector-new-manager]").select("testman2");
     cy.get("[data-cy=final-change-owner]").click();
     cy.wait("@changeOwner");
-    cy.wait("@getChannelData");
     cy.get("[data-cy=manager] > p")
       .filter(':contains("Owner")')
       .should("have.length", 1);
@@ -118,19 +114,13 @@ describe("Channel Settings", () => {
 
 describe("Channel Identity", () => {
   beforeEach(() => {
-    cy.request("POST", "/api/admin/cypress/user");
-    cy.request("POST", "/api/admin/cypress/seedDatabase");
-    cy.intercept("https://www.googleapis.com/identitytoolkit/**", (req) =>
-      req.reply("")
-    ).as("auth mocks");
-    cy.logout();
-    cy.login(user.email, user.password);
     cy.visit("/dashboard");
     cy.viewport("macbook-16");
     cy.get("[data-cy=thetestchannel-channel-button]").click();
   });
 
   it("Change channel display name", () => {
+    cy.login(user.email, user.password);
     cy.get("[name=displayName]").focus().clear().type("someothername");
     cy.intercept("PUT", "/api/channel/meta/displayName").as("displayNameEdit");
     cy.get("[data-cy=confirm-name-change]").click();
@@ -151,18 +141,13 @@ describe("Channel Identity", () => {
 
 describe("Premium Features", () => {
   beforeEach(() => {
-    cy.intercept("https://www.googleapis.com/identitytoolkit/**", (req) =>
-      req.reply("")
-    ).as("auth mocks");
-    cy.logout();
-    cy.login(user.email, user.password);
     cy.visit("/dashboard");
     cy.viewport("macbook-16");
-    cy.wait(200);
     cy.get("[data-cy=premiumchannel-channel-button]").click();
   });
 
   it("CRUD a spec", () => {
+    cy.login(user.email, user.password);
     cy.get("[data-cy=add-a-spec]").click();
     cy.get(".spec-select").click();
     cy.contains("CPU").click();

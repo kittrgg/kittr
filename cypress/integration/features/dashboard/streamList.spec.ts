@@ -3,18 +3,14 @@
 import user from "../../../fixtures/login.json";
 import newChannel from "../../../fixtures/mongoose/newChannel.json";
 
-describe("Channel List View (STUBS)", () => {
+describe("Channel List View", () => {
   beforeEach(() => {
-    cy.intercept("https://www.googleapis.com/identitytoolkit/**", (req) =>
-      req.reply("")
-    ).as("auth mocks only");
-    cy.logout();
-    cy.login(user.email, user.password);
     cy.visit("/dashboard");
     cy.viewport("macbook-16");
   });
 
   it("Renders", () => {
+    cy.login(user.email, user.password);
     cy.contains("thetestchannel");
   });
 

@@ -16,7 +16,6 @@ describe("Games & Kits Actions", () => {
     cy.get("[data-cy=warzone-sidebar-button]").trigger("mouseenter");
     cy.get("[data-cy=warzone-delete-sidebar-button]").click();
     cy.get("[data-cy=delete-game-button]").click();
-    cy.wait("@getChannelData");
     cy.get("[data-cy=warzone-sidebar-button]").should("not.exist");
   });
 
