@@ -59,8 +59,8 @@ describe("Mobile Nav (Authentication)", () => {
   });
 
   it("Does not show Sign Up link (Authed)", () => {
-    // cy.login(user.email, user.password);
-    // cy.visit("/");
+    cy.login(user.email, user.password);
+    cy.visit("/");
     cy.get("[data-cy=mobile-hamburger-icon]").click();
     cy.get("[data-cy=mobile-sign-up-link]").should("not.exist");
   });
