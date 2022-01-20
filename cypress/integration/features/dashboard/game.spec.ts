@@ -2,33 +2,16 @@
 
 import user from "../../../fixtures/login.json";
 import channel from "../../../fixtures/mongoose/channel.json";
-import channelList from "../../../fixtures/managerChannelList.json";
-import managers from "../../../fixtures/managers.json";
 
 describe("Games & Kits Actions", () => {
-  before(() => {
-    cy.request("POST", "/api/admin/cypress/user");
-
-    cy.request("POST", "/api/admin/cypress/seedDatabase");
-  });
-
   beforeEach(() => {
-    cy.intercept("GET", "http://api:5000").as("socket");
-    cy.intercept("https://www.googleapis.com/identitytoolkit/**", (req) =>
-      req.reply("")
-    ).as("auth mocks only");
-    cy.intercept("/api/manager/getInfo?uid=*", (req) =>
-      req.reply(managers[req.query.uid])
-    ).as("getManagerInfo");
-    cy.intercept("/api/manager", channelList).as("api/manager");
     cy.visit("/dashboard");
     cy.viewport("macbook-16");
-    cy.login(user.email, user.password);
     cy.get("[data-cy=thetestchannel-channel-button]").click();
   });
 
   it("Removes game from channel", () => {
-    cy.intercept("GET", "/api/channel**").as("getChannelData");
+    cy.login(user.email, user.password);
     cy.get("[data-cy=warzone-sidebar-button]").trigger("mouseover");
     cy.get("[data-cy=warzone-sidebar-button]").trigger("mouseenter");
     cy.get("[data-cy=warzone-delete-sidebar-button]").click();
