@@ -102,6 +102,7 @@ describe("Channel Settings", () => {
   it("Changes channel's owner", () => {
     cy.intercept("PUT", "/api/manager/newOwner").as("changeOwner");
     cy.intercept("GET", "/api/channel**").as("getChannelData");
+    cy.get("[data-cy=thetestchannel-channel-button]").click();
     cy.get("[data-cy=change-owner-start]").click();
     cy.get("[data-cy=confirm-changing-owner]").click();
     cy.get("[data-cy=selector-new-manager]").select("testman2");

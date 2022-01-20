@@ -21,14 +21,14 @@ describe("Channel List View", () => {
 
   it("Disallow similar named channels", () => {
     cy.get("[data-cy=create-new-channel]").click();
-    cy.get("[name=displayName").type("anthonysheww");
+    cy.get("[name=displayNameInput").type("anthonysheww");
     cy.get("[data-cy=create-channel-button]").click();
     cy.contains("That name is too similar to another channel");
   });
 
   it("Creates a new channel", () => {
     cy.get("[data-cy=create-new-channel]").click();
-    cy.get("[name=displayName").type(newChannel.displayName);
+    cy.get("[name=displayNameInput").type(newChannel.displayName);
     cy.get("[data-cy=create-channel-button]").click();
     cy.get(`[data-cy=${newChannel.displayName}-channel-button]`);
   });
