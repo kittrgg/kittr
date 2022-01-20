@@ -20,7 +20,7 @@ import "./commands";
 // require('./commands')
 
 before(() => {
-  console.log("Attempting to seed users and database.");
+  cy.log("Attempting to seed users and database.");
   cy.request("POST", "/api/admin/cypress/user");
   cy.request("POST", "/api/admin/cypress/seedDatabase");
 });
