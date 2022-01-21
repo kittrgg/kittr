@@ -19,22 +19,8 @@ import "./commands";
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
-import firebase from "firebase/app";
-import "firebase/auth";
-
-const firebaseConfig = {
-  // Only apiKey is needed when using an emulator
-  apiKey: process.env.NEXT_PUBLIC_API_KEY || Cypress.env("NEXT_PUBLIC_API_KEY"),
-  projectId: "dev",
-};
-
-firebase.initializeApp(firebaseConfig);
-
-export const auth = firebase.auth();
-auth.useEmulator(`http://firebase-emulators:4001`);
-
 before(() => {
-  cy.request("POST", "http://web:3000/api/admin/cypress/user");
-
-  cy.request("POST", "http://web:3000/api/admin/cypress/seedDatabase");
+  cy.log("Attempting to seed users and database.");
+  cy.request("POST", "/api/admin/cypress/user");
+  cy.request("POST", "/api/admin/cypress/seedDatabase");
 });

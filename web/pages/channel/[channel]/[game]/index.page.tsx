@@ -3,13 +3,7 @@ import { useRouter } from "next/router"
 
 import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
 import { Channel, Game, KitStat } from "@Services/mongodb/models"
-import {
-	// allKitBaseFeaturedRateQuery,
-	// allKitBaseUsageQuery,
-	allSetupsForComparisonQuery,
-	gameByUrlSafeNameQuery,
-	getChannelProfileQuery
-} from "@Services/mongodb"
+import { gameByUrlSafeNameQuery, getChannelProfileQuery } from "@Services/mongodb"
 import WarzoneProfile from "@Features/WarzoneProfile"
 import { NoItemFound, Head } from "@Components/shared"
 import FallbackPage from "@Components/layouts/FallbackPage"
@@ -113,14 +107,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 	await connectToDatabase()
 
-	const [gameQuery, forSetupComparison, channel] = await Promise.all([
-		gameByUrlSafeNameQuery(game),
-		allSetupsForComparisonQuery(),
-		getChannelProfileQuery(urlSafeName)
-	])
+	const [gameQuery, channel] = await Promise.all([gameByUrlSafeNameQuery(game), getChannelProfileQuery(urlSafeName)])
 
 	const kitStats = await KitStat.find()
-	const { ratioOfChannelsWithBase, ratioOfChannelsWithBaseFeatured } = kitStats[0]
+	const { ratioOfChannelsWithBase, ratioOfChannelsWithBaseFeatured, forSetupComparison } = kitStats[0]
 
 	return {
 		props: {

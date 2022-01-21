@@ -2,48 +2,32 @@
 
 import user from "../../../fixtures/login.json";
 import channel from "../../../fixtures/mongoose/channel.json";
-import channelList from "../../../fixtures/managerChannelList.json";
-import managers from "../../../fixtures/managers.json";
 
 describe("Games & Kits Actions", () => {
-  before(() => {
-    cy.request("POST", "/api/admin/cypress/user");
-
-    cy.request("POST", "/api/admin/cypress/seedDatabase");
-  });
-
   beforeEach(() => {
-    cy.intercept("GET", "http://api:5000").as("socket");
-    cy.intercept("https://www.googleapis.com/identitytoolkit/**", (req) =>
-      req.reply("")
-    ).as("auth mocks only");
-    cy.intercept("/api/manager/getInfo?uid=*", (req) =>
-      req.reply(managers[req.query.uid])
-    ).as("getManagerInfo");
-    cy.intercept("/api/manager", channelList).as("api/manager");
     cy.visit("/dashboard");
     cy.viewport("macbook-16");
-    cy.login(user.email, user.password);
-    cy.get("[data-cy=thetestchannel-channel-button]").click();
   });
 
   it("Removes game from channel", () => {
-    cy.intercept("GET", "/api/channel**").as("getChannelData");
+    cy.login(user.email, user.password);
+    cy.get("[data-cy=thetestchannel-channel-button]").click();
     cy.get("[data-cy=warzone-sidebar-button]").trigger("mouseover");
     cy.get("[data-cy=warzone-sidebar-button]").trigger("mouseenter");
     cy.get("[data-cy=warzone-delete-sidebar-button]").click();
     cy.get("[data-cy=delete-game-button]").click();
-    cy.wait("@getChannelData");
     cy.get("[data-cy=warzone-sidebar-button]").should("not.exist");
   });
 
   it("Adds a game to channel", () => {
+    cy.get("[data-cy=thetestchannel-channel-button]").click();
     cy.get("[data-cy=sidebar-add-game]").click();
     cy.get("[data-cy=warzone-button]").click();
     cy.get("[data-cy=warzone-sidebar-button]");
   });
 
   it("Edits creator code", () => {
+    cy.get("[data-cy=thetestchannel-channel-button]").click();
     cy.get("[data-cy=warzone-sidebar-button]").click();
     cy.get("[data-cy=edit-creator-code]").click();
     cy.get("[data-cy=creator-code-input]").type("testcreatorcode").blur();
@@ -54,6 +38,7 @@ describe("Games & Kits Actions", () => {
   });
 
   it("Creates first kit", () => {
+    cy.get("[data-cy=thetestchannel-channel-button]").click();
     cy.get("[data-cy=warzone-sidebar-button]").click();
     cy.get("[data-cy=create-first-kit]").click();
     cy.get(".choose-kit-base").click();
@@ -80,6 +65,7 @@ describe("Games & Kits Actions", () => {
   });
 
   it("Quick exports command", () => {
+    cy.get("[data-cy=thetestchannel-channel-button]").click();
     cy.get("[data-cy=warzone-sidebar-button]").click();
     cy.get("[data-cy=EM2-quick-export]").click();
     cy.get("[data-cy=user-toggle] > [data-cy=toggler-value-1]").click();
@@ -89,6 +75,7 @@ describe("Games & Kits Actions", () => {
   });
 
   it("Exports bot commands", () => {
+    cy.get("[data-cy=thetestchannel-channel-button]").click();
     cy.get("[data-cy=warzone-sidebar-button]").click();
     cy.contains("EXPORT BOT COMMANDS").click();
     cy.contains(`!editcom !loadout $(touser)`);
@@ -106,6 +93,7 @@ describe("Games & Kits Actions", () => {
   });
 
   it("Deletes kit", () => {
+    cy.get("[data-cy=thetestchannel-channel-button]").click();
     cy.get("[data-cy=warzone-sidebar-button]").click();
     cy.contains("EM2 (tester title)").click();
     cy.get("[data-cy=trash-can]").click();

@@ -49,11 +49,11 @@ mongoose
   .then(async () => {
     // Just a pinger!
     app.get("/", (req, res) => {
-      res.send("Hello from kittr!");
+      res.send("Hello, kittr!");
     });
 
     console.log("Server has started.");
-    if(process.env.ENVIRONMENT === 'PRODUCTION') {
+    if (process.env.ENVIRONMENT === "PRODUCTION") {
       setInterval(() => writeViewCounts(), 3600000); // Once an hour
     }
     setInterval(() => createKitStatsAsInterval(), 86700000); // A little more than once a day

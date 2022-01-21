@@ -4,7 +4,6 @@ import user from "../fixtures/login.json";
 
 describe("Desktop Authentication Flows", () => {
   beforeEach(() => {
-    cy.logout();
     cy.visit("/dashboard");
     cy.viewport("macbook-16");
   });
@@ -13,19 +12,15 @@ describe("Desktop Authentication Flows", () => {
     cy.contains("LOG IN");
   });
 
-  // it("Logs in", () => {
-  //   cy.contains("LOG IN");
-  //   cy.get("[name=email]").type(user.email);
-  //   cy.get("[name=password]").type(user.password);
-  //   cy.get("[data-cy=login-button]").click();
-  //   cy.get("[data-cy=your-channels-title]");
-  // });
+  it("Logs in", () => {
+    cy.contains("LOG IN");
+    cy.get("[name=email]").type(user.email);
+    cy.get("[name=password]").type(user.password);
+    cy.get("[data-cy=login-button]").click();
+    cy.get("[data-cy=your-channels-title]");
+  });
 
   it("Logs out", () => {
-    cy.intercept("https://www.googleapis.com/identitytoolkit/**", (req) =>
-      req.reply("")
-    ).as("auth mocks only");
-    cy.login(user.email, user.password);
     cy.get("[data-cy=profile-container-button]").click();
     cy.get("[data-cy=logout-button]").click();
     cy.contains("get kittd.");
@@ -42,18 +37,18 @@ describe("Desktop Authentication Flows", () => {
     cy.contains("That doesn't look like an email address.");
   });
 
-  // it("Unsuccessful login for bad credentials", () => {
-  //   // Ignore error thrown by failed authentation
-  //   Cypress.on("uncaught:exception", (err) => {
-  //     return false;
-  //   });
+  it("Unsuccessful login for bad credentials", () => {
+    // Ignore error thrown by failed authentation
+    Cypress.on("uncaught:exception", (err) => {
+      return false;
+    });
 
-  //   cy.contains("LOG IN");
-  //   cy.get("[name=email]").type("test123@test123.com");
-  //   cy.get("[name=password]").type("testpasswordtestpassword");
-  //   cy.get("[data-cy=login-button]").click();
-  //   cy.contains("Either your email or password is wrong.");
-  // });
+    cy.contains("LOG IN");
+    cy.get("[name=email]").type("test123@test123.com");
+    cy.get("[name=password]").type("testpasswordtestpassword");
+    cy.get("[data-cy=login-button]").click();
+    cy.contains("Either your email or password is wrong.");
+  });
 
   it("Navigates to sign up form", () => {
     cy.contains("Create an account.").click();

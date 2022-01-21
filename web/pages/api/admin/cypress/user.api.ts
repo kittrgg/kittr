@@ -10,7 +10,7 @@ import managersFixture from "@Utils/fixtures/managers.json"
 const handler = createHandler()
 
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
-	if (process.env.ENVIRONMENT === "TESTING" || process.env.ENVIRONMENT === "DEVELOPMENT") {
+	if (process.env.ENVIRONMENT === "TESTING") {
 		console.log("Seeding firebase emulators...")
 		admin
 			.deleteUsers([

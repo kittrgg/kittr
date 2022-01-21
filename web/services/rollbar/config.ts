@@ -10,7 +10,7 @@ export let config = {
 	ignoredMessages: ["Failed to load Stripe.js"]
 }
 
-if (process.env.NEXT_PUBLIC_ENVIRONMENT === "TESTING") {
+if (process.env.NEXT_PUBLIC_ENVIRONMENT === "DEVELOPMENT") {
 	config = {
 		accessToken: "",
 		environment: "",
