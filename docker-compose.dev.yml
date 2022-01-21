@@ -1,19 +1,17 @@
 version: "3"
 
 services:
-  # Couldn't get connection strings to work correctly locally.
-  # Will continue to use the dev database on Atlas for now...
-  # mongo:
-  #   container_name: mongo
-  #   image: mongo
-  #   restart: always
-  #   ports:
-  #     - 27017:27017
-  #   volumes:
-  #     - /data/db:/data/db
-  #   environment:
-  #     MONGO_INITDB_ROOT_USERNAME: root
-  #     MONGO_INITDB_ROOT_PASSWORD: example
+  mongo:
+    container_name: mongo
+    image: mongo:5
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
 
   firebase-emulators:
     container_name: firebase-emulators
@@ -35,7 +33,7 @@ services:
       context: ./api
       dockerfile: Dockerfile
     depends_on:
-      # - mongo
+      - mongo
       - firebase-emulators
     ports:
       - 5000:5000
@@ -48,7 +46,7 @@ services:
 
   web:
     depends_on:
-      # - mongo
+      - mongo
       - firebase-emulators
     ports:
       - 3000:3000
@@ -58,6 +56,7 @@ services:
     env_file:
       - .env
     environment:
+      - DB_CONNECTION_STRING=mongodb://root:example@mongo:27017/myFirstDatabase
       - ENVIRONMENT=DEVELOPMENT
       - NEXT_PUBLIC_ENVIRONMENT=DEVELOPMENT
       - FIREBASE_AUTH_EMULATOR_HOST=firebase-emulators:4001
