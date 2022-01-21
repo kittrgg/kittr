@@ -161,7 +161,7 @@ const GridItem = styled.a<{ span: number }>`
 const Date = styled.p`
 	margin-bottom: 24px;
 	font-size: 14px;
-	color: ${colors.lightest};
+	color: ${colors.white};
 	letter-spacing: 2px;
 `
 
@@ -175,7 +175,7 @@ const Title = styled.h2`
 `
 
 const MarkdownContainer = styled.div`
-	color: ${colors.lightest};
+	color: ${colors.white};
 	font-size: 18px;
 	letter-spacing: 2px;
 `
@@ -184,6 +184,6 @@ const Paragraph = styled.p`
 	margin-top: 24px;
 	margin-left: 24px;
 	padding-right: 24px;
-	color: ${colors.lightest};
+	color: ${colors.white};
 	font-family: "Montserrat", serif;
 `

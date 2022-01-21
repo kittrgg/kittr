@@ -126,7 +126,7 @@ const Summary = styled.p`
 	border-radius: 10px;
 	background-color: ${colors.darker};
 	${paragraph};
-	color: ${colors.lighter};
+	color: ${colors.white};
 	line-height: 150%;
 
 	strong {
