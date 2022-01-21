@@ -1,5 +1,5 @@
 const Player = require("../models/Player").default;
-const KitStat = require("../models/KitStat").default;
+const KitStats = require("../models/KitStat").default;
 
 const allKitBaseFeaturedRateQuery = async () => {
   const result = await Player.aggregate([
@@ -142,11 +142,56 @@ const allKitBaseUsageQuery = async () => {
   return result[0].kitCounts;
 };
 
+const allSetupsForComparisonQuery = async () => {
+  const result = await Player.aggregate([
+    {
+      $unwind: {
+        path: "$kits",
+      },
+    },
+    {
+      $group: {
+        _id: null,
+        kits: {
+          $push: "$kits",
+        },
+      },
+    },
+    {
+      $unwind: {
+        path: "$kits",
+      },
+    },
+    {
+      $group: {
+        _id: "$kits.baseId",
+        matches: {
+          $push: "$kits.options",
+        },
+      },
+    },
+  ]);
+
+  const serialized = result.map((channel) => {
+    return {
+      ...channel,
+      matches: channel.matches.map((match) => {
+        return match.map((option) => {
+          return option.toString();
+        });
+      }),
+    };
+  });
+
+  return serialized;
+};
+
 const createKitStatsAsInterval = async () => {
   console.log("Creating new kit usage stats...");
 
   const ratioOfChannelsWithBaseFeatured = await allKitBaseFeaturedRateQuery();
   const ratioOfChannelsWithBase = await allKitBaseUsageQuery();
+  const forSetupComparison = await allSetupsForComparisonQuery();
 
   try {
     await KitStats.updateOne(
@@ -154,6 +199,7 @@ const createKitStatsAsInterval = async () => {
       {
         ratioOfChannelsWithBaseFeatured,
         ratioOfChannelsWithBase,
+        forSetupComparison,
       },
       { upsert: true }
     );
