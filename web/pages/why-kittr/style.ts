@@ -36,7 +36,7 @@ export const LinkButton = styled.a<{ design?: string }>`
 export const P = styled.p`
 	margin-top: 28px;
 	margin-bottom: 48px;
-	color: ${colors.lightest};
+	color: ${colors.lighter};
 	${header2};
 	text-align: center;
 `

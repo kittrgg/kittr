@@ -2,7 +2,6 @@ import { useSelector } from "@Redux/store"
 
 import styled from "styled-components"
 import colors from "@Colors"
-import { header2 } from "@Styles/typography"
 import { useDispatch } from "@Redux/store"
 import { setModal } from "@Redux/slices/dashboard"
 import { useManagerRole } from "@Redux/slices/dashboard/selectors"
@@ -152,7 +151,7 @@ const DisplayName = styled.p`
 
 const Email = styled.p`
 	margin: 0 24px;
-	color: ${colors.lightest};
+	color: ${colors.white};
 `
 
 const Role = styled.p``

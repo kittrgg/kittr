@@ -73,5 +73,5 @@ export const HeaderLink = styled.div`
 
 export const CreatorCode = styled.p`
 	margin-top: 4px;
-	color: ${colors.lightest};
+	color: ${colors.lighter};
 `

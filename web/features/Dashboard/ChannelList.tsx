@@ -44,7 +44,7 @@ const ChannelList = ({ ...props }) => {
 				})
 			)
 		}
-	}, [modal.data?.page, data, ref])
+	}, [modal.data?.page, data, ref, dispatch])
 
 	return (
 		<>
@@ -155,15 +155,6 @@ export default ChannelList
 
 const Container = styled.div``
 
-const TutorialText = styled.p`
-	color: ${colors.lighter};
-`
-
-const HStack = styled.div`
-	flex-direction: column;
-	align-items: center;
-`
-
 const Header = styled.h1`
 	margin-bottom: 32px;
 	${header1};
@@ -200,22 +191,7 @@ const ChannelTitle = styled.h2`
 `
 
 const Role = styled.h3`
-	color: ${colors.lightest};
+	color: ${colors.white};
 	${paragraph};
 	text-align: right;
-`
-
-const SocialBar = styled.div`
-	width: 500px;
-	margin: 0 auto;
-	margin-bottom: 32px;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-between;
-	padding: 20px 32px;
-	background-color: ${colors.darker};
-	border-radius: 12px;
-	${paragraph};
-	font-weight: 600;
 `

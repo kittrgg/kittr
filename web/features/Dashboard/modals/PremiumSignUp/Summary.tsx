@@ -63,7 +63,7 @@ const Title = styled.h3`
 
 const Paragraph = styled.p`
 	${paragraph};
-	color: ${colors.lightest};
+	color: ${colors.white};
 `
 
 const TipWrapper = styled.span`

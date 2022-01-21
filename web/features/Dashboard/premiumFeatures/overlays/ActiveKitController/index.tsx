@@ -444,7 +444,7 @@ const GridWrapper = styled.div`
 
 const Caption = styled.p`
 	${caption};
-	color: ${colors.lightest};
+	color: ${colors.white};
 	letter-spacing: 1px;
 `
 

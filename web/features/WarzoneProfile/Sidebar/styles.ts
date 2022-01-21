@@ -65,5 +65,5 @@ export const CategoryLabel = styled.p`
 export const Caption = styled.p`
 	margin: 24px 0 12px;
 	${caption}
-	color: ${colors.lightest};
+	color: ${colors.white};
 `

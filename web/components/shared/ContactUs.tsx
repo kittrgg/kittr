@@ -101,7 +101,7 @@ const SecondaryLinkButton = styled.a`
 	margin-top: 60px;
 	${header2};
 	font-size: 18px;
-	color: ${colors.lightest};
+	color: ${colors.lighter};
 	text-decoration: none;
 	text-align: center;
 	transition: 0.2s;

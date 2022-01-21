@@ -63,7 +63,7 @@ export default CreatorCode
 // Styled Components
 
 const Code = styled.div`
-	color: ${colors.lightest};
+	color: ${colors.lighter};
 	${header2};
 	letter-spacing: 1px;
 `

@@ -2,8 +2,7 @@ import styled from "styled-components"
 import { Elements } from "@stripe/react-stripe-js"
 import { loadStripe } from "@stripe/stripe-js/pure"
 
-import colors from "@Colors"
-import { header2, paragraph } from "@Styles/typography"
+import { header2 } from "@Styles/typography"
 import Modal from "@Components/shared/Modal"
 import CheckoutForm from "./CheckoutForm"
 
@@ -33,27 +32,4 @@ export default PremiumSignUp
 
 const Title = styled.h3`
 	${header2};
-`
-
-const BodyGrid = styled.div`
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	margin-top: 64px;
-`
-
-const GridItem = styled.div`
-	width: 100%;
-	padding: 0 100px;
-`
-
-const Paragraph = styled.p`
-	${paragraph};
-	color: ${colors.lightest};
-`
-
-const HorizFlex = styled.div`
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-between;
 `

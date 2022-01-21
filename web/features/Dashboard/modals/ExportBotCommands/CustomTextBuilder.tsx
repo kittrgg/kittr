@@ -162,7 +162,7 @@ const TextAreaLead = styled.div`
 	position: absolute;
 	top: 18px;
 	left: 20px;
-	color: ${colors.lightest};
+	color: ${colors.lighter};
 	${paragraph};
 `
 
@@ -180,6 +180,6 @@ const UserStringContainer = styled.div`
 	padding: 16px 20px;
 	border-radius: 6px;
 	background-color: ${colors.darker};
-	color: ${colors.lightest};
+	color: ${colors.lighter};
 	cursor: not-allowed;
 `

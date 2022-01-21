@@ -24,7 +24,7 @@ const CustomTitle = ({ ...props }) => {
 				type="text"
 				name="customTitle"
 				label={`${base?.displayName ? base.displayName : ""} (`}
-				labelStyles={{ color: colors.lightest, marginTop: "12px" }}
+				labelStyles={{ color: colors.lighter, marginTop: "12px" }}
 				value={customTitle}
 				onChange={(e) => {
 					if (e.target.value.length === 0) return dispatch(updateCustomTitle(""))
@@ -36,7 +36,7 @@ const CustomTitle = ({ ...props }) => {
 				}}
 				inputStyles={{ width: "50%", minWidth: "390px", marginLeft: "0", marginTop: "12px" }}
 			/>
-			<Styled.ClosingParenthesis style={{ color: colors.lightest }}>{")"}</Styled.ClosingParenthesis>
+			<Styled.ClosingParenthesis style={{ color: colors.lighter }}>{")"}</Styled.ClosingParenthesis>
 		</Styled.Container>
 	)
 }

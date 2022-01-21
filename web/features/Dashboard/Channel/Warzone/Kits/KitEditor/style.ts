@@ -64,13 +64,13 @@ export const HeaderHelper = styled.p<{ animate?: boolean; animationDuration?: nu
 	font-size: 18px;
 	font-style: italic;
 	transition: 0.2s;
-	color: ${(props) => (props.animate ? colors.red : colors.lightest)};
+	color: ${(props) => (props.animate ? colors.red : colors.lighter)};
 	transform: ${(props) => (props.animate ? "scale(1.1) rotate(10deg)" : "scale(1.0) rotate(0deg)")};
 `
 
 export const ParagraphHelper = styled.p`
 	margin-top: 24px;
-	color: ${colors.lightest};
+	color: ${colors.lighter};
 	font-size: 18px;
 	letter-spacing: 1px;
 `

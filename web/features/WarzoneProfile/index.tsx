@@ -108,5 +108,5 @@ const HeaderTitle = styled.h1`
 
 const CreatorCode = styled.p`
 	margin-top: 4px;
-	color: ${colors.lightest};
+	color: ${colors.lighter};
 `

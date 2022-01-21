@@ -69,7 +69,7 @@ const H2 = styled.h2`
 
 const KittrSubline = styled.p`
 	margin-top: 12px;
-	color: ${colors.lightest};
+	color: ${colors.lighter};
 	font-size: 14px;
 `
 
@@ -89,7 +89,7 @@ const LinkToChannel = styled.a`
 
 const DimP = styled.p`
 	margin-top: 8px;
-	color: ${colors.lightest};
+	color: ${colors.lighter};
 `
 
 const LinkButton = styled.a`
