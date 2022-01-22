@@ -102,7 +102,7 @@ const Subline = styled.p`
 `
 
 const MarkdownContainer = styled.div`
-	color: ${colors.lightest};
+	color: ${colors.white};
 	font-size: 18px;
 	letter-spacing: 2px;
 

@@ -40,12 +40,12 @@ const FirstLine = styled.div`
 `
 
 const Label = styled.p`
-	color: ${colors.lightest};
+	color: ${colors.white};
 	font-size: 16px;
 `
 
 const Number = styled.p`
-	color: ${colors.lightest};
+	color: ${colors.white};
 	font-size: 16px;
 `
 

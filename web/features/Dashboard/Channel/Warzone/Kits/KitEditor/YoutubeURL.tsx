@@ -39,12 +39,12 @@ const YoutubeId = ({ ...props }) => {
 				type="text"
 				name="youtubeUrl"
 				label={"https://www.youtube.com/watch?v="}
-				labelStyles={{ color: colors.lightest, display: "block", marginTop: "12px", textTransform: "initial" }}
+				labelStyles={{ color: colors.lighter, display: "block", marginTop: "12px", textTransform: "initial" }}
 				value={youtubeURL || ""}
 				subline="If you want to just copy-paste the whole YouTube link, we'll trim it for you. We know, we know, you're welcome."
 				onChange={(e) => handleInput(e)}
 				inputStyles={{ marginLeft: "0", marginTop: "0" }}
-				sublineStyles={{ color: colors.lightest, fontWeight: "initial", letterSpacing: "1px" }}
+				sublineStyles={{ color: colors.lighter, fontWeight: "initial", letterSpacing: "1px" }}
 			/>
 		</Styled.Container>
 	)

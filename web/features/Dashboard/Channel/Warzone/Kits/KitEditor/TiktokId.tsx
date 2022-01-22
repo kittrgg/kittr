@@ -38,12 +38,12 @@ const TiktokId = ({ ...props }) => {
 				type="text"
 				name="tiktokVideoId"
 				label={"https://www.tiktok.com/"}
-				labelStyles={{ color: colors.lightest, display: "block", marginTop: "12px", textTransform: "initial" }}
+				labelStyles={{ color: colors.lighter, display: "block", marginTop: "12px", textTransform: "initial" }}
 				value={tiktokId || ""}
 				subline={`If you want to just copy-paste the whole Tiktok link, we'll trim it for you. We know, we know, you're welcome. (Note that we cannot accept links from the mobile app. If it starts with "vm.tiktok.com", it won't work!)`}
 				onChange={(e) => handleInput(e)}
 				inputStyles={{ marginLeft: "0", marginTop: "0" }}
-				sublineStyles={{ color: colors.lightest, fontWeight: "initial", letterSpacing: "1px" }}
+				sublineStyles={{ color: colors.lighter, fontWeight: "initial", letterSpacing: "1px" }}
 			/>
 		</Styled.Container>
 	)

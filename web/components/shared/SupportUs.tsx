@@ -123,5 +123,5 @@ const H6 = styled.h6`
 const Paragraph = styled.p<{ numOfColumns: number }>`
 	margin-bottom: 16px;
 	grid-column: 1 / 3;
-	color: ${colors.lighter};
+	color: ${colors.white};
 `

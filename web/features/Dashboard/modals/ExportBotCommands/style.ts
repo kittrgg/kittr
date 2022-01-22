@@ -18,7 +18,7 @@ export const ToggleDescription = styled.p`
 
 export const SubText = styled.p`
 	margin-top: 4px;
-	color: ${colors.lightest};
+	color: ${colors.lighter};
 	${caption};
 	line-height: 150%;
 `

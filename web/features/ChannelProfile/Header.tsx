@@ -99,6 +99,6 @@ const H1 = styled.h1`
 
 const Counts = styled.p`
 	margin: 22px 0;
-	color: ${colors.lightest};
+	color: ${colors.lighter};
 	${header2};
 `

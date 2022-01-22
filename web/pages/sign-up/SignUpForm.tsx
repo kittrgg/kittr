@@ -84,7 +84,7 @@ const SignUp = ({ ...props }) => {
 
 	return (
 		<AuthLayout title="SIGN UP">
-			<Paragraph style={{ margin: "0", color: colors.lightest }}>
+			<Paragraph style={{ margin: "0" }}>
 				This is your personal account so use your own info here. Channel specific stuff will come in a minute.
 			</Paragraph>
 			<form>
@@ -169,6 +169,7 @@ const Paragraph = styled.div`
 	margin: 48px 0;
 	font-size: 18px;
 	letter-spacing: 2px;
+	color: ${colors.white};
 
 	a {
 		font-weight: 600;

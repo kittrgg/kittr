@@ -54,13 +54,6 @@ const Channels = ({ channel, popularityRates }: Props) => {
 		}
 	}, [activeWeapon, query.weapon, query.k])
 
-	// useEffect(() => {
-	//     fetch(`/api/channel/incrementViews`, {
-	//         method: "PUT",
-	//         body: JSON.stringify({ urlSafeName: query.channel })
-	//     })
-	// }, [query])
-
 	const activeGame = channel.games ? channel.games.find((game: IGame) => game.urlSafeName === query.game) : { code: "" }
 
 	return (
@@ -115,5 +108,5 @@ const HeaderTitle = styled.h1`
 
 const CreatorCode = styled.p`
 	margin-top: 4px;
-	color: ${colors.lightest};
+	color: ${colors.lighter};
 `

@@ -57,7 +57,7 @@ export default GamesIndex
 const Paragraph = styled.p`
 	margin: 24px 24px 0 5%;
 	padding-right: 24px;
-	color: ${colors.lightest};
+	color: ${colors.white};
 	font-family: "Montserrat", serif;
 `
 

@@ -110,7 +110,7 @@ const Container = styled.div<{ active: boolean; titleImage: string }>`
 	border-radius: 10px;
 	background: ${colors.darker};
 	${paragraph};
-	color: ${colors.lightest};
+	color: ${colors.white};
 	cursor: ${(props) => (props.active ? "pointer" : "initial")};
 	transition: 0.2s;
 

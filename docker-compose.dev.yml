@@ -10,7 +10,7 @@ services:
   #   ports:
   #     - 27017:27017
   #   volumes:
-  #     - /data/db:/data/db
+  #     - ./data:/data/db
   #   environment:
   #     MONGO_INITDB_ROOT_USERNAME: root
   #     MONGO_INITDB_ROOT_PASSWORD: example
@@ -27,6 +27,7 @@ services:
     image: firebase-emulator:firebase-emulator
     volumes:
       - .:/src
+    # command: firebase emulators:start --project dev --export-on-exit=./firebase-seed-data --import=./firebase-seed-data
     command: firebase emulators:start --project dev
 
   api:

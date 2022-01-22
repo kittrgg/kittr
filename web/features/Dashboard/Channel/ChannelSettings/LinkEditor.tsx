@@ -126,7 +126,7 @@ const LinkEditor = ({ ...props }) => {
 								flexDirection: "row",
 								width: "95%",
 								marginLeft: "24px",
-								color: colors.lightest
+								color: colors.lighter
 							}}
 							inputStyles={{ flex: "1", marginLeft: "0" }}
 							onChange={(e) => handleChange(e, [property, link])}

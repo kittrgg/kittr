@@ -70,7 +70,7 @@ export default EmailInput
 const FormParagraph = styled.p`
 	margin-top: -20px;
 	font-size: 18px;
-	color: ${colors.lightest};
+	color: ${colors.white};
 
 	@media (max-width: 1050px) {
 		margin-top: 18px;
