@@ -1,6 +1,5 @@
 FROM node:alpine
 
-ADD . /src
 WORKDIR /src
 
 RUN apk update && \
