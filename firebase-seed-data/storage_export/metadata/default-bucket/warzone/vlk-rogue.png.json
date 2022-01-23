@@ -1,0 +1,19 @@
+{
+  "name": "warzone/vlk-rogue.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642388418154,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "0db62b07-fade-4f7c-9171-ca020670e4d3"
+  ],
+  "timeCreated": "2022-01-17T03:00:18.153Z",
+  "updated": "2022-01-17T03:00:18.153Z",
+  "size": 62351,
+  "md5Hash": "74nmgtQe0jXmoIM37PkPSQ==",
+  "crc32c": "4004623304"
+}

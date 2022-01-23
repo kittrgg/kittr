@@ -1,0 +1,19 @@
+{
+  "name": "warzone/fennec.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642388417255,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "ea07886d-9c8d-4fb0-b358-9768634cd668"
+  ],
+  "timeCreated": "2022-01-17T03:00:17.254Z",
+  "updated": "2022-01-17T03:00:17.254Z",
+  "size": 62172,
+  "md5Hash": "0AibyaXYbi7hU020iUcieg==",
+  "crc32c": "3676641464"
+}

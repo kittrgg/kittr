@@ -1,0 +1,19 @@
+{
+  "name": "warzone/gorenko-anti-tank-rifle.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642388417446,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "e8d9ccd0-c0b0-4d60-a56e-95c267f5f361"
+  ],
+  "timeCreated": "2022-01-17T03:00:17.445Z",
+  "updated": "2022-01-17T03:00:17.445Z",
+  "size": 12586,
+  "md5Hash": "UbZ++77a0QZbQhlmca5LcQ==",
+  "crc32c": "3374635436"
+}

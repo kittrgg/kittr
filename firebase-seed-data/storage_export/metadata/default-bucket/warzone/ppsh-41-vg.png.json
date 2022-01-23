@@ -1,0 +1,19 @@
+{
+  "name": "warzone/ppsh-41-vg.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642388417889,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "0912e986-51d6-4508-a870-8f5d662d405c"
+  ],
+  "timeCreated": "2022-01-17T03:00:17.888Z",
+  "updated": "2022-01-17T03:00:17.888Z",
+  "size": 16481,
+  "md5Hash": "M4oe3GrkRL7L23Ak7bu0Ig==",
+  "crc32c": "846268276"
+}

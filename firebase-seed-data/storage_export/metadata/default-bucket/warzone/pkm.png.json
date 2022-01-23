@@ -1,0 +1,19 @@
+{
+  "name": "warzone/pkm.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642388417875,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "376e7cd6-89f4-4269-a1e0-65b61c4e7d83"
+  ],
+  "timeCreated": "2022-01-17T03:00:17.874Z",
+  "updated": "2022-01-17T03:00:17.874Z",
+  "size": 48738,
+  "md5Hash": "HTIcaCcLcRP4oGF32TKtZw==",
+  "crc32c": "2435685361"
+}

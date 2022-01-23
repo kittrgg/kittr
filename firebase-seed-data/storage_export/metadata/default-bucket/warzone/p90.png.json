@@ -1,0 +1,19 @@
+{
+  "name": "warzone/p90.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642388417854,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "426bddb5-ce34-483b-a28f-8f842fc3fa66"
+  ],
+  "timeCreated": "2022-01-17T03:00:17.853Z",
+  "updated": "2022-01-17T03:00:17.854Z",
+  "size": 89338,
+  "md5Hash": "ESo5eoxXhPs0HijSJHHDYA==",
+  "crc32c": "4185125351"
+}

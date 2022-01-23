@@ -1,0 +1,19 @@
+{
+  "name": "warzone/magnum.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642388417725,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "19524ee0-e429-4cb4-8d37-c0f84ca623b4"
+  ],
+  "timeCreated": "2022-01-17T03:00:17.724Z",
+  "updated": "2022-01-17T03:00:17.724Z",
+  "size": 32758,
+  "md5Hash": "oTeeafhCXc5YeO9yMGsEMA==",
+  "crc32c": "956105986"
+}

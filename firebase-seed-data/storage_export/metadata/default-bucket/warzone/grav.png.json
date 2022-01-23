@@ -1,0 +1,19 @@
+{
+  "name": "warzone/grav.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642388417505,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "ee3f781a-20c5-471d-8f0a-42cb616c4b9b"
+  ],
+  "timeCreated": "2022-01-17T03:00:17.504Z",
+  "updated": "2022-01-17T03:00:17.504Z",
+  "size": 47331,
+  "md5Hash": "xrLs20KzCRNLzHNkNoWUgQ==",
+  "crc32c": "3124370070"
+}

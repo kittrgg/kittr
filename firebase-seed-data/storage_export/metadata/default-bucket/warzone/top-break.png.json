@@ -1,0 +1,19 @@
+{
+  "name": "warzone/top-break.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642388418112,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "d8570ecf-0b5b-4da7-b430-70c4c77ed9b2"
+  ],
+  "timeCreated": "2022-01-17T03:00:18.111Z",
+  "updated": "2022-01-17T03:00:18.111Z",
+  "size": 12784,
+  "md5Hash": "EhR9eFyLLVY0sB9ZMS/H6A==",
+  "crc32c": "2910489322"
+}

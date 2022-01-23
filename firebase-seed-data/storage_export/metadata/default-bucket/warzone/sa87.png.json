@@ -1,0 +1,19 @@
+{
+  "name": "warzone/sa87.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642388417977,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "8ee3a268-fce0-4b29-a987-55803fcccae2"
+  ],
+  "timeCreated": "2022-01-17T03:00:17.976Z",
+  "updated": "2022-01-17T03:00:17.976Z",
+  "size": 75085,
+  "md5Hash": "8T3ktFrfi/KzvdPt5+hk3A==",
+  "crc32c": "2894179573"
+}

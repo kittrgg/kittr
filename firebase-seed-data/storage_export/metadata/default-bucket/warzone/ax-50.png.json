@@ -1,0 +1,19 @@
+{
+  "name": "warzone/ax-50.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642388416826,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "b2916485-0a68-45bf-8195-f97bb0abb356"
+  ],
+  "timeCreated": "2022-01-17T03:00:16.825Z",
+  "updated": "2022-01-17T03:00:16.825Z",
+  "size": 49811,
+  "md5Hash": "nxdAKVZg20+IHh2AR8C+IA==",
+  "crc32c": "1620158473"
+}

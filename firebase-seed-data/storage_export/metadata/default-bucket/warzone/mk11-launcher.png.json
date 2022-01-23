@@ -1,0 +1,19 @@
+{
+  "name": "warzone/mk11-launcher.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642388417770,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "74de664b-d8db-4781-9294-5f987f36999c"
+  ],
+  "timeCreated": "2022-01-17T03:00:17.769Z",
+  "updated": "2022-01-17T03:00:17.769Z",
+  "size": 5555,
+  "md5Hash": "rPNajXCv7bkEDerZs7AIlQ==",
+  "crc32c": "48146256"
+}

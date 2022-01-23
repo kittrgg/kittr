@@ -1,0 +1,19 @@
+{
+  "name": "warzone/ak-74u.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642388416760,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "0e9f4213-4ed8-4995-8e58-3351fd33c3e2"
+  ],
+  "timeCreated": "2022-01-17T03:00:16.759Z",
+  "updated": "2022-01-17T03:00:16.759Z",
+  "size": 59616,
+  "md5Hash": "GkM3tx43W24njQXKIqzynQ==",
+  "crc32c": "2003711145"
+}

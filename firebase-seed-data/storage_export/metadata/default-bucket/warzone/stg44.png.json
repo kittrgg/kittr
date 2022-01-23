@@ -1,0 +1,19 @@
+{
+  "name": "warzone/stg44.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642388418006,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "f81224b4-cc21-4183-8ce1-ac67449e248e"
+  ],
+  "timeCreated": "2022-01-17T03:00:18.005Z",
+  "updated": "2022-01-17T03:00:18.005Z",
+  "size": 18544,
+  "md5Hash": "I7AGAJY93kJN0AIhaVdL4A==",
+  "crc32c": "3270912376"
+}

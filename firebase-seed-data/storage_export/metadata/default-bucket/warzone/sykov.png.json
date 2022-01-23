@@ -1,0 +1,19 @@
+{
+  "name": "warzone/sykov.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642388418103,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "da446512-9649-4581-a76d-3fb44fc6315a"
+  ],
+  "timeCreated": "2022-01-17T03:00:18.102Z",
+  "updated": "2022-01-17T03:00:18.102Z",
+  "size": 42278,
+  "md5Hash": "vmo4a8MkhYSeMoTk1MJvsw==",
+  "crc32c": "1523822882"
+}

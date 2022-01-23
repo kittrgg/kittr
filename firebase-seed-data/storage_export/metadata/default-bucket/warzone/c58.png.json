@@ -1,0 +1,19 @@
+{
+  "name": "warzone/c58.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642388416868,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "f27dd042-e8fb-443a-961c-93eb49395cf0"
+  ],
+  "timeCreated": "2022-01-17T03:00:16.867Z",
+  "updated": "2022-01-17T03:00:16.868Z",
+  "size": 84042,
+  "md5Hash": "bywplKdaO8KteV+IPn5LDA==",
+  "crc32c": "536844857"
+}

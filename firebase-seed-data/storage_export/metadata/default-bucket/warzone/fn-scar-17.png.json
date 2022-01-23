@@ -1,0 +1,19 @@
+{
+  "name": "warzone/fn-scar-17.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642388417297,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "7b9d1bd7-57a9-45e8-ad99-9d4f56a16035"
+  ],
+  "timeCreated": "2022-01-17T03:00:17.296Z",
+  "updated": "2022-01-17T03:00:17.297Z",
+  "size": 59641,
+  "md5Hash": "x6au0yGoW8tW06p8gIAJag==",
+  "crc32c": "997532492"
+}

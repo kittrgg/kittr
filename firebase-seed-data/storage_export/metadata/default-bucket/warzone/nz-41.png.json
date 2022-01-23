@@ -1,0 +1,19 @@
+{
+  "name": "warzone/nz-41.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642388417839,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "84e98ff2-abb1-4ffd-90bc-51783c39536c"
+  ],
+  "timeCreated": "2022-01-17T03:00:17.838Z",
+  "updated": "2022-01-17T03:00:17.839Z",
+  "size": 14987,
+  "md5Hash": "JxJAQBOgTP94kHtLcSm7/Q==",
+  "crc32c": "1973310384"
+}
