@@ -4,7 +4,7 @@ const dbMiddleWare = async (req, res, next) => {
 	try {
 		if (!global.mongoose) {
 			global.mongoose = await mongoose.connect(process.env.DB_CONNECTION_STRING, {
-				dbName: "myFirstDatabase",
+				authSource: "admin",
 				useNewUrlParser: true,
 				useUnifiedTopology: true
 			})
