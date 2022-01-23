@@ -20,7 +20,7 @@ services:
       - "4001:4001"
       - "4002:4002"
     build:
-      context: .
+      context: ./
       dockerfile: Dockerfile.firebase
     image: firebase-emulator:firebase-emulator
     volumes:
@@ -46,6 +46,7 @@ services:
     command: npm run local
 
   web:
+    container_name: web
     depends_on:
       - mongo
       - firebase-emulators

@@ -2,23 +2,24 @@
 
 # How to Use
 
-## Create new images for development
-
-`npm run dev:build`
-
-You may also `npm run dev:build -- -d` if you don't care about seeing logs.
-
-## Use the existing image
+## "I want to develop kittr."
 
 `npm run dev`
 You may also `npm run dev -- -d` if you don't care about seeing logs.
 
 - To seed the firebase-emulators, you will need to shell into the `web` docker container and use `npm run emulators:seed`.
 
+## "I'm helping with the Dockerfiles."
+
+`npm run dev:build` may be useful to you.
+
+You may also `npm run dev:build -- -d` if you don't care about seeing logs.
+
 ## Ports
 
 - Web front-end: 3000
 - API: 5000
+- Mongo: 27017 (You shouldn't need to interact with this directly.)
 
 Firebase:
 
@@ -31,8 +32,3 @@ Firebase:
 - You may set environment variables in a `.env` file at the top of the file. The example file already includes the proper firebase-emulators ports. You will need variables for everything but the Stripe stuff for now (until we need to do more Stripe developmenting).
 - To run the E2E tests, you will need to `cd web` and run `npm run build`. Then, back out and run the testing compose.
 - If you are on Windows, make sure that you switch your Docker desktop to Linux containers.
-
-## Dev Environment Needed Improvements:
-
-- Automatic firebase-emulators seeding
-- Local mongodb instance
