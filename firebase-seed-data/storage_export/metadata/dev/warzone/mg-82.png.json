@@ -1,0 +1,19 @@
+{
+  "name": "warzone/mg-82.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176811,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "aba8a24d-e8d4-4dc1-9437-569677eaa3da"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.810Z",
+  "updated": "2022-01-23T05:36:16.810Z",
+  "size": 44716,
+  "md5Hash": "3nnLAWJ6u6c98B8ArU0dqQ==",
+  "crc32c": "4289676925"
+}

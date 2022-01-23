@@ -1,0 +1,19 @@
+{
+  "name": "warzone/pp19-bizon.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176922,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "363ad271-7600-4aa7-99b4-8dec9a0af067"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.921Z",
+  "updated": "2022-01-23T05:36:16.921Z",
+  "size": 25433,
+  "md5Hash": "PZpRKOh3dWwoxDG1xV8BuQ==",
+  "crc32c": "1825517236"
+}

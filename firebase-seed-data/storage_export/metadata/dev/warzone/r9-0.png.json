@@ -1,0 +1,19 @@
+{
+  "name": "warzone/r9-0.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176955,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "e396ff73-62cd-4ad5-a281-778a1bec2c09"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.954Z",
+  "updated": "2022-01-23T05:36:16.955Z",
+  "size": 80553,
+  "md5Hash": "A//ngf32DjZDi1R/UZdriA==",
+  "crc32c": "401215349"
+}

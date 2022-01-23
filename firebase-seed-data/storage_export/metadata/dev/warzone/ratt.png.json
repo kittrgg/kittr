@@ -1,0 +1,19 @@
+{
+  "name": "warzone/ratt.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176973,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "5c792eac-9508-498c-a1ad-0e0680e402ab"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.972Z",
+  "updated": "2022-01-23T05:36:16.972Z",
+  "size": 9643,
+  "md5Hash": "qWTqiUkCwtCtRSWztubhwA==",
+  "crc32c": "494950016"
+}

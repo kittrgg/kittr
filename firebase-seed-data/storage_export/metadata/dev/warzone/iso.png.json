@@ -1,0 +1,19 @@
+{
+  "name": "warzone/iso.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176622,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "c9dedac8-5bbf-4886-8a44-1b03469370e8"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.621Z",
+  "updated": "2022-01-23T05:36:16.622Z",
+  "size": 64157,
+  "md5Hash": "u6wzWi75PDzqPuJ0BK6Njw==",
+  "crc32c": "341788057"
+}

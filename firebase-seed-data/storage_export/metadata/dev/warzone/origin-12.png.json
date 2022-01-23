@@ -1,0 +1,19 @@
+{
+  "name": "warzone/origin-12.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176856,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "0824c7ea-1592-49f3-957b-f00b0476ad5e"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.855Z",
+  "updated": "2022-01-23T05:36:16.855Z",
+  "size": 59469,
+  "md5Hash": "oPZJWC8sZQZIwDY8pf7Z0Q==",
+  "crc32c": "1389780880"
+}

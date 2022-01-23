@@ -1,0 +1,19 @@
+{
+  "name": "warzone/as44.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176159,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "56d410b8-5723-43c9-bacf-1e79e11b2cfa"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.158Z",
+  "updated": "2022-01-23T05:36:16.159Z",
+  "size": 13696,
+  "md5Hash": "BwcVBov6p4C1SW8An4YRaA==",
+  "crc32c": "3346389108"
+}

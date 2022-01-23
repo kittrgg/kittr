@@ -1,0 +1,19 @@
+{
+  "name": "warzone/cr-56-amax.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176419,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "4c3e25c4-3b54-4626-84b0-d597d94a272b"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.418Z",
+  "updated": "2022-01-23T05:36:16.419Z",
+  "size": 25775,
+  "md5Hash": "tb8qY5kOEV3TSUEsCPRlQg==",
+  "crc32c": "523213607"
+}
