@@ -1,0 +1,19 @@
+{
+  "name": "warzone/hauer-77.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176612,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "def452ae-bb78-4d62-9772-afb468ca56bf"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.611Z",
+  "updated": "2022-01-23T05:36:16.611Z",
+  "size": 27879,
+  "md5Hash": "PFB6RcMg3rQPspfs+qPqwg==",
+  "crc32c": "1790173041"
+}

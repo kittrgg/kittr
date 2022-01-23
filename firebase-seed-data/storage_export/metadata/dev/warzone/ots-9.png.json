@@ -1,0 +1,19 @@
+{
+  "name": "warzone/ots-9.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176882,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "8ce31fc7-2643-4b57-ab67-dd4c1fc2bffe"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.881Z",
+  "updated": "2022-01-23T05:36:16.881Z",
+  "size": 20844,
+  "md5Hash": "Ux7uytIOKjsX4786N4oYKA==",
+  "crc32c": "1094655457"
+}

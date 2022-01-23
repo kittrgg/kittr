@@ -1,0 +1,19 @@
+{
+  "name": "warzone/diamatti.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176427,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "bbe86bcd-aa44-4942-9391-230066f8812e"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.426Z",
+  "updated": "2022-01-23T05:36:16.426Z",
+  "size": 33172,
+  "md5Hash": "8mH7Jm/1aI75J7uVrD6jDg==",
+  "crc32c": "3960997309"
+}

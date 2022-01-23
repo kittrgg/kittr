@@ -1,0 +1,19 @@
+{
+  "name": "warzone/marshal.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176773,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "504e8616-b9db-470f-9dc3-167e24e9b202"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.772Z",
+  "updated": "2022-01-23T05:36:16.772Z",
+  "size": 13114,
+  "md5Hash": "V5vaL45rAe8fg7xt6/NrIA==",
+  "crc32c": "2033727212"
+}

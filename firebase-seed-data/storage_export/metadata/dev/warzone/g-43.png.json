@@ -1,0 +1,19 @@
+{
+  "name": "warzone/g-43.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176560,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "92e396b9-b0ce-4187-9102-de6a777c2efd"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.559Z",
+  "updated": "2022-01-23T05:36:16.559Z",
+  "size": 12220,
+  "md5Hash": "iXN8brFNfSbd/S++Z6M6dw==",
+  "crc32c": "2690413678"
+}

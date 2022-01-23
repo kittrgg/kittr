@@ -1,0 +1,19 @@
+{
+  "name": "warzone/as-val.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176121,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "0a779484-e100-46d1-8d8e-868e4a6595d9"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.120Z",
+  "updated": "2022-01-23T05:36:16.120Z",
+  "size": 47817,
+  "md5Hash": "cmVLt3DrV1qpek4Hkq8/fg==",
+  "crc32c": "4189288904"
+}

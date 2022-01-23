@@ -1,0 +1,19 @@
+{
+  "name": "warzone/kar98k-vg.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176646,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "8be1c66c-eac8-49e0-94ce-366fc575b5ea"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.645Z",
+  "updated": "2022-01-23T05:36:16.645Z",
+  "size": 12493,
+  "md5Hash": "nBoq6ONDFB6i76JqWO9lQA==",
+  "crc32c": "3726790329"
+}

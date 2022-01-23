@@ -1,0 +1,19 @@
+{
+  "name": "warzone/410-ironhide.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176093,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "d878763e-b5ce-457b-94b8-47c4e2cd0aca"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.092Z",
+  "updated": "2022-01-23T05:36:16.092Z",
+  "size": 25055,
+  "md5Hash": "n+2Q6BKRkNRTxTz/1QCqaQ==",
+  "crc32c": "1884612838"
+}
