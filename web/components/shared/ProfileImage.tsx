@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react"
-import styled from "styled-components"
+import { useIsMounted } from "@Hooks/useIsMounted"
+import { montserrat } from "@Styles/typography"
 import firebase from "firebase/app"
 import "firebase/storage"
+import { useEffect, useState } from "react"
+import styled from "styled-components"
 
-import { montserrat } from "@Styles/typography"
-import { useIsMounted } from "@Hooks/useIsMounted"
 
 interface Props {
 	/** Path for the image. */
@@ -29,10 +29,11 @@ export const ProfileImage = ({ imagePath, size = "50px", border, isLive = false,
 	const [path, setPath] = useState("")
 	const [isLoading, setIsLoading] = useState(true)
 	const [errored, setErrored] = useState(false)
-	const isMounted = useIsMounted()
+	const isMounted = useIsMounted();
+	const isDevelopment = process.env.NEXT_PUBLIC_ENVIRONMENT === 'DEVELOPMENT';
 
 	useEffect(() => {
-		if (imagePath) {
+		if (imagePath && !isDevelopment) {
 			const fetchImage = async () => {
 				try {
 					let imageRef = firebase.storage().ref()
@@ -49,9 +50,9 @@ export const ProfileImage = ({ imagePath, size = "50px", border, isLive = false,
 
 			fetchImage()
 		}
-	}, [imagePath, isMounted])
+	}, [imagePath, isMounted, isDevelopment])
 
-	if (!imagePath || errored) {
+	if (!imagePath || errored || isDevelopment) {
 		return (
 			<ImageContainer data-cy="profile-image" imageSize={size}>
 				<img

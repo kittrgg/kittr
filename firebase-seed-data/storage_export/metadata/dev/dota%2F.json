@@ -1,0 +1,17 @@
+{
+  "name": "dota/",
+  "bucket": "dev",
+  "contentType": "text/plain",
+  "metageneration": 1,
+  "generation": 1642919774445,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [],
+  "timeCreated": "2022-01-23T06:36:14.444Z",
+  "updated": "2022-01-23T06:36:14.444Z",
+  "size": 0,
+  "md5Hash": "1B2M2Y8AsgTpgAmY7PhCfg==",
+  "crc32c": "0"
+}

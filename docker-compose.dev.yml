@@ -29,8 +29,7 @@ services:
       - ./firebase.json:/src/firebase.json
       - ./storage.rules:/src/storage.rules
       - ./firebase-seed-data:/src/firebase-seed-data
-    command: firebase emulators:start --project dev --import=./firebase-seed-data
-
+    command: firebase emulators:start --project dev --import=./firebase-seed-data --export-on-exit=./seed
   api:
     container_name: api
     build:
