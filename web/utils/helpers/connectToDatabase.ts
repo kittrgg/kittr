@@ -22,9 +22,9 @@ export const connectToDatabase = async () => {
 	if (!cached.promise) {
 		cached.promise = mongoose
 			.connect(MONGODB_URI as string, {
+				authSource: "admin",
 				useNewUrlParser: true,
-				useUnifiedTopology: true,
-				authSource: isDev ? "admin" : undefined
+				useUnifiedTopology: true
 			})
 			.then((mongoose) => {
 				return mongoose

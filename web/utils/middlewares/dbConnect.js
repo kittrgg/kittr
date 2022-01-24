@@ -6,7 +6,7 @@ const dbMiddleWare = async (req, res, next) => {
 	try {
 		if (!global.mongoose) {
 			global.mongoose = mongoose.connect(process.env.DB_CONNECTION_STRING, {
-				authSource: isDev ? "admin" : undefined,
+				authSource: "admin",
 				useNewUrlParser: true,
 				useUnifiedTopology: true
 			})
