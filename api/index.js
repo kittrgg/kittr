@@ -42,7 +42,7 @@ app.use(express.urlencoded({ extended: true }));
 
 mongoose
   .connect(process.env.DB_CONNECTION_STRING, {
-    authSource: process.env.ENVIRONMENT === "DEVELOPMENT" ? "admin" : undefined,
+    authSource: "admin",
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,

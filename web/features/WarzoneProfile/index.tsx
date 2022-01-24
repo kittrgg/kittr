@@ -36,7 +36,7 @@ const Channels = ({ channel, popularityRates }: Props) => {
 			dispatch(setActiveWeapon({} as IKit))
 			dispatch(setPopularityRates({} as IPopularityRates))
 		}
-	}, [channel, dispatch, popularityRates])
+	}, [])
 
 	useEffect(() => {
 		const weaponQuery = query.weapon || query.k
@@ -52,7 +52,7 @@ const Channels = ({ channel, popularityRates }: Props) => {
 				dispatch(setActiveWeapon(firstKit))
 			}
 		}
-	}, [activeWeapon, query.weapon, query.k, channel, dispatch])
+	}, [activeWeapon, query.weapon, query.k])
 
 	const activeGame = channel.games ? channel.games.find((game: IGame) => game.urlSafeName === query.game) : { code: "" }
 
