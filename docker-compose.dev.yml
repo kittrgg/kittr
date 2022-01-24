@@ -21,7 +21,7 @@ services:
       - "4002:4002"
     build:
       context: ./firebase-emulators
-      dockerfile: Dockerfile.firebase
+      dockerfile: Dockerfile
     image: firebase-emulator:firebase-emulator
     volumes:
       - ./firebase-emulators/firebase.json:/src/firebase.json
@@ -39,11 +39,16 @@ services:
       - firebase-emulators
     ports:
       - 5000:5000
-      - 5555:5555
     volumes:
-      - ./api:/usr/app
-    env_file:
-      - .env
+      - ./api:/src
+    environment:
+      - DB_CONNECTION_STRING=mongodb://root:example@mongo:27017/myFirstDatabase
+      - ENVIRONMENT=DEVELOPMENT
+      - FIREBASE_AUTH_EMULATOR_HOST=firebase-emulators:4001
+      - FIREBASE_STORAGE_EMULATOR_HOST=firebase-emulators:4002
+      - TWITCH_CLIENT_ID=${TWITCH_CLIENT_ID}
+      - TWITCH_CLIENT_SECRET=${TWITCH_CLIENT_SECRET}
+      - TWITCH_SECRET=${TWITCH_SECRET}
     command: npm run local
 
   web:
@@ -66,6 +71,7 @@ services:
       - FIREBASE_STORAGE_EMULATOR_HOST=firebase-emulators:4002
       - NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST=localhost:4001
       - NEXT_PUBLIC_FIREBASE_STORAGE_EMULATOR_HOST=localhost:4002
+      - NEXT_PUBLIC_SOCKET_HOST=http://localhost:5000
     volumes:
       - ./web:/app
       - /web/app/node_modules
