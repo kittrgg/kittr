@@ -1,0 +1,19 @@
+{
+  "name": "warzone/m1-garand.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176706,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "0b27d32d-5593-4683-9138-2890018ea106"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.705Z",
+  "updated": "2022-01-23T05:36:16.705Z",
+  "size": 12183,
+  "md5Hash": "eomKrnsVc1yLPVkDTyNmSg==",
+  "crc32c": "3600581583"
+}

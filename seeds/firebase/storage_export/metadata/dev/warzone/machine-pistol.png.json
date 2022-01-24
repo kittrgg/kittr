@@ -1,0 +1,19 @@
+{
+  "name": "warzone/machine-pistol.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176770,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "0cd399ce-9c4c-4149-9e74-3ca257978d9b"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.769Z",
+  "updated": "2022-01-23T05:36:16.769Z",
+  "size": 11324,
+  "md5Hash": "wLVKdDvU6ednCEQhXsAntw==",
+  "crc32c": "1109285465"
+}

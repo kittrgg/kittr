@@ -1,0 +1,19 @@
+{
+  "name": "warzone/725.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176086,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "1c0f6aa5-861c-4c31-9f0c-96b43eff0836"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.085Z",
+  "updated": "2022-01-23T05:36:16.085Z",
+  "size": 37077,
+  "md5Hash": "vQTDJmffCHqTFIFOKcH8jA==",
+  "crc32c": "3551954357"
+}

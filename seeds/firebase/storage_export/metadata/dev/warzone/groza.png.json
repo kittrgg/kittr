@@ -1,0 +1,19 @@
+{
+  "name": "warzone/groza.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176608,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "1f8ca673-80a3-475a-ab9c-4c53eaa74ad7"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.607Z",
+  "updated": "2022-01-23T05:36:16.607Z",
+  "size": 58319,
+  "md5Hash": "Dr7+4snWsK9HRAidJIEESw==",
+  "crc32c": "510096489"
+}

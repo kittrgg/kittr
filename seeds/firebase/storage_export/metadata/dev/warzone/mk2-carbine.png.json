@@ -1,0 +1,19 @@
+{
+  "name": "warzone/mk2-carbine.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176835,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "d737ba0f-a5c0-48cb-bd34-fbc35d3b0f91"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.834Z",
+  "updated": "2022-01-23T05:36:16.835Z",
+  "size": 52095,
+  "md5Hash": "q4Pe2/QybhwHgrwbmyys4Q==",
+  "crc32c": "3082352571"
+}

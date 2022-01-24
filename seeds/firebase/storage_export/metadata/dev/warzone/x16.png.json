@@ -1,0 +1,19 @@
+{
+  "name": "warzone/x16.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916177216,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "b4303819-48fb-43fb-99c7-a7592acfa8d5"
+  ],
+  "timeCreated": "2022-01-23T05:36:17.215Z",
+  "updated": "2022-01-23T05:36:17.216Z",
+  "size": 36082,
+  "md5Hash": "xULq0IszYV9VVZQDKLwaNQ==",
+  "crc32c": "4050292289"
+}

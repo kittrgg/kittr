@@ -1,0 +1,19 @@
+{
+  "name": "warzone/klauser.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176661,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "c1e2a727-d812-4b35-9f40-287eb74981cd"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.660Z",
+  "updated": "2022-01-23T05:36:16.660Z",
+  "size": 12541,
+  "md5Hash": "mC0k14iNCBDkfHGU67Usmg==",
+  "crc32c": "4022770426"
+}

@@ -1,0 +1,19 @@
+{
+  "name": "warzone/bruen-mk9.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176374,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "d7617acf-aa9a-4f7b-8409-ed6158370036"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.373Z",
+  "updated": "2022-01-23T05:36:16.374Z",
+  "size": 68448,
+  "md5Hash": "xg+QHJ+Ro0HUUn37HK4IhQ==",
+  "crc32c": "2884336144"
+}

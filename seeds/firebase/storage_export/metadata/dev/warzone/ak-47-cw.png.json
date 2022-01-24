@@ -1,0 +1,19 @@
+{
+  "name": "warzone/ak-47-cw.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176104,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "ddab3d0c-0ad7-4fcf-9c0d-1d627491ca35"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.103Z",
+  "updated": "2022-01-23T05:36:16.104Z",
+  "size": 74314,
+  "md5Hash": "u0/ayL5/LWHOoIdEhHVoIw==",
+  "crc32c": "2079221874"
+}

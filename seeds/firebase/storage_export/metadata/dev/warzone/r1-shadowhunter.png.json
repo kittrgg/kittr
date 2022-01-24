@@ -1,0 +1,19 @@
+{
+  "name": "warzone/r1-shadowhunter.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176948,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "3c4faba4-9543-4f4a-a77e-a5766f4e4e3f"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.947Z",
+  "updated": "2022-01-23T05:36:16.947Z",
+  "size": 40218,
+  "md5Hash": "kQkfN3K36I23bsLLSStIBA==",
+  "crc32c": "3230273892"
+}

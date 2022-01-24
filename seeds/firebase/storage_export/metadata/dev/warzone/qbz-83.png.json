@@ -1,0 +1,19 @@
+{
+  "name": "warzone/qbz-83.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176941,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "eb5e5787-7e4c-4b27-97d8-d5ee908e4dca"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.940Z",
+  "updated": "2022-01-23T05:36:16.941Z",
+  "size": 43358,
+  "md5Hash": "UYeUDgMCWHe60i/yiofjbA==",
+  "crc32c": "1304870722"
+}

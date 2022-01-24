@@ -22,9 +22,11 @@ const app = () => {
 app()
 
 export const auth = firebase.auth()
+export const storage = firebase.storage()
 
 if (process.env.NEXT_PUBLIC_ENVIRONMENT === "DEVELOPMENT") {
 	auth.useEmulator(`http://${process.env.NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST}`)
+	storage.useEmulator(`localhost`, 4002)
 }
 
 export default app

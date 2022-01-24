@@ -76,18 +76,3 @@ jobs:
           key: "${{ secrets.DOKKU_SSH_PRIVATE_KEY }}"
           script: |
             dokku git:from-image web ghcr.io/${{github.repository}}/web:${{github.sha}}
-
-      # Just could not get these to work.
-      # - name: Delete old api images
-      #   uses: actions/delete-package-versions@v2
-      #   with:
-      #     package-name: "api"
-      #     token: ${{secrets.GITHUB_TOKEN}}
-      #     min-versions-to-keep: 3
-
-      # - name: Delete old web images
-      #   uses: actions/delete-package-versions@v2
-      #   with:
-      #     package-name: "web"
-      #     token: ${{secrets.GITHUB_TOKEN}}
-      #     min-versions-to-keep: 3
