@@ -61,8 +61,6 @@ services:
     build:
       context: ./web
       dockerfile: Dockerfile.dev
-    env_file:
-      - .env
     environment:
       - DB_CONNECTION_STRING=mongodb://root:example@mongo:27017/myFirstDatabase
       - ENVIRONMENT=DEVELOPMENT
@@ -72,10 +70,11 @@ services:
       - NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST=localhost:4001
       - NEXT_PUBLIC_FIREBASE_STORAGE_EMULATOR_HOST=localhost:4002
       - NEXT_PUBLIC_SOCKET_HOST=http://localhost:5000
+      - TWITCH_CLIENT_ID=${TWITCH_CLIENT_ID}
+      - TWITCH_CLIENT_SECRET=${TWITCH_CLIENT_SECRET}
+      - TWITCH_SECRET=${TWITCH_SECRET}
     volumes:
-      - ./web:/app
-      - /web/app/node_modules
-      - /web/app/.next
+      - ./web:/src
 
 volumes:
   mongodata:
