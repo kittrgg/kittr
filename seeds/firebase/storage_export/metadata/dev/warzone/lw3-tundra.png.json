@@ -1,0 +1,19 @@
+{
+  "name": "warzone/lw3-tundra.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176701,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "10d7a2bb-37ac-4d78-8eaa-e631de11c4a3"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.700Z",
+  "updated": "2022-01-23T05:36:16.700Z",
+  "size": 36290,
+  "md5Hash": "E4cuRQmKenFGJsLZNGA2Pg==",
+  "crc32c": "1439868502"
+}

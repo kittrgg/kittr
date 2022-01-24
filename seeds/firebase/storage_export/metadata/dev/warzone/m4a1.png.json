@@ -1,0 +1,19 @@
+{
+  "name": "warzone/m4a1.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176735,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "ef6b3bd9-8fcf-4436-9c50-3589fe920561"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.734Z",
+  "updated": "2022-01-23T05:36:16.734Z",
+  "size": 71201,
+  "md5Hash": "64u+TvtqMbzWKS3Vf1y72w==",
+  "crc32c": "570570415"
+}

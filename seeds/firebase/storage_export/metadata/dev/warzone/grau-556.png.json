@@ -1,0 +1,19 @@
+{
+  "name": "warzone/grau-556.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176584,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "6b26ef3c-1657-481d-b932-09ad2f18cd48"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.583Z",
+  "updated": "2022-01-23T05:36:16.583Z",
+  "size": 85705,
+  "md5Hash": "iVMhTuYL+EbiudMBKBnJ6A==",
+  "crc32c": "663224484"
+}

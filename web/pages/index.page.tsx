@@ -1,17 +1,16 @@
-import { GetStaticProps } from "next"
-import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
-import { allGamesQuery, topChannelsQuery, totalKitsQuery, risingStarsQuery, getBlogPostsQuery } from "@Services/mongodb"
-import { liveChannelsQuery } from "@Services/twitch/getLiveStreams"
+import PageWrapper from "@Components/layouts/PageWrapper"
+import FrontPageBoostr from "@Features/Promo/FrontPage"
+import { allGamesQuery, getBlogPostsQuery, risingStarsQuery, topChannelsQuery, totalKitsQuery } from "@Services/mongodb"
 import { getHomeChannelPromo } from "@Services/mongodb/queries/promos"
 import { getTwitchChannelInfo } from "@Services/twitch/getChannelInfo"
-
-import PageWrapper from "@Components/layouts/PageWrapper"
-import Hero from "./Home/Hero"
-import Body from "./Home/Body"
-import PlatformInfo from "./Home/PlatformInfo"
-import BlogSection from "./Home/BlogSection"
+import { liveChannelsQuery } from "@Services/twitch/getLiveStreams"
 import ResponsiveAdBanner from "@Services/venatus/ResponsiveBanner"
-import FrontPageBoostr from "@Features/Promo/FrontPage"
+import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
+import { GetStaticProps } from "next"
+import BlogSection from "./Home/BlogSection"
+import Body from "./Home/Body"
+import Hero from "./Home/Hero"
+import PlatformInfo from "./Home/PlatformInfo"
 
 interface Props {
 	games: IGame[]

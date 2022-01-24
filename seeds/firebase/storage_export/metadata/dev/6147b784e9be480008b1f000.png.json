@@ -1,0 +1,19 @@
+{
+  "name": "6147b784e9be480008b1f000.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642919808381,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "5a68bc38-476e-4575-8a6a-d30fde30410f"
+  ],
+  "timeCreated": "2022-01-23T06:36:48.380Z",
+  "updated": "2022-01-23T06:36:48.381Z",
+  "size": 5035,
+  "md5Hash": "5R0FWahzKyA1E9QRPHptUg==",
+  "crc32c": "27142874"
+}

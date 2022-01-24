@@ -1,0 +1,19 @@
+{
+  "name": "warzone/sks.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916177029,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "4f184592-7be6-4ed5-a759-dc947ab518d2"
+  ],
+  "timeCreated": "2022-01-23T05:36:17.028Z",
+  "updated": "2022-01-23T05:36:17.028Z",
+  "size": 45018,
+  "md5Hash": "g+fIcGZoRiYp6Q95G3EPSw==",
+  "crc32c": "4019152594"
+}

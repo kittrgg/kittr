@@ -1,0 +1,19 @@
+{
+  "name": "warzone/mac-10.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176786,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "050b6ac1-fa01-40f9-a1cf-fdb7faa9b6f9"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.785Z",
+  "updated": "2022-01-23T05:36:16.786Z",
+  "size": 31249,
+  "md5Hash": "YSgyLGuqluvRsyb9EYFCow==",
+  "crc32c": "525901078"
+}

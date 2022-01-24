@@ -1,0 +1,19 @@
+{
+  "name": "warzone/automaton.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176192,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "26d26f01-43a5-44ee-bff7-cdb92060b552"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.191Z",
+  "updated": "2022-01-23T05:36:16.191Z",
+  "size": 15703,
+  "md5Hash": "SJH0iKGxCSmpduYM+w6y7g==",
+  "crc32c": "3189821810"
+}

@@ -1,0 +1,19 @@
+{
+  "name": "warzone/mp5-mw.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916176851,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "f2659b8b-3ebe-4aa6-91fd-2fa9cfc5c63b"
+  ],
+  "timeCreated": "2022-01-23T05:36:16.850Z",
+  "updated": "2022-01-23T05:36:16.850Z",
+  "size": 62212,
+  "md5Hash": "M/ygVBauLdHK0PfAdbhzAw==",
+  "crc32c": "3977326301"
+}

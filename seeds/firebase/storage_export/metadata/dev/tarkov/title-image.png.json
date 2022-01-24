@@ -1,0 +1,19 @@
+{
+  "name": "tarkov/title-image.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642919825669,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "be5f1b49-69a2-414c-9f3d-2c552266988b"
+  ],
+  "timeCreated": "2022-01-23T06:37:05.668Z",
+  "updated": "2022-01-23T06:37:05.668Z",
+  "size": 88764,
+  "md5Hash": "IRJggdf0dWjXzCt5SClgcQ==",
+  "crc32c": "533872509"
+}

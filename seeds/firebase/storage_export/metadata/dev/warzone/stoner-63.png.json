@@ -1,0 +1,19 @@
+{
+  "name": "warzone/stoner-63.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1642916177070,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "21c3b973-8466-4e0e-a842-fa812a1a7332"
+  ],
+  "timeCreated": "2022-01-23T05:36:17.069Z",
+  "updated": "2022-01-23T05:36:17.069Z",
+  "size": 37104,
+  "md5Hash": "DltbPTS1296z9XaIv9xhNA==",
+  "crc32c": "2622218271"
+}
