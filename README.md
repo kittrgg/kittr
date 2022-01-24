@@ -30,5 +30,4 @@ Firebase:
 ## Developer Notes
 
 - You may set environment variables in a `.env` file at the top of the file. The example file already includes the proper firebase-emulators ports. You will need variables for everything but the Stripe stuff for now (until we need to do more Stripe developmenting).
-- To run the E2E tests, you will need to `cd web` and run `npm run build`. Then, back out and run the testing compose.
-- If you are on Windows, make sure that you switch your Docker desktop to Linux containers.
+- If you are on Windows, make sure that you switch your Docker desktop to Linux containers. You won't be able to spin up the docker compose containers without it!

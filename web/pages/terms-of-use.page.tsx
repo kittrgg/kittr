@@ -1,5 +1,5 @@
-import * as Styled from "@Styles/legalPages"
 import PageWrapper from "@Components/layouts/PageWrapper"
+import * as Styled from "@Styles/legalPages"
 
 const Terms = ({ ...props }) => {
 	return (
