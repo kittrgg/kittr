@@ -23,7 +23,7 @@ export const SupportUs = ({ containerStyles }: Props) => {
 			<Button
 				design="white"
 				as="a"
-				href="https://channelelements.com/anthonyfromkittr/tip"
+				href="https://streamelements.com/anthonyfromkittr/tip"
 				target="_blank"
 				rel="noopener noreferrer"
 				style={{ width: "100%", marginBottom: "10px" }}

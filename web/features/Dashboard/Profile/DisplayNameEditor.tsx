@@ -1,13 +1,11 @@
-import firebase from "firebase/app"
-import { useState, useEffect } from "react"
-
-import * as Styled from "./style"
-import styled from "styled-components"
 import colors from "@Colors"
-import TextInput from "@Components/shared/TextInput"
 import Button from "@Components/shared/Button"
+import TextInput from "@Components/shared/TextInput"
 import { useUser } from "@Hooks/useUser"
-import { getCurrentUser } from "@Services/firebase/auth/getCurrentUser"
+import { updateUserDisplayName } from "@Services/firebase/auth"
+import { useEffect, useState } from "react"
+import styled from "styled-components"
+import * as Styled from "./style"
 
 const buttonStyle = { marginLeft: "10%" }
 
@@ -28,17 +26,12 @@ const DisplayNameEditor = ({ ...props }) => {
 	const submitChange = async () => {
 		setIsWorking(true)
 
-		const user = getCurrentUser() as firebase.User
-
 		if (displayName.length === 0) {
 			setIsWorking(false)
 			return setError("You must have a display name!")
 		}
 
-		return await user
-			.updateProfile({
-				displayName: displayName
-			})
+		return await updateUserDisplayName(displayName)
 			.then(() => {
 				setIsWorking(false)
 			})

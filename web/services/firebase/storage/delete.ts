@@ -1,8 +1,8 @@
-import firebase from "firebase/app"
-
-const storageRef = firebase.storage().ref()
+import { storage } from "@Services/firebase"
+import { deleteObject, ref } from "firebase/storage"
 
 export const deleteFile = async (id: string) => {
-	await storageRef.child(`${id}`).delete()
+	const storageRef = ref(storage, id)
+	await deleteObject(storageRef)
 	return true
 }
