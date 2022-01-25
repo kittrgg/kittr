@@ -65,3 +65,13 @@ PLEASE make sure that before you attempt to make any major changes to kittr that
 6. Open a Pull Request
 
    [You can find an instructional video on this process here](https://www.youtube.com/watch?v=T9VylI5C0G8&t=32s)
+
+## Notes
+
+- Existing login credentials to get into the dashboard:
+  - Username: anthony@dev.com
+  - Password: 123123
+- A few channels that you may find useful:
+  - ALLKITS - Features every kit in the database (well, almost)
+  - brandnewchannel - A fresh, empty channel that was just created
+  - anthonyshew - A channel that features multiple managers so you can see how the dashboard changes based on the user's role in that channel
