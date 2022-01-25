@@ -3,23 +3,13 @@
 	"version": "1.0.0",
 	"private": true,
 	"scripts": {
-		"start": "node ./ci/local.js && next dev",
 		"dev": "next dev",
 		"build": "next build",
 		"serve": "next start",
-		"lint": "next lint",
 		"ts:check": "tsc --noEmit --incremental false",
 		"cypress:open": "cypress open",
 		"cypress:run": "cypress run",
-		"emulators": "firebase emulators:start",
-		"emulators:exec": "firebase emulators:exec \"npm run cypress:open\"",
-		"emulators:seed": "node ./services/firebase/auth/seedEmulators.ts",
-		"dev:test-scaffold": "next dev",
-		"dev:test-open": "node ./ci/test.js && concurrently \"npm run dev:test-scaffold\" \"npm run emulators\" \"npm run cypress:open\"",
-		"dev:test-run": "node ./ci/test.js && concurrently \"npm run dev:test-scaffold\" \"npm run emulators\" \"npm run cypress:run\"",
-		"build:test-open": "node ./ci/test.js && next build && concurrently \"npm run serve\" \"npm run emulators\" \"npm run cypress:open\"",
-		"build:test-run": "node ./ci/test.js && npm run ci",
-		"ci": "next build && concurrently --kill-others --success first \"npm run serve\" \"npm run emulators\" \"npm run cypress:run\""
+		"emulators": "firebase emulators:start"
 	},
 	"dependencies": {
 		"@juggle/resize-observer": "^3.3.1",
