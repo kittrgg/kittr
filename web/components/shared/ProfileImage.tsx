@@ -28,8 +28,7 @@ export const ProfileImage = ({ imagePath, size = "50px", border, isLive = false,
 	const [isLoading, setIsLoading] = useState(true)
 	const [errored, setErrored] = useState(false)
 	const isMounted = useIsMounted()
-	// const isDevelopment = process.env.NEXT_PUBLIC_ENVIRONMENT === "DEVELOPMENT"
-	const isDevelopment = false
+	const isDevelopment = process.env.NEXT_PUBLIC_ENVIRONMENT === "DEVELOPMENT"
 
 	useEffect(() => {
 		if (imagePath && !isDevelopment) {
