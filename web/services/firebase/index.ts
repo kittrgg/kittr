@@ -1,6 +1,6 @@
-import firebase from "firebase/app"
-import "firebase/auth"
-import "firebase/storage"
+import { initializeApp } from "@firebase/app"
+import { connectAuthEmulator, getAuth } from "firebase/auth"
+import { connectStorageEmulator, getStorage } from "firebase/storage"
 
 export const firebaseConfig = {
 	apiKey: process.env.NEXT_PUBLIC_API_KEY || "dev",
@@ -13,20 +13,12 @@ export const firebaseConfig = {
 	measurementId: process.env.FIREBASE_MEASUREMENT_ID || "dev"
 }
 
-const app = () => {
-	if (!firebase.apps.length) {
-		return firebase.initializeApp(firebaseConfig)
-	}
-}
+const firebase = initializeApp(firebaseConfig)
 
-app()
-
-export const auth = firebase.auth()
-export const storage = firebase.storage()
+export const auth = getAuth()
+export const storage = getStorage()
 
 if (process.env.NEXT_PUBLIC_ENVIRONMENT === "DEVELOPMENT") {
-	auth.useEmulator(`http://${process.env.NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST}`)
-	storage.useEmulator(`localhost`, 4002)
+	connectAuthEmulator(auth, `http://${process.env.NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST}`)
+	connectStorageEmulator(storage, `localhost`, 4002)
 }
-
-export default app

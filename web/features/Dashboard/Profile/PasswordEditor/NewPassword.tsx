@@ -2,7 +2,7 @@ import colors from "@Colors"
 import Button from "@Components/shared/Button"
 import TextInput from "@Components/shared/TextInput"
 import { logOut } from "@Services/firebase/auth/logOut"
-import { updatePassword } from "@Services/firebase/auth/updatePassword"
+import { updateUserPassword } from "@Services/firebase/auth/updatePassword"
 import { useRouter } from "next/router"
 import { useState } from "react"
 
@@ -17,7 +17,7 @@ const UpdateEmail = ({ ...props }) => {
 		if (password.length === 0) return setError("Need a password, bud.")
 		if (password !== confirmPassword) return setError("Your passwords don't match.")
 
-		updatePassword(password)
+		updateUserPassword(password)
 			.then(() => {
 				logOut()
 				router.reload()

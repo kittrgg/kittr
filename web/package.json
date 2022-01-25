@@ -19,7 +19,7 @@
 		"@stripe/stripe-js": "^1.21.1",
 		"browser-image-compression": "^1.0.14",
 		"date-fns": "^2.25.0",
-		"firebase": "^8.7.1",
+		"firebase": "^9.6.4",
 		"firebase-admin": "^9.10.0",
 		"firebase-tools": "^9.17.0",
 		"jsonwebtoken": "^8.5.1",

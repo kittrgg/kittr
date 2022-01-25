@@ -1,11 +1,10 @@
-import firebase from "firebase/app"
-import "firebase/storage"
+import { storage } from "@Services/firebase"
+import { getDownloadURL, ref } from "firebase/storage"
 
 /** Return the path to the Firebase document. */
 export const download = async (fileName: string, handler?: (...args: any) => any) => {
 	try {
-		let imageRef = firebase.storage().ref()
-		const path = await imageRef.child(fileName).getDownloadURL()
+		const path = getDownloadURL(ref(storage, fileName))
 
 		if (path && handler) return handler(path)
 		if (path) return path
