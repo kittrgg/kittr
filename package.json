@@ -3,9 +3,10 @@
   "version": "0.0.0",
   "author": "Anthony Shew",
   "scripts": {
-    "dev": "docker-compose -f docker-compose.dev.yml up",
-    "dev:build": "docker-compose -f docker-compose.dev.yml up --build",
-    "dev:kill": "docker-compose down",
+    "dev": "docker-compose -f docker-compose.dev.yml up -d",
+    "dev:build": "docker-compose -f docker-compose.dev.yml up --build -d",
+    "dev:stop": "docker-compose stop",
+    "dev:down": "docker-compose down",
     "dev:seed": "set DB_CONNECTION_STRING=mongodb://root:example@localhost:27017/myFirstDatabase && node ./seeds/mongo/db-seed.js",
     "test:local:build": "docker-compose -f docker-compose.localtest.yml up --build",
     "test:local": "docker-compose -f docker-compose.localtest.yml up",

@@ -1,33 +1,67 @@
 # Welcome to kittr
 
-# How to Use
+# Getting Started
 
-## "I want to develop kittr."
+## Prerequisites
 
-`npm run dev`
-You may also `npm run dev -- -d` if you don't care about seeing logs.
+- [Docker Desktop](https://www.docker.com/products/docker-desktop)
+- If you are on Windows, make sure that you switch your Docker Desktop to Linux containers. You won't be able to spin up the docker compose containers without it!
+- [Node.js](https://nodejs.org/en/download/)
 
-- To seed the firebase-emulators, you will need to shell into the `web` docker container and use `npm run emulators:seed`.
+## Installation
 
-## "I'm helping with the Dockerfiles."
+1. Clone the repo
 
-`npm run dev:build` may be useful to you.
+```
+https://github.com/kittrgg/monorepo.git
+```
 
-You may also `npm run dev:build -- -d` if you don't care about seeing logs.
+2. Checkout the develop branch
+
+```
+git checkout develop
+```
+
+3. You will need a Twitch API token to run kittr. Unfortunately, we can't provide you with one since this token is individualized. To get your Twitch token, visit [your Twitch developers console](https://dev.twitch.tv/console/apps) and create an application token. (Feel free to use any information in the boxes. Anything should work.) Make sure you keep the Client Secret that you create in a safe place for the next step!
+
+4. With your token, create a `.env` file at the root of the project by copying the `.env.example` from the project and adding in your Twitch token values.
+
+5. Run the docker-compose to bring up the containers to your local host.
+
+```
+npm run dev
+```
+
+6. If this is your first time developing kittr, you will need to seed your local Mongo instance at this time. To do so:
+
+- In the shell of your Mongo container, use `npm run dev:seed`.
+- If you got a message saying "Seeded correctly, let's get kittd," you are ready to go!
+
+7. Visit kittr at [http://localhost:3000](http://localhost:3000)
 
 ## Ports
 
-- Web front-end: 3000
-- API: 5000
-- Mongo: 27017 (You shouldn't need to interact with this directly.)
+When working locally, these ports are available:
 
-Firebase:
+- Web front-end: [http://localhost:3000](http://localhost:3000)
+- API: [http://localhost:5000](http://localhost:5000)
+- Mongo: http://localhost:27017 (You shouldn't need to interact with this port directly.)
 
-- UI: 4000
-- Auth: 4001
-- Storage: 4002
+- Firebase Emulator UI: [http://localhost:4000](http://localhost:4000)
+- Firebase Auth Emulator: http://localhost:4001 (You shouldn't need to interact with this port directly.)
+- Firebase Storage Emulator: http://localhost:4002 (You shouldn't need to interact with this port directly.)
 
-## Developer Notes
+## Contributing
 
-- You may set environment variables in a `.env` file at the top of the file. The example file already includes the proper firebase-emulators ports. You will need variables for everything but the Stripe stuff for now (until we need to do more Stripe developmenting).
-- If you are on Windows, make sure that you switch your Docker desktop to Linux containers. You won't be able to spin up the docker compose containers without it!
+Contributions are encourage from junior and senior developers alike. You may check the issues on this project to find out what needs working on.
+
+PLEASE make sure that before you attempt to make any major changes to kittr that you ask the maintainers first. There is a business vision here that you may not be privvy to. (We will try to make the long-term plans for kittr more accessible as we continue this effort.)
+
+1. Fork the Project
+2. Checkout the develop branch (git checkout develop)
+3. Create your Feature Branch (git checkout -b new-branch)
+4. Commit your Changes (git commit -m 'New Changes') (Please provide the maintainers with a nice commit message to state your intentions on what this commit should include!)
+5. Push to the Branch (git push origin new-branch)
+6. Open a Pull Request
+
+   [You can find an instructional video on this process here](https://www.youtube.com/watch?v=T9VylI5C0G8&t=32s)

@@ -16,9 +16,9 @@ services:
   firebase-emulators:
     container_name: firebase-emulators
     ports:
-      - "4000:4000"
-      - "4001:4001"
-      - "4002:4002"
+      - 4000:4000
+      - 4001:4001
+      - 4002:4002
     build:
       context: ./firebase-emulators
       dockerfile: Dockerfile
