@@ -50,7 +50,6 @@ export const ProfileImage = ({ imagePath, size = "50px", border, isLive = false,
 	}, [imagePath, isMounted, isDevelopment])
 
 	if (!imagePath || errored || isDevelopment) {
-		console.log("dun did the empty")
 		return (
 			<ImageContainer data-cy="profile-image" imageSize={size}>
 				<img
@@ -63,8 +62,6 @@ export const ProfileImage = ({ imagePath, size = "50px", border, isLive = false,
 	}
 
 	const cacheBuster = alwaysRefresh ? `/?${Math.random()}` : ""
-
-	console.log("WE LOADING")
 
 	return (
 		<Wrapper imageSize={size}>
