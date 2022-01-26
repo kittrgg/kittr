@@ -1,10 +1,8 @@
 import { useIsMounted } from "@Hooks/useIsMounted"
+import { download } from "@Services/firebase/storage"
 import { montserrat } from "@Styles/typography"
-import firebase from "firebase/app"
-import "firebase/storage"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
-
 
 interface Props {
 	/** Path for the image. */
@@ -29,15 +27,14 @@ export const ProfileImage = ({ imagePath, size = "50px", border, isLive = false,
 	const [path, setPath] = useState("")
 	const [isLoading, setIsLoading] = useState(true)
 	const [errored, setErrored] = useState(false)
-	const isMounted = useIsMounted();
-	const isDevelopment = process.env.NEXT_PUBLIC_ENVIRONMENT === 'DEVELOPMENT';
+	const isMounted = useIsMounted()
+	const isDevelopment = process.env.NEXT_PUBLIC_ENVIRONMENT === "DEVELOPMENT"
 
 	useEffect(() => {
 		if (imagePath && !isDevelopment) {
 			const fetchImage = async () => {
 				try {
-					let imageRef = firebase.storage().ref()
-					const uri = await imageRef.child(imagePath).getDownloadURL()
+					const uri = await download(imagePath)
 
 					if (uri && isMounted) {
 						setPath(uri)

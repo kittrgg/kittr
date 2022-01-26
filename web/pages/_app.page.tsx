@@ -1,7 +1,6 @@
 import FallbackPage from "@Components/layouts/FallbackPage"
 import { setFallbackLoader } from "@Redux/slices/global"
 import { store, useDispatch, useSelector } from "@Redux/store"
-import initFirebase from "@Services/firebase/index"
 import { RollbarProvider } from "@Services/rollbar/Provider"
 import GlobalStyles from "@Styles/globals"
 import OverlayStyles from "@Styles/overlay"
@@ -11,8 +10,6 @@ import { useEffect } from "react"
 import { QueryClient, QueryClientProvider } from "react-query"
 import { ReactQueryDevtools } from "react-query/devtools"
 import { Provider } from "react-redux"
-
-initFirebase()
 
 const queryClient = new QueryClient({
 	defaultOptions: {

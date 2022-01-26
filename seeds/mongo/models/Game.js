@@ -17,6 +17,8 @@ const schema = new Schema(
     meta: {
       creatorCode: String,
     },
+    genres: Array,
+    platforms: Array
   },
   { minimize: false }
 );
