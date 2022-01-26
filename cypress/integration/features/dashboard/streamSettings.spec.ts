@@ -151,6 +151,11 @@ describe("Premium Features", () => {
   });
 
   it("CRUD a spec", () => {
+    // Ignore a missing image
+    Cypress.on("uncaught:exception", (err) => {
+      return false;
+    });
+
     cy.get("[data-cy=premiumchannel-channel-button]").click();
     cy.get("[data-cy=add-a-spec]").click();
     cy.get(".spec-select").click();
