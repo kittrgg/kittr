@@ -1,5 +1,5 @@
 {
-  "name": "611efbf690fdff000917abce.jpg",
+  "name": "611efbf690fdff000917abce",
   "bucket": "dev",
   "contentType": "image/jpeg",
   "metageneration": 1,
@@ -8,9 +8,7 @@
   "etag": "someETag",
   "contentDisposition": "inline",
   "contentEncoding": "identity",
-  "downloadTokens": [
-    "ccc83f74-64a1-49fd-ae1c-303286fc567a"
-  ],
+  "downloadTokens": ["ccc83f74-64a1-49fd-ae1c-303286fc567a"],
   "timeCreated": "2022-01-23T06:36:48.383Z",
   "updated": "2022-01-23T06:36:48.384Z",
   "size": 7488,

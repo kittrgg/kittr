@@ -1,14 +1,12 @@
-import { useState, useEffect } from "react"
-import compressor from "browser-image-compression"
-import styled from "styled-components"
-import "firebase/storage"
-
 import colors from "@Colors"
-import { paragraph } from "@Styles/typography"
-import { upload, deleteFile, download } from "@Services/firebase/storage"
+import { Spinner, SVG } from "@Components/shared"
 import { setModal } from "@Redux/slices/dashboard"
 import { useDispatch } from "@Redux/store"
-import { Spinner, SVG } from "@Components/shared"
+import { deleteFile, download, upload } from "@Services/firebase/storage"
+import { paragraph } from "@Styles/typography"
+import compressor from "browser-image-compression"
+import { useEffect, useState } from "react"
+import styled from "styled-components"
 
 interface Props {
 	fileName: string

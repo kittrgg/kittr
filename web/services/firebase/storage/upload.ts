@@ -1,10 +1,7 @@
-import firebase from "firebase/app"
-
-const storageRef = firebase.storage().ref()
+import { storage } from "@Services/firebase"
+import { ref, uploadBytes } from "firebase/storage"
 
 export const upload = (id: string, file: any) => {
-	let imageRef = storageRef.child(`${id}`)
-	return imageRef.put(file, {
-		cacheControl: "public,max-age=86400"
-	})
+	const storageRef = ref(storage, id)
+	return uploadBytes(storageRef, file)
 }

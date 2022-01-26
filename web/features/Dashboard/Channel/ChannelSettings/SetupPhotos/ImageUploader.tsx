@@ -1,16 +1,14 @@
-import { useState, useEffect } from "react"
-import styled from "styled-components"
-import "firebase/storage"
-
 import colors from "@Colors"
-import { paragraph } from "@Styles/typography"
-import { getToken } from "@Services/firebase/auth/getToken"
-import { uploadWithHandlers } from "@Services/firebase/storage/uploadWithHandlers"
-import { deleteFile, download } from "@Services/firebase/storage"
-import { setModal } from "@Redux/slices/dashboard"
-import { useDispatch } from "@Redux/store"
 import { Spinner, SVG } from "@Components/shared"
+import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
+import { useDispatch } from "@Redux/store"
+import { getToken } from "@Services/firebase/auth/getToken"
+import { deleteFile, download } from "@Services/firebase/storage"
+import { uploadWithHandlers } from "@Services/firebase/storage/uploadWithHandlers"
+import { paragraph } from "@Styles/typography"
+import { useEffect, useState } from "react"
+import styled from "styled-components"
 
 interface Props {
 	slot: number

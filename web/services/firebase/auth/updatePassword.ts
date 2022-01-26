@@ -1,6 +1,11 @@
+import { updatePassword } from "firebase/auth"
 import { auth } from "../index"
 
-export const updatePassword = async (password: string) => {
+export const updateUserPassword = async (password: string) => {
 	const user = auth.currentUser
-	return await user?.updatePassword(password)
+	if (user) {
+		return await updatePassword(user, password)
+	}
+
+	return null
 }

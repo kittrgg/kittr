@@ -1,13 +1,12 @@
-import firebase from "firebase/app"
-import { useState, useEffect } from "react"
+import { auth } from "@Services/firebase"
+import type { User } from "firebase/auth"
+import { useEffect, useState } from "react"
 
 /** Use the current Firebase user. */
 export const useUser = () => {
-	const [user, setUser] = useState<firebase.User | null>(null)
+	const [user, setUser] = useState<User | null>(null)
 
 	useEffect(() => {
-		const auth = firebase.auth()
-
 		const unsubscribe = auth.onAuthStateChanged((user) => {
 			if (user) {
 				setUser(auth.currentUser)

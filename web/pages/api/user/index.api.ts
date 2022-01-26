@@ -1,7 +1,7 @@
-import type { NextApiRequest, NextApiResponse } from "next"
 import { createHandler } from "@Middlewares/createHandler"
-import { signUp } from "@Services/firebase/auth/signUp"
+import { signUp, updateUserDisplayName } from "@Services/firebase/auth"
 import { badWordFilter } from "@Utils/helpers/badWordFilter"
+import type { NextApiRequest, NextApiResponse } from "next"
 
 const handler = createHandler()
 
@@ -20,7 +20,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 		const user = await signUp(email, password)
 
 		if (user.user) {
-			user.user.updateProfile({ displayName }).then(() => res.status(200).json({ success: true }))
+			updateUserDisplayName(displayName).then(() => res.status(200).json({ success: true }))
 		}
 	} catch (err: any) {
 		res.status(400).json({ error: true, message: err.message })
