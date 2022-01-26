@@ -1,0 +1,34 @@
+version: 2
+updates:
+  # Root
+  - package-ecosystem: "npm"
+    directory: "/"
+    commit-message:
+      prefix: "npm"
+      include: "scope"
+    schedule:
+      interval: "daily"
+  # API
+  - package-ecosystem: "npm"
+    directory: "/api"
+      commit-message:
+      prefix: "npm"
+      include: "scope"
+    schedule:
+      interval: "daily"
+  # Cypress
+  - package-ecosystem: "npm"
+    directory: "/cypress"
+      commit-message:
+      prefix: "npm"
+      include: "scope"
+    schedule:
+      interval: "daily"
+  # web
+  - package-ecosystem: "npm"
+    directory: "/web"
+      commit-message:
+      prefix: "npm"
+      include: "scope"
+    schedule:
+      interval: "daily"
