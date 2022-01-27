@@ -66,3 +66,8 @@ interface IPromo {
 	__v: number
 	channelId: string
 }
+
+export interface StreamerViewCounts {
+	startDate: string
+	endDate: string
+}
