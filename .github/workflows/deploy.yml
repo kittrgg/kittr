@@ -23,6 +23,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./api
+          target: production
           push: true
           tags: ghcr.io/${{github.repository}}/api:${{github.sha}}
 
