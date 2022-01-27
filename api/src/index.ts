@@ -1,7 +1,7 @@
 import { createKitStatsAsInterval } from "@Jobs/createKitStatsAsInterval"
 import { writeViewCounts } from "@Jobs/viewCountAsUseInterval"
-import twitch from "@Services/twitch/extension/routes"
-import { getStreamerByTwitchBroadcasterLoginId } from "@Utils/streamer"
+// import twitch from "@Services/twitch/extension/routes"
+// import { getStreamerByTwitchBroadcasterLoginId } from "@Utils/streamer"
 import cors from "cors"
 import "dotenv/config"
 import express from "express"
@@ -37,7 +37,7 @@ if (process.env.ENVIRONMENT === "PRODUCTION") {
 }
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use("/twitch", twitch)
+// app.use("/twitch", twitch)
 
 mongoose
 	.connect(process.env.DB_CONNECTION_STRING as string, {
@@ -59,7 +59,7 @@ mongoose
 
       Returns the streamer object
     */
-		app.get("/api/streamer", getStreamerByTwitchBroadcasterLoginId)
+		// app.get("/api/streamer", getStreamerByTwitchBroadcasterLoginId)
 
 		if (process.env.ENVIRONMENT === "PRODUCTION") {
 			setInterval(() => writeViewCounts(), 3600000) // Once an hour
