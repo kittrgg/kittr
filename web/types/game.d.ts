@@ -1,4 +1,4 @@
-export interface IGame {
+interface IGame {
 	/** ObjectId from database */
 	_id: string
 	/** ObjectId from database */
