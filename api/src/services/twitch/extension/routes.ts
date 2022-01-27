@@ -1,6 +1,6 @@
+import axios from "axios"
 import express from "express"
 import jwt from "jsonwebtoken"
-import fetch from "node-fetch"
 import config from "./accessTokenGenerator"
 const router = express.Router()
 
@@ -44,15 +44,15 @@ router
 		if (req.extension.hasOwnProperty("channel_id")) {
 			console.log("Looking up", req.extension.channel_id)
 
-			fetch(`https://api.twitch.tv/helix/channels?broadcaster_id=${req.extension.channel_id}`, {
-				method: "GET",
+			axios({
+				method: "get",
+				url: `https://api.twitch.tv/helix/users?id=${req.extension.channel_id}`,
 				headers: {
 					"Content-Type": "application/json",
 					"client-id": process.env.TWITCH_CLIENT_ID,
 					"authorization": "Bearer " + config.api_token
 				} as any
 			})
-				.then(async (response: any) => response.json())
 				.then((resp: any) => {
 					// monitor our rate limit
 					// console.log(
