@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"local": "ts-node-dev -r tsconfig-paths/register src/index.ts",
-		"build": "tsc -p .",
+		"build": "tsc",
 		"start": "set NODE_PATH=./build node build/index.js",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
