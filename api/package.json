@@ -5,8 +5,8 @@
 	"main": "index.js",
 	"scripts": {
 		"local": "ts-node-dev -r tsconfig-paths/register src/index.ts",
-		"build": "tsc --outDir build",
-		"start": "set NODE_PATH=./build node build/index.js",
+		"build": "tsconfigpaths --outDir build",
+		"start": "set NODE_PATH=./build node -r tsconfig-paths/register build/index.js",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"author": "",
