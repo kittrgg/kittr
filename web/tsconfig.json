@@ -14,6 +14,7 @@
 		"isolatedModules": true,
 		"jsx": "preserve",
 		"baseUrl": "./",
+		"incremental": true,
 		"paths": {
 			"@Routes/*": ["utils/routes/*"],
 			"@Redux/*": ["redux/*"],
@@ -26,8 +27,7 @@
 			"@Middlewares/*": ["utils/middlewares/*"],
 			"@Services/*": ["services/*"],
 			"@Utils/*": ["utils/*"]
-		},
-		"incremental": true
+		}
 	},
 	"include": ["**/*.ts", "**/*.tsx"],
 	"exclude": ["node_modules"]

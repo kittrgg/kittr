@@ -1,0 +1,28 @@
+{
+	"compilerOptions": {
+		"target": "es5",
+		"baseUrl": "./src",
+		"outDir": "dist",
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"allowJs": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"forceConsistentCasingInFileNames": true,
+		"noEmit": true,
+		"noImplicitAny": true,
+		"esModuleInterop": true,
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"isolatedModules": false,
+		"incremental": true,
+		"paths": {
+			"@Jobs/*": ["jobs/*"],
+			"@Services/*": ["services/*"],
+			"@Types/*": ["types/*"],
+			"@Utils/*": ["utils/*"]
+		}
+	},
+	"include": ["**/*.ts", "**/*.js"],
+	"exclude": ["node_modules"]
+}
