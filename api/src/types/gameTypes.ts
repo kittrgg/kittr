@@ -40,7 +40,7 @@ interface IWarzoneWeaponStats {
 	control: number
 }
 
-interface IWarzoneGameInfo {
+export interface IWarzoneGameInfo {
 	/** Text description of the Base */
 	blurb: string
 	/** Statistical performance info for the Base  */

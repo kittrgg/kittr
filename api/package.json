@@ -1,31 +1,36 @@
 {
-  "name": "kittr-back-end",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "local": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@google-analytics/data": "^2.8.0",
-    "bree": "^7.1.0",
-    "cors": "^2.8.5",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.13.3",
-    "node-fetch": "^2.6.6",
-    "rollbar": "^2.24.0",
-    "socket.io": "^4.1.3"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.12"
-  },
-  "engines": {
-    "node": "14.x"
-  }
+	"name": "kittr-back-end",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "ts-node -r tsconfig-paths/register index.ts",
+		"local": "ts-node-dev -r tsconfig-paths/register src/index.ts",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@google-analytics/data": "^2.8.0",
+		"bree": "^7.1.0",
+		"cors": "^2.8.5",
+		"dotenv": "^10.0.0",
+		"express": "^4.17.1",
+		"jsonwebtoken": "^8.5.1",
+		"mongoose": "^5.13.3",
+		"node-fetch": "^2.6.6",
+		"rollbar": "^2.24.0",
+		"socket.io": "^4.1.3",
+		"ts-node": "^10.4.0",
+		"tsconfig-paths": "^3.12.0"
+	},
+	"devDependencies": {
+		"@types/express": "^4.17.13",
+		"nodemon": "^2.0.12",
+		"ts-node-dev": "^1.1.8",
+		"typescript": "^4.5.5"
+	},
+	"engines": {
+		"node": "14.x"
+	}
 }

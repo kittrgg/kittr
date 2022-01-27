@@ -1,0 +1,8 @@
+package-lock.json
+package.json
+.github
+.next
+.nyc_output
+coverage
+node_modules
+*.log

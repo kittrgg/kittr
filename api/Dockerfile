@@ -11,4 +11,4 @@ RUN npm ci --only=production
 COPY . .
 
 EXPOSE 5000
-CMD [ "node", "index.js" ]
+CMD [ "ts-node", "-r tsconfig-paths/register", "index.ts" ]
