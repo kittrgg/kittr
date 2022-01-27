@@ -49,6 +49,7 @@ const getStreamerViewCounts = async (dateRange) => {
                 },
             },
         })
+        
 
         return response.rows.reduce((acc, row) => {
             /**
@@ -61,14 +62,11 @@ const getStreamerViewCounts = async (dateRange) => {
              * returns HusKerrs
              */
             const streamer = row.dimensionValues[0].value.split("/").slice(0, 3)[2]
+            const countToAdd = row.metricValues[0].value
+            const addToExistingCount = (ogCount, newCount) => ogCount + parseFloat(newCount)
 
-            // If streamer counts already exist in object, add new counts to existing
-            if (acc[streamer]) {
-                const count = acc[streamer]
-                acc[streamer] = count + parseFloat(row.metricValues[0].value)
-            } else {
-                acc[streamer] = parseFloat(row.metricValues[0].value)
-            }
+            const streamerCount = acc[streamer] ? addToExistingCount(count, countToAdd) : parseFloat(countToAdd)
+            acc[streamer] = streamerCount
             return acc
         }, {})
     } catch (error) {
