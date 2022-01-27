@@ -1,4 +1,4 @@
-import fetch from "node-fetch"
+import axios from "axios"
 
 const config = {} as any
 
@@ -19,11 +19,11 @@ params.append("client_id", process.env.TWITCH_CLIENT_ID as string)
 params.append("client_secret", process.env.TWITCH_CLIENT_SECRET as string)
 params.append("grant_type", "client_credentials")
 
-fetch("https://id.twitch.tv/oauth2/token", {
-	method: "POST",
-	body: params
+axios({
+	method: "post",
+	url: "https://id.twitch.tv/oauth2/token",
+	data: params
 })
-	.then((resp: any) => resp.json())
 	.then((resp: any) => {
 		if (resp.hasOwnProperty("access_token")) {
 			config.api_token = resp.access_token
