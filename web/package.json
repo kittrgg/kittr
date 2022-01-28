@@ -48,7 +48,6 @@
 		"@cypress/schema-tools": "^4.7.8",
 		"@types/jsonwebtoken": "^8.5.2",
 		"@types/micro": "^7.3.6",
-		"@types/mongoose": "^5.11.97",
 		"@types/react": "^17.0.11",
 		"@types/react-color": "^3.0.6",
 		"@types/react-select": "^5.0.1",

@@ -55,10 +55,7 @@ app.use("/twitch", twitch)
 console.log(`Connecting to MongoDB...`)
 mongoose
 	.connect(process.env.DB_CONNECTION_STRING as string, {
-		authSource: "admin",
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-		useFindAndModify: false
+		authSource: "admin"
 	})
 	.then(async () => {
 		console.log("Server has started.")
