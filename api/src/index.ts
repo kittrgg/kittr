@@ -1,15 +1,17 @@
+import dotenv from "dotenv"
 import "module-alias/register"
 import { createKitStatsAsInterval } from "@Jobs/createKitStatsAsInterval"
 import { writeViewCounts } from "@Jobs/viewCountAsUseInterval"
 import twitch from "@Services/twitch/extension/routes"
 import { getStreamerByTwitchBroadcasterLoginId } from "@Utils/streamer"
 import cors from "cors"
-import "dotenv/config"
 import express from "express"
 import { createServer } from "http"
 import mongoose from "mongoose"
 import Rollbar from "rollbar"
 import { Server } from "socket.io"
+
+dotenv.config()
 
 const app = express()
 const httpServer = createServer(app)
