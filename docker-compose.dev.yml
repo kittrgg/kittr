@@ -50,7 +50,7 @@ services:
     ports:
       - 5000:5000
     volumes:
-      - ./api:/src
+      - ./api:/home/node/app
     environment:
       - DB_CONNECTION_STRING=mongodb://root:example@mongo:27017/myFirstDatabase
       - ENVIRONMENT=DEVELOPMENT
@@ -59,6 +59,7 @@ services:
       - TWITCH_CLIENT_ID=${TWITCH_CLIENT_ID}
       - TWITCH_CLIENT_SECRET=${TWITCH_CLIENT_SECRET}
       - TWITCH_SECRET=${TWITCH_SECRET}
+      - TWITCH_EXTENSION_SECRET=${TWITCH_EXTENSION_SECRET}
     command: npm run local
 
   web:
