@@ -1,9 +1,9 @@
 name: Deploy Testing Environment and run E2E
 
 on:
-  push:
+  pull-request:
     branches:
-      - testing
+      - master
 
 jobs:
   build:
