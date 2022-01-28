@@ -17,4 +17,4 @@ ENV NODE_PATH=./build
 RUN npm run build
 
 EXPOSE 5000
-CMD [ "node", "-r", "tsconfig-paths/register", "build/index.js" ]
+CMD [ "node", "build/index.js" ]

@@ -1,9 +1,8 @@
 {
 	"compilerOptions": {
 		"target": "es5",
-		"baseUrl": "./src",
+		"baseUrl": "./",
 		"outDir": "build",
-		"lib": ["dom", "dom.iterable", "esnext"],
 		"allowJs": true,
 		"skipLibCheck": true,
 		"strict": true,
@@ -11,15 +10,15 @@
 		"noImplicitAny": true,
 		"esModuleInterop": true,
 		"module": "commonjs",
-		"moduleResolution": "Node",
+		"moduleResolution": "node",
 		"resolveJsonModule": true,
 		"isolatedModules": false,
 		"incremental": true,
 		"paths": {
-			"@Jobs/*": ["jobs/*"],
-			"@Services/*": ["services/*"],
-			"@Types/*": ["types/*"],
-			"@Utils/*": ["utils/*"]
+			"@Jobs/*": ["src/jobs/*"],
+			"@Services/*": ["src/services/*"],
+			"@Types/*": ["src/types/*"],
+			"@Utils/*": ["src/utils/*"]
 		}
 	},
 	"include": ["**/*.ts", "**/*.js"],
