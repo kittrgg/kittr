@@ -6,7 +6,7 @@
 	"scripts": {
 		"local": "ts-node-dev -r tsconfig-paths/register src/index.ts",
 		"build": "rm -rf build && tsc -p tsconfig.json",
-		"start": "node -r tsconfig-paths/register ./build/index.js",
+		"start": "node ./build/index.js",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"_moduleAliases": {
