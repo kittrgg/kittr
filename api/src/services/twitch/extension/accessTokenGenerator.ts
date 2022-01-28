@@ -25,11 +25,12 @@ axios({
 	data: params
 })
 	.then((resp: any) => {
+		console.log(process.env.TWITCH_CLIENT_ID)
 		if (resp.hasOwnProperty("access_token")) {
 			config.api_token = resp.access_token
 			console.log("Set an App Access Token", config.api_token)
 		} else {
-			// some thing REALLY went wrong
+			console.error(resp)
 			console.error("The Twitch extension WON’T WORK")
 			console.error("No access_token", resp.body)
 		}
