@@ -1,5 +1,17 @@
 import dotenv from "dotenv"
-import "module-alias/register"
+dotenv.config()
+
+import moduleAlias from "module-alias"
+
+if (process.env.ENVIRONMENT !== "DEVELOPMENT") {
+	moduleAlias.addAliases({
+		"@Jobs": __dirname + "/jobs",
+		"@Services": __dirname + "/services",
+		"@Types": __dirname + "/types",
+		"@Utils": __dirname + "/utils"
+	})
+}
+
 import { createKitStatsAsInterval } from "@Jobs/createKitStatsAsInterval"
 import { writeViewCounts } from "@Jobs/viewCountAsUseInterval"
 import twitch from "@Services/twitch/extension/routes"
@@ -10,8 +22,6 @@ import { createServer } from "http"
 import mongoose from "mongoose"
 import Rollbar from "rollbar"
 import { Server } from "socket.io"
-
-dotenv.config()
 
 const app = express()
 const httpServer = createServer(app)
@@ -42,6 +52,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use("/twitch", twitch)
 
+console.log(`Connecting to MongoDB...`)
 mongoose
 	.connect(process.env.DB_CONNECTION_STRING as string, {
 		authSource: "admin",
@@ -100,4 +111,7 @@ mongoose
 			console.log(`Server is running on PORT: ${process.env.PORT || 5000}...`)
 		)
 	})
-	.catch((err) => console.error(err))
+	.catch((err) => {
+		console.log("Error connecting to MongoDB:")
+		console.error(err)
+	})
