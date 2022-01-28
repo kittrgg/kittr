@@ -40,7 +40,7 @@ const Home = ({
 				games={games}
 				popularChannels={popularChannels}
 				risingStars={risingStars}
-				liveChannels={liveChannels.slice(0, 15)}
+				// liveChannels={liveChannels.slice(0, 15)}
 			/>
 			<ResponsiveAdBanner />
 			<PlatformInfo />
@@ -55,16 +55,16 @@ export default Home
 export const getStaticProps: GetStaticProps = async () => {
 	await connectToDatabase()
 
-	const [games, totalNumberOfKits, popularChannels, risingStars, blogPosts, liveChannels, currentPromo] =
-		await Promise.all([
-			allGamesQuery(),
-			totalKitsQuery(),
-			topChannelsQuery(10),
-			risingStarsQuery({ viewsGreaterThan: 400, skip: 12, sample: 10 }),
-			getBlogPostsQuery({ limit: 3 }),
-			liveChannelsQuery(),
-			getHomeChannelPromo()
-		])
+	// Live channels is missing from this list for when we want to bring it back!
+	const [games, totalNumberOfKits, popularChannels, risingStars, blogPosts, currentPromo] = await Promise.all([
+		allGamesQuery(),
+		totalKitsQuery(),
+		topChannelsQuery(10),
+		risingStarsQuery({ viewsGreaterThan: 400, skip: 12, sample: 10 }),
+		getBlogPostsQuery({ limit: 3 }),
+		getHomeChannelPromo()
+		// liveChannelsQuery(),
+	])
 
 	const featuredChannel = await getTwitchChannelInfo(currentPromo?.channelId || "")
 
@@ -74,7 +74,7 @@ export const getStaticProps: GetStaticProps = async () => {
 			games,
 			popularChannels,
 			risingStars,
-			liveChannels,
+			// liveChannels,
 			blogPosts,
 			totalNumberOfKits: Math.ceil(totalNumberOfKits / 100) * 100 || 0
 		},

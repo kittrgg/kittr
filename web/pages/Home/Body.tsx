@@ -15,11 +15,12 @@ interface Props {
 	 * but we want to give some recognition and visibility.
 	 * */
 	risingStars: IChannel[]
-	liveChannels: IChannel[]
+	// liveChannels: IChannel[]
 }
 
 /** Main content section of the home page. Games, channels, etc. */
-const Body = ({ games, popularChannels, risingStars, liveChannels }: Props) => {
+// Live channels is missing...Just a note for when we want to bring it back!
+const Body = ({ games, popularChannels, risingStars }: Props) => {
 	const router = useRouter()
 
 	const routeChannel = (elem: IChannel) => router.push(Routes.CHANNEL.createPath(elem.urlSafeName))
@@ -66,9 +67,9 @@ const Body = ({ games, popularChannels, risingStars, liveChannels }: Props) => {
 				</Link>
 			</SectionHeader>
 
-			<SideScroller wrapperStyles={{ margin: "12px 0" }} childMargin="0 10px">
+			{/* <SideScroller wrapperStyles={{ margin: "12px 0" }} childMargin="0 10px">
 				{liveChannels && <ChannelAvatarList data={liveChannels} onClick={routeChannel} />}
-			</SideScroller>
+			</SideScroller> */}
 		</Container>
 	)
 }
