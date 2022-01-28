@@ -1,3 +1,4 @@
+import "module-alias/register"
 import { createKitStatsAsInterval } from "@Jobs/createKitStatsAsInterval"
 import { writeViewCounts } from "@Jobs/viewCountAsUseInterval"
 import twitch from "@Services/twitch/extension/routes"

@@ -5,9 +5,15 @@
 	"main": "index.js",
 	"scripts": {
 		"local": "ts-node-dev -r tsconfig-paths/register src/index.ts",
-		"build": "tsc",
-		"start": "set NODE_PATH=./build node -r tsconfig-paths/register build/index.js",
+		"build": "rm -rf build && tsc -p tsconfig.json",
+		"start": "node ./build/index.js",
 		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"_moduleAliases": {
+		"@Jobs": "build/jobs",
+		"@Services": "build/services",
+		"@Types": "build/types",
+		"@Utils": "build/utils"
 	},
 	"author": "",
 	"license": "ISC",
@@ -23,6 +29,7 @@
 		"dotenv": "^10.0.0",
 		"express": "^4.17.1",
 		"jsonwebtoken": "^8.5.1",
+		"module-alias": "^2.2.2",
 		"mongoose": "^5.13.3",
 		"rollbar": "^2.24.0",
 		"socket.io": "^4.1.3",
