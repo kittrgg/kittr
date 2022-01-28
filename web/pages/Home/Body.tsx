@@ -60,12 +60,12 @@ const Body = ({ games, popularChannels, risingStars }: Props) => {
 				{risingStars && <ChannelAvatarList data={risingStars} onClick={routeChannel} />}
 			</SideScroller>
 
-			<SectionHeader style={{ marginTop: "60px" }}>
+			{/* <SectionHeader style={{ marginTop: "60px" }}>
 				<H2>LIVE NOW</H2>
 				<Link href={Routes.CHANNEL.LIST} passHref>
 					<StyledLink>SEE ALL</StyledLink>
 				</Link>
-			</SectionHeader>
+			</SectionHeader> */}
 
 			{/* <SideScroller wrapperStyles={{ margin: "12px 0" }} childMargin="0 10px">
 				{liveChannels && <ChannelAvatarList data={liveChannels} onClick={routeChannel} />}
