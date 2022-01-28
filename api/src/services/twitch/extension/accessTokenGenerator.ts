@@ -30,7 +30,7 @@ axios({
 			console.log("Set an App Access Token", config.api_token)
 		} else {
 			// some thing REALLY went wrong
-			console.error("The Twich extension WON’T WORK")
+			console.error("The Twitch extension WON’T WORK")
 			console.error("No access_token", resp.body)
 		}
 	})
