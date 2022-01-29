@@ -1,12 +1,12 @@
 FROM node:16-alpine3.14 AS deps
 RUN apk add --no-cache libc6-compat
-WORKDIR /src
+WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install --frozen-lockfile
 
 FROM node:16-alpine3.14 AS builder
-WORKDIR /src
-COPY --from=deps /src/node_modules ./node_modules
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
 COPY ./ ./
 
 ARG ENVIRONMENT
@@ -89,18 +89,18 @@ RUN npm run build
 # Production image
 # Copy files from builder and run next
 FROM node:16-alpine3.14 AS runner
-WORKDIR /src
+WORKDIR /app
 
 ENV NODE_ENV production
 
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nextjs -u 1001
 
-COPY --from=builder /src/next.config.js ./
-COPY --from=builder /src/public ./public
-COPY --from=builder --chown=nextjs:nodejs /src/.next ./.next
-COPY --from=builder /src/node_modules ./node_modules
-COPY --from=builder /src/package.json ./package.json
+COPY --from=builder /app/next.config.js ./
+COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
 
 ENV PORT 3000
 EXPOSE 3000

@@ -1,6 +1,7 @@
 import dotenv from "dotenv"
 dotenv.config()
 
+// This needs to happen BEFORE any absolute imports
 import moduleAlias from "module-alias"
 
 if (process.env.ENVIRONMENT !== "DEVELOPMENT") {

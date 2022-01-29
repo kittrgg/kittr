@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const raw = [
   {
@@ -62,10 +62,8 @@ const raw = [
   },
 ];
 
-module.exports = {
-  games: raw.map((game) => ({
-    ...game,
-    releaseDate: Date(game.releaseDate),
-    _id: mongoose.Types.ObjectId(game._id),
-  })),
-};
+export default raw.map((game) => ({
+  ...game,
+  releaseDate: new Date(game.releaseDate),
+  _id: new mongoose.Types.ObjectId(game._id),
+}));

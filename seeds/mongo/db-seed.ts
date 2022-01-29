@@ -1,22 +1,22 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-const Game = require("./models/Game").default;
-const { games } = require("./games.js");
+import Game from "./models/Game";
+import games from "./games";
 
-const BlogPost = require("./models/BlogPost").default;
-const { blogPosts } = require("./blogPosts.js");
+import BlogPost from "./models/BlogPost";
+import blogPosts from "./blogPosts";
 
-const KitBase = require("./models/KitBase").default;
-const { kitBases } = require("./kitBases.js");
+import KitBase from "./models/KitBase";
+import kitBases from "./kitBases";
 
-const KitOption = require("./models/KitOption").default;
-const { kitOptions } = require("./kitOptions.js");
+import KitOption from "./models/KitOption";
+import kitOptions from "./kitOptions";
 
-const KitStat = require("./models/KitStat").default;
-const { kitStats } = require("./kitStats.js");
+import KitStat from "./models/KitStat";
+import kitStats from "./kitStats";
 
-const Player = require("./models/Player").default;
-const { players } = require("./players.js");
+import Player from "./models/Player";
+import players from "./players";
 
 const MONGODB_URI = process.env.DB_CONNECTION_STRING;
 
@@ -29,8 +29,6 @@ if (!MONGODB_URI) {
 const connectToDatabase = async () => {
   return mongoose
     .connect(MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
       authSource: "admin",
     })
     .then((mongoose) => {

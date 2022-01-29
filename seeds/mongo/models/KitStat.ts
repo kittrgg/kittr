@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-const Schema = require("mongoose").Schema;
+import mongoose, { Schema } from "mongoose";
 
 const MODEL_NAME = "kitStat";
 
@@ -11,4 +10,4 @@ const schema = new Schema({
 
 const Model = mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema);
 
-exports.default = Model;
+export default Model;

@@ -1,13 +1,10 @@
 FROM node:16-alpine3.14
 
-WORKDIR /src
+WORKDIR /app
 
 # Installing dependencies
 COPY package*.json ./
 RUN npm install
-
-# Copying source files
-COPY ./ ./
 
 # Expose the port
 ENV PORT 3000

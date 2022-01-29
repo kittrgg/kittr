@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const raw = [
   {
@@ -10993,9 +10993,7 @@ const raw = [
   },
 ];
 
-module.exports = {
-  kitOptions: raw.map((opt) => ({
-    ...opt,
-    _id: mongoose.Types.ObjectId(opt._id),
-  })),
-};
+export default raw.map((opt) => ({
+  ...opt,
+  _id: new mongoose.Types.ObjectId(opt._id),
+}));

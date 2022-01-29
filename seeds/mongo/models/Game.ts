@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-const Schema = require("mongoose").Schema;
+import mongoose, { Schema } from "mongoose";
 
 const MODEL_NAME = "game";
 
@@ -18,11 +17,11 @@ const schema = new Schema(
       creatorCode: String,
     },
     genres: Array,
-    platforms: Array
+    platforms: Array,
   },
   { minimize: false }
 );
 
 const Model = mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema);
 
-exports.default = Model;
+export default Model;
