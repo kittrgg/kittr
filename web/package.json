@@ -6,10 +6,7 @@
 		"dev": "next dev",
 		"build": "next build",
 		"serve": "next start",
-		"ts:check": "tsc --noEmit --incremental false",
-		"cypress:open": "cypress open",
-		"cypress:run": "cypress run",
-		"emulators": "firebase emulators:start"
+		"ts:check": "tsc --noEmit --incremental false"
 	},
 	"dependencies": {
 		"@juggle/resize-observer": "^3.3.1",
