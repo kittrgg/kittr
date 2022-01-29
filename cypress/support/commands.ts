@@ -15,7 +15,3 @@ Cypress.Commands.add("logout", () => {
   cy.get("[data-cy=logout-button]").click();
   cy.contains("get kittd.");
 });
-
-// Cypress.Commands.add("getToken", () => {
-// 	return auth.currentUser?.getIdToken() as Promise<string>
-// })
