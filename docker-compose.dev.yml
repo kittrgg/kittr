@@ -58,6 +58,7 @@ services:
       - FIREBASE_STORAGE_EMULATOR_HOST=firebase-emulators:4002
       - TWITCH_CLIENT_ID=${TWITCH_CLIENT_ID}
       - TWITCH_CLIENT_SECRET=${TWITCH_CLIENT_SECRET}
+      - TWITCH_SECRET=${TWITCH_SECRET}
       - TWITCH_EXTENSION_SECRET=${TWITCH_EXTENSION_SECRET}
     command: npm run local
 
@@ -82,6 +83,7 @@ services:
       - NEXT_PUBLIC_SOCKET_HOST=http://localhost:5000
       - TWITCH_CLIENT_ID=${TWITCH_CLIENT_ID}
       - TWITCH_CLIENT_SECRET=${TWITCH_CLIENT_SECRET}
+      - TWITCH_SECRET=${TWITCH_SECRET}
     volumes:
       - ./web:/src
 
