@@ -7,7 +7,7 @@ RUN npm install --frozen-lockfile
 FROM node:16-alpine3.14 AS builder
 WORKDIR /src
 COPY --from=deps /src/node_modules ./node_modules
-COPY . .
+COPY ./ ./
 
 ARG ENVIRONMENT
 ENV ENVIRONMENT ${ENVIRONMENT}
@@ -104,5 +104,7 @@ COPY --from=builder /src/package.json ./package.json
 
 ENV PORT 3000
 EXPOSE 3000
+
+ENV NEXT_TELEMETRY_DISABLED 1
 
 CMD [ "npm", "run", "serve" ]
