@@ -5,9 +5,10 @@ on:
     branches:
       - master
 
-jobs:
-  build:
+jobs:  
+  build:  
     runs-on: ubuntu-latest
+    if: github.repository_owner == 'kittrgg'
     steps:
       - uses: actions/checkout@v2
 
@@ -75,6 +76,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    if: github.repository_owner == 'kittrgg'
     steps:
       - name: Trigger api testing deployment to Digital Ocean
         uses: appleboy/ssh-action@master
@@ -97,6 +99,7 @@ jobs:
   e2e:
     needs: deploy
     runs-on: ubuntu-latest
+    if: github.repository_owner == 'kittrgg'
     steps:
       - uses: actions/checkout@v2
 
