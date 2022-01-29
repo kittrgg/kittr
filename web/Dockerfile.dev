@@ -6,9 +6,6 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-# Copying source files
-COPY ./ ./
-
 # Expose the port
 ENV PORT 3000
 
