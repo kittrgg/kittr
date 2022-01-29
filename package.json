@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "author": "Anthony Shew",
   "scripts": {
+    "dev:install": "npm install && npm install -C api && npm install -C web && npm install -C cypress",
     "dev": "docker-compose -f docker-compose.dev.yml up -d",
     "dev:with-logs": "docker-compose -f docker-compose.dev.yml up",
     "dev:build": "docker-compose -f docker-compose.dev.yml up --build",

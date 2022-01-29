@@ -22,22 +22,24 @@ https://github.com/kittrgg/monorepo.git
 git checkout develop
 ```
 
-3. You will need a Twitch API token to run kittr. Unfortunately, we can't provide you with one since this token is individualized. To get your Twitch token, visit [your Twitch developers console](https://dev.twitch.tv/console/apps) and create an application token. (Feel free to use any information in the boxes. Anything should work.) Make sure you keep the Client Secret that you create in a safe place for the next step!
+3. You will need a Twitch API token to run kittr. Unfortunately, we can't provide you with one since this token is individualized. To get your Twitch token, visit [your Twitch developers console](https://dev.twitch.tv/console/apps) and create an application token. (For the URLs that it asks for, you can use http://localhost:3000.) Make sure you keep the Client Secret that you create in a safe place for the next step!
 
 4. With your token, create a `.env` file at the root of the project by copying the `.env.example` from the project and adding in your Twitch token values.
 
-5. Run the docker-compose to bring up the containers to your local host.
+5. Run `npm dev:install`. IMPORTANT: Notice the `dev`! This will install the dependencies for all of the containers rather than just the root dependencies.
+
+6. Run the docker-compose to bring up the containers to your local host.
 
 ```
 npm run dev
 ```
 
-6. If this is your first time developing kittr, you will need to seed your local Mongo instance at this time. To do so:
+7. If this is your first time developing kittr, you will need to seed your local Mongo instance at this time. To do so:
 
 - In the shell of your Mongo container, use `npm run dev:seed`.
 - If you got a message saying "Seeded correctly, let's get kittd," you are ready to go!
 
-7. Visit kittr at [http://localhost:3000](http://localhost:3000)
+8. Visit kittr at [http://localhost:3000](http://localhost:3000)
 
 ## Ports
 

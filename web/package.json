@@ -20,6 +20,7 @@
 		"firebase-admin": "^9.10.0",
 		"firebase-tools": "^9.17.0",
 		"jsonwebtoken": "^8.5.1",
+		"kittr": "file:..",
 		"micro": "^9.3.4",
 		"mongoose": "^5.12.14",
 		"next": "^12.0.9",

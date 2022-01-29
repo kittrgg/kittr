@@ -29,6 +29,7 @@
 		"dotenv": "^10.0.0",
 		"express": "^4.17.2",
 		"jsonwebtoken": "^8.5.1",
+		"kittr": "file:..",
 		"module-alias": "^2.2.2",
 		"mongoose": "^6.1.8",
 		"rollbar": "^2.24.0",
