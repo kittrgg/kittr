@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import { Types } from "mongoose";
 
 const raw = [
   {
@@ -1523,7 +1523,7 @@ const raw = [
       { uid: "k2TOhb6hrVRVEHnTlmNNfpRpGmH2", role: "Administrator" },
       { uid: "d6AXDegw3Qe92IHRfTPK9suAnEH3", role: "Editor" },
     ],
-    createdDate: { $date: "2021-08-20T00:48:54.104Z" },
+    createdDate: "2021-08-20T00:48:54.104Z",
     displayName: "HusKerrs",
     urlSafeName: "HusKerrs",
     __v: 0,
@@ -2167,7 +2167,7 @@ const raw = [
       { uid: "8kB6sIo4gfZKZSacpIY1EpJHDQh1", role: "Administrator" },
       { uid: "7WFzwNqcyzWQXPvTeU5xvDBXxis1", role: "Administrator" },
     ],
-    createdDate: { $date: "2021-07-27T17:27:01.184Z" },
+    createdDate: "2021-07-27T17:27:01.184Z",
     displayName: "JoeWo",
     urlSafeName: "JoeWo",
     __v: 0,
@@ -3696,7 +3696,7 @@ const raw = [
       },
     ],
     managers: [{ uid: "cp5OhFQHwSfwuQdFjEPbPleRuNu2", role: "Owner" }],
-    createdDate: { $date: "2021-08-04T20:36:09.885Z" },
+    createdDate: "2021-08-04T20:36:09.885Z",
     displayName: "Symfuhny",
     urlSafeName: "Symfuhny",
     __v: 0,
@@ -4865,7 +4865,7 @@ const raw = [
       },
     ],
     managers: [{ uid: "IiTpYFhuwzOGoxTYWVLqVbiRvDG3", role: "Owner" }],
-    createdDate: { $date: "2021-09-19T22:19:48.562Z" },
+    createdDate: "2021-09-19T22:19:48.562Z",
     displayName: "DiazBiffle",
     urlSafeName: "DiazBiffle",
     __v: 0,
@@ -5342,7 +5342,7 @@ const raw = [
       { uid: "Q8K2Lc1QkHZp5H0wWKn97V3KaJ52", role: "Administrator" },
       { uid: "QAmiw7ybvbOaOB4lC6cxcUdyVTA3", role: "Administrator" },
     ],
-    createdDate: { $date: "2021-08-08T06:50:10.634Z" },
+    createdDate: "2021-08-08T06:50:10.634Z",
     displayName: "adisbak",
     urlSafeName: "adisbak",
     __v: 0,
@@ -7088,7 +7088,7 @@ const raw = [
       { uid: "RChUlxAGRlWPasRtLPTYC93kQSD2", role: "Administrator" },
       { uid: "Nxu1UHXqjJWWLkKLlactXzOHIqn1", role: "Owner" },
     ],
-    createdDate: { $date: "2021-08-08T00:11:19.314Z" },
+    createdDate: "2021-08-08T00:11:19.314Z",
     displayName: "IceManIsaac",
     urlSafeName: "IceManIsaac",
     __v: 0,
@@ -8491,7 +8491,7 @@ const raw = [
         },
       },
     ],
-    createdDate: { $date: "2021-07-18T17:42:38.566Z" },
+    createdDate: "2021-07-18T17:42:38.566Z",
     displayName: "Exzachtt",
     urlSafeName: "Exzachtt",
     authId: "j25YP5bFfcc6HeXDrILNJWisprw2",
@@ -9056,7 +9056,7 @@ const raw = [
       },
     ],
     managers: [{ uid: "GggnRqTgZeewHgC6pmuhyMx3Vet2", role: "Owner" }],
-    createdDate: { $date: "2021-12-24T10:42:39.949Z" },
+    createdDate: "2021-12-24T10:42:39.949Z",
     displayName: "LouisseLags",
     urlSafeName: "LouisseLags",
     __v: 0,
@@ -9978,7 +9978,7 @@ const raw = [
       { uid: "pB88jzh74xQqkeYqrO8IAtxSTpu1", role: "Owner" },
       { uid: "ypn932ItUycM25cwFsUbRHjdeeO2", role: "Administrator" },
     ],
-    createdDate: { $date: "2021-08-14T18:47:03.778Z" },
+    createdDate: "2021-08-14T18:47:03.778Z",
     displayName: "Kalei",
     urlSafeName: "Kalei",
     __v: 0,
@@ -10503,7 +10503,7 @@ const raw = [
       },
     ],
     managers: [{ uid: "s7hkf8XDpRRbrKlGvfvk0jLEMp02", role: "Owner" }],
-    createdDate: { $date: "2021-09-05T19:06:43.266Z" },
+    createdDate: "2021-09-05T19:06:43.266Z",
     displayName: "NurVes",
     urlSafeName: "NurVes",
     __v: 0,
@@ -10984,7 +10984,7 @@ const raw = [
       },
     ],
     managers: [{ uid: "yJdxfgtDkWR5ElsbER5eT50fL3y2", role: "Owner" }],
-    createdDate: { $date: "2021-11-22T21:12:16.746Z" },
+    createdDate: "2021-11-22T21:12:16.746Z",
     displayName: "Clamp",
     urlSafeName: "Clamp",
     __v: 0,
@@ -11656,7 +11656,7 @@ const raw = [
       { uid: "7mE7egFWceRAYtbPISrIjdefN673", role: "Administrator" },
       { uid: "pYcBuFXmVcRyJw31uvvDtiHdhvA3", role: "Administrator" },
     ],
-    createdDate: { $date: "2021-08-01T04:32:40.909Z" },
+    createdDate: "2021-08-01T04:32:40.909Z",
     displayName: "Qrissy",
     urlSafeName: "Qrissy",
     __v: 0,
@@ -13380,7 +13380,7 @@ const raw = [
       { uid: "buDt2AWKTad7CfFVVZceHGSGFkU2", role: "Owner" },
       { uid: "V9Ll0uhYtNSg9dbK1v4n0L6MBp23", role: "Administrator" },
     ],
-    createdDate: { $date: "2021-08-15T14:05:38.705Z" },
+    createdDate: "2021-08-15T14:05:38.705Z",
     displayName: "Jukeyz",
     urlSafeName: "Jukeyz",
     __v: 0,
@@ -14124,7 +14124,7 @@ const raw = [
       },
     ],
     managers: [{ uid: "ourBB5aO1yehRyLxizChfcPVxS23", role: "Owner" }],
-    createdDate: { $date: "2021-08-18T14:30:27.099Z" },
+    createdDate: "2021-08-18T14:30:27.099Z",
     displayName: "Natarsha",
     urlSafeName: "Natarsha",
     __v: 0,
@@ -15060,7 +15060,7 @@ const raw = [
       },
     ],
     managers: [{ uid: "ZsitXKFUElWFJEWTvDIjwkUOSze2", role: "Owner" }],
-    createdDate: { $date: "2021-11-01T23:37:48.095Z" },
+    createdDate: "2021-11-01T23:37:48.095Z",
     displayName: "VieroLII",
     urlSafeName: "VieroLII",
     __v: 0,
@@ -16011,7 +16011,7 @@ const raw = [
       { uid: "M78HD67r7TP7X5xSXFLeYeDcenm2", role: "Owner" },
       { uid: "agPLkLkbh7OerpOlxzF713F8gFn1", role: "Editor" },
     ],
-    createdDate: { $date: "2021-08-31T15:30:48.894Z" },
+    createdDate: "2021-08-31T15:30:48.894Z",
     displayName: "sAwsik",
     urlSafeName: "sAwsik",
     __v: 0,
@@ -16231,7 +16231,7 @@ const raw = [
       },
     ],
     managers: [{ uid: "ilv0UxY8HyeOQbzPb99ejOVE2Ns1", role: "Owner" }],
-    createdDate: { $date: "2021-12-28T13:42:47.310Z" },
+    createdDate: "2021-12-28T13:42:47.310Z",
     displayName: "Slxsh",
     urlSafeName: "Slxsh",
     __v: 0,
@@ -16372,7 +16372,7 @@ const raw = [
       },
     ],
     managers: [{ uid: "5dnUEyXIlvXUOs9ybSbW3DE3PYF2", role: "Owner" }],
-    createdDate: { $date: "2021-12-21T01:32:58.064Z" },
+    createdDate: "2021-12-21T01:32:58.064Z",
     displayName: "AYDAN",
     urlSafeName: "AYDAN",
     __v: 0,
@@ -17535,7 +17535,7 @@ const raw = [
       { uid: "Q8K2Lc1QkHZp5H0wWKn97V3KaJ52", role: "Administrator" },
       { uid: "eNCpVuQPz0bI4JECD0zbk58oz582", role: "Owner" },
     ],
-    createdDate: { $date: "2021-10-29T20:36:37.989Z" },
+    createdDate: "2021-10-29T20:36:37.989Z",
     displayName: "Peet3rz",
     urlSafeName: "Peet3rz",
     __v: 0,
@@ -17819,7 +17819,7 @@ const raw = [
       },
     ],
     managers: [{ uid: "Bkiow52QgrM9BFtwFvXJs24Fswo1", role: "Owner" }],
-    createdDate: { $date: "2021-09-21T17:47:30.663Z" },
+    createdDate: "2021-09-21T17:47:30.663Z",
     displayName: "Euren_",
     urlSafeName: "Euren_",
     __v: 0,
@@ -18210,7 +18210,7 @@ const raw = [
       { uid: "Lp9TyEgMJQV2HAuU4qGCRl0XjFs2", role: "Editor" },
       { uid: "dYPPSLJtUsMBema1jf8IfH3Sgsn1", role: "Editor" },
     ],
-    createdDate: { $date: "2021-09-02T20:38:26.894Z" },
+    createdDate: "2021-09-02T20:38:26.894Z",
     displayName: "Pieman",
     urlSafeName: "Pieman",
     __v: 0,
@@ -18615,7 +18615,7 @@ const raw = [
       { uid: "kkv7Ce5p5IUaHXJFyQhNXces0Bs1", role: "Owner" },
       { uid: "e1HhXRdtkfPMr8dta6UEfp2q03H3", role: "Administrator" },
     ],
-    createdDate: { $date: "2021-09-17T12:04:48.643Z" },
+    createdDate: "2021-09-17T12:04:48.643Z",
     displayName: "PieroCOD",
     urlSafeName: "PieroCOD",
     __v: 0,
@@ -18902,7 +18902,7 @@ const raw = [
       },
     ],
     managers: [{ uid: "IPn82rZikyLbA21pnImue4KdZYn2", role: "Owner" }],
-    createdDate: { $date: "2022-01-01T22:53:26.629Z" },
+    createdDate: "2022-01-01T22:53:26.629Z",
     displayName: "TrulyEviLL",
     urlSafeName: "TrulyEviLL",
     __v: 0,
@@ -18929,7 +18929,7 @@ const raw = [
       { uid: "wdSOqSlPdgemYLOqU8hf0bMJzr83", role: "Administrator" },
       { uid: "R7dWCI8Ln0WVald6PGaQjFbcTql2", role: "Administrator" },
     ],
-    createdDate: { $date: "2021-12-21T01:24:24.229Z" },
+    createdDate: "2021-12-21T01:24:24.229Z",
     displayName: "Shotzzy",
     urlSafeName: "Shotzzy",
     __v: 0,
@@ -20168,7 +20168,7 @@ const raw = [
       { uid: "z11zrD6ghvQG5V6mpXRY4VqywzS2", role: "Owner" },
       { uid: "bIiCdjzjHydpMpNVdOcZTA8CMHy1", role: "Editor" },
     ],
-    createdDate: { $date: "2022-01-11T03:59:18.947Z" },
+    createdDate: "2022-01-11T03:59:18.947Z",
     displayName: "Kartalib",
     urlSafeName: "Kartalib",
     __v: 0,
@@ -20540,7 +20540,7 @@ const raw = [
       },
     ],
     managers: [{ uid: "dWdIe0Rj8wR2rfTMaB8r8oUmsIB3", role: "Owner" }],
-    createdDate: { $date: "2021-10-03T09:31:07.642Z" },
+    createdDate: "2021-10-03T09:31:07.642Z",
     displayName: "SEBASBERON",
     urlSafeName: "SEBASBERON",
     __v: 0,
@@ -21371,7 +21371,7 @@ const raw = [
         userData: { customTitle: "Fav Guns ", blueprint: "", featured: true },
       },
     ],
-    createdDate: { $date: "2021-07-11T02:15:18.680Z" },
+    createdDate: "2021-07-11T02:15:18.680Z",
     displayName: "TeePee",
     urlSafeName: "TeePee",
     authId: "ulqkxaNOsuhrOZaQONAKBmMCpKQ2",
@@ -21391,7 +21391,7 @@ const raw = [
     viewCount: 919,
   },
   {
-    _id: { $oid: "61d23447b7b6a90008d1190a" },
+    _id: "61d23447b7b6a90008d1190a",
     meta: {
       brandColors: { primary: "" },
       premiumType: "",
@@ -21400,10 +21400,10 @@ const raw = [
       links: {},
     },
     viewCount: 0,
-    games: [{ id: { $oid: "60da97598821ed46dc9c008c" } }],
+    games: [{ id: "60da97598821ed46dc9c008c" }],
     kits: [
       {
-        _id: { $oid: "61d234554d87bf0008fef81d" },
+        _id: "61d234554d87bf0008fef81d",
         baseId: "60df67a3bf84855a680f8988",
         options: [],
         userData: {
@@ -21416,7 +21416,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d234594d87bf0008fef821" },
+        _id: "61d234594d87bf0008fef821",
         baseId: "6160a8b54af6fb76f45409a0",
         options: [],
         userData: {
@@ -21429,7 +21429,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2345d4d87bf0008fef825" },
+        _id: "61d2345d4d87bf0008fef825",
         baseId: "60df671dbf84855a680f8982",
         options: [],
         userData: {
@@ -21442,7 +21442,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d234614d87bf0008fef829" },
+        _id: "61d234614d87bf0008fef829",
         baseId: "60df665ebf84855a680f897a",
         options: [],
         userData: {
@@ -21455,7 +21455,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d234644d87bf0008fef82d" },
+        _id: "61d234644d87bf0008fef82d",
         baseId: "60df6779bf84855a680f8986",
         options: [],
         userData: {
@@ -21468,7 +21468,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d234684d87bf0008fef831" },
+        _id: "61d234684d87bf0008fef831",
         baseId: "61b1184acbb40a531ccf0796",
         options: [],
         userData: {
@@ -21481,7 +21481,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2346c4d87bf0008fef835" },
+        _id: "61d2346c4d87bf0008fef835",
         baseId: "61b116c4cbb40a531ccf078c",
         options: [],
         userData: {
@@ -21494,7 +21494,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d234704d87bf0008fef839" },
+        _id: "61d234704d87bf0008fef839",
         baseId: "60df4fabbf84855a680f890a",
         options: [],
         userData: {
@@ -21507,7 +21507,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d234744d87bf0008fef83d" },
+        _id: "61d234744d87bf0008fef83d",
         baseId: "60ded1bbbf84855a680f8881",
         options: [],
         userData: {
@@ -21520,7 +21520,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d234784d87bf0008fef841" },
+        _id: "61d234784d87bf0008fef841",
         baseId: "60ded332bf84855a680f888d",
         options: [],
         userData: {
@@ -21533,7 +21533,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2347f4d87bf0008fef845" },
+        _id: "61d2347f4d87bf0008fef845",
         baseId: "60df4977bf84855a680f88ea",
         options: [],
         userData: {
@@ -21546,7 +21546,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d234844d87bf0008fef849" },
+        _id: "61d234844d87bf0008fef849",
         baseId: "60df6610bf84855a680f8978",
         options: [],
         userData: {
@@ -21559,7 +21559,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d234884d87bf0008fef84d" },
+        _id: "61d234884d87bf0008fef84d",
         baseId: "60ded4b0bf84855a680f8899",
         options: [],
         userData: {
@@ -21572,7 +21572,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2348d4d87bf0008fef851" },
+        _id: "61d2348d4d87bf0008fef851",
         baseId: "60ded5e6bf84855a680f88a5",
         options: [],
         userData: {
@@ -21585,7 +21585,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d234914d87bf0008fef855" },
+        _id: "61d234914d87bf0008fef855",
         baseId: "61b111abcbb40a531ccf0762",
         options: [],
         userData: {
@@ -21598,7 +21598,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2349b4d87bf0008fef859" },
+        _id: "61d2349b4d87bf0008fef859",
         baseId: "60df5d45bf84855a680f892e",
         options: [],
         userData: {
@@ -21611,7 +21611,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d234a14d87bf0008fef85d" },
+        _id: "61d234a14d87bf0008fef85d",
         baseId: "60df4a4fbf84855a680f88f2",
         options: [],
         userData: {
@@ -21624,7 +21624,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d234a54d87bf0008fef861" },
+        _id: "61d234a54d87bf0008fef861",
         baseId: "61b11105cbb40a531ccf075c",
         options: [],
         userData: {
@@ -21637,7 +21637,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d234ab4d87bf0008fef865" },
+        _id: "61d234ab4d87bf0008fef865",
         baseId: "60df616fbf84855a680f8957",
         options: [],
         userData: {
@@ -21650,7 +21650,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d234b54d87bf0008fef869" },
+        _id: "61d234b54d87bf0008fef869",
         baseId: "61b1116ecbb40a531ccf0760",
         options: [],
         userData: {
@@ -21663,7 +21663,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d234bf4d87bf0008fef86d" },
+        _id: "61d234bf4d87bf0008fef86d",
         baseId: "61b115adcbb40a531ccf0782",
         options: [],
         userData: {
@@ -21676,7 +21676,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d234c74d87bf0008fef871" },
+        _id: "61d234c74d87bf0008fef871",
         baseId: "60df5b0ebf84855a680f891a",
         options: [],
         userData: {
@@ -21689,7 +21689,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d234cc4d87bf0008fef875" },
+        _id: "61d234cc4d87bf0008fef875",
         baseId: "60df49abbf84855a680f88ec",
         options: [],
         userData: {
@@ -21702,7 +21702,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d234d44d87bf0008fef879" },
+        _id: "61d234d44d87bf0008fef879",
         baseId: "60ded078bf84855a680f885f",
         options: [],
         userData: {
@@ -21715,7 +21715,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d234d84d87bf0008fef87d" },
+        _id: "61d234d84d87bf0008fef87d",
         baseId: "60df5ce4bf84855a680f892a",
         options: [],
         userData: {
@@ -21728,7 +21728,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d234fe4d87bf0008fef881" },
+        _id: "61d234fe4d87bf0008fef881",
         baseId: "61b114f0cbb40a531ccf077a",
         options: [],
         userData: {
@@ -21741,7 +21741,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d235034d87bf0008fef885" },
+        _id: "61d235034d87bf0008fef885",
         baseId: "61b112a7cbb40a531ccf0768",
         options: [],
         userData: {
@@ -21754,7 +21754,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d235094d87bf0008fef889" },
+        _id: "61d235094d87bf0008fef889",
         baseId: "60ded425bf84855a680f8893",
         options: [],
         userData: {
@@ -21767,7 +21767,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2350e4d87bf0008fef88d" },
+        _id: "61d2350e4d87bf0008fef88d",
         baseId: "614e12c655d8b2253cc0554f",
         options: [],
         userData: {
@@ -21780,7 +21780,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d235164d87bf0008fef891" },
+        _id: "61d235164d87bf0008fef891",
         baseId: "6109bb97ec0dea4e34958025",
         options: [],
         userData: {
@@ -21793,7 +21793,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2351c4d87bf0008fef895" },
+        _id: "61d2351c4d87bf0008fef895",
         baseId: "60df6694bf84855a680f897c",
         options: [],
         userData: {
@@ -21806,7 +21806,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d235604d87bf0008fef89a" },
+        _id: "61d235604d87bf0008fef89a",
         baseId: "60df5cafbf84855a680f8928",
         options: [],
         userData: {
@@ -21819,7 +21819,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d235644d87bf0008fef89e" },
+        _id: "61d235644d87bf0008fef89e",
         baseId: "61b1151acbb40a531ccf077c",
         options: [],
         userData: {
@@ -21832,7 +21832,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d235694d87bf0008fef8a2" },
+        _id: "61d235694d87bf0008fef8a2",
         baseId: "61b11584cbb40a531ccf0780",
         options: [],
         userData: {
@@ -21845,7 +21845,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2356e4d87bf0008fef8a6" },
+        _id: "61d2356e4d87bf0008fef8a6",
         baseId: "60df6206bf84855a680f895d",
         options: [],
         userData: {
@@ -21858,7 +21858,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d235744d87bf0008fef8aa" },
+        _id: "61d235744d87bf0008fef8aa",
         baseId: "60df5f71bf84855a680f8945",
         options: [],
         userData: {
@@ -21871,7 +21871,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d235ac4d87bf0008fef8ae" },
+        _id: "61d235ac4d87bf0008fef8ae",
         baseId: "61b1148acbb40a531ccf0776",
         options: [],
         userData: {
@@ -21884,7 +21884,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d235b34d87bf0008fef8b2" },
+        _id: "61d235b34d87bf0008fef8b2",
         baseId: "61161f48147d3f4f203722f2",
         options: [],
         userData: {
@@ -21897,7 +21897,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d235b94d87bf0008fef8b6" },
+        _id: "61d235b94d87bf0008fef8b6",
         baseId: "60ded4dcbf84855a680f889b",
         options: [],
         userData: {
@@ -21910,7 +21910,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d235c24d87bf0008fef8ba" },
+        _id: "61d235c24d87bf0008fef8ba",
         baseId: "60ded254bf84855a680f8885",
         options: [],
         userData: {
@@ -21923,7 +21923,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d235c64d87bf0008fef8be" },
+        _id: "61d235c64d87bf0008fef8be",
         baseId: "60df4a92bf84855a680f88f4",
         options: [],
         userData: {
@@ -21936,7 +21936,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d235ce4d87bf0008fef8c2" },
+        _id: "61d235ce4d87bf0008fef8c2",
         baseId: "60ded125bf84855a680f887f",
         options: [],
         userData: {
@@ -21949,7 +21949,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d235d44d87bf0008fef8c6" },
+        _id: "61d235d44d87bf0008fef8c6",
         baseId: "60df5c3ebf84855a680f8926",
         options: [],
         userData: {
@@ -21962,7 +21962,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d235d94d87bf0008fef8ca" },
+        _id: "61d235d94d87bf0008fef8ca",
         baseId: "60ded51abf84855a680f889d",
         options: [],
         userData: {
@@ -21975,7 +21975,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d235de4d87bf0008fef8ce" },
+        _id: "61d235de4d87bf0008fef8ce",
         baseId: "60ded5b6bf84855a680f88a3",
         options: [],
         userData: {
@@ -21988,7 +21988,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d235e34d87bf0008fef8d2" },
+        _id: "61d235e34d87bf0008fef8d2",
         baseId: "61b11684cbb40a531ccf078a",
         options: [],
         userData: {
@@ -22001,7 +22001,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d235ec4d87bf0008fef8d6" },
+        _id: "61d235ec4d87bf0008fef8d6",
         baseId: "60df4eddbf84855a680f8902",
         options: [],
         userData: {
@@ -22014,7 +22014,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d235f34d87bf0008fef8da" },
+        _id: "61d235f34d87bf0008fef8da",
         baseId: "61b1265ce413884abcc513bc",
         options: [],
         userData: {
@@ -22027,7 +22027,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d235f94d87bf0008fef8de" },
+        _id: "61d235f94d87bf0008fef8de",
         baseId: "61b114c2cbb40a531ccf0778",
         options: [],
         userData: {
@@ -22040,7 +22040,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d236004d87bf0008fef8e2" },
+        _id: "61d236004d87bf0008fef8e2",
         baseId: "60ded3d0bf84855a680f8891",
         options: [],
         userData: {
@@ -22053,7 +22053,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d236064d87bf0008fef8e6" },
+        _id: "61d236064d87bf0008fef8e6",
         baseId: "61609fec4af6fb76f45408df",
         options: [],
         userData: {
@@ -22066,7 +22066,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2360e4d87bf0008fef8ea" },
+        _id: "61d2360e4d87bf0008fef8ea",
         baseId: "60ded203bf84855a680f8883",
         options: [],
         userData: {
@@ -22079,7 +22079,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d236144d87bf0008fef8ee" },
+        _id: "61d236144d87bf0008fef8ee",
         baseId: "60df4f10bf84855a680f8904",
         options: [],
         userData: {
@@ -22092,7 +22092,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2361d4d87bf0008fef8f2" },
+        _id: "61d2361d4d87bf0008fef8f2",
         baseId: "60df619dbf84855a680f8959",
         options: [],
         userData: {
@@ -22105,7 +22105,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d236234d87bf0008fef8f6" },
+        _id: "61d236234d87bf0008fef8f6",
         baseId: "60df5b3dbf84855a680f891c",
         options: [],
         userData: {
@@ -22118,7 +22118,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2362a4d87bf0008fef8fa" },
+        _id: "61d2362a4d87bf0008fef8fa",
         baseId: "60df4bcfbf84855a680f88fe",
         options: [],
         userData: {
@@ -22131,7 +22131,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d236354d87bf0008fef8fe" },
+        _id: "61d236354d87bf0008fef8fe",
         baseId: "61b11130cbb40a531ccf075e",
         options: [],
         userData: {
@@ -22144,7 +22144,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d236414d87bf0008fef902" },
+        _id: "61d236414d87bf0008fef902",
         baseId: "60df5053bf84855a680f8910",
         options: [],
         userData: {
@@ -22157,7 +22157,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2364a4d87bf0008fef906" },
+        _id: "61d2364a4d87bf0008fef906",
         baseId: "60df5fcbbf84855a680f8949",
         options: [],
         userData: {
@@ -22170,7 +22170,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2364f4d87bf0008fef90a" },
+        _id: "61d2364f4d87bf0008fef90a",
         baseId: "61b11712cbb40a531ccf078e",
         options: [],
         userData: {
@@ -22183,7 +22183,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d236554d87bf0008fef90e" },
+        _id: "61d236554d87bf0008fef90e",
         baseId: "60ded45bbf84855a680f8895",
         options: [],
         userData: {
@@ -22196,7 +22196,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2365a4d87bf0008fef912" },
+        _id: "61d2365a4d87bf0008fef912",
         baseId: "61b1189dcbb40a531ccf079a",
         options: [],
         userData: {
@@ -22209,7 +22209,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d236624d87bf0008fef916" },
+        _id: "61d236624d87bf0008fef916",
         baseId: "60ded2cdbf84855a680f8889",
         options: [],
         userData: {
@@ -22222,7 +22222,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2366a4d87bf0008fef91a" },
+        _id: "61d2366a4d87bf0008fef91a",
         baseId: "60df4934bf84855a680f88e8",
         options: [],
         userData: {
@@ -22235,7 +22235,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d236b9b7b6a90008d11912" },
+        _id: "61d236b9b7b6a90008d11912",
         baseId: "6170e3a69655ec26143f1060",
         options: [],
         userData: {
@@ -22248,7 +22248,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d236c2b7b6a90008d11917" },
+        _id: "61d236c2b7b6a90008d11917",
         baseId: "60df48b8bf84855a680f88e4",
         options: [],
         userData: {
@@ -22261,7 +22261,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d236cbb7b6a90008d1191b" },
+        _id: "61d236cbb7b6a90008d1191b",
         baseId: "60df60c4bf84855a680f8951",
         options: [],
         userData: {
@@ -22274,7 +22274,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d236d3b7b6a90008d1191f" },
+        _id: "61d236d3b7b6a90008d1191f",
         baseId: "61b11620cbb40a531ccf0786",
         options: [],
         userData: {
@@ -22287,7 +22287,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d236d9b7b6a90008d11923" },
+        _id: "61d236d9b7b6a90008d11923",
         baseId: "60ded488bf84855a680f8897",
         options: [],
         userData: {
@@ -22300,7 +22300,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d236dfb7b6a90008d11927" },
+        _id: "61d236dfb7b6a90008d11927",
         baseId: "60df5d0bbf84855a680f892c",
         options: [],
         userData: {
@@ -22313,7 +22313,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d236e5b7b6a90008d1192b" },
+        _id: "61d236e5b7b6a90008d1192b",
         baseId: "60df674bbf84855a680f8984",
         options: [],
         userData: {
@@ -22326,7 +22326,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d236ebb7b6a90008d1192f" },
+        _id: "61d236ebb7b6a90008d1192f",
         baseId: "61b11300cbb40a531ccf076a",
         options: [],
         userData: {
@@ -22339,7 +22339,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d236f6b7b6a90008d11933" },
+        _id: "61d236f6b7b6a90008d11933",
         baseId: "60ded54fbf84855a680f889f",
         options: [],
         userData: {
@@ -22352,7 +22352,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d236fbb7b6a90008d11937" },
+        _id: "61d236fbb7b6a90008d11937",
         baseId: "60df5a9dbf84855a680f8916",
         options: [],
         userData: {
@@ -22365,7 +22365,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d23715b7b6a90008d1193b" },
+        _id: "61d23715b7b6a90008d1193b",
         baseId: "60df610bbf84855a680f8953",
         options: [],
         userData: {
@@ -22378,7 +22378,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2371bb7b6a90008d1193f" },
+        _id: "61d2371bb7b6a90008d1193f",
         baseId: "60df5ba4bf84855a680f8920",
         options: [],
         userData: {
@@ -22391,7 +22391,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d23725b7b6a90008d11943" },
+        _id: "61d23725b7b6a90008d11943",
         baseId: "60df4822bf84855a680f88e0",
         options: [],
         userData: {
@@ -22404,7 +22404,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2372bb7b6a90008d11947" },
+        _id: "61d2372bb7b6a90008d11947",
         baseId: "61b1179bcbb40a531ccf0792",
         options: [],
         userData: {
@@ -22417,7 +22417,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d23731b7b6a90008d1194b" },
+        _id: "61d23731b7b6a90008d1194b",
         baseId: "60df65dabf84855a680f8976",
         options: [],
         userData: {
@@ -22430,7 +22430,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d23736b7b6a90008d1194f" },
+        _id: "61d23736b7b6a90008d1194f",
         baseId: "611e8e8bbe7e9b1954658e27",
         options: [],
         userData: {
@@ -22443,7 +22443,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2373db7b6a90008d11953" },
+        _id: "61d2373db7b6a90008d11953",
         baseId: "60df5a67bf84855a680f8914",
         options: [],
         userData: {
@@ -22456,7 +22456,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d23749b7b6a90008d11957" },
+        _id: "61d23749b7b6a90008d11957",
         baseId: "60df5b77bf84855a680f891e",
         options: [],
         userData: {
@@ -22469,7 +22469,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d23750b7b6a90008d1195b" },
+        _id: "61d23750b7b6a90008d1195b",
         baseId: "61b11559cbb40a531ccf077e",
         options: [],
         userData: {
@@ -22482,7 +22482,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2375ab7b6a90008d1195f" },
+        _id: "61d2375ab7b6a90008d1195f",
         baseId: "60df486abf84855a680f88e2",
         options: [],
         userData: {
@@ -22495,7 +22495,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d23762b7b6a90008d11963" },
+        _id: "61d23762b7b6a90008d11963",
         baseId: "60df5fa3bf84855a680f8947",
         options: [],
         userData: {
@@ -22508,7 +22508,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2376cb7b6a90008d11967" },
+        _id: "61d2376cb7b6a90008d11967",
         baseId: "60df4feebf84855a680f890c",
         options: [],
         userData: {
@@ -22521,7 +22521,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d23772b7b6a90008d1196b" },
+        _id: "61d23772b7b6a90008d1196b",
         baseId: "61b11376cbb40a531ccf076e",
         options: [],
         userData: {
@@ -22534,7 +22534,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2377ab7b6a90008d1196f" },
+        _id: "61d2377ab7b6a90008d1196f",
         baseId: "60df48fbbf84855a680f88e6",
         options: [],
         userData: {
@@ -22547,7 +22547,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d23780b7b6a90008d11973" },
+        _id: "61d23780b7b6a90008d11973",
         baseId: "60df4b35bf84855a680f88fa",
         options: [],
         userData: {
@@ -22560,7 +22560,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d23785b7b6a90008d11977" },
+        _id: "61d23785b7b6a90008d11977",
         baseId: "60df4a12bf84855a680f88f0",
         options: [],
         userData: {
@@ -22573,7 +22573,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2379cb7b6a90008d1197b" },
+        _id: "61d2379cb7b6a90008d1197b",
         baseId: "61b111e4cbb40a531ccf0764",
         options: [],
         userData: {
@@ -22586,7 +22586,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d237a4b7b6a90008d1197f" },
+        _id: "61d237a4b7b6a90008d1197f",
         baseId: "60ded588bf84855a680f88a1",
         options: [],
         userData: {
@@ -22599,7 +22599,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d237beb7b6a90008d11983" },
+        _id: "61d237beb7b6a90008d11983",
         baseId: "60df4f48bf84855a680f8906",
         options: [],
         userData: {
@@ -22612,7 +22612,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d237c7b7b6a90008d11987" },
+        _id: "61d237c7b7b6a90008d11987",
         baseId: "60f0735f1d00452cd0554157",
         options: [],
         userData: {
@@ -22625,7 +22625,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d237d0b7b6a90008d1198b" },
+        _id: "61d237d0b7b6a90008d1198b",
         baseId: "61b1142ecbb40a531ccf0772",
         options: [],
         userData: {
@@ -22638,7 +22638,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d237ddb7b6a90008d1198f" },
+        _id: "61d237ddb7b6a90008d1198f",
         baseId: "60df4ac6bf84855a680f88f6",
         options: [],
         userData: {
@@ -22651,7 +22651,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d237e5b7b6a90008d11993" },
+        _id: "61d237e5b7b6a90008d11993",
         baseId: "60df6050bf84855a680f894d",
         options: [],
         userData: {
@@ -22664,7 +22664,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d237edb7b6a90008d11997" },
+        _id: "61d237edb7b6a90008d11997",
         baseId: "60df5bd4bf84855a680f8922",
         options: [],
         userData: {
@@ -22677,7 +22677,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d237f4b7b6a90008d1199b" },
+        _id: "61d237f4b7b6a90008d1199b",
         baseId: "60df4b05bf84855a680f88f8",
         options: [],
         userData: {
@@ -22690,7 +22690,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d237feb7b6a90008d1199f" },
+        _id: "61d237feb7b6a90008d1199f",
         baseId: "60df47dcbf84855a680f88de",
         options: [],
         userData: {
@@ -22703,7 +22703,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d23804b7b6a90008d119a3" },
+        _id: "61d23804b7b6a90008d119a3",
         baseId: "61b11405cbb40a531ccf0770",
         options: [],
         userData: {
@@ -22716,7 +22716,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d23812b7b6a90008d119a7" },
+        _id: "61d23812b7b6a90008d119a7",
         baseId: "60ded290bf84855a680f8887",
         options: [],
         userData: {
@@ -22729,7 +22729,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2381cb7b6a90008d119ab" },
+        _id: "61d2381cb7b6a90008d119ab",
         baseId: "614e13b355d8b2253cc05551",
         options: [],
         userData: {
@@ -22742,7 +22742,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d23823b7b6a90008d119af" },
+        _id: "61d23823b7b6a90008d119af",
         baseId: "60df5025bf84855a680f890e",
         options: [],
         userData: {
@@ -22755,7 +22755,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2384757c76b0009fd6138" },
+        _id: "61d2384757c76b0009fd6138",
         baseId: "61252d6022975356085a1a07",
         options: [],
         userData: {
@@ -22768,7 +22768,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2385357c76b0009fd613f" },
+        _id: "61d2385357c76b0009fd613f",
         baseId: "60ded377bf84855a680f888f",
         options: [],
         userData: {
@@ -22781,7 +22781,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2385e57c76b0009fd6143" },
+        _id: "61d2385e57c76b0009fd6143",
         baseId: "61b117c0cbb40a531ccf0794",
         options: [],
         userData: {
@@ -22794,7 +22794,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2386657c76b0009fd6148" },
+        _id: "61d2386657c76b0009fd6148",
         baseId: "60df66efbf84855a680f8980",
         options: [],
         userData: {
@@ -22807,7 +22807,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2386d57c76b0009fd614c" },
+        _id: "61d2386d57c76b0009fd614c",
         baseId: "60df5accbf84855a680f8918",
         options: [],
         userData: {
@@ -22820,7 +22820,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2387757c76b0009fd6151" },
+        _id: "61d2387757c76b0009fd6151",
         baseId: "60df61dabf84855a680f895b",
         options: [],
         userData: {
@@ -22833,7 +22833,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2387f57c76b0009fd6155" },
+        _id: "61d2387f57c76b0009fd6155",
         baseId: "60df5c07bf84855a680f8924",
         options: [],
         userData: {
@@ -22846,7 +22846,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2388957c76b0009fd6159" },
+        _id: "61d2388957c76b0009fd6159",
         baseId: "60df5f46bf84855a680f8943",
         options: [],
         userData: {
@@ -22859,7 +22859,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2389157c76b0009fd615d" },
+        _id: "61d2389157c76b0009fd615d",
         baseId: "60df6017bf84855a680f894b",
         options: [],
         userData: {
@@ -22872,7 +22872,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2389857c76b0009fd6161" },
+        _id: "61d2389857c76b0009fd6161",
         baseId: "61b11331cbb40a531ccf076c",
         options: [],
         userData: {
@@ -22885,7 +22885,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2389f57c76b0009fd6165" },
+        _id: "61d2389f57c76b0009fd6165",
         baseId: "61b1104dcbb40a531ccf075a",
         options: [],
         userData: {
@@ -22898,7 +22898,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d238a757c76b0009fd6169" },
+        _id: "61d238a757c76b0009fd6169",
         baseId: "60df5a32bf84855a680f8912",
         options: [],
         userData: {
@@ -22911,7 +22911,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d238b457c76b0009fd616d" },
+        _id: "61d238b457c76b0009fd616d",
         baseId: "60df4ea8bf84855a680f8900",
         options: [],
         userData: {
@@ -22924,7 +22924,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d238c057c76b0009fd6171" },
+        _id: "61d238c057c76b0009fd6171",
         baseId: "60df49e3bf84855a680f88ee",
         options: [],
         userData: {
@@ -22937,7 +22937,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d238c957c76b0009fd6175" },
+        _id: "61d238c957c76b0009fd6175",
         baseId: "61b11659cbb40a531ccf0788",
         options: [],
         userData: {
@@ -22950,7 +22950,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d238d357c76b0009fd6179" },
+        _id: "61d238d357c76b0009fd6179",
         baseId: "60df608ebf84855a680f894f",
         options: [],
         userData: {
@@ -22963,7 +22963,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d238db57c76b0009fd617d" },
+        _id: "61d238db57c76b0009fd617d",
         baseId: "60df67d2bf84855a680f898a",
         options: [],
         userData: {
@@ -22976,7 +22976,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d238e257c76b0009fd6181" },
+        _id: "61d238e257c76b0009fd6181",
         baseId: "611620ae147d3f4f203722f6",
         options: [],
         userData: {
@@ -22989,7 +22989,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d238e957c76b0009fd6185" },
+        _id: "61d238e957c76b0009fd6185",
         baseId: "61b1187acbb40a531ccf0798",
         options: [],
         userData: {
@@ -23002,7 +23002,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d238ef57c76b0009fd6189" },
+        _id: "61d238ef57c76b0009fd6189",
         baseId: "61b1145ecbb40a531ccf0774",
         options: [],
         userData: {
@@ -23015,7 +23015,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d238f657c76b0009fd618d" },
+        _id: "61d238f657c76b0009fd618d",
         baseId: "61b115dbcbb40a531ccf0784",
         options: [],
         userData: {
@@ -23028,7 +23028,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d238fd57c76b0009fd6191" },
+        _id: "61d238fd57c76b0009fd6191",
         baseId: "60df5d75bf84855a680f8930",
         options: [],
         userData: {
@@ -23041,7 +23041,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2390357c76b0009fd6195" },
+        _id: "61d2390357c76b0009fd6195",
         baseId: "61b11742cbb40a531ccf0790",
         options: [],
         userData: {
@@ -23054,7 +23054,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2390a57c76b0009fd6199" },
+        _id: "61d2390a57c76b0009fd6199",
         baseId: "60df4b65bf84855a680f88fc",
         options: [],
         userData: {
@@ -23067,7 +23067,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2390f57c76b0009fd619d" },
+        _id: "61d2390f57c76b0009fd619d",
         baseId: "60df4f75bf84855a680f8908",
         options: [],
         userData: {
@@ -23080,7 +23080,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d23916742bd60008fcefe4" },
+        _id: "61d23916742bd60008fcefe4",
         baseId: "61b1126ecbb40a531ccf0766",
         options: [],
         userData: {
@@ -23093,7 +23093,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d2391d742bd60008fcefe9" },
+        _id: "61d2391d742bd60008fcefe9",
         baseId: "60df66bfbf84855a680f897e",
         options: [],
         userData: {
@@ -23106,7 +23106,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d23921742bd60008fcefed" },
+        _id: "61d23921742bd60008fcefed",
         baseId: "60ded302bf84855a680f888b",
         options: [],
         userData: {
@@ -23119,7 +23119,7 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61d23926742bd60008fceff1" },
+        _id: "61d23926742bd60008fceff1",
         baseId: "60df613fbf84855a680f8955",
         options: [],
         userData: {
@@ -23133,14 +23133,14 @@ const raw = [
       },
     ],
     managers: [{ uid: "S3FIWI9HqVdLcjIQzEniHNaAl123", role: "Owner" }],
-    createdDate: { $date: "2022-01-02T23:24:55.951Z" },
+    createdDate: "2022-01-02T23:24:55.951Z",
     displayName: "ALLKITS",
     urlSafeName: "ALLKITS",
     __v: 0,
     previousUpdater: "Fogthecatman",
   },
   {
-    _id: { $oid: "61f05526e9ce6d00123e7cd7" },
+    _id: "61f05526e9ce6d00123e7cd7",
     meta: {
       brandColors: { primary: "" },
       hasCoverPhoto: false,
@@ -23157,13 +23157,13 @@ const raw = [
     games: [],
     kits: [],
     managers: [{ uid: "w5lMLvVLL3uJNRuoqSWvYjNIJ1GF", role: "Owner" }],
-    createdDate: { $date: "2022-01-25T19:53:10.506Z" },
+    createdDate: "2022-01-25T19:53:10.506Z",
     displayName: "brandnewchannel",
     urlSafeName: "brandnewchannel",
     __v: 0,
   },
   {
-    _id: { $oid: "61f05587e9ce6d00123e7ce7" },
+    _id: "61f05587e9ce6d00123e7ce7",
     meta: {
       brandColors: { primary: "" },
       hasCoverPhoto: false,
@@ -23177,21 +23177,21 @@ const raw = [
       links: {},
     },
     viewCount: 0,
-    games: [{ id: { $oid: "60da97598821ed46dc9c008c" } }],
+    games: [{ id: "60da97598821ed46dc9c008c" }],
     kits: [
       {
-        _id: { $oid: "61f0559ee9ce6d00123e7cf0" },
+        _id: "61f0559ee9ce6d00123e7cf0",
         baseId: "61b1184acbb40a531ccf0796",
         options: [
-          { $oid: "61b1042fcbb40a531ccf051f" },
-          { $oid: "61b10562cbb40a531ccf0573" },
-          { $oid: "61b2dfc876830d4150679258" },
-          { $oid: "61b103adcbb40a531ccf04f9" },
-          { $oid: "61b10ccecbb40a531ccf06e2" },
-          { $oid: "61b10df1cbb40a531ccf0728" },
-          { $oid: "61b10d8bcbb40a531ccf0702" },
-          { $oid: "61b10bbfcbb40a531ccf067e" },
-          { $oid: "61b10e42cbb40a531ccf074e" },
+          "61b1042fcbb40a531ccf051f",
+          "61b10562cbb40a531ccf0573",
+          "61b2dfc876830d4150679258",
+          "61b103adcbb40a531ccf04f9",
+          "61b10ccecbb40a531ccf06e2",
+          "61b10df1cbb40a531ccf0728",
+          "61b10d8bcbb40a531ccf0702",
+          "61b10bbfcbb40a531ccf067e",
+          "61b10e42cbb40a531ccf074e",
         ],
         userData: {
           customTitle: "",
@@ -23203,14 +23203,14 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61f055b1e9ce6d00123e7cf4" },
+        _id: "61f055b1e9ce6d00123e7cf4",
         baseId: "60df5fcbbf84855a680f8949",
         options: [
-          { $oid: "60df7203bf84855a680f8a49" },
-          { $oid: "60e3defd8a26dd1acccc5e41" },
-          { $oid: "60df7280bf84855a680f8a55" },
-          { $oid: "60df732abf84855a680f8a73" },
-          { $oid: "60e3df288a26dd1acccc5e49" },
+          "60df7203bf84855a680f8a49",
+          "60e3defd8a26dd1acccc5e41",
+          "60df7280bf84855a680f8a55",
+          "60df732abf84855a680f8a73",
+          "60e3df288a26dd1acccc5e49",
         ],
         userData: {
           customTitle: "",
@@ -23222,12 +23222,12 @@ const raw = [
         },
       },
       {
-        _id: { $oid: "61f055b9e9ce6d00123e7cf8" },
+        _id: "61f055b9e9ce6d00123e7cf8",
         baseId: "60df5ce4bf84855a680f892a",
         options: [
-          { $oid: "60e3ceee8a26dd1acccc5bdf" },
-          { $oid: "60e1d9babf84855a680f8efb" },
-          { $oid: "60e4b092e580dd3004e5db3c" },
+          "60e3ceee8a26dd1acccc5bdf",
+          "60e1d9babf84855a680f8efb",
+          "60e4b092e580dd3004e5db3c",
         ],
         userData: {
           customTitle: "",
@@ -23244,7 +23244,7 @@ const raw = [
       { uid: "VeoTKmMs72amUYzPRovBGJDJnGn1", role: "Administrator" },
       { uid: "AnRFlNNbQ4d3K6nfEIRGBJm5nER3", role: "Editor" },
     ],
-    createdDate: { $date: "2022-01-25T19:54:47.173Z" },
+    createdDate: "2022-01-25T19:54:47.173Z",
     displayName: "anthonyshew",
     urlSafeName: "anthonyshew",
     __v: 0,
@@ -23252,18 +23252,16 @@ const raw = [
   },
 ];
 
-module.exports = {
-  players: raw.map((player) => ({
-    ...player,
-    games: player.games.map((game) => ({
-      ...game,
-      id: mongoose.Types.ObjectId(game.id),
-    })),
-    createdDate: Date(player.createdDate),
-    kits: player.kits.map((kit) => ({
-      ...kit,
-      _id: mongoose.Types.ObjectId(kit._id),
-      options: kit.options.map((opt) => mongoose.Types.ObjectId(opt)),
-    })),
+export default raw.map((player) => ({
+  ...player,
+  games: player.games.map((game) => ({
+    ...game,
+    id: new Types.ObjectId(game.id),
   })),
-};
+  createdDate: new Date(player.createdDate),
+  kits: player.kits.map((kit) => ({
+    ...kit,
+    _id: new Types.ObjectId(kit._id),
+    options: kit.options.map((opt) => new Types.ObjectId(opt)),
+  })),
+}));

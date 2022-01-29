@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const raw = [
   {
@@ -34047,17 +34047,15 @@ const raw = [
   },
 ];
 
-module.exports = {
-  kitBases: raw.map((base) => ({
-    ...base,
-    _id: mongoose.Types.ObjectId(base._id),
-    gameId: mongoose.Types.ObjectId(base.gameId),
-    gameInfo: {
-      ...base.gameInfo,
-      availableOptions: base.gameInfo.availableOptions.map((opt) => ({
-        ...opt,
-        optionId: mongoose.Types.ObjectId(opt.optionId),
-      })),
-    },
-  })),
-};
+export default raw.map((base) => ({
+  ...base,
+  _id: new mongoose.Types.ObjectId(base._id),
+  gameId: new mongoose.Types.ObjectId(base.gameId),
+  gameInfo: {
+    ...base.gameInfo,
+    availableOptions: base.gameInfo.availableOptions.map((opt) => ({
+      ...opt,
+      optionId: new mongoose.Types.ObjectId(opt.optionId),
+    })),
+  },
+}));

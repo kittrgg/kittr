@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const raw = [
   {
@@ -223,9 +223,7 @@ const raw = [
   },
 ];
 
-module.exports = {
-  blogPosts: raw.map((blogPost) => ({
-    ...blogPost,
-    _id: mongoose.Types.ObjectId(blogPost._id),
-  })),
-};
+export default raw.map((blogPost) => ({
+  ...blogPost,
+  _id: new mongoose.Types.ObjectId(blogPost._id),
+}));
