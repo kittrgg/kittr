@@ -8,12 +8,13 @@
     "dev:with-logs": "docker-compose -f docker-compose.dev.yml up",
     "dev:build": "docker-compose -f docker-compose.dev.yml up --build",
     "dev:down": "docker-compose -f docker-compose.dev.yml down",
-    "dev:seed": "set DB_CONNECTION_STRING=mongodb://root:example@localhost:27017/myFirstDatabase && ts-node ./seeds/mongo/db-seed.ts",
+    "dev:seed": "cross-env DB_CONNECTION_STRING=mongodb://root:example@localhost:27017/myFirstDatabase ts-node ./seeds/mongo/db-seed.ts",
     "test:local": "docker-compose -f docker-compose.test.yml up --build",
     "cypress:open": "cypress open --config-file ./cypress/cypress.local.json",
     "cypress:run": "cypress run --config-file ./cypress/cypress.local.json"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "cypress": "^9.3.1",
     "mongoose": "^6.1.8",
     "ts-node": "^10.4.0",
