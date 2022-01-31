@@ -1,5 +1,4 @@
 import colors from "@Colors"
-import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
 import { header1, header2 } from "@Styles/typography"
 import styled from "styled-components"
 
