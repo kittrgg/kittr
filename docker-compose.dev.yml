@@ -53,7 +53,7 @@ services:
       - ./api/src:/home/node/app/src
     environment:
       - DB_CONNECTION_STRING=mongodb://root:example@mongo:27017/myFirstDatabase
-      - ENVIRONMENT=DEVELOPMENT
+      - NODE_ENV=development
       - FIREBASE_AUTH_EMULATOR_HOST=firebase-emulators:4001
       - FIREBASE_STORAGE_EMULATOR_HOST=firebase-emulators:4002
       - TWITCH_CLIENT_ID=${TWITCH_CLIENT_ID}

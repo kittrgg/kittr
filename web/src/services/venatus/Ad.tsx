@@ -42,7 +42,7 @@ const Ad = ({ placementType, updateTrigger, containerStyles }: Props) => {
 
 	if (!placementType || !isClient()) return null
 
-	if (process.env.ENVIRONMENT !== "TESTING") {
+	if (process.env.NODE_ENV !== "testing") {
 		return (
 			<div style={{ width: "100%", overflow: "hidden", ...containerStyles }}>
 				<div ref={adRef} className="vm-placement" data-id={adDictionary[placementType]} />

@@ -11,7 +11,7 @@ import premiumChannelFixture from "@Utils/fixtures/mongoose/premiumChannel.json"
 const handler = createHandler()
 
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
-	if (process.env.ENVIRONMENT === "TESTING") {
+	if (process.env.NODE_ENV === "testing") {
 		const rawChannel = channelFixture
 		const rawPremiumChannel = premiumChannelFixture
 

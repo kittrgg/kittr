@@ -2,7 +2,7 @@ import mongoose from "mongoose"
 
 const MONGODB_URI = process.env.DB_CONNECTION_STRING
 
-const isDev = process.env.ENVIRONMENT === "DEVELOPMENT"
+const isDev = process.env.NODE_ENV === "development"
 
 if (!MONGODB_URI) {
 	throw new Error("Please define the DB_CONNECTION_STRING environment variable inside .env.local")
