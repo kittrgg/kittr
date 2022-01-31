@@ -13,8 +13,8 @@ if (process.env.ENVIRONMENT !== "DEVELOPMENT") {
 	})
 }
 
-import { createKitStatsAsInterval } from "@Jobs/createKitStatsAsInterval"
-import { writeViewCounts } from "@Jobs/viewCountAsUseInterval"
+import { generateKitStats } from "@Jobs/createKitStatsAsInterval"
+import { writeViewCounts } from "@Jobs/writeViewCounts"
 import twitch from "@Services/twitch/extension/routes"
 import { getStreamerByTwitchBroadcasterLoginId } from "@Utils/streamer"
 import cors from "cors"
@@ -23,6 +23,7 @@ import { createServer } from "http"
 import mongoose from "mongoose"
 import Rollbar from "rollbar"
 import { Server } from "socket.io"
+import { CronJob } from "cron"
 
 const app = express()
 const httpServer = createServer(app)
@@ -73,10 +74,28 @@ mongoose
     */
 		app.get("/api/streamer", getStreamerByTwitchBroadcasterLoginId)
 
-		if (process.env.ENVIRONMENT === "PRODUCTION") {
-			setInterval(() => writeViewCounts(), 3600000) // Once an hour
+		// We are not running this in
+		if (process.env.ENVIRONMENT !== "DEVELOPMENT") {
+			let viewCounts = new CronJob(
+				// Hourly
+				"0 * * * *",
+				() => {
+					try {
+						writeViewCounts()
+					} catch (error) {
+						console.error(error)
+					}
+				},
+				null,
+				true,
+				"America/Los_Angeles"
+			)
+			viewCounts.start()
 		}
-		setInterval(() => createKitStatsAsInterval(), 86700000) // A little more than once a day
+
+		// Every night at 3 AM
+		let kitStats = new CronJob("0 3 * * *", () => generateKitStats(), null, true, "America/Los_Angeles")
+		kitStats.start()
 
 		let openSockets = 0
 

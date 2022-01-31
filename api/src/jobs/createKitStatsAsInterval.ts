@@ -187,7 +187,7 @@ const allSetupsForComparisonQuery = async () => {
 	return serialized
 }
 
-export const createKitStatsAsInterval = async () => {
+export const generateKitStats = async () => {
 	console.log("Creating new kit usage stats...")
 
 	const ratioOfChannelsWithBaseFeatured = await allKitBaseFeaturedRateQuery()
