@@ -1,3 +1,5 @@
+// This comes from mongoose-sanitize
+
 export const sanitize = (v: any): string => {
 	if (v instanceof Object) {
 		for (var key in v) {
