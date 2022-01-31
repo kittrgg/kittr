@@ -74,8 +74,8 @@ services:
       dockerfile: Dockerfile.dev
     environment:
       - DB_CONNECTION_STRING=mongodb://root:example@mongo:27017/myFirstDatabase
-      - ENVIRONMENT=DEVELOPMENT
-      - NEXT_PUBLIC_ENVIRONMENT=DEVELOPMENT
+      - NODE_ENV=development
+      - NEXT_PUBLIC_ENVIRONMENT=development
       - FIREBASE_AUTH_EMULATOR_HOST=firebase-emulators:4001
       - FIREBASE_STORAGE_EMULATOR_HOST=firebase-emulators:4002
       - NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST=localhost:4001
