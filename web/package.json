@@ -18,7 +18,7 @@
 		"date-fns": "2.25.0",
 		"firebase": "9.6.5",
 		"firebase-admin": "10.0.2",
-		"firebase-tools": "9.17.0",
+		"firebase-tools": "10.1.3",
 		"jsonwebtoken": "8.5.1",
 		"kittr": "file:..",
 		"micro": "9.3.4",
