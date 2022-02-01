@@ -96,7 +96,7 @@ describe("Mobile", () => {
     cy.get("[data-cy=kit-list]").invoke("width").should("eq", 0);
   });
 
-  it("Selects a weapon on click and closes list", () => {
+  it("Selects a weapon from placeholder", () => {
     cy.visit("/channel/JoeWo/warzone");
     cy.get("[data-cy=Automaton-placeholder-button]").click();
     cy.location("search").should("eq", "?k=Automaton");
