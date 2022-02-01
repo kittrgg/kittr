@@ -21,6 +21,8 @@ const analyticsReportSchemas = {
 }
 
 const getStreamerViewCounts = async (dateRange: StreamerViewCounts): Promise<Record<string, number>> => {
+	console.log("Trying to streamer view counts...")
+
 	try {
 		const [response] = await analyticsDataClient.runReport({
 			...analyticsReportSchemas,
@@ -86,7 +88,6 @@ export const writeViewCounts = async () => {
 		}
 	}))
 	console.log("Starting bulk write...")
-	console.time("Bulk Write Operation")
 	await Player.bulkWrite([
 		...bulkWrites,
 		{
@@ -96,6 +97,5 @@ export const writeViewCounts = async () => {
 			}
 		}
 	])
-	console.timeEnd("Bulk Write Operation")
-	console.log("Bulk write finished?!")
+	console.log("Bulk write for view counts finished!")
 }
