@@ -91,7 +91,8 @@ RUN npm run build
 FROM node:16-alpine3.14 AS runner
 WORKDIR /app
 
-ENV NODE_ENV production
+ARG NODE_ENV
+ENV NODE_ENV ${NODE_ENV}
 
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nextjs -u 1001
