@@ -7,6 +7,9 @@ on:
 
 jobs:
   build:
+    concurrency: 
+      group: ${{ github.ref }}
+      cancel-in-progress: true
     runs-on: ubuntu-latest
     if: github.repository_owner == 'kittrgg'
     steps:
@@ -74,6 +77,9 @@ jobs:
     #     min-versions-to-keep: 3
 
   deploy:
+    concurrency: 
+      group: ${{ github.ref }}
+      cancel-in-progress: true
     needs: build
     runs-on: ubuntu-latest
     if: github.repository_owner == 'kittrgg'
@@ -97,6 +103,9 @@ jobs:
             dokku git:from-image stage-web ghcr.io/${{github.repository}}/web:test-${{github.sha}}
 
   e2e:
+    concurrency: 
+      group: ${{ github.ref }}
+      cancel-in-progress: true
     needs: deploy
     runs-on: ubuntu-latest
     if: github.repository_owner == 'kittrgg'
