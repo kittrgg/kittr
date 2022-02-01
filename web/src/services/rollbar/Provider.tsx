@@ -7,7 +7,7 @@ import Rollbar from "rollbar"
 import config from "./config"
 
 const rollbar = new Rollbar(config)
-if (process.env.NEXT_PUBLIC_ENVIRONMENT === "PRODUCTION") {
+if (process.env.NEXT_PUBLIC_ENVIRONMENT === "production") {
 	rollbar.configure({
 		checkIgnore: (_, __, payload) => {
 			if (

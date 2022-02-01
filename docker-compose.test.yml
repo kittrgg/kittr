@@ -43,7 +43,7 @@ services:
       - ./api:/src
     environment:
       - DB_CONNECTION_STRING=mongo://root:example@localhost:27017/myFirstDatabase
-      - ENVIRONMENT=TESTING
+      - NODE_ENV=testing
       - FIREBASE_AUTH_EMULATOR_HOST=firebase-emulators:4001
       - FIREBASE_STORAGE_EMULATOR_HOST=firebase-emulators:4002
       - TWITCH_CLIENT_ID=${TWITCH_CLIENT_ID}
@@ -58,8 +58,8 @@ services:
       dockerfile: Dockerfile
       args:
         - DB_CONNECTION_STRING=mongo://root:example@localhost:27017/myFirstDatabase
-        - ENVIRONMENT=TESTING
-        - NEXT_PUBLIC_ENVIRONMENT=TESTING
+        - NODE_ENV=testing
+        - NEXT_PUBLIC_ENVIRONMENT=testing
         - FIREBASE_AUTH_EMULATOR_HOST=firebase-emulators:4001
         - FIREBASE_STORAGE_EMULATOR_HOST=firebase-emulators:4002
         - NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST=localhost:4001
@@ -75,8 +75,8 @@ services:
       - 3000:3000
     environment:
       - DB_CONNECTION_STRING=mongo://root:example@localhost:27017/myFirstDatabase
-      - ENVIRONMENT=TESTING
-      - NEXT_PUBLIC_ENVIRONMENT=TESTING
+      - NODE_ENV=testing
+      - NEXT_PUBLIC_ENVIRONMENT=testing
       - FIREBASE_AUTH_EMULATOR_HOST=firebase-emulators:4001
       - FIREBASE_STORAGE_EMULATOR_HOST=firebase-emulators:4002
       - NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST=localhost:4001
