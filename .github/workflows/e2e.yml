@@ -36,8 +36,8 @@ jobs:
           push: true
           tags: ghcr.io/${{github.repository}}/web:test-${{github.sha}}
           build-args: |
-            ENVIRONMENT=${{secrets.CI_ENVIRONMENT}}
-            NEXT_PUBLIC_ENVIRONMENT=${{secrets.CI_ENVIRONMENT}}
+            NODE_ENV=${{secrets.CI_NODE_ENV}}
+            NEXT_PUBLIC_ENVIRONMENT=${{secrets.CI_NODE_ENV}}
             DB_CONNECTION_STRING=${{secrets.CI_DB_CONNECTION_STRING}}
             NEXT_PUBLIC_GOOGLE_ANALYTICS=${{secrets.CI_NEXT_PUBLIC_GOOGLE_ANALYTICS}}
             NEXT_PUBLIC_API_KEY=${{secrets.CI_NEXT_PUBLIC_API_KEY}}

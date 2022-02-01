@@ -4,3 +4,4 @@ ui-debug.log
 .env
 .env.production
 data
+yarn.lock
