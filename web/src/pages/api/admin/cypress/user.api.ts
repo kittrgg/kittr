@@ -10,7 +10,7 @@ import managersFixture from "@Utils/fixtures/managers.json"
 const handler = createHandler()
 
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
-	if (process.env.NODE_ENV === "testing") {
+	if (process.env.NODE_ENV === "test") {
 		console.log("Seeding firebase emulators...")
 		admin
 			.deleteUsers([
@@ -42,7 +42,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 })
 
 handler.delete(async (req: NextApiRequest, res: NextApiResponse) => {
-	if (process.env.NODE_ENV === "testing") {
+	if (process.env.NODE_ENV === "test") {
 	} else {
 		return res.status(200).json({ message: "Inappropriate environment" })
 	}
