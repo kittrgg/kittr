@@ -18,7 +18,7 @@ const firebase = initializeApp(firebaseConfig)
 export const auth = getAuth()
 export const storage = getStorage()
 
-if (process.env.NEXT_PUBLIC_ENVIRONMENT === "DEVELOPMENT") {
+if (process.env.NEXT_PUBLIC_ENVIRONMENT === "development") {
 	connectAuthEmulator(auth, `http://${process.env.NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST}`)
 	connectStorageEmulator(storage, `localhost`, 4002)
 }

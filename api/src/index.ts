@@ -4,7 +4,7 @@ dotenv.config()
 // This needs to happen BEFORE any absolute imports
 import moduleAlias from "module-alias"
 
-if (process.env.ENVIRONMENT !== "DEVELOPMENT") {
+if (process.env.NODE_ENV !== "development") {
 	moduleAlias.addAliases({
 		"@Jobs": __dirname + "/jobs",
 		"@Services": __dirname + "/services",
@@ -42,12 +42,12 @@ app.use(
 
 const rollbar = new Rollbar({
 	accessToken: process.env.ROLLBAR_ACCESS_TOKEN,
-	environment: process.env.ENVIRONMENT,
+	environment: process.env.NODE_ENV,
 	captureUncaught: true,
 	captureUnhandledRejections: true
 })
 
-if (process.env.ENVIRONMENT === "PRODUCTION") {
+if (process.env.NODE_ENV === "production") {
 	app.use(rollbar.errorHandler())
 }
 app.use(express.json())
@@ -74,8 +74,7 @@ mongoose
     */
 		app.get("/api/streamer", getStreamerByTwitchBroadcasterLoginId)
 
-		// We are not running this in
-		if (process.env.ENVIRONMENT !== "DEVELOPMENT") {
+		if (process.env.NODE_ENV === "production") {
 			let viewCounts = new CronJob(
 				// Hourly
 				"0 * * * *",

@@ -33,7 +33,7 @@ class MyDocument extends Document {
 		return (
 			<Html>
 				<Head>
-					{process.env.ENVIRONMENT !== "TESTING" && (
+					{process.env.NODE_ENV !== "test" && (
 						<script
 							src="https://hb.vntsm.com/v3/live/ad-manager.min.js"
 							type="text/javascript"
