@@ -7,18 +7,20 @@ import { header2 } from "@Styles/typography"
 interface Props {
 	/** Array of channels to render. */
 	data: Array<IChannel>
+	/** Do you want to show the live icon for these channels? */
+	isLive?: boolean
 	/** Function to be ran when user clicks on a channel. */
 	onClick: (...args: any) => any
 }
 
 /** Renders the list of channels using their profile image and display name. */
-export const ChannelAvatarList = ({ data, onClick }: Props) => {
+export const ChannelAvatarList = ({ data, isLive, onClick }: Props) => {
 	return (
 		<>
 			{data.map((elem) => {
 				return (
 					<Identity key={elem._id} data-cy={`${elem.displayName}-button`} onClick={() => onClick && onClick(elem)}>
-						<ProfileImage size="100px" imagePath={elem.meta.profileImage} />
+						<ProfileImage size="100px" imagePath={elem.meta.profileImage} isLive={isLive} />
 						<Name>{elem.displayName}</Name>
 					</Identity>
 				)

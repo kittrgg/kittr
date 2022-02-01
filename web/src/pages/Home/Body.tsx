@@ -15,12 +15,11 @@ interface Props {
 	 * but we want to give some recognition and visibility.
 	 * */
 	risingStars: IChannel[]
-	// liveChannels: IChannel[]
+	liveChannels: IChannel[]
 }
 
 /** Main content section of the home page. Games, channels, etc. */
-// Live channels is missing...Just a note for when we want to bring it back!
-const Body = ({ games, popularChannels, risingStars }: Props) => {
+const Body = ({ games, popularChannels, risingStars, liveChannels }: Props) => {
 	const router = useRouter()
 
 	const routeChannel = (elem: IChannel) => router.push(Routes.CHANNEL.createPath(elem.urlSafeName))
@@ -34,8 +33,25 @@ const Body = ({ games, popularChannels, risingStars }: Props) => {
 				</Link>
 			</SectionHeader>
 
-			<SideScroller childMargin="20px">
-				{games && <GameList data={games} onClick={(elem) => router.push(Routes.GAMES.createPath(elem.urlSafeName))} />}
+			{liveChannels.length > 0 && (
+				<>
+					<SideScroller childMargin="20px">
+						{games && (
+							<GameList data={games} onClick={(elem) => router.push(Routes.GAMES.createPath(elem.urlSafeName))} />
+						)}
+					</SideScroller>
+
+					<SectionHeader style={{ marginTop: "60px" }}>
+						<H2>LIVE NOW</H2>
+						<Link href={Routes.CHANNEL.LIST} passHref>
+							<StyledLink>SEE ALL</StyledLink>
+						</Link>
+					</SectionHeader>
+				</>
+			)}
+
+			<SideScroller wrapperStyles={{ margin: "12px 0" }} childMargin="0 10px">
+				{liveChannels && <ChannelAvatarList data={liveChannels} onClick={routeChannel} isLive />}
 			</SideScroller>
 
 			<SectionHeader>
@@ -59,17 +75,6 @@ const Body = ({ games, popularChannels, risingStars }: Props) => {
 			<SideScroller wrapperStyles={{ margin: "12px 0" }} childMargin="0 10px">
 				{risingStars && <ChannelAvatarList data={risingStars} onClick={routeChannel} />}
 			</SideScroller>
-
-			{/* <SectionHeader style={{ marginTop: "60px" }}>
-				<H2>LIVE NOW</H2>
-				<Link href={Routes.CHANNEL.LIST} passHref>
-					<StyledLink>SEE ALL</StyledLink>
-				</Link>
-			</SectionHeader> */}
-
-			{/* <SideScroller wrapperStyles={{ margin: "12px 0" }} childMargin="0 10px">
-				{liveChannels && <ChannelAvatarList data={liveChannels} onClick={routeChannel} />}
-			</SideScroller> */}
 		</Container>
 	)
 }

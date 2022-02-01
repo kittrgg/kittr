@@ -3,7 +3,7 @@ import FrontPageBoostr from "@Features/Promo/FrontPage"
 import { allGamesQuery, getBlogPostsQuery, risingStarsQuery, topChannelsQuery, totalKitsQuery } from "@Services/mongodb"
 import { getHomeChannelPromo } from "@Services/mongodb/queries/promos"
 import { getTwitchChannelInfo } from "@Services/twitch/getChannelInfo"
-// import { liveChannelsQuery } from "@Services/twitch/getLiveStreams"
+import { liveChannelsQuery } from "@Services/twitch/getLiveStreams"
 import ResponsiveAdBanner from "@Services/venatus/ResponsiveBanner"
 import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
 import { GetStaticProps } from "next"
@@ -40,7 +40,7 @@ const Home = ({
 				games={games}
 				popularChannels={popularChannels}
 				risingStars={risingStars}
-				// liveChannels={liveChannels.slice(0, 15)}
+				liveChannels={liveChannels.slice(0, 15)}
 			/>
 			<ResponsiveAdBanner />
 			<PlatformInfo />
@@ -55,16 +55,16 @@ export default Home
 export const getStaticProps: GetStaticProps = async () => {
 	await connectToDatabase()
 
-	// Live channels is missing from this list for when we want to bring it back!
-	const [games, totalNumberOfKits, popularChannels, risingStars, blogPosts, currentPromo] = await Promise.all([
-		allGamesQuery(),
-		totalKitsQuery(),
-		topChannelsQuery(10),
-		risingStarsQuery({ viewsGreaterThan: 400, skip: 12, sample: 10 }),
-		getBlogPostsQuery({ limit: 3 }),
-		getHomeChannelPromo()
-		// liveChannelsQuery(),
-	])
+	const [games, totalNumberOfKits, popularChannels, risingStars, blogPosts, currentPromo, liveChannels] =
+		await Promise.all([
+			allGamesQuery(),
+			totalKitsQuery(),
+			topChannelsQuery(10),
+			risingStarsQuery({ viewsGreaterThan: 400, skip: 12, sample: 10 }),
+			getBlogPostsQuery({ limit: 3 }),
+			getHomeChannelPromo(),
+			liveChannelsQuery()
+		])
 
 	const featuredChannel = await getTwitchChannelInfo(currentPromo?.channelId || "")
 
@@ -74,7 +74,7 @@ export const getStaticProps: GetStaticProps = async () => {
 			games,
 			popularChannels,
 			risingStars,
-			// liveChannels,
+			liveChannels,
 			blogPosts,
 			totalNumberOfKits: Math.ceil(totalNumberOfKits / 100) * 100 || 0
 		},
