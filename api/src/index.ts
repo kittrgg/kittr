@@ -64,7 +64,7 @@ mongoose
 
 		// Just a pinger!
 		app.get("/", (req, res) => {
-			res.send("Hello, kittr!")
+			res.send("Hello kittr!")
 		})
 
 		/*
