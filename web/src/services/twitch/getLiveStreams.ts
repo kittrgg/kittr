@@ -17,7 +17,7 @@ export const liveChannelsQuery = async () => {
 			}
 		},
 		{
-			$limit: 25
+			$limit: 50
 		}
 	])
 
