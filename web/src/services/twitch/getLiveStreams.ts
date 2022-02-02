@@ -56,7 +56,8 @@ export const liveChannelsQuery = async () => {
 			const data = await response.json()
 
 			if (!data.data) {
-				console.log("The Twitch API fetch did not work.")
+				logReport.error("Twitch Live Channels API ", data)
+				console.log("The Twitch API fetch did not work.", { data })
 				return []
 			}
 
