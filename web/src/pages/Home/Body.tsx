@@ -33,14 +33,12 @@ const Body = ({ games, popularChannels, risingStars, liveChannels }: Props) => {
 				</Link>
 			</SectionHeader>
 
+			<SideScroller childMargin="20px">
+				{games && <GameList data={games} onClick={(elem) => router.push(Routes.GAMES.createPath(elem.urlSafeName))} />}
+			</SideScroller>
+
 			{liveChannels.length > 0 && (
 				<>
-					<SideScroller childMargin="20px">
-						{games && (
-							<GameList data={games} onClick={(elem) => router.push(Routes.GAMES.createPath(elem.urlSafeName))} />
-						)}
-					</SideScroller>
-
 					<SectionHeader style={{ marginTop: "60px" }}>
 						<H2>LIVE NOW</H2>
 						<Link href={Routes.CHANNEL.LIST} passHref>

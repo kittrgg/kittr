@@ -12,6 +12,8 @@ export const getAuthToken = async () => {
 
 		const data = await response.json()
 
+		// console.log(data)
+
 		if (data.access_token) {
 			return data as IOAuthToken
 		} else {
