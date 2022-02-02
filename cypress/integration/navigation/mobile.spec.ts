@@ -1,12 +1,8 @@
 describe("Mobile Navigation", () => {
   beforeEach(() => {
-    console.log("DEBUG: 1");
     cy.visit("/");
-    console.log("DEBUG: 2");
     cy.viewport("iphone-x");
-    console.log("DEBUG: 3");
     cy.get("[data-cy=mobile-hamburger-icon]").click();
-    console.log("DEBUG: 4");
   });
 
   it("Navigates to Games", () => {
