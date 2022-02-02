@@ -68,7 +68,6 @@ export const liveChannelsQuery = async () => {
 	const currentlyLiveChannels = await getStreams()
 
 	try {
-		console.log({ popularChannels })
 		console.log({ currentlyLiveChannels })
 		const data = popularChannels.filter((channel) =>
 			currentlyLiveChannels
