@@ -53,14 +53,14 @@ export const liveChannelsQuery = async () => {
 				redirect: "follow"
 			})
 
-			const { data } = await response.json()
+			const data = await response.json()
 
-			if (!data) {
+			if (!data.data) {
 				console.log("The Twitch API fetch did not work.")
 				return []
 			}
 
-			return data
+			return data.data
 		} catch (error) {
 			console.error(error)
 			logReport.error("Twitch Live Channels API ", error as any)
