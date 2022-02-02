@@ -43,7 +43,6 @@ export const liveChannelsQuery = async () => {
 
 	const getStreams = async (): Promise<ITwitchLiveChannels[]> => {
 		const url = buildLiveStreamRequest(popularChannels)
-		console.log(url)
 
 		if (!url) return []
 
