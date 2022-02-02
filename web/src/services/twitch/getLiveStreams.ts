@@ -29,6 +29,7 @@ export const liveChannelsQuery = async () => {
 			const requestBase = "https://api.twitch.tv/helix/streams/?user_login="
 
 			// Grab the login names from the channels
+			console.log("CHECK 1")
 			const channelNames = channels
 				.map((channel) => grabLoginName(channel.meta.links.twitch || ""))
 				.filter((str: string | undefined) => str !== undefined)
@@ -66,6 +67,7 @@ export const liveChannelsQuery = async () => {
 
 	const currentlyLiveChannels = await getStreams()
 	try {
+		console.log("CHECK 2")
 		const data = popularChannels.filter((channel) =>
 			currentlyLiveChannels
 				.map((channel) => channel.user_login)
