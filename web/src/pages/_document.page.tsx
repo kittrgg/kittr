@@ -33,7 +33,7 @@ class MyDocument extends Document {
 		return (
 			<Html>
 				<Head>
-					{!window.location.pathname.includes("stage-web") && (
+					{typeof window !== "undefined" && !window.location.pathname.includes("stage-web") && (
 						<>
 							<script
 								src="https://hb.vntsm.com/v3/live/ad-manager.min.js"
