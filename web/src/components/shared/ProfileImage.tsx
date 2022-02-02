@@ -51,13 +51,16 @@ export const ProfileImage = ({ imagePath, size = "50px", border, isLive = false,
 
 	if (!imagePath || errored || isDevelopment) {
 		return (
-			<ImageContainer data-cy="profile-image" imageSize={size}>
-				<img
-					src="/media/icons/empty-avatar.svg"
-					alt="Channel Profile Image"
-					style={{ width: "100%", height: "100%", objectFit: "cover" }}
-				/>
-			</ImageContainer>
+			<Wrapper imageSize={size}>
+				<ImageContainer data-cy="profile-image" imageSize={size}>
+					<img
+						src="/media/icons/empty-avatar.svg"
+						alt="Channel Profile Image"
+						style={{ width: "100%", height: "100%", objectFit: "cover" }}
+					/>
+				</ImageContainer>
+				{isLive && <LiveBadge>LIVE</LiveBadge>}
+			</Wrapper>
 		)
 	}
 

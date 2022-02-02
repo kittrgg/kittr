@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    concurrency: 
+    concurrency:
       group: ${{ github.ref }}
       cancel-in-progress: true
     runs-on: ubuntu-latest
@@ -36,7 +36,7 @@ jobs:
           push: true
           tags: ghcr.io/${{github.repository}}/web:test-${{github.sha}}
           build-args: |
-            NODE_ENV=${{secrets.CI_NODE_ENV}}
+            ENABLE_SEEDING=true
             NEXT_PUBLIC_ENVIRONMENT=${{secrets.CI_NODE_ENV}}
             DB_CONNECTION_STRING=${{secrets.CI_DB_CONNECTION_STRING}}
             NEXT_PUBLIC_GOOGLE_ANALYTICS=${{secrets.CI_NEXT_PUBLIC_GOOGLE_ANALYTICS}}
@@ -77,7 +77,7 @@ jobs:
     #     min-versions-to-keep: 3
 
   deploy:
-    concurrency: 
+    concurrency:
       group: ${{ github.ref }}
       cancel-in-progress: true
     needs: build
@@ -103,7 +103,7 @@ jobs:
             dokku git:from-image stage-web ghcr.io/${{github.repository}}/web:test-${{github.sha}}
 
   e2e:
-    concurrency: 
+    concurrency:
       group: ${{ github.ref }}
       cancel-in-progress: true
     needs: deploy

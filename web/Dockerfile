@@ -9,8 +9,8 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY ./ ./
 
-ARG NODE_ENV
-ENV NODE_ENV ${NODE_ENV}
+ARG ENABLE_SEEDING
+ENV ENABLE_SEEDING ${ENABLE_SEEDING}
 
 ARG NEXT_PUBLIC_ENVIRONMENT
 ENV NEXT_PUBLIC_ENVIRONMENT ${NEXT_PUBLIC_ENVIRONMENT}
@@ -90,8 +90,6 @@ RUN npm run build
 # Copy files from builder and run next
 FROM node:16-alpine3.14 AS runner
 WORKDIR /app
-
-ENV NODE_ENV production
 
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nextjs -u 1001

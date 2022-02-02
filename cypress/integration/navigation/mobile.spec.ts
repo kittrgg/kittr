@@ -1,7 +1,3 @@
-/// <reference types="cypress" />
-
-import user from "../../fixtures/login.json";
-
 describe("Mobile Navigation", () => {
   beforeEach(() => {
     cy.visit("/");
