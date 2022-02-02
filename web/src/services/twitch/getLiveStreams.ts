@@ -21,8 +21,6 @@ export const liveChannelsQuery = async () => {
 		}
 	])
 
-	if (popularChannels.length === 0) return []
-
 	// Create the url for the Twitch API fetch
 	const buildLiveStreamRequest = (channels: IChannel[]): string => {
 		try {
@@ -45,7 +43,6 @@ export const liveChannelsQuery = async () => {
 
 	const getStreams = async (): Promise<ITwitchLiveChannels[]> => {
 		const url = buildLiveStreamRequest(popularChannels)
-		console.log(url)
 
 		if (!url) return []
 
@@ -56,8 +53,14 @@ export const liveChannelsQuery = async () => {
 				redirect: "follow"
 			})
 
-			const { data } = await response.json()
-			return data
+			const data = await response.json()
+
+			if (!data.data) {
+				console.log("The Twitch API fetch did not work.")
+				return []
+			}
+
+			return data.data
 		} catch (error) {
 			console.error(error)
 			logReport.error("Twitch Live Channels API ", error as any)
@@ -68,7 +71,6 @@ export const liveChannelsQuery = async () => {
 	const currentlyLiveChannels = await getStreams()
 
 	try {
-		console.log({ currentlyLiveChannels })
 		const data = popularChannels.filter((channel) =>
 			currentlyLiveChannels
 				.map((channel) => channel.user_login)
