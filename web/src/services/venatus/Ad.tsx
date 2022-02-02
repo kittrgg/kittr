@@ -42,6 +42,9 @@ const Ad = ({ placementType, updateTrigger, containerStyles }: Props) => {
 
 	if (!placementType || !isClient()) return null
 
+	// Do not try to render ads in testing environment!
+	if (window.location.pathname.includes("stage-web")) return null
+
 	return (
 		<div style={{ width: "100%", overflow: "hidden", ...containerStyles }}>
 			<div ref={adRef} className="vm-placement" data-id={adDictionary[placementType]} />
