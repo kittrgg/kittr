@@ -65,7 +65,13 @@ router
 						// only return the single channel
 						// no need to dump an array to the front end
 						console.log(resp.data.data)
-						res.json({ error: false, data: resp.data.data[0] })
+						res.json({
+							error: false,
+							data: {
+								...resp.data.data[0],
+								broadcaster_login: resp.data.data[0].login
+							}
+						})
 					} else {
 						res.status(404).json({ error: true, message: "Channel not found", resp })
 					}
