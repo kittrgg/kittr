@@ -48,7 +48,7 @@
 		"@types/react-select": "5.0.1",
 		"@types/styled-components": "5.1.10",
 		"@types/uuid": "8.3.1",
-		"@types/validator": "13.1.4",
+		"@types/validator": "13.7.1",
 		"babel-plugin-styled-components": "2.0.2",
 		"dotenv": "15.0.0",
 		"eslint": "8.8.0",
