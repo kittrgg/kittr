@@ -29,13 +29,14 @@ axios({
 			config.api_token = resp.data.access_token
 			console.log("Set an App Access Token:", config.api_token)
 		} else {
-			console.error("The Twitch extension WON’T WORK")
+			console.error("The Twitch extension WON'T WORK")
 			console.error("No access_token:", resp.data)
 		}
 	})
 	.catch((err: any) => {
 		if (err.response) {
 			console.error("Error at token generation", err.response.statusCode, err.response.body)
+			console.error("Error at token generation", err)
 		} else {
 			console.error("Error at token generation", err)
 		}
