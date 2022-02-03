@@ -26,19 +26,13 @@ import { Server } from "socket.io"
 import { CronJob } from "cron"
 
 const app = express()
+app.use(cors())
 const httpServer = createServer(app)
 const io = new Server(httpServer, {
 	cors: {
 		origin: "*"
 	}
 })
-
-app.use(
-	cors({
-		origin: "*",
-		credentials: true
-	})
-)
 
 const rollbar = new Rollbar({
 	accessToken: process.env.ROLLBAR_ACCESS_TOKEN,
