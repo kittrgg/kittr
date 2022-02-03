@@ -61,12 +61,12 @@ router
 					//   "/",
 					//   resp.headers["ratelimit-limit"]
 					// );
-					if (resp.data && resp.data.length === 1) {
+					if (resp.data) {
 						// only return the single channel
 						// no need to dump an array to the front end
-						res.json({ error: false, data: resp.data[0] })
+						console.log(resp.data.data)
+						res.json({ error: false, data: resp.data.data[0] })
 					} else {
-						console.error(resp)
 						res.status(404).json({ error: true, message: "Channel not found", resp })
 					}
 				})
