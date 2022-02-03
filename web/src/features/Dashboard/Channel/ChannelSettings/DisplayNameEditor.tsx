@@ -8,35 +8,31 @@ import { useDispatch } from "@Redux/store"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
 import Title from "../../H3"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
+import fetch from "@Utils/helpers/fetch"
+import { ChannelModel } from "@Models/Channel"
+import { isFetchError } from "@Utils/helpers/typeGuards"
 
 /** Edit the name of the channel. */
 const DisplayNameEditor = ({ ...props }) => {
+	const [error, setError] = useState("")
 	const dispatch = useDispatch()
 	const { displayName: name } = useChannelData()
 	const { _id } = useChannelData()
 	const [displayName, setDisplayName] = useState(name || "")
 	const [isPersisted, setIsPersisted] = useState(false)
-	const [error, setError] = useState("")
 
 	const { mutate, isLoading } = useDashboardMutator(async () => {
 		try {
-			const result = await fetch(`/api/channel/meta/displayName`, {
-				method: "PUT",
-				headers: {
-					authorization: `Bearer: ${await getToken()}`
-				},
-				body: JSON.stringify({
-					_id,
-					property: "displayName",
-					value: displayName
-				})
+			const result = await fetch.put<ChannelModel | NextClientEndpointError>({
+				url: `/api/channel/meta/displayName`,
+				headers: { authorization: `Bearer: ${await getToken()}` },
+				body: { _id, property: "displayName", value: displayName }
 			})
 
-			const json = (await result.json()) as any
-
-			if (json) {
+			if (isFetchError(result)) {
+				setError(result.errorMessage)
+			} else {
 				setIsPersisted(true)
-				if (json.error) setError(json.message)
 			}
 		} catch (error) {
 			dispatch(setModal({ type: "Error Notification", data: {} }))
