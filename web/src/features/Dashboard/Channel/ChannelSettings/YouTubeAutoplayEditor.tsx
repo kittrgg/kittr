@@ -9,22 +9,26 @@ import { setModal } from "@Redux/slices/dashboard"
 import H3 from "../../H3"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
+import fetch from "@Utils/helpers/fetch"
+import { isFetchError } from "@Utils/helpers/typeGuards"
 
 const YouTubeAutoplayEditor = ({ ...props }) => {
 	const dispatch = useDispatch()
 	const { data } = useDashboardChannel()
 	const { mutate, isLoading } = useDashboardMutator(async () => {
 		try {
-			return await fetch(`/api/channel/meta/youtubeAutoplay`, {
-				method: "PUT",
-				headers: {
-					authorization: `Bearer: ${await getToken()}`
-				},
-				body: JSON.stringify({
-					_id: data?._id,
-					boolean: !data?.meta.youtubeAutoplay
-				})
+			const result = await fetch.put({
+				url: `/api/channel/meta/youtubeAutoplay`,
+				body: { _id: data?._id, boolean: !data?.meta.youtubeAutoplay },
+				headers: { authorization: `Bearer: ${await getToken()}` }
 			})
+
+			if (isFetchError(result)) {
+				dispatch(setModal({ type: "Error Notification", data: {} }))
+			} else {
+				// Don't have to do anything, the sockets will propogate the change
+				return
+			}
 		} catch (error) {
 			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}

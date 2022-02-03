@@ -1,13 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import { createHandler } from "@Middlewares/createHandler"
-import Channel from "@Services/mongodb/models/Channel"
+import Channel, { ChannelModel } from "@Services/mongodb/models/Channel"
 import { userAuth } from "@Utils/middlewares/auth"
 import { sanitize } from "@Services/mongodb/utils/sanitize"
 
 const handler = createHandler(userAuth)
 
 // Edit youtube autoplay setting
-handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
+handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel | null>>) => {
 	const { _id, boolean } = req.body
 
 	try {
@@ -19,7 +19,7 @@ handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
 
 		return res.status(200).json(data)
 	} catch (error) {
-		return res.status(400).json(error)
+		return res.status(400).json({ error: true, errorMessage: JSON.stringify(error) })
 	}
 })
 
