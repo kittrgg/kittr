@@ -26,7 +26,7 @@
 		"axios": "0.25.0",
 		"cors": "2.8.5",
 		"cron": "1.8.2",
-		"dotenv": "15.0.0",
+		"dotenv": "16.0.0",
 		"express": "4.17.2",
 		"jsonwebtoken": "8.5.1",
 		"kittr": "file:..",
