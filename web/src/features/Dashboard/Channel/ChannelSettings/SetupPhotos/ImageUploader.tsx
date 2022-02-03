@@ -9,6 +9,8 @@ import { uploadWithHandlers } from "@Services/firebase/storage/uploadWithHandler
 import { paragraph } from "@Styles/typography"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
+import fetch from "@Utils/helpers/fetch"
+import { isFetchError } from "@Utils/helpers/typeGuards"
 
 interface Props {
 	slot: number
@@ -35,19 +37,16 @@ const ImageUploader = ({ slot }: Props) => {
 				fileName,
 				maxWidthOrHeight: 500,
 				onSuccess: async () => {
-					const response = await fetch(`/api/channel/meta/setupPhoto`, {
-						method: "POST",
-						headers: {
-							authorization: `Bearer: ${await getToken()}`
-						},
-						body: JSON.stringify({
-							slot,
-							channelId: _id,
-							boolean: true
-						})
+					const response = await fetch.post({
+						url: `/api/channel/meta/setupPhoto`,
+						body: { slot, channelId: _id, boolean: true },
+						headers: { authorization: `Bearer: ${await getToken()}` }
 					})
 
-					if (response) {
+					if (isFetchError(response)) {
+						setIsUploading(false)
+						dispatch(setModal({ type: "Error Notification", data: {} }))
+					} else {
 						download(fileName, (path) => {
 							setIsUploading(false)
 							setImage(path)
@@ -67,21 +66,20 @@ const ImageUploader = ({ slot }: Props) => {
 			setIsUploading(true)
 			const result = await deleteFile(fileName)
 
-			const response = await fetch(`/api/channel/meta/setupPhoto`, {
-				method: "POST",
-				headers: {
-					authorization: `Bearer: ${await getToken()}`
-				},
-				body: JSON.stringify({
-					slot,
-					channelId: _id,
-					boolean: false
-				})
+			const response = await fetch.post({
+				url: `/api/channel/meta/setupPhoto`,
+				body: { slot, channelId: _id, boolean: false },
+				headers: { authorization: `Bearer: ${await getToken()}` }
 			})
 
-			if (result && response) {
-				setIsUploading(false)
-				return setImage("")
+			if (result) {
+				if (isFetchError(response)) {
+					setIsUploading(false)
+					dispatch(setModal({ type: "Error Notification", data: {} }))
+				} else {
+					setIsUploading(false)
+					return setImage("")
+				}
 			}
 		} catch (error) {
 			setIsUploading(false)
