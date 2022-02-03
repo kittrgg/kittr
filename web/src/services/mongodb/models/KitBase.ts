@@ -11,6 +11,6 @@ const schema = new Schema({
 	category: String
 })
 
-const KitBase = mongoose.model(MODEL_NAME, schema)
+export const KitBase = mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema)
 
 export default KitBase

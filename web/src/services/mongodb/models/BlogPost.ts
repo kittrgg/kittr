@@ -13,6 +13,6 @@ const schema = new Schema(
 	{ minimize: false }
 )
 
-const BlogPost = mongoose.model(MODEL_NAME, schema)
+export const BlogPost = mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema)
 
 export default BlogPost

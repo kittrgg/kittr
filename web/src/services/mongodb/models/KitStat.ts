@@ -8,6 +8,6 @@ const schema = new Schema({
 	forSetupComparison: Schema.Types.Mixed
 })
 
-const KitStat = mongoose.model(MODEL_NAME, schema)
+export const KitStat = mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema)
 
 export default KitStat

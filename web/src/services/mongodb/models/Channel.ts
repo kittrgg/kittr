@@ -143,6 +143,6 @@ const schema = new Schema<ChannelModel>(
 	{ minimize: false }
 )
 
-const Channel = mongoose.model(MODEL_NAME, schema)
+export const Channel = mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema)
 
 export default Channel
