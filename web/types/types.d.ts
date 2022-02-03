@@ -1,3 +1,17 @@
+interface NextClientEndpointError {
+	error: boolean
+	errorMessage: string
+}
+
+type NextClientPayload<T> = T | NextClientEndpointError
+
+interface NextServerError {
+	error: boolean
+	errorMessage: string
+}
+
+type NextServerPayload<T> = T | NextServerError
+
 type ReduxModalState = { type: DashboardModals; data: any }
 
 /** Workflows that users can utilize to add their commands to their channel */

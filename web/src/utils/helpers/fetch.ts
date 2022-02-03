@@ -1,34 +1,63 @@
 const baseUri = process.env.NEXT_PUBLIC_API_PATH
 
-const get = async (url: string) => {
+interface GetParams {
+	url: string
+	headers?: HeadersInit
+}
+
+const get = async <T>({ url, headers = {} }: GetParams): Promise<T> => {
 	const requestOptions = {
-		method: "GET"
+		method: "GET",
+		headers
 	}
+
 	return await fetch(baseUri + url, requestOptions).then(handleResponse)
 }
 
-const post = async (url: string, body: any) => {
+interface PostParams {
+	url: string
+	body: any
+	headers?: HeadersInit
+}
+
+const post = async <T>({ url, body, headers = {} }: PostParams): Promise<T> => {
 	const requestOptions = {
 		method: "POST",
-		headers: { "Content-Type": "application/json" },
+		headers: { "Content-Type": "application/json", ...headers },
 		body: JSON.stringify(body)
 	}
+
 	return await fetch(baseUri + url, requestOptions).then(handleResponse)
 }
 
-const put = async (url: string, body: any) => {
+interface PutParams {
+	url: string
+	body: any
+	headers?: HeadersInit
+}
+
+const put = async <T>({ url, body, headers = {} }: PutParams): Promise<T> => {
 	const requestOptions = {
 		method: "PUT",
-		headers: { "Content-Type": "application/json" },
+		headers: { "Content-Type": "application/json", ...headers },
 		body: JSON.stringify(body)
 	}
+
 	return await fetch(baseUri + url, requestOptions).then(handleResponse)
+}
+
+interface DeleteParams {
+	url: string
+	body?: any
+	headers?: HeadersInit
 }
 
 // prefixed with underscored because delete is a reserved word in javascript
-const _delete = async (url: string) => {
+const _delete = async <T>({ url, body, headers = {} }: DeleteParams): Promise<T> => {
 	const requestOptions = {
-		method: "DELETE"
+		method: "DELETE",
+		headers,
+		body: JSON.stringify(body)
 	}
 	return await fetch(baseUri + url, requestOptions).then(handleResponse)
 }
