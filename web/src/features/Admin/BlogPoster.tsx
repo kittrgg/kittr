@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { getToken } from "@Services/firebase/auth/getToken"
+import fetch from "@Utils/helpers/fetch"
 
 const BlogPoster = ({ ...props }) => {
 	const [formData, setFormData] = useState({
@@ -17,12 +18,12 @@ const BlogPoster = ({ ...props }) => {
 	}
 
 	const handleSubmit = async () => {
-		fetch(`/api/admin/blog`, {
-			method: "POST",
+		fetch.post({
+			url: `/api/admin/blog`,
+			body: JSON.stringify(formData),
 			headers: {
 				authorization: `Bearer: ${await getToken()}`
-			},
-			body: JSON.stringify(formData)
+			}
 		})
 	}
 

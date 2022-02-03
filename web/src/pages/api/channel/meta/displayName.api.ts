@@ -5,11 +5,12 @@ import Channel from "@Services/mongodb/models/Channel"
 import { userAuth } from "@Middlewares/auth"
 import { toURL } from "@Utils/helpers/toURL"
 import { sanitize } from "@Services/mongodb/utils/sanitize"
+import { ChannelModel } from "@Models/Channel"
 
 const handler = createHandler(userAuth)
 
 // Edit channel's displayName
-handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
+handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel | null>>) => {
 	const { _id, value } = req.body
 	try {
 		const existingChannels = await Channel.find({ urlSafeName: toURL(value) })
@@ -17,7 +18,7 @@ handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
 		if (existingChannels.length > 0) {
 			return res.status(403).json({
 				error: true,
-				message:
+				errorMessage:
 					"That gamertag is too similar to another channel. We don't want to confuse our system...Please choose another."
 			})
 		}
@@ -28,9 +29,9 @@ handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
 			{ new: true }
 		)
 
-		return res.status(200).json(data || {})
+		return res.status(200).json(data)
 	} catch (error) {
-		return res.status(400).json(error)
+		return res.status(400).json({ error: true, errorMessage: JSON.stringify(error) })
 	}
 })
 

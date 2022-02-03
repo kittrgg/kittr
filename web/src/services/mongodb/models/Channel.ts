@@ -7,7 +7,49 @@ import mongoose, { Schema } from "mongoose"
 // This is because we don't feel like doing an entire migration just to change the name of a collection.
 const MODEL_NAME = "player"
 
-const schema = new Schema(
+export interface ChannelModel {
+	createdDate: Date
+	displayName: string
+	urlSafeName: string
+	viewCount: number
+	games: []
+	kits: []
+	meta: {
+		brandColors: {
+			primary: string
+		}
+		hasCoverPhoto: boolean
+		specs: object
+		affiliates: object
+		setupPhotos: object
+		stripeId: string
+		premiumType: string
+		profileImage: string
+		hasProfileImage: boolean
+		links: {
+			twitch: string
+			youtube: string
+			instagram: string
+			twitter: string
+			facebook: string
+			discord: string
+			tiktok: string
+		}
+		youtubeAutoplay: Boolean
+	}
+	managers: Array<{ uid: string; role: "Owner" | "Administrator" | "Editor" }>
+	overlay: {
+		textColorAccent: string
+		backgroundColorSecondary: string
+		textColorSecondary: string
+		backgroundColorPrimary: string
+		textColorPrimary: string
+		primaryKit: Omit<IKit, "gameInfo">
+	}
+	previousUpdater: String
+}
+
+const schema = new Schema<ChannelModel>(
 	{
 		createdDate: Date,
 		displayName: String,
@@ -74,6 +116,6 @@ const schema = new Schema(
 	{ minimize: false }
 )
 
-export const Channel = mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema)
+export const Channel = mongoose.model(MODEL_NAME, schema)
 
 export default Channel

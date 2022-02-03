@@ -13,6 +13,7 @@ import { linkPrefixes } from "@Utils/lookups/linkPrefixes"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
 import AddLink from "../../modals/AddLink"
+import fetch from "@Utils/helpers/fetch"
 
 /** CRUD for editing the social links of a channel. */
 const LinkEditor = ({ ...props }) => {
@@ -26,15 +27,12 @@ const LinkEditor = ({ ...props }) => {
 	const [areActiveChanges, setActiveChanges] = useState(false)
 	const { mutate, isLoading } = useDashboardMutator(async () => {
 		try {
-			return await fetch(`/api/channel/meta/links`, {
-				method: "PUT",
+			return await fetch.put({
+				url: `/api/channel/meta/links`,
 				headers: {
 					authorization: `Bearer: ${await getToken()}`
 				},
-				body: JSON.stringify({
-					_id: data?._id,
-					links: linkEdits
-				})
+				body: { _id: data?._id, links: linkEdits }
 			})
 		} catch (error) {
 			dispatch(setModal({ type: "Error Notification", data: {} }))

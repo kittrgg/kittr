@@ -5,11 +5,12 @@ import { createHandler } from "@Middlewares/createHandler"
 import Channel from "@Services/mongodb/models/Channel"
 import { userAuth } from "@Middlewares/auth"
 import { sanitize } from "@Services/mongodb/utils/sanitize"
+import { ChannelModel } from "@Models/Channel"
 
 const handler = createHandler(userAuth)
 
 // Set channel's affiliate
-handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
+handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel | null>>) => {
 	try {
 		const { _id, company, description, code, link } = req.body
 
@@ -32,7 +33,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 		return res.status(200).json(data)
 	} catch (error) {
 		console.log(error)
-		return res.status(500).json({ isError: true, error })
+		return res.status(500).json({ error: true, errorMessage: JSON.stringify(error) })
 	}
 })
 

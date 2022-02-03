@@ -10,6 +10,9 @@ import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useCoverPhoto } from "@Redux/slices/dashboard/selectors"
 import { Spinner, SVG, Button } from "@Components/shared"
 import { deleteFile } from "@Services/firebase/storage"
+import fetch from "@Utils/helpers/fetch"
+import { isFetchError } from "@Utils/helpers/typeGuards"
+import { ChannelModel } from "@Models/Channel"
 
 const CoverPhotoUploader = ({ ...props }) => {
 	const dispatch = useDispatch()
@@ -32,18 +35,16 @@ const CoverPhotoUploader = ({ ...props }) => {
 				fileName,
 				maxWidthOrHeight: 2500,
 				onSuccess: async () => {
-					const response = await fetch(`/api/channel/meta/coverPhoto`, {
-						method: "POST",
-						headers: {
-							authorization: `Bearer: ${await getToken()}`
-						},
-						body: JSON.stringify({
-							hasCoverPhoto: true,
-							channelId: _id
-						})
+					const response = await fetch.post<ChannelModel | NextClientEndpointError>({
+						url: `/api/channel/meta/coverPhoto`,
+						headers: { authorization: `Bearer: ${await getToken()}` },
+						body: { hasCoverPhoto: true, channelId: _id }
 					})
 
-					if (response) {
+					if (isFetchError(response)) {
+						setIsUploading(false)
+						dispatch(setModal({ type: "Error Notification", data: {} }))
+					} else {
 						download(fileName, (path) => {
 							setIsUploading(false)
 							setImage(path)
@@ -72,15 +73,10 @@ const CoverPhotoUploader = ({ ...props }) => {
 		setImage("")
 		const deleted = await deleteFile(fileName)
 
-		const response = await fetch(`/api/channel/meta/coverPhoto`, {
-			method: "POST",
-			headers: {
-				authorization: `Bearer: ${await getToken()}`
-			},
-			body: JSON.stringify({
-				hasCoverPhoto: false,
-				channelId: _id
-			})
+		const response = await fetch.post({
+			url: `/api/channel/meta/coverPhoto`,
+			headers: { authorization: `Bearer: ${await getToken()}` },
+			body: { hasCoverPhoto: false, channelId: _id }
 		})
 		if (response && deleted) {
 			setIsUploading(false)

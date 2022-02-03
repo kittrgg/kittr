@@ -8,6 +8,8 @@ import { getToken } from "@Services/firebase/auth/getToken"
 import { paragraph } from "@Styles/typography"
 import { useState } from "react"
 import styled from "styled-components"
+import fetch from "@Utils/helpers/fetch"
+import { isFetchError } from "@Utils/helpers/typeGuards"
 
 const Specs = ({ ...props }) => {
 	const [copyNotification, setCopyNotification] = useState(false)
@@ -15,18 +17,17 @@ const Specs = ({ ...props }) => {
 	const specs = useSpecs()
 	const { _id, urlSafeName } = useChannelData()
 	const { mutate } = useDashboardMutator(async (keyName: string) => {
-		const result = await fetch(`/api/channel/meta/specs`, {
-			method: "DELETE",
+		const result = await fetch.delete({
+			url: `/api/channel/meta/specs`,
+			body: { _id, keyName },
 			headers: {
 				authorization: `Bearer ${await getToken()}`
-			},
-			body: JSON.stringify({
-				_id,
-				keyName
-			})
+			}
 		})
 
-		if (result) {
+		if (isFetchError(result)) {
+			dispatch(setModal({ type: "Error Notification", data: "" }))
+		} else {
 			dispatch(setModal({ type: "", data: "" }))
 		}
 	})
