@@ -8,22 +8,18 @@ import { getToken } from "@Services/firebase/auth/getToken"
 import { paragraph } from "@Styles/typography"
 import { useState } from "react"
 import styled from "styled-components"
+import fetch from "@Utils/helpers/fetch"
 
-const Affiliate = ({ ...props }) => {
+const Affiliate = () => {
 	const [copyNotification, setCopyNotification] = useState(false)
 	const dispatch = useDispatch()
 	const affiliates = useAffiliates()
 	const { _id, urlSafeName } = useChannelData()
 	const { mutate } = useDashboardMutator(async (company: string) => {
-		const result = await fetch(`/api/channel/meta/affiliate`, {
-			method: "DELETE",
-			headers: {
-				authorization: `Bearer ${await getToken()}`
-			},
-			body: JSON.stringify({
-				_id,
-				company
-			})
+		const result = await fetch.delete({
+			url: `/api/channel/meta/affiliate`,
+			body: { _id, company },
+			headers: { authorization: `Bearer ${await getToken()}` }
 		})
 
 		if (result) {
