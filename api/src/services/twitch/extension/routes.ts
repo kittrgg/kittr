@@ -67,7 +67,7 @@ router
 						res.json({ error: false, data: resp.data[0] })
 					} else {
 						console.error(resp)
-						res.status(404).json({ error: true, message: "Channel not found" })
+						res.status(404).json({ error: true, message: "Channel not found", resp })
 					}
 				})
 				.catch((err: any) => {

@@ -19,7 +19,7 @@ export const getClips: IFunc = async (broadcaster_id): Promise<ITwitchClip[]> =>
 			queryParams: { broadcaster_id }
 		})
 
-		return data
+		return data || []
 	} catch (error) {
 		throw error
 	}
