@@ -32,7 +32,7 @@
 		"react-markdown": "8.0.0",
 		"react-query": "3.17.3",
 		"react-redux": "7.2.4",
-		"redux": "4.1.0",
+		"redux": "4.1.2",
 		"rollbar": "2.24.0",
 		"socket.io-client": "4.4.1",
 		"stripe": "8.201.0",
