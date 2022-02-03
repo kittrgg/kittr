@@ -8,6 +8,6 @@ const schema = new Schema({
 	slotKey: String
 })
 
-export const KitOption = mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema)
+const KitOption = mongoose.model(MODEL_NAME, schema)
 
 export default KitOption

@@ -9,6 +9,6 @@ const schema = new Schema({
 	channelId: String
 })
 
-export const Promo = mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema)
+const Promo = mongoose.model(MODEL_NAME, schema)
 
 export default Promo

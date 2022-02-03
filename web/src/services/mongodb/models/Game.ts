@@ -19,6 +19,6 @@ const schema = new Schema(
 	{ minimize: false }
 )
 
-export const Game = mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema)
+const Game = mongoose.model(MODEL_NAME, schema)
 
 export default Game
