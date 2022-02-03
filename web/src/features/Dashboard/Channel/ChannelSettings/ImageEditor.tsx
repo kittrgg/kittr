@@ -12,6 +12,9 @@ import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useProfileImage } from "@Redux/slices/dashboard/selectors"
 import { Spinner } from "@Components/shared"
 
+import fetch from "@Utils/helpers/fetch"
+import { isFetchError } from "@Utils/helpers/typeGuards"
+
 /** Change the channel's profile image */
 const ImageEditor = ({ ...props }) => {
 	const dispatch = useDispatch()
@@ -31,15 +34,18 @@ const ImageEditor = ({ ...props }) => {
 				fileName,
 				imageFile,
 				onSuccess: async () => {
-					const setImage = await fetch(`/api/channel/meta/image`, {
-						method: "POST",
+					const setImage = await fetch.post({
+						url: `/api/channel/meta/image`,
+						body: { _id },
 						headers: {
 							authorization: `Bearer: ${await getToken()}`
-						},
-						body: JSON.stringify({ _id })
+						}
 					})
 
-					if (setImage) {
+					if (isFetchError(setImage)) {
+						setIsUploading(false)
+						dispatch(setModal({ type: "Error Notification", data: {} }))
+					} else {
 						download(fileName, (path) => {
 							setIsUploading(false)
 						})
