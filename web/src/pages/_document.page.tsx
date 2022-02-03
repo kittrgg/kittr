@@ -33,21 +33,19 @@ class MyDocument extends Document {
 		return (
 			<Html>
 				<Head>
-					{typeof window !== "undefined" && !window.location.pathname.includes("stage-web") && (
-						<>
-							<script
-								src="https://hb.vntsm.com/v3/live/ad-manager.min.js"
-								type="text/javascript"
-								data-site-id="6124b025a3fb50273241cb6a"
-								data-mode="scan"
-								async
-							></script>
-							<script
-								async
-								src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
-							/>
-						</>
-					)}
+					<>
+						<script
+							src="https://hb.vntsm.com/v3/live/ad-manager.min.js"
+							type="text/javascript"
+							data-site-id="6124b025a3fb50273241cb6a"
+							data-mode="scan"
+							async
+						></script>
+						<script
+							async
+							src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+						/>
+					</>
 
 					<script
 						dangerouslySetInnerHTML={{
