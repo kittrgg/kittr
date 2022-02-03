@@ -42,7 +42,7 @@
 		"vercel": "23.1.0"
 	},
 	"devDependencies": {
-		"@types/jsonwebtoken": "8.5.2",
+		"@types/jsonwebtoken": "8.5.8",
 		"@types/micro": "7.3.6",
 		"@types/react": "17.0.11",
 		"@types/react-select": "5.0.1",
