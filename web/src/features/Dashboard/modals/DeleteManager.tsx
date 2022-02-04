@@ -11,6 +11,7 @@ import { useUser } from "@Hooks/useUser"
 import { useManagedChannels } from "@Hooks/api/useManagedChannels"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
+import fetch from "@Fetch"
 
 const DeleteManager = () => {
 	const dispatch = useDispatch()
@@ -21,23 +22,23 @@ const DeleteManager = () => {
 	const { refetch: refetchChannel } = useDashboardChannel()
 	const isSelf = user?.email === data.email
 	const { mutate, isLoading } = useDashboardMutator(async () => {
-		fetch(`/api/manager/removeManager`, {
-			method: "DELETE",
-			headers: {
-				authorization: `Bearer: ${await getToken()}`
-			},
-			body: JSON.stringify({
-				uid: data.uid,
-				channelId
+		fetch
+			.delete({
+				url: `/api/manager/removeManager`,
+				headers: { authorization: `Bearer: ${await getToken()}` },
+				body: { uid: data.uid, channelId }
 			})
-		}).then(() => {
-			refetchChannel()
-			dispatch(setModal({ type: "", data: {} }))
+			.then(() => {
+				refetchChannel()
+				dispatch(setModal({ type: "", data: {} }))
 
-			if (isSelf) {
-				refetch().finally(() => dispatch(setActiveView({ channelId: "", view: "Channel List" })))
-			}
-		})
+				if (isSelf) {
+					refetch().finally(() => dispatch(setActiveView({ channelId: "", view: "Channel List" })))
+				}
+			})
+			.catch(() => {
+				dispatch(setModal({ type: "Error Notification", data: {} }))
+			})
 	})
 
 	if (isLoading) {
