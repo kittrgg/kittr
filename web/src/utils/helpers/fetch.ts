@@ -1,5 +1,3 @@
-const baseUri = process.env.NEXT_PUBLIC_API_PATH
-
 interface GetParams {
 	url: string
 	headers?: HeadersInit
@@ -11,7 +9,7 @@ const get = async <T>({ url, headers = {} }: GetParams): Promise<T> => {
 		headers
 	}
 
-	return await fetch(baseUri + url, requestOptions).then(handleResponse)
+	return await fetch(url, requestOptions).then(handleResponse)
 }
 
 interface PostParams {
@@ -27,7 +25,7 @@ const post = async <T>({ url, body, headers = {} }: PostParams): Promise<T> => {
 		body: JSON.stringify(body)
 	}
 
-	return await fetch(baseUri + url, requestOptions).then(handleResponse)
+	return await fetch(url, requestOptions).then(handleResponse)
 }
 
 interface PutParams {
@@ -43,7 +41,7 @@ const put = async <T>({ url, body, headers = {} }: PutParams): Promise<T> => {
 		body: JSON.stringify(body)
 	}
 
-	return await fetch(baseUri + url, requestOptions).then(handleResponse)
+	return await fetch(url, requestOptions).then(handleResponse)
 }
 
 interface DeleteParams {
@@ -59,7 +57,7 @@ const _delete = async <T>({ url, body, headers = {} }: DeleteParams): Promise<T>
 		headers,
 		body: JSON.stringify(body)
 	}
-	return await fetch(baseUri + url, requestOptions).then(handleResponse)
+	return await fetch(url, requestOptions).then(handleResponse)
 }
 
 // helper functions
