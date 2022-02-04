@@ -7,7 +7,9 @@ import { paragraph } from "@Styles/typography"
 import { TextInputBox } from "@Components/shared"
 import Summary from "./Summary"
 import { Button } from "@Components/shared"
+import fetch from "@Fetch"
 
+// This is currently not used at all anywhere for any reason.
 const CheckoutForm = ({ ...props }) => {
 	const stripe = useStripe()
 	const elements = useElements() as any
@@ -15,7 +17,6 @@ const CheckoutForm = ({ ...props }) => {
 	const [tip, setTip] = useState(0)
 	const [error, setError] = useState("")
 	const [isProcessing, setIsProcessing] = useState(false)
-	const [success, setSuccess] = useState(false)
 
 	const handleSubmit = async (ev: FormEvent) => {
 		ev.preventDefault()
@@ -32,17 +33,11 @@ const CheckoutForm = ({ ...props }) => {
 		}
 
 		try {
-			const result = await fetch("/api/payments/premium", {
-				method: "POST",
-				headers: {
-					authorization: `Bearer ${await getToken()}`
-				},
-				body: JSON.stringify({
-					amount: 500
-				})
+			const clientSecret = await fetch.post<string>({
+				url: "/api/payments/premium",
+				headers: { authorization: `Bearer ${await getToken()}` },
+				body: { amount: 500 }
 			})
-			const { clientSecret } = await result.json()
-
 			const paymentMethodReq = await stripe.createPaymentMethod({
 				type: "card",
 				card: cardElement as any
@@ -63,7 +58,6 @@ const CheckoutForm = ({ ...props }) => {
 			}
 
 			setIsProcessing(false)
-			setSuccess(true)
 		} catch (err) {
 			console.log(err)
 		}
