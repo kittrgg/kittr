@@ -1,7 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import { createHandler } from "@Utils/middlewares/createHandler"
 import mongoose from "mongoose"
-import { Channel, ChannelModel } from "@Services/mongodb/models"
+import { Channel } from "@Services/mongodb/models"
+import { ChannelModel } from "@Services/mongodb/models/Channel"
 import { userAuth } from "@Middlewares/auth"
 import { sanitize } from "@Services/mongodb/utils/sanitize"
 

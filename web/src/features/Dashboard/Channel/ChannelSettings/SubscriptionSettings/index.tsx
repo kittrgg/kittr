@@ -1,4 +1,4 @@
-import { format, fromUnixTime, differenceInDays } from "date-fns"
+import { fromUnixTime, differenceInDays } from "date-fns"
 import styled from "styled-components"
 
 import colors from "@Colors"
@@ -11,6 +11,8 @@ import { useDispatch } from "@Redux/store"
 import { setModal } from "@Redux/slices/dashboard"
 import PremiumPlans from "@Features/Dashboard/modals/PremiumPlan"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
+import fetch from "@Utils/helpers/fetch"
+import { isFetchError } from "@Utils/helpers/typeGuards"
 
 const SubscriptionSettings = ({ ...props }) => {
 	const dispatch = useDispatch()
@@ -20,15 +22,14 @@ const SubscriptionSettings = ({ ...props }) => {
 	const { data: subscriptionEnd } = useQuery(
 		`/api/channel/meta/premium?stripeId=${data?.meta.stripeId}`,
 		async () => {
-			const result = await fetch(`/api/channel/meta/premium?stripeId=${data?.meta.stripeId}`, {
+			const result = await fetch.get<{ periodEnd: number }>({
+				url: `/api/channel/meta/premium?stripeId=${data?.meta.stripeId}`,
 				headers: {
 					authorization: `Bearer: ${await getToken()}`
 				}
 			})
 
-			const json = await result.json()
-
-			return json.periodEnd
+			return result.periodEnd
 		},
 		{
 			enabled: isPremium,
@@ -40,14 +41,12 @@ const SubscriptionSettings = ({ ...props }) => {
 	const { data: cardLast4 } = useQuery(
 		`/api/stripe/getPaymentMethod?subId=${data?.meta.stripeId}`,
 		async () => {
-			const result = await fetch(`/api/stripe/getPaymentMethod?subId=${data?.meta.stripeId}`, {
-				headers: {
-					authorization: `Bearer: ${await getToken()}`
-				}
+			const result = await fetch.get<{ last4: string }>({
+				url: `/api/stripe/getPaymentMethod?subId=${data?.meta.stripeId}`,
+				headers: { authorization: `Bearer: ${await getToken()}` }
 			})
 
-			const json = await result.json()
-			return json.last4
+			return result.last4
 		},
 		{
 			enabled: isPremium,
@@ -59,17 +58,17 @@ const SubscriptionSettings = ({ ...props }) => {
 	const handleUpgrade = async () => {
 		const apiRoute = isPremium ? `/api/payments/managePremium` : `/api/payments/buyPremium`
 
-		const result = await fetch(apiRoute, {
-			method: "POST",
-			headers: {
-				authorization: `Bearer ${await getToken()}`
-			},
-			body: JSON.stringify({ _id: data?._id, displayName: data?.displayName, urlSafeName: data?.urlSafeName })
+		const result = await fetch.post<{ url: string }>({
+			url: apiRoute,
+			headers: { authorization: `Bearer ${await getToken()}` },
+			body: { _id: data?._id, displayName: data?.displayName, urlSafeName: data?.urlSafeName }
 		})
 
-		const checkoutSession = await result.json()
+		if (isFetchError(result)) {
+			return dispatch(setModal({ type: "Error Notification", data: {} }))
+		}
 
-		window.open(checkoutSession.url, "_blank")
+		window.open(result.url, "_blank")
 	}
 
 	return (

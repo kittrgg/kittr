@@ -8,7 +8,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, { apiVersion:
 const handler = createHandler()
 
 // Get a payment method from a subscription
-handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
+handler.get(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<{ last4: string | undefined }>>) => {
 	const { subId } = req.query
 
 	try {
@@ -17,7 +17,7 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
 
 		return res.status(200).json({ last4: card?.last4 })
 	} catch (err: any) {
-		res.status(400).send(`Webhook Error: ${err.message}`)
+		res.status(400).json({ error: true, errorMessage: `Webhook Error: ${err.message}` })
 	}
 })
 

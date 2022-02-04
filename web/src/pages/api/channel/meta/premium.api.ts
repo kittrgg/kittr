@@ -14,14 +14,14 @@ export const config = {
 
 const handler = createHandler(userAuth)
 
-handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
+handler.get(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<{ periodEnd: number }>>) => {
 	const { stripeId } = req.query
 
 	try {
 		const subscription = await stripe.subscriptions.retrieve(stripeId as string)
 		return res.status(200).json({ periodEnd: subscription.current_period_end })
 	} catch (error) {
-		res.status(500).json(error)
+		res.status(500).json({ error: true, errorMessage: JSON.stringify(error) })
 	}
 })
 
