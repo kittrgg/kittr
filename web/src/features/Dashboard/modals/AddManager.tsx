@@ -10,6 +10,7 @@ import { useChannelData } from "@Redux/slices/dashboard/selectors"
 import { Modal, Button, SVG, TextInput } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
+import fetch from "@Fetch"
 
 /** Modal for adding a manager to a channel. */
 const AddManager = ({ ...props }) => {
@@ -21,23 +22,15 @@ const AddManager = ({ ...props }) => {
 	const { refetch: refetchChannel } = useDashboardChannel()
 	const { mutate, isLoading } = useDashboardMutator(async () => {
 		try {
-			const result = await fetch(`/api/manager/addNewManager`, {
-				method: "POST",
-				headers: {
-					authorization: `Bearer: ${await getToken()}`
-				},
-				body: JSON.stringify({
-					email,
-					channelId,
-					role
-				})
+			const result = await fetch.post({
+				url: `/api/manager/addNewManager`,
+				headers: { authorization: `Bearer: ${await getToken()}` },
+				body: { email, channelId, role }
 			})
 
-			const json = (await result.json()) as any
-
-			if (json) {
+			if (result) {
 				refetchChannel()
-				json.error ? setError(JSON.stringify(json.message)) : dispatch(setModal({ type: "", data: {} }))
+				dispatch(setModal({ type: "", data: {} }))
 			}
 		} catch (error) {
 			dispatch(setModal({ type: "Error Notification", data: "" }))
