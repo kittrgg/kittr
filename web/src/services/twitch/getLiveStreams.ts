@@ -3,6 +3,7 @@ import { headers } from "@Services/twitch/utils/auth"
 import { serializeChannels } from "@Services/mongodb/utils/serializeChannels"
 import { grabLoginName } from "./utils/grabLoginName"
 import { logReport } from "@Services/rollbar/logReport"
+import fetch from "@Fetch"
 
 export const liveChannelsQuery = async () => {
 	const popularChannels = await Channel.aggregate<IChannel>([
@@ -47,13 +48,7 @@ export const liveChannelsQuery = async () => {
 		if (!url) return []
 
 		try {
-			const response = await fetch(url, {
-				method: "GET",
-				headers: await headers(),
-				redirect: "follow"
-			})
-
-			const data = await response.json()
+			const data = await fetch.get<{ data: any }>({ url, headers: await headers(), redirect: "follow" })
 
 			if (!data.data) {
 				logReport.error("Twitch Live Channels API ", data)

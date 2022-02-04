@@ -1,12 +1,16 @@
 interface GetParams {
 	url: string
 	headers?: HeadersInit
+	signal?: AbortSignal
+	redirect?: "follow"
 }
 
-const get = async <T>({ url, headers = {} }: GetParams): Promise<T> => {
+const get = async <T>({ url, headers = {}, signal = undefined, redirect }: GetParams): Promise<T> => {
 	const requestOptions = {
 		method: "GET",
-		headers
+		headers,
+		signal,
+		redirect
 	}
 
 	return await fetch(url, requestOptions).then(handleResponse)
@@ -14,8 +18,9 @@ const get = async <T>({ url, headers = {} }: GetParams): Promise<T> => {
 
 interface PostParams {
 	url: string
-	body: any
+	body?: any
 	headers?: HeadersInit
+	redirect?: "follow"
 }
 
 const post = async <T>({ url, body, headers = {} }: PostParams): Promise<T> => {
