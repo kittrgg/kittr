@@ -26,7 +26,8 @@
 			"@Redux/*": ["redux/*"],
 			"@Services/*": ["services/*"],
 			"@Styles/*": ["styles/*"],
-			"@Utils/*": ["utils/*"]
+			"@Utils/*": ["utils/*"],
+			"@Fetch": ["utils/helpers/fetch"]
 		}
 	},
 	"include": ["**/*.ts", "**/*.tsx"],
