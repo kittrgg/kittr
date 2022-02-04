@@ -11,7 +11,7 @@ import { useDispatch } from "@Redux/store"
 import { setModal } from "@Redux/slices/dashboard"
 import PremiumPlans from "@Features/Dashboard/modals/PremiumPlan"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
-import fetch from "@Utils/helpers/fetch"
+import fetch from "@Fetch"
 import { isFetchError } from "@Utils/helpers/typeGuards"
 
 const SubscriptionSettings = ({ ...props }) => {

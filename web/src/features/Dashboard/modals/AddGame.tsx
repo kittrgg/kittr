@@ -6,7 +6,7 @@ import { useChannelData, useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch, useSelector } from "@Redux/store"
 import { getToken } from "@Services/firebase/auth/getToken"
 import styled from "styled-components"
-import fetch from "@Utils/helpers/fetch"
+import fetch from "@Fetch"
 
 /** The modal that adds a game to a channel. */
 const AddGameModal = ({ ...props }) => {

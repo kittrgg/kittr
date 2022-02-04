@@ -9,7 +9,7 @@ import { getToken } from "@Services/firebase/auth/getToken"
 import { paragraph } from "@Styles/typography"
 import styled from "styled-components"
 import NamingWarning from "./NamingWarning"
-import fetch from "@Utils/helpers/fetch"
+import fetch from "@Fetch"
 import { isFetchError } from "@Utils/helpers/typeGuards"
 
 const EditorSnackbar = () => {

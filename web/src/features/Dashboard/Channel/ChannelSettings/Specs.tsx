@@ -8,7 +8,7 @@ import { getToken } from "@Services/firebase/auth/getToken"
 import { paragraph } from "@Styles/typography"
 import { useState } from "react"
 import styled from "styled-components"
-import fetch from "@Utils/helpers/fetch"
+import fetch from "@Fetch"
 
 const Specs = () => {
 	const [copyNotification, setCopyNotification] = useState(false)

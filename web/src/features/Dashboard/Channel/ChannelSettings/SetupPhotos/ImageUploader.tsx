@@ -9,7 +9,7 @@ import { uploadWithHandlers } from "@Services/firebase/storage/uploadWithHandler
 import { paragraph } from "@Styles/typography"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
-import fetch from "@Utils/helpers/fetch"
+import fetch from "@Fetch"
 import { isFetchError } from "@Utils/helpers/typeGuards"
 
 interface Props {

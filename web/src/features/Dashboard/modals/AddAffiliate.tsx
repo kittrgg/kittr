@@ -10,7 +10,7 @@ import { getToken } from "@Services/firebase/auth/getToken"
 import { setModal } from "@Redux/slices/dashboard"
 import { useModal, useChannelData } from "@Redux/slices/dashboard/selectors"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
-import fetch from "@Utils/helpers/fetch"
+import fetch from "@Fetch"
 
 /** Modal for adding a spec to the channel's PC setup. */
 const AddSpecModal = ({ ...props }) => {

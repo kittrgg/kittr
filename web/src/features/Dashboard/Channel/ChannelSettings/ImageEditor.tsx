@@ -12,7 +12,7 @@ import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useProfileImage } from "@Redux/slices/dashboard/selectors"
 import { Spinner } from "@Components/shared"
 
-import fetch from "@Utils/helpers/fetch"
+import fetch from "@Fetch"
 import { isFetchError } from "@Utils/helpers/typeGuards"
 
 /** Change the channel's profile image */

@@ -9,7 +9,7 @@ import { setModal } from "@Redux/slices/dashboard"
 import H3 from "../../H3"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
-import fetch from "@Utils/helpers/fetch"
+import fetch from "@Fetch"
 
 const YouTubeAutoplayEditor = ({ ...props }) => {
 	const dispatch = useDispatch()

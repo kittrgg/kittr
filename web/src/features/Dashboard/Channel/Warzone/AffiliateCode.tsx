@@ -5,7 +5,7 @@ import { getToken } from "@Services/firebase/auth/getToken"
 import { header2 } from "@Styles/typography"
 import { useEffect, useRef, useState } from "react"
 import styled from "styled-components"
-import fetch from "@Utils/helpers/fetch"
+import fetch from "@Fetch"
 import { useDispatch } from "@Redux/store"
 import { setModal } from "@Redux/slices/dashboard"
 

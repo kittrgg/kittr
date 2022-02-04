@@ -8,7 +8,7 @@ import { useDispatch } from "@Redux/store"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
 import Title from "../../H3"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
-import fetch from "@Utils/helpers/fetch"
+import fetch from "@Fetch"
 import { ChannelModel } from "@Models/Channel"
 
 /** Edit the name of the channel. */

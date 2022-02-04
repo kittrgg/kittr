@@ -6,7 +6,7 @@ import { setModal } from "@Redux/slices/dashboard"
 import { useDispatch } from "@Redux/store"
 import { getToken } from "@Services/firebase/auth/getToken"
 import styled from "styled-components"
-import fetch from "@Utils/helpers/fetch"
+import fetch from "@Fetch"
 
 const ThemeColor = ({ ...props }) => {
 	const { data } = useDashboardChannel()
