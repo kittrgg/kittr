@@ -8,7 +8,7 @@ import mongoose, { Schema, Types, Model } from "mongoose"
 const MODEL_NAME = "player"
 
 export interface ChannelModel {
-	createdDate: Date
+	createdDate: Date | string
 	displayName: string
 	urlSafeName: string
 	viewCount: number

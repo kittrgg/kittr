@@ -1,14 +1,14 @@
 import mongoose from "mongoose"
 import { NextApiRequest, NextApiResponse } from "next"
 import { createHandler } from "@Middlewares/createHandler"
-import Channel from "@Services/mongodb/models/Channel"
+import Channel, { ChannelModel } from "@Services/mongodb/models/Channel"
 import { userAuth } from "@Middlewares/auth"
 import { sanitize } from "@Services/mongodb/utils/sanitize"
 
 const handler = createHandler(userAuth)
 
 // Delete a game AND the game's associated kits from a channel
-handler.delete(async (req: NextApiRequest, res: NextApiResponse) => {
+handler.delete(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel>>) => {
 	const { gameId, channelId } = req.body
 
 	try {
@@ -83,7 +83,7 @@ handler.delete(async (req: NextApiRequest, res: NextApiResponse) => {
 
 		return res.status(200).json(update)
 	} catch (error) {
-		return res.status(400).json(error)
+		return res.status(400).json({ error: true, errorMessage: JSON.stringify(error) })
 	}
 })
 

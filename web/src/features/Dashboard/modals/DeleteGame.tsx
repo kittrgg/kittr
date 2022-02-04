@@ -9,6 +9,7 @@ import { useChannelData } from "@Redux/slices/dashboard/selectors"
 import { Modal, Button } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useSocket } from "pages/dashboard.page"
+import fetch from "@Fetch"
 
 /** Modal to delete a game from a channel. */
 const DeleteGameModal = () => {
@@ -20,19 +21,16 @@ const DeleteGameModal = () => {
 		dispatch(setChannelView({ gameId: "", view: "Deleted Game Notification" }))
 
 		try {
-			fetch(`/api/channel/game/delete`, {
-				method: "DELETE",
-				headers: {
-					authorization: `Bearer: ${await getToken()}`
-				},
-				body: JSON.stringify({
-					gameId,
-					channelId: _id
+			fetch
+				.delete({
+					url: `/api/channel/game/delete`,
+					headers: { authorization: `Bearer: ${await getToken()}` },
+					body: JSON.stringify({ gameId, channelId: _id })
 				})
-			}).then(() => {
-				socket.emit(`gameDelete`, _id)
-				dispatch(setModal({ type: "", data: "" }))
-			})
+				.then(() => {
+					socket.emit(`gameDelete`, _id)
+					dispatch(setModal({ type: "", data: "" }))
+				})
 		} catch (error) {
 			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}

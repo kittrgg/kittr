@@ -1,4 +1,3 @@
-import { io } from "socket.io-client"
 import { useState } from "react"
 import styled from "styled-components"
 
@@ -12,9 +11,10 @@ import { useChannelData } from "@Redux/slices/dashboard/selectors"
 import { useManagedChannels } from "@Hooks/api/useManagedChannels"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useSocket } from "pages/dashboard.page"
+import fetch from "@Fetch"
 
 /** Modal to allow the user to delete the channel. */
-const ChannelDeleteModal = ({ ...props }) => {
+const ChannelDeleteModal = () => {
 	const socket = useSocket()
 	const dispatch = useDispatch()
 	const { _id: channelId, displayName: channelName } = useChannelData()
@@ -22,14 +22,10 @@ const ChannelDeleteModal = ({ ...props }) => {
 	const { refetch } = useManagedChannels()
 	const { mutate } = useDashboardMutator(async () => {
 		try {
-			const result = await fetch(`/api/channel`, {
-				method: "DELETE",
-				headers: {
-					authorization: `Bearer: ${await getToken()}`
-				},
-				body: JSON.stringify({
-					_id: channelId
-				})
+			const result = await fetch.delete({
+				url: `/api/channel`,
+				headers: { authorization: `Bearer: ${await getToken()}` },
+				body: { _id: channelId }
 			})
 
 			if (result) {
