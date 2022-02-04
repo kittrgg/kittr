@@ -2,13 +2,13 @@ import type { NextApiRequest, NextApiResponse } from "next"
 import { createHandler } from "@Utils/middlewares/createHandler"
 import { userAuth } from "@Utils/middlewares/auth"
 import mongoose from "mongoose"
-import { Channel } from "@Services/mongodb/models"
+import Channel, { ChannelModel } from "@Services/mongodb/models/Channel"
 import { sanitize } from "@Services/mongodb/utils/sanitize"
 
 const handler = createHandler(userAuth)
 
 // Change the owner of the channel
-handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
+handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel>>) => {
 	const { channelId, previousOwner, newOwner, token } = req.body
 
 	try {
@@ -31,15 +31,15 @@ handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
 			)
 
 			if (queryResult) {
-				return res.status(200).json({ message: true })
+				return res.status(200).json(queryResult)
 			}
 		} else {
-			return res.status(403).json({ error: true, message: "You do not have permission to add a new manager." })
+			return res.status(403).json({ error: true, errorMessage: "You do not have permission to add a new manager." })
 		}
 	} catch (error) {
 		return res.status(500).json({
 			error: true,
-			message: "We did something wrong. Error Code 2347"
+			errorMessage: "We did something wrong. Error Code 2347"
 		})
 	}
 })

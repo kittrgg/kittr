@@ -11,6 +11,7 @@ import { useChannelManagers } from "@Hooks/api/useChannelManagers"
 import { Modal, Button, Spinner } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
+import fetch from "@Fetch"
 
 /** Modal to allow a user to set a new owner for the channel. */
 const SetNewOwner = ({ ...props }) => {
@@ -27,16 +28,10 @@ const SetNewOwner = ({ ...props }) => {
 			})
 
 		try {
-			const result = await fetch(`/api/manager/newOwner`, {
-				method: "PUT",
-				headers: {
-					authorization: `Bearer: ${await getToken()}`
-				},
-				body: JSON.stringify({
-					channelId,
-					previousOwner: data && data.find((elem: IManagerData) => elem.role === "Owner"),
-					newOwner
-				})
+			const result = await fetch.put({
+				url: `/api/manager/newOwner`,
+				headers: { authorization: `Bearer: ${await getToken()}` },
+				body: { channelId, previousOwner: data && data.find((elem: IManagerData) => elem.role === "Owner"), newOwner }
 			})
 
 			if (result) {
