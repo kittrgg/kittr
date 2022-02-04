@@ -6,6 +6,7 @@ import { useChannelData, useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch, useSelector } from "@Redux/store"
 import { getToken } from "@Services/firebase/auth/getToken"
 import styled from "styled-components"
+import fetch from "@Utils/helpers/fetch"
 
 /** The modal that adds a game to a channel. */
 const AddGameModal = ({ ...props }) => {
@@ -16,15 +17,10 @@ const AddGameModal = ({ ...props }) => {
 	const { isLoading, data } = useAllGames()
 	const { mutate, isLoading: isMutating } = useDashboardMutator(async (game: IGame) => {
 		try {
-			const result = await fetch(`/api/channel/game/add`, {
-				method: "POST",
-				headers: {
-					authorization: `Bearer: ${await getToken()}`
-				},
-				body: JSON.stringify({
-					gameId: game._id,
-					channelId: channelId
-				})
+			const result = await fetch.post({
+				url: `/api/channel/game/add`,
+				headers: { authorization: `Bearer: ${await getToken()}` },
+				body: { gameId: game._id, channelId: channelId }
 			})
 
 			if (result) {
