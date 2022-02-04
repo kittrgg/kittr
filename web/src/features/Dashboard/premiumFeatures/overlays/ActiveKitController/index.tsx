@@ -20,6 +20,7 @@ import H3 from "../../../H3"
 import BackgroundImageUploader from "../BackgroundImageUploader"
 import Preview from "./Preview"
 import * as Styled from "./style"
+import fetch from "@Fetch"
 
 interface IMutation {
 	key: string
@@ -36,16 +37,10 @@ const ActiveKit = ({ ...props }) => {
 	const { data: allOptions } = useAllKitOptions()
 	const { mutate, isLoading: isMutating } = useDashboardMutator(async ({ key, change }: IMutation) => {
 		try {
-			const result = await fetch(`/api/channel/overlay`, {
-				method: "POST",
-				headers: {
-					authorization: `Bearer: ${await getToken()}`
-				},
-				body: JSON.stringify({
-					channelId: data?._id,
-					key,
-					change
-				})
+			const result = await fetch.post({
+				url: `/api/channel/overlay`,
+				headers: { authorization: `Bearer: ${await getToken()}` },
+				body: { channelId: data?._id, key, change }
 			})
 
 			if (result) {
