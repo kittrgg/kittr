@@ -1,6 +1,7 @@
 import { useQuery } from "react-query"
 import { getToken } from "@Services/firebase/auth/getToken"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
+import fetch from "@Fetch"
 
 export const useChannelManagers = () => {
 	const { data } = useDashboardChannel()
@@ -9,12 +10,11 @@ export const useChannelManagers = () => {
 		const aborter = new AbortController()
 
 		const fetchManagerInfo = async (uid: string) => {
-			return fetch(`/api/manager/getInfo?uid=${uid}`, {
+			return fetch.get<Record<string, string>>({
+				url: `/api/manager/getInfo?uid=${uid}`,
 				signal: aborter.signal,
-				headers: {
-					authorization: `Bearer: ${await getToken()}`
-				}
-			}).then((res) => res.json())
+				headers: { authorization: `Bearer: ${await getToken()}` }
+			})
 		}
 
 		const result = data
