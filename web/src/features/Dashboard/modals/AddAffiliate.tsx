@@ -10,6 +10,8 @@ import { getToken } from "@Services/firebase/auth/getToken"
 import { setModal } from "@Redux/slices/dashboard"
 import { useModal, useChannelData } from "@Redux/slices/dashboard/selectors"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
+import fetch from "@Utils/helpers/fetch"
+import { isFetchError } from "@Utils/helpers/typeGuards"
 
 /** Modal for adding a spec to the channel's PC setup. */
 const AddSpecModal = ({ ...props }) => {
@@ -22,21 +24,15 @@ const AddSpecModal = ({ ...props }) => {
 	const [code, setCode] = useState(data?.code || "")
 	const [link, setLink] = useState(data?.link || "")
 	const { mutate, isLoading } = useDashboardMutator(async () => {
-		const result = await fetch(`/api/channel/meta/affiliate`, {
-			method: "POST",
-			headers: {
-				authorization: `Bearer ${await getToken()}`
-			},
-			body: JSON.stringify({
-				_id,
-				company,
-				description,
-				code,
-				link
-			})
+		const result = await fetch.post({
+			url: `/api/channel/meta/affiliate`,
+			headers: { authorization: `Bearer ${await getToken()}` },
+			body: { _id, company, description, code, link }
 		})
 
-		if (result) {
+		if (isFetchError(result)) {
+			dispatch(setModal({ type: "Error Notification", data: "" }))
+		} else {
 			dispatch(setModal({ type: "", data: "" }))
 		}
 	})

@@ -1,8 +1,19 @@
-import mongoose, { Schema } from "mongoose"
+import mongoose, { Schema, Model } from "mongoose"
 
 const MODEL_NAME = "game"
 
-const schema = new Schema(
+export interface GameModel {
+	displayName: string
+	urlSafeName: string
+	backgroundImage: string
+	titleImage: string
+	active: boolean
+	meta: {
+		creatorCode: string
+	}
+}
+
+const schema = new Schema<GameModel>(
 	{
 		displayName: String,
 		urlSafeName: String,
@@ -19,6 +30,7 @@ const schema = new Schema(
 	{ minimize: false }
 )
 
-export const Game = mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema)
+export const Game =
+	(mongoose.models[MODEL_NAME] as Model<GameModel, {}, {}, {}>) || mongoose.model<GameModel>(MODEL_NAME, schema)
 
 export default Game

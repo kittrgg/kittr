@@ -1,4 +1,4 @@
-import mongoose, { Schema, Types } from "mongoose"
+import mongoose, { Schema, Types, Model } from "mongoose"
 
 // This is the only place where channels are referred to as channels.
 // The front-end calls these entities "channels."
@@ -143,6 +143,7 @@ const schema = new Schema<ChannelModel>(
 	{ minimize: false }
 )
 
-export const Channel = mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema)
+export const Channel =
+	(mongoose.models[MODEL_NAME] as Model<ChannelModel, {}, {}, {}>) || mongoose.model(MODEL_NAME, schema)
 
 export default Channel

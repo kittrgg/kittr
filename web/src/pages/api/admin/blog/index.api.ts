@@ -3,15 +3,16 @@ import { createHandler } from "@Utils/middlewares/createHandler"
 import { adminAuth } from "@Utils/middlewares/auth"
 import mongoose from "mongoose"
 import { BlogPost } from "@Services/mongodb/models"
+import { BlogPostModel } from "@Services/mongodb/models/BlogPost"
 import { toURL } from "@Utils/helpers/toURL"
 
 const handler = createHandler(adminAuth)
 
 // Create a blog post
-handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
+handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<BlogPostModel>>) => {
 	const { author, datePublished, title, markdown } = JSON.parse(req.body)
 
-	const newPost = await new BlogPost({
+	const newPost = new BlogPost({
 		author,
 		datePublished,
 		title,
@@ -19,26 +20,30 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 		slug: toURL(datePublished + "-" + title)
 	})
 
-	await newPost.save((errors: any, data: IPost) => {
-		if (errors) return res.status(400).json(errors)
-		return res.status(200).json(data)
-	})
+	try {
+		const save = await newPost.save()
+		return res.status(200).json(save)
+	} catch (error) {
+		return res.status(400).json({ error: true, errorMessage: JSON.stringify(error) })
+	}
 })
 
 // Edit a blog post
 // This route is untested
-handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
+handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<BlogPostModel | null>>) => {
 	const { _id, ...rest } = JSON.parse(req.body)
 
-	await BlogPost.findOneAndUpdate(
-		{ _id: new mongoose.Types.ObjectId(_id) },
-		{ $set: rest },
-		{ new: true },
-		(errors, data: IPost) => {
-			if (errors) return res.status(400).json(errors)
-			return res.status(200).json(data)
-		}
-	)
+	try {
+		const update = await BlogPost.findOneAndUpdate(
+			{ _id: new mongoose.Types.ObjectId(_id) },
+			{ $set: rest },
+			{ new: true }
+		)
+
+		return res.status(200).json(update)
+	} catch (error) {
+		if (error) return res.status(400).json({ error: true, errorMessage: JSON.stringify(error) })
+	}
 })
 
 export default handler

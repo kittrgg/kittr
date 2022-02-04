@@ -1,6 +1,25 @@
-import mongoose, { Schema } from "mongoose"
+import mongoose, { Schema, Model } from "mongoose"
 
 const MODEL_NAME = "kitStat"
+
+export interface KitStatModel {
+	ratioOfChannelsWithBaseFeatured: Array<{
+		_id: string
+		baseCount: number
+		channelCount: number
+		ratio: number
+	}>
+	ratioOfChannelsWithBase: Array<{
+		_id: string
+		baseCount: number
+		channelCount: number
+		ratio: number
+	}>
+	forSetupComparison: Array<{
+		_id: string
+		matches: Array<Array<string>>
+	}>
+}
 
 const schema = new Schema({
 	ratioOfChannelsWithBaseFeatured: Schema.Types.Mixed,
@@ -8,6 +27,7 @@ const schema = new Schema({
 	forSetupComparison: Schema.Types.Mixed
 })
 
-export const KitStat = mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema)
+export const KitStat =
+	(mongoose.models[MODEL_NAME] as Model<KitStatModel, {}, {}, {}>) || mongoose.model<KitStatModel>(MODEL_NAME, schema)
 
 export default KitStat

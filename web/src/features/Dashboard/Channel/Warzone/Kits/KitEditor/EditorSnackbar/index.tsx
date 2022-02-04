@@ -9,6 +9,8 @@ import { getToken } from "@Services/firebase/auth/getToken"
 import { paragraph } from "@Styles/typography"
 import styled from "styled-components"
 import NamingWarning from "./NamingWarning"
+import fetch from "@Utils/helpers/fetch"
+import { isFetchError } from "@Utils/helpers/typeGuards"
 
 const EditorSnackbar = () => {
 	const dispatch = useDispatch()
@@ -51,12 +53,10 @@ const EditorSnackbar = () => {
 		}
 
 		try {
-			const result = await fetch(`/api/channel/kit`, {
-				method: "POST",
-				headers: {
-					authorization: `Bearer: ${await getToken()}`
-				},
-				body: JSON.stringify({
+			const result = await fetch.post({
+				url: `/api/channel/kit`,
+				headers: { authorization: `Bearer: ${await getToken()}` },
+				body: {
 					channelId: _id,
 					kitId: initialKit._id || undefined,
 					kitBase: activeKit.base._id,
@@ -68,10 +68,12 @@ const EditorSnackbar = () => {
 					tiktokId: activeKit.userData.tiktokId,
 					quote: activeKit.userData.quote,
 					previousUpdater: user?.displayName || user?.email
-				})
+				}
 			})
 
-			if (result) {
+			if (isFetchError(result)) {
+				dispatch(setModal({ type: "Error Notification", data: {} }))
+			} else {
 				dispatch(clearKitEditor())
 			}
 		} catch (error) {
