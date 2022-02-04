@@ -9,6 +9,7 @@
     "dev:build": "docker-compose -f docker-compose.dev.yml up --build",
     "dev:down": "docker-compose -f docker-compose.dev.yml down",
     "dev:seed": "cross-env DB_CONNECTION_STRING=mongodb://root:example@localhost:27017/myFirstDatabase ts-node ./seeds/mongo/db-seed.ts",
+    "dev:logs:next": "docker-compose -f docker-compose.dev.yml logs -f web",
     "test:local": "docker-compose -f docker-compose.test.yml up --build",
     "cypress:open": "cypress open --config-file ./cypress/cypress.local.json",
     "cypress:run": "cypress run --config-file ./cypress/cypress.local.json"
