@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next"
 import auth from "@Services/firebase/admin"
 
 export const userAuth = async (req: NextApiRequest, res: NextApiResponse, next: any) => {
-	const parsedBody = req.body ? JSON.parse(req.body) : {}
+	const parsedBody = req.body ?? {}
 
 	const authorization = req.headers.authorization
 
