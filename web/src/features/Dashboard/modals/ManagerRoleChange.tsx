@@ -8,6 +8,7 @@ import { setModal } from "@Redux/slices/dashboard"
 import { useModal, useChannelData } from "@Redux/slices/dashboard/selectors"
 import { Button, Spinner, Modal } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
+import fetch from "@Fetch"
 
 const DeleteManager = ({ ...props }) => {
 	const dispatch = useDispatch()
@@ -15,15 +16,10 @@ const DeleteManager = ({ ...props }) => {
 	const { data } = useModal()
 	const { mutate: demote, isLoading: demoting } = useDashboardMutator(async () => {
 		try {
-			const result = await fetch(`/api/manager/demote`, {
-				method: "PUT",
-				headers: {
-					authorization: `Bearer: ${await getToken()}`
-				},
-				body: JSON.stringify({
-					uid: data.uid,
-					channelId
-				})
+			const result = await fetch.put({
+				url: `/api/manager/demote`,
+				headers: { authorization: `Bearer: ${await getToken()}` },
+				body: { uid: data.uid, channelId }
 			})
 
 			if (result) {
@@ -36,15 +32,10 @@ const DeleteManager = ({ ...props }) => {
 
 	const { mutate: promote, isLoading: promoting } = useDashboardMutator(async () => {
 		try {
-			const result = await fetch(`/api/manager/promote`, {
-				method: "PUT",
-				headers: {
-					authorization: `Bearer: ${await getToken()}`
-				},
-				body: JSON.stringify({
-					uid: data.uid,
-					channelId
-				})
+			const result = await fetch.put({
+				url: `/api/manager/promote`,
+				headers: { authorization: `Bearer: ${await getToken()}` },
+				body: { uid: data.uid, channelId }
 			})
 
 			if (result) {
