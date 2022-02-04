@@ -11,7 +11,6 @@ import { paragraph } from "@Styles/typography"
 import { useState } from "react"
 import styled from "styled-components"
 import fetch from "@Utils/helpers/fetch"
-import { isFetchError } from "@Utils/helpers/typeGuards"
 
 const CreateChannelModal = () => {
 	const dispatch = useDispatch()
@@ -33,7 +32,7 @@ const CreateChannelModal = () => {
 			body: { displayName, userId: user?.uid }
 		})
 
-		if (!isFetchError(result)) {
+		if (result) {
 			refetch()
 
 			dispatch(

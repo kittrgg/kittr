@@ -6,7 +6,6 @@ import { header2 } from "@Styles/typography"
 import { useEffect, useRef, useState } from "react"
 import styled from "styled-components"
 import fetch from "@Utils/helpers/fetch"
-import { isFetchError } from "@Utils/helpers/typeGuards"
 import { useDispatch } from "@Redux/store"
 import { setModal } from "@Redux/slices/dashboard"
 
@@ -17,17 +16,14 @@ const CreatorCode = ({ ...props }) => {
 	const [code, setCode] = useState(games.find((game) => game.id === activeGame)?.code || "")
 	const [isEditing, setIsEditing] = useState(false)
 	const inputRef = useRef<HTMLInputElement>(null)
-	const { mutate } = useDashboardMutator(async () => {
+	const { mutate, error } = useDashboardMutator(async () => {
 		const result = await fetch.put<any>({
 			url: `/api/channel/meta/code`,
 			headers: { authorization: `Bearer: ${await getToken()}` },
 			body: { code, channelId, gameId: games.find((game) => game.id === activeGame)?.id }
 		})
 
-		if (isFetchError(result)) {
-			dispatch(setModal({ type: "Error Notification", data: {} }))
-			setIsEditing(false)
-		} else {
+		if (result) {
 			setIsEditing(false)
 		}
 	})
@@ -37,6 +33,10 @@ const CreatorCode = ({ ...props }) => {
 			inputRef.current.focus()
 		}
 	}, [isEditing])
+
+	if (error) {
+		dispatch(setModal({ type: "Error Notification", data: {} }))
+	}
 
 	return (
 		<Code>

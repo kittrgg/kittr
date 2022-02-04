@@ -9,26 +9,27 @@ import { paragraph } from "@Styles/typography"
 import { useState } from "react"
 import styled from "styled-components"
 import fetch from "@Utils/helpers/fetch"
-import { isFetchError } from "@Utils/helpers/typeGuards"
 
-const Specs = ({ ...props }) => {
+const Specs = () => {
 	const [copyNotification, setCopyNotification] = useState(false)
 	const dispatch = useDispatch()
 	const specs = useSpecs()
 	const { _id, urlSafeName } = useChannelData()
-	const { mutate } = useDashboardMutator(async (keyName: string) => {
-		const result = await fetch.delete({
-			url: `/api/channel/meta/specs`,
-			body: { _id, keyName },
-			headers: {
-				authorization: `Bearer ${await getToken()}`
-			}
-		})
+	const { mutate } = useDashboardMutator<any, string, string>(async (keyName) => {
+		try {
+			const result = await fetch.delete({
+				url: `/api/channel/meta/specs`,
+				body: { _id, keyName },
+				headers: {
+					authorization: `Bearer ${await getToken()}`
+				}
+			})
 
-		if (isFetchError(result)) {
-			dispatch(setModal({ type: "Error Notification", data: "" }))
-		} else {
-			dispatch(setModal({ type: "", data: "" }))
+			if (result) {
+				dispatch(setModal({ type: "", data: "" }))
+			}
+		} catch (error) {
+			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}
 	})
 

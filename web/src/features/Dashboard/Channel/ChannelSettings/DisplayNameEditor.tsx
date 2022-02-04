@@ -10,7 +10,6 @@ import Title from "../../H3"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import fetch from "@Utils/helpers/fetch"
 import { ChannelModel } from "@Models/Channel"
-import { isFetchError } from "@Utils/helpers/typeGuards"
 
 /** Edit the name of the channel. */
 const DisplayNameEditor = ({ ...props }) => {
@@ -29,9 +28,7 @@ const DisplayNameEditor = ({ ...props }) => {
 				body: { _id, property: "displayName", value: displayName }
 			})
 
-			if (isFetchError(result)) {
-				setError(result.errorMessage)
-			} else {
+			if (result) {
 				setIsPersisted(true)
 			}
 		} catch (error) {
