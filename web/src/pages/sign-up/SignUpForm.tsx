@@ -8,6 +8,7 @@ import { FormEvent, useState } from "react"
 import { useMutation } from "react-query"
 import styled from "styled-components"
 import validator from "validator"
+import fetch from "@Fetch"
 
 /** Form to create a user account */
 const SignUp = ({ ...props }) => {
@@ -21,25 +22,13 @@ const SignUp = ({ ...props }) => {
 
 	const { mutate, isLoading } = useMutation(async () => {
 		try {
-			const result = await fetch(`/api/user`, {
-				method: "POST",
-				body: JSON.stringify({
-					displayName: gamertag,
-					email,
-					password
-				})
-			})
+			const result = await fetch.post({ url: `/api/user`, body: { displayName: gamertag, email, password } })
 
-			const json = result.json() as any
-
-			if (json) {
-				if (json.error) {
-					return setError(json.message)
-				}
+			if (result) {
 				router.push(Routes.DASHBOARD)
 			}
 		} catch (error) {
-			return setError("There was a network error.")
+			return setError("Our server just reported an issue. Please try again later.")
 		}
 	})
 
