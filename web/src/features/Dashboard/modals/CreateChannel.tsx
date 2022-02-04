@@ -10,6 +10,8 @@ import { getToken } from "@Services/firebase/auth/getToken"
 import { paragraph } from "@Styles/typography"
 import { useState } from "react"
 import styled from "styled-components"
+import fetch from "@Utils/helpers/fetch"
+import { isFetchError } from "@Utils/helpers/typeGuards"
 
 const CreateChannelModal = () => {
 	const dispatch = useDispatch()
@@ -17,43 +19,30 @@ const CreateChannelModal = () => {
 	const { data } = useModal()
 	const { refetch } = useManagedChannels()
 	const [displayName, setDisplayName] = useState("")
-	const [error, setError] = useState("")
 
-	const { mutate, isLoading } = useDashboardMutator(async () => {
-		if (displayName.length === 0) return setError("You must have a display name.")
-		if (displayName.length > 26) return setError("That channel name is too long. 25 characters or less.")
+	const { mutate, isLoading, error } = useDashboardMutator<any, NextClientEndpointError>(async () => {
+		if (displayName.length === 0) return Promise.reject({ errorMessage: "You must have a display name." })
+		if (displayName.length > 26) {
+			setDisplayName("")
+			return Promise.reject({ errorMessage: "That channel name is too long. 25 characters or less." })
+		}
 
-		try {
-			const result = await fetch(`/api/channels`, {
-				method: "POST",
-				headers: {
-					authorization: `Bearer: ${await getToken()}`
-				},
-				body: JSON.stringify({
-					displayName,
-					userId: user?.uid
+		const result = await fetch.post({
+			url: `/api/channels`,
+			headers: { authorization: `Bearer: ${await getToken()}` },
+			body: { displayName, userId: user?.uid }
+		})
+
+		if (!isFetchError(result)) {
+			refetch()
+
+			dispatch(
+				handleTutorialAction({
+					condition: data.isTutorial,
+					trueState: { type: "Tutorial", data: { page: 3 } },
+					falseState: { type: "", data: {} }
 				})
-			})
-
-			const json = (await result.json()) as any
-
-			if (json) {
-				if (json.error) {
-					return setError(json.message)
-				} else {
-					refetch()
-
-					dispatch(
-						handleTutorialAction({
-							condition: data.isTutorial,
-							trueState: { type: "Tutorial", data: { page: 3 } },
-							falseState: { type: "", data: {} }
-						})
-					)
-				}
-			}
-		} catch (err) {
-			dispatch(setModal({ type: "Error Notification", data: {} }))
+			)
 		}
 	})
 
@@ -74,7 +63,7 @@ const CreateChannelModal = () => {
 				value={displayName}
 				onChange={(e) => setDisplayName(e.target.value)}
 			/>
-			<Error>{error}</Error>
+			<Error>{error?.errorMessage}</Error>
 			<FlexRow>
 				<Button design="transparent" text="CANCEL" onClick={() => dispatch(setModal({ type: "", data: "" }))} />
 				<Button
