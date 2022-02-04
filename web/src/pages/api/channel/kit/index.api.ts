@@ -103,7 +103,7 @@ handler.post(
 )
 
 // Delete a channel's kit
-handler.delete(async (req: NextApiRequest, res: NextApiResponse) => {
+handler.delete(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel | null>>) => {
 	const { channelId, kitId } = req.body
 
 	try {
@@ -113,9 +113,9 @@ handler.delete(async (req: NextApiRequest, res: NextApiResponse) => {
 			{ new: true }
 		)
 
-		return res.status(200).json({ success: true, data })
+		return res.status(200).json(data)
 	} catch (error) {
-		return res.status(400).json({ success: false, error })
+		return res.status(400).json({ error: true, errorMessage: JSON.stringify(error) })
 	}
 })
 
