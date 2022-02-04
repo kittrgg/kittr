@@ -1,10 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import auth from "@Services/firebase/admin"
 
-export const whatever = async (req: NextApiRequest, res: NextApiResponse, next: any) => {
-	return next()
-}
-
 export const userAuth = async (req: NextApiRequest, res: NextApiResponse, next: any) => {
 	const parsedBody = req.body ? JSON.parse(req.body) : {}
 
