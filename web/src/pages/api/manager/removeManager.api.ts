@@ -9,7 +9,7 @@ const handler = createHandler(userAuth)
 
 // Remove a manager from a channel
 handler.delete(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<{ success: true }>>) => {
-	const { uid, channelId, token } = req.body
+	const { uid, channelId, token } = JSON.parse(req.body)
 
 	try {
 		const result = await Channel.find({ _id: new mongoose.Types.ObjectId(sanitize(channelId)) }).lean()

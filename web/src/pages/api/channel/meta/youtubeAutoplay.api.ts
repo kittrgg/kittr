@@ -8,7 +8,7 @@ const handler = createHandler(userAuth)
 
 // Edit youtube autoplay setting
 handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel | null>>) => {
-	const { _id, boolean } = req.body
+	const { _id, boolean } = JSON.parse(req.body)
 
 	try {
 		const data = await Channel.findByIdAndUpdate(

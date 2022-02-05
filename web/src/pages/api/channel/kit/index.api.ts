@@ -23,7 +23,7 @@ handler.post(
 			youtubeURL = "",
 			tiktokId = "",
 			quote = ""
-		} = req.body
+		} = JSON.parse(req.body)
 
 		const optionsArray = Object.values<IKitOption>(options)
 			.filter((opt) => opt._id.length > 0)

@@ -18,7 +18,7 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<C
 
 // Remove a channel from existence...Or just the database
 handler.delete(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<{ deleted: true }>>) => {
-	const { _id } = req.body
+	const { _id } = JSON.parse(req.body)
 
 	try {
 		const result = await Channel.findOneAndDelete({ _id: new mongoose.Types.ObjectId(sanitize(_id)) }, null)

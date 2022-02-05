@@ -12,7 +12,7 @@ const handler = createHandler(userAuth)
 
 // Add a manager to a channel
 handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel>>) => {
-	const { email, channelId, role, token } = req.body
+	const { email, channelId, role, token } = JSON.parse(req.body)
 
 	const result = await Channel.find({ _id: new mongoose.Types.ObjectId(sanitize(channelId)) }).lean()
 	const userRole = result[0].managers.find((manager: IManager) => manager.uid === token.uid)?.role

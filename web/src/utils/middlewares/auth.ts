@@ -4,8 +4,6 @@ import auth from "@Services/firebase/admin"
 export const userAuth = async (req: NextApiRequest, res: NextApiResponse, next: any) => {
 	let parsedBody = {}
 
-	console.log(typeof req.body)
-
 	if (typeof req.body === "string" && req.body.length > 0) {
 		parsedBody = JSON.parse(req.body)
 	} else if (typeof req.body === "object") {
