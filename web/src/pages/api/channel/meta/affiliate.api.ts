@@ -40,7 +40,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<
 // Delete a channel's affiliate
 handler.delete(async (req: NextApiRequest, res: NextApiResponse) => {
 	try {
-		const { _id, company } = req.body
+		const { _id, company } = JSON.parse(req.body)
 
 		const data = await Channel.findByIdAndUpdate(
 			{

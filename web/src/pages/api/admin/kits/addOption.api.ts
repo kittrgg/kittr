@@ -9,7 +9,6 @@ const handler = createHandler(adminAuth)
 // Add a kit option to the kit base as a possibility for the user to add to their kit
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 	const { baseId, optionId, orderPlacement } = JSON.parse(req.body)
-	// const { baseId, optionId, orderPlacement } = req.body
 
 	KitBase.findOneAndUpdate(
 		{ _id: new mongoose.Types.ObjectId(baseId) },
