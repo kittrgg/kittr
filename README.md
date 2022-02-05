@@ -34,10 +34,7 @@ git checkout develop
 npm run dev
 ```
 
-7. If this is your first time developing kittr, you will need to seed your local Mongo instance at this time. To do so:
-
-- In the shell of your Mongo container, use `npm run dev:seed`.
-- If you got a message saying "Seeded correctly, let's get kittd," you are ready to go!
+7. If this is your first time developing kittr, you will need to seed your local Mongo instance at this time. To do so, use `npm run dev:seed`. If you got a message saying "Let's get kittd," you are ready to go!
 
 8. Visit kittr at [http://localhost:3000](http://localhost:3000)
 
