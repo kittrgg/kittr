@@ -2,7 +2,15 @@ import type { NextApiRequest, NextApiResponse } from "next"
 import auth from "@Services/firebase/admin"
 
 export const userAuth = async (req: NextApiRequest, res: NextApiResponse, next: any) => {
-	const parsedBody = req.body ?? {}
+	let parsedBody = {}
+
+	console.log(typeof req.body)
+
+	if (typeof req.body === "string" && req.body.length > 0) {
+		parsedBody = JSON.parse(req.body)
+	} else if (typeof req.body === "object") {
+		parsedBody = req.body
+	}
 
 	const authorization = req.headers.authorization
 
@@ -14,6 +22,7 @@ export const userAuth = async (req: NextApiRequest, res: NextApiResponse, next: 
 		.verifyIdToken(token)
 		.then((decodedToken) => {
 			req.body = { ...parsedBody, token: decodedToken }
+			req.body = JSON.stringify(req.body)
 			return next()
 		})
 		.catch((err) => {
