@@ -39,7 +39,7 @@ const KitButton = ({ favorite, kit }: Props) => {
 				dispatch(
 					setActiveKit({
 						...kit,
-						options: kit.options.map((opt) => allOptions.find((allOption: any) => allOption._id === opt))
+						options: kit.options.map((opt) => allOptions!.find((allOption: any) => allOption._id === opt)!)
 					})
 				)
 			}

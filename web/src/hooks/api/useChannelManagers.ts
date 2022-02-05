@@ -10,7 +10,7 @@ export const useChannelManagers = () => {
 		const aborter = new AbortController()
 
 		const fetchManagerInfo = async (uid: string) => {
-			return fetch.get<Record<string, string>>({
+			return fetch.get<IManagerData>({
 				url: `/api/manager/getInfo?uid=${uid}`,
 				signal: aborter.signal,
 				headers: { authorization: `Bearer: ${await getToken()}` }
@@ -18,9 +18,9 @@ export const useChannelManagers = () => {
 		}
 
 		const result = data
-			? data.managers.map(async (elem: IManager) => ({
-					role: elem.role,
-					...(await fetchManagerInfo(elem.uid))
+			? data.managers.map(async (elem) => ({
+					...(await fetchManagerInfo(elem.uid)),
+					role: elem.role
 			  }))
 			: []
 

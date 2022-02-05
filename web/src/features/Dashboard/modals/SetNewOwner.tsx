@@ -23,7 +23,7 @@ const SetNewOwner = ({ ...props }) => {
 	const { mutate, isLoading: isMutating } = useDashboardMutator(async () => {
 		const newOwner =
 			data &&
-			data.find((elem: IManagerData) => {
+			data.find((elem) => {
 				return elem.displayName === newManager || elem.email === newManager
 			})
 

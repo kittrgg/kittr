@@ -41,7 +41,7 @@ const EditorSnackbar = () => {
 			kitArr
 				.map((kit) => ({
 					...kit,
-					base: allKitBases.find((allBase: IKitBase) => allBase._id === kit.baseId) || activeKit
+					base: allKitBases!.find((allBase: IKitBase) => allBase._id === kit.baseId) || activeKit
 				}))
 				// Map to just the names
 				.map((kit) => kit.base.displayName + kit.userData.customTitle)

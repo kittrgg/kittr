@@ -28,5 +28,5 @@ export const updateStripeId: IFunc = async (_id, stripeId) => {
 
 	if (!rawChannel) return {} as IRawChannel
 
-	return { ...rawChannel, _id: rawChannel._id.toString(), createdDate: rawChannel.createdDate.toISOString() }
+	return { ...rawChannel, _id: rawChannel._id.toString(), createdDate: rawChannel.createdDate.toString() }
 }

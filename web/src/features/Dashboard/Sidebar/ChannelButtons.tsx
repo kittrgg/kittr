@@ -1,4 +1,4 @@
-import { useEffect, useRef, MutableRefObject } from "react"
+import { useEffect, useRef, MutableRefObject, Key } from "react"
 import * as Styled from "./style"
 import colors from "@Colors"
 import { handleTutorialAction, setModal, setChannelView } from "@Redux/slices/dashboard"
@@ -53,11 +53,12 @@ const ChannelButtons = ({ ...props }) => {
 			</Styled.ButtonContainer>
 
 			{games &&
+				data &&
 				games.map((game) => (
 					<GameButton
-						key={data.find((allGame: IKitBase) => allGame._id === game.id)}
-						game={data.find((allGame: IKitBase) => allGame._id === game.id)}
-						activeView={gameId === data.find((allGame: IGame) => allGame._id === game.id)}
+						key={data.find((allGame) => allGame._id === game.id)?.id}
+						game={data.find((allGame) => allGame._id === game.id) as IGame}
+						activeView={gameId === data.find((allGame) => allGame._id === game.id)?.id}
 					/>
 				))}
 

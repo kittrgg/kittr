@@ -4,7 +4,7 @@ import { Modal } from "@Components/shared"
 import { header2 } from "@Styles/typography"
 
 /** Notify of any errors that happen. */
-const SupportModal = ({ ...props }) => {
+const ErrorNotification = ({ ...props }) => {
 	return (
 		<Modal backgroundClickToClose title="UH OH. WE MESSED UP">
 			<Paragraph>This error has been logged into our systems and we will investigate it as soon as possible.</Paragraph>
@@ -12,7 +12,7 @@ const SupportModal = ({ ...props }) => {
 	)
 }
 
-export default SupportModal
+export default ErrorNotification
 
 // Styled Components
 

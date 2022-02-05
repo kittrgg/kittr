@@ -295,7 +295,7 @@ const ActiveKit = ({ ...props }) => {
 							{data?.kits
 								.slice()
 								.filter((kit) => data?.overlay?.secondaryKit?._id !== kit._id)
-								.map((kit) => ({ ...kit, base: allKitBases.find((kitBase: IKitBase) => kitBase._id === kit.baseId) }))
+								.map((kit) => ({ ...kit, base: allKitBases?.find((kitBase: IKitBase) => kitBase._id === kit.baseId) }))
 								.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
 								.sort((kit) => {
 									if (kit.userData.featured) {
@@ -320,9 +320,9 @@ const ActiveKit = ({ ...props }) => {
 												} else {
 													const newKit = {
 														...kit,
-														base: allKitBases.find((allBases: IKitBase) => allBases._id === kit.baseId),
+														base: allKitBases?.find((allBases: IKitBase) => allBases._id === kit.baseId),
 														options: kit.options.map((opt: IKitOptionRaw) =>
-															allOptions.find((allOption: any) => allOption._id === opt)
+															allOptions?.find((allOption: any) => allOption._id === opt)
 														)
 													}
 													mutate({ key: "primaryKit", change: newKit })
@@ -357,7 +357,7 @@ const ActiveKit = ({ ...props }) => {
 							{data?.kits
 								.slice()
 								.filter((kit) => data?.overlay?.primaryKit?._id !== kit._id)
-								.map((kit) => ({ ...kit, base: allKitBases.find((kitBase: IKitBase) => kitBase._id === kit.baseId) }))
+								.map((kit) => ({ ...kit, base: allKitBases?.find((kitBase: IKitBase) => kitBase._id === kit.baseId) }))
 								.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
 								.sort((kit) => {
 									if (kit.userData.featured) {
@@ -382,9 +382,9 @@ const ActiveKit = ({ ...props }) => {
 												} else {
 													const newKit = {
 														...kit,
-														base: allKitBases.find((allBases: IKitBase) => allBases._id === kit.baseId),
+														base: allKitBases?.find((allBases: IKitBase) => allBases._id === kit.baseId),
 														options: kit.options.map((opt: IKitOptionRaw) =>
-															allOptions.find((allOption: any) => allOption._id === opt)
+															allOptions?.find((allOption: any) => allOption._id === opt)
 														)
 													}
 

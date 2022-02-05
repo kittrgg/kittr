@@ -7,6 +7,7 @@ import { useDispatch } from "@Redux/store"
 import { Modal, Selector, TextInputBox, Button, Spinner } from "@Components/shared"
 import { getToken } from "@Services/firebase/auth/getToken"
 import { setModal } from "@Redux/slices/dashboard"
+import ErrorNotification from "./ErrorNotification"
 import { useModal, useChannelData } from "@Redux/slices/dashboard/selectors"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import fetch from "@Fetch"
@@ -37,7 +38,7 @@ const AddSpecModal = ({ ...props }) => {
 		}
 	}, [])
 
-	if (error) return dispatch(setModal({ type: "Error Notification", data: {} }))
+	if (error) return <ErrorNotification />
 	if (isLoading) return <Spinner width="24px" />
 
 	return (

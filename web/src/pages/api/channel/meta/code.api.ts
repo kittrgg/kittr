@@ -8,7 +8,7 @@ import { sanitize } from "@Services/mongodb/utils/sanitize"
 const handler = createHandler(userAuth)
 
 // Edit channel's creator code for the specific game
-handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel>>) => {
+handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel | null>>) => {
 	const { code, gameId, channelId } = req.body
 
 	try {

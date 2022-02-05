@@ -6,7 +6,7 @@ import fetch from "@Fetch"
 export const useManagedChannels = () => {
 	const user = useUser()
 
-	return useQuery(
+	return useQuery<Array<IChannel & { role: IManager[] }>>(
 		`/api/manager`,
 		async () => {
 			return fetch.get({ url: `/api/manager`, headers: { authorization: `Bearer: ${await getToken()}` } })
