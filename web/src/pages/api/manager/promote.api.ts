@@ -9,7 +9,7 @@ const handler = createHandler(userAuth)
 
 // Promote a manager in a channel
 handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel>>) => {
-	const { uid, channelId, token } = req.body
+	const { uid, channelId, token } = JSON.parse(req.body)
 
 	try {
 		const result = await Channel.find({ _id: new mongoose.Types.ObjectId(channelId) }).lean()

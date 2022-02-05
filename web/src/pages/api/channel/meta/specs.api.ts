@@ -10,7 +10,7 @@ const handler = createHandler(userAuth)
 // Set channel's PC spec
 handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel | null>>) => {
 	try {
-		const { _id, keyName, description } = req.body
+		const { _id, keyName, description } = JSON.parse(req.body)
 
 		const data = await Channel.findByIdAndUpdate(
 			{
@@ -32,7 +32,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<
 // Delete a channel's PC spec
 handler.delete(async (req: NextApiRequest, res: NextApiResponse) => {
 	try {
-		const { _id, keyName } = req.body
+		const { _id, keyName } = JSON.parse(req.body)
 
 		const data = await Channel.findByIdAndUpdate(
 			{
