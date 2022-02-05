@@ -23,6 +23,7 @@ export const getSchedule: IFunc = async (broadcaster_id) => {
 		if (!data?.segments) return []
 		return data.segments.filter((segment) => segment.is_recurring)
 	} catch (error) {
-		throw error
+		console.error(error)
+		return []
 	}
 }
