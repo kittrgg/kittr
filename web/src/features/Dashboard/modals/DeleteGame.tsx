@@ -18,18 +18,17 @@ const DeleteGameModal = () => {
 	const gameId = useSelector((state) => state.dashboard.modal.data.idToDelete)
 	const socket = useSocket()
 	const { mutate, isLoading } = useDashboardMutator(async () => {
-		dispatch(setChannelView({ gameId: "", view: "Deleted Game Notification" }))
-
 		try {
 			fetch
 				.delete({
 					url: `/api/channel/game/delete`,
 					headers: { authorization: `Bearer: ${await getToken()}` },
-					body: JSON.stringify({ gameId, channelId: _id })
+					body: { gameId, channelId: _id }
 				})
 				.then(() => {
 					socket.emit(`gameDelete`, _id)
 					dispatch(setModal({ type: "", data: "" }))
+					dispatch(setChannelView({ gameId: "", view: "Deleted Game Notification" }))
 				})
 		} catch (error) {
 			dispatch(setModal({ type: "Error Notification", data: {} }))

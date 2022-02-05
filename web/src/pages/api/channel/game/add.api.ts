@@ -9,7 +9,7 @@ const handler = createHandler(userAuth)
 
 // Add a game to a channel
 handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel>>) => {
-	const { gameId, channelId } = req.body
+	const { gameId, channelId } = JSON.parse(req.body)
 
 	try {
 		const result = await Channel.findOneAndUpdate(

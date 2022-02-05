@@ -20,7 +20,7 @@ const AddGameModal = ({ ...props }) => {
 			const result = await fetch.post({
 				url: `/api/channel/game/add`,
 				headers: { authorization: `Bearer: ${await getToken()}` },
-				body: { gameId: game._id, channelId: channelId }
+				body: { gameId: game._id, channelId }
 			})
 
 			if (result) {
