@@ -7,6 +7,7 @@ import { useDispatch } from "@Redux/store"
 import { setModal } from "@Redux/slices/dashboard"
 import { usePremiumStatus, useChannelData } from "@Redux/slices/dashboard/selectors"
 import { getToken } from "@Services/firebase/auth/getToken"
+import fetch from "@Fetch"
 
 const CENTER_SVG = {
 	position: "absolute",
@@ -26,7 +27,7 @@ const X = () => (
 	</td>
 )
 
-const PremiumPlans = ({ ...props }) => {
+const PremiumPlans = () => {
 	const dispatch = useDispatch()
 	const { _id, displayName, urlSafeName } = useChannelData()
 	const { isPremium } = usePremiumStatus()
@@ -34,17 +35,14 @@ const PremiumPlans = ({ ...props }) => {
 	const handleUpgrade = async () => {
 		const apiRoute = isPremium ? `/api/payments/managePremium` : `/api/payments/buyPremium`
 
-		const result = await fetch(apiRoute, {
-			method: "POST",
-			headers: {
-				authorization: `Bearer ${await getToken()}`
-			},
-			body: JSON.stringify({ _id, displayName, urlSafeName })
-		})
-
-		const checkoutSession = await result.json()
-
-		window.open(checkoutSession.url, "_blank")
+		fetch
+			.post<{ url: string }>({
+				url: apiRoute,
+				headers: { authorization: `Bearer ${await getToken()}` },
+				body: { _id, displayName, urlSafeName }
+			})
+			.then((checkoutSession) => window.open(checkoutSession.url, "_blank"))
+			.catch(() => dispatch(setModal({ type: "Error Notification", data: {} })))
 	}
 
 	return (

@@ -2,6 +2,7 @@ import mongoose from "mongoose"
 import { Channel } from "@Services/mongodb/models"
 import { headers } from "@Services/twitch/utils/auth"
 import { grabLoginName } from "@Services/twitch/utils/grabLoginName"
+import fetch from "@Fetch"
 
 /** Use a channel's display name to get their current Twitch info. */
 export const getTwitchChannelInfo = async (channelId: string): Promise<IHomePageBoostr | null> => {
@@ -37,15 +38,15 @@ export const getTwitchChannelInfo = async (channelId: string): Promise<IHomePage
 
 		const getInfo = async () => {
 			try {
-				const fetchInfo = await fetch(`https://api.twitch.tv/helix/streams?user_login=${loginName}`, {
-					method: "GET",
+				const fetchInfo = await fetch.get<{ data: any }>({
+					url: `https://api.twitch.tv/helix/streams?user_login=${loginName}`,
 					headers: await headers(),
 					redirect: "follow"
 				})
 
 				const {
 					data: [user]
-				} = await fetchInfo.json()
+				} = fetchInfo
 
 				if (!user) {
 					// We won't put you up if you aren't live!

@@ -6,7 +6,7 @@ import * as Styled from "./style"
 
 interface Props {
 	/** Array of kits to render in the table. */
-	kits: Array<IKit>
+	kits: Array<Omit<IKit, "options">>
 	/** Include master commands for this game. Ex: !loadout and !loadouts for Warzone. */
 	includeMasterCommands?: boolean
 	/** Method which the user will be utilizing for adding their commands. */

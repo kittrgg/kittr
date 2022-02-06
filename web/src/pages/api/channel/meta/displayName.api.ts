@@ -11,7 +11,7 @@ const handler = createHandler(userAuth)
 
 // Edit channel's displayName
 handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel | null>>) => {
-	const { _id, value } = req.body
+	const { _id, value } = JSON.parse(req.body)
 	try {
 		const existingChannels = await Channel.find({ urlSafeName: toURL(value) })
 

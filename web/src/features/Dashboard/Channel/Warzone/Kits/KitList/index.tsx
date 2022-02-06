@@ -29,7 +29,7 @@ const KitList = ({ ...props }) => {
 	const createKitObject = (kit: IKit) => {
 		return {
 			...kit,
-			base: kitBases.find((allBases: IKitBase) => allBases._id === kit.baseId)
+			base: kitBases!.find((allBases: IKitBase) => allBases._id === kit.baseId)!
 		}
 	}
 

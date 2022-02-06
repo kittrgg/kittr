@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { getToken } from "@Services/firebase/auth/getToken"
-import fetch from "@Utils/helpers/fetch"
+import fetch from "@Fetch"
 
 const BlogPoster = ({ ...props }) => {
 	const [formData, setFormData] = useState({

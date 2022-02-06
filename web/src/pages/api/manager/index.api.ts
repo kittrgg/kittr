@@ -6,9 +6,9 @@ import { sanitize } from "@Services/mongodb/utils/sanitize"
 
 const handler = createHandler(userAuth)
 
-// Get all channels that user is a manager of
+// Get all channels that user is a manager for.
 handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
-	const { uid } = req.body.token
+	const { uid } = JSON.parse(req.body).token
 
 	try {
 		const result = await Channel.aggregate([

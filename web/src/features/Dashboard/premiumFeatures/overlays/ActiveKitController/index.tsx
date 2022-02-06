@@ -20,6 +20,7 @@ import H3 from "../../../H3"
 import BackgroundImageUploader from "../BackgroundImageUploader"
 import Preview from "./Preview"
 import * as Styled from "./style"
+import fetch from "@Fetch"
 
 interface IMutation {
 	key: string
@@ -36,16 +37,10 @@ const ActiveKit = ({ ...props }) => {
 	const { data: allOptions } = useAllKitOptions()
 	const { mutate, isLoading: isMutating } = useDashboardMutator(async ({ key, change }: IMutation) => {
 		try {
-			const result = await fetch(`/api/channel/overlay`, {
-				method: "POST",
-				headers: {
-					authorization: `Bearer: ${await getToken()}`
-				},
-				body: JSON.stringify({
-					channelId: data?._id,
-					key,
-					change
-				})
+			const result = await fetch.post({
+				url: `/api/channel/overlay`,
+				headers: { authorization: `Bearer: ${await getToken()}` },
+				body: { channelId: data?._id, key, change }
 			})
 
 			if (result) {
@@ -300,7 +295,7 @@ const ActiveKit = ({ ...props }) => {
 							{data?.kits
 								.slice()
 								.filter((kit) => data?.overlay?.secondaryKit?._id !== kit._id)
-								.map((kit) => ({ ...kit, base: allKitBases.find((kitBase: IKitBase) => kitBase._id === kit.baseId) }))
+								.map((kit) => ({ ...kit, base: allKitBases?.find((kitBase: IKitBase) => kitBase._id === kit.baseId) }))
 								.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
 								.sort((kit) => {
 									if (kit.userData.featured) {
@@ -325,9 +320,9 @@ const ActiveKit = ({ ...props }) => {
 												} else {
 													const newKit = {
 														...kit,
-														base: allKitBases.find((allBases: IKitBase) => allBases._id === kit.baseId),
+														base: allKitBases?.find((allBases: IKitBase) => allBases._id === kit.baseId),
 														options: kit.options.map((opt: IKitOptionRaw) =>
-															allOptions.find((allOption: any) => allOption._id === opt)
+															allOptions?.find((allOption: any) => allOption._id === opt)
 														)
 													}
 													mutate({ key: "primaryKit", change: newKit })
@@ -362,7 +357,7 @@ const ActiveKit = ({ ...props }) => {
 							{data?.kits
 								.slice()
 								.filter((kit) => data?.overlay?.primaryKit?._id !== kit._id)
-								.map((kit) => ({ ...kit, base: allKitBases.find((kitBase: IKitBase) => kitBase._id === kit.baseId) }))
+								.map((kit) => ({ ...kit, base: allKitBases?.find((kitBase: IKitBase) => kitBase._id === kit.baseId) }))
 								.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
 								.sort((kit) => {
 									if (kit.userData.featured) {
@@ -387,9 +382,9 @@ const ActiveKit = ({ ...props }) => {
 												} else {
 													const newKit = {
 														...kit,
-														base: allKitBases.find((allBases: IKitBase) => allBases._id === kit.baseId),
+														base: allKitBases?.find((allBases: IKitBase) => allBases._id === kit.baseId),
 														options: kit.options.map((opt: IKitOptionRaw) =>
-															allOptions.find((allOption: any) => allOption._id === opt)
+															allOptions?.find((allOption: any) => allOption._id === opt)
 														)
 													}
 

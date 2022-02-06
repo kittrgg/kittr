@@ -9,7 +9,7 @@ const handler = createHandler(userAuth)
 
 // Edit channel's links
 handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel | null>>) => {
-	const { _id, links } = req.body
+	const { _id, links } = JSON.parse(req.body)
 
 	try {
 		let newLinks = {} as { [key: string]: string }

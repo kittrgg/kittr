@@ -30,11 +30,10 @@ const ExportBotCommands = ({ ...props }) => {
 	const { data: allKitBases } = useAllKitBases()
 	const { data: allKitOptions } = useAllKitOptions()
 
-	const createKitObject = (kit: IKitRaw) => {
+	const createKitObject = (kit: IKit) => {
 		return {
 			...kit,
-			base: allKitBases.find((allBases: IKit) => allBases._id === kit.baseId),
-			options: kit.options?.map((opt) => allKitOptions.find((allOption: any) => allOption._id === opt))
+			base: allKitBases!.find((allBases) => allBases._id === kit.baseId)!
 		}
 	}
 

@@ -10,7 +10,7 @@ import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useCoverPhoto } from "@Redux/slices/dashboard/selectors"
 import { Spinner, SVG, Button } from "@Components/shared"
 import { deleteFile } from "@Services/firebase/storage"
-import fetch from "@Utils/helpers/fetch"
+import fetch from "@Fetch"
 import { isFetchError } from "@Utils/helpers/typeGuards"
 import { ChannelModel } from "@Models/Channel"
 

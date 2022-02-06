@@ -7,26 +7,22 @@ import { clearKitEditor, setModal } from "@Redux/slices/dashboard"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
 import { Modal, Button, Spinner } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
+import fetch from "@Fetch"
 
-const KitDeleteConfirmation = ({ ...props }) => {
+const KitDeleteConfirmation = () => {
 	const { _id } = useChannelData()
 	const data = useSelector((state) => state.dashboard.modal.data)
 	const dispatch = useDispatch()
 	const { mutate, isLoading } = useDashboardMutator(async () => {
 		try {
-			const result = await fetch(`/api/channel/kit`, {
-				method: "DELETE",
-				headers: {
-					authorization: `Bearer: ${await getToken()}`
-				},
-				body: JSON.stringify({
-					channelId: _id,
-					kitId
-				})
+			const result = await fetch.delete({
+				url: `/api/channel/kit`,
+				headers: { authorization: `Bearer: ${await getToken()}` },
+				body: { channelId: _id, kitId }
 			})
 
 			if (result) {
-				dispatch(setModal({ type: "", data: null }))
+				dispatch(setModal({ type: "", data: {} }))
 				dispatch(clearKitEditor())
 			}
 		} catch (error) {

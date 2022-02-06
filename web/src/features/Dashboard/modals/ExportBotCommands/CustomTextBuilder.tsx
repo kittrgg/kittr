@@ -9,6 +9,7 @@ import { paragraph } from "@Styles/typography"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
 import * as Styled from "./style"
+import fetch from "@Fetch"
 
 interface Props {
 	/** Method which the user will be utilizing for adding their commands */
@@ -35,16 +36,10 @@ const CustomTextBuilder = ({ commandStrategy, method }: Props) => {
 
 	const { mutate, isLoading } = useDashboardMutator(async () => {
 		try {
-			const result = await fetch(`/api/channel/meta/botCommandString`, {
-				method: "PUT",
-				headers: {
-					authorization: `Bearer: ${await getToken()}`
-				},
-				body: JSON.stringify({
-					commandString: userString,
-					channelId: channelData._id,
-					gameId: activeGame
-				})
+			const result = await fetch.put({
+				url: `/api/channel/meta/botCommandString`,
+				headers: { authorization: `Bearer: ${await getToken()}` },
+				body: { commandString: userString, channelId: channelData._id, gameId: activeGame }
 			})
 
 			if (result) {

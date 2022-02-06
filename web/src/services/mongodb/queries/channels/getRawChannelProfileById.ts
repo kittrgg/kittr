@@ -1,4 +1,4 @@
-import { Channel } from "@Services/mongodb/models"
+import Channel, { ChannelModel } from "@Services/mongodb/models/Channel"
 
 interface IFunc {
 	/**
@@ -12,7 +12,7 @@ interface IFunc {
 	(
 		/** urlSafeName of the channel */
 		_id: string
-	): Promise<IRawChannel>
+	): Promise<ChannelModel>
 }
 
 /**
@@ -22,6 +22,6 @@ interface IFunc {
  * Does not include dashboard specific information.
  */
 export const getRawChannelProfileByIdQuery: IFunc = async (_id) => {
-	const rawChannel = await Channel.find({ _id }).lean<IRawChannel[]>()
+	const rawChannel = await Channel.find({ _id }).lean()
 	return rawChannel[0]
 }

@@ -1,23 +1,26 @@
-const baseUri = process.env.NEXT_PUBLIC_API_PATH
-
 interface GetParams {
 	url: string
 	headers?: HeadersInit
+	signal?: AbortSignal
+	redirect?: "follow"
 }
 
-const get = async <T>({ url, headers = {} }: GetParams): Promise<T> => {
+const get = async <T>({ url, headers = {}, signal = undefined, redirect }: GetParams): Promise<T> => {
 	const requestOptions = {
 		method: "GET",
-		headers
+		headers,
+		signal,
+		redirect
 	}
 
-	return await fetch(baseUri + url, requestOptions).then(handleResponse)
+	return await fetch(url, requestOptions).then(handleResponse)
 }
 
 interface PostParams {
 	url: string
-	body: any
+	body?: any
 	headers?: HeadersInit
+	redirect?: "follow"
 }
 
 const post = async <T>({ url, body, headers = {} }: PostParams): Promise<T> => {
@@ -27,7 +30,7 @@ const post = async <T>({ url, body, headers = {} }: PostParams): Promise<T> => {
 		body: JSON.stringify(body)
 	}
 
-	return await fetch(baseUri + url, requestOptions).then(handleResponse)
+	return await fetch(url, requestOptions).then(handleResponse)
 }
 
 interface PutParams {
@@ -43,7 +46,7 @@ const put = async <T>({ url, body, headers = {} }: PutParams): Promise<T> => {
 		body: JSON.stringify(body)
 	}
 
-	return await fetch(baseUri + url, requestOptions).then(handleResponse)
+	return await fetch(url, requestOptions).then(handleResponse)
 }
 
 interface DeleteParams {
@@ -59,7 +62,7 @@ const _delete = async <T>({ url, body, headers = {} }: DeleteParams): Promise<T>
 		headers,
 		body: JSON.stringify(body)
 	}
-	return await fetch(baseUri + url, requestOptions).then(handleResponse)
+	return await fetch(url, requestOptions).then(handleResponse)
 }
 
 // helper functions
@@ -69,7 +72,7 @@ const handleResponse = (response: any) => {
 	return response.text().then((text: any) => {
 		const data = text && JSON.parse(text)
 
-		if (!response.ok) {
+		if (response.error || !response.ok) {
 			const error = data || response.statusText
 			return Promise.reject(error)
 		}

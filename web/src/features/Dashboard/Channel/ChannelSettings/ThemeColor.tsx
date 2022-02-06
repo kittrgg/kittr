@@ -6,8 +6,7 @@ import { setModal } from "@Redux/slices/dashboard"
 import { useDispatch } from "@Redux/store"
 import { getToken } from "@Services/firebase/auth/getToken"
 import styled from "styled-components"
-import fetch from "@Utils/helpers/fetch"
-import { isFetchError } from "@Utils/helpers/typeGuards"
+import fetch from "@Fetch"
 
 const ThemeColor = ({ ...props }) => {
 	const { data } = useDashboardChannel()
@@ -15,19 +14,15 @@ const ThemeColor = ({ ...props }) => {
 
 	const { mutate } = useDashboardMutator(async (color: string) => {
 		try {
-			const result = await fetch.put({
+			// We don't need to do anything with the result of this fetch
+			// The sockets will propogate the change
+			await fetch.put({
 				url: `/api/channel/meta/brandColor`,
 				body: { _id: data?._id, primaryColor: color },
 				headers: {
 					authorization: `Bearer: ${await getToken()}`
 				}
 			})
-
-			if (isFetchError(result)) {
-				dispatch(setModal({ type: "Error Notification", data: "" }))
-			} else {
-				return
-			}
 		} catch (err) {
 			dispatch(setModal({ type: "Error Notification", data: "" }))
 		}

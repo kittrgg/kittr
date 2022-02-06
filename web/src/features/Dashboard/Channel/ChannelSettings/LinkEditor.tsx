@@ -13,7 +13,7 @@ import { linkPrefixes } from "@Utils/lookups/linkPrefixes"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
 import AddLink from "../../modals/AddLink"
-import fetch from "@Utils/helpers/fetch"
+import fetch from "@Fetch"
 
 /** CRUD for editing the social links of a channel. */
 const LinkEditor = ({ ...props }) => {

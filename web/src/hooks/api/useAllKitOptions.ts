@@ -1,7 +1,8 @@
 import { useQuery } from "react-query"
+import fetch from "@Fetch"
 
 export const useAllKitOptions = () => {
 	const url = `/api/kits/allOptions`
-	const result = useQuery(url, async () => fetch(url).then((res) => res.json()), { staleTime: 600000 })
+	const result = useQuery<IKitOption[]>(url, async () => fetch.get({ url }), { staleTime: 600000 })
 	return result
 }

@@ -22,7 +22,7 @@ const Warzone = ({ ...props }) => {
 	const dispatch = useDispatch()
 	const { data: allGames } = useAllGames()
 
-	const gameInfo = allGames.find((allGame: any) => allGame._id === gameId)
+	const gameInfo = allGames!.find((allGame: any) => allGame._id === gameId)!
 
 	return (
 		<FirebaseStorageResolver

@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose"
+import mongoose, { Schema, Types, Model } from "mongoose"
 
 // This is the only place where channels are referred to as channels.
 // The front-end calls these entities "channels."
@@ -8,20 +8,44 @@ import mongoose, { Schema } from "mongoose"
 const MODEL_NAME = "player"
 
 export interface ChannelModel {
-	createdDate: Date
+	createdDate: Date | string
 	displayName: string
 	urlSafeName: string
 	viewCount: number
-	games: []
-	kits: []
+	games: Array<{
+		id: string
+		code?: string
+	}>
+	kits: Array<{
+		_id: Types.ObjectId
+		baseId: string
+		options: Array<Types.ObjectId>
+		userData: {
+			customTitle?: string
+			blueprint?: string
+			featured?: boolean
+			youtubeURL?: string
+		}
+	}>
 	meta: {
 		brandColors: {
 			primary: string
 		}
 		hasCoverPhoto: boolean
-		specs: object
-		affiliates: object
-		setupPhotos: object
+		specs: {
+			[key: string]: string
+		}
+		affiliates: {
+			[key: string]: {
+				code?: string
+				description?: string
+				company?: string
+				url?: string
+			}
+		}
+		setupPhotos: {
+			[key: string]: string
+		}
 		stripeId: string
 		premiumType: string
 		profileImage: string
@@ -35,18 +59,21 @@ export interface ChannelModel {
 			discord: string
 			tiktok: string
 		}
-		youtubeAutoplay: Boolean
+		youtubeAutoplay: boolean
 	}
 	managers: Array<{ uid: string; role: "Owner" | "Administrator" | "Editor" }>
 	overlay: {
+		displayName: string
 		textColorAccent: string
 		backgroundColorSecondary: string
 		textColorSecondary: string
 		backgroundColorPrimary: string
 		textColorPrimary: string
-		primaryKit: Omit<IKit, "gameInfo">
+		primaryKit: IKit
+		secondaryKit: IKit
 	}
-	previousUpdater: String
+	previousUpdater: string
+	__v: number
 }
 
 const schema = new Schema<ChannelModel>(
@@ -116,6 +143,7 @@ const schema = new Schema<ChannelModel>(
 	{ minimize: false }
 )
 
-export const Channel = mongoose.model(MODEL_NAME, schema)
+export const Channel =
+	(mongoose.models[MODEL_NAME] as Model<ChannelModel, {}, {}, {}>) || mongoose.model(MODEL_NAME, schema)
 
 export default Channel

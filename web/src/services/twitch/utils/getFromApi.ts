@@ -1,4 +1,5 @@
 import { headers } from "@Services/twitch/utils/auth"
+import fetch from "@Fetch"
 
 interface IFunc {
 	/**
@@ -16,9 +17,5 @@ interface IFunc {
 export const getFromApi: IFunc = async ({ endpointBaseUrl, queryParams }) => {
 	const params = new URLSearchParams(queryParams)
 
-	return await fetch(`${endpointBaseUrl}?${params}`, {
-		method: "GET",
-		headers: await headers(),
-		redirect: "follow"
-	}).then((res) => res.json())
+	return await fetch.get({ url: `${endpointBaseUrl}?${params}`, headers: await headers(), redirect: "follow" })
 }

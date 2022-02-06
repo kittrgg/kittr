@@ -1,3 +1,5 @@
+import fetch from "@Fetch"
+
 /** Use OAuth to get a token for the Twitch API. */
 export const getAuthToken = async () => {
 	const tokenUrl = `https://id.twitch.tv/oauth2/token?client_id=${
@@ -5,14 +7,7 @@ export const getAuthToken = async () => {
 	}&client_secret=${process.env.TWITCH_SECRET as string}&grant_type=client_credentials&scope=`
 
 	try {
-		const response = await fetch(tokenUrl, {
-			method: "POST",
-			redirect: "follow"
-		})
-
-		const data = await response.json()
-
-		// console.log(data)
+		const data = await fetch.post<any>({ url: tokenUrl, redirect: "follow" })
 
 		if (data.access_token) {
 			return data as IOAuthToken

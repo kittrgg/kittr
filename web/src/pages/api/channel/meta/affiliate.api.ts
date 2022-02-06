@@ -12,7 +12,7 @@ const handler = createHandler(userAuth)
 // Set channel's affiliate
 handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel | null>>) => {
 	try {
-		const { _id, company, description, code, link } = req.body
+		const { _id, company, description, code, link } = JSON.parse(req.body)
 
 		const data = await Channel.findByIdAndUpdate(
 			{
@@ -40,7 +40,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<
 // Delete a channel's affiliate
 handler.delete(async (req: NextApiRequest, res: NextApiResponse) => {
 	try {
-		const { _id, company } = req.body
+		const { _id, company } = JSON.parse(req.body)
 
 		const data = await Channel.findByIdAndUpdate(
 			{

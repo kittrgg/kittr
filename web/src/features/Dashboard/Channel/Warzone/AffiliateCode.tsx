@@ -5,26 +5,27 @@ import { getToken } from "@Services/firebase/auth/getToken"
 import { header2 } from "@Styles/typography"
 import { useEffect, useRef, useState } from "react"
 import styled from "styled-components"
+import fetch from "@Fetch"
+import { useDispatch } from "@Redux/store"
+import { setModal } from "@Redux/slices/dashboard"
 
 const CreatorCode = ({ ...props }) => {
+	const dispatch = useDispatch()
 	const { gameId: activeGame } = useChannelView()
 	const { _id: channelId, games } = useChannelData()
 	const [code, setCode] = useState(games.find((game) => game.id === activeGame)?.code || "")
 	const [isEditing, setIsEditing] = useState(false)
 	const inputRef = useRef<HTMLInputElement>(null)
-	const { mutate } = useDashboardMutator(async () => {
-		fetch(`/api/channel/meta/code`, {
-			method: "PUT",
-			headers: {
-				authorization: `Bearer: ${await getToken()}`
-			},
-			body: JSON.stringify({
-				code,
-				channelId,
-				gameId: games.find((game) => game.id === activeGame)?.id
-			})
+	const { mutate, error } = useDashboardMutator(async () => {
+		const result = await fetch.put<any>({
+			url: `/api/channel/meta/code`,
+			headers: { authorization: `Bearer: ${await getToken()}` },
+			body: { code, channelId, gameId: games.find((game) => game.id === activeGame)?.id }
 		})
-		setIsEditing(false)
+
+		if (result) {
+			setIsEditing(false)
+		}
 	})
 
 	useEffect(() => {
@@ -32,6 +33,10 @@ const CreatorCode = ({ ...props }) => {
 			inputRef.current.focus()
 		}
 	}, [isEditing])
+
+	if (error) {
+		dispatch(setModal({ type: "Error Notification", data: {} }))
+	}
 
 	return (
 		<Code>

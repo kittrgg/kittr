@@ -10,14 +10,14 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 	const { type, startTime, endTime, channelId } = req.body
 
 	try {
-		const newPromo = await new Promo({
+		const newPromo = new Promo({
 			type,
 			startTime,
 			endTime,
 			channelId
 		})
 
-		const saveResult = await newPromo.save({ new: true })
+		const saveResult = await newPromo.save()
 
 		return res.status(200).json(saveResult)
 	} catch (error) {

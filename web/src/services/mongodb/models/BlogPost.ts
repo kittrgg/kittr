@@ -1,8 +1,16 @@
-import mongoose, { Schema } from "mongoose"
+import mongoose, { Schema, Model } from "mongoose"
 
 const MODEL_NAME = "blogPost"
 
-const schema = new Schema(
+export interface BlogPostModel {
+	author: string
+	datePublished: string
+	title: string
+	slug: string
+	markdown: string
+}
+
+const schema = new Schema<BlogPostModel>(
 	{
 		author: String,
 		datePublished: String,
@@ -13,6 +21,7 @@ const schema = new Schema(
 	{ minimize: false }
 )
 
-export const BlogPost = mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema)
+export const BlogPost =
+	(mongoose.models[MODEL_NAME] as Model<BlogPostModel, {}, {}, {}>) || mongoose.model<BlogPostModel>(MODEL_NAME, schema)
 
 export default BlogPost

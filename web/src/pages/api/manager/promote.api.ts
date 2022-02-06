@@ -2,14 +2,14 @@ import type { NextApiRequest, NextApiResponse } from "next"
 import { createHandler } from "@Utils/middlewares/createHandler"
 import { userAuth } from "@Utils/middlewares/auth"
 import mongoose from "mongoose"
-import { Channel } from "@Services/mongodb/models"
+import Channel, { ChannelModel } from "@Services/mongodb/models/Channel"
 import { sanitize } from "@Services/mongodb/utils/sanitize"
 
 const handler = createHandler(userAuth)
 
 // Promote a manager in a channel
-handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
-	const { uid, channelId, token } = req.body
+handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel>>) => {
+	const { uid, channelId, token } = JSON.parse(req.body)
 
 	try {
 		const result = await Channel.find({ _id: new mongoose.Types.ObjectId(channelId) }).lean()
@@ -26,15 +26,15 @@ handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
 			)
 
 			if (result) {
-				return res.status(200).json({})
+				return res.status(200).json(result)
 			}
 		} else {
-			return res.status(403).json({ error: true, message: "You do not have permission to add a new manager." })
+			return res.status(403).json({ error: true, errorMessage: "You do not have permission to add a new manager." })
 		}
 	} catch (error) {
 		return res.status(500).json({
 			error: true,
-			message: "We did something wrong. Error Code 7455"
+			errorMessage: "We did something wrong. Error Code 7455"
 		})
 	}
 })
