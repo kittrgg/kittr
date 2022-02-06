@@ -9,7 +9,7 @@ const handler = createHandler(userAuth)
 
 // Edit command string for channel's game
 handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel | null>>) => {
-	const { commandString, gameId, channelId } = req.body
+	const { commandString, gameId, channelId } = JSON.parse(req.body)
 
 	try {
 		const data = await Channel.findByIdAndUpdate(
