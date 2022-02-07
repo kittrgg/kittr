@@ -8,9 +8,6 @@ const { withSentryConfig } = require("@sentry/nextjs")
 const moduleExports = {
 	poweredByHeader: false,
 	pageExtensions: ["page.tsx", "api.ts"],
-	images: {
-		domains: ["firebasestorage.googleapis.com"]
-	},
 	async redirects() {
 		return [
 			// For Venatus
