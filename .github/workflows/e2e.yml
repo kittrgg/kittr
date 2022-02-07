@@ -73,6 +73,7 @@ jobs:
             NEXT_PUBLIC_SOCKET_HOST=${{secrets.CI_NEXT_PUBLIC_SOCKET_HOST}}
             GOOGLE_APPLICATION_CREDENTIALS=${{secrets.CI_GOOGLE_APPLICATION_CREDENTIALS}}
             NEXT_PUBLIC_SENTRY_DSN=${{secrets.SENTRY_DSN}}
+            SENTRY_AUTH_TOKEN=${{secrets.SENTRY_AUTH_TOKEN}}
 
     # Just could not get these to work.
     # - name: Delete old api images

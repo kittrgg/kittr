@@ -71,6 +71,7 @@ jobs:
             NEXT_PUBLIC_SOCKET_HOST=${{secrets.NEXT_PUBLIC_SOCKET_HOST}}
             GOOGLE_APPLICATION_CREDENTIALS=${{secrets.GOOGLE_APPLICATION_CREDENTIALS}}
             NEXT_PUBLIC_SENTRY_DSN=${{secrets.SENTRY_DSN}}
+            SENTRY_AUTH_TOKEN=${{secrets.SENTRY_AUTH_TOKEN}}
 
       - name: Trigger api deployment to Digital Ocean
         uses: appleboy/ssh-action@master
