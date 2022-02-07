@@ -74,6 +74,7 @@ jobs:
             GOOGLE_APPLICATION_CREDENTIALS=${{secrets.CI_GOOGLE_APPLICATION_CREDENTIALS}}
             NEXT_PUBLIC_SENTRY_DSN=${{secrets.SENTRY_DSN}}
             SENTRY_AUTH_TOKEN=${{secrets.SENTRY_AUTH_TOKEN}}
+            SENTRY_LOG_LEVEL=debug
 
     # Just could not get these to work.
     # - name: Delete old api images
