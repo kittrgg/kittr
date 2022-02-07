@@ -84,9 +84,12 @@ services:
       - TWITCH_CLIENT_ID=${TWITCH_CLIENT_ID}
       - TWITCH_CLIENT_SECRET=${TWITCH_CLIENT_SECRET}
       - TWITCH_SECRET=${TWITCH_SECRET}
+      - NEXT_PUBLIC_SENTRY_DSN=${SENTRY_DSN}
     volumes:
       - ./web/next-env.d.ts:/app/next-env.d.ts
       - ./web/next.config.js:/app/next.config.js
+      - ./web/sentry.client.config.js:/app/sentry.client.config.js
+      - ./web/sentry.server.config.js:/app/sentry.server.config.js
       - ./web/.babelrc:/app/.babelrc
       - ./web/tsconfig.json:/app/tsconfig.json
       - ./web/public:/app/public

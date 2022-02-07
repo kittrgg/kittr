@@ -22,6 +22,15 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Create Sentry release
+        uses: getsentry/action-release@v1
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+        with:
+          environment: testing
+
       - name: Build and push api testing image
         uses: docker/build-push-action@v2
         with:
@@ -61,6 +70,7 @@ jobs:
             MONTHLY_TIP_PRICE_ID=${{secrets.CI_MONTHLY_TIP_PRICE_ID}}
             NEXT_PUBLIC_SOCKET_HOST=${{secrets.CI_NEXT_PUBLIC_SOCKET_HOST}}
             GOOGLE_APPLICATION_CREDENTIALS=${{secrets.CI_GOOGLE_APPLICATION_CREDENTIALS}}
+            NEXT_PUBLIC_SENTRY_DSN=${{secrets.SENTRY_DSN}}
 
     # Just could not get these to work.
     # - name: Delete old api images

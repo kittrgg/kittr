@@ -20,6 +20,15 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Create Sentry release
+        uses: getsentry/action-release@v1
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+        with:
+          environment: production
+
       - name: Build and push api image
         uses: docker/build-push-action@v2
         with:
@@ -59,6 +68,7 @@ jobs:
             MONTHLY_TIP_PRICE_ID=${{secrets.MONTHLY_TIP_PRICE_ID}}
             NEXT_PUBLIC_SOCKET_HOST=${{secrets.NEXT_PUBLIC_SOCKET_HOST}}
             GOOGLE_APPLICATION_CREDENTIALS=${{secrets.GOOGLE_APPLICATION_CREDENTIALS}}
+            NEXT_PUBLIC_SENTRY_DSN=${{secrets.SENTRY_DSN}}
 
       - name: Trigger api deployment to Digital Ocean
         uses: appleboy/ssh-action@master
