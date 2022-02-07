@@ -39,3 +39,5 @@ ui-debug.log*
 .env.test.local
 .env.production.local
 cypress.env.json
+# Sentry
+.sentryclirc

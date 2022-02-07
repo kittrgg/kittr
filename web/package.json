@@ -12,6 +12,7 @@
 		"@juggle/resize-observer": "3.3.1",
 		"@reduxjs/toolkit": "1.6.0",
 		"@rollbar/react": "0.9.0",
+		"@sentry/nextjs": "^6.17.5",
 		"@stripe/react-stripe-js": "1.7.0",
 		"@stripe/stripe-js": "1.22.0",
 		"browser-image-compression": "1.0.14",
