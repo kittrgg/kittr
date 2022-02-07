@@ -6,7 +6,7 @@ import * as Sentry from "@sentry/nextjs"
 
 const SENTRY_DSN = process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN
 
-const environment = process.env.ENABLE_SEEDING === "true" ? "testing" : "production"
+const environment = process.env.NEXT_PUBLIC_ENABLE_SEEDING === "true" ? "testing" : "production"
 
 Sentry.init({
 	dsn: SENTRY_DSN,
