@@ -7,7 +7,7 @@ const handler = createHandler()
 
 // Add a new user to Firebase Auth
 handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<{ success: boolean }>>) => {
-	const { displayName, email, password } = JSON.parse(req.body)
+	const { displayName, email, password } = req.body
 
 	if (displayName.length > 26)
 		return res.status(400).json({ error: true, errorMessage: "That name is too long. 25 characters or less" })
