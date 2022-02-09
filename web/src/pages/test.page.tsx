@@ -1,12 +1,6 @@
-import { captureMessage } from "@sentry/nextjs"
-import { useEffect } from "react"
 import { logger } from "@Services/sentry"
 
 const Testing = () => {
-	useEffect(() => {
-		captureMessage("Testing")
-	}, [])
-
 	return (
 		<div>
 			<button
