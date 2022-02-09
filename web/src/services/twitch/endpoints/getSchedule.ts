@@ -1,4 +1,5 @@
 import { getFromApi } from "../utils/getFromApi"
+import { logger } from "@Services/sentry"
 
 interface IFunc {
 	/**
@@ -22,8 +23,9 @@ export const getSchedule: IFunc = async (broadcaster_id) => {
 
 		if (!data?.segments) return []
 		return data.segments.filter((segment) => segment.is_recurring)
-	} catch (error) {
+	} catch (error: any) {
 		console.error(error)
+		logger.exception(new Error(error))
 		return []
 	}
 }
