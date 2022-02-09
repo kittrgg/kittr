@@ -21,7 +21,13 @@ interface Params {
 const log = ({ message, severity = "log" }: Params) => Sentry.captureMessage(message, severities[severity])
 
 /** This method ALWAYS results in an error in Sentry logging. You will receive a stack trace and a severity level of "error". */
-const exception = (error: Error) => Sentry.captureException(error)
+const exception = (error: Error) => {
+	if (typeof error === "object") {
+		Sentry.captureException(new Error(JSON.stringify(error)))
+	} else {
+		Sentry.captureException(new Error(error))
+	}
+}
 
 export const logger = {
 	log,
