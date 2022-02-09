@@ -18,8 +18,7 @@ interface Params {
 }
 
 /** This method can be configured to accept severities of your choosing. If one is not provided, it will use the level "log". */
-const log = ({ message, severity = "log" }: Params) =>
-	Sentry.captureMessage("As Message:" + message, severities[severity])
+const log = ({ message, severity = "log" }: Params) => Sentry.captureMessage(message, severities[severity])
 
 /** This method ALWAYS results in an error in Sentry logging. You will receive a stack trace and a severity level of "error". */
 const exception = (message: string) => Sentry.captureException(new Error(message))
