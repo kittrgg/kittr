@@ -2,7 +2,6 @@ import { ResizeObserver, ResizeObserverEntry } from "@juggle/resize-observer"
 import { isClient } from "@Utils/helpers/isClient"
 import { useState, useRef, useEffect, useCallback } from "react"
 // @ts-ignore
-import { useRollbar } from "@rollbar/react"
 import { useLatestRef } from "./useLatestRef"
 
 export const observerErr =
@@ -93,7 +92,6 @@ export const useDimensions = <T extends HTMLElement | null>({
 		width: 0,
 		height: 0
 	})
-	const rollbar = useRollbar()
 	const prevSizeRef = useRef<{ width?: number; height?: number }>({})
 	const prevBreakpointRef = useRef<string>()
 	const observerRef = useRef<ResizeObserver>()
@@ -134,7 +132,6 @@ export const useDimensions = <T extends HTMLElement | null>({
 					if (borderBoxSize) {
 						boxSize = borderBoxSize
 					} else if (!warnedRef.current) {
-						rollbar.warn(borderBoxWarn)
 						console.warn(borderBoxWarn)
 						warnedRef.current = true
 					}

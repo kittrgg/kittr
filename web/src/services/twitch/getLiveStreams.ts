@@ -2,7 +2,6 @@ import { Channel } from "@Services/mongodb/models"
 import { headers } from "@Services/twitch/utils/auth"
 import { serializeChannels } from "@Services/mongodb/utils/serializeChannels"
 import { grabLoginName } from "./utils/grabLoginName"
-import { logReport } from "@Services/rollbar/logReport"
 import fetch from "@Fetch"
 
 export const liveChannelsQuery = async () => {
@@ -37,7 +36,7 @@ export const liveChannelsQuery = async () => {
 			return url
 		} catch (error) {
 			console.error(error)
-			logReport.error("Twitch Live Channels API ", error as any)
+			// logReport.error("Twitch Live Channels API ", error as any)
 			return ""
 		}
 	}
@@ -51,7 +50,6 @@ export const liveChannelsQuery = async () => {
 			const data = await fetch.get<{ data: any }>({ url, headers: await headers(), redirect: "follow" })
 
 			if (!data.data) {
-				logReport.error("Twitch Live Channels API ", data)
 				console.log("The Twitch API fetch did not work.", { data })
 				return []
 			}
@@ -59,7 +57,6 @@ export const liveChannelsQuery = async () => {
 			return data.data
 		} catch (error) {
 			console.error(error)
-			logReport.error("Twitch Live Channels API ", error as any)
 			return []
 		}
 	}
@@ -77,7 +74,6 @@ export const liveChannelsQuery = async () => {
 		return serialized
 	} catch (error) {
 		console.error(error)
-		logReport.error("Twitch Live Channels API ", error as any)
 		return []
 	}
 }

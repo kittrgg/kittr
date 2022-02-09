@@ -1,5 +1,5 @@
 import { Promo } from "@Services/mongodb/models/Promo"
-import { logReport } from "@Services/rollbar/logReport"
+import { logger } from "@Services/sentry"
 
 export const getHomeChannelPromo = async () => {
 	const rightNow = new Date().getTime()
@@ -23,7 +23,7 @@ export const getHomeChannelPromo = async () => {
 	}
 
 	if (result.length > 1) {
-		logReport.warn("Overlapping Promos", result)
+		logger.log({ message: "Multiple home channel promos found" })
 	}
 
 	return result[0]

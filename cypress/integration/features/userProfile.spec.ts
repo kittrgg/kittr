@@ -10,7 +10,7 @@ describe("Desktop", () => {
     cy.contains("SELECT A KIT.");
   });
 
-  it("Selects a weapon on click and closes list", () => {
+  it("Selects a placeholder and shows weapon", () => {
     cy.visit("/channel/JoeWo/warzone");
     cy.get("[data-cy=Automaton-placeholder-button]").click();
     cy.location("search").should("eq", "?k=Automaton");

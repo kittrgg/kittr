@@ -10,7 +10,7 @@ import managersFixture from "@Utils/fixtures/managers.json"
 const handler = createHandler()
 
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
-	if (process.env.ENABLE_SEEDING) {
+	if (process.env.NEXT_PUBLIC_ENABLE_SEEDING) {
 		console.log("Seeding firebase emulators...")
 		admin
 			.deleteUsers([
@@ -42,7 +42,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 })
 
 handler.delete(async (req: NextApiRequest, res: NextApiResponse) => {
-	if (process.env.ENABLE_SEEDING === "test") {
+	if (process.env.NEXT_PUBLIC_ENABLE_SEEDING === "test") {
 	} else {
 		return res.status(200).json({ message: "Inappropriate environment" })
 	}

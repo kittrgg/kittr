@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 // @ts-ignore
-import { useRollbar } from "@rollbar/react"
 
 import { isClient } from "@Utils/helpers/isClient"
 import { isWebApiSupported } from "@Utils/helpers/isWebApiSupported"
@@ -10,8 +9,6 @@ const errorMessage =
 	" your current browser or you're using the useMediaQuery hook whilst server side rendering."
 
 export const useMediaQuery = (mediaQuery: string) => {
-	const rollbar = useRollbar()
-
 	const [isVerified, setIsVerified] = useState(!!window.matchMedia(mediaQuery).matches)
 
 	useEffect(() => {
@@ -22,7 +19,6 @@ export const useMediaQuery = (mediaQuery: string) => {
 			mediaQueryList.addEventListener("change", documentChangeHandler)
 		} catch (e) {
 			//Safari isn't supporting mediaQueryList.addEventListener
-			rollbar.error(e)
 			console.error(e)
 			mediaQueryList.addListener(documentChangeHandler)
 		}
@@ -33,7 +29,6 @@ export const useMediaQuery = (mediaQuery: string) => {
 				mediaQueryList.removeEventListener("change", documentChangeHandler)
 			} catch (e) {
 				//Safari isn't supporting mediaQueryList.removeEventListener
-				rollbar.error(e)
 				console.error(e)
 				mediaQueryList.removeListener(documentChangeHandler)
 			}
@@ -41,7 +36,6 @@ export const useMediaQuery = (mediaQuery: string) => {
 	}, [mediaQuery])
 
 	if (!isClient() || !isWebApiSupported("matchMedia")) {
-		rollbar.warn(errorMessage)
 		console.warn(errorMessage)
 		return null
 	} else {

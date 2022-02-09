@@ -2,5 +2,9 @@ import { createUserWithEmailAndPassword } from "firebase/auth"
 import { auth } from "../index"
 
 export const signUp = (email: string, password: string) => {
-	return createUserWithEmailAndPassword(auth, email, password)
+	try {
+		return createUserWithEmailAndPassword(auth, email, password)
+	} catch (error) {
+		throw error
+	}
 }

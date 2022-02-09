@@ -12,6 +12,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
@@ -19,6 +21,15 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Sentry release
+        uses: getsentry/action-release@v1
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+        with:
+          environment: production
 
       - name: Build and push api image
         uses: docker/build-push-action@v2
@@ -40,8 +51,6 @@ jobs:
             NEXT_PUBLIC_GOOGLE_ANALYTICS=${{secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS}}
             NEXT_PUBLIC_API_KEY=${{secrets.NEXT_PUBLIC_API_KEY}}
             NEXT_PUBLIC_FIREBASE_DATABASE_URL=${{secrets.NEXT_PUBLIC_FIREBASE_DATABASE_URL}}
-            NEXT_PUBLIC_ROLLBAR_ACCESS_TOKEN=${{secrets.NEXT_PUBLIC_ROLLBAR_ACCESS_TOKEN}}
-            NEXT_PUBLIC_ROLLBAR_ENVIRONMENT=${{secrets.NEXT_PUBLIC_ROLLBAR_ENVIRONMENT}}
             FIREBASE_PROJECT_ID=${{secrets.FIREBASE_PROJECT_ID}}
             FIREBASE_AUTH_DOMAIN=${{secrets.FIREBASE_AUTH_DOMAIN}}
             FIREBASE_CLIENT_EMAIL=${{secrets.FIREBASE_CLIENT_EMAIL}}
@@ -59,6 +68,8 @@ jobs:
             MONTHLY_TIP_PRICE_ID=${{secrets.MONTHLY_TIP_PRICE_ID}}
             NEXT_PUBLIC_SOCKET_HOST=${{secrets.NEXT_PUBLIC_SOCKET_HOST}}
             GOOGLE_APPLICATION_CREDENTIALS=${{secrets.GOOGLE_APPLICATION_CREDENTIALS}}
+            NEXT_PUBLIC_SENTRY_DSN=${{secrets.SENTRY_DSN}}
+            SENTRY_AUTH_TOKEN=${{secrets.SENTRY_AUTH_TOKEN}}
 
       - name: Trigger api deployment to Digital Ocean
         uses: appleboy/ssh-action@master

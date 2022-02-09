@@ -9,8 +9,9 @@ const handler = createHandler()
 handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<{ success: boolean }>>) => {
 	const { displayName, email, password } = req.body
 
-	if (displayName.length > 26)
+	if (displayName.length > 26) {
 		return res.status(400).json({ error: true, errorMessage: "That name is too long. 25 characters or less" })
+	}
 
 	if (badWordFilter(displayName)) {
 		return res.status(400).json({ error: true, errorMessage: "Hey, no bad words!" })
@@ -22,8 +23,11 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<
 		if (user.user) {
 			updateUserDisplayName(displayName).then(() => res.status(200).json({ success: true }))
 		}
+
+		return res.status(200).json({ success: true })
 	} catch (err) {
-		res.status(400).json({ error: true, errorMessage: JSON.stringify(err) })
+		console.error(err)
+		return res.status(400).json({ error: true, errorMessage: JSON.stringify(err) })
 	}
 })
 

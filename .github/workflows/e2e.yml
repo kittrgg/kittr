@@ -14,6 +14,8 @@ jobs:
     if: github.repository_owner == 'kittrgg'
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
@@ -21,6 +23,15 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Sentry release
+        uses: getsentry/action-release@v1
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+        with:
+          environment: testing
 
       - name: Build and push api testing image
         uses: docker/build-push-action@v2
@@ -36,14 +47,12 @@ jobs:
           push: true
           tags: ghcr.io/${{github.repository}}/web:test-${{github.sha}}
           build-args: |
-            ENABLE_SEEDING=true
+            NEXT_PUBLIC_ENABLE_SEEDING=true
             NEXT_PUBLIC_ENVIRONMENT=${{secrets.CI_NODE_ENV}}
             DB_CONNECTION_STRING=${{secrets.CI_DB_CONNECTION_STRING}}
             NEXT_PUBLIC_GOOGLE_ANALYTICS=${{secrets.CI_NEXT_PUBLIC_GOOGLE_ANALYTICS}}
             NEXT_PUBLIC_API_KEY=${{secrets.CI_NEXT_PUBLIC_API_KEY}}
             NEXT_PUBLIC_FIREBASE_DATABASE_URL=${{secrets.CI_NEXT_PUBLIC_FIREBASE_DATABASE_URL}}
-            NEXT_PUBLIC_ROLLBAR_ACCESS_TOKEN=${{secrets.CI_NEXT_PUBLIC_ROLLBAR_ACCESS_TOKEN}}
-            NEXT_PUBLIC_ROLLBAR_ENVIRONMENT=${{secrets.CI_NEXT_PUBLIC_ROLLBAR_ENVIRONMENT}}
             FIREBASE_PROJECT_ID=${{secrets.CI_FIREBASE_PROJECT_ID}}
             FIREBASE_AUTH_DOMAIN=${{secrets.CI_FIREBASE_AUTH_DOMAIN}}
             FIREBASE_CLIENT_EMAIL=${{secrets.CI_FIREBASE_CLIENT_EMAIL}}
@@ -61,6 +70,9 @@ jobs:
             MONTHLY_TIP_PRICE_ID=${{secrets.CI_MONTHLY_TIP_PRICE_ID}}
             NEXT_PUBLIC_SOCKET_HOST=${{secrets.CI_NEXT_PUBLIC_SOCKET_HOST}}
             GOOGLE_APPLICATION_CREDENTIALS=${{secrets.CI_GOOGLE_APPLICATION_CREDENTIALS}}
+            NEXT_PUBLIC_SENTRY_DSN=${{secrets.SENTRY_DSN}}
+            SENTRY_AUTH_TOKEN=${{secrets.SENTRY_AUTH_TOKEN}}
+            SENTRY_LOG_LEVEL=debug
 
     # Just could not get these to work.
     # - name: Delete old api images
