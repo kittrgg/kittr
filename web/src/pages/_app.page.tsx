@@ -1,7 +1,6 @@
 import FallbackPage from "@Components/layouts/FallbackPage"
 import { setFallbackLoader } from "@Redux/slices/global"
 import { store, useDispatch, useSelector } from "@Redux/store"
-import { RollbarProvider } from "@Services/rollbar/Provider"
 import GlobalStyles from "@Styles/globals"
 import OverlayStyles from "@Styles/overlay"
 import { Routes } from "@Utils/lookups/routes"
@@ -21,13 +20,11 @@ const queryClient = new QueryClient({
 
 const AppWrap = ({ Component, pageProps }: any) => {
 	return (
-		<RollbarProvider>
-			<QueryClientProvider client={queryClient}>
-				<Provider store={store}>
-					<MyApp Component={Component} pageProps={pageProps} />
-				</Provider>
-			</QueryClientProvider>
-		</RollbarProvider>
+		<QueryClientProvider client={queryClient}>
+			<Provider store={store}>
+				<MyApp Component={Component} pageProps={pageProps} />
+			</Provider>
+		</QueryClientProvider>
 	)
 }
 

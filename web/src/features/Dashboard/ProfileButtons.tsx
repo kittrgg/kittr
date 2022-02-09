@@ -5,7 +5,6 @@ import { setActiveView, setChannelView } from "@Redux/slices/dashboard"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
 //@ts-ignore
-import { useRollbar } from "@rollbar/react"
 import { logOut } from "@Services/firebase/auth/logOut"
 import { header4 } from "@Styles/typography"
 import { Routes } from "@Utils/lookups/routes"
@@ -18,7 +17,6 @@ import styled from "styled-components"
  * "View Profile" will only apply if the user has a channel open.
  */
 const ProfileButtons = ({ ...props }) => {
-	const rollbar = useRollbar()
 	const router = useRouter()
 	const channelData = useChannelData()
 	const [isOpen, setIsOpen] = useState(false)
@@ -64,7 +62,6 @@ const ProfileButtons = ({ ...props }) => {
 								router.push(Routes.ROOT)
 							})
 							.catch((err) => {
-								rollbar.error("Authentication Logout Failure", err)
 								console.error(err)
 							})
 					}}
