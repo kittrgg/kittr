@@ -33,14 +33,14 @@
 		"react-indiana-drag-scroll": "2.0.1",
 		"react-markdown": "8.0.0",
 		"react-query": "3.34.14",
-		"react-redux": "7.2.4",
+		"react-redux": "7.2.6",
 		"redux": "4.1.2",
 		"socket.io-client": "4.4.1",
 		"stripe": "8.202.0",
 		"styled-components": "5.3.3",
 		"uuid": "8.3.2",
 		"validator": "13.7.0",
-		"vercel": "23.1.0"
+		"vercel": "23.1.2"
 	},
 	"devDependencies": {
 		"@types/jsonwebtoken": "8.5.8",
