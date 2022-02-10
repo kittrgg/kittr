@@ -39,8 +39,7 @@
 		"stripe": "8.202.0",
 		"styled-components": "5.3.3",
 		"uuid": "8.3.2",
-		"validator": "13.7.0",
-		"vercel": "23.1.0"
+		"validator": "13.7.0"
 	},
 	"devDependencies": {
 		"@types/jsonwebtoken": "8.5.8",
