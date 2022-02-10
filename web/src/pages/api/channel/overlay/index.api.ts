@@ -23,7 +23,7 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<C
 
 // Remove a channel from existence...Or just the database
 handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel>>) => {
-	const { channelId, key, change } = req.body
+	const { channelId, key, change } = JSON.parse(req.body)
 
 	try {
 		const result = await Channel.findOneAndUpdate(

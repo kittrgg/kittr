@@ -9,7 +9,7 @@ const handler = createHandler(userAuth)
 
 // Edit channel's brand color
 handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
-	const { primaryColor, channelId } = req.body
+	const { primaryColor, channelId } = JSON.parse(req.body)
 
 	try {
 		const data = await Channel.findByIdAndUpdate(

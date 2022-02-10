@@ -9,7 +9,7 @@ const handler = createHandler(userAuth)
 
 // Change the owner of the channel
 handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel>>) => {
-	const { channelId, previousOwner, newOwner, token } = req.body
+	const { channelId, previousOwner, newOwner, token } = JSON.parse(req.body)
 
 	try {
 		const result = await Channel.find({ _id: new mongoose.Types.ObjectId(sanitize(channelId)) }).lean()

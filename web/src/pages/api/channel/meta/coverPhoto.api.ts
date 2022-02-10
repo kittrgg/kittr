@@ -10,7 +10,7 @@ const handler = createHandler(userAuth)
 // Set boolean for channel's cover photo
 handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel | null>>) => {
 	try {
-		const { hasCoverPhoto, channelId } = req.body
+		const { hasCoverPhoto, channelId } = JSON.parse(req.body)
 
 		const data = await Channel.findByIdAndUpdate(
 			{
