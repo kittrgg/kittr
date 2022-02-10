@@ -1,5 +1,5 @@
 import { getFromApi } from "../utils/getFromApi"
-import { logger } from "@Services/sentry"
+// import { logger } from "@Services/sentry"
 
 interface IFunc {
 	/**
@@ -25,7 +25,8 @@ export const getSchedule: IFunc = async (broadcaster_id) => {
 		return data.segments.filter((segment) => segment.is_recurring)
 	} catch (error: any) {
 		console.error(error)
-		logger.exception(error)
+		// This error was going to very quickly send us over our Sentry limits so let's get rid of it.
+		// logger.exception(error)
 		return []
 	}
 }
