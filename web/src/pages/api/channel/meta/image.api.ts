@@ -9,7 +9,7 @@ import { sanitize } from "@Services/mongodb/utils/sanitize"
 const handler = createHandler(userAuth)
 
 handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel | null>>) => {
-	const { _id } = req.body
+	const { _id } = JSON.parse(req.body)
 
 	try {
 		const data = await Channel.findOneAndUpdate(
