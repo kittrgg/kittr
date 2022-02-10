@@ -10,7 +10,10 @@ const environment = process.env.NEXT_PUBLIC_ENABLE_SEEDING === "true" ? "testing
 
 Sentry.init({
 	allowUrls: ["https://*.kittr.gg", "http://localhost:3000"],
-	ignoreErrors: ["Error: Failed to load Stripe.js"],
+	ignoreErrors: [
+		"Error: Failed to load Stripe.js",
+		"Error: UnknownError: Connection to Indexed Database server lost. Refresh the page to try again"
+	],
 	dsn: SENTRY_DSN,
 	environment,
 	// Adjust this value in production, or use tracesSampler for greater control
