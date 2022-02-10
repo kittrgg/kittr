@@ -16,7 +16,7 @@
 		"@sentry/node": "^6.17.6",
 		"@stripe/react-stripe-js": "1.7.0",
 		"@stripe/stripe-js": "1.22.0",
-		"browser-image-compression": "1.0.14",
+		"browser-image-compression": "1.0.17",
 		"date-fns": "2.28.0",
 		"firebase": "9.6.6",
 		"firebase-admin": "10.0.2",
