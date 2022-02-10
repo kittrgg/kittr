@@ -7,7 +7,7 @@ const handler = createHandler(userAuth)
 
 // Create a new promo
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
-	const { type, startTime, endTime, channelId } = JSON.parse(req.body)
+	const { type, startTime, endTime, channelId } = req.body
 
 	try {
 		const newPromo = new Promo({

@@ -10,7 +10,7 @@ const handler = createHandler()
 
 // Add a channel
 handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel>>) => {
-	const { displayName, userId } = JSON.parse(req.body)
+	const { displayName, userId } = req.body
 
 	try {
 		if (displayName.length > 26)

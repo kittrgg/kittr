@@ -10,7 +10,7 @@ const handler = createHandler(userAuth)
 // Set flag for a channel's setup photo
 handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel | null>>) => {
 	try {
-		const { slot, boolean, channelId } = JSON.parse(req.body)
+		const { slot, boolean, channelId } = req.body
 
 		const data = await Channel.findByIdAndUpdate(
 			{

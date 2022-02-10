@@ -10,7 +10,7 @@ const handler = createHandler(userAuth)
 // Create a Stripe subscription checkout
 handler.post(
 	async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<Stripe.Response<Stripe.Checkout.Session>>>) => {
-		const { _id, displayName, urlSafeName } = JSON.parse(req.body)
+		const { _id, displayName, urlSafeName } = req.body
 		const origin = req.headers.origin
 
 		try {
