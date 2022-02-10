@@ -9,6 +9,8 @@ const SENTRY_DSN = process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN
 const environment = process.env.NEXT_PUBLIC_ENABLE_SEEDING === "true" ? "testing" : process.env.NODE_ENV
 
 Sentry.init({
+	allowUrls: ["https://*.kittr.gg", "http://localhost:3000"],
+	ignoreErrors: ["Error: Failed to load Stripe.js"],
 	dsn: SENTRY_DSN,
 	environment,
 	// Adjust this value in production, or use tracesSampler for greater control
