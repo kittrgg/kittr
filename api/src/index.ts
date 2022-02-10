@@ -13,6 +13,7 @@ if (process.env.NODE_ENV !== "development") {
 	})
 }
 
+import * as Sentry from "@sentry/node"
 import { generateKitStats } from "@Jobs/createKitStatsAsInterval"
 import { writeViewCounts } from "@Jobs/writeViewCounts"
 import twitch from "@Services/twitch/extension/routes"
@@ -21,7 +22,6 @@ import cors from "cors"
 import express from "express"
 import { createServer } from "http"
 import mongoose from "mongoose"
-import Rollbar from "rollbar"
 import { Server } from "socket.io"
 import { CronJob } from "cron"
 
@@ -34,16 +34,12 @@ const io = new Server(httpServer, {
 	}
 })
 
-const rollbar = new Rollbar({
-	accessToken: process.env.ROLLBAR_ACCESS_TOKEN,
-	environment: process.env.NODE_ENV,
-	captureUncaught: true,
-	captureUnhandledRejections: true
+Sentry.init({
+	dsn: process.env.SENTRY_DSN,
+	environment: process.env.IS_TESTING ? "testing" : process.env.NODE_ENV
 })
 
-if (process.env.NODE_ENV === "production") {
-	app.use(rollbar.errorHandler())
-}
+app.use(Sentry.Handlers.requestHandler())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use("/twitch", twitch)
@@ -59,6 +55,11 @@ mongoose
 		// Just a pinger!
 		app.get("/", (req, res) => {
 			res.send("Hello kittr!")
+		})
+
+		// Throw an error to test Sentry
+		app.get("/error", (req, res) => {
+			throw new Error("Test error")
 		})
 
 		/*
@@ -117,6 +118,8 @@ mongoose
 			})
 		})
 
+		app.use(Sentry.Handlers.errorHandler())
+
 		httpServer.listen(process.env.PORT || 5000, () =>
 			console.log(`Server is running on port: ${process.env.PORT || 5000}...`)
 		)
@@ -124,4 +127,5 @@ mongoose
 	.catch((err) => {
 		console.log("Error connecting to MongoDB:")
 		console.error(err)
+		Sentry.captureException(err)
 	})

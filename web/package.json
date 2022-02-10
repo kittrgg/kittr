@@ -35,7 +35,6 @@
 		"react-query": "3.34.14",
 		"react-redux": "7.2.4",
 		"redux": "4.1.2",
-		"rollbar": "2.24.0",
 		"socket.io-client": "4.4.1",
 		"stripe": "8.202.0",
 		"styled-components": "5.3.3",

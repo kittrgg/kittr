@@ -60,6 +60,7 @@ services:
       - TWITCH_CLIENT_SECRET=${TWITCH_CLIENT_SECRET}
       - TWITCH_SECRET=${TWITCH_SECRET}
       - TWITCH_EXTENSION_SECRET=${TWITCH_EXTENSION_SECRET}
+      - SENTRY_DSN=${SENTRY_DSN}
     command: npm run local
 
   web:
