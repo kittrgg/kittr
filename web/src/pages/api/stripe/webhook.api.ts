@@ -1,9 +1,8 @@
+import { createHandler } from "@Middlewares/createHandler"
+import Channel from "@Services/mongodb/models/Channel"
 import { buffer } from "micro"
 import mongoose from "mongoose"
 import type { NextApiRequest, NextApiResponse } from "next"
-import { createHandler } from "@Middlewares/createHandler"
-import Channel from "@Services/mongodb/models/Channel"
-
 import Stripe from "stripe"
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, { apiVersion: "2020-08-27" })
