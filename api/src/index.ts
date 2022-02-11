@@ -1,5 +1,3 @@
-import { generateKitStats } from "@Jobs/createKitStatsAsInterval"
-import { writeViewCounts } from "@Jobs/writeViewCounts"
 import * as Sentry from "@sentry/node"
 import twitch from "@Services/twitch/extension/routes"
 import { getStreamerByTwitchBroadcasterLoginId } from "@Utils/streamer"
@@ -22,6 +20,9 @@ if (process.env.NODE_ENV !== "development") {
 		"@Utils": __dirname + "/utils"
 	})
 }
+
+import { generateKitStats } from "@Jobs/createKitStatsAsInterval"
+import { writeViewCounts } from "@Jobs/writeViewCounts"
 
 const app = express()
 app.use(cors())
@@ -60,6 +61,13 @@ mongoose
 			throw new Error("Test error")
 		})
 
+		// Triggers refetches for the Stripe subscription webhook
+		app.post("/stripe-webhook-reporter", (req, res) => {
+			const { _id } = req.body
+			io.emit(`dashboard=${_id}`, "Trigger refetch!")
+			return res.status(200).json({ success: true })
+		})
+
 		/*
       /api/streamer?broadcasterLogin={broadcasterLogin}
 
@@ -95,13 +103,6 @@ mongoose
 			console.log(`Socket connected from IP: ${socket.handshake.address}`)
 			openSockets = openSockets + 1
 			console.log("Active Socket Count:", openSockets)
-
-			// Triggers refetches for the Stripe subscription webhook
-			// app.post("/stripe-webhook-reporter", (req, res) => {
-			// 	const { _id } = req.body
-			// 	io.emit(`dashboard=${_id}`, "Trigger refetch!")
-			// 	return res.status(200).json({ success: true })
-			// })
 
 			// Triggers refetches for both the dashboard and overlay
 			socket.on(`dashboardChangeReporter`, (_id: string) => {
