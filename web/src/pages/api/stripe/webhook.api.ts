@@ -45,7 +45,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 				)
 
 				if (signUp) {
-					fetch.post({
+					await fetch.post({
 						url: localURL || `https://${apiURL}.kittr.gg/stripe-webhook-reporter`,
 						body: {
 							// @ts-ignore
@@ -70,7 +70,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 				)
 
 				if (customerCancelled) {
-					fetch.post({
+					await fetch.post({
 						url: localURL || `https://${apiURL}.kittr.gg/stripe-webhook-reporter`,
 						body: {
 							// @ts-ignore
@@ -99,7 +99,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 					)
 
 					if (paymentLapse && cancelSubscription) {
-						fetch.post({
+						await fetch.post({
 							url: localURL || `https://${apiURL}.kittr.gg/stripe-webhook-reporter`,
 							body: {
 								// @ts-ignore

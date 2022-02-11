@@ -100,6 +100,7 @@ mongoose
 			app.post("/stripe-webhook-reporter", (req, res) => {
 				const { _id } = req.body
 				io.emit(`dashboard=${_id}`, "Trigger refetch!")
+				res.status(200).json({ success: true })
 			})
 
 			// Triggers refetches for both the dashboard and overlay
