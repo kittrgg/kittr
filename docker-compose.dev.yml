@@ -86,6 +86,11 @@ services:
       - TWITCH_CLIENT_SECRET=${TWITCH_CLIENT_SECRET}
       - TWITCH_SECRET=${TWITCH_SECRET}
       - NEXT_PUBLIC_SENTRY_DSN=${SENTRY_DSN}
+      - NEXT_PUBLIC_PUBLISHABLE_KEY=${STRIPE_PUBLISHABLE_KEY}
+      - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - MONTHLY_TIP_PRICE_ID=${MONTHLY_TIP_PRICE_ID}
+      - SUBSCRIPTION_PRICE_ID=${SUBSCRIPTION_PRICE_ID}
     volumes:
       - ./web/next-env.d.ts:/app/next-env.d.ts
       - ./web/next.config.js:/app/next.config.js

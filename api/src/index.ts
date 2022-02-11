@@ -1,9 +1,9 @@
 import dotenv from "dotenv"
 dotenv.config()
 
-// This needs to happen BEFORE any absolute imports
 import moduleAlias from "module-alias"
 
+// This needs to happen BEFORE any absolute imports
 if (process.env.NODE_ENV !== "development") {
 	moduleAlias.addAliases({
 		"@Jobs": __dirname + "/jobs",
@@ -12,18 +12,17 @@ if (process.env.NODE_ENV !== "development") {
 		"@Utils": __dirname + "/utils"
 	})
 }
-
 import * as Sentry from "@sentry/node"
 import { generateKitStats } from "@Jobs/createKitStatsAsInterval"
 import { writeViewCounts } from "@Jobs/writeViewCounts"
 import twitch from "@Services/twitch/extension/routes"
 import { getStreamerByTwitchBroadcasterLoginId } from "@Utils/streamer"
 import cors from "cors"
+import { CronJob } from "cron"
 import express from "express"
 import { createServer } from "http"
 import mongoose from "mongoose"
 import { Server } from "socket.io"
-import { CronJob } from "cron"
 
 const app = express()
 app.use(cors())
@@ -60,6 +59,13 @@ mongoose
 		// Throw an error to test Sentry
 		app.get("/error", (req, res) => {
 			throw new Error("Test error")
+		})
+
+		// Triggers refetches for the Stripe subscription webhook
+		app.post("/stripe-webhook-reporter", (req, res) => {
+			const { _id } = req.body
+			io.emit(`dashboard=${_id}`, "Trigger refetch!")
+			return res.status(200).json({ success: true })
 		})
 
 		/*

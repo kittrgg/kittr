@@ -1,7 +1,7 @@
-import type { NextApiRequest, NextApiResponse } from "next"
-import { createHandler } from "@Utils/middlewares/createHandler"
-import Stripe from "stripe"
 import { userAuth } from "@Middlewares/auth"
+import { createHandler } from "@Utils/middlewares/createHandler"
+import type { NextApiRequest, NextApiResponse } from "next"
+import Stripe from "stripe"
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, { apiVersion: "2020-08-27" })
 
@@ -10,7 +10,7 @@ const handler = createHandler(userAuth)
 // Create a Stripe subscription checkout
 handler.post(
 	async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<Stripe.Response<Stripe.Checkout.Session>>>) => {
-		const { _id, displayName, urlSafeName } = req.body
+		const { _id, displayName, urlSafeName } = JSON.parse(req.body)
 		const origin = req.headers.origin
 
 		try {
