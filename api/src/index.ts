@@ -8,12 +8,12 @@ import { CronJob } from "cron"
 import dotenv from "dotenv"
 import express from "express"
 import { createServer } from "http"
-// This needs to happen BEFORE any absolute imports
 import moduleAlias from "module-alias"
 import mongoose from "mongoose"
 import { Server } from "socket.io"
 dotenv.config()
 
+// This needs to happen BEFORE any absolute imports
 if (process.env.NODE_ENV !== "development") {
 	moduleAlias.addAliases({
 		"@Jobs": __dirname + "/jobs",
@@ -100,7 +100,7 @@ mongoose
 			app.post("/stripe-webhook-reporter", (req, res) => {
 				const { _id } = req.body
 				io.emit(`dashboard=${_id}`, "Trigger refetch!")
-				res.status(200).json({ success: true })
+				return res.status(200).json({ success: true })
 			})
 
 			// Triggers refetches for both the dashboard and overlay
