@@ -97,11 +97,11 @@ mongoose
 			console.log("Active Socket Count:", openSockets)
 
 			// Triggers refetches for the Stripe subscription webhook
-			app.post("/stripe-webhook-reporter", (req, res) => {
-				const { _id } = req.body
-				io.emit(`dashboard=${_id}`, "Trigger refetch!")
-				return res.status(200).json({ success: true })
-			})
+			// app.post("/stripe-webhook-reporter", (req, res) => {
+			// 	const { _id } = req.body
+			// 	io.emit(`dashboard=${_id}`, "Trigger refetch!")
+			// 	return res.status(200).json({ success: true })
+			// })
 
 			// Triggers refetches for both the dashboard and overlay
 			socket.on(`dashboardChangeReporter`, (_id: string) => {
