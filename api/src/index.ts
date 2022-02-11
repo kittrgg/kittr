@@ -1,15 +1,7 @@
-import * as Sentry from "@sentry/node"
-import twitch from "@Services/twitch/extension/routes"
-import { getStreamerByTwitchBroadcasterLoginId } from "@Utils/streamer"
-import cors from "cors"
-import { CronJob } from "cron"
 import dotenv from "dotenv"
-import express from "express"
-import { createServer } from "http"
-import moduleAlias from "module-alias"
-import mongoose from "mongoose"
-import { Server } from "socket.io"
 dotenv.config()
+
+import moduleAlias from "module-alias"
 
 // This needs to happen BEFORE any absolute imports
 if (process.env.NODE_ENV !== "development") {
@@ -20,9 +12,17 @@ if (process.env.NODE_ENV !== "development") {
 		"@Utils": __dirname + "/utils"
 	})
 }
-
+import * as Sentry from "@sentry/node"
 import { generateKitStats } from "@Jobs/createKitStatsAsInterval"
 import { writeViewCounts } from "@Jobs/writeViewCounts"
+import twitch from "@Services/twitch/extension/routes"
+import { getStreamerByTwitchBroadcasterLoginId } from "@Utils/streamer"
+import cors from "cors"
+import { CronJob } from "cron"
+import express from "express"
+import { createServer } from "http"
+import mongoose from "mongoose"
+import { Server } from "socket.io"
 
 const app = express()
 app.use(cors())
