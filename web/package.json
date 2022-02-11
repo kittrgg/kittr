@@ -10,7 +10,7 @@
 	},
 	"dependencies": {
 		"@juggle/resize-observer": "3.3.1",
-		"@reduxjs/toolkit": "1.6.0",
+		"@reduxjs/toolkit": "1.7.2",
 		"@rollbar/react": "0.9.0",
 		"@sentry/nextjs": "^6.17.6",
 		"@sentry/node": "^6.17.6",
