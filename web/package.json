@@ -46,7 +46,7 @@
 		"@types/micro": "7.3.6",
 		"@types/react": "17.0.39",
 		"@types/react-select": "5.0.1",
-		"@types/styled-components": "5.1.21",
+		"@types/styled-components": "5.1.22",
 		"@types/uuid": "8.3.4",
 		"@types/validator": "13.7.1",
 		"babel-plugin-styled-components": "2.0.2",
