@@ -1,8 +1,18 @@
+import { generateKitStats } from "@Jobs/createKitStatsAsInterval"
+import { writeViewCounts } from "@Jobs/writeViewCounts"
+import * as Sentry from "@sentry/node"
+import twitch from "@Services/twitch/extension/routes"
+import { getStreamerByTwitchBroadcasterLoginId } from "@Utils/streamer"
+import cors from "cors"
+import { CronJob } from "cron"
 import dotenv from "dotenv"
-dotenv.config()
-
+import express from "express"
+import { createServer } from "http"
 // This needs to happen BEFORE any absolute imports
 import moduleAlias from "module-alias"
+import mongoose from "mongoose"
+import { Server } from "socket.io"
+dotenv.config()
 
 if (process.env.NODE_ENV !== "development") {
 	moduleAlias.addAliases({
@@ -12,18 +22,6 @@ if (process.env.NODE_ENV !== "development") {
 		"@Utils": __dirname + "/utils"
 	})
 }
-
-import * as Sentry from "@sentry/node"
-import { generateKitStats } from "@Jobs/createKitStatsAsInterval"
-import { writeViewCounts } from "@Jobs/writeViewCounts"
-import twitch from "@Services/twitch/extension/routes"
-import { getStreamerByTwitchBroadcasterLoginId } from "@Utils/streamer"
-import cors from "cors"
-import express from "express"
-import { createServer } from "http"
-import mongoose from "mongoose"
-import { Server } from "socket.io"
-import { CronJob } from "cron"
 
 const app = express()
 app.use(cors())
@@ -97,6 +95,12 @@ mongoose
 			console.log(`Socket connected from IP: ${socket.handshake.address}`)
 			openSockets = openSockets + 1
 			console.log("Active Socket Count:", openSockets)
+
+			// Triggers refetches for the Stripe subscription webhook
+			app.post("/stripe-webhook-reporter", (req, res) => {
+				const { _id } = req.body
+				io.emit(`dashboard=${_id}`, "Trigger refetch!")
+			})
 
 			// Triggers refetches for both the dashboard and overlay
 			socket.on(`dashboardChangeReporter`, (_id: string) => {

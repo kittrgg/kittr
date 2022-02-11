@@ -1,3 +1,4 @@
+import fetch from "@Fetch"
 import { createHandler } from "@Middlewares/createHandler"
 import Channel from "@Services/mongodb/models/Channel"
 import { buffer } from "micro"
@@ -22,6 +23,9 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 
 	let event: Stripe.Event
 
+	const localURL = process.env.NODE_ENV === "development" ? "http://api:5000/stripe-webhook-reporter" : ""
+	const apiURL = process.env.NEXT_PUBLIC_ENABLE_SEEDING === "true" ? "stage-api" : "api"
+
 	try {
 		event = stripe.webhooks.constructEvent(buf, sig, process.env.STRIPE_WEBHOOK_SECRET as string)
 
@@ -41,7 +45,15 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 				)
 
 				if (signUp) {
-					res.status(200).json({ success: true })
+					fetch.post({
+						url: localURL || `https://${apiURL}.kittr.gg/stripe-webhook-reporter`,
+						body: {
+							// @ts-ignore
+							_id: event.data.object.metadata._id
+						}
+					})
+
+					return res.status(200).json({ success: true })
 				}
 
 				break
@@ -58,7 +70,15 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 				)
 
 				if (customerCancelled) {
-					res.status(200).json({ cancelled: true })
+					fetch.post({
+						url: localURL || `https://${apiURL}.kittr.gg/stripe-webhook-reporter`,
+						body: {
+							// @ts-ignore
+							_id: event.data.object.id
+						}
+					})
+
+					return res.status(200).json({ cancelled: true })
 				}
 				break
 			case "subscription_schedule.updated":
@@ -79,17 +99,25 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 					)
 
 					if (paymentLapse && cancelSubscription) {
-						res.status(200).json({ cancelled: true })
+						fetch.post({
+							url: localURL || `https://${apiURL}.kittr.gg/stripe-webhook-reporter`,
+							body: {
+								// @ts-ignore
+								_id: event.data.object.metadata._id
+							}
+						})
+
+						return res.status(200).json({ cancelled: true })
 					}
 				}
 				break
 			default:
 				console.log(`Unhandled event type ${event.type}`)
-				res.status(418).send("im a little teapot")
+				return res.status(418).send("im a little teapot")
 		}
 	} catch (err: any) {
 		console.log(err)
-		res.status(400).send(`Webhook Error: ${err.message}`)
+		return res.status(400).send(`Webhook Error: ${err.message}`)
 	}
 })
 
