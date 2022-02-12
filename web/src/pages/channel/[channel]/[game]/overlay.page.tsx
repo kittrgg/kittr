@@ -1,5 +1,4 @@
 import { GetServerSideProps } from "next"
-import { useEffect } from "react"
 import { getRawChannelProfileQuery } from "@Services/mongodb"
 import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
 import KitOverlay from "@Features/Overlays/ActiveKit"
@@ -9,12 +8,6 @@ interface Props {
 }
 
 export const Overlay = ({ _id, isPremium }: Props) => {
-	useEffect(() => {
-		if (document) {
-			document.querySelector(".firebase-emulator-warning").style.display = "none"
-		}
-	}, [])
-
 	if (isPremium) {
 		return <KitOverlay _id={_id} />
 	}

@@ -13,7 +13,7 @@ import fetch from "@Fetch"
 import { isFetchError } from "@Utils/helpers/typeGuards"
 
 interface Props {
-	slot: 1 | 2 | 3 | 4
+	slot: number
 }
 
 const ImageUploader = ({ slot }: Props) => {
