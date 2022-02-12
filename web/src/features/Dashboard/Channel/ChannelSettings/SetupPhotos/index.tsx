@@ -39,7 +39,7 @@ const SetupPhotos = ({ ...props }) => {
 			</Title>
 			<Grid>
 				{[...Array(4)].map((_, index) => (
-					<ImageUploader slot={index + 1} />
+					<ImageUploader key={index} slot={index + 1} />
 				))}
 			</Grid>
 			<Toast visible={copyNotification} setVisibility={setCopyNotification}>

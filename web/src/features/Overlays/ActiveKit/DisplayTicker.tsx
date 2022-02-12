@@ -4,9 +4,7 @@ import styled, { ThemeProvider } from "styled-components"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
 import { asyncDelay } from "@Utils/helpers/asyncDelay"
-import { download } from "@Services/firebase/storage/download"
 import { header1, header2, montserrat, paragraph } from "@Styles/typography"
-import { usePreviousValue } from "@Hooks/usePreviousValue"
 
 interface Props {
 	_id: string
@@ -21,13 +19,9 @@ const OPTION_SWAP_INTERVAL = 500
 const OPACITY_DURATION = 0.2
 
 const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Props) => {
-	const [background, setBackground] = useState("")
-	const [isUsingCustomBackground, setIsUsingCustomBackground] = useState(true)
-	const [isOverlayReady, setIsOverlayReady] = useState(false)
 	const [isOptionVisible, setIsOptionVisible] = useState(true)
 	const [isBaseVisible, setIsBaseVisible] = useState(true)
 	const [cursor, setCursor] = useState(0)
-	const prevUuid = usePreviousValue(data?.uuid)
 
 	const activeKitOptions =
 		Object.keys(activeKit || {}).length > 0
@@ -104,29 +98,11 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 		resetEndofKitVisiblility()
 	}, [cursor])
 
-	// Handle changing backgrounds
-	// Comparing the uuids has to happen so that the browser knows to refetch the background
-	useEffect(() => {
-		try {
-			if (data?.uuid !== prevUuid) {
-				download(`${_id}-kit-overlay-display-ticker`, async (image) => {
-					if (!image) {
-						setIsUsingCustomBackground(false)
-						setBackground("")
-						return setIsOverlayReady(true)
-					}
-
-					setBackground(image)
-				})
-			}
-		} catch (error) {}
-	}, [download, data])
-
 	if (!data) return null
 
 	const hasAKitSelected =
 		Object.keys(data.primaryKit || {}).length > 0 || Object.keys(data.secondaryKit || {}).length > 0
-	const isRendered = data.isOverlayVisible === "on" && hasAKitSelected && isOverlayReady
+	const isRendered = data.isOverlayVisible === "on" && hasAKitSelected
 	const isOverlayVisible = !!previewWidth || isRendered
 
 	return (
@@ -134,24 +110,9 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 			theme={{
 				...data,
 				isOverlayVisible: isOverlayVisible && hasAKitSelected,
-				customBackground: background,
 				previewWidth
 			}}
 		>
-			{isUsingCustomBackground && (
-				<img
-					style={{
-						position: "absolute",
-						top: "0",
-						left: "0",
-						zIndex: -1,
-						width: "0",
-						height: "0"
-					}}
-					src={background + new Date().getTime()}
-					onLoad={() => setIsOverlayReady(true)}
-				/>
-			)}
 			<Wrapper>
 				<Meta fadeDuration={OPACITY_DURATION}>
 					<BaseName isVisible={isBaseVisible} fadeDuration={OPACITY_DURATION}>

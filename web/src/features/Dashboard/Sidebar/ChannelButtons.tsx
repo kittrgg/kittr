@@ -54,13 +54,15 @@ const ChannelButtons = ({ ...props }) => {
 
 			{games &&
 				data &&
-				games.map((game) => (
-					<GameButton
-						key={data.find((allGame) => allGame._id === game.id)?.id}
-						game={data.find((allGame) => allGame._id === game.id) as IGame}
-						activeView={gameId === data.find((allGame) => allGame._id === game.id)?.id}
-					/>
-				))}
+				games.map((game) => {
+					return (
+						<GameButton
+							key={data.find((allGame) => allGame._id === game.id)?._id}
+							game={data.find((allGame) => allGame._id === game.id) as IGame}
+							activeView={gameId === data.find((allGame) => allGame._id === game.id)?.id}
+						/>
+					)
+				})}
 
 			{role === "Owner" && (
 				<>
