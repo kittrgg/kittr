@@ -44,8 +44,8 @@ const SetupPhotos = ({ _id, meta }: IChannel) => {
 		<section id="setup">
 			<H2>SETUP</H2>
 			<SideScroller childMargin="20px" wrapperStyles={{ width: "100vw" }}>
-				{photoPathsArray.map((photo) => {
-					return <Image key={photo} src={photo} />
+				{photoPathsArray.map((photo, index) => {
+					return <Image key={photo} src={photo} alt={`Setup Photo ${index + 1}`} />
 				})}
 			</SideScroller>
 		</section>
