@@ -12,9 +12,11 @@ const SetupPhotos = ({ _id, meta }: IChannel) => {
 	const [photoPathsArray, setPhotoPathsArray] = useState<Array<string>>([])
 
 	useEffect(() => {
+		// Turn the setupPhotoes from the DB into an array of only the ones that exist
 		const setupEntries = Object.entries(setupPhotos || {}).filter((elem) => !!elem[1])
 
 		const fetchImages = async () => {
+			// Fetch only the images that exist
 			const result = await Promise.all(
 				setupEntries.map(async (entry) => {
 					return await download(`${_id}-setup-photo-${entry[0]}`)
@@ -28,7 +30,7 @@ const SetupPhotos = ({ _id, meta }: IChannel) => {
 		}
 
 		fetchImages()
-	}, [])
+	}, [_id, setupPhotos])
 
 	if (isLoading) {
 		return (

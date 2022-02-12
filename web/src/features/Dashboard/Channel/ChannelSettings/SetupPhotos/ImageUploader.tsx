@@ -13,12 +13,12 @@ import fetch from "@Fetch"
 import { isFetchError } from "@Utils/helpers/typeGuards"
 
 interface Props {
-	slot: number
+	slot: 1 | 2 | 3 | 4
 }
 
 const ImageUploader = ({ slot }: Props) => {
 	const dispatch = useDispatch()
-	const { _id } = useChannelData()
+	const { _id, meta } = useChannelData()
 	const [image, setImage] = useState("")
 	const [isUploading, setIsUploading] = useState(false)
 	const [isHovered, setIsHovered] = useState(false)
@@ -88,8 +88,10 @@ const ImageUploader = ({ slot }: Props) => {
 	}
 
 	useEffect(() => {
-		download(fileName, (path) => setImage(path))
-	}, [download])
+		if (meta?.setupPhotos?.[String(slot) as "1" | "2" | "3" | "4"]) {
+			download(fileName, (path) => setImage(path))
+		}
+	}, [fileName, meta.setupPhotos, slot])
 
 	if (isUploading) {
 		return (
