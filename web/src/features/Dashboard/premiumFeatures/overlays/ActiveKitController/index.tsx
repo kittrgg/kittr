@@ -137,7 +137,7 @@ const ActiveKit = ({ ...props }) => {
 						<Preview overlay={data?.overlay} />
 						<UrlCopy>
 							<Styled.Paragraph style={{ color: colors.white }}>
-								Click here to copy the URL to your overlay when you’re done customizing.
+								Click here to copy the URL to your overlay when you're done customizing.
 							</Styled.Paragraph>
 							<Button
 								data-cy="copy-overlay-url"
@@ -151,7 +151,7 @@ const ActiveKit = ({ ...props }) => {
 							</Styled.Paragraph>
 						</UrlCopy>
 						<H3>Appearance</H3>
-						<div>
+						{/* <div>
 							<FlexRow>
 								<Styled.Paragraph style={{ color: colors.white }}>Custom Backgrounds</Styled.Paragraph>
 								<Styled.Paragraph style={{ fontStyle: "italic" }}>Optional</Styled.Paragraph>
@@ -209,7 +209,7 @@ const ActiveKit = ({ ...props }) => {
 									}
 								/>
 							</ImageUploaderGrid>
-						</div>
+						</div> */}
 						<div>
 							<Styled.Paragraph>Colors</Styled.Paragraph>
 							<ColorsGrid>

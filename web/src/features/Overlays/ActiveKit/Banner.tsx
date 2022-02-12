@@ -1,11 +1,9 @@
-import { useState, useEffect, Dispatch, SetStateAction, CSSProperties } from "react"
+import { useState, useEffect, Dispatch, SetStateAction } from "react"
 import styled, { keyframes, ThemeProvider } from "styled-components"
 
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
-import { download } from "@Services/firebase/storage/download"
 import { header1, header2, montserrat, paragraph } from "@Styles/typography"
-import { usePreviousValue } from "@Hooks/usePreviousValue"
 
 interface Props {
 	_id: string
@@ -16,11 +14,7 @@ interface Props {
 }
 
 const Banner = ({ _id, previewWidth, data, activeKit, setActiveKit }: Props) => {
-	const [background, setBackground] = useState("")
-	const [isUsingCustomBackground, setIsUsingCustomBackground] = useState(true)
-	const [isOverlayReady, setIsOverlayReady] = useState(false)
 	const [isDataVisible, setIsDataVisible] = useState(true)
-	const prevUuid = usePreviousValue(data?.uuid)
 
 	const SWAP_TIMER = Object.keys(activeKit || {}).length ? activeKit.options?.length * 3 : 0
 	const NO_SCROLL_SWAP_TIMER = 8000
@@ -74,36 +68,11 @@ const Banner = ({ _id, previewWidth, data, activeKit, setActiveKit }: Props) => 
 		return () => clearTimeout(timeout)
 	}, [data, activeKit])
 
-	// Handle changing backgrounds
-	// Comparing the uuids has to happen so that the browser knows to refetch the background
-	useEffect(() => {
-		if (previewWidth) {
-			setIsUsingCustomBackground(false)
-			return setIsOverlayReady(true)
-		}
-
-		try {
-			if (data?.uuid !== prevUuid) {
-				download(`${_id}-kit-overlay-banner`, async (image) => {
-					if (!image) {
-						setIsUsingCustomBackground(false)
-						setBackground("")
-						return setIsOverlayReady(true)
-					}
-
-					setBackground(image)
-				})
-			}
-		} catch (error) {
-			console.error(error)
-		}
-	}, [download, data])
-
 	if (!data) return null
 
 	const hasAKitSelected =
 		Object.keys(data.primaryKit || {}).length > 0 || Object.keys(data.secondaryKit || {}).length > 0
-	const isRendered = data.isOverlayVisible === "on" && hasAKitSelected && isOverlayReady
+	const isRendered = data.isOverlayVisible === "on" && hasAKitSelected
 	const isOverlayVisible = !!previewWidth || isRendered
 
 	return (
@@ -111,55 +80,38 @@ const Banner = ({ _id, previewWidth, data, activeKit, setActiveKit }: Props) => 
 			theme={{
 				...data,
 				isOverlayVisible: isOverlayVisible && hasAKitSelected,
-				customBackground: background,
 				previewWidth
 			}}
 		>
 			<VisibilityController opacitySwap={OPACITY_TIMER}>
-				{isUsingCustomBackground && (
-					<img
-						style={{
-							position: "absolute",
-							top: "0",
-							left: "0",
-							zIndex: -1,
-							width: "0",
-							height: "0"
-						}}
-						src={background + new Date().getTime()}
-						onLoad={() => setIsOverlayReady(true)}
-					/>
-				)}
-				{!isUsingCustomBackground && isOverlayReady && <BackgroundArt />}
-				{isOverlayReady && (
-					<Main>
-						<Meta isDataVisible={isDataVisible} opacitySwap={OPACITY_TIMER}>
-							<BaseName>{activeKit?.base?.displayName}</BaseName>
-							<CommandInfo>kittr.gg | !{activeKit?.base?.commandCodes[0]}</CommandInfo>
-						</Meta>
-						<OptionsWrapper
-							isDataVisible={isDataVisible}
-							numOfItems={activeKit?.options?.length || 0}
-							opacitySwap={OPACITY_TIMER}
-						>
-							<Options duration={SWAP_TIMER} numOfItems={activeKit?.options?.length || 0}>
-								{Object.keys(activeKit || {}).length > 0 &&
-									customOrderArray<IKitOption>({
-										sortingArray: warzoneSlotsOrder,
-										keyToSort: "slotKey",
-										array: activeKit.options || []
-									}).map((elem) => {
-										return (
-											<div key={elem.displayName} style={{ width: "200px", minWidth: "200px" }}>
-												<Slot>{elem.slotKey}</Slot>
-												<Selection>{elem.displayName.toUpperCase()}</Selection>
-											</div>
-										)
-									})}
-							</Options>
-						</OptionsWrapper>
-					</Main>
-				)}
+				<BackgroundArt />
+				<Main>
+					<Meta isDataVisible={isDataVisible} opacitySwap={OPACITY_TIMER}>
+						<BaseName>{activeKit?.base?.displayName}</BaseName>
+						<CommandInfo>kittr.gg | !{activeKit?.base?.commandCodes[0]}</CommandInfo>
+					</Meta>
+					<OptionsWrapper
+						isDataVisible={isDataVisible}
+						numOfItems={activeKit?.options?.length || 0}
+						opacitySwap={OPACITY_TIMER}
+					>
+						<Options duration={SWAP_TIMER} numOfItems={activeKit?.options?.length || 0}>
+							{Object.keys(activeKit || {}).length > 0 &&
+								customOrderArray<IKitOption>({
+									sortingArray: warzoneSlotsOrder,
+									keyToSort: "slotKey",
+									array: activeKit.options || []
+								}).map((elem) => {
+									return (
+										<div key={elem.displayName} style={{ width: "200px", minWidth: "200px" }}>
+											<Slot>{elem.slotKey}</Slot>
+											<Selection>{elem.displayName.toUpperCase()}</Selection>
+										</div>
+									)
+								})}
+						</Options>
+					</OptionsWrapper>
+				</Main>
 			</VisibilityController>
 		</ThemeProvider>
 	)
