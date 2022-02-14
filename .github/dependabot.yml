@@ -6,7 +6,7 @@ updates:
     commit-message:
       prefix: "npm"
       include: "scope"
-    target-branch: "develop"
+    target-branch: "dependabot"
     schedule:
       interval: "daily"
   # API
@@ -15,7 +15,7 @@ updates:
     commit-message:
       prefix: "npm"
       include: "scope"
-    target-branch: "develop"
+    target-branch: "dependabot"
     schedule:
       interval: "daily"
   # Cypress
@@ -24,7 +24,7 @@ updates:
     commit-message:
       prefix: "npm"
       include: "scope"
-    target-branch: "develop"
+    target-branch: "dependabot"
     schedule:
       interval: "daily"
   # web
@@ -33,6 +33,6 @@ updates:
     commit-message:
       prefix: "npm"
       include: "scope"
-    target-branch: "develop"
+    target-branch: "dependabot"
     schedule:
       interval: "daily"
