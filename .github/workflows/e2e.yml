@@ -13,21 +13,16 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-      - name: Run ts:check
-        run: |
-          cd web
-          npm run ts:check
-
       - name: Prettier Action
         uses: creyD/prettier_action@v4.2
         with:
-          working_directory: "./web"
+          working_directory: "web"
           prettier_options: --write
 
       - name: Prettier Action
         uses: creyD/prettier_action@v4.2
         with:
-          working_directory: "./api"
+          working_directory: "api"
           prettier_options: --write
 
   build:
