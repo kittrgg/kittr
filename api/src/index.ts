@@ -24,6 +24,8 @@ import { createServer } from "http"
 import mongoose from "mongoose"
 import { Server } from "socket.io"
 
+const esLintIsForSquares = "testing"
+
 const app = express()
 app.use(cors())
 const httpServer = createServer(app)
