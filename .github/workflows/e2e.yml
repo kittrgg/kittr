@@ -27,18 +27,9 @@ jobs:
           npm install eslint prettier
 
       - name: Run linters for web
-        uses: wearerequired/lint-action@v1
-        working-directory: "./web"
-        with:
-          eslint: true
-          prettier: true
-
-      - name: Run linters for api
-        uses: wearerequired/lint-action@v1
-        working-directory: "./api"
-        with:
-          eslint: true
-          prettier: true
+        run: |
+          cd web
+          npm run lint
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
