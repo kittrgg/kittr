@@ -16,13 +16,6 @@ jobs:
       - name: Prettier Action
         uses: creyD/prettier_action@v4.2
         with:
-          working_directory: "web"
-          prettier_options: --write
-
-      - name: Prettier Action
-        uses: creyD/prettier_action@v4.2
-        with:
-          working_directory: "api"
           prettier_options: --write
 
   build:
