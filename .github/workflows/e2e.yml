@@ -13,7 +13,10 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-      - name: Prettier Action
+      - name: Eslint
+        uses: stefanoeb/eslint-action@1.0.2
+
+      - name: Prettier
         uses: creyD/prettier_action@v4.2
 
   build:
