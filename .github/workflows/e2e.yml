@@ -26,7 +26,15 @@ jobs:
         run: |
           npm install eslint prettier
 
-      - name: Run linters
+      - name: Run linters for web
+        working-directory: "./web"
+        uses: wearerequired/lint-action@v1
+        with:
+          eslint: true
+          prettier: true
+
+      - name: Run linters for api
+        working-directory: "./api"
         uses: wearerequired/lint-action@v1
         with:
           eslint: true
