@@ -12,7 +12,7 @@
     "test:local": "docker-compose -f docker-compose.test.yml up --build",
     "cypress:open": "cypress open --config-file ./cypress/cypress.local.json",
     "cypress:run": "cypress run --config-file ./cypress/cypress.local.json",
-    "eslint": "eslint --ext .js,.ts,.tsx",
+    "eslint": "eslint --ext .js,.ts,.tsx"
   },
   "devDependencies": {
     "cross-env": "7.0.3",
