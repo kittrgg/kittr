@@ -17,7 +17,7 @@ jobs:
         run: npm install eslint
 
       - name: Run ESLint
-        run: eslint . --ext .js,.jsx,.ts,.tsx
+        run: npm run eslint
 
       - name: Prettier
         uses: creyD/prettier_action@v4.2
