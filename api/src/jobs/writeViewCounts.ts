@@ -73,7 +73,7 @@ const getStreamerViewCounts = async (dateRange: StreamerViewCounts): Promise<Rec
 
 export const writeViewCounts = async () => {
 	const now = new Date()
-	let monthAgo = new Date()
+	const monthAgo = new Date()
 	monthAgo.setMonth(now.getMonth() - 1)
 
 	const streamerData = await getStreamerViewCounts({

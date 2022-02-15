@@ -3,11 +3,11 @@ import { IGame } from "@Types/gameTypes"
 import { IKitBase, IKitOption } from "@Types/kitsTypes"
 import { Request, Response } from "express"
 import mongoose from "mongoose"
-const { default: Player } = require("../models/Player")
-const { default: Game } = require("../models/Game")
-const { default: KitBase } = require("../models/KitBase")
-const { default: KitOption } = require("../models/KitOption")
-const { default: KitStat } = require("../models/KitStat")
+import Player from "../models/Player"
+import Game from "../models/Game"
+import KitBase from "../models/KitBase"
+import KitOption from "../models/KitOption"
+import KitStat from "../models/KitStat"
 
 const allSetupsForComparisonQuery = async () => {
 	const result = await Player.aggregate([
@@ -54,19 +54,19 @@ const allSetupsForComparisonQuery = async () => {
 }
 
 const allGamesQuery = async () => {
-	const result = await Game.find({}).lean()
+	const result = await Game.find({})
 
 	const serialized = result.map((elem: IGame) => ({
 		...elem,
 		_id: elem._id.toString(),
-		releaseDate: elem.releaseDate.toString()
+		releaseDate: elem!.releaseDate
 	}))
 
 	return serialized
 }
 
 const allBasesQuery = async () => {
-	const result = await KitBase.find({}).lean()
+	const result = await KitBase.find({})
 
 	const serialized = result.map((elem: IKitBase) => ({
 		...elem,
@@ -78,7 +78,7 @@ const allBasesQuery = async () => {
 }
 
 const allOptionsQuery = async () => {
-	const result = await KitOption.find({}).lean()
+	const result = await KitOption.find({})
 
 	const serialized = result.map((elem: IKitOption) => ({
 		...elem,
@@ -109,14 +109,14 @@ export const serializeChannels: IFunc = async (channelsArr) => {
 		games: channel.games.map((game: IGame) => ({
 			...game,
 			id: game.id.toString(),
-			...games.find((rawGame: IGame) => rawGame._id.toString() === game.id.toString())
+			...games.find((rawGame: any) => rawGame._id.toString() === game.id.toString())
 		})),
 		createdDate: channel.createdDate.toString(),
 		kits: channel.kits.map((kit) => ({
 			...kit,
 			_id: kit._id.toString(),
 			base: kitBases
-				.filter((base: IKitBase) => base._id.toString() === kit.baseId.toString())
+				.filter((base: IKitBase) => base._id!.toString() === kit.baseId.toString())
 				.map((base: IKitBase) => ({
 					...base,
 					gameInfo: {
@@ -126,7 +126,7 @@ export const serializeChannels: IFunc = async (channelsArr) => {
 				}))[0],
 			options: kit.options.map(
 				(opt: IKitOption) =>
-					kitOptions.find((option: IKitOption) => option._id.toString() === opt.toString()) as IKitOption
+					kitOptions.find((option: Partial<IKitOption>) => option?._id?.toString() === opt.toString()) as IKitOption
 			)
 		}))
 	}))
@@ -135,7 +135,7 @@ export const serializeChannels: IFunc = async (channelsArr) => {
 export const getStreamerByTwitchBroadcasterLoginId = async (req: Request, res: Response) => {
 	const rawChannel = await Player.find({
 		"meta.links.twitch": { $regex: `.*${req.query.broadcasterLogin}.*` }
-	}).lean()
+	})
 
 	if (rawChannel.length === 0) {
 		return res.status(403).json({

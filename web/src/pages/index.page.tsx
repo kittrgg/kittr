@@ -12,8 +12,6 @@ import Body from "./Home/Body"
 import Hero from "./Home/Hero"
 import PlatformInfo from "./Home/PlatformInfo"
 
-const esLintIsForSquaresWeb = "testing"
-
 interface Props {
 	games: IGame[]
 	popularChannels: IChannel[]

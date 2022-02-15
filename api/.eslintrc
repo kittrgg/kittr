@@ -1,13 +1,9 @@
 {
-	"extends": "next",
+	"parser": "@typescript-eslint/parser",
+	"plugins": ["@typescript-eslint"],
+	"extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
 	"rules": {
-		"@next/next/no-img-element": 0,
-		"react/no-unescaped-entities": 0,
-		"no-unused-vars": [
-			"warn",
-			{
-				"args": "none"
-			}
-		]
+		"@typescript-eslint/no-explicit-any": "off",
+		"@typescript-eslint/no-non-null-assertion": "off"
 	}
 }

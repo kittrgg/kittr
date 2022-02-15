@@ -10,7 +10,7 @@ const router = express.Router()
 */
 router.use("/:route?", (req: any, res, next) => {
 	if (req.headers["authorization"]) {
-		let [type, auth] = req.headers["authorization"].split(" ")
+		const [type, auth] = req.headers["authorization"].split(" ")
 
 		if (type == "Bearer") {
 			jwt.verify(auth, config.secret, (err: any, decoded: any) => {
@@ -41,7 +41,7 @@ router
 		res.status(404).json({ error: true, message: "GET Not supported" })
 	})
 	.post((req: any, res) => {
-		if (req.extension.hasOwnProperty("channel_id")) {
+		if (req.extension.channel_id) {
 			console.log("Looking up", req.extension.channel_id)
 
 			axios({
