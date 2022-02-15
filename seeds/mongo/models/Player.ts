@@ -11,8 +11,39 @@ const schema = new Schema(
       type: Schema.Types.Number,
       default: 0,
     },
-    games: [],
-    kits: [],
+    games: [
+      {
+        id: Schema.Types.ObjectId,
+        code: {
+          type: String,
+          optional: true
+        }
+      }
+    ],
+    kits: [
+      {
+        _id: Schema.Types.ObjectId,
+        baseId: String,
+        options: [Schema.Types.ObjectId],
+        userData: {
+          customTitle: String,
+          blueprint: String,
+          features: Boolean,
+          youtubeURL: {
+            type: String,
+            optional: true,
+          },
+          tiktokId: {
+            type: String,
+            optional:true
+          },
+          quote: {
+            type: String,
+            optional:true
+          },
+        }
+      }
+    ],
     meta: {
       brandColors: {
         primary: "",
@@ -39,8 +70,28 @@ const schema = new Schema(
       youtubeAutoplay: Boolean,
     },
     managers: [],
-    overlay: {},
-    previousUpdater: String,
+    overlay: {
+      backgroundColorPrimary: {
+        type: String,
+        optional:true
+      }
+    },
+      backgroundColorSecondary: {
+        type: String,
+        optional:true
+      },
+      textColorPrimary: {
+        type: String,
+        optional:true
+      },
+      textColorAccent: {
+        type: String,
+        optional:true
+      },
+      textColorSecondary: {
+        type: String,
+        optional:true
+      },
   },
   { minimize: false }
 );
