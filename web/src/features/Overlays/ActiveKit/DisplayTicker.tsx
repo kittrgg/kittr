@@ -58,6 +58,7 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 		}, DATA_SWITCH_TIMER)
 
 		return () => clearInterval(interval)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeKit])
 
 	useEffect(() => {
@@ -82,6 +83,7 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 		}
 
 		switchKit()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [cursor])
 
 	useEffect(() => {
@@ -96,6 +98,7 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 		}
 
 		resetEndofKitVisiblility()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [cursor])
 
 	if (!data) return null

@@ -1,15 +1,12 @@
 import styled, { keyframes } from "styled-components"
 import colors from "@Colors"
 import SVG from "@Components/shared/SVG"
-import { useModal } from "@Redux/slices/dashboard/selectors"
 
 /** If a user doesn't have a game yet,
  * they are probably a new account and
  * we want to show them where to add their first game.
  * */
 const AddGameNotification = ({ ...props }) => {
-	const { data } = useModal()
-
 	return (
 		<Wrapper>
 			<SVG.Carat width="24px" fill={colors.white} />

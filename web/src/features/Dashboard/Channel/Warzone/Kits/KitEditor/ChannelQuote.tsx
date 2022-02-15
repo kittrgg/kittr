@@ -10,7 +10,6 @@ import { useDispatch } from "@Redux/store"
 const ChannelQuote = ({ ...props }) => {
 	const dispatch = useDispatch()
 	const {
-		base,
 		userData: { quote }
 	} = useActiveKit()
 

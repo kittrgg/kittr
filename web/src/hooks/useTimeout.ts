@@ -31,7 +31,7 @@ export const useTimeout = (fn: (...args: any) => any, milliseconds: number, opti
 			}, milliseconds)
 		}
 		return clear
-	}, [milliseconds])
+	}, [milliseconds, clear])
 
 	useEffect(
 		() => () => {
@@ -39,6 +39,7 @@ export const useTimeout = (fn: (...args: any) => any, milliseconds: number, opti
 				clear()
 			}
 		},
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[]
 	)
 

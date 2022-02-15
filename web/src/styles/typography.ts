@@ -94,8 +94,7 @@ export const paragraph = `
     ${montserrat};
     letter-spacing: 2px;
 `
-
-export default {
+const styles = {
 	montserrat,
 	barlow,
 	header1,
@@ -103,3 +102,5 @@ export default {
 	header4,
 	caption
 }
+
+export default styles

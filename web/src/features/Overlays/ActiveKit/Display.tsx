@@ -60,6 +60,7 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 		}
 
 		return () => clearTimeout(timeout)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data, activeKit])
 
 	if (!data) return null

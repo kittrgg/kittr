@@ -1,4 +1,3 @@
-import { initializeApp } from "@firebase/app"
 import { connectAuthEmulator, getAuth } from "firebase/auth"
 import { connectStorageEmulator, getStorage } from "firebase/storage"
 
@@ -12,8 +11,6 @@ export const firebaseConfig = {
 	appId: process.env.FIREBASE_APP_ID || "dev",
 	measurementId: process.env.FIREBASE_MEASUREMENT_ID || "dev"
 }
-
-const firebase = initializeApp(firebaseConfig)
 
 export const auth = getAuth()
 export const storage = getStorage()

@@ -15,7 +15,7 @@ interface Props {
 }
 
 const Preview = ({ overlay }: Props) => {
-	const { urlSafeName, _id } = useChannelData()
+	const { _id } = useChannelData()
 	const [cursor, setCursor] = useState(0)
 	const { observe, width } = useDimensions()
 

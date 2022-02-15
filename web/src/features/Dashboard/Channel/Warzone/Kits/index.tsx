@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-import { useModal, useChannelData, useActiveKit, useInitialKit } from "@Redux/slices/dashboard/selectors"
+import { useModal, useChannelData, useActiveKit } from "@Redux/slices/dashboard/selectors"
 import KitDeleteConfirmation from "../../../modals/KitDeleteConfirmation"
 import KitsPlaceholder from "./KitsPlaceholder"
 import KitList from "./KitList"

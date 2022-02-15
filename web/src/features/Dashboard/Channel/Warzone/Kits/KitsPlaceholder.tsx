@@ -37,6 +37,7 @@ const KitsPlaceholder = () => {
 				})
 			)
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [buttonRef, buttonRef.current, modal.data?.page])
 
 	return (

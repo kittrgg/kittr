@@ -36,6 +36,7 @@ const Channels = ({ channel, popularityRates }: Props) => {
 			dispatch(setActiveWeapon({} as IKit))
 			dispatch(setPopularityRates({} as IPopularityRates))
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	useEffect(() => {
@@ -52,6 +53,7 @@ const Channels = ({ channel, popularityRates }: Props) => {
 				dispatch(setActiveWeapon(firstKit))
 			}
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeWeapon, query.weapon, query.k])
 
 	const activeGame = channel.games ? channel.games.find((game: IGame) => game.urlSafeName === query.game) : { code: "" }

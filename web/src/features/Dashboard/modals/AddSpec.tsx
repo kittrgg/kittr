@@ -36,6 +36,7 @@ const AddSpecModal = ({ ...props }) => {
 		if (data?.keyName) {
 			setKeyName(data.keyName)
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	if (error) return <ErrorNotification />

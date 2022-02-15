@@ -22,6 +22,7 @@ const Item = ({ elem }: Props) => {
 				block: "nearest"
 			})
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeWeapon])
 
 	return (

@@ -51,6 +51,7 @@ const Item = ({ baseName, featured, kits, setFilterQuery }: Props) => {
 				block: "center"
 			})
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isReady])
 
 	return (
