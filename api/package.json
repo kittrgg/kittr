@@ -20,7 +20,7 @@
 	"license": "ISC",
 	"dependencies": {
 		"@google-analytics/data": "2.8.0",
-		"@sentry/node": "^6.17.6",
+		"@sentry/node": "^6.17.8",
 		"axios": "0.25.0",
 		"cors": "2.8.5",
 		"cron": "1.8.2",
