@@ -24,9 +24,8 @@ export const getSchedule: IFunc = async (broadcaster_id) => {
 		if (!data?.segments) return []
 		return data.segments.filter((segment) => segment.is_recurring)
 	} catch (error: any) {
-		console.error(error)
-		// This error was going to very quickly send us over our Sentry limits so let's get rid of it.
-		// logger.exception(error)
+		// This user does not have a schedule.
+		// Because of that, we need to provide an empty array so nothing breaks.
 		return []
 	}
 }

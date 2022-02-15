@@ -17,5 +17,11 @@ interface IFunc {
 export const getFromApi: IFunc = async ({ endpointBaseUrl, queryParams }) => {
 	const params = new URLSearchParams(queryParams)
 
-	return await fetch.get({ url: `${endpointBaseUrl}?${params}`, headers: await headers(), redirect: "follow" })
+	const result = await fetch.get<any>({
+		url: `${endpointBaseUrl}?${params}`,
+		headers: await headers(),
+		redirect: "follow"
+	})
+
+	return result
 }
