@@ -14,7 +14,7 @@ jobs:
           ref: ${{ github.head_ref }}
 
       - name: Install eslint
-        run: npm install eslint eslint-config-next
+        run: npm install eslint eslint-config-next babel-plugin-styled-components
 
       - name: Run ESLint
         run: npm run lint
