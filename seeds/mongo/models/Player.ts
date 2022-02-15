@@ -69,7 +69,12 @@ const schema = new Schema(
       },
       youtubeAutoplay: Boolean,
     },
-    managers: [],
+    managers: [
+      {
+        uid: String,
+        role: String
+      }
+    ],
     overlay: {
       backgroundColorPrimary: {
         type: String,
