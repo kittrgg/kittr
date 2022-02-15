@@ -1,4 +1,4 @@
-import { useEffect, useRef, MutableRefObject, Key } from "react"
+import { useEffect, useRef, MutableRefObject } from "react"
 import * as Styled from "./style"
 import colors from "@Colors"
 import { handleTutorialAction, setModal, setChannelView } from "@Redux/slices/dashboard"
@@ -38,6 +38,7 @@ const ChannelButtons = ({ ...props }) => {
 				})
 			)
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [modal.data?.page, ref?.current, role])
 
 	return (

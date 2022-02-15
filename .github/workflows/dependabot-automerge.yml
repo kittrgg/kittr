@@ -1,0 +1,21 @@
+name: Deploy Testing Environment and run E2E
+
+on:
+  pull_request:
+    branches:
+      - dependabot
+
+jobs:
+  auto-merge:
+    steps:
+      - name: Minors
+        uses: ahmadnassri/action-dependabot-auto-merge@v2
+        with:
+          target: minor
+          github-token: ${{ secrets.mytoken }}
+
+      - name: Patches
+        uses: ahmadnassri/action-dependabot-auto-merge@v2
+        with:
+          target: patch
+          github-token: ${{ secrets.mytoken }}

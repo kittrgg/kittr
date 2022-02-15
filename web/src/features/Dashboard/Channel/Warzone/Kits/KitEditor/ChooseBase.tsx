@@ -1,5 +1,4 @@
 import { sortAlphabetical } from "@Utils/helpers/sortAlphabetical"
-import { SingleValue } from "react-select"
 
 import * as Styled from "./style"
 import { useDispatch } from "@Redux/store"

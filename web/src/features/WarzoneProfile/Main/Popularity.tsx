@@ -32,6 +32,8 @@ const Popularity = ({ ...props }) => {
 		})
 
 		setSetupsWithSameAttachmentsRatio(matchedAttachmentsCount / matchedBasesAmount)
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeWeapon])
 
 	return (

@@ -100,7 +100,6 @@ const Header = styled.h1`
 	margin-bottom: 32px;
 	${header1};
 `
-const Button = styled.button``
 
 const Grid = styled.div`
 	display: grid;
@@ -112,13 +111,6 @@ const GridItem = styled.div<{ backgroundColor?: string }>`
 	padding: 52px;
 	border-radius: 24px;
 	background-color: ${(props) => props.backgroundColor || colors.darker};
-`
-
-const HorizFlex = styled.div`
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-between;
 `
 
 const GridTitle = styled.p`

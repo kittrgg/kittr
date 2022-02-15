@@ -38,6 +38,7 @@ const AddSpecModal = ({ ...props }) => {
 		if (data?.company) {
 			setCompany(data.company)
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	if (error) {

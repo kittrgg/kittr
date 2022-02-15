@@ -35,6 +35,7 @@ const KitEditor = ({ ...props }) => {
 		return () => {
 			dispatch(clearKitEditor())
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	return (

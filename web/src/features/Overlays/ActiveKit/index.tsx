@@ -15,7 +15,7 @@ interface Props {
 }
 
 const ActiveKitOverlay = ({ _id, previewWidth, overlayStyle }: Props) => {
-	const { data, isLoading, refetch } = useOverlayData(_id)
+	const { data, refetch } = useOverlayData(_id)
 	const [activeKit, setActiveKit] = useState({} as IKit)
 	const { width, height } = useViewportDimensions()
 
@@ -27,6 +27,7 @@ const ActiveKitOverlay = ({ _id, previewWidth, overlayStyle }: Props) => {
 				setActiveKit(update || ({} as IKit))
 			}
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data])
 
 	useEffect((): any => {
@@ -37,6 +38,7 @@ const ActiveKitOverlay = ({ _id, previewWidth, overlayStyle }: Props) => {
 		})
 
 		return () => socket.disconnect()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	if (overlayStyle === "Banner" || (width === 1500 && height === 90)) {

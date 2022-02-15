@@ -57,7 +57,7 @@ mongoose
 		})
 
 		// Throw an error to test Sentry
-		app.get("/error", (req, res) => {
+		app.get("/error", () => {
 			throw new Error("Test error")
 		})
 
@@ -76,7 +76,7 @@ mongoose
 		app.get("/api/streamer", getStreamerByTwitchBroadcasterLoginId)
 
 		if (process.env.NODE_ENV === "production") {
-			let viewCounts = new CronJob(
+			const viewCounts = new CronJob(
 				// Hourly
 				"0 * * * *",
 				() => {
@@ -94,7 +94,7 @@ mongoose
 		}
 
 		// Every night at 3 AM
-		let kitStats = new CronJob("0 3 * * *", () => generateKitStats(), null, true, "America/Los_Angeles")
+		const kitStats = new CronJob("0 3 * * *", () => generateKitStats(), null, true, "America/Los_Angeles")
 		kitStats.start()
 
 		let openSockets = 0

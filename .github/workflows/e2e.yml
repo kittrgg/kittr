@@ -6,7 +6,24 @@ on:
       - master
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Install eslint
+        run: npm install eslint eslint-config-next babel-plugin-styled-components
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Prettier
+        uses: creyD/prettier_action@v4.2
+
   build:
+    needs: lint
     concurrency:
       group: ${{ github.ref }}
       cancel-in-progress: true

@@ -38,6 +38,7 @@ const Channel = ({ containerRef }: Props) => {
 			dispatch(setActiveView({ channelId: "", view: "Channel List" }))
 			dispatch(setChannelView({ gameId: "", view: "Channel Settings" }))
 		})
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [_id, dispatch, user?.uid, socket])
 
 	if (isLoading) {

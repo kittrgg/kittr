@@ -61,6 +61,7 @@ const BackgroundImageUploader = ({ fileName, label, imageWidth, imageHeight, han
 
 	useEffect(() => {
 		download(fileName, (path) => setImage(path))
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [download])
 
 	if (isUploading) {

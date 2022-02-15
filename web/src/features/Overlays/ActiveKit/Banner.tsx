@@ -66,6 +66,7 @@ const Banner = ({ _id, previewWidth, data, activeKit, setActiveKit }: Props) => 
 		}
 
 		return () => clearTimeout(timeout)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data, activeKit])
 
 	if (!data) return null

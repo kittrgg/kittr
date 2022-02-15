@@ -35,6 +35,7 @@ const GameButton = ({ game, activeView }: Props) => {
 				})
 			)
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [modal.data?.page, ref?.current])
 
 	return (

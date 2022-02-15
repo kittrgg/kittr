@@ -15,9 +15,7 @@ import { ActiveKitOverlay } from "@Utils/lookups/overlays"
 import { Routes } from "@Utils/lookups/routes"
 import { useSocket } from "pages/dashboard.page"
 import styled from "styled-components"
-import { v4 as uuidv4 } from "uuid"
 import H3 from "../../../H3"
-import BackgroundImageUploader from "../BackgroundImageUploader"
 import Preview from "./Preview"
 import * as Styled from "./style"
 import fetch from "@Fetch"
@@ -448,13 +446,6 @@ const FlexRow = styled.div`
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
-`
-
-const ImageUploaderGrid = styled.div`
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	grid-gap: 14px;
-	margin-top: 24px;
 `
 
 const ColorsGrid = styled.div`

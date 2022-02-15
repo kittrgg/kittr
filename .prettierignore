@@ -6,3 +6,6 @@ package.json
 coverage
 node_modules
 *.log
+/seeds
+/cypress
+/firebase-emulators

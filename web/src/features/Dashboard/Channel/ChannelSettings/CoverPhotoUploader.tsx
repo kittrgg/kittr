@@ -66,6 +66,7 @@ const CoverPhotoUploader = ({ ...props }) => {
 				setImage(path)
 			})
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isUploading])
 
 	const handleDelete = async (e: any) => {
@@ -97,7 +98,7 @@ const CoverPhotoUploader = ({ ...props }) => {
 			</p>
 
 			<Grid>
-				{hasCoverPhoto && <Image backgroundImage={image} />}
+				{hasCoverPhoto && <BackgroundImage backgroundImage={image} />}
 
 				<ButtonsWrapper>
 					<Label htmlFor="coverPhotoUpload">
@@ -120,10 +121,6 @@ const CoverPhotoUploader = ({ ...props }) => {
 export default CoverPhotoUploader
 
 // Styled Components
-
-const Wrapper = styled.div`
-	margin-bottom: 32px;
-`
 
 const Title = styled.p`
 	margin-bottom: 20px;
@@ -167,7 +164,7 @@ const ButtonsWrapper = styled.div`
 	justify-content: center;
 `
 
-const Image = styled.div<{ backgroundImage: string }>`
+const BackgroundImage = styled.div<{ backgroundImage: string }>`
 	width: 100%;
 	padding-bottom: 25%;
 	background-image: url("${(props) => props.backgroundImage}");

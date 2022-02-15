@@ -6,6 +6,7 @@
 		"dev": "next dev",
 		"build": "next build",
 		"serve": "next start",
+		"lint": "next lint",
 		"ts:check": "tsc --noEmit --incremental false"
 	},
 	"dependencies": {

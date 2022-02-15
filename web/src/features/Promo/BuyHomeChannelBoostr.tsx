@@ -6,10 +6,7 @@ import { paragraph } from "@Styles/typography"
 import { Modal, SVG } from "@Components/shared"
 
 const BuyHomeChannelBoostr = ({ ...props }) => {
-	const [step, setStep] = useState(0)
-	const [date, setDate] = useState(0)
-	const [startTime, setStartTime] = useState(0)
-	const [endTime, setEndTime] = useState(0)
+	const [step] = useState(0)
 
 	return (
 		<Modal backgroundClickToClose>

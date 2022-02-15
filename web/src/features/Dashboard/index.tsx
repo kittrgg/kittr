@@ -41,7 +41,7 @@ const Dashboard = ({ ...props }) => {
 					padding: "24px"
 				}}
 			>
-				<img style={{ margin: "0 auto 24px" }} src="/media/logo.svg" />
+				<img style={{ margin: "0 auto 24px" }} src="/media/logo.svg" alt="kittr logo" />
 				<p>We do not currently support the dashboard on mobile.</p>
 				<p>Please revisit us with a larger screen!</p>
 				<a href={Routes.ROOT} style={{ color: "white", textDecoration: "underline" }}>
