@@ -13,11 +13,11 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-      - name: Install dependencies
+      - name: Install eslint
         run: npm install eslint
 
       - name: Run ESLint
-        run: npm run eslint
+        run: npm run lint
 
       - name: Prettier
         uses: creyD/prettier_action@v4.2
