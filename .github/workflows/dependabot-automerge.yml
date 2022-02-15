@@ -7,14 +7,15 @@ on:
 
 jobs:
   auto-merge:
-    - name: Minors
-      uses: ahmadnassri/action-dependabot-auto-merge@v2
-      with:
-        target: minor
-        github-token: ${{ secrets.mytoken }}
+    steps:
+      - name: Minors
+        uses: ahmadnassri/action-dependabot-auto-merge@v2
+        with:
+          target: minor
+          github-token: ${{ secrets.mytoken }}
 
-    - name: Patches
-      uses: ahmadnassri/action-dependabot-auto-merge@v2
-      with:
-        target: patch
-        github-token: ${{ secrets.mytoken }}
+      - name: Patches
+        uses: ahmadnassri/action-dependabot-auto-merge@v2
+        with:
+          target: patch
+          github-token: ${{ secrets.mytoken }}
