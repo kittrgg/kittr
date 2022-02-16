@@ -91,7 +91,6 @@ const Sidebar = ({ ...props }) => {
 										.filter((kit) => kit.base.category === category)
 										.map((kit) => {
 											const { _id, base } = kit
-
 											return <Item key={_id} kits={kits} baseName={base.displayName} setFilterQuery={setFilterQuery} />
 										})}
 								</React.Fragment>

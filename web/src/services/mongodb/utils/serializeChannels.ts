@@ -15,7 +15,7 @@ interface IFunc {
 export const serializeChannels: IFunc = async (channelsArr) => {
 	const [games, kitBases, kitOptions] = await Promise.all([allGamesQuery(), allBasesQuery(), allOptionsQuery()])
 
-	return channelsArr.map((channel: IChannel) => ({
+	const serialized = channelsArr.map((channel: IChannel) => ({
 		...channel,
 		_id: channel._id.toString(),
 		games: channel.games.map((game: IGame) => ({
@@ -41,4 +41,6 @@ export const serializeChannels: IFunc = async (channelsArr) => {
 			)
 		}))
 	}))
+
+	return serialized
 }

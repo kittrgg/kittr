@@ -8,9 +8,11 @@ export interface GameModel {
 	backgroundImage: string
 	titleImage: string
 	active: boolean
-	meta: {
-		creatorCode: string
-	}
+	blurDataURL: string
+	developer: string
+	genres: [string]
+	platforms: [string]
+	releaseDate: Date
 }
 
 const schema = new Schema<GameModel>(
@@ -23,9 +25,11 @@ const schema = new Schema<GameModel>(
 			type: Boolean,
 			default: false
 		},
-		meta: {
-			creatorCode: String
-		}
+		blurDataURL: String,
+		developer: String,
+		genres: [String],
+		platforms: [String],
+		releaseDate: Date
 	},
 	{ minimize: false }
 )
