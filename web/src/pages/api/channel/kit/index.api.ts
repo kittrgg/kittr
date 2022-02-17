@@ -104,7 +104,7 @@ handler.post(
 
 // Delete a channel's kit
 handler.delete(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel | null>>) => {
-	const { channelId, kitId } = req.body
+	const { channelId, kitId } = JSON.parse(req.body)
 
 	try {
 		const data = await Channel.findOneAndUpdate(
