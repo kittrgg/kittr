@@ -11,7 +11,6 @@ const router = express.Router()
 router.use("/:route?", (req: any, res, next) => {
 	if (req.headers["authorization"]) {
 		const [type, auth] = req.headers["authorization"].split(" ")
-
 		if (type == "Bearer") {
 			jwt.verify(auth, config.secret, (err: any, decoded: any) => {
 				if (err) {
@@ -64,9 +63,7 @@ router
 					if (resp.data) {
 						// only return the single channel
 						// no need to dump an array to the front end
-						console.log(resp.data.data)
 						res.json({
-							error: false,
 							data: {
 								...resp.data.data[0],
 								broadcaster_login: resp.data.data[0].login

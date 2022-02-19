@@ -54,9 +54,9 @@ const allSetupsForComparisonQuery = async () => {
 }
 
 const allGamesQuery = async () => {
-	const result = await Game.find({})
+	const result = await Game.find({}).lean<IGame[]>()
 
-	const serialized = result.map((elem: IGame) => ({
+	const serialized = result.map((elem) => ({
 		...elem,
 		_id: elem._id.toString(),
 		releaseDate: elem!.releaseDate
@@ -66,9 +66,9 @@ const allGamesQuery = async () => {
 }
 
 const allBasesQuery = async () => {
-	const result = await KitBase.find({})
+	const result = await KitBase.find({}).lean<IKitBase[]>()
 
-	const serialized = result.map((elem: IKitBase) => ({
+	const serialized = result.map((elem) => ({
 		...elem,
 		_id: elem._id.toString(),
 		gameId: elem.gameId.toString()
@@ -78,9 +78,9 @@ const allBasesQuery = async () => {
 }
 
 const allOptionsQuery = async () => {
-	const result = await KitOption.find({})
+	const result = await KitOption.find({}).lean<IKitOption[]>()
 
-	const serialized = result.map((elem: IKitOption) => ({
+	const serialized = result.map((elem) => ({
 		...elem,
 		_id: elem._id.toString()
 	}))
@@ -99,14 +99,18 @@ interface IFunc {
 	(channelsArr: IChannel[]): Promise<IChannel[]>
 }
 
-/** Serialize an array of players from mongodb. Needed to make getStaticProps happy. */
+/** Serialize an array of players from mongodb. */
 export const serializeChannels: IFunc = async (channelsArr) => {
-	const [games, kitBases, kitOptions] = await Promise.all([allGamesQuery(), allBasesQuery(), allOptionsQuery()])
+	const [games, kitBases, kitOptions] = await Promise.all([
+		await allGamesQuery(),
+		await allBasesQuery(),
+		await allOptionsQuery()
+	])
 
-	return channelsArr.map((channel: IChannel) => ({
+	return channelsArr.map((channel) => ({
 		...channel,
 		_id: channel._id.toString(),
-		games: channel.games.map((game: IGame) => ({
+		games: channel.games.map((game) => ({
 			...game,
 			id: game.id.toString(),
 			...games.find((rawGame: any) => rawGame._id.toString() === game.id.toString())
@@ -116,8 +120,8 @@ export const serializeChannels: IFunc = async (channelsArr) => {
 			...kit,
 			_id: kit._id.toString(),
 			base: kitBases
-				.filter((base: IKitBase) => base._id!.toString() === kit.baseId.toString())
-				.map((base: IKitBase) => ({
+				.filter((base) => base._id!.toString() === kit.baseId.toString())
+				.map((base) => ({
 					...base,
 					gameInfo: {
 						...base.gameInfo,
@@ -125,8 +129,7 @@ export const serializeChannels: IFunc = async (channelsArr) => {
 					}
 				}))[0],
 			options: kit.options.map(
-				(opt: IKitOption) =>
-					kitOptions.find((option: Partial<IKitOption>) => option?._id?.toString() === opt.toString()) as IKitOption
+				(opt) => kitOptions.find((option) => option?._id?.toString() === opt.toString()) as IKitOption
 			)
 		}))
 	}))
@@ -144,9 +147,7 @@ export const getStreamerByTwitchBroadcasterLoginId = async (req: Request, res: R
 		})
 	}
 
-	const serialized = (await serializeChannels(rawChannel))[0]
-
-	const player = serialized
+	const streamer = (await serializeChannels(rawChannel))[0]
 
 	const kitStats = await KitStat.find()
 	const {
@@ -156,7 +157,7 @@ export const getStreamerByTwitchBroadcasterLoginId = async (req: Request, res: R
 	const forSetupComparison = await allSetupsForComparisonQuery()
 
 	return res.send({
-		streamer: player,
+		streamer,
 		ratioOfPlayersWithBase,
 		ratioOfPlayersWithBaseFeatured,
 		forSetupComparison
