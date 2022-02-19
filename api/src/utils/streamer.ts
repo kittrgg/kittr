@@ -138,7 +138,7 @@ export const serializeChannels: IFunc = async (channelsArr) => {
 export const getStreamerByTwitchBroadcasterLoginId = async (req: Request, res: Response) => {
 	const rawChannel = await Player.find({
 		"meta.links.twitch": { $regex: `.*${req.query.broadcasterLogin}.*` }
-	})
+	}).lean<IChannel[]>()
 
 	if (rawChannel.length === 0) {
 		return res.status(403).json({
