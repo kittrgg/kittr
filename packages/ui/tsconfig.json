@@ -1,0 +1,12 @@
+{
+	"extends": "tsconfig/react-library.json",
+	"compilerOptions": {
+		"baseUrl": "./src",
+		"paths": {
+			"@test-utils": ["test-utils"],
+			"@Styles/*": ["styles/*"]
+		}
+	},
+	"include": ["."],
+	"exclude": ["dist", "build", "node_modules"]
+}

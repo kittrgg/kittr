@@ -1,0 +1,30 @@
+{
+  "name": "turborepo-basic-shared",
+  "version": "0.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "docker": "docker-compose -f docker-compose.yml up",
+    "docker:build": "docker-compose -f docker-compose.yml up --build",
+    "build": "turbo run build",
+    "dev": "concurrently \"npm run docker\" \"turbo run dev --parallel\"",
+    "dev:turbo": "\"turbo run dev --parallel\"",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "devDependencies": {
+    "prettier": "^2.5.1",
+    "turbo": "latest"
+  },
+  "engines": {
+    "npm": ">=8.0.0",
+    "node": ">=16.0.0"
+  },
+  "packageManager": "npm@8.1.4",
+  "dependencies": {
+    "concurrently": "^7.0.0"
+  }
+}

@@ -1,0 +1,39 @@
+{
+	"name": "ui",
+	"version": "0.0.0",
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"source": "src/index.tsx",
+	"sideEffects": false,
+	"private": true,
+	"license": "MIT",
+	"files": [
+		"dist/**"
+	],
+	"scripts": {
+		"test": "jest",
+		"build": "tsup src/index.tsx --format esm,cjs --dts --external react",
+		"dev": "tsup src/index.tsx --format esm,cjs --watch --dts --external react",
+		"lint": "TIMING=1 eslint src --fix",
+		"clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+	},
+	"devDependencies": {
+		"@types/react": "17.0.37",
+		"@types/react-dom": "17.0.11",
+		"config": "*",
+		"logger": "*",
+		"tsconfig": "*",
+		"tsup": "^5.11.13",
+		"types": "*",
+		"typescript": "^4.5.3"
+	},
+	"dependencies": {
+		"@mantine/core": "^3.6.9",
+		"@mantine/dates": "^3.6.9",
+		"@mantine/hooks": "^3.6.9",
+		"@mantine/next": "^3.6.9",
+		"@mantine/rte": "^3.6.9",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2"
+	}
+}
