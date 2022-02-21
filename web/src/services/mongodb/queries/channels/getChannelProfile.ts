@@ -23,6 +23,7 @@ interface IFunc {
  * Does not include dashboard specific information.
  */
 export const getChannelProfileQuery: IFunc = async (urlSafeName) => {
+	console.log("Started getChannelProfileQuery...")
 	const rawChannel = await Channel.find({ urlSafeName }).lean<IChannel[]>()
 
 	if (rawChannel.length === 0) {
@@ -33,5 +34,6 @@ export const getChannelProfileQuery: IFunc = async (urlSafeName) => {
 
 	const channel = serialized
 
+	console.log("Finished getChannelProfileQuery...")
 	return channel
 }

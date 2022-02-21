@@ -7,6 +7,7 @@ import { getRecentVideos } from "./endpoints/getRecentVideos"
 
 /** Get a single channel's information for their profile page. */
 export const profilePageQuery = async (urlSafeName: string) => {
+	console.log("Started profilePageQuery...")
 	const [rawChannel] = await Channel.aggregate<{ twitchUrl: string }>([
 		{
 			$match: {
@@ -43,6 +44,7 @@ export const profilePageQuery = async (urlSafeName: string) => {
 		getRecentVideos(broadcaster_id)
 	])
 
+	console.log("Finishing profilePagequery...")
 	return {
 		channelData,
 		schedule,

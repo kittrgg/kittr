@@ -21,6 +21,7 @@ interface IFunc {
  * Get a game by its urlSafeName
  */
 export const gameByUrlSafeNameQuery: IFunc = async (urlSafeName) => {
+	console.log("Starting gameByUrlSafeNameQuery...")
 	const result = await Game.find({ urlSafeName }).lean<IGame[]>()
 	if (result.length == 0) return [] as any
 
@@ -29,6 +30,6 @@ export const gameByUrlSafeNameQuery: IFunc = async (urlSafeName) => {
 		_id: result[0]._id.toString(),
 		releaseDate: result[0].toString() as unknown as Date
 	}
-
+	console.log("Finishing gameByUrlSafeNameQuery...")
 	return serialized
 }
