@@ -1,8 +1,3 @@
-import React from "react"
-
-/** This is here to make sure that React gets put into the dist. */
-console.log(React.version)
-
 export * from "@mantine/core"
 export * from "@mantine/dates"
 

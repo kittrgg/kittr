@@ -3,8 +3,8 @@
 	"version": "0.0.0",
 	"scripts": {
 		"build": "rm -rf build && prisma generate && tsc -p tsconfig.json",
-		"compile": "tsc && node ./build/src/index.js",
-		"dev": "prisma migrate dev && nodemon -e ts --exec \"npm run compile\"",
+		"compile": "tsc && node ./build/index.js",
+		"dev": "prisma migrate dev && concurrently \"prisma studio\" \"nodemon -e ts\"",
 		"start": "node ./build/src/index.js && prisma migrate deploy",
 		"test": "prisma generate && jest --coverage",
 		"lint": "eslint \"**/*.ts\" --ignore-pattern node_modules/",

@@ -10,7 +10,10 @@ import { createTrials } from "./seeds/trials"
 import { users } from "./seeds/users"
 const prisma = new PrismaClient()
 
-const generateEntitySeedWithForeignKeys = (records: any, entityCreator: any): [] => {
+const generateEntitySeedWithForeignKeys = (
+	records: any,
+	entityCreator: any
+): [] => {
 	const ids = records.map((record: any) => record.id)
 	return entityCreator(ids)
 }
@@ -34,26 +37,32 @@ const main = async () => {
 		})
 	})
 
-	const trials = generateEntitySeedWithForeignKeys(await prisma.club.findMany(), createTrials)
+	const trials = generateEntitySeedWithForeignKeys(
+		await prisma.club.findMany(),
+		createTrials
+	)
 	trials.forEach(async (item) => {
 		await prisma.trial.create({
 			data: item
 		})
 	})
 
-	const trialDays = generateEntitySeedWithForeignKeys(await prisma.trial.findMany(), createTrialDays)
+	const trialDays = generateEntitySeedWithForeignKeys(
+		await prisma.trial.findMany(),
+		createTrialDays
+	)
 	trialDays.forEach(async (item) => {
 		await prisma.trialDay.create({
 			data: item
 		})
 	})
 
-	const rings = generateEntitySeedWithForeignKeys(await prisma.trialDay.findMany(), createRings)
-	rings.forEach(async (item) => {
-		await prisma.ring.create({
-			data: item
-		})
-	})
+	// const rings = generateEntitySeedWithForeignKeys(await prisma.trialDay.findMany(), createRings)
+	// rings.forEach(async (item) => {
+	// 	await prisma.ring.create({
+	// 		data: item
+	// 	})
+	// })
 }
 
 main()

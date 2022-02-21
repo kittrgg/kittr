@@ -35,6 +35,7 @@ export const Flexbox = ({
 				justifyContent,
 				alignItems
 			}}
+			fluid={fluid}
 			{...props}
 		>
 			{children}

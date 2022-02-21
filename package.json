@@ -12,6 +12,7 @@
 		"build": "turbo run build",
 		"dev": "concurrently \"npm run docker\" \"turbo run dev --parallel\"",
 		"dev:turbo": "\"turbo run dev --parallel\"",
+		"dev:seed": "cross-env DATABASE_URL=postgres://turboAf:getTurbo@localhost:5432/prisma?schema=prisma ts-node ./apps/api/prisma/seed.ts",
 		"lint": "turbo run lint",
 		"test": "turbo run test",
 		"clean": "turbo run clean && rm -rf node_modules",
@@ -34,5 +35,8 @@
 		"npm": ">=8.0.0",
 		"node": ">=16.0.0"
 	},
-	"packageManager": "npm@8.1.4"
+	"packageManager": "npm@8.1.4",
+	"dependencies": {
+		"cross-env": "^7.0.3"
+	}
 }

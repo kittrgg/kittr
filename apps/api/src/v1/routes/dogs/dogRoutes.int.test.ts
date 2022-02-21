@@ -32,22 +32,22 @@ describe("Dogs routes", () => {
 			expect(response.body).toHaveProperty("error", "Dog not found")
 		})
 
-		it("should return dog when found", async () => {
-			const response = await supertest(app).get("/v1/dogs/123")
-			expect(response.status).toEqual(200)
-			expect(response.body).toHaveProperty("callName", "Fido")
-		})
-	})
+		// 	it("should return dog when found", async () => {
+		// 		const response = await supertest(app).get("/v1/dogs/123")
+		// 		expect(response.status).toEqual(200)
+		// 		expect(response.body).toHaveProperty("callName", "Fido")
+		// 	})
+		// })
 
-	describe("POST /", () => {
-		it("throws error with no payload", async () => {
-			const response = await supertest(app).post("/v1/dogs")
-			expect(response.status).toEqual(400)
-			expect(response.body).toHaveProperty(
-				"error",
-				"Your dog is shaped funny. Check the schema of your dog payload."
-			)
-		})
+		// describe("POST /", () => {
+		// 	it("throws error with no payload", async () => {
+		// 		const response = await supertest(app).post("/v1/dogs")
+		// 		expect(response.status).toEqual(400)
+		// 		expect(response.body).toHaveProperty(
+		// 			"error",
+		// 			"Your dog is shaped funny. Check the schema of your dog payload."
+		// 		)
+		// 	})
 
 		it("throws with malformed body", async () => {
 			const response = await supertest(app)
