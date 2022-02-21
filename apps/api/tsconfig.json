@@ -21,6 +21,14 @@
 			"@Jest/*": ["./.jest/*"]
 		}
 	},
-	"include": ["**/*.ts", "**/*.js"],
-	"exclude": ["node_modules"]
+	"include": ["src/"],
+	"exclude": [
+		"node_modules",
+		".turbo",
+		"coverage",
+		"build",
+		"src/**/*.test.ts",
+		"src/**/*.unit.ts",
+		"src/**/*.int.ts"
+	]
 }
