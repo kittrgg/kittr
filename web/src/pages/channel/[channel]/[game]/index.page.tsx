@@ -23,7 +23,7 @@ const GamePresentation = ({
 	ratioOfChannelsWithBaseFeatured,
 	forSetupComparison
 }: Props) => {
-	const { isFallback } = useRouter()
+	const { isFallback, route } = useRouter()
 	if (isFallback) return <FallbackPage />
 
 	if (Object.keys(channel).length === 0) {
@@ -38,6 +38,7 @@ const GamePresentation = ({
 		)
 	}
 
+	console.log(`${route} has finished rendering`)
 	if (game.urlSafeName === "warzone") {
 		return (
 			<>
@@ -107,7 +108,7 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-	console.log("Started getStaticProps from channel/[channel]/game")
+	console.log(`Started getStaticProps from channel/${params?.channel}/game`)
 	const { channel: urlSafeName, game } = params as { channel: string; game: string }
 
 	console.log("Connecting to database")
