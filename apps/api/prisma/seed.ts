@@ -1,10 +1,7 @@
-// This ts-ignore is for the actual running of this seed script.
-// You should still be able to use faker types in VSCode.
-// @ts-ignore
 import { PrismaClient } from "@prisma/client"
 import { clubs } from "./seeds/clubs"
 import { dogs } from "./seeds/dogs"
-import { createRings } from "./seeds/rings"
+// import { createRings } from "./seeds/rings"
 import { createTrialDays } from "./seeds/trialDays"
 import { createTrials } from "./seeds/trials"
 import { users } from "./seeds/users"
