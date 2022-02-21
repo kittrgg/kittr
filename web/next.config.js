@@ -6,6 +6,9 @@
 const { withSentryConfig } = require("@sentry/nextjs")
 
 const moduleExports = {
+	compiler: {
+		styledComponents: true
+	},
 	poweredByHeader: false,
 	pageExtensions: ["page.tsx", "api.ts"],
 	async redirects() {
