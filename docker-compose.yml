@@ -19,11 +19,11 @@ services:
       - 4001:4001
       - 4002:4002
     build:
-      context: ./firebase-emulators
+      context: ./lib/firebase-emulators
       dockerfile: Dockerfile
     image: firebase-emulator:firebase-emulator
     volumes:
-      - ./packages/firebase-emulators/firebase.json:/src/firebase.json
-      - ./packages/firebase-emulators/storage.rules:/src/storage.rules
-      - ./packages/firebase/seed:/src/firebase/seed
+      - ./lib/firebase-emulators/firebase.json:/src/firebase.json
+      - ./lib/firebase-emulators/storage.rules:/src/storage.rules
+      - ./lib/firebase/seed:/src/firebase/seed
     command: firebase emulators:start --project dev
