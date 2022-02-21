@@ -1,3 +1,4 @@
+import * as Sentry from "@sentry/node"
 import { getFromApi } from "../utils/getFromApi"
 
 interface IFunc {
@@ -12,7 +13,7 @@ interface IFunc {
 	(user_id: string): Promise<ITwitchClip[]>
 }
 
-export const getRecentVideos: IFunc = async (user_id): Promise<ITwitchClip[]> => {
+export const getRecentVideos: IFunc = async (user_id) => {
 	try {
 		const { data } = await getFromApi<ITwitchClip[]>({
 			endpointBaseUrl: "https://api.twitch.tv/helix/videos",
@@ -21,6 +22,8 @@ export const getRecentVideos: IFunc = async (user_id): Promise<ITwitchClip[]> =>
 
 		return data
 	} catch (error) {
+		Sentry.captureException(error)
+		console.log("getRecentVideos")
 		throw error
 	}
 }

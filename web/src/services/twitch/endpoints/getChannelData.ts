@@ -1,3 +1,4 @@
+import * as Sentry from "@sentry/node"
 import { getFromApi } from "../utils/getFromApi"
 
 interface IFunc {
@@ -22,6 +23,8 @@ export const getChannelData: IFunc = async (login) => {
 
 		return data
 	} catch (error) {
+		Sentry.captureException(error)
+		console.log("getChannelData")
 		throw error
 	}
 }
