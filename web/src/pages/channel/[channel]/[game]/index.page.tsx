@@ -69,7 +69,11 @@ const GamePresentation = ({
 }
 
 export const getStaticPaths = async () => {
+	console.log("Started getStaticPaths for channel/game")
+
+	console.log("Connecting to database...")
 	await connectToDatabase()
+	console.log("Connected to database")
 
 	const games = await Game.find().lean<Array<IGame>>()
 	const leanChannels = await Channel.find({}, ["-kits"], {
@@ -103,9 +107,12 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+	console.log("Started getStaticProps from channel/[channel]/game")
 	const { channel: urlSafeName, game } = params as { channel: string; game: string }
 
+	console.log("Connecting to database")
 	await connectToDatabase()
+	console.log("Connected to database")
 
 	const [gameQuery, channel] = await Promise.all([gameByUrlSafeNameQuery(game), getChannelProfileQuery(urlSafeName)])
 
