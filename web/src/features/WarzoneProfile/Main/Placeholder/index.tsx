@@ -14,15 +14,9 @@ interface Props {
 const Cards = ({ isMobile }: Props) => {
 	const { kits } = useChannel()
 
-	const sortedKits = kits
-		? kits.slice().sort((kit) => {
-				if (kit.userData.featured) return 1
-				if (kit.userData.featured) return -1
-				return 0
-		  })
-		: []
+	const filteredKits = kits ? kits.slice().filter((kit) => kit.userData.featured) : []
 
-	// Ensure that the ad gets removed when the placholder is no longer in view.
+	// Ensure that the ad gets removed when the placeholder is no longer in view.
 	useEffect(() => {
 		return () => {
 			;(window.top as any).__vm_remove_category = ["richmedia_all"]
@@ -41,13 +35,17 @@ const Cards = ({ isMobile }: Props) => {
 				SELECT A KIT.
 			</PlaceholderCallToAction>
 			<CardsContainer>
-				{sortedKits && (
+				{filteredKits && (
 					<>
-						{sortedKits[0] && <KitCard kit={sortedKits[0]} containerStyles={{ position: "relative", left: "55px" }} />}
-						{sortedKits[1] && (
-							<KitCard kit={sortedKits[1]} containerStyles={{ zIndex: "1", position: "relative", bottom: "10px" }} />
+						{filteredKits[0] && (
+							<KitCard kit={filteredKits[0]} containerStyles={{ position: "relative", left: "55px" }} />
 						)}
-						{sortedKits[2] && <KitCard kit={sortedKits[2]} containerStyles={{ position: "relative", right: "55px" }} />}
+						{filteredKits[1] && (
+							<KitCard kit={filteredKits[1]} containerStyles={{ zIndex: "1", position: "relative", bottom: "10px" }} />
+						)}
+						{filteredKits[2] && (
+							<KitCard kit={filteredKits[2]} containerStyles={{ position: "relative", right: "55px" }} />
+						)}
 					</>
 				)}
 			</CardsContainer>
