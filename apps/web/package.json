@@ -9,6 +9,7 @@
 		"lint": "next lint",
 		"tsc": "tsc --noEmit --incremental false",
 		"test": "jest --coverage",
+		"clean": "rm -rf .next && rm -rf coverage && rm -rf .turbo && rm -rf node_modules",
 		"ci:test": "jest .*\\.unit\\.test\\.ts"
 	},
 	"dependencies": {

@@ -25,5 +25,5 @@ services:
     volumes:
       - ./lib/firebase-emulators/firebase.json:/src/firebase.json
       - ./lib/firebase-emulators/storage.rules:/src/storage.rules
-      - ./lib/firebase/seed:/src/firebase/seed
+      - ./lib/firebase-emulators/seed:/src/firebase/seed
     command: firebase emulators:start --project dev

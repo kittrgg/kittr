@@ -8,6 +8,7 @@
 		"start": "node ./build/src/index.js && prisma migrate deploy",
 		"test": "prisma generate && jest --coverage",
 		"lint": "eslint \"**/*.ts\" --ignore-pattern node_modules/",
+		"clean": "rm -rf .turbo && rm -rf coverage && rm -rf build && rm -rf node_modules",
 		"ci:test": "cross-env DATABASE_URL=test prisma generate && jest .*\\.unit\\.test\\.ts"
 	},
 	"_moduleAliases": {
