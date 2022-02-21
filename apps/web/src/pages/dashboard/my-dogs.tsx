@@ -1,6 +1,6 @@
 import { getLayout } from "@Components/layouts/Dashboard"
 import { Image } from "ui"
-import SVG from "ui/SVG"
+import { SVG } from "ui"
 import { Alert, Card, Container, Group, Title } from "ui"
 import { useMantineTheme } from "@Hooks/index"
 import { imageDict } from "@Utils/imageDict"

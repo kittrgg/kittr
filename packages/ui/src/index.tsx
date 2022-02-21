@@ -23,7 +23,7 @@ export { Select } from "./Select"
 import SVGLibrary from "./SVG"
 export const SVG = SVGLibrary
 
-/** Styling exports. */
+/** Styling */
 
 export { createInputStyles } from "./styles/createInputStyles"
 export { theme } from "./styles/theme"

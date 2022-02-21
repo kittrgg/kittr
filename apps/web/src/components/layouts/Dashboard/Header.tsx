@@ -1,5 +1,5 @@
 import type { Dispatch, SetStateAction } from "react"
-import { Image } from "ui/Image"
+import { Image } from "ui"
 // import { Image } from "src/components/shared"
 import { MediaQuery, Burger, Header, useMantineTheme, Center } from "ui"
 import { imageDict } from "@Utils/imageDict"

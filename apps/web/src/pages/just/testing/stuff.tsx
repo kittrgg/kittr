@@ -4,6 +4,7 @@ import { useQuery } from "react-query"
 import fetch from "@Utils/fetch"
 import { Title, Table, Button } from "@mantine/core"
 import { DatePicker } from "@mantine/dates"
+import { Dog } from "types"
 
 const MantineTesting: NextPage = () => {
 	const [fetchIt, setFetchIt] = useState(false)
