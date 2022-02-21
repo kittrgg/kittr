@@ -4,6 +4,11 @@
 			"dependsOn": ["^build"],
 			"outputs": ["dist/**", ".next/**", "build/**"]
 		},
+		"test": {
+			"dependsOn": ["^build"],
+			"outputs": ["coverage/**"]
+		},
+
 		"lint": {
 			"outputs": []
 		},

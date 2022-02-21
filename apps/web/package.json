@@ -8,7 +8,7 @@
 		"serve": "next start",
 		"lint": "next lint",
 		"tsc": "tsc --noEmit --incremental false",
-		"test": "jest --watch --coverage",
+		"test": "jest --coverage",
 		"ci:test": "jest .*\\.unit\\.test\\.ts"
 	},
 	"dependencies": {

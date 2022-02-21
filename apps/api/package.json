@@ -6,7 +6,7 @@
 		"compile": "tsc && node ./build/src/index.js",
 		"dev": "prisma migrate dev && nodemon -e ts --exec \"npm run compile\"",
 		"start": "node ./build/src/index.js && prisma migrate deploy",
-		"test": "jest --watch --coverage",
+		"test": "prisma generate && jest --coverage",
 		"lint": "eslint \"**/*.ts\" --ignore-pattern node_modules/",
 		"ci:test": "cross-env DATABASE_URL=test prisma generate && jest .*\\.unit\\.test\\.ts"
 	},

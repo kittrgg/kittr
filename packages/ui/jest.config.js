@@ -18,7 +18,7 @@ const SRC_PATH = "./src"
 
 module.exports = {
 	testEnvironment: "jest-environment-jsdom",
-	testPathIgnorePatterns: ["<rootDir>/.next/", "<rootDir>/node_modules/"],
+	testPathIgnorePatterns: ["<rootDir>/node_modules/"],
 	roots: [SRC_PATH],
 	clearMocks: true,
 	moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
