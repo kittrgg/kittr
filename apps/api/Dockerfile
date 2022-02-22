@@ -16,7 +16,7 @@ ENV NODE_PATH=./build
 RUN npm run build
 
 EXPOSE 5000
-CMD [ "node", "./build/src/index.js", "&&", "npx", "prisma", "migrate", "deploy" ]
+CMD [  "node", "./build/src/index.js", "&&", "npx", "prisma", "migrate", "deploy" ]
 
 
 # FROM node:16-alpine as production

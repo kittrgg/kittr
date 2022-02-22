@@ -12,7 +12,7 @@
 		"dev": "concurrently \"npm run dev:docker\" \"turbo run dev --parallel\"",
 		"dev:turbo": "\"turbo run dev --parallel\"",
 		"dev:seed": "cross-env DATABASE_URL=postgres://turboAf:getTurbo@localhost:5432/prisma?schema=prisma ts-node ./apps/api/prisma/seed.ts",
-		"dev:deploy": "turbo run build && docker-compose -f docker-compose.deploy.yml up",
+		"dev:deploy": "turbo run build && docker-compose -f docker-compose.deploy.yml up --build",
 		"build": "turbo run build",
 		"lint": "turbo run lint",
 		"test": "turbo run test",

@@ -12,7 +12,7 @@ const MantineTesting: NextPage = () => {
 		enabled: fetchIt
 	})
 
-	if (error) return <p>Error: {error}</p>
+	if (error) return <p>Error: {JSON.stringify(error)}</p>
 	if (isLoading) return <p>Loading..........</p>
 
 	const rows = data
