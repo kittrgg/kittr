@@ -33,9 +33,5 @@ jobs:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
         run: npm run build
 
-      - name: Run postgres container
-        run: |
-          docker run --rm -d -p 5432:5432 -e POSTGRES_PASSWORD=getTurbo -e POSTGRES_USER=turboAf -e POSTGRES_DB=prisma postgres:alpine
-
       - name: Run unit tests
         run: npm run test
