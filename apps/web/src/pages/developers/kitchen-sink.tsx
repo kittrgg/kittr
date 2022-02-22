@@ -96,7 +96,7 @@ const Test = () => {
 					<Group>
 						<Textarea
 							value={inputText}
-							onChange={(e) => setInputText(e.target.value)}
+							onChange={(e: any) => setInputText(e.target.value)}
 							label="Textarea"
 							placeholder="Some test placeholder"
 							description="This is a description"
@@ -108,7 +108,7 @@ const Test = () => {
 						<Textarea
 							value={inputText}
 							placeholder="Some test placeholder"
-							onChange={(e) => setInputText(e.target.value)}
+							onChange={(e: any) => setInputText(e.target.value)}
 							label="Textarea"
 							description="This is a description"
 						/>
@@ -116,7 +116,7 @@ const Test = () => {
 						<TextInput
 							value={inputText}
 							placeholder="Some test placeholder"
-							onChange={(e) => setInputText(e.target.value)}
+							onChange={(e: any) => setInputText(e.target.value)}
 							label="TextInput"
 							description="This is a description"
 						/>

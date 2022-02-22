@@ -4,13 +4,13 @@ import {
 	SharedButtonProps as MantineButtonProps
 } from "@mantine/core"
 
-interface ButtonProps extends MantineButtonProps {
+interface Props extends MantineButtonProps {
 	asLink?: boolean
 	disabled?: boolean
 	children?: ReactNode
 }
 
-export const Button = ({ asLink, children, ...props }: ButtonProps) => {
+export const Button = ({ asLink, children, ...props }: Props) => {
 	if (asLink) {
 		return (
 			<MantineButton

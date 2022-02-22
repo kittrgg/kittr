@@ -1,7 +1,7 @@
 // import { Provider } from "react-redux"
 // import { store } from "@Redux/store"
-import { Global, MantineProvider } from "@mantine/core"
-import { createInputStyles, theme, colors } from "ui"
+import { Global } from "@mantine/core"
+import { createInputStyles, theme, colors, ComponentsProvider } from "ui"
 import { NextPage } from "next"
 import Head from "next/head"
 import { QueryClient, QueryClientProvider } from "react-query"
@@ -28,7 +28,7 @@ const MyApp = ({ Component, pageProps }: any) => {
 			<Head>
 				<meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
 			</Head>
-			<MantineProvider
+			<ComponentsProvider
 				withGlobalStyles
 				withNormalizeCSS
 				theme={theme}
@@ -294,7 +294,7 @@ const MyApp = ({ Component, pageProps }: any) => {
 				/>
 				{getLayout(<Component {...pageProps} />)}
 				<ReactQueryDevtools />
-			</MantineProvider>
+			</ComponentsProvider>
 		</>
 	)
 }

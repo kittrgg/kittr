@@ -1,9 +1,12 @@
-import React from "react"
+import React, { ReactNode } from "react"
 import { Flexbox } from "./Flexbox"
-import { ReactNode } from "react"
+
+interface Props {
+	children: ReactNode
+}
 
 /** This component contains an optional tag on the right side of the label. */
-export const OptionalInputLabel = ({ children }: { children: ReactNode }) => {
+export const OptionalInputLabel = ({ children }: Props) => {
 	return (
 		<Flexbox
 			direction="row"
