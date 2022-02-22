@@ -6,9 +6,6 @@
 const { withSentryConfig } = require("@sentry/nextjs")
 
 const moduleExports = {
-	experimental: {
-		outputStandalone: true
-	},
 	reactStrictMode: true,
 	webpackDevMiddleware: (config) => {
 		config.watchOptions = {
