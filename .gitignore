@@ -36,3 +36,4 @@ dist/**
 next/**
 
 dist
+tsconfig.tsbuildinfo

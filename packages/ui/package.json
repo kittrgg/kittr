@@ -15,7 +15,8 @@
 		"build": "tsup src/index.tsx --format esm,cjs --dts --external react",
 		"dev": "tsup src/index.tsx --format esm,cjs --watch --dts --external react",
 		"lint": "eslint src --fix",
-		"clean": "rm -rf .turbo && rm -rf coverage && rm -rf node_modules && rm -rf dist"
+		"clean": "rm -rf .turbo && rm -rf coverage && rm -rf node_modules && rm -rf dist",
+		"type-check": "tsc --pretty --noEmit"
 	},
 	"devDependencies": {
 		"@testing-library/jest-dom": "^5.16.2",
