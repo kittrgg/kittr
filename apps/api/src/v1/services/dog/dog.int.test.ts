@@ -1,4 +1,3 @@
-// TODO: Absolute import
 import { buildDog } from "@Root/../.jest/dogGenerator"
 import DogService from "./index"
 import { prisma } from "@Libs/prisma"

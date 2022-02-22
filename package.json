@@ -7,15 +7,16 @@
 		"packages/*"
 	],
 	"scripts": {
-		"docker": "docker-compose -f docker-compose.yml up",
 		"docker:build": "docker-compose -f docker-compose.yml up --build",
-		"build": "turbo run build",
-		"dev": "concurrently \"npm run docker\" \"turbo run dev --parallel\"",
+		"dev:docker": "docker-compose -f docker-compose.yml up",
+		"dev": "concurrently \"npm run dev:docker\" \"turbo run dev --parallel\"",
 		"dev:turbo": "\"turbo run dev --parallel\"",
 		"dev:seed": "cross-env DATABASE_URL=postgres://turboAf:getTurbo@localhost:5432/prisma?schema=prisma ts-node ./apps/api/prisma/seed.ts",
+		"dev:deploy": "turbo run build && docker-compose -f docker-compose.deploy.yml up",
+		"build": "turbo run build",
 		"lint": "turbo run lint",
 		"test": "turbo run test",
-		"clean": "turbo run clean && rm -rf node_modules",
+		"clean": "turbo run clean && echo Removing top-level node_modules... && rm -rf node_modules && echo All clean!",
 		"type-check": "turbo run type-check",
 		"format": "prettier --write \"**/*.{ts,tsx,md}\""
 	},

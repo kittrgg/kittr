@@ -3,7 +3,6 @@ import type { NextPage } from "next"
 import { useQuery } from "react-query"
 import fetch from "@Utils/fetch"
 import { Title, Table, Button } from "@mantine/core"
-import { DatePicker } from "@mantine/dates"
 import { Dog } from "types"
 
 const MantineTesting: NextPage = () => {
@@ -44,8 +43,6 @@ const MantineTesting: NextPage = () => {
 				</thead>
 				<tbody>{rows}</tbody>
 			</Table>
-
-			<DatePicker />
 		</div>
 	)
 }

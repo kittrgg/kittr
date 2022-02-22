@@ -1,0 +1,45 @@
+version: "3"
+
+services:
+  postgres:
+    container_name: postgres
+    ports:
+      - 5432:5432
+    image: postgres:alpine
+    environment:
+      - POSTGRES_USER=turboAf
+      - POSTGRES_PASSWORD=getTurbo
+      - POSTGRES_DB=prisma
+    restart: always
+
+  firebase-emulators:
+    container_name: firebase-emulators
+    ports:
+      - 4000:4000
+      - 4001:4001
+      - 4002:4002
+    build:
+      context: ./lib/firebase-emulators
+      dockerfile: Dockerfile
+    image: firebase-emulator:firebase-emulator
+    volumes:
+      - ./lib/firebase-emulators/firebase.json:/src/firebase.json
+      - ./lib/firebase-emulators/storage.rules:/src/storage.rules
+      - ./lib/firebase-emulators/seed:/src/firebase/seed
+    command: firebase emulators:start --project dev
+
+  api:
+    container_name: api
+    ports:
+      - 5000:5000
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+
+  web:
+    container_name: web
+    ports:
+      - 3000:3000
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
