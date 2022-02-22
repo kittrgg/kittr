@@ -2,6 +2,7 @@ const { SENTRY_DSN, IS_DEV, IS_TESTING } = process.env
 
 import * as Sentry from "@sentry/node"
 // Needed for supporting tracing (even if it's not referenced)!
+// eslint-disable-next-line
 import * as Tracing from "@sentry/tracing"
 
 export const initSentry = () => {
