@@ -38,7 +38,13 @@ app.get("/", async (req, res) => {
 // Please only use this route for development and testing purposes.
 app.get("/error", () => {
 	throw new ResponseError(
-		`API Error in environment: ${process.env.ENVIRONMENT}`,
+		`API Error in environment: ${
+			process.env.IS_DEV
+				? "development"
+				: process.env.IS_TESTING
+				? "testing"
+				: process.env.NODE_ENV
+		}`,
 		{ statusCode: 418 }
 	)
 })

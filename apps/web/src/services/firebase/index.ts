@@ -21,7 +21,7 @@ const app = () => {
 app()
 
 export const auth = getAuth()
-if (process.env.NEXT_PUBLIC_ENVIRONMENT !== "production") {
+if (!process.env.IS_DEV) {
 	connectAuthEmulator(auth, "http://localhost:4001")
 }
 

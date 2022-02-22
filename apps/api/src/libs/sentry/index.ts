@@ -1,4 +1,4 @@
-const { SENTRY_DSN, ENVIRONMENT } = process.env
+const { SENTRY_DSN, IS_DEV, IS_TESTING } = process.env
 
 import * as Sentry from "@sentry/node"
 // Needed for supporting tracing (even if it's not referenced)!
@@ -11,7 +11,7 @@ export const initSentry = () => {
 
 	Sentry.init({
 		dsn: SENTRY_DSN,
-		environment: ENVIRONMENT,
+		environment: IS_DEV ? "development" : IS_TESTING ? "testing" : "production",
 		tracesSampleRate: 1.0
 	})
 }

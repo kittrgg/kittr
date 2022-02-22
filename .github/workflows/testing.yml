@@ -30,7 +30,16 @@ jobs:
 
       - name: Run build
         env:
+          DATABASE_URL: ${{ secrets.CI_DATABASE_URL }}
+          IS_TESTING: true
+          NEXT_PUBLIC_API_PATH: ${{ secrets.CI_NEXT_PUBLIC_API_PATH }}
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
         run: npm run build
 
       - name: Run unit tests

@@ -4,10 +4,12 @@
 
 import * as Sentry from "@sentry/nextjs"
 
-if (process.env.NEXT_PUBLIC_SENTRY_DSN)
+const { NEXT_PUBLIC_SENTRY_DSN, NEXT_PUBLIC_IS_DEV, NEXT_PUBLIC_IS_TESTING } = process.env
+
+if (NEXT_PUBLIC_SENTRY_DSN)
 	Sentry.init({
-		dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
-		environment: process.env.NEXT_PUBLIC_ENVIRONMENT,
+		dsn: NEXT_PUBLIC_SENTRY_DSN,
+		environment: NEXT_PUBLIC_IS_DEV ? "development" : NEXT_PUBLIC_IS_TESTING ? "testing" : "production",
 		// Adjust this value in production, or use tracesSampler for greater control
 		tracesSampleRate: 1.0
 		// ...
