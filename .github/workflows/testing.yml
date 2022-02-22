@@ -10,7 +10,7 @@ on:
       - turbo
 
 jobs:
-  unit-tests:
+  build-and-test:
     runs-on: ubuntu-latest
 
     strategy:
@@ -35,3 +35,41 @@ jobs:
 
       - name: Run unit tests
         run: npm run test
+
+      - name: Build and push api testing image
+        uses: docker/build-push-action@v2
+        with:
+          context: ./apps/api
+          push: true
+          tags: ghcr.io/${{github.repository}}/api:test-${{github.sha}}
+
+
+      - name: Build and push web testing image
+        uses: docker/build-push-action@v2
+        with:
+          context: ./apps/web
+          push: true
+          tags: ghcr.io/${{github.repository}}/web:test-${{github.sha}}
+
+
+  deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger api testing deployment to Digital Ocean
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{secrets.DOKKU_HOST}}
+          username: ${{secrets.DOKKU_SSH_USER}}
+          key: "${{ secrets.DOKKU_SSH_PRIVATE_KEY }}"
+          script: |
+            dokku git:from-image test-api ghcr.io/${{github.repository}}/api:test-${{github.sha}}
+
+      - name: Trigger web testing deployment to Digital Ocean
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{secrets.DOKKU_HOST}}
+          username: ${{secrets.DOKKU_SSH_USER}}
+          key: "${{ secrets.DOKKU_SSH_PRIVATE_KEY }}"
+          script: |
+            dokku git:from-image test-web ghcr.io/${{github.repository}}/web:test-${{github.sha}}
