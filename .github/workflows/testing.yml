@@ -96,6 +96,8 @@ jobs:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+
       - name: Install Cypress
         run: cd lib && cd e2e && npm install
 
