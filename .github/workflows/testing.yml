@@ -10,11 +10,9 @@ on:
 jobs:
   build-and-unit-test:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [16.x]
-
     steps:
       - uses: actions/checkout@v2
 
@@ -96,5 +94,8 @@ jobs:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
+      - name: Install Cypress
+        run: cd lib && cd e2e && npm install
+
       - name: Run e2e tests
         run: npm run test:e2e:ci
