@@ -1,0 +1,5 @@
+{
+	"baseUrl": "https://test-web.doggosports.com/",
+	"screenshotOnRunFailure": false,
+	"video": false
+}
