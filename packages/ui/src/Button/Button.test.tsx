@@ -9,12 +9,9 @@ describe("Button", () => {
 	})
 
 	it("Allow disabled on <button> tag", async () => {
-		render(
-			<Button component="button" disabled>
-				Test Text
-			</Button>
-		)
-
+		render(<Button disabled>Test Text</Button>)
+		// TODO: Try changing the 'lib' compiler option to include 'dom'.
+		// @ts-ignore
 		expect(screen.getByText("Test Text").closest("button")).toBeDisabled()
 	})
 
