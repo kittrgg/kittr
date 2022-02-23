@@ -98,8 +98,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install Cypress
-        run: cd lib && cd e2e && npm install
-
-      - name: Run e2e tests
-        run: npm run test:e2e:ci
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          project: ./lib/e2e
