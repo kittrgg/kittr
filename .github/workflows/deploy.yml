@@ -9,6 +9,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: [16.x]
+
     steps:
       - uses: actions/checkout@v2
 
@@ -34,8 +38,8 @@ jobs:
           NEXT_PUBLIC_API_PATH: ${{ secrets.NEXT_PUBLIC_API_PATH }}
           NEXT_PUBLIC_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
-          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
           SENTRY_ORG: ${{ secrets.SENTRY_ORG }}

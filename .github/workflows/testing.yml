@@ -1,12 +1,10 @@
 name: Deploy Testing Environment and run E2E
 
 on:
-  pull_request:
-    branches:
-      - master
-  # TODO: Delete this line whence done developing this pipeline!
   push:
     branches:
+      - develop
+      # TODO: Delete this line once we are happy with the new pipeline.
       - turbo
 
 jobs:
