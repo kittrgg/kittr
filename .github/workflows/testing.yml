@@ -91,3 +91,10 @@ jobs:
           key: "${{ secrets.DOKKU_SSH_PRIVATE_KEY }}"
           script: |
             dokku git:from-image test-web ghcr.io/${{github.repository}}/web:test-${{github.sha}}
+
+  e2e:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run e2e tests
+        run: npm run test:e2e:ci
