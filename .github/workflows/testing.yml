@@ -33,6 +33,7 @@ jobs:
           DATABASE_URL: ${{ secrets.CI_DATABASE_URL }}
           IS_TESTING: true
           NEXT_PUBLIC_API_PATH: ${{ secrets.CI_NEXT_PUBLIC_API_PATH }}
+          NEXT_PUBLIC_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}

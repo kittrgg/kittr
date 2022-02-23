@@ -1,0 +1,66 @@
+name: Deploy Production
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run build
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          NEXT_PUBLIC_API_PATH: ${{ secrets.NEXT_PUBLIC_API_PATH }}
+          NEXT_PUBLIC_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+        run: npm run prod:build
+
+      - name: Build and push api image
+        uses: docker/build-push-action@v2
+        with:
+          context: ./api
+          push: true
+          tags: ghcr.io/${{github.repository}}/api:${{github.sha}}
+
+      - name: Build and push web image
+        uses: docker/build-push-action@v2
+        with:
+          context: ./web
+          push: true
+          tags: ghcr.io/${{github.repository}}/web:${{github.sha}}
+
+      - name: Trigger api deployment to Digital Ocean
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{secrets.DOKKU_HOST}}
+          username: ${{secrets.DOKKU_SSH_USER}}
+          key: ${{ secrets.DOKKU_SSH_PRIVATE_KEY }}
+          script: |
+            dokku git:from-image api ghcr.io/${{github.repository}}/api:${{github.sha}}
+
+      - name: Trigger web deployment to Digital Ocean
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{secrets.DOKKU_HOST}}
+          username: ${{secrets.DOKKU_SSH_USER}}
+          key: "${{ secrets.DOKKU_SSH_PRIVATE_KEY }}"
+          script: |
+            dokku git:from-image web ghcr.io/${{github.repository}}/web:${{github.sha}}
