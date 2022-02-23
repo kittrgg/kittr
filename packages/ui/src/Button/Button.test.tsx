@@ -8,6 +8,17 @@ describe("Button", () => {
 		screen.getByText("Test Text")
 	})
 
+	it("Renders an <a> tag", async () => {
+		render(
+			<Button asLink disabled>
+				Test Text
+			</Button>
+		)
+		// TODO: Try changing the 'lib' compiler option to include 'dom'.
+		// @ts-ignore
+		expect(screen.getByText("Test Text").closest("a")).toBeInTheDocument()
+	})
+
 	it("Allow disabled on <button> tag", async () => {
 		render(<Button disabled>Test Text</Button>)
 		// TODO: Try changing the 'lib' compiler option to include 'dom'.
