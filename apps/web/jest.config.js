@@ -1,3 +1,9 @@
+const nextJest = require("next/jest")
+
+const createJestConfig = nextJest({
+	dir: "./"
+})
+
 const makeModuleNameMapper = (srcPath, tsconfigPath) => {
 	const { paths } = require(tsconfigPath).compilerOptions
 
@@ -16,12 +22,12 @@ const makeModuleNameMapper = (srcPath, tsconfigPath) => {
 const TS_CONFIG_PATH = "./tsconfig.json"
 const SRC_PATH = "./src"
 
-module.exports = {
+const customJestConfig = {
 	testEnvironment: "jest-environment-jsdom",
-	testPathIgnorePatterns: ["<rootDir>/.next/", "<rootDir>/node_modules/"],
-	roots: [SRC_PATH],
 	clearMocks: true,
 	moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
 	moduleNameMapper: makeModuleNameMapper(SRC_PATH, TS_CONFIG_PATH),
 	setupFilesAfterEnv: ["<rootDir>/setupTests.js"]
 }
+
+module.exports = createJestConfig(customJestConfig)
