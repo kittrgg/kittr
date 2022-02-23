@@ -102,3 +102,4 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           working-directory: ./lib/e2e
+          config-file: config.ci.json
