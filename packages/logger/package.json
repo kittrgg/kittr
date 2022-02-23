@@ -10,6 +10,7 @@
 	],
 	"scripts": {
 		"test": "echo \"No logger tests have been written...yet.\"",
+		"test:watch": "jest --watch --coverage",
 		"dev": "tsc -w",
 		"build": "tsc",
 		"lint": "eslint src --fix",

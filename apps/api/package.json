@@ -7,6 +7,7 @@
 		"dev": "prisma migrate dev && concurrently \"prisma studio\" \"nodemon -e ts\"",
 		"start": "node ./build/src/index.js && prisma migrate deploy",
 		"test": "prisma generate && jest --coverage",
+		"test:watch": "jest --watch --coverage",
 		"lint": "eslint \"**/*.ts\" --ignore-pattern node_modules/",
 		"clean": "rm -rf .turbo && rm -rf coverage && rm -rf build && rm -rf node_modules",
 		"type-check": "tsc --pretty --noEmit",
