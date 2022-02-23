@@ -101,4 +101,4 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
-          project: ./lib/e2e
+          working-directory: ./lib/e2e
