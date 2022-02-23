@@ -21,7 +21,8 @@
 		"test:e2e:ci": "cd lib && cd e2e && npm run cypress:e2e:ci",
 		"clean": "turbo run clean && echo Removing top-level node_modules... && rm -rf node_modules && echo All clean!",
 		"type-check": "turbo run type-check",
-		"format": "prettier --write \"**/*.{ts,tsx,md}\""
+		"format": "prettier --write \"**/*.{ts,tsx,md}\"",
+		"prepare": "husky install"
 	},
 	"devDependencies": {
 		"@testing-library/jest-dom": "^5.16.2",
@@ -45,5 +46,16 @@
 	"packageManager": "npm@8.1.4",
 	"dependencies": {
 		"cross-env": "^7.0.3"
+	},
+	"lint-staged": {
+		"apps/**/*.{js,ts,jsx,tsx}": [
+			"eslint --fix"
+		],
+		"packages/ui/**/*.{js,ts,jsx,tsx}": [
+			"eslint --fix"
+		],
+		"*.json": [
+			"prettier --write"
+		]
 	}
 }
