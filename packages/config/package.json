@@ -5,7 +5,7 @@
 	"license": "MIT",
 	"files": [
 		"eslint-preset.js",
-		"jest-next.js"
+		"jest-common.js"
 	],
 	"scripts": {
 		"clean": "rm -rf node_modules"
