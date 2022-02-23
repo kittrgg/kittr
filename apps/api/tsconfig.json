@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"outDir": "build",
+		"outDir": "dist/src",
 		"baseUrl": "./src",
 		"module": "commonjs",
 		"target": "es2015",
@@ -14,11 +14,10 @@
 		"esModuleInterop": true,
 		"incremental": true,
 		"paths": {
-			"@Root/*": ["./*"],
-			"@Utils/*": ["./utils/*"],
-			"@Libs/*": ["./libs/*"],
-			"@v1/*": ["./v1/*"],
-			"@Jest/*": ["./.jest/*"]
+			"@Jobs/*": ["./jobs/*"],
+			"@Services/*": ["./services/*"],
+			"@Types/*": ["./types/*"],
+			"@Utils/*": ["./utils/*"]
 		}
 	},
 	"include": ["src/"],
