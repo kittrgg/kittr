@@ -1,6 +1,6 @@
 # Turborepo starter with NPM
 
-This is an official starter turborepo.
+This is an official starter turborepo...that Anthony altered to make it his own.
 
 ## What's inside?
 
