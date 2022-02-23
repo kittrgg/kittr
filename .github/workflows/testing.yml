@@ -72,6 +72,8 @@ jobs:
     needs: build-and-unit-test
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+
       - name: Trigger api testing deployment to Digital Ocean
         uses: appleboy/ssh-action@master
         with:
