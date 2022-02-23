@@ -3,8 +3,7 @@
 	"version": "0.0.0",
 	"private": true,
 	"scripts": {
-		"cypress:e2e": "cypress open --config-file ./config.dev.json",
-		"cypress:e2e:ci": "cypress:run --config-file ./config.ci.json"
+		"cypress:e2e": "cypress open --config-file ./config.dev.json"
 	},
 	"devDependencies": {
 		"cypress": "^9.5.0"
