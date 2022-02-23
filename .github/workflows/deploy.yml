@@ -45,14 +45,14 @@ jobs:
       - name: Build and push api image
         uses: docker/build-push-action@v2
         with:
-          context: ./api
+          context: ./apps/api
           push: true
           tags: ghcr.io/${{github.repository}}/api:${{github.sha}}
 
       - name: Build and push web image
         uses: docker/build-push-action@v2
         with:
-          context: ./web
+          context: ./apps/web
           push: true
           tags: ghcr.io/${{github.repository}}/web:${{github.sha}}
 
