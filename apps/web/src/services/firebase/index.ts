@@ -1,5 +1,6 @@
-import firebase, { initializeApp } from "firebase/app"
-import { getAuth, connectAuthEmulator } from "firebase/auth"
+import { initializeApp } from "@firebase/app"
+import { connectAuthEmulator, getAuth } from "firebase/auth"
+import { connectStorageEmulator, getStorage } from "firebase/storage"
 
 export const firebaseConfig = {
 	apiKey: process.env.NEXT_PUBLIC_API_KEY || "dev",
@@ -12,17 +13,14 @@ export const firebaseConfig = {
 	measurementId: process.env.FIREBASE_MEASUREMENT_ID || "dev"
 }
 
-const app = () => {
-	if (!firebase?.getApp()) {
-		return initializeApp(firebaseConfig)
-	}
-}
-
-app()
+// Must be called before any other Firebase APIs can be used
+// eslint-disable-next-line
+const firebase = initializeApp(firebaseConfig)
 
 export const auth = getAuth()
-if (!process.env.IS_DEV) {
-	connectAuthEmulator(auth, "http://localhost:4001")
-}
+export const storage = getStorage()
 
-export default app
+if (process.env.NEXT_PUBLIC_IS_DEV) {
+	connectAuthEmulator(auth, `http://${process.env.NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST}`)
+	connectStorageEmulator(storage, `localhost`, 4002)
+}

@@ -1,0 +1,17 @@
+{
+	"name": "warzone/m1928.png",
+	"bucket": "dev",
+	"contentType": "image/png",
+	"metageneration": 1,
+	"generation": 1642916176740,
+	"storageClass": "STANDARD",
+	"etag": "someETag",
+	"contentDisposition": "inline",
+	"contentEncoding": "identity",
+	"downloadTokens": ["3037199c-e753-4f78-bc05-6012819b7eec"],
+	"timeCreated": "2022-01-23T05:36:16.739Z",
+	"updated": "2022-01-23T05:36:16.739Z",
+	"size": 14979,
+	"md5Hash": "8rxDY4mhc8lnJKQ1mS37yw==",
+	"crc32c": "69326009"
+}

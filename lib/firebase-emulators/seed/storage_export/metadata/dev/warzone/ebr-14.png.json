@@ -1,0 +1,17 @@
+{
+	"name": "warzone/ebr-14.png",
+	"bucket": "dev",
+	"contentType": "image/png",
+	"metageneration": 1,
+	"generation": 1642916176471,
+	"storageClass": "STANDARD",
+	"etag": "someETag",
+	"contentDisposition": "inline",
+	"contentEncoding": "identity",
+	"downloadTokens": ["fbc75b75-cf7a-4830-bbb2-36ce5fa29874"],
+	"timeCreated": "2022-01-23T05:36:16.470Z",
+	"updated": "2022-01-23T05:36:16.471Z",
+	"size": 53638,
+	"md5Hash": "Uclixs7nhS9zPS2wfLB/vA==",
+	"crc32c": "3191046321"
+}

@@ -1,0 +1,17 @@
+{
+	"name": "league-of-legends/title-image.png",
+	"bucket": "dev",
+	"contentType": "image/png",
+	"metageneration": 1,
+	"generation": 1642919836605,
+	"storageClass": "STANDARD",
+	"etag": "someETag",
+	"contentDisposition": "inline",
+	"contentEncoding": "identity",
+	"downloadTokens": ["0e82c8dd-1c11-4933-ab83-a3207cd76176"],
+	"timeCreated": "2022-01-23T06:37:16.604Z",
+	"updated": "2022-01-23T06:37:16.604Z",
+	"size": 92507,
+	"md5Hash": "gKZ2T4pHczfkGfwRrTMRAA==",
+	"crc32c": "2832522087"
+}

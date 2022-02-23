@@ -1,0 +1,17 @@
+{
+	"name": "warzone/1911-mw.png",
+	"bucket": "dev",
+	"contentType": "image/png",
+	"metageneration": 1,
+	"generation": 1642916176066,
+	"storageClass": "STANDARD",
+	"etag": "someETag",
+	"contentDisposition": "inline",
+	"contentEncoding": "identity",
+	"downloadTokens": ["cc3b4423-aee6-4288-88e0-ba61e37113c4"],
+	"timeCreated": "2022-01-23T05:36:16.065Z",
+	"updated": "2022-01-23T05:36:16.065Z",
+	"size": 46298,
+	"md5Hash": "DRfOo0ohcTbcn39ti4Fuuw==",
+	"crc32c": "1249332566"
+}

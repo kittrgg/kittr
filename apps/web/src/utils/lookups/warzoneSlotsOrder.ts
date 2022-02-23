@@ -1,0 +1,23 @@
+export const warzoneSlotsOrder = [
+	"Cable",
+	"Muzzle",
+	"Arms",
+	"Barrel",
+	"Laser",
+	"Guard",
+	"Optic",
+	"Stock",
+	"Underbarrel",
+	"Trigger Action",
+	"Bolt Assembly",
+	"Bolt",
+	"Magazine",
+	"Ammunition",
+	"Ammo Type",
+	"Rear Grip",
+	"Pump Grip",
+	"Perk",
+	"Pumps",
+	"Perk 1",
+	"Perk 2"
+]

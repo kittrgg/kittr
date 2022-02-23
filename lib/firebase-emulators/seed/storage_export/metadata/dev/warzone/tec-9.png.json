@@ -1,0 +1,17 @@
+{
+	"name": "warzone/tec-9.png",
+	"bucket": "dev",
+	"contentType": "image/png",
+	"metageneration": 1,
+	"generation": 1642916177112,
+	"storageClass": "STANDARD",
+	"etag": "someETag",
+	"contentDisposition": "inline",
+	"contentEncoding": "identity",
+	"downloadTokens": ["2b8e01e3-f959-488f-bf13-e03f58286ea7"],
+	"timeCreated": "2022-01-23T05:36:17.111Z",
+	"updated": "2022-01-23T05:36:17.112Z",
+	"size": 26215,
+	"md5Hash": "Zwc6CaQQXISmyOVVvHWzJg==",
+	"crc32c": "4028393970"
+}

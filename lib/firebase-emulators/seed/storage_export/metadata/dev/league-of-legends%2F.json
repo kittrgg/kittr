@@ -1,0 +1,17 @@
+{
+	"name": "league-of-legends/",
+	"bucket": "dev",
+	"contentType": "text/plain",
+	"metageneration": 1,
+	"generation": 1642919782659,
+	"storageClass": "STANDARD",
+	"etag": "someETag",
+	"contentDisposition": "inline",
+	"contentEncoding": "identity",
+	"downloadTokens": [],
+	"timeCreated": "2022-01-23T06:36:22.658Z",
+	"updated": "2022-01-23T06:36:22.658Z",
+	"size": 0,
+	"md5Hash": "1B2M2Y8AsgTpgAmY7PhCfg==",
+	"crc32c": "0"
+}

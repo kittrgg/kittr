@@ -1,0 +1,17 @@
+{
+	"name": "warzone/einhorn-revolving.png",
+	"bucket": "dev",
+	"contentType": "image/png",
+	"metageneration": 1,
+	"generation": 1642916176463,
+	"storageClass": "STANDARD",
+	"etag": "someETag",
+	"contentDisposition": "inline",
+	"contentEncoding": "identity",
+	"downloadTokens": ["9691b57a-239e-498f-9643-cba17c5d64ee"],
+	"timeCreated": "2022-01-23T05:36:16.462Z",
+	"updated": "2022-01-23T05:36:16.462Z",
+	"size": 12833,
+	"md5Hash": "lEhYS8BId5E2C861YMwN6Q==",
+	"crc32c": "374695774"
+}

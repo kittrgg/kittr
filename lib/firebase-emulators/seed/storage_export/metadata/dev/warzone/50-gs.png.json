@@ -1,0 +1,17 @@
+{
+	"name": "warzone/50-gs.png",
+	"bucket": "dev",
+	"contentType": "image/png",
+	"metageneration": 1,
+	"generation": 1642916176070,
+	"storageClass": "STANDARD",
+	"etag": "someETag",
+	"contentDisposition": "inline",
+	"contentEncoding": "identity",
+	"downloadTokens": ["3382ed4f-5163-4748-bd8d-e4bf327ec267"],
+	"timeCreated": "2022-01-23T05:36:16.069Z",
+	"updated": "2022-01-23T05:36:16.069Z",
+	"size": 48864,
+	"md5Hash": "cI0H168de0KRJ3GYMylfVg==",
+	"crc32c": "2774686518"
+}

@@ -1,0 +1,17 @@
+{
+	"name": "warzone/lc10.png",
+	"bucket": "dev",
+	"contentType": "image/png",
+	"metageneration": 1,
+	"generation": 1642916176696,
+	"storageClass": "STANDARD",
+	"etag": "someETag",
+	"contentDisposition": "inline",
+	"contentEncoding": "identity",
+	"downloadTokens": ["6877f682-5066-4c15-ad64-0c9260c8f7ba"],
+	"timeCreated": "2022-01-23T05:36:16.695Z",
+	"updated": "2022-01-23T05:36:16.695Z",
+	"size": 48003,
+	"md5Hash": "cTP0Ab/BKDM/Y2CQKEDNlg==",
+	"crc32c": "3180744824"
+}

@@ -1,16 +1,17 @@
 version: "3"
 
 services:
-  postgres:
-    container_name: postgres
-    ports:
-      - 5432:5432
-    image: postgres:alpine
-    environment:
-      - POSTGRES_USER=turboAf
-      - POSTGRES_PASSWORD=getTurbo
-      - POSTGRES_DB=prisma
+  mongo:
+    container_name: mongo
+    image: mongo:5
     restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodata:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
 
   firebase-emulators:
     container_name: firebase-emulators
@@ -43,3 +44,6 @@ services:
     build:
       context: ./apps/web
       dockerfile: Dockerfile
+
+volumes:
+  mongodata:

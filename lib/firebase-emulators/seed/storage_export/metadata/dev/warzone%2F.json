@@ -1,0 +1,17 @@
+{
+	"name": "warzone/",
+	"bucket": "dev",
+	"contentType": "text/plain",
+	"metageneration": 1,
+	"generation": 1642916166096,
+	"storageClass": "STANDARD",
+	"etag": "someETag",
+	"contentDisposition": "inline",
+	"contentEncoding": "identity",
+	"downloadTokens": [],
+	"timeCreated": "2022-01-23T05:36:06.095Z",
+	"updated": "2022-01-23T05:36:06.095Z",
+	"size": 0,
+	"md5Hash": "1B2M2Y8AsgTpgAmY7PhCfg==",
+	"crc32c": "0"
+}

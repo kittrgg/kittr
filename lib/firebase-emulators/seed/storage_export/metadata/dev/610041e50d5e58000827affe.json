@@ -1,0 +1,17 @@
+{
+	"name": "610041e50d5e58000827affe",
+	"bucket": "dev",
+	"contentType": "image/jpeg",
+	"metageneration": 1,
+	"generation": 1642919808388,
+	"storageClass": "STANDARD",
+	"etag": "someETag",
+	"contentDisposition": "inline",
+	"contentEncoding": "identity",
+	"downloadTokens": ["cccdfa69-c1ff-46e6-a1d0-ec8d9752f54d"],
+	"timeCreated": "2022-01-23T06:36:48.387Z",
+	"updated": "2022-01-23T06:36:48.387Z",
+	"size": 23890,
+	"md5Hash": "6UoCRE65RF3REr+eS6tZvA==",
+	"crc32c": "1983744523"
+}

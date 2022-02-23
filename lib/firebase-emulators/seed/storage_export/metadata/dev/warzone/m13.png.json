@@ -1,0 +1,17 @@
+{
+	"name": "warzone/m13.png",
+	"bucket": "dev",
+	"contentType": "image/png",
+	"metageneration": 1,
+	"generation": 1642916176722,
+	"storageClass": "STANDARD",
+	"etag": "someETag",
+	"contentDisposition": "inline",
+	"contentEncoding": "identity",
+	"downloadTokens": ["c29b4d57-5c39-4f22-8bdf-bdd3c6c556c5"],
+	"timeCreated": "2022-01-23T05:36:16.721Z",
+	"updated": "2022-01-23T05:36:16.721Z",
+	"size": 68741,
+	"md5Hash": "yca9n2qqjEFFQ7hoN+XkKw==",
+	"crc32c": "3048071244"
+}

@@ -1,0 +1,17 @@
+{
+	"name": "warzone/krig-6.png",
+	"bucket": "dev",
+	"contentType": "image/png",
+	"metageneration": 1,
+	"generation": 1642916176673,
+	"storageClass": "STANDARD",
+	"etag": "someETag",
+	"contentDisposition": "inline",
+	"contentEncoding": "identity",
+	"downloadTokens": ["454d5baa-a6f5-4d29-941b-a0cc55df20d2"],
+	"timeCreated": "2022-01-23T05:36:16.672Z",
+	"updated": "2022-01-23T05:36:16.672Z",
+	"size": 37593,
+	"md5Hash": "H1NWFiyT0CuGj+fyrW/FIA==",
+	"crc32c": "2180857912"
+}

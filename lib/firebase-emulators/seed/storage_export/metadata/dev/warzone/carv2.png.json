@@ -1,0 +1,17 @@
+{
+	"name": "warzone/carv2.png",
+	"bucket": "dev",
+	"contentType": "image/png",
+	"metageneration": 1,
+	"generation": 1642916176379,
+	"storageClass": "STANDARD",
+	"etag": "someETag",
+	"contentDisposition": "inline",
+	"contentEncoding": "identity",
+	"downloadTokens": ["92a30c49-0462-4616-958b-6637acaeff2f"],
+	"timeCreated": "2022-01-23T05:36:16.378Z",
+	"updated": "2022-01-23T05:36:16.379Z",
+	"size": 85150,
+	"md5Hash": "/gYMDEV4Ac3I/XuF2SByWg==",
+	"crc32c": "2134334462"
+}

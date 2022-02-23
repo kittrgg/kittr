@@ -1,0 +1,17 @@
+{
+	"name": "warzone/panzerfaust.png",
+	"bucket": "dev",
+	"contentType": "image/png",
+	"metageneration": 1,
+	"generation": 1642916176905,
+	"storageClass": "STANDARD",
+	"etag": "someETag",
+	"contentDisposition": "inline",
+	"contentEncoding": "identity",
+	"downloadTokens": ["3221c0b2-0ca0-4fe2-96da-8d026f1d2967"],
+	"timeCreated": "2022-01-23T05:36:16.904Z",
+	"updated": "2022-01-23T05:36:16.904Z",
+	"size": 3968,
+	"md5Hash": "z9VI/9yiE/rgrC4yuIameg==",
+	"crc32c": "2095596592"
+}

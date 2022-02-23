@@ -1,0 +1,17 @@
+{
+	"name": "warzone/rytec-amr.png",
+	"bucket": "dev",
+	"contentType": "image/png",
+	"metageneration": 1,
+	"generation": 1642916177007,
+	"storageClass": "STANDARD",
+	"etag": "someETag",
+	"contentDisposition": "inline",
+	"contentEncoding": "identity",
+	"downloadTokens": ["e802bc96-94d3-48e6-836e-e9a906b48495"],
+	"timeCreated": "2022-01-23T05:36:17.006Z",
+	"updated": "2022-01-23T05:36:17.007Z",
+	"size": 47935,
+	"md5Hash": "9A1sMXgXv9HF3wGidkGPfg==",
+	"crc32c": "662497673"
+}

@@ -1,0 +1,17 @@
+{
+	"name": "warzone/fs-fighting-knife.png",
+	"bucket": "dev",
+	"contentType": "image/png",
+	"metageneration": 1,
+	"generation": 1642916176515,
+	"storageClass": "STANDARD",
+	"etag": "someETag",
+	"contentDisposition": "inline",
+	"contentEncoding": "identity",
+	"downloadTokens": ["aef1127f-cbac-490e-b0fe-45d113287989"],
+	"timeCreated": "2022-01-23T05:36:16.514Z",
+	"updated": "2022-01-23T05:36:16.515Z",
+	"size": 2958,
+	"md5Hash": "BW2J0w8zDoqFxrBpCTgvIQ==",
+	"crc32c": "3443788709"
+}

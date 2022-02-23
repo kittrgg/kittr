@@ -1,0 +1,17 @@
+{
+	"name": "warzone/fara-83.png",
+	"bucket": "dev",
+	"contentType": "image/png",
+	"metageneration": 1,
+	"generation": 1642916176493,
+	"storageClass": "STANDARD",
+	"etag": "someETag",
+	"contentDisposition": "inline",
+	"contentEncoding": "identity",
+	"downloadTokens": ["c7819eaf-5012-4d08-8ad9-62c224374d27"],
+	"timeCreated": "2022-01-23T05:36:16.492Z",
+	"updated": "2022-01-23T05:36:16.492Z",
+	"size": 43634,
+	"md5Hash": "t4SsVX7kk9KHSKyoWgFYcQ==",
+	"crc32c": "2776137506"
+}

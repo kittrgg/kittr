@@ -1,0 +1,17 @@
+{
+	"name": "warzone/type-100.png",
+	"bucket": "dev",
+	"contentType": "image/png",
+	"metageneration": 1,
+	"generation": 1642916177124,
+	"storageClass": "STANDARD",
+	"etag": "someETag",
+	"contentDisposition": "inline",
+	"contentEncoding": "identity",
+	"downloadTokens": ["44ca3748-0b68-430e-bc93-46dc91d1fe99"],
+	"timeCreated": "2022-01-23T05:36:17.123Z",
+	"updated": "2022-01-23T05:36:17.123Z",
+	"size": 11183,
+	"md5Hash": "pKR8ve64sT4q+Ub187NrxA==",
+	"crc32c": "2916944965"
+}

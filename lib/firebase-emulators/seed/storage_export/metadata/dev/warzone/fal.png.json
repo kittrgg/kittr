@@ -1,0 +1,17 @@
+{
+	"name": "warzone/fal.png",
+	"bucket": "dev",
+	"contentType": "image/png",
+	"metageneration": 1,
+	"generation": 1642916176505,
+	"storageClass": "STANDARD",
+	"etag": "someETag",
+	"contentDisposition": "inline",
+	"contentEncoding": "identity",
+	"downloadTokens": ["d1047c78-9a84-42ac-850a-0e0a29424bcd"],
+	"timeCreated": "2022-01-23T05:36:16.504Z",
+	"updated": "2022-01-23T05:36:16.504Z",
+	"size": 46910,
+	"md5Hash": "QlPkkDtg/X1izh0zNGMmYg==",
+	"crc32c": "4104617199"
+}

@@ -1,0 +1,17 @@
+{
+	"name": "warzone/cooper-carbine.png",
+	"bucket": "dev",
+	"contentType": "image/png",
+	"metageneration": 1,
+	"generation": 1642916176415,
+	"storageClass": "STANDARD",
+	"etag": "someETag",
+	"contentDisposition": "inline",
+	"contentEncoding": "identity",
+	"downloadTokens": ["65dace42-8c93-4d3e-b2c4-76b60f99532f"],
+	"timeCreated": "2022-01-23T05:36:16.414Z",
+	"updated": "2022-01-23T05:36:16.414Z",
+	"size": 14115,
+	"md5Hash": "2YKTCuFxMYRcVVxvJGcksA==",
+	"crc32c": "1795387996"
+}

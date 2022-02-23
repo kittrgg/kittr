@@ -1,0 +1,17 @@
+{
+	"name": "dota/title-image.png",
+	"bucket": "dev",
+	"contentType": "image/png",
+	"metageneration": 1,
+	"generation": 1642919844238,
+	"storageClass": "STANDARD",
+	"etag": "someETag",
+	"contentDisposition": "inline",
+	"contentEncoding": "identity",
+	"downloadTokens": ["8b6df644-bc68-4ee8-af0b-2e48ec1f691b"],
+	"timeCreated": "2022-01-23T06:37:24.237Z",
+	"updated": "2022-01-23T06:37:24.239Z",
+	"size": 645140,
+	"md5Hash": "wDo3a4mknlvGcY2ScIqQ4Q==",
+	"crc32c": "3722656793"
+}

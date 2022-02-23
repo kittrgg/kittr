@@ -1,0 +1,17 @@
+{
+	"name": "warzone/lapa.png",
+	"bucket": "dev",
+	"contentType": "image/png",
+	"metageneration": 1,
+	"generation": 1642916176693,
+	"storageClass": "STANDARD",
+	"etag": "someETag",
+	"contentDisposition": "inline",
+	"contentEncoding": "identity",
+	"downloadTokens": ["6d2370c0-f46e-4011-a5dc-a390ae8d409c"],
+	"timeCreated": "2022-01-23T05:36:16.692Z",
+	"updated": "2022-01-23T05:36:16.692Z",
+	"size": 31511,
+	"md5Hash": "MiMw7cFEG9B2gNIsS6LfQQ==",
+	"crc32c": "1469171845"
+}

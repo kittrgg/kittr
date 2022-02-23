@@ -1,0 +1,17 @@
+{
+	"name": "warzone/ffar1.png",
+	"bucket": "dev",
+	"contentType": "image/png",
+	"metageneration": 1,
+	"generation": 1642916176512,
+	"storageClass": "STANDARD",
+	"etag": "someETag",
+	"contentDisposition": "inline",
+	"contentEncoding": "identity",
+	"downloadTokens": ["f238847a-9e91-4d79-bbb1-f07667b1d556"],
+	"timeCreated": "2022-01-23T05:36:16.511Z",
+	"updated": "2022-01-23T05:36:16.512Z",
+	"size": 51524,
+	"md5Hash": "MEEwRujlrv9JjebZPTpjow==",
+	"crc32c": "3919741226"
+}

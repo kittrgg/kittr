@@ -1,0 +1,17 @@
+{
+	"name": "warzone/pelington-703.png",
+	"bucket": "dev",
+	"contentType": "image/png",
+	"metageneration": 1,
+	"generation": 1642916176915,
+	"storageClass": "STANDARD",
+	"etag": "someETag",
+	"contentDisposition": "inline",
+	"contentEncoding": "identity",
+	"downloadTokens": ["c690cc59-4fb9-4827-a6fe-390d40466617"],
+	"timeCreated": "2022-01-23T05:36:16.914Z",
+	"updated": "2022-01-23T05:36:16.914Z",
+	"size": 34249,
+	"md5Hash": "tRD0x6FaHP8/gh40yMfJWw==",
+	"crc32c": "606290148"
+}
