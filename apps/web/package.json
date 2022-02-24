@@ -10,7 +10,7 @@
 		"tsc": "tsc --noEmit --incremental false",
 		"test": "jest --coverage",
 		"test:watch": "jest --watch --coverage",
-		"clean": "rm -rf .next && rm -rf coverage && rm -rf .turbo && rm -rf node_modules",
+		"clean": "rm -rf .turbo && rm -rf .next &&  rm -rf coverage && rm -rf node_modules",
 		"type-check": "tsc --pretty --noEmit",
 		"ci:test": "jest .*\\.unit\\.test\\.ts"
 	},

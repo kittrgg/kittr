@@ -15,8 +15,8 @@
 		"test:watch": "jest --watch --coverage",
 		"build": "tsup src/index.tsx --format esm,cjs --dts --external react",
 		"dev": "tsup src/index.tsx --format esm,cjs --watch --dts --external react",
-		"lint": "eslint src --fix",
-		"clean": "rm -rf .turbo && rm -rf coverage && rm -rf node_modules && rm -rf dist",
+		"lint": "eslint \"**/*.ts\" --ignore-pattern node_modules/",
+		"clean": "rm -rf .turbo  && rm -rf dist && rm -rf coverage && rm -rf node_modules",
 		"type-check": "tsc --pretty --noEmit"
 	},
 	"devDependencies": {
