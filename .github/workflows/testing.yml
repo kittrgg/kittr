@@ -61,12 +61,6 @@ jobs:
           echo TWITCH_SECRET=${{secrets.CI_TWITCH_SECRET}} >> .env
           echo GOOGLE_APPLICATION_CREDENTIALS=${{secrets.CI_GOOGLE_APPLICATION_CREDENTIALS}} >> .env
 
-      - name: Cat the web .env
-        run: |
-          cd apps
-          cd web
-          cat .env
-
       - name: Use Node.js ${{matrix.node-version}}
         uses: actions/setup-node@v2
         with:
@@ -74,6 +68,12 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Create .env.production
+        run: |
+          cd apps
+          cd web
+          cp .env .env.production
 
       - name: Run build
         run: npm run prod:build
