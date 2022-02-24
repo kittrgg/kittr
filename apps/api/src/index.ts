@@ -1,5 +1,7 @@
 import dotenv from "dotenv"
-dotenv.config()
+dotenv.config({
+	path: process.env.NODE_ENV === "production" ? ".env" : ".env.development"
+})
 
 // This needs to happen BEFORE any absolute imports
 import moduleAlias from "module-alias"

@@ -1,34 +1,6 @@
 version: "3"
 
 services:
-  mongo:
-    container_name: mongo
-    image: mongo:5
-    restart: always
-    ports:
-      - 27017:27017
-    volumes:
-      - mongodata:/data/db
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-
-  firebase-emulators:
-    container_name: firebase-emulators
-    ports:
-      - 4000:4000
-      - 4001:4001
-      - 4002:4002
-    build:
-      context: ./lib/firebase-emulators
-      dockerfile: Dockerfile
-    image: firebase-emulator:firebase-emulator
-    volumes:
-      - ./lib/firebase-emulators/firebase.json:/src/firebase.json
-      - ./lib/firebase-emulators/storage.rules:/src/storage.rules
-      - ./lib/firebase-emulators/seed:/src/firebase/seed
-    command: firebase emulators:start --project dev
-
   api:
     container_name: api
     ports:

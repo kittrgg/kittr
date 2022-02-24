@@ -39,6 +39,7 @@
 		"react-markdown": "8.0.0",
 		"react-query": "3.34.14",
 		"react-redux": "7.2.6",
+		"react-select": "^5.2.2",
 		"redux": "4.1.2",
 		"socket.io-client": "4.4.1",
 		"stripe": "8.202.0",
