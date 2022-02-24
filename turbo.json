@@ -3,7 +3,10 @@
 		"build": {
 			"dependsOn": [
 				"^build",
-				"$DATABASE_URL",
+				"$NODE_ENV",
+				"$DB_CONNECTION_STRING",
+				"$FIREBASE_AUTH_EMULATOR_HOST",
+				"$FIREBASE_STORAGE_EMULATOR_HOST",
 				"$IS_TESTING",
 				"$IS_DEV",
 				"$NEXT_PUBLIC_API_PATH",
@@ -16,7 +19,16 @@
 				"$SENTRY_AUTH_TOKEN",
 				"$SENTRY_DSN",
 				"$SENTRY_ORG",
-				"$SENTRY_PROJECT"
+				"$SENTRY_PROJECT",
+				"$STRIPE_WEBHOOK_SECRET",
+				"$STRIPE_SECRET_KEY",
+				"$STRIPE_PUBLISHABLE_KEY",
+				"$SUBSCRIPTION_PRICE_ID",
+				"$MONTHLY_TIP_PRICE_ID",
+				"$TWITCH_CLIENT_ID",
+				"$TWITCH_CLIENT_SECRET",
+				"$TWITCH_SECRET",
+				"$TWITCH_EXTENSION_SECRET"
 			],
 			"outputs": ["dist/**", ".next/**", "build/**"]
 		},
