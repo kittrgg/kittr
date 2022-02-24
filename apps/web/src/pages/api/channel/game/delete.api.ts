@@ -11,9 +11,6 @@ const handler = createHandler(userAuth)
 handler.delete(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel>>) => {
 	const { gameId, channelId } = JSON.parse(req.body)
 
-	// console.log({ gameId })
-	// console.log({ channelId })
-
 	try {
 		const aggResult = await Channel.aggregate([
 			{ $match: { _id: new mongoose.Types.ObjectId(sanitize(channelId)) } },

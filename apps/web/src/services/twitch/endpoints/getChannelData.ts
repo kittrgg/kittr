@@ -24,7 +24,6 @@ export const getChannelData: IFunc = async (login) => {
 		return data
 	} catch (error) {
 		Sentry.captureException(error)
-		console.log("getChannelData")
 		throw error
 	}
 }

@@ -43,8 +43,6 @@ const ImageUploader = ({ slot }: Props) => {
 						headers: { authorization: `Bearer: ${await getToken()}` }
 					})
 
-					console.log({ response })
-
 					if (isFetchError(response)) {
 						setIsUploading(false)
 						dispatch(setModal({ type: "Error Notification", data: {} }))

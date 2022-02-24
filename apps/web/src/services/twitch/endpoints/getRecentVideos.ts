@@ -23,7 +23,6 @@ export const getRecentVideos: IFunc = async (user_id) => {
 		return data
 	} catch (error) {
 		Sentry.captureException(error)
-		console.log("getRecentVideos")
 		throw error
 	}
 }

@@ -112,7 +112,6 @@ const Admin = ({ ...props }) => {
 								style={{ top: "initial" }}
 								isSearchable
 								onChange={(elem) => {
-									console.log(elem)
 									setActiveOptions([...activeOptions, [elem.value, ""]])
 								}}
 								options={allOptions

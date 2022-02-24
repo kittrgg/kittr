@@ -23,7 +23,6 @@ export const getClips: IFunc = async (broadcaster_id): Promise<ITwitchClip[]> =>
 		return data || []
 	} catch (error) {
 		Sentry.captureException(error)
-		console.log("getClips")
 		throw error
 	}
 }
