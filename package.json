@@ -8,8 +8,8 @@
 	],
 	"scripts": {
 		"docker:build": "docker-compose -f docker-compose.yml up --build",
-		"docker:deploy": "docker-compose -f docker-compose.deploy.yml up --build",
-		"dev:docker": "docker-compose -f docker-compose.yml up",
+		"docker:deploy": "docker-compose -f docker-compose.deploy.yml up -d",
+		"dev:docker": "docker-compose -f docker-compose.yml up -d",
 		"dev": "concurrently \"npm run dev:docker\" \"turbo run dev --parallel\"",
 		"dev:turbo": "\"turbo run dev --parallel\"",
 		"dev:seed": "cross-env DB_CONNECTION_STRING=mongodb://root:example@localhost:27017/myFirstDatabase ts-node ./lib/seeds/mongo/db-seed.ts",

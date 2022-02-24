@@ -1,5 +1,5 @@
 {
-	"baseUrl": "https://test-web.doggosports.com/",
+	"baseUrl": "https://stage-web.kittr.gg/",
 	"screenshotOnRunFailure": false,
 	"video": false
 }
