@@ -2,8 +2,12 @@
 
 declare namespace Cypress {
 	interface Chainable {
-		login: (email: string, password: string) => Promise<firebase.default.auth.UserCredential>
+		login: (
+			email: string,
+			password: string
+		) => Promise<firebase.default.auth.UserCredential>
 		logout: () => Promise<void>
+		clearEmulatorAuth: () => Promise<void>
 		getToken: () => Promise<string>
 	}
 }

@@ -30,7 +30,7 @@ const Card = ({ kit, containerStyles }: Props) => {
 					Routes.CHANNEL.GAME.createPath(channel as string, game as string, `?k=${base.displayName.replace(/ /g, "-")}`)
 				)
 			}}
-			data-cy={`${base.displayName.replace(/ /g, "-")}-placeholder-button`}
+			data-cy={`placeholder-button`}
 		>
 			<HeaderContainer>
 				{userData.featured && (
