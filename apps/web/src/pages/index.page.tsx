@@ -31,8 +31,6 @@ const Home = ({
 	liveChannels,
 	featuredChannel
 }: Props) => {
-	const featuredChannelInfo = featuredChannel
-
 	return (
 		<PageWrapper title="Home | kittr" description="Where the pros post their kits. Get kitted.">
 			<Hero totalNumberOfKits={totalNumberOfKits} />
