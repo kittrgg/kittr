@@ -7,14 +7,12 @@
 		"packages/*"
 	],
 	"scripts": {
-		"docker:build": "docker-compose -f docker-compose.yml up --build",
-		"docker:deploy": "docker-compose -f docker-compose.deploy.yml up -d",
 		"dev:docker": "docker-compose -f docker-compose.yml up -d",
-		"dev": "concurrently \"npm run dev:docker\" \"turbo run dev --parallel\"",
+		"dev:down": "docker-compose -f docker-compose.yml down",
 		"dev:turbo": "\"turbo run dev --parallel\"",
 		"dev:seed": "cross-env DB_CONNECTION_STRING=mongodb://root:example@localhost:27017/myFirstDatabase ts-node ./lib/seeds/mongo/db-seed.ts",
-		"dev:deploy": "concurrently \"docker-compose -f docker-compose.yml up --build\" \"turbo run build && docker-compose -f docker-compose.deploy.yml up --build\"",
-		"build": "turbo run build",
+		"dev:build": "turbo run build",
+		"dev:deploy": "docker-compose -f docker-compose.deploy.yml up -d",
 		"rebuild": "turbo run build --force",
 		"prod:build": "turbo run build --scope=\"api\" --scope=\"web\" --include-dependencies",
 		"lint": "turbo run lint",
