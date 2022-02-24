@@ -18,48 +18,48 @@ jobs:
 
       - name: Create API .env
         run: |
-        cd apps
-        cd api
-        touch .env
-        echo DB_CONNECTION_STRING=${{secrets.CI_DB_CONNECTION_STRING}} >> .env
-        echo GOOGLE_APPLICATION_CREDENTIALS=${{secrets.CI_GOOGLE_APPLICATION_CREDENTIALS}} >> .env
-        echo SENTRY_DSN=${{secrets.SENTRY_DSN}} >> .env
-        echo TWITCH_CLIENT_ID=${{secrets.CI_TWITCH_CLIENT_ID}} >> .env
-        echo TWITCH_CLIENT_SECRET=${{secrets.CI_CLIENT_SECRET}} >> .env
-        echo TWITCH_EXTENSION_SECRET=${{secrets.TWITCH_EXTENSION_SECRET}} >> .env
+          cd apps
+          cd api
+          touch .env
+          echo DB_CONNECTION_STRING=${{secrets.CI_DB_CONNECTION_STRING}} >> .env
+          echo GOOGLE_APPLICATION_CREDENTIALS=${{secrets.CI_GOOGLE_APPLICATION_CREDENTIALS}} >> .env
+          echo SENTRY_DSN=${{secrets.SENTRY_DSN}} >> .env
+          echo TWITCH_CLIENT_ID=${{secrets.CI_TWITCH_CLIENT_ID}} >> .env
+          echo TWITCH_CLIENT_SECRET=${{secrets.CI_CLIENT_SECRET}} >> .env
+          echo TWITCH_EXTENSION_SECRET=${{secrets.TWITCH_EXTENSION_SECRET}} >> .env
 
       - name: Create web .env
         run: |
-        cd apps
-        cd web
-        touch .env
-        echo ADS_DISABLED=true >> .env
-        echo ENABLE_SEEDING=true >> .env
-        echo DB_CONNECTION_STRING=${{secrets.CI_DB_CONNECTION_STRING}} >> .env
-        echo FIREBASE_PROJECT_ID=${{secrets.CI_FIREBASE_PROJECT_ID}} >> .env
-        echo FIREBASE_AUTH_DOMAIN=${{secrets.CI_FIREBASE_AUTH_DOMAIN}} >> .env
-        echo FIREBASE_CLIENT_EMAIL=${{secrets.CI_FIREBASE_CLIENT_EMAIL}} >> .env
-        echo FIREBASE_MESSAGING_SENDER_ID=${{secrets.CI_FIREBASE_MESSAGING_SENDER_ID}} >> .env
-        echo FIREBASE_APP_ID=${{secrets.CI_FIREBASE_APP_ID}} >> .env
-        echo FIREBASE_MEASUREMENT_ID=${{secrets.CI_FIREBASE_MEASUREMENT_ID}} >> .env
-        echo FIREBASE_COOKIE_SECRET_PREVIOUS=${{secrets.CI_FIREBASE_COOKIE_SECRET_PREVIOUS}} >> .env
-        echo FIREBASE_COOKIE_SECRET_CURRENT=${{secrets.CI_FIREBASE_COOKIE_SECRET_CURRENT}} >> .env
-        echo MONTHLY_TIP_PRICE_ID=${{secrets.CI_MONTHLY_TIP_PRICE_ID}} >> .env
-        echo NEXT_PUBLIC_API_KEY=${{secrets.CI_NEXT_PUBLIC_API_KEY}} >> .env
-        echo NEXT_PUBLIC_ENABLE_SEEDING=true >> .env
-        echo NEXT_PUBLIC_ENVIRONMENT=${{secrets.CI_NODE_ENV}} >> .env
-        echo NEXT_PUBLIC_FIREBASE_DATABASE_URL=${{secrets.CI_NEXT_PUBLIC_FIREBASE_DATABASE_URL}} >> .env
-        echo NEXT_PUBLIC_GOOGLE_ANALYTICS=${{secrets.CI_NEXT_PUBLIC_GOOGLE_ANALYTICS}} >> .env
-        echo NEXT_PUBLIC_SENTRY_DSN=${{secrets.SENTRY_DSN}} >> .env
-        echo NEXT_PUBLIC_SOCKET_HOST=${{secrets.CI_NEXT_PUBLIC_SOCKET_HOST}} >> .env
-        echo NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${{secrets.CI_NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}} >> .env
-        echo SENTRY_AUTH_TOKEN=${{secrets.SENTRY_AUTH_TOKEN}} >> .env
-        echo STRIPE_SECRET_KEY=${{secrets.CI_STRIPE_SECRET_KEY}} >> .env
-        echo STRIPE_WEBHOOK_SECRET=${{secrets.CI_STRIPE_WEBHOOK_SECRET}} >> .env
-        echo SUBSCRIPTION_PRICE_ID=${{secrets.CI_SUBSCRIPTION_PRICE_ID}} >> .env
-        echo TWITCH_CLIENT_ID=${{secrets.CI_TWITCH_CLIENT_ID}} >> .env
-        echo TWITCH_SECRET=${{secrets.CI_TWITCH_SECRET}} >> .env
-        echo GOOGLE_APPLICATION_CREDENTIALS=${{secrets.CI_GOOGLE_APPLICATION_CREDENTIALS}} >> .env
+          cd apps
+          cd web
+          touch .env
+          echo ADS_DISABLED=true >> .env
+          echo ENABLE_SEEDING=true >> .env
+          echo DB_CONNECTION_STRING=${{secrets.CI_DB_CONNECTION_STRING}} >> .env
+          echo FIREBASE_PROJECT_ID=${{secrets.CI_FIREBASE_PROJECT_ID}} >> .env
+          echo FIREBASE_AUTH_DOMAIN=${{secrets.CI_FIREBASE_AUTH_DOMAIN}} >> .env
+          echo FIREBASE_CLIENT_EMAIL=${{secrets.CI_FIREBASE_CLIENT_EMAIL}} >> .env
+          echo FIREBASE_MESSAGING_SENDER_ID=${{secrets.CI_FIREBASE_MESSAGING_SENDER_ID}} >> .env
+          echo FIREBASE_APP_ID=${{secrets.CI_FIREBASE_APP_ID}} >> .env
+          echo FIREBASE_MEASUREMENT_ID=${{secrets.CI_FIREBASE_MEASUREMENT_ID}} >> .env
+          echo FIREBASE_COOKIE_SECRET_PREVIOUS=${{secrets.CI_FIREBASE_COOKIE_SECRET_PREVIOUS}} >> .env
+          echo FIREBASE_COOKIE_SECRET_CURRENT=${{secrets.CI_FIREBASE_COOKIE_SECRET_CURRENT}} >> .env
+          echo MONTHLY_TIP_PRICE_ID=${{secrets.CI_MONTHLY_TIP_PRICE_ID}} >> .env
+          echo NEXT_PUBLIC_API_KEY=${{secrets.CI_NEXT_PUBLIC_API_KEY}} >> .env
+          echo NEXT_PUBLIC_ENABLE_SEEDING=true >> .env
+          echo NEXT_PUBLIC_ENVIRONMENT=${{secrets.CI_NODE_ENV}} >> .env
+          echo NEXT_PUBLIC_FIREBASE_DATABASE_URL=${{secrets.CI_NEXT_PUBLIC_FIREBASE_DATABASE_URL}} >> .env
+          echo NEXT_PUBLIC_GOOGLE_ANALYTICS=${{secrets.CI_NEXT_PUBLIC_GOOGLE_ANALYTICS}} >> .env
+          echo NEXT_PUBLIC_SENTRY_DSN=${{secrets.SENTRY_DSN}} >> .env
+          echo NEXT_PUBLIC_SOCKET_HOST=${{secrets.CI_NEXT_PUBLIC_SOCKET_HOST}} >> .env
+          echo NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${{secrets.CI_NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}} >> .env
+          echo SENTRY_AUTH_TOKEN=${{secrets.SENTRY_AUTH_TOKEN}} >> .env
+          echo STRIPE_SECRET_KEY=${{secrets.CI_STRIPE_SECRET_KEY}} >> .env
+          echo STRIPE_WEBHOOK_SECRET=${{secrets.CI_STRIPE_WEBHOOK_SECRET}} >> .env
+          echo SUBSCRIPTION_PRICE_ID=${{secrets.CI_SUBSCRIPTION_PRICE_ID}} >> .env
+          echo TWITCH_CLIENT_ID=${{secrets.CI_TWITCH_CLIENT_ID}} >> .env
+          echo TWITCH_SECRET=${{secrets.CI_TWITCH_SECRET}} >> .env
+          echo GOOGLE_APPLICATION_CREDENTIALS=${{secrets.CI_GOOGLE_APPLICATION_CREDENTIALS}} >> .env
 
       - name: Use Node.js ${{matrix.node-version}}
         uses: actions/setup-node@v2
