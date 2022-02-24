@@ -9,7 +9,7 @@
 		"dist/**"
 	],
 	"scripts": {
-		"test": "echo \"No logger tests have been written...yet.\"",
+		"test": "jest --coverage",
 		"test:watch": "jest --watch --coverage",
 		"dev": "tsc -w",
 		"build": "tsc",
