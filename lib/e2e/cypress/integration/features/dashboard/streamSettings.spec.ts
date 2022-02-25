@@ -9,6 +9,7 @@ describe("Channel Settings", () => {
 	})
 
 	it("Modal for more info on managers", () => {
+		cy.login(user.email, user.password)
 		cy.get("[data-cy=thetestchannel-channel-button]").click()
 		cy.get("[data-cy=managers-info-question]").click()
 		cy.contains("ABOUT ACCOUNT MANAGERS")
@@ -17,9 +18,11 @@ describe("Channel Settings", () => {
 	it("Shows all managers", () => {
 		cy.get("[data-cy=thetestchannel-channel-button]").click()
 		cy.get("[data-cy=manager]").should("have.length", 3)
+
 		cy.get("[data-cy=manager] > p")
 			.filter(':contains("Owner")')
 			.should("have.length", 1)
+
 		cy.get("[data-cy=manager] > p")
 			.filter(':contains("Editor")')
 			.should("have.length", 2)
