@@ -51,7 +51,7 @@ jobs:
           DB_CONNECTION_STRING: ${{secrets.DB_CONNECTION_STRING}}
           TWITCH_CLIENT_ID: ${{secrets.TWITCH_CLIENT_ID}}
           TWITCH_SECRET: ${{secrets.TWITCH_SECRET}}
-        run: npm run prod:build
+        run: npm run build --scope=\"api\" --scope=\"web\" --include-dependencies --token="${{ secrets.TURBO_SERVER_TOKEN }}" --team="kittr"
 
       - name: Build and push api image
         uses: docker/build-push-action@v2

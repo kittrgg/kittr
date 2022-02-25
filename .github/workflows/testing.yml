@@ -47,7 +47,7 @@ jobs:
           DB_CONNECTION_STRING: ${{secrets.CI_DB_CONNECTION_STRING}}
           TWITCH_CLIENT_ID: ${{secrets.CI_TWITCH_CLIENT_ID}}
           TWITCH_SECRET: ${{secrets.CI_TWITCH_SECRET}}
-        run: npm run prod:build --token="${{ secrets.TURBO_SERVER_TOKEN }}" --team="kittr"
+        run: npm run build --scope=\"api\" --scope=\"web\" --include-dependencies --token="${{ secrets.TURBO_SERVER_TOKEN }}" --team="kittr"
 
       - name: Run unit tests
         run: npm run test
