@@ -21,5 +21,13 @@
 		}
 	},
 	"include": ["src/"],
-	"exclude": ["node_modules", ".turbo", "coverage", "build"]
+	"exclude": [
+		"node_modules",
+		".turbo",
+		"coverage",
+		"build",
+		"**/*.test.ts",
+		"**/*.spec.ts",
+		"**/*.d.ts"
+	]
 }

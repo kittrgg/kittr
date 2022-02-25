@@ -1,5 +1,3 @@
-export type DogSex = "MALE" | "FEMALE"
-
 export type AkcRegistrationType =
 	| "AKCREGNUMBER"
 	| "AKCPALNUMBER"
@@ -11,7 +9,6 @@ export interface Dog {
 	id: string
 	callName: string
 	akcBreed: string
-	sex: DogSex
 	birthdate: Date | null
 	birthplace: string | null
 	akcRegisteredName: string | null
