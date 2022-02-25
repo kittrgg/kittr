@@ -29,6 +29,8 @@ jobs:
 
       - name: Run build
         env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_DSN: ${{secrets.SENTRY_DSN}}
           DB_CONNECTION_STRING: ${{secrets.CI_DB_CONNECTION_STRING}}
           TWITCH_CLIENT_ID: ${{secrets.CI_TWITCH_CLIENT_ID}}
           TWITCH_SECRET: ${{secrets.CI_TWITCH_SECRET}}
