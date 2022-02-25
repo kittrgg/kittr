@@ -12,13 +12,18 @@ const handler = createHandler()
 
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 	if (process.env.NEXT_PUBLIC_ENABLE_SEEDING) {
+		console.log("Seeding database...")
 		const rawChannel = channelFixture
 		const rawPremiumChannel = premiumChannelFixture
 
-		await Channel.deleteOne({ _id: channelFixture._id })
-		await Channel.deleteOne({ _id: premiumChannelFixture._id })
-		await Channel.deleteOne({ displayName: tutorialChannel.displayName })
-		await Channel.deleteOne({ displayName: dummyChannelFixture.displayName })
+		try {
+			await Channel.deleteOne({ _id: channelFixture._id })
+			await Channel.deleteOne({ _id: premiumChannelFixture._id })
+			await Channel.deleteOne({ displayName: tutorialChannel.displayName })
+			await Channel.deleteOne({ displayName: dummyChannelFixture.displayName })
+		} catch (error) {
+			console.error("Error while deleting channels: ", error)
+		}
 
 		const prepped = {
 			...rawChannel,
@@ -48,8 +53,10 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 
 		Channel.insertMany([prepped, preppedPremium], {}, (err: any, data: any) => {
 			if (err) {
+				console.error("Error while inserting channels:", err)
 				return res.status(500).json(err)
 			}
+			console.log("Seeding database...done")
 			return res.status(200).json({ success: true })
 		})
 	} else {

@@ -29,6 +29,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 					const user5 = await admin.createUser(managersFixture["BnRFlNNbQ4d3K6nfEIRGBJm5nER8"])
 
 					if (user1 && user2 && user3 && user4 && user5) {
+						console.log("Seeding firebase emulators...done")
 						return res.status(200).json({ success: true })
 					}
 				} catch (error) {
