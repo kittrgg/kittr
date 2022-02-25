@@ -25,11 +25,11 @@ describe("Mobile Navigation", () => {
 		cy.location("pathname").should("include", "/blog")
 	})
 
-	it("Navigates to Sign Up", () => {
-		cy.clearEmulatorAuth()
-		cy.get("[data-cy=mobile-sign-up-link]").click()
-		cy.location("pathname").should("include", "/sign-up")
-	})
+	// it("Navigates to Sign Up", () => {
+	// 	cy.clearEmulatorAuth()
+	// 	cy.get("[data-cy=mobile-sign-up-link]").click()
+	// 	cy.location("pathname").should("include", "/sign-up")
+	// })
 
 	// TODO: Fix this test locally!
 	// it("Navigates to Dashboard", () => {

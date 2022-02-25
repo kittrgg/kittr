@@ -13,7 +13,7 @@ To run a production version:
 ```
   npm run dev:docker
   npm run dev:seed
-  npm run dev:build
+  npm run rebuild
   npm run dev:deploy
 ```
 

@@ -34,14 +34,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Turborepo remote caching server
-        uses: felixmosh/turborepo-gh-artifacts@v1
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          server-token: ${{ secrets.TURBO_SERVER_TOKEN }}
-
       - name: Run build
         env:
+          NEXT_PUBLIC_ADS_DISABLED: true
           NEXT_PUBLIC_ENABLE_SEEDING: true
           NEXT_PUBLIC_ENVIRONMENT: ${{secrets.CI_NODE_ENV}}
           DB_CONNECTION_STRING: ${{secrets.CI_DB_CONNECTION_STRING}}

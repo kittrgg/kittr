@@ -34,7 +34,9 @@ class MyDocument extends Document {
 			<Html>
 				<Head>
 					<>
-						{process.env.ADS_DISABLED !== "true" && (
+						{process.env.NEXT_PUBLIC_ADS_DISABLED ? (
+							<></>
+						) : (
 							<script
 								src="https://hb.vntsm.com/v3/live/ad-manager.min.js"
 								type="text/javascript"

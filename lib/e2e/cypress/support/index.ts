@@ -14,13 +14,14 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import "./commands";
+import "./commands"
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
 before(() => {
-  cy.log("Attempting to seed users and database.");
-  cy.request("POST", "/api/admin/cypress/user");
-  cy.request("POST", "/api/admin/cypress/seedDatabase");
-});
+	cy.log("Attempting to seed users and database.")
+	cy.request("POST", "/api/admin/cypress/user")
+	cy.request("POST", "/api/admin/cypress/seedDatabase")
+	cy.log("Seeded users and database.")
+})

@@ -1,7 +1,7 @@
 import admin from "firebase-admin"
 
 if (!admin.apps.length) {
-	if (process.env.IS_DEV) {
+	if (process.env.NEXT_PUBLIC_IS_DEV) {
 		console.log("Using admin in emulator mode.")
 		admin.initializeApp({ projectId: "dev" })
 	} else {
