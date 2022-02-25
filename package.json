@@ -14,6 +14,7 @@
 		"dev:build": "turbo run build",
 		"dev:deploy": "docker-compose -f docker-compose.deploy.yml up -d --build",
 		"rebuild": "turbo run build --force",
+		"build": "turbo run build --scope=\"api\" --scope=\"web\" --include-dependencies",
 		"lint": "turbo run lint",
 		"test": "turbo run test",
 		"test:e2e": "cd lib && cd e2e && npm run cypress:e2e",
