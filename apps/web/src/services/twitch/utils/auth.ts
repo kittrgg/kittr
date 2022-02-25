@@ -15,6 +15,7 @@ export const getAuthToken = async () => {
 			throw data as IOAuthRejection
 		}
 	} catch (error) {
+		console.log({ twitchError: error })
 		throw { twitchError: error }
 	}
 }

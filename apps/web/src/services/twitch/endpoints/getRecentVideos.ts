@@ -23,6 +23,7 @@ export const getRecentVideos: IFunc = async (user_id) => {
 		return data
 	} catch (error) {
 		Sentry.captureException(error)
+		console.log({ twitchError: error })
 		throw error
 	}
 }
