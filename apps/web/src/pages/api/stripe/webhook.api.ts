@@ -113,7 +113,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 				break
 			default:
 				console.log(`Unhandled event type ${event.type}`)
-				return res.status(418).send("im a little teapot")
+				return res.status(200).send("Unhandled event")
 		}
 	} catch (err: any) {
 		console.log(err)
