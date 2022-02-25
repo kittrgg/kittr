@@ -34,16 +34,11 @@ jobs:
 
       - name: Run build
         env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          NEXT_PUBLIC_API_PATH: ${{ secrets.NEXT_PUBLIC_API_PATH }}
-          NEXT_PUBLIC_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
-          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
-          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
-          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
-          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+          SENTRY_DSN: ${{secrets.SENTRY_DSN}}
+          DB_CONNECTION_STRING: ${{secrets.DB_CONNECTION_STRING}}
+          TWITCH_CLIENT_ID: ${{secrets.TWITCH_CLIENT_ID}}
+          TWITCH_SECRET: ${{secrets.TWITCH_SECRET}}
         run: npm run prod:build
 
       - name: Build and push api image
