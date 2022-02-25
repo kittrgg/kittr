@@ -49,8 +49,6 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<
 
 			const data = await newUser.save()
 
-			console.log(data)
-
 			return res.status(200).json(data)
 		}
 	} catch (error) {
