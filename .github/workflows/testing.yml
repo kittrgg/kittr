@@ -47,7 +47,7 @@ jobs:
           DB_CONNECTION_STRING: ${{secrets.CI_DB_CONNECTION_STRING}}
           TWITCH_CLIENT_ID: ${{secrets.CI_TWITCH_CLIENT_ID}}
           TWITCH_SECRET: ${{secrets.CI_TWITCH_SECRET}}
-        run: npm run prod:build
+        run: npm run prod:build --token="${{ secrets.TURBO_SERVER_TOKEN }}" --team="kittr"
 
       - name: Run unit tests
         run: npm run test
@@ -90,7 +90,7 @@ jobs:
           username: ${{secrets.DOKKU_SSH_USER}}
           key: "${{ secrets.DOKKU_SSH_PRIVATE_KEY }}"
           script: |
-            dokku git:from-image test-api ghcr.io/${{github.repository}}/api:test-${{github.sha}}
+            dokku git:from-image stage-api ghcr.io/${{github.repository}}/api:test-${{github.sha}}
 
       - name: Trigger web testing deployment to Digital Ocean
         uses: appleboy/ssh-action@master
@@ -99,7 +99,7 @@ jobs:
           username: ${{secrets.DOKKU_SSH_USER}}
           key: "${{ secrets.DOKKU_SSH_PRIVATE_KEY }}"
           script: |
-            dokku git:from-image test-web ghcr.io/${{github.repository}}/web:test-${{github.sha}}
+            dokku git:from-image stage-web ghcr.io/${{github.repository}}/web:test-${{github.sha}}
 
   e2e:
     concurrency:
