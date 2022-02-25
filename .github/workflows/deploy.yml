@@ -38,7 +38,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Turborepo local server
+      - name: Turborepo remote caching server
         uses: felixmosh/turborepo-gh-artifacts@v1
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
