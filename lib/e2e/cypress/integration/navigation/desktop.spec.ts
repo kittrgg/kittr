@@ -52,9 +52,9 @@ describe("Desktop Nav (Authentication)", () => {
 	//   cy.get("[data-cy=desktop-sign-up-link]").should("not.exist");
 	// });
 
-	it("Navigates to Dashboard (Authed)", () => {
-		cy.visit("/")
-		cy.get("[data-cy=desktop-dashboard-link-authed]").click()
-		cy.location("pathname").should("include", "/dashboard")
-	})
+	// it("Navigates to Dashboard (Authed)", () => {
+	// 	cy.visit("/")
+	// 	cy.get("[data-cy=desktop-dashboard-link-authed]").click()
+	// 	cy.location("pathname").should("include", "/dashboard")
+	// })
 })

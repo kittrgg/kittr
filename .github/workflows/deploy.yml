@@ -46,8 +46,6 @@ jobs:
 
       - name: Run build
         env:
-          NEXT_PUBLIC_ENABLE_SEEDING: true
-          NEXT_PUBLIC_ENVIRONMENT: ${{secrets.NODE_ENV}}
           DB_CONNECTION_STRING: ${{secrets.DB_CONNECTION_STRING}}
           NEXT_PUBLIC_GOOGLE_ANALYTICS: ${{secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS}}
           NEXT_PUBLIC_API_KEY: ${{secrets.NEXT_PUBLIC_API_KEY}}
