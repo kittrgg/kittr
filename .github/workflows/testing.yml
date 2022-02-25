@@ -9,6 +9,9 @@ on:
 
 jobs:
   build-and-unit-test:
+    concurrency:
+      group: ${{ github.ref }}
+      cancel-in-progress: true
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -98,7 +101,6 @@ jobs:
           SUBSCRIPTION_PRICE_ID: ${{secrets.CI_SUBSCRIPTION_PRICE_ID}}
           TWITCH_CLIENT_ID: ${{secrets.CI_TWITCH_CLIENT_ID}}
           TWITCH_SECRET: ${{secrets.CI_TWITCH_SECRET}}
-
         run: npm run prod:build
 
       - name: Run unit tests
@@ -128,6 +130,9 @@ jobs:
 
 
   deploy:
+    concurrency:
+      group: ${{ github.ref }}
+      cancel-in-progress: true
     needs: build-and-unit-test
     runs-on: ubuntu-latest
     steps:
@@ -152,6 +157,9 @@ jobs:
             dokku git:from-image test-web ghcr.io/${{github.repository}}/web:test-${{github.sha}}
 
   e2e:
+    concurrency:
+      group: ${{ github.ref }}
+      cancel-in-progress: true
     needs: deploy
     runs-on: ubuntu-latest
     steps:
