@@ -42,7 +42,8 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 })
 
 handler.delete(async (req: NextApiRequest, res: NextApiResponse) => {
-	if (process.env.NEXT_PUBLIC_ENABLE_SEEDING === "test") {
+	if (!process.env.NEXT_PUBLIC_ENABLE_SEEDING) {
+		// Does something go here?
 	} else {
 		return res.status(200).json({ message: "Inappropriate environment" })
 	}
