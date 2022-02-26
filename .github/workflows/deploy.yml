@@ -64,7 +64,7 @@ jobs:
           NEXT_PUBLIC_SENTRY_DSN: ${{secrets.SENTRY_DSN}}
           SENTRY_AUTH_TOKEN: ${{secrets.SENTRY_AUTH_TOKEN}}
           SENTRY_LOG_LEVEL: debug
-        run: npm run build --scope=\"api\" --scope=\"web\" --include-dependencies --token="${{ secrets.TURBO_SERVER_TOKEN }}" --team="kittr"
+        run: npm run build --scope=\"api\" --scope=\"web\" --include-dependencies"
 
       - name: Build and push api image
         uses: docker/build-push-action@v2

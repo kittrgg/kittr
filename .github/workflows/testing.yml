@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - develop
-      # TODO: Delete this line once we are happy with the new pipeline.
-      - turbo
 
 jobs:
   build-and-unit-test:
