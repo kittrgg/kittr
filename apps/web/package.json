@@ -17,13 +17,13 @@
 	"dependencies": {
 		"@juggle/resize-observer": "3.3.1",
 		"@reduxjs/toolkit": "1.7.2",
-		"@sentry/nextjs": "^6.17.6",
+		"@sentry/nextjs": "^6.18.0",
 		"@sentry/node": "^6.17.6",
 		"@stripe/react-stripe-js": "1.7.0",
-		"@stripe/stripe-js": "1.22.0",
+		"@stripe/stripe-js": "^1.23.0",
 		"browser-image-compression": "1.0.17",
 		"date-fns": "2.28.0",
-		"firebase": "9.6.6",
+		"firebase": "^9.6.7",
 		"firebase-admin": "10.0.2",
 		"firebase-tools": "^10.2.1",
 		"jsonwebtoken": "8.5.1",
@@ -57,10 +57,10 @@
 		"@types/styled-components": "^5.1.23",
 		"@types/uuid": "8.3.4",
 		"@types/validator": "13.7.1",
-		"babel-plugin-styled-components": "^2.0.3",
+		"babel-plugin-styled-components": "^2.0.6",
 		"dotenv": "16.0.0",
-		"eslint": "8.8.0",
-		"eslint-config-next": "12.0.10",
+		"eslint": "^8.10.0",
+		"eslint-config-next": "^12.1.0",
 		"typescript": "4.5.5"
 	}
 }
