@@ -11,13 +11,11 @@ handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<C
 	const { _id, boolean } = JSON.parse(req.body)
 
 	try {
-		console.time("ytAutoplayUpdate")
 		const data = await Channel.findByIdAndUpdate(
 			{ _id: sanitize(_id) },
 			{ $set: { "meta.youtubeAutoplay": sanitize(boolean) } },
 			{ new: true }
 		)
-		console.time("ytAutoplayUpdate")
 
 		return res.status(200).json(data)
 	} catch (error) {
