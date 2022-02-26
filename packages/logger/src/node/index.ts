@@ -1,12 +1,35 @@
 import * as Sentry from "@sentry/node"
-// Send log to Sentry (or other) as an error
-// Send log to Sentry (or other) as a warning
-// Send log to Sentry (or other) as info
-// Option for console.log/error? Or perhaps make it so that we get console logs in dev but not elsewhere?
+import { Severity } from "@sentry/types"
 
-export const log = (
-	message: string,
-	level: Sentry.Severity = Sentry.Severity.Info
-) => {
+/** Send exception to the error logger. */
+export const logError = (message: string, withConsole?: boolean) => {
+	Sentry.captureException(new Error(message))
+	if (withConsole) {
+		console.error(message)
+	}
+}
+
+export const logWarning = (warning: string, withConsole?: boolean) => {
+	Sentry.captureMessage(warning, "warning" as Severity)
+	if (withConsole) {
+		console.warn(warning)
+	}
+}
+
+export const logInfo = (info: string, withConsole?: boolean) => {
+	Sentry.captureMessage(info, "info" as Severity)
+	if (withConsole) {
+		console.info(info)
+	}
+}
+
+export const logDebug = (debugMessage: string, withConsole?: boolean) => {
+	Sentry.captureMessage(debugMessage, "debug" as Severity)
+	if (withConsole) {
+		console.warn(debugMessage)
+	}
+}
+
+export const consoleLog = (message: string) => {
 	console.log(message)
 }
