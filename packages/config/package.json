@@ -20,8 +20,8 @@
 		"eslint-plugin-only-warn": "^1.0.3"
 	},
 	"dependencies": {
-		"@kittr/logger": "*",
-		"@kittr/types": "*",
-		"@kittr/ui": "*"
+		"@kittr/logger": "file:packages/logger",
+		"@kittr/types": "file:packages/types",
+		"@kittr/ui": "file:packages/ui"
 	}
 }

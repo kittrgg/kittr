@@ -2,8 +2,8 @@
 	"extends": "@kittr/config/tsconfig/base.json",
 	"compilerOptions": {
 		"outDir": "dist/src",
-		"baseUrl": "./src",
 		"module": "commonjs",
+		"baseUrl": "./src",
 		"paths": {
 			"@Jobs/*": ["./jobs/*"],
 			"@Services/*": ["./services/*"],

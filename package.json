@@ -45,10 +45,6 @@
 	},
 	"packageManager": "npm@8.1.4",
 	"dependencies": {
-		"@kittr/config": "*",
-		"@kittr/logger": "*",
-		"@kittr/ui": "*",
-		"@kittr/types": "*",
 		"cross-env": "^7.0.3"
 	},
 	"lint-staged": {

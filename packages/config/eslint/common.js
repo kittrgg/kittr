@@ -17,6 +17,8 @@ module.exports = {
 		"import/prefer-default-export": 0,
 		"import/no-extraneous-dependencies": 0,
 		"operator-linebreak": 0,
+		"implicit-arrow-linebreak": 0,
+		"function-paren-newline": 0,
 		"quote-props": 0,
 		"linebreak-style": 0,
 		"object-curly-newline": 0
