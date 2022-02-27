@@ -1,5 +1,10 @@
-/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
+const buildModuleNameMapper =
+	require("@kittr/config/jest/buildModuleNameMapper").buildModuleNameMapper
+
+const srcPath = "./src"
+const tsConfig = require("./tsconfig.json")
+
 module.exports = {
-  preset: 'ts-jest',
-  testEnvironment: 'node',
-};
+	...require("@kittr/config/jest/common"),
+	moduleNameMapper: buildModuleNameMapper(srcPath, tsConfig)
+}

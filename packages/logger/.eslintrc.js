@@ -1,1 +1,1 @@
-module.exports = require("@kittr/config/eslint/common.js")
+module.exports = require("@kittr/config/eslint/common")

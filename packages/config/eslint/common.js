@@ -18,7 +18,8 @@ module.exports = {
 		"import/no-extraneous-dependencies": 0,
 		"operator-linebreak": 0,
 		"quote-props": 0,
-		"linebreak-style": 0
+		"linebreak-style": 0,
+		"object-curly-newline": 0
 	},
 	ignorePatterns: [
 		"**/*.js",
