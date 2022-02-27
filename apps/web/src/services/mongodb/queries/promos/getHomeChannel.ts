@@ -1,5 +1,5 @@
 import { Promo } from "@Services/mongodb/models/Promo"
-import { nextLogger } from "@kittr/logger"
+import { logError } from "@kittr/logger/nextjs"
 
 export const getHomeChannelPromo = async () => {
 	const rightNow = new Date().getTime()
@@ -23,7 +23,7 @@ export const getHomeChannelPromo = async () => {
 	}
 
 	if (result.length > 1) {
-		nextLogger.logError("Multiple home channel promos found")
+		logError("Multiple home channel promos found")
 	}
 
 	return result[0]

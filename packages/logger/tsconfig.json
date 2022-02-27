@@ -3,7 +3,7 @@
 	"compilerOptions": {
 		"lib": ["ES2015"],
 		"module": "CommonJS",
-		"outDir": "./dist",
+		"outDir": "./",
 		"rootDir": "./src",
 		"incremental": true,
 		"tsBuildInfoFile": "./.tsbuildinfo"

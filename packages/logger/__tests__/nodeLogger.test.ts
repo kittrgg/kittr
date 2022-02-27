@@ -1,12 +1,12 @@
-import * as Sentry from "@sentry/nextjs"
-import { consoleLog, logError, logWarning, logInfo, logDebug } from "./index"
+import * as Sentry from "@sentry/node"
+import { consoleLog, logError, logWarning, logInfo, logDebug } from "../node"
 
-jest.mock("@sentry/nextjs", () => ({
+jest.mock("@sentry/node", () => ({
 	captureException: jest.fn(),
 	captureMessage: jest.fn()
 }))
 
-describe("Next logger", () => {
+describe("Node logger", () => {
 	it("logError", () => {
 		jest.spyOn(console, "error")
 		logError("error")
@@ -51,20 +51,20 @@ describe("Next logger", () => {
 	it("logDebug", () => {
 		jest.spyOn(console, "warn")
 		logDebug("debug")
-		expect(console.info).toBeCalledTimes(0)
+		expect(console.warn).toBeCalledTimes(0)
 		expect(Sentry.captureMessage).toHaveBeenCalledTimes(1)
 	})
 
 	it("logDebug with console.info", () => {
 		jest.spyOn(console, "warn")
 		logDebug("debug", true)
-		expect(console.info).toBeCalledTimes(1)
+		expect(console.warn).toBeCalledTimes(1)
 		expect(Sentry.captureMessage).toHaveBeenCalledTimes(1)
 	})
 
 	it("consoleLog", () => {
 		jest.spyOn(console, "log")
-		consoleLog("hello")
+		consoleLog("This is a log")
 		expect(console.log).toBeCalledTimes(1)
 	})
 })
