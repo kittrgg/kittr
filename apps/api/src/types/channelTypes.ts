@@ -1,5 +1,6 @@
 import { IGame } from "./gameTypes"
 import { IKit, IKitRaw } from "./kitsTypes"
+import { IManager } from "./managerTypes"
 
 interface IChannelLinks {
 	twitch?: string
@@ -60,7 +61,7 @@ interface IOverlayData {
 	secondaryKit?: IKit
 }
 
-interface IOverlay {
+export interface IOverlay {
 	isOverlayVisible?: "off" | "on"
 	backgroundColorPrimary: string
 	backgroundColorSecondary: string
@@ -98,7 +99,7 @@ export interface IChannel {
 	__v: number
 }
 
-interface IRawChannel {
+export interface IRawChannel {
 	/** ObjectId from database */
 	_id: string
 	/** Managers who are allowed to interact with this channel */

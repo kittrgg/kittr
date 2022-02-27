@@ -1,12 +1,13 @@
 {
-	"extends": "@kittr/config/tsconfig/react-library.json",
+	"extends": "@kittr/config/tsconfig/nextjs.json",
 	"compilerOptions": {
+		"tsBuildInfoFile": ".tsbuildinfo",
 		"baseUrl": "./src",
 		"paths": {
 			"@test-utils": ["test-utils"],
 			"@Styles/*": ["styles/*"]
 		}
 	},
-	"include": ["."],
+	"include": ["./src"],
 	"exclude": ["dist", "build", "node_modules"]
 }

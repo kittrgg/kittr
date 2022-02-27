@@ -7,10 +7,6 @@ jest.mock("@sentry/nextjs", () => ({
 }))
 
 describe("Next logger", () => {
-	beforeEach(() => {
-		jest.clearAllMocks()
-	})
-
 	it("logError", () => {
 		jest.spyOn(console, "error")
 		logError("error")

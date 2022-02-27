@@ -1,7 +1,7 @@
 {
 	"name": "@kittr/logger",
 	"version": "0.0.0",
-	"main": "./dist/index.js",
+	"main": "./dist/src/index.js",
 	"types": "./dist/index.d.ts",
 	"source": "./src/index.ts",
 	"private": true,

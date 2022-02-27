@@ -20,6 +20,7 @@
 		"@Utils": "dist/src/utils"
 	},
 	"dependencies": {
+		"@kittr/logger": "*",
 		"@google-analytics/data": "2.8.0",
 		"@sentry/node": "^6.18.0",
 		"axios": "^0.26.0",

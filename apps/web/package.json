@@ -15,7 +15,9 @@
 		"ci:test": "jest .*\\.unit\\.test\\.ts"
 	},
 	"dependencies": {
-		"@kittr/config": "0.1.1",
+		"@kittr/config": "*",
+		"@kittr/types": "*",
+		"@kittr/ui": "*",
 		"@juggle/resize-observer": "3.3.1",
 		"@reduxjs/toolkit": "1.7.2",
 		"@sentry/nextjs": "^6.18.0",
@@ -28,7 +30,6 @@
 		"firebase-admin": "10.0.2",
 		"firebase-tools": "^10.2.1",
 		"jsonwebtoken": "8.5.1",
-		"kittr": "file:..",
 		"micro": "9.3.4",
 		"mongoose": "^6.2.3",
 		"next": "^12.1.0",
@@ -45,8 +46,6 @@
 		"socket.io-client": "4.4.1",
 		"stripe": "^8.205.0",
 		"styled-components": "5.3.3",
-		"types": "*",
-		"ui": "*",
 		"uuid": "8.3.2",
 		"validator": "13.7.0"
 	},

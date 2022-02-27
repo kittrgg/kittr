@@ -1,11 +1,11 @@
-interface IForSetupComparison {
+export interface IForSetupComparison {
 	/** Stringified ObjectId of the Kit Base for comparison */
 	_id: string
 	/** All of the user Kits for this Base to show to the front-end for comparison */
 	matches: Array<string[]>
 }
 
-interface IRatioOfChannelsWithBase {
+export interface IRatioOfChannelsWithBase {
 	/** Stringified ObjectId of the Kit Base in question */
 	_id: string
 	/** Count for how many bases we have found for the given Kit Base. If a channel has multiple of the same Kit Base, it is only counted once. */
@@ -16,7 +16,7 @@ interface IRatioOfChannelsWithBase {
 	ratio: number
 }
 
-interface IRatioOfChannelsWithBaseFeatured {
+export interface IRatioOfChannelsWithBaseFeatured {
 	/** Stringified ObjectId of the given Kit Base */
 	_id: string
 	/** Count for how many bases we have found for the given Kit Base that were featured. If a channel has multiple of the same Kit Base featured, it is only counted once. */
@@ -27,7 +27,7 @@ interface IRatioOfChannelsWithBaseFeatured {
 	ratio: number
 }
 
-interface IPopularityRates {
+export interface IPopularityRates {
 	forSetupComparison: Array<IForSetupComparison>
 	ratioOfChannelsWithBase: Array<IRatioOfChannelsWithBase>
 	ratioOfChannelsWithBaseFeatured: Array<IRatioOfChannelsWithBaseFeatured>

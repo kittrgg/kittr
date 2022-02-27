@@ -1,11 +1,11 @@
-interface IManager {
+export interface IManager {
 	/** UID of the user from Firebase */
 	uid: string
 	/** kittr management role for this channel */
 	role: "Owner" | "Administrator" | "Editor"
 }
 
-interface IManagerData {
+export interface IManagerData {
 	/** UID of the user from Firebase */
 	uid: string
 	/** User's display name */

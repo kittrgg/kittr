@@ -6,8 +6,7 @@
 		"eslint/common.js",
 		"eslint/next.js",
 		"tsconfig/base.json",
-		"tsconfig/nextjs.json",
-		"tsconfig/react-library.json"
+		"tsconfig/nextjs.json"
 	],
 	"scripts": {
 		"clean": "rm -rf node_modules"

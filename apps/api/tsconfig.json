@@ -1,18 +1,9 @@
 {
+	"extends": "@kittr/config/tsconfig/base.json",
 	"compilerOptions": {
 		"outDir": "dist/src",
 		"baseUrl": "./src",
 		"module": "commonjs",
-		"target": "es2015",
-		"lib": ["es2017"],
-		"strictNullChecks": true,
-		"noImplicitAny": false,
-		"preserveConstEnums": true,
-		"removeComments": true,
-		"forceConsistentCasingInFileNames": true,
-		"skipLibCheck": true,
-		"esModuleInterop": true,
-		"incremental": true,
 		"paths": {
 			"@Jobs/*": ["./jobs/*"],
 			"@Services/*": ["./services/*"],
@@ -20,14 +11,5 @@
 			"@Utils/*": ["./utils/*"]
 		}
 	},
-	"include": ["src/"],
-	"exclude": [
-		"node_modules",
-		".turbo",
-		"coverage",
-		"build",
-		"**/*.test.ts",
-		"**/*.spec.ts",
-		"**/*.d.ts"
-	]
+	"include": ["./src"]
 }

@@ -4,7 +4,9 @@
 		"lib": ["ES2015"],
 		"module": "CommonJS",
 		"outDir": "./dist",
-		"rootDir": "./src"
+		"rootDir": "./src",
+		"incremental": true,
+		"tsBuildInfoFile": "./.tsbuildinfo"
 	},
 	"exclude": [
 		"node_modules",
