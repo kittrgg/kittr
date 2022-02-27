@@ -27,7 +27,6 @@
 	"dependencies": {
 		"@kittr/config": "file:packages/config",
 		"@kittr/types": "file:packages/types",
-		"@kittr/ui": "file:packages/ui",
 		"@sentry/nextjs": "^6.17.9",
 		"@sentry/node": "^6.17.9"
 	}
