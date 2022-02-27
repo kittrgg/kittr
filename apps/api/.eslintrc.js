@@ -1,3 +1,3 @@
 module.exports = {
-	...require("config/eslint-preset.js")
+	...require("@kittr/config/eslint/common.js")
 }

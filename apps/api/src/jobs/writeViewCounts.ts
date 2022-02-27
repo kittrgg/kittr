@@ -7,7 +7,7 @@ const analyticsDataClient = new BetaAnalyticsDataClient({
 })
 
 const analyticsReportSchemas = {
-	property: `properties/276805067`,
+	property: "properties/276805067",
 	metrics: [
 		{
 			name: "screenPageViews"
@@ -20,7 +20,9 @@ const analyticsReportSchemas = {
 	]
 }
 
-const getStreamerViewCounts = async (dateRange: StreamerViewCounts): Promise<Record<string, number>> => {
+const getStreamerViewCounts = async (
+	dateRange: StreamerViewCounts
+): Promise<Record<string, number>> => {
 	console.log("Trying to streamer view counts...")
 
 	try {
@@ -54,7 +56,8 @@ const getStreamerViewCounts = async (dateRange: StreamerViewCounts): Promise<Rec
 			 *
 			 * returns HusKerrs
 			 */
-			const streamer = row.dimensionValues?.[0].value?.split("/").slice(0, 3)[2] ?? ""
+			const streamer =
+				row.dimensionValues?.[0].value?.split("/").slice(0, 3)[2] ?? ""
 
 			// If streamer counts already exist in object, add new counts to existing
 			if (acc[streamer]) {
@@ -77,16 +80,22 @@ export const writeViewCounts = async () => {
 	monthAgo.setMonth(now.getMonth() - 1)
 
 	const streamerData = await getStreamerViewCounts({
-		startDate: `${monthAgo.getUTCFullYear()}-${monthAgo.getUTCMonth() + 1}-${monthAgo.getUTCDate()}`,
-		endDate: `${now.getUTCFullYear()}-${now.getUTCMonth() + 1}-${now.getUTCDate()}`
+		startDate: `${monthAgo.getUTCFullYear()}-${
+			monthAgo.getUTCMonth() + 1
+		}-${monthAgo.getUTCDate()}`,
+		endDate: `${now.getUTCFullYear()}-${
+			now.getUTCMonth() + 1
+		}-${now.getUTCDate()}`
 	})
 
-	const bulkWrites = Object.entries(streamerData).map(([urlSafeName, viewCount]) => ({
-		updateOne: {
-			filter: { urlSafeName: urlSafeName },
-			update: { $set: { viewCount: viewCount } }
-		}
-	}))
+	const bulkWrites = Object.entries(streamerData).map(
+		([urlSafeName, viewCount]) => ({
+			updateOne: {
+				filter: { urlSafeName },
+				update: { $set: { viewCount } }
+			}
+		})
+	)
 	console.log("Starting bulk write...")
 	await Player.bulkWrite([
 		...bulkWrites,

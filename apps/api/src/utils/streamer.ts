@@ -39,16 +39,10 @@ const allSetupsForComparisonQuery = async () => {
 		}
 	])
 
-	const serialized = result.map((player: { _id: string; matches: Array<Array<mongoose.Types.ObjectId>> }) => {
-		return {
-			...player,
-			matches: player.matches.map((match) => {
-				return match.map((option) => {
-					return option.toString()
-				})
-			})
-		}
-	})
+	const serialized = result.map((player: { _id: string; matches: Array<Array<mongoose.Types.ObjectId>> }) => ({
+		...player,
+		matches: player.matches.map((match) => match.map((option) => option.toString()))
+	}))
 
 	return { serialized }
 }

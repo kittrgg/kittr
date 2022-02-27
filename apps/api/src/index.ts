@@ -1,17 +1,9 @@
 import dotenv from "dotenv"
-dotenv.config({
-	path: process.env.NODE_ENV === "production" ? ".env" : ".env.development"
-})
 
 // This needs to happen BEFORE any absolute imports
 import moduleAlias from "module-alias"
 
-moduleAlias.addAliases({
-	"@Jobs": __dirname + "/jobs",
-	"@Services": __dirname + "/services",
-	"@Types": __dirname + "/types",
-	"@Utils": __dirname + "/utils"
-})
+// var butt = "fat"
 
 import * as Sentry from "@sentry/node"
 import { generateKitStats } from "@Jobs/createKitStatsAsInterval"
@@ -24,6 +16,17 @@ import express from "express"
 import { createServer } from "http"
 import mongoose from "mongoose"
 import { Server } from "socket.io"
+
+dotenv.config({
+	path: process.env.NODE_ENV === "production" ? ".env" : ".env.development"
+})
+
+moduleAlias.addAliases({
+	"@Jobs": `${__dirname}/jobs`,
+	"@Services": `${__dirname}/services`,
+	"@Types": `${__dirname}/types`,
+	"@Utils": `${__dirname}/utils`
+})
 
 const app = express()
 app.use(cors())
@@ -44,7 +47,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use("/twitch", twitch)
 
-console.log(`Connecting to MongoDB...`)
+console.log("Connecting to MongoDB...")
 mongoose
 	.connect(process.env.DB_CONNECTION_STRING as string, {
 		authSource: "admin"
@@ -108,11 +111,11 @@ mongoose
 
 		io.on("connection", async (socket) => {
 			console.log(`Socket connected from IP: ${socket.handshake.address}`)
-			openSockets = openSockets + 1
+			openSockets += 1
 			console.log("Active Socket Count:", openSockets)
 
 			// Triggers refetches for both the dashboard and overlay
-			socket.on(`dashboardChangeReporter`, (_id: string) => {
+			socket.on("dashboardChangeReporter", (_id: string) => {
 				io.emit(`dashboard=${_id}`, "Trigger refetch!")
 			})
 
@@ -126,16 +129,14 @@ mongoose
 
 			socket.on("disconnect", () => {
 				console.log(`Socket disconnected from IP: ${socket.handshake.address}`)
-				openSockets = openSockets - 1
+				openSockets -= 1
 				console.log("Active Socket Count:", openSockets)
 			})
 		})
 
 		app.use(Sentry.Handlers.errorHandler())
 
-		httpServer.listen(process.env.PORT || 5000, () =>
-			console.log(`Server is running on port: ${process.env.PORT || 5000}...`)
-		)
+		httpServer.listen(process.env.PORT || 5000, () => console.log(`Server is running on port: ${process.env.PORT || 5000}...`))
 	})
 	.catch((err) => {
 		console.log("Error connecting to MongoDB:")

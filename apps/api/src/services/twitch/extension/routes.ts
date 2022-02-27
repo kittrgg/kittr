@@ -2,6 +2,7 @@ import axios from "axios"
 import express from "express"
 import jwt from "jsonwebtoken"
 import config from "./accessTokenGenerator"
+
 const router = express.Router()
 
 /*
@@ -9,14 +10,16 @@ const router = express.Router()
 		If this server only does extension traffic, then all good to global.
 */
 router.use("/:route?", (req: any, res, next) => {
-	if (req.headers["authorization"]) {
-		const [type, auth] = req.headers["authorization"].split(" ")
-		if (type == "Bearer") {
+	if (req.headers.authorization) {
+		const [type, auth] = req.headers.authorization.split(" ")
+		if (type === "Bearer") {
 			jwt.verify(auth, config.secret, (err: any, decoded: any) => {
 				if (err) {
 					console.log("JWT Error", err)
 
-					res.status(401).json({ error: true, message: "Invalid authorization" })
+					res
+						.status(401)
+						.json({ error: true, message: "Invalid authorization" })
 					return
 				}
 
@@ -28,9 +31,13 @@ router.use("/:route?", (req: any, res, next) => {
 			return
 		}
 
-		res.status(401).json({ error: true, message: "Invalid authorization header" })
+		res
+			.status(401)
+			.json({ error: true, message: "Invalid authorization header" })
 	} else {
-		res.status(401).json({ error: true, message: "Missing authorization header" })
+		res
+			.status(401)
+			.json({ error: true, message: "Missing authorization header" })
 	}
 })
 
@@ -49,7 +56,7 @@ router
 				headers: {
 					"Content-Type": "application/json",
 					"client-id": process.env.TWITCH_CLIENT_ID,
-					"authorization": "Bearer " + config.api_token
+					"authorization": `Bearer ${config.api_token}`
 				} as any
 			})
 				.then((resp: any) => {
@@ -70,19 +77,27 @@ router
 							}
 						})
 					} else {
-						res.status(404).json({ error: true, message: "Channel not found", resp })
+						res
+							.status(404)
+							.json({ error: true, message: "Channel not found", resp })
 					}
 				})
 				.catch((err: any) => {
 					if (err.response.statusCode) {
-						console.error("Twitch API streams Failed", err.response.statusCode, err.response.body)
+						console.error(
+							"Twitch API streams Failed",
+							err.response.statusCode,
+							err.response.body
+						)
 					} else {
 						console.error("Error", err)
 					}
 					res.status(500).json({ error: true, message: "Twitch API failed" })
 				})
 		} else {
-			res.status(401).json({ error: true, message: "Not Logged into Extension" })
+			res
+				.status(401)
+				.json({ error: true, message: "Not Logged into Extension" })
 		}
 	})
 

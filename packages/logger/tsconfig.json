@@ -1,5 +1,5 @@
 {
-	"extends": "tsconfig/base.json",
+	"extends": "@kittr/config/tsconfig/base.json",
 	"compilerOptions": {
 		"lib": ["ES2015"],
 		"module": "CommonJS",
