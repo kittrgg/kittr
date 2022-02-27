@@ -2,5 +2,10 @@
 	"name": "@kittr/types",
 	"version": "0.1.1",
 	"private": true,
-	"main": "index.d.ts"
+	"main": "index.d.ts",
+	"dependencies": {
+		"@kittr/config": "*",
+		"@kittr/logger": "*",
+		"@kittr/ui": "*"
+	}
 }

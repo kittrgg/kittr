@@ -15,10 +15,11 @@
 		"ci:test": "jest .*\\.unit\\.test\\.ts"
 	},
 	"dependencies": {
-		"@kittr/config": "*",
-		"@kittr/types": "*",
-		"@kittr/ui": "*",
 		"@juggle/resize-observer": "3.3.1",
+		"@kittr/config": "file:packages/config",
+		"@kittr/logger": "file:packages/logger",
+		"@kittr/types": "file:packages/types",
+		"@kittr/ui": "file:packages/ui",
 		"@reduxjs/toolkit": "1.7.2",
 		"@sentry/nextjs": "^6.18.0",
 		"@sentry/node": "^6.17.6",
