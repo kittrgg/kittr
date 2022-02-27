@@ -1,10 +1,5 @@
 import dotenv from "dotenv"
 
-// This needs to happen BEFORE any absolute imports
-import moduleAlias from "module-alias"
-
-// var butt = "fat"
-
 import * as Sentry from "@sentry/node"
 import { generateKitStats } from "@Jobs/createKitStatsAsInterval"
 import { writeViewCounts } from "@Jobs/writeViewCounts"
@@ -19,13 +14,6 @@ import { Server } from "socket.io"
 
 dotenv.config({
 	path: process.env.NODE_ENV === "production" ? ".env" : ".env.development"
-})
-
-moduleAlias.addAliases({
-	"@Jobs": `${__dirname}/jobs`,
-	"@Services": `${__dirname}/services`,
-	"@Types": `${__dirname}/types`,
-	"@Utils": `${__dirname}/utils`
 })
 
 const app = express()
