@@ -1,4 +1,6 @@
 import { Channel } from "@Services/mongodb/models"
+import { IChannel } from "@kittr/types/channel"
+import { IGame } from "@kittr/types/game"
 
 interface IFunc {
 	/**

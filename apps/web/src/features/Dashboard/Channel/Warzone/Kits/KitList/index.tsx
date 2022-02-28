@@ -1,3 +1,4 @@
+import { IKit, IKitBase, IKitRaw } from "@kittr/types/kits"
 import colors from "@Colors"
 import { Button } from "@Components/shared"
 import { createNewKit } from "@Redux/slices/dashboard"
@@ -26,7 +27,7 @@ const KitList = ({ ...props }) => {
 		)
 	}
 
-	const createKitObject = (kit: IKit) => {
+	const createKitObject = (kit: IKit | IKitRaw) => {
 		return {
 			...kit,
 			base: kitBases!.find((allBases: IKitBase) => allBases._id === kit.baseId)!
@@ -40,14 +41,14 @@ const KitList = ({ ...props }) => {
 					.map(createKitObject)
 					.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
 					.map((kit) => (
-						<KitButton key={kit._id} favorite kit={kit} />
+						<KitButton key={kit._id} favorite kit={kit as IKit} />
 					))}
 				{kits && filterKitsByFeature(kits).length > 0 && <hr style={{ width: "88%", borderColor: colors.lightest }} />}
 				{kits &&
 					filterKitsByFeature(kits, false)
 						.map(createKitObject)
 						.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
-						.map((kit) => <KitButton key={kit._id} kit={kit} />)}
+						.map((kit) => <KitButton key={kit._id} kit={kit as IKit} />)}
 			</Container>
 			<ButtonWrapper>
 				<Button

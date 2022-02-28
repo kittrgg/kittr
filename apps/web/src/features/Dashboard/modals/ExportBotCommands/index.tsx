@@ -1,4 +1,6 @@
 import colors from "@Colors"
+import { TCommandMethod } from "@kittr/types/types"
+import { IKitRaw } from "@kittr/types/kits"
 import { Button, Modal } from "@Components/shared"
 import { useAllKitBases } from "@Hooks/api/useAllKitBases"
 import { useAllKitOptions } from "@Hooks/api/useAllKitOptions"
@@ -30,7 +32,7 @@ const ExportBotCommands = ({ ...props }) => {
 	const { data: allKitBases } = useAllKitBases()
 	const { data: allKitOptions } = useAllKitOptions()
 
-	const createKitObject = (kit: IKit) => {
+	const createKitObject = (kit: IKitRaw) => {
 		return {
 			...kit,
 			base: allKitBases!.find((allBases) => allBases._id === kit.baseId)!

@@ -2,6 +2,7 @@ import { useState } from "react"
 import styled from "styled-components"
 
 import colors from "@Colors"
+import { IManagerData } from "@kittr/types"
 import { header2, montserrat } from "@Styles/typography"
 import { getToken } from "@Services/firebase/auth/getToken"
 import { useDispatch } from "@Redux/store"

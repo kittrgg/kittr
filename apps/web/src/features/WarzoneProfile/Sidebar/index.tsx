@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 
+import { IKit } from "@kittr/types"
 import * as Styled from "./styles"
 import colors from "@Colors"
 import { filterKitsByFeature } from "@Utils/helpers/filterKitsByFeature"
@@ -46,7 +47,7 @@ const Sidebar = ({ ...props }) => {
 	)
 
 	const featuredKits = filterKitsByFeature(kits)
-	const featuredFilter = sortKits(featuredKits)
+	const featuredFilter = sortKits(featuredKits as IKit[])
 	const uniqueListItems = sortForUniqueKitName(featuredFilter)
 
 	const restOfKits = kits.filter((elem) => !elem.userData.featured)
@@ -68,7 +69,7 @@ const Sidebar = ({ ...props }) => {
 					return (
 						<Item
 							key={baseName}
-							kits={filterKitsByFeature(kits)}
+							kits={filterKitsByFeature(kits) as IKit[]}
 							baseName={baseName}
 							featured
 							setFilterQuery={setFilterQuery}

@@ -1,3 +1,5 @@
+import { NextServerPayload } from "@kittr/types/types"
+import { IManager } from "@kittr/types/manager"
 import type { NextApiRequest, NextApiResponse } from "next"
 import { createHandler } from "@Utils/middlewares/createHandler"
 import { userAuth } from "@Utils/middlewares/auth"

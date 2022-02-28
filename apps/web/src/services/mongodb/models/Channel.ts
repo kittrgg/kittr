@@ -1,4 +1,5 @@
 import mongoose, { Schema, Types, Model } from "mongoose"
+import { IKit } from "@kittr/types/kits"
 
 // This is the only place where channels are referred to as channels.
 // The front-end calls these entities "channels."

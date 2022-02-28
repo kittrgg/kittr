@@ -1,3 +1,6 @@
+import { IChannel } from "@kittr/types/channel"
+import { ITwitchLiveChannels } from "@kittr/types/twitch"
+
 import { Channel } from "@Services/mongodb/models"
 import { headers } from "@Services/twitch/utils/auth"
 import { serializeChannels } from "@Services/mongodb/utils/serializeChannels"

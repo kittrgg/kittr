@@ -1,6 +1,7 @@
 import { useState, useEffect, Dispatch, SetStateAction } from "react"
 import styled, { ThemeProvider } from "styled-components"
 
+import { IKit } from "@kittr/types"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
 import { asyncDelay } from "@Utils/helpers/asyncDelay"

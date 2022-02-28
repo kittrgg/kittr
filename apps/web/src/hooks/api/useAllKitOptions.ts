@@ -1,3 +1,4 @@
+import { IKitOption } from "@kittr/types/kits"
 import { useQuery } from "react-query"
 import fetch from "@Fetch"
 

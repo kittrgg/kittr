@@ -1,3 +1,4 @@
+import { IKit } from "@kittr/types"
 import { useState, useEffect, useRef } from "react"
 import ScrollContainer from "react-indiana-drag-scroll"
 import * as Styled from "./style"

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 
+import { IKitOption, IKitOptionRaw } from "@kittr/types"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
 import * as Styled from "./style"
 import { useOptionsByKitBase } from "@Hooks/api/useOptionsbyKitBase"

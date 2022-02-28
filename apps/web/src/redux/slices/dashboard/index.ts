@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { DashboardModals, ReduxModalState } from "@kittr/types/types"
+import { IKitUpdates, IKitBase } from "@kittr/types/kits"
 
 export const dashboardSlice = createSlice({
 	name: "dashboard",

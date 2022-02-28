@@ -1,5 +1,6 @@
 import styled from "styled-components"
 
+import { IGame } from "@kittr/types"
 import { header2 } from "@Styles/typography"
 import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
 

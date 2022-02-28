@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import styled from "styled-components"
 
+import { NextClientEndpointError } from "@kittr/types"
 import colors from "@Colors"
 import { uploadWithHandlers } from "@Services/firebase/storage/uploadWithHandlers"
 import { download } from "@Services/firebase/storage/download"

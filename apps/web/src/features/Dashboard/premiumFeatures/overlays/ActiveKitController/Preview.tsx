@@ -2,6 +2,7 @@ import { useState } from "react"
 import styled from "styled-components"
 import * as Styled from "./style"
 
+import { ActiveKitOverlays } from "@kittr/types"
 import { ActiveKitOverlay } from "@Utils/lookups/overlays"
 import colors from "@Colors"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"

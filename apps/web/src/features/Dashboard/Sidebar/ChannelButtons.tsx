@@ -5,6 +5,7 @@ import { handleTutorialAction, setModal, setChannelView } from "@Redux/slices/da
 import { useDispatch } from "@Redux/store"
 import { useManagerRole } from "@Redux/slices/dashboard/selectors/useManagerRole"
 
+import { IGame } from "@kittr/types"
 import ProfileImage from "@Components/shared/ProfileImage"
 import GameButton from "./GameButton"
 import AddGameNotification from "./AddGameNotification"

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { io } from "socket.io-client"
 
+import { IKit } from "@kittr/types"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
 import Banner from "./Banner"
 import BannerTicker from "@Features/Overlays/ActiveKit/BannerTicker"

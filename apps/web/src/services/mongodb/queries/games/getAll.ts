@@ -1,4 +1,5 @@
 import { Game } from "@Services/mongodb/models"
+import { IGame } from "@kittr/types/game"
 
 interface IFunc {
 	/**

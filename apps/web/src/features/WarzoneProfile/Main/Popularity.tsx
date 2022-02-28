@@ -1,3 +1,9 @@
+import {
+	IRatioOfChannelsWithBase,
+	IRatioOfChannelsWithBaseFeatured,
+	IForSetupComparison,
+	IKitOption
+} from "@kittr/types"
 import { useState, useEffect } from "react"
 import * as Styled from "./style"
 import { useActiveWeapon, usePopularityRates } from "@Redux/slices/displayr/selectors"

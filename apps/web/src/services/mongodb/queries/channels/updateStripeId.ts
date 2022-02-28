@@ -1,4 +1,5 @@
 import { Channel } from "@Services/mongodb/models"
+import { IRawChannel } from "@kittr/types/channel"
 
 interface IFunc {
 	/**
@@ -26,7 +27,7 @@ interface IFunc {
 export const updateStripeId: IFunc = async (_id, stripeId) => {
 	const rawChannel = await Channel.findOneAndUpdate({ _id }, { $set: { "meta.stripeId": stripeId } }, { new: true })
 
-	if (!rawChannel) return {} as IRawChannel
+	if (!rawChannel) return {} as any
 
 	return { ...rawChannel, _id: rawChannel._id.toString(), createdDate: rawChannel.createdDate.toString() }
 }

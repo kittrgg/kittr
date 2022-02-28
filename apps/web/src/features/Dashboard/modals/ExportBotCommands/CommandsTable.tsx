@@ -1,4 +1,6 @@
 import colors from "@Colors"
+import { TCommandMethod } from "@kittr/types/types"
+import { IKit } from "@kittr/types/kits"
 import Toast from "@Components/shared/Toast"
 import { useChannelData, useChannelView } from "@Redux/slices/dashboard/selectors"
 import { useState } from "react"

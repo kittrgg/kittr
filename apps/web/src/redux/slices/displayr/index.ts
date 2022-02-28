@@ -1,4 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { IKit } from "@kittr/types/kits"
+import { IChannel } from "@kittr/types/channel"
+import { IPopularityRates } from "@kittr/types/popularity"
 
 export const displayrSlice = createSlice({
 	name: "displayr",

@@ -1,4 +1,6 @@
 import { Button, GameCard, Modal, Spinner } from "@Components/shared"
+import { NextClientEndpointError } from "@kittr/types/types"
+import { IGame } from "@kittr/types/game"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useAllGames } from "@Hooks/api/useAllGames"
 import { handleTutorialAction, setModal } from "@Redux/slices/dashboard"

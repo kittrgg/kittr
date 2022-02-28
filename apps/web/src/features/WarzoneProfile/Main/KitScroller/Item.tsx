@@ -1,3 +1,4 @@
+import { IKit } from "@kittr/types"
 import SVG from "@Components/shared/SVG"
 import { useEffect, useRef } from "react"
 import * as Styled from "./style"

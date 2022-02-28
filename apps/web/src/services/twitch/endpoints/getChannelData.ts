@@ -1,3 +1,4 @@
+import { ITwitchChannelData } from "@kittr/types/twitch"
 import * as Sentry from "@sentry/node"
 import { getFromApi } from "../utils/getFromApi"
 

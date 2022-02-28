@@ -14,6 +14,7 @@ import {
 import { Fragment } from "react"
 import styled from "styled-components"
 
+import { ITwitchScheduleSegment } from "@kittr/types"
 import colors from "@Colors"
 import { caption, paragraph } from "@Styles/typography"
 import useDimensions from "@Hooks/useDimensions"

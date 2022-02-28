@@ -2,6 +2,7 @@ import { userAuth } from "@Middlewares/auth"
 import { createHandler } from "@Utils/middlewares/createHandler"
 import type { NextApiRequest, NextApiResponse } from "next"
 import Stripe from "stripe"
+import { NextServerPayload } from "@kittr/types"
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, { apiVersion: "2020-08-27" })
 

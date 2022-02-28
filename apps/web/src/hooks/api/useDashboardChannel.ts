@@ -2,6 +2,7 @@ import { useQuery } from "react-query"
 import { getToken } from "@Services/firebase/auth/getToken"
 import { useSelector } from "@Redux/store"
 import fetch from "@Fetch"
+import { IRawChannel } from "@kittr/types/channel"
 
 export const useDashboardChannel = () => {
 	const _id = useSelector((state) => state.dashboard.activeView.channelId)

@@ -1,3 +1,4 @@
+import { IChannel, IPopularityRates, IKit, IGame } from "@kittr/types"
 import colors from "@Colors"
 import FullScreen from "@Components/layouts/FullScreen"
 import NavMenu from "@Components/layouts/NavMenu"

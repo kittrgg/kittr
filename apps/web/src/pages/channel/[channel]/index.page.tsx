@@ -1,3 +1,5 @@
+import { IChannel } from "@kittr/types/channel"
+import { ITwitchDataForProfilePage } from "@kittr/types/twitch"
 import { GetStaticProps } from "next"
 import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
 import { useRouter } from "next/router"

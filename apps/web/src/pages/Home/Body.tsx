@@ -1,3 +1,5 @@
+import { IGame } from "@kittr/types/game"
+import { IChannel } from "@kittr/types/channel"
 import colors from "@Colors"
 import { ChannelAvatarList, GameList, SideScroller } from "@Components/shared"
 import { header2 } from "@Styles/typography"

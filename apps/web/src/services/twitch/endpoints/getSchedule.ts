@@ -1,5 +1,5 @@
+import { ITwitchScheduleSegment } from "@kittr/types/twitch"
 import { getFromApi } from "../utils/getFromApi"
-// import { logger } from "@Services/sentry"
 
 interface IFunc {
 	/**

@@ -1,3 +1,4 @@
+import { IKitBase, IKitOption } from "@kittr/types"
 import colors from "@Colors"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useAllKitBases } from "@Hooks/api/useAllKitBases"
@@ -31,10 +32,10 @@ const EditorSnackbar = () => {
 		let index = kits.findIndex((kit) => kit._id === activeKit._id)
 		if (index !== -1) {
 			// Replace the existing kit with its new data
-			kitArr[index] = activeKit as IKit
+			kitArr[index] = activeKit as any
 		} else {
 			// Add the new kit to the array
-			kitArr.push(activeKit as IKit)
+			kitArr.push(activeKit as any)
 		}
 
 		if (
@@ -44,7 +45,7 @@ const EditorSnackbar = () => {
 					base: allKitBases!.find((allBase: IKitBase) => allBase._id === kit.baseId) || activeKit
 				}))
 				// Map to just the names
-				.map((kit) => kit.base.displayName + kit.userData.customTitle)
+				.map((kit) => (kit.base as IKitBase).displayName + kit.userData.customTitle)
 
 				// Compare to ensure that there are no dupes
 				.filter((existingKitName) => newKitName === existingKitName).length > 1

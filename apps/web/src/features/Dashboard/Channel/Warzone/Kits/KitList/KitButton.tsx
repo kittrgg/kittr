@@ -1,5 +1,6 @@
 import styled from "styled-components"
 
+import { IKit } from "@kittr/types"
 import colors from "@Colors"
 import { useDispatch } from "@Redux/store"
 import { setModal, setActiveKit } from "@Redux/slices/dashboard"

@@ -1,3 +1,4 @@
+import { IChannel, IManager } from "@kittr/types"
 import { useQuery } from "react-query"
 import { getToken } from "@Services/firebase/auth/getToken"
 import { useUser } from "@Hooks/useUser"

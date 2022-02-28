@@ -1,3 +1,4 @@
+import { IChannelLinks } from "@kittr/types"
 import { SvgByType, SVGType } from "@Components/shared"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { linkLabelImages } from "@Utils/lookups/linkLabelImages"

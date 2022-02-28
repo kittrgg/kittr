@@ -1,4 +1,5 @@
 import mongoose from "mongoose"
+import { IChannel } from "@kittr/types/channel"
 import { Channel } from "@Services/mongodb/models"
 
 interface IFunc {

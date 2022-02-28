@@ -1,3 +1,4 @@
+import { IManagerData } from "@kittr/types/manager"
 import { useQuery } from "react-query"
 import { getToken } from "@Services/firebase/auth/getToken"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"

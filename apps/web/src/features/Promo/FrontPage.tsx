@@ -1,5 +1,6 @@
 import styled from "styled-components"
 
+import { IHomePageBoostr } from "@kittr/types"
 import colors from "@Colors"
 import { barlow, header2, paragraph } from "@Styles/typography"
 import { useDimensions } from "@Hooks/useDimensions"

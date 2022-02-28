@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import styled from "styled-components"
 
 import { download } from "@Services/firebase/storage"
+import { IChannel } from "@kittr/types"
 import { H2 } from "./style"
 import { Spinner } from "@Components/shared"
 import { SideScroller } from "@Components/shared"

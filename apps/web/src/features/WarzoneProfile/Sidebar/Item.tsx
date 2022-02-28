@@ -1,3 +1,4 @@
+import { IKit } from "@kittr/types"
 import colors from "@Colors"
 import SVG from "@Components/shared/SVG"
 import { setActiveWeapon, setIsSidebarOpen } from "@Redux/slices/displayr"

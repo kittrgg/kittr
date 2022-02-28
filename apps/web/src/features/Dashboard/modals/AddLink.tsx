@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction, useState } from "react"
 import styled from "styled-components"
 
+import { SocialPlatform } from "@kittr/types/types"
 import { capitalizeFirstCharacter } from "@Utils/helpers/capitalizeFirstCharacter"
 import colors from "@Colors"
 import { trimPrefix } from "@Utils/helpers/trimPrefix"

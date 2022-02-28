@@ -1,3 +1,4 @@
+import { SocialPlatform } from "@kittr/types"
 import colors from "@Colors"
 import { Button, Spinner, SVG, SvgByType, SVGType } from "@Components/shared"
 import TextInput from "@Components/shared/TextInput"

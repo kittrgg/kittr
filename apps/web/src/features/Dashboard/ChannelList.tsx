@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { MutableRefObject, useRef, useEffect } from "react"
 
+import { IManager, IChannel } from "@kittr/types"
 import colors from "@Colors"
 import { header1, header2, paragraph } from "@Styles/typography"
 import { useManagedChannels } from "@Hooks/api/useManagedChannels"

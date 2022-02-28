@@ -1,4 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next"
+import { NextServerPayload } from "@kittr/types"
+import { IManager } from "@kittr/types/manager"
 import admin from "@Services/firebase/admin"
 import { createHandler } from "@Utils/middlewares/createHandler"
 import { userAuth } from "@Utils/middlewares/auth"

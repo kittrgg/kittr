@@ -1,3 +1,6 @@
+import { IChannel } from "@kittr/types/channel"
+import { IGame } from "@kittr/types/game"
+import { IPost, IHomePageBoostr } from "@kittr/types/types"
 import PageWrapper from "@Components/layouts/PageWrapper"
 import FrontPageBoostr from "@Features/Promo/FrontPage"
 import { allGamesQuery, getBlogPostsQuery, risingStarsQuery, topChannelsQuery, totalKitsQuery } from "@Services/mongodb"

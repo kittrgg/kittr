@@ -1,5 +1,6 @@
 import { sortAlphabetical } from "@Utils/helpers/sortAlphabetical"
 
+import { IKitBase } from "@kittr/types"
 import * as Styled from "./style"
 import { useDispatch } from "@Redux/store"
 import { useAllKitsByGameId } from "@Hooks/api/useAllKitsByGameId"

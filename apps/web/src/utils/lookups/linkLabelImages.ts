@@ -1,3 +1,5 @@
+import { SocialPlatform } from "@kittr/types/types"
+
 export const linkLabelImages: Record<SocialPlatform, string> = {
 	twitch: "/media/icons/twitch.svg",
 	twitter: "/media/icons/twitter.svg",

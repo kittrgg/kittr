@@ -1,3 +1,4 @@
+import { IChannelMeta } from "@kittr/types"
 import * as Styled from "./style"
 import { SocialIcons, ProfileImage } from "@Components/shared"
 

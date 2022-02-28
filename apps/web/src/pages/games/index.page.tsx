@@ -1,3 +1,4 @@
+import { IGame } from "@kittr/types/game"
 import colors from "@Colors"
 import AdPageWrapper, { H1 } from "@Components/layouts/AdPageWrapper"
 import GameCard from "@Components/shared/GameCard"

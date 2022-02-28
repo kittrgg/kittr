@@ -1,3 +1,4 @@
+import { IGame } from "@kittr/types/game"
 import { useQuery } from "react-query"
 import fetch from "@Fetch"
 

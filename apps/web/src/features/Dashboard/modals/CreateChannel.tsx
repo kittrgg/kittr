@@ -1,3 +1,4 @@
+import { NextClientEndpointError } from "@kittr/types"
 import colors from "@Colors"
 import { Button, Modal, Spinner, TextInput } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"

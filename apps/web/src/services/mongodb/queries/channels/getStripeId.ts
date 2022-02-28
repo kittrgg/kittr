@@ -1,4 +1,5 @@
 import { Channel } from "@Services/mongodb/models"
+import { IRawChannel } from "@kittr/types/channel"
 
 interface IFunc {
 	/**

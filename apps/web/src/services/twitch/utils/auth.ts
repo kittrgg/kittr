@@ -1,3 +1,5 @@
+import { IOAuthToken, IOAuthRejection } from "@kittr/types/twitch"
+
 import fetch from "@Fetch"
 
 /** Use OAuth to get a token for the Twitch API. */

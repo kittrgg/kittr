@@ -1,4 +1,5 @@
 import colors from "@Colors"
+import { TCommandMethod } from "@kittr/types/types"
 import Button from "@Components/shared/Button"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { setModal } from "@Redux/slices/dashboard"

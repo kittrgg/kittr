@@ -1,4 +1,5 @@
 import { Channel } from "@Services/mongodb/models"
+import { IChannel } from "@kittr/types/channel"
 import { serializeChannels } from "@Services/mongodb/utils/serializeChannels"
 
 interface IFunc {

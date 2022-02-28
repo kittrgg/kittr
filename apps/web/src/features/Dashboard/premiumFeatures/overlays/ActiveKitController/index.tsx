@@ -1,4 +1,5 @@
 import colors from "@Colors"
+import { IKitBase, IKitOptionRaw } from "@kittr/types/kits"
 import { Button, ColorPicker, MultiButton, Spinner, SVG } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import PremiumCallout from "@Features/Dashboard/PremiumCallout"
@@ -294,7 +295,7 @@ const ActiveKit = ({ ...props }) => {
 								.slice()
 								.filter((kit) => data?.overlay?.secondaryKit?._id !== kit._id)
 								.map((kit) => ({ ...kit, base: allKitBases?.find((kitBase: IKitBase) => kitBase._id === kit.baseId) }))
-								.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
+								.sort((a, b) => sortAlphabetical(a.base!.displayName, b.base!.displayName))
 								.sort((kit) => {
 									if (kit.userData.featured) {
 										return -1
@@ -303,7 +304,7 @@ const ActiveKit = ({ ...props }) => {
 									}
 								})
 								.map((kit) => {
-									const name = kit.base.displayName
+									const name = kit?.base?.displayName
 									const isActive = data?.overlay?.primaryKit?._id === kit._id
 									const userTitle = kit.userData.customTitle
 									const isFeatured = kit.userData.featured
@@ -356,7 +357,7 @@ const ActiveKit = ({ ...props }) => {
 								.slice()
 								.filter((kit) => data?.overlay?.primaryKit?._id !== kit._id)
 								.map((kit) => ({ ...kit, base: allKitBases?.find((kitBase: IKitBase) => kitBase._id === kit.baseId) }))
-								.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
+								.sort((a, b) => sortAlphabetical(a.base!.displayName, b.base!.displayName))
 								.sort((kit) => {
 									if (kit.userData.featured) {
 										return -1
@@ -365,7 +366,7 @@ const ActiveKit = ({ ...props }) => {
 									}
 								})
 								.map((kit) => {
-									const name = kit.base.displayName
+									const name = kit.base!.displayName
 									const isActive = data?.overlay?.secondaryKit?._id === kit._id
 									const userTitle = kit.userData.customTitle
 									const isFeatured = kit.userData.featured

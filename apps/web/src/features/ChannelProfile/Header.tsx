@@ -1,5 +1,6 @@
 import styled from "styled-components"
 
+import { IChannel } from "@kittr/types"
 import colors from "@Colors"
 import { header1, header2 } from "@Styles/typography"
 import ProfileImage from "@Components/shared/ProfileImage"

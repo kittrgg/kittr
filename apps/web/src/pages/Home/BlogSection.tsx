@@ -1,3 +1,4 @@
+import { IPost } from "@kittr/types/types"
 import colors from "@Colors"
 import { header2 } from "@Styles/typography"
 import { Routes } from "@Utils/lookups/routes"

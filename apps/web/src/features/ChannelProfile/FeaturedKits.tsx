@@ -1,3 +1,4 @@
+import { IChannel, IKit } from "@kittr/types"
 import { KitList } from "@Components/shared"
 import SideScroller from "@Components/shared/SideScroller"
 import { basePlusTitleToUrlSafe } from "@Utils/helpers/basePlusTitleToUrlSafe"
@@ -16,7 +17,7 @@ const FeaturedKits = ({ kits }: IChannel) => {
 			<H2>FEATURED KITS</H2>
 			<SideScroller childMargin="10px" wrapperStyles={{ width: "97vw" }}>
 				<KitList
-					data={filterKitsByFeature(kits)}
+					data={filterKitsByFeature(kits) as IKit[]}
 					onClick={(kit: IKit & { gameUrlSafeName: string }) => {
 						const query = basePlusTitleToUrlSafe(kit)
 						router.push(Routes.CHANNEL.GAME.createPath(router.query.channel as string, "warzone", `?weapon=${query}`))

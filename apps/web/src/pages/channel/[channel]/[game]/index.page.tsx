@@ -1,3 +1,10 @@
+import { IChannel } from "@kittr/types/channel"
+import { IGame } from "@kittr/types/game"
+import {
+	IRatioOfChannelsWithBase,
+	IRatioOfChannelsWithBaseFeatured,
+	IForSetupComparison
+} from "@kittr/types/popularity"
 import { GetStaticProps } from "next"
 import { useRouter } from "next/router"
 

@@ -1,3 +1,4 @@
+import { IGame } from "@kittr/types"
 import colors from "@Colors"
 import { Button, SupportUs, SVG } from "@Components/shared"
 import { useDetectAdBlock } from "@Hooks/useDetectAdBlock"

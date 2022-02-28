@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import styled from "styled-components"
 
+import { IChannel, ITwitchDataForProfilePage } from "@kittr/types"
 import colors from "@Colors"
 import { download } from "@Services/firebase/storage"
 import Header from "./Header"

@@ -1,5 +1,6 @@
 import { Promo } from "@Services/mongodb/models/Promo"
 import { logError } from "@kittr/logger/nextjs"
+import { IPromo } from "@kittr/types/types"
 
 export const getHomeChannelPromo = async () => {
 	const rightNow = new Date().getTime()

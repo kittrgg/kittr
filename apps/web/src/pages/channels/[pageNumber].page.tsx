@@ -1,3 +1,4 @@
+import { IChannel } from "@kittr/types/channel"
 import colors from "@Colors"
 import AdPageWrapper, { H1 } from "@Components/layouts/AdPageWrapper"
 import FallbackPage from "@Components/layouts/FallbackPage"

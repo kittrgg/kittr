@@ -1,3 +1,6 @@
+import { IChannel } from "@kittr/types/channel"
+import { IGame } from "@kittr/types/game"
+import { IKitOption } from "@kittr/types/kits"
 import { allGamesQuery, allBasesQuery, allOptionsQuery } from "../index"
 
 interface IFunc {

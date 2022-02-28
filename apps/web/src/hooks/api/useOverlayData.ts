@@ -1,3 +1,4 @@
+import { IOverlay } from "@kittr/types"
 import { useQuery } from "react-query"
 import { getToken } from "@Services/firebase/auth/getToken"
 import fetch from "@Fetch"

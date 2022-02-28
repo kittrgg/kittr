@@ -1,3 +1,5 @@
+import { SocialPlatform } from "@kittr/types/types"
+
 export const linkPrefixes: Record<SocialPlatform, string> = {
 	twitch: "https://www.twitch.tv/",
 	twitter: "https://twitter.com/",

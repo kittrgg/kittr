@@ -1,3 +1,4 @@
+import { TCommandMethod } from "@kittr/types/types"
 import colors from "@Colors"
 import { Button, Modal, MultiButton } from "@Components/shared"
 import CommandsTable from "@Features/Dashboard/modals/ExportBotCommands/CommandsTable"

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 
+import { NextClientEndpointError } from "@kittr/types"
 import colors from "@Colors"
 import { getToken } from "@Services/firebase/auth/getToken"
 import { TextInputBox, Button } from "@Components/shared"

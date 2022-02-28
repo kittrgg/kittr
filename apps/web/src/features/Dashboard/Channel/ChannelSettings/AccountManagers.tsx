@@ -1,5 +1,6 @@
 import { useSelector } from "@Redux/store"
 
+import { IManagerData, IManager } from "@kittr/types"
 import styled from "styled-components"
 import colors from "@Colors"
 import { useDispatch } from "@Redux/store"

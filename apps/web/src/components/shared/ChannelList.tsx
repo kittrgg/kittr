@@ -1,3 +1,4 @@
+import { IChannel } from "@kittr/types"
 import colors from "@Colors"
 import ProfileImage from "@Components/shared/ProfileImage"
 import SocialIcons from "@Components/shared/SocialIcons"

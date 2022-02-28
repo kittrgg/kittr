@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { IKit } from "@kittr/types/kits"
 
 import colors from "@Colors"
 import SVG from "@Components/shared/SVG"

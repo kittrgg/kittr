@@ -1,6 +1,7 @@
 import { useState, useEffect, Dispatch, SetStateAction } from "react"
 import styled, { keyframes, ThemeProvider } from "styled-components"
 
+import { IKit, IKitOption } from "@kittr/types"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
 import { header1, header2, montserrat, paragraph } from "@Styles/typography"

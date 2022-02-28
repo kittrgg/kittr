@@ -1,5 +1,6 @@
 import mongoose from "mongoose"
 import { NextApiRequest, NextApiResponse } from "next"
+import { NextServerPayload } from "@kittr/types"
 import { createHandler } from "@Middlewares/createHandler"
 import Channel, { ChannelModel } from "@Services/mongodb/models/Channel"
 import { userAuth } from "@Middlewares/auth"

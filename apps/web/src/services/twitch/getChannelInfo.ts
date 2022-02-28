@@ -1,3 +1,5 @@
+import { IHomePageBoostr } from "@kittr/types/types"
+
 import mongoose from "mongoose"
 import { Channel } from "@Services/mongodb/models"
 import { headers } from "@Services/twitch/utils/auth"

@@ -1,3 +1,4 @@
+import { IChannel, IGame } from "@kittr/types"
 import GameList from "@Components/shared/GameList"
 import SideScroller from "@Components/shared/SideScroller"
 import { Routes } from "@Utils/lookups/routes"

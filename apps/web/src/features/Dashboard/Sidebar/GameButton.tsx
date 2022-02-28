@@ -1,5 +1,6 @@
 import { useState, useRef, MutableRefObject, useEffect } from "react"
 
+import { IGame } from "@kittr/types"
 import * as Styled from "./style"
 import colors from "@Colors"
 import { useDispatch } from "@Redux/store"

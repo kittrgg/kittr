@@ -1,3 +1,4 @@
+import { IChannel } from "@kittr/types/channel"
 import { useQuery } from "react-query"
 import fetch from "@Fetch"
 
