@@ -26,6 +26,6 @@ export const getChannelData: IFunc = async (login) => {
 	} catch (error) {
 		Logger.logError(error as unknown as Error)
 		console.log({ twitchError: error })
-		throw error
+		throw { twitchError: error }
 	}
 }

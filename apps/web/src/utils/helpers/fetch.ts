@@ -74,7 +74,7 @@ const handleResponse = (response: any) => {
 
 		if (response.error || !response.ok) {
 			const error = data || response.statusText
-			return Promise.reject(error)
+			return Promise.reject({ requestedUrl: response.url, error })
 		}
 
 		return data

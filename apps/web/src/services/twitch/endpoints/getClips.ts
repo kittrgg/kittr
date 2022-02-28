@@ -25,6 +25,6 @@ export const getClips: IFunc = async (broadcaster_id): Promise<ITwitchClip[]> =>
 	} catch (error) {
 		Logger.logError(error as unknown as Error)
 		console.log({ twitchError: error })
-		throw error
+		throw { twitchError: error }
 	}
 }
