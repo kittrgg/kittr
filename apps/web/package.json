@@ -21,8 +21,6 @@
 		"@kittr/types": "*",
 		"@kittr/ui": "*",
 		"@reduxjs/toolkit": "1.7.2",
-		"@sentry/nextjs": "^6.18.0",
-		"@sentry/node": "^6.17.6",
 		"@stripe/react-stripe-js": "1.7.0",
 		"@stripe/stripe-js": "^1.23.0",
 		"browser-image-compression": "1.0.17",

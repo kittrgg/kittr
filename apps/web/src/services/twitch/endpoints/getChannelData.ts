@@ -1,5 +1,5 @@
 import { ITwitchChannelData } from "@kittr/types/twitch"
-import * as Sentry from "@sentry/node"
+import * as Logger from "@kittr/logger/node"
 import { getFromApi } from "../utils/getFromApi"
 
 interface IFunc {
@@ -24,7 +24,7 @@ export const getChannelData: IFunc = async (login) => {
 
 		return data
 	} catch (error) {
-		Sentry.captureException(error)
+		Logger.logError(error as unknown as Error)
 		console.log({ twitchError: error })
 		throw error
 	}

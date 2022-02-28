@@ -1,5 +1,5 @@
 import { ITwitchClip } from "@kittr/types/twitch"
-import * as Sentry from "@sentry/node"
+import * as Logger from "@kittr/logger/node"
 import { getFromApi } from "../utils/getFromApi"
 
 interface IFunc {
@@ -23,7 +23,7 @@ export const getClips: IFunc = async (broadcaster_id): Promise<ITwitchClip[]> =>
 
 		return data || []
 	} catch (error) {
-		Sentry.captureException(error)
+		Logger.logError(error as unknown as Error)
 		console.log({ twitchError: error })
 		throw error
 	}

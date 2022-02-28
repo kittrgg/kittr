@@ -2,8 +2,8 @@ import * as Sentry from "@sentry/node"
 import { Severity } from "@sentry/types"
 
 /** Send exception to the error logger from node. */
-export const logError = (message: string, withConsole?: boolean) => {
-	Sentry.captureException(new Error(message))
+export const logError = (message: string | Error, withConsole?: boolean) => {
+	Sentry.captureException(message)
 	if (withConsole) {
 		console.error(message)
 	}

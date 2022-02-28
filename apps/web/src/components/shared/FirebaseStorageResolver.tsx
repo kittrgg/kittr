@@ -1,7 +1,6 @@
 import { Spinner } from "@Components/shared"
-// @ts-ignore
 import { download } from "@Services/firebase/storage"
-import { logger } from "@Services/sentry"
+import { logError } from "@kittr/logger/nextjs"
 import { useEffect } from "react"
 import { useQuery } from "react-query"
 
@@ -17,7 +16,7 @@ export const FirebaseStorageResolver = ({ path, noSpinner, render }: FirebaseRes
 
 	useEffect(() => {
 		if (error) {
-			logger.log({ message: error, severity: "error" })
+			logError(error)
 		}
 	}, [error])
 
