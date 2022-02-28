@@ -16,7 +16,7 @@ For now, this will need to be refreshed manually
 */
 const params = new URLSearchParams()
 params.append("client_id", process.env.TWITCH_CLIENT_ID as string)
-params.append("client_secret", process.env.TWITCH_CLIENT_SECRET as string)
+params.append("client_secret", process.env.TWITCH_SECRET as string)
 params.append("grant_type", "client_credentials")
 
 axios({
