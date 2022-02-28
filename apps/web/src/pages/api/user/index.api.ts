@@ -25,7 +25,6 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<
 			updateUserDisplayName(displayName).then(() => res.status(200).json({ success: true }))
 		}
 
-		return res.status(200).json({ success: true })
 	} catch (err) {
 		console.error(err)
 		return res.status(400).json({ error: true, errorMessage: JSON.stringify(err) })

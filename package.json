@@ -9,7 +9,7 @@
 	"scripts": {
 		"dev:docker": "docker-compose -f docker-compose.yml up -d",
 		"dev:down": "docker-compose -f docker-compose.yml -f docker-compose.deploy.yml down",
-		"dev:turbo": "\"turbo run dev --parallel\"",
+		"dev:turbo": "turbo run dev --parallel",
 		"dev:seed": "cross-env DB_CONNECTION_STRING=mongodb://root:example@localhost:27017/myFirstDatabase ts-node ./lib/seeds/mongo/db-seed.ts",
 		"dev:build": "turbo run build",
 		"dev:deploy": "docker-compose -f docker-compose.deploy.yml up -d --build",
