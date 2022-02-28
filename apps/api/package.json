@@ -15,9 +15,9 @@
 	},
 	"dependencies": {
 		"@google-analytics/data": "2.8.0",
-		"@kittr/config": "file:packages/config",
-		"@kittr/logger": "file:packages/logger",
-		"@kittr/types": "file:packages/types",
+		"@kittr/config": "*",
+		"@kittr/logger": "*",
+		"@kittr/types": "*",
 		"@sentry/node": "^6.18.0",
 		"axios": "^0.26.0",
 		"cors": "2.8.5",

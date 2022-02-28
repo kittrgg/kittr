@@ -20,7 +20,7 @@
 		"type-check": "tsc --pretty --noEmit"
 	},
 	"devDependencies": {
-		"@kittr/config": "file:packages/config",
+		"@kittr/config": "*",
 		"@testing-library/jest-dom": "^5.16.2",
 		"@testing-library/react": "^12.1.3",
 		"@types/react": "17.0.37",
@@ -37,8 +37,8 @@
 	"dependencies": {
 		"@babel/core": "^7.17.5",
 		"@babel/plugin-transform-modules-commonjs": "^7.16.8",
-		"@kittr/logger": "file:packages/logger",
-		"@kittr/types": "file:packages/types",
+		"@kittr/logger": "*",
+		"@kittr/types": "*",
 		"@mantine/core": "^3.6.9",
 		"@mantine/dates": "^3.6.9",
 		"@mantine/hooks": "^3.6.9",
