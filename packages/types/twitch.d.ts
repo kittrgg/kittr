@@ -4,36 +4,36 @@ export interface IOAuthToken {
 	token_type: string
 }
 
-interface ioauthrejection {
+export interface IOAuthRejection {
 	status: string
 	message: string
 }
 
-interface itwitchlivechannels {
-	id: string
-	user_id: string
-	user_login: string
-	user_name: string
-	game_id: string
-	game_name: string
-	type: string
-	title: string
-	viewer_count: number
-	started_at: string
-	language: string
-	thumbnail_url: string
-	tag_ids: [string]
-	is_mature: boolean
+export interface ITwitchLiveChannels {
+	id: String
+	user_id: String
+	user_login: String
+	user_name: String
+	game_id: String
+	game_name: String
+	type: String
+	title: String
+	viewer_count: Number
+	started_at: String
+	language: String
+	thumbnail_url: String
+	tag_ids: [String]
+	is_mature: Boolean
 }
 
-interface itwitchdataforprofilepage {
-	channeldata: itwitchchanneldata
-	clips: itwitchclip[]
-	recentvideos: itwitchvideo[]
-	schedule: itwitchschedulesegment[]
+interface ITwitchDataForProfilePage {
+	channelData: ITwitchChannelData
+	clips: ITwitchClip[]
+	recentVideos: ITwitchVideo[]
+	schedule: ITwitchScheduleSegment[]
 }
 
-interface itwitchclip {
+interface ITwitchClip {
 	id: string
 	url: string
 	embed_url: string
@@ -51,7 +51,7 @@ interface itwitchclip {
 	duration: number
 }
 
-interface itwitchvideo {
+interface ITwitchVideo {
 	id: string
 	channel_id: string
 	user_id: string
@@ -68,10 +68,10 @@ interface itwitchvideo {
 	language: string
 	type: string
 	duration: string
-	muted_segments: null | any
+	muted_segments: null | {}
 }
 
-interface itwitchschedulesegment {
+export interface ITwitchScheduleSegment {
 	id: string
 	start_time: Date
 	end_time: Date
@@ -84,7 +84,7 @@ interface itwitchschedulesegment {
 	is_recurring: true
 }
 
-interface itwitchchanneldata {
+interface ITwitchChannelData {
 	id: string
 	login: string
 	display_name: string

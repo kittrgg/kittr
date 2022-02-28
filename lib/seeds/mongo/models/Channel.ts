@@ -1,4 +1,4 @@
-import mongoose, { Schema,  Model } from "mongoose"
+import mongoose, { Schema } from "mongoose"
 
 // This is the only place where channels are referred to as channels.
 // The front-end calls these entities "channels."
@@ -6,7 +6,6 @@ import mongoose, { Schema,  Model } from "mongoose"
 // The database calls these entities "channels."
 // This is because we don't feel like doing an entire migration just to change the name of a collection.
 const MODEL_NAME = "player"
-
 
 const schema = new Schema(
 	{
@@ -76,6 +75,6 @@ const schema = new Schema(
 )
 
 export const Channel =
-	(mongoose.models[MODEL_NAME]) || mongoose.model(MODEL_NAME, schema)
+	mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema)
 
 export default Channel

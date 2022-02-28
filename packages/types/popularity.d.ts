@@ -5,7 +5,7 @@ export interface IForSetupComparison {
 	matches: Array<string[]>
 }
 
-export interface IRatioOfChannelsWithBase {
+interface IRatioOfChannelsWithBase {
 	/** Stringified ObjectId of the Kit Base in question */
 	_id: string
 	/** Count for how many bases we have found for the given Kit Base. If a channel has multiple of the same Kit Base, it is only counted once. */
@@ -16,7 +16,7 @@ export interface IRatioOfChannelsWithBase {
 	ratio: number
 }
 
-export interface IRatioOfChannelsWithBaseFeatured {
+interface IRatioOfChannelsWithBaseFeatured {
 	/** Stringified ObjectId of the given Kit Base */
 	_id: string
 	/** Count for how many bases we have found for the given Kit Base that were featured. If a channel has multiple of the same Kit Base featured, it is only counted once. */

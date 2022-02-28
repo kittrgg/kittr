@@ -1,6 +1,6 @@
-import { IWarzoneGameInfo } from "./gameTypes"
+import { IWarzoneGameInfo } from "./game"
 
-export interface IKitBase {
+interface IKitBase {
 	/** ObjectId from database */
 	_id: string
 	/** Name of Base to present on front-end/client */
@@ -37,7 +37,7 @@ export interface IKitBase {
 	category: string
 }
 
-export interface IKitOption {
+interface IKitOption {
 	/** ObjectId from database */
 	_id: string
 	/** Stringified ObjectId of the game that this Option belongs to */
@@ -81,7 +81,7 @@ interface IKitUpdates {
 	options: Array<IKitOption>
 }
 
-export interface IKitRaw {
+interface IKitRaw {
 	/** ObjectId from database */
 	_id: string
 	/** Stringified ObjectId of the Base for this Kit */

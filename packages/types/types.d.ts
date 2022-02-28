@@ -1,15 +1,36 @@
-type ReduxModalState = { type: DashboardModals; data: any }
+export interface NextClientEndpointError {
+	error: boolean
+	errorMessage: string
+}
+
+export type NextClientPayload<T> = T | NextClientEndpointError
+
+export interface NextServerError {
+	error: boolean
+	errorMessage: string
+}
+
+export type NextServerPayload<T> = T | NextServerError
+
+export type ReduxModalState = { type: DashboardModals; data: any }
 
 /** Workflows that users can utilize to add their commands to their channel */
-type TCommandMethod = "dashboard" | "nightbot" | "channel-elements"
+export type TCommandMethod = "dashboard" | "nightbot" | "channel-elements"
 
 /** Twitch command strategies to add kittr commands to chat */
-type TTwitchStrategy = "!editcom" | "!addcom" | "!commands add"
+export type TTwitchStrategy = "!editcom" | "!addcom" | "!commands add"
 
-type SocialPlatform = "twitch" | "twitter" | "youtube" | "instagram" | "facebook" | "discord" | "tiktok"
+export type SocialPlatform =
+	| "twitch"
+	| "twitter"
+	| "youtube"
+	| "instagram"
+	| "facebook"
+	| "discord"
+	| "tiktok"
 
 /** Dasbhoard Modal Options */
-type DashboardModals =
+export type DashboardModals =
 	| ""
 	| "Error Notification"
 	| "Create New Channel"
@@ -35,10 +56,14 @@ type DashboardModals =
 	| "Add Affiliate"
 	| "Tutorial"
 
-type ActiveKitOverlays = "Banner" | "Banner Ticker" | "Display Ticker" | "Display"
+export type ActiveKitOverlays =
+	| "Banner"
+	| "Banner Ticker"
+	| "Display Ticker"
+	| "Display"
 
 /** A blog post */
-interface IPost {
+export interface IPost {
 	_id: string
 	author: string
 	datePublished: string
@@ -49,7 +74,7 @@ interface IPost {
 }
 
 /** Boosted channel on the home page */
-interface IHomePageBoostr {
+export interface IHomePageBoostr {
 	game: string
 	kitCount: number
 	profileImage: string
@@ -58,16 +83,11 @@ interface IHomePageBoostr {
 	viewerCount: number
 }
 
-interface IPromo {
+export interface IPromo {
 	_id: string
 	type: string
 	startTime: number
 	endTime: number
 	__v: number
 	channelId: string
-}
-
-export interface StreamerViewCounts {
-	startDate: string
-	endDate: string
 }
