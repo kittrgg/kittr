@@ -1,6 +1,4 @@
-import { IChannel } from "@Types/channelTypes"
-import { IGame } from "@Types/gameTypes"
-import { IKitBase, IKitOption } from "@Types/kitsTypes"
+import { IChannel, IGame, IKitBase, IKitOption } from "@kittr/types"
 import { Request, Response } from "express"
 import mongoose from "mongoose"
 import Player from "../models/Player"
@@ -39,10 +37,17 @@ const allSetupsForComparisonQuery = async () => {
 		}
 	])
 
-	const serialized = result.map((player: { _id: string; matches: Array<Array<mongoose.Types.ObjectId>> }) => ({
-		...player,
-		matches: player.matches.map((match) => match.map((option) => option.toString()))
-	}))
+	const serialized = result.map(
+		(player: {
+			_id: string
+			matches: Array<Array<mongoose.Types.ObjectId>>
+		}) => ({
+			...player,
+			matches: player.matches.map((match) =>
+				match.map((option) => option.toString())
+			)
+		})
+	)
 
 	return { serialized }
 }
@@ -107,7 +112,9 @@ export const serializeChannels: IFunc = async (channelsArr) => {
 		games: channel.games.map((game) => ({
 			...game,
 			id: game.id.toString(),
-			...games.find((rawGame: any) => rawGame._id.toString() === game.id.toString())
+			...games.find(
+				(rawGame: any) => rawGame._id.toString() === game.id.toString()
+			)
 		})),
 		createdDate: channel.createdDate.toString(),
 		kits: channel.kits.map((kit) => ({
@@ -123,13 +130,19 @@ export const serializeChannels: IFunc = async (channelsArr) => {
 					}
 				}))[0],
 			options: kit.options.map(
-				(opt) => kitOptions.find((option) => option?._id?.toString() === opt.toString()) as IKitOption
+				(opt) =>
+					kitOptions.find(
+						(option) => option?._id?.toString() === opt.toString()
+					) as IKitOption
 			)
 		}))
 	}))
 }
 
-export const getStreamerByTwitchBroadcasterLoginId = async (req: Request, res: Response) => {
+export const getStreamerByTwitchBroadcasterLoginId = async (
+	req: Request,
+	res: Response
+) => {
 	const rawChannel = await Player.find({
 		"meta.links.twitch": { $regex: `.*${req.query.broadcasterLogin}.*` }
 	}).lean<IChannel[]>()

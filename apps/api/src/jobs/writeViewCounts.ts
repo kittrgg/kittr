@@ -1,5 +1,5 @@
 import { BetaAnalyticsDataClient } from "@google-analytics/data/build/src/v1beta"
-import { StreamerViewCounts } from "@Types/types"
+import { StreamerViewCounts } from "@kittr/types"
 import Player from "../models/Player"
 
 const analyticsDataClient = new BetaAnalyticsDataClient({

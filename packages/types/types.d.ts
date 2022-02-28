@@ -1,3 +1,8 @@
+export interface StreamerViewCounts {
+	startDate: string
+	endDate: string
+}
+
 export interface NextClientEndpointError {
 	error: boolean
 	errorMessage: string
