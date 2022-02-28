@@ -4,7 +4,7 @@ dotenv.config({
 	path: process.env.NODE_ENV === "production" ? ".env" : ".env.development"
 })
 
-import * as Sentry from "@sentry/node"
+import * as Logger from "@kittr/logger/node"
 import { Server } from "socket.io"
 import cors from "cors"
 import { CronJob } from "cron"
@@ -25,12 +25,12 @@ const io = new Server(httpServer, {
 	}
 })
 
-Sentry.init({
+Logger.init({
 	dsn: process.env.SENTRY_DSN,
 	environment: process.env.IS_TESTING ? "testing" : process.env.NODE_ENV
 })
 
-app.use(Sentry.Handlers.requestHandler())
+app.use(Logger.Handlers.requestHandler())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use("/twitch", twitch)
@@ -122,7 +122,7 @@ mongoose
 			})
 		})
 
-		app.use(Sentry.Handlers.errorHandler())
+		app.use(Logger.Handlers.errorHandler())
 
 		httpServer.listen(process.env.PORT || 5000, () =>
 			console.log(`Server is running on port: ${process.env.PORT || 5000}...`)
@@ -131,5 +131,5 @@ mongoose
 	.catch((err) => {
 		console.log("Error connecting to MongoDB:")
 		console.error(err)
-		Sentry.captureException(err)
+		Logger.captureException(err)
 	})
