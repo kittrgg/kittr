@@ -1,6 +1,17 @@
 version: "3"
 
 services:
+  postgres:
+    container_name: postgres
+    ports:
+      - 5432:5432
+    image: postgres:alpine
+    environment:
+      - POSTGRES_USER=turboAf
+      - POSTGRES_PASSWORD=getTurbo
+      - POSTGRES_DB=prisma
+    restart: always
+
   mongo:
     container_name: mongo
     image: mongo:5
