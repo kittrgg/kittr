@@ -5,7 +5,7 @@ WORKDIR /home/node/app
 
 # Install app dependencies
 COPY package*.json ./
-RUN npm install --only=production
+RUN npm install
 
 # Bundle app source
 COPY ./ ./
