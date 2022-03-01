@@ -1,0 +1,68 @@
+version: 2
+updates:
+  # Root
+  - package-ecosystem: "npm"
+    directory: "/"
+    commit-message:
+      prefix: "npm"
+      include: "scope"
+    target-branch: "dependabot"
+    schedule:
+      interval: "daily"
+  # API
+  - package-ecosystem: "npm"
+    directory: "/apps/api"
+    commit-message:
+      prefix: "npm"
+      include: "scope"
+    target-branch: "dependabot"
+    schedule:
+      interval: "daily"
+  # Cypress
+  - package-ecosystem: "npm"
+    directory: "/lib/e2e/cypress"
+    commit-message:
+      prefix: "npm"
+      include: "scope"
+    target-branch: "dependabot"
+    schedule:
+      interval: "daily"
+  # web
+  - package-ecosystem: "npm"
+    directory: "/apps/web"
+    commit-message:
+      prefix: "npm"
+      include: "scope"
+    target-branch: "dependabot"
+    schedule:
+      interval: "daily"
+
+  # config
+  - package-ecosystem: "npm"
+    directory: "/packages/config"
+    commit-message:
+      prefix: "npm"
+      include: "scope"
+    target-branch: "dependabot"
+    schedule:
+      interval: "daily"
+
+  # logger
+  - package-ecosystem: "npm"
+    directory: "/packages/logger"
+    commit-message:
+      prefix: "npm"
+      include: "scope"
+    target-branch: "dependabot"
+    schedule:
+      interval: "daily"
+
+  # ui
+  - package-ecosystem: "npm"
+    directory: "/packages/ui"
+    commit-message:
+      prefix: "npm"
+      include: "scope"
+    target-branch: "dependabot"
+    schedule:
+      interval: "daily"
