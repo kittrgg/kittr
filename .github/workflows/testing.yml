@@ -30,7 +30,7 @@ jobs:
           restore-keys: npm-
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Run build
         env:
