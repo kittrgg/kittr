@@ -13,3 +13,40 @@ model KitOption {
   displayName          String
   slotKey              String
 }
+
+model Game {
+  id                   String               @id @default(uuid())
+  displayName                 String
+  urlSafeName          String
+  backgroundImageUrl   String
+  titleImageUrl        String
+  active              Boolean
+  blurDataUrl          String
+  developer          String
+  genres              Genre[]
+  platforms           Platform[]
+  releaseDate         DateTime
+}
+
+
+model Platform {
+  id                   String               @id @default(uuid())
+  displayName          String
+  games                Game[]
+}
+
+model Genre {
+  id                   String               @id @default(uuid())
+  displayName          String
+  games                Game[]
+}
+
+
+model BlogPost{
+  id                   String               @id @default(uuid())
+  author               String
+  createdAt            DateTime
+  title                String
+  slug                 String
+  markdown             String
+}

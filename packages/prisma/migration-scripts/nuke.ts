@@ -10,6 +10,7 @@ mongoose
 	.then(async () => {
 		const main = async () => {
 			await prisma.kitOption.deleteMany()
+			await prisma.platform.deleteMany()
 		}
 
 		main()
