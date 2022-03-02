@@ -1,8 +1,6 @@
 import { prisma } from "../index"
 import mongoose from "mongoose"
 
-import { KitOption } from "../models/KitOption"
-
 mongoose
 	.connect(process.env.MONGOOSE_CONNECTION_STRING as string, {
 		authSource: "admin"
@@ -11,6 +9,7 @@ mongoose
 		const main = async () => {
 			await prisma.kitOption.deleteMany()
 			await prisma.platform.deleteMany()
+			await prisma.game.deleteMany()
 		}
 
 		main()

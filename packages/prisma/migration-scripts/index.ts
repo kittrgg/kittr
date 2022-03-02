@@ -1,4 +1,5 @@
 import { prisma } from "../index"
+import { Game as GameType } from "../client"
 import mongoose from "mongoose"
 
 import { KitOption } from "../models/KitOption"
@@ -23,48 +24,36 @@ mongoose
 			await prisma.kitOption.createMany({ data: formattedOptions })
 		}
 
-		const createPlatforms = async () => {
-			const platforms = [
-				{ displayName: "PC" },
-				{ displayName: "PS" },
-				{ displayName: "XBox" }
-			]
-			await prisma.platform.createMany({ data: platforms })
-		}
-
 		const createGames = async () => {
-			// For a game, pull out the string values of the platforms it is on
-			// Find the platforms in the prisma results
-			// Assign them on the outgoing Prisma game object
-			const platforms = await prisma.platform.findMany()
 			const games = await Game.find({})
 
-			const formattedGames = games.map((game) => ({
-				id: game._id.toString(),
-				displayName: game.displayName,
-				urlSafeName: game.urlSafeName,
-				backgroundImageUrl: game.backgroundImage,
-				titleImageUrl: game.titleImage,
-				active: game.active,
-				blurDataUrl: game.blurDataURL,
-				developer: game.developer,
-				releaseDate: game.releaseDate,
-				platforms: {
-					create: [{ displayName: "PC" }]
-					// create: game.platforms.map((platform) => {
-					// 	if (platform === "PC") return { displayName: "PC" }
-					// 	if (platform.startsWith("PS")) return { displayName: "PS" }
-					// 	if (platform.startsWith("X")) return { displayName: "XBox" }
-					// })
-				}
-			}))
-
-			await prisma.game.createMany({ data: formattedGames })
+			for (const game of games) {
+				await prisma.game.create({
+					data: {
+						id: game._id.toString(),
+						displayName: game.displayName,
+						urlSafeName: game.urlSafeName,
+						backgroundImageUrl: game.backgroundImage,
+						titleImageUrl: game.titleImage,
+						active: game.active,
+						blurDataUrl: game.blurDataURL,
+						developer: game.developer,
+						releaseDate: game.releaseDate,
+						platforms: {
+							connectOrCreate: [
+								...game.platforms.map((platform) => ({
+									where: { displayName: platform },
+									create: { displayName: platform }
+								}))
+							]
+						}
+					}
+				})
+			}
 		}
 
 		const main = async () => {
 			await createKitOptions()
-			await createPlatforms()
 			await createGames()
 		}
 
@@ -75,7 +64,7 @@ mongoose
 			})
 			.finally(async () => {
 				await prisma.$disconnect()
+				await mongoose.connection.close()
+				console.log("Dun.")
 			})
-
-		// mongoose.connection.close()
 	})

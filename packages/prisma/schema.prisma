@@ -28,17 +28,16 @@ model Game {
   releaseDate         DateTime
 }
 
-
 model Platform {
   id                   String               @id @default(uuid())
-  displayName          String
-  games                Game[]
+  displayName          String @unique
+  games            Game[]
 }
 
 model Genre {
   id                   String               @id @default(uuid())
-  displayName          String
-  games                Game[]
+  displayName          String @unique
+  games               Game[]
 }
 
 
