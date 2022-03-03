@@ -4,6 +4,7 @@ import mongoose from "mongoose"
 import { KitOption } from "../models/KitOption"
 import { Game } from "../models/Game"
 import { KitBase } from "../models/KitBase"
+import { Channel } from "../models/Channel"
 
 mongoose
 	.connect(process.env.MONGOOSE_CONNECTION_STRING as string, {
@@ -11,10 +12,13 @@ mongoose
 	})
 	.then(async () => {
 		console.log("Connected to MongoDB")
+		// Pick up all the data that I will be needing once
+		const games = await Game.find({}).lean()
+		const bases = await KitBase.find({}).lean()
+		const options = await KitOption.find({}).lean()
+		const channels = await Channel.find({}).lean()
 
 		const createGames = async () => {
-			const games = await Game.find({}).lean()
-
 			for (const game of games) {
 				await prisma.game.create({
 					data: {
@@ -41,9 +45,6 @@ mongoose
 		}
 
 		const createKitBases = async () => {
-			const bases = await KitBase.find({}).lean()
-			const options = await KitOption.find({}).lean()
-
 			const formattedBases = bases.map((base) => ({
 				...base,
 				gameInfo: {
@@ -106,9 +107,24 @@ mongoose
 			}
 		}
 
+		const createChannels = async () => {
+			const formattedChannels = channels.map((channel) => ({
+				createdAt: channel._id.getTimestamp(),
+				displayName: channel.displayName,
+				urlSafeName: channel.urlSafeName,
+				viewCount: channel.viewCount,
+				previousUpdater: channel.previousUpdater
+			}))
+
+			await prisma.channel.createMany({
+				data: formattedChannels
+			})
+		}
+
 		const main = async () => {
 			await createGames()
 			await createKitBases()
+			await createChannels()
 		}
 
 		main()

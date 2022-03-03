@@ -7,6 +7,42 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Channel {
+  id                 String                 @id @default(cuid())
+  createdAt          DateTime               @default(now())
+  displayName        String
+  urlSafeName        String
+  viewCount          Int
+  previousUpdater    String?
+  games              Game[]
+  gameAffiliateCodes ChannelAffiliateCode[]
+  kits               Kit[]
+}
+
+model Kit {
+  id          String      @id @default(cuid())
+  customTitle String
+  blueprint   String
+  featured    Boolean
+  youtubeUrl  String
+  tiktokUrl   String
+  quote       String
+  kitBaseId   String
+  kitBase     KitBase     @relation(fields: [kitBaseId], references: [id])
+  options     KitOption[]
+  channel     Channel     @relation(fields: [channelId], references: [id])
+  channelId   String
+}
+
+model ChannelAffiliateCode {
+  id        String  @id @default(cuid())
+  channels  Channel @relation(fields: [channelId], references: [id])
+  channelId String
+  games     Game[]
+  gameId    String
+  code      String
+}
+
 model KitOption {
   id             String  @id @default(cuid())
   gameId         String
@@ -15,6 +51,7 @@ model KitOption {
   orderPlacement Int
   kit            KitBase @relation(fields: [kitId], references: [id])
   kitId          String
+  channelKits    Kit[]
 }
 
 model KitBase {
@@ -30,6 +67,7 @@ model KitBase {
   availableOptions KitOption[]
   category         KitBaseCategory @relation(fields: [categoryId], references: [id])
   categoryId       String
+  kits             Kit[]
 }
 
 model KitBaseCategory {
@@ -54,18 +92,20 @@ model KitStat {
 }
 
 model Game {
-  id                 String     @id @default(cuid())
-  displayName        String
-  urlSafeName        String
-  backgroundImageUrl String
-  titleImageUrl      String
-  active             Boolean
-  blurDataUrl        String
-  developer          String
-  genres             Genre[]
-  platforms          Platform[]
-  releaseDate        DateTime
-  kitBases           KitBase[]
+  id                    String                 @id @default(cuid())
+  displayName           String
+  urlSafeName           String
+  backgroundImageUrl    String
+  titleImageUrl         String
+  active                Boolean
+  blurDataUrl           String
+  developer             String
+  genres                Genre[]
+  platforms             Platform[]
+  releaseDate           DateTime
+  kitBases              KitBase[]
+  channels              Channel[]
+  channelAffiliateCodes ChannelAffiliateCode[]
 }
 
 model Platform {
