@@ -8,30 +8,34 @@ datasource db {
 }
 
 model KitOption {
-  id          String @id @default(cuid())
-  gameId      String
-  displayName String
-  slotKey     String
+  id             String  @id @default(cuid())
+  gameId         String
+  displayName    String
+  slotKey        String
+  orderPlacement Int
+  kit            KitBase @relation(fields: [kitId], references: [id])
+  kitId          String
 }
 
 model KitBase {
-  id           String            @id @default(cuid())
-  displayName  String
-  game         Game              @relation(fields: [gameId], references: [id])
-  gameId       String
-  imageUrl     String
-  blurb        String
-  stats     KitStat[]
-  maxOptions   Int
-  commandCodes CommandCode[]
-  category     KitBaseCategory[]
+  id               String          @id @default(cuid())
+  displayName      String
+  game             Game            @relation(fields: [gameId], references: [id])
+  gameId           String
+  imageUrl         String
+  blurb            String
+  maxOptions       Int
+  stats            KitStat[]
+  commandCodes     CommandCode[]
+  availableOptions KitOption[]
+  category         KitBaseCategory @relation(fields: [categoryId], references: [id])
+  categoryId       String
 }
 
 model KitBaseCategory {
-  id          String  @id @default(cuid())
-  displayName String
-  kit         KitBase @relation(fields: [kitBaseId], references: [id])
-  kitBaseId   String
+  id          String    @id @default(cuid())
+  displayName String    @unique
+  kit         KitBase[]
 }
 
 model CommandCode {
@@ -80,7 +84,7 @@ model BlogPost {
   id        String   @id @default(cuid())
   author    String
   createdAt DateTime
-  title     String
-  slug      String
+  title     String   @unique
+  slug      String   @unique
   markdown  String
 }

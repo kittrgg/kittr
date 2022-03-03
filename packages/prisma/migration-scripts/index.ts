@@ -1,5 +1,4 @@
 import { prisma } from "../index"
-import { Game as GameType } from "../client"
 import mongoose from "mongoose"
 
 import { KitOption } from "../models/KitOption"
@@ -12,21 +11,9 @@ mongoose
 	})
 	.then(async () => {
 		console.log("Connected to MongoDB")
-		const createKitOptions = async () => {
-			const options = await KitOption.find({})
-
-			const formattedOptions = options.map((option) => ({
-				id: option._id.toString(),
-				gameId: option.gameId,
-				displayName: option.displayName,
-				slotKey: option.slotKey
-			}))
-
-			await prisma.kitOption.createMany({ data: formattedOptions })
-		}
 
 		const createGames = async () => {
-			const games = await Game.find({})
+			const games = await Game.find({}).lean()
 
 			for (const game of games) {
 				await prisma.game.create({
@@ -54,15 +41,36 @@ mongoose
 		}
 
 		const createKitBases = async () => {
-			const bases = await KitBase.find({})
+			const bases = await KitBase.find({}).lean()
+			const options = await KitOption.find({}).lean()
 
-			for (const base of bases) {
+			const formattedBases = bases.map((base) => ({
+				...base,
+				gameInfo: {
+					...base.gameInfo,
+					availableOptions: base.gameInfo.availableOptions.map((option) => {
+						const foundOption = options.find((o) => {
+							return o._id.toString() === option.optionId.toString()
+						})
+
+						return {
+							orderPlacement: Number(option.orderPlacement) * 10,
+							gameId: (foundOption as any).gameId,
+							displayName: (foundOption as any).displayName,
+							slotKey: (foundOption as any).slotKey
+						}
+					})
+				}
+			}))
+
+			for (const base of formattedBases) {
 				await prisma.kitBase.create({
 					data: {
 						id: base._id.toString(),
 						displayName: base.displayName,
 						imageUrl: base.image,
 						blurb: base.gameInfo.blurb,
+
 						maxOptions: base.gameInfo.maxOptions,
 						game: {
 							connect: {
@@ -83,6 +91,15 @@ mongoose
 									value: String(value)
 								}
 							})
+						},
+						availableOptions: {
+							create: base.gameInfo.availableOptions
+						},
+						category: {
+							connectOrCreate: {
+								where: { displayName: base.category },
+								create: { displayName: base.category }
+							}
 						}
 					}
 				})
@@ -90,7 +107,6 @@ mongoose
 		}
 
 		const main = async () => {
-			await createKitOptions()
 			await createGames()
 			await createKitBases()
 		}
@@ -103,6 +119,8 @@ mongoose
 			.finally(async () => {
 				await prisma.$disconnect()
 				await mongoose.connection.close()
-				console.log("Dun.")
+				console.log(
+					"Dun. You are a good person and I hope that you achieved your goal for this run."
+				)
 			})
 	})
