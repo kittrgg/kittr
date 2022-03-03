@@ -8,44 +8,79 @@ datasource db {
 }
 
 model KitOption {
-  id                   String               @id @default(uuid())
-  gameId               String
-  displayName          String
-  slotKey              String
+  id          String @id @default(cuid())
+  gameId      String
+  displayName String
+  slotKey     String
+}
+
+model KitBase {
+  id           String            @id @default(cuid())
+  displayName  String
+  game         Game              @relation(fields: [gameId], references: [id])
+  gameId       String
+  imageUrl     String
+  blurb        String
+  stats     KitStat[]
+  maxOptions   Int
+  commandCodes CommandCode[]
+  category     KitBaseCategory[]
+}
+
+model KitBaseCategory {
+  id          String  @id @default(cuid())
+  displayName String
+  kit         KitBase @relation(fields: [kitBaseId], references: [id])
+  kitBaseId   String
+}
+
+model CommandCode {
+  id        String  @id @default(cuid())
+  code      String
+  kitBase   KitBase @relation(fields: [kitBaseId], references: [id])
+  kitBaseId String
+}
+
+model KitStat {
+  id          String  @id @default(cuid())
+  displayName String
+  value       String
+  kitBase     KitBase @relation(fields: [kitBaseId], references: [id])
+  kitBaseId   String
 }
 
 model Game {
-  id                   String               @id @default(uuid())
-  displayName                 String
-  urlSafeName          String
-  backgroundImageUrl   String
-  titleImageUrl        String
-  active              Boolean
-  blurDataUrl          String
+  id                 String     @id @default(cuid())
+  displayName        String
+  urlSafeName        String
+  backgroundImageUrl String
+  titleImageUrl      String
+  active             Boolean
+  blurDataUrl        String
   developer          String
-  genres              Genre[]
-  platforms           Platform[]
-  releaseDate         DateTime
+  genres             Genre[]
+  platforms          Platform[]
+  releaseDate        DateTime
+  kitBases           KitBase[]
 }
 
 model Platform {
-  id                   String               @id @default(uuid())
-  displayName          String @unique
-  games            Game[]
+  id          String @id @default(cuid())
+  displayName String @unique
+  games       Game[]
 }
 
 model Genre {
-  id                   String               @id @default(uuid())
-  displayName          String @unique
-  games               Game[]
+  id          String @id @default(cuid())
+  displayName String @unique
+  games       Game[]
 }
 
-
-model BlogPost{
-  id                   String               @id @default(uuid())
-  author               String
-  createdAt            DateTime
-  title                String
-  slug                 String
-  markdown             String
+model BlogPost {
+  id        String   @id @default(cuid())
+  author    String
+  createdAt DateTime
+  title     String
+  slug      String
+  markdown  String
 }

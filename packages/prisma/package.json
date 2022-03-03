@@ -1,5 +1,5 @@
 {
-	"name": "@doggo/prisma",
+	"name": "@kittr/prisma",
 	"version": "0.1.1",
 	"private": true,
 	"scripts": {
@@ -9,7 +9,8 @@
 		"generate-schemas": "prisma generate",
 		"db-studio": "prisma studio",
 		"pls": "ts-node ./migration-scripts/index.ts",
-		"nuke": "ts-node ./migration-scripts/nuke.ts"
+		"nuke": "ts-node ./migration-scripts/nuke.ts",
+		"format": "prisma format"
 	},
 	"devDependencies": {
 		"prisma": "3.9.2",

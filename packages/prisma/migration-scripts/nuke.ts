@@ -9,6 +9,8 @@ mongoose
 		const main = async () => {
 			await prisma.kitOption.deleteMany()
 			await prisma.platform.deleteMany()
+			await prisma.commandCode.deleteMany()
+			await prisma.kitBase.deleteMany()
 			await prisma.game.deleteMany()
 		}
 
@@ -19,7 +21,7 @@ mongoose
 			})
 			.finally(async () => {
 				await prisma.$disconnect()
+				await mongoose.connection.close()
+				console.log("DB is clear.")
 			})
-
-		mongoose.connection.close()
 	})

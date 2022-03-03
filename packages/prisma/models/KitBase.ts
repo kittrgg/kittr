@@ -3,7 +3,7 @@ import mongoose, { Schema, Model, Types } from "mongoose"
 const MODEL_NAME = "kitBase"
 
 export interface KitBaseModel {
-	displayName: String
+	displayName: string
 	gameId: Types.ObjectId
 	image: string
 	gameInfo: {
@@ -16,7 +16,10 @@ export interface KitBaseModel {
 			fireRate: number
 			control: number
 		}
-		availableOptions: Array<{ orderPlacement: string; optionId: Types.ObjectId }>
+		availableOptions: Array<{
+			orderPlacement: string
+			optionId: Types.ObjectId
+		}>
 		maxOptions: number
 	}
 	commandCodes: Array<string>
@@ -33,6 +36,7 @@ const schema = new Schema({
 })
 
 export const KitBase =
-	(mongoose.models[MODEL_NAME] as Model<KitBaseModel, {}, {}, {}>) || mongoose.model<KitBaseModel>(MODEL_NAME, schema)
+	(mongoose.models[MODEL_NAME] as Model<KitBaseModel, {}, {}, {}>) ||
+	mongoose.model<KitBaseModel>(MODEL_NAME, schema)
 
 export default KitBase

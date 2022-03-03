@@ -4,6 +4,7 @@ import mongoose from "mongoose"
 
 import { KitOption } from "../models/KitOption"
 import { Game } from "../models/Game"
+import { KitBase } from "../models/KitBase"
 
 mongoose
 	.connect(process.env.MONGOOSE_CONNECTION_STRING as string, {
@@ -52,9 +53,46 @@ mongoose
 			}
 		}
 
+		const createKitBases = async () => {
+			const bases = await KitBase.find({})
+
+			for (const base of bases) {
+				await prisma.kitBase.create({
+					data: {
+						id: base._id.toString(),
+						displayName: base.displayName,
+						imageUrl: base.image,
+						blurb: base.gameInfo.blurb,
+						maxOptions: base.gameInfo.maxOptions,
+						game: {
+							connect: {
+								id: base.gameId.toString()
+							}
+						},
+						commandCodes: {
+							create: base.commandCodes.map((code) => ({
+								code: code
+							}))
+						},
+						stats: {
+							create: Object.entries(base.gameInfo.stats).map((stat) => {
+								const [key, value] = stat
+
+								return {
+									displayName: key,
+									value: String(value)
+								}
+							})
+						}
+					}
+				})
+			}
+		}
+
 		const main = async () => {
 			await createKitOptions()
 			await createGames()
+			await createKitBases()
 		}
 
 		main()
