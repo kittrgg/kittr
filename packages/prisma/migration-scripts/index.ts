@@ -122,6 +122,7 @@ mongoose
 		const createChannels = async () => {
 			console.time("Creating channels")
 			const formattedChannels = channels.map((channel) => ({
+				id: channel._id.toString(),
 				createdAt: channel._id.getTimestamp(),
 				displayName: channel.displayName,
 				urlSafeName: channel.urlSafeName,
@@ -136,6 +137,26 @@ mongoose
 						...channel,
 						games: {
 							connect: channel.games.map((game) => ({ id: game.id.toString() }))
+						},
+						gameAffiliateCodes: {
+							create: channel.games
+								.filter((game) => !!game.code)
+								.map((game) => {
+									return {
+										gameId: game.id.toString(),
+										code: game.code!
+									}
+								})
+						},
+						customGameCommands: {
+							create: channel.games
+								.filter((game) => !!game.commandString)
+								.map((game) => {
+									return {
+										game: { connect: { id: game.id.toString() } },
+										command: game.commandString!
+									}
+								})
 						}
 					}
 				})

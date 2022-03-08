@@ -16,6 +16,7 @@ export interface ChannelModel {
 	games: Array<{
 		id: string
 		code?: string
+		commandString?: string
 	}>
 	kits: Array<{
 		_id: Types.ObjectId
@@ -145,6 +146,7 @@ const schema = new Schema<ChannelModel>(
 )
 
 export const Channel =
-	(mongoose.models[MODEL_NAME] as Model<ChannelModel, {}, {}, {}>) || mongoose.model(MODEL_NAME, schema)
+	(mongoose.models[MODEL_NAME] as Model<ChannelModel, {}, {}, {}>) ||
+	mongoose.model(MODEL_NAME, schema)
 
 export default Channel

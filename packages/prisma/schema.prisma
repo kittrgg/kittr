@@ -8,14 +8,15 @@ datasource db {
 }
 
 model Channel {
-  id                 String                 @id @default(cuid())
-  createdAt          DateTime               @default(now())
+  id                 String                     @id @default(cuid())
+  createdAt          DateTime                   @default(now())
   displayName        String
   urlSafeName        String
   viewCount          Int
   previousUpdater    String?
   games              Game[]
   gameAffiliateCodes ChannelAffiliateCode[]
+  customGameCommands ChannelCustomGameCommand[]
   kits               Kit[]
 }
 
@@ -34,9 +35,18 @@ model Kit {
   channelId   String
 }
 
+model ChannelCustomGameCommand {
+  id        String  @id @default(cuid())
+  command   String
+  game      Game    @relation(fields: [gameId], references: [id])
+  gameId    String
+  channel   Channel @relation(fields: [channelId], references: [id])
+  channelId String
+}
+
 model ChannelAffiliateCode {
   id        String  @id @default(cuid())
-  channels  Channel @relation(fields: [channelId], references: [id])
+  channel   Channel @relation(fields: [channelId], references: [id])
   channelId String
   games     Game[]
   gameId    String
@@ -92,7 +102,7 @@ model KitStat {
 }
 
 model Game {
-  id                    String                 @id @default(cuid())
+  id                    String                     @id @default(cuid())
   displayName           String
   urlSafeName           String
   backgroundImageUrl    String
@@ -106,6 +116,7 @@ model Game {
   kitBases              KitBase[]
   channels              Channel[]
   channelAffiliateCodes ChannelAffiliateCode[]
+  customCommandStrings  ChannelCustomGameCommand[]
 }
 
 model Platform {
