@@ -126,12 +126,20 @@ mongoose
 				displayName: channel.displayName,
 				urlSafeName: channel.urlSafeName,
 				viewCount: channel.viewCount,
-				previousUpdater: channel.previousUpdater
+				previousUpdater: channel.previousUpdater,
+				games: channel.games
 			}))
 
-			await prisma.channel.createMany({
-				data: formattedChannels
-			})
+			for (const channel of formattedChannels) {
+				await prisma.channel.create({
+					data: {
+						...channel,
+						games: {
+							connect: channel.games.map((game) => ({ id: game.id.toString() }))
+						}
+					}
+				})
+			}
 			console.timeEnd("Creating channels")
 		}
 

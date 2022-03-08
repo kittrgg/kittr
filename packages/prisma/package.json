@@ -8,7 +8,7 @@
 		"db-migrate": "prisma migrate dev",
 		"generate-schemas": "prisma generate",
 		"db-studio": "prisma studio",
-		"pls": "ts-node ./migration-scripts/index.ts",
+		"pls": "prisma migrate reset --force --skip-seed && ts-node ./migration-scripts/index.ts",
 		"nuke": "ts-node ./migration-scripts/nuke.ts",
 		"format": "prisma format"
 	},

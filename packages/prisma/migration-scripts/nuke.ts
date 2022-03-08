@@ -14,6 +14,7 @@ mongoose
 			await prisma.kitBase.deleteMany()
 			await prisma.kitBaseCategory.deleteMany()
 			await prisma.game.deleteMany()
+			await prisma.channel.deleteMany()
 		}
 
 		main()
