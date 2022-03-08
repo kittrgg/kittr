@@ -19,6 +19,7 @@ mongoose
 		const channels = await Channel.find({}).lean()
 
 		const createGames = async () => {
+			console.time("Creating games")
 			for (const game of games) {
 				await prisma.game.create({
 					data: {
@@ -38,13 +39,23 @@ mongoose
 									create: { displayName: platform }
 								}))
 							]
+						},
+						genres: {
+							connectOrCreate: [
+								...game.genres.map((genre) => ({
+									where: { displayName: genre },
+									create: { displayName: genre }
+								}))
+							]
 						}
 					}
 				})
 			}
+			console.timeEnd("Creating games")
 		}
 
 		const createKitBases = async () => {
+			console.time("Creating kit bases")
 			const formattedBases = bases.map((base) => ({
 				...base,
 				gameInfo: {
@@ -105,9 +116,11 @@ mongoose
 					}
 				})
 			}
+			console.timeEnd("Creating kit bases")
 		}
 
 		const createChannels = async () => {
+			console.time("Creating channels")
 			const formattedChannels = channels.map((channel) => ({
 				createdAt: channel._id.getTimestamp(),
 				displayName: channel.displayName,
@@ -119,6 +132,7 @@ mongoose
 			await prisma.channel.createMany({
 				data: formattedChannels
 			})
+			console.timeEnd("Creating channels")
 		}
 
 		const main = async () => {
