@@ -6,6 +6,7 @@ import { Game } from "../models/Game"
 import { KitBase } from "../models/KitBase"
 import { Channel } from "../models/Channel"
 
+console.time("Script Main")
 mongoose
 	.connect(process.env.MONGOOSE_CONNECTION_STRING as string, {
 		authSource: "admin"
@@ -13,14 +14,13 @@ mongoose
 	.then(async () => {
 		console.log("Connected to MongoDB")
 		// Pick up all the data that I will be needing once
-		const games = await Game.find({}).lean()
-		const bases = await KitBase.find({}).lean()
-		const options = await KitOption.find({}).lean()
-		const channels = await Channel.find({}).lean()
+		const mongoGames = await Game.find({}).lean()
+		const mongoBases = await KitBase.find({}).lean()
+		const mongoOptions = await KitOption.find({}).lean()
+		const mongoChannels = await Channel.find({}).lean()
 
 		const createGames = async () => {
-			console.time("Creating games")
-			for (const game of games) {
+			for (const game of mongoGames) {
 				await prisma.game.create({
 					data: {
 						id: game._id.toString(),
@@ -51,23 +51,22 @@ mongoose
 					}
 				})
 			}
-			console.timeEnd("Creating games")
 		}
 
 		const createKitBases = async () => {
-			console.time("Creating kit bases")
-			const formattedBases = bases.map((base) => ({
+			const formattedBases = mongoBases.map((base) => ({
 				...base,
+				id: base._id.toString(),
 				gameInfo: {
 					...base.gameInfo,
 					availableOptions: base.gameInfo.availableOptions.map((option) => {
-						const foundOption = options.find((o) => {
+						const foundOption = mongoOptions.find((o) => {
 							return o._id.toString() === option.optionId.toString()
 						})
 
 						return {
 							orderPlacement: Number(option.orderPlacement) * 10,
-							gameId: (foundOption as any).gameId,
+							gameId: (foundOption as any).gameId.toString(),
 							displayName: (foundOption as any).displayName,
 							slotKey: (foundOption as any).slotKey
 						}
@@ -116,12 +115,10 @@ mongoose
 					}
 				})
 			}
-			console.timeEnd("Creating kit bases")
 		}
 
 		const createChannels = async () => {
-			console.time("Creating channels")
-			const formattedChannels = channels.map((channel) => ({
+			const formattedChannels = mongoChannels.map((channel) => ({
 				id: channel._id.toString(),
 				createdAt: channel._id.getTimestamp(),
 				displayName: channel.displayName,
@@ -161,13 +158,95 @@ mongoose
 					}
 				})
 			}
-			console.timeEnd("Creating channels")
+		}
+
+		const createKits = async () => {
+			// I need the new options from postgres so I can use their ids
+			const newOptions = await prisma.kitOption.findMany({
+				include: { kit: true }
+			})
+
+			// Every kit is for Warzone right now so this is applicable
+			const warzoneId = mongoGames
+				.find((game) => game.displayName === "Warzone")!
+				._id.toString()
+
+			// The kits to map over for our creates
+			const allKits = mongoChannels
+				.map((channel) =>
+					channel.kits.map((kit) => ({
+						...kit,
+						channelId: channel._id.toString(),
+						id: kit._id.toString(),
+						options: kit.options
+							.map((opt) => {
+								const optionId = opt._id.toString()
+								const info = mongoOptions.find(
+									(o) => o._id.toString() === optionId
+								)!
+
+								const newOptionId = newOptions.find((o) => {
+									const displayNameMatch = o.displayName === info.displayName
+									const baseIdMatch = kit.baseId === o.kit.id
+
+									return displayNameMatch && baseIdMatch
+								})
+
+								return newOptionId?.id || undefined
+							})
+							.filter((opt) => !!opt),
+						gameId: warzoneId
+					}))
+				)
+				.flat()
+
+			for (const kit of allKits) {
+				await prisma.kit.create({
+					data: {
+						id: kit.id,
+						customTitle: kit.userData.customTitle,
+						blueprint: kit.userData.blueprint,
+						featured: kit.userData.featured,
+						youtubeUrl: kit.userData.youtubeURL,
+						tiktokUrl: kit.userData.tiktokId,
+						quote: kit.userData.quote,
+						game: {
+							connect: { id: warzoneId! }
+						},
+						kitBase: {
+							connect: {
+								id: kit.baseId
+							}
+						},
+						channel: {
+							connect: {
+								id: kit.channelId
+							}
+						},
+						options: {
+							connect: kit.options.map((opt) => ({ id: opt }))
+						}
+					}
+				})
+			}
 		}
 
 		const main = async () => {
+			console.time("Creating games")
 			await createGames()
+			console.timeEnd("Creating games")
+
+			console.time("Creating kit bases")
 			await createKitBases()
+			console.timeEnd("Creating kit bases")
+
+			console.time("Creating channels")
 			await createChannels()
+			console.timeEnd("Creating channels")
+
+			console.time("Creating kits")
+			await createKits()
+			console.timeEnd("Creating kits")
 		}
 
 		main()
@@ -181,5 +260,6 @@ mongoose
 				console.log(
 					"Dun. You are a good person and I hope that you achieved your goal for this run."
 				)
+				console.timeEnd("Script Main")
 			})
 	})

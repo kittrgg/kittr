@@ -27,6 +27,8 @@ export interface ChannelModel {
 			blueprint?: string
 			featured?: boolean
 			youtubeURL?: string
+			tiktokId?: string
+			quote?: string
 		}
 	}>
 	meta: {

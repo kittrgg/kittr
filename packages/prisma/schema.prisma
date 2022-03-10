@@ -22,15 +22,17 @@ model Channel {
 
 model Kit {
   id          String      @id @default(cuid())
-  customTitle String
-  blueprint   String
-  featured    Boolean
-  youtubeUrl  String
-  tiktokUrl   String
-  quote       String
-  kitBaseId   String
-  kitBase     KitBase     @relation(fields: [kitBaseId], references: [id])
+  customTitle String?
+  blueprint   String?
+  featured    Boolean     @default(false)
+  youtubeUrl  String?
+  tiktokUrl   String?
+  quote       String?
   options     KitOption[]
+  game        Game        @relation(fields: [gameId], references: [id])
+  gameId      String
+  kitBase     KitBase     @relation(fields: [kitBaseId], references: [id])
+  kitBaseId   String
   channel     Channel     @relation(fields: [channelId], references: [id])
   channelId   String
 }
@@ -117,6 +119,7 @@ model Game {
   channels              Channel[]
   channelAffiliateCodes ChannelAffiliateCode[]
   customCommandStrings  ChannelCustomGameCommand[]
+  kits                  Kit[]
 }
 
 model Platform {
