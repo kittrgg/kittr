@@ -125,7 +125,8 @@ mongoose
 				urlSafeName: channel.urlSafeName,
 				viewCount: channel.viewCount,
 				previousUpdater: channel.previousUpdater,
-				games: channel.games
+				games: channel.games,
+				managers: channel.managers
 			}))
 
 			for (const channel of formattedChannels) {
@@ -154,6 +155,12 @@ mongoose
 										command: game.commandString!
 									}
 								})
+						},
+						managers: {
+							create: channel.managers.map((manager) => ({
+								firebaseId: manager.uid.toString(),
+								role: manager.role
+							}))
 						}
 					}
 				})

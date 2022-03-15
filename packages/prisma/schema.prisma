@@ -23,9 +23,13 @@ model Channel {
 }
 
 model ChannelManager {
-  id       String    @id @default(cuid())
-  role     String    @default("Owner")
-  channels Channel[]
+  id         String  @id @default(cuid())
+  firebaseId String
+  role       String  @default("Owner")
+  channel    Channel @relation(fields: [channelId], references: [id])
+  channelId  String
+
+  @@unique([id, firebaseId])
 }
 
 model ChannelKitOverlay {
