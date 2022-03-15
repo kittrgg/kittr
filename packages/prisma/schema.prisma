@@ -18,23 +18,48 @@ model Channel {
   gameAffiliateCodes ChannelAffiliateCode[]
   customGameCommands ChannelCustomGameCommand[]
   kits               Kit[]
+  overlay            ChannelKitOverlay?
+  managers           ChannelManager[]
+}
+
+model ChannelManager {
+  id       String    @id @default(cuid())
+  role     String    @default("Owner")
+  channels Channel[]
+}
+
+model ChannelKitOverlay {
+  id                       String  @id @default(cuid())
+  channel                  Channel @relation(fields: [channelId], references: [id])
+  channelId                String  @unique
+  backgroundColorPrimary   String?
+  backgroundColorSecondary String?
+  textColorPrimary         String?
+  textColorSecondary       String?
+  textColorAccent          String?
+  primaryKit               Kit?    @relation(name: "primaryKitOverlay", fields: [primaryKitId], references: [id])
+  primaryKitId             String? @unique
+  secondaryKit             Kit?    @relation(name: "secondaryKitOverlay", fields: [secondaryKitId], references: [id])
+  secondaryKitId           String? @unique
 }
 
 model Kit {
-  id          String      @id @default(cuid())
-  customTitle String?
-  blueprint   String?
-  featured    Boolean     @default(false)
-  youtubeUrl  String?
-  tiktokUrl   String?
-  quote       String?
-  options     KitOption[]
-  game        Game        @relation(fields: [gameId], references: [id])
-  gameId      String
-  kitBase     KitBase     @relation(fields: [kitBaseId], references: [id])
-  kitBaseId   String
-  channel     Channel     @relation(fields: [channelId], references: [id])
-  channelId   String
+  id                         String             @id @default(cuid())
+  customTitle                String?
+  blueprint                  String?
+  featured                   Boolean            @default(false)
+  youtubeUrl                 String?
+  tiktokUrl                  String?
+  quote                      String?
+  options                    KitOption[]
+  game                       Game               @relation(fields: [gameId], references: [id])
+  gameId                     String
+  kitBase                    KitBase            @relation(fields: [kitBaseId], references: [id])
+  kitBaseId                  String
+  channel                    Channel            @relation(fields: [channelId], references: [id])
+  channelId                  String
+  channelKitOverlayPrimary   ChannelKitOverlay? @relation(name: "primaryKitOverlay")
+  channelKitOverlaySecondary ChannelKitOverlay? @relation(name: "secondaryKitOverlay")
 }
 
 model ChannelCustomGameCommand {

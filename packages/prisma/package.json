@@ -5,7 +5,7 @@
 	"scripts": {
 		"clean": "rm -rf .turbo && rm -rf node_modules",
 		"db-deploy": "prisma migrate deploy",
-		"db-migrate": "prisma migrate dev",
+		"db-migrate": "prisma db push --force-reset",
 		"generate-schemas": "prisma generate",
 		"db-studio": "prisma studio",
 		"pls": "prisma db push --force-reset && ts-node ./migration-scripts/index.ts",

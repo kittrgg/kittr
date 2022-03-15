@@ -231,6 +231,57 @@ mongoose
 			}
 		}
 
+		const createOverlays = async () => {
+			const channels = mongoChannels.map((channel) => ({
+				channelId: channel._id,
+				kits: channel.kits,
+				overlay: channel.overlay
+			}))
+
+			for (const channel of channels) {
+				const foundPrimaryKit = channel.kits
+					.find(
+						(kit) =>
+							kit._id.toString() === channel.overlay?.primaryKit?._id.toString()
+					)
+					?._id.toString()
+				const foundSecondaryKit = channel.kits
+					.find(
+						(kit) =>
+							kit._id.toString() ===
+							channel.overlay?.secondaryKit?._id.toString()
+					)
+					?._id.toString()
+
+				if (channel.overlay) {
+					await prisma.channelKitOverlay.create({
+						data: {
+							...channel.overlay,
+							primaryKit: foundPrimaryKit
+								? {
+										connect: {
+											id: foundPrimaryKit
+										}
+								  }
+								: undefined,
+							secondaryKit: foundSecondaryKit
+								? {
+										connect: {
+											id: foundSecondaryKit
+										}
+								  }
+								: undefined,
+							channel: {
+								connect: {
+									id: channel.channelId.toString()
+								}
+							}
+						}
+					})
+				}
+			}
+		}
+
 		const main = async () => {
 			console.time("Creating games")
 			await createGames()
@@ -247,6 +298,10 @@ mongoose
 			console.time("Creating kits")
 			await createKits()
 			console.timeEnd("Creating kits")
+
+			console.time("Creating Overlays")
+			await createOverlays()
+			console.timeEnd("Creating Overlays")
 		}
 
 		main()

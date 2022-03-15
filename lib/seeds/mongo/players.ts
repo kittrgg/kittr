@@ -1561,6 +1561,30 @@ const raw = [
 		],
 		kits: [
 			{
+				_id: "61c165f95f8ca00009f4149e",
+				baseId: "61b11331cbb40a531ccf076c",
+				options: [
+					"61b10468cbb40a531ccf0531",
+					"61b10556cbb40a531ccf056f",
+					"61b107c2cbb40a531ccf05fd",
+					"61b10735cbb40a531ccf05cf",
+					"61b28b7476830d41506785b7",
+					"61b10cdbcbb40a531ccf06e8",
+					"61b10d75cbb40a531ccf06f6",
+					"61b10db7cbb40a531ccf070a",
+					"61b10e49cbb40a531ccf0752",
+					"61b103d2cbb40a531ccf0505"
+				],
+				userData: {
+					customTitle: "",
+					blueprint: "",
+					featured: false,
+					youtubeURL: "",
+					tiktokId: "",
+					quote: ""
+				}
+			},
+			{
 				_id: "61b569f91104450009acff8b",
 				baseId: "61b112a7cbb40a531ccf0768",
 				options: [
