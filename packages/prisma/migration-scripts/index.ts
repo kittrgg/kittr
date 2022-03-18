@@ -1,5 +1,6 @@
 import { prisma } from "../index"
 import mongoose from "mongoose"
+import { LinkProperties } from "@prisma/client"
 
 import { KitOption } from "../models/KitOption"
 import { Game } from "../models/Game"
@@ -126,13 +127,24 @@ mongoose
 				viewCount: channel.viewCount,
 				previousUpdater: channel.previousUpdater,
 				games: channel.games,
-				managers: channel.managers
+				managers: channel.managers,
+				hasCoverPhoto: channel.meta.hasCoverPhoto,
+				affiliates: channel.meta.affiliates,
+				brandColors: channel.meta.brandColors,
+				specs: channel.meta.specs,
+				stripeId: channel.meta.stripeId,
+				premiumType: channel.meta.premiumType,
+				links: channel.meta.links,
+				setupPhotos: channel.meta.setupPhotos
 			}))
 
 			for (const channel of formattedChannels) {
 				await prisma.channel.create({
 					data: {
-						...channel,
+						id: channel.id,
+						displayName: channel.displayName,
+						urlSafeName: channel.urlSafeName,
+						viewCount: channel.viewCount,
 						games: {
 							connect: channel.games.map((game) => ({ id: game.id.toString() }))
 						},
@@ -160,6 +172,57 @@ mongoose
 							create: channel.managers.map((manager) => ({
 								firebaseId: manager.uid.toString(),
 								role: manager.role
+							}))
+						},
+						profile: {
+							create: {
+								hasCoverPhoto: channel.hasCoverPhoto || false,
+								affiliates: {
+									create: Object.values(channel.affiliates || {}).map(
+										(affiliate) => ({
+											code: affiliate.code,
+											description: affiliate.description,
+											company: affiliate.company,
+											url: affiliate.url
+										})
+									)
+								},
+								channelPcSpecs: {
+									create: Object.entries(channel.specs || {}).map((spec) => ({
+										partType: spec[0],
+										partName: spec[1]
+									}))
+								},
+								setupPhotos: {
+									create: Object.entries(channel.setupPhotos || {}).map(
+										(photo) => {
+											return {
+												slot: Number(photo[0]),
+												exists: photo[1] as unknown as boolean
+											}
+										}
+									)
+								},
+								brandColors: {
+									create: Object.entries(channel.brandColors || {}).map(
+										(entry) => ({
+											type: entry[0],
+											value: entry[1]
+										})
+									)
+								}
+							}
+						},
+						plan: {
+							create: {
+								type: channel.premiumType,
+								stripeSubscriptionId: channel.stripeId || ""
+							}
+						},
+						links: {
+							create: Object.entries(channel.links).map((entry) => ({
+								property: entry[0].toUpperCase() as LinkProperties,
+								value: entry[1]
 							}))
 						}
 					}

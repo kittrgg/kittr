@@ -13,7 +13,7 @@ const SetupPhotos = ({ _id, meta }: IChannel) => {
 	const [photoPathsArray, setPhotoPathsArray] = useState<Array<string>>([])
 
 	useEffect(() => {
-		// Turn the setupPhotoes from the DB into an array of only the ones that exist
+		// Turn the setupPhotos from the DB into an array of only the ones that exist
 		const setupEntries = Object.entries(setupPhotos || {}).filter((elem) => !!elem[1])
 
 		const fetchImages = async () => {

@@ -20,6 +20,79 @@ model Channel {
   kits               Kit[]
   overlay            ChannelKitOverlay?
   managers           ChannelManager[]
+  profile            ChannelProfile?
+  plan               ChannelPlan?
+  links              ChannelLink[]
+}
+
+model ChannelProfile {
+  id             String              @id @default(cuid())
+  brandColors    ChannelBrandColor[]
+  hasCoverPhoto  Boolean
+  channelPcSpecs ChannelPcSpec[]
+  affiliates     ChannelAffiliate[]
+  setupPhotos    SetupPhotos[]
+  channel        Channel             @relation(fields: [channelId], references: [id])
+  channelId      String              @unique
+}
+
+model SetupPhotos {
+  id               String         @id @default(cuid())
+  channelProfile   ChannelProfile @relation(fields: [channelProfileId], references: [id])
+  channelProfileId String
+  slot             Int
+  exists           Boolean
+}
+
+enum LinkProperties {
+  TWITCH
+  YOUTUBE
+  INSTAGRAM
+  TWITTER
+  FACEBOOK
+  DISCORD
+  TIKTOK
+}
+
+model ChannelLink {
+  id        String         @id @default(cuid())
+  property  LinkProperties
+  value     String
+  channel   Channel        @relation(fields: [channelId], references: [id])
+  channelId String
+}
+
+model ChannelPlan {
+  id                   String  @id @default(cuid())
+  stripeSubscriptionId String
+  type                 String  @default("basic")
+  channel              Channel @relation(fields: [id], references: [id])
+}
+
+model ChannelPcSpec {
+  id               String         @id @default(cuid())
+  partType         String
+  partName         String
+  channelProfile   ChannelProfile @relation(fields: [channelProfileId], references: [id])
+  channelProfileId String
+}
+
+model ChannelAffiliate {
+  id               String          @id @default(cuid())
+  code             String?
+  description      String?
+  company          String?
+  url              String?
+  channelProfile   ChannelProfile? @relation(fields: [channelProfileId], references: [id])
+  channelProfileId String?
+}
+
+model ChannelBrandColor {
+  id               String          @id @default(cuid())
+  type             String
+  value            String
+  channelProfile   ChannelProfile? @relation(fields: [channelProfileId], references: [id])
+  channelProfileId String?
 }
 
 model ChannelManager {
