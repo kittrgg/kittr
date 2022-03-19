@@ -18,6 +18,7 @@
 		"@juggle/resize-observer": "3.3.1",
 		"@kittr/config": "*",
 		"@kittr/logger": "*",
+		"@kittr/prisma": "*",
 		"@kittr/types": "*",
 		"@kittr/ui": "*",
 		"@reduxjs/toolkit": "1.7.2",

@@ -3,6 +3,7 @@
 	"version": "0.1.1",
 	"private": true,
 	"scripts": {
+		"dev": "tsup index.ts --watch --dts",
 		"clean": "rm -rf .turbo && rm -rf node_modules",
 		"db-deploy": "prisma migrate deploy",
 		"db-migrate": "prisma db push --force-reset",
@@ -21,8 +22,11 @@
 		"@prisma/client": "3.9.2",
 		"mongoose": "6.2.3"
 	},
-	"main": "index.ts",
-	"types": "index.d.ts",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
 	"prisma": {
 		"seed": "ts-node ./seed.ts"
 	}

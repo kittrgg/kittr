@@ -1,0 +1,31 @@
+{
+	"display": "@doggo/prisma",
+	"compilerOptions": {
+		"target": "es6",
+		"lib": ["esnext"],
+		"composite": false,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"inlineSources": false,
+		"isolatedModules": true,
+		"moduleResolution": "node",
+		"noUnusedLocals": false,
+		"noUnusedParameters": false,
+		"preserveWatchOutput": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"outDir": "dist",
+		"declaration": true,
+		"incremental": true,
+		"tsBuildInfoFile": "tsbuildinfo.json"
+	},
+	"include": ["index.ts"],
+	"exclude": [
+		"**/node_modules",
+		".turbo",
+		"coverage",
+		"build",
+		"**/*.test.ts",
+		"**/*.spec.ts"
+	]
+}

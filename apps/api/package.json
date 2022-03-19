@@ -17,6 +17,7 @@
 		"@google-analytics/data": "2.8.0",
 		"@kittr/config": "*",
 		"@kittr/logger": "*",
+		"@kittr/prisma": "*",
 		"@kittr/types": "*",
 		"axios": "0.26.0",
 		"cors": "2.8.5",

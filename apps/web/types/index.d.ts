@@ -1,5 +1,7 @@
-import * as typos from "@kittr/types"
+import { Prisma } from "@kittr/prisma"
 
-declare namespace kittr {
-	export type test = "fart"
-}
+const userWithPosts = Prisma.validator<Prisma.GameArgs>()({
+	include: { genres: true, platforms: true }
+})
+
+export type GameWithGenresAndPlatforms = Prisma.GameGetPayload<typeof userWithPosts>

@@ -1,17 +1,17 @@
-import { IGame } from "@kittr/types/game"
 import colors from "@Colors"
 import AdPageWrapper, { H1 } from "@Components/layouts/AdPageWrapper"
 import GameCard from "@Components/shared/GameCard"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
-import { allGamesQuery } from "@Services/mongodb"
 import ResponsiveBanner from "@Services/venatus/ResponsiveBanner"
 import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
 import { Routes } from "@Utils/lookups/routes"
 import { useRouter } from "next/router"
 import styled from "styled-components"
+import { prisma } from "@kittr/prisma"
+import { GameWithGenresAndPlatforms } from "../../../types"
 
 interface Props {
-	games: Array<IGame>
+	games: Array<GameWithGenresAndPlatforms>
 }
 
 const GamesIndex = ({ games }: Props) => {
@@ -28,7 +28,7 @@ const GamesIndex = ({ games }: Props) => {
 					games.map((elem) => {
 						return (
 							<GameCard
-								key={elem._id}
+								key={elem.id}
 								{...elem}
 								onClick={() => elem.active && router.push(Routes.GAMES.createPath(elem.urlSafeName))}
 							/>
@@ -42,10 +42,18 @@ const GamesIndex = ({ games }: Props) => {
 
 export const getStaticProps = async () => {
 	await connectToDatabase()
+	const raw = await prisma.game.findMany({
+		include: {
+			genres: true,
+			platforms: true
+		}
+	})
+
+	const formatted = raw.map((elem) => ({ ...elem, releaseDate: elem.releaseDate.toString() }))
 
 	return {
 		props: {
-			games: await allGamesQuery()
+			games: formatted
 		},
 		revalidate: 60
 	}

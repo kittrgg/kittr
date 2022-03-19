@@ -130,6 +130,6 @@ mongoose
 	})
 	.catch((err) => {
 		console.log("Error connecting to MongoDB:")
-		console.error(err)
-		Logger.captureException(err)
+		// console.error(err)
+		// Logger.captureException(err)
 	})
