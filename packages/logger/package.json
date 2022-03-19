@@ -3,11 +3,14 @@
 	"version": "0.0.0",
 	"main": "./index.js",
 	"private": true,
+	"files": [
+		"dist"
+	],
 	"scripts": {
 		"test": "jest --coverage",
 		"test:watch": "jest --watch --coverage",
-		"dev": "tsc -w",
-		"build": "tsc",
+		"dev": "tsup src/**/index.ts --watch --dts",
+		"build": "tsup src/**/index.ts --dts",
 		"lint": "eslint \"**/*.ts\" --fix",
 		"clean": "rm -rf .turbo && rm -rf dist && rm -rf coverage && rm -rf node_modules",
 		"type-check": "tsc --pretty --noEmit"

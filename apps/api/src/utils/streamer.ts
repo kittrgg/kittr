@@ -1,4 +1,3 @@
-import { IChannel, IGame, IKitBase, IKitOption } from "@kittr/types"
 import { Request, Response } from "express"
 import mongoose from "mongoose"
 import Player from "../models/Player"
@@ -53,7 +52,7 @@ const allSetupsForComparisonQuery = async () => {
 }
 
 const allGamesQuery = async () => {
-	const result = await Game.find({}).lean<IGame[]>()
+	const result = await Game.find({}).lean<any[]>()
 
 	const serialized = result.map((elem) => ({
 		...elem,
@@ -65,7 +64,7 @@ const allGamesQuery = async () => {
 }
 
 const allBasesQuery = async () => {
-	const result = await KitBase.find({}).lean<IKitBase[]>()
+	const result = await KitBase.find({}).lean<any[]>()
 
 	const serialized = result.map((elem) => ({
 		...elem,
@@ -77,7 +76,7 @@ const allBasesQuery = async () => {
 }
 
 const allOptionsQuery = async () => {
-	const result = await KitOption.find({}).lean<IKitOption[]>()
+	const result = await KitOption.find({}).lean<any[]>()
 
 	const serialized = result.map((elem) => ({
 		...elem,
@@ -95,7 +94,7 @@ interface IFunc {
 	 * @returns
 	 * Promise with array of serialized channels.
 	 */
-	(channelsArr: IChannel[]): Promise<IChannel[]>
+	(channelsArr: any[]): Promise<any[]>
 }
 
 /** Serialize an array of players from mongodb. */
@@ -109,7 +108,7 @@ export const serializeChannels: IFunc = async (channelsArr) => {
 	return channelsArr.map((channel) => ({
 		...channel,
 		_id: channel._id.toString(),
-		games: channel.games.map((game) => ({
+		games: channel.games.map((game: any) => ({
 			...game,
 			id: game.id.toString(),
 			...games.find(
@@ -117,7 +116,7 @@ export const serializeChannels: IFunc = async (channelsArr) => {
 			)
 		})),
 		createdDate: channel.createdDate.toString(),
-		kits: channel.kits.map((kit) => ({
+		kits: channel.kits.map((kit: any) => ({
 			...kit,
 			_id: kit._id.toString(),
 			base: kitBases
@@ -130,10 +129,10 @@ export const serializeChannels: IFunc = async (channelsArr) => {
 					}
 				}))[0],
 			options: kit.options.map(
-				(opt) =>
+				(opt: any) =>
 					kitOptions.find(
 						(option) => option?._id?.toString() === opt.toString()
-					) as IKitOption
+					) as any
 			)
 		}))
 	}))
@@ -145,7 +144,7 @@ export const getStreamerByTwitchBroadcasterLoginId = async (
 ) => {
 	const rawChannel = await Player.find({
 		"meta.links.twitch": { $regex: `.*${req.query.broadcasterLogin}.*` }
-	}).lean<IChannel[]>()
+	}).lean<any[]>()
 
 	if (rawChannel.length === 0) {
 		return res.status(403).json({
