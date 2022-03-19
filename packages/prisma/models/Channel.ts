@@ -73,6 +73,7 @@ export interface ChannelModel {
 		textColorSecondary: string
 		backgroundColorPrimary: string
 		textColorPrimary: string
+		isOverlayVisible: "on" | "off"
 		primaryKit: IKit
 		secondaryKit: IKit
 	}

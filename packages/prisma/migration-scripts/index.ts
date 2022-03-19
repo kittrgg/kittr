@@ -1,6 +1,6 @@
 import { prisma } from "../index"
 import mongoose from "mongoose"
-import { LinkProperties } from "@prisma/client"
+import { LinkProperties, OverlayVisibilityStates } from "@prisma/client"
 
 import { KitOption } from "../models/KitOption"
 import { Game } from "../models/Game"
@@ -60,18 +60,24 @@ mongoose
 				id: base._id.toString(),
 				gameInfo: {
 					...base.gameInfo,
-					availableOptions: base.gameInfo.availableOptions.map((option) => {
-						const foundOption = mongoOptions.find((o) => {
-							return o._id.toString() === option.optionId.toString()
-						})
+					availableOptions: base.gameInfo.availableOptions
+						.map((option) => {
+							const foundOption = mongoOptions.find((o) => {
+								return o._id.toString() === option.optionId.toString()
+							})
 
-						return {
-							orderPlacement: Number(option.orderPlacement) * 10,
-							gameId: (foundOption as any).gameId.toString(),
-							displayName: (foundOption as any).displayName,
-							slotKey: (foundOption as any).slotKey
-						}
-					})
+							if (!foundOption) {
+								return undefined
+							}
+
+							return {
+								orderPlacement: Number(option.orderPlacement) * 10,
+								gameId: (foundOption as any).gameId.toString(),
+								displayName: (foundOption as any).displayName,
+								slotKey: (foundOption as any).slotKey
+							}
+						})
+						.filter((option) => !!option) as any // Compiler was complaining about returning undefined but...that's not going to happen...because filter...?
 				}
 			}))
 
@@ -105,7 +111,7 @@ mongoose
 							})
 						},
 						availableOptions: {
-							create: base.gameInfo.availableOptions
+							create: base.gameInfo.availableOptions as any
 						},
 						category: {
 							connectOrCreate: {
@@ -244,7 +250,7 @@ mongoose
 			// The kits to map over for our creates
 			const allKits = mongoChannels
 				.map((channel) =>
-					channel.kits.map((kit) => ({
+					channel.kits.map((kit, index) => ({
 						...kit,
 						channelId: channel._id.toString(),
 						id: kit._id.toString(),
@@ -254,6 +260,10 @@ mongoose
 								const info = mongoOptions.find(
 									(o) => o._id.toString() === optionId
 								)!
+
+								if (!info) {
+									return undefined
+								}
 
 								const newOptionId = newOptions.find((o) => {
 									const displayNameMatch = o.displayName === info.displayName
@@ -271,33 +281,39 @@ mongoose
 				.flat()
 
 			for (const kit of allKits) {
-				await prisma.kit.create({
-					data: {
-						id: kit.id,
-						customTitle: kit.userData.customTitle,
-						blueprint: kit.userData.blueprint,
-						featured: kit.userData.featured,
-						youtubeUrl: kit.userData.youtubeURL,
-						tiktokUrl: kit.userData.tiktokId,
-						quote: kit.userData.quote,
-						game: {
-							connect: { id: warzoneId! }
-						},
-						kitBase: {
-							connect: {
-								id: kit.baseId
+				try {
+					await prisma.kit.create({
+						data: {
+							id: kit.id,
+							customTitle: kit.userData.customTitle,
+							blueprint: kit.userData.blueprint,
+							featured: kit.userData.featured,
+							youtubeUrl: kit.userData.youtubeURL,
+							tiktokUrl: kit.userData.tiktokId,
+							quote: kit.userData.quote,
+							game: {
+								connect: { id: warzoneId! }
+							},
+							kitBase: {
+								connect: {
+									id: kit.baseId
+								}
+							},
+							channel: {
+								connect: {
+									id: kit.channelId
+								}
+							},
+							options: {
+								connect: kit.options.map((opt) => ({ id: opt }))
 							}
-						},
-						channel: {
-							connect: {
-								id: kit.channelId
-							}
-						},
-						options: {
-							connect: kit.options.map((opt) => ({ id: opt }))
 						}
-					}
-				})
+					})
+				} catch (err) {
+					console.log(err)
+					console.log({ kitId: kit.id })
+					console.log({ channelId: kit.channelId })
+				}
 			}
 		}
 
@@ -305,21 +321,27 @@ mongoose
 			const channels = mongoChannels.map((channel) => ({
 				channelId: channel._id,
 				kits: channel.kits,
-				overlay: channel.overlay
+				overlay: {
+					...channel.overlay,
+					isOverlayVisible: channel.overlay?.isOverlayVisible?.toUpperCase() as
+						| OverlayVisibilityStates
+						| undefined
+				}
 			}))
 
 			for (const channel of channels) {
 				const foundPrimaryKit = channel.kits
 					.find(
 						(kit) =>
-							kit._id.toString() === channel.overlay?.primaryKit?._id.toString()
+							kit._id.toString() ===
+							channel.overlay?.primaryKit?._id?.toString()
 					)
 					?._id.toString()
 				const foundSecondaryKit = channel.kits
 					.find(
 						(kit) =>
 							kit._id.toString() ===
-							channel.overlay?.secondaryKit?._id.toString()
+							channel.overlay?.secondaryKit?._id?.toString()
 					)
 					?._id.toString()
 
@@ -353,25 +375,30 @@ mongoose
 		}
 
 		const main = async () => {
+			console.log("Creating games...")
 			console.time("Creating games")
 			await createGames()
 			console.timeEnd("Creating games")
 
+			console.log("Creating kit bases...")
 			console.time("Creating kit bases")
 			await createKitBases()
 			console.timeEnd("Creating kit bases")
 
+			console.log("Creating channels...")
 			console.time("Creating channels")
 			await createChannels()
 			console.timeEnd("Creating channels")
 
+			console.log("Creating kits...")
 			console.time("Creating kits")
 			await createKits()
 			console.timeEnd("Creating kits")
 
-			console.time("Creating Overlays")
+			console.log("Creating overlays...")
+			console.time("Creating overlays")
 			await createOverlays()
-			console.timeEnd("Creating Overlays")
+			console.timeEnd("Creating overlays")
 		}
 
 		main()
