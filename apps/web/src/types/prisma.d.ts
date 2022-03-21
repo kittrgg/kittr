@@ -1,7 +1,11 @@
-import { Prisma } from "@kittr/prisma"
+import { Prisma, Channel, ChannelLink } from "@kittr/prisma"
 
-const userWithPosts = Prisma.validator<Prisma.GameArgs>()({
+const GameWithIncludes = Prisma.validator<Prisma.GameArgs>()({
 	include: { genres: true, platforms: true }
 })
 
-export type GameWithGenresAndPlatforms = Prisma.GameGetPayload<typeof userWithPosts>
+export type GameWithGenresAndPlatforms = Prisma.GameGetPayload<typeof GameWithIncludes>
+
+export interface ChannelWithLinks extends Channel {
+	links: ChannelLink[]
+}

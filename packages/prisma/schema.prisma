@@ -26,14 +26,15 @@ model Channel {
 }
 
 model ChannelProfile {
-  id             String              @id @default(cuid())
-  brandColors    ChannelBrandColor[]
-  hasCoverPhoto  Boolean
-  channelPcSpecs ChannelPcSpec[]
-  affiliates     ChannelAffiliate[]
-  setupPhotos    SetupPhotos[]
-  channel        Channel             @relation(fields: [channelId], references: [id])
-  channelId      String              @unique
+  id              String              @id @default(cuid())
+  brandColors     ChannelBrandColor[]
+  hasCoverPhoto   Boolean
+  hasProfileImage Boolean
+  channelPcSpecs  ChannelPcSpec[]
+  affiliates      ChannelAffiliate[]
+  setupPhotos     SetupPhotos[]
+  channel         Channel             @relation(fields: [channelId], references: [id])
+  channelId       String              @unique
 }
 
 model SetupPhotos {
@@ -111,19 +112,19 @@ enum OverlayVisibilityStates {
 }
 
 model ChannelKitOverlay {
-  id                       String  @id @default(cuid())
-  channel                  Channel @relation(fields: [channelId], references: [id])
-  channelId                String  @unique
+  id                       String                  @id @default(cuid())
+  channel                  Channel                 @relation(fields: [channelId], references: [id])
+  channelId                String                  @unique
   backgroundColorPrimary   String?
   backgroundColorSecondary String?
   textColorPrimary         String?
   textColorSecondary       String?
   textColorAccent          String?
-  isOverlayVisible        OverlayVisibilityStates @default(OFF)
-  primaryKit               Kit?    @relation(name: "primaryKitOverlay", fields: [primaryKitId], references: [id])
-  primaryKitId             String? @unique
-  secondaryKit             Kit?    @relation(name: "secondaryKitOverlay", fields: [secondaryKitId], references: [id])
-  secondaryKitId           String? @unique
+  isOverlayVisible         OverlayVisibilityStates @default(OFF)
+  primaryKit               Kit?                    @relation(name: "primaryKitOverlay", fields: [primaryKitId], references: [id])
+  primaryKitId             String?                 @unique
+  secondaryKit             Kit?                    @relation(name: "secondaryKitOverlay", fields: [secondaryKitId], references: [id])
+  secondaryKitId           String?                 @unique
 }
 
 model Kit {

@@ -16,7 +16,11 @@ interface IFunc {
 
 /** Serialize an array of channels from mongodb. Needed to make getStaticProps happy. */
 export const serializeChannels: IFunc = async (channelsArr) => {
-	const [games, kitBases, kitOptions] = await Promise.all([allGamesQuery(), allBasesQuery(), allOptionsQuery()])
+	const [games, kitBases, kitOptions] = await Promise.all([
+		allGamesQuery({ serialized: true }),
+		allBasesQuery(),
+		allOptionsQuery()
+	])
 
 	const serialized = channelsArr.map((channel: IChannel) => ({
 		...channel,

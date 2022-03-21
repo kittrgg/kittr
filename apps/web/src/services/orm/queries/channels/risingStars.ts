@@ -1,72 +1,54 @@
-import { Channel } from "@Services/orm/models"
-import { IChannel } from "@kittr/types/channel"
-
-interface IFunc {
-	/**
-	 * @params
-	 * viewsGreaterThan: Minimum view threshold.
-	 *
-	 * skip: Amount of results to skip. Useful for skipping channels that already show up in "top" results or pagination.
-	 *
-	 * sample: How many channels do you want back?
-	 *
-	 * @returns
-	 * Promise with array of channels (channels do not have kits, managers, or games on them)
-	 *
-	 */
-	(params: {
-		/** Minimum view threshold. */
-		viewsGreaterThan: number
-		/**  Amount of results to skip. Useful for skipping channels that already show up in "top" results or pagination. */
-		skip: number
-		/** How many channels do you want back? */
-		sample: number
-	}): Promise<IChannel[]>
+import { prisma, Channel } from "@kittr/prisma"
+interface SerializedChannel extends Omit<Channel, "createdAt"> {
+	createdAt: string
 }
-
 /**
  * SERVER SIDE ONLY!
  *
- * Get channels who are worthy of mention from the platform but not quite in the top results.
- * */
-export const risingStarsQuery: IFunc = async ({ viewsGreaterThan, skip, sample }) => {
-	const result = await Channel.aggregate<IChannel>([
-		{
-			$match: {
-				"meta.hasProfileImage": true,
-				"viewCount": {
-					$gte: viewsGreaterThan
-				}
-			}
+ * Get the top channels on the platform. */
+export const risingStarsQuery = async ({
+	limit,
+	skip,
+	viewsGreaterThan,
+	serialized
+}: {
+	skip: number
+	limit: number
+	serialized?: boolean
+	viewsGreaterThan: number
+}): Promise<Channel[] | SerializedChannel[]> => {
+	const where = {
+		profile: {
+			hasProfileImage: true
 		},
-		{
-			$sort: {
-				viewCount: -1
-			}
-		},
-		{
-			$skip: skip
-		},
-		{
-			$project: {
-				kits: 0,
-				previousUpdater: 0,
-				createdDate: 0,
-				managers: 0,
-				games: 0
-			}
-		},
-		{
-			$sample: {
-				size: sample
-			}
+		viewCount: {
+			gte: viewsGreaterThan
 		}
-	])
+	}
 
-	const serialized = result.map((channel) => ({
-		...channel,
-		_id: channel._id.toString()
-	}))
+	const channelCount = await prisma.channel.count({
+		where
+	})
 
-	return serialized
+	const randomSkip = Math.max(skip, Math.floor(Math.random() * channelCount) - skip)
+
+	const result = await prisma.channel.findMany({
+		where,
+		skip: randomSkip,
+		take: limit,
+		include: {
+			profile: true
+		}
+	})
+
+	if (serialized) {
+		const serializedResult = result.map((channel) => ({
+			...channel,
+			createdAt: channel.createdAt.toISOString()
+		}))
+
+		return serializedResult
+	}
+
+	return result
 }

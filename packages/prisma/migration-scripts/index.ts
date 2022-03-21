@@ -135,6 +135,7 @@ mongoose
 				games: channel.games,
 				managers: channel.managers,
 				hasCoverPhoto: channel.meta.hasCoverPhoto,
+				hasProfileImage: channel.meta.hasProfileImage,
 				affiliates: channel.meta.affiliates,
 				brandColors: channel.meta.brandColors,
 				specs: channel.meta.specs,
@@ -183,6 +184,7 @@ mongoose
 						profile: {
 							create: {
 								hasCoverPhoto: channel.hasCoverPhoto || false,
+								hasProfileImage: channel.hasProfileImage,
 								affiliates: {
 									create: Object.values(channel.affiliates || {}).map(
 										(affiliate) => ({

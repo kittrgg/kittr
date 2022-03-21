@@ -5,10 +5,6 @@ interface SerializedGame extends Omit<GameWithGenresAndPlatforms, "releaseDate">
 	releaseDate: string
 }
 
-/**
- * SERVER SIDE ONLY!
- *
- * Get all the games on the platform. */
 export const allGamesQuery = async ({
 	serialized
 }: {
