@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import { createHandler } from "@Utils/middlewares/createHandler"
-import { Promo } from "@Services/mongodb/models"
+import { Promo } from "@Services/orm/models"
 import { userAuth } from "@Middlewares/auth"
 
 const handler = createHandler(userAuth)

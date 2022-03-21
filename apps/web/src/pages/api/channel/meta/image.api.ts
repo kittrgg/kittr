@@ -2,10 +2,10 @@ import type { NextApiRequest, NextApiResponse } from "next"
 import { NextServerPayload } from "@kittr/types"
 import { createHandler } from "@Utils/middlewares/createHandler"
 import mongoose from "mongoose"
-import { Channel } from "@Services/mongodb/models"
-import { ChannelModel } from "@Services/mongodb/models/Channel"
+import { Channel } from "@Services/orm/models"
+import { ChannelModel } from "@Services/orm/models/Channel"
 import { userAuth } from "@Middlewares/auth"
-import { sanitize } from "@Services/mongodb/utils/sanitize"
+import { sanitize } from "@Services/orm/utils/sanitize"
 
 const handler = createHandler(userAuth)
 

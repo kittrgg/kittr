@@ -3,9 +3,9 @@ import { NextServerPayload } from "@kittr/types"
 import { createHandler } from "@Utils/middlewares/createHandler"
 import { userAuth } from "@Utils/middlewares/auth"
 import mongoose from "mongoose"
-import Channel, { ChannelModel } from "@Services/mongodb/models/Channel"
-import { sanitize } from "@Services/mongodb/utils/sanitize"
-import { getRawChannelProfileByIdQuery } from "@Services/mongodb"
+import Channel, { ChannelModel } from "@Services/orm/models/Channel"
+import { sanitize } from "@Services/orm/utils/sanitize"
+import { getRawChannelProfileByIdQuery } from "@Services/orm"
 
 const handler = createHandler(userAuth)
 

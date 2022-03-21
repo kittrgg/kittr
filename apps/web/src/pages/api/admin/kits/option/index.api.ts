@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next"
 import { NextServerPayload } from "@kittr/types"
 import { createHandler } from "@Utils/middlewares/createHandler"
 import { adminAuth } from "@Utils/middlewares/auth"
-import KitOption, { KitOptionModel } from "@Services/mongodb/models/KitOption"
+import KitOption, { KitOptionModel } from "@Services/orm/models/KitOption"
 
 const handler = createHandler(adminAuth)
 

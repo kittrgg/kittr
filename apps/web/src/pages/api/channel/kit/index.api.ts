@@ -3,10 +3,10 @@ import { IKitOption } from "@kittr/types/kits"
 import type { NextApiRequest, NextApiResponse } from "next"
 import mongoose, { UpdateWriteOpResult } from "mongoose"
 import { createHandler } from "@Utils/middlewares/createHandler"
-import { Channel } from "@Services/mongodb/models"
+import { Channel } from "@Services/orm/models"
 import { userAuth } from "@Middlewares/auth"
-import { sanitize } from "@Services/mongodb/utils/sanitize"
-import { ChannelModel } from "@Models/Channel"
+import { sanitize } from "@Services/orm/utils/sanitize"
+import { ChannelModel } from "@Services/orm/models/Channel"
 
 const handler = createHandler(userAuth)
 

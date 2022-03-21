@@ -1,4 +1,4 @@
-import { KitBase } from "@Services/mongodb/models"
+import { KitBase } from "@Services/orm/models"
 import { IKitBase } from "@kittr/types/kits"
 
 interface IFunc {

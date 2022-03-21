@@ -1,4 +1,4 @@
-import { Channel } from "@Services/mongodb/models"
+import { Channel } from "@Services/orm/models"
 import { grabLoginName } from "./utils/grabLoginName"
 import { getChannelData } from "./endpoints/getChannelData"
 import { getSchedule } from "./endpoints/getSchedule"

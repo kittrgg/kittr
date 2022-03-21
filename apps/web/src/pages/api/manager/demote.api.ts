@@ -4,8 +4,8 @@ import { IManager } from "@kittr/types/manager"
 import { createHandler } from "@Utils/middlewares/createHandler"
 import { userAuth } from "@Utils/middlewares/auth"
 import mongoose from "mongoose"
-import Channel, { ChannelModel } from "@Services/mongodb/models/Channel"
-import { sanitize } from "@Services/mongodb/utils/sanitize"
+import Channel, { ChannelModel } from "@Services/orm/models/Channel"
+import { sanitize } from "@Services/orm/utils/sanitize"
 
 const handler = createHandler(userAuth)
 

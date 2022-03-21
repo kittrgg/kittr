@@ -1,4 +1,4 @@
-import { KitOption } from "@Services/mongodb/models"
+import { KitOption } from "@Services/orm/models"
 import { IKitOption } from "@kittr/types/kits"
 
 interface IFunc {

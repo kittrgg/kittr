@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next"
-import { getRawChannelProfileQuery } from "@Services/mongodb"
+import { getRawChannelProfileQuery } from "@Services/orm"
 import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
 import KitOverlay from "@Features/Overlays/ActiveKit"
 interface Props {

@@ -7,7 +7,7 @@ import { useRouter } from "next/router"
 import ChannelProfile from "@Features/ChannelProfile"
 import { NoItemFound } from "@Components/shared"
 import PageWrapper from "@Components/layouts/PageWrapper"
-import { getChannelProfileQuery, getChannelsQuery } from "@Services/mongodb"
+import { getChannelProfileQuery, getChannelsQuery } from "@Services/orm"
 import { profilePageQuery } from "@Services/twitch/getProfilePageData"
 import FallbackPage from "@Components/layouts/FallbackPage"
 

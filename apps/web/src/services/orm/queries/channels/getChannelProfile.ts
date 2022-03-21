@@ -1,6 +1,6 @@
-import { Channel } from "@Services/mongodb/models"
+import { Channel } from "@Services/orm/models"
 import { IChannel } from "@kittr/types/channel"
-import { serializeChannels } from "@Services/mongodb/utils/serializeChannels"
+import { serializeChannels } from "@Services/orm/utils/serializeChannels"
 
 interface IFunc {
 	/**

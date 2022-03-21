@@ -1,4 +1,4 @@
-import { Promo } from "@Services/mongodb/models/Promo"
+import { Promo } from "@Services/orm/models/Promo"
 import { logError } from "@kittr/logger/nextjs"
 import { IPromo } from "@kittr/types/types"
 

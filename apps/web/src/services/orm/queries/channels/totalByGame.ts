@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-import { Channel } from "@Services/mongodb/models"
+import { Channel } from "@Services/orm/models"
 
 interface IChannelsByGameQuery {
 	/**

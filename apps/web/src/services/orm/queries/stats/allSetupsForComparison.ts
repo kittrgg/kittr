@@ -1,4 +1,4 @@
-import { Channel } from "@Services/mongodb/models"
+import { Channel } from "@Services/orm/models"
 import mongoose from "mongoose"
 
 interface IFunction {

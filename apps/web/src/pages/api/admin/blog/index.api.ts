@@ -3,8 +3,8 @@ import { NextServerPayload } from "@kittr/types"
 import { createHandler } from "@Utils/middlewares/createHandler"
 import { adminAuth } from "@Utils/middlewares/auth"
 import mongoose from "mongoose"
-import { BlogPost } from "@Services/mongodb/models"
-import { BlogPostModel } from "@Services/mongodb/models/BlogPost"
+import { BlogPost } from "@Services/orm/models"
+import { BlogPostModel } from "@Services/orm/models/BlogPost"
 import { toURL } from "@Utils/helpers/toURL"
 
 const handler = createHandler(adminAuth)

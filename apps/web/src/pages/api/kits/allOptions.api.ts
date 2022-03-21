@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import { createHandler } from "@Utils/middlewares/createHandler"
-import { KitOption } from "@Services/mongodb/models"
+import { KitOption } from "@Services/orm/models"
 
 const handler = createHandler()
 

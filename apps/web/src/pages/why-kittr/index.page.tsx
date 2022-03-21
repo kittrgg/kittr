@@ -1,6 +1,6 @@
 import ContactUs from "@Components/shared/ContactUs"
 import Head from "@Components/shared/Head"
-import { totalKitsQuery } from "@Services/mongodb"
+import { totalKitsQuery } from "@Services/orm"
 import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
 import { Routes } from "@Utils/lookups/routes"
 import { GetStaticProps } from "next"

@@ -1,4 +1,4 @@
-import { Channel } from "@Services/mongodb/models"
+import { Channel } from "@Services/orm/models"
 import { IChannel } from "@kittr/types/channel"
 
 interface ITopChannels {

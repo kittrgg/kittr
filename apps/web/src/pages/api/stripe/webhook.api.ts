@@ -1,6 +1,6 @@
 import fetch from "@Fetch"
 import { createHandler } from "@Middlewares/createHandler"
-import Channel from "@Services/mongodb/models/Channel"
+import Channel from "@Services/orm/models/Channel"
 import { buffer } from "micro"
 import mongoose from "mongoose"
 import type { NextApiRequest, NextApiResponse } from "next"

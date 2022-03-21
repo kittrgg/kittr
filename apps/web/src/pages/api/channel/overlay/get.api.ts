@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import { createHandler } from "@Utils/middlewares/createHandler"
-import { getRawChannelProfileByIdQuery } from "@Services/mongodb"
+import { getRawChannelProfileByIdQuery } from "@Services/orm"
 
 const handler = createHandler()
 

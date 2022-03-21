@@ -1,7 +1,7 @@
 import { IHomePageBoostr } from "@kittr/types/types"
 
 import mongoose from "mongoose"
-import { Channel } from "@Services/mongodb/models"
+import { Channel } from "@Services/orm/models"
 import { headers } from "@Services/twitch/utils/auth"
 import { grabLoginName } from "@Services/twitch/utils/grabLoginName"
 import fetch from "@Fetch"

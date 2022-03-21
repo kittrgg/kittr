@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import { createHandler } from "@Middlewares/createHandler"
-import Channel from "@Services/mongodb/models/Channel"
-import { sanitize } from "@Services/mongodb/utils/sanitize"
+import Channel from "@Services/orm/models/Channel"
+import { sanitize } from "@Services/orm/utils/sanitize"
 
 const handler = createHandler()
 

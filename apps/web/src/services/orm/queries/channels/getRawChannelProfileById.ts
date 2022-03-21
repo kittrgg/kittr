@@ -1,4 +1,4 @@
-import Channel, { ChannelModel } from "@Services/mongodb/models/Channel"
+import Channel, { ChannelModel } from "@Services/orm/models/Channel"
 
 interface IFunc {
 	/**

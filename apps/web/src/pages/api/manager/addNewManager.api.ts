@@ -5,10 +5,10 @@ import admin from "@Services/firebase/admin"
 import { createHandler } from "@Utils/middlewares/createHandler"
 import { userAuth } from "@Utils/middlewares/auth"
 import mongoose from "mongoose"
-import { Channel } from "@Services/mongodb/models"
+import { Channel } from "@Services/orm/models"
 import { FirebaseError } from "firebase-admin"
-import { sanitize } from "@Services/mongodb/utils/sanitize"
-import { ChannelModel } from "@Models/Channel"
+import { sanitize } from "@Services/orm/utils/sanitize"
+import { ChannelModel } from "@Services/orm/models/Channel"
 
 const handler = createHandler(userAuth)
 

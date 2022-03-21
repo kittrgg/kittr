@@ -1,7 +1,7 @@
 import { NextServerPayload } from "@kittr/types/types"
 import type { NextApiRequest, NextApiResponse } from "next"
 import { createHandler } from "@Utils/middlewares/createHandler"
-import Channel from "@Models/Channel"
+import Channel from "@Services/orm/models/Channel"
 import Stripe from "stripe"
 import { userAuth } from "@Middlewares/auth"
 

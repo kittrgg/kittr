@@ -1,8 +1,8 @@
 import mongoose from "mongoose"
 import type { NextApiRequest, NextApiResponse } from "next"
 import { createHandler } from "@Utils/middlewares/createHandler"
-import { KitBase } from "@Services/mongodb/models"
-import { sanitize } from "@Services/mongodb/utils/sanitize"
+import { KitBase } from "@Services/orm/models"
+import { sanitize } from "@Services/orm/utils/sanitize"
 
 const handler = createHandler()
 

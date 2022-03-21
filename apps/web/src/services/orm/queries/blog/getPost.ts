@@ -1,4 +1,4 @@
-import { BlogPost } from "@Services/mongodb/models"
+import { BlogPost } from "@Services/orm/models"
 import { IPost } from "@kittr/types/types"
 
 interface IFunc {

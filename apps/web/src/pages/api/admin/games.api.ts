@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next"
 import { NextServerPayload } from "@kittr/types"
 import { createHandler } from "@Utils/middlewares/createHandler"
 import { adminAuth } from "@Utils/middlewares/auth"
-import Game, { GameModel } from "@Models/Game"
+import Game, { GameModel } from "@Services/orm/models/Game"
 
 const handler = createHandler(adminAuth)
 

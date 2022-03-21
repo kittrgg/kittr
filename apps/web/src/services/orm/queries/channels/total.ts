@@ -1,4 +1,4 @@
-import Channel from "@Services/mongodb/models/Channel"
+import Channel from "@Services/orm/models/Channel"
 
 interface IChannelQuery {
 	/**

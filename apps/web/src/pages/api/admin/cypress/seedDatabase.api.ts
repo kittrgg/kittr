@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import { createHandler } from "@Utils/middlewares/createHandler"
-import { Channel } from "@Services/mongodb/models"
+import { Channel } from "@Services/orm/models"
 import mongoose from "mongoose"
 
 import dummyChannelFixture from "@Utils/fixtures/mongoose/newChannel.json"

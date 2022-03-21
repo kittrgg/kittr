@@ -7,7 +7,7 @@ import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
 import { Routes } from "@Utils/lookups/routes"
 import { useRouter } from "next/router"
 import styled from "styled-components"
-import { allGamesQuery } from "@Services/mongodb"
+import { allGamesQuery } from "@Services/orm"
 import { GameWithGenresAndPlatforms } from "@Types/prisma"
 
 interface Props {

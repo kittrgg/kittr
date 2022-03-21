@@ -13,7 +13,7 @@ import { Spinner, SVG, Button } from "@Components/shared"
 import { deleteFile } from "@Services/firebase/storage"
 import fetch from "@Fetch"
 import { isFetchError } from "@Utils/helpers/typeGuards"
-import { ChannelModel } from "@Models/Channel"
+import { ChannelModel } from "@Services/orm/models/Channel"
 
 const CoverPhotoUploader = ({ ...props }) => {
 	const dispatch = useDispatch()
