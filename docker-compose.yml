@@ -18,8 +18,6 @@ services:
     restart: always
     ports:
       - 27017:27017
-    volumes:
-      - mongodata:/data/db
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
@@ -49,6 +47,3 @@ services:
       - ./lib/firebase-emulators/storage.rules:/src/storage.rules
       - ./lib/firebase-emulators/seed:/src/firebase/seed
     command: firebase emulators:start --project dev --import=./firebase/seed --debug
-
-volumes:
-  mongodata:

@@ -1,26 +1,36 @@
-import { Game } from "@Services/mongodb/models"
-import { IGame } from "@kittr/types/game"
+import { prisma } from "@kittr/prisma"
+import { GameWithGenresAndPlatforms } from "@Types/prisma"
 
-interface IFunc {
-	/**
-	 * @returns
-	 * Promise with array of games
-	 */
-	(): Promise<IGame[]>
+interface SerializedGame extends Omit<GameWithGenresAndPlatforms, "releaseDate"> {
+	releaseDate: string
 }
 
 /**
  * SERVER SIDE ONLY!
  *
  * Get all the games on the platform. */
-export const allGamesQuery: IFunc = async () => {
-	const result = await Game.find({}).lean<IGame[]>()
+export const allGamesQuery = async ({
+	serialized
+}: {
+	serialized?: boolean
+}): Promise<GameWithGenresAndPlatforms[] | SerializedGame[]> => {
+	const games = await prisma.game.findMany({
+		include: {
+			platforms: true,
+			genres: true
+		}
+	})
 
-	const serialized = result.map((elem) => ({
-		...elem,
-		_id: elem._id.toString(),
-		releaseDate: elem.releaseDate.toString() as unknown as Date
-	}))
+	if (serialized) {
+		const serializedQuery: SerializedGame[] = games.map((game) => {
+			return {
+				...game,
+				releaseDate: game.releaseDate.toISOString()
+			}
+		})
 
-	return serialized
+		return serializedQuery
+	}
+
+	return games
 }

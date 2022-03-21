@@ -1,30 +1,11 @@
-import { Channel } from "@Services/mongodb/models"
-
-interface ITotalKits {
-	/**
-	 * @returns
-	 * Number of kits that are on the platform
-	 */
-	(): Promise<number>
-}
+import { prisma } from "@kittr/prisma"
 
 /**
  *  SERVER SIDE ONLY!
  *
  * Get the total amount of kits on the platform. */
-export const totalKitsQuery: ITotalKits = async () => {
-	const result = await Channel.aggregate([
-		{
-			$group: {
-				_id: null,
-				total: {
-					$sum: {
-						$size: "$kits"
-					}
-				}
-			}
-		}
-	])
+export const totalKitsQuery = async (): Promise<number> => {
+	const result = await prisma.kit.count()
 
-	return result[0].total
+	return result
 }

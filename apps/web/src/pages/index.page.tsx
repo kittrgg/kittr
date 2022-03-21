@@ -1,5 +1,4 @@
 import { IChannel } from "@kittr/types/channel"
-import { IGame } from "@kittr/types/game"
 import { IPost, IHomePageBoostr } from "@kittr/types/types"
 import PageWrapper from "@Components/layouts/PageWrapper"
 import FrontPageBoostr from "@Features/Promo/FrontPage"
@@ -14,9 +13,10 @@ import BlogSection from "./Home/BlogSection"
 import Body from "./Home/Body"
 import Hero from "./Home/Hero"
 import PlatformInfo from "./Home/PlatformInfo"
+import { Game } from "@kittr/prisma"
 
 interface Props {
-	games: IGame[]
+	games: Game[]
 	popularChannels: IChannel[]
 	risingStars: IChannel[]
 	blogPosts: IPost[]
@@ -60,7 +60,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 	const [games, totalNumberOfKits, popularChannels, risingStars, blogPosts, currentPromo, liveChannels] =
 		await Promise.all([
-			allGamesQuery(),
+			allGamesQuery({ serialized: true }),
 			totalKitsQuery(),
 			topChannelsQuery(10),
 			risingStarsQuery({ viewsGreaterThan: 400, skip: 12, sample: 10 }),

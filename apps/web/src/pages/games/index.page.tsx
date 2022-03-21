@@ -7,8 +7,8 @@ import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
 import { Routes } from "@Utils/lookups/routes"
 import { useRouter } from "next/router"
 import styled from "styled-components"
-import { prisma } from "@kittr/prisma"
-import { GameWithGenresAndPlatforms } from "../../../types"
+import { allGamesQuery } from "@Services/mongodb"
+import { GameWithGenresAndPlatforms } from "@Types/prisma"
 
 interface Props {
 	games: Array<GameWithGenresAndPlatforms>
@@ -42,18 +42,10 @@ const GamesIndex = ({ games }: Props) => {
 
 export const getStaticProps = async () => {
 	await connectToDatabase()
-	const raw = await prisma.game.findMany({
-		include: {
-			genres: true,
-			platforms: true
-		}
-	})
-
-	const formatted = raw.map((elem) => ({ ...elem, releaseDate: elem.releaseDate.toString() }))
 
 	return {
 		props: {
-			games: formatted
+			games: await allGamesQuery({ serialized: true })
 		},
 		revalidate: 60
 	}
