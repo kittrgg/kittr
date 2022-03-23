@@ -34,52 +34,54 @@ export const GameCard = ({
 		<FirebaseStorageResolver
 			path={backgroundImageUrl}
 			noSpinner
-			render={(img) => (
-				<Container onClick={onClick} active={active} titleImage={img} data-cy={`${urlSafeName}-button`}>
-					{(width as number) > 550 && (
-						<ImageContainer>
-							<img src={img} alt={displayName} style={{ width: "100%" }} />
-						</ImageContainer>
-					)}
+			render={(img) => {
+				return (
+					<Container onClick={onClick} active={active} titleImage={img} data-cy={`${urlSafeName}-button`}>
+						{(width as number) > 550 && (
+							<ImageContainer>
+								<img src={img} alt={displayName} style={{ width: "100%" }} />
+							</ImageContainer>
+						)}
 
-					{!noText && (
-						<MetaInfo>
-							<H2>{displayName}</H2>
-							<div>
-								<Paragraph>{developer}</Paragraph>
-								<Paragraph>
-									{genres.map((elem, index) => {
-										return (
-											<Fragment key={elem.id}>
-												{index === genres.length - 1 ? `${elem.displayName}` : `${elem.displayName}, `}
-											</Fragment>
-										)
-									})}
-								</Paragraph>
-								<Paragraph>
-									{platforms.map((elem, index) => {
-										return (
-											<Fragment key={elem.id}>
-												{index === platforms.length - 1 ? `${elem.displayName}` : `${elem.displayName}, `}
-											</Fragment>
-										)
-									})}
-								</Paragraph>
-								<Paragraph>Released {toHumanReadableDate(releaseDate)}</Paragraph>
-							</div>
-						</MetaInfo>
-					)}
+						{!noText && (
+							<MetaInfo>
+								<H2>{displayName}</H2>
+								<div>
+									<Paragraph>{developer}</Paragraph>
+									<Paragraph>
+										{genres.map((elem, index) => {
+											return (
+												<Fragment key={elem.id}>
+													{index === genres.length - 1 ? `${elem.displayName}` : `${elem.displayName}, `}
+												</Fragment>
+											)
+										})}
+									</Paragraph>
+									<Paragraph>
+										{platforms.map((elem, index) => {
+											return (
+												<Fragment key={elem.id}>
+													{index === platforms.length - 1 ? `${elem.displayName}` : `${elem.displayName}, `}
+												</Fragment>
+											)
+										})}
+									</Paragraph>
+									<Paragraph>Released {toHumanReadableDate(releaseDate)}</Paragraph>
+								</div>
+							</MetaInfo>
+						)}
 
-					{!active && (
-						<>
-							<ComingSoon>
-								<p style={{ cursor: "default" }}>COMING</p>
-								<p style={{ cursor: "default" }}>SOON</p>
-							</ComingSoon>
-						</>
-					)}
-				</Container>
-			)}
+						{!active && (
+							<>
+								<ComingSoon>
+									<p style={{ cursor: "default" }}>COMING</p>
+									<p style={{ cursor: "default" }}>SOON</p>
+								</ComingSoon>
+							</>
+						)}
+					</Container>
+				)
+			}}
 		/>
 	)
 }

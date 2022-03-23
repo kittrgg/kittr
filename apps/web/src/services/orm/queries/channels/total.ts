@@ -1,4 +1,4 @@
-import Channel from "@Services/orm/models/Channel"
+import { prisma } from "@kittr/prisma"
 
 interface IChannelQuery {
 	/**
@@ -15,11 +15,5 @@ interface IChannelQuery {
  * Get the total channels on the platform.
  */
 export const totalChannelsQuery: IChannelQuery = async () => {
-	const result = await Channel.aggregate([
-		{
-			$count: "count"
-		}
-	])
-
-	return result[0].count
+	return await prisma.channel.count()
 }

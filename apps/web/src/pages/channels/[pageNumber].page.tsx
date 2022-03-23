@@ -1,4 +1,4 @@
-import { IChannel } from "@kittr/types/channel"
+import type { CompleteChannel } from "@Types/prisma/index"
 import colors from "@Colors"
 import AdPageWrapper, { H1 } from "@Components/layouts/AdPageWrapper"
 import FallbackPage from "@Components/layouts/FallbackPage"
@@ -16,7 +16,7 @@ import styled from "styled-components"
 const CHANNELS_PER_PAGE = 10
 
 interface Props {
-	channels: Array<IChannel>
+	channels: Array<CompleteChannel>
 	totalChannels: number
 	numberOfPages: number
 }
@@ -95,7 +95,13 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
 
 	const [totalChannels, channels] = await Promise.all([
 		totalChannelsQuery(),
-		getChannelsQuery({ limit: 10, skip: (Number(params.pageNumber) - 1) * CHANNELS_PER_PAGE })
+		getChannelsQuery({
+			serialized: true,
+			includeProfile: true,
+			includeLinks: true,
+			limit: 10,
+			skip: (Number(params.pageNumber) - 1) * CHANNELS_PER_PAGE
+		})
 	])
 
 	return {

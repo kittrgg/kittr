@@ -35,7 +35,5 @@ export const topChannelsQuery = async ({
 		}))
 	}
 
-	console.log(result)
-
 	return result
 }

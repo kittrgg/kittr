@@ -1,18 +1,34 @@
-import { Channel } from "@Services/orm/models"
-import { IChannel } from "@kittr/types/channel"
-import { IGame } from "@kittr/types/game"
+import { prisma, Channel, ChannelProfile, ChannelLink } from "@kittr/prisma"
 
-interface IFunc {
-	/**
-	 * @params
-	 * limit: How many Channels do you want?
-	 *
-	 * skip: Optional. Skip first n results.
-	 *
-	 * @returns
-	 * Promise with array of channels.
-	 */
-	(params: { limit: number; skip?: number }): Promise<IChannel[]>
+type WithSerialization<T, S extends boolean> = S extends true
+	? Omit<T, "createdAt"> & {
+			createdAt: string
+	  }
+	: T
+
+type WithProfile<T, P extends boolean> = P extends true
+	? T & {
+			profile: ChannelProfile
+	  }
+	: T
+
+type WithLinks<T, L extends boolean> = L extends true
+	? T & {
+			links: ChannelLink[]
+	  }
+	: T
+
+type Value<S extends boolean, P extends boolean, L extends boolean> = WithSerialization<
+	WithProfile<WithLinks<Channel, L>, P>,
+	S
+>
+
+interface Params<S extends boolean, K extends boolean, L extends boolean> {
+	serialized?: S
+	includeProfile?: K
+	includeLinks?: L
+	limit: number
+	skip: number
 }
 
 /**
@@ -20,24 +36,35 @@ interface IFunc {
  *
  * Get channels that are on the platform. Accepts parameters for limit and skip.
  */
-export const getChannelsQuery: IFunc = async ({ limit, skip = 0 }) => {
-	const result = await Channel.aggregate<IChannel>([
-		{
-			$sort: {
-				viewCount: -1
-			}
+export const getChannelsQuery = async <S extends boolean, K extends boolean, L extends boolean>(
+	params: Params<S, K, L>
+): Promise<Value<S, K, L>> => {
+	const result = await prisma.channel.findMany({
+		orderBy: {
+			viewCount: "desc"
 		},
-		{ $skip: skip },
-		{ $limit: limit },
-		{ $unset: "kits" }
-	])
+		skip: params.skip,
+		take: params.limit,
+		include: {
+			profile: params.includeProfile,
+			links: params.includeLinks
+		}
+	})
 
-	const serialized = result.map((channel) => ({
-		...channel,
-		_id: channel._id.toString(),
-		createdDate: channel.createdDate.toString(),
-		games: channel.games.map((game: IGame) => ({ ...game, id: game.id.toString() }))
-	}))
+	if (params.serialized) {
+		return result.map((channel) => ({
+			...channel,
+			createdAt: channel.createdAt.toISOString()
+		})) as any
+	}
 
-	return serialized
+	return result as any
 }
+
+getChannelsQuery({
+	serialized: true,
+	includeProfile: true,
+	includeLinks: true,
+	limit: 10,
+	skip: 0
+})
