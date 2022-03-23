@@ -1,7 +1,6 @@
 import { ITwitchLiveChannels } from "@kittr/types/twitch"
 
 import { headers } from "@Services/twitch/utils/auth"
-import { serializeChannels } from "@Services/orm/utils/serializeChannels"
 import { grabLoginName } from "./utils/grabLoginName"
 import fetch from "@Fetch"
 import { prisma, LinkProperties } from "@kittr/prisma"
@@ -23,8 +22,6 @@ export const liveChannelsQuery = async () => {
 			links: true
 		}
 	})
-
-	console.log(popularChannels[0].links)
 
 	// Create the url for the Twitch API fetch
 	const buildLiveStreamRequest = (channels: ChannelWithLinks[]): string => {

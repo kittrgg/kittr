@@ -30,9 +30,12 @@ export const risingStarsQuery = async ({
 		where
 	})
 
-	const randomSkip = Math.max(skip, Math.floor(Math.random() * channelCount) - skip)
+	const randomSkip = Math.min(channelCount - skip, Math.max(skip, Math.floor(Math.random() * channelCount)))
 
 	const result = await prisma.channel.findMany({
+		orderBy: {
+			viewCount: "desc"
+		},
 		where,
 		skip: randomSkip,
 		take: limit,
