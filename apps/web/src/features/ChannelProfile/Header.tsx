@@ -1,36 +1,43 @@
 import styled from "styled-components"
 
-import { IChannel } from "@kittr/types"
+import { CompleteChannel, CompleteChannelProfile } from "@Types/prisma"
 import colors from "@Colors"
 import { header1, header2 } from "@Styles/typography"
 import ProfileImage from "@Components/shared/ProfileImage"
 import SocialIcons from "@Components/shared/SocialIcons"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
 
+interface Props extends Omit<CompleteChannel, "profile"> {
+	profile: CompleteChannelProfile
+}
+
 const Header = ({
+	id,
 	games,
 	displayName,
-	meta,
+	profile,
+	links,
+	plan,
 	kits,
 	isLive,
 	imagePath
-}: IChannel & { isLive: boolean; imagePath: string }) => {
-	const isPremium = !!meta.premiumType
-	const hasCoverPhoto = meta.hasCoverPhoto
-	const userColor = meta.brandColors?.primary || colors.white
+}: Props & { isLive: boolean; imagePath: string }) => {
+	const isPremium = plan.type === "premium"
+	const hasCoverPhoto = profile.hasCoverPhoto
+	const userColor = profile.brandColors.find((color) => color.type === "primary")?.value || colors.white
 	const { width } = useViewportDimensions()
 
 	return (
 		<Wrapper hasCoverPhoto={isPremium && !!hasCoverPhoto} imagePath={imagePath}>
 			<Avatar>
-				<ProfileImage size="150px" imagePath={meta.profileImage} border={isPremium ? userColor : ""} isLive={isLive} />
+				<ProfileImage size="150px" imagePath={id} border={isPremium ? userColor : ""} isLive={isLive} />
 				<AvatarInfo>
 					<H1>{displayName}</H1>
 					<Counts>
 						{games.length} {games.length === 1 ? "game" : "games"}, {kits.length} kits
 					</Counts>
 					<SocialIcons
-						links={meta.links}
+						links={links}
 						iconSize={30}
 						colorHover={userColor}
 						style={{ flexWrap: width > 750 ? "nowrap" : "wrap", rowGap: "10px" }}

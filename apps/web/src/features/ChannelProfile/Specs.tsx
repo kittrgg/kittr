@@ -4,14 +4,13 @@ import styled from "styled-components"
 
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { H2, GridItem, SpecsGrid } from "./style"
+import { ChannelPcSpec } from "@kittr/prisma"
 
 const SORT_ORDER = ["Case", "CPU", "CPU Cooler", "Motherboard", "RAM", "GPU", "Storage", "Monitor", "Keyboard", "Mouse"]
 
 interface Props {
 	brandColor: string
-	specs?: {
-		[key: string]: string
-	}
+	specs: ChannelPcSpec[]
 }
 
 const Specs = ({ specs, brandColor }: Props) => {

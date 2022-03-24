@@ -1,6 +1,6 @@
 import { prisma } from "@kittr/prisma"
 
-interface IChannelQuery {
+interface ChannelQuery {
 	/**
 	 * @returns
 	 * Promise for count of all channels on platform
@@ -14,6 +14,6 @@ interface IChannelQuery {
  *
  * Get the total channels on the platform.
  */
-export const totalChannelsQuery: IChannelQuery = async () => {
+export const totalChannelsQuery: ChannelQuery = async () => {
 	return await prisma.channel.count()
 }

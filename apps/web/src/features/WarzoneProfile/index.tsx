@@ -1,4 +1,4 @@
-import { IChannel, IPopularityRates, IKit, IGame } from "@kittr/types"
+import { Channel, IPopularityRates, IKit, IGame } from "@kittr/types"
 import colors from "@Colors"
 import FullScreen from "@Components/layouts/FullScreen"
 import NavMenu from "@Components/layouts/NavMenu"
@@ -15,7 +15,7 @@ import ChannelMain from "./Main"
 import Sidebar from "./Sidebar"
 
 interface Props {
-	channel: IChannel
+	channel: Channel
 	popularityRates: IPopularityRates
 }
 
@@ -33,7 +33,7 @@ const Channels = ({ channel, popularityRates }: Props) => {
 		dispatch(setPopularityRates(popularityRates))
 
 		return () => {
-			dispatch(setChannel({} as IChannel))
+			dispatch(setChannel({} as Channel))
 			dispatch(setActiveWeapon({} as IKit))
 			dispatch(setPopularityRates({} as IPopularityRates))
 		}

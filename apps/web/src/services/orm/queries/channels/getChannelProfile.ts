@@ -1,20 +1,44 @@
-import { Channel } from "@Services/orm/models"
-import { IChannel } from "@kittr/types/channel"
-import { serializeChannels } from "@Services/orm/utils/serializeChannels"
+import {
+	prisma,
+	Channel,
+	Game,
+	ChannelProfile,
+	Kit,
+	KitBase,
+	KitOption,
+	ChannelLink,
+	ChannelPlan,
+	ChannelBrandColor
+} from "@kittr/prisma"
 
-interface IFunc {
-	/**
-	 * @params
-	 *  urlSafeName of the channel
-	 *
-	 * @returns
-	 * Promise with array of channels, ordered by view count (channels do not have kits, managers, or games on them)
-	 *
-	 */
-	(
-		/** urlSafeName of the channel */
-		urlSafeName: string
-	): Promise<IChannel>
+interface ProfileWithIncludes extends ChannelProfile {
+	brandColors: ChannelBrandColor[]
+}
+
+interface KitWithIncludes extends Kit {
+	kitbase: KitBase
+	options: KitOption[]
+}
+
+interface ChannelWithIncludes extends Channel {
+	games: Game[]
+	profile: ProfileWithIncludes | null
+	kits: KitWithIncludes[]
+	links: ChannelLink[]
+	plan: ChannelPlan | null
+}
+
+type WithSerialization<T, S extends boolean> = S extends true
+	? Omit<T, "createdAt"> & {
+			createdAt: string
+	  }
+	: T
+
+type Value<S extends boolean> = WithSerialization<ChannelWithIncludes, S>
+
+interface Params<S extends boolean> {
+	urlSafeName: string
+	serialized: S
 }
 
 /**
@@ -23,16 +47,42 @@ interface IFunc {
  * Using the urlSafeName of the channel, get their full profile including kits and games.
  * Does not include dashboard specific information.
  */
-export const getChannelProfileQuery: IFunc = async (urlSafeName) => {
-	const rawChannel = await Channel.find({ urlSafeName }).lean<IChannel[]>()
+export const getChannelProfileQuery = async <S extends boolean>({
+	urlSafeName,
+	serialized
+}: Params<S>): Promise<Value<S>> => {
+	const channel = await prisma.channel.findFirst({
+		where: {
+			urlSafeName
+		},
+		include: {
+			profile: {
+				include: {
+					brandColors: true
+				}
+			},
+			kits: {
+				include: {
+					kitBase: true,
+					options: true
+				}
+			},
+			links: true,
+			plan: true,
+			games: true
+		}
+	})
 
-	if (rawChannel.length === 0) {
-		return {} as IChannel
+	if (serialized && channel) {
+		return {
+			...channel,
+			createdAt: channel.createdAt.toISOString(),
+			games: channel.games.map((game) => ({
+				...game,
+				releaseDate: game.releaseDate.toISOString()
+			}))
+		} as any
 	}
 
-	const serialized = (await serializeChannels(rawChannel))[0]
-
-	const channel = serialized
-
-	return channel
+	return channel as any
 }

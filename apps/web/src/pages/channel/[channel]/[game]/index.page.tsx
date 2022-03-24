@@ -1,5 +1,3 @@
-import { IChannel } from "@kittr/types/channel"
-import { IGame } from "@kittr/types/game"
 import {
 	IRatioOfChannelsWithBase,
 	IRatioOfChannelsWithBaseFeatured,
@@ -16,7 +14,7 @@ import { NoItemFound, Head } from "@Components/shared"
 import FallbackPage from "@Components/layouts/FallbackPage"
 
 interface Props {
-	channel: IChannel
+	channel: Channel
 	game: IGame
 	ratioOfChannelsWithBase: IRatioOfChannelsWithBase[]
 	ratioOfChannelsWithBaseFeatured: IRatioOfChannelsWithBaseFeatured[]
@@ -84,7 +82,7 @@ export const getStaticPaths = async () => {
 			viewCount: -1
 		},
 		limit: 30
-	}).lean<Array<IChannel>>()
+	}).lean<Array<Channel>>()
 	const channels = leanChannels.map((channel) => ({
 		...channel,
 		_id: channel._id.toString(),

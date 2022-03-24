@@ -2,7 +2,7 @@ import { IKit, IKitRaw } from "./kits"
 import { IManager } from "./manager"
 import { IGame } from "./game"
 
-interface IChannelLinks {
+interface ChannelLinks {
 	twitch?: string
 	twitter?: string
 	youtube?: string
@@ -12,7 +12,7 @@ interface IChannelLinks {
 	tiktok?: string
 }
 
-interface IChannelMeta {
+interface ChannelMeta {
 	brandColors?: {
 		primary?: string
 	}
@@ -40,7 +40,7 @@ interface IChannelMeta {
 	/** Boolean for if we should autoplay this channel's youtube videos when we can */
 	youtubeAutoplay: boolean
 	/** User provided links to their various social channels */
-	links: IChannelLinks
+	links: ChannelLinks
 }
 
 /** Must be serializable to play nice with styled-components themeing! */
@@ -72,7 +72,7 @@ interface IOverlay {
 	secondaryKit?: IKit
 }
 
-export interface IChannel {
+export interface Channel {
 	/** ObjectId from database */
 	_id: string
 	/** Managers who are allowed to interact with this channel */
@@ -86,7 +86,7 @@ export interface IChannel {
 	/** Display name made safe for urls */
 	urlSafeName: string
 	/** Meta information for the channel */
-	meta: IChannelMeta
+	meta: ChannelMeta
 	/** The kits created for this channel */
 	kits: Array<IKit>
 	/** Manager who was the most recent to update some piece of information for this channel */
@@ -113,7 +113,7 @@ interface IRawChannel {
 	/** Display name made safe for urls */
 	urlSafeName: string
 	/** Meta information for the channel */
-	meta: IChannelMeta
+	meta: ChannelMeta
 	/** The kits created for this channel */
 	kits: Array<IKitRaw>
 	/** Manager who was the most recent to update some piece of information for this channel */

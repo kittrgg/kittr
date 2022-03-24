@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { IKit } from "@kittr/types/kits"
+import { CompleteKit } from "@Types/prisma"
 
 import colors from "@Colors"
 import SVG from "@Components/shared/SVG"
@@ -8,7 +8,7 @@ import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResol
 
 interface Props {
 	/** Array of kits to render. */
-	data: IKit[]
+	data: CompleteKit[]
 	/** onClick handler for if user click's on a kit's card. */
 	onClick?: any
 }
@@ -22,7 +22,7 @@ export const KitList = ({ data, onClick }: Props) => {
 		<>
 			{data.map((elem) => {
 				return (
-					<Card key={elem._id} onClick={() => onClick(elem)}>
+					<Card key={elem.id} onClick={() => onClick(elem)}>
 						<SVG.Star
 							width="15px"
 							fill={colors.gold}
@@ -31,18 +31,16 @@ export const KitList = ({ data, onClick }: Props) => {
 						/>
 						<div>
 							<KitTitle>
-								{elem.userData.customTitle
-									? `${elem.base.displayName} - ${elem.userData.customTitle}`
-									: `${elem.base.displayName}`}
+								{elem.customTitle ? `${elem.kitBase.displayName} - ${elem.customTitle}` : `${elem.kitBase.displayName}`}
 							</KitTitle>
 							<ImageContainer>
 								<FirebaseStorageResolver
-									path={elem.base.image}
+									path={elem.kitBase.imageUrl}
 									noSpinner
 									render={(data) => (
 										<img
 											src={data || "/media/logo.svg"}
-											alt={elem.base.displayName}
+											alt={elem.kitBase.displayName}
 											style={{ width: "100%", height: "100%", objectFit: "cover" }}
 										/>
 									)}
@@ -52,7 +50,7 @@ export const KitList = ({ data, onClick }: Props) => {
 						<Options>
 							{elem.options.map((option) => {
 								return (
-									<OptionItem key={option._id}>
+									<OptionItem key={option.id}>
 										<OptionSlot>{option.slotKey} - </OptionSlot>
 										<Option>{option.displayName}</Option>
 									</OptionItem>

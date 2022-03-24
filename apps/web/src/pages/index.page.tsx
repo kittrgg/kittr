@@ -1,4 +1,4 @@
-import { IChannel } from "@kittr/types/channel"
+import { Channel } from "@kittr/types/channel"
 import { IPost, IHomePageBoostr } from "@kittr/types/types"
 import PageWrapper from "@Components/layouts/PageWrapper"
 import FrontPageBoostr from "@Features/Promo/FrontPage"
@@ -16,11 +16,11 @@ import { Game } from "@kittr/prisma"
 interface Props {
 	games: Game[]
 	// START HERE: Refactoring the page itself to have prisma types instead of the old mongoose types
-	popularChannels: IChannel[]
-	risingStars: IChannel[]
+	popularChannels: Channel[]
+	risingStars: Channel[]
 	blogPosts: IPost[]
 	totalNumberOfKits: number
-	liveChannels: IChannel[]
+	liveChannels: Channel[]
 	featuredChannel: IHomePageBoostr | null
 }
 
@@ -46,7 +46,7 @@ const Home = ({
 			/>
 			<ResponsiveAdBanner />
 			<PlatformInfo />
-			<BlogSection posts={blogPosts} />
+			{/* <BlogSection posts={blogPosts} /> */}
 			<ResponsiveAdBanner largeWidthAdUnit="d728x90" smallWidthAdUnit="s300x250" />
 		</PageWrapper>
 	)

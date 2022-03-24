@@ -6,23 +6,8 @@ import { getClips } from "./endpoints/getClips"
 import { getRecentVideos } from "./endpoints/getRecentVideos"
 
 /** Get a single channel's information for their profile page. */
-export const profilePageQuery = async (urlSafeName: string) => {
-	const [rawChannel] = await Channel.aggregate<{ twitchUrl: string }>([
-		{
-			$match: {
-				urlSafeName: urlSafeName
-			}
-		},
-		{
-			$project: {
-				twitchUrl: "$meta.links.twitch"
-			}
-		}
-	])
-
-	if (!rawChannel) return null
-
-	const channelTwitchLogin = grabLoginName(rawChannel.twitchUrl || "")
+export const profilePageQuery = async (twitchLink: string) => {
+	const channelTwitchLogin = grabLoginName(twitchLink || "")
 
 	const [channelData] = await getChannelData(channelTwitchLogin)
 

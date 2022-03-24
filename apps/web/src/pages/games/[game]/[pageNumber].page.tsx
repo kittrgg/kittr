@@ -1,5 +1,5 @@
 import { IGame } from "@kittr/types/game"
-import { IChannel } from "@kittr/types/channel"
+import { Channel } from "@kittr/types/channel"
 import colors from "@Colors"
 import AdPageWrapper from "@Components/layouts/AdPageWrapper"
 import FallbackPage from "@Components/layouts/FallbackPage"
@@ -19,7 +19,7 @@ import styled from "styled-components"
 interface Props {
 	gameDoesNotExist?: true
 	game: IGame
-	channels: IChannel[]
+	channels: Channel[]
 	totalChannels: number
 	numberOfPages: number
 }

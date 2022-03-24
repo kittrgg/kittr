@@ -32,12 +32,12 @@ model ChannelProfile {
   hasProfileImage Boolean
   channelPcSpecs  ChannelPcSpec[]
   affiliates      ChannelAffiliate[]
-  setupPhotos     SetupPhotos[]
+  setupPhotos     SetupPhoto[]
   channel         Channel             @relation(fields: [channelId], references: [id])
   channelId       String              @unique
 }
 
-model SetupPhotos {
+model SetupPhoto {
   id               String         @id @default(cuid())
   channelProfile   ChannelProfile @relation(fields: [channelProfileId], references: [id])
   channelProfileId String

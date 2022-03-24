@@ -4,7 +4,7 @@ import AdPageWrapper, { H1 } from "@Components/layouts/AdPageWrapper"
 import FallbackPage from "@Components/layouts/FallbackPage"
 import { ChannelList, ChannelSearch, Paginator } from "@Components/shared"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
-import { getChannelsQuery, totalChannelsQuery } from "@Services/orm"
+import { getTopChannelsQuery, totalChannelsQuery } from "@Services/orm"
 import ResponsiveBanner from "@Services/venatus/ResponsiveBanner"
 import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
 import { Routes } from "@Utils/lookups/routes"
@@ -95,7 +95,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
 
 	const [totalChannels, channels] = await Promise.all([
 		totalChannelsQuery(),
-		getChannelsQuery({
+		getTopChannelsQuery({
 			serialized: true,
 			includeProfile: true,
 			includeLinks: true,

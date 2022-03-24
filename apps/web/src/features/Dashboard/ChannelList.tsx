@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { MutableRefObject, useRef, useEffect } from "react"
 
-import { IManager, IChannel } from "@kittr/types"
+import { IManager, Channel } from "@kittr/types"
 import colors from "@Colors"
 import { header1, header2, paragraph } from "@Styles/typography"
 import { useManagedChannels } from "@Hooks/api/useManagedChannels"
@@ -60,7 +60,7 @@ const ChannelList = ({ ...props }) => {
 				{isFetching && <Spinner width="100%" height="100px" />}
 				{!isFetching &&
 					data &&
-					data.map((elem: IChannel & { role: IManager[] }) => {
+					data.map((elem: Channel & { role: IManager[] }) => {
 						return (
 							<ChannelContainer
 								key={elem._id}

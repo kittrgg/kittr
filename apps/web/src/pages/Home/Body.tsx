@@ -1,5 +1,5 @@
 import { IGame } from "@kittr/types/game"
-import { IChannel } from "@kittr/types/channel"
+import { Channel } from "@kittr/types/channel"
 import colors from "@Colors"
 import { ChannelAvatarList, GameList, SideScroller } from "@Components/shared"
 import { header2 } from "@Styles/typography"
@@ -12,19 +12,19 @@ interface Props {
 	/** Games available on the platform. Includes both active and inactive games. */
 	games: IGame[]
 	/** Top channels sorted by view count on kittr. */
-	popularChannels: IChannel[]
+	popularChannels: Channel[]
 	/** Channels who aren't quite in the top channels list
 	 * but we want to give some recognition and visibility.
 	 * */
-	risingStars: IChannel[]
-	liveChannels: IChannel[]
+	risingStars: Channel[]
+	liveChannels: Channel[]
 }
 
 /** Main content section of the home page. Games, channels, etc. */
 const Body = ({ games, popularChannels, risingStars, liveChannels }: Props) => {
 	const router = useRouter()
 
-	const routeChannel = (elem: IChannel) => router.push(Routes.CHANNEL.createPath(elem.urlSafeName))
+	const routeChannel = (elem: Channel) => router.push(Routes.CHANNEL.createPath(elem.urlSafeName))
 
 	return (
 		<Container>

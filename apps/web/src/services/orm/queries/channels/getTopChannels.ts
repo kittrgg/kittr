@@ -1,5 +1,7 @@
 import { prisma, Channel, ChannelProfile, ChannelLink } from "@kittr/prisma"
 
+// TODO: Learn how to do this right, bro.
+
 type WithSerialization<T, S extends boolean> = S extends true
 	? Omit<T, "createdAt"> & {
 			createdAt: string
@@ -19,7 +21,7 @@ type WithLinks<T, L extends boolean> = L extends true
 	: T
 
 type Value<S extends boolean, P extends boolean, L extends boolean> = WithSerialization<
-	WithProfile<WithLinks<Channel, L>, P>,
+	WithProfile<WithLinks<Channel[], L>, P>,
 	S
 >
 
@@ -36,7 +38,7 @@ interface Params<S extends boolean, K extends boolean, L extends boolean> {
  *
  * Get channels that are on the platform. Accepts parameters for limit and skip.
  */
-export const getChannelsQuery = async <S extends boolean, K extends boolean, L extends boolean>(
+export const getTopChannelsQuery = async <S extends boolean, K extends boolean, L extends boolean>(
 	params: Params<S, K, L>
 ): Promise<Value<S, K, L>> => {
 	const result = await prisma.channel.findMany({
@@ -60,11 +62,3 @@ export const getChannelsQuery = async <S extends boolean, K extends boolean, L e
 
 	return result as any
 }
-
-getChannelsQuery({
-	serialized: true,
-	includeProfile: true,
-	includeLinks: true,
-	limit: 10,
-	skip: 0
-})

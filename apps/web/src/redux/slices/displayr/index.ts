@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { IKit } from "@kittr/types/kits"
-import { IChannel } from "@kittr/types/channel"
+import { Channel } from "@kittr/types/channel"
 import { IPopularityRates } from "@kittr/types/popularity"
 
 export const displayrSlice = createSlice({
 	name: "displayr",
 	initialState: {
 		activeWeapon: {} as IKit,
-		channel: {} as IChannel,
+		channel: {} as Channel,
 		isSidebarOpen: false,
 		popularityRates: {} as IPopularityRates
 	},
@@ -15,7 +15,7 @@ export const displayrSlice = createSlice({
 		setActiveWeapon: (state, action: { payload: IKit }) => {
 			state.activeWeapon = action.payload
 		},
-		setChannel: (state, action: { payload: IChannel }) => {
+		setChannel: (state, action: { payload: Channel }) => {
 			state.channel = action.payload
 		},
 		setIsSidebarOpen: (state, action: { payload: boolean }) => {

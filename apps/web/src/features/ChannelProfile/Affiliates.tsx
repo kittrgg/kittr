@@ -1,5 +1,6 @@
 import colors from "@Colors"
 import { SVG } from "@Components/shared"
+import { ChannelAffiliate } from "@kittr/prisma"
 import { paragraph } from "@Styles/typography"
 import styled from "styled-components"
 
@@ -7,13 +8,7 @@ import { H2, GridItem, SpecsGrid } from "./style"
 
 interface Props {
 	brandColor: string
-	affiliates?: {
-		[key: string]: {
-			code?: string
-			description?: string
-			link?: string
-		}
-	}
+	affiliates: ChannelAffiliate[]
 }
 
 const Affiliates = ({ affiliates, brandColor }: Props) => {
@@ -26,7 +21,7 @@ const Affiliates = ({ affiliates, brandColor }: Props) => {
 				{affiliates &&
 					Object.entries(affiliates).map((spec) => {
 						const [company, attrs] = spec
-						const { code, description, link } = attrs
+						const { code, description, url } = attrs
 
 						return (
 							<GridItem key={company} colorHover={brandColor}>
@@ -40,8 +35,8 @@ const Affiliates = ({ affiliates, brandColor }: Props) => {
 										<Code>{code}</Code>
 									</Flex>
 								)}
-								{link && (
-									<Link href={link} target="_blank" rel="noopener noreferrer">
+								{url && (
+									<Link href={url} target="_blank" rel="noopener noreferrer">
 										<SVG.Link
 											width="24px"
 											stroke={colors.lighter}

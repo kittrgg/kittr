@@ -9,7 +9,13 @@ import {
 	Kit,
 	ChannelKitOverlay,
 	ChannelManager,
-	ChannelPlan
+	ChannelPlan,
+	ChannelBrandColor,
+	ChannelPcSpec,
+	ChannelAffiliate,
+	SetupPhoto,
+	KitOption,
+	KitBase
 } from "@kittr/prisma"
 
 const GameWithIncludes = Prisma.validator<Prisma.GameArgs>()({
@@ -37,6 +43,26 @@ export interface CompleteChannel extends Channel {
 	plan: ChannelPlan
 	links: ChannelLink[]
 }
+
+export interface CompleteChannelProfile extends ChannelProfile {
+	brandColors: ChannelBrandColor[]
+	channelPcSpecs: ChannelPcSpec[]
+	affiliates: ChannelAffiliate[]
+	setupPhotos: SetupPhoto[]
+}
+
+export interface CompleteKit extends Kit {
+	options: KitOption[]
+	game: Game
+	kitBase: KitBase
+	channel: Channel
+}
+
+export interface CompleteChannelWithCompleteKits extends CompleteChannel {
+	kits: CompleteKit[]
+}
+
+export interface CompleteProfile extends ChannelProfile {}
 
 export interface SerializedChannel extends Omit<Channel, "createdAt"> {
 	createdAt: string

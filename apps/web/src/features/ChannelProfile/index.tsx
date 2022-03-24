@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import styled from "styled-components"
 
-import { IChannel, ITwitchDataForProfilePage } from "@kittr/types"
+import { ITwitchDataForProfilePage } from "@kittr/types"
 import colors from "@Colors"
 import { download } from "@Services/firebase/storage"
 import Header from "./Header"
@@ -14,27 +14,28 @@ import Schedule from "./Schedule"
 import Specs from "./Specs"
 import Affiliates from "./Affiliates"
 import PremiumCallout from "./PremiumCallout"
+import { CompleteChannelWithCompleteKits, CompleteChannelProfile } from "@Types/prisma"
 
 interface Props {
-	channel: IChannel
+	channel: CompleteChannelWithCompleteKits & { profile: CompleteChannelProfile }
 	twitchInfo: ITwitchDataForProfilePage
 }
 
 const ChannelProfile = ({ channel, twitchInfo }: Props) => {
-	const isPremium = !!channel.meta.premiumType
-	const hasCoverPhoto = !!channel.meta.hasCoverPhoto
-	const primaryColor = channel.meta.brandColors?.primary || colors.white
+	const isPremium = channel.plan.type === "premium"
+	const hasCoverPhoto = channel.profile.hasCoverPhoto
+	const primaryColor = channel.profile.brandColors.find((color) => color.type === "primary")?.value || colors.white
 	const [coverPhotoPath, setCoverPhotoPath] = useState("")
 
 	useEffect(() => {
-		if (isPremium && hasCoverPhoto) download(`${channel._id}-profile-cover-photo`, (path) => setCoverPhotoPath(path))
-	}, [channel._id, hasCoverPhoto, isPremium])
+		if (isPremium && hasCoverPhoto) download(`${channel.id}-profile-cover-photo`, (path) => setCoverPhotoPath(path))
+	}, [channel.id, hasCoverPhoto, isPremium])
 
 	return (
 		<Container>
 			<Header {...channel} isLive={twitchInfo.channelData?.type === "live"} imagePath={coverPhotoPath} />
-			<Games {...channel} />
-			<FeaturedKits {...channel} />
+			<Games games={channel.games} urlSafeName={channel.urlSafeName} />
+			<FeaturedKits kits={channel.kits} />
 			{isPremium ? (
 				<>
 					<PopularClips clips={twitchInfo.clips} brandColor={primaryColor} />
@@ -42,12 +43,13 @@ const ChannelProfile = ({ channel, twitchInfo }: Props) => {
 						videos={twitchInfo.recentVideos}
 						brandColor={primaryColor}
 						coverPhotoPath={coverPhotoPath}
-						profileImagePath={channel.meta.profileImage}
+						profileImagePath={channel.profile.hasProfileImage ? channel.id : ""}
 					/>
+
 					<Schedule schedule={twitchInfo.schedule} brandColor={primaryColor} />
-					<SetupPhotos {...channel} />
-					<Specs specs={channel.meta.specs} brandColor={primaryColor} />
-					<Affiliates affiliates={channel.meta.affiliates} brandColor={primaryColor} />
+					<SetupPhotos id={channel.id} setupPhotos={channel.profile.setupPhotos} />
+					<Specs specs={channel.profile.channelPcSpecs} brandColor={primaryColor} />
+					<Affiliates affiliates={channel.profile.affiliates} brandColor={primaryColor} />
 				</>
 			) : (
 				<PremiumCallout />

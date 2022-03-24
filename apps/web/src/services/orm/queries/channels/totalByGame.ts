@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
 import { Channel } from "@Services/orm/models"
 
-interface IChannelsByGameQuery {
+interface ChannelsByGameQuery {
 	/**
 	 * @params
 	 * gameId: ObjectId of the game
@@ -18,7 +18,7 @@ interface IChannelsByGameQuery {
  *
  * Get the total channels for a game.
  */
-export const totalChannelsByGameQuery: IChannelsByGameQuery = async (gameId) => {
+export const totalChannelsByGameQuery: ChannelsByGameQuery = async (gameId) => {
 	const result = await Channel.aggregate([
 		{
 			$match: {

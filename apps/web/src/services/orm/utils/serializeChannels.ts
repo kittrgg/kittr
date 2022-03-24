@@ -1,4 +1,4 @@
-import { IChannel } from "@kittr/types/channel"
+import { Channel } from "@kittr/types/channel"
 import { IGame } from "@kittr/types/game"
 import { IKitOption } from "@kittr/types/kits"
 import { allGamesQuery, allBasesQuery, allOptionsQuery } from "../index"
@@ -11,7 +11,7 @@ interface IFunc {
 	 * @returns
 	 * Promise with array of serialized channels.
 	 */
-	(channelsArr: IChannel[]): Promise<IChannel[]>
+	(channelsArr: Channel[]): Promise<Channel[]>
 }
 
 /** Serialize an array of channels from mongodb. Needed to make getStaticProps happy. */
@@ -22,7 +22,7 @@ export const serializeChannels: IFunc = async (channelsArr) => {
 		allOptionsQuery()
 	])
 
-	const serialized = channelsArr.map((channel: IChannel) => ({
+	const serialized = channelsArr.map((channel: Channel) => ({
 		...channel,
 		_id: channel._id.toString(),
 		games: channel.games.map((game: IGame) => ({

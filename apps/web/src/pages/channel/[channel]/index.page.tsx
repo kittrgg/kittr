@@ -1,4 +1,3 @@
-import { IChannel } from "@kittr/types/channel"
 import { ITwitchDataForProfilePage } from "@kittr/types/twitch"
 import { GetStaticProps } from "next"
 import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
@@ -7,12 +6,13 @@ import { useRouter } from "next/router"
 import ChannelProfile from "@Features/ChannelProfile"
 import { NoItemFound } from "@Components/shared"
 import PageWrapper from "@Components/layouts/PageWrapper"
-import { getChannelProfileQuery, getChannelsQuery } from "@Services/orm"
+import { getChannelProfileQuery, getTopChannelsQuery } from "@Services/orm"
 import { profilePageQuery } from "@Services/twitch/getProfilePageData"
 import FallbackPage from "@Components/layouts/FallbackPage"
+import { CompleteChannelProfile, CompleteChannelWithCompleteKits } from "@Types/prisma"
 
 interface Props {
-	channel: IChannel
+	channel: CompleteChannelWithCompleteKits & { profile: CompleteChannelProfile }
 	twitchInfo: ITwitchDataForProfilePage
 }
 
@@ -37,8 +37,7 @@ const ChannelProfilePage = ({ channel, twitchInfo }: Props) => {
 export const getStaticPaths = async () => {
 	await connectToDatabase()
 
-	const leanChannels = await getChannelsQuery({ limit: 30 })
-	const channels = leanChannels.map((channel) => ({ urlSafeName: channel.urlSafeName }))
+	const channels = await getTopChannelsQuery({ limit: 30, skip: 0 })
 	const paths = channels.map((channel) => ({ params: { channel: channel.urlSafeName } }))
 
 	return {
@@ -52,8 +51,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 	await connectToDatabase()
 
-	const channel = await getChannelProfileQuery(urlSafeName)
-	const twitchInfo = await profilePageQuery(channel.urlSafeName)
+	const channel = await getChannelProfileQuery({ serialized: true, urlSafeName })
+	const twitchLink = channel?.links.find((channel) => channel.property === "TWITCH")?.value
+
+	let twitchInfo = {}
+
+	if (twitchLink) {
+		twitchInfo = await profilePageQuery(twitchLink)
+	}
 
 	return {
 		props: {

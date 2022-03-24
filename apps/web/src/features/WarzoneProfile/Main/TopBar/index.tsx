@@ -1,11 +1,11 @@
-import { IChannelMeta } from "@kittr/types"
+import { ChannelMeta } from "@kittr/types"
 import * as Styled from "./style"
 import { SocialIcons, ProfileImage } from "@Components/shared"
 
 interface Props {
 	channelInfo: {
 		displayName: string
-		meta: IChannelMeta
+		meta: ChannelMeta
 		affiliateCode: string
 	}
 }
