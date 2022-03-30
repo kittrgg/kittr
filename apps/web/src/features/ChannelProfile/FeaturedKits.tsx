@@ -1,6 +1,6 @@
-import { CompleteKit } from "@Types/prisma"
 import { KitList } from "@Components/shared"
 import SideScroller from "@Components/shared/SideScroller"
+import { OptionalCompleteKit } from "@Types/prisma"
 import { basePlusTitleToUrlSafe } from "@Utils/helpers/basePlusTitleToUrlSafe"
 import { filterKitsByFeature } from "@Utils/helpers/filterKitsByFeature"
 import { Routes } from "@Utils/lookups/routes"
@@ -8,7 +8,7 @@ import { useRouter } from "next/router"
 import { H2 } from "./style"
 
 interface Props {
-	kits: CompleteKit[]
+	kits: OptionalCompleteKit
 }
 
 const FeaturedKits = ({ kits }: Props) => {
@@ -21,8 +21,8 @@ const FeaturedKits = ({ kits }: Props) => {
 			<H2>FEATURED KITS</H2>
 			<SideScroller childMargin="10px" wrapperStyles={{ width: "97vw" }}>
 				<KitList
-					data={filterKitsByFeature(kits) as CompleteKit[]}
-					onClick={(kit: CompleteKit & { gameUrlSafeName: string }) => {
+					data={filterKitsByFeature(kits)}
+					onClick={(kit: any & { gameUrlSafeName: string }) => {
 						const query = basePlusTitleToUrlSafe(kit)
 						router.push(Routes.CHANNEL.GAME.createPath(router.query.channel as string, "warzone", `?weapon=${query}`))
 					}}

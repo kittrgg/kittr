@@ -1,35 +1,34 @@
-import { ITwitchDataForProfilePage } from "@kittr/types/twitch"
-import { GetStaticProps } from "next"
+import { GetStaticProps, InferGetStaticPropsType } from "next"
 import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
 import { useRouter } from "next/router"
-
 import ChannelProfile from "@Features/ChannelProfile"
 import { NoItemFound } from "@Components/shared"
 import PageWrapper from "@Components/layouts/PageWrapper"
-import { getChannelProfileQuery, getTopChannelsQuery } from "@Services/orm"
-import { profilePageQuery } from "@Services/twitch/getProfilePageData"
+import { getFullChannelProfileQuery, getTopChannelsQuery } from "@Services/orm"
+import { SerializeFullChannelWithSerializedGamesReturnType } from "@Services/orm/utils/serializers"
+import { profilePageQuery, ProfilePageQueryReturnType } from "@Services/twitch/getProfilePageData"
 import FallbackPage from "@Components/layouts/FallbackPage"
-import { CompleteChannelProfile, CompleteChannelWithCompleteKits } from "@Types/prisma"
+import {
+	serializeFullChannelWithSerializedGames,
+	deserializeFullChannelWithSerializedGames
+} from "@Services/orm/utils/serializers/serializeFullChannelWithFullGame"
 
-interface Props {
-	channel: CompleteChannelWithCompleteKits & { profile: CompleteChannelProfile }
-	twitchInfo: ITwitchDataForProfilePage
-}
-
-const ChannelProfilePage = ({ channel, twitchInfo }: Props) => {
+const ChannelProfilePage = ({ channel, twitchInfo }: InferGetStaticPropsType<typeof getStaticProps>) => {
 	const { isFallback } = useRouter()
 	if (isFallback) return <FallbackPage />
 
-	if (Object.keys(channel).length === 0) {
+	if (!channel) {
 		return <NoItemFound type="channel" />
 	}
 
+	const deserializedChannel = deserializeFullChannelWithSerializedGames(channel)
+
 	return (
 		<PageWrapper
-			title={`${channel.displayName}'s Profile | kittr`}
-			description={`${channel.displayName}'s wants to share their kits with you.`}
+			title={`${deserializedChannel.displayName}'s Profile | kittr`}
+			description={`${deserializedChannel.displayName}'s wants to share their kits with you.`}
 		>
-			<ChannelProfile channel={channel} twitchInfo={twitchInfo} />
+			<ChannelProfile channel={deserializedChannel} twitchInfo={twitchInfo} />
 		</PageWrapper>
 	)
 }
@@ -46,15 +45,28 @@ export const getStaticPaths = async () => {
 	}
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps<{
+	channel: SerializeFullChannelWithSerializedGamesReturnType | null
+	twitchInfo: ProfilePageQueryReturnType
+}> = async ({ params }) => {
 	const { channel: urlSafeName } = params as { channel: string }
 
 	await connectToDatabase()
 
-	const channel = await getChannelProfileQuery({ serialized: true, urlSafeName })
-	const twitchLink = channel?.links.find((channel) => channel.property === "TWITCH")?.value
+	const channel = await getFullChannelProfileQuery({ urlSafeName })
+	let twitchInfo = {} as ProfilePageQueryReturnType
 
-	let twitchInfo = {}
+	if (!channel) {
+		return {
+			props: {
+				channel: null,
+				twitchInfo
+			}
+		}
+	}
+
+	const serializedChannel = serializeFullChannelWithSerializedGames(channel)
+	const twitchLink = channel?.links.find((channel) => channel.property === "TWITCH")?.value
 
 	if (twitchLink) {
 		twitchInfo = await profilePageQuery(twitchLink)
@@ -62,7 +74,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 	return {
 		props: {
-			channel,
+			channel: serializedChannel,
 			twitchInfo
 		},
 		revalidate: 60

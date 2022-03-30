@@ -51,6 +51,8 @@ export interface CompleteKit extends Kit {
 	channel: Channel
 }
 
+export type OptionalCompleteKit = Optional<CompleteKit, "options" | "game" | "kitBase" | "channel">
+
 export interface CompleteChannelWithCompleteKits extends CompleteChannel {
 	kits: CompleteKit[]
 }

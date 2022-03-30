@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
 import styled from "styled-components"
 
-import { ITwitchDataForProfilePage } from "@kittr/types"
 import colors from "@Colors"
 import { download } from "@Services/firebase/storage"
 import Header from "./Header"
@@ -14,17 +13,18 @@ import Schedule from "./Schedule"
 import Specs from "./Specs"
 import Affiliates from "./Affiliates"
 import PremiumCallout from "./PremiumCallout"
-import { CompleteChannelWithCompleteKits, CompleteChannelProfile } from "@Types/prisma"
+import { DeserializeFullChannelWithDeserializedGamesReturnType } from "@Services/orm/utils/serializers"
+import { ProfilePageQueryReturnType } from "@Services/twitch/getProfilePageData"
 
 interface Props {
-	channel: CompleteChannelWithCompleteKits & { profile: CompleteChannelProfile }
-	twitchInfo: ITwitchDataForProfilePage
+	channel: DeserializeFullChannelWithDeserializedGamesReturnType
+	twitchInfo: ProfilePageQueryReturnType
 }
 
 const ChannelProfile = ({ channel, twitchInfo }: Props) => {
-	const isPremium = channel.plan.type === "premium"
-	const hasCoverPhoto = channel.profile.hasCoverPhoto
-	const primaryColor = channel.profile.brandColors.find((color) => color.type === "primary")?.value || colors.white
+	const isPremium = channel.plan?.type === "premium"
+	const hasCoverPhoto = channel.profile?.hasCoverPhoto
+	const primaryColor = channel.profile?.brandColors.find((color) => color.type === "primary")?.value || colors.white
 	const [coverPhotoPath, setCoverPhotoPath] = useState("")
 
 	useEffect(() => {
@@ -43,13 +43,13 @@ const ChannelProfile = ({ channel, twitchInfo }: Props) => {
 						videos={twitchInfo.recentVideos}
 						brandColor={primaryColor}
 						coverPhotoPath={coverPhotoPath}
-						profileImagePath={channel.profile.hasProfileImage ? channel.id : ""}
+						profileImagePath={channel.profile?.hasProfileImage ? channel.id : ""}
 					/>
 
 					<Schedule schedule={twitchInfo.schedule} brandColor={primaryColor} />
-					<SetupPhotos id={channel.id} setupPhotos={channel.profile.setupPhotos} />
-					<Specs specs={channel.profile.channelPcSpecs} brandColor={primaryColor} />
-					<Affiliates affiliates={channel.profile.affiliates} brandColor={primaryColor} />
+					<SetupPhotos id={channel.id} setupPhotos={channel.profile?.setupPhotos || []} />
+					<Specs specs={channel.profile?.channelPcSpecs || []} brandColor={primaryColor} />
+					<Affiliates affiliates={channel.profile?.affiliates || []} brandColor={primaryColor} />
 				</>
 			) : (
 				<PremiumCallout />

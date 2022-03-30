@@ -1,15 +1,11 @@
 import styled from "styled-components"
 
-import { CompleteChannel, CompleteChannelProfile } from "@Types/prisma"
 import colors from "@Colors"
 import { header1, header2 } from "@Styles/typography"
 import ProfileImage from "@Components/shared/ProfileImage"
 import SocialIcons from "@Components/shared/SocialIcons"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
-
-interface Props extends Omit<CompleteChannel, "profile"> {
-	profile: CompleteChannelProfile
-}
+import { DeserializeFullChannelWithDeserializedGamesReturnType } from "@Services/orm/utils/serializers"
 
 const Header = ({
 	id,
@@ -21,10 +17,10 @@ const Header = ({
 	kits,
 	isLive,
 	imagePath
-}: Props & { isLive: boolean; imagePath: string }) => {
-	const isPremium = plan.type === "premium"
-	const hasCoverPhoto = profile.hasCoverPhoto
-	const userColor = profile.brandColors.find((color) => color.type === "primary")?.value || colors.white
+}: DeserializeFullChannelWithDeserializedGamesReturnType & { isLive: boolean; imagePath: string }) => {
+	const isPremium = plan?.type === "premium"
+	const hasCoverPhoto = profile?.hasCoverPhoto
+	const userColor = profile?.brandColors.find((color) => color.type === "primary")?.value || colors.white
 	const { width } = useViewportDimensions()
 
 	return (
