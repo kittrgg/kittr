@@ -1,52 +1,46 @@
-import { Channel } from "@kittr/types/channel"
-import { IPost, IHomePageBoostr } from "@kittr/types/types"
+import { InferGetStaticPropsType } from "next"
 import PageWrapper from "@Components/layouts/PageWrapper"
-import FrontPageBoostr from "@Features/Promo/FrontPage"
-import { allGamesQuery, getBlogPostsQuery, risingStarsQuery, topChannelsQuery, totalKitsQuery } from "@Services/orm"
+import { getAllGamesQuery, getRisingStarsQuery, getTopChannelsWithProfileQuery, getTotalKitsQuery } from "@Services/orm"
+import {
+	serializeGame,
+	serializeChannel,
+	SerializeChannelReturnType,
+	SerializeGameReturnType,
+	deserializeGame,
+	deserializeChannel
+} from "@Services/orm/utils/serializers"
 import { liveChannelsQuery } from "@Services/twitch/getLiveStreams"
 import ResponsiveAdBanner from "@Services/venatus/ResponsiveBanner"
 import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
 import { GetStaticProps } from "next"
-import BlogSection from "./Home/BlogSection"
 import Body from "./Home/Body"
 import Hero from "./Home/Hero"
 import PlatformInfo from "./Home/PlatformInfo"
-import { Game } from "@kittr/prisma"
-
-interface Props {
-	games: Game[]
-	// START HERE: Refactoring the page itself to have prisma types instead of the old mongoose types
-	popularChannels: Channel[]
-	risingStars: Channel[]
-	blogPosts: IPost[]
-	totalNumberOfKits: number
-	liveChannels: Channel[]
-	featuredChannel: IHomePageBoostr | null
-}
 
 const Home = ({
 	games,
+	liveChannels,
 	popularChannels,
 	risingStars,
-	blogPosts,
-	totalNumberOfKits,
-	liveChannels,
-	featuredChannel
-}: Props) => {
+	totalNumberOfKits
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
+	const deserializedGames = games.map((game) => deserializeGame(game))
+	const deserializedPopularChannels = popularChannels.map((channel) => deserializeChannel(channel))
+	const deserializedRisingStars = risingStars.map((channel) => deserializeChannel(channel))
+	const deserializedLiveChannels = liveChannels.map((channel) => deserializeChannel(channel))
+
 	return (
 		<PageWrapper title="Home | kittr" description="Where the pros post their kits. Get kitted.">
 			<Hero totalNumberOfKits={totalNumberOfKits} />
 			<ResponsiveAdBanner />
-			{featuredChannel && <FrontPageBoostr channelData={featuredChannel} />}
 			<Body
-				games={games}
-				popularChannels={popularChannels}
-				risingStars={risingStars}
-				liveChannels={liveChannels.slice(0, 15)}
+				games={deserializedGames}
+				popularChannels={deserializedPopularChannels}
+				risingStars={deserializedRisingStars}
+				liveChannels={deserializedLiveChannels.slice(0, 15)}
 			/>
 			<ResponsiveAdBanner />
 			<PlatformInfo />
-			{/* <BlogSection posts={blogPosts} /> */}
 			<ResponsiveAdBanner largeWidthAdUnit="d728x90" smallWidthAdUnit="s300x250" />
 		</PageWrapper>
 	)
@@ -54,25 +48,34 @@ const Home = ({
 
 export default Home
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps<{
+	games: SerializeGameReturnType[]
+	popularChannels: SerializeChannelReturnType[]
+	risingStars: SerializeChannelReturnType[]
+	liveChannels: SerializeChannelReturnType[]
+	totalNumberOfKits: number
+}> = async () => {
 	await connectToDatabase()
 
-	const [games, totalNumberOfKits, popularChannels, risingStars, blogPosts, liveChannels] = await Promise.all([
-		allGamesQuery({ serialized: true }),
-		totalKitsQuery(),
-		topChannelsQuery({ limit: 10, serialized: true }),
-		risingStarsQuery({ viewsGreaterThan: 400, skip: 10, limit: 10, serialized: true }),
-		getBlogPostsQuery({ limit: 3 }),
+	const [games, totalNumberOfKits, popularChannels, risingStars, liveChannels] = await Promise.all([
+		getAllGamesQuery(),
+		getTotalKitsQuery(),
+		getTopChannelsWithProfileQuery({ take: 10 }),
+		getRisingStarsQuery({ viewsGreaterThan: 400, skip: 10, limit: 10 }),
 		liveChannelsQuery()
 	])
 
+	const serializedGames = games.map((game) => serializeGame(game))
+	const serializedPopularChannels = popularChannels.map((channel) => serializeChannel(channel))
+	const serializedRisingStars = risingStars.map((channel) => serializeChannel(channel))
+	const serializedLiveChannels = liveChannels.map((channel) => serializeChannel(channel))
+
 	return {
 		props: {
-			games,
-			popularChannels,
-			risingStars,
-			liveChannels,
-			blogPosts,
+			games: serializedGames,
+			liveChannels: serializedLiveChannels,
+			popularChannels: serializedPopularChannels,
+			risingStars: serializedRisingStars,
 			totalNumberOfKits: Math.ceil(totalNumberOfKits / 100) * 100 || 0
 		},
 		revalidate: 60

@@ -5,7 +5,7 @@ import { Kit } from "@kittr/prisma"
  *
  * Optional second parameter will return the un-featured kits. Defaults to true (featured kits only).
  * */
-export const filterKitsByFeature = (kits: Array<Kit>, bool = true) => {
+export const filterKitsByFeature = <T extends Kit>(kits: Array<T>, bool = true): T[] => {
 	if (bool) {
 		return kits.filter((kit) => kit.featured)
 	} else {

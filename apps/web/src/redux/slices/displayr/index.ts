@@ -1,21 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { IKit } from "@kittr/types/kits"
-import { Channel } from "@kittr/types/channel"
+import { Kit } from "@kittr/prisma"
 import { IPopularityRates } from "@kittr/types/popularity"
+import type { CompleteChannel } from "@Types/pages/WarzoneProfile"
 
 export const displayrSlice = createSlice({
 	name: "displayr",
 	initialState: {
-		activeWeapon: {} as IKit,
-		channel: {} as Channel,
+		activeWeapon: {} as Kit,
+		channel: {} as CompleteChannel,
 		isSidebarOpen: false,
 		popularityRates: {} as IPopularityRates
 	},
 	reducers: {
-		setActiveWeapon: (state, action: { payload: IKit }) => {
+		setActiveWeapon: (state, action: { payload: Kit }) => {
 			state.activeWeapon = action.payload
 		},
-		setChannel: (state, action: { payload: Channel }) => {
+		setChannel: (state, action: { payload: CompleteChannel }) => {
 			state.channel = action.payload
 		},
 		setIsSidebarOpen: (state, action: { payload: boolean }) => {

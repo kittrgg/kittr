@@ -3,25 +3,15 @@ import { ITwitchLiveChannels } from "@kittr/types/twitch"
 import { headers } from "@Services/twitch/utils/auth"
 import { grabLoginName } from "./utils/grabLoginName"
 import fetch from "@Fetch"
-import { prisma, LinkProperties } from "@kittr/prisma"
+import { LinkProperties } from "@kittr/prisma"
 import { ChannelWithLinks } from "@Types/prisma"
+import { getTopChannelsWithLinksQuery } from "@Services/orm/queries/channels"
 
 const getTwitchLink = (channel: ChannelWithLinks) =>
 	channel.links.find((link) => link.property === LinkProperties.TWITCH)?.value ?? ""
 
 export const liveChannelsQuery = async () => {
-	const popularChannels = await prisma.channel.findMany({
-		where: {
-			profile: {
-				hasProfileImage: true
-			}
-		},
-		orderBy: { viewCount: "desc" },
-		take: 100,
-		include: {
-			links: true
-		}
-	})
+	const popularChannels = await getTopChannelsWithLinksQuery({ take: 100 })
 
 	// Create the url for the Twitch API fetch
 	const buildLiveStreamRequest = (channels: ChannelWithLinks[]): string => {
@@ -72,9 +62,7 @@ export const liveChannelsQuery = async () => {
 				.includes(getTwitchLink(channel).substring(getTwitchLink(channel).lastIndexOf("/") + 1) as string)
 		)
 
-		const serialized = data.map((channel) => ({ ...channel, createdAt: channel.createdAt.toISOString() }))
-
-		return serialized
+		return data
 	} catch (error) {
 		console.error(error)
 		return []

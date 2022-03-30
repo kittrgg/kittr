@@ -159,7 +159,7 @@ model ChannelAffiliateCode {
   id        String  @id @default(cuid())
   channel   Channel @relation(fields: [channelId], references: [id])
   channelId String
-  games     Game[]
+  game     Game @relation(fields: [gameId], references: [id])
   gameId    String
   code      String
 }

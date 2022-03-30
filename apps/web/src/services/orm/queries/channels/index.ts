@@ -1,4 +1,5 @@
-export * from "./topChannels"
+export * from "./getTopChannelsWithProfile"
+export * from "./getTopChannelsWithLinks"
 export * from "./risingStars"
 export * from "./byGame"
 export * from "./totalByGame"

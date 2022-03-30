@@ -1,4 +1,6 @@
-import { Channel, IPopularityRates, IKit, IGame } from "@kittr/types"
+// import { IPopularityRates } from "@kittr/types"
+import { Kit } from "@kittr/prisma"
+import { CompleteChannel } from "@Types/pages/WarzoneProfile"
 import colors from "@Colors"
 import FullScreen from "@Components/layouts/FullScreen"
 import NavMenu from "@Components/layouts/NavMenu"
@@ -15,11 +17,11 @@ import ChannelMain from "./Main"
 import Sidebar from "./Sidebar"
 
 interface Props {
-	channel: Channel
-	popularityRates: IPopularityRates
+	channel: CompleteChannel
+	// popularityRates: IPopularityRates
 }
 
-const Channels = ({ channel, popularityRates }: Props) => {
+const Channels = ({ channel }: Props) => {
 	const router = useRouter()
 	const { query } = router
 	const dispatch = useDispatch()
@@ -28,14 +30,16 @@ const Channels = ({ channel, popularityRates }: Props) => {
 	const { observe, height } = useDimensions()
 	useLockBodyScroll()
 
+	const code = channel.gameAffiliateCodes.find((code) => code.game.urlSafeName === query.game)?.code
+
 	useEffect(() => {
 		dispatch(setChannel(channel))
-		dispatch(setPopularityRates(popularityRates))
+		// dispatch(setPopularityRates(popularityRates))
 
 		return () => {
-			dispatch(setChannel({} as Channel))
-			dispatch(setActiveWeapon({} as IKit))
-			dispatch(setPopularityRates({} as IPopularityRates))
+			dispatch(setChannel({} as CompleteChannel))
+			dispatch(setActiveWeapon({} as Kit))
+			// dispatch(setPopularityRates({} as IPopularityRates))
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
@@ -47,8 +51,8 @@ const Channels = ({ channel, popularityRates }: Props) => {
 			if (Object.keys(activeWeapon).length === 0 && weaponQuery) {
 				const { kits } = channel
 				const filteredKits = kits
-					.filter((elem) => elem.base.displayName.replace(/ /g, "-") === weaponQuery)
-					.sort((a, b) => Number(b.userData.featured) - Number(a.userData.featured))
+					.filter((elem) => elem.kitBase.displayName.replace(/ /g, "-") === weaponQuery)
+					.sort((a, b) => Number(b.featured) - Number(a.featured))
 
 				const firstKit = filteredKits[0]
 				dispatch(setActiveWeapon(firstKit))
@@ -56,8 +60,6 @@ const Channels = ({ channel, popularityRates }: Props) => {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeWeapon, query.weapon, query.k])
-
-	const activeGame = channel.games ? channel.games.find((game: IGame) => game.urlSafeName === query.game) : { code: "" }
 
 	return (
 		<FullScreen
@@ -77,7 +79,7 @@ const Channels = ({ channel, popularityRates }: Props) => {
 				middleComponent={
 					<>
 						<HeaderTitle>{`${query.channel || ("" as string)}`}</HeaderTitle>
-						{activeGame?.code && <CreatorCode>CODE: {activeGame?.code}</CreatorCode>}
+						{code && <CreatorCode>CODE: {code}</CreatorCode>}
 					</>
 				}
 			/>

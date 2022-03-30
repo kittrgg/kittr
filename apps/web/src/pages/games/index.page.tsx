@@ -7,11 +7,11 @@ import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
 import { Routes } from "@Utils/lookups/routes"
 import { useRouter } from "next/router"
 import styled from "styled-components"
-import { allGamesQuery } from "@Services/orm"
-import { GameWithGenresAndPlatforms } from "@Types/prisma"
+import { getAllGamesQuery, getAllGamesQueryReturnType } from "@Services/orm"
+import { serializeGame } from "@Services/orm/utils/serializers/serializeGame"
 
 interface Props {
-	games: Array<GameWithGenresAndPlatforms>
+	games: getAllGamesQueryReturnType
 }
 
 const GamesIndex = ({ games }: Props) => {
@@ -43,9 +43,13 @@ const GamesIndex = ({ games }: Props) => {
 export const getStaticProps = async () => {
 	await connectToDatabase()
 
+	const games = await getAllGamesQuery()
+
+	const serializedGames = games.map((game) => serializeGame(game))
+
 	return {
 		props: {
-			games: await allGamesQuery({ serialized: true })
+			games: serializedGames
 		},
 		revalidate: 60
 	}

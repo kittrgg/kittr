@@ -1,32 +1,12 @@
-import { prisma } from "@kittr/prisma"
-import { GameWithGenresAndPlatforms } from "@Types/prisma"
+import { Prisma, prisma } from "@kittr/prisma"
+export const include = Prisma.validator<Prisma.GameInclude>()({ genres: true, platforms: true })
 
-interface SerializedGame extends Omit<GameWithGenresAndPlatforms, "releaseDate"> {
-	releaseDate: string
-}
-
-export const allGamesQuery = async ({
-	serialized
-}: {
-	serialized?: boolean
-}): Promise<GameWithGenresAndPlatforms[] | SerializedGame[]> => {
+export const getAllGamesQuery = async () => {
 	const games = await prisma.game.findMany({
-		include: {
-			platforms: true,
-			genres: true
-		}
+		include
 	})
-
-	if (serialized) {
-		const serializedQuery: SerializedGame[] = games.map((game) => {
-			return {
-				...game,
-				releaseDate: game.releaseDate.toISOString()
-			}
-		})
-
-		return serializedQuery
-	}
 
 	return games
 }
+
+export type getAllGamesQueryReturnType = Prisma.PromiseReturnType<typeof getAllGamesQuery>

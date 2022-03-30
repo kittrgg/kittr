@@ -62,6 +62,11 @@ export const getChannelProfileQuery = async <S extends boolean>({
 				}
 			},
 			kits: {
+				orderBy: {
+					kitBase: {
+						displayName: "desc"
+					}
+				},
 				include: {
 					kitBase: true,
 					options: true
@@ -69,7 +74,12 @@ export const getChannelProfileQuery = async <S extends boolean>({
 			},
 			links: true,
 			plan: true,
-			games: true
+			games: true,
+			gameAffiliateCodes: {
+				include: {
+					game: true
+				}
+			}
 		}
 	})
 
@@ -80,6 +90,13 @@ export const getChannelProfileQuery = async <S extends boolean>({
 			games: channel.games.map((game) => ({
 				...game,
 				releaseDate: game.releaseDate.toISOString()
+			})),
+			gameAffiliateCodes: channel.gameAffiliateCodes.map((code) => ({
+				...code,
+				game: {
+					...code.game,
+					releaseDate: code.game.releaseDate.toISOString()
+				}
 			}))
 		} as any
 	}

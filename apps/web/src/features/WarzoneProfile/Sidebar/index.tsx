@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 
-import { IKit } from "@kittr/types"
+import { CompleteKit } from "@Types/prisma"
+import { Kit } from "@kittr/prisma"
 import * as Styled from "./styles"
 import colors from "@Colors"
 import { filterKitsByFeature } from "@Utils/helpers/filterKitsByFeature"
@@ -34,25 +35,18 @@ const Sidebar = ({ ...props }) => {
 
 	const sanitizeForSearch = (string: string) => string.toLowerCase().replace(/[^0-9a-zA-Z]/g, "")
 
-	const sortKits = (kitArray: IKit[]) =>
-		kitArray
-			.filter((v, i, a) => a.findIndex((t) => t.base.displayName === v.base.displayName) === i)
-			.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
-
-	const sortForUniqueKitName = (arr: IKit[]) =>
-		arr.map((elem) => elem.base.displayName).sort((a, b) => sortAlphabetical(a, b))
+	const sortForUniqueKitName = (arr: CompleteKit[]): string[] =>
+		arr.map((elem) => elem.kitBase.displayName).sort((a, b) => sortAlphabetical(a, b))
 
 	const kits = unfilteredKits.filter((kit) =>
-		sanitizeForSearch(kit.base.displayName).includes(sanitizeForSearch(filterQuery))
+		sanitizeForSearch(kit.kitBase.displayName).includes(sanitizeForSearch(filterQuery))
 	)
 
 	const featuredKits = filterKitsByFeature(kits)
-	const featuredFilter = sortKits(featuredKits as IKit[])
-	const uniqueListItems = sortForUniqueKitName(featuredFilter)
+	const uniqueListItems = sortForUniqueKitName(featuredKits)
 
-	const restOfKits = kits.filter((elem) => !elem.userData.featured)
-	const filteredRest = sortKits(restOfKits)
-	const restListItems = sortForUniqueKitName(filteredRest)
+	const restOfKits = kits.filter((elem) => !elem.featured)
+	const restListItems = sortForUniqueKitName(restOfKits)
 
 	return (
 		<Styled.Wrapper isSidebarOpen={isSidebarOpen} viewportWidth={width} data-cy="kit-list">
@@ -69,7 +63,7 @@ const Sidebar = ({ ...props }) => {
 					return (
 						<Item
 							key={baseName}
-							kits={filterKitsByFeature(kits) as IKit[]}
+							kits={filterKitsByFeature(kits) as Kit[]}
 							baseName={baseName}
 							featured
 							setFilterQuery={setFilterQuery}

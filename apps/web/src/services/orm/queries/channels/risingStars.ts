@@ -1,22 +1,18 @@
-import { prisma, Channel } from "@kittr/prisma"
-interface SerializedChannel extends Omit<Channel, "createdAt"> {
-	createdAt: string
-}
-/**
- * SERVER SIDE ONLY!
- *
- * Get the top channels on the platform. */
-export const risingStarsQuery = async ({
+import { Prisma, prisma } from "@kittr/prisma"
+
+export const include = Prisma.validator<Prisma.ChannelInclude>()({
+	profile: true
+})
+
+export const getRisingStarsQuery = async ({
 	limit,
 	skip,
-	viewsGreaterThan,
-	serialized
+	viewsGreaterThan
 }: {
 	skip: number
 	limit: number
-	serialized?: boolean
 	viewsGreaterThan: number
-}): Promise<Channel[] | SerializedChannel[]> => {
+}) => {
 	const where = {
 		profile: {
 			hasProfileImage: true
@@ -39,19 +35,10 @@ export const risingStarsQuery = async ({
 		where,
 		skip: randomSkip,
 		take: limit,
-		include: {
-			profile: true
-		}
+		include
 	})
-
-	if (serialized) {
-		const serializedResult = result.map((channel) => ({
-			...channel,
-			createdAt: channel.createdAt.toISOString()
-		}))
-
-		return serializedResult
-	}
 
 	return result
 }
+
+export type getRisingStarsQueryReturnType = Prisma.PromiseReturnType<typeof getRisingStarsQuery>

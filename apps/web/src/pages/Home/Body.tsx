@@ -1,5 +1,3 @@
-import { IGame } from "@kittr/types/game"
-import { Channel } from "@kittr/types/channel"
 import colors from "@Colors"
 import { ChannelAvatarList, GameList, SideScroller } from "@Components/shared"
 import { header2 } from "@Styles/typography"
@@ -7,10 +5,11 @@ import { Routes } from "@Utils/lookups/routes"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import styled from "styled-components"
+import { Game, Channel } from "@kittr/prisma"
 
 interface Props {
 	/** Games available on the platform. Includes both active and inactive games. */
-	games: IGame[]
+	games: Game[]
 	/** Top channels sorted by view count on kittr. */
 	popularChannels: Channel[]
 	/** Channels who aren't quite in the top channels list
@@ -51,7 +50,7 @@ const Body = ({ games, popularChannels, risingStars, liveChannels }: Props) => {
 			)}
 
 			<SideScroller wrapperStyles={{ margin: "12px 0" }} childMargin="0 10px">
-				{liveChannels && <ChannelAvatarList data={liveChannels} onClick={routeChannel} isLive />}
+				{liveChannels && <ChannelAvatarList channels={liveChannels} onClick={routeChannel} isLive />}
 			</SideScroller>
 
 			<SectionHeader>
@@ -62,7 +61,7 @@ const Body = ({ games, popularChannels, risingStars, liveChannels }: Props) => {
 			</SectionHeader>
 
 			<SideScroller wrapperStyles={{ margin: "12px 0" }} childMargin="0 10px">
-				{popularChannels && <ChannelAvatarList data={popularChannels} onClick={routeChannel} />}
+				{popularChannels && <ChannelAvatarList channels={popularChannels} onClick={routeChannel} />}
 			</SideScroller>
 
 			<SectionHeader style={{ marginTop: "60px" }}>
@@ -73,7 +72,7 @@ const Body = ({ games, popularChannels, risingStars, liveChannels }: Props) => {
 			</SectionHeader>
 
 			<SideScroller wrapperStyles={{ margin: "12px 0" }} childMargin="0 10px">
-				{risingStars && <ChannelAvatarList data={risingStars} onClick={routeChannel} />}
+				{risingStars && <ChannelAvatarList channels={risingStars} onClick={routeChannel} />}
 			</SideScroller>
 		</Container>
 	)
