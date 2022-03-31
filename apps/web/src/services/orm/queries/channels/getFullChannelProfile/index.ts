@@ -32,10 +32,17 @@ export const getFullChannelProfileQuery = async ({ urlSafeName }: Params) => {
 			links: true,
 			plan: true,
 			games: true,
-			gameAffiliateCodes: true
+			gameAffiliateCodes: {
+				include: {
+					game: true
+				}
+			}
 		}
 	})
 	return channel
 }
 
 export type getFullChannelProfileType = Prisma.PromiseReturnType<typeof getFullChannelProfileQuery>
+
+export * from "./deserializer"
+export * from "./serializer"

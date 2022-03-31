@@ -1,5 +1,5 @@
 import { Prisma } from "@kittr/prisma"
-import { SerializeGameReturnType } from "./game"
+import { serializeGame } from "../../../utils/serializers/game"
 
 const ChannelWithIncludeAll = Prisma.validator<Prisma.ChannelArgs>()({
 	include: {
@@ -30,17 +30,18 @@ const ChannelWithIncludeAll = Prisma.validator<Prisma.ChannelArgs>()({
 
 type CompleteFullChannel = Prisma.ChannelGetPayload<typeof ChannelWithIncludeAll>
 
-interface CompleteFullChannelWithSerializedGames extends Omit<CompleteFullChannel, "games"> {
-	games: SerializeGameReturnType[]
-}
-
-export const serializeFullChannel = (channel: CompleteFullChannel | CompleteFullChannelWithSerializedGames) => {
+export const serializeFullChannelProfile = (channel: CompleteFullChannel) => {
 	const serializedChannel = {
 		...channel,
-		createdAt: channel.createdAt.toISOString()
+		createdAt: channel.createdAt.toISOString(),
+		games: channel.games.map((game) => serializeGame(game)),
+		gameAffiliateCodes: channel.gameAffiliateCodes.map((gameAffiliateCode) => ({
+			...gameAffiliateCode,
+			game: serializeGame(gameAffiliateCode.game)
+		}))
 	}
 
 	return serializedChannel
 }
 
-export type SerializeFullChannelReturnType = ReturnType<typeof serializeFullChannel>
+export type SerializeFullChannelProfileReturnType = ReturnType<typeof serializeFullChannelProfile>

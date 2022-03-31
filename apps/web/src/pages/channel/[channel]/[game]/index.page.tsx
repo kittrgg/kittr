@@ -1,51 +1,43 @@
-// import {
-// 	IRatioOfChannelsWithBase,
-// 	IRatioOfChannelsWithBaseFeatured,
-// 	IForSetupComparison
-// } from "@kittr/types/popularity"
-import { GetStaticProps } from "next"
+import { GetStaticProps, InferGetStaticPropsType } from "next"
 import { useRouter } from "next/router"
 
 import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
-// import { KitStat } from "@Services/orm/models"
-import { Game, prisma } from "@kittr/prisma"
-import type { CompleteChannel } from "@Types/pages/WarzoneProfile"
-import { gameByUrlSafeNameQuery, getChannelProfileQuery } from "@Services/orm"
+
+import {
+	getFullChannelProfileQuery,
+	serializeFullChannelProfile,
+	SerializeFullChannelProfileReturnType,
+	deserializeFullChannelProfile
+} from "@Services/orm/queries/channels/getFullChannelProfile"
+import { gameByUrlSafeNameQuery } from "@Services/orm"
+import { serializeGame, SerializeGameReturnType, deserializeGame } from "@Services/orm/utils/serializers"
 import WarzoneProfile from "@Features/WarzoneProfile"
 import { NoItemFound, Head } from "@Components/shared"
 import FallbackPage from "@Components/layouts/FallbackPage"
 
-interface Props {
-	channel: CompleteChannel
-	game: Game
-	// ratioOfChannelsWithBase: IRatioOfChannelsWithBase[]
-	// ratioOfChannelsWithBaseFeatured: IRatioOfChannelsWithBaseFeatured[]
-	// forSetupComparison: IForSetupComparison[]
-}
-
 const GamePresentation = ({
-	channel,
-	game
-}: // ratioOfChannelsWithBase,
-// ratioOfChannelsWithBaseFeatured,
-// forSetupComparison
-Props) => {
-	const { isFallback } = useRouter()
+	channel: serializedChannel,
+	game: serializedGame
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
+	const channel = serializedChannel ? deserializeFullChannelProfile(serializedChannel) : null
+	const game = serializedGame ? deserializeGame(serializedGame) : null
+
+	const { isFallback, query } = useRouter()
 	if (isFallback) return <FallbackPage />
 
-	if (Object.keys(channel).length === 0) {
+	if (!channel) {
 		return (
 			<>
 				<Head
 					title={`Game Not Found | kittr`}
-					description={`${channel.displayName} doesn't seem to play that game! | kittr`}
+					description={`${query.channel} doesn't seem to play that game! | kittr`}
 				/>
 				<NoItemFound type="game" />
 			</>
 		)
 	}
 
-	if (game.urlSafeName === "warzone") {
+	if (game?.urlSafeName === "warzone") {
 		return (
 			<>
 				<Head
@@ -66,10 +58,7 @@ Props) => {
 
 	return (
 		<>
-			<Head
-				title={`Game Not Found | kittr`}
-				description={`${channel.displayName} doesn't seem to play that game! | kittr`}
-			/>
+			<Head title={`Game Not Found | kittr`} description={`${query.channel} doesn't seem to play that game! | kittr`} />
 			<NoItemFound type="channel" />
 		</>
 	)
@@ -107,14 +96,20 @@ export const getStaticPaths = async () => {
 	}
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps<{
+	channel: SerializeFullChannelProfileReturnType | null
+	game: SerializeGameReturnType | null
+}> = async ({ params }) => {
 	const { channel: urlSafeName, game } = params as { channel: string; game: string }
 	await connectToDatabase()
 
 	const [gameQuery, channel] = await Promise.all([
-		gameByUrlSafeNameQuery(game),
-		getChannelProfileQuery({ serialized: true, urlSafeName })
+		gameByUrlSafeNameQuery({ urlSafeName: game }),
+		getFullChannelProfileQuery({ urlSafeName })
 	])
+
+	const serializedGame = gameQuery ? serializeGame(gameQuery) : null
+	const serializedChannel = channel ? serializeFullChannelProfile(channel) : null
 
 	// TODO: Bring back kit stats!
 	// const kitStats = await KitStat.find()
@@ -122,8 +117,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 	return {
 		props: {
-			channel,
-			game: gameQuery
+			channel: serializedChannel,
+			game: serializedGame
 			// ratioOfChannelsWithBase,
 			// ratioOfChannelsWithBaseFeatured,
 			// forSetupComparison

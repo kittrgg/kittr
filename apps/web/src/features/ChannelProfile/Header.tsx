@@ -5,7 +5,6 @@ import { header1, header2 } from "@Styles/typography"
 import ProfileImage from "@Components/shared/ProfileImage"
 import SocialIcons from "@Components/shared/SocialIcons"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
-import { DeserializeFullChannelWithDeserializedGamesReturnType } from "@Services/orm/utils/serializers"
 
 const Header = ({
 	id,

@@ -8,7 +8,7 @@ import { Routes } from "@Utils/lookups/routes"
 import { useRouter } from "next/router"
 import styled from "styled-components"
 import { getAllGamesQuery, getAllGamesQueryReturnType } from "@Services/orm"
-import { serializeGame } from "@Services/orm/utils/serializers/serializeGame"
+import { serializeGame } from "@Services/orm/utils/serializers/game"
 
 interface Props {
 	games: getAllGamesQueryReturnType

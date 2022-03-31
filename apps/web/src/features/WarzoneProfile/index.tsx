@@ -6,7 +6,7 @@ import FullScreen from "@Components/layouts/FullScreen"
 import NavMenu from "@Components/layouts/NavMenu"
 import { useDimensions } from "@Hooks/useDimensions"
 import { useLockBodyScroll } from "@Hooks/useLockBodyScroll"
-import { setActiveWeapon, setChannel, setIsSidebarOpen, setPopularityRates } from "@Redux/slices/displayr"
+import { setActiveWeapon, setChannel, setIsSidebarOpen } from "@Redux/slices/displayr"
 import { useActiveWeapon, useSidebarState } from "@Redux/slices/displayr/selectors"
 import { useDispatch } from "@Redux/store"
 import { Routes } from "@Utils/lookups/routes"
@@ -15,10 +15,10 @@ import { useEffect } from "react"
 import styled from "styled-components"
 import ChannelMain from "./Main"
 import Sidebar from "./Sidebar"
+import { deserializeFullChannelProfileType } from "@Services/orm/queries/channels/getFullChannelProfile"
 
 interface Props {
-	channel: CompleteChannel
-	// popularityRates: IPopularityRates
+	channel: deserializeFullChannelProfileType
 }
 
 const Channels = ({ channel }: Props) => {
@@ -30,7 +30,7 @@ const Channels = ({ channel }: Props) => {
 	const { observe, height } = useDimensions()
 	useLockBodyScroll()
 
-	const code = channel.gameAffiliateCodes.find((code) => code.game.urlSafeName === query.game)?.code
+	const code = channel?.gameAffiliateCodes.find((code) => code.game.urlSafeName === query.game)?.code
 
 	useEffect(() => {
 		dispatch(setChannel(channel))

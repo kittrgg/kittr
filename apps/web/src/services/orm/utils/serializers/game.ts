@@ -39,3 +39,5 @@ export const deserializeGame = (game: SerializeGameReturnType): PartialCompleteG
 
 	return deserializedGame
 }
+
+export type DeserializeGameReturnType = ReturnType<typeof deserializeGame>

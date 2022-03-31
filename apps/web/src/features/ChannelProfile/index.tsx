@@ -13,7 +13,6 @@ import Schedule from "./Schedule"
 import Specs from "./Specs"
 import Affiliates from "./Affiliates"
 import PremiumCallout from "./PremiumCallout"
-import { DeserializeFullChannelWithDeserializedGamesReturnType } from "@Services/orm/utils/serializers"
 import { ProfilePageQueryReturnType } from "@Services/twitch/getProfilePageData"
 
 interface Props {
