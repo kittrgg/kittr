@@ -1,21 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { Kit } from "@kittr/prisma"
 import { IPopularityRates } from "@kittr/types/popularity"
-import type { CompleteChannel } from "@Types/pages/WarzoneProfile"
+import { DeserializeFullChannelProfileReturnType } from "@Services/orm"
+import { NonNullable } from "@Types/index"
+import { KitWithBaseInDisplayr } from "@Types/prisma"
 
 export const displayrSlice = createSlice({
 	name: "displayr",
 	initialState: {
-		activeWeapon: {} as Kit,
-		channel: {} as CompleteChannel,
+		activeWeapon: {} as KitWithBaseInDisplayr,
+		channel: {} as NonNullable<DeserializeFullChannelProfileReturnType>,
 		isSidebarOpen: false,
 		popularityRates: {} as IPopularityRates
 	},
 	reducers: {
-		setActiveWeapon: (state, action: { payload: Kit }) => {
+		setActiveWeapon: (state, action: { payload: KitWithBaseInDisplayr }) => {
 			state.activeWeapon = action.payload
 		},
-		setChannel: (state, action: { payload: CompleteChannel }) => {
+		setChannel: (state, action: { payload: NonNullable<DeserializeFullChannelProfileReturnType> }) => {
 			state.channel = action.payload
 		},
 		setIsSidebarOpen: (state, action: { payload: boolean }) => {

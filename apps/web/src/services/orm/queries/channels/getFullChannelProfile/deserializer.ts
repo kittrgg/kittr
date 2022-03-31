@@ -7,10 +7,14 @@ export const deserializeFullChannelProfile = (channel: SerializeFullChannelProfi
 	const deserializedGame = {
 		...channel,
 		createdAt: new Date(channel.createdAt),
-		games: channel.games.map((game) => deserializeGame(game))
+		games: channel.games.map((game) => deserializeGame(game)),
+		gameAffiliateCodes: channel.gameAffiliateCodes.map((gameAffiliateCode) => ({
+			...gameAffiliateCode,
+			game: deserializeGame(gameAffiliateCode.game)
+		}))
 	}
 
 	return deserializedGame
 }
 
-export type deserializeFullChannelProfileType = ReturnType<typeof deserializeFullChannelProfile>
+export type DeserializeFullChannelProfileReturnType = ReturnType<typeof deserializeFullChannelProfile>

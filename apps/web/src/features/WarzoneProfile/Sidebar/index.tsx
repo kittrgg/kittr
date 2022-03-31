@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 
-import { CompleteKit } from "@Types/prisma"
-import { Kit } from "@kittr/prisma"
+import { KitWithBaseInDisplayr } from "@Types/prisma"
 import * as Styled from "./styles"
 import colors from "@Colors"
 import { filterKitsByFeature } from "@Utils/helpers/filterKitsByFeature"
@@ -26,16 +25,18 @@ const CATEGORIES = [
 ]
 const CATEGORY_SPLIT = 19
 
-const Sidebar = ({ ...props }) => {
+const Sidebar = () => {
 	const dispatch = useDispatch()
 	const isSidebarOpen = useSidebarState()
 	const { kits: unfilteredKits = [] } = useChannel()
 	const { width } = useViewportDimensions()
 	const [filterQuery, setFilterQuery] = useState("")
 
+	console.log(unfilteredKits)
+
 	const sanitizeForSearch = (string: string) => string.toLowerCase().replace(/[^0-9a-zA-Z]/g, "")
 
-	const sortForUniqueKitName = (arr: CompleteKit[]): string[] =>
+	const sortForUniqueKitName = (arr: KitWithBaseInDisplayr[]): string[] =>
 		arr.map((elem) => elem.kitBase.displayName).sort((a, b) => sortAlphabetical(a, b))
 
 	const kits = unfilteredKits.filter((kit) =>
@@ -63,7 +64,7 @@ const Sidebar = ({ ...props }) => {
 					return (
 						<Item
 							key={baseName}
-							kits={filterKitsByFeature(kits) as Kit[]}
+							kits={filterKitsByFeature(kits)}
 							baseName={baseName}
 							featured
 							setFilterQuery={setFilterQuery}
@@ -78,15 +79,17 @@ const Sidebar = ({ ...props }) => {
 							return (
 								<React.Fragment key={category}>
 									<Styled.CategoryLabel>
-										{filteredRest.filter((kit) => kit.base.category === category).length > 0 && (
+										{restOfKits.filter((kit) => kit.kitBase.category.displayName === category).length > 0 && (
 											<>{`${category}s`.toUpperCase()}</>
 										)}
 									</Styled.CategoryLabel>
-									{filteredRest
-										.filter((kit) => kit.base.category === category)
+									{restOfKits
+										.filter((kit) => kit.kitBase.category.displayName === category)
 										.map((kit) => {
-											const { _id, base } = kit
-											return <Item key={_id} kits={kits} baseName={base.displayName} setFilterQuery={setFilterQuery} />
+											const { id, kitBase } = kit
+											return (
+												<Item key={id} kits={kits} baseName={kitBase.displayName} setFilterQuery={setFilterQuery} />
+											)
 										})}
 								</React.Fragment>
 							)

@@ -1,7 +1,7 @@
 import { Prisma } from "@kittr/prisma"
 import { serializeGame } from "../../../utils/serializers/game"
 
-const ChannelWithIncludeAll = Prisma.validator<Prisma.ChannelArgs>()({
+export const include = Prisma.validator<Prisma.ChannelArgs>()({
 	include: {
 		profile: {
 			include: {
@@ -12,8 +12,17 @@ const ChannelWithIncludeAll = Prisma.validator<Prisma.ChannelArgs>()({
 			}
 		},
 		kits: {
+			orderBy: {
+				kitBase: {
+					displayName: "asc"
+				}
+			},
 			include: {
-				kitBase: true,
+				kitBase: {
+					include: {
+						category: true
+					}
+				},
 				options: true
 			}
 		},
@@ -28,7 +37,7 @@ const ChannelWithIncludeAll = Prisma.validator<Prisma.ChannelArgs>()({
 	}
 })
 
-type CompleteFullChannel = Prisma.ChannelGetPayload<typeof ChannelWithIncludeAll>
+type CompleteFullChannel = Prisma.ChannelGetPayload<typeof include>
 
 export const serializeFullChannelProfile = (channel: CompleteFullChannel) => {
 	const serializedChannel = {

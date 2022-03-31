@@ -15,10 +15,14 @@ import { useEffect } from "react"
 import styled from "styled-components"
 import ChannelMain from "./Main"
 import Sidebar from "./Sidebar"
-import { deserializeFullChannelProfileType } from "@Services/orm/queries/channels/getFullChannelProfile"
+import type { NonNullable } from "@Types/index"
+import {
+	DeserializeFullChannelProfileReturnType,
+	SerializeFullChannelProfileReturnType
+} from "@Services/orm/queries/channels/getFullChannelProfile"
 
 interface Props {
-	channel: deserializeFullChannelProfileType
+	channel: NonNullable<DeserializeFullChannelProfileReturnType>
 }
 
 const Channels = ({ channel }: Props) => {
@@ -37,7 +41,7 @@ const Channels = ({ channel }: Props) => {
 		// dispatch(setPopularityRates(popularityRates))
 
 		return () => {
-			dispatch(setChannel({} as CompleteChannel))
+			dispatch(setChannel({} as SerializeFullChannelProfileReturnType))
 			dispatch(setActiveWeapon({} as Kit))
 			// dispatch(setPopularityRates({} as IPopularityRates))
 		}

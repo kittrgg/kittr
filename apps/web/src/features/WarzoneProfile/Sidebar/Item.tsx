@@ -1,4 +1,3 @@
-import { IKit } from "@kittr/types"
 import colors from "@Colors"
 import SVG from "@Components/shared/SVG"
 import { setActiveWeapon, setIsSidebarOpen } from "@Redux/slices/displayr"
@@ -9,10 +8,11 @@ import { Routes } from "@Utils/lookups/routes"
 import { useRouter } from "next/router"
 import { Dispatch, SetStateAction, useEffect, useRef } from "react"
 import styled from "styled-components"
+import { KitWithBaseInDisplayr } from "@Types/prisma"
 
 interface Props {
 	baseName: string
-	kits: Array<IKit>
+	kits: Array<KitWithBaseInDisplayr>
 	setFilterQuery: Dispatch<SetStateAction<string>>
 	featured?: true
 	noRef?: true
@@ -30,14 +30,15 @@ const Item = ({ baseName, featured, kits, setFilterQuery }: Props) => {
 	const weaponQuery = router.query.weapon || router.query.k
 
 	const matchedBase = kits
-		.filter((elem) => elem.base.displayName === baseName)
+		.filter((elem) => elem.kitBase.displayName === baseName)
 		.sort((a, b) => {
-			if (a.userData.customTitle < b.userData.customTitle) return -1
-			if (a.userData.customTitle > b.userData.customTitle) return 1
+			if (!a.customTitle || !b.customTitle) return 0
+			if (a?.customTitle < b.customTitle) return -1
+			if (a.customTitle > b.customTitle) return 1
 			return 0
 		})
 
-	const firstMatchedBaseUserTitle = ` (${matchedBase[0].userData.customTitle})`
+	const firstMatchedBaseUserTitle = ` (${matchedBase[0].customTitle})`
 
 	const onClick = () => {
 		dispatch(setActiveWeapon(matchedBase[0]))
@@ -86,16 +87,16 @@ const Item = ({ baseName, featured, kits, setFilterQuery }: Props) => {
 					{weaponQuery === baseNameCleanse &&
 						matchedBase.length > 1 &&
 						matchedBase
-							.sort((a, b) => sortAlphabetical(a.userData.customTitle, b.userData.customTitle))
-							.sort((a, b) => Number(b.userData.featured) - Number(a.userData.featured))
+							.sort((a, b) => sortAlphabetical(a.customTitle || "", b.customTitle || ""))
+							.sort((a, b) => Number(b.featured) - Number(a.featured))
 							.map((elem) => {
 								return (
 									<SubItem
 										active={
-											activeWeapon?.base?.displayName === elem.base.displayName &&
-											activeWeapon?.userData?.customTitle === elem.userData.customTitle
+											activeWeapon?.kitBase?.displayName === elem.kitBase.displayName &&
+											activeWeapon.customTitle === elem.customTitle
 										}
-										key={elem._id}
+										key={elem.id}
 										onClick={() => {
 											dispatch(setActiveWeapon(elem))
 											dispatch(setIsSidebarOpen(false))
@@ -109,12 +110,12 @@ const Item = ({ baseName, featured, kits, setFilterQuery }: Props) => {
 												{ shallow: true }
 											)
 										}}
-										data-cy={`${elem.base.displayName.replace(/ /g, "-").replace("(", "-").replace(")", "-")}-${
-											elem.userData.customTitle.replace(/ /g, "-") || "Primary"
+										data-cy={`${elem.kitBase.displayName.replace(/ /g, "-").replace("(", "-").replace(")", "-")}-${
+											elem.customTitle?.replace(/ /g, "-") || "Primary"
 										}`}
 									>
-										<SubItemTitle>{elem.userData.customTitle || elem.base.displayName}</SubItemTitle>
-										{elem.userData.featured && (
+										<SubItemTitle>{elem.customTitle || elem.kitBase.displayName}</SubItemTitle>
+										{elem.featured && (
 											<SVG.Star
 												style={{ position: "absolute", top: "50%", transform: "translateY(-50%)", right: "0px" }}
 												width="14px"
