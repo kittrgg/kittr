@@ -20,7 +20,8 @@ export const include = Prisma.validator<Prisma.ChannelArgs>()({
 			include: {
 				kitBase: {
 					include: {
-						category: true
+						category: true,
+						stats: true
 					}
 				},
 				options: true
