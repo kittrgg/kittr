@@ -27,7 +27,8 @@ export const getFullChannelProfileQuery = async ({ urlSafeName }: Params) => {
 				include: {
 					kitBase: {
 						include: {
-							category: true
+							category: true,
+							stats: true
 						}
 					},
 					options: true

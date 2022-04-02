@@ -30,6 +30,7 @@ model ChannelProfile {
   brandColors     ChannelBrandColor[]
   hasCoverPhoto   Boolean
   hasProfileImage Boolean
+  youtubeAutoplay Boolean
   channelPcSpecs  ChannelPcSpec[]
   affiliates      ChannelAffiliate[]
   setupPhotos     SetupPhoto[]

@@ -7,7 +7,7 @@ import { SVG } from "@Components/shared"
 
 const FavoriteBlueprint = ({ ...props }) => {
 	const activeWeapon = useActiveWeapon()
-	const quote = activeWeapon.userData.quote
+	const quote = activeWeapon.quote
 
 	if (quote) {
 		return (

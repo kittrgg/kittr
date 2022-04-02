@@ -32,8 +32,6 @@ const Sidebar = () => {
 	const { width } = useViewportDimensions()
 	const [filterQuery, setFilterQuery] = useState("")
 
-	console.log(unfilteredKits)
-
 	const sanitizeForSearch = (string: string) => string.toLowerCase().replace(/[^0-9a-zA-Z]/g, "")
 
 	const sortForUniqueKitName = (arr: KitWithBaseInDisplayr[]): string[] =>

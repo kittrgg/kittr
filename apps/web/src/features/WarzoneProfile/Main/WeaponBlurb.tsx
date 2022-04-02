@@ -3,7 +3,7 @@ import { useActiveWeapon } from "@Redux/slices/displayr/selectors"
 
 const BottomBlurb = ({ ...props }) => {
 	const activeWeapon = useActiveWeapon()
-	const blurb = activeWeapon.base.gameInfo.blurb
+	const blurb = activeWeapon.kitBase.blurb
 
 	return (
 		<Styled.Container data-cy="kit-blurb">

@@ -142,7 +142,8 @@ mongoose
 				stripeId: channel.meta.stripeId,
 				premiumType: channel.meta.premiumType,
 				links: channel.meta.links,
-				setupPhotos: channel.meta.setupPhotos
+				setupPhotos: channel.meta.setupPhotos,
+				youtubeAutoplay: channel.meta.youtubeAutoplay
 			}))
 
 			for (const channel of formattedChannels) {
@@ -185,6 +186,7 @@ mongoose
 							create: {
 								hasCoverPhoto: channel.hasCoverPhoto || false,
 								hasProfileImage: channel.hasProfileImage,
+								youtubeAutoplay: channel.youtubeAutoplay || false,
 								affiliates: {
 									create: Object.values(channel.affiliates || {}).map(
 										(affiliate) => ({

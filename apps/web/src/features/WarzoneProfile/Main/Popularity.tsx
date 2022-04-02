@@ -45,7 +45,7 @@ const Popularity = ({ ...props }) => {
 	return (
 		<Styled.Container data-cy="kit-popularity">
 			<Styled.Header>POPULARITY</Styled.Header>
-			<p>Under Construction</p>
+			<Styled.Header style={{ margin: "1rem 0", fontSize: "1rem" }}>Under Construction</Styled.Header>
 			{/* <Styled.List>
 				<Styled.ListItem>Weapon used by {(channelsWithBase?.ratio * 100).toFixed(1)}% of channels</Styled.ListItem>
 				<Styled.ListItem>

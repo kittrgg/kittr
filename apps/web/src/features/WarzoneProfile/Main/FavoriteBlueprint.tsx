@@ -7,7 +7,7 @@ import { useActiveWeapon } from "@Redux/slices/displayr/selectors"
 
 const FavoriteBlueprint = ({ ...props }) => {
 	const activeWeapon = useActiveWeapon()
-	const favorite = activeWeapon.userData.blueprint
+	const favorite = activeWeapon.blueprint
 
 	if (favorite) {
 		return (
