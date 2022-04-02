@@ -1,4 +1,4 @@
-import { IKit } from "@kittr/types"
+import { DeserializeFullChannelProfileReturnType } from "@Services/orm"
 import colors from "@Colors"
 import SVG from "@Components/shared/SVG"
 import { setActiveWeapon } from "@Redux/slices/displayr"
@@ -12,13 +12,13 @@ import styled from "styled-components"
 import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
 
 interface Props {
-	kit: IKit
+	kit: NonNullable<DeserializeFullChannelProfileReturnType>["kits"][0]
 	containerStyles?: any
 }
 
 const Card = ({ kit, containerStyles }: Props) => {
 	const dispatch = useDispatch()
-	const { options, userData, base } = kit
+	const { featured, kitBase, options } = kit
 	const router = useRouter()
 	const { channel, game } = router.query
 
@@ -28,21 +28,23 @@ const Card = ({ kit, containerStyles }: Props) => {
 			onClick={() => {
 				dispatch(setActiveWeapon(kit))
 				router.push(
-					Routes.CHANNEL.GAME.createPath(channel as string, game as string, `?k=${base.displayName.replace(/ /g, "-")}`)
+					Routes.CHANNEL.GAME.createPath(
+						channel as string,
+						game as string,
+						`?k=${kitBase.displayName.replace(/ /g, "-")}`
+					)
 				)
 			}}
 			data-cy={`placeholder-button`}
 		>
 			<HeaderContainer>
-				{userData.featured && (
-					<SVG.Star width="10px" fill={colors.gold} stroke={colors.gold} style={{ marginRight: "8px" }} />
-				)}
-				{base.displayName.toUpperCase()}
+				{featured && <SVG.Star width="10px" fill={colors.gold} stroke={colors.gold} style={{ marginRight: "8px" }} />}
+				{kitBase.displayName.toUpperCase()}
 			</HeaderContainer>
 
 			<ImageContainer>
 				<FirebaseStorageResolver
-					path={base.image}
+					path={kitBase.imageUrl}
 					noSpinner
 					render={(data) => (
 						<img

@@ -1,4 +1,3 @@
-import { IGame } from "@kittr/types"
 import colors from "@Colors"
 import { Button, SupportUs, SVG } from "@Components/shared"
 import { useDetectAdBlock } from "@Hooks/useDetectAdBlock"
@@ -39,7 +38,7 @@ const Marketing = () => {
 	return null
 }
 
-const Main = ({ ...props }) => {
+const Main = () => {
 	const dispatch = useDispatch()
 	const activeWeapon = useActiveWeapon()
 	const channelData = useChannel()
@@ -82,11 +81,13 @@ const Main = ({ ...props }) => {
 				<>
 					{!isMobile && (
 						<TopBar
-							channelInfo={{
-								displayName: channelData.displayName,
-								meta: channelData.meta,
-								affiliateCode: channelData.games.find((game: IGame) => game.urlSafeName === query.game)?.code || ""
-							}}
+							id={channelData.id}
+							displayName={channelData.displayName}
+							hasProfileImage={channelData.profile?.hasProfileImage || false}
+							links={channelData.links}
+							gameAffiliateCode={
+								channelData.gameAffiliateCodes.find((code) => code.game.displayName === "Warzone")?.code || ""
+							}
 						/>
 					)}
 					{isMobile && <KitScroller availableKits={channelData.kits} />}
@@ -116,7 +117,7 @@ const Main = ({ ...props }) => {
 					<Popularity />
 					<div style={{ display: "grid", gap: "12px" }}>
 						<WeaponBlurb />
-						<FavoriteBlueprint favorite={activeWeapon?.userData?.blueprint} />
+						<FavoriteBlueprint favorite={activeWeapon?.blueprint} />
 					</div>
 					<ChannelQuote />
 					{isMobile && (

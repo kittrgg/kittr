@@ -1,26 +1,23 @@
-import { ChannelMeta } from "@kittr/types"
+import { ChannelLink } from "@kittr/prisma"
 import * as Styled from "./style"
 import { SocialIcons, ProfileImage } from "@Components/shared"
 
 interface Props {
-	channelInfo: {
-		displayName: string
-		meta: ChannelMeta
-		affiliateCode: string
-	}
+	id: string
+	displayName: string
+	hasProfileImage: boolean
+	links: ChannelLink[]
+	gameAffiliateCode: string
 }
 
-const TopBar = ({ channelInfo }: Props) => {
-	const { displayName } = channelInfo
-	const { hasProfileImage, profileImage, links } = channelInfo.meta
-
+const TopBar = ({ id, displayName, hasProfileImage, gameAffiliateCode, links }: Props) => {
 	return (
 		<Styled.Container>
 			<Styled.Row>
-				{hasProfileImage && <ProfileImage imagePath={profileImage} />}
+				{hasProfileImage && <ProfileImage imagePath={id} />}
 				<Styled.NameContainer data-cy="channel-name">
 					<Styled.H1>{displayName}</Styled.H1>
-					{channelInfo.affiliateCode && <Styled.Code>CODE: {channelInfo.affiliateCode}</Styled.Code>}
+					{gameAffiliateCode && <Styled.Code>CODE: {gameAffiliateCode}</Styled.Code>}
 				</Styled.NameContainer>
 			</Styled.Row>
 			<SocialIcons links={links} />

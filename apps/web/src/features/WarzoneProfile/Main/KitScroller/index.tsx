@@ -1,4 +1,5 @@
-import { IKit } from "@kittr/types"
+import { NonNullable } from "@Types/index"
+import { DeserializeFullChannelProfileReturnType } from "@Services/orm"
 import { useState, useEffect, useRef } from "react"
 import ScrollContainer from "react-indiana-drag-scroll"
 import * as Styled from "./style"
@@ -6,7 +7,7 @@ import Item from "./Item"
 import { useActiveWeapon } from "@Redux/slices/displayr/selectors"
 
 interface Props {
-	availableKits: IKit[]
+	availableKits: NonNullable<DeserializeFullChannelProfileReturnType>["kits"]
 }
 
 const KitScroller = ({ availableKits }: Props) => {
@@ -15,10 +16,10 @@ const KitScroller = ({ availableKits }: Props) => {
 	const containerRef = useRef<HTMLDivElement>(null)
 
 	const matchedBase = availableKits
-		.filter((elem: IKit) => elem.base.displayName === activeWeapon?.base?.displayName)
+		.filter((elem) => elem.kitBase.displayName === activeWeapon?.kitBase?.displayName)
 		.sort((a, b) => {
-			if (a.userData.customTitle < b.userData.customTitle) return -1
-			if (a.userData.customTitle > b.userData.customTitle) return 1
+			if ((a.customTitle ?? "") < (b.customTitle ?? "")) return -1
+			if ((a.customTitle ?? "") > (b.customTitle ?? "")) return 1
 			return 0
 		})
 
@@ -81,9 +82,9 @@ const KitScroller = ({ availableKits }: Props) => {
 		>
 			<Styled.Wrapper>
 				{matchedBase
-					.sort((a, b) => Number(b.userData.featured) - Number(a.userData.featured))
-					.map((elem: IKit) => {
-						return <Item key={elem._id} elem={elem} />
+					.sort((a, b) => Number(b.featured) - Number(a.featured))
+					.map((elem) => {
+						return <Item key={elem.id} elem={elem} />
 					})}
 			</Styled.Wrapper>
 		</ScrollContainer>

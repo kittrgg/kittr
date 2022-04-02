@@ -1,4 +1,5 @@
-import { IKit } from "@kittr/types"
+import { NonNullable } from "@Types/index"
+import { DeserializeFullChannelProfileReturnType } from "@Services/orm"
 import SVG from "@Components/shared/SVG"
 import { useEffect, useRef } from "react"
 import * as Styled from "./style"
@@ -8,7 +9,7 @@ import { setActiveWeapon } from "@Redux/slices/displayr"
 import { useDispatch } from "@Redux/store"
 
 interface Props {
-	elem: IKit
+	elem: NonNullable<DeserializeFullChannelProfileReturnType>["kits"][0]
 }
 
 const Item = ({ elem }: Props) => {
@@ -17,7 +18,7 @@ const Item = ({ elem }: Props) => {
 	const itemRef = useRef<HTMLButtonElement>(null)
 
 	useEffect(() => {
-		if (activeWeapon?.userData?.customTitle === elem.userData.customTitle && itemRef.current) {
+		if (activeWeapon?.customTitle === elem.customTitle && itemRef.current) {
 			itemRef.current.scrollIntoView({
 				inline: "center",
 				block: "nearest"
@@ -29,16 +30,14 @@ const Item = ({ elem }: Props) => {
 	return (
 		<Styled.Item
 			ref={itemRef}
-			active={activeWeapon?.userData?.customTitle === elem.userData.customTitle}
+			active={activeWeapon?.customTitle === elem.customTitle}
 			onClick={() => dispatch(setActiveWeapon(elem))}
-			data-cy={`slider-${elem.base.displayName.replace(/ /g, "-").replace("(", "-").replace(")", "-")}-${
-				elem.userData.customTitle.replace(/ /g, "-") || "Primary"
+			data-cy={`slider-${elem.kitBase.displayName.replace(/ /g, "-").replace("(", "-").replace(")", "-")}-${
+				elem.customTitle?.replace(/ /g, "-") || "Primary"
 			}`}
 		>
-			{elem.userData.customTitle || elem.base.displayName}{" "}
-			{elem.userData.featured && (
-				<SVG.Star style={{ marginLeft: "4px" }} width="20px" fill={colors.gold} stroke="none" />
-			)}
+			{elem.customTitle || elem.kitBase.displayName}{" "}
+			{elem.featured && <SVG.Star style={{ marginLeft: "4px" }} width="20px" fill={colors.gold} stroke="none" />}
 		</Styled.Item>
 	)
 }
