@@ -10,7 +10,7 @@ datasource db {
 model Channel {
   id                 String                     @id @default(cuid())
   createdAt          DateTime                   @default(now())
-  displayName        String
+  displayName        String @unique
   urlSafeName        String
   viewCount          Int
   previousUpdater    String?
@@ -168,11 +168,12 @@ model ChannelAffiliateCode {
 model KitOption {
   id             String  @id @default(cuid())
   gameId         String
+  game          Game    @relation(fields: [gameId], references: [id])
   displayName    String
   slotKey        String
   orderPlacement Int
-  kit            KitBase @relation(fields: [kitId], references: [id])
-  kitId          String
+  kitBase            KitBase @relation(fields: [kitBaseId], references: [id])
+  kitBaseId          String
   channelKits    Kit[]
 }
 
@@ -230,6 +231,7 @@ model Game {
   channelAffiliateCodes ChannelAffiliateCode[]
   customCommandStrings  ChannelCustomGameCommand[]
   kits                  Kit[]
+  kitOptions            KitOption[]
 }
 
 model Platform {

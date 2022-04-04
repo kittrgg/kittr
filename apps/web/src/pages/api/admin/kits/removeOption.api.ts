@@ -1,28 +1,21 @@
 import type { NextApiRequest, NextApiResponse } from "next"
+import { NextServerPayload } from "@kittr/types"
 import { createHandler } from "@Utils/middlewares/createHandler"
 import { adminAuth } from "@Utils/middlewares/auth"
-import mongoose from "mongoose"
-import { KitBase } from "@Services/orm/models"
+import { prisma, KitOption } from "@kittr/prisma"
 
 const handler = createHandler(adminAuth)
 
-// Delete a kit base
-handler.delete(async (req: NextApiRequest, res: NextApiResponse) => {
-	const { baseId, optionId } = req.body
+// Delete a kit option
+handler.delete(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<KitOption>>) => {
+	const { id } = req.body
 
-	KitBase.findOneAndUpdate(
-		{ _id: new mongoose.Types.ObjectId(baseId) },
-		{
-			$pull: {
-				"gameInfo.availableOptions": { optionId }
-			}
-		},
-		{ new: true },
-		(errors, data) => {
-			if (errors) return res.status(400).json({ success: false, errors })
-			return res.status(200).json({ data })
-		}
-	)
+	try {
+		const data = await prisma.kitOption.delete({ where: { id } })
+		return res.status(200).json(data)
+	} catch (err) {
+		return res.status(400).json({ error: true, errorMessage: JSON.stringify(err) })
+	}
 })
 
 export default handler

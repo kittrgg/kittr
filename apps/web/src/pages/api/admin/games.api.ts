@@ -1,36 +1,40 @@
-import mongoose from "mongoose"
 import type { NextApiRequest, NextApiResponse } from "next"
 import { NextServerPayload } from "@kittr/types"
 import { createHandler } from "@Utils/middlewares/createHandler"
 import { adminAuth } from "@Utils/middlewares/auth"
-import Game, { GameModel } from "@Services/orm/models/Game"
+
+import { prisma, Game } from "@kittr/prisma"
 
 const handler = createHandler(adminAuth)
 
-// Create a game
-handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<GameModel>>) => {
-	const newGame = new Game(req.body)
+// TODO: Make this do the thing right. This was my naive version because I knew I didn't need this functionality yet.
+handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<Game>>) => {
+	const savedGame = await prisma.game.create({
+		data: req.body as any
+	})
 
 	try {
-		const game = await newGame.save()
-		return res.status(200).json(game)
+		return res.status(200).json(savedGame)
 	} catch (error) {
 		return res.status(400).json({ error: true, errorMessage: JSON.stringify(error) })
 	}
 })
 
-//Edit a game
-handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<GameModel | null>>) => {
-	const { _id, displayName, backgroundImage, titleImage } = req.body
+// TODO: Make this do the thing right. This was my naive version because I knew I didn't need this functionality yet.
+handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<Game>>) => {
+	const { id, displayName, backgroundImageUrl, titleImageUrl } = req.body
 
 	try {
-		const game = await Game.findOneAndUpdate(
-			{ _id: new mongoose.Types.ObjectId(_id) },
-			{ $set: { displayName, backgroundImage, titleImage } },
-			{ new: true }
-		)
+		const editedGame = await prisma.game.update({
+			where: { id },
+			data: {
+				displayName,
+				backgroundImageUrl,
+				titleImageUrl
+			}
+		})
 
-		return res.status(200).json(game)
+		return res.status(200).json(editedGame)
 	} catch (error) {
 		return res.status(400).json({ error: true, errorMessage: JSON.stringify(error) })
 	}
