@@ -2,31 +2,18 @@ import type { NextApiRequest, NextApiResponse } from "next"
 import { NextServerPayload } from "@kittr/types"
 import { createHandler } from "@Utils/middlewares/createHandler"
 import { userAuth } from "@Utils/middlewares/auth"
-import mongoose from "mongoose"
-import Channel, { ChannelModel } from "@Services/orm/models/Channel"
-import { sanitize } from "@Services/orm/utils/sanitize"
-import { getRawChannelProfileByIdQuery } from "@Services/orm"
+import { prisma, Channel } from "@kittr/prisma"
 
 const handler = createHandler(userAuth)
 
-handler.get(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel>>) => {
-	const { _id } = req.query
-
-	const profile = await getRawChannelProfileByIdQuery(_id as string)
-
-	return res.status(200).json(profile)
-})
-
 // Remove a channel from existence...Or just the database
-handler.delete(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<{ deleted: true }>>) => {
-	const { _id } = JSON.parse(req.body)
+handler.delete(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<Channel>>) => {
+	const { id } = JSON.parse(req.body) as Channel
 
 	try {
-		const result = await Channel.findOneAndDelete({ _id: new mongoose.Types.ObjectId(sanitize(_id)) }, null)
+		const data = await prisma.channel.delete({ where: { id } })
 
-		if (result) {
-			return res.status(200).json({ deleted: true })
-		}
+		return res.status(200).json(data)
 	} catch (error) {
 		return res.status(500).json({ error: true, errorMessage: JSON.stringify(error) })
 	}

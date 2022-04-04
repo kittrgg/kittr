@@ -3,14 +3,39 @@ import { IKitOption } from "@kittr/types/kits"
 import type { NextApiRequest, NextApiResponse } from "next"
 import mongoose, { UpdateWriteOpResult } from "mongoose"
 import { createHandler } from "@Utils/middlewares/createHandler"
-import { Channel } from "@Services/orm/models"
+import { Channel as oldChannel } from "@Services/orm/models"
 import { userAuth } from "@Middlewares/auth"
 import { sanitize } from "@Services/orm/utils/sanitize"
 import { ChannelModel } from "@Services/orm/models/Channel"
 
+import { prisma, Kit, Channel } from "@kittr/prisma"
+
 const handler = createHandler(userAuth)
 
 // Upsert a kit to a channel
+handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<Channel>>) => {
+	const { channelId, kit } = JSON.parse(req.body) as { kit: Kit; channelId: string }
+
+	try {
+		const data = await prisma.channel.update({
+			where: { id: channelId },
+			data: {
+				kits: {
+					upsert: {
+						where: { id: kit.id },
+						create: kit,
+						update: kit
+					}
+				}
+			}
+		})
+
+		return res.status(200).json(data)
+	} catch (err) {
+		return res.status(500).json({ error: true, errorMessage: JSON.stringify(err) })
+	}
+})
+
 handler.post(
 	async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<UpdateWriteOpResult | ChannelModel | null>>) => {
 		const {
@@ -33,7 +58,7 @@ handler.post(
 
 		if (!kitId) {
 			try {
-				const data = await Channel.updateOne(
+				const data = await oldChannel.updateOne(
 					{ _id: sanitize(channelId) },
 					{
 						$push: {
@@ -63,7 +88,7 @@ handler.post(
 
 		if (kitId) {
 			try {
-				const data = await Channel.findOneAndUpdate(
+				const data = await oldChannel.findOneAndUpdate(
 					{
 						_id: sanitize(channelId),
 						kits: {
@@ -109,7 +134,7 @@ handler.delete(async (req: NextApiRequest, res: NextApiResponse<NextServerPayloa
 	const { channelId, kitId } = JSON.parse(req.body)
 
 	try {
-		const data = await Channel.findOneAndUpdate(
+		const data = await oldChannel.findOneAndUpdate(
 			{ _id: channelId },
 			{ $pull: { kits: { _id: new mongoose.Types.ObjectId(sanitize(kitId)) } } },
 			{ new: true }
