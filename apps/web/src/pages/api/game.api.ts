@@ -1,14 +1,16 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import { createHandler } from "@Utils/middlewares/createHandler"
-import { getAllGamesQuery, getAllGamesQueryReturnType } from "@Services/orm/queries/games/getAll"
+import { gameByUrlSafeNameQuery, gameByUrlSafeNameQueryReturnType } from "@Services/orm/queries/games/byUrlSafeName"
 import { NextServerPayload } from "@kittr/types"
 
 const handler = createHandler()
 
 // Fetch games on kittr
-handler.get(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<getAllGamesQueryReturnType>>) => {
+handler.get(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<gameByUrlSafeNameQueryReturnType>>) => {
+	const { urlSafeName } = req.query as { urlSafeName: string }
+
 	try {
-		const data = await getAllGamesQuery()
+		const data = await gameByUrlSafeNameQuery({ urlSafeName })
 
 		return res.status(200).json(data)
 	} catch (error) {
