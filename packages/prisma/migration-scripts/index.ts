@@ -243,7 +243,7 @@ mongoose
 		const createKits = async () => {
 			// I need the new options from postgres so I can use their ids
 			const newOptions = await prisma.kitOption.findMany({
-				include: { kit: true }
+				include: { kitBase: true }
 			})
 
 			// Every kit is for Warzone right now so this is applicable
@@ -271,7 +271,7 @@ mongoose
 
 								const newOptionId = newOptions.find((o) => {
 									const displayNameMatch = o.displayName === info.displayName
-									const baseIdMatch = kit.baseId === o.kit.id
+									const baseIdMatch = kit.baseId === o.kitBase.id
 
 									return displayNameMatch && baseIdMatch
 								})
