@@ -1,4 +1,4 @@
-import { prisma, Channel, ChannelProfile, ChannelLink } from "@kittr/prisma"
+import { Prisma, prisma, Channel, ChannelProfile, ChannelLink } from "@kittr/prisma"
 
 // TODO: Learn how to do this right, bro.
 
@@ -62,3 +62,5 @@ export const getTopChannelsQuery = async <S extends boolean, K extends boolean, 
 
 	return result as any
 }
+
+export type getTopChannelsQueryReturnType = Prisma.PromiseReturnType<typeof getTopChannelsQuery>

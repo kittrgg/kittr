@@ -1,16 +1,13 @@
-import mongoose from "mongoose"
 import { NextServerPayload } from "@kittr/types"
 import type { NextApiRequest, NextApiResponse } from "next"
 import { createHandler } from "@Middlewares/createHandler"
-import Channel, { ChannelModel } from "@Services/orm/models/Channel"
 import { toURL } from "@Utils/helpers/toURL"
 import { badWordFilter } from "@Utils/helpers/badWordFilter"
-import { sanitize } from "@Services/orm/utils/sanitize"
+import { prisma, Channel } from "@kittr/prisma"
 
 const handler = createHandler()
 
-// Add a channel
-handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel>>) => {
+handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<Channel>>) => {
 	const { displayName, userId } = req.body
 
 	try {
@@ -21,37 +18,33 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<
 			return res.status(400).json({ error: true, errorMessage: "Hey, no bad words!" })
 		}
 
-		const existingChannels = await Channel.find({ urlSafeName: toURL(displayName.trim()) })
-		if (existingChannels.length > 0) {
+		const existingChannel = await prisma.channel.findFirst({
+			where: { urlSafeName: toURL(displayName) }
+		})
+
+		if (existingChannel) {
 			return res.status(403).json({
 				error: true,
 				errorMessage:
 					"That name is too similar to another channel. We don't want to confuse our system...Please choose another."
 			})
-		} else {
-			const _id = new mongoose.Types.ObjectId()
+		}
 
-			const newUser = new Channel({
-				_id,
-				isPremium: false,
-				createdDate: Date.now(),
-				displayName: sanitize(displayName.trim()),
-				urlSafeName: toURL(sanitize(displayName.trim())),
-				meta: {
-					profileImage: ""
-				},
-				managers: [
-					{
-						uid: userId,
+		const result = await prisma.channel.create({
+			data: {
+				displayName,
+				urlSafeName: toURL(displayName),
+				managers: {
+					create: {
+						firebaseId: userId,
+						// NO TOUCHY! We need to make sure that the person who creates this channel is the owner of it.
 						role: "Owner"
 					}
-				]
-			})
+				}
+			}
+		})
 
-			const data = await newUser.save()
-
-			return res.status(200).json(data)
-		}
+		return res.status(200).json(result)
 	} catch (error) {
 		return res.status(500).send({
 			error: true,

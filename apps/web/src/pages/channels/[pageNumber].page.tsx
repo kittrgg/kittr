@@ -1,27 +1,20 @@
-import type { CompleteChannel } from "@Types/prisma/index"
 import colors from "@Colors"
 import AdPageWrapper, { H1 } from "@Components/layouts/AdPageWrapper"
 import FallbackPage from "@Components/layouts/FallbackPage"
 import { ChannelList, ChannelSearch, Paginator } from "@Components/shared"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
-import { getTopChannelsQuery, totalChannelsQuery } from "@Services/orm"
+import { getTopChannelsQuery, getTopChannelsQueryReturnType, totalChannelsQuery } from "@Services/orm"
 import ResponsiveBanner from "@Services/venatus/ResponsiveBanner"
 import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
 import { Routes } from "@Utils/lookups/routes"
-import { GetStaticProps } from "next"
+import { GetStaticProps, InferGetStaticPropsType } from "next"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import styled from "styled-components"
 
 const CHANNELS_PER_PAGE = 10
 
-interface Props {
-	channels: Array<CompleteChannel>
-	totalChannels: number
-	numberOfPages: number
-}
-
-const PageOfChannels = ({ channels, totalChannels, numberOfPages }: Props) => {
+const PageOfChannels = ({ channels, totalChannels, numberOfPages }: InferGetStaticPropsType<typeof getStaticProps>) => {
 	const { width } = useViewportDimensions()
 	const {
 		isFallback,
@@ -90,7 +83,11 @@ export const getStaticPaths = async () => {
 	}
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }: any) => {
+export const getStaticProps: GetStaticProps<{
+	channels: getTopChannelsQueryReturnType
+	totalChannels: number
+	numberOfPages: number
+}> = async ({ params }: any) => {
 	await connectToDatabase()
 
 	const [totalChannels, channels] = await Promise.all([

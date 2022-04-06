@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
 datasource db {
@@ -9,10 +10,10 @@ datasource db {
 
 model Channel {
   id                 String                     @id @default(cuid())
-  createdAt          DateTime                   @default(now())
+  createdAt          DateTime              @default(now())
   displayName        String @unique
   urlSafeName        String @unique
-  viewCount          Int
+  viewCount          Int @default(0)
   previousUpdater    String?
   games              Game[]
   gameAffiliateCodes ChannelAffiliateCode[]
@@ -28,8 +29,8 @@ model Channel {
 model ChannelProfile {
   id              String              @id @default(cuid())
   brandColors     ChannelBrandColor[]
-  hasCoverPhoto   Boolean
-  hasProfileImage Boolean
+  hasCoverPhoto   Boolean @default(false)
+  hasProfileImage Boolean @default(false)
   youtubeAutoplay Boolean
   channelPcSpecs  ChannelPcSpec[]
   affiliates      ChannelAffiliate[]
@@ -105,7 +106,7 @@ model ChannelBrandColor {
 model ChannelManager {
   id         String  @id @default(cuid())
   firebaseId String
-  role       String  @default("Owner")
+  role       String
   channel    Channel @relation(fields: [channelId], references: [id])
   channelId  String
 
