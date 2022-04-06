@@ -11,7 +11,7 @@ model Channel {
   id                 String                     @id @default(cuid())
   createdAt          DateTime                   @default(now())
   displayName        String @unique
-  urlSafeName        String
+  urlSafeName        String @unique
   viewCount          Int
   previousUpdater    String?
   games              Game[]
@@ -44,6 +44,8 @@ model SetupPhoto {
   channelProfileId String
   slot             Int
   exists           Boolean
+
+  @@unique([channelProfileId, slot])
 }
 
 enum LinkProperties {
@@ -77,6 +79,8 @@ model ChannelPcSpec {
   partName         String
   channelProfile   ChannelProfile @relation(fields: [channelProfileId], references: [id])
   channelProfileId String
+
+  @@unique([channelProfileId, partType])
 }
 
 model ChannelAffiliate {
@@ -91,6 +95,7 @@ model ChannelAffiliate {
 
 model ChannelBrandColor {
   id               String          @id @default(cuid())
+  // "type" refers to "primary", "secondary", "accent"...
   type             String
   value            String
   channelProfile   ChannelProfile? @relation(fields: [channelProfileId], references: [id])
@@ -161,7 +166,7 @@ model ChannelAffiliateCode {
   channel   Channel @relation(fields: [channelId], references: [id])
   channelId String
   game     Game @relation(fields: [gameId], references: [id])
-  gameId    String
+  gameId    String @unique
   code      String
 }
 

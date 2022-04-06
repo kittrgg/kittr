@@ -1,28 +1,41 @@
-import mongoose from "mongoose"
 import type { NextApiRequest, NextApiResponse } from "next"
 import { createHandler } from "@Middlewares/createHandler"
-import Channel from "@Services/orm/models/Channel"
 import { userAuth } from "@Middlewares/auth"
-import { sanitize } from "@Services/orm/utils/sanitize"
+import { prisma } from "@kittr/prisma"
 
 const handler = createHandler(userAuth)
 
 // Edit channel's brand color
 handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
-	const { primaryColor, channelId } = req.body
+	const { primaryColor, colorId, channelId } = req.body as { primaryColor: string; colorId: string; channelId: string }
 
 	try {
-		const data = await Channel.findByIdAndUpdate(
-			{
-				_id: new mongoose.Types.ObjectId(sanitize(channelId))
-			},
-			{
-				$set: { "meta.brandColors.primary": sanitize(primaryColor) }
-			},
-			{ new: true }
-		)
+		const result = await prisma.channel.update({
+			where: { id: channelId },
+			data: {
+				profile: {
+					update: {
+						brandColors: {
+							upsert: {
+								where: {
+									id: colorId
+								},
+								create: {
+									type: "primary",
+									value: primaryColor
+								},
+								update: {
+									type: "primary",
+									value: primaryColor
+								}
+							}
+						}
+					}
+				}
+			}
+		})
 
-		return res.status(200).json(data)
+		return res.status(200).json(result)
 	} catch (error) {
 		return res.status(500).json({ isError: true, error })
 	}

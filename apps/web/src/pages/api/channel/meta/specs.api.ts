@@ -1,29 +1,50 @@
-import mongoose from "mongoose"
 import { NextServerPayload } from "@kittr/types"
 import type { NextApiRequest, NextApiResponse } from "next"
 import { createHandler } from "@Middlewares/createHandler"
-import Channel, { ChannelModel } from "@Services/orm/models/Channel"
 import { userAuth } from "@Middlewares/auth"
-import { sanitize } from "@Services/orm/utils/sanitize"
+import { prisma, Channel } from "@kittr/prisma"
 
 const handler = createHandler(userAuth)
 
 // Set channel's PC spec
-handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel | null>>) => {
+handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<Channel>>) => {
 	try {
-		const { _id, keyName, description } = JSON.parse(req.body)
+		const { partType, partName, channelProfileId, channelId } = JSON.parse(req.body) as {
+			partType: string
+			partName: string
+			channelProfileId: string
+			channelId: string
+		}
 
-		const data = await Channel.findByIdAndUpdate(
-			{
-				_id: new mongoose.Types.ObjectId(sanitize(_id))
-			},
-			{
-				$set: { [`meta.specs.${keyName.replace(/[^\w\s-]/g, "")}`]: sanitize(description) }
-			},
-			{ new: true }
-		)
+		const result = await prisma.channel.update({
+			where: { id: channelId },
+			data: {
+				profile: {
+					update: {
+						channelPcSpecs: {
+							upsert: {
+								where: {
+									channelProfileId_partType: {
+										channelProfileId: channelProfileId,
+										partType
+									}
+								},
+								create: {
+									partType,
+									partName
+								},
+								update: {
+									partType,
+									partName
+								}
+							}
+						}
+					}
+				}
+			}
+		})
 
-		return res.status(200).json(data)
+		return res.status(200).json(result)
 	} catch (error) {
 		console.log(error)
 		return res.status(500).json({ error: true, errorMessage: JSON.stringify(error) })
@@ -33,19 +54,24 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<
 // Delete a channel's PC spec
 handler.delete(async (req: NextApiRequest, res: NextApiResponse) => {
 	try {
-		const { _id, keyName } = JSON.parse(req.body)
+		const { channelId, specId } = JSON.parse(req.body)
 
-		const data = await Channel.findByIdAndUpdate(
-			{
-				_id: new mongoose.Types.ObjectId(sanitize(_id))
-			},
-			{
-				$unset: { [`meta.specs.${keyName.replace(/[^\w\s-]/g, "")}`]: 1 }
-			},
-			{ new: true }
-		)
+		const result = await prisma.channel.update({
+			where: { id: channelId },
+			data: {
+				profile: {
+					update: {
+						channelPcSpecs: {
+							delete: {
+								id: specId
+							}
+						}
+					}
+				}
+			}
+		})
 
-		return res.status(200).json(data)
+		return res.status(200).json(result)
 	} catch (error) {
 		console.log(error)
 		return res.status(500).json({ isError: true, error })
