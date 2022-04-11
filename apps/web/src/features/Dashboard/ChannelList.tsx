@@ -1,7 +1,5 @@
 import styled from "styled-components"
 import { MutableRefObject, useRef, useEffect } from "react"
-
-import { IManager, Channel } from "@kittr/types"
 import colors from "@Colors"
 import { header1, header2, paragraph } from "@Styles/typography"
 import { useManagedChannels } from "@Hooks/api/useManagedChannels"
@@ -11,6 +9,7 @@ import { useModal } from "@Redux/slices/dashboard/selectors"
 import { SVG, Spinner, Button, ProfileImage, SupportUs } from "@Components/shared"
 import LogoutButton from "./ProfileButtons"
 import CreateChannelModal from "./modals/CreateChannel"
+import { useUser } from "@Hooks/useUser"
 
 /** List the channels for a user */
 const ChannelList = ({ ...props }) => {
@@ -19,9 +18,8 @@ const ChannelList = ({ ...props }) => {
 	const ref = useRef() as MutableRefObject<HTMLButtonElement>
 	const divRef = useRef() as MutableRefObject<HTMLDivElement>
 	const { data, refetch, isFetching } = useManagedChannels()
+	const user = useUser()
 	const modal = useSelector((state) => state.dashboard.modal)
-
-	console.log(data)
 
 	/** set tutorial ref data */
 	useEffect(() => {
@@ -54,7 +52,6 @@ const ChannelList = ({ ...props }) => {
 			{modal.type === "Create New Channel" && <CreateChannelModal />}
 			<Container>
 				<SupportUs containerStyles={{ width: "100%", margin: "32px 0" }} />
-
 				<Header data-cy="your-channels-title">
 					YOUR CHANNELS{" "}
 					<SVG.Renew width="24px" style={{ cursor: "pointer" }} onClick={() => refetch()} dataCy="renew-svg" />
@@ -62,10 +59,10 @@ const ChannelList = ({ ...props }) => {
 				{isFetching && <Spinner width="100%" height="100px" />}
 				{!isFetching &&
 					data &&
-					data.map((elem: Channel & { role: IManager[] }) => {
+					data.map((elem) => {
 						return (
 							<ChannelContainer
-								key={elem._id}
+								key={elem.id}
 								ref={divRef}
 								style={modalData?.page === 3 ? { position: "relative", zIndex: 101 } : undefined}
 								onClick={() => {
@@ -77,7 +74,7 @@ const ChannelList = ({ ...props }) => {
 									)
 									dispatch(
 										setActiveView({
-											channelId: elem._id,
+											channelId: elem.id,
 											view: "Channel"
 										})
 									)
@@ -94,10 +91,13 @@ const ChannelList = ({ ...props }) => {
 								data-cy={`${elem.displayName}-channel-button`}
 							>
 								<FlexRow>
-									<ProfileImage size="50px" imagePath={elem.meta.profileImage} />
+									<ProfileImage size="50px" imagePath={elem.profile?.hasProfileImage ? elem.id : ""} />
 									<ChannelTitle>{elem.displayName}</ChannelTitle>
 								</FlexRow>
-								<Role>Your role is {elem.role[0].role} for this channel.</Role>
+								<Role>
+									Your role is {elem.managers.find((manager) => manager.firebaseId === user?.uid)?.role} for this
+									channel.
+								</Role>
 							</ChannelContainer>
 						)
 					})}

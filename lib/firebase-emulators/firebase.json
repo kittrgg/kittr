@@ -1,20 +1,16 @@
 {
-  "storage": {
-    "rules": "storage.rules"
-  },
-  "emulators": {
-    "ui": {
-      "enabled": true,
-      "host": "0.0.0.0",
-      "port": 4000
-    },
-    "auth": {
-      "host": "0.0.0.0",
-      "port": 4001
-    },
-    "storage": {
-      "host": "0.0.0.0",
-      "port": 4002
-    }
-  }
+	"storage": {
+		"rules": "storage.rules"
+	},
+	"emulators": {
+		"ui": {
+			"enabled": true,
+			"host": "0.0.0.0",
+			"port": 4000
+		},
+		"auth": {
+			"host": "0.0.0.0",
+			"port": 4001
+		}
+	}
 }
