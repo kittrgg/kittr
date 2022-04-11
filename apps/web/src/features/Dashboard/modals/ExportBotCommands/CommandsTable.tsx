@@ -43,7 +43,7 @@ const CommandsTable = ({ kits, includeMasterCommands = true, method, commandStra
 			customizedString = currentStringTemplate
 				.replace("{{link}}", baseTitle ? `${commandBase}/?k=${baseTitle}` : `${commandBase}`)
 				.replace("{{weapon name}}", displayName)
-				.replace("{{channeler name}}", channelDisplayName)
+				.replace("{{player name}}", channelDisplayName)
 		} else if (baseTitle) {
 			customizedString = `${commandBase}/?k=${baseTitle}`
 		} else {

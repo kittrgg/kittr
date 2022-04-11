@@ -13,7 +13,7 @@ interface Props {
 }
 
 const PopularClips = ({ clips, brandColor }: Props) => {
-	// If channeler doesn't have any clips.
+	// If channel doesn't have any clips.
 	if (clips.length === 0) return null
 
 	return (

@@ -77,7 +77,7 @@ export interface Channel {
 	_id: string
 	/** Managers who are allowed to interact with this channel */
 	managers: Array<IManager>
-	/** Games that this channeler has listed for their kittr profile */
+	/** Games that this channel has listed for their kittr profile */
 	games: Array<IGame & { code?: string; commandString?: string }>
 	/** ISO date that this channel was created on */
 	createdDate: string
@@ -104,7 +104,7 @@ interface IRawChannel {
 	_id: string
 	/** Managers who are allowed to interact with this channel */
 	managers: Array<IManager>
-	/** Games that this channeler has listed for their kittr profile */
+	/** Games that this channel has listed for their kittr profile */
 	games: Array<{ id: string; code?: string; commandString?: string }>
 	/** ISO date that this channel was created on */
 	createdDate: string

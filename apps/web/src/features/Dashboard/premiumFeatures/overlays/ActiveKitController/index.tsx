@@ -80,7 +80,7 @@ const ActiveKit = ({ ...props }) => {
 					<GridWrapper>
 						<Styled.Paragraph>This overlay will show the kit currently in use on channel.</Styled.Paragraph>
 						<Styled.Paragraph>
-							During channel, the channeler or mod will manually select the active kit below to update the overlay.{" "}
+							During channel, the player or mod will manually select the active kit below to update the overlay.{" "}
 						</Styled.Paragraph>
 						<Styled.Paragraph>There are four overlay styles available:</Styled.Paragraph>
 						<ul style={{ marginLeft: "52px" }}>

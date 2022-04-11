@@ -19,15 +19,15 @@ const FAQ = ({ ...props }) => {
 					<Accordion title="What is kittr?">
 						<Answer>
 							kittr is how you share your loadouts with your channel community. We saw that there wasn't really any
-							great way for a channeler to share loadouts on Twitch - so we made one. There were ways, certainly...But
-							no outstanding solution to this obviously common channel need.
+							great way for a player to share loadouts on Twitch - so we made one. There were ways, certainly...But no
+							outstanding solution to this obviously common channel need.
 						</Answer>
 					</Accordion>
 					<Accordion title="How does it work?">
 						<Answer>
-							A channeler or mod can make an account and pick out the games that will be found on channel. From there,
-							you can make a bunch of kits (loadouts, setups, whatever you like to call them) and export the bot
-							commands for those kits into your Twitch chat. The whole thing takes 20 minutes tops.
+							A player or mod can make an account and pick out the games that will be found on channel. From there, you
+							can make a bunch of kits (loadouts, setups, whatever you like to call them) and export the bot commands
+							for those kits into your Twitch chat. The whole thing takes 20 minutes tops.
 						</Answer>
 						<Answer>
 							Now, the next time that someone types in your text command, they'll be given the link to kittr for that
@@ -93,8 +93,8 @@ const FAQ = ({ ...props }) => {
 							Let's be honest. If someone requested your loadout kit, they probably just want to know about the
 							attachments. They are already probably watching you use the setup right there on channel. If they ask for
 							your kit, they probably just want to know. We've asked a lot, a lot, A LOT of viewers over time with this
-							project and they all say the exact same thing: They hate it when the channeler links to a YouTube video
-							for their loadout commands.
+							project and they all say the exact same thing: They hate it when the player links to a YouTube video for
+							their loadout commands.
 						</Answer>
 						<Answer>
 							Let's do better than that by offering up your YouTube content in a more pleasant way. Embed your YouTube
@@ -111,8 +111,8 @@ const FAQ = ({ ...props }) => {
 					</Accordion>
 					<Accordion title="How much does kittr cost to use?">
 						<Answer>
-							It's free. We want to help channelers, not hurt them. Our goal is to help your channel get better, not
-							reach in your wallet.
+							It's free. We want to help player, not hurt them. Our goal is to help your channel get better, not reach
+							in your wallet.
 						</Answer>
 					</Accordion>
 				</div>

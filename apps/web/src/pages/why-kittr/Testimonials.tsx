@@ -5,12 +5,12 @@ import colors from "@Colors"
 const TESTIMONIALS = [
 	{
 		name: "JoeWo",
-		role: "Channeler",
+		role: "Player",
 		quote: "WAIT THATS GAS"
 	},
 	{
 		name: "TeePee",
-		role: "Channeler",
+		role: "Player",
 		quote: "Yo, Blade, that site looks sick, though."
 	},
 	{
@@ -20,7 +20,7 @@ const TESTIMONIALS = [
 	},
 	{
 		name: "exzachtt",
-		role: "Channeler",
+		role: "Player",
 		quote: "FIRE FIRE FIRE FIRE! THAT SITE IS FIRE!!!"
 	},
 	{
@@ -30,12 +30,12 @@ const TESTIMONIALS = [
 	},
 	{
 		name: "Almxnd",
-		role: "Channeler",
+		role: "Player",
 		quote: "Wait, hol' up. Tommey, are you on this? You gotta get on this."
 	},
 	{
 		name: "GeeBigs",
-		role: "Channeler",
+		role: "Player",
 		quote: "This site has been absolutely perfect for my community and I've received a handful of compliments on it."
 	},
 	{

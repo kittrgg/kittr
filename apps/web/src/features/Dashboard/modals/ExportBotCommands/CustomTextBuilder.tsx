@@ -70,7 +70,7 @@ const CustomTextBuilder = ({ commandStrategy, method }: Props) => {
 				) : (
 					<>
 						<Styled.SubText>
-							Use curly brackets for shortcodes. For example, {"{{channeler name}}"} will be replaced with "
+							Use curly brackets for shortcodes. For example, {"{{player name}}"} will be replaced with "
 							{channelData.displayName}".
 						</Styled.SubText>
 						<Styled.SubText>Available shortcodes:</Styled.SubText>
@@ -79,7 +79,7 @@ const CustomTextBuilder = ({ commandStrategy, method }: Props) => {
 								<strong style={{ fontWeight: 700 }}>{"{{link}}"} (Required)</strong>
 							</Styled.SubText>
 							<Styled.SubText>{"{{weapon name}}"}</Styled.SubText>
-							<Styled.SubText>{"{{channeler name}}"}</Styled.SubText>
+							<Styled.SubText>{"{{player name}}"}</Styled.SubText>
 						</div>
 					</>
 				)}

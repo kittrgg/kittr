@@ -21,6 +21,8 @@ const ChannelList = ({ ...props }) => {
 	const { data, refetch, isFetching } = useManagedChannels()
 	const modal = useSelector((state) => state.dashboard.modal)
 
+	console.log(data)
+
 	/** set tutorial ref data */
 	useEffect(() => {
 		if (modal.data?.page === 2 && ref) {
