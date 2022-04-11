@@ -1,7 +1,7 @@
 import { Prisma } from "@kittr/prisma"
 import { serializeGame } from "../../../utils/serializers/game"
 
-export const include = Prisma.validator<Prisma.ChannelArgs>()({
+const include = Prisma.validator<Prisma.ChannelArgs>()({
 	include: {
 		profile: {
 			include: {

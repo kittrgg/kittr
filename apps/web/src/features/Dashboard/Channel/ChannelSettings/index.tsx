@@ -3,7 +3,8 @@ import styled from "styled-components"
 import colors from "@Colors"
 import PremiumCallout from "@Features/Dashboard/PremiumCallout"
 import SubscriptionSettings from "@Features/Dashboard/Channel/ChannelSettings/SubscriptionSettings"
-import { useManagerRole, useModal, usePremiumStatus, useChannelData } from "@Redux/slices/dashboard/selectors"
+import { useManagerRole, useModal, usePremiumStatus } from "@Redux/slices/dashboard/selectors"
+import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { header1 } from "@Styles/typography"
 import BuyHomeChannelBoostr from "../../../Promo/BuyHomeChannelBoostr"
 import AddAffiliate from "../../modals/AddAffiliate"
@@ -15,7 +16,7 @@ import Affiliate from "./Affiliate"
 import CoverPhotoUploader from "./CoverPhotoUploader"
 import DisplayNameEditor from "./DisplayNameEditor"
 import ImageEditor from "./ImageEditor"
-import LinkEditor from "./LinkEditor"
+// import LinkEditor from "./LinkEditor"
 import SetupPhotos from "./SetupPhotos"
 import Specs from "./Specs"
 import ChannelDeleter from "./ChannelDeleter"
@@ -23,10 +24,12 @@ import ThemeColor from "./ThemeColor"
 import YouTubeAutoplayEditor from "./YouTubeAutoplayEditor"
 
 const ChannelSettings = ({ ...props }) => {
-	const { displayName } = useChannelData()
+	const { isLoading, data } = useDashboardChannel()
 	const role = useManagerRole()
 	const modal = useModal()
 	const { isPremium } = usePremiumStatus()
+
+	if (isLoading) return <div>Loading...</div>
 
 	return (
 		<>
@@ -34,7 +37,7 @@ const ChannelSettings = ({ ...props }) => {
 			{modal.type === "Premium Sign Up" && <PremiumSignUp />}
 			{modal.type === "Add Spec" && <AddSpec />}
 			{modal.type === "Add Affiliate" && <AddAffiliate />}
-			<Header>{displayName}'s SETTINGS</Header>
+			<Header>{data?.displayName}'s SETTINGS</Header>
 			<Grid>
 				{!isPremium && role !== "Editor" && (
 					<GridItem>
@@ -73,7 +76,7 @@ const ChannelSettings = ({ ...props }) => {
 							)}
 						</Grid>
 					)}
-					{role !== "Editor" && <LinkEditor />}
+					{/* {role !== "Editor" && <LinkEditor />} */}
 					{role !== "Editor" && <YouTubeAutoplayEditor />}
 				</GridItem>
 				<GridItem>

@@ -1,11 +1,14 @@
 import { ITwitchLiveChannels } from "@kittr/types/twitch"
-
 import { headers } from "@Services/twitch/utils/auth"
 import { grabLoginName } from "./utils/grabLoginName"
 import fetch from "@Fetch"
 import { LinkProperties } from "@kittr/prisma"
-import { ChannelWithLinks } from "@Types/prisma"
+import { Channel, ChannelLink } from "@kittr/prisma"
 import { getTopChannelsWithLinksQuery } from "@Services/orm/queries/channels"
+
+interface ChannelWithLinks extends Channel {
+	links: ChannelLink[]
+}
 
 const getTwitchLink = (channel: ChannelWithLinks) =>
 	channel.links.find((link) => link.property === LinkProperties.TWITCH)?.value ?? ""

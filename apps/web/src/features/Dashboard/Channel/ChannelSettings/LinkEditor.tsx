@@ -22,9 +22,7 @@ const LinkEditor = ({ ...props }) => {
 	const { isPremium } = usePremiumStatus()
 	const modal = useModal()
 	const dispatch = useDispatch()
-	const [linkEdits, setLinkEdits] = useState<[SocialPlatform, string][]>(
-		Object.entries(data?.meta.links || {}) as [SocialPlatform, string][]
-	)
+	const [linkEdits, setLinkEdits] = useState(data?.links)
 	const [areActiveChanges, setActiveChanges] = useState(false)
 	const { mutate, isLoading } = useDashboardMutator(async () => {
 		try {
@@ -33,7 +31,7 @@ const LinkEditor = ({ ...props }) => {
 				headers: {
 					authorization: `Bearer: ${await getToken()}`
 				},
-				body: { _id: data?._id, links: linkEdits }
+				body: { _id: data?.id, links: linkEdits }
 			})
 		} catch (error) {
 			dispatch(setModal({ type: "Error Notification", data: {} }))
@@ -41,8 +39,8 @@ const LinkEditor = ({ ...props }) => {
 	})
 
 	useEffect(() => {
-		setLinkEdits(Object.entries(data?.meta.links || {}) as [SocialPlatform, string][])
-	}, [data?.meta.links])
+		setLinkEdits(Object.entries(data?.links || {}) as [SocialPlatform, string][])
+	}, [data?.links])
 
 	useEffect(() => {
 		if (Object.entries(data?.meta.links || {}).length !== linkEdits.length) {

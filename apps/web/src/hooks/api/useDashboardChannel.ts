@@ -1,18 +1,18 @@
 import { useQuery } from "react-query"
 import { getToken } from "@Services/firebase/auth/getToken"
 import { useSelector } from "@Redux/store"
+import { getFullChannelProfileType } from "@Services/orm/queries/channels/getFullChannelProfile"
 import fetch from "@Fetch"
-import { IRawChannel } from "@kittr/types/channel"
 
 export const useDashboardChannel = () => {
-	const _id = useSelector((state) => state.dashboard.activeView.channelId)
+	const id = useSelector((state) => state.dashboard.activeView.channelId)
 
-	const url = `/api/channel?_id=${_id}`
+	const url = `/api/channel?id=${id}`
 
-	const query = useQuery<IRawChannel, Error>(
+	const query = useQuery<getFullChannelProfileType, Error>(
 		url,
 		async () => fetch.get({ url, headers: { authorization: `Bearer: ${await getToken()}` } }),
-		{ staleTime: 60000, enabled: !!_id }
+		{ staleTime: 60000, enabled: !!id }
 	)
 	return query
 }

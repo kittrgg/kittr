@@ -1,12 +1,14 @@
 import { Prisma, prisma } from "@kittr/prisma"
 
 interface Params {
+	id: string
 	urlSafeName: string
 }
 
-export const getFullChannelProfileQuery = async ({ urlSafeName }: Params) => {
+export const getFullChannelProfileQuery = async ({ id, urlSafeName }: Params) => {
 	const channel = await prisma.channel.findFirst({
 		where: {
+			id,
 			urlSafeName
 		},
 		include: {

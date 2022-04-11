@@ -4,5 +4,5 @@ import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 export const useAffiliates = () => {
 	const { data } = useDashboardChannel()
 
-	return data?.meta.affiliates
+	return data?.profile?.affiliates
 }

@@ -4,5 +4,5 @@ import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 export const useCoverPhoto = () => {
 	const { data } = useDashboardChannel()
 
-	return data?.meta.hasCoverPhoto
+	return data?.profile?.hasCoverPhoto
 }

@@ -1,6 +1,6 @@
 export * from "./byGame"
 export * from "./getManagerChannels"
-export * from "./getRawChannelProfile"
+export * from "./getRawChannel"
 export * from "./getStripeId"
 export * from "./getTopChannels"
 export * from "./getTopChannelsWithLinks"

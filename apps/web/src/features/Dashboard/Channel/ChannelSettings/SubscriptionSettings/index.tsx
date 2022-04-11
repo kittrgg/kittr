@@ -20,10 +20,10 @@ const SubscriptionSettings = ({ ...props }) => {
 	const { isPremium } = usePremiumStatus()
 	const { data } = useDashboardChannel()
 	const { data: subscriptionEnd } = useQuery(
-		`/api/channel/meta/premium?stripeId=${data?.meta.stripeId}`,
+		`/api/channel/meta/premium?stripeId=${data?.plan?.stripeSubscriptionId}`,
 		async () => {
 			const result = await fetch.get<{ periodEnd: number }>({
-				url: `/api/channel/meta/premium?stripeId=${data?.meta.stripeId}`,
+				url: `/api/channel/meta/premium?stripeId=${data?.plan?.stripeSubscriptionId}`,
 				headers: {
 					authorization: `Bearer: ${await getToken()}`
 				}
@@ -39,10 +39,10 @@ const SubscriptionSettings = ({ ...props }) => {
 	)
 
 	const { data: cardLast4 } = useQuery(
-		`/api/stripe/getPaymentMethod?subId=${data?.meta.stripeId}`,
+		`/api/stripe/getPaymentMethod?subId=${data?.plan?.stripeSubscriptionId}`,
 		async () => {
 			const result = await fetch.get<{ last4: string }>({
-				url: `/api/stripe/getPaymentMethod?subId=${data?.meta.stripeId}`,
+				url: `/api/stripe/getPaymentMethod?subId=${data?.plan?.stripeSubscriptionId}`,
 				headers: { authorization: `Bearer: ${await getToken()}` }
 			})
 
@@ -61,7 +61,7 @@ const SubscriptionSettings = ({ ...props }) => {
 		const result = await fetch.post<{ url: string }>({
 			url: apiRoute,
 			headers: { authorization: `Bearer ${await getToken()}` },
-			body: { _id: data?._id, displayName: data?.displayName, urlSafeName: data?.urlSafeName }
+			body: { _id: data?.id, displayName: data?.displayName, urlSafeName: data?.urlSafeName }
 		})
 
 		if (isFetchError(result)) {

@@ -1,5 +1,5 @@
 import { Prisma, prisma } from "@kittr/prisma"
-export const include = Prisma.validator<Prisma.GameInclude>()({ genres: true, platforms: true })
+const include = Prisma.validator<Prisma.GameInclude>()({ genres: true, platforms: true })
 
 export const getAllGamesQuery = async () => {
 	const games = await prisma.game.findMany({

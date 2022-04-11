@@ -12,12 +12,12 @@ const UserIdentity = ({ ...props }) => {
 	const { data } = useDashboardChannel()
 	const role = useManagerRole()
 
-	const profileImage = data?.meta.profileImage
+	const profileImage = data?.profile?.hasProfileImage
 
 	return (
 		<Wrapper>
 			<Child>
-				<ProfileImage size="25px" imagePath={profileImage} />
+				<ProfileImage size="25px" imagePath={profileImage ? data?.id : ""} />
 				<Role>You are an {role}</Role>
 			</Child>
 			<Child>

@@ -1,6 +1,6 @@
 import { Prisma, prisma } from "@kittr/prisma"
 
-export const include = Prisma.validator<Prisma.ChannelInclude>()({
+const include = Prisma.validator<Prisma.ChannelInclude>()({
 	profile: true
 })
 

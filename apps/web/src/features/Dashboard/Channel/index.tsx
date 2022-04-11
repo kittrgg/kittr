@@ -25,6 +25,7 @@ const Channel = ({ containerRef }: Props) => {
 	const { view } = useChannelView()
 	const user = useUser()
 	const { data, isLoading, refetch } = useDashboardChannel()
+	console.log(data)
 
 	useEffect(() => {
 		socket.on(`dashboard=${_id}`, () => refetch())
