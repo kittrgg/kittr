@@ -1,43 +1,69 @@
 import { NextServerPayload } from "@kittr/types/types"
-import { IManager } from "@kittr/types/manager"
 import type { NextApiRequest, NextApiResponse } from "next"
 import { createHandler } from "@Utils/middlewares/createHandler"
 import { userAuth } from "@Utils/middlewares/auth"
-import mongoose from "mongoose"
-import Channel, { ChannelModel } from "@Services/orm/models/Channel"
-import { sanitize } from "@Services/orm/utils/sanitize"
+import { prisma, Channel } from "@kittr/prisma"
 
 const handler = createHandler(userAuth)
 
 // Change the owner of the channel
-handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel>>) => {
-	const { channelId, previousOwner, newOwner, token } = req.body
+handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<Channel>>) => {
+	const { channelId, previousOwner, newOwner, token } = req.body as {
+		channelId: string
+		previousOwner: string
+		newOwner: string
+		token: any
+	}
 
 	try {
-		const result = await Channel.find({ _id: new mongoose.Types.ObjectId(sanitize(channelId)) }).lean()
-		const userRole = result[0].managers.find((manager: IManager) => manager.uid === token.uid)?.role
-
-		if (userRole === "Owner") {
-			const newChannel = {
-				...result[0],
-				managers: result[0].managers.map((elem: IManager) => {
-					if (elem.uid === previousOwner.uid) return { uid: previousOwner.uid, role: "Administrator" }
-					if (elem.uid === newOwner.uid) return { uid: newOwner.uid, role: "Owner" }
-					return elem
-				})
+		const result = await prisma.channel.findFirst({
+			where: {
+				id: channelId
+			},
+			include: {
+				managers: true
 			}
+		})
 
-			const queryResult = await Channel.replaceOne(
-				{ _id: new mongoose.Types.ObjectId(sanitize(channelId)) },
-				newChannel
-			)
+		if (!result) {
+			return res.status(404).json({ error: true, errorMessage: "Channel not found." })
+		}
 
-			if (queryResult) {
-				return res.status(200).json(queryResult)
-			}
-		} else {
+		const userRole = result.managers.find((manager) => manager.firebaseId === token.uid)?.role
+
+		if (userRole !== "Owner") {
 			return res.status(403).json({ error: true, errorMessage: "You do not have permission to add a new manager." })
 		}
+
+		const updatedChannel = await prisma.channel.update({
+			where: {
+				id: channelId
+			},
+			data: {
+				managers: {
+					update: [
+						{
+							where: {
+								id: previousOwner
+							},
+							data: {
+								role: "Administrator"
+							}
+						},
+						{
+							where: {
+								id: newOwner
+							},
+							data: {
+								role: "Owner"
+							}
+						}
+					]
+				}
+			}
+		})
+
+		return res.status(200).json(updatedChannel)
 	} catch (error) {
 		return res.status(500).json({
 			error: true,

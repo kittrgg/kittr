@@ -109,8 +109,6 @@ model ChannelManager {
   role       String
   channel    Channel @relation(fields: [channelId], references: [id])
   channelId  String
-
-  @@unique([id, firebaseId])
 }
 
 enum OverlayVisibilityStates {

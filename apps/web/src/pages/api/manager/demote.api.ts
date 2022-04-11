@@ -1,31 +1,49 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import { NextServerPayload } from "@kittr/types"
-import { IManager } from "@kittr/types/manager"
 import { createHandler } from "@Utils/middlewares/createHandler"
 import { userAuth } from "@Utils/middlewares/auth"
-import mongoose from "mongoose"
-import Channel, { ChannelModel } from "@Services/orm/models/Channel"
-import { sanitize } from "@Services/orm/utils/sanitize"
+import { prisma, Channel } from "@kittr/prisma"
 
 const handler = createHandler(userAuth)
 
 // Demote a manager in a channel
-handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel>>) => {
+handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<Channel>>) => {
 	const { uid, channelId, token } = JSON.parse(req.body)
 
 	try {
-		const result = await Channel.find({ _id: new mongoose.Types.ObjectId(channelId) }).lean()
-		const userRole = result[0].managers.find((manager: IManager) => manager.uid === token.uid)?.role
+		const result = await prisma.channel.findFirst({
+			where: {
+				id: channelId
+			},
+			include: {
+				managers: true
+			}
+		})
+
+		if (!result) {
+			return res.status(404).json({ error: true, errorMessage: "Channel not found." })
+		}
+
+		const userRole = result.managers.find((manager) => manager.firebaseId === token.uid)?.role
 
 		if (userRole === "Owner") {
-			const result = await Channel.findOneAndUpdate(
-				{
-					"_id": new mongoose.Types.ObjectId(channelId),
-					"managers.uid": { $eq: sanitize(uid) }
+			const result = await prisma.channel.update({
+				where: {
+					id: channelId
 				},
-				{ $set: { "managers.$": { uid: sanitize(uid), role: "Editor" } } },
-				{ new: true }
-			)
+				data: {
+					managers: {
+						update: {
+							where: {
+								id: uid
+							},
+							data: {
+								role: "Editor"
+							}
+						}
+					}
+				}
+			})
 
 			if (result) {
 				return res.status(200).json(result)

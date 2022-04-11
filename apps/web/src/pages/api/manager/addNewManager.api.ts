@@ -1,23 +1,32 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import { NextServerPayload } from "@kittr/types"
-import { IManager } from "@kittr/types/manager"
 import admin from "@Services/firebase/admin"
 import { createHandler } from "@Utils/middlewares/createHandler"
 import { userAuth } from "@Utils/middlewares/auth"
-import mongoose from "mongoose"
-import { Channel } from "@Services/orm/models"
 import { FirebaseError } from "firebase-admin"
-import { sanitize } from "@Services/orm/utils/sanitize"
-import { ChannelModel } from "@Services/orm/models/Channel"
+import { prisma, Channel } from "@kittr/prisma"
 
 const handler = createHandler(userAuth)
 
-// Add a manager to a channel
-handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel>>) => {
+// Add a new manager to a channel
+handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<Channel>>) => {
 	const { email, channelId, role, token } = JSON.parse(req.body)
 
-	const result = await Channel.find({ _id: new mongoose.Types.ObjectId(sanitize(channelId)) }).lean()
-	const userRole = result[0].managers.find((manager: IManager) => manager.uid === token.uid)?.role
+	const result = await prisma.channel.findFirst({
+		where: {
+			id: channelId
+		},
+		include: {
+			managers: true
+		}
+	})
+
+	if (!result) {
+		return res.status(404).json({ error: true, errorMessage: "Channel not found." })
+	}
+
+	// TODO: Careful of the naming here...Somewhat misleading. Will clean up when I circle back for manual testing.
+	const userRole = result.managers.find((manager) => manager.firebaseId === token.uid)?.role
 
 	if (userRole === "Administrator" || userRole === "Owner") {
 		try {
@@ -25,15 +34,19 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<
 
 			if (user) {
 				try {
-					const data = await Channel.findOneAndUpdate(
-						{
-							"_id": new mongoose.Types.ObjectId(sanitize(channelId)),
-							"managers.uid": { $ne: user.uid }
+					const data = await prisma.channel.update({
+						where: {
+							id: channelId
 						},
-						{ $addToSet: { managers: { uid: user.uid, role: sanitize(role) } } },
-						{ new: true }
-					)
-
+						data: {
+							managers: {
+								create: {
+									firebaseId: user.uid,
+									role: role
+								}
+							}
+						}
+					})
 					if (!data) {
 						return res.status(409).json({
 							error: true,
