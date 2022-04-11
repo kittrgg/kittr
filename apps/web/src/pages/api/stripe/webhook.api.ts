@@ -1,10 +1,9 @@
 import fetch from "@Fetch"
 import { createHandler } from "@Middlewares/createHandler"
-import Channel from "@Services/orm/models/Channel"
 import { buffer } from "micro"
-import mongoose from "mongoose"
 import type { NextApiRequest, NextApiResponse } from "next"
 import Stripe from "stripe"
+import { prisma } from "@kittr/prisma"
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, { apiVersion: "2020-08-27" })
 
@@ -32,24 +31,26 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 		// Handle the event
 		switch (event.type) {
 			case "checkout.session.completed":
-				const signUp = await Channel.findOneAndUpdate(
-					// @ts-ignore
-					{ _id: new mongoose.Types.ObjectId(event.data.object.metadata._id) },
-					{
-						$set: {
-							"meta.premiumType": "premium",
-							// @ts-ignore
-							"meta.stripeId": event.data.object.subscription
+				const signUp = await prisma.channel.update({
+					where: {
+						// @ts-ignore
+						id: event.data.object.metadata.id || event.data.object.metadata._id // _id needed for pre-Prisma migration accounts
+					},
+					data: {
+						plan: {
+							update: {
+								type: "premium"
+							}
 						}
 					}
-				)
+				})
 
 				if (signUp) {
 					await fetch.post({
 						url: localURL || `https://${apiURL}.kittr.gg/stripe-webhook-reporter`,
 						body: {
 							// @ts-ignore
-							_id: event.data.object.metadata._id
+							id: event.object.metadata.id || event.data.object.metadata._id // _id needed for pre-Prisma migration accounts
 						}
 					})
 
@@ -58,23 +59,26 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 
 				break
 			case "customer.subscription.deleted":
-				const customerCancelled = await Channel.findOneAndUpdate(
-					// @ts-ignore
-					{ "meta.stripeId": event.data.object.id },
-					{
-						$set: {
-							"meta.premiumType": "",
-							"meta.stripeId": ""
+				const customerCancelled = await prisma.channel.update({
+					where: {
+						// @ts-ignore
+						id: event.object.metadata.id || event.data.object.metadata._id // _id needed for pre-Prisma migration accounts
+					},
+					data: {
+						plan: {
+							update: {
+								type: "basic"
+							}
 						}
 					}
-				)
+				})
 
 				if (customerCancelled) {
 					await fetch.post({
 						url: localURL || `https://${apiURL}.kittr.gg/stripe-webhook-reporter`,
 						body: {
 							// @ts-ignore
-							_id: event.data.object.id
+							id: event.object.metadata.id || event.data.object.metadata._id // _id needed for pre-Prisma migration accounts
 						}
 					})
 
@@ -87,23 +91,26 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 					// @ts-ignore
 					const cancelSubscription = await stripe.subscriptions.del(event.data.object.id)
 
-					const paymentLapse = await Channel.findOneAndUpdate(
-						// @ts-ignore
-						{ "meta.stripeId": event.data.object.id },
-						{
-							$set: {
-								"meta.premiumType": "",
-								"meta.stripeId": ""
+					const paymentLapse = await prisma.channel.update({
+						where: {
+							// @ts-ignore
+							id: event.object.metadata.id || event.data.object.metadata._id // _id needed for pre-Prisma migration accounts
+						},
+						data: {
+							plan: {
+								update: {
+									type: "basic"
+								}
 							}
 						}
-					)
+					})
 
 					if (paymentLapse && cancelSubscription) {
 						await fetch.post({
 							url: localURL || `https://${apiURL}.kittr.gg/stripe-webhook-reporter`,
 							body: {
 								// @ts-ignore
-								_id: event.data.object.metadata._id
+								id: event.object.metadata.id || event.data.object.metadata._id // _id needed for pre-Prisma migration accounts
 							}
 						})
 
