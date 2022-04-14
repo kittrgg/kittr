@@ -1,3 +1,5 @@
+// TODO: Empty subscription strings should be turned into "basic".
+
 import { prisma } from "../index"
 import mongoose from "mongoose"
 import { LinkProperties, OverlayVisibilityStates } from "@prisma/client"

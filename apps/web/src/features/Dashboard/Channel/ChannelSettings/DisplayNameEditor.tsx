@@ -16,32 +16,30 @@ import { ChannelModel } from "@Services/orm/models/Channel"
 const DisplayNameEditor = ({ ...props }) => {
 	const [error, setError] = useState("")
 	const dispatch = useDispatch()
-	const { displayName: name } = useChannelData()
-	const { _id } = useChannelData()
-	const [displayName, setDisplayName] = useState(name || "")
-	const [isPersisted, setIsPersisted] = useState(false)
+	const { data } = useChannelData()
+	const [displayName, setDisplayName] = useState(data?.displayName || "")
 
-	const { mutate, isLoading } = useDashboardMutator(async () => {
-		try {
-			const result = await fetch.put<ChannelModel | NextClientEndpointError>({
+	const originalName = data?.displayName || ""
+
+	const { mutate, isLoading, isSuccess } = useDashboardMutator(async () => {
+		const result = await fetch
+			.put<ChannelModel | NextClientEndpointError>({
 				url: `/api/channel/meta/displayName`,
 				headers: { authorization: `Bearer: ${await getToken()}` },
-				body: { _id, property: "displayName", value: displayName }
+				body: { id: data?.id, value: displayName }
+			})
+			.catch((err) => {
+				dispatch(setModal({ type: "Error Notification", data: {} }))
 			})
 
-			if (result) {
-				setIsPersisted(true)
-			}
-		} catch (error) {
-			dispatch(setModal({ type: "Error Notification", data: {} }))
-		}
+		return result
 	})
 
 	useEffect(() => {
-		setDisplayName(name)
-	}, [name])
+		setDisplayName(displayName)
+	}, [displayName])
 
-	const isChanged = name !== displayName
+	const isChanged = originalName !== displayName
 
 	return (
 		<>
@@ -53,7 +51,7 @@ const DisplayNameEditor = ({ ...props }) => {
 				subline={
 					error
 						? error
-						: isPersisted
+						: isSuccess
 						? "Your display name was changed. Make sure you update all your links and commands!"
 						: "Careful! Changing your display name also changes your links. Ye be warned..."
 				}
