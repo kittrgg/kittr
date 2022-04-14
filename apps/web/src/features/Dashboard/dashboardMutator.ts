@@ -10,7 +10,7 @@ export const useDashboardMutator = <TData, TError, Variables = unknown>(
 
 	return useMutation<TData, TError, Variables>(mutationFn, {
 		onSettled: () => {
-			socket.emit(`dashboardChangeReporter`, data?._id)
+			socket.emit(`dashboardChangeReporter`, data?.id)
 		}
 	})
 }

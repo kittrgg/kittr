@@ -103,16 +103,16 @@ mongoose
 			console.log("Active Socket Count:", openSockets)
 
 			// Triggers refetches for both the dashboard and overlay
-			socket.on("dashboardChangeReporter", (_id: string) => {
-				io.emit(`dashboard=${_id}`, "Trigger refetch!")
+			socket.on("dashboardChangeReporter", (id: string) => {
+				io.emit(`dashboard=${id}`, "Trigger refetch!")
 			})
 
-			socket.on("channelDelete", (_id: string) => {
-				io.emit(`channelDelete=${_id}`, _id)
+			socket.on("channelDelete", (id: string) => {
+				io.emit(`channelDelete=${id}`, id)
 			})
 
-			socket.on("gameDelete", (_id: string) => {
-				io.emit(`gameDelete=${_id}`, "Trigger refetch!")
+			socket.on("gameDelete", (id: string) => {
+				io.emit(`gameDelete=${id}`, "Trigger refetch!")
 			})
 
 			socket.on("disconnect", () => {
