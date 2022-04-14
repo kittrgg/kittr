@@ -11,16 +11,19 @@ handler.delete(async (req: NextApiRequest, res: NextApiResponse<NextServerPayloa
 	const { uid, channelId } = JSON.parse(req.body) as { uid: string; channelId: string }
 
 	try {
-		const channel = await prisma.channel.findFirst({
+		const manager = await prisma.channelManager.findFirst({
 			where: {
-				id: channelId
+				channelId,
+				firebaseId: uid
 			},
 			include: {
-				managers: true
+				channel: {
+					select: { id: true }
+				}
 			}
 		})
 
-		if (!channel) {
+		if (!manager) {
 			return res.status(404).json({ error: true, errorMessage: "Channel not found." })
 		}
 
@@ -31,7 +34,7 @@ handler.delete(async (req: NextApiRequest, res: NextApiResponse<NextServerPayloa
 			data: {
 				managers: {
 					delete: {
-						id: uid
+						id: manager?.id
 					}
 				}
 			}
@@ -39,6 +42,7 @@ handler.delete(async (req: NextApiRequest, res: NextApiResponse<NextServerPayloa
 
 		return res.status(200).json(result)
 	} catch (error) {
+		console.log(error)
 		return res.status(500).json({
 			error: true,
 			errorMessage: "We did something wrong. Error Code 9942"

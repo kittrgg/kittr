@@ -11,13 +11,14 @@ import { Modal, Button, SVG, TextInput } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import fetch from "@Fetch"
+import { ChannelManagerRoles } from "@kittr/prisma"
 
 /** Modal for adding a manager to a channel. */
 const AddManager = ({ ...props }) => {
 	const dispatch = useDispatch()
-	const { _id: channelId } = useChannelData()
+	const { data } = useChannelData()
 	const [email, setEmail] = useState("")
-	const [role, setRole] = useState("")
+	const [role, setRole] = useState<ChannelManagerRoles>("EDITOR")
 	const [error, setError] = useState("")
 	const { refetch: refetchChannel } = useDashboardChannel()
 	const { mutate, isLoading } = useDashboardMutator(async () => {
@@ -25,7 +26,7 @@ const AddManager = ({ ...props }) => {
 			const result = await fetch.post({
 				url: `/api/manager/addNewManager`,
 				headers: { authorization: `Bearer: ${await getToken()}` },
-				body: { email, channelId, role }
+				body: { email, channelId: data?.id, role }
 			})
 
 			if (result) {
@@ -85,13 +86,13 @@ const AddManager = ({ ...props }) => {
 						value={role}
 						onChange={(e) => {
 							setError("")
-							setRole(e.target.value)
+							setRole(e.target.value as ChannelManagerRoles)
 						}}
 						data-cy="role-selector"
 					>
 						<option value="">-</option>
-						<option value="Administrator">Administrator</option>
-						<option value="Editor">Editor</option>
+						<option value="ADMIN">Administrator</option>
+						<option value="EDITOR">Editor</option>
 					</Select>
 				</ColumnFlex>
 			</RowFlex>

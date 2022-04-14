@@ -10,16 +10,16 @@ import { Button, Spinner, Modal } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import fetch from "@Fetch"
 
-const DeleteManager = ({ ...props }) => {
+const DeleteManager = () => {
 	const dispatch = useDispatch()
-	const { _id: channelId } = useChannelData()
+	const { data: channelData } = useChannelData()
 	const { data } = useModal()
 	const { mutate: demote, isLoading: demoting } = useDashboardMutator(async () => {
 		try {
 			const result = await fetch.put({
 				url: `/api/manager/demote`,
 				headers: { authorization: `Bearer: ${await getToken()}` },
-				body: { uid: data.uid, channelId }
+				body: { managerIdToUpdate: data.id, channelId: channelData?.id }
 			})
 
 			if (result) {
@@ -35,7 +35,7 @@ const DeleteManager = ({ ...props }) => {
 			const result = await fetch.put({
 				url: `/api/manager/promote`,
 				headers: { authorization: `Bearer: ${await getToken()}` },
-				body: { uid: data.uid, channelId }
+				body: { managerIdToUpdate: data.id, channelId: channelData?.id }
 			})
 
 			if (result) {
@@ -53,7 +53,7 @@ const DeleteManager = ({ ...props }) => {
 			</Modal>
 		)
 
-	if (data.role == "Administrator") {
+	if (data.role == "ADMIN") {
 		return (
 			<Modal backgroundClickToClose title="EXITING THE CIRCLE OF TRUST?">
 				<Paragraph style={{ marginBottom: "24px" }}>ARE YOU SURE YOU WANT TO DEMOTE</Paragraph>

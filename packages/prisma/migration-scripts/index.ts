@@ -1,8 +1,13 @@
 // TODO: Empty subscription strings should be turned into "basic".
+// TODO: Manager roles converted to new prisma enums.
 
 import { prisma } from "../index"
 import mongoose from "mongoose"
-import { LinkProperties, OverlayVisibilityStates } from "@prisma/client"
+import {
+	LinkProperties,
+	OverlayVisibilityStates,
+	ChannelManagerRoles
+} from "@prisma/client"
 
 import { KitOption } from "../models/KitOption"
 import { Game } from "../models/Game"
@@ -135,7 +140,26 @@ mongoose
 				viewCount: channel.viewCount,
 				previousUpdater: channel.previousUpdater,
 				games: channel.games,
-				managers: channel.managers,
+				managers: channel.managers.map((manager) => {
+					const coerceStringToEnum = (): ChannelManagerRoles => {
+						if (manager.role === "Administrator") {
+							return "ADMIN"
+						}
+						if (manager.role === "Editor") {
+							return "EDITOR"
+						}
+						if (manager.role === "Owner") {
+							return "OWNER"
+						}
+
+						return "EDITOR"
+					}
+
+					return {
+						...manager,
+						role: coerceStringToEnum()
+					}
+				}),
 				hasCoverPhoto: channel.meta.hasCoverPhoto,
 				hasProfileImage: channel.meta.hasProfileImage,
 				affiliates: channel.meta.affiliates,

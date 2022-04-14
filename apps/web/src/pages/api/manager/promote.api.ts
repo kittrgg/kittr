@@ -2,54 +2,43 @@ import { NextServerPayload } from "@kittr/types/types"
 import type { NextApiRequest, NextApiResponse } from "next"
 import { createHandler } from "@Utils/middlewares/createHandler"
 import { userAuth } from "@Utils/middlewares/auth"
-import { prisma, Channel } from "@kittr/prisma"
+import { prisma, ChannelManager } from "@kittr/prisma"
 
 const handler = createHandler(userAuth)
 
 // Promote a manager in a channel
-handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<Channel>>) => {
-	const { uid, channelId, token } = JSON.parse(req.body)
+handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelManager>>) => {
+	const { managerIdToUpdate, channelId, token } = JSON.parse(req.body)
 
 	try {
-		const channel = await prisma.channel.findFirst({
+		// Can this user perform this action?
+		// Check their token for their uid and see if that uid is an owner or admin on this channel
+		const manager = await prisma.channelManager.findFirst({
 			where: {
-				id: channelId
-			},
-			include: {
-				managers: true
+				channelId,
+				firebaseId: token.uid,
+				role: "OWNER" || "ADMIN"
 			}
 		})
 
-		if (!channel) {
-			return res.status(404).json({ error: true, errorMessage: "Channel not found." })
+		if (!manager) {
+			return res
+				.status(404)
+				.json({ error: true, errorMessage: "You do not have permission to perform this action on this channel." })
 		}
 
-		const userRole = channel.managers.find((manager) => manager.firebaseId === token.uid)?.role
-
-		if (userRole === "Editor") {
-			return res.status(403).json({ error: true, errorMessage: "You do not have permission to add a new manager." })
-		}
-
-		const updated = await prisma.channel.update({
+		const update = await prisma.channelManager.update({
 			where: {
-				id: channelId
+				id: managerIdToUpdate
 			},
 			data: {
-				managers: {
-					update: {
-						where: {
-							id: uid
-						},
-						data: {
-							role: "Administrator"
-						}
-					}
-				}
+				role: "ADMIN"
 			}
 		})
 
-		return res.status(200).json(updated)
+		return res.status(200).json(update)
 	} catch (error) {
+		console.log(error)
 		return res.status(500).json({
 			error: true,
 			errorMessage: "We did something wrong. Error Code 7455"

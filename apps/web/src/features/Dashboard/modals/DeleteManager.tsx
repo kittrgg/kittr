@@ -15,7 +15,7 @@ import fetch from "@Fetch"
 
 const DeleteManager = () => {
 	const dispatch = useDispatch()
-	const { _id: channelId } = useChannelData()
+	const { data: channelData } = useChannelData()
 	const { data } = useModal()
 	const user = useUser()
 	const { refetch } = useManagedChannels()
@@ -26,7 +26,7 @@ const DeleteManager = () => {
 			.delete({
 				url: `/api/manager/removeManager`,
 				headers: { authorization: `Bearer: ${await getToken()}` },
-				body: { uid: data.uid, channelId }
+				body: { uid: data.uid, channelId: channelData?.id }
 			})
 			.then(() => {
 				refetchChannel()

@@ -106,9 +106,15 @@ model ChannelBrandColor {
 model ChannelManager {
   id         String  @id @default(cuid())
   firebaseId String
-  role       String
+  role       ChannelManagerRoles
   channel    Channel @relation(fields: [channelId], references: [id])
   channelId  String
+}
+
+enum ChannelManagerRoles {
+  OWNER
+  ADMIN
+  EDITOR
 }
 
 enum OverlayVisibilityStates {

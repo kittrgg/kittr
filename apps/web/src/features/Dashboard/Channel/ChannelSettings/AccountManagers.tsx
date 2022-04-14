@@ -1,6 +1,5 @@
 import { useSelector } from "@Redux/store"
 
-import { IManagerData, IManager } from "@kittr/types"
 import styled from "styled-components"
 import colors from "@Colors"
 import { useDispatch } from "@Redux/store"
@@ -35,7 +34,6 @@ const AccountManagers = ({ ...props }) => {
 			{type === "Add Manager" && <AddManager />}
 			{type === "Manager Role Change" && <ManagerRoleChange />}
 			{type === "Delete Manager" && <DeleteManager />}
-			{type === "About Account Managers" && <AboutAccountManagers />}
 			<H3>
 				ACCOUNT MANAGERS
 				<SVG.QuestionMark
@@ -51,18 +49,18 @@ const AccountManagers = ({ ...props }) => {
 				data
 					.slice()
 					// Organize so Owner is always first, Editor is always last
-					.sort((a: IManager, b: IManager) => {
+					.sort((a, b) => {
 						if (managersOrder.indexOf(a.role) === -1) return 1
 						if (managersOrder.indexOf(b.role) === -1) return -1
 						return managersOrder.indexOf(a.role) - managersOrder.indexOf(b.role)
 					})
-					.map((manager: IManagerData) => {
+					.map((manager) => {
 						return (
 							<Manager key={manager.uid} data-cy="manager">
 								<Identity>
 									<DisplayName>{manager.displayName}</DisplayName>
 									<Email>{manager.email}</Email>
-									{role === "Owner" && manager.role === "Owner" && (
+									{role === "OWNER" && manager.role === "OWNER" && (
 										<SVG.Pencil
 											width="20px"
 											style={{ marginRight: "8px", cursor: "pointer" }}
@@ -72,11 +70,11 @@ const AccountManagers = ({ ...props }) => {
 									)}
 									{
 										// Never if the manager is the owner
-										manager.role !== "Owner" &&
+										manager.role !== "OWNER" &&
 											// Never on yourself
 											manager.email !== auth?.email &&
 											// Never if you are an editor
-											role !== "Editor" &&
+											role !== "EDITOR" &&
 											// Never if you are the same role
 											role !== manager.role && (
 												<>
@@ -84,7 +82,7 @@ const AccountManagers = ({ ...props }) => {
 														width="20px"
 														style={{ marginRight: "8px", cursor: "pointer" }}
 														onClick={() => dispatch(setModal({ type: "Manager Role Change", data: manager }))}
-														dataCy={manager.role === "Editor" ? "promote" : "demote"}
+														dataCy={manager.role === "EDITOR" ? "promote" : "demote"}
 													/>
 													<SVG.X
 														width="24px"
@@ -95,7 +93,7 @@ const AccountManagers = ({ ...props }) => {
 												</>
 											)
 									}
-									{role !== "Owner" && manager.email === auth?.email && (
+									{role !== "OWNER" && manager.email === auth?.email && (
 										<SVG.X
 											width="24px"
 											style={{ cursor: "pointer" }}
@@ -109,7 +107,7 @@ const AccountManagers = ({ ...props }) => {
 						)
 					})}
 
-			{role !== "Editor" && (
+			{role !== "EDITOR" && (
 				<Button
 					design="transparent"
 					text="ADD MANAGER"

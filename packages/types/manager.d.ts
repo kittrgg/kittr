@@ -1,3 +1,5 @@
+import { ChannelManagerRoles } from ".prisma/client"
+
 export interface IManager {
 	/** UID of the user from Firebase */
 	uid: string
@@ -13,5 +15,5 @@ interface IManagerData {
 	/** Email for the user */
 	email: string
 	/** kittr management role for this channel */
-	role: string
+	role: ChannelManagerRoles
 }

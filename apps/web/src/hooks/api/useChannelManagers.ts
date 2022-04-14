@@ -20,8 +20,9 @@ export const useChannelManagers = () => {
 
 		const result = data
 			? data.managers.map(async (elem) => ({
-					...(await fetchManagerInfo(elem.uid)),
-					role: elem.role
+					...(await fetchManagerInfo(elem.firebaseId)),
+					role: elem.role,
+					id: elem.id
 			  }))
 			: []
 

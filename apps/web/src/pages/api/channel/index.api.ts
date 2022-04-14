@@ -6,6 +6,8 @@ import { prisma, Channel } from "@kittr/prisma"
 import { getFullChannelProfileQuery } from "@Services/orm/queries/channels/getFullChannelProfile"
 
 const handler = createHandler(userAuth)
+
+// Get a full channel profile
 handler.get(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<Channel | null>>) => {
 	const { id, urlSafeName } = req.query as { id: string; urlSafeName: string }
 

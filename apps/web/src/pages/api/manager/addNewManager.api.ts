@@ -4,13 +4,18 @@ import admin from "@Services/firebase/admin"
 import { createHandler } from "@Utils/middlewares/createHandler"
 import { userAuth } from "@Utils/middlewares/auth"
 import { FirebaseError } from "firebase-admin"
-import { prisma, Channel } from "@kittr/prisma"
+import { prisma, Channel, ChannelManagerRoles } from "@kittr/prisma"
 
 const handler = createHandler(userAuth)
 
 // Add a new manager to a channel
 handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<Channel>>) => {
-	const { email, channelId, role, token } = JSON.parse(req.body)
+	const { email, channelId, role, token } = JSON.parse(req.body) as {
+		email: string
+		channelId: string
+		role: ChannelManagerRoles
+		token: any
+	}
 
 	const result = await prisma.channel.findFirst({
 		where: {
@@ -25,10 +30,9 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<
 		return res.status(404).json({ error: true, errorMessage: "Channel not found." })
 	}
 
-	// TODO: Careful of the naming here...Somewhat misleading. Will clean up when I circle back for manual testing.
 	const userRole = result.managers.find((manager) => manager.firebaseId === token.uid)?.role
 
-	if (userRole === "Administrator" || userRole === "Owner") {
+	if (userRole === "ADMIN" || userRole === "OWNER") {
 		try {
 			const user = await admin.getUserByEmail(email)
 
@@ -56,6 +60,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<
 
 					return res.status(200).json(data)
 				} catch (error) {
+					console.log(error)
 					return res.status(500).json({
 						error: true,
 						errorMessage: "We messed up. Please let us know that there is a problem. (Error code: 3457)"
