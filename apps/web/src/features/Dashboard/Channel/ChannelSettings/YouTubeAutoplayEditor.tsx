@@ -19,7 +19,7 @@ const YouTubeAutoplayEditor = ({ ...props }) => {
 			// Don't have to do anything with this result, the sockets will propogate the change
 			await fetch.put({
 				url: `/api/channel/meta/youtubeAutoplay`,
-				body: { _id: data?.id, boolean: !data?.profile?.youtubeAutoplay },
+				body: { id: data?.id, boolean: !data?.profile?.youtubeAutoplay },
 				headers: { authorization: `Bearer: ${await getToken()}` }
 			})
 		} catch (error) {
