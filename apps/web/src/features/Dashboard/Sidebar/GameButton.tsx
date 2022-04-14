@@ -1,6 +1,5 @@
 import { useState, useRef, MutableRefObject, useEffect } from "react"
 
-import { IGame } from "@kittr/types"
 import * as Styled from "./style"
 import colors from "@Colors"
 import { useDispatch } from "@Redux/store"
@@ -8,10 +7,11 @@ import { setChannelView, setModal, handleTutorialAction } from "@Redux/slices/da
 import { useManagerRole, useModal } from "@Redux/slices/dashboard/selectors"
 import SVG from "@Components/shared/SVG"
 import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
+import { Game } from "@kittr/prisma"
 
 interface Props {
 	/** The game for this button. */
-	game: IGame
+	game: Game
 	/** If the game is currently in view. */
 	activeView: string | boolean
 }
@@ -42,7 +42,7 @@ const GameButton = ({ game, activeView }: Props) => {
 	return (
 		<Styled.ButtonContainer
 			style={{ zIndex: modal.type === "Tutorial" ? 101 : 100 }}
-			key={game._id}
+			key={game.id}
 			isActive={activeView}
 		>
 			<Styled.Button
@@ -58,7 +58,7 @@ const GameButton = ({ game, activeView }: Props) => {
 							falseState: { type: "", data: {} }
 						})
 					)
-					dispatch(setChannelView({ gameId: game._id, view: game.urlSafeName }))
+					dispatch(setChannelView({ gameId: game.id, view: game.urlSafeName }))
 				}}
 				onMouseEnter={() => setIsHovered(true)}
 				onMouseLeave={() => setIsHovered(false)}
@@ -66,13 +66,13 @@ const GameButton = ({ game, activeView }: Props) => {
 			>
 				<FirebaseStorageResolver
 					noSpinner
-					path={game.titleImage}
+					path={game.titleImageUrl}
 					render={(img) => (
 						<img src={img} alt={game.displayName} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
 					)}
 				/>
 			</Styled.Button>
-			{role === "Owner" && (
+			{role === "OWNER" && (
 				<Styled.DeleteGameBubble
 					onMouseEnter={() => setIsHovered(true)}
 					onMouseLeave={() => setIsHovered(false)}
@@ -80,7 +80,7 @@ const GameButton = ({ game, activeView }: Props) => {
 						dispatch(
 							setModal({
 								type: "Delete Game",
-								data: { idToDelete: game._id }
+								data: { idToDelete: game.id }
 							})
 						)
 					}

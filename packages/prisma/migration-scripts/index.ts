@@ -242,7 +242,7 @@ mongoose
 								brandColors: {
 									create: Object.entries(channel.brandColors || {}).map(
 										(entry) => ({
-											type: entry[0],
+											type: "PRIMARY",
 											value: entry[1]
 										})
 									)

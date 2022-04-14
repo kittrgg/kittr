@@ -18,7 +18,11 @@ const ThemeColor = ({ ...props }) => {
 			// The sockets will propogate the change
 			await fetch.put({
 				url: `/api/channel/meta/brandColor`,
-				body: { _id: data?.id, primaryColor: color },
+				body: {
+					channelId: data?.id,
+					primaryColor: color,
+					colorId: data?.profile?.brandColors?.find((color) => color.type === "PRIMARY")?.id
+				},
 				headers: {
 					authorization: `Bearer: ${await getToken()}`
 				}
@@ -36,7 +40,7 @@ const ThemeColor = ({ ...props }) => {
 			</Title>
 			<ColorPicker
 				onChangeComplete={(color) => mutate(color || colors.white)}
-				defaultColor={data?.profile?.brandColors.find((color) => color.type === "primary")?.value || colors.white}
+				defaultColor={data?.profile?.brandColors.find((color) => color.type === "PRIMARY")?.value || colors.white}
 				designVariant="Big Square"
 			/>
 		</div>

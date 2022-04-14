@@ -96,11 +96,16 @@ model ChannelAffiliate {
 
 model ChannelBrandColor {
   id               String          @id @default(cuid())
-  // "type" refers to "primary", "secondary", "accent"...
-  type             String
+  type             ChannelBrandColorTypes
   value            String
   channelProfile   ChannelProfile? @relation(fields: [channelProfileId], references: [id])
   channelProfileId String?
+}
+
+enum ChannelBrandColorTypes {
+  PRIMARY
+  SECONDARY
+  ACCENT
 }
 
 model ChannelManager {

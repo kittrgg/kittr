@@ -7,7 +7,13 @@ const handler = createHandler(userAuth)
 
 // Edit channel's brand color
 handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
-	const { primaryColor, colorId, channelId } = req.body as { primaryColor: string; colorId: string; channelId: string }
+	const { primaryColor, colorId, channelId } = JSON.parse(req.body) as {
+		primaryColor: string
+		colorId: string
+		channelId: string
+	}
+
+	console.log(primaryColor, colorId)
 
 	try {
 		const result = await prisma.channel.update({
@@ -21,11 +27,11 @@ handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
 									id: colorId
 								},
 								create: {
-									type: "primary",
+									type: "PRIMARY",
 									value: primaryColor
 								},
 								update: {
-									type: "primary",
+									type: "PRIMARY",
 									value: primaryColor
 								}
 							}
@@ -37,6 +43,7 @@ handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
 
 		return res.status(200).json(result)
 	} catch (error) {
+		console.log(error)
 		return res.status(500).json({ isError: true, error })
 	}
 })
