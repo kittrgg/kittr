@@ -13,24 +13,42 @@ import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import fetch from "@Fetch"
 
 /** Modal for adding a spec to the channel's PC setup. */
-const AddSpecModal = ({ ...props }) => {
+const AddAffiliateModal = ({ ...props }) => {
 	const dispatch = useDispatch()
-	const { _id } = useChannelData()
+	const { data: channelData } = useChannelData()
 	const { data } = useModal()
 
 	const [company, setCompany] = useState(data?.company || "")
 	const [description, setDescription] = useState(data?.description || "")
 	const [code, setCode] = useState(data?.code || "")
-	const [link, setLink] = useState(data?.link || "")
-	const { mutate, isLoading, error } = useDashboardMutator(async () => {
-		const result = await fetch.post({
-			url: `/api/channel/meta/affiliate`,
-			headers: { authorization: `Bearer ${await getToken()}` },
-			body: { _id, company, description, code, link }
-		})
-
-		if (result) {
-			dispatch(setModal({ type: "", data: "" }))
+	const [url, setUrl] = useState(data?.url || "")
+	const { mutate, isLoading } = useDashboardMutator(async () => {
+		if (data?.id) {
+			return fetch
+				.put({
+					url: `/api/channel/meta/affiliate`,
+					headers: { authorization: `Bearer ${await getToken()}` },
+					body: { channelId: channelData?.id, company, description, code, url }
+				})
+				.then(() => {
+					dispatch(setModal({ type: "", data: "" }))
+				})
+				.catch((err) => {
+					dispatch(setModal({ type: "Error Notification", data: "" }))
+				})
+		} else {
+			return fetch
+				.post({
+					url: `/api/channel/meta/affiliate`,
+					headers: { authorization: `Bearer ${await getToken()}` },
+					body: { affiliatedId: data?.id, channelId: channelData?.id, company, description, code, url }
+				})
+				.then(() => {
+					dispatch(setModal({ type: "", data: "" }))
+				})
+				.catch((err) => {
+					dispatch(setModal({ type: "Error Notification", data: "" }))
+				})
 		}
 	})
 
@@ -40,10 +58,6 @@ const AddSpecModal = ({ ...props }) => {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
-
-	if (error) {
-		dispatch(setModal({ type: "Error Notification", data: "" }))
-	}
 
 	if (isLoading) return <Spinner width="24px" />
 
@@ -87,8 +101,8 @@ const AddSpecModal = ({ ...props }) => {
 				<Optional>Optional</Optional>
 			</InputLabel>
 			<TextInputBox
-				value={link}
-				onChange={(e) => setLink(e.target.value)}
+				value={url}
+				onChange={(e) => setUrl(e.target.value)}
 				name="link"
 				type="text"
 				inputStyles={{ marginLeft: "0", width: "100%", minWidth: "700px" }}
@@ -98,9 +112,7 @@ const AddSpecModal = ({ ...props }) => {
 				data-cy="confirm-add-affiliate"
 				design="white"
 				onClick={mutate}
-				disabled={
-					!company || ![description, code].some((elem) => elem.length) || (link ? !validator.isURL(link) : false)
-				}
+				disabled={!company || ![description, code].some((elem) => elem.length) || (url ? !validator.isURL(url) : false)}
 				text="SAVE"
 				style={{ margin: "84px auto 0" }}
 			/>
@@ -108,7 +120,7 @@ const AddSpecModal = ({ ...props }) => {
 	)
 }
 
-export default AddSpecModal
+export default AddAffiliateModal
 
 // Styled Components
 

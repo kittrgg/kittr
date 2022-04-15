@@ -53,15 +53,11 @@ handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<C
 				profile: {
 					update: {
 						channelPcSpecs: {
-							upsert: {
+							update: {
 								where: {
 									id: specId
 								},
-								create: {
-									partType,
-									partName
-								},
-								update: {
+								data: {
 									partType,
 									partName
 								}

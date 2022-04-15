@@ -42,8 +42,6 @@ const Specs = () => {
 		setCopyNotification(true)
 	}
 
-	console.log(specs)
-
 	return (
 		<div>
 			<Title>

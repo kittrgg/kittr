@@ -39,7 +39,7 @@ const ChannelSettings = ({ ...props }) => {
 			{modal.type === "Add Affiliate" && <AddAffiliate />}
 			<Header>{data?.displayName}'s SETTINGS</Header>
 			<Grid>
-				{!isPremium && role !== "Editor" && (
+				{!isPremium && role !== "EDITOR" && (
 					<GridItem>
 						<GridTitle>SUBSCRIPTION SETTINGS</GridTitle>
 						<SubscriptionSettings />
@@ -47,19 +47,19 @@ const ChannelSettings = ({ ...props }) => {
 				)}
 				<GridItem>
 					<GridTitle>ACCOUNT INFORMATION</GridTitle>
-					{role !== "Editor" && <ImageEditor />}
-					{role !== "Editor" && <DisplayNameEditor />}
+					{role !== "EDITOR" && <ImageEditor />}
+					{role !== "EDITOR" && <DisplayNameEditor />}
 					<AccountManagers />
 				</GridItem>
 				<GridItem>
 					<GridTitle>PROFILE PAGE CUSTOMIZATION</GridTitle>
-					{role === "Editor" && (
+					{role === "EDITOR" && (
 						<p>
 							You are not allowed to change the profile's settings as an Editor. If you think you should be able to, ask
 							the channel Owner or an Administrator for permission.
 						</p>
 					)}
-					{role !== "Editor" && (
+					{role !== "EDITOR" && (
 						<Grid style={{ gap: "60px" }}>
 							{isPremium ? (
 								<>
@@ -77,19 +77,19 @@ const ChannelSettings = ({ ...props }) => {
 						</Grid>
 					)}
 					{/* {role !== "Editor" && <LinkEditor />} */}
-					{role !== "Editor" && <YouTubeAutoplayEditor />}
+					{role !== "EDITOR" && <YouTubeAutoplayEditor />}
 				</GridItem>
 				<GridItem>
 					<GridTitle>OVERLAY CONTROLLER</GridTitle>
 					<Overlays />
 				</GridItem>
-				{isPremium && role !== "Editor" && (
+				{isPremium && role !== "EDITOR" && (
 					<GridItem>
 						<GridTitle>SUBSCRIPTION SETTINGS</GridTitle>
 						<SubscriptionSettings />
 					</GridItem>
 				)}
-				{role === "Owner" && <ChannelDeleter />}
+				{role === "OWNER" && <ChannelDeleter />}
 			</Grid>
 		</>
 	)
