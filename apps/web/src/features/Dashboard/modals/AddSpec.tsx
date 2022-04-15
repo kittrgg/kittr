@@ -12,29 +12,41 @@ import { useModal, useChannelData } from "@Redux/slices/dashboard/selectors"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import fetch from "@Fetch"
 
-/** Modal for adding a spec to the channel's PC setup. */
-const AddSpecModal = ({ ...props }) => {
+/** Modal for adding or editing a spec to the channel's PC setup. */
+const AddSpecModal = () => {
 	const dispatch = useDispatch()
-	const { _id } = useChannelData()
+	const { data: channelData } = useChannelData()
 	const { data } = useModal()
-	const [keyName, setKeyName] = useState("")
-	const [description, setDescription] = useState("")
+	const [partType, setPartType] = useState("")
+	const [partName, setPartName] = useState("")
 
 	const { mutate, isLoading, error } = useDashboardMutator(async () => {
-		const result = await fetch.post({
-			url: `/api/channel/meta/specs`,
-			headers: { authorization: `Bearer ${await getToken()}` },
-			body: { _id, keyName, description }
-		})
+		if (data?.id) {
+			const result = await fetch.put({
+				url: `/api/channel/meta/specs`,
+				headers: { authorization: `Bearer ${await getToken()}` },
+				body: { specId: data?.id, channelId: channelData?.id, partType, partName }
+			})
 
-		if (result) {
-			dispatch(setModal({ type: "", data: "" }))
+			if (result) {
+				dispatch(setModal({ type: "", data: "" }))
+			}
+		} else {
+			const result = await fetch.post({
+				url: `/api/channel/meta/specs`,
+				headers: { authorization: `Bearer ${await getToken()}` },
+				body: { specId: data?.id, channelId: channelData?.id, partType, partName }
+			})
+
+			if (result) {
+				dispatch(setModal({ type: "", data: "" }))
+			}
 		}
 	})
 
 	useEffect(() => {
-		if (data?.keyName) {
-			setKeyName(data.keyName)
+		if (data) {
+			setPartType(data.partType)
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
@@ -47,9 +59,9 @@ const AddSpecModal = ({ ...props }) => {
 			<Selector
 				className="spec-select"
 				isCreatable
-				onChange={(option: any) => setKeyName(option.label.replace(/[^\w\s-]/g, ""))}
+				onChange={(option: any) => setPartType(option.label.replace(/[^\w\s-]/g, ""))}
 				placeholder="Select from list or type here to create your own"
-				value={keyName ? { label: keyName, value: keyName } : null}
+				value={partType ? { label: partType, value: partType } : null}
 				styles={{
 					container: (base, state) => ({
 						...base,
@@ -89,8 +101,8 @@ const AddSpecModal = ({ ...props }) => {
 			<InputLabel>Description</InputLabel>
 			<TextInputBox
 				data-cy="input-spec-name"
-				value={description}
-				onChange={(e) => setDescription(e.target.value)}
+				value={partName}
+				onChange={(e) => setPartName(e.target.value)}
 				name="specDescription"
 				type="text"
 				inputStyles={{ marginLeft: "0", width: "100%" }}
@@ -99,7 +111,7 @@ const AddSpecModal = ({ ...props }) => {
 				data-cy="confirm-add-spec"
 				design="white"
 				onClick={mutate}
-				disabled={!keyName || !description}
+				disabled={!partType || !partName}
 				text="SAVE"
 				style={{ margin: "84px auto 0" }}
 			/>

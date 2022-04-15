@@ -14,12 +14,12 @@ const Specs = () => {
 	const [copyNotification, setCopyNotification] = useState(false)
 	const dispatch = useDispatch()
 	const specs = useSpecs()
-	const { _id, urlSafeName } = useChannelData()
-	const { mutate } = useDashboardMutator<any, string, string>(async (keyName) => {
+	const { data } = useChannelData()
+	const { mutate } = useDashboardMutator<any, string, string>(async (specId) => {
 		try {
 			const result = await fetch.delete({
 				url: `/api/channel/meta/specs`,
-				body: { _id, keyName },
+				body: { channelId: data?.id, specId },
 				headers: {
 					authorization: `Bearer ${await getToken()}`
 				}
@@ -35,12 +35,14 @@ const Specs = () => {
 
 	let rootUrl = new URL(window.location.origin.toString()).host.replace("www.", "")
 
-	const commandString = `!addcom !specs ${rootUrl}/c/${urlSafeName}#specs`
+	const commandString = `!addcom !specs ${rootUrl}/c/${data?.urlSafeName}#specs`
 
 	const copyToClipboard = (string: string) => {
 		navigator.clipboard.writeText(string)
 		setCopyNotification(true)
 	}
+
+	console.log(specs)
 
 	return (
 		<div>
@@ -60,19 +62,19 @@ const Specs = () => {
 				)}
 			</Title>
 			{specs &&
-				Object.entries<string>(specs).map((spec, index) => {
+				Object.values(data?.profile?.channelPcSpecs || {}).map((spec, index) => {
 					return (
-						<Spec key={`${spec[0]}-${index}`}>
+						<Spec key={`${spec.id}-${index}`}>
 							<SpecInfo>
-								<Label>{spec[0]}</Label>
-								<span>{spec[1]}</span>
+								<Label>{spec.partType}</Label>
+								<span>{spec.partName}</span>
 							</SpecInfo>
 							<IconButtons>
 								<SVG.Pencil
-									data-cy={`${spec[0].replace(/ /g, "-")}-update-spec`}
-									onClick={() => dispatch(setModal({ type: "Add Spec", data: { keyName: spec[0] } }))}
+									data-cy={`${spec.partName.replace(/ /g, "-")}-update-spec`}
+									onClick={() => dispatch(setModal({ type: "Add Spec", data: spec }))}
 								/>
-								<SVG.X data-cy={`${spec[0]}-delete-spec`} onClick={() => mutate(spec[0])} />
+								<SVG.X data-cy={`${spec.partName}-delete-spec`} onClick={() => mutate(spec.id)} />
 							</IconButtons>
 						</Spec>
 					)

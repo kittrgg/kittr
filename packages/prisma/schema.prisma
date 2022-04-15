@@ -80,8 +80,6 @@ model ChannelPcSpec {
   partName         String
   channelProfile   ChannelProfile @relation(fields: [channelProfileId], references: [id])
   channelProfileId String
-
-  @@unique([channelProfileId, partType])
 }
 
 model ChannelAffiliate {

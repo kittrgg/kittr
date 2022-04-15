@@ -9,10 +9,41 @@ const handler = createHandler(userAuth)
 // Set channel's PC spec
 handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<Channel>>) => {
 	try {
-		const { partType, partName, channelProfileId, channelId } = JSON.parse(req.body) as {
+		const { channelId, partType, partName } = JSON.parse(req.body) as {
+			channelId: string
 			partType: string
 			partName: string
-			channelProfileId: string
+		}
+
+		const result = await prisma.channel.update({
+			where: { id: channelId },
+			data: {
+				profile: {
+					update: {
+						channelPcSpecs: {
+							create: {
+								partType,
+								partName
+							}
+						}
+					}
+				}
+			}
+		})
+
+		return res.status(200).json(result)
+	} catch (error) {
+		console.log(error)
+		return res.status(500).json({ error: true, errorMessage: JSON.stringify(error) })
+	}
+})
+
+handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<Channel>>) => {
+	try {
+		const { specId, partType, partName, channelId } = JSON.parse(req.body) as {
+			specId: string
+			partType: string
+			partName: string
 			channelId: string
 		}
 
@@ -24,10 +55,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<
 						channelPcSpecs: {
 							upsert: {
 								where: {
-									channelProfileId_partType: {
-										channelProfileId: channelProfileId,
-										partType
-									}
+									id: specId
 								},
 								create: {
 									partType,
