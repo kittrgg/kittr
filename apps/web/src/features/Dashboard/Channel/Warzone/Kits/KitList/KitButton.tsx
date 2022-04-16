@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-import { IKit } from "@kittr/types"
+import { Kit, KitBase, KitOption } from "@kittr/prisma"
 import colors from "@Colors"
 import { useDispatch } from "@Redux/store"
 import { setModal, setActiveKit } from "@Redux/slices/dashboard"
@@ -10,14 +10,14 @@ import { useAllKitOptions } from "@Hooks/api/useAllKitOptions"
 
 interface Props {
 	favorite?: true
-	kit: IKit
+	kit: Kit & { base: KitBase; options: KitOption[] }
 }
 
 const KitButton = ({ favorite, kit }: Props) => {
 	const dispatch = useDispatch()
 	const activeKit = useActiveKit()
 	const {
-		userData: { customTitle },
+		customTitle,
 		base: { displayName }
 	} = kit
 	const { data: allOptions, isLoading } = useAllKitOptions()
@@ -34,13 +34,13 @@ const KitButton = ({ favorite, kit }: Props) => {
 
 	return (
 		<Button
-			key={kit._id}
-			active={activeKit._id == kit._id}
+			key={kit.id}
+			active={activeKit.id == kit.id}
 			onClick={() =>
 				dispatch(
 					setActiveKit({
 						...kit,
-						options: kit.options.map((opt) => allOptions!.find((allOption: any) => allOption._id === opt)!)
+						options: kit.options.map((opt) => allOptions!.find((allOption) => allOption.id === opt.id)!)
 					})
 				)
 			}
@@ -60,7 +60,7 @@ const KitButton = ({ favorite, kit }: Props) => {
 				/>
 			)}
 			<SVG.Export
-				stroke={activeKit._id === kit._id ? colors.darker : colors.light}
+				stroke={activeKit.id === kit.id ? colors.darker : colors.light}
 				style={{
 					position: "absolute",
 					top: "50%",

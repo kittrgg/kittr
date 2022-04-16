@@ -1,4 +1,3 @@
-import { IKit, IKitBase, IKitRaw } from "@kittr/types/kits"
 import colors from "@Colors"
 import { Button } from "@Components/shared"
 import { createNewKit } from "@Redux/slices/dashboard"
@@ -9,11 +8,16 @@ import { sortAlphabetical } from "@Utils/helpers/sortAlphabetical"
 import styled from "styled-components"
 import KitButton from "./KitButton"
 import { useAllKitBases } from "@Hooks/api/useAllKitBases"
+import { Kit, KitOption } from "@kittr/prisma"
 
-const KitList = ({ ...props }) => {
+interface ExtendedKit extends Kit {
+	options: KitOption[]
+}
+
+const KitList = () => {
 	const dispatch = useDispatch()
-	const { kits } = useChannelData()
-	const noKits = kits.length === 0
+	const { data } = useChannelData()
+	const noKits = data?.kits.length === 0
 	const { data: kitBases } = useAllKitBases()
 
 	if (noKits) {
@@ -27,28 +31,29 @@ const KitList = ({ ...props }) => {
 		)
 	}
 
-	const createKitObject = (kit: IKit | IKitRaw) => {
+	const createKitObject = (kit: ExtendedKit) => {
 		return {
 			...kit,
-			base: kitBases!.find((allBases: IKitBase) => allBases._id === kit.baseId)!
+			base: kitBases!.find((allBases) => allBases.id === kit.kitBaseId)!
 		}
 	}
 
 	return (
 		<Wrapper>
 			<Container>
-				{filterKitsByFeature(kits)
-					.map(createKitObject)
-					.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
-					.map((kit) => (
-						<KitButton key={kit._id} favorite kit={kit as IKit} />
-					))}
-				{kits && filterKitsByFeature(kits).length > 0 && <hr style={{ width: "88%", borderColor: colors.lightest }} />}
-				{kits &&
-					filterKitsByFeature(kits, false)
+				{data?.kits &&
+					filterKitsByFeature(data?.kits)
 						.map(createKitObject)
 						.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
-						.map((kit) => <KitButton key={kit._id} kit={kit as IKit} />)}
+						.map((kit) => <KitButton key={kit.id} favorite kit={kit} />)}
+				{data?.kits && filterKitsByFeature(data?.kits).length > 0 && (
+					<hr style={{ width: "88%", borderColor: colors.lightest }} />
+				)}
+				{data?.kits &&
+					filterKitsByFeature(data?.kits, false)
+						.map(createKitObject)
+						.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
+						.map((kit) => <KitButton key={kit.id} kit={kit} />)}
 			</Container>
 			<ButtonWrapper>
 				<Button

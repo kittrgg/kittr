@@ -62,7 +62,7 @@ export const dashboardSlice = createSlice({
 			}
 
 			state.kitEditor.activeKit = {
-				_id: undefined,
+				id: undefined,
 				baseId: "",
 				base: {} as IKitBase,
 				options: [],

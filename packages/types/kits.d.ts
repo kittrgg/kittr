@@ -1,4 +1,5 @@
 import { IWarzoneGameInfo } from "./game"
+import { KitOption, KitBase } from "@kittr/prisma"
 
 interface IKitBase {
 	/** ObjectId from database */
@@ -70,15 +71,11 @@ interface IKitUserData {
 
 interface IKitUpdates {
 	/** ObjectId from database */
-	_id: string | undefined
-	/** Stringified ObjectId of the Base for this Kit */
-	baseId: string
-	/** User provided values */
-	userData: IKitUserData
+	id: string | undefined
 	/** Kit Base information for this Kit */
-	base: IKitBase
+	base: KitBase
 	/** User selected Kit Options to apply to the Kit base */
-	options: Array<IKitOption>
+	options: Array<KitOption>
 }
 
 interface IKitRaw {

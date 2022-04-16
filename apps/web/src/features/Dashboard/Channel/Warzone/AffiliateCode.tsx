@@ -9,18 +9,19 @@ import fetch from "@Fetch"
 import { useDispatch } from "@Redux/store"
 import { setModal } from "@Redux/slices/dashboard"
 
-const CreatorCode = ({ ...props }) => {
+const CreatorCode = () => {
 	const dispatch = useDispatch()
 	const { gameId: activeGame } = useChannelView()
-	const { _id: channelId, games } = useChannelData()
-	const [code, setCode] = useState(games.find((game) => game.id === activeGame)?.code || "")
+	const { data } = useChannelData()
+	const affiliateCode = data?.gameAffiliateCodes?.find((code) => code.gameId === activeGame)?.code
+	const [code, setCode] = useState(affiliateCode || "")
 	const [isEditing, setIsEditing] = useState(false)
 	const inputRef = useRef<HTMLInputElement>(null)
 	const { mutate, error } = useDashboardMutator(async () => {
 		const result = await fetch.put<any>({
 			url: `/api/channel/meta/code`,
 			headers: { authorization: `Bearer: ${await getToken()}` },
-			body: { code, channelId, gameId: games.find((game) => game.id === activeGame)?.id }
+			body: { code, channelId: data?.id, gameId: activeGame }
 		})
 
 		if (result) {
