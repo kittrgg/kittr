@@ -20,7 +20,6 @@
 		"@kittr/logger": "*",
 		"@kittr/prisma": "*",
 		"@kittr/types": "*",
-		"@kittr/ui": "*",
 		"@reduxjs/toolkit": "1.7.2",
 		"@stripe/react-stripe-js": "1.7.0",
 		"@stripe/stripe-js": "1.23.0",

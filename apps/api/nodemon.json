@@ -1,4 +1,9 @@
 {
 	"ignore": ["node_modules/**", "dist", "**/*.spec.ts", "**/*.test.ts"],
-	"exec": "npm run compile"
+	"exec": "yarn compile",
+	"events": {
+		"restart": "kill-port 5000",
+		"crash": "kill-port 5000"
+	},
+	"delay": "1000"
 }
