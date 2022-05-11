@@ -1,6 +1,6 @@
 import { Button, GameCard, Modal, Spinner } from "@Components/shared"
 import { NextClientEndpointError } from "@kittr/types/types"
-import { IGame } from "@kittr/types/game"
+import { Game } from "@kittr/prisma"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useAllGames } from "@Hooks/api/useAllGames"
 import { handleTutorialAction, setModal } from "@Redux/slices/dashboard"
@@ -17,12 +17,12 @@ const AddGameModal = ({ ...props }) => {
 	const { channelId } = useSelector((state) => state.dashboard.activeView)
 	const channelData = useChannelData()
 	const { isLoading, data } = useAllGames()
-	const { mutate, isLoading: isMutating } = useDashboardMutator<void, NextClientEndpointError, IGame>(async (game) => {
+	const { mutate, isLoading: isMutating } = useDashboardMutator<void, NextClientEndpointError, Game>(async (game) => {
 		try {
 			const result = await fetch.post({
 				url: `/api/channel/game/add`,
 				headers: { authorization: `Bearer: ${await getToken()}` },
-				body: { gameId: game._id, channelId }
+				body: { gameId: game.id, channelId }
 			})
 
 			if (result) {
@@ -49,7 +49,7 @@ const AddGameModal = ({ ...props }) => {
 		)
 	}
 
-	const gamesToExclude = channelData.games.map((game) => game.id)
+	const gamesToExclude = channelData.data?.games.map((game) => game.id) ?? []
 
 	return (
 		<Modal backgroundClickToClose={false} title="ADD GAME" onUserClose={handleTutorial}>
@@ -68,11 +68,11 @@ const AddGameModal = ({ ...props }) => {
 				{data &&
 					!isMutating &&
 					data
-						.filter((game: IGame) => !gamesToExclude.includes(game._id))
-						.map((game: IGame) => {
+						.filter((game) => !gamesToExclude.includes(game.id))
+						.map((game) => {
 							return (
 								<GameCard
-									key={game._id}
+									key={game.id}
 									{...game}
 									noText
 									onClick={() => {

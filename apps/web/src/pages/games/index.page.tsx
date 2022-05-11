@@ -25,7 +25,7 @@ const GamesIndex = ({ games }: Props) => {
 			<Paragraph>Find channels & kits by game. Stay tuned for more games coming very soon!</Paragraph>
 			<GamesWrapper>
 				{games &&
-					games.map((elem, index) => {
+					games.map((elem) => {
 						return (
 							<GameCard
 								key={elem.id}

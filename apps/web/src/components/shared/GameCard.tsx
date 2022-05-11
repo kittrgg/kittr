@@ -6,7 +6,12 @@ import colors from "@Colors"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
 import { header2, paragraph } from "@Styles/typography"
 import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
-import { GameWithGenresAndPlatforms } from "@Types/prisma"
+import { Game, Genre, Platform } from "@kittr/prisma"
+
+interface GameWithGenresAndPlatforms extends Game {
+	genres: Genre[]
+	platforms: Platform[]
+}
 
 interface Props extends GameWithGenresAndPlatforms {
 	/** Optionally display the game without any of it's meta information. */
