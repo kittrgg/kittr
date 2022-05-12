@@ -3,13 +3,7 @@ import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useAllKitBases } from "@Hooks/api/useAllKitBases"
 import { useUser } from "@Hooks/useUser"
 import { clearKitEditor, resetToInitialKit, setModal } from "@Redux/slices/dashboard"
-import {
-	useActiveKit,
-	useChannelData,
-	useDashboardView,
-	useInitialKit,
-	useModal
-} from "@Redux/slices/dashboard/selectors"
+import { useActiveKit, useChannelData, useInitialKit, useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
 import { getToken } from "@Services/firebase/auth/getToken"
 import { paragraph } from "@Styles/typography"
@@ -17,6 +11,8 @@ import styled from "styled-components"
 import NamingWarning from "./NamingWarning"
 import fetch from "@Fetch"
 import { isFetchError } from "@Utils/helpers/typeGuards"
+import { Kit, KitBase, KitOption } from "@kittr/prisma"
+import { KitWithOptionalId } from "@kittr/types/kits"
 
 const EditorSnackbar = () => {
 	const dispatch = useDispatch()
@@ -28,14 +24,18 @@ const EditorSnackbar = () => {
 	const { data: allKitBases } = useAllKitBases()
 	const { mutate, isLoading } = useDashboardMutator(async () => {
 		// Grab the existing kit array and map them to just their titles
-		let kitArr = channelData.data?.kits.slice()
+		let kitArr = channelData.data?.kits.slice() as KitWithOptionalId[]
 
 		// Grab the new kit's name
 		const newKitName = activeKit.base.displayName + activeKit.customTitle
 
 		// Is this an existing kit being updated?
-		let index = channelData.data?.kits.findIndex((kit) => kit.id === activeKit.id)
-		if (!kitArr || !index) return
+		let index = channelData.data?.kits.findIndex((kit) => kit.id === activeKit.id) ?? -1 // -1 means there's no kit
+
+		if (!kitArr) {
+			console.log("Disallowed.")
+			return
+		}
 
 		if (index !== -1) {
 			// Replace the existing kit with its new data
@@ -57,7 +57,7 @@ const EditorSnackbar = () => {
 						}) || activeKit
 				}))
 				// Map to just the names
-				.map((kit) => kit.base.gameId + kit.customTitle)
+				.map((kit) => kit.base.gameId + kit.base.displayName)
 
 				// Compare to ensure that there are no dupes
 				.filter((existingKitName) => newKitName === existingKitName).length > 1
@@ -74,7 +74,7 @@ const EditorSnackbar = () => {
 					kit: {
 						id: initialKit.id || undefined,
 						gameId: activeKit.base.gameId,
-						kitBaseId: activeKit.base.id,
+						baseId: activeKit.base.id,
 						customTitle: activeKit.customTitle,
 						options: activeKit.options,
 						blueprint: activeKit.blueprint,

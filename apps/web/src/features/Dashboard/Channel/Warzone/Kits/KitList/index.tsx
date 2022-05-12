@@ -34,7 +34,7 @@ const KitList = () => {
 	const createKitObject = (kit: ExtendedKit) => {
 		return {
 			...kit,
-			base: kitBases!.find((allBases) => allBases.id === kit.kitBaseId)!
+			base: kitBases!.find((allBases) => allBases.id === kit.baseId)!
 		}
 	}
 

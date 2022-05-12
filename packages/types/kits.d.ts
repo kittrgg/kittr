@@ -69,14 +69,13 @@ interface IKitUserData {
 	quote?: string
 }
 
-interface IKitUpdates {
-	/** ObjectId from database */
-	id: string | undefined
-	/** Kit Base information for this Kit */
+interface KitUpdates extends Kit {
 	base: KitBase
-	/** User selected Kit Options to apply to the Kit base */
-	options: Array<KitOption>
-	userData: IKitUserData
+	options: KitOption[]
+}
+
+interface KitWithOptionalId extends Omit<KitUpdates, "id"> {
+	id?: string
 }
 
 interface IKitRaw {

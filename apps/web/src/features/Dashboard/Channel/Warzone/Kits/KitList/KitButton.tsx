@@ -16,18 +16,15 @@ interface Props {
 const KitButton = ({ favorite, kit }: Props) => {
 	const dispatch = useDispatch()
 	const activeKit = useActiveKit()
-	const {
-		customTitle,
-		base: { displayName }
-	} = kit
+	const { customTitle, base } = kit
 	const { data: allOptions, isLoading } = useAllKitOptions()
 
 	let title = ""
 
 	if (customTitle) {
-		title = `${displayName} (${customTitle})`
+		title = `${base.displayName} (${customTitle})`
 	} else {
-		title = `${displayName}`
+		title = `${base.displayName}`
 	}
 
 	if (isLoading) return null
@@ -77,7 +74,7 @@ const KitButton = ({ favorite, kit }: Props) => {
 						})
 					)
 				}}
-				dataCy={`${displayName}-quick-export`}
+				dataCy={`${base.displayName}-quick-export`}
 			/>
 		</Button>
 	)

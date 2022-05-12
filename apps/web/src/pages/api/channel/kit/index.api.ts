@@ -21,9 +21,9 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<
 
 	try {
 		const update = {
-			kitBase: {
+			base: {
 				connect: {
-					id: kit.kitBaseId
+					id: kit.baseId
 				}
 			},
 			channel: {
