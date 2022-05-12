@@ -12,6 +12,7 @@ export const getDashboardChannel = async ({ id, urlSafeName }: Params) => {
 			urlSafeName
 		},
 		include: {
+			customGameCommands: true,
 			profile: {
 				include: {
 					brandColors: true,
@@ -31,7 +32,8 @@ export const getDashboardChannel = async ({ id, urlSafeName }: Params) => {
 					base: {
 						include: {
 							category: true,
-							stats: true
+							stats: true,
+							commandCodes: true
 						}
 					},
 					options: true

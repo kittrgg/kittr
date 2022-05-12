@@ -7,7 +7,11 @@ const handler = createHandler()
 // Fetch all bases
 handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
 	try {
-		const result = await prisma.kitBase.findMany({})
+		const result = await prisma.kitBase.findMany({
+			include: {
+				commandCodes: true
+			}
+		})
 		return res.status(200).json(result)
 	} catch (error) {
 		return res.status(500).json(error)

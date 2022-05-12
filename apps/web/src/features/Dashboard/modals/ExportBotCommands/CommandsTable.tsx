@@ -1,14 +1,22 @@
 import colors from "@Colors"
 import { TCommandMethod } from "@kittr/types/types"
-import { IKit } from "@kittr/types/kits"
 import Toast from "@Components/shared/Toast"
 import { useChannelData, useChannelView } from "@Redux/slices/dashboard/selectors"
 import { useState } from "react"
 import * as Styled from "./style"
+import { CommandCode, Kit, KitBase } from "@kittr/prisma"
+
+interface KitBaseWithCodes extends KitBase {
+	commandCodes: CommandCode[]
+}
+
+interface FullKit extends Kit {
+	base: KitBaseWithCodes
+}
 
 interface Props {
 	/** Array of kits to render in the table. */
-	kits: Array<Omit<IKit, "options">>
+	kits: Array<Omit<FullKit, "options">>
 	/** Include master commands for this game. Ex: !loadout and !loadouts for Warzone. */
 	includeMasterCommands?: boolean
 	/** Method which the user will be utilizing for adding their commands. */
@@ -21,7 +29,7 @@ interface Props {
 
 /** Render the list of commands for the kits of the user. */
 const CommandsTable = ({ kits, includeMasterCommands = true, method, commandStrategy, includeUser }: Props) => {
-	const { games, urlSafeName, displayName: channelDisplayName } = useChannelData()
+	const { data } = useChannelData()
 	const { gameId } = useChannelView()
 	const [copyNotification, setCopyNotification] = useState(false)
 	const isDashboard = method === "dashboard"
@@ -33,8 +41,8 @@ const CommandsTable = ({ kits, includeMasterCommands = true, method, commandStra
 	const createNightbotPrefix = (code: string): string => `${dashboardStrategy} !${code}`
 	const createChannelElementsPrefix = (code: string): string => `${channelElementsStrategy} !${code}`
 	const createUserString = (): string => (includeUser ? " $(touser)" : "")
-	const commandBase = `${rootUrl}/c/${urlSafeName}/warzone`
-	const currentStringTemplate = games.find((elem) => elem.id === gameId)?.commandString || ""
+	const commandBase = `${rootUrl}/c/${data?.urlSafeName}/warzone`
+	const currentStringTemplate = data?.customGameCommands?.find((elem) => elem.id === gameId)?.command || ""
 
 	const createCommandString = (displayName: string, baseTitle: string, code: string): string => {
 		let customizedString = ""
@@ -43,7 +51,7 @@ const CommandsTable = ({ kits, includeMasterCommands = true, method, commandStra
 			customizedString = currentStringTemplate
 				.replace("{{link}}", baseTitle ? `${commandBase}/?k=${baseTitle}` : `${commandBase}`)
 				.replace("{{weapon name}}", displayName)
-				.replace("{{player name}}", channelDisplayName)
+				.replace("{{player name}}", data?.displayName ?? "")
 		} else if (baseTitle) {
 			customizedString = `${commandBase}/?k=${baseTitle}`
 		} else {
@@ -142,10 +150,10 @@ const CommandsTable = ({ kits, includeMasterCommands = true, method, commandStra
 					.map((elem) => {
 						const baseTitle = `${elem.base.displayName.replace(/ /g, "-")}`
 
-						return elem.base.commandCodes.map((code: string) => {
+						return elem.base.commandCodes.map((code) => {
 							return (
 								<Styled.HorizFlex
-									key={code}
+									key={code.id}
 									style={{ marginTop: "28px", borderBottom: `1px solid ${colors.lightest}` }}
 								>
 									<Styled.CommandTitle
@@ -155,23 +163,23 @@ const CommandsTable = ({ kits, includeMasterCommands = true, method, commandStra
 											cursor: isDashboard ? "pointer" : "initial",
 											color: isDashboard ? colors.lighter : ""
 										}}
-										onClick={() => isDashboard && copyToClipboard(`!${code}`)}
+										onClick={() => isDashboard && copyToClipboard(`!${code.code}`)}
 									>
-										!{code}
+										!{code.code}
 										{isDashboard && (
-											<Styled.ImageContainer onClick={() => copyToClipboard(`!${code}`)} style={{ top: 0 }}>
+											<Styled.ImageContainer onClick={() => copyToClipboard(`!${code.code}`)} style={{ top: 0 }}>
 												<img src="/media/icons/clipboard.svg" alt="Click to Copy" width={13} height={17} />
 											</Styled.ImageContainer>
 										)}
 									</Styled.CommandTitle>
 									<Styled.CommandContent
-										onClick={() => copyToClipboard(createCommandString(elem.base.displayName, baseTitle, code))}
+										onClick={() => copyToClipboard(createCommandString(elem.base.displayName, baseTitle, code.code))}
 										style={{ marginBottom: "20px", flex: "1" }}
 									>
-										{createCommandString(elem.base.displayName, baseTitle, code)}
+										{createCommandString(elem.base.displayName, baseTitle, code.code)}
 									</Styled.CommandContent>
 									<Styled.ImageContainer
-										onClick={() => copyToClipboard(createCommandString(elem.base.displayName, baseTitle, code))}
+										onClick={() => copyToClipboard(createCommandString(elem.base.displayName, baseTitle, code.code))}
 									>
 										<img src="/media/icons/clipboard.svg" alt="Click to Copy" width={13} height={17} />
 									</Styled.ImageContainer>

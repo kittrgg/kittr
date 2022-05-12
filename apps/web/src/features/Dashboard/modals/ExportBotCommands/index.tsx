@@ -1,6 +1,6 @@
 import colors from "@Colors"
 import { TCommandMethod } from "@kittr/types/types"
-import { IKitRaw } from "@kittr/types/kits"
+import { KitBase, Kit, CommandCode } from "@kittr/prisma"
 import { Button, Modal } from "@Components/shared"
 import { useAllKitBases } from "@Hooks/api/useAllKitBases"
 import { useAllKitOptions } from "@Hooks/api/useAllKitOptions"
@@ -14,6 +14,10 @@ import UserIncludeToggle from "./IncludeUserToggle"
 import MethodToggle from "./MethodToggle"
 import TwitchStrategyToggle from "./TwitchStrategyToggle"
 
+interface KitWithCommandCodes extends Kit {
+	base: KitBase & { commandCodes: CommandCode[] }
+}
+
 /**
  * Modal for exporting bot commands to the user's desired channel.
  *
@@ -23,19 +27,19 @@ import TwitchStrategyToggle from "./TwitchStrategyToggle"
  * and using different platforms for inputting the commands to their chat.
  *
  * */
-const ExportBotCommands = ({ ...props }) => {
+const ExportBotCommands = () => {
 	const dispatch = useDispatch()
-	const { kits } = useChannelData()
+	const { data } = useChannelData()
 	const [method, setMethod] = useState<TCommandMethod>("nightbot")
 	const [commandStrategy, setCommandStrategy] = useState<"edit" | "add">("edit")
 	const [includeUser, setIncludeUser] = useState(true)
 	const { data: allKitBases } = useAllKitBases()
 	const { data: allKitOptions } = useAllKitOptions()
 
-	const createKitObject = (kit: IKitRaw) => {
+	const createKitObject = <T extends Kit>(kit: T): T => {
 		return {
 			...kit,
-			base: allKitBases!.find((allBases) => allBases._id === kit.baseId)!
+			base: allKitBases!.find((allBases) => allBases.id === kit.baseId)!
 		}
 	}
 
@@ -51,7 +55,7 @@ const ExportBotCommands = ({ ...props }) => {
 			)}
 
 			<CommandsTable
-				kits={kits.map(createKitObject)}
+				kits={data?.kits.map(createKitObject) ?? []}
 				method={method}
 				commandStrategy={commandStrategy}
 				includeUser={includeUser}
