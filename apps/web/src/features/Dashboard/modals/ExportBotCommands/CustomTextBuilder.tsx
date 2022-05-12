@@ -28,9 +28,10 @@ const CustomTextBuilder = ({ commandStrategy, method }: Props) => {
 	const dispatch = useDispatch()
 	const role = useManagerRole()
 	const { gameId: activeGame } = useChannelView()
-	const initialString = useChannelData().games.find((game) => game.id === activeGame)?.commandString || ""
-	const channelData = useChannelData()
-	const [userString, setUserString] = useState(initialString)
+	const { data } = useChannelData()
+	const initialCode = data?.customGameCommands.find((code) => code.gameId === activeGame)
+	const [userString, setUserString] = useState(initialCode?.command)
+	console.log(data)
 
 	const nightbotStrategy = commandStrategy === "edit" ? "!editcom" : "!addcom"
 	const channelElementsStrategy = commandStrategy === "edit" ? "!command edit" : "!command add"
@@ -40,7 +41,7 @@ const CustomTextBuilder = ({ commandStrategy, method }: Props) => {
 			const result = await fetch.put({
 				url: `/api/channel/meta/botCommandString`,
 				headers: { authorization: `Bearer: ${await getToken()}` },
-				body: { commandString: userString, channelId: channelData._id, gameId: activeGame }
+				body: { commandId: initialCode?.id, commandString: userString, channelId: data?.id, gameId: activeGame }
 			})
 
 			if (result) {
@@ -52,8 +53,8 @@ const CustomTextBuilder = ({ commandStrategy, method }: Props) => {
 	})
 
 	useEffect(() => {
-		setUserString(initialString)
-	}, [initialString])
+		setUserString(initialCode?.command)
+	}, [initialCode])
 
 	return (
 		<Styled.HorizFlex>
@@ -62,7 +63,7 @@ const CustomTextBuilder = ({ commandStrategy, method }: Props) => {
 					Use custom text?
 				</Styled.ToggleDescription>
 				<Styled.SubText style={{ display: "inline" }}>Optional</Styled.SubText>
-				{role === "Editor" ? (
+				{role === "EDITOR" ? (
 					<Styled.SubText>
 						Only Owners and Administrators can edit this field. If you think this text needs a change, let someone with
 						that role know.
@@ -71,7 +72,7 @@ const CustomTextBuilder = ({ commandStrategy, method }: Props) => {
 					<>
 						<Styled.SubText>
 							Use curly brackets for shortcodes. For example, {"{{player name}}"} will be replaced with "
-							{channelData.displayName}".
+							{data?.displayName}".
 						</Styled.SubText>
 						<Styled.SubText>Available shortcodes:</Styled.SubText>
 						<div>
@@ -84,7 +85,7 @@ const CustomTextBuilder = ({ commandStrategy, method }: Props) => {
 					</>
 				)}
 			</div>
-			{role === "Editor" ? (
+			{role === "EDITOR" ? (
 				<UserStringContainer>{userString}</UserStringContainer>
 			) : (
 				<div style={{ position: "relative", width: "60%", marginBottom: "40px" }}>
@@ -100,16 +101,16 @@ const CustomTextBuilder = ({ commandStrategy, method }: Props) => {
 						} !example`}</TextAreaLead>
 					)}
 					<Styled.HorizFlex style={{ alignItems: "center", marginTop: "12px" }}>
-						{userString?.length > 0 && !userString.includes("{{link}}") && (
-							<ShortcodeWarning>Must include {"{{link}}"}</ShortcodeWarning>
-						)}
+						{userString?.length
+							? !userString?.includes("{{link}}") && <ShortcodeWarning>Must include {"{{link}}"}</ShortcodeWarning>
+							: null}
 						<Button
 							design="white"
 							text={isLoading ? "..." : "SAVE"}
 							disabled={
 								userString?.length === 0
 									? false
-									: isLoading || !userString.includes("{{link}}") || initialString === userString
+									: isLoading || !userString?.includes("{{link}}") || initialCode?.command === userString
 							}
 							onClick={mutate}
 							style={{ marginLeft: "auto", padding: "6px 32px", fontSize: "16px" }}
