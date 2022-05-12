@@ -8,9 +8,7 @@ import { useActiveKit } from "@Redux/slices/dashboard/selectors"
 
 const YoutubeId = ({ ...props }) => {
 	const dispatch = useDispatch()
-	const {
-		userData: { youtubeURL }
-	} = useActiveKit()
+	const { youtubeUrl } = useActiveKit()
 
 	const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (e.target.value.includes("youtu.be")) {
@@ -40,7 +38,7 @@ const YoutubeId = ({ ...props }) => {
 				name="youtubeUrl"
 				label={"https://www.youtube.com/watch?v="}
 				labelStyles={{ color: colors.lighter, display: "block", marginTop: "12px", textTransform: "initial" }}
-				value={youtubeURL || ""}
+				value={youtubeUrl || ""}
 				subline="If you want to just copy-paste the whole YouTube link, we'll trim it for you. We know, we know, you're welcome."
 				onChange={(e) => handleInput(e)}
 				inputStyles={{ marginLeft: "0", marginTop: "0" }}

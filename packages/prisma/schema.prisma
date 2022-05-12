@@ -152,8 +152,8 @@ model Kit {
   options                    KitOption[]
   game                       Game               @relation(fields: [gameId], references: [id])
   gameId                     String
-  kitBase                    KitBase            @relation(fields: [kitBaseId], references: [id])
-  kitBaseId                  String
+  base                    KitBase            @relation(fields: [baseId], references: [id])
+  baseId                  String
   channel                    Channel            @relation(fields: [channelId], references: [id])
   channelId                  String
   channelKitOverlayPrimary   ChannelKitOverlay? @relation(name: "primaryKitOverlay")

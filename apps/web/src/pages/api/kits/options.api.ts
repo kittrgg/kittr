@@ -4,7 +4,7 @@ import { prisma } from "@kittr/prisma"
 
 const handler = createHandler()
 
-// Fetch options by kitId
+// Fetch options by kit
 handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
 	const { kitBaseId } = req.query as { kitBaseId: string }
 

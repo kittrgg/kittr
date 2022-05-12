@@ -8,7 +8,7 @@ import { updateBase, updateOptions } from "@Redux/slices/dashboard"
 import { useActiveKit, useChannelView } from "@Redux/slices/dashboard/selectors"
 import { Selector } from "@Components/shared"
 
-const ChooseBase = ({ ...props }) => {
+const ChooseBase = () => {
 	const { gameId } = useChannelView()
 	const { data, isLoading } = useAllKitsByGameId(gameId)
 	const dispatch = useDispatch()

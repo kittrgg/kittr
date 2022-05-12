@@ -12,7 +12,7 @@ import AffiliateCode from "./AffiliateCode"
 import Kits from "./Kits"
 import ExportBotCommands from "../../modals/ExportBotCommands"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
-import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
+// import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
 
 /** The Warzone screen for a channel. */
 const Warzone = () => {

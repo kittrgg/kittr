@@ -324,7 +324,7 @@ mongoose
 							game: {
 								connect: { id: warzoneId! }
 							},
-							kitBase: {
+							base: {
 								connect: {
 									id: kit.baseId
 								}

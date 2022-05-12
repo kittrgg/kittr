@@ -76,6 +76,7 @@ interface IKitUpdates {
 	base: KitBase
 	/** User selected Kit Options to apply to the Kit base */
 	options: Array<KitOption>
+	userData: IKitUserData
 }
 
 interface IKitRaw {

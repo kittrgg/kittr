@@ -23,12 +23,12 @@ export const getDashboardChannel = async ({ id, urlSafeName }: Params) => {
 			managers: true,
 			kits: {
 				orderBy: {
-					kitBase: {
+					base: {
 						displayName: "asc"
 					}
 				},
 				include: {
-					kitBase: {
+					base: {
 						include: {
 							category: true,
 							stats: true
@@ -51,6 +51,3 @@ export const getDashboardChannel = async ({ id, urlSafeName }: Params) => {
 }
 
 export type getDashboardChannelReturnType = Prisma.PromiseReturnType<typeof getDashboardChannel>
-
-// export * from "./deserializer"
-// export * from "./serializer"

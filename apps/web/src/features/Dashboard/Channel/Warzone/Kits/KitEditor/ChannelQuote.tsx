@@ -7,11 +7,9 @@ import { useActiveKit } from "@Redux/slices/dashboard/selectors"
 import { updateChannelQuote } from "@Redux/slices/dashboard"
 import { useDispatch } from "@Redux/store"
 
-const ChannelQuote = ({ ...props }) => {
+const ChannelQuote = () => {
 	const dispatch = useDispatch()
-	const {
-		userData: { quote }
-	} = useActiveKit()
+	const { quote } = useActiveKit()
 
 	return (
 		<Styled.Container>
@@ -22,7 +20,7 @@ const ChannelQuote = ({ ...props }) => {
 			<Styled.ParagraphHelper>Add your tips or comments about this kit.</Styled.ParagraphHelper>
 			<TextArea
 				name="channelQuote"
-				value={quote || ""}
+				value={quote ?? ""}
 				onChange={(e) => {
 					if (e.target.value.length > 350) {
 						return

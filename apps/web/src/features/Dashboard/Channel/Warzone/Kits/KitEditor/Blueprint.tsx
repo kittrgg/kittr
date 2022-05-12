@@ -6,9 +6,7 @@ import { updateBlueprint } from "@Redux/slices/dashboard"
 
 const Blueprint = ({ ...props }) => {
 	const dispatch = useDispatch()
-	const {
-		userData: { blueprint }
-	} = useActiveKit()
+	const { blueprint } = useActiveKit()
 
 	return (
 		<Styled.Container>
@@ -18,7 +16,7 @@ const Blueprint = ({ ...props }) => {
 				name="blueprint"
 				label="Favorite Blueprint"
 				noTextLabel
-				value={blueprint}
+				value={blueprint ?? ""}
 				onChange={(e) => dispatch(updateBlueprint(e.target.value))}
 				inputStyles={{ marginTop: "12px" }}
 			/>

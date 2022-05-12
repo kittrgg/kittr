@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 
-import { IKitOption, IKitOptionRaw } from "@kittr/types"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
 import * as Styled from "./style"
 import { useOptionsByKitBase } from "@Hooks/api/useOptionsbyKitBase"
@@ -13,11 +12,11 @@ import { Selector } from "@Components/shared"
 
 const animationDuration = 1000
 
-const Options = ({ ...props }) => {
+const Options = () => {
 	const dispatch = useDispatch()
 	const { base, options: current } = useActiveKit()
 	const isMounted = useIsMounted()
-	const { data: availableOptions, isLoading } = useOptionsByKitBase(base?._id)
+	const { data: availableOptions, isLoading } = useOptionsByKitBase(base?.id)
 	const [animationTrigger, setAnimationTrigger] = useState(false)
 
 	useEffect(() => {
@@ -38,15 +37,16 @@ const Options = ({ ...props }) => {
 		const newCurrent = current.slice()
 
 		if (displayName === "") {
-			const index = newCurrent.findIndex((elem: IKitOption) => elem.slotKey === slot)
+			const index = newCurrent.findIndex((elem) => elem.slotKey === slot)
 			newCurrent.splice(index, 1)
 			return dispatch(updateOptions(newCurrent))
 		}
 
-		let toAdd = availableOptions.find((opt: IKitOption) => opt.displayName === displayName && opt.slotKey === slot)
-		toAdd = { ...toAdd, _id: toAdd.optionId }
+		let toAdd = availableOptions?.find((opt) => opt.displayName === displayName && opt.slotKey === slot)
 
-		const index = newCurrent.findIndex((elem: IKitOption) => elem.slotKey === toAdd.slotKey)
+		const index = newCurrent.findIndex((elem) => elem.slotKey === toAdd?.slotKey)
+
+		if (!toAdd) return
 
 		if (index > -1) {
 			newCurrent[index] = toAdd
@@ -54,7 +54,7 @@ const Options = ({ ...props }) => {
 			newCurrent.push(toAdd)
 		}
 
-		if (newCurrent.length > base.gameInfo.maxOptions) return setAnimationTrigger(true)
+		if (newCurrent.length > base.maxOptions) return setAnimationTrigger(true)
 		return dispatch(updateOptions(newCurrent))
 	}
 
@@ -72,12 +72,12 @@ const Options = ({ ...props }) => {
 			<Styled.HorizFlex>
 				<Styled.Header>ATTACHMENTS</Styled.Header>
 				<Styled.HeaderHelper animate={animationTrigger} animationDuration={animationDuration}>
-					(Limit {base.gameInfo.maxOptions})
+					(Limit {base.maxOptions})
 				</Styled.HeaderHelper>
 			</Styled.HorizFlex>
 			<Styled.AttachmentsFlex>
 				{!isLoading &&
-					slots.map((slot: string) => {
+					slots?.map((slot: string) => {
 						return (
 							<div key={slot} style={{ marginBottom: "18px", flexBasis: "40%" }}>
 								<Styled.Header>{slot}</Styled.Header>
@@ -86,8 +86,8 @@ const Options = ({ ...props }) => {
 									onChange={(e: any) => addToOptions(e.value, slot)}
 									isSearchable={false}
 									value={{
-										label: current?.find((opt: IKitOption) => opt.slotKey === slot)
-											? current.find((opt: IKitOption) => opt.slotKey === slot)?.displayName
+										label: current?.find((opt) => opt.slotKey === slot)
+											? current.find((opt) => opt.slotKey === slot)?.displayName
 											: "-"
 									}}
 									options={[
@@ -96,9 +96,9 @@ const Options = ({ ...props }) => {
 											value: ""
 										},
 										...availableOptions
-											?.filter((opt: IKitOption) => opt.slotKey === slot)
-											.sort((a: IKitOptionRaw, b: IKitOptionRaw) => Number(a.orderPlacement) - Number(b.orderPlacement))
-											.map((option: IKitOption) => ({
+											?.filter((opt) => opt.slotKey === slot)
+											.sort((a, b) => Number(a.orderPlacement) - Number(b.orderPlacement))
+											.map((option) => ({
 												label: option.displayName,
 												value: option.displayName
 											}))

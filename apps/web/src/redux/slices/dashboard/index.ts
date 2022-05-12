@@ -1,6 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { DashboardModals, ReduxModalState } from "@kittr/types/types"
-import { IKitUpdates, IKitBase } from "@kittr/types/kits"
+import { KitBase, Kit, KitOption } from "@kittr/prisma"
+
+interface KitUpdates extends Kit {
+	base: KitBase
+	options: KitOption[]
+}
+
+interface KitWithOptionalId extends Omit<KitUpdates, "id"> {
+	id?: string
+}
 
 export const dashboardSlice = createSlice({
 	name: "dashboard",
@@ -18,8 +27,8 @@ export const dashboardSlice = createSlice({
 			view: ""
 		},
 		kitEditor: {
-			initialKit: {} as IKitUpdates,
-			activeKit: {} as IKitUpdates
+			initialKit: {} as KitWithOptionalId,
+			activeKit: {} as KitWithOptionalId
 		},
 		overlayEditor: {
 			kit: {} as any
@@ -43,72 +52,74 @@ export const dashboardSlice = createSlice({
 		setChannelView: (state, action: { payload: { gameId: string; view: string } }) => {
 			state.channelView = action.payload
 		},
-		setInitialKit: (state, action: { payload: IKitUpdates }) => {
+		setInitialKit: (state, action: { payload: KitWithOptionalId }) => {
 			state.kitEditor.initialKit = action.payload
 		},
 		createNewKit: (state) => {
 			state.kitEditor.initialKit = {
-				_id: undefined,
-				baseId: "",
-				base: {} as IKitBase,
-				options: [],
-				userData: {
-					featured: false,
-					customTitle: "",
-					blueprint: "",
-					youtubeURL: "",
-					tiktokId: ""
-				}
+				id: undefined,
+				base: {} as KitBase,
+				options: [] as KitOption[],
+				featured: false,
+				customTitle: "",
+				blueprint: "",
+				youtubeUrl: "",
+				tiktokUrl: "",
+				quote: "",
+				gameId: "",
+				channelId: "",
+				baseId: ""
 			}
 
 			state.kitEditor.activeKit = {
 				id: undefined,
-				baseId: "",
-				base: {} as IKitBase,
-				options: [],
-				userData: {
-					featured: false,
-					customTitle: "",
-					blueprint: "",
-					youtubeURL: "",
-					tiktokId: ""
-				}
+				base: {} as KitBase,
+				options: [] as KitOption[],
+				featured: false,
+				customTitle: "",
+				blueprint: "",
+				youtubeUrl: "",
+				tiktokUrl: "",
+				quote: "",
+				gameId: "",
+				channelId: "",
+				baseId: ""
 			}
 		},
 		resetToInitialKit: (state) => {
 			state.kitEditor.activeKit = state.kitEditor.initialKit
 		},
-		setActiveKit: (state, action: { payload: IKitUpdates }) => {
+		setActiveKit: (state, action: { payload: KitWithOptionalId }) => {
 			state.kitEditor.initialKit = action.payload
 			state.kitEditor.activeKit = action.payload
 		},
 		clearKitEditor: (state) => {
-			state.kitEditor.initialKit = {} as IKitUpdates
-			state.kitEditor.activeKit = {} as IKitUpdates
+			state.kitEditor.initialKit = {} as KitWithOptionalId
+			state.kitEditor.activeKit = {} as KitWithOptionalId
 		},
-		updateBase: (state, action: { payload: IKitBase }) => {
+		updateBase: (state, action: { payload: KitBase }) => {
 			state.kitEditor.activeKit.base = action.payload
 		},
 		updateOptions: (state, action: { payload: any[] }) => {
 			state.kitEditor.activeKit.options = action.payload
 		},
 		updateFeatured: (state, action: { payload: boolean }) => {
-			state.kitEditor.activeKit.userData.featured = action.payload
+			state.kitEditor.activeKit.featured = action.payload
 		},
 		updateCustomTitle: (state, action: { payload: string }) => {
-			state.kitEditor.activeKit.userData.customTitle = action.payload
+			state.kitEditor.activeKit.customTitle = action.payload
 		},
 		updateBlueprint: (state, action: { payload: string }) => {
-			state.kitEditor.activeKit.userData.blueprint = action.payload
+			state.kitEditor.activeKit.blueprint = action.payload
 		},
 		updateTiktokId: (state, action: { payload: string }) => {
-			state.kitEditor.activeKit.userData.tiktokId = action.payload
+			state.kitEditor.activeKit.tiktokUrl = action.payload
 		},
 		updateYoutubeURL: (state, action: { payload: string }) => {
-			state.kitEditor.activeKit.userData.youtubeURL = action.payload
+			state.kitEditor.activeKit.youtubeUrl = action.payload
 		},
 		updateChannelQuote: (state, action: { payload: string }) => {
-			state.kitEditor.activeKit.userData.quote = action.payload
+			state.kitEditor.activeKit.quote = action.payload
 		},
 		setOverlayEditor: (state, action: { payload: any }) => {
 			state.overlayEditor = action.payload
