@@ -2,13 +2,13 @@ import { NextServerPayload } from "@kittr/types"
 import type { NextApiRequest, NextApiResponse } from "next"
 import { createHandler } from "@Middlewares/createHandler"
 import { userAuth } from "@Utils/middlewares/auth"
-import { LinkProperties, Channel, prisma } from "@kittr/prisma"
+import { ChannelLink, Channel, prisma } from "@kittr/prisma"
 
 const handler = createHandler(userAuth)
 
 // Edit channel's links
 handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<Channel>>) => {
-	const { id, links } = JSON.parse(req.body) as { id: string; links: Record<string, string> }
+	const { id, links } = JSON.parse(req.body) as { id: string; links: ChannelLink[] }
 
 	try {
 		// TODO: Turn this into a correctly done CRUD
@@ -42,9 +42,9 @@ handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<C
 			data: {
 				links: {
 					createMany: {
-						data: Object.entries(links).map(([property, url]) => ({
-							property: property.toUpperCase() as LinkProperties,
-							value: url
+						data: links.map((link) => ({
+							property: link.property,
+							value: link.value
 						}))
 					}
 				}
@@ -53,6 +53,8 @@ handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<C
 
 		return res.status(200).json(result)
 	} catch (error) {
+		console.log(error)
+
 		return res.status(400).json({ error: true, errorMessage: JSON.stringify(error) })
 	}
 })

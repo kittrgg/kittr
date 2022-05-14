@@ -31,7 +31,6 @@ const CustomTextBuilder = ({ commandStrategy, method }: Props) => {
 	const { data } = useChannelData()
 	const initialCode = data?.customGameCommands.find((code) => code.gameId === activeGame)
 	const [userString, setUserString] = useState(initialCode?.command)
-	console.log(data)
 
 	const nightbotStrategy = commandStrategy === "edit" ? "!editcom" : "!addcom"
 	const channelElementsStrategy = commandStrategy === "edit" ? "!command edit" : "!command add"

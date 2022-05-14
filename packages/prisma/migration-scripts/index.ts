@@ -4,7 +4,7 @@
 import { prisma } from "../index"
 import mongoose from "mongoose"
 import {
-	LinkProperties,
+	LinkProperty,
 	OverlayVisibilityStates,
 	ChannelManagerRoles
 } from "@prisma/client"
@@ -257,7 +257,7 @@ mongoose
 						},
 						links: {
 							create: Object.entries(channel.links).map((entry) => ({
-								property: entry[0].toUpperCase() as LinkProperties,
+								property: entry[0].toUpperCase() as LinkProperty,
 								value: entry[1]
 							}))
 						}

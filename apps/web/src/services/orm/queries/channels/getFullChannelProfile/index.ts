@@ -22,12 +22,12 @@ export const getFullChannelProfileQuery = async ({ id, urlSafeName }: Params) =>
 			},
 			kits: {
 				orderBy: {
-					kitBase: {
+					base: {
 						displayName: "asc"
 					}
 				},
 				include: {
-					kitBase: {
+					base: {
 						include: {
 							category: true,
 							stats: true

@@ -2,7 +2,7 @@ import { ITwitchLiveChannels } from "@kittr/types/twitch"
 import { headers } from "@Services/twitch/utils/auth"
 import { grabLoginName } from "./utils/grabLoginName"
 import fetch from "@Fetch"
-import { LinkProperties } from "@kittr/prisma"
+import { LinkProperty } from "@kittr/prisma"
 import { Channel, ChannelLink } from "@kittr/prisma"
 import { getTopChannelsWithLinksQuery } from "@Services/orm/queries/channels"
 
@@ -11,7 +11,7 @@ interface ChannelWithLinks extends Channel {
 }
 
 const getTwitchLink = (channel: ChannelWithLinks) =>
-	channel.links.find((link) => link.property === LinkProperties.TWITCH)?.value ?? ""
+	channel.links.find((link) => link.property === LinkProperty.TWITCH)?.value ?? ""
 
 export const liveChannelsQuery = async () => {
 	const popularChannels = await getTopChannelsWithLinksQuery({ take: 100 })

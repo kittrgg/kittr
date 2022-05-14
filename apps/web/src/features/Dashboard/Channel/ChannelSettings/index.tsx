@@ -16,7 +16,7 @@ import Affiliate from "./Affiliate"
 import CoverPhotoUploader from "./CoverPhotoUploader"
 import DisplayNameEditor from "./DisplayNameEditor"
 import ImageEditor from "./ImageEditor"
-// import LinkEditor from "./LinkEditor"
+import LinkEditor from "./LinkEditor"
 import SetupPhotos from "./SetupPhotos"
 import Specs from "./Specs"
 import ChannelDeleter from "./ChannelDeleter"
@@ -76,7 +76,7 @@ const ChannelSettings = ({ ...props }) => {
 							)}
 						</Grid>
 					)}
-					{/* {role !== "Editor" && <LinkEditor />} */}
+					{role !== "EDITOR" && <LinkEditor />}
 					{role !== "EDITOR" && <YouTubeAutoplayEditor />}
 				</GridItem>
 				<GridItem>

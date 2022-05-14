@@ -1,10 +1,14 @@
 import styled from "styled-components"
-import { CompleteKit } from "@Types/prisma"
-
 import colors from "@Colors"
 import SVG from "@Components/shared/SVG"
 import { header2 } from "@Styles/typography"
 import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
+import { Kit, KitBase, KitOption } from "@kittr/prisma"
+
+interface CompleteKit extends Kit {
+	base: KitBase
+	options: KitOption[]
+}
 
 interface Props {
 	/** Array of kits to render. */
@@ -31,16 +35,16 @@ export const KitList = ({ data, onClick }: Props) => {
 						/>
 						<div>
 							<KitTitle>
-								{elem.customTitle ? `${elem.kitBase.displayName} - ${elem.customTitle}` : `${elem.kitBase.displayName}`}
+								{elem.customTitle ? `${elem.base.displayName} - ${elem.customTitle}` : `${elem.base.displayName}`}
 							</KitTitle>
 							<ImageContainer>
 								<FirebaseStorageResolver
-									path={elem.kitBase.imageUrl}
+									path={elem.base.imageUrl}
 									noSpinner
 									render={(data) => (
 										<img
 											src={data || "/media/logo.svg"}
-											alt={elem.kitBase.displayName}
+											alt={elem.base.displayName}
 											style={{ width: "100%", height: "100%", objectFit: "cover" }}
 										/>
 									)}

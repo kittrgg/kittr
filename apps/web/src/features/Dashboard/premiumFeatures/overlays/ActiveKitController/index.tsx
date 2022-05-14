@@ -1,5 +1,4 @@
 import colors from "@Colors"
-import { IKitBase, IKitOptionRaw } from "@kittr/types/kits"
 import { Button, ColorPicker, MultiButton, Spinner, SVG } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import PremiumCallout from "@Features/Dashboard/PremiumCallout"
@@ -39,7 +38,7 @@ const ActiveKit = ({ ...props }) => {
 			const result = await fetch.post({
 				url: `/api/channel/overlay`,
 				headers: { authorization: `Bearer: ${await getToken()}` },
-				body: { channelId: data?._id, key, change }
+				body: { channelId: data?.id, key, change }
 			})
 
 			if (result) {
@@ -59,7 +58,7 @@ const ActiveKit = ({ ...props }) => {
 		)
 	}
 
-	if (role === "Editor") {
+	if (role === "EDITOR") {
 		return (
 			<div>
 				<p>
@@ -70,7 +69,7 @@ const ActiveKit = ({ ...props }) => {
 		)
 	}
 
-	if (role === "Owner" || role === "Administrator") {
+	if (role === "OWNER" || role === "ADMIN") {
 		return (
 			<div>
 				<H3 style={{ marginBottom: "24px" }}>ACTIVE KIT</H3>
@@ -294,7 +293,7 @@ const ActiveKit = ({ ...props }) => {
 							{data?.kits
 								.slice()
 								.filter((kit) => data?.overlay?.secondaryKit?._id !== kit._id)
-								.map((kit) => ({ ...kit, base: allKitBases?.find((kitBase: IKitBase) => kitBase._id === kit.baseId) }))
+								.map((kit) => ({ ...kit, base: allKitBases?.find((kitBase) => kitBase._id === kit.baseId) }))
 								.sort((a, b) => sortAlphabetical(a.base!.displayName, b.base!.displayName))
 								.sort((kit) => {
 									if (kit.userData.featured) {

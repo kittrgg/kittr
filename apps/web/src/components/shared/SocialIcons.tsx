@@ -1,10 +1,10 @@
 import { SvgByType, SVGType } from "@Components/shared"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import styled from "styled-components"
-import { ChannelLink, LinkProperties } from "@kittr/prisma"
+import { ChannelLink, LinkProperty } from "@kittr/prisma"
 import { CSSProperties } from "react"
 
-const linkOrder: LinkProperties[] = ["TWITCH", "YOUTUBE", "FACEBOOK", "TWITTER", "TIKTOK", "INSTAGRAM", "DISCORD"]
+const linkOrder: LinkProperty[] = ["TWITCH", "YOUTUBE", "FACEBOOK", "TWITTER", "TIKTOK", "INSTAGRAM", "DISCORD"]
 
 interface Props {
 	/** Channel's links from the database. */

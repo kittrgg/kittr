@@ -49,7 +49,7 @@ model SetupPhoto {
   @@unique([channelProfileId, slot])
 }
 
-enum LinkProperties {
+enum LinkProperty {
   TWITCH
   YOUTUBE
   INSTAGRAM
@@ -61,7 +61,7 @@ enum LinkProperties {
 
 model ChannelLink {
   id        String         @id @default(cuid())
-  property  LinkProperties
+  property  LinkProperty
   value     String
   channel   Channel        @relation(fields: [channelId], references: [id])
   channelId String
