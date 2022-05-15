@@ -11,7 +11,6 @@
 		"dev:docker": "docker-compose -f docker-compose.yml up -d",
 		"dev:down": "docker-compose -f docker-compose.yml -f docker-compose.deploy.yml down",
 		"dev:turbo": "turbo run dev",
-		"dev:seed": "cross-env DB_CONNECTION_STRING=mongodb://root:example@localhost:27017/myFirstDatabase ts-node ./lib/seeds/mongo/db-seed.ts",
 		"dev:build": "turbo run build",
 		"dev:deploy": "docker-compose -f docker-compose.deploy.yml up -d --build",
 		"rebuild": "turbo run build --force",
@@ -38,7 +37,7 @@
 		"lint-staged": "12.3.4",
 		"prettier": "2.5.1",
 		"ts-node": "10.5.0",
-		"turbo": "1.1.4"
+		"turbo": "1.2.8"
 	},
 	"engines": {
 		"npm": ">=8.0.0",

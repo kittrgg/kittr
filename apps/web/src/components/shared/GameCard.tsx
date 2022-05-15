@@ -26,7 +26,7 @@ export const GameCard = ({
 	active,
 	displayName,
 	urlSafeName,
-	backgroundImageUrl,
+	titleImageUrl,
 	developer,
 	genres,
 	platforms,
@@ -37,7 +37,7 @@ export const GameCard = ({
 
 	return (
 		<FirebaseStorageResolver
-			path={backgroundImageUrl}
+			path={titleImageUrl}
 			noSpinner
 			render={(img) => {
 				return (
