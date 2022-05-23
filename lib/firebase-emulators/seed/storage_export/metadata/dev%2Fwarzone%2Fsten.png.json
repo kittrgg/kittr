@@ -1,0 +1,20 @@
+{
+  "name": "warzone/sten.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699635,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "84a4e704-c0ad-4684-b3d7-4d54ca97a623"
+  ],
+  "etag": "tOG5T/ilajuc5D11gCG0scUV1oc",
+  "timeCreated": "2022-05-21T17:04:59.635Z",
+  "updated": "2022-05-21T17:04:59.635Z",
+  "size": 9961,
+  "md5Hash": "+0/f7S/bPfXJ/Tz7gGkiOg==",
+  "crc32c": "1476860836"
+}

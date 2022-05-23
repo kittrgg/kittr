@@ -1,0 +1,20 @@
+{
+  "name": "warzone/m91.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699500,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "ca3db38d-7c23-41e7-b628-e0cf6aa16ba8"
+  ],
+  "etag": "3P6jALRa1ppjpMpIsOQNOEoGKnE",
+  "timeCreated": "2022-05-21T17:04:59.500Z",
+  "updated": "2022-05-21T17:04:59.500Z",
+  "size": 64285,
+  "md5Hash": "8oMZmRiCWH5Y0McpcvTxgw==",
+  "crc32c": "1110150727"
+}

@@ -1,0 +1,20 @@
+{
+  "name": "warzone/streetsweeper.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699656,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "d643b8a9-21a9-408d-8579-3cd233e9034e"
+  ],
+  "etag": "40VHYSgeBo+VU/IiVFt9cSFvwWo",
+  "timeCreated": "2022-05-21T17:04:59.656Z",
+  "updated": "2022-05-21T17:04:59.656Z",
+  "size": 41097,
+  "md5Hash": "xZ8k1F1f8sg5T0/eX3HPmg==",
+  "crc32c": "2880479943"
+}

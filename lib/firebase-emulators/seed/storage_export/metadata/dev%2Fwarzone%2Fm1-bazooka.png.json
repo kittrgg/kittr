@@ -1,0 +1,20 @@
+{
+  "name": "warzone/m1-bazooka.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699481,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "0bf9f3fa-7aa3-49a5-923b-620106d61703"
+  ],
+  "etag": "odl9CUDxv1kF9nbXkqh29qSk08o",
+  "timeCreated": "2022-05-21T17:04:59.481Z",
+  "updated": "2022-05-21T17:04:59.481Z",
+  "size": 4978,
+  "md5Hash": "xPWB6cLfahMJ82qDg0MZWQ==",
+  "crc32c": "3195006037"
+}

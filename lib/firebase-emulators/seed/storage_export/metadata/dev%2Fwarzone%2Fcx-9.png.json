@@ -1,0 +1,20 @@
+{
+  "name": "warzone/cx-9.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699253,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "a223978a-628c-4fac-bba1-feecda692313"
+  ],
+  "etag": "mTLmfN9Zp0usmbfzV1kiRhnjHhg",
+  "timeCreated": "2022-05-21T17:04:59.253Z",
+  "updated": "2022-05-21T17:04:59.253Z",
+  "size": 48398,
+  "md5Hash": "tqVu65B951bzzJbkPkdobw==",
+  "crc32c": "1038229337"
+}

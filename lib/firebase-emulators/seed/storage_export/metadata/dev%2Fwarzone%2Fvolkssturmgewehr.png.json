@@ -1,0 +1,20 @@
+{
+  "name": "warzone/volkssturmgewehr.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699676,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "282bac94-6866-4787-a567-1802bb751652"
+  ],
+  "etag": "5dzxmL9MvemfHrWuq31ibFlGScI",
+  "timeCreated": "2022-05-21T17:04:59.676Z",
+  "updated": "2022-05-21T17:04:59.676Z",
+  "size": 13972,
+  "md5Hash": "Xk54jp6dGNorFuFOtX43zg==",
+  "crc32c": "2450189154"
+}

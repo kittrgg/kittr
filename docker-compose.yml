@@ -11,8 +11,8 @@ services:
       - POSTGRES_PASSWORD=getTurbo
       - POSTGRES_DB=prisma
     restart: always
-    # volumes:
-    #   - ./postgres-data:/var/lib/postgresql/data
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
 
   mongo:
     container_name: mongo
@@ -48,5 +48,4 @@ services:
       - ./lib/firebase-emulators/firebase.json:/src/firebase.json
       - ./lib/firebase-emulators/storage.rules:/src/storage.rules
       - ./lib/firebase-emulators/seed:/src/firebase/seed
-    command: firebase emulators:start --project dev --debug
-    # command: firebase emulators:start --project dev --import=./firebase/seed --debug
+    command: firebase emulators:start --project dev --import=./firebase/seed --debug

@@ -1,0 +1,20 @@
+{
+  "name": "warzone/mg34.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699532,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "0216cf13-cdaf-4023-bf1c-44a5d1749175"
+  ],
+  "etag": "IMmMZoHoYzM28Uc8OGJGmLPjkWU",
+  "timeCreated": "2022-05-21T17:04:59.532Z",
+  "updated": "2022-05-21T17:04:59.532Z",
+  "size": 45292,
+  "md5Hash": "XXtqkUR/tsbhBU9rAZDHwg==",
+  "crc32c": "413443616"
+}

@@ -1,0 +1,20 @@
+{
+  "name": "warzone/lc10.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699483,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "acdefc58-d9f9-4db7-ba6a-36aa10161a21"
+  ],
+  "etag": "oAKPm9SHQPN8BNuOSs1V5H8IPAI",
+  "timeCreated": "2022-05-21T17:04:59.483Z",
+  "updated": "2022-05-21T17:04:59.483Z",
+  "size": 48003,
+  "md5Hash": "cTP0Ab/BKDM/Y2CQKEDNlg==",
+  "crc32c": "3180744824"
+}

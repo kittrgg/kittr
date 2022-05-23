@@ -41,3 +41,4 @@ build
 dist
 .tsbuildinfo
 tsconfig.tsbuildinfo
+postgres-data

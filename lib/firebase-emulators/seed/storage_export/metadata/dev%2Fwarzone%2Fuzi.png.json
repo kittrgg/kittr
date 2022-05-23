@@ -1,0 +1,20 @@
+{
+  "name": "warzone/uzi.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699678,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "1da0dea2-8340-476f-a64c-4f52a6e4e0e8"
+  ],
+  "etag": "pBarvzZVui4w6khqbBqSy8bRvV4",
+  "timeCreated": "2022-05-21T17:04:59.678Z",
+  "updated": "2022-05-21T17:04:59.678Z",
+  "size": 43531,
+  "md5Hash": "gxDrt664Olx3hBL0sY38Kw==",
+  "crc32c": "4272286685"
+}

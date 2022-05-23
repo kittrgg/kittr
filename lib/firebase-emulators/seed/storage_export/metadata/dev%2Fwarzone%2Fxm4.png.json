@@ -1,0 +1,20 @@
+{
+  "name": "warzone/xm4.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699684,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "b34d3823-698d-4c3b-a16e-c8dbc6c23360"
+  ],
+  "etag": "folGVDHAHAWTfEgFlGB/SXjimMc",
+  "timeCreated": "2022-05-21T17:04:59.684Z",
+  "updated": "2022-05-21T17:04:59.684Z",
+  "size": 60466,
+  "md5Hash": "w5LRm3IBZbzK/6YQ92EDZg==",
+  "crc32c": "2444835603"
+}

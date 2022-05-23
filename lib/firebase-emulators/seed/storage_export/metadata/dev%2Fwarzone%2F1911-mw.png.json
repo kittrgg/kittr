@@ -1,0 +1,20 @@
+{
+  "name": "warzone/1911-mw.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699058,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "9319ac05-4282-4ec4-afe9-d333c9f76219"
+  ],
+  "etag": "FqcPQI0bcm4EUkxGz1LLpxBs8LA",
+  "timeCreated": "2022-05-21T17:04:59.058Z",
+  "updated": "2022-05-21T17:04:59.058Z",
+  "size": 46298,
+  "md5Hash": "DRfOo0ohcTbcn39ti4Fuuw==",
+  "crc32c": "1249332566"
+}

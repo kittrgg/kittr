@@ -1,0 +1,20 @@
+{
+  "name": "warzone/ots-9.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699565,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "9b10968f-9f8b-44fe-9caa-8882a25cba40"
+  ],
+  "etag": "9PZZ7pFKaRHgmmtKzVQwPKF6xM0",
+  "timeCreated": "2022-05-21T17:04:59.565Z",
+  "updated": "2022-05-21T17:04:59.565Z",
+  "size": 20844,
+  "md5Hash": "Ux7uytIOKjsX4786N4oYKA==",
+  "crc32c": "1094655457"
+}

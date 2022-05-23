@@ -1,0 +1,20 @@
+{
+  "name": "warzone/1911-vg.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699050,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "7d0a8798-777b-4043-a360-4195231b3d4b"
+  ],
+  "etag": "Uevjibb5pQA9HL+EsYiNwddybSE",
+  "timeCreated": "2022-05-21T17:04:59.050Z",
+  "updated": "2022-05-21T17:04:59.050Z",
+  "size": 11106,
+  "md5Hash": "eJp8XtY6Qo6y9xOCTr3HNA==",
+  "crc32c": "595612727"
+}

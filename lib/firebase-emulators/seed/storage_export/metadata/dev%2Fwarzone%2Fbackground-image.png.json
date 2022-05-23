@@ -1,0 +1,20 @@
+{
+  "name": "warzone/background-image.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699088,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "ef79d77b-68e6-4330-922a-614bb19167d9"
+  ],
+  "etag": "8X4h3XWtJuN9eV0zWZvSFhPFzQc",
+  "timeCreated": "2022-05-21T17:04:59.088Z",
+  "updated": "2022-05-21T17:04:59.088Z",
+  "size": 229085,
+  "md5Hash": "ZcJJPs3s0RZrRUOkQlDQxA==",
+  "crc32c": "55062849"
+}

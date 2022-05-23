@@ -1,5 +1,5 @@
 {
-	"name": "turborepo-basic-shared",
+	"name": "kittr",
 	"version": "0.0.0",
 	"private": true,
 	"workspaces": [
@@ -13,7 +13,6 @@
 		"dev:turbo": "turbo run dev",
 		"dev:build": "turbo run build",
 		"dev:deploy": "docker-compose -f docker-compose.deploy.yml up -d --build",
-		"rebuild": "turbo run build --force",
 		"build": "turbo run build --scope=\"api\" --scope=\"web\" --include-dependencies",
 		"lint": "turbo run lint",
 		"test": "turbo run test",
