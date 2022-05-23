@@ -12,7 +12,7 @@ services:
       - POSTGRES_DB=prisma
     restart: always
     volumes:
-      - ./postgres-data:/var/lib/postgresql/data
+      - ./volumes/postgres:/var/lib/postgresql/data
 
   mongo:
     container_name: mongo
@@ -23,16 +23,8 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
-
-  mongo-express:
-    image: mongo-express
-    restart: always
-    ports:
-      - 5001:8081
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: example
-      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017
+    volumes:
+      - ./volumes/mongo:/data/db
 
   firebase-emulators:
     container_name: firebase-emulators
