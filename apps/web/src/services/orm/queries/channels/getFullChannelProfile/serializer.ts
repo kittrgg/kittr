@@ -13,12 +13,12 @@ const include = Prisma.validator<Prisma.ChannelArgs>()({
 		},
 		kits: {
 			orderBy: {
-				kitBase: {
+				base: {
 					displayName: "asc"
 				}
 			},
 			include: {
-				kitBase: {
+				base: {
 					include: {
 						category: true,
 						stats: true

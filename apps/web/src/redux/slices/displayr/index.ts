@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { IPopularityRates } from "@kittr/types/popularity"
-import { DeserializeFullChannelProfileReturnType } from "@Services/orm"
+import { DeserializeFullChannelProfileReturnType } from "@Services/orm/queries/channels/getFullChannelProfile"
 import { NonNullable } from "@Types/index"
 import { KitWithBaseInDisplayr } from "@Types/prisma"
 

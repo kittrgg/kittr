@@ -13,7 +13,7 @@ const ChannelWithIncludeAll = Prisma.validator<Prisma.ChannelArgs>()({
 		},
 		kits: {
 			include: {
-				kitBase: true,
+				base: true,
 				options: true
 			}
 		},

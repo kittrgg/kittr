@@ -1,6 +1,6 @@
 import ContactUs from "@Components/shared/ContactUs"
 import Head from "@Components/shared/Head"
-import { totalKitsQuery } from "@Services/orm"
+import { getTotalKitsQuery } from "@Services/orm/queries/kits/total"
 import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
 import { Routes } from "@Utils/lookups/routes"
 import { GetStaticProps } from "next"
@@ -52,7 +52,7 @@ export default WhyKittr
 
 export const getStaticProps: GetStaticProps = async () => {
 	await connectToDatabase()
-	const totalNumberOfKits = await totalKitsQuery()
+	const totalNumberOfKits = await getTotalKitsQuery()
 
 	return {
 		props: {
