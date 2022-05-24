@@ -1,4 +1,3 @@
-import type { CompleteChannel } from "@Types/prisma/index"
 import colors from "@Colors"
 import ProfileImage from "@Components/shared/ProfileImage"
 import SocialIcons from "@Components/shared/SocialIcons"
@@ -7,10 +6,16 @@ import { header2 } from "@Styles/typography"
 import { Routes } from "@Utils/lookups/routes"
 import { useRouter } from "next/router"
 import styled from "styled-components"
+import { Channel, ChannelProfile, ChannelLink } from "@kittr/prisma"
+
+interface FullChannel extends Channel {
+	profile: ChannelProfile
+	links: ChannelLink[]
+}
 
 interface Props {
 	/** Array of channels to render. */
-	data: Array<CompleteChannel>
+	data: Array<FullChannel>
 	/** The background color for the channel list item. Defaults to colors.darker */
 	itemBackgroundColor?: string
 	/** To link to a specific game page for that channel, pass it's URL safe name here. */
@@ -42,7 +47,7 @@ export const ChannelList = ({ data, itemBackgroundColor = colors.darker, gameLin
 							}
 						>
 							<Identity data-cy={`${elem.urlSafeName}-profile-link`}>
-								<ProfileImage size="52px" imagePath={elem.profile.hasProfileImage ? "FIXME" : ""} />
+								<ProfileImage size="52px" imagePath={elem.profile.hasProfileImage ? elem.id : ""} />
 								<DisplayName>{elem.displayName}</DisplayName>
 							</Identity>
 							{withSocialLinks && (
