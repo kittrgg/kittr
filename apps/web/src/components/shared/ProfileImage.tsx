@@ -28,10 +28,9 @@ export const ProfileImage = ({ imagePath, size = "50px", border, isLive = false,
 	const [isLoading, setIsLoading] = useState(true)
 	const [errored, setErrored] = useState(false)
 	const isMounted = useIsMounted()
-	const isDevelopment = process.env.NEXT_PUBLIC_ENVIRONMENT === "development"
 
 	useEffect(() => {
-		if (imagePath && !isDevelopment) {
+		if (imagePath) {
 			const fetchImage = async () => {
 				try {
 					const uri = await download(imagePath)
@@ -40,16 +39,22 @@ export const ProfileImage = ({ imagePath, size = "50px", border, isLive = false,
 						setPath(uri)
 						setIsLoading(false)
 					}
+
+					if (!uri) {
+						setErrored(true)
+						setIsLoading(false)
+					}
 				} catch (err) {
 					setErrored(true)
+					setIsLoading(false)
 				}
 			}
 
 			fetchImage()
 		}
-	}, [imagePath, isMounted, isDevelopment])
+	}, [imagePath, isMounted])
 
-	if (!imagePath || errored || isDevelopment) {
+	if (!imagePath || errored) {
 		return (
 			<Wrapper imageSize={size}>
 				<ImageContainer data-cy="profile-image" imageSize={size}>
