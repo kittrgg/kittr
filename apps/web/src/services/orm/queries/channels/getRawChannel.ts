@@ -4,9 +4,12 @@ interface Params {
 	id: string
 }
 
-export const getRawChannelQuery = async ({ id }: Params): Promise<Channel | null> => {
+export const getRawChannelQuery = async ({ id }: Params) => {
 	const rawChannel = await prisma.channel.findFirst({
-		where: { id }
+		where: { id },
+		include: {
+			plan: true
+		}
 	})
 
 	return rawChannel

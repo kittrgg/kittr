@@ -1,15 +1,15 @@
 import { GetServerSideProps } from "next"
-import { getRawChannelProfileQuery } from "@Services/orm"
+import { getRawChannelQuery } from "@Services/orm"
 import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
 import KitOverlay from "@Features/Overlays/ActiveKit"
 interface Props {
-	_id: string
+	id: string
 	isPremium: boolean
 }
 
-export const Overlay = ({ _id, isPremium }: Props) => {
+export const Overlay = ({ id, isPremium }: Props) => {
 	if (isPremium) {
-		return <KitOverlay _id={_id} />
+		return <KitOverlay _id={id} />
 	}
 
 	return null
@@ -17,12 +17,12 @@ export const Overlay = ({ _id, isPremium }: Props) => {
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 	await connectToDatabase()
-	const rawChannel = await getRawChannelProfileQuery(query.channel as string)
+	const rawChannel = await getRawChannelQuery({ id: query.id as string })
 
 	return {
 		props: {
-			_id: rawChannel._id.toString(),
-			isPremium: !!rawChannel.meta.premiumType
+			id: rawChannel?.id.toString(),
+			isPremium: !!rawChannel?.plan?.type
 		}
 	}
 }
