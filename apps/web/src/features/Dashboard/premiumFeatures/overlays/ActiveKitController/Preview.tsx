@@ -16,7 +16,7 @@ interface Props {
 }
 
 const Preview = ({ overlay }: Props) => {
-	const { _id } = useChannelData()
+	const { data } = useChannelData()
 	const [cursor, setCursor] = useState(0)
 	const { observe, width } = useDimensions()
 
@@ -45,8 +45,8 @@ const Preview = ({ overlay }: Props) => {
 					</>
 				)}
 				<H3 style={{ marginTop: 0, marginBottom: "24px" }}>{overlayOptions[cursor].style.toUpperCase()}</H3>
-				{hasAKitSelected ? (
-					<Overlay _id={_id} previewWidth={width} overlayStyle={overlayOptions[cursor].style as ActiveKitOverlays} />
+				{hasAKitSelected && data?.id ? (
+					<Overlay id={data.id} previewWidth={width} overlayStyle={overlayOptions[cursor].style as ActiveKitOverlays} />
 				) : (
 					<p>Choose a kit to see a preview.</p>
 				)}

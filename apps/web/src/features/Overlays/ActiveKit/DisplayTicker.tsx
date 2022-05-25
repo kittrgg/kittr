@@ -8,7 +8,7 @@ import { asyncDelay } from "@Utils/helpers/asyncDelay"
 import { header1, header2, montserrat, paragraph } from "@Styles/typography"
 
 interface Props {
-	_id: string
+	id: string
 	previewWidth?: number
 	data: any
 	activeKit: IKit
@@ -19,7 +19,7 @@ const DATA_SWITCH_TIMER = 5000
 const OPTION_SWAP_INTERVAL = 500
 const OPACITY_DURATION = 0.2
 
-const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Props) => {
+const BannerTicker = ({ id, previewWidth, data, activeKit, setActiveKit }: Props) => {
 	const [isOptionVisible, setIsOptionVisible] = useState(true)
 	const [isBaseVisible, setIsBaseVisible] = useState(true)
 	const [cursor, setCursor] = useState(0)

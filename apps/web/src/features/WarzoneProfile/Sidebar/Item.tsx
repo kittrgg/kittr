@@ -30,7 +30,7 @@ const Item = ({ baseName, featured, kits, setFilterQuery }: Props) => {
 	const weaponQuery = router.query.weapon || router.query.k
 
 	const matchedBase = kits
-		.filter((elem) => elem.kitBase.displayName === baseName)
+		.filter((elem) => elem.base.displayName === baseName)
 		.sort((a, b) => {
 			if (!a.customTitle || !b.customTitle) return 0
 			if (a?.customTitle < b.customTitle) return -1
@@ -93,7 +93,7 @@ const Item = ({ baseName, featured, kits, setFilterQuery }: Props) => {
 								return (
 									<SubItem
 										active={
-											activeWeapon?.kitBase?.displayName === elem.kitBase.displayName &&
+											activeWeapon?.base?.displayName === elem.base.displayName &&
 											activeWeapon.customTitle === elem.customTitle
 										}
 										key={elem.id}
@@ -110,11 +110,11 @@ const Item = ({ baseName, featured, kits, setFilterQuery }: Props) => {
 												{ shallow: true }
 											)
 										}}
-										data-cy={`${elem.kitBase.displayName.replace(/ /g, "-").replace("(", "-").replace(")", "-")}-${
+										data-cy={`${elem.base.displayName.replace(/ /g, "-").replace("(", "-").replace(")", "-")}-${
 											elem.customTitle?.replace(/ /g, "-") || "Primary"
 										}`}
 									>
-										<SubItemTitle>{elem.customTitle || elem.kitBase.displayName}</SubItemTitle>
+										<SubItemTitle>{elem.customTitle || elem.base.displayName}</SubItemTitle>
 										{elem.featured && (
 											<SVG.Star
 												style={{ position: "absolute", top: "50%", transform: "translateY(-50%)", right: "0px" }}

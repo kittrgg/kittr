@@ -1,14 +1,19 @@
 import { KitList } from "@Components/shared"
 import SideScroller from "@Components/shared/SideScroller"
-import { OptionalCompleteKit } from "@Types/prisma"
 import { basePlusTitleToUrlSafe } from "@Utils/helpers/basePlusTitleToUrlSafe"
 import { filterKitsByFeature } from "@Utils/helpers/filterKitsByFeature"
 import { Routes } from "@Utils/lookups/routes"
 import { useRouter } from "next/router"
 import { H2 } from "./style"
+import { Kit, KitBase, KitOption } from "@kittr/prisma"
+
+interface CompleteKit extends Kit {
+	base: KitBase
+	options: KitOption[]
+}
 
 interface Props {
-	kits: OptionalCompleteKit
+	kits: CompleteKit[]
 }
 
 const FeaturedKits = ({ kits }: Props) => {

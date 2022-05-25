@@ -11,26 +11,25 @@ import styled from "styled-components"
 import NamingWarning from "./NamingWarning"
 import fetch from "@Fetch"
 import { isFetchError } from "@Utils/helpers/typeGuards"
-import { Kit, KitBase, KitOption } from "@kittr/prisma"
 import { KitWithOptionalId } from "@kittr/types/kits"
 
 const EditorSnackbar = () => {
 	const dispatch = useDispatch()
 	const initialKit = useInitialKit()
 	const activeKit = useActiveKit()
-	const channelData = useChannelData()
+	const { data: channelData } = useChannelData()
 	const user = useUser()
 	const modal = useModal()
 	const { data: allKitBases } = useAllKitBases()
 	const { mutate, isLoading } = useDashboardMutator(async () => {
 		// Grab the existing kit array and map them to just their titles
-		let kitArr = channelData.data?.kits.slice() as KitWithOptionalId[]
+		let kitArr = channelData?.kits.slice() as KitWithOptionalId[]
 
 		// Grab the new kit's name
 		const newKitName = activeKit.base.displayName + activeKit.customTitle
 
 		// Is this an existing kit being updated?
-		let index = channelData.data?.kits.findIndex((kit) => kit.id === activeKit.id) ?? -1 // -1 means there's no kit
+		let index = channelData?.kits.findIndex((kit) => kit.id === activeKit.id) ?? -1 // -1 means there's no kit
 
 		if (!kitArr) {
 			console.log("Disallowed.")
@@ -49,12 +48,11 @@ const EditorSnackbar = () => {
 			kitArr
 				.map((kit) => ({
 					...kit,
-					base:
-						allKitBases?.find((allBase) => {
-							console.log(kit.base.id)
+					...(allKitBases?.find((allBase) => {
+						console.log(kit.base.id)
 
-							return allBase.id === kit.base.id
-						}) || activeKit
+						return allBase.id === kit.base.id
+					}) || activeKit)
 				}))
 				// Map to just the names
 				.map((kit) => kit.base.gameId + kit.base.displayName)
@@ -70,7 +68,7 @@ const EditorSnackbar = () => {
 				url: `/api/channel/kit`,
 				headers: { authorization: `Bearer: ${await getToken()}` },
 				body: {
-					channelId: channelData.data?.id,
+					channelId: channelData?.id,
 					kit: {
 						id: initialKit.id || undefined,
 						gameId: activeKit.base.gameId,

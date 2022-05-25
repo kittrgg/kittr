@@ -1,12 +1,11 @@
 import styled from "styled-components"
-
-import { IGame } from "@kittr/types"
 import { header2 } from "@Styles/typography"
 import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
+import { Game } from "@kittr/prisma"
 
 interface Props {
 	/** The array of games to render. */
-	data: IGame[]
+	data: Game[]
 	/** Do you want the games to do a zoom-in animation when hovered? Defaults to true. */
 	hoverScale?: boolean
 	/** Function to run when the game is clicked on. */
@@ -32,7 +31,7 @@ export const GameList = ({ data, hoverScale = true, onClick, withVisitText }: Pr
 							<ImageContainer>
 								<FirebaseStorageResolver
 									noSpinner
-									path={elem.titleImage}
+									path={elem.titleImageUrl}
 									render={(data) => <img src={data} alt={`${elem.displayName} Cover Art`} style={{ width: "100%" }} />}
 								/>
 								{!elem.active && (

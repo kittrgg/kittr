@@ -18,7 +18,7 @@ import { isFetchError } from "@Utils/helpers/typeGuards"
 /** Change the channel's profile image */
 const ImageEditor = ({ ...props }) => {
 	const dispatch = useDispatch()
-	const { _id } = useChannelData()
+	const { data } = useChannelData()
 	const profileImage = useProfileImage()
 	const [isUploading, setIsUploading] = useState(false)
 
@@ -26,8 +26,10 @@ const ImageEditor = ({ ...props }) => {
 		e.preventDefault()
 		setIsUploading(true)
 
+		if (!data?.id) return
+
 		const imageFile = e.target.files[0]
-		const fileName = _id
+		const fileName = data.id
 
 		if (imageFile) {
 			uploadWithHandlers({
@@ -36,7 +38,7 @@ const ImageEditor = ({ ...props }) => {
 				onSuccess: async () => {
 					const setImage = await fetch.post({
 						url: `/api/channel/meta/image`,
-						body: { _id },
+						body: { id: data?.id },
 						headers: {
 							authorization: `Bearer: ${await getToken()}`
 						}

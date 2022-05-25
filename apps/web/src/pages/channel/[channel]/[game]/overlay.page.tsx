@@ -9,7 +9,7 @@ interface Props {
 
 export const Overlay = ({ id, isPremium }: Props) => {
 	if (isPremium) {
-		return <KitOverlay _id={id} />
+		return <KitOverlay id={id} />
 	}
 
 	return null

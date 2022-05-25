@@ -10,13 +10,13 @@ import DisplayTicker from "@Features/Overlays/ActiveKit/DisplayTicker"
 import { useOverlayData } from "@Hooks/api/useOverlayData"
 
 interface Props {
-	_id: string
+	id: string
 	previewWidth?: number
 	overlayStyle?: "Banner" | "Banner Ticker" | "Display Ticker" | "Display"
 }
 
-const ActiveKitOverlay = ({ _id, previewWidth, overlayStyle }: Props) => {
-	const { data, refetch } = useOverlayData(_id)
+const ActiveKitOverlay = ({ id, previewWidth, overlayStyle }: Props) => {
+	const { data, refetch } = useOverlayData(id)
 	const [activeKit, setActiveKit] = useState({} as IKit)
 	const { width, height } = useViewportDimensions()
 
@@ -34,7 +34,7 @@ const ActiveKitOverlay = ({ _id, previewWidth, overlayStyle }: Props) => {
 	useEffect((): any => {
 		const socket = io(process.env.NEXT_PUBLIC_SOCKET_HOST as string)
 
-		socket.on(`dashboard=${_id}`, () => {
+		socket.on(`dashboard=${id}`, () => {
 			refetch()
 		})
 
@@ -43,15 +43,13 @@ const ActiveKitOverlay = ({ _id, previewWidth, overlayStyle }: Props) => {
 	}, [])
 
 	if (overlayStyle === "Banner" || (width === 1500 && height === 90)) {
-		return (
-			<Banner _id={_id} data={data} activeKit={activeKit} setActiveKit={setActiveKit} previewWidth={previewWidth} />
-		)
+		return <Banner _id={id} data={data} activeKit={activeKit} setActiveKit={setActiveKit} previewWidth={previewWidth} />
 	}
 
 	if (overlayStyle === "Banner Ticker" || (width === 1920 && height === 32)) {
 		return (
 			<BannerTicker
-				_id={_id}
+				_id={id}
 				data={data}
 				activeKit={activeKit}
 				setActiveKit={setActiveKit}
@@ -62,14 +60,14 @@ const ActiveKitOverlay = ({ _id, previewWidth, overlayStyle }: Props) => {
 
 	if (overlayStyle === "Display" || (width === 480 && height === 640)) {
 		return (
-			<Display _id={_id} data={data} activeKit={activeKit} setActiveKit={setActiveKit} previewWidth={previewWidth} />
+			<Display _id={id} data={data} activeKit={activeKit} setActiveKit={setActiveKit} previewWidth={previewWidth} />
 		)
 	}
 
 	if (overlayStyle === "Display Ticker" || (width === 500 && height === 90)) {
 		return (
 			<DisplayTicker
-				_id={_id}
+				id={id}
 				data={data}
 				activeKit={activeKit}
 				setActiveKit={setActiveKit}

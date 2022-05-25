@@ -6,7 +6,7 @@ import styled from "styled-components"
 
 interface Props {
 	/** Path for the image. */
-	imagePath?: string
+	imagePath?: string | null
 	/** The width and height of the image. This image is always a square. */
 	size?: string
 	/** A border color to apply to the image. */

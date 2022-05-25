@@ -15,14 +15,14 @@ import fetch from "@Fetch"
 import { isFetchError } from "@Utils/helpers/typeGuards"
 import { ChannelModel } from "@Services/orm/models/Channel"
 
-const CoverPhotoUploader = ({ ...props }) => {
+const CoverPhotoUploader = () => {
 	const dispatch = useDispatch()
-	const { _id } = useChannelData()
+	const { data } = useChannelData()
 	const hasCoverPhoto = useCoverPhoto()
 	const [isUploading, setIsUploading] = useState(false)
 	const [image, setImage] = useState("")
 
-	const fileName = `${_id}-profile-cover-photo`
+	const fileName = `${data?.id}-profile-cover-photo`
 
 	const handleUpload = async (e: any) => {
 		e.preventDefault()
@@ -39,7 +39,7 @@ const CoverPhotoUploader = ({ ...props }) => {
 					const response = await fetch.post<ChannelModel | NextClientEndpointError>({
 						url: `/api/channel/meta/coverPhoto`,
 						headers: { authorization: `Bearer: ${await getToken()}` },
-						body: { hasCoverPhoto: true, channelId: _id }
+						body: { hasCoverPhoto: true, channelId: data?.id }
 					})
 
 					if (isFetchError(response)) {
@@ -78,7 +78,7 @@ const CoverPhotoUploader = ({ ...props }) => {
 		const response = await fetch.post({
 			url: `/api/channel/meta/coverPhoto`,
 			headers: { authorization: `Bearer: ${await getToken()}` },
-			body: { hasCoverPhoto: false, channelId: _id }
+			body: { hasCoverPhoto: false, channelId: data?.id }
 		})
 		if (response && deleted) {
 			setIsUploading(false)
