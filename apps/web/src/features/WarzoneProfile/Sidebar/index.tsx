@@ -35,10 +35,10 @@ const Sidebar = () => {
 	const sanitizeForSearch = (string: string) => string.toLowerCase().replace(/[^0-9a-zA-Z]/g, "")
 
 	const sortForUniqueKitName = (arr: KitWithBaseInDisplayr[]): string[] =>
-		arr.map((elem) => elem.kitBase.displayName).sort((a, b) => sortAlphabetical(a, b))
+		arr.map((elem) => elem.base.displayName).sort((a, b) => sortAlphabetical(a, b))
 
 	const kits = unfilteredKits.filter((kit) =>
-		sanitizeForSearch(kit.kitBase.displayName).includes(sanitizeForSearch(filterQuery))
+		sanitizeForSearch(kit.base.displayName).includes(sanitizeForSearch(filterQuery))
 	)
 
 	const featuredKits = filterKitsByFeature(kits)
@@ -77,17 +77,15 @@ const Sidebar = () => {
 							return (
 								<React.Fragment key={category}>
 									<Styled.CategoryLabel>
-										{restOfKits.filter((kit) => kit.kitBase.category.displayName === category).length > 0 && (
+										{restOfKits.filter((kit) => kit.base.category.displayName === category).length > 0 && (
 											<>{`${category}s`.toUpperCase()}</>
 										)}
 									</Styled.CategoryLabel>
 									{restOfKits
-										.filter((kit) => kit.kitBase.category.displayName === category)
+										.filter((kit) => kit.base.category.displayName === category)
 										.map((kit) => {
-											const { id, kitBase } = kit
-											return (
-												<Item key={id} kits={kits} baseName={kitBase.displayName} setFilterQuery={setFilterQuery} />
-											)
+											const { id, base } = kit
+											return <Item key={id} kits={kits} baseName={base.displayName} setFilterQuery={setFilterQuery} />
 										})}
 								</React.Fragment>
 							)

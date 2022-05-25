@@ -38,7 +38,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<
 					create: {
 						firebaseId: userId,
 						// NO TOUCHY! We need to make sure that the person who creates this channel is the owner of it.
-						role: "Owner"
+						role: "OWNER"
 					}
 				}
 			}

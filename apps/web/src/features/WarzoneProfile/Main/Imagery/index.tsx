@@ -8,8 +8,8 @@ const WeaponPicture = ({ ...props }) => {
 	const channel = useChannel()
 	const youtubeAutoplay = channel.profile?.youtubeAutoplay
 	const activeWeapon = useActiveWeapon()
-	const { kitBase, youtubeUrl, tiktokUrl } = activeWeapon
-	const { displayName, imageUrl } = kitBase
+	const { base, youtubeUrl, tiktokUrl } = activeWeapon
+	const { displayName, imageUrl } = base
 
 	const split = youtubeUrl?.split("&t=") || ""
 	const youtubeId = split[0] || youtubeUrl

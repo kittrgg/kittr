@@ -142,13 +142,13 @@ mongoose
 				games: channel.games,
 				managers: channel.managers.map((manager) => {
 					const coerceStringToEnum = (): ChannelManagerRoles => {
-						if (manager.role === "Administrator") {
+						if (manager.role === "ADMIN") {
 							return "ADMIN"
 						}
-						if (manager.role === "Editor") {
+						if (manager.role === "EDITOR") {
 							return "EDITOR"
 						}
-						if (manager.role === "Owner") {
+						if (manager.role === "OWNER") {
 							return "OWNER"
 						}
 

@@ -1,11 +1,15 @@
 import { Prisma, prisma } from "@kittr/prisma"
 
 interface Params {
-	id: string
-	urlSafeName: string
+	id?: string
+	urlSafeName?: string
 }
 
 export const getFullChannelProfileQuery = async ({ id, urlSafeName }: Params) => {
+	if (!id && !urlSafeName) {
+		throw new Error("Need either id or urlSafeName")
+	}
+
 	const channel = await prisma.channel.findFirst({
 		where: {
 			id,

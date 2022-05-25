@@ -15,10 +15,10 @@ import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import fetch from "@Fetch"
 
 /** Modal to allow a user to set a new owner for the channel. */
-const SetNewOwner = ({ ...props }) => {
+const SetNewOwner = () => {
 	const dispatch = useDispatch()
 	const [newManager, setNewManager] = useState("-")
-	const { _id: channelId } = useChannelData()
+	const { data: channelData } = useChannelData()
 	const { data, isLoading } = useChannelManagers()
 	const { refetch: refetchChannel } = useDashboardChannel()
 	const { mutate, isLoading: isMutating } = useDashboardMutator(async () => {
@@ -32,7 +32,11 @@ const SetNewOwner = ({ ...props }) => {
 			const result = await fetch.put({
 				url: `/api/manager/newOwner`,
 				headers: { authorization: `Bearer: ${await getToken()}` },
-				body: { channelId, previousOwner: data && data.find((elem: IManagerData) => elem.role === "Owner"), newOwner }
+				body: {
+					channelId: channelData?.id,
+					previousOwner: data && data.find((elem: IManagerData) => elem.role === "OWNER"),
+					newOwner
+				}
 			})
 
 			if (result) {
@@ -60,7 +64,7 @@ const SetNewOwner = ({ ...props }) => {
 							>
 								<option value="">-</option>
 								{data
-									.filter((manager) => manager.role !== "Owner")
+									.filter((manager) => manager.role !== "OWNER")
 									.map((elem: IManagerData) => (
 										<option key={elem.email} value={elem.displayName || elem.email}>
 											{elem.displayName || elem.email}

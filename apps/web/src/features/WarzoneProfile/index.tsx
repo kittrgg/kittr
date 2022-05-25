@@ -55,7 +55,7 @@ const Channels = ({ channel }: Props) => {
 			if (Object.keys(activeWeapon).length === 0 && weaponQuery) {
 				const { kits } = channel
 				const filteredKits = kits
-					.filter((elem) => elem.kitBase.displayName.replace(/ /g, "-") === weaponQuery)
+					.filter((elem) => elem.base.displayName.replace(/ /g, "-") === weaponQuery)
 					.sort((a, b) => Number(b.featured) - Number(a.featured))
 
 				const firstKit = filteredKits[0]

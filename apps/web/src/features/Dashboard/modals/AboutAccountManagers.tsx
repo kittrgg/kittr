@@ -26,7 +26,7 @@ const X = () => (
 )
 
 /** Information about which account managers have which abilities. */
-const AboutAccountManagers = ({ ...props }) => {
+const AboutAccountManagers = () => {
 	const dispatch = useDispatch()
 	const role = useManagerRole()
 
@@ -41,9 +41,9 @@ const AboutAccountManagers = ({ ...props }) => {
 				<thead>
 					<tr>
 						<Th></Th>
-						<Th>Owner{role === "Owner" ? " (You)" : ""}</Th>
-						<Th>Administrators{role === "Administrator" ? " (You)" : ""}</Th>
-						<Th>Editors{role === "Editor" ? " (You)" : ""}</Th>
+						<Th>Owner{role === "OWNER" ? " (You)" : ""}</Th>
+						<Th>Administrators{role === "ADMIN" ? " (You)" : ""}</Th>
+						<Th>Editors{role === "EDITOR" ? " (You)" : ""}</Th>
 					</tr>
 				</thead>
 				<TBody>

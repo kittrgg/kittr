@@ -31,7 +31,7 @@ handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<C
 
 		const userRole = result.managers.find((manager) => manager.firebaseId === token.uid)?.role
 
-		if (userRole !== "Owner") {
+		if (userRole !== "OWNER") {
 			return res.status(403).json({ error: true, errorMessage: "You do not have permission to add a new manager." })
 		}
 
@@ -47,7 +47,7 @@ handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<C
 								id: previousOwner
 							},
 							data: {
-								role: "Administrator"
+								role: "ADMIN"
 							}
 						},
 						{
@@ -55,7 +55,7 @@ handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<C
 								id: newOwner
 							},
 							data: {
-								role: "Owner"
+								role: "OWNER"
 							}
 						}
 					]

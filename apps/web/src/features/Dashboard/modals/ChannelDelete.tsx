@@ -17,7 +17,7 @@ import fetch from "@Fetch"
 const ChannelDeleteModal = () => {
 	const socket = useSocket()
 	const dispatch = useDispatch()
-	const { _id: channelId, displayName: channelName } = useChannelData()
+	const { data: channelData } = useChannelData()
 	const [input, setInput] = useState("")
 	const { refetch } = useManagedChannels()
 	const { mutate } = useDashboardMutator(async () => {
@@ -25,11 +25,11 @@ const ChannelDeleteModal = () => {
 			const result = await fetch.delete({
 				url: `/api/channel`,
 				headers: { authorization: `Bearer: ${await getToken()}` },
-				body: { _id: channelId }
+				body: { id: channelData?.id }
 			})
 
 			if (result) {
-				socket.emit(`channelDelete`, channelId)
+				socket.emit(`channelDelete`, channelData?.id)
 				dispatch(setActiveView({ channelId: "", view: "Channel List" }))
 				dispatch(setModal({ type: "", data: {} }))
 				refetch()
@@ -56,7 +56,7 @@ const ChannelDeleteModal = () => {
 				<Button
 					design="transparent"
 					text="DELETE FOREVER"
-					disabled={channelName !== input}
+					disabled={channelData?.displayName !== input}
 					onClick={mutate}
 					style={{ backgroundColor: colors.red }}
 				/>

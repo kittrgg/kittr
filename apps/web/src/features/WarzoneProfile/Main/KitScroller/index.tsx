@@ -1,5 +1,5 @@
 import { NonNullable } from "@Types/index"
-import { DeserializeFullChannelProfileReturnType } from "@Services/orm"
+import { DeserializeFullChannelProfileReturnType } from "@Services/orm/queries/channels/getFullChannelProfile"
 import { useState, useEffect, useRef } from "react"
 import ScrollContainer from "react-indiana-drag-scroll"
 import * as Styled from "./style"
@@ -16,7 +16,7 @@ const KitScroller = ({ availableKits }: Props) => {
 	const containerRef = useRef<HTMLDivElement>(null)
 
 	const matchedBase = availableKits
-		.filter((elem) => elem.kitBase.displayName === activeWeapon?.kitBase?.displayName)
+		.filter((elem) => elem.base.displayName === activeWeapon?.base?.displayName)
 		.sort((a, b) => {
 			if ((a.customTitle ?? "") < (b.customTitle ?? "")) return -1
 			if ((a.customTitle ?? "") > (b.customTitle ?? "")) return 1

@@ -1,4 +1,4 @@
-import { DeserializeFullChannelProfileReturnType } from "@Services/orm"
+import { DeserializeFullChannelProfileReturnType } from "@Services/orm/queries/channels/getFullChannelProfile"
 import colors from "@Colors"
 import SVG from "@Components/shared/SVG"
 import { setActiveWeapon } from "@Redux/slices/displayr"
@@ -18,7 +18,7 @@ interface Props {
 
 const Card = ({ kit, containerStyles }: Props) => {
 	const dispatch = useDispatch()
-	const { featured, kitBase, options } = kit
+	const { featured, base, options } = kit
 	const router = useRouter()
 	const { channel, game } = router.query
 
@@ -28,23 +28,19 @@ const Card = ({ kit, containerStyles }: Props) => {
 			onClick={() => {
 				dispatch(setActiveWeapon(kit))
 				router.push(
-					Routes.CHANNEL.GAME.createPath(
-						channel as string,
-						game as string,
-						`?k=${kitBase.displayName.replace(/ /g, "-")}`
-					)
+					Routes.CHANNEL.GAME.createPath(channel as string, game as string, `?k=${base.displayName.replace(/ /g, "-")}`)
 				)
 			}}
 			data-cy={`placeholder-button`}
 		>
 			<HeaderContainer>
 				{featured && <SVG.Star width="10px" fill={colors.gold} stroke={colors.gold} style={{ marginRight: "8px" }} />}
-				{kitBase.displayName.toUpperCase()}
+				{base.displayName.toUpperCase()}
 			</HeaderContainer>
 
 			<ImageContainer>
 				<FirebaseStorageResolver
-					path={kitBase.imageUrl}
+					path={base.imageUrl}
 					noSpinner
 					render={(data) => (
 						<img

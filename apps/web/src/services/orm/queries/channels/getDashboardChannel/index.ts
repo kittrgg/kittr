@@ -46,6 +46,12 @@ export const getDashboardChannel = async ({ id, urlSafeName }: Params) => {
 				include: {
 					game: true
 				}
+			},
+			overlay: {
+				include: {
+					primaryKit: true,
+					secondaryKit: true
+				}
 			}
 		}
 	})

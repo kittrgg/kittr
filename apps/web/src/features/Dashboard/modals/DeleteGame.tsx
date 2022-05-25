@@ -14,7 +14,7 @@ import fetch from "@Fetch"
 /** Modal to delete a game from a channel. */
 const DeleteGameModal = () => {
 	const dispatch = useDispatch()
-	const { _id } = useChannelData()
+	const { data: channelData } = useChannelData()
 	const gameId = useSelector((state) => state.dashboard.modal.data.idToDelete)
 	const socket = useSocket()
 	const { mutate, isLoading } = useDashboardMutator(async () => {
@@ -23,10 +23,10 @@ const DeleteGameModal = () => {
 				.delete({
 					url: `/api/channel/game/delete`,
 					headers: { authorization: `Bearer: ${await getToken()}` },
-					body: { gameId, channelId: _id }
+					body: { gameId, channelId: channelData?.id }
 				})
 				.then(() => {
-					socket.emit(`gameDelete`, _id)
+					socket.emit(`gameDelete`, channelData?.id)
 					dispatch(setModal({ type: "", data: "" }))
 					dispatch(setChannelView({ gameId: "", view: "Deleted Game Notification" }))
 				})

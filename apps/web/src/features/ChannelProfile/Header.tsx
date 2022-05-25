@@ -5,6 +5,7 @@ import { header1, header2 } from "@Styles/typography"
 import ProfileImage from "@Components/shared/ProfileImage"
 import SocialIcons from "@Components/shared/SocialIcons"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
+import { DeserializeFullChannelProfileReturnType } from "@Services/orm/queries/channels/getFullChannelProfile"
 
 const Header = ({
 	id,
@@ -16,10 +17,10 @@ const Header = ({
 	kits,
 	isLive,
 	imagePath
-}: DeserializeFullChannelWithDeserializedGamesReturnType & { isLive: boolean; imagePath: string }) => {
+}: DeserializeFullChannelProfileReturnType & { isLive: boolean; imagePath: string }) => {
 	const isPremium = plan?.type === "premium"
 	const hasCoverPhoto = profile?.hasCoverPhoto
-	const userColor = profile?.brandColors.find((color) => color.type === "primary")?.value || colors.white
+	const userColor = profile?.brandColors.find((color) => color.type === "PRIMARY")?.value || colors.white
 	const { width } = useViewportDimensions()
 
 	return (

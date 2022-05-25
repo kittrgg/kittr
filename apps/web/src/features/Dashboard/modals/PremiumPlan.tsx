@@ -29,7 +29,7 @@ const X = () => (
 
 const PremiumPlans = () => {
 	const dispatch = useDispatch()
-	const { _id, displayName, urlSafeName } = useChannelData()
+	const { data: channelData } = useChannelData()
 	const { isPremium } = usePremiumStatus()
 
 	const handleUpgrade = async () => {
@@ -39,7 +39,7 @@ const PremiumPlans = () => {
 			.post<{ url: string }>({
 				url: apiRoute,
 				headers: { authorization: `Bearer ${await getToken()}` },
-				body: { _id, displayName, urlSafeName }
+				body: { id: channelData?.id, displayName: channelData?.displayName, urlSafeName: channelData?.urlSafeName }
 			})
 			.then((checkoutSession) => window.open(checkoutSession.url, "_blank"))
 			.catch(() => dispatch(setModal({ type: "Error Notification", data: {} })))

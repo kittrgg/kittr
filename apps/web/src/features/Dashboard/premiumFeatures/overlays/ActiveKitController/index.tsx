@@ -25,7 +25,7 @@ interface IMutation {
 	change: any
 }
 
-const ActiveKit = ({ ...props }) => {
+const ActiveKit = () => {
 	const socket = useSocket()
 	const dispatch = useDispatch()
 	const { data } = useDashboardChannel()
@@ -112,7 +112,7 @@ const ActiveKit = ({ ...props }) => {
 										onClick={() =>
 											mutate({
 												key: "isOverlayVisible",
-												change: data?.overlay?.isOverlayVisible === "on" ? "off" : "on"
+												change: data?.overlay?.isOverlayVisible === "ON" ? "off" : "on"
 											})
 										}
 										wrapperBackgroundColor={colors.dark20}
@@ -292,11 +292,11 @@ const ActiveKit = ({ ...props }) => {
 							<Styled.Paragraph>Primary</Styled.Paragraph>
 							{data?.kits
 								.slice()
-								.filter((kit) => data?.overlay?.secondaryKit?._id !== kit._id)
-								.map((kit) => ({ ...kit, base: allKitBases?.find((kitBase) => kitBase._id === kit.baseId) }))
+								.filter((kit) => data?.overlay?.secondaryKit?.id !== kit.id)
+								.map((kit) => ({ ...kit, ...allKitBases?.find((kitBase) => kitBase.id === kit.baseId) }))
 								.sort((a, b) => sortAlphabetical(a.base!.displayName, b.base!.displayName))
 								.sort((kit) => {
-									if (kit.userData.featured) {
+									if (kit.featured) {
 										return -1
 									} else {
 										return 1
@@ -304,9 +304,9 @@ const ActiveKit = ({ ...props }) => {
 								})
 								.map((kit) => {
 									const name = kit?.base?.displayName
-									const isActive = data?.overlay?.primaryKit?._id === kit._id
-									const userTitle = kit.userData.customTitle
-									const isFeatured = kit.userData.featured
+									const isActive = data?.overlay?.primaryKit?.id === kit.id
+									const userTitle = kit.customTitle
+									const isFeatured = kit.featured
 
 									return (
 										<KitButton
@@ -318,10 +318,8 @@ const ActiveKit = ({ ...props }) => {
 												} else {
 													const newKit = {
 														...kit,
-														base: allKitBases?.find((allBases: IKitBase) => allBases._id === kit.baseId),
-														options: kit.options.map((opt: IKitOptionRaw) =>
-															allOptions?.find((allOption: any) => allOption._id === opt)
-														)
+														base: allKitBases?.find((allBases) => allBases.id === kit.baseId),
+														options: kit.options.map((opt) => allOptions?.find((allOption) => allOption.id === opt.id))
 													}
 													mutate({ key: "primaryKit", change: newKit })
 												}
@@ -354,11 +352,11 @@ const ActiveKit = ({ ...props }) => {
 							</FlexRow>
 							{data?.kits
 								.slice()
-								.filter((kit) => data?.overlay?.primaryKit?._id !== kit._id)
-								.map((kit) => ({ ...kit, base: allKitBases?.find((kitBase: IKitBase) => kitBase._id === kit.baseId) }))
+								.filter((kit) => data?.overlay?.primaryKit?.id !== kit.id)
+								.map((kit) => ({ ...kit, ...allKitBases?.find((kitBase) => kitBase.id === kit.baseId) }))
 								.sort((a, b) => sortAlphabetical(a.base!.displayName, b.base!.displayName))
 								.sort((kit) => {
-									if (kit.userData.featured) {
+									if (kit.featured) {
 										return -1
 									} else {
 										return 1
@@ -366,9 +364,9 @@ const ActiveKit = ({ ...props }) => {
 								})
 								.map((kit) => {
 									const name = kit.base!.displayName
-									const isActive = data?.overlay?.secondaryKit?._id === kit._id
-									const userTitle = kit.userData.customTitle
-									const isFeatured = kit.userData.featured
+									const isActive = data?.overlay?.secondaryKit?.id === kit.id
+									const userTitle = kit.customTitle
+									const isFeatured = kit.featured
 
 									return (
 										<KitButton
@@ -380,10 +378,8 @@ const ActiveKit = ({ ...props }) => {
 												} else {
 													const newKit = {
 														...kit,
-														base: allKitBases?.find((allBases: IKitBase) => allBases._id === kit.baseId),
-														options: kit.options.map((opt: IKitOptionRaw) =>
-															allOptions?.find((allOption: any) => allOption._id === opt)
-														)
+														base: allKitBases?.find((allBases) => allBases.id === kit.baseId),
+														options: kit.options.map((opt) => allOptions?.find((allOption) => allOption.id === opt.id))
 													}
 
 													mutate({ key: "secondaryKit", change: newKit })

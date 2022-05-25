@@ -2,9 +2,9 @@ import * as Styled from "../style"
 import StatBar from "./StatBar"
 import { useActiveWeapon } from "@Redux/slices/displayr/selectors"
 
-const WeaponStats = ({ ...props }) => {
+const WeaponStats = () => {
 	const activeWeapon = useActiveWeapon()
-	const stats = activeWeapon.kitBase.stats
+	const stats = activeWeapon.base.stats
 
 	return (
 		<Styled.Container data-cy="kit-stats">

@@ -1,4 +1,4 @@
-import { Kit, KitBase, KitBaseCategory, KitStat } from "@kittr/prisma"
+import { Kit, KitBase, KitBaseCategory, KitStat, KitOption } from "@kittr/prisma"
 
 interface KitBaseWithCategoryAndStats extends KitBase {
 	category: KitBaseCategory
@@ -6,5 +6,6 @@ interface KitBaseWithCategoryAndStats extends KitBase {
 }
 
 export interface KitWithBaseInDisplayr extends Kit {
-	kitBase: KitBaseWithCategoryAndStats
+	base: KitBaseWithCategoryAndStats
+	options: KitOption[]
 }
