@@ -1,8 +1,8 @@
-import { prisma, Channel } from "@kittr/prisma"
+import { Prisma, prisma } from "@kittr/prisma"
 
 interface Params {
 	gameId: string
-	limit: number
+	take: number
 	skip: number
 }
 
@@ -11,8 +11,10 @@ interface Params {
  *
  * Get channels for a certain game. Accepts parameters for limiting and skipping.
  */
-export const channelsByGameQuery = async ({ gameId, limit, skip = 0 }: Params): Promise<Channel[]> => {
+export const getChannelsByGameQuery = async ({ gameId, take = 10, skip = 0 }: Params) => {
 	const result = await prisma.channel.findMany({
+		take,
+		skip,
 		orderBy: {
 			viewCount: "desc"
 		},
@@ -22,8 +24,14 @@ export const channelsByGameQuery = async ({ gameId, limit, skip = 0 }: Params): 
 					id: gameId
 				}
 			}
+		},
+		include: {
+			links: true,
+			profile: true
 		}
 	})
 
 	return result
 }
+
+export type getChannelsByGameQueryReturnType = Prisma.PromiseReturnType<typeof getChannelsByGameQuery>

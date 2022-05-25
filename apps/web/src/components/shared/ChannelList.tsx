@@ -9,8 +9,8 @@ import styled from "styled-components"
 import { Channel, ChannelProfile, ChannelLink } from "@kittr/prisma"
 
 interface FullChannel extends Channel {
-	profile: ChannelProfile
-	links: ChannelLink[]
+	profile?: ChannelProfile | null
+	links?: ChannelLink[]
 }
 
 interface Props {
@@ -33,6 +33,8 @@ export const ChannelList = ({ data, itemBackgroundColor = colors.darker, gameLin
 			{data
 				.sort((a, b) => b.viewCount - a.viewCount)
 				.map((elem) => {
+					if (!elem.profile) return
+
 					return (
 						<ListItem
 							data-cy="channel-list-item"
@@ -50,7 +52,7 @@ export const ChannelList = ({ data, itemBackgroundColor = colors.darker, gameLin
 								<ProfileImage size="52px" imagePath={elem.profile.hasProfileImage ? elem.id : ""} />
 								<DisplayName>{elem.displayName}</DisplayName>
 							</Identity>
-							{withSocialLinks && (
+							{withSocialLinks && elem.links && (
 								<SocialIconsContainer>
 									<SocialIcons links={elem.links} iconSize={20} />
 								</SocialIconsContainer>

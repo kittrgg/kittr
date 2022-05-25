@@ -1,32 +1,40 @@
-import { IGame } from "@kittr/types/game"
-import { Channel } from "@kittr/types/channel"
 import colors from "@Colors"
-import AdPageWrapper from "@Components/layouts/AdPageWrapper"
 import FallbackPage from "@Components/layouts/FallbackPage"
 import { ChannelList, ChannelSearch, NoItemFound, Paginator } from "@Components/shared"
 import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
-import { channelsByGameQuery, gameByUrlSafeNameQuery, totalChannelsByGameQuery } from "@Services/orm"
-import { Game } from "@Services/orm/models"
+import {
+	getChannelsByGameQuery,
+	gameByUrlSafeNameQuery,
+	getTotalChannelsByGameQuery,
+	getTotalChannelsByGameQueryReturnType
+} from "@Services/orm"
+import {
+	SerializeChannelReturnType,
+	serializeGame,
+	SerializeGameReturnType,
+	deserializeChannel,
+	deserializeGame
+} from "@Services/orm/utils/serializers"
+import AdPageWrapper from "@Components/layouts/AdPageWrapper"
 import ResponsiveBanner from "@Services/venatus/ResponsiveBanner"
 import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
 import { Routes } from "@Utils/lookups/routes"
-import { GetStaticProps } from "next"
+import { GetStaticProps, InferGetStaticPropsType } from "next"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import styled from "styled-components"
-
-interface Props {
-	gameDoesNotExist?: true
-	game: IGame
-	channels: Channel[]
-	totalChannels: number
-	numberOfPages: number
-}
+import { ChannelLink, ChannelProfile } from "@kittr/prisma"
 
 const CHANNELS_PER_PAGE = 10
 
-const GameProfile = ({ gameDoesNotExist, game, channels, totalChannels, numberOfPages }: Props) => {
+const GameProfile = ({
+	gameDoesNotExist,
+	serializedGame,
+	deserializedChannels,
+	totalChannels,
+	numberOfPages
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
 	const { width } = useViewportDimensions()
 	const {
 		query: { pageNumber },
@@ -34,34 +42,39 @@ const GameProfile = ({ gameDoesNotExist, game, channels, totalChannels, numberOf
 	} = useRouter()
 	if (isFallback) return <FallbackPage />
 
-	const { displayName, backgroundImage, titleImage, urlSafeName } = game
 	const page = Number(pageNumber)
 
-	if (Object.keys(game).length === 0 || isNaN(page) || gameDoesNotExist) return <NoItemFound type="game" />
+	if (!serializedGame || isNaN(page) || gameDoesNotExist) return <NoItemFound type="game" />
+
+	const game = deserializeGame(serializedGame)
+	const channels = deserializedChannels?.map(deserializeChannel) ?? []
 
 	return (
-		<AdPageWrapper title={`${displayName} | kittr`} description={`Check out who is playing ${displayName} on kittr.`}>
+		<AdPageWrapper
+			title={`${game.displayName} | kittr`}
+			description={`Check out who is playing ${game.displayName} on kittr.`}
+		>
 			{width < 1200 && <ResponsiveBanner />}
 			<FlexRow>
 				<FirebaseStorageResolver
-					path={backgroundImage}
+					path={game.backgroundImageUrl}
 					noSpinner
 					render={(img) => <BackgroundImage backgroundImage={img} />}
 				/>
 				<ImageContainer>
 					<FirebaseStorageResolver
-						path={titleImage}
+						path={game.titleImageUrl}
 						noSpinner
-						render={(img) => <Image src={img} alt={displayName} />}
+						render={(img) => <Image src={img} alt={game.displayName} />}
 					/>
 				</ImageContainer>
-				<GameTitle>{displayName.toUpperCase()}</GameTitle>
+				<GameTitle>{game.displayName.toUpperCase()}</GameTitle>
 			</FlexRow>
 
 			<ChannelsContainer>
 				<ChannelsTitle>CHANNELS</ChannelsTitle>
 				<ChannelSearch />
-				{channels.length === 0 && (
+				{channels?.length === 0 && (
 					<>
 						<p style={{ marginTop: "24px" }}>Hm, no channels here.</p>
 
@@ -79,11 +92,11 @@ const GameProfile = ({ gameDoesNotExist, game, channels, totalChannels, numberOf
 						</Link>
 					</>
 				)}
-				{channels.length > 0 && (
+				{channels && channels.length > 0 && (
 					<>
-						<ChannelList data={channels} itemBackgroundColor="#2F2F31" gameLink={urlSafeName} />
+						<ChannelList data={channels} itemBackgroundColor="#2F2F31" gameLink={game.urlSafeName} />
 						<Paginator
-							totalResults={totalChannels}
+							totalResults={totalChannels ?? 0}
 							currentPageResultStart={(page - 1) * 10 + 1}
 							currentPageResultEnd={page * 10 + 1}
 							isFirstPage={page === 1}
@@ -102,7 +115,12 @@ const GameProfile = ({ gameDoesNotExist, game, channels, totalChannels, numberOf
 export const getStaticPaths = async () => {
 	await connectToDatabase()
 
-	const games = await Game.find().lean<Array<IGame>>()
+	const games = await prisma.game.findMany({
+		orderBy: {
+			active: "asc",
+			displayName: "desc"
+		}
+	})
 	const paths = games.map((game) => {
 		return [1, 2, 3].map((elem: number) => {
 			return {
@@ -120,35 +138,51 @@ export const getStaticPaths = async () => {
 	}
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps<{
+	gameDoesNotExist: boolean
+	serializedGame: SerializeGameReturnType | null
+	deserializedChannels: Array<
+		SerializeChannelReturnType & { profile: ChannelProfile | null; links: ChannelLink[] }
+	> | null
+	totalChannels: getTotalChannelsByGameQueryReturnType
+	numberOfPages: number
+}> = async ({ params }) => {
 	const { game, pageNumber } = params as { game: string; pageNumber: string }
 	await connectToDatabase()
 
-	const gameQuery = await gameByUrlSafeNameQuery(game)
-	const totalChannels = await totalChannelsByGameQuery(gameQuery._id)
+	const gameQuery = await gameByUrlSafeNameQuery({ urlSafeName: game })
+	const totalChannels = await getTotalChannelsByGameQuery(gameQuery?.id ?? "")
 
-	if (!totalChannels) {
+	if (!totalChannels || !gameQuery) {
 		return {
 			props: {
 				gameDoesNotExist: true,
-				game: {
-					displayName: "",
-					backgroundImage: "",
-					titleImage: "",
-					urlSafeName: ""
-				}
+				serializedGame: null,
+				deserializedChannels: null,
+				totalChannels: 0,
+				numberOfPages: 0
 			}
 		}
 	}
 
+	const channels = await getChannelsByGameQuery({
+		gameId: gameQuery?.id,
+		take: CHANNELS_PER_PAGE,
+		skip: Number(Number(pageNumber) - 1) * CHANNELS_PER_PAGE
+	})
+
+	const serializedChannels = channels.map((channel) => ({
+		...channel,
+		createdAt: channel.createdAt.toISOString()
+	}))
+
+	const serializedGame = serializeGame(gameQuery)
+
 	return {
 		props: {
-			game: gameQuery,
-			channels: await channelsByGameQuery({
-				gameId: gameQuery._id,
-				limit: CHANNELS_PER_PAGE,
-				skip: Number(Number(pageNumber) - 1) * CHANNELS_PER_PAGE
-			}),
+			gameDoesNotExist: false,
+			serializedGame: serializedGame,
+			deserializedChannels: serializedChannels,
 			totalChannels,
 			numberOfPages: Math.ceil(totalChannels / CHANNELS_PER_PAGE)
 		},

@@ -1,5 +1,4 @@
-import mongoose from "mongoose"
-import { Channel } from "@Services/orm/models"
+import { Prisma, prisma } from "@kittr/prisma"
 
 interface ChannelsByGameQuery {
 	/**
@@ -10,7 +9,7 @@ interface ChannelsByGameQuery {
 	 * Promise containing number
 	 *
 	 */
-	(gameId: string): Promise<number>
+	(gameId: string): Promise<number | undefined>
 }
 
 /**
@@ -18,23 +17,20 @@ interface ChannelsByGameQuery {
  *
  * Get the total channels for a game.
  */
-export const totalChannelsByGameQuery: ChannelsByGameQuery = async (gameId) => {
-	const result = await Channel.aggregate([
-		{
-			$match: {
-				games: {
-					$elemMatch: {
-						id: new mongoose.Types.ObjectId(gameId)
-					}
+export const getTotalChannelsByGameQuery: ChannelsByGameQuery = async (gameId) => {
+	const result = await prisma.channel.count({
+		where: {
+			games: {
+				some: {
+					id: gameId
 				}
 			}
-		},
-		{
-			$count: "count"
 		}
-	])
+	})
 
-	if (result.length === 0) return undefined
+	if (result === 0) return undefined
 
-	return result[0].count
+	return result
 }
+
+export type getTotalChannelsByGameQueryReturnType = Prisma.PromiseReturnType<typeof getTotalChannelsByGameQuery>
