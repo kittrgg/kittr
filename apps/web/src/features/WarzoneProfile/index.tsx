@@ -1,5 +1,5 @@
 // import { IPopularityRates } from "@kittr/types"
-import { Kit } from "@kittr/prisma"
+import { Kit, KitBase, KitOption } from "@kittr/prisma"
 import { CompleteChannel } from "@Types/pages/WarzoneProfile"
 import colors from "@Colors"
 import FullScreen from "@Components/layouts/FullScreen"
@@ -16,6 +16,7 @@ import styled from "styled-components"
 import ChannelMain from "./Main"
 import Sidebar from "./Sidebar"
 import type { NonNullable } from "@Types/index"
+import type { KitWithBaseInDisplayr } from "@Types/prisma"
 import {
 	DeserializeFullChannelProfileReturnType,
 	SerializeFullChannelProfileReturnType
@@ -25,7 +26,7 @@ interface Props {
 	channel: NonNullable<DeserializeFullChannelProfileReturnType>
 }
 
-const Channels = ({ channel }: Props) => {
+const WarzoneProfile = ({ channel }: Props) => {
 	const router = useRouter()
 	const { query } = router
 	const dispatch = useDispatch()
@@ -41,8 +42,8 @@ const Channels = ({ channel }: Props) => {
 		// dispatch(setPopularityRates(popularityRates))
 
 		return () => {
-			dispatch(setChannel({} as SerializeFullChannelProfileReturnType))
-			dispatch(setActiveWeapon({} as Kit))
+			dispatch(setChannel({} as NonNullable<DeserializeFullChannelProfileReturnType>))
+			dispatch(setActiveWeapon({} as KitWithBaseInDisplayr))
 			// dispatch(setPopularityRates({} as IPopularityRates))
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -95,7 +96,7 @@ const Channels = ({ channel }: Props) => {
 	)
 }
 
-export default Channels
+export default WarzoneProfile
 
 // Styled Components
 

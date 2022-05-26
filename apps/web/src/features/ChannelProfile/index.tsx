@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
 import styled from "styled-components"
-
 import colors from "@Colors"
 import { download } from "@Services/firebase/storage"
 import Header from "./Header"
@@ -14,21 +13,24 @@ import Specs from "./Specs"
 import Affiliates from "./Affiliates"
 import PremiumCallout from "./PremiumCallout"
 import { ProfilePageQueryReturnType } from "@Services/twitch/getProfilePageData"
+import { DeserializeFullChannelProfileReturnType } from "@Services/orm/queries/channels/getFullChannelProfile"
 
 interface Props {
-	channel: DeserializeFullChannelWithDeserializedGamesReturnType
+	channel: DeserializeFullChannelProfileReturnType
 	twitchInfo: ProfilePageQueryReturnType
 }
 
 const ChannelProfile = ({ channel, twitchInfo }: Props) => {
-	const isPremium = channel.plan?.type === "premium"
-	const hasCoverPhoto = channel.profile?.hasCoverPhoto
-	const primaryColor = channel.profile?.brandColors.find((color) => color.type === "primary")?.value || colors.white
+	const isPremium = channel?.plan?.type === "premium"
+	const hasCoverPhoto = channel?.profile?.hasCoverPhoto
+	const primaryColor = channel?.profile?.brandColors.find((color) => color.type === "PRIMARY")?.value || colors.white
 	const [coverPhotoPath, setCoverPhotoPath] = useState("")
 
 	useEffect(() => {
 		if (isPremium && hasCoverPhoto) download(`${channel.id}-profile-cover-photo`, (path) => setCoverPhotoPath(path))
-	}, [channel.id, hasCoverPhoto, isPremium])
+	}, [channel?.id, hasCoverPhoto, isPremium])
+
+	if (!channel) return null
 
 	return (
 		<Container>

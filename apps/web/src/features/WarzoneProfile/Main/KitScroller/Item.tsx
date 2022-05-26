@@ -1,5 +1,5 @@
 import { NonNullable } from "@Types/index"
-import { DeserializeFullChannelProfileReturnType } from "@Services/orm"
+import { DeserializeFullChannelProfileReturnType } from "@Services/orm/queries/channels/getFullChannelProfile"
 import SVG from "@Components/shared/SVG"
 import { useEffect, useRef } from "react"
 import * as Styled from "./style"
@@ -32,11 +32,11 @@ const Item = ({ elem }: Props) => {
 			ref={itemRef}
 			active={activeWeapon?.customTitle === elem.customTitle}
 			onClick={() => dispatch(setActiveWeapon(elem))}
-			data-cy={`slider-${elem.kitBase.displayName.replace(/ /g, "-").replace("(", "-").replace(")", "-")}-${
+			data-cy={`slider-${elem.base.displayName.replace(/ /g, "-").replace("(", "-").replace(")", "-")}-${
 				elem.customTitle?.replace(/ /g, "-") || "Primary"
 			}`}
 		>
-			{elem.customTitle || elem.kitBase.displayName}{" "}
+			{elem.customTitle || elem.base.displayName}{" "}
 			{elem.featured && <SVG.Star style={{ marginLeft: "4px" }} width="20px" fill={colors.gold} stroke="none" />}
 		</Styled.Item>
 	)

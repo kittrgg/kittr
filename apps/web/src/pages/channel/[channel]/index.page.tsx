@@ -11,7 +11,8 @@ import {
 	getFullChannelProfileQuery,
 	serializeFullChannelProfile,
 	deserializeFullChannelProfile,
-	SerializeFullChannelProfileReturnType
+	SerializeFullChannelProfileReturnType,
+	DeserializeFullChannelProfileReturnType
 } from "@Services/orm/queries/channels/getFullChannelProfile"
 
 const ChannelProfilePage = ({ channel, twitchInfo }: InferGetStaticPropsType<typeof getStaticProps>) => {
@@ -23,6 +24,8 @@ const ChannelProfilePage = ({ channel, twitchInfo }: InferGetStaticPropsType<typ
 	}
 
 	const deserializedChannel = deserializeFullChannelProfile(channel)
+
+	if (!deserializedChannel) return null
 
 	return (
 		<PageWrapper

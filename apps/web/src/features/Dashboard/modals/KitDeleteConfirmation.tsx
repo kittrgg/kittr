@@ -10,7 +10,7 @@ import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import fetch from "@Fetch"
 
 const KitDeleteConfirmation = () => {
-	const { _id } = useChannelData()
+	const { data: channelData } = useChannelData()
 	const data = useSelector((state) => state.dashboard.modal.data)
 	const dispatch = useDispatch()
 	const { mutate, isLoading } = useDashboardMutator(async () => {
@@ -18,7 +18,7 @@ const KitDeleteConfirmation = () => {
 			const result = await fetch.delete({
 				url: `/api/channel/kit`,
 				headers: { authorization: `Bearer: ${await getToken()}` },
-				body: { channelId: _id, kitId }
+				body: { channelId: channelData?.id, kitId }
 			})
 
 			if (result) {

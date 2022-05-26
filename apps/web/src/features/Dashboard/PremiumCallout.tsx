@@ -21,7 +21,7 @@ const PremiumCallout = ({ text }: Props) => {
 				<SVG.Premium width="24px" style={{ position: "relative", top: "3px" }} />
 				<Text>{text}</Text>
 			</span>
-			{role !== "Editor" && <span>LEARN MORE</span>}
+			{role !== "EDITOR" && <span>LEARN MORE</span>}
 		</LearnMore>
 	)
 }
