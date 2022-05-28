@@ -6,7 +6,6 @@ import SubscriptionSettings from "@Features/Dashboard/Channel/ChannelSettings/Su
 import { useManagerRole, useModal, usePremiumStatus } from "@Redux/slices/dashboard/selectors"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { header1 } from "@Styles/typography"
-import BuyHomeChannelBoostr from "../../../Promo/BuyHomeChannelBoostr"
 import AddAffiliate from "../../modals/AddAffiliate"
 import AddSpec from "../../modals/AddSpec"
 import PremiumSignUp from "../../modals/PremiumSignUp"
@@ -33,7 +32,6 @@ const ChannelSettings = ({ ...props }) => {
 
 	return (
 		<>
-			{modal.type === "Buy Home Channel Boostr" && <BuyHomeChannelBoostr />}
 			{modal.type === "Premium Sign Up" && <PremiumSignUp />}
 			{modal.type === "Add Spec" && <AddSpec />}
 			{modal.type === "Add Affiliate" && <AddAffiliate />}

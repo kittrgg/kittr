@@ -54,7 +54,6 @@ export type DashboardModals =
 	| "Kit Naming Warning"
 	| "Quick Command Export"
 	| "Add Link"
-	| "Buy Home Channel Boostr"
 	| "Premium Sign Up"
 	| "Premium Plans"
 	| "Add Spec"
@@ -66,22 +65,3 @@ export type ActiveKitOverlays =
 	| "Banner Ticker"
 	| "Display Ticker"
 	| "Display"
-
-/** Boosted channel on the home page */
-export interface IHomePageBoostr {
-	game: string
-	kitCount: number
-	profileImage: string
-	twitchLink: string
-	twitchName: string
-	viewerCount: number
-}
-
-export interface IPromo {
-	_id: string
-	type: string
-	startTime: number
-	endTime: number
-	__v: number
-	channelId: string
-}
