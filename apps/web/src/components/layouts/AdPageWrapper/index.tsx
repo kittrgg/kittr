@@ -45,9 +45,6 @@ const AdPageWrapper = ({ withAds = true, title, description, children }: Props) 
 		if (pathname?.includes("channels/search")) {
 			setTop("2.6%")
 		}
-		if (pathname?.includes("blog")) {
-			setTop("2.6%")
-		}
 	}, [pathname])
 
 	return (

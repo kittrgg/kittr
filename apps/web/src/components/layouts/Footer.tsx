@@ -26,9 +26,6 @@ const Footer = ({ paddingRight }: Props) => {
 				<Link href={Routes.CHANNEL.LIST} passHref>
 					<StyledLink data-cy="footer-channels-link">CHANNELS</StyledLink>
 				</Link>
-				<Link href={Routes.BLOG.LIST} passHref>
-					<StyledLink data-cy="footer-blog-link">BLOG</StyledLink>
-				</Link>
 				<Link href={Routes.ABOUT} passHref>
 					<StyledLink data-cy="footer-about-link">ABOUT</StyledLink>
 				</Link>

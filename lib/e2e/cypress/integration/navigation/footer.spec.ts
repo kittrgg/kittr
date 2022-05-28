@@ -21,11 +21,6 @@ describe("Footer Navigation", () => {
 		cy.location("pathname").should("include", "/channels")
 	})
 
-	it("Navigates to Blog", () => {
-		cy.get("[data-cy=footer-blog-link]").click()
-		cy.location("pathname").should("include", "/blog")
-	})
-
 	it("Navigates to About", () => {
 		cy.get("[data-cy=footer-about-link]").click()
 		cy.location("pathname").should("include", "/about")

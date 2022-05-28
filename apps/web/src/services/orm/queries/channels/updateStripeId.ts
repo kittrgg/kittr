@@ -1,5 +1,4 @@
-import { Channel } from "@Services/orm/models"
-import { IRawChannel } from "@kittr/types/channel"
+import { Channel, prisma } from "@kittr/prisma"
 
 interface IFunc {
 	/**
@@ -14,9 +13,9 @@ interface IFunc {
 	 */
 	(
 		/** _id of the channel */
-		_id: string,
+		id: string,
 		stripeId: string
-	): Promise<IRawChannel>
+	): Promise<Channel & {plan: {stripeSubscriptionId: string  } | null } >
 }
 
 /**
@@ -24,10 +23,25 @@ interface IFunc {
  *
  * Using the _id of the channel, get the stripeId.
  */
-export const updateStripeId: IFunc = async (_id, stripeId) => {
-	const rawChannel = await Channel.findOneAndUpdate({ _id }, { $set: { "meta.stripeId": stripeId } }, { new: true })
+export const updateStripeId: IFunc = async (id, stripeId) => {
+	const channel = await prisma.channel.update({
+		where: {
+			id
+		},
+		data: {
+			plan: {
+				update: {
+					stripeSubscriptionId: stripeId
+				}}
+		},
+		include: {
+			plan: {
+				select: {
+					stripeSubscriptionId: true
+				}
+			}
+		}
+	})
 
-	if (!rawChannel) return {} as any
-
-	return { ...rawChannel, _id: rawChannel._id.toString(), createdDate: rawChannel.createdDate.toString() }
+return channel
 }

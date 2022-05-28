@@ -1,4 +1,3 @@
-export { default as BlogPost } from "./BlogPost"
 export { default as Channel } from "./Channel"
 export { default as Game } from "./Game"
 export { default as KitBase } from "./KitBase"

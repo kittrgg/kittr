@@ -55,11 +55,6 @@ const MobileNavPane = ({ isOpen, setIsOpen }: Props) => {
 							CHANNELS
 						</StyledLink>
 					</Link>
-					<Link href={Routes.BLOG.LIST} passHref>
-						<StyledLink data-cy="mobile-blog-link" active={pathname.startsWith(Routes.BLOG.LIST)}>
-							BLOG
-						</StyledLink>
-					</Link>
 				</LinksList>
 				<LinksList>
 					{!isLoggedIn && (

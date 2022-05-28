@@ -23,10 +23,6 @@ describe("Desktop Navigation", () => {
 		cy.location("pathname").should("include", "/channels")
 	})
 
-	it("Navigates to Blog", () => {
-		cy.get("[data-cy=desktop-blog-link]").click()
-		cy.location("pathname").should("include", "/blog")
-	})
 })
 
 describe("Desktop Nav (Authentication)", () => {

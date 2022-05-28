@@ -20,11 +20,6 @@ describe("Mobile Navigation", () => {
 		cy.location("pathname").should("include", "/channels")
 	})
 
-	it("Navigates to Blog", () => {
-		cy.get("[data-cy=mobile-blog-link]").click()
-		cy.location("pathname").should("include", "/blog")
-	})
-
 	// it("Navigates to Sign Up", () => {
 	// 	cy.clearEmulatorAuth()
 	// 	cy.get("[data-cy=mobile-sign-up-link]").click()

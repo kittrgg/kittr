@@ -3,9 +3,6 @@ import mongoose from "mongoose";
 import Game from "./models/Game";
 import games from "./games";
 
-import BlogPost from "./models/BlogPost";
-import blogPosts from "./blogPosts";
-
 import KitBase from "./models/KitBase";
 import kitBases from "./kitBases";
 
@@ -53,13 +50,6 @@ const main = async () => {
   try {
     await Game.deleteMany({});
     await Game.insertMany(games);
-  } catch (err) {
-    return console.error(err);
-  }
-
-  try {
-    await BlogPost.deleteMany({});
-    await BlogPost.insertMany(blogPosts);
   } catch (err) {
     return console.error(err);
   }

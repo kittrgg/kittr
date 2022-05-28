@@ -19,14 +19,6 @@ export const Routes = {
 		/** Output result: `/games/:channel` */
 		createPath: (channel: string) => `/games/${channel}`
 	},
-	BLOG: {
-		/** Output result: `/blog` */
-		LIST: "/blog",
-		/** Output result: `/blog/:slug` */
-		createBlogDirPath: (slug: string) => `/blog/${slug}`,
-		/** Output result: `/blog/post/:slug` */
-		createBlogPostPath: (slug: string) => `/blog/post/${slug}`
-	},
 	/** Output result: `/dashboard` */
 	DASHBOARD: "/dashboard",
 	/** Output result: `/sign-up` */

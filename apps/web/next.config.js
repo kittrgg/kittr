@@ -66,11 +66,6 @@ const moduleExports = {
 				destination: "/channel/:player/:game/overlay",
 				permanent: true
 			},
-			{
-				source: "/blog",
-				destination: "/blog/1",
-				permanent: true
-			}
 		]
 	},
 	webpackDevMiddleware: (config) => {

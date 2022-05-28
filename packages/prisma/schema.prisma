@@ -258,12 +258,3 @@ model Genre {
   displayName String @unique
   games       Game[]
 }
-
-model BlogPost {
-  id        String   @id @default(cuid())
-  author    String
-  createdAt DateTime
-  title     String   @unique
-  slug      String   @unique
-  markdown  String
-}

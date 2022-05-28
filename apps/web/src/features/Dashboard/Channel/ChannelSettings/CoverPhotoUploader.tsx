@@ -13,7 +13,7 @@ import { Spinner, SVG, Button } from "@Components/shared"
 import { deleteFile } from "@Services/firebase/storage"
 import fetch from "@Fetch"
 import { isFetchError } from "@Utils/helpers/typeGuards"
-import { ChannelModel } from "@Services/orm/models/Channel"
+import { Channel } from "@kittr/prisma"
 
 const CoverPhotoUploader = () => {
 	const dispatch = useDispatch()
@@ -36,7 +36,7 @@ const CoverPhotoUploader = () => {
 				fileName,
 				maxWidthOrHeight: 2500,
 				onSuccess: async () => {
-					const response = await fetch.post<ChannelModel | NextClientEndpointError>({
+					const response = await fetch.post<Channel | NextClientEndpointError>({
 						url: `/api/channel/meta/coverPhoto`,
 						headers: { authorization: `Bearer: ${await getToken()}` },
 						body: { hasCoverPhoto: true, channelId: data?.id }

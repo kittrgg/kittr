@@ -67,17 +67,6 @@ export type ActiveKitOverlays =
 	| "Display Ticker"
 	| "Display"
 
-/** A blog post */
-export interface IPost {
-	_id: string
-	author: string
-	datePublished: string
-	title: string
-	markdown: string
-	slug: string
-	__v: number
-}
-
 /** Boosted channel on the home page */
 export interface IHomePageBoostr {
 	game: string
