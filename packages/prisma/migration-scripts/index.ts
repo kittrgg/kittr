@@ -211,7 +211,7 @@ mongoose
 						profile: {
 							create: {
 								hasCoverPhoto: channel.hasCoverPhoto || false,
-								hasProfileImage: channel.hasProfileImage,
+								hasProfileImage: channel.displayName === "JoeWo",
 								youtubeAutoplay: channel.youtubeAutoplay || false,
 								affiliates: {
 									create: Object.values(channel.affiliates || {}).map(

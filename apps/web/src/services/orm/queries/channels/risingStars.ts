@@ -13,9 +13,10 @@ export const getRisingStarsQuery = async ({
 	limit: number
 	viewsGreaterThan: number
 }) => {
+
 	const where = {
 		profile: {
-			hasProfileImage: true
+			hasProfileImage: process.env.IS_DEV ? undefined:  true
 		},
 		viewCount: {
 			gte: viewsGreaterThan
