@@ -6,7 +6,7 @@ import { LinkProperty } from "@kittr/prisma"
 import { Channel, ChannelLink } from "@kittr/prisma"
 import { getTopChannelsWithLinksQuery } from "@Services/orm/queries/channels"
 
-interface ChannelWithLinks extends Channel {
+export interface ChannelWithLinks extends Channel {
 	links: ChannelLink[]
 }
 

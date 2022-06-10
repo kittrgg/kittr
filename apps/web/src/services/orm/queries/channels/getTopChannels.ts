@@ -1,34 +1,15 @@
-import { Prisma, prisma, Channel, ChannelProfile, ChannelLink } from "@kittr/prisma"
+import { Prisma, prisma, Channel } from "@kittr/prisma"
 
-// TODO: Learn how to do this right, bro.
+export const ChannelWithIncludes = Prisma.validator<Prisma.ChannelArgs>()({
+	include: {
+		profile: true,
+		links: true
+	}
+})
 
-type WithSerialization<T, S extends boolean> = S extends true
-	? Omit<T, "createdAt"> & {
-			createdAt: string
-	  }
-	: T
+export type TChannelWithIncludes = typeof ChannelWithIncludes
 
-type WithProfile<T, P extends boolean> = P extends true
-	? T & {
-			profile: ChannelProfile
-	  }
-	: T
-
-type WithLinks<T, L extends boolean> = L extends true
-	? T & {
-			links: ChannelLink[]
-	  }
-	: T
-
-type Value<S extends boolean, P extends boolean, L extends boolean> = WithSerialization<
-	WithProfile<WithLinks<Channel[], L>, P>,
-	S
->
-
-interface Params<S extends boolean, K extends boolean, L extends boolean> {
-	serialized?: S
-	includeProfile?: K
-	includeLinks?: L
+interface Params {
 	limit: number
 	skip: number
 }
@@ -38,9 +19,7 @@ interface Params<S extends boolean, K extends boolean, L extends boolean> {
  *
  * Get channels that are on the platform. Accepts parameters for limit and skip.
  */
-export const getTopChannelsQuery = async <S extends boolean, K extends boolean, L extends boolean>(
-	params: Params<S, K, L>
-): Promise<Value<S, K, L>> => {
+export const getTopChannelsQuery = async (params: Params) => {
 	const result = await prisma.channel.findMany({
 		orderBy: {
 			viewCount: "desc"
@@ -48,19 +27,12 @@ export const getTopChannelsQuery = async <S extends boolean, K extends boolean, 
 		skip: params.skip,
 		take: params.limit,
 		include: {
-			profile: params.includeProfile,
-			links: params.includeLinks
+			profile: true,
+			links: true
 		}
 	})
 
-	if (params.serialized) {
-		return result.map((channel) => ({
-			...channel,
-			createdAt: channel.createdAt.toISOString()
-		})) as any
-	}
-
-	return result as any
+	return result
 }
 
 export type getTopChannelsQueryReturnType = Prisma.PromiseReturnType<typeof getTopChannelsQuery>

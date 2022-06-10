@@ -2,11 +2,15 @@ import styled from "styled-components"
 import colors from "@Colors"
 import ProfileImage from "@Components/shared/ProfileImage"
 import { header2 } from "@Styles/typography"
-import { Channel } from "@kittr/prisma"
+import { Channel, ChannelProfile } from "@kittr/prisma"
+
+interface ChannelWithProfile extends Channel {
+	profile?: ChannelProfile
+}
 
 interface Props {
 	/** Array of channels to render. */
-	channels: Channel[]
+	channels: ChannelWithProfile[]
 	/** Do you want to show the live icon for these channels? */
 	isLive?: boolean
 	/** Function to be ran when user clicks on a channel. */
@@ -24,7 +28,7 @@ export const ChannelAvatarList = ({ channels, isLive, onClick }: Props) => {
 						data-cy={`${channel.displayName}-button`}
 						onClick={() => onClick && onClick(channel)}
 					>
-						<ProfileImage size="100px" imagePath={channel.id} isLive={isLive} />
+						<ProfileImage size="100px" imagePath={channel.id} hasProfileImage={!!channel.profile?.hasProfileImage} isLive={isLive} />
 						<Name>{channel.displayName}</Name>
 					</Identity>
 				)

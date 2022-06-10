@@ -1,26 +1,11 @@
-import { Prisma } from "@kittr/prisma"
-import { Optional } from "@Types/index"
+import { Game } from "@kittr/prisma"
 
-export const GameIncludeAll = Prisma.validator<Prisma.GameArgs>()({
-	include: {
-		genres: true,
-		platforms: true,
-		kitBases: true,
-		channels: true,
-		channelAffiliateCodes: true,
-		customCommandStrings: true,
-		kits: true
-	}
-})
+export type SerializeGameReturnType<T> = Omit<T, "releaseDate"> & { releaseDate: string }
 
-type CompleteGame = Prisma.GameGetPayload<typeof GameIncludeAll>
+// My goal is to take in any Game shape, whether it includes some extra fields or not.
+// I also want to deserialize back to that type WITH A STRINGIFIED RELEASE DATE.
 
-type PartialCompleteGame = Optional<
-	CompleteGame,
-	"genres" | "platforms" | "kitBases" | "channels" | "channelAffiliateCodes" | "customCommandStrings" | "kits"
->
-
-export const serializeGame = (game: PartialCompleteGame) => {
+export const serializeGame = <T extends Game>(game: T): SerializeGameReturnType<T> => {
 	const serializedGame = {
 		...game,
 		releaseDate: game.releaseDate.toISOString()
@@ -29,9 +14,9 @@ export const serializeGame = (game: PartialCompleteGame) => {
 	return serializedGame
 }
 
-export type SerializeGameReturnType = ReturnType<typeof serializeGame>
-
-export const deserializeGame = (game: SerializeGameReturnType): PartialCompleteGame => {
+export const deserializeGame = <T extends SerializeGameReturnType<T>>(
+	game: T
+): Omit<T, "releaseDate"> & { releaseDate: Date } => {
 	const deserializedGame = {
 		...game,
 		releaseDate: new Date(game.releaseDate)

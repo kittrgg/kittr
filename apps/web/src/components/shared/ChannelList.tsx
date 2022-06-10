@@ -49,7 +49,7 @@ export const ChannelList = ({ data, itemBackgroundColor = colors.darker, gameLin
 							}
 						>
 							<Identity data-cy={`${elem.urlSafeName}-profile-link`}>
-								<ProfileImage size="52px" imagePath={elem.profile.hasProfileImage ? elem.id : ""} />
+								<ProfileImage size="52px" hasProfileImage={elem.profile.hasProfileImage} imagePath={elem.id} />
 								<DisplayName>{elem.displayName}</DisplayName>
 							</Identity>
 							{withSocialLinks && elem.links && (

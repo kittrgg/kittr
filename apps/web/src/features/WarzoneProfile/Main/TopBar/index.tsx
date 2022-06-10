@@ -14,7 +14,7 @@ const TopBar = ({ id, displayName, hasProfileImage, gameAffiliateCode, links }: 
 	return (
 		<Styled.Container>
 			<Styled.Row>
-				{hasProfileImage && <ProfileImage imagePath={id} />}
+				{hasProfileImage && <ProfileImage hasProfileImage={hasProfileImage} imagePath={id} />}
 				<Styled.NameContainer data-cy="channel-name">
 					<Styled.H1>{displayName}</Styled.H1>
 					{gameAffiliateCode && <Styled.Code>CODE: {gameAffiliateCode}</Styled.Code>}

@@ -91,7 +91,7 @@ const ChannelList = ({ ...props }) => {
 								data-cy={`${elem.displayName}-channel-button`}
 							>
 								<FlexRow>
-									<ProfileImage size="50px" imagePath={elem.profile?.hasProfileImage ? elem.id : ""} />
+									<ProfileImage size="50px" hasProfileImage={!!elem.profile?.hasProfileImage} imagePath={elem.id} />
 									<ChannelTitle>{elem.displayName}</ChannelTitle>
 								</FlexRow>
 								<Role>

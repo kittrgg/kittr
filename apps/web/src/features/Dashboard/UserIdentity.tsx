@@ -17,7 +17,7 @@ const UserIdentity = ({ ...props }) => {
 	return (
 		<Wrapper>
 			<Child>
-				<ProfileImage size="25px" imagePath={profileImage ? data?.id : ""} />
+				<ProfileImage size="25px" hasProfileImage={!!data?.profile?.hasProfileImage} imagePath={data?.id} />
 				<Role>You are an {role}</Role>
 			</Child>
 			<Child>

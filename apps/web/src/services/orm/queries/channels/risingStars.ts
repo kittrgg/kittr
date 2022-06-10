@@ -1,8 +1,10 @@
-import { Prisma, prisma } from "@kittr/prisma"
+import { Prisma, prisma, Channel } from "@kittr/prisma"
 
 const include = Prisma.validator<Prisma.ChannelInclude>()({
 	profile: true
 })
+
+export interface TChannelWithIncludeProfile extends Channel {}
 
 export const getRisingStarsQuery = async ({
 	limit,
@@ -13,10 +15,9 @@ export const getRisingStarsQuery = async ({
 	limit: number
 	viewsGreaterThan: number
 }) => {
-
 	const where = {
 		profile: {
-			hasProfileImage: process.env.IS_DEV ? undefined:  true
+			hasProfileImage: process.env.IS_DEV ? undefined : true
 		},
 		viewCount: {
 			gte: viewsGreaterThan

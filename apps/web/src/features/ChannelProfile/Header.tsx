@@ -26,7 +26,7 @@ const Header = ({
 	return (
 		<Wrapper hasCoverPhoto={isPremium && !!hasCoverPhoto} imagePath={imagePath}>
 			<Avatar>
-				<ProfileImage size="150px" imagePath={id} border={isPremium ? userColor : ""} isLive={isLive} />
+				<ProfileImage size="150px" hasProfileImage={!!profile?.hasProfileImage} imagePath={id} border={isPremium ? userColor : ""} isLive={isLive} />
 				<AvatarInfo>
 					<H1>{displayName}</H1>
 					<Counts>

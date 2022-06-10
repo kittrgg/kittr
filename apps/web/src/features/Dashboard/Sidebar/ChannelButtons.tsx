@@ -46,6 +46,7 @@ const ChannelButtons = () => {
 					<ProfileImage
 						size="70px"
 						imagePath={channelData?.profile?.hasProfileImage ? channelData?.id : undefined}
+						hasProfileImage={!!channelData?.profile?.hasProfileImage}
 						alwaysRefresh
 					/>
 				</Styled.Button>

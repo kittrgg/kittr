@@ -1,6 +1,13 @@
 import { InferGetStaticPropsType } from "next"
 import PageWrapper from "@Components/layouts/PageWrapper"
-import { getAllGamesQuery, getRisingStarsQuery, getTopChannelsWithProfileQuery, getTotalKitsQuery } from "@Services/orm"
+import {
+	getAllGamesQuery,
+	getRisingStarsQuery,
+	getRisingStarsQueryReturnType,
+	getTopChannelsWithProfileQuery,
+	getTopChannelsQueryReturnType,
+	getTotalKitsQuery
+} from "@Services/orm"
 import {
 	serializeGame,
 	serializeChannel,
@@ -9,13 +16,15 @@ import {
 	deserializeGame,
 	deserializeChannel
 } from "@Services/orm/utils/serializers"
-import { liveChannelsQuery } from "@Services/twitch/getLiveStreams"
+import { TChannelWithIncludes, TChannelWithIncludeProfile } from "@Services/orm/queries/channels"
+import { liveChannelsQuery, ChannelWithLinks } from "@Services/twitch/getLiveStreams"
 import ResponsiveAdBanner from "@Services/venatus/ResponsiveBanner"
 import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
 import { GetStaticProps } from "next"
 import Body from "./Home/Body"
 import Hero from "./Home/Hero"
 import PlatformInfo from "./Home/PlatformInfo"
+import { Game } from "@kittr/prisma"
 
 const Home = ({
 	games,
@@ -28,6 +37,8 @@ const Home = ({
 	const deserializedPopularChannels = popularChannels.map((channel) => deserializeChannel(channel))
 	const deserializedRisingStars = risingStars.map((channel) => deserializeChannel(channel))
 	const deserializedLiveChannels = liveChannels.map((channel) => deserializeChannel(channel))
+
+	console.log(deserializedPopularChannels)
 
 	return (
 		<PageWrapper title="Home | kittr" description="Where the pros post their kits. Get kitted.">
@@ -49,10 +60,10 @@ const Home = ({
 export default Home
 
 export const getStaticProps: GetStaticProps<{
-	games: SerializeGameReturnType[]
-	popularChannels: SerializeChannelReturnType[]
-	risingStars: SerializeChannelReturnType[]
-	liveChannels: SerializeChannelReturnType[]
+	games: SerializeGameReturnType<Game>[]
+	popularChannels: SerializeChannelReturnType<TChannelWithIncludes>[]
+	risingStars: SerializeChannelReturnType<TChannelWithIncludeProfile>[]
+	liveChannels: SerializeChannelReturnType<ChannelWithLinks>[]
 	totalNumberOfKits: number
 }> = async () => {
 	await connectToDatabase()

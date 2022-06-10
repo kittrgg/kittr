@@ -31,7 +31,7 @@ const ChannelWithIncludeAll = Prisma.validator<Prisma.ChannelArgs>()({
 type CompleteFullChannel = Prisma.ChannelGetPayload<typeof ChannelWithIncludeAll>
 
 interface CompleteFullChannelWithSerializedGames extends Omit<CompleteFullChannel, "games"> {
-	games: SerializeGameReturnType[]
+	games: SerializeGameReturnType<CompleteFullChannel>[]
 }
 
 export const serializeFullChannel = (channel: CompleteFullChannel | CompleteFullChannelWithSerializedGames) => {

@@ -5,18 +5,22 @@ import { Routes } from "@Utils/lookups/routes"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import styled from "styled-components"
-import { Game, Channel } from "@kittr/prisma"
+import { Game, Channel, ChannelProfile } from "@kittr/prisma"
+
+interface ChannelWithProfile extends Channel {
+	profile: ChannelProfile
+}
 
 interface Props {
 	/** Games available on the platform. Includes both active and inactive games. */
 	games: Game[]
 	/** Top channels sorted by view count on kittr. */
-	popularChannels: Channel[]
+	popularChannels: ChannelWithProfile[]
 	/** Channels who aren't quite in the top channels list
 	 * but we want to give some recognition and visibility.
 	 * */
-	risingStars: Channel[]
-	liveChannels: Channel[]
+	risingStars: ChannelWithProfile[]
+	liveChannels: ChannelWithProfile[]
 }
 
 /** Main content section of the home page. Games, channels, etc. */

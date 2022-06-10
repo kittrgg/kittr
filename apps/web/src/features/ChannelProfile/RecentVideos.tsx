@@ -11,10 +11,11 @@ interface Props {
 	videos: ITwitchVideo[]
 	coverPhotoPath: string
 	profileImagePath: string
+	hasProfileImage: boolean
 	brandColor: string
 }
 
-const RecentVideos = ({ videos, coverPhotoPath, profileImagePath, brandColor }: Props) => {
+const RecentVideos = ({ videos, coverPhotoPath, profileImagePath, hasProfileImage, brandColor }: Props) => {
 	// If channel doesn't have any videos.
 	if (videos.length === 0) return null
 
@@ -37,7 +38,7 @@ const RecentVideos = ({ videos, coverPhotoPath, profileImagePath, brandColor }: 
 							target="_blank"
 						>
 							<ProfileImageContainer>
-								<ProfileImage imagePath={profileImagePath} />
+								<ProfileImage imagePath={profileImagePath} hasProfileImage={hasProfileImage} />
 							</ProfileImageContainer>
 							<Duration>{clip.duration}</Duration>
 							<ViewCount>

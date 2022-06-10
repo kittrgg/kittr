@@ -44,6 +44,7 @@ const ChannelProfile = ({ channel, twitchInfo }: Props) => {
 						videos={twitchInfo.recentVideos}
 						brandColor={primaryColor}
 						coverPhotoPath={coverPhotoPath}
+						hasProfileImage={!!channel.profile?.hasProfileImage}
 						profileImagePath={channel.profile?.hasProfileImage ? channel.id : ""}
 					/>
 

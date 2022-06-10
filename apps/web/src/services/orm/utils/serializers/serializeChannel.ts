@@ -1,28 +1,8 @@
-import { Prisma } from "@kittr/prisma"
-import { Optional } from "@Types/index"
+import { Channel } from "@kittr/prisma"
 
-export const ChannelIncludeAll = Prisma.validator<Prisma.ChannelArgs>()({
-	include: {
-		games: true,
-		gameAffiliateCodes: true,
-		customGameCommands: true,
-		kits: true,
-		overlay: true,
-		managers: true,
-		profile: true,
-		plan: true,
-		links: true
-	}
-})
+export type SerializeChannelReturnType<T> = Omit<T, "createdAt"> & { createdAt: string }
 
-type CompleteChannel = Prisma.ChannelGetPayload<typeof ChannelIncludeAll>
-
-type PartialCompleteChannel = Optional<
-	CompleteChannel,
-	"games" | "gameAffiliateCodes" | "customGameCommands" | "kits" | "overlay" | "managers" | "profile" | "plan" | "links"
->
-
-export const serializeChannel = (channel: PartialCompleteChannel) => {
+export const serializeChannel = <T extends Channel>(channel: T): Omit<T, "createdAt"> & { createdAt: string } => {
 	const serializedChannel = {
 		...channel,
 		createdAt: channel.createdAt.toISOString()
@@ -31,9 +11,9 @@ export const serializeChannel = (channel: PartialCompleteChannel) => {
 	return serializedChannel
 }
 
-export type SerializeChannelReturnType = ReturnType<typeof serializeChannel>
-
-export const deserializeChannel = (channel: SerializeChannelReturnType): PartialCompleteChannel => {
+export const deserializeChannel = <T extends Omit<Channel, "createdAt"> & { createdAt: string }>(
+	channel: T
+): Omit<T, "createdAt"> & { createdAt: Date } => {
 	const deserializedChannel = {
 		...channel,
 		createdAt: new Date(channel.createdAt)

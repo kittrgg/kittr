@@ -5,6 +5,8 @@ import { useEffect, useState } from "react"
 import styled from "styled-components"
 
 interface Props {
+	/** If user has profile image. */
+	hasProfileImage: boolean
 	/** Path for the image. */
 	imagePath?: string | null
 	/** The width and height of the image. This image is always a square. */
@@ -23,13 +25,17 @@ interface Props {
  *
  * If an image has not been provided, we will render a placeholder.
  */
-export const ProfileImage = ({ imagePath, size = "50px", border, isLive = false, alwaysRefresh }: Props) => {
+export const ProfileImage = ({ imagePath, hasProfileImage, size = "50px", border, isLive = false, alwaysRefresh }: Props) => {
 	const [path, setPath] = useState("")
 	const [isLoading, setIsLoading] = useState(true)
 	const [errored, setErrored] = useState(false)
 	const isMounted = useIsMounted()
 
 	useEffect(() => {
+		if (process.env.IS_DEV && !hasProfileImage) {
+			return setIsLoading(false)
+		}
+
 		if (imagePath) {
 			const fetchImage = async () => {
 				try {

@@ -66,7 +66,7 @@ const ImageEditor = ({ ...props }) => {
 	return (
 		<>
 			<PhotoButtonFlex>
-				<ProfileImage imagePath={profileImage} alwaysRefresh />
+				<ProfileImage imagePath={profileImage} hasProfileImage={!!data?.profile?.hasProfileImage} alwaysRefresh />
 				<Label htmlFor="file">
 					CHANGE IMAGE
 					<input id="file" type="file" name="file" onChange={(e: any) => handleUpload(e)} style={{ display: "none" }} />
