@@ -42,3 +42,4 @@ dist
 .tsbuildinfo
 tsconfig.tsbuildinfo
 volumes
+dev.env.json

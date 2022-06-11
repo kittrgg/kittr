@@ -2,46 +2,66 @@
 sidebar_position: 1
 ---
 
-# Intro
+# Introduction
 
-Let's discover **Docusaurus in less than 5 minutes**.
+## The Scripts You Need to Succeed
 
-## Getting Started
+Before you can do anything useful:
 
-Get started by **creating a new site**.
+- Install the required packages: `yarn install`
+- Establish your environment variables:
+  - To do this, visit /scripts/createEnvironment/inputs.
+  - Make a file called `dev.env.json`.
+  - Use the example template and fill the needed values.
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+## Your Daily Drivers
 
-### What you'll need
+`yarn dx`: Builds up the development environment including a Docker containers.
 
-- [Node.js](https://nodejs.org/en/download/) version 14 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+`yarn dx:db-seed`: Uses the seed data found in /packages/prisma/seed.ts.
 
-## Generate a new site
+`yarn dx:db-view`: Open up an in-browser database viewer.
 
-Generate a new Docusaurus site using the **classic template**.
+`yarn db-snapshot`: Creates a snapshot of the current database and saves it in your local file system.
 
-The classic template will automatically be added to your project after you run the command:
+`yarn dx:seed-snapshot`: Uses the snapshot from `yarn db-snapshot` to overwrite your current database.
 
-```bash
-npm init docusaurus@latest my-website classic
-```
+`yarn dx:db-nuke`: If you for some reason need to reset any Docker data, you can remove it all here.
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+---
 
-The command also installs all necessary dependencies you need to run Docusaurus.
+## Codebase Health
 
-## Start your site
+`yarn type-check`: Runs a TypeScript check against the entire repository letting you know if you've made any mistakes.
 
-Run the development server:
+`yarn lint`: Runs a linter against the entire repository letting you know if you've been messy.
 
-```bash
-cd my-website
-npm run start
-```
+`yarn format`: Formats the entire repository according to Prettier. (Currently rather useless)
 
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
+---
 
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
+## Helpers
 
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+These are not need-to-know but may be useful if something has gone wrong.
+
+`yarn kill-ports`: If your ports did not clear when you took down your environment, you can use this command to clear them manually.
+
+`yarn clean`: rm -rf all of the builds, artifacts, and node_modules in your repository.
+
+`yarn env:clear`: Clears the environment variables from the apps and Prisma.
+
+`yarn env:prisma`: Sets the environment variables for Prisma. Useful for giving Prisma the necessary variables for its scripts.
+
+`yarn env:local-prod`: Sets environment variables for creating a local build of the project.
+
+`yarn env:dev`: Sets the environment variables for local development using your inputs and runs the docker-compose.
+
+---
+
+## Build pipeline scripts
+
+`yarn build`: Generates a build for every app and package in the repo.
+
+`yarn test`: Runs unit tests for every app and package in the repo.
+
+`yarn test:e2e`: Runs end-to-end tests for the repository. (Not sure if this is for CI or local...)

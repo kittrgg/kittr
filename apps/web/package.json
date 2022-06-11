@@ -4,8 +4,8 @@
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
-		"build": "next build --debug",
-		"serve": "next start",
+		"build": "next build",
+		"start": "next start",
 		"lint": "next lint",
 		"tsc": "tsc --noEmit --incremental false",
 		"test": "jest --coverage",
