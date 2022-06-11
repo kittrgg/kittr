@@ -1,40 +1,23 @@
-import { createSSGHelpers } from "@trpc/react/ssg"
-import { createContext, trpc } from "@Utils/trpc"
-import superjson from "superjson"
-import { appRouter } from "./api/trpc/[trpc].api"
+import { createSSGHelper } from "@Server/createSSGHelper"
+import { trpc } from "@Utils/trpc"
 
 export default function IndexPage() {
-	const hello = trpc.useQuery(["hello", { text: "test!" }], {
-		refetchOnWindowFocus: false,
-		refetchOnMount: false,
-		refetchOnReconnect: false
-	})
-
-	console.log(hello.isRefetching, hello.isFetching)
+	const hello = trpc.useQuery(["games/list"])
 
 	if (!hello.data) {
 		return <div>Loading...</div>
 	}
 	return (
 		<div>
-			<p>{hello.data.greeting}</p>
+			<pre>{JSON.stringify(hello.data, null, 2)}</pre>
 		</div>
 	)
 }
 
 export const getStaticProps = async () => {
-	const ssg = createSSGHelpers({
-		router: appRouter,
-		ctx: await createContext(),
-		transformer: superjson
-	})
+	const ssg = await createSSGHelper()
 
-	// Prefetch
-	const test = await ssg.fetchQuery("hello", {
-		text: "test!"
-	})
-
-	console.log({ test })
+	await ssg.fetchQuery("games/list")
 
 	return {
 		props: {

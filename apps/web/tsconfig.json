@@ -29,7 +29,8 @@
 			"@Styles/*": ["styles/*"],
 			"@Utils/*": ["utils/*"],
 			"@Fetch": ["utils/helpers/fetch"],
-			"@Types/*": ["types/*"]
+			"@Types/*": ["types/*"],
+			"@Server/*": ["server/*"]
 		}
 	},
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
