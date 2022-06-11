@@ -4,6 +4,7 @@
 import { createRouter } from "./createRouter"
 import superjson from "superjson"
 import { gamesRouter } from "@Server/routers/games"
+import { getAllGames } from "@Server/services/games"
 
 /**
  * Create your application's root router
@@ -25,11 +26,6 @@ export const appRouter = createRouter()
 	/**
 	 * Merge `postRouter` under `post.`
 	 */
-	.query("test", {
-		async resolve() {
-			return ""
-		}
-	})
 	.merge("games/", gamesRouter)
 
 export type AppRouter = typeof appRouter

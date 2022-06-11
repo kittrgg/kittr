@@ -1,5 +1,6 @@
 import { createController } from "@Server/createController"
 import { getAllGames } from "@Server/services/games"
+import superjson from "superjson"
 
 const listGames = createController().query("", {
 	async resolve() {

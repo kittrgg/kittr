@@ -12,7 +12,7 @@ import { useEffect } from "react"
 import { ReactQueryDevtools } from "react-query/devtools"
 import { Provider } from "react-redux"
 import superjson from "superjson"
-import { AppRouter } from "./api/trpc/[trpc].api"
+import { AppRouter } from "./api/trpc/[[...trpc]].api"
 
 const AppWrap = ({ Component, pageProps }: any) => {
 	return (
