@@ -1,5 +1,5 @@
 import { createSSGHelper } from "@Server/createSSGHelper"
-import { trpc } from "@Utils/trpc"
+import { trpc } from "@Server/createHooks"
 
 export default function IndexPage() {
 	const hello = trpc.useQuery(["games/list"])
@@ -14,14 +14,14 @@ export default function IndexPage() {
 	)
 }
 
-export const getStaticProps = async () => {
-	const ssg = await createSSGHelper()
+// export const getStaticProps = async () => {
+// 	const ssg = await createSSGHelper()
 
-	await ssg.fetchQuery("games/list")
+// 	await ssg.fetchQuery("games/list")
 
-	return {
-		props: {
-			trpcState: ssg.dehydrate()
-		}
-	}
-}
+// 	return {
+// 		props: {
+// 			trpcState: ssg.dehydrate()
+// 		}
+// 	}
+// }

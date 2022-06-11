@@ -1,6 +1,7 @@
 import * as trpcNext from "@trpc/server/adapters/next"
-import { createContext } from "@Utils/trpc"
+import { createContext } from "@Server/context"
 import { appRouter } from "@Server/index"
+import superjson from "superjson"
 
 // export type definition of API
 export type AppRouter = typeof appRouter
@@ -8,8 +9,8 @@ export type AppRouter = typeof appRouter
 // export API handler
 export default trpcNext.createNextApiHandler({
 	router: appRouter,
-	createContext: createContext,
-	batching: {
-		enabled: true
-	}
+	createContext: createContext
+	// batching: {
+	// 	enabled: true
+	// }
 })

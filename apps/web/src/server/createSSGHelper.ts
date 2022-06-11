@@ -1,6 +1,6 @@
 import { createSSGHelpers as createTrcpSsgHelpers } from "@trpc/react/ssg"
 import { appRouter } from "@Server/index"
-import { createContext } from "@Utils/trpc"
+import { createContext } from "@Server/context"
 import superjson from "superjson"
 
 export const createSSGHelper = async () =>

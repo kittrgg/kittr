@@ -25,6 +25,11 @@ export const appRouter = createRouter()
 	/**
 	 * Merge `postRouter` under `post.`
 	 */
+	.query("test", {
+		async resolve() {
+			return ""
+		}
+	})
 	.merge("games/", gamesRouter)
 
 export type AppRouter = typeof appRouter
