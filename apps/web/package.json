@@ -49,6 +49,7 @@
 		"socket.io-client": "4.4.1",
 		"stripe": "8.205.0",
 		"styled-components": "5.3.3",
+		"superjson": "^1.9.1",
 		"uuid": "8.3.2",
 		"validator": "13.7.0",
 		"zod": "^3.17.3"
