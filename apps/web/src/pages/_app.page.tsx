@@ -3,28 +3,22 @@ import { setFallbackLoader } from "@Redux/slices/global"
 import { store, useDispatch, useSelector } from "@Redux/store"
 import GlobalStyles from "@Styles/globals"
 import OverlayStyles from "@Styles/overlay"
+import { httpBatchLink } from "@trpc/client/links/httpBatchLink"
+import { loggerLink } from "@trpc/client/links/loggerLink"
+import { withTRPC } from "@trpc/next"
 import { Routes } from "@Utils/lookups/routes"
 import { useRouter } from "next/router"
 import { useEffect } from "react"
-import { QueryClient, QueryClientProvider } from "react-query"
 import { ReactQueryDevtools } from "react-query/devtools"
 import { Provider } from "react-redux"
-
-const queryClient = new QueryClient({
-	defaultOptions: {
-		queries: {
-			retry: 0
-		}
-	}
-})
+import superjson from "superjson"
+import { AppRouter } from "./api/trpc/[trpc].api"
 
 const AppWrap = ({ Component, pageProps }: any) => {
 	return (
-		<QueryClientProvider client={queryClient}>
-			<Provider store={store}>
-				<MyApp Component={Component} pageProps={pageProps} />
-			</Provider>
-		</QueryClientProvider>
+		<Provider store={store}>
+			<MyApp Component={Component} pageProps={pageProps} />
+		</Provider>
 	)
 }
 
@@ -62,4 +56,37 @@ const MyApp = ({ Component, pageProps }: any) => {
 	)
 }
 
-export default AppWrap
+export default withTRPC<AppRouter>({
+	config({}) {
+		/*
+		 * If you want to use SSR, you need to use the server's full URL
+		 * @link https://trpc.io/docs/ssr
+		 */
+		const url = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}/api/trpc` : "http://localhost:3000/api/trpc"
+
+		return {
+			url,
+			transformer: superjson,
+			/**
+			 * @link https://react-query.tanstack.com/reference/QueryClient
+			 */
+			// queryClientConfig: { defaultOptions: { queries: { staleTime: 60 } } },
+			links: [
+				// adds pretty logs to your console in development and logs errors in production
+				loggerLink({
+					enabled: (opts) =>
+						process.env.NODE_ENV === "development" || (opts.direction === "down" && opts.result instanceof Error)
+				}),
+				httpBatchLink({
+					url
+				})
+			]
+		}
+	}
+	/**
+	 * @link https://trpc.io/docs/ssr
+	 */
+	// ssr: true
+})(AppWrap)
+
+// export default AppWrap

@@ -1,30 +1,22 @@
-import { InferGetStaticPropsType } from "next"
 import PageWrapper from "@Components/layouts/PageWrapper"
+import { Game } from "@kittr/prisma"
 import {
 	getAllGamesQuery,
-	getRisingStarsQuery,
-	getRisingStarsQueryReturnType,
-	getTopChannelsWithProfileQuery,
-	getTopChannelsQueryReturnType,
-	getTotalKitsQuery
+	getRisingStarsQuery, getTopChannelsWithProfileQuery, getTotalKitsQuery
 } from "@Services/orm"
+import { TChannelWithIncludeProfile, TChannelWithIncludes } from "@Services/orm/queries/channels"
 import {
-	serializeGame,
-	serializeChannel,
-	SerializeChannelReturnType,
-	SerializeGameReturnType,
-	deserializeGame,
-	deserializeChannel
+	deserializeChannel, deserializeGame, serializeChannel,
+	SerializeChannelReturnType, serializeGame, SerializeGameReturnType
 } from "@Services/orm/utils/serializers"
-import { TChannelWithIncludes, TChannelWithIncludeProfile } from "@Services/orm/queries/channels"
-import { liveChannelsQuery, ChannelWithLinks } from "@Services/twitch/getLiveStreams"
+import { ChannelWithLinks, liveChannelsQuery } from "@Services/twitch/getLiveStreams"
 import ResponsiveAdBanner from "@Services/venatus/ResponsiveBanner"
 import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
-import { GetStaticProps } from "next"
+import { trpc } from "@Utils/trpc"
+import { GetStaticProps, InferGetStaticPropsType } from "next"
 import Body from "./Home/Body"
 import Hero from "./Home/Hero"
 import PlatformInfo from "./Home/PlatformInfo"
-import { Game } from "@kittr/prisma"
 
 const Home = ({
 	games,
@@ -33,12 +25,15 @@ const Home = ({
 	risingStars,
 	totalNumberOfKits
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
+
+	const hello = trpc.useQuery(['hello']);
+
 	const deserializedGames = games.map((game) => deserializeGame(game))
 	const deserializedPopularChannels = popularChannels.map((channel) => deserializeChannel(channel))
 	const deserializedRisingStars = risingStars.map((channel) => deserializeChannel(channel))
 	const deserializedLiveChannels = liveChannels.map((channel) => deserializeChannel(channel))
 
-	console.log(deserializedPopularChannels)
+	console.log("TEST", hello.data)
 
 	return (
 		<PageWrapper title="Home | kittr" description="Where the pros post their kits. Get kitted.">
@@ -48,7 +43,7 @@ const Home = ({
 				games={deserializedGames}
 				popularChannels={deserializedPopularChannels}
 				risingStars={deserializedRisingStars}
-				liveChannels={deserializedLiveChannels.slice(0, 15)}
+				liveChannels={deserializedLiveChannels?.slice(0, 15)}
 			/>
 			<ResponsiveAdBanner />
 			<PlatformInfo />
