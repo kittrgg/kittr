@@ -1,6 +1,6 @@
 import colors from "@Colors"
 import { ChannelAvatarList, GameList, SideScroller } from "@Components/shared"
-import { Channel, ChannelProfile, Game } from "@kittr/prisma"
+import { Channel, ChannelLink, ChannelProfile, Game } from "@kittr/prisma"
 import { header2 } from "@Styles/typography"
 import { Routes } from "@Utils/lookups/routes"
 import Link from "next/link"
@@ -11,16 +11,20 @@ interface ChannelWithProfile extends Channel {
 	profile: ChannelProfile
 }
 
+interface ChannelWithLinks extends Channel {
+	links: ChannelLink[]
+}
+
 interface Props {
 	/** Games available on the platform. Includes both active and inactive games. */
-	games: Game[]
+	games?: Game[]
 	/** Top channels sorted by view count on kittr. */
-	popularChannels: ChannelWithProfile[]
+	popularChannels?: ChannelWithProfile[]
 	/** Channels who aren't quite in the top channels list
 	 * but we want to give some recognition and visibility.
 	 * */
-	risingStars: ChannelWithProfile[]
-	liveChannels: ChannelWithProfile[]
+	risingStars?: ChannelWithProfile[]
+	liveChannels?: ChannelWithLinks[]
 }
 
 /** Main content section of the home page. Games, channels, etc. */
@@ -42,7 +46,7 @@ const Body = ({ games, popularChannels, risingStars, liveChannels }: Props) => {
 				{games && <GameList data={games} onClick={(elem) => router.push(Routes.GAMES.createPath(elem.urlSafeName))} />}
 			</SideScroller>
 
-			{liveChannels.length > 0 && (
+			{liveChannels && liveChannels.length > 0 && (
 				<>
 					<SectionHeader style={{ marginTop: "60px" }}>
 						<H2>LIVE NOW</H2>

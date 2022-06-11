@@ -1,10 +1,11 @@
 /**
  * This file contains the root router of your tRPC-backend
  */
-import { createRouter } from "./createRouter"
-import superjson from "superjson"
 import { gamesRouter } from "@Server/routers/games"
-import { getAllGames } from "@Server/services/games"
+import superjson from "superjson"
+import { createRouter } from "./createRouter"
+import { channelsRouter } from "./routers/channels"
+import { kitsRouter } from "./routers/kits"
 
 /**
  * Create your application's root router
@@ -27,5 +28,7 @@ export const appRouter = createRouter()
 	 * Merge `postRouter` under `post.`
 	 */
 	.merge("games/", gamesRouter)
+	.merge("channels/", channelsRouter)
+	.merge("kits/", kitsRouter)
 
 export type AppRouter = typeof appRouter
