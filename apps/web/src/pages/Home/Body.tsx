@@ -1,11 +1,11 @@
 import colors from "@Colors"
 import { ChannelAvatarList, GameList, SideScroller } from "@Components/shared"
+import { Channel, ChannelProfile, Game } from "@kittr/prisma"
 import { header2 } from "@Styles/typography"
 import { Routes } from "@Utils/lookups/routes"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import styled from "styled-components"
-import { Game, Channel, ChannelProfile } from "@kittr/prisma"
 
 interface ChannelWithProfile extends Channel {
 	profile: ChannelProfile
