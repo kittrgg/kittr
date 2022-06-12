@@ -5,7 +5,7 @@ Retrieve a game from kittr.
 # Usage
 
 ```js
-const { data: game } = trpc.useQuery(["games/get"])
+const { data: game } = trpc.useQuery(["games/get", { id: "123" }])
 ```
 
 # Returns

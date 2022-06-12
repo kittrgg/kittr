@@ -1,17 +1,19 @@
-# Get Dashboard Channel
+# Dashboard Channel
 
 An endpoint specifically for getting a full channel for the dashboard to work.
 
 # Usage
 
 ```js
-const { data: dashboardChannel } = trpc.useQuery(["channels/dashboard"])
+const { data: dashboardChannel } = trpc.useQuery([
+	"channels/dashboard",
+	{ id: "123", urlSafeName: "JoeWo" }
+])
 ```
 
 # Returns
 
-This query returns the Channel object for the dashboard with all of it's needed relations.
-This isn't the best programming Anthony has ever done.
+This query returns the Channel object for the channel profile page with all of it's needed relations.
 
 ```json
  // TODO: Payload, please

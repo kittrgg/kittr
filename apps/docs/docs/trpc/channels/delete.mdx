@@ -5,7 +5,10 @@ Delete a channel from kittr.
 # Usage
 
 ```js
-const { data: deletedChannel } = trpc.useQuery(["channels/delete"])
+const { data: deletedChannel } = trpc.useQuery([
+	"channels/delete",
+	{ id: "123" }
+])
 ```
 
 # Returns

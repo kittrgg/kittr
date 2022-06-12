@@ -1,9 +1,10 @@
 import fetch from "@Fetch"
-import { Channel, ChannelLink, ChannelProfile, LinkProperty, prisma } from "@kittr/prisma"
+import { Channel, ChannelLink, ChannelProfile, LinkProperty, prisma, Prisma } from "@kittr/prisma"
 import { ITwitchLiveChannels } from "@kittr/types"
 import { getTopChannelsWithLinksQuery } from "@Services/orm"
 import { headers } from "@Services/twitch/utils/auth"
 import { grabLoginName } from "@Services/twitch/utils/grabLoginName"
+import { TRPCError } from "@trpc/server"
 
 interface ChannelWithProfile extends Channel {
 	profile: ChannelProfile
@@ -15,6 +16,16 @@ interface ChannelWithLinks extends Channel {
 
 const getTwitchLink = (channel: ChannelWithLinks) =>
 	channel.links.find((link) => link.property === LinkProperty.TWITCH)?.value ?? ""
+
+export const deleteChannel = async (id: string) => {
+	const channel = await prisma.channel.delete({
+		where: {
+			id
+		}
+	})
+
+	return channel
+}
 
 export const getDashboardChannel = async ({ id, urlSafeName }: { id: string; urlSafeName: string }) => {
 	const channel = await prisma.channel.findFirst({
@@ -69,10 +80,97 @@ export const getDashboardChannel = async ({ id, urlSafeName }: { id: string; url
 	return channel
 }
 
-export const deleteChannel = async (id: string) => {
-	const channel = await prisma.channel.delete({
+export const getFullChannelProfileQuery = async ({ id, urlSafeName }: { id: string; urlSafeName: string }) => {
+	if (!id && !urlSafeName) {
+		throw new TRPCError({ code: "NOT_FOUND", message: "Need either id or urlSafeName" })
+	}
+
+	const channel = await prisma.channel.findFirst({
 		where: {
-			id
+			id,
+			urlSafeName
+		},
+		include: {
+			profile: {
+				include: {
+					brandColors: true,
+					channelPcSpecs: true,
+					affiliates: true,
+					setupPhotos: true
+				}
+			},
+			kits: {
+				orderBy: {
+					base: {
+						displayName: "asc"
+					}
+				},
+				include: {
+					base: {
+						include: {
+							category: true,
+							stats: true
+						}
+					},
+					options: true
+				}
+			},
+			links: true,
+			plan: true,
+			games: true,
+			gameAffiliateCodes: {
+				include: {
+					game: true
+				}
+			}
+		}
+	})
+	return channel
+}
+
+export const getChannelProfile = async ({ id, urlSafeName }: { id: string; urlSafeName: string }) => {
+	if (!id && !urlSafeName) {
+		throw new TRPCError({ code: "BAD_REQUEST", message: "Need either id or urlSafeName" })
+	}
+
+	const channel = await prisma.channel.findFirst({
+		where: {
+			id,
+			urlSafeName
+		},
+		include: {
+			profile: {
+				include: {
+					brandColors: true,
+					channelPcSpecs: true,
+					affiliates: true,
+					setupPhotos: true
+				}
+			},
+			kits: {
+				orderBy: {
+					base: {
+						displayName: "asc"
+					}
+				},
+				include: {
+					base: {
+						include: {
+							category: true,
+							stats: true
+						}
+					},
+					options: true
+				}
+			},
+			links: true,
+			plan: true,
+			games: true,
+			gameAffiliateCodes: {
+				include: {
+					game: true
+				}
+			}
 		}
 	})
 

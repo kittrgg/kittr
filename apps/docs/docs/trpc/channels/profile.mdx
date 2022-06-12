@@ -1,0 +1,20 @@
+# Channel Profile
+
+An endpoint specifically for getting a channel's profile for the profile page .
+
+# Usage
+
+```js
+const { data: dashboardChannel } = trpc.useQuery([
+	"channels/profile",
+	{ id: "123", urlSafeName: "JoeWo" }
+])
+```
+
+# Returns
+
+This query returns the Channel object for the dashboard with all of it's needed relations.
+
+```json
+ // TODO: Payload, please
+```

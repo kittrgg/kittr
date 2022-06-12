@@ -31,6 +31,20 @@ const getDashboardChannel = createController().query("", {
 	async resolve({ input }) {
 		const { id, urlSafeName } = input
 		const channel = await ChannelsService.getDashboardChannel({ id, urlSafeName })
+
+		return channel
+	}
+})
+
+const getChannelProfile = createController().query("", {
+	input: z.object({
+		id: z.string(),
+		urlSafeName: z.string()
+	}),
+	async resolve({ input }) {
+		const { id, urlSafeName } = input
+		const channel = await ChannelsService.getChannelProfile({ id, urlSafeName })
+
 		return channel
 	}
 })
@@ -48,5 +62,6 @@ export const ChannelsController = {
 	listRisingChannels,
 	listLiveChannels,
 	getDashboardChannel,
+	getChannelProfile,
 	deleteChannel
 }
