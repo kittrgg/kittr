@@ -22,7 +22,7 @@ Before you can do anything useful:
 
 `yarn dx:db-view`: Open up an in-browser database viewer.
 
-`yarn db-snapshot`: Creates a snapshot of the current database and saves it in your local file system.
+`yarn dx:db-snapshot`: Creates a snapshot of the current database and saves it in your local file system.
 
 `yarn dx:seed-snapshot`: Uses the snapshot from `yarn db-snapshot` to overwrite your current database.
 
