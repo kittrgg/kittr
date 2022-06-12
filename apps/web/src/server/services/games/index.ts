@@ -5,3 +5,12 @@ export const getAllGames = async () => {
 
 	return games
 }
+
+export const getGame = async (id: string) => {
+	const game = await prisma.game.findFirst({
+		where: {
+			id
+		}
+	})
+	return game
+}

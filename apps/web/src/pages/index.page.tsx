@@ -38,6 +38,7 @@ export const getStaticProps = async () => {
 
 	const ssg = await createSSGHelper()
 
+	// TODO: Do we want to Promise.all this or does it already do it through tRPC magic?
 	await ssg.fetchQuery("kits/count")
 	await ssg.fetchQuery("games/list")
 	await ssg.fetchQuery("channels/top")
