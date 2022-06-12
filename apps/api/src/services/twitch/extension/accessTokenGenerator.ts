@@ -35,10 +35,14 @@ axios({
 	})
 	.catch((err: any) => {
 		if (err.response) {
-			console.error("Error at token generation", err.response.statusCode, err.response.body)
-			console.error("Error at token generation", err)
+			console.error(
+				"Error at token generation",
+				err.response.statusCode,
+				err.response.body
+			)
+			console.error("Error at token generation", err.data)
 		} else {
-			console.error("Error at token generation", err)
+			console.error("Error at token generation", err.data)
 		}
 	})
 

@@ -13,7 +13,6 @@ services:
     restart: always
     volumes:
       - ./volumes/postgres:/var/lib/postgresql/data
-
   mongo:
     container_name: mongo
     image: mongo:5

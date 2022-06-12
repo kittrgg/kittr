@@ -17,6 +17,9 @@ const main = async () => {
 
 	let file = {}
 
+	file.DATABASE_URL = inputs.DATABASE_URL
+	await writeFile("./packages/prisma/.env", stringify(file))
+
 	file.DB_CONNECTION_STRING = inputs.DB_CONNECTION_STRING
 	file.IS_DEV = inputs.IS_DEV
 	file.FIREBASE_AUTH_EMULATOR_HOST = inputs.FIREBASE_AUTH_EMULATOR_HOST
@@ -26,6 +29,7 @@ const main = async () => {
 	file.TWITCH_SECRET = inputs.TWITCH_SECRET
 	file.TWITCH_EXTENSION_SECRET = inputs.TWITCH_EXTENSION_SECRET
 	file.SENTRY_DSN = inputs.SENTRY_DSN
+	await writeFile("./apps/api/.env", stringify(file))
 	await writeFile("./apps/api/.env.development", stringify(file))
 
 	file.NEXT_PUBLIC_SENTRY_DSN = inputs.SENTRY_DSN

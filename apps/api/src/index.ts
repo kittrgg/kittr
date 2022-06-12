@@ -1,9 +1,4 @@
 import dotenv from "dotenv"
-
-dotenv.config({
-	path: process.env.NODE_ENV === "production" ? ".env" : ".env.development"
-})
-
 import * as Logger from "@kittr/logger/node"
 import { Server } from "socket.io"
 import cors from "cors"
@@ -13,8 +8,10 @@ import { createServer } from "http"
 import mongoose from "mongoose"
 import { generateKitStats } from "./jobs/createKitStatsAsInterval"
 import { writeViewCounts } from "./jobs/writeViewCounts"
-import twitch from "./services/twitch/extension/routes"
-import { getStreamerByTwitchBroadcasterLoginId } from "./utils/streamer"
+
+dotenv.config({
+	path: process.env.NODE_ENV === "production" ? ".env" : ".env.development"
+})
 
 const app = express()
 app.use(cors())
@@ -33,7 +30,6 @@ Logger.init({
 app.use(Logger.Handlers.requestHandler())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use("/twitch", twitch)
 
 console.log("Connecting to MongoDB...")
 mongoose
@@ -59,13 +55,6 @@ mongoose
 			io.emit(`dashboard=${_id}`, "Trigger refetch!")
 			return res.status(200).json({ success: true })
 		})
-
-		/*
-      /api/streamer?broadcasterLogin={broadcasterLogin}
-
-      Returns the streamer object
-    */
-		app.get("/api/streamer", getStreamerByTwitchBroadcasterLoginId)
 
 		if (process.env.NODE_ENV === "production") {
 			const viewCounts = new CronJob(

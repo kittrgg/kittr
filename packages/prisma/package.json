@@ -3,7 +3,7 @@
 	"version": "0.1.1",
 	"private": true,
 	"scripts": {
-		"dev": "tsup index.ts --watch --dts",
+		"dev": "prisma db push && tsup index.ts --watch --dts",
 		"clean": "rm -rf .turbo && rm -rf node_modules",
 		"db-deploy": "prisma migrate deploy",
 		"db-migrate": "prisma db push --force-reset",
