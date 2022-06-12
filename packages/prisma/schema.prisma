@@ -1,6 +1,15 @@
 generator client {
   provider = "prisma-client-js"
-  previewFeatures = ["fullTextSearch"]
+}
+
+generator zod {
+  provider              = "zod-prisma"
+  output                = "./validator"
+  relationModel         = true
+  modelCase             = "PascalCase"
+  modelSuffix           = "Model"
+  useDecimalJs          = true
+  prismaJsonNullability = true
 }
 
 datasource db {
