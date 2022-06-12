@@ -19,8 +19,6 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<
 			code?: string
 			url?: string
 		}
-		console.log({ url })
-
 		if (url) {
 			if (!validator.isURL(url)) return res.status(400).json({ error: true, errorMessage: "Invalid URL" })
 		}
@@ -52,6 +50,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<
 	}
 })
 
+// Edit
 handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<Channel>>) => {
 	try {
 		// Upsert an affiliate for a channel

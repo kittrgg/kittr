@@ -8,6 +8,7 @@ import { TRPCError } from "@trpc/server"
 
 export * from "./games"
 export * from "./kits"
+export * from "./profile"
 
 interface ChannelWithProfile extends Channel {
 	profile: ChannelProfile
