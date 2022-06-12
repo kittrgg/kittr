@@ -6,6 +6,8 @@ import { headers } from "@Services/twitch/utils/auth"
 import { grabLoginName } from "@Services/twitch/utils/grabLoginName"
 import { TRPCError } from "@trpc/server"
 
+export * from "./games"
+
 interface ChannelWithProfile extends Channel {
 	profile: ChannelProfile
 }
