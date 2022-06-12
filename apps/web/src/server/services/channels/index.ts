@@ -16,6 +16,69 @@ interface ChannelWithLinks extends Channel {
 const getTwitchLink = (channel: ChannelWithLinks) =>
 	channel.links.find((link) => link.property === LinkProperty.TWITCH)?.value ?? ""
 
+export const getDashboardChannel = async ({ id, urlSafeName }: { id: string; urlSafeName: string }) => {
+	const channel = await prisma.channel.findFirst({
+		where: {
+			id,
+			urlSafeName
+		},
+		include: {
+			customGameCommands: true,
+			profile: {
+				include: {
+					brandColors: true,
+					channelPcSpecs: true,
+					affiliates: true,
+					setupPhotos: true
+				}
+			},
+			managers: true,
+			kits: {
+				orderBy: {
+					base: {
+						displayName: "asc"
+					}
+				},
+				include: {
+					base: {
+						include: {
+							category: true,
+							stats: true,
+							commandCodes: true
+						}
+					},
+					options: true
+				}
+			},
+			links: true,
+			plan: true,
+			games: true,
+			gameAffiliateCodes: {
+				include: {
+					game: true
+				}
+			},
+			overlay: {
+				include: {
+					primaryKit: true,
+					secondaryKit: true
+				}
+			}
+		}
+	})
+	return channel
+}
+
+export const deleteChannel = async (id: string) => {
+	const channel = await prisma.channel.delete({
+		where: {
+			id
+		}
+	})
+
+	return channel
+}
+
 export const listTopChannels = async () => {
 	const result = await prisma.channel.findMany({
 		where: {
