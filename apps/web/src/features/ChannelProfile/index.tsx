@@ -12,15 +12,20 @@ import Schedule from "./Schedule"
 import Specs from "./Specs"
 import Affiliates from "./Affiliates"
 import PremiumCallout from "./PremiumCallout"
-import { ProfilePageQueryReturnType } from "@Services/twitch/getProfilePageData"
-import { DeserializeFullChannelProfileReturnType } from "@Services/orm/queries/channels/getFullChannelProfile"
+import { ChannelProfile } from "@kittr/prisma"
+import { trpc } from "@Server/createHooks"
+import { useRouter } from "next/router"
 
-interface Props {
-	channel: DeserializeFullChannelProfileReturnType
-	twitchInfo: ProfilePageQueryReturnType
-}
+const ChannelProfile = () => {
+	const { query } = useRouter()
+	const { urlSafeName } = query as { urlSafeName: string }
 
-const ChannelProfile = ({ channel, twitchInfo }: Props) => {
+	const { data: channel } = trpc.useQuery(["channels/profile/get", urlSafeName])
+	const twitchLink = channel?.links.find((channel) => channel.property === "TWITCH")?.value!
+	const { data: twitchInfo } = trpc.useQuery(["twitch/profile-page", twitchLink], {
+		enabled: !!twitchLink
+	})
+
 	const isPremium = channel?.plan?.type === "premium"
 	const hasCoverPhoto = channel?.profile?.hasCoverPhoto
 	const primaryColor = channel?.profile?.brandColors.find((color) => color.type === "PRIMARY")?.value || colors.white
@@ -34,21 +39,21 @@ const ChannelProfile = ({ channel, twitchInfo }: Props) => {
 
 	return (
 		<Container>
-			<Header {...channel} isLive={twitchInfo.channelData?.type === "live"} imagePath={coverPhotoPath} />
+			<Header {...channel} isLive={twitchInfo?.channelData?.type === "live"} imagePath={coverPhotoPath} />
 			<Games games={channel.games} urlSafeName={channel.urlSafeName} />
 			<FeaturedKits kits={channel.kits} />
 			{isPremium ? (
 				<>
-					<PopularClips clips={twitchInfo.clips} brandColor={primaryColor} />
+					<PopularClips clips={twitchInfo?.clips} brandColor={primaryColor} />
 					<RecentVideos
-						videos={twitchInfo.recentVideos}
+						videos={twitchInfo?.recentVideos}
 						brandColor={primaryColor}
 						coverPhotoPath={coverPhotoPath}
 						hasProfileImage={!!channel.profile?.hasProfileImage}
 						profileImagePath={channel.profile?.hasProfileImage ? channel.id : ""}
 					/>
 
-					<Schedule schedule={twitchInfo.schedule} brandColor={primaryColor} />
+					<Schedule schedule={twitchInfo?.schedule} brandColor={primaryColor} />
 					<SetupPhotos id={channel.id} setupPhotos={channel.profile?.setupPhotos || []} />
 					<Specs specs={channel.profile?.channelPcSpecs || []} brandColor={primaryColor} />
 					<Affiliates affiliates={channel.profile?.affiliates || []} brandColor={primaryColor} />

@@ -34,16 +34,15 @@ const Home = () => {
 export default Home
 
 export const getStaticProps = async () => {
-	await connectToDatabase()
-
 	const ssg = await createSSGHelper()
 
-	// TODO: Do we want to Promise.all this or does it already do it through tRPC magic?
-	await ssg.fetchQuery("kits/count")
-	await ssg.fetchQuery("games/list")
-	await ssg.fetchQuery("channels/top", { take: 10 })
-	await ssg.fetchQuery("channels/rising")
-	await ssg.fetchQuery("channels/live")
+	Promise.all([
+		await ssg.fetchQuery("kits/count"),
+		await ssg.fetchQuery("games/list"),
+		await ssg.fetchQuery("channels/top", { take: 10 }),
+		await ssg.fetchQuery("channels/rising"),
+		await ssg.fetchQuery("channels/live")
+	])
 
 	return {
 		props: {

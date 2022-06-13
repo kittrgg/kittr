@@ -47,6 +47,9 @@
 		"clean": {
 			"cache": false
 		},
+		"seed": {
+			"cache": false
+		},
 		"type-check": {
 			"outputs": []
 		}

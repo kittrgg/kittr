@@ -48,13 +48,9 @@ const getDashboardChannel = createController().query("", {
 })
 
 const getChannelProfile = createController().query("", {
-	input: z.object({
-		id: z.string(),
-		urlSafeName: z.string()
-	}),
-	async resolve({ input }) {
-		const { id, urlSafeName } = input
-		const channel = await ChannelsService.getChannelProfile({ id, urlSafeName })
+	input: z.string(),
+	async resolve({ input: urlSafeName }) {
+		const channel = await ChannelsService.getChannelProfileByUrlSafeName(urlSafeName)
 
 		return channel
 	}

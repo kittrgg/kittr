@@ -23,7 +23,7 @@ import { H2 } from "./style"
 import MobileSchedule from "./MobileSchedule"
 
 interface Props {
-	schedule: ITwitchScheduleSegment[]
+	schedule?: ITwitchScheduleSegment[]
 	brandColor: string
 }
 
@@ -66,7 +66,7 @@ const Schedule = ({ schedule, brandColor }: Props) => {
 	}
 
 	// If channel has not set a Twitch schedule.
-	if (schedule.length === 0) return null
+	if (schedule?.length === 0) return null
 
 	return (
 		<section id="schedule">
@@ -101,7 +101,7 @@ const Schedule = ({ schedule, brandColor }: Props) => {
 									<Day firstOfType={weekIndex === 0} ref={observe}>
 										{schedule
 											// Filter for any channel where the start time or end time happens today
-											.filter((channel: any) => {
+											?.filter((channel: any) => {
 												const channelStartsOnDay = isSameDay(
 													new Date(channel.end_time),
 													advanceDaysFromToday(weekIndex)

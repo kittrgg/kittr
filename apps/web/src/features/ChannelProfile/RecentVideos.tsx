@@ -8,7 +8,7 @@ import { montserrat } from "@Styles/typography"
 import colors from "@Colors"
 
 interface Props {
-	videos: ITwitchVideo[]
+	videos?: ITwitchVideo[]
 	coverPhotoPath: string
 	profileImagePath: string
 	hasProfileImage: boolean
@@ -17,13 +17,13 @@ interface Props {
 
 const RecentVideos = ({ videos, coverPhotoPath, profileImagePath, hasProfileImage, brandColor }: Props) => {
 	// If channel doesn't have any videos.
-	if (videos.length === 0) return null
+	if (videos?.length === 0) return null
 
 	return (
 		<section id="videos">
 			<H2>RECENT STREAMS</H2>
 			<SideScroller childMargin="10px" wrapperStyles={{ width: "100vw" }}>
-				{videos.map((clip: any) => {
+				{videos?.map((clip: any) => {
 					const month = getMonth(new Date(clip.created_at))
 					const day = getDate(new Date(clip.created_at))
 					const year = getYear(new Date(clip.created_at))

@@ -1,23 +1,39 @@
 import styled from "styled-components"
-
 import colors from "@Colors"
 import { header1, header2 } from "@Styles/typography"
 import ProfileImage from "@Components/shared/ProfileImage"
 import SocialIcons from "@Components/shared/SocialIcons"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
-import { DeserializeFullChannelProfileReturnType } from "@Services/orm/queries/channels/getFullChannelProfile"
+import {
+	Channel,
+	Game,
+	ChannelProfile,
+	SetupPhoto,
+	ChannelPcSpec,
+	ChannelLink,
+	ChannelPlan,
+	Kit,
+	ChannelBrandColor
+} from "@kittr/prisma"
 
-const Header = ({
-	id,
-	games,
-	displayName,
-	profile,
-	links,
-	plan,
-	kits,
-	isLive,
-	imagePath
-}: DeserializeFullChannelProfileReturnType & { isLive: boolean; imagePath: string }) => {
+interface Props extends Channel {
+	isLive: boolean
+	imagePath: string
+	games: Game[]
+	profile:
+		| (ChannelProfile & {
+				brandColors: ChannelBrandColor[]
+				setupPhotos: SetupPhoto[]
+				channelPcSpecs: ChannelPcSpec[]
+		  })
+		| null
+
+	links: ChannelLink[]
+	plan: ChannelPlan | null
+	kits: Kit[]
+}
+
+const Header = ({ id, games, displayName, profile, links, plan, kits, isLive, imagePath }: Props) => {
 	const isPremium = plan?.type === "premium"
 	const hasCoverPhoto = profile?.hasCoverPhoto
 	const userColor = profile?.brandColors.find((color) => color.type === "PRIMARY")?.value || colors.white
@@ -26,7 +42,13 @@ const Header = ({
 	return (
 		<Wrapper hasCoverPhoto={isPremium && !!hasCoverPhoto} imagePath={imagePath}>
 			<Avatar>
-				<ProfileImage size="150px" hasProfileImage={!!profile?.hasProfileImage} imagePath={id} border={isPremium ? userColor : ""} isLive={isLive} />
+				<ProfileImage
+					size="150px"
+					hasProfileImage={!!profile?.hasProfileImage}
+					imagePath={id}
+					border={isPremium ? userColor : ""}
+					isLive={isLive}
+				/>
 				<AvatarInfo>
 					<H1>{displayName}</H1>
 					<Counts>

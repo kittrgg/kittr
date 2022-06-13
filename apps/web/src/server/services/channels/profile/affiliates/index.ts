@@ -46,3 +46,18 @@ export const updateAffiliate = async ({ id, data }: { id: string; data: Partial<
 	})
 	return newAffiliate
 }
+
+export const deleteAffiliate = async ({ channelId, affiliateId }: { channelId: string; affiliateId: string }) => {
+	const channel = await prisma.channelProfile.update({
+		where: { id: channelId },
+		data: {
+			affiliates: {
+				delete: {
+					id: affiliateId
+				}
+			}
+		}
+	})
+
+	return channel
+}

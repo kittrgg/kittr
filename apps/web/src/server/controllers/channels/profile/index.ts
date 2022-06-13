@@ -3,13 +3,9 @@ import * as ChannelsService from "@Server/services/channels"
 import { z } from "zod"
 
 const getChannelProfile = createController().query("", {
-	input: z.object({
-		id: z.string(),
-		urlSafeName: z.string()
-	}),
+	input: z.string(),
 	async resolve({ input }) {
-		const { id, urlSafeName } = input
-		const channel = await ChannelsService.getChannelProfile({ id, urlSafeName })
+		const channel = await ChannelsService.getChannelProfileByUrlSafeName(input)
 
 		return channel
 	}

@@ -10,6 +10,7 @@
 		"generate-schemas": "prisma generate",
 		"db-studio": "prisma studio",
 		"migrate-data": "prisma db push --force-reset && ts-node ./migration-scripts/index.ts",
+		"seed": "prisma db push --force-reset && ts-node ./migration-scripts/index.ts",
 		"nuke": "ts-node ./migration-scripts/nuke.ts",
 		"db-format": "prisma format"
 	},

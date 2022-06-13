@@ -137,14 +137,13 @@ export const getFullChannelProfileQuery = async ({ id, urlSafeName }: { id: stri
 	return channel
 }
 
-export const getChannelProfile = async ({ id, urlSafeName }: { id: string; urlSafeName: string }) => {
-	if (!id && !urlSafeName) {
+export const getChannelProfileByUrlSafeName = async (urlSafeName: string) => {
+	if (!urlSafeName) {
 		throw new TRPCError({ code: "BAD_REQUEST", message: "Need either id or urlSafeName" })
 	}
 
 	const channel = await prisma.channel.findFirst({
 		where: {
-			id,
 			urlSafeName
 		},
 		include: {

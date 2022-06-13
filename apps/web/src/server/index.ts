@@ -6,6 +6,7 @@ import superjson from "superjson"
 import { createRouter } from "./createRouter"
 import { channelsRouter } from "./routers/channels"
 import { kitsRouter } from "./routers/kits"
+import { twitchRouter } from "./routers/twitch"
 
 /**
  * Create your application's root router
@@ -30,5 +31,6 @@ export const appRouter = createRouter()
 	.merge("games/", gamesRouter)
 	.merge("channels/", channelsRouter)
 	.merge("kits/", kitsRouter)
+	.merge("twitch/", twitchRouter)
 
 export type AppRouter = typeof appRouter

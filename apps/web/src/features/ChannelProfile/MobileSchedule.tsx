@@ -7,7 +7,7 @@ import { header1, header2, paragraph } from "@Styles/typography"
 import { format, getMilliseconds } from "date-fns"
 
 interface Props {
-	schedule: ITwitchScheduleSegment[]
+	schedule?: ITwitchScheduleSegment[]
 	brandColor: string
 }
 
@@ -15,7 +15,7 @@ const MobileSchedule = ({ schedule, brandColor }: Props) => {
 	return (
 		<section id="schedule">
 			<SideScroller childMargin="24px" wrapperStyles={{ width: "100vw" }}>
-				{schedule.map((channel) => {
+				{schedule?.map((channel) => {
 					const { category, start_time, end_time, title } = channel
 
 					return (

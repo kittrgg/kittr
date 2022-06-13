@@ -2,6 +2,7 @@ import { createController } from "@Server/createController"
 import * as ChannelsService from "@Server/services/channels"
 import { ChannelAffiliateModel } from "@kittr/prisma/validator"
 import { TRPCError } from "@trpc/server"
+import { z } from "zod"
 
 const createAffiliate = createController().query("", {
 	input: ChannelAffiliateModel.omit({ id: true }),
@@ -29,7 +30,19 @@ const updateAffiliate = createController().query("", {
 	}
 })
 
+const deleteAffiliate = createController().query("", {
+	input: z.object({
+		channelId: z.string(),
+		affiliateId: z.string()
+	}),
+	async resolve({ input }) {
+		const channel = await ChannelsService.deleteAffiliate(input)
+		return channel
+	}
+})
+
 export const ChannelsProfileAffiliatesController = {
 	createAffiliate,
-	updateAffiliate
+	updateAffiliate,
+	deleteAffiliate
 }
