@@ -6,10 +6,19 @@ export const getAllGames = async () => {
 	return games
 }
 
-export const getGame = async (id: string) => {
+export const getGameById = async (id: string) => {
 	const game = await prisma.game.findFirst({
 		where: {
 			id
+		}
+	})
+	return game
+}
+
+export const getGameByUrlSafeName = async (urlSafeName: string) => {
+	const game = await prisma.game.findFirst({
+		where: {
+			urlSafeName
 		}
 	})
 	return game

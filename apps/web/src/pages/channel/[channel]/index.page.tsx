@@ -53,7 +53,7 @@ export const getStaticProps = async ({ params }: { params: { channel: string } }
 
 	return {
 		props: {
-			twitchInfo
+			trpcState: ssg.dehydrate()
 		},
 		revalidate: 60
 	}

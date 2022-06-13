@@ -206,8 +206,38 @@ export const listTopChannels = async ({ skip = 0, take = 10 }: ListParams) => {
 	return result as ChannelWithProfile[]
 }
 
-export const countChannels = async () => {
-	const total = await prisma.channel.count()
+// export const countChannels = async () => {
+// 	if (gameId) {
+// 		const total = await prisma.channel.count({
+// 			where: {
+// 				games: {
+// 					some: {
+// 						id: gameId
+// 					}
+// 				}
+// 			}
+// 		})
+
+// 		return total
+// 	}
+// }
+
+/** Counts channels both for a game and on the entirety of kittr.
+ *
+ * Passs a game's urlSafeName to count channels for that game.
+ *
+ * Passing undefined results in all channels.
+ */
+export const countChannels = async (urlSafeName?: string) => {
+	const total = await prisma.channel.count({
+		where: {
+			games: {
+				some: {
+					urlSafeName
+				}
+			}
+		}
+	})
 
 	return total
 }

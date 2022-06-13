@@ -9,15 +9,24 @@ const listGames = createController().query("", {
 	}
 })
 
-const getGame = createController().query("", {
+const getGameByUrlSafeName = createController().query("", {
+	input: z.string(),
+	async resolve({ input: urlSafeName }) {
+		const game = await GamesService.getGameByUrlSafeName(urlSafeName)
+		return game
+	}
+})
+
+const getGameById = createController().query("", {
 	input: z.string(),
 	async resolve({ input: id }) {
-		const game = await GamesService.getGame(id)
+		const game = await GamesService.getGameById(id)
 		return game
 	}
 })
 
 export const GamesController = {
 	listGames,
-	getGame
+	getGameByUrlSafeName,
+	getGameById
 }

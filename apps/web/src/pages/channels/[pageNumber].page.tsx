@@ -94,7 +94,7 @@ export const getStaticProps = async ({ params }: { params: { pageNumber: string 
 
 	const skip = (Number(params.pageNumber) - 1) * CHANNELS_PER_PAGE
 
-	await ssg.fetchQuery("channels/top", { take: 10, skip })
+	await ssg.fetchQuery("channels/top", { take: CHANNELS_PER_PAGE, skip })
 	await ssg.fetchQuery("channels/count")
 
 	return {

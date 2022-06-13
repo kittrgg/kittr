@@ -29,3 +29,26 @@ export const deleteGame = async ({ channelId, gameId }: { channelId: string; gam
 
 	return channel
 }
+
+export const getChannelsByGame = async ({
+	urlSafeName,
+	skip,
+	take
+}: {
+	urlSafeName: string
+	skip: number
+	take: number
+}) => {
+	const channels = await prisma.channel.findMany({
+		where: {
+			games: {
+				some: {
+					urlSafeName
+				}
+			}
+		},
+		skip,
+		take
+	})
+	return channels
+}

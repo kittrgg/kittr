@@ -23,7 +23,20 @@ const deleteGameFromChannel = createController().mutation("", {
 	}
 })
 
+const listChannelsForGame = createController().query("", {
+	input: z.object({
+		urlSafeName: z.string(),
+		take: z.number(),
+		skip: z.number()
+	}),
+	async resolve({ input: { urlSafeName, take, skip } }) {
+		const channels = await ChannelsService.getChannelsByGame({ urlSafeName, take, skip })
+		return channels
+	}
+})
+
 export const ChannelsGamesController = {
 	addGameToChannel,
-	deleteGameFromChannel
+	deleteGameFromChannel,
+	listChannelsForGame
 }

@@ -14,8 +14,9 @@ const listTopChannels = createController().query("", {
 })
 
 const countChannels = createController().query("", {
-	async resolve() {
-		const total = await ChannelsService.countChannels()
+	input: z.string().optional(),
+	async resolve({ input: urlSafeName }) {
+		const total = await ChannelsService.countChannels(urlSafeName)
 		return total
 	}
 })
