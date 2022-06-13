@@ -48,7 +48,10 @@ export const getChannelsByGame = async ({
 			}
 		},
 		skip,
-		take
+		take,
+		include: {
+			profile: true
+		}
 	})
 	return channels
 }
