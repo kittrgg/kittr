@@ -10,7 +10,7 @@ import PlatformInfo from "./Home/PlatformInfo"
 const Home = () => {
 	const { data: games } = trpc.useQuery(["games/list"])
 	const { data: totalNumberOfKits } = trpc.useQuery(["kits/count"])
-	const { data: popularChannels } = trpc.useQuery(["channels/top"])
+	const { data: popularChannels } = trpc.useQuery(["channels/top", { take: 10 }])
 	const { data: risingChannels } = trpc.useQuery(["channels/rising"])
 	const { data: liveChannels } = trpc.useQuery(["channels/live"])
 
@@ -41,7 +41,7 @@ export const getStaticProps = async () => {
 	// TODO: Do we want to Promise.all this or does it already do it through tRPC magic?
 	await ssg.fetchQuery("kits/count")
 	await ssg.fetchQuery("games/list")
-	await ssg.fetchQuery("channels/top")
+	await ssg.fetchQuery("channels/top", { take: 10 })
 	await ssg.fetchQuery("channels/rising")
 	await ssg.fetchQuery("channels/live")
 

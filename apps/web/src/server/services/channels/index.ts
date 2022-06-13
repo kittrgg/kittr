@@ -1,5 +1,5 @@
 import fetch from "@Fetch"
-import { Channel, ChannelLink, ChannelProfile, LinkProperty, prisma, Prisma } from "@kittr/prisma"
+import { Channel, ChannelLink, ChannelProfile, LinkProperty, prisma } from "@kittr/prisma"
 import { ITwitchLiveChannels } from "@kittr/types"
 import { getTopChannelsWithLinksQuery } from "@Services/orm"
 import { headers } from "@Services/twitch/utils/auth"
@@ -16,6 +16,11 @@ interface ChannelWithProfile extends Channel {
 
 interface ChannelWithLinks extends Channel {
 	links: ChannelLink[]
+}
+
+interface ListParams {
+	skip?: number
+	take?: number
 }
 
 const getTwitchLink = (channel: ChannelWithLinks) =>
@@ -181,7 +186,7 @@ export const getChannelProfile = async ({ id, urlSafeName }: { id: string; urlSa
 	return channel
 }
 
-export const listTopChannels = async () => {
+export const listTopChannels = async ({ skip = 0, take = 10 }: ListParams) => {
 	const result = await prisma.channel.findMany({
 		where: {
 			profile: {
@@ -191,13 +196,21 @@ export const listTopChannels = async () => {
 		orderBy: {
 			viewCount: "desc"
 		},
-		take: 10,
+		skip,
+		take,
 		include: {
-			profile: true
+			profile: true,
+			links: true
 		}
 	})
 
 	return result as ChannelWithProfile[]
+}
+
+export const countChannels = async () => {
+	const total = await prisma.channel.count()
+
+	return total
 }
 
 export const listRisingChannels = async () => {

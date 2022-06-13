@@ -3,9 +3,20 @@ import * as ChannelsService from "@Server/services/channels"
 import { z } from "zod"
 
 const listTopChannels = createController().query("", {
-	async resolve() {
-		const result = await ChannelsService.listTopChannels()
+	input: z.object({
+		skip: z.number().optional(),
+		take: z.number().optional()
+	}),
+	async resolve({ input: { skip, take } }) {
+		const result = await ChannelsService.listTopChannels({ skip, take })
 		return result
+	}
+})
+
+const countChannels = createController().query("", {
+	async resolve() {
+		const total = await ChannelsService.countChannels()
+		return total
 	}
 })
 
@@ -63,5 +74,6 @@ export const ChannelsController = {
 	listLiveChannels,
 	getDashboardChannel,
 	getChannelProfile,
-	deleteChannel
+	deleteChannel,
+	countChannels
 }
