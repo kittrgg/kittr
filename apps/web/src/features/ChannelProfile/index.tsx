@@ -1,26 +1,25 @@
-import { useState, useEffect } from "react"
-import styled from "styled-components"
 import colors from "@Colors"
+import { trpc } from "@Server/createHooks"
 import { download } from "@Services/firebase/storage"
-import Header from "./Header"
-import Games from "./Games"
+import { useRouter } from "next/router"
+import { useEffect, useState } from "react"
+import styled from "styled-components"
+import Affiliates from "./Affiliates"
 import FeaturedKits from "./FeaturedKits"
-import SetupPhotos from "./SetupPhotos"
+import Games from "./Games"
+import Header from "./Header"
 import PopularClips from "./PopularClips"
+import PremiumCallout from "./PremiumCallout"
 import RecentVideos from "./RecentVideos"
 import Schedule from "./Schedule"
+import SetupPhotos from "./SetupPhotos"
 import Specs from "./Specs"
-import Affiliates from "./Affiliates"
-import PremiumCallout from "./PremiumCallout"
-import { ChannelProfile } from "@kittr/prisma"
-import { trpc } from "@Server/createHooks"
-import { useRouter } from "next/router"
 
 const ChannelProfile = () => {
 	const { query } = useRouter()
-	const { urlSafeName } = query as { urlSafeName: string }
+	const { channel: urlChannel } = query as { channel: string }
 
-	const { data: channel } = trpc.useQuery(["channels/profile/get", urlSafeName])
+	const { data: channel } = trpc.useQuery(["channels/profile/get", urlChannel])
 	const twitchLink = channel?.links.find((channel) => channel.property === "TWITCH")?.value!
 	const { data: twitchInfo } = trpc.useQuery(["twitch/profile-page", twitchLink], {
 		enabled: !!twitchLink

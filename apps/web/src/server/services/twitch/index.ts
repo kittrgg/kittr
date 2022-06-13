@@ -1,9 +1,9 @@
-import { ITwitchScheduleSegment, ITwitchClip, ITwitchChannelData, ITwitchVideo } from "@kittr/types"
+import { ITwitchChannelData, ITwitchClip, ITwitchScheduleSegment, ITwitchVideo } from "@kittr/types"
 import { grabLoginName } from "@Services/twitch/utils/grabLoginName"
 import { getChannelData } from "./getChannelData"
-import { getSchedule } from "./getSchedule"
 import { getClips } from "./getClips"
 import { getRecentVideos } from "./getRecentVideos"
+import { getSchedule } from "./getSchedule"
 
 interface ProfilePageData {
 	channelData: ITwitchChannelData
@@ -12,9 +12,7 @@ interface ProfilePageData {
 	recentVideos: ITwitchVideo[]
 }
 
-export const getProfile = async (twitchLink: string) => {
-	let response = {} as ProfilePageData
-
+export const getProfile = async (twitchLink: string): Promise<ProfilePageData> => {
 	const channelTwitchLogin = grabLoginName(twitchLink || "")
 
 	const [channelData] = await getChannelData(channelTwitchLogin)
@@ -27,10 +25,10 @@ export const getProfile = async (twitchLink: string) => {
 		getRecentVideos(broadcaster_id)
 	])
 
-	response.channelData = channelData
-	response.schedule = schedule
-	response.clips = clips
-	response.recentVideos = recentVideos
-
-	return response
+	return {
+		channelData,
+		schedule,
+		clips,
+		recentVideos
+	}
 }

@@ -1,16 +1,16 @@
-import { useRouter } from "next/router"
-import ChannelProfile from "@Features/ChannelProfile"
-import { NoItemFound } from "@Components/shared"
-import PageWrapper from "@Components/layouts/PageWrapper"
-import { getTopChannelsQuery } from "@Services/orm"
 import FallbackPage from "@Components/layouts/FallbackPage"
-import { createSSGHelper } from "@Server/createSSGHelper"
+import PageWrapper from "@Components/layouts/PageWrapper"
+import { NoItemFound } from "@Components/shared"
+import ChannelProfile from "@Features/ChannelProfile"
 import { trpc } from "@Server/createHooks"
+import { createSSGHelper } from "@Server/createSSGHelper"
+import { getTopChannelsQuery } from "@Services/orm"
+import { useRouter } from "next/router"
 
 const ChannelProfilePage = () => {
 	const { isFallback, query } = useRouter()
-	const { urlSafeName } = query as { urlSafeName: string }
-	const { data: channel } = trpc.useQuery(["channels/profile/get", urlSafeName])
+	const { channel: urlChannel } = query as { channel: string }
+	const { data: channel } = trpc.useQuery(["channels/profile/get", urlChannel])
 
 	if (isFallback) return <FallbackPage />
 
@@ -45,10 +45,8 @@ export const getStaticProps = async ({ params }: { params: { channel: string } }
 	const channel = await ssg.fetchQuery("channels/profile/get", urlSafeName)
 	const twitchLink = channel?.links.find((channel) => channel.property === "TWITCH")?.value
 
-	let twitchInfo = null
-
 	if (twitchLink) {
-		twitchInfo = await ssg.fetchQuery("twitch/profile-page", twitchLink)
+		await ssg.fetchQuery("twitch/profile-page", twitchLink)
 	}
 
 	return {

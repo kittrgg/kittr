@@ -1,16 +1,16 @@
 import colors from "@Colors"
+import AdPageWrapper from "@Components/layouts/AdPageWrapper"
 import FallbackPage from "@Components/layouts/FallbackPage"
 import { ChannelList, ChannelSearch, NoItemFound, Paginator } from "@Components/shared"
 import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
-import AdPageWrapper from "@Components/layouts/AdPageWrapper"
+import { trpc } from "@Server/createHooks"
+import { createSSGHelper } from "@Server/createSSGHelper"
 import ResponsiveBanner from "@Services/venatus/ResponsiveBanner"
 import { Routes } from "@Utils/lookups/routes"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import styled from "styled-components"
-import { createSSGHelper } from "@Server/createSSGHelper"
-import { trpc } from "@Server/createHooks"
 
 const CHANNELS_PER_PAGE = 10
 
@@ -128,7 +128,7 @@ export const getStaticPaths = async () => {
 	})
 
 	return {
-		paths: paths[0],
+		paths: paths.flat(),
 		fallback: true
 	}
 }

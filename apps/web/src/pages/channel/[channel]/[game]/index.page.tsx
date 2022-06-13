@@ -1,37 +1,26 @@
-import { GetStaticProps, InferGetStaticPropsType } from "next"
 import { useRouter } from "next/router"
 
 import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
 
-import {
-	getFullChannelProfileQuery,
-	serializeFullChannelProfile,
-	SerializeFullChannelProfileReturnType,
-	deserializeFullChannelProfile
-} from "@Services/orm/queries/channels/getFullChannelProfile"
-import { gameByUrlSafeNameQuery } from "@Services/orm"
-import { serializeGame, SerializeGameReturnType, deserializeGame } from "@Services/orm/utils/serializers"
-import WarzoneProfile from "@Features/WarzoneProfile"
-import { NoItemFound, Head } from "@Components/shared"
 import FallbackPage from "@Components/layouts/FallbackPage"
+import { Head, NoItemFound } from "@Components/shared"
+import WarzoneProfile from "@Features/WarzoneProfile"
+import { trpc } from "@Server/createHooks"
+import { createSSGHelper } from "@Server/createSSGHelper"
 
-const GamePresentation = ({
-	channel: serializedChannel,
-	game: serializedGame
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
-	const channel = serializedChannel ? deserializeFullChannelProfile(serializedChannel) : null
-	const game = serializedGame ? deserializeGame(serializedGame) : null
-
+const GamePresentation = () => {
 	const { isFallback, query } = useRouter()
+	const { game: urlGame, channel: urlChannel } = query as { game: string; channel: string }
+
+	const { data: game } = trpc.useQuery(["games/getByUrlSafeName", urlGame])
+	const { data: channel } = trpc.useQuery(["channels/profile/get", urlChannel])
+
 	if (isFallback) return <FallbackPage />
 
 	if (!channel) {
 		return (
 			<>
-				<Head
-					title={`Game Not Found | kittr`}
-					description={`${query.channel} doesn't seem to play that game! | kittr`}
-				/>
+				<Head title={`Game Not Found | kittr`} description={`${urlChannel} doesn't seem to play that game! | kittr`} />
 				<NoItemFound type="game" />
 			</>
 		)
@@ -58,7 +47,7 @@ const GamePresentation = ({
 
 	return (
 		<>
-			<Head title={`Game Not Found | kittr`} description={`${query.channel} doesn't seem to play that game! | kittr`} />
+			<Head title={`Game Not Found | kittr`} description={`${urlChannel} doesn't seem to play that game! | kittr`} />
 			<NoItemFound type="channel" />
 		</>
 	)
@@ -96,20 +85,12 @@ export const getStaticPaths = async () => {
 	}
 }
 
-export const getStaticProps: GetStaticProps<{
-	channel: SerializeFullChannelProfileReturnType | null
-	game: SerializeGameReturnType | null
-}> = async ({ params }) => {
-	const { channel: urlSafeName, game } = params as { channel: string; game: string }
-	await connectToDatabase()
+export const getStaticProps = async ({ params }: { params: { channel: string; game: string } }) => {
+	const { channel: urlChannel, game: urlGame } = params
+	const ssg = await createSSGHelper()
 
-	const [gameQuery, channel] = await Promise.all([
-		gameByUrlSafeNameQuery({ urlSafeName: game }),
-		getFullChannelProfileQuery({ urlSafeName })
-	])
-
-	const serializedGame = gameQuery ? serializeGame(gameQuery) : null
-	const serializedChannel = channel ? serializeFullChannelProfile(channel) : null
+	await ssg.fetchQuery("games/getByUrlSafeName", urlGame)
+	await ssg.fetchQuery("channels/profile/get", urlChannel)
 
 	// TODO: Bring back kit stats!
 	// const kitStats = await KitStat.find()
@@ -117,11 +98,7 @@ export const getStaticProps: GetStaticProps<{
 
 	return {
 		props: {
-			channel: serializedChannel,
-			game: serializedGame
-			// ratioOfChannelsWithBase,
-			// ratioOfChannelsWithBaseFeatured,
-			// forSetupComparison
+			trpcState: ssg.dehydrate()
 		},
 		revalidate: 15
 	}
