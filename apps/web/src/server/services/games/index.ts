@@ -1,9 +1,11 @@
-import { prisma } from "@kittr/prisma"
+import { Prisma, prisma } from "@kittr/prisma"
 
-export const getAllGames = async () => {
-	const games = await prisma.game.findMany()
+export const getAllGames = async <T extends Prisma.GameInclude>(include: T) => {
+	const game = await prisma.game.findMany({
+		include
+	})
 
-	return games
+	return game
 }
 
 export const getGameById = async (id: string) => {

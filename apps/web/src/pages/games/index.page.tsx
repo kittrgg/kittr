@@ -1,22 +1,19 @@
 import colors from "@Colors"
 import AdPageWrapper, { H1 } from "@Components/layouts/AdPageWrapper"
 import GameCard from "@Components/shared/GameCard"
+import { useAllGames } from "@Hooks/trpc/useAllGames"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
+import { createSSGHelper } from "@Server/createSSGHelper"
 import ResponsiveBanner from "@Services/venatus/ResponsiveBanner"
-import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
 import { Routes } from "@Utils/lookups/routes"
 import { useRouter } from "next/router"
 import styled from "styled-components"
-import { getAllGamesQuery, getAllGamesQueryReturnType } from "@Services/orm"
-import { serializeGame } from "@Services/orm/utils/serializers/game"
 
-interface Props {
-	games: getAllGamesQueryReturnType
-}
-
-const GamesIndex = ({ games }: Props) => {
+const GamesIndex = () => {
 	const { width } = useViewportDimensions()
 	const router = useRouter()
+
+	const { data: games } = useAllGames<"genres" | "platforms">({ include: { genres: true, platforms: true } })
 
 	return (
 		<AdPageWrapper title="Games | kittr" description="Library of games on kittr. Get kitted.">
@@ -41,15 +38,13 @@ const GamesIndex = ({ games }: Props) => {
 }
 
 export const getStaticProps = async () => {
-	await connectToDatabase()
+	const ssg = await createSSGHelper()
 
-	const games = await getAllGamesQuery()
-
-	const serializedGames = games.map((game) => serializeGame(game))
+	await ssg.fetchQuery("games/list", { genres: true, platforms: true })
 
 	return {
 		props: {
-			games: serializedGames
+			trpcState: ssg.dehydrate()
 		},
 		revalidate: 60
 	}

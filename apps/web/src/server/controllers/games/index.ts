@@ -3,8 +3,21 @@ import * as GamesService from "@Server/services/games"
 import { z } from "zod"
 
 const listGames = createController().query("", {
-	async resolve() {
-		const result = await GamesService.getAllGames()
+	input: z.object({
+		genres: z.boolean().optional(),
+		platforms: z.boolean().optional(),
+		kitBases: z.boolean().optional(),
+		channels: z.boolean().optional(),
+		channelAffiliateCodes: z.boolean().optional(),
+		customCommandStrings: z.boolean().optional(),
+		kits: z.boolean().optional(),
+		kitOptions: z.boolean().optional()
+	}),
+	async resolve({ input }) {
+		const result = await GamesService.getAllGames(input)
+
+		const result2 = await GamesService.getAllGames({ genres: true })
+
 		return result
 	}
 })
