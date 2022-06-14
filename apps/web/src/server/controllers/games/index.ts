@@ -4,6 +4,7 @@ import { z } from "zod"
 
 const listGames = createController().query("", {
 	input: z.object({
+		_count: z.boolean().optional(),
 		genres: z.boolean().optional(),
 		platforms: z.boolean().optional(),
 		kitBases: z.boolean().optional(),
@@ -15,8 +16,6 @@ const listGames = createController().query("", {
 	}),
 	async resolve({ input }) {
 		const result = await GamesService.getAllGames(input)
-
-		const result2 = await GamesService.getAllGames({ genres: true })
 
 		return result
 	}

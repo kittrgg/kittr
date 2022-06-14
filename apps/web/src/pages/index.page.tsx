@@ -1,14 +1,14 @@
 import PageWrapper from "@Components/layouts/PageWrapper"
+import { useAllGames } from "@Hooks/trpc/useAllGames"
 import { trpc } from "@Server/createHooks"
 import { createSSGHelper } from "@Server/createSSGHelper"
 import ResponsiveAdBanner from "@Services/venatus/ResponsiveBanner"
-import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
 import Body from "./Home/Body"
 import Hero from "./Home/Hero"
 import PlatformInfo from "./Home/PlatformInfo"
 
 const Home = () => {
-	const { data: games } = trpc.useQuery(["games/list"])
+	const { data: games } = useAllGames<"_count">({ include: { _count: true } })
 	const { data: totalNumberOfKits } = trpc.useQuery(["kits/count"])
 	const { data: popularChannels } = trpc.useQuery(["channels/top", { take: 10 }])
 	const { data: risingChannels } = trpc.useQuery(["channels/rising"])
@@ -38,7 +38,7 @@ export const getStaticProps = async () => {
 
 	Promise.all([
 		await ssg.fetchQuery("kits/count"),
-		await ssg.fetchQuery("games/list"),
+		await ssg.fetchQuery("games/list", { _count: true }),
 		await ssg.fetchQuery("channels/top", { take: 10 }),
 		await ssg.fetchQuery("channels/rising"),
 		await ssg.fetchQuery("channels/live")
