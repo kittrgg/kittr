@@ -1,25 +1,3 @@
-Local Devving:
-
-To develop:
-
-```
-  npm run dev:docker
-  npm run dev:seed
-  npm run dev:turbo
-```
-
-To run a production version:
-
-```
-  npm run dev:docker
-  npm run dev:seed
-  npm run rebuild
-  npm run dev:deploy
-```
-
-Bonus!:
-To run the e2es, after performing the prod version steps, do `npm run test:e2e`
-
 # Welcome to kittr
 
 # Getting Started
@@ -29,13 +7,14 @@ To run the e2es, after performing the prod version steps, do `npm run test:e2e`
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 - If you are on Windows, make sure that you switch your Docker Desktop to Linux containers. You won't be able to spin up the docker compose containers without it!
 - [Node.js](https://nodejs.org/en/download/)
+- yarn
 
 ## Installation
 
 1. Clone the repo
 
 ```
-https://github.com/kittrgg/monorepo.git
+git clone https://github.com/kittrgg/kittr.git
 ```
 
 2. Checkout the develop branch
@@ -44,20 +23,23 @@ https://github.com/kittrgg/monorepo.git
 git checkout develop
 ```
 
-3. You will need a Twitch API token to run kittr. Unfortunately, we can't provide you with one since this token is individualized. To get your Twitch token, visit [your Twitch developers console](https://dev.twitch.tv/console/apps) and create an application token. (For the URLs that it asks for, you can use http://localhost:3000.) Make sure you keep the Client Secret that you create in a safe place for the next step!
+3. Let's get your environment variables set up. Navigate in your file explorer to `/scripts/createEnvironment/inputs`.
 
-4. You will need to create a few .env files according to the examples provided. (More info coming)
+- Copy the `example.env.json` file to a new file called `dev.env.json`.
+- Provide values for the empty strings.
+- `SENTRY_DSN` is optional. This is for logging and error reporting. If you want to use Sentry, you'll use your own account.
+- `STRIPE_*`, `SUBSCRIPTION_PRICE_ID` and `MONTHLY_TIP_PRICE_ID` are only needed if you are going to be working with the payment systems.
+- You will need a Twitch API token to run kittr. Unfortunately, we can't provide you with one since this token is individualized. To get your Twitch token, visit [your Twitch developers console](https://dev.twitch.tv/console/apps) and create an application token. (For the URLs that it asks for, you can use http://localhost:3000.) Make sure you keep the Client Secret that you create in a safe place for the next step!
 
-5. Run `npm install`. IMPORTANT: Notice the `dev`! This will install the dependencies for all of the containers rather than just the root dependencies.
+4. Run `yarn install`.
 
-6. Run the docker-compose and turbo to bring up the containers to your local host.
+5. Run `yarn env:dev`.
 
-```
-npm run dev:docker
-npm run dev:turbo
-```
+6. If this is your first time developing kittr, you will need to seed your local Mongo instance at this time. To do so, use `yarn dx:mongo-seed`. If you got a message saying "Let's get kittd," you are ready to go!
 
-7. If this is your first time developing kittr, you will need to seed your local Mongo instance at this time. To do so, use `npm run dev:seed`. If you got a message saying "Let's get kittd," you are ready to go!
+7. Run `yarn dx:db-seed`.
+
+8. Run `yarn dx`.
 
 8. Visit kittr at [http://localhost:3000](http://localhost:3000)
 
@@ -66,6 +48,7 @@ npm run dev:turbo
 When working locally, these ports are available:
 
 - Web front-end: [http://localhost:3000](http://localhost:3000)
+- Documentation: [http://localhost:3001](http://localhost:3001)
 - API: [http://localhost:5000](http://localhost:5000)
 - Mongo Express: [http://localhost:5001](http://localhost:5001) (View your Mongo data in your browser!)
 - Mongo: http://localhost:27017 (You shouldn't need to interact with this port directly.)
@@ -95,6 +78,6 @@ PLEASE make sure that before you attempt to make any major changes to kittr that
   - Username: anthony@dev.com
   - Password: 123123
 - A few channels that you may find useful:
-  - ALLKITS - Features every kit in the database (well, almost)
+  - ALLKITS - Features every kit in the database (well, almost) (may no longer be in the seed...)
   - brandnewchannel - A fresh, empty channel that was just created
   - anthonyshew - A channel that features multiple managers so you can see how the dashboard changes based on the user's role in that channel
