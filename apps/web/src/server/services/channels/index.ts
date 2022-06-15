@@ -4,6 +4,8 @@ import { ITwitchLiveChannels } from "@kittr/types"
 import { getTopChannelsWithLinksQuery } from "@Services/orm"
 import { headers } from "@Services/twitch/utils/auth"
 import { grabLoginName } from "@Services/twitch/utils/grabLoginName"
+import { badWordFilter } from "@Utils/helpers/badWordFilter"
+import { toURL } from "@Utils/helpers/toURL"
 import { TRPCError } from "@trpc/server"
 
 export * from "./games"
@@ -25,6 +27,50 @@ interface ListParams {
 
 const getTwitchLink = (channel: ChannelWithLinks) =>
 	channel.links.find((link) => link.property === LinkProperty.TWITCH)?.value ?? ""
+
+export const createChannel = async (displayName: string) => {
+	if (displayName.length > 26)
+		throw new TRPCError({
+			code: "BAD_REQUEST",
+			message: "That name is too long. 25 characters or less"
+		})
+
+	if (badWordFilter(displayName)) {
+		throw new TRPCError({
+			code: "FORBIDDEN",
+			message: "Hey, no bad words!"
+		})
+	}
+
+	const existingChannel = await prisma.channel.findFirst({
+		where: { urlSafeName: toURL(displayName) }
+	})
+
+	if (existingChannel) {
+		throw new TRPCError({
+			code: "CONFLICT",
+			message:
+				"That name is too similar to another channel. We don't want to confuse our system...Please choose another."
+		})
+	}
+
+	const result = await prisma.channel.create({
+		data: {
+			displayName,
+			urlSafeName: toURL(displayName),
+			managers: {
+				create: {
+					// TODO: Use the authentication of the user in the request.
+					firebaseId: "123",
+					// NO TOUCHY! We need to make sure that the person who creates this channel is the owner of it.
+					role: "OWNER"
+				}
+			}
+		}
+	})
+
+	return result
+}
 
 export const deleteChannel = async (id: string) => {
 	const channel = await prisma.channel.delete({

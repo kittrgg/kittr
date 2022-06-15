@@ -65,6 +65,18 @@ const getChannelProfile = createController().query("", {
 	}
 })
 
+const createChannel = createController().mutation("", {
+	input: z
+		.string()
+		.min(1, "You must provide a display name.")
+		.max(25, "That channel name is too long. 25 characters or less."),
+	async resolve({ input: displayName }) {
+		const channel = await ChannelsService.createChannel(displayName)
+
+		return channel
+	}
+})
+
 const deleteChannel = createController().mutation("", {
 	input: z.string(),
 	async resolve({ input }) {
@@ -79,6 +91,7 @@ export const ChannelsController = {
 	listLiveChannels,
 	getDashboardChannel,
 	getChannelProfile,
+	createChannel,
 	deleteChannel,
 	countChannels,
 	getOverlay

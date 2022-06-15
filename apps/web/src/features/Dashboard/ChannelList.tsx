@@ -10,6 +10,7 @@ import { SVG, Spinner, Button, ProfileImage, SupportUs } from "@Components/share
 import LogoutButton from "./ProfileButtons"
 import CreateChannelModal from "./modals/CreateChannel"
 import { useUser } from "@Hooks/useUser"
+import { capitalizeFirstCharacter } from "@Utils/helpers/capitalizeFirstCharacter"
 
 /** List the channels for a user */
 const ChannelList = ({ ...props }) => {
@@ -95,8 +96,9 @@ const ChannelList = ({ ...props }) => {
 									<ChannelTitle>{elem.displayName}</ChannelTitle>
 								</FlexRow>
 								<Role>
-									Your role is {elem.managers.find((manager) => manager.firebaseId === user?.uid)?.role} for this
-									channel.
+									Your role is{" "}
+									{capitalizeFirstCharacter(elem.managers.find((manager) => manager.firebaseId === user?.uid)?.role!)}{" "}
+									for this channel.
 								</Role>
 							</ChannelContainer>
 						)
