@@ -5,13 +5,8 @@ import { createRouter } from "./createRouter"
 import { channelsRouter } from "./routers/channels"
 import { kitsRouter } from "./routers/kits"
 import { twitchRouter } from "./routers/twitch"
+import { z } from "zod"
 
-/**
- * Create your application's root router
- * If you want to use SSG, you need export this
- * @link https://trpc.io/docs/ssg
- * @link https://trpc.io/docs/router
- */
 export const appRouter = createRouter()
 	.transformer(superjson)
 	.merge("games/", gamesRouter)

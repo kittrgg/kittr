@@ -10,7 +10,7 @@ import { useChannelData } from "@Redux/slices/dashboard/selectors"
 import Title from "../../H3"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import fetch from "@Fetch"
-import {Channel} from '@kittr/prisma'
+import { Channel } from "@kittr/prisma"
 
 /** Edit the name of the channel. */
 const DisplayNameEditor = ({ ...props }) => {
