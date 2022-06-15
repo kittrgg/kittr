@@ -13,7 +13,7 @@ const GamesIndex = () => {
 	const { width } = useViewportDimensions()
 	const router = useRouter()
 
-	const { data: games } = useAllGames<"genres" | "platforms">({ include: { genres: true, platforms: true } })
+	const { data: games } = useAllGames({ include: { genres: true, platforms: true } })
 
 	return (
 		<AdPageWrapper title="Games | kittr" description="Library of games on kittr. Get kitted.">

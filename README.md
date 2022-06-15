@@ -33,11 +33,11 @@ git checkout develop
 
 5. Run `yarn env:dev`.
 
-6. If this is your first time developing kittr, you will need to seed your local Mongo instance at this time. To do so, use `yarn dx:mongo-seed`. If you got a message saying "Let's get kittd," you are ready to go!
+6. Run `yarn dx`.
 
-7. Run `yarn dx:db-seed`.
+7. If this is your first time developing kittr, you will need to seed your local Mongo instance at this time. To do so, use `yarn dx:mongo-seed`. If you got a message saying "Let's get kittd," you are ready to go!
 
-8. Run `yarn dx`.
+8. Run `yarn dx:db-seed`.
 
 9. Visit kittr at [http://localhost:3000](http://localhost:3000)
 
