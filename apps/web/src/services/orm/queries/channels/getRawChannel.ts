@@ -1,12 +1,12 @@
-import { prisma, Channel } from "@kittr/prisma"
+import { prisma } from "@kittr/prisma"
 
 interface Params {
-	id: string
+	channel: string
 }
 
-export const getRawChannelQuery = async ({ id }: Params) => {
+export const getRawChannelQuery = async ({ channel: urlSafeName }: Params) => {
 	const rawChannel = await prisma.channel.findFirst({
-		where: { id },
+		where: { urlSafeName },
 		include: {
 			plan: true
 		}

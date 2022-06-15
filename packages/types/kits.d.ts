@@ -1,5 +1,5 @@
+import { CommandCode, Kit, KitBase, KitOption } from "@kittr/prisma"
 import { IWarzoneGameInfo } from "./game"
-import { KitOption, KitBase } from "@kittr/prisma"
 
 interface IKitBase {
 	/** ObjectId from database */
@@ -104,4 +104,9 @@ export interface IKit {
 	base: IKitBase
 	/** Information about the game that this Kit is a part of */
 	gameInfo?: IWarzoneGameInfo
+}
+
+export type OverlayKit = Kit & {
+	options: KitOption[]
+	base: KitBase & { commandCodes: CommandCode[] }
 }

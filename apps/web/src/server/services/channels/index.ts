@@ -333,3 +333,37 @@ export const listLiveChannels = async () => {
 		return []
 	}
 }
+
+export const getOverlay = async (id?: string) => {
+	const overlay = await prisma.channelKitOverlay.findFirst({
+		where: {
+			channel: {
+				id
+			}
+		},
+		include: {
+			primaryKit: {
+				include: {
+					options: true,
+					base: {
+						include: {
+							commandCodes: true
+						}
+					}
+				}
+			},
+			secondaryKit: {
+				include: {
+					options: true,
+					base: {
+						include: {
+							commandCodes: true
+						}
+					}
+				}
+			}
+		}
+	})
+
+	return overlay
+}

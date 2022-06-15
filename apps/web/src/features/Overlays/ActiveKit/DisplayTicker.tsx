@@ -1,25 +1,39 @@
-import { useState, useEffect, Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import styled, { ThemeProvider } from "styled-components"
 
-import { IKit } from "@kittr/types"
+import { ChannelKitOverlay, CommandCode, Kit, KitBase, KitOption } from "@kittr/prisma"
+import { OverlayKit } from "@kittr/types"
+import { header1, header2, montserrat, paragraph } from "@Styles/typography"
+import { asyncDelay } from "@Utils/helpers/asyncDelay"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
-import { asyncDelay } from "@Utils/helpers/asyncDelay"
-import { header1, header2, montserrat, paragraph } from "@Styles/typography"
 
 interface Props {
-	id: string
+	_id: string
 	previewWidth?: number
-	data: any
-	activeKit: IKit
-	setActiveKit: Dispatch<SetStateAction<IKit>>
+	data:
+		| (ChannelKitOverlay & {
+				primaryKit:
+					| (Kit & {
+							options: KitOption[]
+							base: KitBase & {
+								commandCodes: CommandCode[]
+							}
+					  })
+					| null
+				secondaryKit: Kit | null
+		  })
+		| null
+		| undefined
+	activeKit: OverlayKit
+	setActiveKit: Dispatch<SetStateAction<OverlayKit>>
 }
 
 const DATA_SWITCH_TIMER = 5000
 const OPTION_SWAP_INTERVAL = 500
 const OPACITY_DURATION = 0.2
 
-const BannerTicker = ({ id, previewWidth, data, activeKit, setActiveKit }: Props) => {
+const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Props) => {
 	const [isOptionVisible, setIsOptionVisible] = useState(true)
 	const [isBaseVisible, setIsBaseVisible] = useState(true)
 	const [cursor, setCursor] = useState(0)
@@ -66,15 +80,15 @@ const BannerTicker = ({ id, previewWidth, data, activeKit, setActiveKit }: Props
 		const switchKit = async () => {
 			if (hasAnActiveKit) {
 				if (cursor === 0) {
-					const kitCount = [data.primaryKit, data.secondaryKit].filter(
+					const kitCount = [data?.primaryKit, data?.secondaryKit].filter(
 						(kit) => !!kit && Object.keys(kit).length > 0
 					).length
 
 					if (kitCount > 1) {
-						if (activeKit._id === data.primaryKit._id) {
-							setActiveKit(data.secondaryKit)
+						if (activeKit.id === data?.primaryKit?.id) {
+							setActiveKit(data?.secondaryKit as OverlayKit)
 						} else {
-							setActiveKit(data.primaryKit)
+							setActiveKit(data?.primaryKit as OverlayKit)
 						}
 					}
 				}
@@ -106,7 +120,7 @@ const BannerTicker = ({ id, previewWidth, data, activeKit, setActiveKit }: Props
 
 	const hasAKitSelected =
 		Object.keys(data.primaryKit || {}).length > 0 || Object.keys(data.secondaryKit || {}).length > 0
-	const isRendered = data.isOverlayVisible === "on" && hasAKitSelected
+	const isRendered = data.isOverlayVisible === "ON" && hasAKitSelected
 	const isOverlayVisible = !!previewWidth || isRendered
 
 	return (
@@ -123,7 +137,7 @@ const BannerTicker = ({ id, previewWidth, data, activeKit, setActiveKit }: Props
 						{activeKit?.base?.displayName}
 					</BaseName>
 					<CommandInfo isVisible={isBaseVisible} fadeDuration={OPACITY_DURATION}>
-						!{activeKit?.base?.commandCodes[0]}
+						!{activeKit?.base?.commandCodes[0].code}
 					</CommandInfo>
 				</Meta>
 				<OptionWrapper isVisible={isOptionVisible} fadeDuration={OPACITY_DURATION}>
