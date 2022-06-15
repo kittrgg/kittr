@@ -8,7 +8,7 @@ import Hero from "./Home/Hero"
 import PlatformInfo from "./Home/PlatformInfo"
 
 const Home = () => {
-	const { data: games } = useAllGames<"_count">({ include: { _count: true } })
+	const { data: games } = useAllGames({ include: { _count: true } })
 	const { data: totalNumberOfKits } = trpc.useQuery(["kits/count"])
 	const { data: popularChannels } = trpc.useQuery(["channels/top", { take: 10 }])
 	const { data: risingChannels } = trpc.useQuery(["channels/rising"])
