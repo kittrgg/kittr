@@ -4,6 +4,7 @@ import { z } from "zod"
 
 const listGames = createController().query("", {
 	input: z.object({
+		_count: z.boolean().optional(),
 		genres: z.boolean().optional(),
 		platforms: z.boolean().optional(),
 		kitBases: z.boolean().optional(),

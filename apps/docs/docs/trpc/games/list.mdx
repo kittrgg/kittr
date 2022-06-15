@@ -5,7 +5,10 @@ Retrieve the list of games kittr supports.
 # Usage
 
 ```js
-const { data: games } = trpc.useQuery(["games/list"])
+const { data: games } = trpc.useQuery([
+	"games/list",
+	{ include: { channels: true, kitBases: true } }
+])
 ```
 
 # Returns

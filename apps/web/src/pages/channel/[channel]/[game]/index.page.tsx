@@ -1,7 +1,4 @@
 import { useRouter } from "next/router"
-
-import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
-
 import FallbackPage from "@Components/layouts/FallbackPage"
 import { Head, NoItemFound } from "@Components/shared"
 import WarzoneProfile from "@Features/WarzoneProfile"
@@ -54,8 +51,6 @@ const GamePresentation = () => {
 }
 
 export const getStaticPaths = async () => {
-	await connectToDatabase()
-
 	const channels = await prisma.channel.findMany({
 		orderBy: {
 			viewCount: "desc"
@@ -67,7 +62,6 @@ export const getStaticPaths = async () => {
 	})
 
 	// I need a mapping of all the games on the top 30 channels
-
 	const paths = channels.map((channel) => {
 		return channel.games.map((game) => {
 			return {

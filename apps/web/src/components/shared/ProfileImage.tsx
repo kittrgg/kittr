@@ -25,14 +25,22 @@ interface Props {
  *
  * If an image has not been provided, we will render a placeholder.
  */
-export const ProfileImage = ({ imagePath, hasProfileImage, size = "50px", border, isLive = false, alwaysRefresh }: Props) => {
+export const ProfileImage = ({
+	imagePath,
+	hasProfileImage,
+	size = "50px",
+	border,
+	isLive = false,
+	alwaysRefresh
+}: Props) => {
 	const [path, setPath] = useState("")
 	const [isLoading, setIsLoading] = useState(true)
 	const [errored, setErrored] = useState(false)
 	const isMounted = useIsMounted()
 
 	useEffect(() => {
-		if (process.env.IS_DEV && !hasProfileImage) {
+		if (process.env.NEXT_PUBLIC_IS_DEV && !hasProfileImage) {
+			setErrored(true)
 			return setIsLoading(false)
 		}
 
@@ -41,7 +49,7 @@ export const ProfileImage = ({ imagePath, hasProfileImage, size = "50px", border
 				try {
 					const uri = await download(imagePath)
 
-					if (uri && isMounted) {
+					if (uri && isMounted()) {
 						setPath(uri)
 						setIsLoading(false)
 					}

@@ -15,19 +15,7 @@ import { twitchRouter } from "./routers/twitch"
  * @link https://trpc.io/docs/router
  */
 export const appRouter = createRouter()
-	/**
-	 * Add data transformers
-	 * @link https://trpc.io/docs/data-transformers
-	 */
 	.transformer(superjson)
-	/**
-	 * Optionally do custom error (type safe!) formatting
-	 * @link https://trpc.io/docs/error-formatting
-	 */
-	// .formatError(({ shape, error }) => { })
-	/**
-	 * Merge `postRouter` under `post.`
-	 */
 	.merge("games/", gamesRouter)
 	.merge("channels/", channelsRouter)
 	.merge("kits/", kitsRouter)
