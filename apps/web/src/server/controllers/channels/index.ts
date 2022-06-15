@@ -35,6 +35,14 @@ const listLiveChannels = createController().query("", {
 	}
 })
 
+const getOverlay = createController().query("", {
+	input: z.string(),
+	async resolve({ input: id }) {
+		const result = await ChannelsService.getOverlay(id)
+		return result
+	}
+})
+
 const getDashboardChannel = createController().query("", {
 	input: z.object({
 		id: z.string(),
@@ -85,5 +93,6 @@ export const ChannelsController = {
 	getChannelProfile,
 	createChannel,
 	deleteChannel,
-	countChannels
+	countChannels,
+	getOverlay
 }
