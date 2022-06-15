@@ -26,10 +26,8 @@ git checkout develop
 3. Let's get your environment variables set up. Navigate in your file explorer to `/scripts/createEnvironment/inputs`.
 
 - Copy the `example.env.json` file to a new file called `dev.env.json`.
-- Provide values for the empty strings.
-- `SENTRY_DSN` is optional. This is for logging and error reporting. If you want to use Sentry, you'll use your own account.
-- `STRIPE_*`, `SUBSCRIPTION_PRICE_ID` and `MONTHLY_TIP_PRICE_ID` are only needed if you are going to be working with the payment systems.
-- You will need a Twitch API token to run kittr. Unfortunately, we can't provide you with one since this token is individualized. To get your Twitch token, visit [your Twitch developers console](https://dev.twitch.tv/console/apps) and create an application token. (For the URLs that it asks for, you can use http://localhost:3000.) Make sure you keep the Client Secret that you create in a safe place for the next step!
+- Provide values for `TWITCH_CLIENT_ID` and `TWITCH_SECRET`.
+  - We can't provide you with these values because they are indiviual to you. To get your Twitch tokens, visit [your Twitch developers console](https://dev.twitch.tv/console/apps) and create an application token. (For the URLs that it asks for, you can use http://localhost:3000.)
 
 4. Run `yarn install`.
 
@@ -41,7 +39,7 @@ git checkout develop
 
 8. Run `yarn dx`.
 
-8. Visit kittr at [http://localhost:3000](http://localhost:3000)
+9. Visit kittr at [http://localhost:3000](http://localhost:3000)
 
 ## Ports
 
