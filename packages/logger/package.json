@@ -12,7 +12,7 @@
 		"dev": "tsup src/**/index.ts --watch --dts --outDir .",
 		"build": "tsup src/**/index.ts --dts --outDir .",
 		"lint": "eslint \"**/*.ts\" --fix",
-		"clean": "rm -rf .turbo && rm -rf dist && rm -rf coverage && rm -rf node_modules",
+		"clean": "rm -rf .turbo && rm -rf nextjs  && rm -rf node && rm -rf coverage && rm -rf node_modules",
 		"type-check": "tsc --pretty --noEmit"
 	},
 	"devDependencies": {
@@ -26,6 +26,7 @@
 		"eslint": "7.32.0",
 		"eslint-plugin-jest": "26.1.1",
 		"jest": "27.5.1",
+		"tsup": "6.1.2",
 		"ts-jest": "27.1.3",
 		"typescript": "4.5.3"
 	},
