@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import styled, { ThemeProvider } from "styled-components"
 
-import { ChannelKitOverlay, CommandCode, Kit, KitBase, KitOption } from "@kittr/prisma"
 import { OverlayKit } from "@kittr/types"
+import { InferQueryOutput } from "@Server/index"
 import { header1, header2, montserrat, paragraph } from "@Styles/typography"
 import { asyncDelay } from "@Utils/helpers/asyncDelay"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
@@ -11,20 +11,7 @@ import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
 interface Props {
 	_id: string
 	previewWidth?: number
-	data:
-		| (ChannelKitOverlay & {
-				primaryKit:
-					| (Kit & {
-							options: KitOption[]
-							base: KitBase & {
-								commandCodes: CommandCode[]
-							}
-					  })
-					| null
-				secondaryKit: Kit | null
-		  })
-		| null
-		| undefined
+	data?: InferQueryOutput<"channels/overlay">
 	activeKit: OverlayKit
 	setActiveKit: Dispatch<SetStateAction<OverlayKit>>
 }
