@@ -65,3 +65,12 @@ export type ActiveKitOverlays =
 	| "Banner Ticker"
 	| "Display Ticker"
 	| "Display"
+
+type Booleanify<T> = {
+	[P in keyof T]?: boolean
+}
+
+export type PrismaIncludes<T, K extends keyof T> = Pick<
+	Required<Booleanify<T>>,
+	K
+>

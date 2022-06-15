@@ -1,6 +1,6 @@
 import { Prisma } from "@kittr/prisma"
-import { trpc } from "@Server/createHooks"
 import { PrismaIncludes } from "@kittr/types"
+import { trpc } from "@Server/createHooks"
 
 export const useAllGames = <T extends keyof Prisma.GameInclude>({
 	include
