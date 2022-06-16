@@ -17,7 +17,6 @@ const CreateChannelModal = () => {
 
 	const { mutate, isLoading, error } = useDashboardMutator({
 		path: "channels/create",
-		inputs: displayName,
 		opts: {
 			onMutate: (data) => {
 				if (!data) {
@@ -67,7 +66,7 @@ const CreateChannelModal = () => {
 					design="white"
 					text={isLoading ? "..." : "CREATE"}
 					disabled={isLoading}
-					onClick={mutate}
+					onClick={() => mutate(displayName)}
 					dataCy="create-channel-button"
 				/>
 			</FlexRow>

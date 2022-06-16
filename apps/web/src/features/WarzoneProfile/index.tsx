@@ -19,7 +19,7 @@ import ChannelMain from "./Main"
 import Sidebar from "./Sidebar"
 
 interface Props {
-	channel: InferQueryOutput<"channels/profile/get">
+	channel: NonNullable<InferQueryOutput<"channels/profile/get">>
 }
 
 const WarzoneProfile = ({ channel }: Props) => {

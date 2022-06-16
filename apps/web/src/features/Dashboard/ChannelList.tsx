@@ -1,16 +1,16 @@
-import styled from "styled-components"
-import { MutableRefObject, useRef, useEffect } from "react"
 import colors from "@Colors"
-import { header1, header2, paragraph } from "@Styles/typography"
+import { Button, ProfileImage, Spinner, SupportUs, SVG } from "@Components/shared"
 import { useManagedChannels } from "@Hooks/api/useManagedChannels"
-import { useDispatch, useSelector } from "@Redux/store"
+import { useUser } from "@Hooks/useUser"
 import { setActiveView, setChannelView, setModal } from "@Redux/slices/dashboard"
 import { useModal } from "@Redux/slices/dashboard/selectors"
-import { SVG, Spinner, Button, ProfileImage, SupportUs } from "@Components/shared"
-import LogoutButton from "./ProfileButtons"
-import CreateChannelModal from "./modals/CreateChannel"
-import { useUser } from "@Hooks/useUser"
+import { useDispatch, useSelector } from "@Redux/store"
+import { header1, header2, paragraph } from "@Styles/typography"
 import { capitalizeFirstCharacter } from "@Utils/helpers/capitalizeFirstCharacter"
+import { MutableRefObject, useEffect, useRef } from "react"
+import styled from "styled-components"
+import CreateChannelModal from "./modals/CreateChannel"
+import LogoutButton from "./ProfileButtons"
 
 /** List the channels for a user */
 const ChannelList = ({ ...props }) => {
@@ -59,6 +59,7 @@ const ChannelList = ({ ...props }) => {
 				</Header>
 				{isFetching && <Spinner width="100%" height="100px" />}
 				{!isFetching &&
+					!!user &&
 					data &&
 					data.map((elem) => {
 						return (
