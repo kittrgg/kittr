@@ -130,11 +130,6 @@ enum ChannelManagerRoles {
   EDITOR
 }
 
-enum OverlayVisibilityStates {
-  ON
-  OFF
-}
-
 model ChannelKitOverlay {
   id                       String                  @id @default(cuid())
   channel                  Channel                 @relation(fields: [channelId], references: [id])
@@ -144,7 +139,7 @@ model ChannelKitOverlay {
   textColorPrimary         String?
   textColorSecondary       String?
   textColorAccent          String?
-  isOverlayVisible         OverlayVisibilityStates @default(OFF)
+  isOverlayVisible         Boolean @default(false)
   primaryKit               Kit?                    @relation(name: "primaryKitOverlay", fields: [primaryKitId], references: [id])
   primaryKitId             String?                 @unique
   secondaryKit             Kit?                    @relation(name: "secondaryKitOverlay", fields: [secondaryKitId], references: [id])
