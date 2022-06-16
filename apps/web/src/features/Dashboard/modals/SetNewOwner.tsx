@@ -12,39 +12,19 @@ import { useChannelManagers } from "@Hooks/api/useChannelManagers"
 import { Modal, Button, Spinner } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
-import fetch from "@Fetch"
 
 /** Modal to allow a user to set a new owner for the channel. */
 const SetNewOwner = () => {
 	const dispatch = useDispatch()
-	const [newManager, setNewManager] = useState("-")
+	const [newOwner, setNewOwner] = useState("-")
 	const { data: channelData } = useChannelData()
 	const { data, isLoading } = useChannelManagers()
 	const { refetch: refetchChannel } = useDashboardChannel()
-	const { mutate, isLoading: isMutating } = useDashboardMutator(async () => {
-		const newOwner =
-			data &&
-			data.find((elem) => {
-				return elem.displayName === newManager || elem.email === newManager
-			})
 
-		try {
-			const result = await fetch.put({
-				url: `/api/manager/newOwner`,
-				headers: { authorization: `Bearer: ${await getToken()}` },
-				body: {
-					channelId: channelData?.id,
-					previousOwner: data && data.find((elem: IManagerData) => elem.role === "OWNER"),
-					newOwner
-				}
-			})
-
-			if (result) {
-				refetchChannel()
-				dispatch(setModal({ type: "", data: {} }))
-			}
-		} catch (error) {
-			dispatch(setModal({ type: "Error Notification", data: {} }))
+	const { mutate: mutateOwner, isLoading: isMutatingOwner } = useDashboardMutator({
+		path: "channels/managers/owner/edit",
+		opts: {
+			onSuccess: () => refetchChannel()
 		}
 	})
 
@@ -58,8 +38,8 @@ const SetNewOwner = () => {
 						<ColumnFlex>
 							<Select
 								style={{ width: "100%" }}
-								value={newManager}
-								onChange={(e) => setNewManager(e.target.value)}
+								value={newOwner}
+								onChange={(e) => setNewOwner(e.target.value)}
 								data-cy="selector-new-manager"
 							>
 								<option value="">-</option>
@@ -82,9 +62,9 @@ const SetNewOwner = () => {
 						/>
 						<Button
 							design="white"
-							text={isMutating ? "..." : "CONFIRM NEW OWNER"}
-							disabled={isMutating || newManager === "-"}
-							onClick={mutate}
+							text={isMutatingOwner ? "..." : "CONFIRM NEW OWNER"}
+							disabled={isMutatingOwner || newOwner === "-"}
+							onClick={async () => mutateOwner({authToken: await getToken(), channelId: channelData?.id!, newOwnerEmail: newOwner })}
 							style={{ margin: "0 auto" }}
 							dataCy="final-change-owner"
 						/>

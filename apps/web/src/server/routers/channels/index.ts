@@ -1,5 +1,6 @@
 import { ChannelsController } from "@Server/controllers/channels"
 import { createRouter } from "@Server/createRouter"
+import { channelsManagersRouter } from "@Server/routers/channels/managers"
 import { channelsOverlayRouter } from "@Server/routers/channels/overlays"
 import { channelsGamesRouter } from "./games"
 import { channelsKitsRouter } from "./kits"
@@ -10,6 +11,7 @@ export const channelsRouter = createRouter()
 	.merge("kits/", channelsKitsRouter)
 	.merge("profile/", channelsProfileRouter)
 	.merge("overlay/", channelsOverlayRouter)
+	.merge("managers/", channelsManagersRouter)
 	.merge("top", ChannelsController.listTopChannels)
 	.merge("rising", ChannelsController.listRisingChannels)
 	.merge("live", ChannelsController.listLiveChannels)
