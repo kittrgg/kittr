@@ -14,7 +14,6 @@ import { ReactQueryDevtools } from "react-query/devtools"
 import { Provider } from "react-redux"
 import superjson from "superjson"
 import { AppRouter } from "./api/trpc/[[...trpc]].api"
-import { MantineProvider } from "@mantine/core"
 
 const AppWrap = ({ Component, pageProps }: any) => {
 	return (
@@ -77,23 +76,7 @@ const MyApp = ({ Component, pageProps }: any) => {
 				<GlobalStyles />
 			)}
 			{isFallback && <FallbackPage />}
-			{!isFallback && (
-				<MantineProvider
-					theme={{
-						colorScheme: "dark",
-						headings: {
-							fontFamily: '"Barlow Condensed", serif',
-							sizes: {
-								h1: {
-									fontSize: "72px"
-								}
-							}
-						}
-					}}
-				>
-					<Component {...pageProps} />
-				</MantineProvider>
-			)}
+			{!isFallback && <Component {...pageProps} />}
 			<ReactQueryDevtools />
 		</MantineProvider>
 	)
