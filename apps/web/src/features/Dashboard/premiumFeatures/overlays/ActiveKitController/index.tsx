@@ -18,7 +18,6 @@ import styled from "styled-components"
 import H3 from "../../../H3"
 import Preview from "./Preview"
 import * as Styled from "./style"
-import fetch from "@Fetch"
 
 interface IMutation {
 	key: string
@@ -33,20 +32,13 @@ const ActiveKit = () => {
 	const { isPremium } = usePremiumStatus()
 	const { data: allKitBases } = useAllKitBases()
 	const { data: allOptions } = useAllKitOptions()
-	const { mutate, isLoading: isMutating } = useDashboardMutator(async ({ key, change }: IMutation) => {
-		try {
-			const result = await fetch.post({
-				url: `/api/channel/overlay`,
-				headers: { authorization: `Bearer: ${await getToken()}` },
-				body: { channelId: data?.id, key, change }
-			})
-
-			if (result) {
-				socket.emit(`overlayChangeReporter`, data?.urlSafeName)
+	const { mutate: mutateToggle, isLoading: isMutatingToggle } = useDashboardMutator({
+		path: "channels/overlay/toggle",
+		opts: {
+			onError: (error) => {
+				console.error(error)
+				dispatch(setModal({ type: "Error Notification", data: "" }))
 			}
-		} catch (err) {
-			console.error(err)
-			dispatch(setModal({ type: "Error Notification", data: "" }))
 		}
 	})
 
@@ -104,17 +96,12 @@ const ActiveKit = () => {
 								</Caption>
 							</div>
 							<div style={{ width: "300px" }}>
-								{isMutating ? (
+								{isMutatingToggle ? (
 									<Spinner width="24px" />
 								) : (
 									<MultiButton
 										activeValue={data?.overlay?.isOverlayVisible || "off"}
-										onClick={() =>
-											mutate({
-												key: "isOverlayVisible",
-												change: data?.overlay?.isOverlayVisible === "ON" ? "off" : "on"
-											})
-										}
+										onClick={() => mutateToggle({ channelId: data?.id!, newState: !data?.overlay?.isOverlayVisible })}
 										wrapperBackgroundColor={colors.dark20}
 										values={[
 											{
