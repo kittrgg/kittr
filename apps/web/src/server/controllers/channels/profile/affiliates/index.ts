@@ -1,6 +1,6 @@
+import { ChannelAffiliateModel } from "@kittr/prisma/validator"
 import { createController } from "@Server/createController"
 import * as ChannelsService from "@Server/services/channels"
-import { ChannelAffiliateModel } from "@kittr/prisma/validator"
 import { TRPCError } from "@trpc/server"
 import { z } from "zod"
 
@@ -30,7 +30,7 @@ const updateAffiliate = createController().query("", {
 	}
 })
 
-const deleteAffiliate = createController().query("", {
+const deleteAffiliate = createController().mutation("", {
 	input: z.object({
 		channelId: z.string(),
 		affiliateId: z.string()
