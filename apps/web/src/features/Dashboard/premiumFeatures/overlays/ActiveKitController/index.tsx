@@ -42,6 +42,26 @@ const ActiveKit = () => {
 		}
 	})
 
+	const { mutate: mutateColor } = useDashboardMutator({
+		path: "channels/overlay/color/edit",
+		opts: {
+			onError: (error) => {
+				console.error(error)
+				dispatch(setModal({ type: "Error Notification", data: "" }))
+			}
+		}
+	})
+
+	const { mutate: mutateKit } = useDashboardMutator({
+		path: "channels/overlay/kit/edit",
+		opts: {
+			onError: (error) => {
+				console.error(error)
+				dispatch(setModal({ type: "Error Notification", data: "" }))
+			}
+		}
+	})
+
 	let rootUrl = new URL(window.location.origin.toString()).host.replace("www.", "")
 
 	const copyToClipboard = () => {
@@ -100,7 +120,7 @@ const ActiveKit = () => {
 									<Spinner width="24px" />
 								) : (
 									<MultiButton
-										activeValue={data?.overlay?.isOverlayVisible || "off"}
+										activeValue={data?.overlay?.isOverlayVisible ? "on" : "off"}
 										onClick={() => mutateToggle({ channelId: data?.id!, newState: !data?.overlay?.isOverlayVisible })}
 										wrapperBackgroundColor={colors.dark20}
 										values={[
@@ -206,9 +226,10 @@ const ActiveKit = () => {
 											designVariant="Small Circle"
 											defaultColor={data?.overlay?.backgroundColorPrimary || colors.lightest}
 											onChangeComplete={(e: any) =>
-												mutate({
-													key: "backgroundColorPrimary",
-													change: e
+												mutateColor({
+													channelId: data?.id!,
+													color: e,
+													colorKeyToChange: "backgroundColorPrimary"
 												})
 											}
 										/>
@@ -219,9 +240,10 @@ const ActiveKit = () => {
 											designVariant="Small Circle"
 											defaultColor={data?.overlay?.backgroundColorSecondary || colors.darker}
 											onChangeComplete={(e: any) =>
-												mutate({
-													key: "backgroundColorSecondary",
-													change: e
+												mutateColor({
+													channelId: data?.id!,
+													color: e,
+													colorKeyToChange: "backgroundColorSecondary"
 												})
 											}
 										/>
@@ -235,9 +257,10 @@ const ActiveKit = () => {
 											designVariant="Small Circle"
 											defaultColor={data?.overlay?.textColorPrimary || colors.white}
 											onChangeComplete={(e: any) =>
-												mutate({
-													key: "textColorPrimary",
-													change: e
+												mutateColor({
+													channelId: data?.id!,
+													color: e,
+													colorKeyToChange: "textColorPrimary"
 												})
 											}
 										/>
@@ -248,9 +271,10 @@ const ActiveKit = () => {
 											designVariant="Small Circle"
 											defaultColor={data?.overlay?.textColorSecondary || colors.darker}
 											onChangeComplete={(e: any) =>
-												mutate({
-													key: "textColorSecondary",
-													change: e
+												mutateColor({
+													channelId: data?.id!,
+													color: e,
+													colorKeyToChange: "textColorSecondary"
 												})
 											}
 										/>
@@ -261,9 +285,10 @@ const ActiveKit = () => {
 											designVariant="Small Circle"
 											defaultColor={data?.overlay?.textColorAccent || colors.lighter}
 											onChangeComplete={(e: any) =>
-												mutate({
-													key: "textColorAccent",
-													change: e
+												mutateColor({
+													channelId: data?.id!,
+													color: e,
+													colorKeyToChange: "textColorAccent"
 												})
 											}
 										/>
@@ -301,14 +326,9 @@ const ActiveKit = () => {
 											isActive={isActive}
 											onClick={() => {
 												if (isActive) {
-													mutate({ key: "primaryKit", change: {} })
+													mutateKit({ channelId: data?.id!, kitId: null, kitToChange: "primaryKit" })
 												} else {
-													const newKit = {
-														...kit,
-														base: allKitBases?.find((allBases) => allBases.id === kit.baseId),
-														options: kit.options.map((opt) => allOptions?.find((allOption) => allOption.id === opt.id))
-													}
-													mutate({ key: "primaryKit", change: newKit })
+													mutateKit({ channelId: data?.id!, kitId: kit.id, kitToChange: "primaryKit" })
 												}
 											}}
 										>
@@ -361,15 +381,9 @@ const ActiveKit = () => {
 											isActive={isActive}
 											onClick={() => {
 												if (isActive) {
-													mutate({ key: "secondaryKit", change: {} })
+													mutateKit({ channelId: data?.id!, kitId: null, kitToChange: "secondaryKit" })
 												} else {
-													const newKit = {
-														...kit,
-														base: allKitBases?.find((allBases) => allBases.id === kit.baseId),
-														options: kit.options.map((opt) => allOptions?.find((allOption) => allOption.id === opt.id))
-													}
-
-													mutate({ key: "secondaryKit", change: newKit })
+													mutateKit({ channelId: data?.id!, kitId: kit.id, kitToChange: "secondaryKit" })
 												}
 											}}
 										>

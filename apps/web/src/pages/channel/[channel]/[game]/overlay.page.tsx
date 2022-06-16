@@ -23,7 +23,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 	const channel = await ssg.fetchQuery("channels/profile/get", query.channel as string)
 
 	if (channel) {
-		await ssg.fetchQuery("channels/overlay", channel.id)
+		await ssg.fetchQuery("channels/overlay/get", channel.id)
 	}
 
 	return {

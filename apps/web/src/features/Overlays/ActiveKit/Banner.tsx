@@ -11,7 +11,7 @@ import { InferQueryOutput } from "@Server/index"
 interface Props {
 	_id: string
 	previewWidth?: number
-	data?: InferQueryOutput<"channels/overlay">
+	data?: InferQueryOutput<"channels/overlay/get">
 	activeKit: OverlayKit
 	setActiveKit: Dispatch<SetStateAction<OverlayKit>>
 }
@@ -76,7 +76,7 @@ const Banner = ({ _id, previewWidth, data, activeKit, setActiveKit }: Props) => 
 
 	const hasAKitSelected =
 		Object.keys(data.primaryKit || {}).length > 0 || Object.keys(data.secondaryKit || {}).length > 0
-	const isRendered = data.isOverlayVisible === "ON" && hasAKitSelected
+	const isRendered = data.isOverlayVisible && hasAKitSelected
 	const isOverlayVisible = !!previewWidth || isRendered
 
 	return (

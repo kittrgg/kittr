@@ -45,8 +45,21 @@ const editColor = createController().mutation("", {
 	}
 })
 
+const editKit = createController().mutation("", {
+	input: z.object({
+		channelId: z.string(),
+		kitId: z.string().nullable(),
+		kitToChange: z.enum(["primaryKit", "secondaryKit"])
+	}),
+	async resolve({ input }) {
+		const channel = await ChannelsOverlaysService.editKit(input)
+		return channel
+	}
+})
+
 export const ChannelsOverlaysController = {
 	toggle,
 	getOverlay,
-	editColor
+	editColor,
+	editKit
 }

@@ -83,3 +83,28 @@ export const editColor = async ({
 
 	return channel
 }
+
+export const editKit = async ({
+	channelId,
+	kitId,
+	kitToChange
+}: {
+	channelId: string
+	kitId: string | null
+	kitToChange: "primaryKit" | "secondaryKit"
+}) => {
+	const channel = await prisma.channel.update({
+		where: { id: channelId },
+		data: {
+			overlay: {
+				update: {
+					[kitToChange]: {
+						connect: { id: kitId }
+					}
+				}
+			}
+		}
+	})
+
+	return channel
+}
