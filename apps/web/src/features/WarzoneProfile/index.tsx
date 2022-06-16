@@ -1,6 +1,4 @@
 // import { IPopularityRates } from "@kittr/types"
-import { Kit, KitBase, KitOption } from "@kittr/prisma"
-import { CompleteChannel } from "@Types/pages/WarzoneProfile"
 import colors from "@Colors"
 import FullScreen from "@Components/layouts/FullScreen"
 import NavMenu from "@Components/layouts/NavMenu"
@@ -9,21 +7,19 @@ import { useLockBodyScroll } from "@Hooks/useLockBodyScroll"
 import { setActiveWeapon, setChannel, setIsSidebarOpen } from "@Redux/slices/displayr"
 import { useActiveWeapon, useSidebarState } from "@Redux/slices/displayr/selectors"
 import { useDispatch } from "@Redux/store"
+import { InferQueryOutput } from "@Server/index"
+import { DeserializeFullChannelProfileReturnType } from "@Services/orm/queries/channels/getFullChannelProfile"
+import type { NonNullable } from "@Types/index"
+import type { KitWithBaseInDisplayr } from "@Types/prisma"
 import { Routes } from "@Utils/lookups/routes"
 import { useRouter } from "next/router"
 import { useEffect } from "react"
 import styled from "styled-components"
 import ChannelMain from "./Main"
 import Sidebar from "./Sidebar"
-import type { NonNullable } from "@Types/index"
-import type { KitWithBaseInDisplayr } from "@Types/prisma"
-import {
-	DeserializeFullChannelProfileReturnType,
-	SerializeFullChannelProfileReturnType
-} from "@Services/orm/queries/channels/getFullChannelProfile"
 
 interface Props {
-	channel: NonNullable<DeserializeFullChannelProfileReturnType>
+	channel: InferQueryOutput<"channels/profile/get">
 }
 
 const WarzoneProfile = ({ channel }: Props) => {
@@ -54,12 +50,11 @@ const WarzoneProfile = ({ channel }: Props) => {
 
 		if (activeWeapon) {
 			if (Object.keys(activeWeapon).length === 0 && weaponQuery) {
-				const { kits } = channel
-				const filteredKits = kits
+				const filteredKits = channel?.kits
 					.filter((elem) => elem.base.displayName.replace(/ /g, "-") === weaponQuery)
 					.sort((a, b) => Number(b.featured) - Number(a.featured))
 
-				const firstKit = filteredKits[0]
+				const [firstKit] = filteredKits!
 				dispatch(setActiveWeapon(firstKit))
 			}
 		}

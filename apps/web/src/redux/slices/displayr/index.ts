@@ -1,14 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit"
 import { IPopularityRates } from "@kittr/types/popularity"
-import { DeserializeFullChannelProfileReturnType } from "@Services/orm/queries/channels/getFullChannelProfile"
-import { NonNullable } from "@Types/index"
+import { createSlice } from "@reduxjs/toolkit"
+import { InferQueryOutput } from "@Server/index"
 import { KitWithBaseInDisplayr } from "@Types/prisma"
 
 export const displayrSlice = createSlice({
 	name: "displayr",
 	initialState: {
 		activeWeapon: {} as KitWithBaseInDisplayr,
-		channel: {} as NonNullable<DeserializeFullChannelProfileReturnType>,
+		channel: {} as InferQueryOutput<"channels/profile/get">,
 		isSidebarOpen: false,
 		popularityRates: {} as IPopularityRates
 	},
@@ -16,7 +15,7 @@ export const displayrSlice = createSlice({
 		setActiveWeapon: (state, action: { payload: KitWithBaseInDisplayr }) => {
 			state.activeWeapon = action.payload
 		},
-		setChannel: (state, action: { payload: NonNullable<DeserializeFullChannelProfileReturnType> }) => {
+		setChannel: (state, action: { payload: InferQueryOutput<"channels/profile/get"> }) => {
 			state.channel = action.payload
 		},
 		setIsSidebarOpen: (state, action: { payload: boolean }) => {
