@@ -1,6 +1,9 @@
 // eslint-disable-next-line
+import { createStylesServer, ServerStyles } from "@mantine/next"
 import Document, { Html, Head, Main, NextScript, DocumentContext } from "next/document"
 import { ServerStyleSheet } from "styled-components"
+
+const stylesServer = createStylesServer()
 
 class MyDocument extends Document {
 	static async getInitialProps(ctx: DocumentContext) {
@@ -15,12 +18,14 @@ class MyDocument extends Document {
 				})
 
 			const initialProps = await Document.getInitialProps(ctx)
+
 			return {
 				...initialProps,
 				styles: (
 					<>
 						{initialProps.styles}
 						{sheet.getStyleElement()}
+						<ServerStyles html={initialProps.html} server={stylesServer} key="styles" />
 					</>
 				)
 			}
@@ -80,3 +85,4 @@ class MyDocument extends Document {
 }
 
 export default MyDocument
+
