@@ -15,7 +15,7 @@ import kitStats from "./kitStats"
 import Player from "./models/Channel"
 import players from "./players"
 
-const MONGODB_URI = "mongodb://root:example@localhost:27017/myFirstDatabase"
+const MONGODB_URI = process.env.DB_CONNECTION_STRING || "mongodb://root:example@localhost:27017/myFirstDatabase"
 
 if (!MONGODB_URI) {
 	throw new Error(
