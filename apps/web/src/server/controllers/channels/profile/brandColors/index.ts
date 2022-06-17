@@ -1,9 +1,9 @@
 import { createController } from "@Server/createController"
 import * as ChannelsBrandColorsService from "@Server/services/channels"
-import { z } from "zod"
 import { TRPCError } from "@trpc/server"
+import { z } from "zod"
 
-const getChannelProfile = createController().query("", {
+const getChannelProfile = createController().mutation("", {
 	input: z.object({
 		authToken: z.string().optional(),
 		channelId: z.string(),

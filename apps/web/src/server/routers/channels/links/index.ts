@@ -1,5 +1,4 @@
-import { ChannelsKitsController } from "@Server/controllers/channels/kits"
+import { ChannelsLinksController } from "@Server/controllers/channels/links"
 import { createRouter } from "@Server/createRouter"
 
-export const channelsLinksRouter = createRouter()
-	.merge("upsert", ChannelsKitsController.upsertKitToChannel)
+export const channelsLinksRouter = createRouter().merge("upsert", ChannelsLinksController.upsertLinks)

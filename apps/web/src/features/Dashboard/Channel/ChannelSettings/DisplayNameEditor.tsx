@@ -1,16 +1,13 @@
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 
-import { NextClientEndpointError } from "@kittr/types"
 import colors from "@Colors"
-import { getToken } from "@Services/firebase/auth/getToken"
-import { TextInputBox, Button } from "@Components/shared"
-import { setModal } from "@Redux/slices/dashboard"
-import { useDispatch } from "@Redux/store"
-import { useChannelData } from "@Redux/slices/dashboard/selectors"
-import Title from "../../H3"
+import { Button, TextInputBox } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
-import fetch from "@Fetch"
-import { Channel } from "@kittr/prisma"
+import { setModal } from "@Redux/slices/dashboard"
+import { useChannelData } from "@Redux/slices/dashboard/selectors"
+import { useDispatch } from "@Redux/store"
+import { getToken } from "@Services/firebase/auth"
+import Title from "../../H3"
 
 /** Edit the name of the channel. */
 const DisplayNameEditor = ({ ...props }) => {
@@ -21,18 +18,13 @@ const DisplayNameEditor = ({ ...props }) => {
 
 	const originalName = data?.displayName || ""
 
-	const { mutate, isLoading, isSuccess } = useDashboardMutator(async () => {
-		const result = await fetch
-			.put<Channel | NextClientEndpointError>({
-				url: `/api/channel/meta/displayName`,
-				headers: { authorization: `Bearer: ${await getToken()}` },
-				body: { id: data?.id, value: displayName }
-			})
-			.catch((err) => {
+	const { mutate, isLoading, isSuccess } = useDashboardMutator({
+		path: "channels/update",
+		opts: {
+			onError: () => {
 				dispatch(setModal({ type: "Error Notification", data: {} }))
-			})
-
-		return result
+			}
+		}
 	})
 
 	useEffect(() => {
@@ -66,7 +58,7 @@ const DisplayNameEditor = ({ ...props }) => {
 				design="white"
 				text="Save Changes"
 				disabled={!isChanged || isLoading}
-				onClick={mutate}
+				onClick={async () => mutate({ authToken: await getToken(), channelId: data?.id!, data: { displayName } })}
 				style={{
 					marginTop: "24px",
 					opacity: isLoading ? 0.3 : isChanged ? 1 : 0,
