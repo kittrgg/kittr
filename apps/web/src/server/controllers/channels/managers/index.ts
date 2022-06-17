@@ -7,7 +7,7 @@ const demoteManager = createController().mutation("", {
 	input: z.object({
 		authToken: z.string().optional(),
 		channelId: z.string(),
-		managerToDemoteId: z.string()
+		managerIdToDemote: z.string()
 	}),
 	async resolve({ input }) {
 		if (!input.authToken) {
@@ -19,7 +19,7 @@ const demoteManager = createController().mutation("", {
 		const channel = await ChannelsManagersService.demoteManager({
 			authToken: input.authToken,
 			channelId: input.channelId,
-			managerIdToDemote: input.managerToDemoteId
+			managerIdToDemote: input.managerIdToDemote
 		})
 
 		return channel
@@ -28,7 +28,7 @@ const demoteManager = createController().mutation("", {
 
 const promoteManager = createController().mutation("", {
 	input: z.object({
-		authToken: z.string(),
+		authToken: z.string().optional(),
 		channelId: z.string(),
 		managerIdToPromote: z.string()
 	}),

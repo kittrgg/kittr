@@ -63,7 +63,7 @@ const DeleteManager = () => {
 						design="white"
 						text="YES, DEMOTE THEM"
 						onClick={async () =>
-							demote({ authToken: await getToken(), managerId: data.id, channelId: channelData?.id! })
+							demote({ authToken: await getToken(), managerIdToDemote: data.id, channelId: channelData?.id! })
 						}
 						style={{ marginLeft: "32px" }}
 					/>
@@ -91,7 +91,7 @@ const DeleteManager = () => {
 					design="white"
 					text="YES, PROMOTE THEM"
 					onClick={async () =>
-						promote({ authToken: await getToken(), managerId: data.id, channelId: channelData?.id! })
+						promote({ authToken: await getToken(), managerIdToPromote: data.id, channelId: channelData?.id! })
 					}
 					style={{ marginLeft: "32px" }}
 				/>

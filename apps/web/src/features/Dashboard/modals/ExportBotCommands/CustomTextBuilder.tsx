@@ -1,16 +1,15 @@
 import colors from "@Colors"
-import { TCommandMethod } from "@kittr/types/types"
 import Button from "@Components/shared/Button"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
+import { TCommandMethod } from "@kittr/types/types"
 import { setModal } from "@Redux/slices/dashboard"
-import { useManagerRole, useChannelData, useChannelView } from "@Redux/slices/dashboard/selectors"
+import { useChannelData, useChannelView, useManagerRole } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import { getToken } from "@Services/firebase/auth/getToken"
+import { getToken } from "@Services/firebase/auth"
 import { paragraph } from "@Styles/typography"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
 import * as Styled from "./style"
-import fetch from "@Fetch"
 
 interface Props {
 	/** Method which the user will be utilizing for adding their commands */
@@ -35,19 +34,12 @@ const CustomTextBuilder = ({ commandStrategy, method }: Props) => {
 	const nightbotStrategy = commandStrategy === "edit" ? "!editcom" : "!addcom"
 	const channelElementsStrategy = commandStrategy === "edit" ? "!command edit" : "!command add"
 
-	const { mutate, isLoading } = useDashboardMutator(async () => {
-		try {
-			const result = await fetch.put({
-				url: `/api/channel/meta/botCommandString`,
-				headers: { authorization: `Bearer: ${await getToken()}` },
-				body: { commandId: initialCode?.id, commandString: userString, channelId: data?.id, gameId: activeGame }
-			})
-
-			if (result) {
-				return
+	const { mutate, isLoading } = useDashboardMutator({
+		path: "channels/command-strings/update",
+		opts: {
+			onError: () => {
+				dispatch(setModal({ type: "Error Notification", data: {} }))
 			}
-		} catch (error) {
-			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}
 	})
 
@@ -111,7 +103,9 @@ const CustomTextBuilder = ({ commandStrategy, method }: Props) => {
 									? false
 									: isLoading || !userString?.includes("{{link}}") || initialCode?.command === userString
 							}
-							onClick={mutate}
+							onClick={async () =>
+								mutate({ channelId: data?.id!, authToken: await getToken(), newString: userString || "" })
+							}
 							style={{ marginLeft: "auto", padding: "6px 32px", fontSize: "16px" }}
 							dataCy="save-custom-string"
 						/>
