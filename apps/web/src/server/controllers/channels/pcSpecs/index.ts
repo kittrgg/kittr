@@ -28,7 +28,7 @@ const createPcSpec = createController().mutation("", {
 	input: z.object({
 		authToken: z.string().optional(),
 		channelId: z.string(),
-		data: ChannelPcSpecModel.omit({ id: true })
+		data: ChannelPcSpecModel.pick({partName: true, partType: true})
 	}),
 	async resolve({ input }) {
 		if (!input.authToken) {
@@ -38,7 +38,6 @@ const createPcSpec = createController().mutation("", {
 		}
 
 		const channel = await ChannelsPcSpecsService.createPcSpec({
-			authToken: input.authToken,
 			data: input.data
 		})
 		return channel
@@ -48,9 +47,9 @@ const createPcSpec = createController().mutation("", {
 const updatePcSpec = createController().mutation("", {
 	input: z.object({
 		authToken: z.string().optional(),
-		channelId: z.string(),
 		pcSpecId: z.string(),
-		update: ChannelPcSpecModel.partial()
+		channelId: z.string(),
+		data: ChannelPcSpecModel.pick({partName: true, partType: true})
 	}),
 	async resolve({ input }) {
 		if (!input.authToken) {
@@ -61,7 +60,6 @@ const updatePcSpec = createController().mutation("", {
 
 		const channel = await ChannelsPcSpecsService.updatePcSpec({
 			authToken: input.authToken,
-			channelId: input.channelId,
 			pcSpecId: input.pcSpecId,
 			update: input.update
 		})

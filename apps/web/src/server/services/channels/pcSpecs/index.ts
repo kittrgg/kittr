@@ -28,7 +28,7 @@ export const getPcSpec = async (pcSpecId: string) => {
 	return pcSpec
 }
 
-export const createPcSpec = async ({ authToken, data }: { authToken: string; data: Omit<ChannelPcSpec, "id"> }) => {
+export const createPcSpec = async ({ data }: { data: Omit<ChannelPcSpec, "id"> }) => {
 	const pcSpec = await prisma.channelPcSpec.create({
 		data: {
 			partName: data.partName,
@@ -44,18 +44,16 @@ export const createPcSpec = async ({ authToken, data }: { authToken: string; dat
 
 export const updatePcSpec = async ({
 	authToken,
-	channelId,
 	pcSpecId,
 	update
 }: {
 	authToken: string
-	channelId: string
 	pcSpecId: string
 	update: Prisma.ChannelPcSpecUpdateInput
 }) => {
-	await checkRole({ authToken, channelId, roles: ["OWNER"] })
+	await checkRole({ authToken, channelId: update.channelProfile, roles: ["OWNER"] })
 
-	const pcSpec = await prisma.channelPcSpec.update({
+	const pcSpec = await prisma.channel.update({
 		where: {
 			id: pcSpecId
 		},
