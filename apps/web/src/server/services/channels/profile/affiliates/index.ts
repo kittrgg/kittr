@@ -4,34 +4,33 @@ import { TRPCError } from "@trpc/server"
 import { checkRole } from "@Server/services/users"
 
 export const createAffiliate = async ({
-	channelProfileId,
-	company,
-	code,
-	description,
-	url
-}: Partial<ChannelAffiliate>) => {
-	if (url) {
-		if (!validator.isURL(url)) {
+	authToken,
+	channelId,
+	data
+}: {
+	authToken: string
+	channelId: string
+	data: Partial<ChannelAffiliate>
+}) => {
+	await checkRole({ authToken, channelId, roles: ["OWNER", "ADMIN"] })
+
+	if (data.url) {
+		if (!validator.isURL(data.url)) {
 			throw new TRPCError({ code: "BAD_REQUEST", message: "Invalid URL" })
 		}
 	}
 
-	if (!channelProfileId) {
+	if (!data.channelProfileId) {
 		throw new TRPCError({ code: "BAD_REQUEST", message: "Missing channelProfileId." })
 	}
 
 	const newAffiliate = await prisma.channel.update({
-		where: { id: channelProfileId },
+		where: { id: data.channelProfileId },
 		data: {
 			profile: {
 				update: {
 					affiliates: {
-						create: {
-							code,
-							company,
-							description,
-							url
-						}
+						create: data
 					}
 				}
 			}

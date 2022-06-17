@@ -5,16 +5,24 @@ import { TRPCError } from "@trpc/server"
 import { z } from "zod"
 
 const createAffiliate = createController().mutation("", {
-	input: ChannelAffiliateModel.omit({ id: true }),
+	input: z.object({
+		authToken: z.string().optional(),
+		channelId: z.string(),
+		data: ChannelAffiliateModel.omit({ id: true })
+	}),
 	async resolve({ input }) {
-		if (!input.channelProfileId) {
+		if (!input.authToken) {
 			throw new TRPCError({
 				code: "BAD_REQUEST",
 				message: "Missing channelProfileId."
 			})
 		}
 
-		const channel = await ChannelsService.createAffiliate(input)
+		const channel = await ChannelsService.createAffiliate({
+			authToken: input.authToken,
+			channelId: input.channelId,
+			data: input.data
+		})
 
 		return channel
 	}
@@ -24,7 +32,7 @@ const updateAffiliate = createController().query("", {
 	input: z.object({
 		authToken: z.string().optional(),
 		channelId: z.string(),
-		affiliate: ChannelAffiliateModel
+		data: ChannelAffiliateModel
 	}),
 	async resolve({ input }) {
 		if (!input.authToken) {
@@ -36,7 +44,7 @@ const updateAffiliate = createController().query("", {
 		const channel = await ChannelsService.updateAffiliate({
 			authToken: input.authToken,
 			channelId: input.channelId,
-			data: input.affiliate
+			data: input.data
 		})
 		return channel
 	}
