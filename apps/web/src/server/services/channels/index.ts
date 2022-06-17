@@ -12,6 +12,7 @@ import { checkRole } from "@Server/services/users"
 export * from "./games"
 export * from "./kits"
 export * from "./profile"
+export * from "./links"
 
 interface ChannelWithProfile extends Channel {
 	profile: ChannelProfile
