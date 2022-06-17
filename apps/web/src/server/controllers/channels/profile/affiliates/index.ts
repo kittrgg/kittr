@@ -28,7 +28,7 @@ const createAffiliate = createController().mutation("", {
 	}
 })
 
-const updateAffiliate = createController().query("", {
+const updateAffiliate = createController().mutation("", {
 	input: z.object({
 		authToken: z.string().optional(),
 		channelId: z.string(),

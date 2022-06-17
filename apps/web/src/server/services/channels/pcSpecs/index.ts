@@ -1,4 +1,4 @@
-import { prisma, Prisma, ChannelPcSpec } from "@kittr/prisma"
+import { ChannelPcSpec, prisma, Prisma } from "@kittr/prisma"
 import { checkRole } from "@Server/services/users"
 
 export const listPcSpecs = async (channelId: string) => {

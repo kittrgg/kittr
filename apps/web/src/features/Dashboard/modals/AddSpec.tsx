@@ -1,16 +1,14 @@
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 import styled from "styled-components"
 
 import colors from "@Colors"
-import { paragraph } from "@Styles/typography"
-import { useDispatch } from "@Redux/store"
-import { Modal, Selector, TextInputBox, Button, Spinner } from "@Components/shared"
-import { getToken } from "@Services/firebase/auth/getToken"
-import { setModal } from "@Redux/slices/dashboard"
-import ErrorNotification from "./ErrorNotification"
-import { useModal, useChannelData } from "@Redux/slices/dashboard/selectors"
+import { Button, Modal, Selector, Spinner, TextInputBox } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
-import fetch from "@Fetch"
+import { setModal } from "@Redux/slices/dashboard"
+import { useChannelData, useModal } from "@Redux/slices/dashboard/selectors"
+import { useDispatch } from "@Redux/store"
+import { paragraph } from "@Styles/typography"
+import ErrorNotification from "./ErrorNotification"
 
 /** Modal for adding or editing a spec to the channel's PC setup. */
 const AddSpecModal = () => {
@@ -20,29 +18,43 @@ const AddSpecModal = () => {
 	const [partType, setPartType] = useState("")
 	const [partName, setPartName] = useState("")
 
-	const { mutate, isLoading, error } = useDashboardMutator(async () => {
-		if (data?.id) {
-			const result = await fetch.put({
-				url: `/api/channel/meta/specs`,
-				headers: { authorization: `Bearer ${await getToken()}` },
-				body: { specId: data?.id, channelId: channelData?.id, partType, partName }
-			})
-
-			if (result) {
-				dispatch(setModal({ type: "", data: "" }))
-			}
-		} else {
-			const result = await fetch.post({
-				url: `/api/channel/meta/specs`,
-				headers: { authorization: `Bearer ${await getToken()}` },
-				body: { specId: data?.id, channelId: channelData?.id, partType, partName }
-			})
-
-			if (result) {
+	const {
+		mutate: updateSpec,
+		isLoading: isUpdateLoading,
+		error: updateError
+	} = useDashboardMutator({
+		path: "channels/profile/pc-specs/update",
+		opts: {
+			onSuccess: () => {
 				dispatch(setModal({ type: "", data: "" }))
 			}
 		}
 	})
+
+	const {
+		mutate: createSpec,
+		isLoading: isCreateLoading,
+		error: createError
+	} = useDashboardMutator({
+		path: "channels/profile/pc-specs/create",
+		opts: {
+			onSuccess: () => {
+				dispatch(setModal({ type: "", data: "" }))
+			}
+		}
+	})
+
+	const submit = () => {
+		if (data?.id) {
+			updateSpec({
+				channelId: channelData?.id!,
+				pcSpecId: data?.id,
+				data: { partType, partName }
+			})
+		} else {
+			createSpec({ channelId: channelData?.id!, data: { partType, partName } })
+		}
+	}
 
 	useEffect(() => {
 		if (data) {
@@ -51,8 +63,8 @@ const AddSpecModal = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
-	if (error) return <ErrorNotification />
-	if (isLoading) return <Spinner width="24px" />
+	if (updateError || createError) return <ErrorNotification />
+	if (isUpdateLoading || isCreateLoading) return <Spinner width="24px" />
 
 	return (
 		<Modal backgroundClickToClose title="ADD SPEC">
@@ -110,7 +122,7 @@ const AddSpecModal = () => {
 			<Button
 				data-cy="confirm-add-spec"
 				design="white"
-				onClick={mutate}
+				onClick={submit}
 				disabled={!partType || !partName}
 				text="SAVE"
 				style={{ margin: "84px auto 0" }}

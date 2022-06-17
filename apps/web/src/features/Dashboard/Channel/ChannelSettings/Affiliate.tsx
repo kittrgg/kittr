@@ -4,28 +4,35 @@ import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { setModal } from "@Redux/slices/dashboard"
 import { useAffiliates, useChannelData } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import { getToken } from "@Services/firebase/auth/getToken"
 import { paragraph } from "@Styles/typography"
 import { useState } from "react"
 import styled from "styled-components"
-import fetch from "@Fetch"
 
 const Affiliate = () => {
 	const [copyNotification, setCopyNotification] = useState(false)
 	const dispatch = useDispatch()
 	const affiliates = useAffiliates()
 	const { data: channelData } = useChannelData()
-	const { mutate } = useDashboardMutator(async (affiliateId: string) => {
-		const result = await fetch.delete({
-			url: `/api/channel/meta/affiliate`,
-			body: { channelId: channelData?.id, affiliateId },
-			headers: { authorization: `Bearer ${await getToken()}` }
-		})
 
-		if (result) {
-			dispatch(setModal({ type: "", data: "" }))
+	const { mutate } = useDashboardMutator({
+		path: "channels/profile/affiliates/delete",
+		opts: {
+			onSuccess: () => {
+				dispatch(setModal({ type: "", data: "" }))
+			}
 		}
 	})
+
+	// const { mutate } = useDashboardMutator(async (affiliateId: string) => {
+	// 	const result = await fetch.delete({
+	// 		url: `/api/channel/meta/affiliate`,
+	// 		body: { channelId: channelData?.id, affiliateId },
+	// 		headers: { authorization: `Bearer ${await getToken()}` }
+	// 	})
+
+	// 	if (result) {
+	// 	}
+	// })
 
 	let rootUrl = new URL(window.location.origin.toString()).host.replace("www.", "")
 
@@ -87,7 +94,7 @@ const Affiliate = () => {
 										<Icon>
 											<SVG.X
 												data-cy={`${company?.replace(/ /g, "-")}-delete-affiliate`}
-												onClick={() => mutate(affiliate.id)}
+												onClick={() => mutate({ affiliateId: affiliate.id, channelId: channelData?.id! })}
 											/>
 										</Icon>
 									</Spec>
