@@ -1,6 +1,7 @@
 import { prisma, ChannelAffiliate } from "@kittr/prisma"
 import validator from "validator"
 import { TRPCError } from "@trpc/server"
+import { checkRole } from "@Server/services/users"
 
 export const createAffiliate = async ({
 	channelProfileId,
@@ -39,12 +40,26 @@ export const createAffiliate = async ({
 	return newAffiliate
 }
 
-export const updateAffiliate = async ({ id, data }: { id: string; data: Partial<Omit<ChannelAffiliate, "id">> }) => {
-	const newAffiliate = await prisma.channelAffiliate.update({
-		where: { id },
-		data
+export const updateAffiliate = async ({
+	authToken,
+	channelId,
+	data
+}: {
+	authToken: string
+	channelId: string
+	data: Partial<ChannelAffiliate> & { id: string }
+}) => {
+	await checkRole({ authToken, channelId, roles: ["OWNER", "ADMIN"] })
+
+	const updatedAffiliate = await prisma.channelAffiliate.upsert({
+		where: {
+			id: data.id
+		},
+		update: data,
+		create: data
 	})
-	return newAffiliate
+
+	return updatedAffiliate
 }
 
 export const deleteAffiliate = async ({ channelId, affiliateId }: { channelId: string; affiliateId: string }) => {

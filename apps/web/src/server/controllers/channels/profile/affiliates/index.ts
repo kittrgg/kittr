@@ -21,11 +21,23 @@ const createAffiliate = createController().query("", {
 })
 
 const updateAffiliate = createController().query("", {
-	input: ChannelAffiliateModel,
+	input: z.object({
+		authToken: z.string().optional(),
+		channelId: z.string(),
+		affiliate: ChannelAffiliateModel
+	}),
 	async resolve({ input }) {
-		const { id, ...affiliate } = input
+		if (!input.authToken) {
+			throw new TRPCError({
+				code: "UNAUTHORIZED"
+			})
+		}
 
-		const channel = await ChannelsService.updateAffiliate({ id: input.id, data: affiliate })
+		const channel = await ChannelsService.updateAffiliate({
+			authToken: input.authToken,
+			channelId: input.channelId,
+			data: input.affiliate
+		})
 		return channel
 	}
 })

@@ -2,5 +2,6 @@ import { ChannelsProfileAffiliatesController } from "@Server/controllers/channel
 import { createRouter } from "@Server/createRouter"
 
 export const channelsAffiliatesRouter = createRouter()
-	.merge("upsert", ChannelsProfileAffiliatesController.updateAffiliate)
+	.merge("create", ChannelsProfileAffiliatesController.createAffiliate)
+	.merge("update", ChannelsProfileAffiliatesController.updateAffiliate)
 	.merge("delete", ChannelsProfileAffiliatesController.deleteAffiliate)
