@@ -1,16 +1,11 @@
 import { prisma } from "@kittr/prisma"
-import { getUserByEmail } from "@Server/services/users"
+import { checkRole, getUserByEmail } from "@Server/services/users"
 
-export const editOwner = async ({ channelId, newOwnerEmail }: { channelId: string; newOwnerEmail: string }) => {
+export const editOwner = async ({authToken, channelId, newOwnerEmail }: {authToken: string, channelId: string; newOwnerEmail: string }) => {
+	const {user, manager: previousOwner}	 =await checkRole({ authToken, channelId, roles: ["OWNER"] })
+
 	const newOwnerFirebaseId = await getUserByEmail(newOwnerEmail).then((user) => user.uid)
 
-	/** This is not a Firebase id! This is the id of the record in the database. */
-	const previousOwnerId = await prisma.channelManager.findFirst({
-		where: { channel: { id: channelId }, role: "OWNER" },
-		select: {
-			id: true
-		}
-	})
 
 	/** This is not a Firebase id! This is the id of the record in the database. */
 	const newOwnerId = await prisma.channelManager.findFirst({
@@ -27,7 +22,7 @@ export const editOwner = async ({ channelId, newOwnerEmail }: { channelId: strin
 				update: [
 					{
 						where: {
-							id: previousOwnerId?.id
+							id: previousOwner.id
 						},
 						data: {
 							role: "ADMIN"

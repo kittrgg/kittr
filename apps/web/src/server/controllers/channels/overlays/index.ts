@@ -1,7 +1,6 @@
 import { createController } from "@Server/createController"
 import * as ChannelsOverlaysService from "@Server/services/channels/overlays"
 import { z } from "zod"
-import { ChannelKitOverlayModel } from "@kittr/prisma/validator"
 
 const toggle = createController().mutation("", {
 	input: z.object({

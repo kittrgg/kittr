@@ -50,7 +50,7 @@ const promoteManager = createController().mutation("", {
 
 const deleteManager = createController().mutation("", {
 	input: z.object({
-		authToken: z.string(),
+		authToken: z.string().optional(),
 		channelId: z.string(),
 		managerIdToDelete: z.string()
 	}),
@@ -61,7 +61,11 @@ const deleteManager = createController().mutation("", {
 			})
 		}
 
-		const channel = await ChannelsManagersService.deleteManager(input)
+		const channel = await ChannelsManagersService.deleteManager({
+			authToken: input.authToken,
+			channelId: input.channelId,
+			managerIdToDelete: input.managerIdToDelete
+		})
 		return channel
 	}
 })

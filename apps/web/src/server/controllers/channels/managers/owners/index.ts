@@ -15,7 +15,11 @@ const editOwner = createController().mutation("", {
 				code: "UNAUTHORIZED"
 			})
 		}
-		const channel = await ChannelsManagersOwnersService.editOwner(input)
+		const channel = await ChannelsManagersOwnersService.editOwner({
+			authToken: input.authToken,
+			channelId: input.channelId,
+			newOwnerEmail: input.newOwnerEmail
+		})
 		return channel
 	}
 })
