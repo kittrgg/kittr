@@ -1,4 +1,4 @@
-import { prisma, Prisma } from "@kittr/prisma"
+import { prisma, Prisma, ChannelPcSpec } from "@kittr/prisma"
 import { checkRole } from "@Server/services/users"
 
 export const listPcSpecs = async (channelId: string) => {
@@ -26,6 +26,20 @@ export const getPcSpec = async (pcSpecId: string) => {
 	})
 
 	return pcSpec
+}
+
+export const createPcSpec = async ({ authToken, data }: { authToken: string; data: Omit<ChannelPcSpec, "id"> }) => {
+	const pcSpec = await prisma.channelPcSpec.create({
+		data: {
+			partName: data.partName,
+			partType: data.partType,
+			channelProfile: {
+				connect: {
+					id: data.channelProfileId
+				}
+			}
+		}
+	})
 }
 
 export const updatePcSpec = async ({

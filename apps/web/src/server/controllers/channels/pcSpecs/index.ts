@@ -24,6 +24,27 @@ const getPcSpec = createController().mutation("", {
 	}
 })
 
+const createPcSpec = createController().mutation("", {
+	input: z.object({
+		authToken: z.string().optional(),
+		channelId: z.string(),
+		data: ChannelPcSpecModel.omit({ id: true })
+	}),
+	async resolve({ input }) {
+		if (!input.authToken) {
+			throw new TRPCError({
+				code: "UNAUTHORIZED"
+			})
+		}
+
+		const channel = await ChannelsPcSpecsService.createPcSpec({
+			authToken: input.authToken,
+			data: input.data
+		})
+		return channel
+	}
+})
+
 const updatePcSpec = createController().mutation("", {
 	input: z.object({
 		authToken: z.string().optional(),
@@ -73,6 +94,7 @@ const deletePcSpec = createController().mutation("", {
 export const ChannelsPcSpecsController = {
 	listPcSpec,
 	getPcSpec,
+	createPcSpec,
 	updatePcSpec,
 	deletePcSpec
 }
