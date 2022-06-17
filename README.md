@@ -35,9 +35,9 @@ git checkout mantine
 
 6. Run `yarn dx`.
 
-7. If this is your first time developing kittr, you will need to seed your local Mongo instance at this time. To do so, use `yarn dx:mongo-seed`. If you got a message saying "Let's get kittd," you are ready to go!
+7. If this is your first time developing kittr, you will need to seed your local Mongo instance at this time. To do so, open a new shall and use `yarn dx:mongo-seed`. You should get a message saying "Let's get kittd."
 
-8. Run `yarn dx:db-seed`.
+8. Now, run `yarn dx:db-seed` in that new shell, too. This takes the data from MongoDB to Postgres so you can use it for our migration.
 
 9. Visit kittr at [http://localhost:3000](http://localhost:3000)
 
