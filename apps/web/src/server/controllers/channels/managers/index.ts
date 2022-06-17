@@ -42,7 +42,26 @@ const promoteManager = createController().mutation("", {
 	}
 })
 
+const deleteManager = createController().mutation("", {
+	input: z.object({
+		authToken: z.string(),
+		channelId: z.string(),
+		managerIdToDelete: z.string()
+	}),
+	async resolve({ input }) {
+		if (!input.authToken) {
+			throw new TRPCError({
+				code: "UNAUTHORIZED"
+			})
+		}
+
+		const channel = await ChannelsManagersService.deleteManager(input)
+		return channel
+	}
+})
+
 export const ChannelsManagersController = {
 	promoteManager,
-	demoteManager
+	demoteManager,
+	deleteManager
 }

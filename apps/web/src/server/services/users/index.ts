@@ -44,12 +44,16 @@ export const checkRole = async ({
 			id: channelId,
 			firebaseId: user.uid
 		},
-		select: {
-			role: true
-		}
 	})
 
-	const hasPermission = roles.some((role) => manager?.role === role)
+	if (!manager) {
+		throw new TRPCError({
+			code: "UNAUTHORIZED",
+			message: "You are not a manager of this channel."
+		})
+	}
+
+	const hasPermission = roles.some((role) => manager.role === role)
 
 	if (!hasPermission) {
 		throw new TRPCError({
@@ -57,5 +61,5 @@ export const checkRole = async ({
 		})
 	}
 
-	return manager?.role
+	return {user, manager }
 }

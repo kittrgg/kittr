@@ -23,7 +23,7 @@ export const updateCommandString = async ({
 	newString: string
 	channelId: string
 }) => {
-	await checkRole({ authToken, channelId, roles: ["ADMIN", "EDITOR"] })
+	await checkRole({ authToken, channelId, roles: ["OWNER", "ADMIN", "EDITOR"] })
 
 	const commandString = await prisma.channelCustomGameCommand.update({
 		where: {

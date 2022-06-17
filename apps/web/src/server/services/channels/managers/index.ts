@@ -1,24 +1,8 @@
 import { prisma } from "@kittr/prisma"
-import { TRPCError } from "@trpc/server"
-import { verifyIdToken } from "@Server/services/users"
+import { checkRole } from "@Server/services/users"
 
 export const promoteManager = async ({ channelId, authToken }: { channelId: string; authToken: string }) => {
-	const user = await verifyIdToken(authToken)
-
-	const manager = await prisma.channelManager.findFirst({
-		where: {
-			channelId,
-			id: user.uid,
-			role: "OWNER" || "ADMIN"
-		}
-	})
-
-	if (!manager) {
-		throw new TRPCError({
-			code: "UNAUTHORIZED",
-			message: "You do not have permission to do promote managers on this channel."
-		})
-	}
+	const { manager } = await checkRole({ authToken, channelId, roles: ["OWNER", "ADMIN"] })
 
 	const channel = await prisma.channel.update({
 		where: {
@@ -42,22 +26,7 @@ export const promoteManager = async ({ channelId, authToken }: { channelId: stri
 }
 
 export const demoteManager = async ({ channelId, authToken }: { channelId: string; authToken: string }) => {
-	const user = await verifyIdToken(authToken)
-
-	const manager = await prisma.channelManager.findFirst({
-		where: {
-			channelId,
-			id: user.uid,
-			role: "OWNER" || "ADMIN"
-		}
-	})
-
-	if (!manager) {
-		throw new TRPCError({
-			code: "UNAUTHORIZED",
-			message: "You do not have permission to do promote managers on this channel."
-		})
-	}
+	const { manager } = await checkRole({ authToken, channelId, roles: ["OWNER", "ADMIN"] })
 
 	const channel = await prisma.channel.update({
 		where: {
@@ -72,6 +41,33 @@ export const demoteManager = async ({ channelId, authToken }: { channelId: strin
 					data: {
 						role: "EDITOR"
 					}
+				}
+			}
+		}
+	})
+
+	return channel
+}
+
+export const deleteManager = async ({
+	channelId,
+	managerIdToDelete,
+	authToken
+}: {
+	channelId: string
+	managerIdToDelete: string
+	authToken: string
+}) => {
+	await checkRole({ authToken, channelId, roles: ["OWNER", "ADMIN"] })
+
+	const channel = await prisma.channel.update({
+		where: {
+			id: channelId
+		},
+		data: {
+			managers: {
+				delete: {
+					id: managerIdToDelete
 				}
 			}
 		}
