@@ -43,7 +43,7 @@ export const checkRole = async ({
 		where: {
 			id: channelId,
 			firebaseId: user.uid
-		},
+		}
 	})
 
 	if (!manager) {
@@ -57,9 +57,10 @@ export const checkRole = async ({
 
 	if (!hasPermission) {
 		throw new TRPCError({
-			code: "UNAUTHORIZED"
+			code: "UNAUTHORIZED",
+			message: "You do not have permission to do that."
 		})
 	}
 
-	return {user, manager }
+	return { user, manager }
 }
