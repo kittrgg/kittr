@@ -8,28 +8,22 @@ import { getToken } from "@Services/firebase/auth/getToken"
 import { paragraph } from "@Styles/typography"
 import { useState } from "react"
 import styled from "styled-components"
-import fetch from "@Fetch"
 
 const Specs = () => {
 	const [copyNotification, setCopyNotification] = useState(false)
 	const dispatch = useDispatch()
 	const specs = useSpecs()
 	const { data } = useChannelData()
-	const { mutate } = useDashboardMutator<any, string, string>(async (specId) => {
-		try {
-			const result = await fetch.delete({
-				url: `/api/channel/meta/specs`,
-				body: { channelId: data?.id, specId },
-				headers: {
-					authorization: `Bearer ${await getToken()}`
-				}
-			})
 
-			if (result) {
+	const { mutate } = useDashboardMutator({
+		path: "channels/profile/pc-specs/delete",
+		opts: {
+			onSuccess: () => {
 				dispatch(setModal({ type: "", data: "" }))
+			},
+			onError: () => {
+				dispatch(setModal({ type: "Error Notification", data: {} }))
 			}
-		} catch (error) {
-			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}
 	})
 
@@ -72,7 +66,10 @@ const Specs = () => {
 									data-cy={`${spec.partName.replace(/ /g, "-")}-update-spec`}
 									onClick={() => dispatch(setModal({ type: "Add Spec", data: spec }))}
 								/>
-								<SVG.X data-cy={`${spec.partName}-delete-spec`} onClick={() => mutate(spec.id)} />
+								<SVG.X
+									data-cy={`${spec.partName}-delete-spec`}
+									onClick={async () => mutate({ authToken: await getToken(), channelId: data?.id!, pcSpecId: spec.id })}
+								/>
 							</IconButtons>
 						</Spec>
 					)

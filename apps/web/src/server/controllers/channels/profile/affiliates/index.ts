@@ -4,7 +4,7 @@ import * as ChannelsService from "@Server/services/channels"
 import { TRPCError } from "@trpc/server"
 import { z } from "zod"
 
-const createAffiliate = createController().query("", {
+const createAffiliate = createController().mutation("", {
 	input: ChannelAffiliateModel.omit({ id: true }),
 	async resolve({ input }) {
 		if (!input.channelProfileId) {
