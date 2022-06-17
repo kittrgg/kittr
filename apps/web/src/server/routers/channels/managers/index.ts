@@ -4,6 +4,7 @@ import { ChannelsManagersController } from "@Server/controllers/channels/manager
 
 export const channelsManagersRouter = createRouter()
 	.merge("owner/", channelsManagersOwnersRouter)
+	.merge("create", ChannelsManagersController.createManager)
 	.merge("demote", ChannelsManagersController.demoteManager)
 	.merge("promote", ChannelsManagersController.promoteManager)
 	.merge("delete", ChannelsManagersController.deleteManager)

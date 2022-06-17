@@ -3,6 +3,33 @@ import * as ChannelsManagersService from "@Server/services/channels/managers"
 import { TRPCError } from "@trpc/server"
 import { z } from "zod"
 
+const createManager = createController().mutation("", {
+	input: z.object({
+		authToken: z.string().optional(),
+		channelId: z.string(),
+		data: z.object({
+			email: z.string(),
+			role: z.enum(["OWNER", "ADMIN", "EDITOR"])
+		})
+	}),
+	async resolve({ input }) {
+		if (!input.authToken) {
+			throw new TRPCError({
+				code: "UNAUTHORIZED"
+			})
+		}
+
+		const manager = await ChannelsManagersService.createManager({
+			authToken: input.authToken,
+			channelId: input.channelId,
+			email: input.data.email,
+			role: input.data.role
+		})
+
+		return manager
+	}
+})
+
 const demoteManager = createController().mutation("", {
 	input: z.object({
 		authToken: z.string().optional(),
@@ -71,6 +98,7 @@ const deleteManager = createController().mutation("", {
 })
 
 export const ChannelsManagersController = {
+	createManager,
 	promoteManager,
 	demoteManager,
 	deleteManager
