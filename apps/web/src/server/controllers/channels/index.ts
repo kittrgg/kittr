@@ -2,6 +2,7 @@ import { createController } from "@Server/createController"
 import * as ChannelsService from "@Server/services/channels"
 import { z } from "zod"
 import { TRPCError } from "@trpc/server"
+import { ChannelModel } from "@kittr/prisma/validator"
 
 const listTopChannels = createController().query("", {
 	input: z.object({
@@ -70,6 +71,28 @@ const createChannel = createController().mutation("", {
 	}
 })
 
+const updateChannel = createController().mutation("", {
+	input: z.object({
+		channelId: z.string(),
+		authToken: z.string().optional(),
+		data: ChannelModel.partial()
+	}),
+	async resolve({ input }) {
+		if (!input.authToken) {
+			throw new TRPCError({
+				code: "UNAUTHORIZED"
+			})
+		}
+
+		const channel = await ChannelsService.updateChannel({
+			authToken: input.authToken,
+			channelId: input.channelId,
+			data: input.data
+		})
+		return channel
+	}
+})
+
 const deleteChannel = createController().mutation("", {
 	input: z.object({
 		channelId: z.string(),
@@ -94,6 +117,7 @@ export const ChannelsController = {
 	getDashboardChannel,
 	getChannelProfile,
 	createChannel,
+	updateChannel,
 	deleteChannel,
 	countChannels
 }

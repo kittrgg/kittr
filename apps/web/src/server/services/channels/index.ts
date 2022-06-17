@@ -73,6 +73,23 @@ export const createChannel = async (displayName: string) => {
 	return result
 }
 
+export const updateChannel = async ({
+	channelId,
+	authToken,
+	data
+}: {
+	channelId: string
+	authToken: string
+	data: Partial<Channel>
+}) => {
+	await checkRole({ authToken, channelId, roles: ["OWNER", "ADMIN"] })
+
+	const result = await prisma.channel.update({
+		where: { id: channelId },
+		data
+	})
+}
+
 export const deleteChannel = async ({ authToken, channelId }: { authToken: string; channelId: string }) => {
 	const manager = await checkRole({ authToken, channelId, roles: ["OWNER"] })
 
@@ -254,22 +271,6 @@ export const listTopChannels = async ({ skip = 0, take = 10 }: ListParams) => {
 
 	return result as ChannelWithProfile[]
 }
-
-// export const countChannels = async () => {
-// 	if (gameId) {
-// 		const total = await prisma.channel.count({
-// 			where: {
-// 				games: {
-// 					some: {
-// 						id: gameId
-// 					}
-// 				}
-// 			}
-// 		})
-
-// 		return total
-// 	}
-// }
 
 /** Counts channels both for a game and on the entirety of kittr.
  *
