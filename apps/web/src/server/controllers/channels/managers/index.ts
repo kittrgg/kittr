@@ -5,7 +5,7 @@ import { z } from "zod"
 
 const demoteManager = createController().mutation("", {
 	input: z.object({
-		authToken: z.string().optional(),
+		authToken: z.string(),
 		channelId: z.string(),
 		managerId: z.string()
 	}),
@@ -23,7 +23,7 @@ const demoteManager = createController().mutation("", {
 
 const promoteManager = createController().mutation("", {
 	input: z.object({
-		authToken: z.string().optional(),
+		authToken: z.string(),
 		channelId: z.string(),
 		managerId: z.string()
 	}),

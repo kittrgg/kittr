@@ -1,11 +1,14 @@
 import { prisma } from "@kittr/prisma"
 import { TRPCError } from "@trpc/server"
+import { verifyIdToken } from "@Server/services/users"
 
-export const promoteManager = async ({ channelId, managerId }: { channelId: string; managerId: string }) => {
+export const promoteManager = async ({ channelId, authToken }: { channelId: string; authToken: string }) => {
+	const user = await verifyIdToken(authToken)
+
 	const manager = await prisma.channelManager.findFirst({
 		where: {
 			channelId,
-			id: managerId,
+			id: user.uid,
 			role: "OWNER" || "ADMIN"
 		}
 	})
@@ -25,7 +28,7 @@ export const promoteManager = async ({ channelId, managerId }: { channelId: stri
 			managers: {
 				update: {
 					where: {
-						id: managerId
+						id: manager.id
 					},
 					data: {
 						role: "ADMIN"
@@ -38,11 +41,13 @@ export const promoteManager = async ({ channelId, managerId }: { channelId: stri
 	return channel
 }
 
-export const demoteManager = async ({ channelId, managerId }: { channelId: string; managerId: string }) => {
+export const demoteManager = async ({ channelId, authToken }: { channelId: string; authToken: string }) => {
+	const user = await verifyIdToken(authToken)
+
 	const manager = await prisma.channelManager.findFirst({
 		where: {
 			channelId,
-			id: managerId,
+			id: user.uid,
 			role: "OWNER" || "ADMIN"
 		}
 	})
@@ -62,7 +67,7 @@ export const demoteManager = async ({ channelId, managerId }: { channelId: strin
 			managers: {
 				update: {
 					where: {
-						id: managerId
+						id: manager.id
 					},
 					data: {
 						role: "EDITOR"
