@@ -14,6 +14,7 @@ const DeleteManager = () => {
 	const dispatch = useDispatch()
 	const { data: channelData } = useChannelData()
 	const { data } = useModal()
+
 	const { mutate: demote, isLoading: demoting } = useDashboardMutator(async () => {
 		try {
 			const result = await fetch.put({
