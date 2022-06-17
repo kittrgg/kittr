@@ -1,14 +1,10 @@
 import { Button, GameCard, Modal, Spinner } from "@Components/shared"
-import { NextClientEndpointError } from "@kittr/types/types"
-import { Game } from "@kittr/prisma"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useAllGames } from "@Hooks/api/useAllGames"
 import { handleTutorialAction, setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch, useSelector } from "@Redux/store"
-import { getToken } from "@Services/firebase/auth/getToken"
 import styled from "styled-components"
-import fetch from "@Fetch"
 
 /** The modal that adds a game to a channel. */
 const AddGameModal = ({ ...props }) => {
@@ -18,15 +14,10 @@ const AddGameModal = ({ ...props }) => {
 	const channelData = useChannelData()
 	const { isLoading, data } = useAllGames()
 
-	const { mutate, isLoading: isMutating } = useDashboardMutator<void, NextClientEndpointError, Game>(async (game) => {
-		try {
-			const result = await fetch.post({
-				url: `/api/channel/game/add`,
-				headers: { authorization: `Bearer: ${await getToken()}` },
-				body: { gameId: game.id, channelId }
-			})
-
-			if (result) {
+	const { mutate, isLoading: isMutating } = useDashboardMutator({
+		path: "channels/games/add",
+		opts: {
+			onSuccess: () => {
 				dispatch(
 					handleTutorialAction({
 						condition: modal.data?.isTutorial,
@@ -34,9 +25,10 @@ const AddGameModal = ({ ...props }) => {
 						falseState: { type: "", data: {} }
 					})
 				)
+			},
+			onError: () => {
+				dispatch(setModal({ type: "Error Notification", data: "" }))
 			}
-		} catch (err) {
-			dispatch(setModal({ type: "Error Notification", data: "" }))
 		}
 	})
 
@@ -77,7 +69,7 @@ const AddGameModal = ({ ...props }) => {
 									{...game}
 									noText
 									onClick={() => {
-										if (game.active) mutate(game)
+										if (game.active) mutate({ gameId: game.id, channelId: channelId })
 									}}
 								/>
 							)

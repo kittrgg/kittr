@@ -1,10 +1,10 @@
+import { ChannelAffiliateCodeModel } from "@kittr/prisma/validator"
 import { createController } from "@Server/createController"
 import * as ChannelsProfileCreatorCodesService from "@Server/services/channels/profile/creatorCodes"
-import { z } from "zod"
 import { TRPCError } from "@trpc/server"
-import { ChannelAffiliateCodeModel } from "@kittr/prisma/validator"
+import { z } from "zod"
 
-const upsertCode = createController().query("", {
+const upsertCode = createController().mutation("", {
 	input: z.object({
 		authToken: z.string().optional(),
 		code: ChannelAffiliateCodeModel

@@ -8,6 +8,7 @@ import { useManagedChannels } from "@Hooks/api/useManagedChannels"
 import { setActiveView, setModal } from "@Redux/slices/dashboard"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
+import { getToken } from "@Services/firebase/auth"
 import { header2 } from "@Styles/typography"
 import { useSocket } from "pages/dashboard.page"
 
@@ -51,7 +52,7 @@ const ChannelDeleteModal = () => {
 					design="transparent"
 					text="DELETE FOREVER"
 					disabled={channelData?.displayName !== input}
-					onClick={() => mutate(channelData?.id!)}
+					onClick={async () => mutate({ authToken: await getToken(), channelId: channelData?.id! })}
 					style={{ backgroundColor: colors.red }}
 				/>
 			</FlexRow>

@@ -3,6 +3,5 @@ import { createRouter } from "@Server/createRouter"
 
 export const channelsCreatorCodesRouter = createRouter().merge(
 	"upsert",
-
 	ChannelsProfileCreatorCodesController.upsertCode
 )
