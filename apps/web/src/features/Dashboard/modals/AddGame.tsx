@@ -17,6 +17,7 @@ const AddGameModal = ({ ...props }) => {
 	const { channelId } = useSelector((state) => state.dashboard.activeView)
 	const channelData = useChannelData()
 	const { isLoading, data } = useAllGames()
+
 	const { mutate, isLoading: isMutating } = useDashboardMutator<void, NextClientEndpointError, Game>(async (game) => {
 		try {
 			const result = await fetch.post({
