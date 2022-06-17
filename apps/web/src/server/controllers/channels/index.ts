@@ -1,6 +1,7 @@
 import { createController } from "@Server/createController"
 import * as ChannelsService from "@Server/services/channels"
 import { z } from "zod"
+import { TRPCError } from "@trpc/server"
 
 const listTopChannels = createController().query("", {
 	input: z.object({
@@ -70,9 +71,18 @@ const createChannel = createController().mutation("", {
 })
 
 const deleteChannel = createController().mutation("", {
-	input: z.string(),
+	input: z.object({
+		channelId: z.string(),
+		authToken: z.string().optional()
+	}),
 	async resolve({ input }) {
-		const channel = await ChannelsService.deleteChannel(input)
+		if (!input.authToken) {
+			throw new TRPCError({
+				code: "UNAUTHORIZED"
+			})
+		}
+
+		const channel = await ChannelsService.deleteChannel({ authToken: input.authToken, channelId: input.channelId })
 		return channel
 	}
 })

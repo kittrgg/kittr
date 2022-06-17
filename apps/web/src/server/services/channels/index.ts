@@ -7,6 +7,7 @@ import { grabLoginName } from "@Services/twitch/utils/grabLoginName"
 import { badWordFilter } from "@Utils/helpers/badWordFilter"
 import { toURL } from "@Utils/helpers/toURL"
 import { TRPCError } from "@trpc/server"
+import { checkRole } from "@Server/services/users"
 
 export * from "./games"
 export * from "./kits"
@@ -72,10 +73,12 @@ export const createChannel = async (displayName: string) => {
 	return result
 }
 
-export const deleteChannel = async (id: string) => {
+export const deleteChannel = async ({ authToken, channelId }: { authToken: string; channelId: string }) => {
+	const manager = await checkRole({ authToken, channelId, roles: ["OWNER"] })
+
 	const channel = await prisma.channel.delete({
 		where: {
-			id
+			id: channelId
 		}
 	})
 
@@ -379,5 +382,3 @@ export const listLiveChannels = async () => {
 		return []
 	}
 }
-
-

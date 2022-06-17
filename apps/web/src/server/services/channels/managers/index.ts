@@ -1,8 +1,16 @@
 import { prisma } from "@kittr/prisma"
 import { checkRole } from "@Server/services/users"
 
-export const promoteManager = async ({ channelId, authToken }: { channelId: string; authToken: string }) => {
-	const { manager } = await checkRole({ authToken, channelId, roles: ["OWNER", "ADMIN"] })
+export const promoteManager = async ({
+	channelId,
+	managerIdToPromote,
+	authToken
+}: {
+	channelId: string
+	managerIdToPromote: string
+	authToken: string
+}) => {
+	await checkRole({ authToken, channelId, roles: ["OWNER", "ADMIN"] })
 
 	const channel = await prisma.channel.update({
 		where: {
@@ -12,7 +20,7 @@ export const promoteManager = async ({ channelId, authToken }: { channelId: stri
 			managers: {
 				update: {
 					where: {
-						id: manager.id
+						id: managerIdToPromote
 					},
 					data: {
 						role: "ADMIN"
@@ -25,8 +33,16 @@ export const promoteManager = async ({ channelId, authToken }: { channelId: stri
 	return channel
 }
 
-export const demoteManager = async ({ channelId, authToken }: { channelId: string; authToken: string }) => {
-	const { manager } = await checkRole({ authToken, channelId, roles: ["OWNER", "ADMIN"] })
+export const demoteManager = async ({
+	channelId,
+	managerIdToDemote,
+	authToken
+}: {
+	channelId: string
+	managerIdToDemote: string
+	authToken: string
+}) => {
+	await checkRole({ authToken, channelId, roles: ["OWNER", "ADMIN"] })
 
 	const channel = await prisma.channel.update({
 		where: {
@@ -36,7 +52,7 @@ export const demoteManager = async ({ channelId, authToken }: { channelId: strin
 			managers: {
 				update: {
 					where: {
-						id: manager.id
+						id: managerIdToDemote
 					},
 					data: {
 						role: "EDITOR"
