@@ -6,7 +6,8 @@ import { z } from "zod"
 const demoteManager = createController().mutation("", {
 	input: z.object({
 		authToken: z.string().optional(),
-		channelId: z.string()
+		channelId: z.string(),
+		managerToDemoteId: z.string()
 	}),
 	async resolve({ input }) {
 		if (!input.authToken) {
@@ -17,7 +18,8 @@ const demoteManager = createController().mutation("", {
 
 		const channel = await ChannelsManagersService.demoteManager({
 			authToken: input.authToken,
-			channelId: input.channelId
+			channelId: input.channelId,
+			managerIdToDemote: input.managerToDemoteId
 		})
 
 		return channel
@@ -28,7 +30,7 @@ const promoteManager = createController().mutation("", {
 	input: z.object({
 		authToken: z.string(),
 		channelId: z.string(),
-		managerId: z.string()
+		managerIdToPromote: z.string()
 	}),
 	async resolve({ input }) {
 		if (!input.authToken) {
@@ -37,7 +39,11 @@ const promoteManager = createController().mutation("", {
 			})
 		}
 
-		const channel = await ChannelsManagersService.promoteManager(input)
+		const channel = await ChannelsManagersService.promoteManager({
+			authToken: input.authToken,
+			channelId: input.channelId,
+			managerIdToPromote: input.managerIdToPromote
+		})
 		return channel
 	}
 })
