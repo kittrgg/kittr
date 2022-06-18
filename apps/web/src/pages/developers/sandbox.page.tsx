@@ -10,7 +10,8 @@ export default function IndexPage() {
 	}
 	return (
 		<div>
-			<Button>Test</Button>
+			<Button>tree shook</Button>
+			{/* <Title>Do the thing</Title> */}
 			<pre>{JSON.stringify(hello.data, null, 2)}</pre>
 		</div>
 	)

@@ -1,3 +1,4 @@
+import React from "react"
 import { Text as MantineText, SharedTextProps } from "@mantine/core"
 import { useMantineTheme } from "@mantine/core"
 import { ReactNode } from "react"
