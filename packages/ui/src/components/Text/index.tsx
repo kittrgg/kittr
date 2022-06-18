@@ -117,7 +117,7 @@ export const TEXT_PRESETS = {
 }
 
 interface Props extends SharedTextProps {
-	/** Use a preset set of defined properties as found in the UI Kit in Figma. */
+	/** Use a preset set of defined properties. */
 	preset?: keyof typeof TEXT_PRESETS
 	children: ReactNode
 }
