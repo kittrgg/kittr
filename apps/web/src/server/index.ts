@@ -1,11 +1,11 @@
 import type { inferProcedureOutput, inferProcedureInput } from "@trpc/server"
+import {} from "@trpc/react/src/createReactQueryHooks"
 import { gamesRouter } from "@Server/routers/games"
 import superjson from "superjson"
 import { createRouter } from "./createRouter"
 import { channelsRouter } from "./routers/channels"
 import { kitsRouter } from "./routers/kits"
 import { twitchRouter } from "./routers/twitch"
-import { z } from "zod"
 
 export const appRouter = createRouter()
 	.transformer(superjson)
@@ -21,6 +21,7 @@ export type TQuery = keyof AppRouter["_def"]["queries"]
 
 /** Enum containing all api mutation paths */
 export type TMutation = keyof AppRouter["_def"]["mutations"]
+export type TMutationPaths = AppRouter["_def"]["mutations"]
 
 /**
  * This is a helper method to infer the output of a query resolver
