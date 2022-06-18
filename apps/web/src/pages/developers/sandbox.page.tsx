@@ -1,5 +1,6 @@
 import { createSSGHelper } from "@Server/createSSGHelper"
 import { trpc } from "@Server/createHooks"
+import {Button} from '@kittr/ui/dist/Button'
 
 export default function IndexPage() {
 	const hello = trpc.useQuery(["games/list", { kits: true }])
@@ -9,6 +10,7 @@ export default function IndexPage() {
 	}
 	return (
 		<div>
+			<Button>Test</Button>
 			<pre>{JSON.stringify(hello.data, null, 2)}</pre>
 		</div>
 	)
