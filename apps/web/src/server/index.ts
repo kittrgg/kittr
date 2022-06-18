@@ -1,5 +1,4 @@
 import type { inferProcedureOutput, inferProcedureInput } from "@trpc/server"
-import {} from "@trpc/react/src/createReactQueryHooks"
 import { gamesRouter } from "@Server/routers/games"
 import superjson from "superjson"
 import { createRouter } from "./createRouter"
