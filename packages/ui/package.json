@@ -11,8 +11,8 @@
 	"scripts": {
 		"test": "jest --coverage",
 		"test:watch": "jest --watch --coverage",
-		"build": "tsup src/**/index.tsx  --dts ",
-		"dev": "tsup src/**/index.tsx --watch --dts",
+		"build": "tsup src/components/index.ts  --dts ",
+		"dev": "tsup src/components/index.ts --watch --dts",
 		"lint": "eslint \"**/*.tsx\" --fix",
 		"clean": "rm -rf .turbo  && rm -rf dist && rm -rf coverage && rm -rf node_modules",
 		"type-check": "tsc --pretty --noEmit",

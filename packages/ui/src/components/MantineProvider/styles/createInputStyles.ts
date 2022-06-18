@@ -1,5 +1,5 @@
-import { other } from "@Styles/theme"
-import { colors } from "@Styles/colors"
+import { other } from "./theme"
+import { colors } from "./colors"
 
 export const createInputStyles = (overrides?: any) => {
 	const stylesObj = {

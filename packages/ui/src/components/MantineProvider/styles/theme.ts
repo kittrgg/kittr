@@ -1,5 +1,5 @@
 import { MantineThemeOverride } from "@mantine/core"
-import { colors } from "@Styles/colors"
+import { colors } from "./colors"
 
 export const other = {
 	colors: {

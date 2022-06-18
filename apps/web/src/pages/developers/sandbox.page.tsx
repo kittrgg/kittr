@@ -1,6 +1,6 @@
 import { createSSGHelper } from "@Server/createSSGHelper"
 import { trpc } from "@Server/createHooks"
-import {Button} from '@kittr/ui/dist/Button'
+import { Button } from "@kittr/ui"
 
 export default function IndexPage() {
 	const hello = trpc.useQuery(["games/list", { kits: true }])
