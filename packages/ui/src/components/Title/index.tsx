@@ -9,44 +9,52 @@ const fontFamily = "Barlow Condensed, serif"
 
 export const TITLE_PRESETS = {
 	d1: {
-		fontSize: "2.625rem",
-		fontWeight: 600,
-		fontFamily
+		fontSize: "4.5rem",
+		fontWeight: 900,
+		fontFamily,
+		letterSpacing: ".375rem"
 	},
 	d2: {
-		fontSize: "1.75rem",
+		fontSize: "3.5rem",
 		fontWeight: 600,
-		fontFamily
+		fontFamily,
+		letterSpacing: ".3rem"
 	},
 	h1: {
-		fontSize: "2.125rem",
-		fontWeight: 600,
-		fontFamily
+		fontFamily,
+		fontSize: "2.25rem",
+		fontWeight: 900,
+		letterSpacing: ".1875rem"
 	},
 	h2: {
-		fontSize: "1.625rem",
+		fontFamily,
+		fontSize: "2rem",
 		fontWeight: 700,
-		fontFamily
+		letterSpacing: ".166666666667rem"
 	},
 	h3: {
-		fontSize: "1.375rem",
+		fontSize: "1.75rem",
 		fontWeight: 700,
-		fontFamily
+		fontFamily,
+		letterSpacing: ".145rem"
 	},
 	h4: {
-		fontSize: "1.25rem",
-		fontWeight: 700,
-		fontFamily
+		fontSize: "1.5rem",
+		fontWeight: 600,
+		fontFamily,
+		letterSpacing: ".125rem"
 	},
 	h5: {
-		fontSize: "1.125rem",
-		fontWeight: 700,
-		fontFamily
+		fontSize: "1.25rem",
+		fontWeight: 600,
+		fontFamily,
+		letterSpacing: ".105rem"
 	},
 	h6: {
 		fontSize: "1rem",
-		fontWeight: 700,
-		fontFamily
+		fontWeight: 600,
+		fontFamily,
+		letterSpacing: ".08333333rem"
 	}
 }
 
