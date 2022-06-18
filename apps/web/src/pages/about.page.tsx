@@ -6,7 +6,7 @@ import { useViewportDimensions } from "@Hooks/useViewportDimensions"
 import colors from "@Colors"
 import PageWrapper from "@Components/layouts/PageWrapper"
 
-const About = ({ ...props }) => {
+const About = () => {
 	const { width } = useViewportDimensions()
 	const { classes } = useStyles()
 
@@ -108,7 +108,6 @@ const useStyles = createStyles((theme) => {
 			fontFamily: '"Barlow Condensed", serif',
 			color: theme.white
 		},
-
 		h2: {
 			marginBottom: "12px",
 			color: theme.white,
@@ -117,7 +116,6 @@ const useStyles = createStyles((theme) => {
 			letterSpacing: "2px",
 			fontFamily: '"Montserrat", sans-serif'
 		},
-
 		grid: {
 			display: "grid",
 			gridTemplateColumns: "1fr 1fr 1fr",
@@ -129,30 +127,24 @@ const useStyles = createStyles((theme) => {
 				columnGap: "0"
 			}
 		},
-
 		container: {
 			padding: "32px",
 			borderRadius: "10px",
 			backgroundColor: colors.darker,
 			color: colors.lighter,
 			lineHeight: "200%",
-
 			["& p"]: {
 				fontSize: "18px",
-
 				["&:not(:nth-child(1))"]: {
 					marginTop: "24px"
 				},
-
 				["@media (max-width: 600px)"]: {
 					fontSize: "14px"
 				}
 			},
-
 			["& strong"]: {
 				fontWeight: 600
 			},
-
 			["& a"]: {
 				color: colors.lighter
 			}

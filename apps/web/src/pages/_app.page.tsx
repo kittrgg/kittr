@@ -48,7 +48,6 @@ const MyApp = ({ Component, pageProps }: any) => {
 			withGlobalStyles
 			withNormalizeCSS
 			theme={{
-				/** Put your mantine theme override here */
 				colorScheme: "dark"
 			}}
 		>
@@ -118,6 +117,3 @@ export default withTRPC<AppRouter>({
 	 */
 	// ssr: true
 })(AppWrap)
-
-// export default AppWrap
-
