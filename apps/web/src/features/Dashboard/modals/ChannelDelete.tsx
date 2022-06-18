@@ -2,16 +2,15 @@ import { useState } from "react"
 import styled from "styled-components"
 
 import colors from "@Colors"
-import { header2 } from "@Styles/typography"
-import { getToken } from "@Services/firebase/auth/getToken"
-import { Modal, Button, TextInput } from "@Components/shared"
-import { useDispatch } from "@Redux/store"
+import { Button, Modal, TextInput } from "@Components/shared"
+import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
+import { useManagedChannels } from "@Hooks/api/useManagedChannels"
 import { setActiveView, setModal } from "@Redux/slices/dashboard"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
-import { useManagedChannels } from "@Hooks/api/useManagedChannels"
-import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
+import { useDispatch } from "@Redux/store"
+import { getToken } from "@Services/firebase/auth"
+import { header2 } from "@Styles/typography"
 import { useSocket } from "pages/dashboard.page"
-import fetch from "@Fetch"
 
 /** Modal to allow the user to delete the channel. */
 const ChannelDeleteModal = () => {
@@ -20,22 +19,18 @@ const ChannelDeleteModal = () => {
 	const { data: channelData } = useChannelData()
 	const [input, setInput] = useState("")
 	const { refetch } = useManagedChannels()
-	const { mutate } = useDashboardMutator(async () => {
-		try {
-			const result = await fetch.delete({
-				url: `/api/channel`,
-				headers: { authorization: `Bearer: ${await getToken()}` },
-				body: { id: channelData?.id }
-			})
-
-			if (result) {
+	const { mutate } = useDashboardMutator({
+		path: "channels/delete",
+		opts: {
+			onSuccess: () => {
 				socket.emit(`channelDelete`, channelData?.id)
 				dispatch(setActiveView({ channelId: "", view: "Channel List" }))
 				dispatch(setModal({ type: "", data: {} }))
 				refetch()
+			},
+			onError: () => {
+				dispatch(setModal({ type: "Error Notification", data: {} }))
 			}
-		} catch (error) {
-			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}
 	})
 
@@ -57,7 +52,7 @@ const ChannelDeleteModal = () => {
 					design="transparent"
 					text="DELETE FOREVER"
 					disabled={channelData?.displayName !== input}
-					onClick={mutate}
+					onClick={async () => mutate({ authToken: await getToken(), channelId: channelData?.id! })}
 					style={{ backgroundColor: colors.red }}
 				/>
 			</FlexRow>

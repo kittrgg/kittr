@@ -1,36 +1,56 @@
+import { ChannelAffiliateModel } from "@kittr/prisma/validator"
 import { createController } from "@Server/createController"
 import * as ChannelsService from "@Server/services/channels"
-import { ChannelAffiliateModel } from "@kittr/prisma/validator"
 import { TRPCError } from "@trpc/server"
 import { z } from "zod"
 
-const createAffiliate = createController().query("", {
-	input: ChannelAffiliateModel.omit({ id: true }),
+const createAffiliate = createController().mutation("", {
+	input: z.object({
+		authToken: z.string().optional(),
+		channelId: z.string(),
+		data: ChannelAffiliateModel.omit({ id: true })
+	}),
 	async resolve({ input }) {
-		if (!input.channelProfileId) {
+		if (!input.authToken) {
 			throw new TRPCError({
 				code: "BAD_REQUEST",
 				message: "Missing channelProfileId."
 			})
 		}
 
-		const channel = await ChannelsService.createAffiliate(input)
+		const channel = await ChannelsService.createAffiliate({
+			authToken: input.authToken,
+			channelId: input.channelId,
+			data: input.data
+		})
 
 		return channel
 	}
 })
 
-const updateAffiliate = createController().query("", {
-	input: ChannelAffiliateModel,
+const updateAffiliate = createController().mutation("", {
+	input: z.object({
+		authToken: z.string().optional(),
+		channelId: z.string(),
+		data: ChannelAffiliateModel
+	}),
 	async resolve({ input }) {
-		const { id, ...affiliate } = input
+		if (!input.authToken) {
+			throw new TRPCError({
+				code: "UNAUTHORIZED"
+			})
+		}
 
-		const channel = await ChannelsService.updateAffiliate({ id: input.id, data: affiliate })
+		const channel = await ChannelsService.updateAffiliate({
+			authToken: input.authToken,
+			channelId: input.channelId,
+			data: input.data
+		})
 		return channel
 	}
 })
 
-const deleteAffiliate = createController().query("", {
+const deleteAffiliate = createController().mutation("", {
 	input: z.object({
 		channelId: z.string(),
 		affiliateId: z.string()

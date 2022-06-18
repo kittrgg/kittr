@@ -1,29 +1,25 @@
 import styled from "styled-components"
 
 import colors from "@Colors"
-import { getToken } from "@Services/firebase/auth/getToken"
 import { MultiButton, Spinner } from "@Components/shared"
-import { paragraph } from "@Styles/typography"
-import { useDispatch } from "@Redux/store"
-import { setModal } from "@Redux/slices/dashboard"
-import H3 from "../../H3"
-import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
-import fetch from "@Fetch"
+import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
+import { setModal } from "@Redux/slices/dashboard"
+import { useDispatch } from "@Redux/store"
+import { getToken } from "@Services/firebase/auth/getToken"
+import { paragraph } from "@Styles/typography"
+import H3 from "../../H3"
 
 const YouTubeAutoplayEditor = ({ ...props }) => {
 	const dispatch = useDispatch()
 	const { data } = useDashboardChannel()
-	const { mutate, isLoading } = useDashboardMutator(async () => {
-		try {
-			// Don't have to do anything with this result, the sockets will propogate the change
-			await fetch.put({
-				url: `/api/channel/meta/youtubeAutoplay`,
-				body: { id: data?.id, boolean: !data?.profile?.youtubeAutoplay },
-				headers: { authorization: `Bearer: ${await getToken()}` }
-			})
-		} catch (error) {
-			dispatch(setModal({ type: "Error Notification", data: {} }))
+
+	const { mutate, isLoading } = useDashboardMutator({
+		path: "channels/profile/youtube-autoplay/upsert",
+		opts: {
+			onError: () => {
+				dispatch(setModal({ type: "Error Notification", data: {} }))
+			}
 		}
 	})
 
@@ -50,7 +46,13 @@ const YouTubeAutoplayEditor = ({ ...props }) => {
 							}
 						]}
 						activeValue={data?.profile?.youtubeAutoplay ? "YUP" : "NOPE"}
-						onClick={mutate}
+						onClick={async () =>
+							mutate({
+								authToken: await getToken(),
+								channelId: data?.id!,
+								shouldYoutubeAutoplay: !data?.profile?.youtubeAutoplay
+							})
+						}
 					/>
 				</div>
 			</HorizFlex>

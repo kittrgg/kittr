@@ -1,14 +1,6 @@
-// TODO: Empty subscription strings should be turned into "basic".
-// TODO: Manager roles converted to new prisma enums.
-
 import { prisma } from "../index"
 import mongoose from "mongoose"
-import {
-	LinkProperty,
-	OverlayVisibilityStates,
-	ChannelManagerRoles
-} from "@prisma/client"
-
+import { LinkProperty, ChannelManagerRoles } from "@prisma/client"
 import { KitOption } from "../models/KitOption"
 import { Game } from "../models/Game"
 import { KitBase } from "../models/KitBase"
@@ -348,16 +340,17 @@ mongoose
 		}
 
 		const createOverlays = async () => {
-			const channels = mongoChannels.map((channel) => ({
-				channelId: channel._id,
-				kits: channel.kits,
-				overlay: {
-					...channel.overlay,
-					isOverlayVisible: channel.overlay?.isOverlayVisible?.toUpperCase() as
-						| OverlayVisibilityStates
-						| undefined
+			const channels = mongoChannels.map((channel) => {
+				return {
+					channelId: channel._id,
+					kits: channel.kits,
+					overlay: {
+						...channel.overlay,
+						isOverlayVisible:
+							channel.overlay?.isOverlayVisible === "on" ? true : false
+					}
 				}
-			}))
+			})
 
 			for (const channel of channels) {
 				const foundPrimaryKit = channel.kits

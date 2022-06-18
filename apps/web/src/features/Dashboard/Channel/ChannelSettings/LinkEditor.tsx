@@ -6,14 +6,13 @@ import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { setModal } from "@Redux/slices/dashboard"
 import { useModal, usePremiumStatus } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import { getToken } from "@Services/firebase/auth/getToken"
+import { getToken } from "@Services/firebase/auth"
 import { paragraph } from "@Styles/typography"
 import { trimPrefix } from "@Utils/helpers/trimPrefix"
 import { linkPrefixes } from "@Utils/lookups/linkPrefixes"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
 import AddLink from "../../modals/AddLink"
-import fetch from "@Fetch"
 
 /** CRUD for editing the social links of a channel. */
 const LinkEditor = () => {
@@ -23,17 +22,12 @@ const LinkEditor = () => {
 	const dispatch = useDispatch()
 	const [linkEdits, setLinkEdits] = useState(data?.links)
 	const [areActiveChanges, setActiveChanges] = useState(false)
-	const { mutate, isLoading } = useDashboardMutator(async () => {
-		try {
-			return await fetch.put({
-				url: `/api/channel/meta/links`,
-				headers: {
-					authorization: `Bearer: ${await getToken()}`
-				},
-				body: { id: data?.id, links: linkEdits }
-			})
-		} catch (error) {
-			dispatch(setModal({ type: "Error Notification", data: {} }))
+	const { mutate, isLoading } = useDashboardMutator({
+		path: "channels/links/upsert",
+		opts: {
+			onError: () => {
+				dispatch(setModal({ type: "Error Notification", data: {} }))
+			}
 		}
 	})
 
@@ -171,7 +165,7 @@ const LinkEditor = () => {
 							design="white"
 							disabled={!areActiveChanges}
 							text="Save Changes"
-							onClick={mutate}
+							onClick={async () => mutate({ authToken: await getToken(), channelId: data?.id!, links: linkEdits! })}
 							style={{
 								margin: "0 auto"
 							}}

@@ -11,7 +11,7 @@ import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
 interface Props {
 	_id: string
 	previewWidth?: number
-	data?: InferQueryOutput<"channels/overlay">
+	data?: InferQueryOutput<"channels/overlay/get">
 	activeKit: OverlayKit
 	setActiveKit: Dispatch<SetStateAction<OverlayKit>>
 }
@@ -107,7 +107,7 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 
 	const hasAKitSelected =
 		Object.keys(data.primaryKit || {}).length > 0 || Object.keys(data.secondaryKit || {}).length > 0
-	const isRendered = data.isOverlayVisible === "ON" && hasAKitSelected
+	const isRendered = data.isOverlayVisible && hasAKitSelected
 	const isOverlayVisible = !!previewWidth || isRendered
 
 	return (

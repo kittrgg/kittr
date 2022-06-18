@@ -2,16 +2,14 @@ import colors from "@Colors"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useAllKitBases } from "@Hooks/api/useAllKitBases"
 import { useUser } from "@Hooks/useUser"
+import { KitWithOptionalId } from "@kittr/types/kits"
 import { clearKitEditor, resetToInitialKit, setModal } from "@Redux/slices/dashboard"
 import { useActiveKit, useChannelData, useInitialKit, useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import { getToken } from "@Services/firebase/auth/getToken"
 import { paragraph } from "@Styles/typography"
+import { isFetchError } from "@Utils/helpers/typeGuards"
 import styled from "styled-components"
 import NamingWarning from "./NamingWarning"
-import fetch from "@Fetch"
-import { isFetchError } from "@Utils/helpers/typeGuards"
-import { KitWithOptionalId } from "@kittr/types/kits"
 
 const EditorSnackbar = () => {
 	const dispatch = useDispatch()
@@ -21,77 +19,61 @@ const EditorSnackbar = () => {
 	const user = useUser()
 	const modal = useModal()
 	const { data: allKitBases } = useAllKitBases()
-	const { mutate, isLoading } = useDashboardMutator(async () => {
-		// Grab the existing kit array and map them to just their titles
-		let kitArr = channelData?.kits.slice() as KitWithOptionalId[]
+	const { mutate, isLoading } = useDashboardMutator({
+		path: "channels/kits/upsert",
+		opts: {
+			onMutate: () => {
+				// Grab the existing kit array and map them to just their titles
+				let kitArr = channelData?.kits.slice() as KitWithOptionalId[]
 
-		// Grab the new kit's name
-		const newKitName = activeKit.base.displayName + activeKit.customTitle
+				// Grab the new kit's name
+				const newKitName = activeKit.base.displayName + activeKit.customTitle
 
-		// Is this an existing kit being updated?
-		let index = channelData?.kits.findIndex((kit) => kit.id === activeKit.id) ?? -1 // -1 means there's no kit
+				// Is this an existing kit being updated?
+				let index = channelData?.kits.findIndex((kit) => kit.id === activeKit.id) ?? -1 // -1 means there's no kit
 
-		if (!kitArr) {
-			console.log("Disallowed.")
-			return
-		}
-
-		if (index !== -1) {
-			// Replace the existing kit with its new data
-			kitArr[index] = activeKit
-		} else {
-			// Add the new kit to the array
-			kitArr.push(activeKit)
-		}
-
-		if (
-			kitArr
-				.map((kit) => ({
-					...kit,
-					...(allKitBases?.find((allBase) => {
-						console.log(kit.base.id)
-
-						return allBase.id === kit.base.id
-					}) || activeKit)
-				}))
-				// Map to just the names
-				.map((kit) => kit.base.gameId + kit.base.displayName)
-
-				// Compare to ensure that there are no dupes
-				.filter((existingKitName) => newKitName === existingKitName).length > 1
-		) {
-			return dispatch(setModal({ type: "Kit Naming Warning", data: {} }))
-		}
-
-		try {
-			const result = await fetch.post({
-				url: `/api/channel/kit`,
-				headers: { authorization: `Bearer: ${await getToken()}` },
-				body: {
-					channelId: channelData?.id,
-					kit: {
-						id: initialKit.id || undefined,
-						gameId: activeKit.base.gameId,
-						baseId: activeKit.base.id,
-						customTitle: activeKit.customTitle,
-						options: activeKit.options,
-						blueprint: activeKit.blueprint,
-						featured: activeKit.featured,
-						youtubeUrl: activeKit.youtubeUrl,
-						tiktokUrl: activeKit.tiktokUrl,
-						quote: activeKit.quote
-					},
-					previousUpdater: user?.displayName || user?.email
+				if (!kitArr) {
+					console.log("Disallowed.")
+					return
 				}
-			})
 
-			if (isFetchError(result)) {
+				if (index !== -1) {
+					// Replace the existing kit with its new data
+					kitArr[index] = activeKit
+				} else {
+					// Add the new kit to the array
+					kitArr.push(activeKit)
+				}
+
+				if (
+					kitArr
+						.map((kit) => ({
+							...kit,
+							...(allKitBases?.find((allBase) => {
+								console.log(kit.base.id)
+
+								return allBase.id === kit.base.id
+							}) || activeKit)
+						}))
+						// Map to just the names
+						.map((kit) => kit.base.gameId + kit.base.displayName)
+
+						// Compare to ensure that there are no dupes
+						.filter((existingKitName) => newKitName === existingKitName).length > 1
+				) {
+					return dispatch(setModal({ type: "Kit Naming Warning", data: {} }))
+				}
+			},
+			onSuccess: (result: any) => {
+				if (isFetchError(result)) {
+					dispatch(setModal({ type: "Error Notification", data: {} }))
+				} else {
+					dispatch(clearKitEditor())
+				}
+			},
+			onError: () => {
 				dispatch(setModal({ type: "Error Notification", data: {} }))
-			} else {
-				dispatch(clearKitEditor())
 			}
-		} catch (error) {
-			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}
 	})
 
@@ -128,6 +110,25 @@ const EditorSnackbar = () => {
 		dispatch(resetToInitialKit())
 	}
 
+	const upsertKit = () => {
+		mutate({
+			channelId: channelData?.id!,
+			kit: {
+				channelId: channelData?.id!,
+				id: initialKit.id!,
+				gameId: activeKit.base.gameId,
+				baseId: activeKit.base.id,
+				customTitle: activeKit.customTitle,
+				options: activeKit.options,
+				blueprint: activeKit.blueprint,
+				featured: activeKit.featured,
+				youtubeUrl: activeKit.youtubeUrl,
+				tiktokUrl: activeKit.tiktokUrl,
+				quote: activeKit.quote
+			}
+		})
+	}
+
 	const isNewKit = !initialKit.id
 
 	return (
@@ -140,7 +141,7 @@ const EditorSnackbar = () => {
 				</HorizFlex>
 				<HorizFlex>
 					{!isNewKit && <ResetButton onClick={reset}>Reset</ResetButton>}
-					<SaveButton onClick={mutate} disabled={Object.keys(activeKit.base).length === 0} data-cy="save-kit-button">
+					<SaveButton onClick={upsertKit} disabled={Object.keys(activeKit.base).length === 0} data-cy="save-kit-button">
 						{isLoading ? "..." : "Save"}
 					</SaveButton>
 				</HorizFlex>

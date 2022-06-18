@@ -6,31 +6,28 @@ import { setModal } from "@Redux/slices/dashboard"
 import { useDispatch } from "@Redux/store"
 import { getToken } from "@Services/firebase/auth/getToken"
 import styled from "styled-components"
-import fetch from "@Fetch"
 
 const ThemeColor = ({ ...props }) => {
 	const { data } = useDashboardChannel()
 	const dispatch = useDispatch()
 
-	const { mutate } = useDashboardMutator(async (color: string) => {
-		try {
-			// We don't need to do anything with the result of this fetch
-			// The sockets will propogate the change
-			await fetch.put({
-				url: `/api/channel/meta/brandColor`,
-				body: {
-					channelId: data?.id,
-					primaryColor: color,
-					colorId: data?.profile?.brandColors?.find((color) => color.type === "PRIMARY")?.id
-				},
-				headers: {
-					authorization: `Bearer: ${await getToken()}`
-				}
-			})
-		} catch (err) {
-			dispatch(setModal({ type: "Error Notification", data: "" }))
+	const { mutate } = useDashboardMutator({
+		path: "channels/profile/brand-color/upsert",
+		opts: {
+			onError: () => {
+				dispatch(setModal({ type: "Error Notification", data: "" }))
+			}
 		}
 	})
+
+	const onChangeColor = async (color: string | null) => {
+		mutate({
+			authToken: await getToken(),
+			newColor: color || colors.white,
+			channelId: data?.id!,
+			colorId: data?.profile?.brandColors?.find((color) => color.type === "PRIMARY")?.id!
+		})
+	}
 
 	return (
 		<div>
@@ -39,7 +36,7 @@ const ThemeColor = ({ ...props }) => {
 				<SVG.PremiumWithCircle width="24px" style={{ position: "relative", top: "6px", marginLeft: "12px" }} />
 			</Title>
 			<ColorPicker
-				onChangeComplete={(color) => mutate(color || colors.white)}
+				onChangeComplete={onChangeColor}
 				defaultColor={data?.profile?.brandColors.find((color) => color.type === "PRIMARY")?.value || colors.white}
 				designVariant="Big Square"
 			/>

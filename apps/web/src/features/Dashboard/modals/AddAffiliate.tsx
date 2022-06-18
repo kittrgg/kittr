@@ -1,16 +1,14 @@
-import validator from "validator"
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 import styled from "styled-components"
+import validator from "validator"
 
 import colors from "@Colors"
-import { paragraph } from "@Styles/typography"
-import { useDispatch } from "@Redux/store"
-import { Modal, TextInputBox, Button, Spinner } from "@Components/shared"
-import { getToken } from "@Services/firebase/auth/getToken"
-import { setModal } from "@Redux/slices/dashboard"
-import { useModal, useChannelData } from "@Redux/slices/dashboard/selectors"
+import { Button, Modal, Spinner, TextInputBox } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
-import fetch from "@Fetch"
+import { setModal } from "@Redux/slices/dashboard"
+import { useChannelData, useModal } from "@Redux/slices/dashboard/selectors"
+import { useDispatch } from "@Redux/store"
+import { paragraph } from "@Styles/typography"
 
 /** Modal for adding a spec to the channel's PC setup. */
 const AddAffiliateModal = ({ ...props }) => {
@@ -22,35 +20,38 @@ const AddAffiliateModal = ({ ...props }) => {
 	const [description, setDescription] = useState(data?.description || "")
 	const [code, setCode] = useState(data?.code || "")
 	const [url, setUrl] = useState(data?.url || "")
-	const { mutate, isLoading } = useDashboardMutator(async () => {
-		if (data?.id) {
-			return fetch
-				.put({
-					url: `/api/channel/meta/affiliate`,
-					headers: { authorization: `Bearer ${await getToken()}` },
-					body: { channelId: channelData?.id, company, description, code, url }
-				})
-				.then(() => {
-					dispatch(setModal({ type: "", data: "" }))
-				})
-				.catch((err) => {
-					dispatch(setModal({ type: "Error Notification", data: "" }))
-				})
-		} else {
-			return fetch
-				.post({
-					url: `/api/channel/meta/affiliate`,
-					headers: { authorization: `Bearer ${await getToken()}` },
-					body: { affiliatedId: data?.id, channelId: channelData?.id, company, description, code, url }
-				})
-				.then(() => {
-					dispatch(setModal({ type: "", data: "" }))
-				})
-				.catch((err) => {
-					dispatch(setModal({ type: "Error Notification", data: "" }))
-				})
+
+	const { mutate: createAffiliate, isLoading: isCreatingAffiliate } = useDashboardMutator({
+		path: "channels/profile/affiliates/create",
+		opts: {
+			onSuccess: () => {
+				dispatch(setModal({ type: "", data: "" }))
+			},
+			onError: () => {
+				dispatch(setModal({ type: "Error Notification", data: "" }))
+			}
 		}
 	})
+
+	const { mutate: updateAffiliate, isLoading: isUpdatingAffiliate } = useDashboardMutator({
+		path: "channels/profile/affiliates/update",
+		opts: {
+			onSuccess: () => {
+				dispatch(setModal({ type: "", data: "" }))
+			},
+			onError: () => {
+				dispatch(setModal({ type: "Error Notification", data: "" }))
+			}
+		}
+	})
+
+	const submit = () => {
+		if (data?.id) {
+			updateAffiliate({ channelId: channelData?.id!, data: { id: data?.id!, company, description, code, url } })
+		} else {
+			createAffiliate({ channelId: channelData?.id!, data: { company, description, code, url } })
+		}
+	}
 
 	useEffect(() => {
 		if (data?.company) {
@@ -59,7 +60,7 @@ const AddAffiliateModal = ({ ...props }) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
-	if (isLoading) return <Spinner width="24px" />
+	if (isCreatingAffiliate || isUpdatingAffiliate) return <Spinner width="24px" />
 
 	return (
 		<Modal backgroundClickToClose title="ADD AFFILIATE">
@@ -111,7 +112,7 @@ const AddAffiliateModal = ({ ...props }) => {
 			<Button
 				data-cy="confirm-add-affiliate"
 				design="white"
-				onClick={mutate}
+				onClick={submit}
 				disabled={!company || ![description, code].some((elem) => elem.length) || (url ? !validator.isURL(url) : false)}
 				text="SAVE"
 				style={{ margin: "84px auto 0" }}

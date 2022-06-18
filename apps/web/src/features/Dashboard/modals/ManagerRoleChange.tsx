@@ -1,52 +1,44 @@
 import styled from "styled-components"
 
 import colors from "@Colors"
-import { getToken } from "@Services/firebase/auth/getToken"
-import { paragraph } from "@Styles/typography"
-import { useDispatch } from "@Redux/store"
-import { setModal } from "@Redux/slices/dashboard"
-import { useModal, useChannelData } from "@Redux/slices/dashboard/selectors"
-import { Button, Spinner, Modal } from "@Components/shared"
+import { Button, Modal, Spinner } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
-import fetch from "@Fetch"
+import { setModal } from "@Redux/slices/dashboard"
+import { useChannelData, useModal } from "@Redux/slices/dashboard/selectors"
+import { useDispatch } from "@Redux/store"
+import { getToken } from "@Services/firebase/auth"
+import { paragraph } from "@Styles/typography"
 
 const DeleteManager = () => {
 	const dispatch = useDispatch()
 	const { data: channelData } = useChannelData()
 	const { data } = useModal()
-	const { mutate: demote, isLoading: demoting } = useDashboardMutator(async () => {
-		try {
-			const result = await fetch.put({
-				url: `/api/manager/demote`,
-				headers: { authorization: `Bearer: ${await getToken()}` },
-				body: { managerIdToUpdate: data.id, channelId: channelData?.id }
-			})
 
-			if (result) {
+	const { mutate: demote, isLoading: isDemoting } = useDashboardMutator({
+		path: "channels/managers/demote",
+		opts: {
+			onSuccess: () => {
 				dispatch(setModal({ type: "", data: {} }))
+			},
+			onError: () => {
+				dispatch(setModal({ type: "Error Notification", data: {} }))
 			}
-		} catch (error) {
-			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}
 	})
 
-	const { mutate: promote, isLoading: promoting } = useDashboardMutator(async () => {
-		try {
-			const result = await fetch.put({
-				url: `/api/manager/promote`,
-				headers: { authorization: `Bearer: ${await getToken()}` },
-				body: { managerIdToUpdate: data.id, channelId: channelData?.id }
-			})
-
-			if (result) {
+	const { mutate: promote, isLoading: isPromoting } = useDashboardMutator({
+		path: "channels/managers/promote",
+		opts: {
+			onSuccess: () => {
 				dispatch(setModal({ type: "", data: {} }))
+			},
+			onError: () => {
+				dispatch(setModal({ type: "Error Notification", data: {} }))
 			}
-		} catch (error) {
-			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}
 	})
 
-	if (promoting || demoting)
+	if (isPromoting || isDemoting)
 		return (
 			<Modal backgroundClickToClose title="MAKING THE SWITCH...">
 				<Spinner width="100%" height="50px" />
@@ -67,7 +59,14 @@ const DeleteManager = () => {
 						text="NO, KEEP THE SAME"
 						onClick={() => dispatch(setModal({ type: "", data: {} }))}
 					/>
-					<Button design="white" text="YES, DEMOTE THEM" onClick={demote} style={{ marginLeft: "32px" }} />
+					<Button
+						design="white"
+						text="YES, DEMOTE THEM"
+						onClick={async () =>
+							demote({ authToken: await getToken(), managerIdToDemote: data.id, channelId: channelData?.id! })
+						}
+						style={{ marginLeft: "32px" }}
+					/>
 				</RowFlex>
 			</Modal>
 		)
@@ -88,7 +87,14 @@ const DeleteManager = () => {
 					text="NO, KEEP THE SAME"
 					onClick={() => dispatch(setModal({ type: "", data: {} }))}
 				/>
-				<Button design="white" text="YES, PROMOTE THEM" onClick={promote} style={{ marginLeft: "32px" }} />
+				<Button
+					design="white"
+					text="YES, PROMOTE THEM"
+					onClick={async () =>
+						promote({ authToken: await getToken(), managerIdToPromote: data.id, channelId: channelData?.id! })
+					}
+					style={{ marginLeft: "32px" }}
+				/>
 			</RowFlex>
 		</Modal>
 	)

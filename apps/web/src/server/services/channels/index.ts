@@ -7,10 +7,12 @@ import { grabLoginName } from "@Services/twitch/utils/grabLoginName"
 import { badWordFilter } from "@Utils/helpers/badWordFilter"
 import { toURL } from "@Utils/helpers/toURL"
 import { TRPCError } from "@trpc/server"
+import { checkRole } from "@Server/services/users"
 
 export * from "./games"
 export * from "./kits"
 export * from "./profile"
+export * from "./links"
 
 interface ChannelWithProfile extends Channel {
 	profile: ChannelProfile
@@ -72,10 +74,29 @@ export const createChannel = async (displayName: string) => {
 	return result
 }
 
-export const deleteChannel = async (id: string) => {
+export const updateChannel = async ({
+	channelId,
+	authToken,
+	data
+}: {
+	channelId: string
+	authToken: string
+	data: Partial<Channel>
+}) => {
+	await checkRole({ authToken, channelId, roles: ["OWNER", "ADMIN"] })
+
+	const result = await prisma.channel.update({
+		where: { id: channelId },
+		data
+	})
+}
+
+export const deleteChannel = async ({ authToken, channelId }: { authToken: string; channelId: string }) => {
+	const manager = await checkRole({ authToken, channelId, roles: ["OWNER"] })
+
 	const channel = await prisma.channel.delete({
 		where: {
-			id
+			id: channelId
 		}
 	})
 
@@ -252,22 +273,6 @@ export const listTopChannels = async ({ skip = 0, take = 10 }: ListParams) => {
 	return result as ChannelWithProfile[]
 }
 
-// export const countChannels = async () => {
-// 	if (gameId) {
-// 		const total = await prisma.channel.count({
-// 			where: {
-// 				games: {
-// 					some: {
-// 						id: gameId
-// 					}
-// 				}
-// 			}
-// 		})
-
-// 		return total
-// 	}
-// }
-
 /** Counts channels both for a game and on the entirety of kittr.
  *
  * Passs a game's urlSafeName to count channels for that game.
@@ -378,38 +383,4 @@ export const listLiveChannels = async () => {
 		console.error(error)
 		return []
 	}
-}
-
-export const getOverlay = async (id?: string) => {
-	const overlay = await prisma.channelKitOverlay.findFirst({
-		where: {
-			channel: {
-				id
-			}
-		},
-		include: {
-			primaryKit: {
-				include: {
-					options: true,
-					base: {
-						include: {
-							commandCodes: true
-						}
-					}
-				}
-			},
-			secondaryKit: {
-				include: {
-					options: true,
-					base: {
-						include: {
-							commandCodes: true
-						}
-					}
-				}
-			}
-		}
-	})
-
-	return overlay
 }

@@ -2,16 +2,15 @@ import { useState } from "react"
 import styled from "styled-components"
 
 import colors from "@Colors"
-import { paragraph } from "@Styles/typography"
-import { useDispatch } from "@Redux/store"
-import { setModal } from "@Redux/slices/dashboard"
-import { getToken } from "@Services/firebase/auth/getToken"
-import { useChannelData } from "@Redux/slices/dashboard/selectors"
-import { Modal, Button, SVG, TextInput } from "@Components/shared"
+import { Button, Modal, SVG, TextInput } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
-import fetch from "@Fetch"
 import { ChannelManagerRoles } from "@kittr/prisma"
+import { setModal } from "@Redux/slices/dashboard"
+import { useChannelData } from "@Redux/slices/dashboard/selectors"
+import { useDispatch } from "@Redux/store"
+import { getToken } from "@Services/firebase/auth/getToken"
+import { paragraph } from "@Styles/typography"
 
 /** Modal for adding a manager to a channel. */
 const AddManager = ({ ...props }) => {
@@ -21,20 +20,17 @@ const AddManager = ({ ...props }) => {
 	const [role, setRole] = useState<ChannelManagerRoles>("EDITOR")
 	const [error, setError] = useState("")
 	const { refetch: refetchChannel } = useDashboardChannel()
-	const { mutate, isLoading } = useDashboardMutator(async () => {
-		try {
-			const result = await fetch.post({
-				url: `/api/manager/addNewManager`,
-				headers: { authorization: `Bearer: ${await getToken()}` },
-				body: { email, channelId: data?.id, role }
-			})
 
-			if (result) {
+	const { mutate, isLoading } = useDashboardMutator({
+		path: "channels/managers/create",
+		opts: {
+			onSuccess: (result) => {
 				refetchChannel()
 				dispatch(setModal({ type: "", data: {} }))
+			},
+			onError: () => {
+				dispatch(setModal({ type: "Error Notification", data: "" }))
 			}
-		} catch (error) {
-			dispatch(setModal({ type: "Error Notification", data: "" }))
 		}
 	})
 
@@ -108,7 +104,7 @@ const AddManager = ({ ...props }) => {
 					design="white"
 					text={isLoading ? "..." : "Add"}
 					disabled={isLoading || !role || email.length === 0}
-					onClick={mutate}
+					onClick={async () => mutate({ authToken: await getToken(), channelId: data?.id!, data: { email, role } })}
 					style={{ margin: "0 auto" }}
 					dataCy="confirm-manager-add"
 				/>

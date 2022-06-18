@@ -1,6 +1,8 @@
 import { createController } from "@Server/createController"
 import * as ChannelsService from "@Server/services/channels"
 import { z } from "zod"
+import { TRPCError } from "@trpc/server"
+import { ChannelModel } from "@kittr/prisma/validator"
 
 const listTopChannels = createController().query("", {
 	input: z.object({
@@ -31,14 +33,6 @@ const listRisingChannels = createController().query("", {
 const listLiveChannels = createController().query("", {
 	async resolve() {
 		const result = await ChannelsService.listLiveChannels()
-		return result
-	}
-})
-
-const getOverlay = createController().query("", {
-	input: z.string(),
-	async resolve({ input: id }) {
-		const result = await ChannelsService.getOverlay(id)
 		return result
 	}
 })
@@ -77,10 +71,41 @@ const createChannel = createController().mutation("", {
 	}
 })
 
-const deleteChannel = createController().mutation("", {
-	input: z.string(),
+const updateChannel = createController().mutation("", {
+	input: z.object({
+		channelId: z.string(),
+		authToken: z.string().optional(),
+		data: ChannelModel.partial()
+	}),
 	async resolve({ input }) {
-		const channel = await ChannelsService.deleteChannel(input)
+		if (!input.authToken) {
+			throw new TRPCError({
+				code: "UNAUTHORIZED"
+			})
+		}
+
+		const channel = await ChannelsService.updateChannel({
+			authToken: input.authToken,
+			channelId: input.channelId,
+			data: input.data
+		})
+		return channel
+	}
+})
+
+const deleteChannel = createController().mutation("", {
+	input: z.object({
+		channelId: z.string(),
+		authToken: z.string().optional()
+	}),
+	async resolve({ input }) {
+		if (!input.authToken) {
+			throw new TRPCError({
+				code: "UNAUTHORIZED"
+			})
+		}
+
+		const channel = await ChannelsService.deleteChannel({ authToken: input.authToken, channelId: input.channelId })
 		return channel
 	}
 })
@@ -92,7 +117,7 @@ export const ChannelsController = {
 	getDashboardChannel,
 	getChannelProfile,
 	createChannel,
+	updateChannel,
 	deleteChannel,
-	countChannels,
-	getOverlay
+	countChannels
 }

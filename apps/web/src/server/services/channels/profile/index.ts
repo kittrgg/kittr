@@ -2,6 +2,7 @@ import { prisma } from "@kittr/prisma"
 import { TRPCError } from "@trpc/server"
 
 export * from "./affiliates"
+export * from "./brandColors"
 
 export const getFullChannelProfileQuery = async ({ id, urlSafeName }: { id: string; urlSafeName: string }) => {
 	if (!id && !urlSafeName) {

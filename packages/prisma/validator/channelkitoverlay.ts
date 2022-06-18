@@ -1,5 +1,4 @@
 import * as z from "zod"
-import { OverlayVisibilityStates } from "@prisma/client"
 import { CompleteChannel, RelatedChannelModel, CompleteKit, RelatedKitModel } from "./index"
 
 export const ChannelKitOverlayModel = z.object({
@@ -10,7 +9,7 @@ export const ChannelKitOverlayModel = z.object({
   textColorPrimary: z.string().nullish(),
   textColorSecondary: z.string().nullish(),
   textColorAccent: z.string().nullish(),
-  isOverlayVisible: z.nativeEnum(OverlayVisibilityStates),
+  isOverlayVisible: z.boolean(),
   primaryKitId: z.string().nullish(),
   secondaryKitId: z.string().nullish(),
 })
