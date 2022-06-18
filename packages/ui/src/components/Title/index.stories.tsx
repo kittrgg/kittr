@@ -5,4 +5,4 @@ export default {
 	component: Title
 }
 
-export const Default = () => <Title>This is a test.</Title>
+export const Default = () => <Title preset="h1">This is a test.</Title>

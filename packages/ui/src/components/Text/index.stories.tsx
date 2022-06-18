@@ -5,4 +5,4 @@ export default {
 	component: Text
 }
 
-export const Default = () => <Text>This is a a test.</Text>
+export const Default = () => <Text preset="lg">This is a a test.</Text>

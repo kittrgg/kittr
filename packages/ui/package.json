@@ -18,7 +18,7 @@
 		"type-check": "tsc --pretty --noEmit",
 		"dev:CURRENTLY_IGNORED": "vite",
 		"preview": "vite preview",
-		"storybook": "start-storybook -p 6006",
+		"storybook": "start-storybook -p 3002",
 		"build-storybook": "build-storybook"
 	},
 	"dependencies": {
