@@ -18,8 +18,9 @@ export const Section = ({ title, caption, hoverable, children }: Props) => {
 				borderRadius: theme.radius.lg,
 				backgroundColor:
 					theme.colorScheme === "dark"
-						? theme.colors.gray[8]
-						: theme.colors.gray[2]
+						? theme.colors.brand[7]
+						: theme.colors.brand[2],
+				height: "100%"
 			})}
 		>
 			{caption && (
@@ -28,7 +29,7 @@ export const Section = ({ title, caption, hoverable, children }: Props) => {
 				</Text>
 			)}
 			<Title
-				preset="h1"
+				preset="h3"
 				sx={{
 					marginBottom: "1rem"
 				}}
