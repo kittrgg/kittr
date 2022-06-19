@@ -1,8 +1,8 @@
-import { Container, createStyles, Title, Accordion } from "@mantine/core"
+import { Accordion, Container, createStyles, Title } from "@mantine/core"
 
+import colors from "@Colors"
 import PageWrapper from "@Components/layouts/PageWrapper"
 import SVG from "@Components/shared/SVG"
-import colors from "@Colors"
 
 const FAQ = () => {
 	const { classes } = useStyles()
@@ -192,4 +192,3 @@ const useStyles = createStyles((theme, _params, getRef) => {
 		}
 	}
 })
-

@@ -1,23 +1,13 @@
-import React from "react"
 import {
 	Button as MantineButton,
-	SharedButtonProps as MantineButtonProps,
-	useMantineTheme
+	SharedButtonProps as MantineButtonProps
 } from "@mantine/core"
-import { MantineProvider } from "../MantineProvider"
+import React from "react"
 
 interface Props extends MantineButtonProps {
 	children?: React.ReactNode
 }
 
-export const Button = ({ children, ...mantineProps }: Props) => {
-	const { colors } = useMantineTheme()
-
-	return (
-		<MantineProvider>
-			<MantineButton {...mantineProps} color={colors.pink[0]}>
-				{children}
-			</MantineButton>
-		</MantineProvider>
-	)
+export const Button: React.FC<MantineButtonProps> = (props) => {
+	return <MantineButton {...props} />
 }

@@ -1,5 +1,6 @@
-import { MantineProvider, Global } from "@mantine/core"
 import FallbackPage from "@Components/layouts/FallbackPage"
+import { MantineProvider } from "@kittr/ui"
+import { Global } from "@mantine/core"
 import { setFallbackLoader } from "@Redux/slices/global"
 import { store, useDispatch, useSelector } from "@Redux/store"
 import GlobalStyles from "@Styles/globals"
@@ -44,28 +45,7 @@ const MyApp = ({ Component, pageProps }: any) => {
 	}, [router.events, dispatch])
 
 	return (
-		<MantineProvider
-			withGlobalStyles
-			withNormalizeCSS
-			theme={{
-				colors: {
-					brand: [
-						"#F0BBDD",
-						"#ED9BCF",
-						"#EC7CC3",
-						"#ED5DB8",
-						"#F13EAF",
-						"#F71FA7",
-						"#FF00A1",
-						"#E00890",
-						"#C50E82",
-						"#AD1374"
-					]
-				},
-				primaryColor: "brand",
-				colorScheme: "dark"
-			}}
-		>
+		<MantineProvider>
 			<Global
 				styles={() => ({
 					"body": {

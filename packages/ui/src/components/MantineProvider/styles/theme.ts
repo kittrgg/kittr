@@ -1,5 +1,6 @@
 import { MantineThemeOverride } from "@mantine/core"
-import { colors } from "./colors"
+import { gray } from "./colors/gray"
+import { red } from "./colors/red"
 
 export const other = {
 	colors: {
@@ -13,18 +14,14 @@ export const other = {
 }
 
 export const theme: MantineThemeOverride = {
-	colorScheme: "light",
+	colorScheme: "dark",
 	fontFamilyMonospace: "Monaco, Courier, monospace",
-	fontFamily: "Open Sans",
-	headings: { fontFamily: "Josefin Sans, serif" },
+	fontFamily: "Montserrat",
+	headings: { fontFamily: "Barlow Condensed, serif" },
+	other,
 	colors: {
-		gray: colors.gray,
-		teal: colors.teal,
-		yellow: colors.yellow,
-		navy: colors.navy,
-		red: colors.red,
-		green: colors.green
+		brand: gray,
+		red: red
 	},
-	primaryColor: "teal",
-	other
+	primaryColor: "brand"
 }
