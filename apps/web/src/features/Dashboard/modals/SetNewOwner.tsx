@@ -64,7 +64,7 @@ const SetNewOwner = () => {
 							design="white"
 							text={isMutatingOwner ? "..." : "CONFIRM NEW OWNER"}
 							disabled={isMutatingOwner || newOwner === "-"}
-							onClick={async () => mutateOwner({authToken: await getToken(), channelId: channelData?.id!, newOwnerEmail: newOwner })}
+							onClick={async () => mutateOwner({ channelId: channelData?.id!, newOwnerEmail: newOwner })}
 							style={{ margin: "0 auto" }}
 							dataCy="final-change-owner"
 						/>

@@ -52,7 +52,7 @@ const ChannelDeleteModal = () => {
 					design="transparent"
 					text="DELETE FOREVER"
 					disabled={channelData?.displayName !== input}
-					onClick={async () => mutate({ authToken: await getToken(), channelId: channelData?.id! })}
+					onClick={async () => mutate({ channelId: channelData?.id! })}
 					style={{ backgroundColor: colors.red }}
 				/>
 			</FlexRow>

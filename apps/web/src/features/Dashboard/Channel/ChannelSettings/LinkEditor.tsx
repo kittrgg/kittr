@@ -165,7 +165,7 @@ const LinkEditor = () => {
 							design="white"
 							disabled={!areActiveChanges}
 							text="Save Changes"
-							onClick={async () => mutate({ authToken: await getToken(), channelId: data?.id!, links: linkEdits! })}
+							onClick={async () => mutate({ channelId: data?.id!, links: linkEdits! })}
 							style={{
 								margin: "0 auto"
 							}}

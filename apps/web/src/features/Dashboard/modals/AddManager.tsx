@@ -104,7 +104,7 @@ const AddManager = ({ ...props }) => {
 					design="white"
 					text={isLoading ? "..." : "Add"}
 					disabled={isLoading || !role || email.length === 0}
-					onClick={async () => mutate({ authToken: await getToken(), channelId: data?.id!, data: { email, role } })}
+					onClick={async () => mutate({ channelId: data?.id!, data: { email, role } })}
 					style={{ margin: "0 auto" }}
 					dataCy="confirm-manager-add"
 				/>

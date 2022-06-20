@@ -62,9 +62,7 @@ const DeleteManager = () => {
 					<Button
 						design="white"
 						text="YES, DEMOTE THEM"
-						onClick={async () =>
-							demote({ authToken: await getToken(), managerIdToDemote: data.id, channelId: channelData?.id! })
-						}
+						onClick={async () => demote({ managerIdToDemote: data.id, channelId: channelData?.id! })}
 						style={{ marginLeft: "32px" }}
 					/>
 				</RowFlex>

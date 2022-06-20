@@ -22,7 +22,6 @@ const ThemeColor = ({ ...props }) => {
 
 	const onChangeColor = async (color: string | null) => {
 		mutate({
-			authToken: await getToken(),
 			newColor: color || colors.white,
 			channelId: data?.id!,
 			colorId: data?.profile?.brandColors?.find((color) => color.type === "PRIMARY")?.id!
