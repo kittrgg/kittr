@@ -3,12 +3,12 @@ import { TRPCError } from "@trpc/server"
 import admin from "@Services/firebase/admin"
 import { MiddlewareResult } from "@trpc/server/src/internals/middlewares"
 
-type Thingy<T> = {
+type NextFunction<T> = {
 	<T>(): Promise<MiddlewareResult<T>>
 	<T>(opts: { ctx: T }): Promise<MiddlewareResult<T>>
 }
 
-export const authenticateUser = async ({ ctx, next }: { ctx: Context; next: Thingy<typeof ctx> }) => {
+export const authenticateUser = async ({ ctx, next }: { ctx: Context; next: NextFunction<typeof ctx> }) => {
 	if (!ctx.userToken) {
 		throw new TRPCError({
 			code: "UNAUTHORIZED"

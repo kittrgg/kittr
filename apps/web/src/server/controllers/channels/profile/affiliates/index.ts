@@ -1,65 +1,59 @@
 import { ChannelAffiliateModel } from "@kittr/prisma/validator"
 import { createController } from "@Server/createController"
+import { authenticateUser } from "@Server/middlewares/authenticateUser"
 import * as ChannelsService from "@Server/services/channels"
-import { TRPCError } from "@trpc/server"
+import { checkRole } from "@Server/services/users"
 import { z } from "zod"
 
-const createAffiliate = createController().mutation("", {
-	input: z.object({
-		authToken: z.string().optional(),
-		channelId: z.string(),
-		data: ChannelAffiliateModel.omit({ id: true })
-	}),
-	async resolve({ input }) {
-		if (!input.authToken) {
-			throw new TRPCError({
-				code: "BAD_REQUEST",
-				message: "Missing channelProfileId."
+const createAffiliate = createController()
+	.middleware(authenticateUser)
+	.mutation("", {
+		input: z.object({
+			channelId: z.string(),
+			data: ChannelAffiliateModel.omit({ id: true })
+		}),
+		async resolve({ ctx, input }) {
+			await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["OWNER", "ADMIN"] })
+
+			const channel = await ChannelsService.createAffiliate({
+				data: input.data
 			})
+
+			return channel
 		}
+	})
 
-		const channel = await ChannelsService.createAffiliate({
-			authToken: input.authToken,
-			channelId: input.channelId,
-			data: input.data
-		})
+const updateAffiliate = createController()
+	.middleware(authenticateUser)
+	.mutation("", {
+		input: z.object({
+			channelId: z.string(),
+			data: ChannelAffiliateModel
+		}),
+		async resolve({ ctx, input }) {
+			await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["OWNER", "ADMIN"] })
 
-		return channel
-	}
-})
-
-const updateAffiliate = createController().mutation("", {
-	input: z.object({
-		authToken: z.string().optional(),
-		channelId: z.string(),
-		data: ChannelAffiliateModel
-	}),
-	async resolve({ input }) {
-		if (!input.authToken) {
-			throw new TRPCError({
-				code: "UNAUTHORIZED"
+			const channel = await ChannelsService.updateAffiliate({
+				data: input.data
 			})
+			return channel
 		}
+	})
 
-		const channel = await ChannelsService.updateAffiliate({
-			authToken: input.authToken,
-			channelId: input.channelId,
-			data: input.data
-		})
-		return channel
-	}
-})
+const deleteAffiliate = createController()
+	.middleware(authenticateUser)
+	.mutation("", {
+		input: z.object({
+			channelId: z.string(),
+			affiliateId: z.string()
+		}),
+		async resolve({ ctx, input }) {
+			await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["OWNER", "ADMIN"] })
 
-const deleteAffiliate = createController().mutation("", {
-	input: z.object({
-		channelId: z.string(),
-		affiliateId: z.string()
-	}),
-	async resolve({ input }) {
-		const channel = await ChannelsService.deleteAffiliate(input)
-		return channel
-	}
-})
+			const channel = await ChannelsService.deleteAffiliate(input)
+			return channel
+		}
+	})
 
 export const ChannelsProfileAffiliatesController = {
 	createAffiliate,

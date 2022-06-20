@@ -1,5 +1,4 @@
 import { ChannelPcSpec, prisma, Prisma } from "@kittr/prisma"
-import { checkRole } from "@Server/services/users"
 
 export const listPcSpecs = async (channelId: string) => {
 	const channel = await prisma.channel.findFirst({
@@ -29,16 +28,12 @@ export const getPcSpec = async (pcSpecId: string) => {
 }
 
 export const createPcSpec = async ({
-	authToken,
 	channelId,
 	data
 }: {
-	authToken: string
 	channelId: string
 	data: Omit<ChannelPcSpec, "id" | "channelProfileId">
 }) => {
-	await checkRole({ authToken, channelId, roles: ["OWNER", "EDITOR"] })
-
 	const pcSpec = await prisma.channelProfile.update({
 		where: {
 			channelId
@@ -54,18 +49,14 @@ export const createPcSpec = async ({
 }
 
 export const updatePcSpec = async ({
-	authToken,
 	pcSpecId,
 	channelId,
 	data
 }: {
-	authToken: string
 	pcSpecId: string
 	channelId: string
 	data: Prisma.ChannelPcSpecUpdateInput
 }) => {
-	await checkRole({ authToken, channelId, roles: ["OWNER"] })
-
 	const pcSpec = await prisma.channelPcSpec.update({
 		where: {
 			id: pcSpecId
@@ -76,17 +67,7 @@ export const updatePcSpec = async ({
 	return pcSpec
 }
 
-export const deletePcSpec = async ({
-	authToken,
-	channelId,
-	pcSpecId
-}: {
-	authToken: string
-	channelId: string
-	pcSpecId: string
-}) => {
-	await checkRole({ authToken, channelId, roles: ["OWNER"] })
-
+export const deletePcSpec = async ({ channelId, pcSpecId }: { channelId: string; pcSpecId: string }) => {
 	const pcSpec = await prisma.channelPcSpec.delete({
 		where: {
 			id: pcSpecId

@@ -7,7 +7,6 @@ import { grabLoginName } from "@Services/twitch/utils/grabLoginName"
 import { badWordFilter } from "@Utils/helpers/badWordFilter"
 import { toURL } from "@Utils/helpers/toURL"
 import { TRPCError } from "@trpc/server"
-import { checkRole } from "@Server/services/users"
 
 export * from "./games"
 export * from "./kits"
@@ -74,26 +73,14 @@ export const createChannel = async (displayName: string) => {
 	return result
 }
 
-export const updateChannel = async ({
-	channelId,
-	authToken,
-	data
-}: {
-	channelId: string
-	authToken: string
-	data: Partial<Channel>
-}) => {
-	await checkRole({ authToken, channelId, roles: ["OWNER", "ADMIN"] })
-
+export const updateChannel = async ({ channelId, data }: { channelId: string; data: Partial<Channel> }) => {
 	const result = await prisma.channel.update({
 		where: { id: channelId },
 		data
 	})
 }
 
-export const deleteChannel = async ({ authToken, channelId }: { authToken: string; channelId: string }) => {
-	const manager = await checkRole({ authToken, channelId, roles: ["OWNER"] })
-
+export const deleteChannel = async ({ channelId }: { channelId: string }) => {
 	const channel = await prisma.channel.delete({
 		where: {
 			id: channelId

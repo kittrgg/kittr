@@ -22,7 +22,7 @@ const updateCommandString = createController()
 			newString: z.string()
 		}),
 		async resolve({ ctx, input }) {
-			await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["OWNER", "ADMIN", "EDITOR"] })
+			await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["OWNER", "ADMIN"] })
 
 			const channel = await ChannelsCommandStringsService.updateCommandString({
 				channelId: input.channelId,

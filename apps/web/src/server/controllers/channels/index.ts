@@ -3,6 +3,8 @@ import * as ChannelsService from "@Server/services/channels"
 import { z } from "zod"
 import { TRPCError } from "@trpc/server"
 import { ChannelModel } from "@kittr/prisma/validator"
+import { authenticateUser } from "@Server/middlewares/authenticateUser"
+import { checkRole } from "@Server/services/users"
 
 const listTopChannels = createController().query("", {
 	input: z.object({
@@ -71,44 +73,39 @@ const createChannel = createController().mutation("", {
 	}
 })
 
-const updateChannel = createController().mutation("", {
-	input: z.object({
-		channelId: z.string(),
-		authToken: z.string().optional(),
-		data: ChannelModel.partial()
-	}),
-	async resolve({ input }) {
-		if (!input.authToken) {
-			throw new TRPCError({
-				code: "UNAUTHORIZED"
+const updateChannel = createController()
+	.middleware(authenticateUser)
+	.mutation("", {
+		input: z.object({
+			channelId: z.string(),
+			data: ChannelModel.partial()
+		}),
+		async resolve({ ctx, input }) {
+			await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["OWNER", "ADMIN"] })
+
+			const channel = await ChannelsService.updateChannel({
+				channelId: input.channelId,
+				data: input.data
 			})
+			return channel
 		}
+	})
 
-		const channel = await ChannelsService.updateChannel({
-			authToken: input.authToken,
-			channelId: input.channelId,
-			data: input.data
-		})
-		return channel
-	}
-})
+const deleteChannel = createController()
+	.middleware(authenticateUser)
+	.mutation("", {
+		input: z.object({
+			channelId: z.string(),
+		}),
+		async resolve({ctx, input: {channelId} }) {
 
-const deleteChannel = createController().mutation("", {
-	input: z.object({
-		channelId: z.string(),
-		authToken: z.string().optional()
-	}),
-	async resolve({ input }) {
-		if (!input.authToken) {
-			throw new TRPCError({
-				code: "UNAUTHORIZED"
-			})
+	await checkRole({ firebaseUserId:ctx.user.uid , channelId, roles: ["OWNER"] })
+
+
+			const channel = await ChannelsService.deleteChannel({ channelId })
+			return channel
 		}
-
-		const channel = await ChannelsService.deleteChannel({ authToken: input.authToken, channelId: input.channelId })
-		return channel
-	}
-})
+	})
 
 export const ChannelsController = {
 	listTopChannels,
