@@ -1,9 +1,9 @@
 import type { inferProcedureOutput, inferProcedureInput } from "@trpc/server"
-import {} from "@trpc/react/src/createReactQueryHooks"
 import { gamesRouter } from "@Server/routers/games"
 import superjson from "superjson"
 import { createRouter } from "./createRouter"
 import { channelsRouter } from "./routers/channels"
+import { managersRouter } from "./routers/managers"
 import { kitsRouter } from "./routers/kits"
 import { twitchRouter } from "./routers/twitch"
 
@@ -11,6 +11,7 @@ export const appRouter = createRouter()
 	.transformer(superjson)
 	.merge("games/", gamesRouter)
 	.merge("channels/", channelsRouter)
+	.merge("managers/", managersRouter)
 	.merge("kits/", kitsRouter)
 	.merge("twitch/", twitchRouter)
 

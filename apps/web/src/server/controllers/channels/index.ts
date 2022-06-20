@@ -1,7 +1,6 @@
 import { createController } from "@Server/createController"
 import * as ChannelsService from "@Server/services/channels"
 import { z } from "zod"
-import { TRPCError } from "@trpc/server"
 import { ChannelModel } from "@kittr/prisma/validator"
 import { authenticateUser } from "@Server/middlewares/authenticateUser"
 import { checkRole } from "@Server/services/users"
@@ -95,12 +94,10 @@ const deleteChannel = createController()
 	.middleware(authenticateUser)
 	.mutation("", {
 		input: z.object({
-			channelId: z.string(),
+			channelId: z.string()
 		}),
-		async resolve({ctx, input: {channelId} }) {
-
-	await checkRole({ firebaseUserId:ctx.user.uid , channelId, roles: ["OWNER"] })
-
+		async resolve({ ctx, input: { channelId } }) {
+			await checkRole({ firebaseUserId: ctx.user.uid, channelId, roles: ["OWNER"] })
 
 			const channel = await ChannelsService.deleteChannel({ channelId })
 			return channel
