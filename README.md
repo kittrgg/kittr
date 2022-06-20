@@ -20,7 +20,7 @@ git clone https://github.com/kittrgg/kittr.git
 2. Checkout the develop branch
 
 ```
-git checkout develop
+git checkout migration
 ```
 
 3. Let's get your environment variables set up. Navigate in your file explorer to `/scripts/createEnvironment/inputs`.
@@ -79,3 +79,4 @@ PLEASE make sure that before you attempt to make any major changes to kittr that
   - ALLKITS - Features every kit in the database (well, almost) (may no longer be in the seed...)
   - brandnewchannel - A fresh, empty channel that was just created
   - anthonyshew - A channel that features multiple managers so you can see how the dashboard changes based on the user's role in that channel
+
