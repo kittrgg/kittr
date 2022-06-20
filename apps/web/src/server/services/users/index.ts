@@ -29,20 +29,18 @@ export const verifyIdToken = async (token: string) => {
 }
 
 export const checkRole = async ({
-	authToken,
+	firebaseUserId,
 	channelId,
 	roles
 }: {
-	authToken: string
+	firebaseUserId: string
 	channelId: string
 	roles: ChannelManagerRoles[]
 }) => {
-	const user = await verifyIdToken(authToken)
-
 	const manager = await prisma.channelManager.findFirst({
 		where: {
 			id: channelId,
-			firebaseId: user.uid
+			firebaseId: firebaseUserId
 		}
 	})
 
@@ -62,5 +60,5 @@ export const checkRole = async ({
 		})
 	}
 
-	return { user, manager }
+	return manager
 }

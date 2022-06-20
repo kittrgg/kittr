@@ -1,31 +1,29 @@
-import * as trpcServer from "@trpc/server"
+import * as trpc from "@trpc/server"
 import * as trpcNext from "@trpc/server/adapters/next"
-import { NextPageContext } from "next"
-
-export interface SSRContext extends NextPageContext {
-	/**
-	 * Set HTTP Status code
-	 * @usage
-	 * const utils = trpc.useContext();
-	 * if (utils.ssrContext) {
-	 *   utils.ssrContext.status = 404;
-	 * }
-	 */
-	status?: number
-}
+import { getToken } from "@Services/firebase/auth/getToken"
 
 interface CreateContextOptions {
-	// session: Session | null
+	userToken: string | undefined
 }
 
+/**
+ * Inner function for `createContext` where we create the context.
+ * This is useful for testing when we don't want to mock Next.js' request/response
+ */
 export async function createContextInner(_opts: CreateContextOptions) {
-	return {}
+	return _opts
 }
 
-export type Context = trpcServer.inferAsyncReturnType<typeof createContextInner>
+export type Context = trpc.inferAsyncReturnType<typeof createContextInner>
 
-export async function createContext(opts?: trpcNext.CreateNextContextOptions): Promise<Context> {
+/**
+ * Creates context for an incoming request
+ * @link https://trpc.io/docs/context
+ */
+export async function createContext(opts: trpcNext.CreateNextContextOptions): Promise<Context> {
 	// for API-response caching see https://trpc.io/docs/caching
 
-	return await createContextInner({})
+	const userToken = await getToken()
+
+	return await createContextInner({ userToken })
 }
