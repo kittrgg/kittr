@@ -1,25 +1,28 @@
 import { prisma, ChannelLink } from "@kittr/prisma"
 
 export const updateLinks = async ({ channelId, links }: { channelId: string; links: ChannelLink[] }) => {
-	const linksUpdate = await prisma.channel.update({
-		where: {
-			id: channelId
-		},
-		data: {
-			links: {
-				connectOrCreate: links.map((link) => {
-					const { channelId, ...rest } = link
-
-					return {
-						where: {
-							id: link.id
-						},
-						create: rest
-					}
-				})
+	const [_, newLinks] = await prisma.$transaction([
+		prisma.channelLink.deleteMany({
+			where: {
+				channelId
 			}
-		}
-	})
+		}),
+		prisma.channel.update({
+			where: {
+				id: channelId
+			},
+			data: {
+				links: {
+					createMany: {
+						data: links.map((link) => {
+							const { channelId, id, ...rest } = link
+							return rest
+						})
+					}
+				}
+			}
+		})
+	])
 
-	return linksUpdate
+	return newLinks
 }
