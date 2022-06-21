@@ -6,9 +6,10 @@ import ProfileImage from "@Components/shared/ProfileImage"
 import LogoutButton from "./ProfileButtons"
 import { caption } from "@Styles/typography"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
+import { capitalizeFirstCharacter } from "@Utils/helpers/capitalizeFirstCharacter"
 
 /** Show the user their role within a channel as well as the logout button. */
-const UserIdentity = ({ ...props }) => {
+const UserIdentity = () => {
 	const { data } = useDashboardChannel()
 	const role = useManagerRole()
 
@@ -18,7 +19,7 @@ const UserIdentity = ({ ...props }) => {
 		<Wrapper>
 			<Child>
 				<ProfileImage size="25px" hasProfileImage={!!data?.profile?.hasProfileImage} imagePath={data?.id} />
-				<Role>You are an {role}</Role>
+				<Role>You are an {capitalizeFirstCharacter(role)}</Role>
 			</Child>
 			<Child>
 				<LogoutButton />

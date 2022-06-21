@@ -17,6 +17,7 @@ import DeleteManager from "../../modals/DeleteManager"
 import H3 from "../../H3"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { ChannelManagerRoles } from "@kittr/prisma"
+import { capitalizeFirstCharacter } from "@Utils/helpers/capitalizeFirstCharacter"
 
 const managersOrder: ChannelManagerRoles[] = ["OWNER", "ADMIN", "EDITOR"]
 
@@ -100,7 +101,7 @@ const AccountManagers = ({ ...props }) => {
 									/>
 								)}
 							</Identity>
-							<Role>{manager.role}</Role>
+							<Role>{capitalizeFirstCharacter(manager.role)}</Role>
 						</Manager>
 					)
 				})}
