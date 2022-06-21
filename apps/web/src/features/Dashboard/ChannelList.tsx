@@ -1,6 +1,5 @@
 import colors from "@Colors"
 import { Button, ProfileImage, Spinner, SupportUs, SVG } from "@Components/shared"
-import { useManagedChannels } from "@Hooks/api/useManagedChannels"
 import { useUser } from "@Hooks/useUser"
 import { setActiveView, setChannelView, setModal } from "@Redux/slices/dashboard"
 import { useModal } from "@Redux/slices/dashboard/selectors"
@@ -14,7 +13,7 @@ import LogoutButton from "./ProfileButtons"
 import { trpc } from "@Server/createHooks"
 
 /** List the channels for a user */
-const ChannelList = ({ ...props }) => {
+const ChannelList = () => {
 	const dispatch = useDispatch()
 	const modalData = useModal().data
 	const ref = useRef() as MutableRefObject<HTMLButtonElement>
