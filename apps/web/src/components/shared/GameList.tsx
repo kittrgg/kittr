@@ -1,7 +1,7 @@
-import styled from "styled-components"
-import { header2 } from "@Styles/typography"
 import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
 import { Game } from "@kittr/prisma"
+import { header2 } from "@Styles/typography"
+import styled from "styled-components"
 
 interface Props {
 	/** The array of games to render. */
@@ -27,6 +27,7 @@ export const GameList = ({ data, hoverScale = true, onClick, withVisitText }: Pr
 							hoverScale={hoverScale}
 							onClick={() => elem.active && onClick && onClick(elem)}
 							data-cy={`${elem.urlSafeName}-button`}
+							style={{ marginRight: "2rem" }}
 						>
 							<ImageContainer>
 								<FirebaseStorageResolver

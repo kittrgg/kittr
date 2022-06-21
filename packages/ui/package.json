@@ -11,8 +11,8 @@
 	"scripts": {
 		"test": "jest --coverage",
 		"test:watch": "jest --watch --coverage",
-		"build": "tsup src/components/index.ts  --dts ",
-		"dev": "tsup src/components/index.ts --watch --dts",
+		"build": "tsup src/components/index.ts  --dts --inject ./react-import.js",
+		"dev": "tsup src/components/index.ts --watch --dts --inject ./react-import.js",
 		"lint:CURRENTLY_IGNORED": "eslint \"**/*.tsx\" --fix",
 		"clean": "rm -rf .turbo  && rm -rf dist && rm -rf coverage && rm -rf node_modules",
 		"type-check": "tsc --pretty --noEmit",
@@ -29,6 +29,7 @@
 		"@mantine/hooks": "3.6.9",
 		"@mantine/next": "3.6.9",
 		"@mantine/rte": "3.6.9",
+		"react-device-detect": "2.1.2",
 		"react": "17.0.2",
 		"react-dom": "17.0.2"
 	},

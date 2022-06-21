@@ -3,7 +3,7 @@ import {
 	MantineProviderProps
 } from "@mantine/core"
 import React from "react"
-import { theme } from "./styles/theme"
+import { theme, themeStyles } from "./styles/theme"
 
 export interface Props extends MantineProviderProps {
 	children: React.ReactNode
@@ -13,8 +13,8 @@ export const MantineProvider = ({ children, ...props }: Props) => {
 	return (
 		<MantineLibProvider
 			withNormalizeCSS
-			withGlobalStyles
 			theme={theme}
+			styles={themeStyles}
 			{...props}
 		>
 			{children}

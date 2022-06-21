@@ -1,41 +1,47 @@
 import { Box } from "@mantine/core"
 import React from "react"
-import { Text } from "../Text"
 import { Title } from "../Title"
 
 interface Props {
-	title: string
-	caption?: string
+	title?: string
+	action?: React.ReactNode
 	children?: React.ReactNode
 	hoverable?: boolean
+	transparent?: boolean
 }
 
-export const Section = ({ title, caption, hoverable, children }: Props) => {
+export const Section = ({
+	title,
+	action,
+	hoverable,
+	children,
+	transparent
+}: Props) => {
 	return (
 		<Box
 			sx={(theme) => ({
 				padding: "2rem",
 				borderRadius: theme.radius.lg,
-				backgroundColor:
-					theme.colorScheme === "dark"
-						? theme.colors.brand[7]
-						: theme.colors.brand[2],
-				height: "100%"
+				backgroundColor: transparent
+					? "none"
+					: theme.colorScheme === "dark"
+					? theme.colors.brand[9]
+					: theme.colors.brand[2],
+				height: "100%",
+				position: "relative"
 			})}
 		>
-			{caption && (
-				<Text size="md" sx={(theme) => ({ marginBottom: theme.spacing.md })}>
-					{caption}
-				</Text>
+			{action && <Box sx={{ float: "right" }}>{action}</Box>}
+			{title && (
+				<Title
+					preset="h3"
+					sx={{
+						marginBottom: "1rem"
+					}}
+				>
+					{title}
+				</Title>
 			)}
-			<Title
-				preset="h3"
-				sx={{
-					marginBottom: "1rem"
-				}}
-			>
-				{title}
-			</Title>
 
 			<Box>{children}</Box>
 		</Box>

@@ -131,6 +131,10 @@ const ImageContainer = styled.div<{ imageSize: string | undefined }>`
 	border-radius: 100%;
 	overflow: hidden;
 
+	& > img {
+		vertical-align: baseline;
+	}
+
 	& > img:-moz-loading {
 		visibility: hidden;
 	}

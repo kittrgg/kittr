@@ -1,4 +1,4 @@
-import { MantineThemeOverride } from "@mantine/core"
+import { CSSObject, MantineTheme, MantineThemeOverride } from "@mantine/core"
 import { gray } from "./colors/gray"
 import { red } from "./colors/red"
 
@@ -24,4 +24,27 @@ export const theme: MantineThemeOverride = {
 		red: red
 	},
 	primaryColor: "brand"
+}
+
+export const themeStyles: Record<
+	string,
+	| Record<string, CSSObject>
+	| ((theme: MantineTheme) => Record<string, CSSObject>)
+> = {
+	Accordion: (theme: MantineTheme) => ({
+		control: {
+			borderRadius: theme.radius.lg
+		},
+		item: {
+			borderBottom: "none"
+		}
+	}),
+	Text: {
+		root: {
+			"lineHeight": "2rem",
+			"& > a": {
+				color: "white"
+			}
+		}
+	}
 }
