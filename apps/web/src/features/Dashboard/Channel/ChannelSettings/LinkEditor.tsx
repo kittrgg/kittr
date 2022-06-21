@@ -58,7 +58,6 @@ const LinkEditor = () => {
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>, link: [string, string]) => {
 		let newEdit = linkEdits?.slice() ?? []
-		console.log(newEdit)
 		const editIndex =
 			newEdit?.findIndex((linkToEdit) => {
 				return link[0] === linkToEdit.property
