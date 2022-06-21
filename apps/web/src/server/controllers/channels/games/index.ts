@@ -8,7 +8,7 @@ const addGameToChannel = createController().mutation("", {
 		gameId: z.string()
 	}),
 	async resolve({ input: { channelId, gameId } }) {
-		const channel = await ChannelsService.deleteGame({ channelId, gameId })
+		const channel = await ChannelsService.addGame({ channelId, gameId })
 		return channel
 	}
 })
@@ -18,7 +18,7 @@ const deleteGameFromChannel = createController().mutation("", {
 		gameId: z.string()
 	}),
 	async resolve({ input: { channelId, gameId } }) {
-		const channel = await ChannelsService.addGame({ channelId, gameId })
+		const channel = await ChannelsService.deleteGame({ channelId, gameId })
 		return channel
 	}
 })
