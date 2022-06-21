@@ -46,8 +46,8 @@ const SetNewOwner = () => {
 								{data
 									.filter((manager) => manager.role !== "OWNER")
 									.map((elem: IManagerData) => (
-										<option key={elem.email} value={elem.displayName || elem.email}>
-											{elem.displayName || elem.email}
+										<option key={elem.email} value={elem.email}>
+											{elem.email}
 										</option>
 									))}
 							</Select>
