@@ -39,7 +39,7 @@ export const checkRole = async ({
 }) => {
 	const manager = await prisma.channelManager.findFirst({
 		where: {
-			id: channelId,
+			channelId: channelId,
 			firebaseId: firebaseUserId
 		}
 	})
