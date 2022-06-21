@@ -1,9 +1,9 @@
-import { createController } from "@Server/createController"
-import * as ChannelsService from "@Server/services/channels"
-import { z } from "zod"
 import { ChannelModel } from "@kittr/prisma/validator"
+import { createController } from "@Server/createController"
 import { authenticateUser } from "@Server/middlewares/authenticateUser"
+import * as ChannelsService from "@Server/services/channels"
 import { checkRole } from "@Server/services/users"
+import { z } from "zod"
 
 const listTopChannels = createController().query("", {
 	input: z.object({
@@ -39,13 +39,9 @@ const listLiveChannels = createController().query("", {
 })
 
 const getDashboardChannel = createController().query("", {
-	input: z.object({
-		id: z.string(),
-		urlSafeName: z.string()
-	}),
+	input: z.string(),
 	async resolve({ input }) {
-		const { id, urlSafeName } = input
-		const channel = await ChannelsService.getDashboardChannel({ id, urlSafeName })
+		const channel = await ChannelsService.getDashboardChannel({ id: input })
 
 		return channel
 	}
@@ -60,17 +56,19 @@ const getChannelProfile = createController().query("", {
 	}
 })
 
-const createChannel = createController().mutation("", {
-	input: z
-		.string()
-		.min(1, "You must provide a display name.")
-		.max(25, "That channel name is too long. 25 characters or less."),
-	async resolve({ input: displayName }) {
-		const channel = await ChannelsService.createChannel(displayName)
+const createChannel = createController()
+	.middleware(authenticateUser)
+	.mutation("", {
+		input: z
+			.string()
+			.min(1, "You must provide a display name.")
+			.max(25, "That channel name is too long. 25 characters or less."),
+		async resolve({ ctx, input: displayName }) {
+			const channel = await ChannelsService.createChannel({ displayName, ownerFirebaseId: ctx.user.uid })
 
-		return channel
-	}
-})
+			return channel
+		}
+	})
 
 const updateChannel = createController()
 	.middleware(authenticateUser)
