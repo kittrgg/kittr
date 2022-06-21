@@ -68,7 +68,10 @@ export default withTRPC<AppRouter>({
 		return {
 			url,
 			fetch: async (requestUrl, test) => {
-				return fetch(requestUrl, { headers: { ...test?.headers, authorization: (await getToken()) ?? "" } })
+				return fetch(requestUrl, {
+					...test,
+					headers: { ...test?.headers, authorization: (await getToken()) ?? "" }
+				})
 			},
 			transformer: superjson,
 			links: [
