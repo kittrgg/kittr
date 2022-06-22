@@ -4,13 +4,13 @@ import * as ChannelsBrandColorsService from "@Server/services/channels"
 import { checkRole } from "@Server/services/users"
 import { z } from "zod"
 
-const getChannelProfile = createController()
+const upsertBrandColor = createController()
 	.middleware(authenticateUser)
 	.mutation("", {
 		input: z.object({
 			channelId: z.string(),
 			newColor: z.string(),
-			colorId: z.string()
+			colorId: z.string().optional()
 		}),
 		async resolve({ ctx, input }) {
 			await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["OWNER", "ADMIN"] })
@@ -26,5 +26,5 @@ const getChannelProfile = createController()
 	})
 
 export const ChannelsProfileBrandColorsController = {
-	getChannelProfile
+	upsertBrandColor
 }

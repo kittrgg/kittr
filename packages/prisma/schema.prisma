@@ -78,17 +78,17 @@ model ChannelLink {
 }
 
 model ChannelPlan {
-  id                   String  @id @default(cuid())
+  id                   String          @id @default(cuid())
   stripeSubscriptionId String?
-  type                 ChannelPlanType  @default(BASIC)
-  channel              Channel @relation(fields: [id], references: [id], onDelete: Cascade)
+  type                 ChannelPlanType @default(BASIC)
+  channel              Channel         @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  channelId            String          @unique
 }
 
 enum ChannelPlanType {
   PREMIUM
   BASIC
 }
-
 
 model ChannelPcSpec {
   id               String         @id @default(cuid())

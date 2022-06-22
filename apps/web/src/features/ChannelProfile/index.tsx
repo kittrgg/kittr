@@ -25,7 +25,7 @@ const ChannelProfile = () => {
 		enabled: !!twitchLink
 	})
 
-	const isPremium = channel?.plan?.type === "premium"
+	const isPremium = channel?.plan?.type === "PREMIUM"
 	const hasCoverPhoto = channel?.profile?.hasCoverPhoto
 	const primaryColor = channel?.profile?.brandColors.find((color) => color.type === "PRIMARY")?.value || colors.white
 	const [coverPhotoPath, setCoverPhotoPath] = useState("")

@@ -6,7 +6,7 @@ export const upsertBrandColor = async ({
 	newColor
 }: {
 	channelId: string
-	colorId: string
+	colorId?: string
 	newColor: string
 }) => {
 	const channelProfile = await prisma.channelProfile.update({
@@ -15,13 +15,12 @@ export const upsertBrandColor = async ({
 		},
 		data: {
 			brandColors: {
-				update: {
+				upsert: {
 					where: {
-						id: colorId
+						id: colorId ?? ""
 					},
-					data: {
-						value: newColor
-					}
+					create: { type: "PRIMARY", value: newColor },
+					update: { type: "PRIMARY", value: newColor }
 				}
 			}
 		}

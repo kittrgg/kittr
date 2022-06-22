@@ -1,10 +1,14 @@
-import { prisma } from "../index"
+import {
+	ChannelManagerRoles,
+	ChannelPlanType,
+	LinkProperty
+} from "@prisma/client"
 import mongoose from "mongoose"
-import { LinkProperty, ChannelManagerRoles } from "@prisma/client"
-import { KitOption } from "../models/KitOption"
+import { prisma } from "../index"
+import { Channel } from "../models/Channel"
 import { Game } from "../models/Game"
 import { KitBase } from "../models/KitBase"
-import { Channel } from "../models/Channel"
+import { KitOption } from "../models/KitOption"
 
 console.time("Script Main")
 mongoose
@@ -158,7 +162,8 @@ mongoose
 				brandColors: channel.meta.brandColors,
 				specs: channel.meta.specs,
 				stripeId: channel.meta.stripeId,
-				premiumType: channel.meta.premiumType,
+				premiumType:
+					channel.meta.premiumType === "premium" ? "PREMIUM" : "BASIC",
 				links: channel.meta.links,
 				setupPhotos: channel.meta.setupPhotos,
 				youtubeAutoplay: channel.meta.youtubeAutoplay
@@ -207,7 +212,12 @@ mongoose
 								youtubeAutoplay: channel.youtubeAutoplay || false,
 								affiliates: {
 									create: Object.values(channel.affiliates || {}).map(
-										(affiliate) => ({
+										(affiliate: {
+											code?: string
+											description?: string
+											company?: string
+											url?: string
+										}) => ({
 											code: affiliate.code,
 											description: affiliate.description,
 											company: affiliate.company,
@@ -243,7 +253,7 @@ mongoose
 						},
 						plan: {
 							create: {
-								type: channel.premiumType,
+								type: channel.premiumType as ChannelPlanType,
 								stripeSubscriptionId: channel.stripeId || ""
 							}
 						},

@@ -50,8 +50,6 @@ const EditorSnackbar = () => {
 						.map((kit) => ({
 							...kit,
 							...(allKitBases?.find((allBase) => {
-								console.log(kit.base.id)
-
 								return allBase.id === kit.base.id
 							}) || activeKit)
 						}))

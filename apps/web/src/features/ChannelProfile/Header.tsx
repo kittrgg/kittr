@@ -1,20 +1,20 @@
-import styled from "styled-components"
 import colors from "@Colors"
-import { header1, header2 } from "@Styles/typography"
 import ProfileImage from "@Components/shared/ProfileImage"
 import SocialIcons from "@Components/shared/SocialIcons"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
 import {
 	Channel,
-	Game,
-	ChannelProfile,
-	SetupPhoto,
-	ChannelPcSpec,
+	ChannelBrandColor,
 	ChannelLink,
+	ChannelPcSpec,
 	ChannelPlan,
+	ChannelProfile,
+	Game,
 	Kit,
-	ChannelBrandColor
+	SetupPhoto
 } from "@kittr/prisma"
+import { header1, header2 } from "@Styles/typography"
+import styled from "styled-components"
 
 interface Props extends Channel {
 	isLive: boolean
@@ -34,7 +34,7 @@ interface Props extends Channel {
 }
 
 const Header = ({ id, games, displayName, profile, links, plan, kits, isLive, imagePath }: Props) => {
-	const isPremium = plan?.type === "premium"
+	const isPremium = plan?.type === "PREMIUM"
 	const hasCoverPhoto = profile?.hasCoverPhoto
 	const userColor = profile?.brandColors.find((color) => color.type === "PRIMARY")?.value || colors.white
 	const { width } = useViewportDimensions()
