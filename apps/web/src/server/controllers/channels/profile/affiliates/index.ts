@@ -16,6 +16,7 @@ const createAffiliate = createController()
 			await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["OWNER", "ADMIN"] })
 
 			const channel = await ChannelsService.createAffiliate({
+				channelId: input.channelId,
 				data: input.data
 			})
 

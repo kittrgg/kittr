@@ -75,10 +75,10 @@ const Affiliate = () => {
 					<TBody>
 						{affiliates &&
 							Object.values(affiliates).map((affiliate) => {
-								const { description, company, code, url } = affiliate
+								const { description, company, code, url, id } = affiliate
 
 								return (
-									<Spec key={company}>
+									<Spec key={company + id}>
 										<Label>{company}</Label>
 										<td>{description}</td>
 										<td>{code}</td>
@@ -87,7 +87,12 @@ const Affiliate = () => {
 											<SVG.Pencil
 												data-cy={`${company?.replace(/ /g, "-")}-edit-affiliate`}
 												onClick={() =>
-													dispatch(setModal({ type: "Add Affiliate", data: { company, description, code, url } }))
+													dispatch(
+														setModal({
+															type: "Add Affiliate",
+															data: { id: affiliate.id, company, description, code, url }
+														})
+													)
 												}
 											/>
 										</Icon>
