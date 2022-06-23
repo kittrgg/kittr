@@ -2,9 +2,9 @@ import colors from "@Colors"
 import { paragraph } from "@Styles/typography"
 import styled from "styled-components"
 
-import { customOrderArray } from "@Utils/helpers/orderArrayByString"
-import { H2, GridItem, SpecsGrid } from "./style"
 import { ChannelPcSpec } from "@kittr/prisma"
+import { customOrderArray } from "@Utils/helpers/orderArrayByString"
+import { GridItem, H2, SpecsGrid } from "./style"
 
 const SORT_ORDER = ["Case", "CPU", "CPU Cooler", "Motherboard", "RAM", "GPU", "Storage", "Monitor", "Keyboard", "Mouse"]
 
@@ -21,17 +21,18 @@ const Specs = ({ specs, brandColor }: Props) => {
 			<H2>SPECS</H2>
 			<SpecsGrid>
 				{specs &&
-					customOrderArray<[string, string]>({
+					customOrderArray<ChannelPcSpec>({
 						sortingArray: SORT_ORDER,
 						indexToSort: 0,
-						array: Object.entries(specs)
+						array: specs
 					}).map((spec) => {
-						const [partName, part] = spec
+						console.log({ spec })
+						const { partName, partType } = spec
 
 						return (
 							<GridItem key={partName} colorHover={brandColor}>
 								<PartName>{partName}</PartName>
-								<Part>{part}</Part>
+								<Part>{partType}</Part>
 							</GridItem>
 						)
 					})}

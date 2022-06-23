@@ -3,5 +3,5 @@ import { createRouter } from "@Server/createRouter"
 
 export const channelsProfileBrandColorsRouter = createRouter().merge(
 	"upsert",
-	ChannelsProfileBrandColorsController.getChannelProfile
+	ChannelsProfileBrandColorsController.upsertBrandColor
 )

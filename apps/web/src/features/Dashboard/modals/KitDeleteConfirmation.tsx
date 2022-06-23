@@ -24,7 +24,7 @@ const KitDeleteConfirmation = () => {
 		}
 	})
 
-	const { base, _id: kitId } = data
+	const { base, id: kitId } = data
 
 	if (isLoading) {
 		return (

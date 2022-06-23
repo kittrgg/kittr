@@ -1,10 +1,12 @@
 import * as z from "zod"
+import { ChannelPlanType } from "@prisma/client"
 import { CompleteChannel, RelatedChannelModel } from "./index"
 
 export const ChannelPlanModel = z.object({
   id: z.string(),
-  stripeSubscriptionId: z.string(),
-  type: z.string(),
+  stripeSubscriptionId: z.string().nullish(),
+  type: z.nativeEnum(ChannelPlanType),
+  channelId: z.string(),
 })
 
 export interface CompleteChannelPlan extends z.infer<typeof ChannelPlanModel> {

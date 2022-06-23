@@ -1,5 +1,7 @@
 import colors from "@Colors"
 import { Button } from "@Components/shared"
+import { useAllKitBases } from "@Hooks/api/useAllKitBases"
+import { Kit, KitOption } from "@kittr/prisma"
 import { createNewKit } from "@Redux/slices/dashboard"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
@@ -7,8 +9,6 @@ import { filterKitsByFeature } from "@Utils/helpers/filterKitsByFeature"
 import { sortAlphabetical } from "@Utils/helpers/sortAlphabetical"
 import styled from "styled-components"
 import KitButton from "./KitButton"
-import { useAllKitBases } from "@Hooks/api/useAllKitBases"
-import { Kit, KitOption } from "@kittr/prisma"
 
 interface ExtendedKit extends Kit {
 	options: KitOption[]
@@ -34,7 +34,7 @@ const KitList = () => {
 	const createKitObject = (kit: ExtendedKit) => {
 		return {
 			...kit,
-			...kitBases!.find((allBases) => allBases.id === kit.baseId)!
+			base: kitBases!.find((allBases) => allBases.id === kit.baseId)!
 		}
 	}
 

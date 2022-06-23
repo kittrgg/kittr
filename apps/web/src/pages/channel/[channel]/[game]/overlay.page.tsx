@@ -10,7 +10,7 @@ export const Overlay = () => {
 
 	const { data: channel } = trpc.useQuery(["channels/profile/get", urlChannel])
 
-	if (channel?.plan?.type === "premium") {
+	if (channel?.plan?.type === "PREMIUM") {
 		return <KitOverlay id={channel.id} />
 	}
 

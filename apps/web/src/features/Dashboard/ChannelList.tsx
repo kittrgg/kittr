@@ -4,13 +4,13 @@ import { useUser } from "@Hooks/useUser"
 import { setActiveView, setChannelView, setModal } from "@Redux/slices/dashboard"
 import { useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch, useSelector } from "@Redux/store"
+import { trpc } from "@Server/createHooks"
 import { header1, header2, paragraph } from "@Styles/typography"
 import { capitalizeFirstCharacter } from "@Utils/helpers/capitalizeFirstCharacter"
 import { MutableRefObject, useEffect, useRef } from "react"
 import styled from "styled-components"
 import CreateChannelModal from "./modals/CreateChannel"
 import LogoutButton from "./ProfileButtons"
-import { trpc } from "@Server/createHooks"
 
 /** List the channels for a user */
 const ChannelList = () => {
