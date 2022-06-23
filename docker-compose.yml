@@ -12,7 +12,7 @@ services:
       - POSTGRES_DB=prisma
     restart: always
     volumes:
-      - database:/var/lib/postgresql/data
+      - kittr-database:/var/lib/postgresql/data
 
   mongo:
     container_name: mongo
@@ -43,5 +43,5 @@ services:
     command: firebase emulators:start --project dev --import=./firebase/seed --debug
 
 volumes:
-  database:
+  kittr-database:
     driver: local

@@ -1,34 +1,27 @@
 import type { NextApiRequest, NextApiResponse } from "next"
-import { NextServerPayload } from "@kittr/types"
 import { createHandler } from "@Utils/middlewares/createHandler"
 import { adminAuth } from "@Utils/middlewares/auth"
-import { prisma, KitOption } from "@kittr/prisma"
+import KitOption, { KitOptionModel } from "@Services/mongodb/models/KitOption"
+
 const handler = createHandler(adminAuth)
 
 // Create a new kit option
-handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<KitOption>>) => {
-	const newKitOption = req.body as KitOption
-
+handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<KitOptionModel | null>>) => {
 	try {
-		const data = await prisma.kitOption.create({
-			data: newKitOption
-		})
-		return res.status(200).json(data)
+		const newKitOption = new KitOption(req.body)
+		const option = await newKitOption.save()
+		return res.status(200).json(option)
 	} catch (error) {
 		return res.status(400).json({ error: true, errorMessage: JSON.stringify(error) })
 	}
 })
 
 // Edit an existing kit option
-handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<KitOption>>) => {
-	const { id, ...rest } = req.body as KitOption
+handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<KitOptionModel | null>>) => {
+	const { _id, ...rest } = req.body
 
 	try {
-		const data = await prisma.kitOption.update({
-			where: { id },
-			data: rest
-		})
-
+		const data = await KitOption.findByIdAndUpdate(_id, { $set: rest }, { new: true })
 		return res.status(200).json(data)
 	} catch (error) {
 		return res.status(400).json({ error: true, errorMessage: JSON.stringify(error) })
@@ -36,11 +29,11 @@ handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<K
 })
 
 // Delete a kit option
-handler.delete(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<KitOption>>) => {
-	const { id } = req.body as KitOption
+handler.delete(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<KitOptionModel | null>>) => {
+	const { _id } = req.body
 
 	try {
-		const data = await prisma.kitOption.delete({ where: { id } })
+		const data = await KitOption.findByIdAndDelete(_id)
 		return res.status(200).json(data)
 	} catch (error) {
 		return res.status(400).json({ error: true, errorMessage: JSON.stringify(error) })

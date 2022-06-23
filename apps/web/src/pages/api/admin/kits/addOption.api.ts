@@ -1,25 +1,34 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import { createHandler } from "@Utils/middlewares/createHandler"
 import { adminAuth } from "@Utils/middlewares/auth"
-
-import { prisma } from "@kittr/prisma"
+import mongoose from "mongoose"
+import { KitBase } from "@Services/mongodb/models/KitBase"
 
 const handler = createHandler(adminAuth)
 
 // Add a kit option to the kit base as a possibility for the user to add to their kit
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
-	const { kitBaseId, gameId, orderPlacement, slotKey, displayName } = JSON.parse(req.body)
-	const data = await prisma.kitOption.create({
-		data: {
-			kitBaseId,
-			gameId,
-			orderPlacement,
-			slotKey,
-			displayName
-		}
-	})
+	const { baseId, optionId, orderPlacement } = JSON.parse(req.body)
 
-	return res.status(200).json({ data })
+	KitBase.findOneAndUpdate(
+		{ _id: new mongoose.Types.ObjectId(baseId) },
+		{
+			$push: {
+				"gameInfo.availableOptions": {
+					orderPlacement,
+					optionId: new mongoose.Types.ObjectId(optionId)
+				}
+			}
+		},
+		{ new: true },
+		(err, data) => {
+			if (err) {
+				return res.status(500).json({ err })
+			}
+
+			return res.status(200).json({ data })
+		}
+	)
 })
 
 export default handler
