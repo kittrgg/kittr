@@ -12,7 +12,8 @@ services:
       - POSTGRES_DB=prisma
     restart: always
     volumes:
-      - ./volumes/postgres:/var/lib/postgresql/data
+      - database:/var/lib/postgresql/data
+
   mongo:
     container_name: mongo
     image: mongo:5
@@ -40,3 +41,7 @@ services:
       - ./lib/firebase-emulators/storage.rules:/src/storage.rules
       - ./lib/firebase-emulators/seed:/src/firebase/seed
     command: firebase emulators:start --project dev --import=./firebase/seed --debug
+
+volumes:
+  database:
+    driver: local
