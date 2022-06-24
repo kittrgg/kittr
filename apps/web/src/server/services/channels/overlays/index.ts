@@ -93,16 +93,12 @@ export const editKit = async ({
 	kitId: string | null
 	kitToChange: "primaryKit" | "secondaryKit"
 }) => {
-	const channel = await prisma.channel.update({
-		where: { id: channelId },
+	const kitIdToChange = kitToChange === "primaryKit" ? "primaryKitId" : "secondaryKitId"
+
+	const channel = await prisma.channelKitOverlay.update({
+		where: { channelId },
 		data: {
-			overlay: {
-				update: {
-					[kitToChange]: {
-						connect: { id: kitId }
-					}
-				}
-			}
+			[kitIdToChange]: kitId
 		}
 	})
 

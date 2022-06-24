@@ -3,7 +3,9 @@ import { createRouter } from "@Server/createRouter"
 import { channelsAffiliatesRouter } from "./affiliates"
 import { channelsProfileBrandColorsRouter } from "./brandColors"
 import { channelsCreatorCodesRouter } from "./creatorCodes"
+import { channelsProfileImageRouter } from "./image"
 import { channelsPcSpecsRouter } from "./pcSpecs"
+import { channelsSetupPhotosRouter } from "./setupPhotos"
 import { youtubeAutoplayRouter } from "./youtubeAutoplay"
 
 export const channelsProfileRouter = createRouter()
@@ -12,4 +14,6 @@ export const channelsProfileRouter = createRouter()
 	.merge("creator-codes/", channelsCreatorCodesRouter)
 	.merge("youtube-autoplay/", youtubeAutoplayRouter)
 	.merge("brand-color/", channelsProfileBrandColorsRouter)
+	.merge("setup-photos/", channelsSetupPhotosRouter)
+	.merge("image/", channelsProfileImageRouter)
 	.merge("get", ChannelsProfileController.getChannelProfile)

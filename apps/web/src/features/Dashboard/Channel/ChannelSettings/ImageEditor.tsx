@@ -2,18 +2,16 @@ import { useState } from "react"
 import styled from "styled-components"
 
 import colors from "@Colors"
-import { uploadWithHandlers } from "@Services/firebase/storage/uploadWithHandlers"
-import { caption } from "@Styles/typography"
-import { download } from "@Services/firebase/storage/download"
-import { getToken } from "@Services/firebase/auth/getToken"
+import { Spinner } from "@Components/shared"
 import ProfileImage from "@Components/shared/ProfileImage"
-import { useDispatch } from "@Redux/store"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useProfileImage } from "@Redux/slices/dashboard/selectors"
-import { Spinner } from "@Components/shared"
+import { useDispatch } from "@Redux/store"
+import { download } from "@Services/firebase/storage/download"
+import { uploadWithHandlers } from "@Services/firebase/storage/uploadWithHandlers"
+import { caption } from "@Styles/typography"
 
-import fetch from "@Fetch"
-import { isFetchError } from "@Utils/helpers/typeGuards"
+import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 
 /** Change the channel's profile image */
 const ImageEditor = ({ ...props }) => {
@@ -21,6 +19,22 @@ const ImageEditor = ({ ...props }) => {
 	const { data } = useChannelData()
 	const profileImage = useProfileImage()
 	const [isUploading, setIsUploading] = useState(false)
+
+	const { mutate } = useDashboardMutator({
+		path: "channels/profile/image/update",
+		opts: {
+			onSuccess: () => {
+				// Filename is the channelId
+				download(data?.id!, (path) => {
+					setIsUploading(false)
+				})
+			},
+			onError: () => {
+				setIsUploading(false)
+				dispatch(setModal({ type: "Error Notification", data: {} }))
+			}
+		}
+	})
 
 	const handleUpload = async (e: any) => {
 		e.preventDefault()
@@ -36,22 +50,7 @@ const ImageEditor = ({ ...props }) => {
 				fileName,
 				imageFile,
 				onSuccess: async () => {
-					const setImage = await fetch.post({
-						url: `/api/channel/meta/image`,
-						body: { id: data?.id },
-						headers: {
-							authorization: `Bearer: ${await getToken()}`
-						}
-					})
-
-					if (isFetchError(setImage)) {
-						setIsUploading(false)
-						dispatch(setModal({ type: "Error Notification", data: {} }))
-					} else {
-						download(fileName, (path) => {
-							setIsUploading(false)
-						})
-					}
+					mutate({ channelId: data?.id! })
 				},
 				onError: () => {
 					setIsUploading(false)
