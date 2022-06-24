@@ -6,6 +6,7 @@ import KitBase, { KitBaseModel } from "@Services/mongodb/models/KitBase"
 const handler = createHandler(adminAuth)
 
 // Create a new kit base
+// @ts-ignore
 handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<KitBaseModel>>) => {
 	const newKitBase = new KitBase(req.body)
 
@@ -19,6 +20,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<
 })
 
 // Edit an existing kit base
+// @ts-ignore
 handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<KitBaseModel | null>>) => {
 	const { _id, ...rest } = req.body
 

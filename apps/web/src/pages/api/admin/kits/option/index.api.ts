@@ -6,6 +6,7 @@ import KitOption, { KitOptionModel } from "@Services/mongodb/models/KitOption"
 const handler = createHandler(adminAuth)
 
 // Create a new kit option
+// @ts-ignore
 handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<KitOptionModel | null>>) => {
 	try {
 		const newKitOption = new KitOption(req.body)
@@ -17,6 +18,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<
 })
 
 // Edit an existing kit option
+// @ts-ignore
 handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<KitOptionModel | null>>) => {
 	const { _id, ...rest } = req.body
 
@@ -29,6 +31,7 @@ handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<K
 })
 
 // Delete a kit option
+// @ts-ignore
 handler.delete(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<KitOptionModel | null>>) => {
 	const { _id } = req.body
 
