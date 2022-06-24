@@ -1,5 +1,7 @@
+import PageWrapper from "@Components/layouts/PageWrapper"
 import ContactUs from "@Components/shared/ContactUs"
 import Head from "@Components/shared/Head"
+import { BackgroundImage, Box } from "@mantine/core"
 import { getTotalKitsQuery } from "@Services/orm/queries/kits/total"
 import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
 import { Routes } from "@Utils/lookups/routes"
@@ -19,8 +21,13 @@ interface Props {
 
 const WhyKittr = ({ totalNumberOfKits }: Props) => {
 	return (
-		<>
-			<Head title="Improve Your Channel in 15 Minutes | kittr" description="." />
+		<Box
+			sx={() => ({
+				backgroundImage: "url(/media/hero.png)",
+				backgroundRepeat: "no-repeat",
+				backgroundPosition: "top"
+			})}
+		>
 			<Hero totalNumberOfKits={totalNumberOfKits} />
 			<div style={{ margin: "0 24px" }}>
 				<Features />
@@ -44,7 +51,7 @@ const WhyKittr = ({ totalNumberOfKits }: Props) => {
 					</Link>
 				</div>
 			</div>
-		</>
+		</Box>
 	)
 }
 

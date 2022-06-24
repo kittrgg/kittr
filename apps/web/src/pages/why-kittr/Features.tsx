@@ -48,14 +48,6 @@ const FEATURE_SET = [
 const Features = ({ ...props }) => {
 	return (
 		<section style={{ zIndex: 1 }}>
-			<ImageContainer>
-				<img
-					src="/media/landing-page-screenie.png"
-					alt="An example kittr page."
-					style={{ width: "100%", height: "100%", objectFit: "cover" }}
-				/>
-			</ImageContainer>
-			<Styled.P>Quite a bit better than a Google Sheet, huh?</Styled.P>
 			<Styled.H2>FEATURES</Styled.H2>
 			<Grid>
 				{FEATURE_SET.map((feature) => {
