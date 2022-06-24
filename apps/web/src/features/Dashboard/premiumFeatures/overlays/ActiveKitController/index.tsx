@@ -321,7 +321,7 @@ const ActiveKit = () => {
 
 									return (
 										<KitButton
-											key={name + userTitle}
+											key={`${name} ${userTitle}`}
 											isActive={isActive}
 											onClick={() => {
 												if (isActive) {
