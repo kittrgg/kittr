@@ -35,7 +35,6 @@ export const promoteManager = async ({
 }: {
 	channelId: string
 	managerIdToPromote: string
-	authToken: string
 }) => {
 	const channel = await prisma.channel.update({
 		where: {

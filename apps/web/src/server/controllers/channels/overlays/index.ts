@@ -1,17 +1,23 @@
 import { createController } from "@Server/createController"
+import { authenticateUser } from "@Server/middlewares/authenticateUser"
 import * as ChannelsOverlaysService from "@Server/services/channels/overlays"
+import { checkRole } from "@Server/services/users"
 import { z } from "zod"
 
-const toggle = createController().mutation("", {
-	input: z.object({
-		channelId: z.string(),
-		newState: z.boolean()
-	}),
-	async resolve({ input }) {
-		const channel = await ChannelsOverlaysService.toggle({ channelId: input.channelId, newState: input.newState })
-		return channel
-	}
-})
+const toggle = createController()
+	.middleware(authenticateUser)
+	.mutation("", {
+		input: z.object({
+			channelId: z.string(),
+			newState: z.boolean()
+		}),
+		async resolve({ ctx, input }) {
+			await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["ADMIN", "OWNER"] })
+
+			const channel = await ChannelsOverlaysService.toggle({ channelId: input.channelId, newState: input.newState })
+			return channel
+		}
+	})
 
 const getOverlay = createController().query("", {
 	input: z.string(),
@@ -21,28 +27,32 @@ const getOverlay = createController().query("", {
 	}
 })
 
-const editColor = createController().mutation("", {
-	input: z.object({
-		channelId: z.string(),
-		color: z.string(),
-		colorKeyToChange: z.enum([
-			"backgroundColorPrimary",
-			"backgroundColorSecondary",
-			"textColorPrimary",
-			"textColorSecondary",
-			"textColorAccent"
-		])
-	}),
-	async resolve({ input }) {
-		const channel = await ChannelsOverlaysService.editColor({
-			channelId: input.channelId,
-			color: input.color,
-			colorKeyToChange: input.colorKeyToChange
-		})
+const editColor = createController()
+	.middleware(authenticateUser)
+	.mutation("", {
+		input: z.object({
+			channelId: z.string(),
+			color: z.string(),
+			colorKeyToChange: z.enum([
+				"backgroundColorPrimary",
+				"backgroundColorSecondary",
+				"textColorPrimary",
+				"textColorSecondary",
+				"textColorAccent"
+			])
+		}),
+		async resolve({ ctx, input }) {
+			await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["ADMIN", "OWNER"] })
 
-		return channel
-	}
-})
+			const channel = await ChannelsOverlaysService.editColor({
+				channelId: input.channelId,
+				color: input.color,
+				colorKeyToChange: input.colorKeyToChange
+			})
+
+			return channel
+		}
+	})
 
 const editKit = createController().mutation("", {
 	input: z.object({
