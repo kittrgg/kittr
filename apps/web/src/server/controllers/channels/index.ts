@@ -38,14 +38,18 @@ const listLiveChannels = createController().query("", {
 	}
 })
 
-const getDashboardChannel = createController().query("", {
-	input: z.string(),
-	async resolve({ input }) {
-		const channel = await ChannelsService.getDashboardChannel({ id: input })
+const getDashboardChannel = createController()
+	.middleware(authenticateUser)
+	.query("", {
+		input: z.string(),
+		async resolve({ ctx, input }) {
+			await checkRole({ firebaseUserId: ctx.user.uid, channelId: input, roles: ["ADMIN", "EDITOR", "OWNER"] })
 
-		return channel
-	}
-})
+			const channel = await ChannelsService.getDashboardChannel({ id: input })
+
+			return channel
+		}
+	})
 
 const getChannelProfile = createController().query("", {
 	input: z.string(),
