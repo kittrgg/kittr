@@ -14,7 +14,7 @@ import { caption } from "@Styles/typography"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 
 /** Change the channel's profile image */
-const ImageEditor = ({ ...props }) => {
+const ImageEditor = () => {
 	const dispatch = useDispatch()
 	const { data } = useChannelData()
 	const profileImage = useProfileImage()
@@ -51,6 +51,7 @@ const ImageEditor = ({ ...props }) => {
 				imageFile,
 				onSuccess: async () => {
 					mutate({ channelId: data?.id! })
+					console.log("okay, yeah")
 				},
 				onError: () => {
 					setIsUploading(false)

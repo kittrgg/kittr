@@ -5,15 +5,10 @@ import PageWrapper from "@Components/layouts/PageWrapper"
 import Accordion from "@Components/shared/Accordion"
 import { header2 } from "@Styles/typography"
 
-const FAQ = ({ ...props }) => {
+const FAQ = () => {
 	return (
 		<PageWrapper title="FAQ | kittr" description="Frequently asked questions about kittr.">
-			<div
-				style={{
-					margin: "0 2%",
-					padding: "2%"
-				}}
-			>
+			<div style={{ margin: "0 2%", padding: "2%" }}>
 				<Header>FAQ</Header>
 				<div style={{ padding: "20px", backgroundColor: colors.dark, borderRadius: "24px" }}>
 					<Accordion title="What is kittr?">

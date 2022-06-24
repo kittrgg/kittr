@@ -18,7 +18,13 @@ const ChannelList = () => {
 	const modalData = useModal().data
 	const ref = useRef() as MutableRefObject<HTMLButtonElement>
 	const divRef = useRef() as MutableRefObject<HTMLDivElement>
-	const { data: channels, isFetching: isFetchingChannels, refetch } = trpc.useQuery(["managers/channels/list"])
+	const {
+		data: channels,
+		isFetching: isFetchingChannels,
+		refetch
+	} = trpc.useQuery(["managers/channels/list"], {
+		refetchOnMount: true
+	})
 	const user = useUser()
 	const modal = useSelector((state) => state.dashboard.modal)
 
@@ -93,7 +99,12 @@ const ChannelList = () => {
 								data-cy={`${elem.displayName}-channel-button`}
 							>
 								<FlexRow>
-									<ProfileImage size="50px" hasProfileImage={!!elem.profile?.hasProfileImage} imagePath={elem.id} />
+									<ProfileImage
+										size="50px"
+										alwaysRefresh={true}
+										hasProfileImage={!!elem.profile?.hasProfileImage}
+										imagePath={elem.id}
+									/>
 									<ChannelTitle>{elem.displayName}</ChannelTitle>
 								</FlexRow>
 								<Role>
