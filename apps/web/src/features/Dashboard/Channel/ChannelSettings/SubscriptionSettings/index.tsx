@@ -21,12 +21,21 @@ const SubscriptionSettings = ({ ...props }) => {
 	const { data } = useDashboardChannel()
 
 	const { data: subscriptionEnd } = trpc.useQuery(
-		["channels/plan/subscription-end", data?.plan?.stripeSubscriptionId],
+		[
+			"channels/plan/subscription-end",
+			{ stripeSubscriptionId: data?.plan?.stripeSubscriptionId!, channelId: data?.id! }
+		],
 		{ enabled: !!data?.plan?.stripeSubscriptionId }
 	)
-	const { data: cardLast4 } = trpc.useQuery(["channels/plan/card-last-4-digits", data?.plan?.stripeSubscriptionId], {
-		enabled: !!data?.plan?.stripeSubscriptionId
-	})
+	const { data: cardLast4 } = trpc.useQuery(
+		[
+			"channels/plan/card-last-4-digits",
+			{ stripeSubscriptionId: data?.plan?.stripeSubscriptionId!, channelId: data?.id! }
+		],
+		{
+			enabled: !!data?.plan?.stripeSubscriptionId
+		}
+	)
 
 	const handleUpgrade = async () => {
 		const apiRoute = isPremium ? `/api/payments/managePremium` : `/api/payments/buyPremium`
