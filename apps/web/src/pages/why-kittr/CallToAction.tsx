@@ -1,4 +1,7 @@
 import colors from "@Colors"
+import { Button } from "@Components/shared"
+import { Title } from "@kittr/ui"
+import { Box, Stack } from "@mantine/core"
 import { header4, paragraph } from "@Styles/typography"
 import { Routes } from "@Utils/lookups/routes"
 import Link from "next/link"
@@ -14,14 +17,20 @@ interface Props {
 /** Call to action for the mod landing page. */
 const CallToAction = ({ marginTop, marginBottom, header }: Props) => {
 	return (
-		<Container marginTop={marginTop} marginBottom={marginBottom}>
-			<Header>{header}</Header>
-			<Link href={Routes.SIGN_UP} passHref>
-				<LinkButton target="_blank" rel="noopener noreferrer">
-					SIGN UP
-				</LinkButton>
-			</Link>
-		</Container>
+		<Stack mt={marginTop} mb={marginBottom} style={{ width: "100%" }} align="center">
+			<Title preset="d2" mb={20}>
+				{header}
+			</Title>
+			<Button
+				design="white"
+				as="a"
+				href={Routes.SIGN_UP}
+				target="_blank"
+				rel="noopener noreferrer"
+				text={"SIGN UP"}
+				style={{ width: "200px" }}
+			/>
+		</Stack>
 	)
 }
 
@@ -29,37 +38,37 @@ export default CallToAction
 
 // Styled Components
 
-const Container = styled.div<{ marginBottom?: string; marginTop?: string }>`
-	display: block;
-	width: 100%;
-	text-align: center;
-	margin-top: ${(props) => props.marginTop || ""};
-	margin-bottom: ${(props) => props.marginBottom || "24px"};
-`
+// const Container = styled.div<{ marginBottom?: string; marginTop?: string }>`
+// 	display: block;
+// 	width: 100%;
+// 	text-align: center;
+// 	margin-top: ${(props) => props.marginTop || ""};
+// 	margin-bottom: ${(props) => props.marginBottom || "24px"};
+// `
 
-const Header = styled.h2`
-	${header4};
-	font-size: 48px;
-`
+// const Header = styled.h2`
+// 	${header4};
+// 	font-size: 48px;
+// `
 
-const LinkButton = styled.a<{ design?: string }>`
-	display: inline-block;
-	margin-top: 32px;
-	padding: 20px 32px;
-	color: ${(props) => (props.design === "transparent" ? colors.white : colors.dark)};
-	border-radius: 20px;
-	border: ${(props) => (props.design == "transparent" ? `2px solid ${colors.white}` : "")};
-	background-color: ${(props) => (props.design === "transparent" ? "transparent" : colors.white)};
-	text-decoration: none;
-	${paragraph};
-	font-weight: 600;
-	cursor: pointer;
-	transition: 0.2s;
+// const LinkButton = styled.a<{ design?: string }>`
+// 	display: inline-block;
+// 	margin-top: 32px;
+// 	padding: 20px 32px;
+// 	color: ${(props) => (props.design === "transparent" ? colors.white : colors.dark)};
+// 	border-radius: 20px;
+// 	border: ${(props) => (props.design == "transparent" ? `2px solid ${colors.white}` : "")};
+// 	background-color: ${(props) => (props.design === "transparent" ? "transparent" : colors.white)};
+// 	text-decoration: none;
+// 	${paragraph};
+// 	font-weight: 600;
+// 	cursor: pointer;
+// 	transition: 0.2s;
 
-	@media (hover: hover) {
-		&:hover {
-			background-color: ${colors.dark};
-			color: ${colors.white};
-		}
-	}
-`
+// 	@media (hover: hover) {
+// 		&:hover {
+// 			background-color: ${colors.dark};
+// 			color: ${colors.white};
+// 		}
+// 	}
+// `
