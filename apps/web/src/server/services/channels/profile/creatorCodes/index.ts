@@ -1,14 +1,10 @@
 import { prisma, ChannelAffiliateCode } from "@kittr/prisma"
-import { checkRole } from "@Server/services/users"
 
 export const upsertCode = async ({
-	authToken,
 	codeUpdate
 }: {
-	authToken: string
 	codeUpdate: ChannelAffiliateCode
 }) => {
-	await checkRole({ authToken, channelId: codeUpdate.channelId, roles: ["OWNER", "ADMIN"] })
 
 	const { channelId, gameId, code, id } = codeUpdate
 

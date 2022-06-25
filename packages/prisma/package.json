@@ -2,8 +2,12 @@
 	"name": "@kittr/prisma",
 	"version": "0.1.1",
 	"private": true,
+	"exports": {
+		".": "./index.ts",
+		"./validator": "./validator/index.ts"
+	},
 	"scripts": {
-		"dev": "prisma db push && tsup index.ts validator/index.ts --watch --dts",
+		"dev": "prisma db push --accept-data-loss",
 		"clean": "rm -rf .turbo && rm -rf node_modules",
 		"db-deploy": "prisma migrate deploy",
 		"db-migrate": "prisma db push --force-reset",
@@ -15,22 +19,18 @@
 		"db-format": "prisma format"
 	},
 	"devDependencies": {
-		"prisma": "3.9.2",
+		"prisma": "3.13.0",
 		"ts-node": "10.5.0",
 		"tsup": "5.12.0",
 		"typescript": "4.5.5",
 		"zod-prisma": "0.5.4"
 	},
 	"dependencies": {
-		"@prisma/client": "3.9.2",
+		"@prisma/client": "3.13.0",
 		"mongoose": "6.2.3"
 	},
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
-	"exports": {
-		".": "./dist/index.js",
-		"./validator": "./dist/validator/index.js"
-	},
 	"prisma": {
 		"seed": "ts-node ./seed.ts"
 	}

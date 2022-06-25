@@ -68,7 +68,7 @@ const Specs = () => {
 								/>
 								<SVG.X
 									data-cy={`${spec.partName}-delete-spec`}
-									onClick={async () => mutate({ authToken: await getToken(), channelId: data?.id!, pcSpecId: spec.id })}
+									onClick={async () => mutate({ channelId: data?.id!, pcSpecId: spec.id })}
 								/>
 							</IconButtons>
 						</Spec>

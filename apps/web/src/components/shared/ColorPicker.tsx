@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import styled from "styled-components"
 
 import colors from "@Colors"
 import { useDebounce } from "@Hooks/useDebounce"
+import { useDidMountEffect } from "@Hooks/useDidMountEffect"
 
 type DesignVariants = "Big Square" | "Small Circle"
 
@@ -16,11 +17,9 @@ export const ColorPicker = ({ onChangeComplete, defaultColor, designVariant }: P
 	const [color, setColor] = useState<string | null>(defaultColor)
 	const debouncedColor = useDebounce(color, 500)
 
-	useEffect(() => {
+	useDidMountEffect(() => {
 		if (debouncedColor && onChangeComplete) {
 			onChangeComplete(debouncedColor)
-		} else if (!debouncedColor && onChangeComplete) {
-			onChangeComplete(null)
 		}
 		// eslint-disable-next-line
 	}, [debouncedColor])

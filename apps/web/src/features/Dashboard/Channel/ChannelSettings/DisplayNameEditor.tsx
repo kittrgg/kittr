@@ -58,7 +58,7 @@ const DisplayNameEditor = ({ ...props }) => {
 				design="white"
 				text="Save Changes"
 				disabled={!isChanged || isLoading}
-				onClick={async () => mutate({ authToken: await getToken(), channelId: data?.id!, data: { displayName } })}
+				onClick={async () => mutate({ channelId: data?.id!, data: { displayName } })}
 				style={{
 					marginTop: "24px",
 					opacity: isLoading ? 0.3 : isChanged ? 1 : 0,

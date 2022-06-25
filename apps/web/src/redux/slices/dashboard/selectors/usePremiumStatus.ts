@@ -8,6 +8,6 @@ export const usePremiumStatus = () => {
 
 	return {
 		premiumType,
-		isPremium: !!premiumType
+		isPremium: premiumType === "PREMIUM"
 	}
 }

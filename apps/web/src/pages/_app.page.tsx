@@ -15,6 +15,7 @@ import { ReactQueryDevtools } from "react-query/devtools"
 import { Provider } from "react-redux"
 import superjson from "superjson"
 import { AppRouter } from "./api/trpc/[[...trpc]].api"
+import { getToken } from "@Services/firebase/auth"
 
 const AppWrap = ({ Component, pageProps }: any) => {
 	return (
@@ -86,6 +87,12 @@ export default withTRPC<AppRouter>({
 
 		return {
 			url,
+			fetch: async (requestUrl, test) => {
+				return fetch(requestUrl, {
+					...test,
+					headers: { ...test?.headers, authorization: (await getToken()) ?? "" }
+				})
+			},
 			transformer: superjson,
 			links: [
 				// adds pretty logs to your console in development and logs errors in production

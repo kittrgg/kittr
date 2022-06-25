@@ -1,4 +1,4 @@
-import { prisma, Kit, KitOption } from "@kittr/prisma"
+import { Kit, KitOption, prisma } from "@kittr/prisma"
 
 export const upsertKit = async ({
 	channelId,

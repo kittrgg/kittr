@@ -1,10 +1,10 @@
 import colors from "@Colors"
 import { Button, ProfileImage, Spinner, SupportUs, SVG } from "@Components/shared"
-import { useManagedChannels } from "@Hooks/api/useManagedChannels"
 import { useUser } from "@Hooks/useUser"
 import { setActiveView, setChannelView, setModal } from "@Redux/slices/dashboard"
 import { useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch, useSelector } from "@Redux/store"
+import { trpc } from "@Server/createHooks"
 import { header1, header2, paragraph } from "@Styles/typography"
 import { capitalizeFirstCharacter } from "@Utils/helpers/capitalizeFirstCharacter"
 import { MutableRefObject, useEffect, useRef } from "react"
@@ -13,12 +13,18 @@ import CreateChannelModal from "./modals/CreateChannel"
 import LogoutButton from "./ProfileButtons"
 
 /** List the channels for a user */
-const ChannelList = ({ ...props }) => {
+const ChannelList = () => {
 	const dispatch = useDispatch()
 	const modalData = useModal().data
 	const ref = useRef() as MutableRefObject<HTMLButtonElement>
 	const divRef = useRef() as MutableRefObject<HTMLDivElement>
-	const { data, refetch, isFetching } = useManagedChannels()
+	const {
+		data: channels,
+		isFetching: isFetchingChannels,
+		refetch
+	} = trpc.useQuery(["managers/channels/list"], {
+		refetchOnMount: true
+	})
 	const user = useUser()
 	const modal = useSelector((state) => state.dashboard.modal)
 
@@ -35,7 +41,7 @@ const ChannelList = ({ ...props }) => {
 				})
 			)
 		}
-		if (data && modal.data?.page === 3) {
+		if (channels && modal.data?.page === 3) {
 			dispatch(
 				setModal({
 					type: "Tutorial",
@@ -46,7 +52,7 @@ const ChannelList = ({ ...props }) => {
 				})
 			)
 		}
-	}, [modal.data?.page, data, ref, dispatch])
+	}, [modal.data?.page, channels, ref, dispatch])
 
 	return (
 		<>
@@ -57,11 +63,11 @@ const ChannelList = ({ ...props }) => {
 					YOUR CHANNELS{" "}
 					<SVG.Renew width="24px" style={{ cursor: "pointer" }} onClick={() => refetch()} dataCy="renew-svg" />
 				</Header>
-				{isFetching && <Spinner width="100%" height="100px" />}
-				{!isFetching &&
+				{isFetchingChannels && <Spinner width="100%" height="100px" />}
+				{!isFetchingChannels &&
 					!!user &&
-					data &&
-					data.map((elem) => {
+					channels &&
+					channels.map((elem) => {
 						return (
 							<ChannelContainer
 								key={elem.id}
@@ -93,7 +99,12 @@ const ChannelList = ({ ...props }) => {
 								data-cy={`${elem.displayName}-channel-button`}
 							>
 								<FlexRow>
-									<ProfileImage size="50px" hasProfileImage={!!elem.profile?.hasProfileImage} imagePath={elem.id} />
+									<ProfileImage
+										size="50px"
+										alwaysRefresh={true}
+										hasProfileImage={!!elem.profile?.hasProfileImage}
+										imagePath={elem.id}
+									/>
 									<ChannelTitle>{elem.displayName}</ChannelTitle>
 								</FlexRow>
 								<Role>
@@ -105,7 +116,7 @@ const ChannelList = ({ ...props }) => {
 						)
 					})}
 
-				{!isFetching && data?.length === 0 && (
+				{!isFetchingChannels && channels?.length === 0 && (
 					<>
 						<Container
 							style={{

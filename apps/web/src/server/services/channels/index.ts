@@ -4,15 +4,14 @@ import { ITwitchLiveChannels } from "@kittr/types"
 import { getTopChannelsWithLinksQuery } from "@Services/orm"
 import { headers } from "@Services/twitch/utils/auth"
 import { grabLoginName } from "@Services/twitch/utils/grabLoginName"
+import { TRPCError } from "@trpc/server"
 import { badWordFilter } from "@Utils/helpers/badWordFilter"
 import { toURL } from "@Utils/helpers/toURL"
-import { TRPCError } from "@trpc/server"
-import { checkRole } from "@Server/services/users"
 
 export * from "./games"
 export * from "./kits"
-export * from "./profile"
 export * from "./links"
+export * from "./profile"
 
 interface ChannelWithProfile extends Channel {
 	profile: ChannelProfile
@@ -30,7 +29,13 @@ interface ListParams {
 const getTwitchLink = (channel: ChannelWithLinks) =>
 	channel.links.find((link) => link.property === LinkProperty.TWITCH)?.value ?? ""
 
-export const createChannel = async (displayName: string) => {
+export const createChannel = async ({
+	displayName,
+	ownerFirebaseId
+}: {
+	displayName: string
+	ownerFirebaseId: string
+}) => {
 	if (displayName.length > 26)
 		throw new TRPCError({
 			code: "BAD_REQUEST",
@@ -63,10 +68,19 @@ export const createChannel = async (displayName: string) => {
 			managers: {
 				create: {
 					// TODO: Use the authentication of the user in the request.
-					firebaseId: "123",
+					firebaseId: ownerFirebaseId,
 					// NO TOUCHY! We need to make sure that the person who creates this channel is the owner of it.
 					role: "OWNER"
 				}
+			},
+			profile: {
+				create: {}
+			},
+			plan: {
+				create: {}
+			},
+			overlay: {
+				create: {}
 			}
 		}
 	})
@@ -74,26 +88,16 @@ export const createChannel = async (displayName: string) => {
 	return result
 }
 
-export const updateChannel = async ({
-	channelId,
-	authToken,
-	data
-}: {
-	channelId: string
-	authToken: string
-	data: Partial<Channel>
-}) => {
-	await checkRole({ authToken, channelId, roles: ["OWNER", "ADMIN"] })
-
+export const updateChannel = async ({ channelId, data }: { channelId: string; data: Partial<Channel> }) => {
 	const result = await prisma.channel.update({
 		where: { id: channelId },
 		data
 	})
+
+	return result
 }
 
-export const deleteChannel = async ({ authToken, channelId }: { authToken: string; channelId: string }) => {
-	const manager = await checkRole({ authToken, channelId, roles: ["OWNER"] })
-
+export const deleteChannel = async ({ channelId }: { channelId: string }) => {
 	const channel = await prisma.channel.delete({
 		where: {
 			id: channelId
@@ -103,11 +107,10 @@ export const deleteChannel = async ({ authToken, channelId }: { authToken: strin
 	return channel
 }
 
-export const getDashboardChannel = async ({ id, urlSafeName }: { id: string; urlSafeName: string }) => {
+export const getDashboardChannel = async ({ id }: { id: string }) => {
 	const channel = await prisma.channel.findFirst({
 		where: {
-			id,
-			urlSafeName
+			id
 		},
 		include: {
 			customGameCommands: true,

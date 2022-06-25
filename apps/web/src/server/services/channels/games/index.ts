@@ -16,18 +16,26 @@ export const addGame = async ({ channelId, gameId }: { channelId: string; gameId
 }
 
 export const deleteGame = async ({ channelId, gameId }: { channelId: string; gameId: string }) => {
-	const channel = await prisma.channel.update({
+	const games = await prisma.channel.update({
 		where: { id: channelId },
 		data: {
 			games: {
 				disconnect: {
 					id: gameId
 				}
+			},
+			kits: {
+				deleteMany: {
+					gameId
+				}
 			}
+		},
+		select: {
+			games: true
 		}
 	})
 
-	return channel
+	return games
 }
 
 export const getChannelsByGame = async ({

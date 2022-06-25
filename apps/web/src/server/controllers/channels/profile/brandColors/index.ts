@@ -1,33 +1,30 @@
 import { createController } from "@Server/createController"
+import { authenticateUser } from "@Server/middlewares/authenticateUser"
 import * as ChannelsBrandColorsService from "@Server/services/channels"
-import { TRPCError } from "@trpc/server"
+import { checkRole } from "@Server/services/users"
 import { z } from "zod"
 
-const getChannelProfile = createController().mutation("", {
-	input: z.object({
-		authToken: z.string().optional(),
-		channelId: z.string(),
-		newColor: z.string(),
-		colorId: z.string()
-	}),
-	async resolve({ input }) {
-		if (!input.authToken) {
-			throw new TRPCError({
-				code: "UNAUTHORIZED"
+const upsertBrandColor = createController()
+	.middleware(authenticateUser)
+	.mutation("", {
+		input: z.object({
+			channelId: z.string(),
+			newColor: z.string(),
+			colorId: z.string().optional()
+		}),
+		async resolve({ ctx, input }) {
+			await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["OWNER", "ADMIN"] })
+
+			const channel = await ChannelsBrandColorsService.upsertBrandColor({
+				channelId: input.channelId,
+				colorId: input.colorId,
+				newColor: input.newColor
 			})
+
+			return channel
 		}
-
-		const channel = await ChannelsBrandColorsService.upsertBrandColor({
-			authToken: input.authToken,
-			channelId: input.channelId,
-			colorId: input.colorId,
-			newColor: input.newColor
-		})
-
-		return channel
-	}
-})
+	})
 
 export const ChannelsProfileBrandColorsController = {
-	getChannelProfile
+	upsertBrandColor
 }

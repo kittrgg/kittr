@@ -42,6 +42,8 @@ export const getStaticProps = async ({ params }: { params: { channel: string } }
 	const { channel: urlSafeName } = params
 	const ssg = await createSSGHelper()
 
+	console.log(params)
+
 	const channel = await ssg.fetchQuery("channels/profile/get", urlSafeName)
 	const twitchLink = channel?.links.find((channel) => channel.property === "TWITCH")?.value
 

@@ -4,7 +4,6 @@ import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { setModal } from "@Redux/slices/dashboard"
 import { useDispatch } from "@Redux/store"
-import { getToken } from "@Services/firebase/auth/getToken"
 import styled from "styled-components"
 
 const ThemeColor = ({ ...props }) => {
@@ -20,9 +19,8 @@ const ThemeColor = ({ ...props }) => {
 		}
 	})
 
-	const onChangeColor = async (color: string | null) => {
+	const onChangeColor = (color: string | null) => {
 		mutate({
-			authToken: await getToken(),
 			newColor: color || colors.white,
 			channelId: data?.id!,
 			colorId: data?.profile?.brandColors?.find((color) => color.type === "PRIMARY")?.id!

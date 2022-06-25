@@ -8,7 +8,6 @@ import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { setModal } from "@Redux/slices/dashboard"
 import { useManagerRole, usePremiumStatus } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import { getToken } from "@Services/firebase/auth/getToken"
 import { caption, paragraph } from "@Styles/typography"
 import { sortAlphabetical } from "@Utils/helpers/sortAlphabetical"
 import { ActiveKitOverlay } from "@Utils/lookups/overlays"
@@ -305,7 +304,7 @@ const ActiveKit = () => {
 							{data?.kits
 								.slice()
 								.filter((kit) => data?.overlay?.secondaryKit?.id !== kit.id)
-								.map((kit) => ({ ...kit, ...allKitBases?.find((kitBase) => kitBase.id === kit.baseId) }))
+								.map((kit) => ({ ...kit, base: allKitBases?.find((kitBase) => kitBase.id === kit.baseId) }))
 								.sort((a, b) => sortAlphabetical(a.base!.displayName, b.base!.displayName))
 								.sort((kit) => {
 									if (kit.featured) {
@@ -322,7 +321,7 @@ const ActiveKit = () => {
 
 									return (
 										<KitButton
-											key={name + userTitle}
+											key={`${name} ${userTitle}`}
 											isActive={isActive}
 											onClick={() => {
 												if (isActive) {
@@ -360,7 +359,7 @@ const ActiveKit = () => {
 							{data?.kits
 								.slice()
 								.filter((kit) => data?.overlay?.primaryKit?.id !== kit.id)
-								.map((kit) => ({ ...kit, ...allKitBases?.find((kitBase) => kitBase.id === kit.baseId) }))
+								.map((kit) => ({ ...kit, base: allKitBases?.find((kitBase) => kitBase.id === kit.baseId) }))
 								.sort((a, b) => sortAlphabetical(a.base!.displayName, b.base!.displayName))
 								.sort((kit) => {
 									if (kit.featured) {

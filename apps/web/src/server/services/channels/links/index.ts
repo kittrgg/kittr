@@ -1,15 +1,28 @@
-import {prisma, ChannelLink} from '@kittr/prisma'
-import { checkRole } from '@Server/services/users'
+import { prisma, ChannelLink } from "@kittr/prisma"
 
-export const updateLinks =  async ({authToken, channelId, links}: {authToken: string, channelId: string, links: ChannelLink[]}) => {
-  await checkRole({authToken, channelId, roles: ["OWNER", "ADMIN"]})
+export const updateLinks = async ({ channelId, links }: { channelId: string; links: ChannelLink[] }) => {
+	const [_, newLinks] = await prisma.$transaction([
+		prisma.channelLink.deleteMany({
+			where: {
+				channelId
+			}
+		}),
+		prisma.channel.update({
+			where: {
+				id: channelId
+			},
+			data: {
+				links: {
+					createMany: {
+						data: links.map((link) => {
+							const { channelId, id, ...rest } = link
+							return rest
+						})
+					}
+				}
+			}
+		})
+	])
 
-  const linksUpdate = await prisma.channelLink.updateMany({
-    where: {
-      channelId
-    },
-    data: links
-  })
-
-  return linksUpdate
+	return newLinks
 }

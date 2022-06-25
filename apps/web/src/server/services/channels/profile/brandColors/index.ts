@@ -1,32 +1,26 @@
 import { prisma } from "@kittr/prisma"
-import { checkRole } from "@Server/services/users"
 
 export const upsertBrandColor = async ({
-	authToken,
 	channelId,
 	colorId,
 	newColor
 }: {
-	authToken: string
 	channelId: string
-	colorId: string
+	colorId?: string
 	newColor: string
 }) => {
-	await checkRole({ authToken, channelId, roles: ["OWNER", "ADMIN"] })
-
 	const channelProfile = await prisma.channelProfile.update({
 		where: {
 			channelId
 		},
 		data: {
 			brandColors: {
-				update: {
+				upsert: {
 					where: {
-						id: colorId
+						id: colorId ?? ""
 					},
-					data: {
-						value: newColor
-					}
+					create: { type: "PRIMARY", value: newColor },
+					update: { type: "PRIMARY", value: newColor }
 				}
 			}
 		}

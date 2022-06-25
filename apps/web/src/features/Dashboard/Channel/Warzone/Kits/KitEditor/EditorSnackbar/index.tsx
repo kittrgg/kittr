@@ -49,11 +49,10 @@ const EditorSnackbar = () => {
 					kitArr
 						.map((kit) => ({
 							...kit,
-							...(allKitBases?.find((allBase) => {
-								console.log(kit.base.id)
-
-								return allBase.id === kit.base.id
-							}) || activeKit)
+							base:
+								allKitBases?.find((allBase) => {
+									return allBase.id === kit.base.id
+								}) || activeKit.base
 						}))
 						// Map to just the names
 						.map((kit) => kit.base.gameId + kit.base.displayName)
@@ -115,7 +114,7 @@ const EditorSnackbar = () => {
 			channelId: channelData?.id!,
 			kit: {
 				channelId: channelData?.id!,
-				id: initialKit.id!,
+				id: initialKit.id,
 				gameId: activeKit.base.gameId,
 				baseId: activeKit.base.id,
 				customTitle: activeKit.customTitle,

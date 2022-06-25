@@ -46,8 +46,8 @@ const SetNewOwner = () => {
 								{data
 									.filter((manager) => manager.role !== "OWNER")
 									.map((elem: IManagerData) => (
-										<option key={elem.email} value={elem.displayName || elem.email}>
-											{elem.displayName || elem.email}
+										<option key={elem.email} value={elem.email}>
+											{elem.email}
 										</option>
 									))}
 							</Select>
@@ -64,7 +64,7 @@ const SetNewOwner = () => {
 							design="white"
 							text={isMutatingOwner ? "..." : "CONFIRM NEW OWNER"}
 							disabled={isMutatingOwner || newOwner === "-"}
-							onClick={async () => mutateOwner({authToken: await getToken(), channelId: channelData?.id!, newOwnerEmail: newOwner })}
+							onClick={async () => mutateOwner({ channelId: channelData?.id!, newOwnerEmail: newOwner })}
 							style={{ margin: "0 auto" }}
 							dataCy="final-change-owner"
 						/>

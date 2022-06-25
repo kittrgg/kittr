@@ -1,5 +1,4 @@
 import { prisma } from "@kittr/prisma"
-import { checkRole } from "@Server/services/users"
 
 export const getCommandString = async ({ channelId }: { channelId: string }) => {
 	const commandString = await prisma.channelCustomGameCommand.findFirst({
@@ -14,17 +13,7 @@ export const getCommandString = async ({ channelId }: { channelId: string }) => 
 	return commandString
 }
 
-export const updateCommandString = async ({
-	authToken,
-	newString,
-	channelId
-}: {
-	authToken: string
-	newString: string
-	channelId: string
-}) => {
-	await checkRole({ authToken, channelId, roles: ["OWNER", "ADMIN", "EDITOR"] })
-
+export const updateCommandString = async ({ newString, channelId }: { newString: string; channelId: string }) => {
 	const commandString = await prisma.channelCustomGameCommand.update({
 		where: {
 			id: channelId

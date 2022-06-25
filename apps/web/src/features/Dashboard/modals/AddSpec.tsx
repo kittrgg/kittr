@@ -59,6 +59,7 @@ const AddSpecModal = () => {
 	useEffect(() => {
 		if (data) {
 			setPartType(data.partType)
+			setPartName(data.partName)
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])

@@ -51,6 +51,7 @@ export const ProfileImage = ({
 
 					if (uri && isMounted()) {
 						setPath(uri)
+						setErrored(false)
 						setIsLoading(false)
 					}
 
@@ -66,7 +67,7 @@ export const ProfileImage = ({
 
 			fetchImage()
 		}
-	}, [imagePath, isMounted])
+	}, [imagePath, isMounted, hasProfileImage])
 
 	if (!imagePath || errored) {
 		return (

@@ -1,9 +1,9 @@
-import { NextServerPayload } from "@kittr/types/types"
-import type { NextApiRequest, NextApiResponse } from "next"
-import { createHandler } from "@Utils/middlewares/createHandler"
-import Stripe from "stripe"
-import { userAuth } from "@Middlewares/auth"
 import { prisma } from "@kittr/prisma"
+import { NextServerPayload } from "@kittr/types/types"
+import { userAuth } from "@Middlewares/auth"
+import { createHandler } from "@Utils/middlewares/createHandler"
+import type { NextApiRequest, NextApiResponse } from "next"
+import Stripe from "stripe"
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, { apiVersion: "2020-08-27" })
 
@@ -26,7 +26,8 @@ handler.post(
 			})
 
 			if (!channel) return res.status(500).json({ error: true, errorMessage: "Channel not found" })
-			if (!channel.plan) return res.status(500).json({ error: true, errorMessage: "Channel has no plan" })
+			if (!channel.plan || !channel.plan.stripeSubscriptionId)
+				return res.status(500).json({ error: true, errorMessage: "Channel has no plan" })
 
 			const subscription = await stripe.subscriptions.retrieve(channel.plan?.stripeSubscriptionId)
 			const session = await stripe.billingPortal.sessions.create({

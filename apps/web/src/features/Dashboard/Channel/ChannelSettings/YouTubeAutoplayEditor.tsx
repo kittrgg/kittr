@@ -48,7 +48,6 @@ const YouTubeAutoplayEditor = ({ ...props }) => {
 						activeValue={data?.profile?.youtubeAutoplay ? "YUP" : "NOPE"}
 						onClick={async () =>
 							mutate({
-								authToken: await getToken(),
 								channelId: data?.id!,
 								shouldYoutubeAutoplay: !data?.profile?.youtubeAutoplay
 							})

@@ -1,31 +1,16 @@
-import { prisma, ChannelAffiliate } from "@kittr/prisma"
-import validator from "validator"
+import { ChannelAffiliate, prisma } from "@kittr/prisma"
 import { TRPCError } from "@trpc/server"
-import { checkRole } from "@Server/services/users"
+import validator from "validator"
 
-export const createAffiliate = async ({
-	authToken,
-	channelId,
-	data
-}: {
-	authToken: string
-	channelId: string
-	data: Partial<ChannelAffiliate>
-}) => {
-	await checkRole({ authToken, channelId, roles: ["OWNER", "ADMIN"] })
-
+export const createAffiliate = async ({ channelId, data }: { channelId: string; data: Partial<ChannelAffiliate> }) => {
 	if (data.url) {
 		if (!validator.isURL(data.url)) {
 			throw new TRPCError({ code: "BAD_REQUEST", message: "Invalid URL" })
 		}
 	}
 
-	if (!data.channelProfileId) {
-		throw new TRPCError({ code: "BAD_REQUEST", message: "Missing channelProfileId." })
-	}
-
 	const newAffiliate = await prisma.channel.update({
-		where: { id: data.channelProfileId },
+		where: { id: channelId },
 		data: {
 			profile: {
 				update: {
@@ -39,17 +24,7 @@ export const createAffiliate = async ({
 	return newAffiliate
 }
 
-export const updateAffiliate = async ({
-	authToken,
-	channelId,
-	data
-}: {
-	authToken: string
-	channelId: string
-	data: Partial<ChannelAffiliate> & { id: string }
-}) => {
-	await checkRole({ authToken, channelId, roles: ["OWNER", "ADMIN"] })
-
+export const updateAffiliate = async ({ data }: { data: Partial<ChannelAffiliate> & { id: string } }) => {
 	const updatedAffiliate = await prisma.channelAffiliate.upsert({
 		where: {
 			id: data.id
@@ -62,12 +37,16 @@ export const updateAffiliate = async ({
 }
 
 export const deleteAffiliate = async ({ channelId, affiliateId }: { channelId: string; affiliateId: string }) => {
-	const channel = await prisma.channelProfile.update({
+	const channel = await prisma.channel.update({
 		where: { id: channelId },
 		data: {
-			affiliates: {
-				delete: {
-					id: affiliateId
+			profile: {
+				update: {
+					affiliates: {
+						delete: {
+							id: affiliateId
+						}
+					}
 				}
 			}
 		}

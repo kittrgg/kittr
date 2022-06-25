@@ -1,6 +1,6 @@
 import { Button, GameCard, Modal, Spinner } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
-import { useAllGames } from "@Hooks/api/useAllGames"
+import { useAllGames } from "@Hooks/trpc/useAllGames"
 import { handleTutorialAction, setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch, useSelector } from "@Redux/store"
@@ -12,7 +12,8 @@ const AddGameModal = ({ ...props }) => {
 	const modal = useModal()
 	const { channelId } = useSelector((state) => state.dashboard.activeView)
 	const channelData = useChannelData()
-	const { isLoading, data } = useAllGames()
+
+	const { isLoading, data } = useAllGames({ include: { genres: true, platforms: true } })
 
 	const { mutate, isLoading: isMutating } = useDashboardMutator({
 		path: "channels/games/add",

@@ -1,18 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import { createHandler } from "@Utils/middlewares/createHandler"
-import { prisma } from "@kittr/prisma"
+import { KitBase } from "@Services/mongodb/models/KitBase"
 
 const handler = createHandler()
 
 // Fetch all bases
 handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
 	try {
-		const result = await prisma.kitBase.findMany({
-			include: {
-				commandCodes: true
-			}
-		})
-		return res.status(200).json(result)
+		const data = await KitBase.find()
+		return res.status(200).json(data)
 	} catch (error) {
 		return res.status(500).json(error)
 	}

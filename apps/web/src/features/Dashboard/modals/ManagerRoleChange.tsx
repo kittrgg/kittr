@@ -6,7 +6,6 @@ import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import { getToken } from "@Services/firebase/auth"
 import { paragraph } from "@Styles/typography"
 
 const DeleteManager = () => {
@@ -62,9 +61,7 @@ const DeleteManager = () => {
 					<Button
 						design="white"
 						text="YES, DEMOTE THEM"
-						onClick={async () =>
-							demote({ authToken: await getToken(), managerIdToDemote: data.id, channelId: channelData?.id! })
-						}
+						onClick={async () => demote({ managerIdToDemote: data.id, channelId: channelData?.id! })}
 						style={{ marginLeft: "32px" }}
 					/>
 				</RowFlex>
@@ -90,9 +87,7 @@ const DeleteManager = () => {
 				<Button
 					design="white"
 					text="YES, PROMOTE THEM"
-					onClick={async () =>
-						promote({ authToken: await getToken(), managerIdToPromote: data.id, channelId: channelData?.id! })
-					}
+					onClick={async () => promote({ managerIdToPromote: data.id, channelId: channelData?.id! })}
 					style={{ marginLeft: "32px" }}
 				/>
 			</RowFlex>

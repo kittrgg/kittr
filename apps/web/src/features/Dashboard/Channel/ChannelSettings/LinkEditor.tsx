@@ -58,7 +58,10 @@ const LinkEditor = () => {
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>, link: [string, string]) => {
 		let newEdit = linkEdits?.slice() ?? []
-		const editIndex = newEdit?.findIndex((linkToEdit) => link[0] === linkToEdit.value) ?? -1
+		const editIndex =
+			newEdit?.findIndex((linkToEdit) => {
+				return link[0] === linkToEdit.property
+			}) ?? -1
 
 		if (!linkEdits) {
 			console.error("No link edits found.")
@@ -165,7 +168,7 @@ const LinkEditor = () => {
 							design="white"
 							disabled={!areActiveChanges}
 							text="Save Changes"
-							onClick={async () => mutate({ authToken: await getToken(), channelId: data?.id!, links: linkEdits! })}
+							onClick={async () => mutate({ channelId: data?.id!, links: linkEdits! })}
 							style={{
 								margin: "0 auto"
 							}}

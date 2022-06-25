@@ -3,7 +3,15 @@
 // https://nextjs.org/docs/api-reference/next.config.js/introduction
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
-const { withSentryConfig } = require("@kittr/logger/nextjs")
+const withTM = require("next-transpile-modules")([
+	"@kittr/config",
+	"@kittr/logger",
+	"@kittr/prisma",
+	"@kittr/types",
+	"@kittr/ui"
+])
+
+const { withSentryConfig } = require("@sentry/nextjs")
 
 const moduleExports = {
 	compiler: {
@@ -65,17 +73,8 @@ const moduleExports = {
 				source: "/players/:player/:game/overlay",
 				destination: "/channel/:player/:game/overlay",
 				permanent: true
-			},
+			}
 		]
-	},
-	webpackDevMiddleware: (config) => {
-		config.watchOptions = {
-			poll: 800,
-			aggregateTimeout: 300,
-			ignored: /node_modules/
-		}
-
-		return config
 	}
 }
 
@@ -92,4 +91,4 @@ const sentryWebpackPluginOptions = {
 
 // Make sure adding Sentry options is the last code to run before exporting, to
 // ensure that your source maps include changes from all other Webpack plugins
-module.exports = withSentryConfig(moduleExports, sentryWebpackPluginOptions)
+module.exports = withTM(withSentryConfig(moduleExports, sentryWebpackPluginOptions))

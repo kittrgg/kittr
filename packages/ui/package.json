@@ -2,22 +2,14 @@
 	"name": "@kittr/ui",
 	"private": true,
 	"version": "0.0.0",
-	"main": "./dist/index.js",
-	"types": "./dist/index.d.ts",
+	"main": "./src/components/index.ts",
 	"license": "MIT",
-	"files": [
-		"dist/**"
-	],
 	"scripts": {
 		"test": "jest --coverage",
 		"test:watch": "jest --watch --coverage",
-		"build": "tsup src/components/index.ts  --dts --inject ./react-import.js",
-		"dev": "tsup src/components/index.ts --watch --dts --inject ./react-import.js",
 		"lint:CURRENTLY_IGNORED": "eslint \"**/*.tsx\" --fix",
 		"clean": "rm -rf .turbo  && rm -rf dist && rm -rf coverage && rm -rf node_modules",
 		"type-check": "tsc --pretty --noEmit",
-		"dev:CURRENTLY_IGNORED": "vite",
-		"preview": "vite preview",
 		"storybook": "start-storybook -p 3002 --no-manager-cache",
 		"build-storybook": "build-storybook"
 	},

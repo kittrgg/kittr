@@ -1,8 +1,9 @@
-import { createController } from "@Server/createController"
-import * as ChannelsService from "@Server/services/channels"
-import { z } from "zod"
-import { TRPCError } from "@trpc/server"
 import { ChannelModel } from "@kittr/prisma/validator"
+import { createController } from "@Server/createController"
+import { authenticateUser } from "@Server/middlewares/authenticateUser"
+import * as ChannelsService from "@Server/services/channels"
+import { checkRole } from "@Server/services/users"
+import { z } from "zod"
 
 const listTopChannels = createController().query("", {
 	input: z.object({
@@ -37,18 +38,18 @@ const listLiveChannels = createController().query("", {
 	}
 })
 
-const getDashboardChannel = createController().query("", {
-	input: z.object({
-		id: z.string(),
-		urlSafeName: z.string()
-	}),
-	async resolve({ input }) {
-		const { id, urlSafeName } = input
-		const channel = await ChannelsService.getDashboardChannel({ id, urlSafeName })
+const getDashboardChannel = createController()
+	.middleware(authenticateUser)
+	.query("", {
+		input: z.string(),
+		async resolve({ ctx, input }) {
+			await checkRole({ firebaseUserId: ctx.user.uid, channelId: input, roles: ["ADMIN", "EDITOR", "OWNER"] })
 
-		return channel
-	}
-})
+			const channel = await ChannelsService.getDashboardChannel({ id: input })
+
+			return channel
+		}
+	})
 
 const getChannelProfile = createController().query("", {
 	input: z.string(),
@@ -59,56 +60,51 @@ const getChannelProfile = createController().query("", {
 	}
 })
 
-const createChannel = createController().mutation("", {
-	input: z
-		.string()
-		.min(1, "You must provide a display name.")
-		.max(25, "That channel name is too long. 25 characters or less."),
-	async resolve({ input: displayName }) {
-		const channel = await ChannelsService.createChannel(displayName)
+const createChannel = createController()
+	.middleware(authenticateUser)
+	.mutation("", {
+		input: z
+			.string()
+			.min(1, "You must provide a display name.")
+			.max(25, "That channel name is too long. 25 characters or less."),
+		async resolve({ ctx, input: displayName }) {
+			const channel = await ChannelsService.createChannel({ displayName, ownerFirebaseId: ctx.user.uid })
 
-		return channel
-	}
-})
-
-const updateChannel = createController().mutation("", {
-	input: z.object({
-		channelId: z.string(),
-		authToken: z.string().optional(),
-		data: ChannelModel.partial()
-	}),
-	async resolve({ input }) {
-		if (!input.authToken) {
-			throw new TRPCError({
-				code: "UNAUTHORIZED"
-			})
+			return channel
 		}
+	})
 
-		const channel = await ChannelsService.updateChannel({
-			authToken: input.authToken,
-			channelId: input.channelId,
-			data: input.data
-		})
-		return channel
-	}
-})
+const updateChannel = createController()
+	.middleware(authenticateUser)
+	.mutation("", {
+		input: z.object({
+			channelId: z.string(),
+			data: ChannelModel.partial()
+		}),
+		async resolve({ ctx, input }) {
+			await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["OWNER", "ADMIN"] })
 
-const deleteChannel = createController().mutation("", {
-	input: z.object({
-		channelId: z.string(),
-		authToken: z.string().optional()
-	}),
-	async resolve({ input }) {
-		if (!input.authToken) {
-			throw new TRPCError({
-				code: "UNAUTHORIZED"
+			const channel = await ChannelsService.updateChannel({
+				channelId: input.channelId,
+				data: input.data
 			})
+			return channel
 		}
+	})
 
-		const channel = await ChannelsService.deleteChannel({ authToken: input.authToken, channelId: input.channelId })
-		return channel
-	}
-})
+const deleteChannel = createController()
+	.middleware(authenticateUser)
+	.mutation("", {
+		input: z.object({
+			channelId: z.string()
+		}),
+		async resolve({ ctx, input: { channelId } }) {
+			await checkRole({ firebaseUserId: ctx.user.uid, channelId, roles: ["OWNER"] })
+
+			const channel = await ChannelsService.deleteChannel({ channelId })
+			return channel
+		}
+	})
 
 export const ChannelsController = {
 	listTopChannels,

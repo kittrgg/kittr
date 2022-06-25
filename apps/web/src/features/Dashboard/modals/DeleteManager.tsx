@@ -37,19 +37,6 @@ const DeleteManager = () => {
 		}
 	})
 
-	// const { mutate, isLoading } = useDashboardMutator(async () => {
-	// 	fetch
-	// 		.delete({
-	// 			url: `/api/manager/removeManager`,
-	// 			headers: { authorization: `Bearer: ${await getToken()}` },
-	// 			body: { uid: data.uid, channelId: channelData?.id }
-	// 		})
-	// 		.then(() => {
-	// 		})
-	// 		.catch(() => {
-	// 		})
-	// })
-
 	if (isLoading) {
 		return (
 			<Modal title="WAIT A MINUTE...">
@@ -74,7 +61,7 @@ const DeleteManager = () => {
 				<Button
 					design="white"
 					text={"YES, REMOVE " + (isSelf ? "MYSELF" : "THIS MANAGER")}
-					onClick={mutate}
+					onClick={() => mutate({ channelId: channelData?.id!, managerIdToDelete: data.id })}
 					style={{ marginLeft: "32px" }}
 					dataCy="confirm-manager-removal"
 				/>

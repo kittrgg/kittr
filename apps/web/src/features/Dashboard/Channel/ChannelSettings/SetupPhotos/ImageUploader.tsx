@@ -1,16 +1,14 @@
 import colors from "@Colors"
 import { Spinner, SVG } from "@Components/shared"
+import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
+import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { setModal } from "@Redux/slices/dashboard"
 import { useDispatch } from "@Redux/store"
-import { getToken } from "@Services/firebase/auth/getToken"
 import { deleteFile, download } from "@Services/firebase/storage"
 import { uploadWithHandlers } from "@Services/firebase/storage/uploadWithHandlers"
 import { paragraph } from "@Styles/typography"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
-import fetch from "@Fetch"
-import { isFetchError } from "@Utils/helpers/typeGuards"
-import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 
 interface Props {
 	slot: number
@@ -18,12 +16,43 @@ interface Props {
 
 const ImageUploader = ({ slot }: Props) => {
 	const dispatch = useDispatch()
-	const { data } = useDashboardChannel()
+	const { data, refetch: refetchDashboard } = useDashboardChannel()
 	const [image, setImage] = useState("")
 	const [isUploading, setIsUploading] = useState(false)
 	const [isHovered, setIsHovered] = useState(false)
 
 	const fileName = `${data?.id}-setup-photo-${slot}`
+
+	const { mutate: uploadImage } = useDashboardMutator({
+		path: "channels/profile/setup-photos/update",
+		opts: {
+			onSuccess: () => {
+				download(fileName, (path) => {
+					setIsUploading(false)
+					setImage(path)
+				})
+				refetchDashboard()
+			},
+			onError: () => {
+				setIsUploading(false)
+				dispatch(setModal({ type: "Error Notification", data: {} }))
+			}
+		}
+	})
+	const { mutate: removeImage } = useDashboardMutator({
+		path: "channels/profile/setup-photos/update",
+		opts: {
+			onSuccess: () => {
+				setIsUploading(false)
+				setImage("")
+				refetchDashboard()
+			},
+			onError: () => {
+				setIsUploading(false)
+				dispatch(setModal({ type: "Error Notification", data: {} }))
+			}
+		}
+	})
 
 	const handleUpload = async (e: any) => {
 		e.preventDefault()
@@ -37,21 +66,7 @@ const ImageUploader = ({ slot }: Props) => {
 				fileName,
 				maxWidthOrHeight: 500,
 				onSuccess: async () => {
-					const response = await fetch.post({
-						url: `/api/channel/meta/setupPhoto`,
-						body: { slot, channelId: data?.id, boolean: true },
-						headers: { authorization: `Bearer: ${await getToken()}` }
-					})
-
-					if (isFetchError(response)) {
-						setIsUploading(false)
-						dispatch(setModal({ type: "Error Notification", data: {} }))
-					} else {
-						download(fileName, (path) => {
-							setIsUploading(false)
-							setImage(path)
-						})
-					}
+					uploadImage({ slot, channelId: data?.id!, bool: true, channelProfileId: data?.profile?.id! })
 				},
 				onError: async () => {
 					setIsUploading(false)
@@ -64,23 +79,9 @@ const ImageUploader = ({ slot }: Props) => {
 	const handleDelete = async () => {
 		try {
 			setIsUploading(true)
-			const result = await deleteFile(fileName)
+			await deleteFile(fileName)
 
-			const response = await fetch.post({
-				url: `/api/channel/meta/setupPhoto`,
-				body: { slot, channelId: data?.id, boolean: false },
-				headers: { authorization: `Bearer: ${await getToken()}` }
-			})
-
-			if (result) {
-				if (isFetchError(response)) {
-					setIsUploading(false)
-					dispatch(setModal({ type: "Error Notification", data: {} }))
-				} else {
-					setIsUploading(false)
-					return setImage("")
-				}
-			}
+			removeImage({ slot, channelId: data?.id!, bool: false, channelProfileId: data?.profile?.id! })
 		} catch (error) {
 			setIsUploading(false)
 			dispatch(setModal({ type: "Error Notification", data: {} }))
@@ -88,7 +89,9 @@ const ImageUploader = ({ slot }: Props) => {
 	}
 
 	useEffect(() => {
-		if (data?.profile?.setupPhotos?.[String(slot) as "1" | "2" | "3" | "4"]) {
+		const photo = data?.profile?.setupPhotos?.find((photo) => photo.slot === slot)
+
+		if (photo?.exists) {
 			download(fileName, (path) => setImage(path))
 		}
 	}, [fileName, data?.profile?.setupPhotos, slot])

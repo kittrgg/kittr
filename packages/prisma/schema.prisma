@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["fullTextSearch"]
 }
 
@@ -20,10 +20,10 @@ datasource db {
 
 model Channel {
   id                 String                     @id @default(cuid())
-  createdAt          DateTime              @default(now())
-  displayName        String @unique
-  urlSafeName        String @unique
-  viewCount          Int @default(0)
+  createdAt          DateTime                   @default(now())
+  displayName        String                     @unique
+  urlSafeName        String                     @unique
+  viewCount          Int                        @default(0)
   previousUpdater    String?
   games              Game[]
   gameAffiliateCodes ChannelAffiliateCode[]
@@ -39,13 +39,13 @@ model Channel {
 model ChannelProfile {
   id              String              @id @default(cuid())
   brandColors     ChannelBrandColor[]
-  hasCoverPhoto   Boolean @default(false)
-  hasProfileImage Boolean @default(false)
-  youtubeAutoplay Boolean
+  hasCoverPhoto   Boolean             @default(false)
+  hasProfileImage Boolean             @default(false)
+  youtubeAutoplay Boolean             @default(false)
   channelPcSpecs  ChannelPcSpec[]
   affiliates      ChannelAffiliate[]
   setupPhotos     SetupPhoto[]
-  channel         Channel             @relation(fields: [channelId], references: [id])
+  channel         Channel             @relation(fields: [channelId], references: [id], onDelete: Cascade)
   channelId       String              @unique
 }
 
@@ -70,18 +70,24 @@ enum LinkProperty {
 }
 
 model ChannelLink {
-  id        String         @id @default(cuid())
+  id        String       @id @default(cuid())
   property  LinkProperty
   value     String
-  channel   Channel        @relation(fields: [channelId], references: [id])
+  channel   Channel      @relation(fields: [channelId], references: [id], onDelete: Cascade)
   channelId String
 }
 
 model ChannelPlan {
-  id                   String  @id @default(cuid())
-  stripeSubscriptionId String
-  type                 String  @default("basic")
-  channel              Channel @relation(fields: [id], references: [id])
+  id                   String          @id @default(cuid())
+  stripeSubscriptionId String?
+  type                 ChannelPlanType @default(BASIC)
+  channel              Channel         @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  channelId            String          @unique
+}
+
+enum ChannelPlanType {
+  PREMIUM
+  BASIC
 }
 
 model ChannelPcSpec {
@@ -103,10 +109,10 @@ model ChannelAffiliate {
 }
 
 model ChannelBrandColor {
-  id               String          @id @default(cuid())
+  id               String                 @id @default(cuid())
   type             ChannelBrandColorTypes
   value            String
-  channelProfile   ChannelProfile? @relation(fields: [channelProfileId], references: [id])
+  channelProfile   ChannelProfile?        @relation(fields: [channelProfileId], references: [id])
   channelProfileId String?
 }
 
@@ -117,10 +123,10 @@ enum ChannelBrandColorTypes {
 }
 
 model ChannelManager {
-  id         String  @id @default(cuid())
+  id         String              @id @default(cuid())
   firebaseId String
   role       ChannelManagerRoles
-  channel    Channel @relation(fields: [channelId], references: [id])
+  channel    Channel             @relation(fields: [channelId], references: [id], onDelete: Cascade)
   channelId  String
 }
 
@@ -131,19 +137,19 @@ enum ChannelManagerRoles {
 }
 
 model ChannelKitOverlay {
-  id                       String                  @id @default(cuid())
-  channel                  Channel                 @relation(fields: [channelId], references: [id])
-  channelId                String                  @unique
+  id                       String  @id @default(cuid())
+  channel                  Channel @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  channelId                String  @unique
   backgroundColorPrimary   String?
   backgroundColorSecondary String?
   textColorPrimary         String?
   textColorSecondary       String?
   textColorAccent          String?
   isOverlayVisible         Boolean @default(false)
-  primaryKit               Kit?                    @relation(name: "primaryKitOverlay", fields: [primaryKitId], references: [id])
-  primaryKitId             String?                 @unique
-  secondaryKit             Kit?                    @relation(name: "secondaryKitOverlay", fields: [secondaryKitId], references: [id])
-  secondaryKitId           String?                 @unique
+  primaryKit               Kit?    @relation(name: "primaryKitOverlay", fields: [primaryKitId], references: [id])
+  primaryKitId             String? @unique
+  secondaryKit             Kit?    @relation(name: "secondaryKitOverlay", fields: [secondaryKitId], references: [id])
+  secondaryKitId           String? @unique
 }
 
 model Kit {
@@ -157,9 +163,9 @@ model Kit {
   options                    KitOption[]
   game                       Game               @relation(fields: [gameId], references: [id])
   gameId                     String
-  base                    KitBase            @relation(fields: [baseId], references: [id])
-  baseId                  String
-  channel                    Channel            @relation(fields: [channelId], references: [id])
+  base                       KitBase            @relation(fields: [baseId], references: [id])
+  baseId                     String
+  channel                    Channel            @relation(fields: [channelId], references: [id], onDelete: Cascade)
   channelId                  String
   channelKitOverlayPrimary   ChannelKitOverlay? @relation(name: "primaryKitOverlay")
   channelKitOverlaySecondary ChannelKitOverlay? @relation(name: "secondaryKitOverlay")
@@ -170,15 +176,15 @@ model ChannelCustomGameCommand {
   command   String
   game      Game    @relation(fields: [gameId], references: [id])
   gameId    String
-  channel   Channel @relation(fields: [channelId], references: [id])
+  channel   Channel @relation(fields: [channelId], references: [id], onDelete: Cascade)
   channelId String
 }
 
 model ChannelAffiliateCode {
   id        String  @id @default(cuid())
-  channel   Channel @relation(fields: [channelId], references: [id])
+  channel   Channel @relation(fields: [channelId], references: [id], onDelete: Cascade)
   channelId String
-  game     Game @relation(fields: [gameId], references: [id])
+  game      Game    @relation(fields: [gameId], references: [id])
   gameId    String
   code      String
 }
@@ -186,12 +192,12 @@ model ChannelAffiliateCode {
 model KitOption {
   id             String  @id @default(cuid())
   gameId         String
-  game          Game    @relation(fields: [gameId], references: [id])
+  game           Game    @relation(fields: [gameId], references: [id])
   displayName    String
   slotKey        String
   orderPlacement Int
-  kitBase            KitBase @relation(fields: [kitBaseId], references: [id])
-  kitBaseId          String
+  kitBase        KitBase @relation(fields: [kitBaseId], references: [id])
+  kitBaseId      String
   channelKits    Kit[]
 }
 

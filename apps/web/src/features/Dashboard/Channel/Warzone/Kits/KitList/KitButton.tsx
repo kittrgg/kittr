@@ -1,12 +1,12 @@
 import styled from "styled-components"
 
-import { Kit, KitBase, KitOption } from "@kittr/prisma"
 import colors from "@Colors"
-import { useDispatch } from "@Redux/store"
-import { setModal, setActiveKit } from "@Redux/slices/dashboard"
 import { SVG } from "@Components/shared"
-import { useActiveKit } from "@Redux/slices/dashboard/selectors"
 import { useAllKitOptions } from "@Hooks/api/useAllKitOptions"
+import { Kit, KitBase, KitOption } from "@kittr/prisma"
+import { setActiveKit, setModal } from "@Redux/slices/dashboard"
+import { useActiveKit } from "@Redux/slices/dashboard/selectors"
+import { useDispatch } from "@Redux/store"
 
 interface Props {
 	favorite?: true

@@ -1,9 +1,9 @@
 import fetch from "@Fetch"
+import { prisma } from "@kittr/prisma"
 import { createHandler } from "@Middlewares/createHandler"
 import { buffer } from "micro"
 import type { NextApiRequest, NextApiResponse } from "next"
 import Stripe from "stripe"
-import { prisma } from "@kittr/prisma"
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, { apiVersion: "2020-08-27" })
 
@@ -39,7 +39,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 					data: {
 						plan: {
 							update: {
-								type: "premium"
+								type: "PREMIUM"
 							}
 						}
 					}
@@ -67,7 +67,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 					data: {
 						plan: {
 							update: {
-								type: "basic"
+								type: "BASIC"
 							}
 						}
 					}
@@ -99,7 +99,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 						data: {
 							plan: {
 								update: {
-									type: "basic"
+									type: "BASIC"
 								}
 							}
 						}
