@@ -3,13 +3,17 @@ import colors from "../../styles/colors"
 import { Title } from "../Title"
 
 const CARD_PRESETS = {
+	sm: {
+		width: "100%",
+		height: "100%",
+		padding: "24px",
+		borderRadius: "12px"
+	},
 	lg: {
 		width: "100%",
 		height: "100%",
-		backgroundColor: colors.darker,
 		padding: "24px",
-		borderRadius: "12px",
-		minHeigh: "300px"
+		borderRadius: "12px"
 	}
 }
 
@@ -19,6 +23,7 @@ interface Props extends BoxProps<any> {
 	title: string
 	icon?: string
 	iconAlt?: string
+	bgColor?: string
 }
 
 export const Card = ({
@@ -26,15 +31,17 @@ export const Card = ({
 	title,
 	icon,
 	iconAlt,
+	bgColor,
 	children,
 	sx,
 	...props
 }: Props) => {
 	const styles = preset ? CARD_PRESETS[preset] : CARD_PRESETS["lg"]
+	const cardBgColor = bgColor ? bgColor : colors.darker
 	// const { colors } = useMantineTheme()
 
 	return (
-		<Box sx={{ ...styles, ...sx }} {...props}>
+		<Box sx={{ ...styles, ...sx, backgroundColor: cardBgColor }} {...props}>
 			<Box
 				sx={() => ({
 					textAlign: "center"
