@@ -4,10 +4,10 @@ import { Title } from "../Title"
 
 const CARD_PRESETS = {
 	sm: {
-		width: "100%",
+		width: "275px",
 		height: "100%",
-		padding: "24px",
-		borderRadius: "12px"
+		padding: "20px",
+		borderRadius: "20px"
 	},
 	lg: {
 		width: "100%",
@@ -20,16 +20,18 @@ const CARD_PRESETS = {
 interface Props extends BoxProps<any> {
 	/** Use a preset defined styling property. */
 	preset?: keyof typeof CARD_PRESETS
-	title: string
+	title?: string
 	icon?: string
 	iconAlt?: string
 	bgColor?: string
+	center?: boolean
 }
 
 export const Card = ({
 	preset,
 	title,
 	icon,
+	center,
 	iconAlt,
 	bgColor,
 	children,
@@ -38,15 +40,12 @@ export const Card = ({
 }: Props) => {
 	const styles = preset ? CARD_PRESETS[preset] : CARD_PRESETS["lg"]
 	const cardBgColor = bgColor ? bgColor : colors.darker
+	const centerBool = center ? { textAling: "center" } : {}
 	// const { colors } = useMantineTheme()
 
 	return (
 		<Box sx={{ ...styles, ...sx, backgroundColor: cardBgColor }} {...props}>
-			<Box
-				sx={() => ({
-					textAlign: "center"
-				})}
-			>
+			<Box sx={() => centerBool}>
 				{icon && (
 					<Image
 						src={icon}
@@ -56,9 +55,11 @@ export const Card = ({
 						alt={iconAlt}
 					/>
 				)}
-				<Title preset="h3" mt="md">
-					{title}
-				</Title>
+				{title && (
+					<Title preset="h3" mt="md">
+						{title}
+					</Title>
+				)}
 			</Box>
 
 			{children}
