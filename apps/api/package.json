@@ -40,7 +40,6 @@
 		"ts-jest": "27.1.3",
 		"ts-node": "10.8.1",
 		"tsconfig-paths": "3.12.0",
-		"tsup": "6.1.0",
 		"typescript": "4.5.5"
 	}
 }
