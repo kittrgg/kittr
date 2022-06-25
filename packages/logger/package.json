@@ -1,10 +1,10 @@
 {
 	"name": "@kittr/logger",
 	"version": "0.0.0",
+	"main" :"index.ts",
 	"exports": {
-		".": "./index.ts",
-		"./node": "./node/index.ts",
-		"./nextjs": "./nextjs/index.ts"
+		"./node": "./src/node/index.ts",
+		"./nextjs": "./src/nextjs/index.ts"
 	},
 	"private": true,
 	"scripts": {
@@ -15,17 +15,10 @@
 		"type-check": "tsc --pretty --noEmit"
 	},
 	"devDependencies": {
-		"@kittr/config": "*",
 		"@types/jest": "27.4.0",
-		"@typescript-eslint/eslint-plugin": "5.12.1",
-		"@typescript-eslint/parser": "5.12.1",
-		"eslint-config-airbnb": "19.0.4",
-		"eslint-config-next": "12.0.8",
-		"eslint-plugin-only-warn": "1.0.3",
 		"eslint": "7.32.0",
-		"eslint-plugin-jest": "26.1.1",
+		"eslint-config-custom": "*",
 		"jest": "27.5.1",
-		"tsup": "6.1.2",
 		"ts-jest": "27.1.3",
 		"typescript": "4.5.3"
 	},
