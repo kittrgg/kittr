@@ -16,6 +16,7 @@ import * as Styled from "./style"
 import Testimonials from "./Testimonials"
 import Winners from "./Winners"
 import colors from "@Colors"
+import { Button } from "@Components/shared"
 
 interface Props {
 	totalNumberOfKits: number
@@ -38,18 +39,17 @@ const WhyKittr = ({ totalNumberOfKits }: Props) => {
 				<Testimonials />
 				<ContactUs />
 				<CallToAction marginTop="32px" header="get kittd." />
-				<div style={{ marginBottom: "32px", textAlign: "center" }}>
-					<Link href={Routes.ROOT} passHref>
-						<Styled.LinkButton
-							design="transparent"
-							target="_blank"
-							rel="noopener no referrer"
-							style={{ marginTop: "0" }}
-						>
-							VISIT SITE
-						</Styled.LinkButton>
-					</Link>
-				</div>
+				<Center>
+					<Button
+						design="transparent"
+						as="a"
+						href={Routes.ROOT}
+						target="_blank"
+						rel="noopener noreferrer"
+						text={"VISIT SITE"}
+						style={{ width: "200px" }}
+					/>
+				</Center>
 			</div>
 		</Box>
 	)
