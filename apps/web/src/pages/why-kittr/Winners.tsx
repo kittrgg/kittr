@@ -8,24 +8,28 @@ import { Box, Center, Grid, Stack } from "@mantine/core"
 
 const WINNERS = [
 	{
+		id: 1,
 		icon: "/media/icons/player.svg",
 		iconAlt: "player Icon",
 		title: "PLAYERS",
 		text: "Increased professionalism, a sleeker viewer experience, and more YouTube views if you're into them. Yup. Let kittr help your channel reach its potential with about 15 minutes of effort from you or a mod."
 	},
 	{
+		id: 2,
 		icon: "/media/icons/mod.svg",
 		iconAlt: "Mod Icon",
 		title: "MODS",
 		text: "kittr makes it easier to create, edit, and collaborate live easier than a Google Sheet. No typos, no trying to style it up, and comically easy chat command updates. We took care of ALL of that for you. Now get back to wrangling chat!"
 	},
 	{
+		id: 3,
 		icon: "/media/icons/viewer.svg",
 		iconAlt: "Viewer Icon",
 		title: "VIEWERS",
 		text: "kittr is easier to read than a Google Sheet. It's also cooler to look at. And it makes it easier to watch your Youtube content if you have some. Viewers from all corners of Twitch have told us they like kittr more than any other option to find out about loadouts."
 	},
 	{
+		id: 4,
 		icon: "/media/icons/us.svg",
 		iconAlt: "Us Icon",
 		title: "US",
@@ -44,7 +48,7 @@ const Winners = ({ ...props }) => {
 			<Grid gutter={20}>
 				{WINNERS.map((winner) => {
 					return (
-						<Grid.Col sm={6} lg={3}>
+						<Grid.Col key={winner.id} sm={6} lg={3}>
 							<Card title={winner.title} icon={winner.icon} iconAlt={winner.iconAlt}>
 								<Text preset="lg" mt="md">
 									{winner.text}
