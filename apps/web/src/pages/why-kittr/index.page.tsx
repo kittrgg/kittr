@@ -38,7 +38,7 @@ const WhyKittr = ({ totalNumberOfKits }: Props) => {
 				<Winners />
 				<Testimonials />
 				<ContactUs />
-				<CallToAction marginTop="32px" header="get kittd." />
+				<CallToAction marginTop="32px" marginBottom="32px" header="get kittd." />
 				<Center>
 					<Button
 						design="transparent"

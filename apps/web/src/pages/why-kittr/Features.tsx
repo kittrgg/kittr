@@ -1,17 +1,17 @@
 import { Card, Title, Text } from "@kittr/ui"
-import { Center, Grid, Stack } from "@mantine/core"
+import { Box, Center, Grid, Stack } from "@mantine/core"
 import { Routes } from "@Utils/lookups/routes"
 import CallToAction from "./CallToAction"
 
 /** Features that are currently a part of the platform */
 const Features = () => {
 	return (
-		<>
+		<Box mb={40}>
 			<Center pb={20} pt={40}>
 				<Title preset="h1">FEATURES</Title>
 			</Center>
 
-			<Grid gutter={30} pb={20}>
+			<Grid gutter={30} mb={40}>
 				<Grid.Col sm={6} lg={3}>
 					<Card title={"Kit Displayr"} icon={"/media/icons/displayr.svg"} iconAlt="Displayr Icon">
 						<Text preset="lg" mt="md">
@@ -54,7 +54,7 @@ const Features = () => {
 				</Grid.Col>
 			</Grid>
 			<CallToAction marginBottom="60px" header="channel bettr with kittr." />
-		</>
+		</Box>
 	)
 }
 
