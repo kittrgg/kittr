@@ -5,6 +5,7 @@ import { Title } from "../Title"
 const CARD_PRESETS = {
 	lg: {
 		width: "100%",
+		height: "100%",
 		backgroundColor: colors.darker,
 		padding: "24px",
 		borderRadius: "12px",
@@ -33,10 +34,10 @@ export const Card = ({
 	// const { colors } = useMantineTheme()
 
 	return (
-		<Box sx={{ ...styles, ...sx, textAlign: "center" }} {...props}>
+		<Box sx={{ ...styles, ...sx }} {...props}>
 			<Box
 				sx={() => ({
-					width: "100%"
+					textAlign: "center"
 				})}
 			>
 				{icon && (
@@ -48,10 +49,11 @@ export const Card = ({
 						alt={iconAlt}
 					/>
 				)}
+				<Title preset="h3" mt="md">
+					{title}
+				</Title>
 			</Box>
-			<Title preset="h3" mt="md">
-				{title}
-			</Title>
+
 			{children}
 		</Box>
 	)
