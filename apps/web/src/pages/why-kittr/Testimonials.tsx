@@ -1,6 +1,8 @@
 import * as Styled from "./style"
 import styled from "styled-components"
 import colors from "@Colors"
+import { Card, Text, Title } from "@kittr/ui"
+import { Box, Center, Grid, ScrollArea, Stack } from "@mantine/core"
 
 const TESTIMONIALS = [
 	{
@@ -50,93 +52,56 @@ const TESTIMONIALS = [
 	}
 ]
 
-const LastSection = ({ ...props }) => {
+const Testimonials = ({ ...props }) => {
 	return (
-		<section>
-			<Styled.H2>TESTIMONIALS</Styled.H2>
-			<Styled.P>STILL DON'T BELIEVE US? HERE'S WHAT THE COMMUNITY SAYS.</Styled.P>
-			<Wrapper>
-				<Scrolltainer>
+		<Box mb={20}>
+			<Stack pb={10} align="center">
+				<Title preset="h1">TESTIMONIALS</Title>
+
+				<Title preset="h2" style={{ color: colors.lighter }} mb={20}>
+					STILL DON'T BELIEVE US? HERE'S WHAT THE COMMUNITY SAYS.
+				</Title>
+			</Stack>
+
+			<Box
+				sx={() => ({
+					"overflowY": "hidden",
+					"overflowX": "scroll",
+					"-webkit-overflow-scrolling": "touch",
+
+					"&::-webkit-scrollbar": {
+						width: "8px"
+					},
+					"&::-webkit-scrollbar-track": {
+						background: "transparent"
+					},
+
+					"&::-webkit-scrollbar-thumb": {
+						backgroundColor: colors.lightest,
+						border: "5px solid transparent"
+					}
+				})}
+			>
+				<Grid gutter={10} style={{ width: "2700px" }} p={10}>
 					{TESTIMONIALS.map(({ name, role, quote }) => {
 						return (
-							<Item key={name}>
-								<Name>{name}</Name>
-								<Role>{role}</Role>
-								<Quote>{quote}</Quote>
-							</Item>
+							<Box pb={20} style={{ maxHeight: "250px" }}>
+								<Card preset="sm" m={10} bgColor={colors.dark}>
+									<Title preset="h4">{name}</Title>
+
+									<Text preset="sm italic" color={colors.lighter}>
+										{role}
+									</Text>
+
+									<Text preset="md">{quote}</Text>
+								</Card>
+							</Box>
 						)
 					})}
-				</Scrolltainer>
-			</Wrapper>
-		</section>
+				</Grid>
+			</Box>
+		</Box>
 	)
 }
 
-export default LastSection
-
-// Styled Components
-
-const Wrapper = styled.div`
-	width: 100%;
-	margin-bottom: 40px;
-	overflow: hidden;
-`
-
-const Scrolltainer = styled.div`
-	display: flex;
-	flex-direction: row;
-	overflow-y: auto;
-	-webkit-overflow-scrolling: touch;
-
-	&::-webkit-scrollbar {
-		width: 8px;
-	}
-
-	&::-webkit-scrollbar-track {
-		background: transparent;
-	}
-
-	&::-webkit-scrollbar-thumb {
-		background-color: ${colors.lightest};
-		border: 5px solid transparent;
-	}
-`
-
-const Item = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	justify-content: flex-start;
-	min-width: 275px;
-	max-width: 275px;
-	height: 200px;
-	margin: 18px 10px;
-	padding: 20px;
-	background-color: ${colors.dark};
-	border-radius: 20px;
-	overflow: hidden;
-`
-
-const Name = styled.p`
-	font-family: "Barlow Condensed", serif;
-	font-size: 22px;
-	font-weight: 600;
-	letter-spacing: 1px;
-`
-
-const Role = styled.p`
-	margin-top: 6px;
-	font-style: italic;
-	font-size: 14px;
-	color: ${colors.lighter};
-`
-
-const Quote = styled.p`
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	font-size: 18px;
-	letter-spacing: 1px;
-`
+export default Testimonials
