@@ -1,38 +1,5 @@
 {
-	"compilerOptions": {
-		"target": "es5",
-		"lib": ["dom", "dom.iterable", "esnext"],
-		"allowJs": true,
-		"skipLibCheck": true,
-		"strict": true,
-		"forceConsistentCasingInFileNames": true,
-		"noEmit": true,
-		"esModuleInterop": true,
-		"module": "esnext",
-		"moduleResolution": "node",
-		"resolveJsonModule": true,
-		"removeComments": true,
-		"isolatedModules": true,
-		"jsx": "preserve",
-		"incremental": true,
-		"baseUrl": "./src",
-		"paths": {
-			"@Colors": ["styles/colors"],
-			"@Components/*": ["components/*"],
-			"@Features/*": ["features/*"],
-			"@Hooks/*": ["hooks/*"],
-			"@Models/*": ["services/mongodb/models/*"],
-			"@Middlewares/*": ["utils/middlewares/*"],
-			"@Routes/*": ["utils/routes/*"],
-			"@Redux/*": ["redux/*"],
-			"@Services/*": ["services/*"],
-			"@Styles/*": ["styles/*"],
-			"@Utils/*": ["utils/*"],
-			"@Fetch": ["utils/helpers/fetch"],
-			"@Types/*": ["types/*"],
-			"@Server/*": ["server/*"]
-		}
-	},
+	"extends": "tsconfig/nexjs.json",
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
 	"exclude": ["node_modules"]
 }

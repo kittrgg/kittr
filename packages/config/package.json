@@ -1,23 +1,14 @@
 {
-	"name": "@kittr/config",
-	"version": "0.1.1",
+	"name": "eslint-config-custom",
+	"version": "0.0.0",
 	"license": "MIT",
-	"files": [
-		"eslint/common.js",
-		"eslint/next.js",
-		"tsconfig/base.json",
-		"tsconfig/nextjs.json"
-	],
-	"scripts": {
-		"clean": "rm -rf node_modules"
-	},
+	"main": "index.js",
 	"devDependencies": {
-		"@typescript-eslint/eslint-plugin": "5.12.1",
-		"@typescript-eslint/parser": "5.12.1",
-		"eslint": "8.10.0",
-		"eslint-config-airbnb": "19.0.4",
 		"eslint-config-next": "12.0.8",
-		"eslint-plugin-jest": "26.1.1",
-		"eslint-plugin-only-warn": "1.0.3"
+		"eslint-config-prettier": "8.5.0",
+		"eslint-plugin-react": "7.28.0"
+	},
+	"publishConfig": {
+		"access": "public"
 	}
 }

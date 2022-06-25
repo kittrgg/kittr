@@ -2,14 +2,12 @@
 	"$schema": "https://json.schemastore.org/tsconfig",
 	"display": "Default",
 	"compilerOptions": {
-		"target": "es6",
-		"lib": ["esnext"],
 		"composite": false,
 		"declaration": true,
+		"declarationMap": true,
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
 		"inlineSources": false,
-		"incremental": true,
 		"isolatedModules": true,
 		"moduleResolution": "node",
 		"noUnusedLocals": false,
@@ -18,12 +16,5 @@
 		"skipLibCheck": true,
 		"strict": true
 	},
-	"exclude": [
-		"**/node_modules",
-		".turbo",
-		"coverage",
-		"build",
-		"**/*.test.ts",
-		"**/*.spec.ts"
-	]
+	"exclude": ["node_modules"]
 }
