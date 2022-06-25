@@ -20,6 +20,7 @@
 		"@kittr/logger": "*",
 		"@kittr/prisma": "*",
 		"@kittr/types": "*",
+		"@kittr/ui": "*",
 		"@mantine/core": "^4.2.9",
 		"@mantine/hooks": "^4.2.9",
 		"@mantine/next": "^4.2.9",

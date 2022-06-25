@@ -1,4 +1,6 @@
 import FallbackPage from "@Components/layouts/FallbackPage"
+import { MantineProvider } from "@kittr/ui"
+import { Global } from "@mantine/core"
 import { setFallbackLoader } from "@Redux/slices/global"
 import { store, useDispatch, useSelector } from "@Redux/store"
 import GlobalStyles from "@Styles/globals"
@@ -44,7 +46,25 @@ const MyApp = ({ Component, pageProps }: any) => {
 	}, [router.events, dispatch])
 
 	return (
-		<>
+		<MantineProvider>
+			<Global
+				styles={() => ({
+					"body": {
+						// This is because the desktop footers for Venatus try to buy themselves space.
+						// We will handle this manually if we need to.
+						marginBottom: `0 !important`
+					},
+					// Make sure that Venatus ads are always a minimum of 320px wide.
+					'[data-ref="vm-preloader"]': {
+						minWidth: `320px !important`
+					},
+					// // This hides a warning about how you are using firebase emulators
+					".firebase-emulator-warning": {
+						display: "none"
+					}
+				})}
+			/>
+
 			{router.route === Routes.CHANNEL.GAME.createOverlayPath("[channel]", "[game]") ? (
 				<OverlayStyles />
 			) : (
@@ -53,7 +73,7 @@ const MyApp = ({ Component, pageProps }: any) => {
 			{isFallback && <FallbackPage />}
 			{!isFallback && <Component {...pageProps} />}
 			<ReactQueryDevtools />
-		</>
+		</MantineProvider>
 	)
 }
 
@@ -99,5 +119,3 @@ export default withTRPC<AppRouter>({
 	 */
 	// ssr: true
 })(AppWrap)
-
-// export default AppWrap

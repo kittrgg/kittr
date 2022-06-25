@@ -15,7 +15,7 @@ const Footer = ({ paddingRight }: Props) => {
 	const isLoggedIn = !!user?.uid
 
 	return (
-		<Container style={{ paddingRight: paddingRight }}>
+		<Container style={{ paddingRight: paddingRight, marginTop: "auto" }}>
 			<LinkList>
 				<Link href={Routes.ROOT} passHref>
 					<StyledLink>HOME</StyledLink>

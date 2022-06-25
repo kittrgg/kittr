@@ -1,6 +1,7 @@
 import colors from "@Colors"
-import { ChannelAvatarList, GameList, SideScroller } from "@Components/shared"
+import { ChannelAvatarList, GameList } from "@Components/shared"
 import { Channel, ChannelLink, ChannelProfile, Game } from "@kittr/prisma"
+import { Section, SideScroller } from "@kittr/ui"
 import { header2 } from "@Styles/typography"
 import { Routes } from "@Utils/lookups/routes"
 import Link from "next/link"
@@ -35,51 +36,52 @@ const Body = ({ games, popularChannels, risingStars, liveChannels }: Props) => {
 
 	return (
 		<Container>
-			<SectionHeader>
-				<H2>GAMES</H2>
-				<Link href={Routes.GAMES.LIST} passHref>
-					<StyledLink>SEE ALL</StyledLink>
-				</Link>
-			</SectionHeader>
+			<Section
+				title="GAMES"
+				transparent
+				action={
+					<Link href={Routes.GAMES.LIST} passHref>
+						<StyledLink>SEE ALL</StyledLink>
+					</Link>
+				}
+			>
+				<SideScroller>
+					{games && (
+						<GameList data={games} onClick={(elem) => router.push(Routes.GAMES.createPath(elem.urlSafeName))} />
+					)}
+				</SideScroller>
+			</Section>
 
-			<SideScroller childMargin="20px">
-				{games && <GameList data={games} onClick={(elem) => router.push(Routes.GAMES.createPath(elem.urlSafeName))} />}
-			</SideScroller>
-
-			{liveChannels && liveChannels.length > 0 && (
-				<>
-					<SectionHeader style={{ marginTop: "60px" }}>
-						<H2>LIVE NOW</H2>
-						<Link href={Routes.CHANNEL.LIST} passHref>
-							<StyledLink>SEE ALL</StyledLink>
-						</Link>
-					</SectionHeader>
-				</>
-			)}
-
-			<SideScroller wrapperStyles={{ margin: "12px 0" }} childMargin="0 10px">
+			<SideScroller
+				title="LIVE NOW"
+				action={
+					<Link href={Routes.CHANNEL.LIST} passHref>
+						<StyledLink>SEE ALL</StyledLink>
+					</Link>
+				}
+			>
 				{liveChannels && <ChannelAvatarList channels={liveChannels} onClick={routeChannel} isLive />}
 			</SideScroller>
 
-			<SectionHeader>
-				<H2>TRENDING CHANNELS</H2>
-				<Link href={Routes.CHANNEL.LIST} passHref>
-					<StyledLink>SEE ALL</StyledLink>
-				</Link>
-			</SectionHeader>
-
-			<SideScroller wrapperStyles={{ margin: "12px 0" }} childMargin="0 10px">
+			<SideScroller
+				title="TRENDING CHANNELS"
+				action={
+					<Link href={Routes.CHANNEL.LIST} passHref>
+						<StyledLink>SEE ALL</StyledLink>
+					</Link>
+				}
+			>
 				{popularChannels && <ChannelAvatarList channels={popularChannels} onClick={routeChannel} />}
 			</SideScroller>
 
-			<SectionHeader style={{ marginTop: "60px" }}>
-				<H2>RISING STARS</H2>
-				<Link href={Routes.CHANNEL.LIST} passHref>
-					<StyledLink>SEE ALL</StyledLink>
-				</Link>
-			</SectionHeader>
-
-			<SideScroller wrapperStyles={{ margin: "12px 0" }} childMargin="0 10px">
+			<SideScroller
+				title="RISING STARS"
+				action={
+					<Link href={Routes.CHANNEL.LIST} passHref>
+						<StyledLink>SEE ALL</StyledLink>
+					</Link>
+				}
+			>
 				{risingStars && <ChannelAvatarList channels={risingStars} onClick={routeChannel} />}
 			</SideScroller>
 		</Container>

@@ -1,39 +1,52 @@
 version: 2
 updates:
-  # Root
+  # root
   - package-ecosystem: "npm"
     directory: "/"
     commit-message:
-      prefix: "npm"
+      prefix: "yarn"
       include: "scope"
-    target-branch: "dependabot"
+    target-branch: "develop"
     schedule:
       interval: "daily"
-  # API
+
+  # api
   - package-ecosystem: "npm"
     directory: "/apps/api"
     commit-message:
-      prefix: "npm"
+      prefix: "yarn"
       include: "scope"
-    target-branch: "dependabot"
+    target-branch: "develop"
     schedule:
       interval: "daily"
-  # Cypress
+
+  # docs
   - package-ecosystem: "npm"
-    directory: "/lib/e2e/cypress"
+    directory: "/apps/docs"
     commit-message:
-      prefix: "npm"
+      prefix: "yarn"
       include: "scope"
-    target-branch: "dependabot"
+    target-branch: "develop"
     schedule:
       interval: "daily"
+
   # web
   - package-ecosystem: "npm"
     directory: "/apps/web"
     commit-message:
-      prefix: "npm"
+      prefix: "yarn"
       include: "scope"
-    target-branch: "dependabot"
+    target-branch: "develop"
+    schedule:
+      interval: "daily"
+
+  # Cypress
+  - package-ecosystem: "npm"
+    directory: "/lib/e2e/cypress"
+    commit-message:
+      prefix: "yarn"
+      include: "scope"
+    target-branch: "develop"
     schedule:
       interval: "daily"
 
@@ -41,9 +54,9 @@ updates:
   - package-ecosystem: "npm"
     directory: "/packages/config"
     commit-message:
-      prefix: "npm"
+      prefix: "yarn"
       include: "scope"
-    target-branch: "dependabot"
+    target-branch: "develop"
     schedule:
       interval: "daily"
 
@@ -51,9 +64,19 @@ updates:
   - package-ecosystem: "npm"
     directory: "/packages/logger"
     commit-message:
-      prefix: "npm"
+      prefix: "yarn"
       include: "scope"
-    target-branch: "dependabot"
+    target-branch: "develop"
+    schedule:
+      interval: "daily"
+
+  # prisma
+  - package-ecosystem: "npm"
+    directory: "/packages/prisma"
+    commit-message:
+      prefix: "yarn"
+      include: "scope"
+    target-branch: "develop"
     schedule:
       interval: "daily"
 
@@ -61,8 +84,8 @@ updates:
   - package-ecosystem: "npm"
     directory: "/packages/ui"
     commit-message:
-      prefix: "npm"
+      prefix: "yarn"
       include: "scope"
-    target-branch: "dependabot"
+    target-branch: "develop"
     schedule:
       interval: "daily"
