@@ -1,7 +1,8 @@
 import PageWrapper from "@Components/layouts/PageWrapper"
 import ContactUs from "@Components/shared/ContactUs"
 import Head from "@Components/shared/Head"
-import { BackgroundImage, Box } from "@mantine/core"
+import { Title } from "@kittr/ui"
+import { BackgroundImage, Box, Center, Stack } from "@mantine/core"
 import { getTotalKitsQuery } from "@Services/orm/queries/kits/total"
 import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
 import { Routes } from "@Utils/lookups/routes"
@@ -14,6 +15,7 @@ import HowItWorks from "./HowItWorks"
 import * as Styled from "./style"
 import Testimonials from "./Testimonials"
 import Winners from "./Winners"
+import colors from "@Colors"
 
 interface Props {
 	totalNumberOfKits: number
@@ -34,8 +36,6 @@ const WhyKittr = ({ totalNumberOfKits }: Props) => {
 				<HowItWorks />
 				<Winners />
 				<Testimonials />
-				<Styled.H2>CONTACT US</Styled.H2>
-				<Styled.P>STILL HAVE QUESTIONS? WE'VE GOT YOUR BACK.</Styled.P>
 				<ContactUs />
 				<CallToAction marginTop="32px" header="get kittd." />
 				<div style={{ marginBottom: "32px", textAlign: "center" }}>
