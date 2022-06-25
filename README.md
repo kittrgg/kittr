@@ -17,10 +17,10 @@
 git clone https://github.com/kittrgg/kittr.git
 ```
 
-2. Checkout the mantine branch
+2. Checkout the migration branch
 
 ```
-git checkout mantine
+git checkout migration
 ```
 
 3. Let's get your environment variables set up. Navigate in your file explorer to `/scripts/createEnvironment/inputs`.
