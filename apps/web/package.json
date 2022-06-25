@@ -69,6 +69,7 @@
 		"dotenv": "16.0.0",
 		"eslint": "8.10.0",
 		"eslint-config-next": "12.1.0",
+		"next-transpile-modules": "9.0.0",
 		"typescript": "4.5.5"
 	}
 }

@@ -3,6 +3,8 @@
 // https://nextjs.org/docs/api-reference/next.config.js/introduction
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
+const withTM = require("next-transpile-modules")(["@kittr/config", "@kittr/logger", "@kittr/prisma", "@kittr/types"])
+
 const { withSentryConfig } = require("@kittr/logger/nextjs")
 
 const moduleExports = {
@@ -65,7 +67,7 @@ const moduleExports = {
 				source: "/players/:player/:game/overlay",
 				destination: "/channel/:player/:game/overlay",
 				permanent: true
-			},
+			}
 		]
 	},
 	webpackDevMiddleware: (config) => {
