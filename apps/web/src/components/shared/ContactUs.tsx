@@ -1,9 +1,10 @@
-import { Box, Center, createStyles, Grid, Stack, UnstyledButton } from "@mantine/core"
+import { Box, Grid, Stack } from "@mantine/core"
 
 import colors from "@Colors"
 import { Routes } from "@Utils/lookups/routes"
-import { Button, Card, Title } from "@kittr/ui"
+import { Card, Title } from "@kittr/ui"
 import Image from "next/image"
+import Button from "./Button"
 
 const PROPERTIES = [
 	{
@@ -47,8 +48,22 @@ export const ContactUs = ({ ...props }) => {
 								<Stack align={"center"}>
 									<Image src={property.image} alt={property.imageAlt} width={75} height={75} />
 									<Title preset="h3">{property.title}</Title>
-									<Button>{property.primaryText}</Button>
-									<Button>{property.secondaryText}</Button>
+									<Button
+										design="transparent"
+										as="a"
+										href={property.primaryLink}
+										target="_blank"
+										rel="noopener noreferrer"
+										text={property.primaryText}
+									/>
+									<Button
+										design="transparent"
+										as="a"
+										href={property.secondaryLink}
+										target="_blank"
+										rel="noopener noreferrer"
+										text={property.secondaryText}
+									/>
 								</Stack>
 							</Card>
 						</Grid.Col>
