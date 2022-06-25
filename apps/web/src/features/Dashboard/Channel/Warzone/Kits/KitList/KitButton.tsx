@@ -33,13 +33,14 @@ const KitButton = ({ favorite, kit }: Props) => {
 		<Button
 			key={kit.id}
 			active={activeKit.id == kit.id}
-			onClick={() =>
+			onClick={() =>	{
 				dispatch(
 					setActiveKit({
 						...kit,
 						options: kit.options.map((opt) => allOptions!.find((allOption) => allOption.id === opt.id)!)
 					})
 				)
+ }
 			}
 		>
 			<p style={{ maskImage: "linear-gradient(to right, black 65%, transparent 92%, transparent 100%)" }}>{title}</p>

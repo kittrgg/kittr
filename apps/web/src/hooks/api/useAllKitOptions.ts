@@ -1,9 +1,7 @@
-import { KitOption } from "@kittr/prisma"
-import { useQuery } from "react-query"
-import fetch from "@Fetch"
+import { trpc } from "@Server/createHooks"
 
 export const useAllKitOptions = () => {
-	const url = `/api/kits/allOptions`
-	const result = useQuery<KitOption[]>(url, async () => fetch.get({ url }), { staleTime: 600000 })
-	return result
+	const query = trpc.useQuery([ "kits/options/list" ])
+	return query
+
 }

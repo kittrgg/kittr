@@ -7,7 +7,7 @@ interface KitUpdates extends Kit {
 	options: KitOption[]
 }
 
-interface KitWithOptionalId extends Omit<KitUpdates, "id"> {
+export interface KitWithOptionalId extends Omit<KitUpdates, "id"> {
 	id?: string
 }
 

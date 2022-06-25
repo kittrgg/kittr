@@ -1,7 +1,6 @@
 import colors from "@Colors"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useAllKitBases } from "@Hooks/api/useAllKitBases"
-import { useUser } from "@Hooks/useUser"
 import { KitWithOptionalId } from "@kittr/types/kits"
 import { clearKitEditor, resetToInitialKit, setModal } from "@Redux/slices/dashboard"
 import { useActiveKit, useChannelData, useInitialKit, useModal } from "@Redux/slices/dashboard/selectors"
@@ -16,7 +15,6 @@ const EditorSnackbar = () => {
 	const initialKit = useInitialKit()
 	const activeKit = useActiveKit()
 	const { data: channelData } = useChannelData()
-	const user = useUser()
 	const modal = useModal()
 	const { data: allKitBases } = useAllKitBases()
 	const { mutate, isLoading } = useDashboardMutator({
@@ -33,7 +31,6 @@ const EditorSnackbar = () => {
 				let index = channelData?.kits.findIndex((kit) => kit.id === activeKit.id) ?? -1 // -1 means there's no kit
 
 				if (!kitArr) {
-					console.log("Disallowed.")
 					return
 				}
 
