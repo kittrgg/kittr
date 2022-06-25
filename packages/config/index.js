@@ -4,6 +4,7 @@ module.exports = {
 		"@next/next/no-html-link-for-pages": "off",
 		"@next/next/no-img-element": "off",
 		"react/jsx-key": "off",
-		"semi": ["warn", "never"]
+		"semi": ["warn", "never"],
+		"no-console": 1
 	}
 }

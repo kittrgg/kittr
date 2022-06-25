@@ -7,6 +7,7 @@ import { channelsProfileImageRouter } from "./image"
 import { channelsPcSpecsRouter } from "./pcSpecs"
 import { channelsSetupPhotosRouter } from "./setupPhotos"
 import { youtubeAutoplayRouter } from "./youtubeAutoplay"
+import { channelsProfileCoverPhotoRouter } from "./coverPhoto"
 
 export const channelsProfileRouter = createRouter()
 	.merge("affiliates/", channelsAffiliatesRouter)
@@ -16,4 +17,5 @@ export const channelsProfileRouter = createRouter()
 	.merge("brand-color/", channelsProfileBrandColorsRouter)
 	.merge("setup-photos/", channelsSetupPhotosRouter)
 	.merge("image/", channelsProfileImageRouter)
+	.merge("cover-photo/", channelsProfileCoverPhotoRouter)
 	.merge("get", ChannelsProfileController.getChannelProfile)

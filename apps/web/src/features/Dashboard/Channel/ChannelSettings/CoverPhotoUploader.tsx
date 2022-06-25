@@ -1,19 +1,15 @@
 import { useEffect, useState } from "react"
 import styled from "styled-components"
 
-import { NextClientEndpointError } from "@kittr/types"
 import colors from "@Colors"
 import { uploadWithHandlers } from "@Services/firebase/storage/uploadWithHandlers"
 import { download } from "@Services/firebase/storage/download"
-import { getToken } from "@Services/firebase/auth/getToken"
 import { useDispatch } from "@Redux/store"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useCoverPhoto } from "@Redux/slices/dashboard/selectors"
 import { Spinner, SVG, Button } from "@Components/shared"
 import { deleteFile } from "@Services/firebase/storage"
-import fetch from "@Fetch"
-import { isFetchError } from "@Utils/helpers/typeGuards"
-import { Channel } from "@kittr/prisma"
+import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 
 const CoverPhotoUploader = () => {
 	const dispatch = useDispatch()
@@ -24,35 +20,39 @@ const CoverPhotoUploader = () => {
 
 	const fileName = `${data?.id}-profile-cover-photo`
 
+	const { mutate } = useDashboardMutator({
+		path: "channels/profile/cover-photo/update",
+		opts: {
+			onSuccess: (data) => {
+				if (data?.profile?.hasCoverPhoto) {
+					download(data?.id, (path) => {
+						setIsUploading(false)
+					})
+				}
+			},
+			onError: () => {
+				setIsUploading(false)
+				dispatch(setModal({ type: "Error Notification", data: {} }))
+			}
+		}
+	})
+
 	const handleUpload = async (e: any) => {
 		e.preventDefault()
 		setIsUploading(true)
+
+		if (!data?.id) return
 
 		const imageFile = e.target.files[0]
 
 		if (imageFile) {
 			uploadWithHandlers({
-				imageFile,
 				fileName,
-				maxWidthOrHeight: 2500,
+				imageFile,
 				onSuccess: async () => {
-					const response = await fetch.post<Channel | NextClientEndpointError>({
-						url: `/api/channel/meta/coverPhoto`,
-						headers: { authorization: `Bearer: ${await getToken()}` },
-						body: { hasCoverPhoto: true, channelId: data?.id }
-					})
-
-					if (isFetchError(response)) {
-						setIsUploading(false)
-						dispatch(setModal({ type: "Error Notification", data: {} }))
-					} else {
-						download(fileName, (path) => {
-							setIsUploading(false)
-							setImage(path)
-						})
-					}
+					mutate({ channelId: data?.id!, hasCoverPhoto: true  } )
 				},
-				onError: async () => {
+				onError: () => {
 					setIsUploading(false)
 					dispatch(setModal({ type: "Error Notification", data: {} }))
 				}
@@ -67,23 +67,20 @@ const CoverPhotoUploader = () => {
 				setImage(path)
 			})
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isUploading])
+	}, [isUploading,hasCoverPhoto,fileName ])
 
 	const handleDelete = async (e: any) => {
 		setIsUploading(true)
 		setImage("")
-		const deleted = await deleteFile(fileName)
+		await deleteFile({
+			id: fileName,
+			onSuccess: () => {
+					mutate({ channelId: data?.id!, hasCoverPhoto: false  })
+		},
+		onError: (error)=> {
+					dispatch(setModal({ type: "Error Notification", data: {} }))
+		} })
 
-		const response = await fetch.post({
-			url: `/api/channel/meta/coverPhoto`,
-			headers: { authorization: `Bearer: ${await getToken()}` },
-			body: { hasCoverPhoto: false, channelId: data?.id }
-		})
-		if (response && deleted) {
-			setIsUploading(false)
-		}
-		setIsUploading(false)
 	}
 
 	if (isUploading) return <Spinner width="24px" />
