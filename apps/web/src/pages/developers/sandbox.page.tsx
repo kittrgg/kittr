@@ -11,7 +11,7 @@ export default function IndexPage() {
 	}
 	return (
 		<div>
-			<Button color={colors.green[0]}>Doesn't turn green here.</Button>
+			<Button color={colors.green[0]}>No turn green here.</Button>
 			{/* <Title>Do the thing</Title> */}
 			<pre>{JSON.stringify(hello.data, null, 2)}</pre>
 		</div>

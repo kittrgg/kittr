@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { Grid } from "@mantine/core"
 import Link from "next/link"
 

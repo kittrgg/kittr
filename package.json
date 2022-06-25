@@ -53,10 +53,10 @@
 	},
 	"lint-staged": {
 		"apps/**/*.{js,ts,jsx,tsx}": [
-			"eslint --fix"
+			"eslint --fix ."
 		],
 		"packages/**/*.{js,ts,jsx,tsx}": [
-			"eslint --fix"
+			"eslint --fix ."
 		]
 	}
 }

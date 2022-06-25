@@ -50,11 +50,11 @@ const TESTIMONIALS = [
 	}
 ]
 
-const LastSection = ({ ...props }) => {
+const LastSection = () => {
 	return (
 		<section>
 			<Styled.H2>TESTIMONIALS</Styled.H2>
-			<Styled.P>STILL DON'T BELIEVE US? HERE'S WHAT THE COMMUNITY SAYS.</Styled.P>
+			<Styled.P>STILL { "DON'T" }BELIEVE US? { "HERE'S"} WHAT THE COMMUNITY SAYS.</Styled.P>
 			<Wrapper>
 				<Scrolltainer>
 					{TESTIMONIALS.map(({ name, role, quote }) => {

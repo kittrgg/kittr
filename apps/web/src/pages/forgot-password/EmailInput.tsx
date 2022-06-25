@@ -30,7 +30,7 @@ const EmailInput = ({ setStep }: Props) => {
 	return (
 		<>
 			<FormParagraph>
-				Enter the email address associated with your account and we'll send you a message with instructions to reset
+				Enter the email address associated with your account and we will send you a message with instructions to reset
 				your password.
 			</FormParagraph>
 			<FormBody>

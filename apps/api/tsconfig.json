@@ -1,5 +1,14 @@
 {
 	"extends": "tsconfig/base.json",
+	"compilerOptions": {
+		"baseUrl": "./src",
+		"paths": {
+			"@Jobs/*": ["./jobs/*"],
+			"@Services/*": ["./services/*"],
+			"@Types/*": ["./types/*"],
+			"@Utils/*": ["./utils/*"]
+		}
+	},
 	"include": ["."],
 	"exclude": ["node_modules"]
 }

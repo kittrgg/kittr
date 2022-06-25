@@ -28,7 +28,7 @@ const WhyKittr = ({ totalNumberOfKits }: Props) => {
 				<Winners />
 				<Testimonials />
 				<Styled.H2>CONTACT US</Styled.H2>
-				<Styled.P>STILL HAVE QUESTIONS? WE'VE GOT YOUR BACK.</Styled.P>
+				<Styled.P>STILL HAVE QUESTIONS? { "WE'VE" } GOT YOUR BACK.</Styled.P>
 				<ContactUs />
 				<CallToAction marginTop="32px" header="get kittd." />
 				<div style={{ marginBottom: "32px", textAlign: "center" }}>

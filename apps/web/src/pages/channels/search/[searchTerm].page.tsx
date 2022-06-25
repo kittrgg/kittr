@@ -30,7 +30,7 @@ const ChannelsSearch = ({ ...props }) => {
 					{data.length > 20 && (
 						<ParagraphWrapper>
 							<Paragraph>
-								More than 20 channels matched your search. Didn't find who you were looking for? Refine your search term
+								More than 20 channels matched your search. { "Didn't" }find who you were looking for? Refine your search term
 								a little.
 							</Paragraph>
 						</ParagraphWrapper>

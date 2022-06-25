@@ -8,7 +8,7 @@
 	},
 	"private": true,
 	"scripts": {
-		"test": "jest --coverage",
+		"test:CURRENTLY_IGNORED": "jest --coverage",
 		"test:watch": "jest --watch --coverage",
 		"lint": "eslint *.ts",
 		"clean": "rm -rf .turbo && rm -rf coverage && rm -rf node_modules",
@@ -16,7 +16,7 @@
 	},
 	"devDependencies": {
 		"@types/jest": "27.4.0",
-		"eslint": "7.32.0",
+		"eslint": "8.10.0",
 		"eslint-config-custom": "*",
 		"jest": "27.5.1",
 		"ts-jest": "27.1.3",

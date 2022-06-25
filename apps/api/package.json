@@ -6,7 +6,7 @@
 		"dev": "nodemon src/index.ts",
 		"test": "jest --coverage",
 		"test:watch": "jest --watch --coverage",
-		"lint": "eslint \"**/*.ts\" --ignore-pattern node_modules/",
+		"lint": "eslint --fix .",
 		"clean": "rm -rf .turbo && rm -rf coverage && rm -rf dist && rm -rf node_modules",
 		"type-check": "tsc --pretty --noEmit"
 	},

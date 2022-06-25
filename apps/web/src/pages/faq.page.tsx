@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { createStyles, Grid } from "@mantine/core"
 
 import colors from "@Colors"

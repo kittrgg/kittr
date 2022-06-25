@@ -7,7 +7,7 @@ const PrivacyPolicy = ({ ...props }) => {
 			<Styled.Container>
 				<h2>Privacy Policy</h2>
 				<p>
-					Your privacy is important to us. It is kittr's policy to respect your privacy and comply with any applicable
+					Your privacy is important to us. It is { "kittr's" }policy to respect your privacy and comply with any applicable
 					law and regulation regarding any personal information we may collect about you, including across our website,{" "}
 					<a href="https://kittr.gg">https://kittr.gg</a>, and other sites we own and operate.{" "}
 				</p>
