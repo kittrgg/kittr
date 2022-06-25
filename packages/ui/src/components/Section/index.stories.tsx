@@ -39,7 +39,7 @@ export const Default = () => (
 export const Caption = () => (
 	<Section
 		title="TOURNEY WRAP: $100K WARZONE ROKKR ROYALE TOURNAMENT"
-		caption="Aug 18, 2021"
+		action="Aug 18, 2021"
 	>
 		<Text>
 			Welcome one and all to this ROKKR sponsored tournament, featuring fun,

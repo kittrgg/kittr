@@ -1,5 +1,4 @@
 import * as Sentry from "@sentry/nextjs"
-import { Severity } from "@sentry/types"
 
 /** Send exception to the error logger from Nextjs. */
 export const logError = (message: string | Error, withConsole?: boolean) => {
@@ -11,7 +10,7 @@ export const logError = (message: string | Error, withConsole?: boolean) => {
 
 /** Send warning to the error logger from Nextjs. */
 export const logWarning = (warning: string, withConsole?: boolean) => {
-	Sentry.captureMessage(warning, "warning" as Severity)
+	Sentry.captureMessage(warning, "warning")
 	if (withConsole) {
 		console.warn(warning)
 	}
@@ -19,7 +18,7 @@ export const logWarning = (warning: string, withConsole?: boolean) => {
 
 /** Send an info log to the error logger from Nextjs. */
 export const logInfo = (info: string, withConsole?: boolean) => {
-	Sentry.captureMessage(info, "info" as Severity)
+	Sentry.captureMessage(info, "info")
 	if (withConsole) {
 		console.info(info)
 	}
@@ -27,7 +26,7 @@ export const logInfo = (info: string, withConsole?: boolean) => {
 
 /** Send a debug log to the error logger from Nextjs. */
 export const logDebug = (debugMessage: string, withConsole?: boolean) => {
-	Sentry.captureMessage(debugMessage, "debug" as Severity)
+	Sentry.captureMessage(debugMessage, "debug")
 	if (withConsole) {
 		console.info(debugMessage)
 	}

@@ -1,5 +1,5 @@
 import * as z from "zod"
-import { CompleteChannel, RelatedChannelModel, CompleteKit, RelatedKitModel } from "./index"
+import { CompleteChannel, RelatedChannelModel, CompleteWarzoneKit, RelatedWarzoneKitModel } from "./index"
 
 export const ChannelKitOverlayModel = z.object({
   id: z.string(),
@@ -16,8 +16,8 @@ export const ChannelKitOverlayModel = z.object({
 
 export interface CompleteChannelKitOverlay extends z.infer<typeof ChannelKitOverlayModel> {
   channel: CompleteChannel
-  primaryKit?: CompleteKit | null
-  secondaryKit?: CompleteKit | null
+  primaryKit?: CompleteWarzoneKit | null
+  secondaryKit?: CompleteWarzoneKit | null
 }
 
 /**
@@ -27,6 +27,6 @@ export interface CompleteChannelKitOverlay extends z.infer<typeof ChannelKitOver
  */
 export const RelatedChannelKitOverlayModel: z.ZodSchema<CompleteChannelKitOverlay> = z.lazy(() => ChannelKitOverlayModel.extend({
   channel: RelatedChannelModel,
-  primaryKit: RelatedKitModel.nullish(),
-  secondaryKit: RelatedKitModel.nullish(),
+  primaryKit: RelatedWarzoneKitModel.nullish(),
+  secondaryKit: RelatedWarzoneKitModel.nullish(),
 }))

@@ -1,5 +1,5 @@
 import * as z from "zod"
-import { CompleteGame, RelatedGameModel, CompleteChannelAffiliateCode, RelatedChannelAffiliateCodeModel, CompleteChannelCustomGameCommand, RelatedChannelCustomGameCommandModel, CompleteKit, RelatedKitModel, CompleteChannelKitOverlay, RelatedChannelKitOverlayModel, CompleteChannelManager, RelatedChannelManagerModel, CompleteChannelProfile, RelatedChannelProfileModel, CompleteChannelPlan, RelatedChannelPlanModel, CompleteChannelLink, RelatedChannelLinkModel } from "./index"
+import { CompleteGame, RelatedGameModel, CompleteChannelCreatorCode, RelatedChannelCreatorCodeModel, CompleteChannelCustomGameCommand, RelatedChannelCustomGameCommandModel, CompleteWarzoneKit, RelatedWarzoneKitModel, CompleteChannelKitOverlay, RelatedChannelKitOverlayModel, CompleteChannelManager, RelatedChannelManagerModel, CompleteChannelProfile, RelatedChannelProfileModel, CompleteChannelPlan, RelatedChannelPlanModel, CompleteChannelLink, RelatedChannelLinkModel } from "./index"
 
 export const ChannelModel = z.object({
   id: z.string(),
@@ -12,9 +12,9 @@ export const ChannelModel = z.object({
 
 export interface CompleteChannel extends z.infer<typeof ChannelModel> {
   games: CompleteGame[]
-  gameAffiliateCodes: CompleteChannelAffiliateCode[]
+  gameAffiliateCodes: CompleteChannelCreatorCode[]
   customGameCommands: CompleteChannelCustomGameCommand[]
-  kits: CompleteKit[]
+  warzoneKits: CompleteWarzoneKit[]
   overlay?: CompleteChannelKitOverlay | null
   managers: CompleteChannelManager[]
   profile?: CompleteChannelProfile | null
@@ -29,9 +29,9 @@ export interface CompleteChannel extends z.infer<typeof ChannelModel> {
  */
 export const RelatedChannelModel: z.ZodSchema<CompleteChannel> = z.lazy(() => ChannelModel.extend({
   games: RelatedGameModel.array(),
-  gameAffiliateCodes: RelatedChannelAffiliateCodeModel.array(),
+  gameAffiliateCodes: RelatedChannelCreatorCodeModel.array(),
   customGameCommands: RelatedChannelCustomGameCommandModel.array(),
-  kits: RelatedKitModel.array(),
+  warzoneKits: RelatedWarzoneKitModel.array(),
   overlay: RelatedChannelKitOverlayModel.nullish(),
   managers: RelatedChannelManagerModel.array(),
   profile: RelatedChannelProfileModel.nullish(),

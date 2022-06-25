@@ -1,5 +1,5 @@
 import * as z from "zod"
-import { CompleteGenre, RelatedGenreModel, CompletePlatform, RelatedPlatformModel, CompleteKitBase, RelatedKitBaseModel, CompleteChannel, RelatedChannelModel, CompleteChannelAffiliateCode, RelatedChannelAffiliateCodeModel, CompleteChannelCustomGameCommand, RelatedChannelCustomGameCommandModel, CompleteKit, RelatedKitModel, CompleteKitOption, RelatedKitOptionModel } from "./index"
+import { CompleteGenre, RelatedGenreModel, CompletePlatform, RelatedPlatformModel, CompleteChannel, RelatedChannelModel, CompleteChannelCreatorCode, RelatedChannelCreatorCodeModel, CompleteChannelCustomGameCommand, RelatedChannelCustomGameCommandModel, CompleteWarzoneKitBase, RelatedWarzoneKitBaseModel, CompleteWarzoneKit, RelatedWarzoneKitModel } from "./index"
 
 export const GameModel = z.object({
   id: z.string(),
@@ -16,12 +16,11 @@ export const GameModel = z.object({
 export interface CompleteGame extends z.infer<typeof GameModel> {
   genres: CompleteGenre[]
   platforms: CompletePlatform[]
-  kitBases: CompleteKitBase[]
   channels: CompleteChannel[]
-  channelAffiliateCodes: CompleteChannelAffiliateCode[]
+  channelCreatorCodes: CompleteChannelCreatorCode[]
   customCommandStrings: CompleteChannelCustomGameCommand[]
-  kits: CompleteKit[]
-  kitOptions: CompleteKitOption[]
+  warzoneKitBases: CompleteWarzoneKitBase[]
+  warzoneKits: CompleteWarzoneKit[]
 }
 
 /**
@@ -32,10 +31,9 @@ export interface CompleteGame extends z.infer<typeof GameModel> {
 export const RelatedGameModel: z.ZodSchema<CompleteGame> = z.lazy(() => GameModel.extend({
   genres: RelatedGenreModel.array(),
   platforms: RelatedPlatformModel.array(),
-  kitBases: RelatedKitBaseModel.array(),
   channels: RelatedChannelModel.array(),
-  channelAffiliateCodes: RelatedChannelAffiliateCodeModel.array(),
+  channelCreatorCodes: RelatedChannelCreatorCodeModel.array(),
   customCommandStrings: RelatedChannelCustomGameCommandModel.array(),
-  kits: RelatedKitModel.array(),
-  kitOptions: RelatedKitOptionModel.array(),
+  warzoneKitBases: RelatedWarzoneKitBaseModel.array(),
+  warzoneKits: RelatedWarzoneKitModel.array(),
 }))
