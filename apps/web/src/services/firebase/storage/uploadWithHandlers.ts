@@ -34,8 +34,6 @@ export const uploadWithHandlers: IFunc = async ({
 	onSuccess,
 	onError
 }) => {
-	console.log(fileName)
-
 	try {
 		const compressedImage = await compressor(imageFile, {
 			maxWidthOrHeight,

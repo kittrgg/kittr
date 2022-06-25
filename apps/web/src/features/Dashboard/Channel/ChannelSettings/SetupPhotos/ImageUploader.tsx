@@ -79,7 +79,7 @@ const ImageUploader = ({ slot }: Props) => {
 	const handleDelete = async () => {
 		try {
 			setIsUploading(true)
-			await deleteFile(fileName)
+			await deleteFile({ id: fileName,   })
 
 			removeImage({ slot, channelId: data?.id!, bool: false, channelProfileId: data?.profile?.id! })
 		} catch (error) {

@@ -7,7 +7,7 @@ import ImageUploader from "./ImageUploader"
 import Toast from "@Components/shared/Toast"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 
-const SetupPhotos = ({ ...props }) => {
+const SetupPhotos = () => {
 	const [copyNotification, setCopyNotification] = useState(false)
 	const { data } = useDashboardChannel()
 
