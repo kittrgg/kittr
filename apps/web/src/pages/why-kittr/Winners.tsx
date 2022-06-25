@@ -3,6 +3,8 @@ import colors from "@Colors"
 import * as Styled from "./style"
 import CallToAction from "./CallToAction"
 import { barlow, header2, paragraph } from "@Styles/typography"
+import { Card, Text, Title } from "@kittr/ui"
+import { Box, Center, Grid, Stack } from "@mantine/core"
 
 const WINNERS = [
 	{
@@ -33,25 +35,28 @@ const WINNERS = [
 
 const Winners = ({ ...props }) => {
 	return (
+		// <Stack align="center" mt={40}>
 		<>
-			<Styled.H2>WHO LOVES KITTR?</Styled.H2>
-			<Grid>
-				{WINNERS.map(({ title, text, icon, iconAlt }) => {
+			<Center pb={20}>
+				<Title preset="h1">WHO LOVES KITTR?</Title>
+			</Center>
+
+			<Grid gutter={20}>
+				{WINNERS.map((winner) => {
 					return (
-						<GridItem key={title}>
-							<GridItemTopRow>
-								<GridIconContainer>
-									<img src={icon} alt={iconAlt} width="40px" height="40px" />
-								</GridIconContainer>
-								<GridTitle>{title}</GridTitle>
-							</GridItemTopRow>
-							<GridText>{text}</GridText>
-						</GridItem>
+						<Grid.Col sm={6} lg={3}>
+							<Card title={winner.title} icon={winner.icon} iconAlt={winner.iconAlt}>
+								<Text preset="lg" mt="md">
+									{winner.text}
+								</Text>
+							</Card>
+						</Grid.Col>
 					)
 				})}
 			</Grid>
 			<CallToAction marginTop="48px" marginBottom="48px" header="get started with kittr." />
 		</>
+		/* </Stack> */
 	)
 }
 
@@ -59,46 +64,46 @@ export default Winners
 
 // Styled Components
 
-const Grid = styled.div`
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-column-gap: 96px;
-	grid-row-gap: 96px;
-	margin: 24px 60px;
+// const Grid = styled.div`
+// 	display: grid;
+// 	grid-template-columns: 1fr 1fr;
+// 	grid-column-gap: 96px;
+// 	grid-row-gap: 96px;
+// 	margin: 24px 60px;
 
-	@media (max-width: 750px) {
-		grid-template-columns: 100%;
-		grid-row-gap: 40px;
-		margin: 24px 0;
-	}
-`
+// 	@media (max-width: 750px) {
+// 		grid-template-columns: 100%;
+// 		grid-row-gap: 40px;
+// 		margin: 24px 0;
+// 	}
+// `
 
-const GridItem = styled.div``
+// const GridItem = styled.div``
 
-const GridItemTopRow = styled.div`
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: flex-start;
-	margin-bottom: 8px;
-`
+// const GridItemTopRow = styled.div`
+// 	display: flex;
+// 	flex-direction: row;
+// 	align-items: center;
+// 	justify-content: flex-start;
+// 	margin-bottom: 8px;
+// `
 
-const GridIconContainer = styled.div`
-	@media (max-width: 750px) {
-		margin-left: 0;
-	}
-`
+// const GridIconContainer = styled.div`
+// 	@media (max-width: 750px) {
+// 		margin-left: 0;
+// 	}
+// `
 
-const GridTitle = styled.h3`
-	${header2};
-	${barlow};
-	margin-left: 12px;
-	font-size: 32px;
-	font-weight: 600;
-	color: ${colors.white};
-`
+// const GridTitle = styled.h3`
+// 	${header2};
+// 	${barlow};
+// 	margin-left: 12px;
+// 	font-size: 32px;
+// 	font-weight: 600;
+// 	color: ${colors.white};
+// `
 
-const GridText = styled.p`
-	${paragraph};
-	line-height: 150%;
-`
+// const GridText = styled.p`
+// 	${paragraph};
+// 	line-height: 150%;
+// `
