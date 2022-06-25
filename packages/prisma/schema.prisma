@@ -26,7 +26,7 @@ model Channel {
   viewCount          Int                        @default(0)
   previousUpdater    String?
   games              Game[]
-  gameAffiliateCodes ChannelAffiliateCode[]
+  gameAffiliateCodes ChannelCreatorCode[]
   customGameCommands ChannelCustomGameCommand[]
   warzoneKits        WarzoneKit[]
   overlay            ChannelKitOverlay?
@@ -179,7 +179,7 @@ model ChannelCustomGameCommand {
   channelId String
 }
 
-model ChannelAffiliateCode {
+model ChannelCreatorCode {
   id        String  @id @default(cuid())
   channel   Channel @relation(fields: [channelId], references: [id], onDelete: Cascade)
   channelId String
@@ -227,22 +227,22 @@ model WarzoneCommandCode {
 }
 
 model Game {
-  id                    String                     @id @default(cuid())
-  displayName           String
-  urlSafeName           String
-  backgroundImageUrl    String
-  titleImageUrl         String
-  active                Boolean
-  blurDataUrl           String
-  developer             String
-  genres                Genre[]
-  platforms             Platform[]
-  releaseDate           DateTime
-  channels              Channel[]
-  channelAffiliateCodes ChannelAffiliateCode[]
-  customCommandStrings  ChannelCustomGameCommand[]
-  warzoneKitBases       WarzoneKitBase[]
-  warzoneKits           WarzoneKit[]
+  id                   String                     @id @default(cuid())
+  displayName          String
+  urlSafeName          String
+  backgroundImageUrl   String
+  titleImageUrl        String
+  active               Boolean
+  blurDataUrl          String
+  developer            String
+  genres               Genre[]
+  platforms            Platform[]
+  releaseDate          DateTime
+  channels             Channel[]
+  channelCreatorCodes  ChannelCreatorCode[]
+  customCommandStrings ChannelCustomGameCommand[]
+  warzoneKitBases      WarzoneKitBase[]
+  warzoneKits          WarzoneKit[]
 }
 
 model Platform {
