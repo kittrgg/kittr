@@ -1,6 +1,6 @@
 import admin from "firebase-admin"
 import { TRPCError } from "@trpc/server"
-import { ChannelManagerRoles } from "@kittr/prisma"
+import {prisma, ChannelManagerRoles } from "@kittr/prisma"
 
 export const getUserByEmail = async (email: string) => {
 	const user = await admin.auth().getUserByEmail(email)
@@ -62,3 +62,31 @@ export const checkRole = async ({
 
 	return manager
 }
+
+
+
+
+
+const yaya = async ({kitBaseId}: {kitBaseId: string}) => {
+	const thingy = await prisma.channel.findMany({
+		where: {
+			kits: {
+					options: {
+						some: {
+							id: optionid
+						}
+					}
+				}
+			}
+		},
+		select: {
+
+		}
+
+	})
+}
+
+// What percentage of Ak47s have the Silencer on them?
+// What percentage of kits use the Silencer?
+// How many channels use the Silencer on their M4?
+// 

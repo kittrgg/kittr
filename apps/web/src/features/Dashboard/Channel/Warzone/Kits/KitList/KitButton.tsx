@@ -18,6 +18,8 @@ const KitButton = ({ favorite, kit }: Props) => {
 	const activeKit = useActiveKit()
 	const { customTitle, base } = kit
 	const { data: allOptions, isLoading } = useAllKitOptions()
+	const {data: options, isLoading} = useKitOption({baseId})
+	const {data: options, isLoading} = useKitOption({baseId, slot})
 
 	let title = ""
 
