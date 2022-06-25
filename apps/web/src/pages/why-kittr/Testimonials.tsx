@@ -54,7 +54,7 @@ const TESTIMONIALS = [
 
 const Testimonials = ({ ...props }) => {
 	return (
-		<Box mb={20}>
+		<Box mb={60}>
 			<Stack pb={10} align="center">
 				<Title preset="h1">TESTIMONIALS</Title>
 
