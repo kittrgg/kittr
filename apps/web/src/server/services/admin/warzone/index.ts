@@ -1,23 +1,21 @@
-import { prisma, Prisma, WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
+import { prisma } from "@kittr/prisma"
 
 export const listKitBases = async () => {
-	const result = await prisma.warzoneKitBase.findMany({})
+	const result = await prisma.warzoneKitBase.findMany({
+		include: {
+			availableOptions: true
+		}
+	})
 
 	return result
 }
 
-export const updateKitBase = async ({ base, options, commandCodes, category }:
-	{
-		category: string,
-		base: WarzoneKitBase,
-		options: WarzoneKitOption,
-		commandCodes: string[]
-	}) => {
-	// transaction
-	// update the base itself
-	// update the existing options and create new ones using upsert
-	// Delete the ones that got dropped on the floor?
+export const listKitBaseOptions = async ({ kitBaseId }: { kitBaseId: string }) => {
+	const result = await prisma.warzoneKitOption.findMany({
+		where: {
+			id: kitBaseId
+		}
+	})
 
-	const result = await prisma.warzoneKitBase.update(data)
-
+	return result
 }

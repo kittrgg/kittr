@@ -6,6 +6,7 @@ import React from "react"
 
 interface Props extends MantineButtonProps {
 	children?: React.ReactNode
+	onClick: () => void
 }
 
 export const Button: React.FC<MantineButtonProps> = (props) => {
