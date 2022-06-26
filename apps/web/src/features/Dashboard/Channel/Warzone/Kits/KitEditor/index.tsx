@@ -19,7 +19,7 @@ import QuickCommandExport from "../../../../modals/ExportBotCommands/QuickComman
 import { useModal } from "@Redux/slices/dashboard/selectors"
 
 /** The Kit Editor. Where the magic happens. */
-const KitEditor = ({ ...props }) => {
+const KitEditor = () => {
 	const dispatch = useDispatch()
 	const activeKit = useActiveKit()
 	const modal = useModal()

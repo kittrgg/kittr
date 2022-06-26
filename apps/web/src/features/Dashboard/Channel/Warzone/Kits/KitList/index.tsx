@@ -1,7 +1,7 @@
 import colors from "@Colors"
 import { Button } from "@Components/shared"
 import { useAllKitBases } from "@Hooks/api/useAllKitBases"
-import { WarzoneKit, WarzoneKitOption } from "@kittr/prisma"
+import { Loader } from "@kittr/ui"
 import { createNewKit } from "@Redux/slices/dashboard"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
@@ -10,15 +10,11 @@ import { sortAlphabetical } from "@Utils/helpers/sortAlphabetical"
 import styled from "styled-components"
 import KitButton from "./KitButton"
 
-interface ExtendedKit extends WarzoneKit {
-	options: WarzoneKitOption[]
-}
-
 const KitList = () => {
 	const dispatch = useDispatch()
 	const { data } = useChannelData()
 	const noKits = data?.warzoneKits.length === 0
-	const { data: kitBases } = useAllKitBases()
+	const {isLoading: isLoadingBases} = useAllKitBases()
 
 	if (noKits) {
 		return (
@@ -31,19 +27,13 @@ const KitList = () => {
 		)
 	}
 
-	const createKitObject = (kit: ExtendedKit) => {
-		return {
-			...kit,
-			base: kitBases!.find((allBases) => allBases.id === kit.baseId)!
-		}
-	}
+	if (isLoadingBases) return <Loader />
 
 	return (
 		<Wrapper>
 			<Container>
 				{data?.warzoneKits &&
 					filterKitsByFeature(data?.warzoneKits)
-						.map(createKitObject)
 						.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
 						.map((kit) => <KitButton key={kit.id} favorite kit={kit} />)}
 				{data?.warzoneKits && filterKitsByFeature(data?.warzoneKits).length > 0 && (
@@ -51,7 +41,6 @@ const KitList = () => {
 				)}
 				{data?.warzoneKits &&
 					filterKitsByFeature(data?.warzoneKits, false)
-						.map(createKitObject)
 						.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
 						.map((kit) => <KitButton key={kit.id} kit={kit} />)}
 			</Container>

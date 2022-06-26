@@ -1,8 +1,6 @@
 import colors from "@Colors"
 import { Button, Modal } from "@Components/shared"
 import { useAllKitBases } from "@Hooks/api/useAllKitBases"
-import { useAllKitOptions } from "@Hooks/api/useAllKitOptions"
-import { WarzoneCommandCode, WarzoneKit, WarzoneKitBase } from "@kittr/prisma"
 import { TCommandMethod } from "@kittr/types/types"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
@@ -13,10 +11,6 @@ import CustomTextBuilder from "./CustomTextBuilder"
 import UserIncludeToggle from "./IncludeUserToggle"
 import MethodToggle from "./MethodToggle"
 import TwitchStrategyToggle from "./TwitchStrategyToggle"
-
-interface KitWithCommandCodes extends WarzoneKit {
-	base: WarzoneKitBase & { commandCodes: WarzoneCommandCode[] }
-}
 
 /**
  * Modal for exporting bot commands to the user's desired channel.
@@ -34,16 +28,8 @@ const ExportBotCommands = () => {
 	const [commandStrategy, setCommandStrategy] = useState<"edit" | "add">("edit")
 	const [includeUser, setIncludeUser] = useState(true)
 	const { data: allKitBases } = useAllKitBases()
-	const { data: allKitOptions } = useAllKitOptions()
 
-	const createKitObject = <T extends WarzoneKit>(kit: T): T => {
-		return {
-			...kit,
-			base: allKitBases!.find((allBases) => allBases.id === kit.baseId)!
-		}
-	}
-
-	if (!allKitBases || !allKitOptions) return null
+	if (!allKitBases) return null
 
 	return (
 		<Modal backgroundClickToClose title="EXPORT BOT COMMANDS">
@@ -55,7 +41,7 @@ const ExportBotCommands = () => {
 			)}
 
 			<CommandsTable
-				kits={data?.warzoneKits.map(createKitObject) ?? []}
+				kits={data?.warzoneKits?? []}
 				method={method}
 				commandStrategy={commandStrategy}
 				includeUser={includeUser}

@@ -10,7 +10,7 @@ export const logError = (message: string | Error, withConsole?: boolean) => {
 
 /** Send warning to the error logger from Nextjs. */
 export const logWarning = (warning: string, withConsole?: boolean) => {
-	Sentry.captureMessage(warning, "warning")
+	Sentry.captureMessage(warning, "warning" as any)
 	if (withConsole) {
 		console.warn(warning)
 	}
@@ -18,7 +18,7 @@ export const logWarning = (warning: string, withConsole?: boolean) => {
 
 /** Send an info log to the error logger from Nextjs. */
 export const logInfo = (info: string, withConsole?: boolean) => {
-	Sentry.captureMessage(info, "info")
+	Sentry.captureMessage(info, "info" as any)
 	if (withConsole) {
 		console.info(info)
 	}
@@ -26,7 +26,7 @@ export const logInfo = (info: string, withConsole?: boolean) => {
 
 /** Send a debug log to the error logger from Nextjs. */
 export const logDebug = (debugMessage: string, withConsole?: boolean) => {
-	Sentry.captureMessage(debugMessage, "debug")
+	Sentry.captureMessage(debugMessage, "debug" as any)
 	if (withConsole) {
 		console.info(debugMessage)
 	}

@@ -9,6 +9,7 @@ import { useDispatch } from "@Redux/store"
 import { useActiveKit } from "@Redux/slices/dashboard/selectors"
 import { updateOptions } from "@Redux/slices/dashboard"
 import { Selector } from "@Components/shared"
+import { Loader } from "@kittr/ui"
 
 const animationDuration = 1000
 
@@ -58,15 +59,6 @@ const Options = () => {
 		return dispatch(updateOptions(newCurrent))
 	}
 
-	if (!availableOptions) {
-		return (
-			<Styled.Container>
-				<Styled.Header>ATTACHMENTS</Styled.Header>
-				<p style={{ marginTop: "24px" }}>Pick a base up top first.</p>
-			</Styled.Container>
-		)
-	}
-
 	return (
 		<Styled.Container>
 			<Styled.HorizFlex>
@@ -76,7 +68,8 @@ const Options = () => {
 				</Styled.HeaderHelper>
 			</Styled.HorizFlex>
 			<Styled.AttachmentsFlex>
-				{!isLoading &&
+				{isLoading && <Loader />}
+				{!isLoading && availableOptions &&
 					slots?.map((slot: string) => {
 						return (
 							<div key={slot} style={{ marginBottom: "18px", flexBasis: "40%" }}>
