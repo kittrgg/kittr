@@ -1,17 +1,17 @@
 import React, { useState } from "react"
 
-import { KitWithBaseInDisplayr } from "@Types/prisma"
-import * as Styled from "./styles"
 import colors from "@Colors"
+import { Button, SearchInput } from "@Components/shared"
+import { useViewportDimensions } from "@Hooks/useViewportDimensions"
+import { setIsSidebarOpen } from "@Redux/slices/displayr"
+import { useChannel, useSidebarState } from "@Redux/slices/displayr/selectors"
+import { useDispatch } from "@Redux/store"
+import Ad from "@Services/venatus/Ad"
+import { KitWithBaseInDisplayr } from "@Types/prisma"
 import { filterKitsByFeature } from "@Utils/helpers/filterKitsByFeature"
 import { sortAlphabetical } from "@Utils/helpers/sortAlphabetical"
-import { useDispatch } from "@Redux/store"
-import { useChannel, useSidebarState } from "@Redux/slices/displayr/selectors"
-import { setIsSidebarOpen } from "@Redux/slices/displayr"
-import { useViewportDimensions } from "@Hooks/useViewportDimensions"
 import Item from "./Item"
-import { SearchInput, Button } from "@Components/shared"
-import Ad from "@Services/venatus/Ad"
+import * as Styled from "./styles"
 
 const CATEGORIES = [
 	"Assault Rifle",
@@ -28,7 +28,7 @@ const CATEGORY_SPLIT = 19
 const Sidebar = () => {
 	const dispatch = useDispatch()
 	const isSidebarOpen = useSidebarState()
-	const { kits: unfilteredKits = [] } = useChannel()
+	const { warzoneKits: unfilteredKits = [] } = useChannel()
 	const { width } = useViewportDimensions()
 	const [filterQuery, setFilterQuery] = useState("")
 

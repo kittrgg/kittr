@@ -1,4 +1,4 @@
-import { ChannelAffiliateCodeModel } from "@kittr/prisma/validator"
+import { ChannelCreatorCodeModel } from "@kittr/prisma/validator"
 import { createController } from "@Server/createController"
 import { authenticateUser } from "@Server/middlewares/authenticateUser"
 import * as ChannelsProfileCreatorCodesService from "@Server/services/channels/profile/creatorCodes"
@@ -10,7 +10,7 @@ const upsertCode = createController()
 	.mutation("", {
 		input: z.object({
 			authToken: z.string().optional(),
-			code: ChannelAffiliateCodeModel
+			code: ChannelCreatorCodeModel
 		}),
 		async resolve({ ctx, input }) {
 			await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.code.channelId, roles: ["OWNER", "ADMIN"] })

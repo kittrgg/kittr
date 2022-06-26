@@ -23,7 +23,7 @@ export const getFullChannelProfileQuery = async ({ id, urlSafeName }: { id: stri
 					setupPhotos: true
 				}
 			},
-			kits: {
+			warzoneKits: {
 				orderBy: {
 					base: {
 						displayName: "asc"
@@ -32,11 +32,9 @@ export const getFullChannelProfileQuery = async ({ id, urlSafeName }: { id: stri
 				include: {
 					base: {
 						include: {
-							category: true,
-							stats: true
+							category: true
 						}
-					},
-					options: true
+					}
 				}
 			},
 			links: true,
@@ -71,7 +69,7 @@ export const getChannelProfile = async ({ id, urlSafeName }: { id: string; urlSa
 					setupPhotos: true
 				}
 			},
-			kits: {
+			warzoneKits: {
 				orderBy: {
 					base: {
 						displayName: "asc"
@@ -80,11 +78,9 @@ export const getChannelProfile = async ({ id, urlSafeName }: { id: string; urlSa
 				include: {
 					base: {
 						include: {
-							category: true,
-							stats: true
+							category: true
 						}
-					},
-					options: true
+					}
 				}
 			},
 			links: true,

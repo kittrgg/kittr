@@ -1,16 +1,16 @@
 import colors from "@Colors"
-import { TCommandMethod } from "@kittr/types/types"
 import Toast from "@Components/shared/Toast"
+import { CommandCode, WarzoneKit, WarzoneKitBase } from "@kittr/prisma"
+import { TCommandMethod } from "@kittr/types/types"
 import { useChannelData, useChannelView } from "@Redux/slices/dashboard/selectors"
 import { useState } from "react"
 import * as Styled from "./style"
-import { CommandCode, Kit, KitBase } from "@kittr/prisma"
 
-interface KitBaseWithCodes extends KitBase {
+interface KitBaseWithCodes extends WarzoneKitBase {
 	commandCodes: CommandCode[]
 }
 
-interface FullKit extends Kit {
+interface FullKit extends WarzoneKit {
 	base: KitBaseWithCodes
 }
 

@@ -1,17 +1,17 @@
+import { prisma, WarzoneKit, WarzoneKitOption } from "@kittr/prisma"
 import { NextServerPayload } from "@kittr/types"
-import type { NextApiRequest, NextApiResponse } from "next"
-import { createHandler } from "@Utils/middlewares/createHandler"
 import { userAuth } from "@Middlewares/auth"
-import { prisma, Kit, KitOption } from "@kittr/prisma"
+import { createHandler } from "@Utils/middlewares/createHandler"
+import type { NextApiRequest, NextApiResponse } from "next"
 
-interface KitWithOptions extends Kit {
-	options: KitOption[]
+interface KitWithOptions extends WarzoneKit {
+	options: WarzoneKitOption[]
 }
 
 const handler = createHandler(userAuth)
 
 // Upsert a kit to a channel
-handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<Kit>>) => {
+handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<WarzoneKit>>) => {
 	const { channelId, token, previousUpdater, kit } = JSON.parse(req.body) as {
 		channelId: string
 		token: any
@@ -49,7 +49,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<
 			youtubeUrl: kit.youtubeUrl
 		}
 
-		const data = await prisma.kit.upsert({
+		const data = await prisma.warzoneKit.upsert({
 			where: { id: kit.id ?? "" },
 			create: update,
 			update: update
@@ -63,11 +63,11 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<
 })
 
 // Delete a channel's kit
-handler.delete(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<Kit | null>>) => {
+handler.delete(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<WarzoneKit | null>>) => {
 	const { kitId } = JSON.parse(req.body)
 
 	try {
-		const result = await prisma.kit.delete({
+		const result = await prisma.warzoneKit.delete({
 			where: {
 				id: kitId
 			}

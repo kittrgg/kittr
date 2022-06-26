@@ -27,7 +27,6 @@ export const getOverlay = async (id?: string) => {
 		include: {
 			primaryKit: {
 				include: {
-					options: true,
 					base: {
 						include: {
 							commandCodes: true
@@ -37,7 +36,6 @@ export const getOverlay = async (id?: string) => {
 			},
 			secondaryKit: {
 				include: {
-					options: true,
 					base: {
 						include: {
 							commandCodes: true

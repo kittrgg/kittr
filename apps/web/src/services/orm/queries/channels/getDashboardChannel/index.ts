@@ -22,7 +22,7 @@ export const getDashboardChannel = async ({ id, urlSafeName }: Params) => {
 				}
 			},
 			managers: true,
-			kits: {
+			warzoneKits: {
 				orderBy: {
 					base: {
 						displayName: "asc"
@@ -32,11 +32,9 @@ export const getDashboardChannel = async ({ id, urlSafeName }: Params) => {
 					base: {
 						include: {
 							category: true,
-							stats: true,
 							commandCodes: true
 						}
-					},
-					options: true
+					}
 				}
 			},
 			links: true,

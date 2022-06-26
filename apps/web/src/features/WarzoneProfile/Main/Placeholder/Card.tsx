@@ -1,18 +1,18 @@
-import { DeserializeFullChannelProfileReturnType } from "@Services/orm/queries/channels/getFullChannelProfile"
 import colors from "@Colors"
+import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
 import SVG from "@Components/shared/SVG"
 import { setActiveWeapon } from "@Redux/slices/displayr"
 import { useDispatch } from "@Redux/store"
+import { DeserializeFullChannelProfileReturnType } from "@Services/orm/queries/channels/getFullChannelProfile"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { Routes } from "@Utils/lookups/routes"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
 import { useRouter } from "next/router"
 import { Fragment } from "react"
 import styled from "styled-components"
-import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
 
 interface Props {
-	kit: NonNullable<DeserializeFullChannelProfileReturnType>["kits"][0]
+	kit: NonNullable<DeserializeFullChannelProfileReturnType>["warzoneKits"][0]
 	containerStyles?: any
 }
 

@@ -1,15 +1,15 @@
-import { NonNullable } from "@Types/index"
-import { DeserializeFullChannelProfileReturnType } from "@Services/orm/queries/channels/getFullChannelProfile"
+import colors from "@Colors"
 import SVG from "@Components/shared/SVG"
+import { setActiveWeapon } from "@Redux/slices/displayr"
+import { useActiveWeapon } from "@Redux/slices/displayr/selectors"
+import { useDispatch } from "@Redux/store"
+import { DeserializeFullChannelProfileReturnType } from "@Services/orm/queries/channels/getFullChannelProfile"
+import { NonNullable } from "@Types/index"
 import { useEffect, useRef } from "react"
 import * as Styled from "./style"
-import colors from "@Colors"
-import { useActiveWeapon } from "@Redux/slices/displayr/selectors"
-import { setActiveWeapon } from "@Redux/slices/displayr"
-import { useDispatch } from "@Redux/store"
 
 interface Props {
-	elem: NonNullable<DeserializeFullChannelProfileReturnType>["kits"][0]
+	elem: NonNullable<DeserializeFullChannelProfileReturnType>["warzoneKits"][0]
 }
 
 const Item = ({ elem }: Props) => {

@@ -50,7 +50,7 @@ const WarzoneProfile = ({ channel }: Props) => {
 
 		if (activeWeapon) {
 			if (Object.keys(activeWeapon).length === 0 && weaponQuery) {
-				const filteredKits = channel?.kits
+				const filteredKits = channel?.warzoneKits
 					.filter((elem) => elem.base.displayName.replace(/ /g, "-") === weaponQuery)
 					.sort((a, b) => Number(b.featured) - Number(a.featured))
 

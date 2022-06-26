@@ -13,11 +13,11 @@ export * from "./kits"
 export * from "./links"
 export * from "./profile"
 
-interface ChannelWithProfile extends Channel {
+export interface ChannelWithProfile extends Channel {
 	profile: ChannelProfile
 }
 
-interface ChannelWithLinks extends Channel {
+export interface ChannelWithLinks extends Channel {
 	links: ChannelLink[]
 }
 
@@ -123,7 +123,7 @@ export const getDashboardChannel = async ({ id }: { id: string }) => {
 				}
 			},
 			managers: true,
-			kits: {
+			warzoneKits: {
 				orderBy: {
 					base: {
 						displayName: "asc"
@@ -133,11 +133,9 @@ export const getDashboardChannel = async ({ id }: { id: string }) => {
 					base: {
 						include: {
 							category: true,
-							stats: true,
 							commandCodes: true
 						}
-					},
-					options: true
+					}
 				}
 			},
 			links: true,
@@ -178,7 +176,7 @@ export const getFullChannelProfileQuery = async ({ id, urlSafeName }: { id: stri
 					setupPhotos: true
 				}
 			},
-			kits: {
+			warzoneKits: {
 				orderBy: {
 					base: {
 						displayName: "asc"
@@ -187,11 +185,9 @@ export const getFullChannelProfileQuery = async ({ id, urlSafeName }: { id: stri
 				include: {
 					base: {
 						include: {
-							category: true,
-							stats: true
+							category: true
 						}
-					},
-					options: true
+					}
 				}
 			},
 			links: true,
@@ -225,7 +221,7 @@ export const getChannelProfileByUrlSafeName = async (urlSafeName: string) => {
 					setupPhotos: true
 				}
 			},
-			kits: {
+			warzoneKits: {
 				orderBy: {
 					base: {
 						displayName: "asc"
@@ -234,11 +230,9 @@ export const getChannelProfileByUrlSafeName = async (urlSafeName: string) => {
 				include: {
 					base: {
 						include: {
-							category: true,
-							stats: true
+							category: true
 						}
-					},
-					options: true
+					}
 				}
 			},
 			links: true,

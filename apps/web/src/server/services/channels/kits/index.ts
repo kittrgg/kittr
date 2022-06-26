@@ -1,10 +1,10 @@
-import { Kit, KitOption, prisma } from "@kittr/prisma"
+import { prisma, WarzoneKit, WarzoneKitOption } from "@kittr/prisma"
 
 export const upsertKit = async ({
 	channelId,
 	kit
 }: {
-	kit: Partial<Kit> & { options?: KitOption[] | null }
+	kit: Partial<WarzoneKit> & { options?: WarzoneKitOption[] | null }
 	channelId: string
 }) => {
 	const update = {
@@ -36,7 +36,7 @@ export const upsertKit = async ({
 		youtubeUrl: kit.youtubeUrl
 	}
 
-	const channel = await prisma.kit.upsert({
+	const channel = await prisma.warzoneKit.upsert({
 		where: { id: kit.id ?? "" },
 		create: update,
 		update: update
@@ -49,7 +49,7 @@ export const deleteKit = async ({ kitId, channelId }: { kitId: string; channelId
 	const deletedKit = await prisma.channel.update({
 		where: { id: channelId },
 		data: {
-			kits: {
+			warzoneKits: {
 				delete: {
 					id: kitId
 				}

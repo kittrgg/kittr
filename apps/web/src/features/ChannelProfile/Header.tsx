@@ -10,8 +10,8 @@ import {
 	ChannelPlan,
 	ChannelProfile,
 	Game,
-	Kit,
-	SetupPhoto
+	SetupPhoto,
+	WarzoneKit
 } from "@kittr/prisma"
 import { header1, header2 } from "@Styles/typography"
 import styled from "styled-components"
@@ -30,7 +30,7 @@ interface Props extends Channel {
 
 	links: ChannelLink[]
 	plan: ChannelPlan | null
-	kits: Kit[]
+	kits: WarzoneKit[]
 }
 
 const Header = ({ id, games, displayName, profile, links, plan, kits, isLive, imagePath }: Props) => {

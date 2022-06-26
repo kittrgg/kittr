@@ -11,7 +11,7 @@ const include = Prisma.validator<Prisma.ChannelArgs>()({
 				setupPhotos: true
 			}
 		},
-		kits: {
+		warzoneKits: {
 			orderBy: {
 				base: {
 					displayName: "asc"
@@ -20,8 +20,7 @@ const include = Prisma.validator<Prisma.ChannelArgs>()({
 			include: {
 				base: {
 					include: {
-						category: true,
-						stats: true
+						category: true
 					}
 				},
 				options: true

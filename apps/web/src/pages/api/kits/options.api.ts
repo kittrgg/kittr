@@ -1,6 +1,6 @@
-import type { NextApiRequest, NextApiResponse } from "next"
-import { createHandler } from "@Utils/middlewares/createHandler"
 import { prisma } from "@kittr/prisma"
+import { createHandler } from "@Utils/middlewares/createHandler"
+import type { NextApiRequest, NextApiResponse } from "next"
 
 const handler = createHandler()
 
@@ -9,7 +9,7 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
 	const { kitBaseId } = req.query as { kitBaseId: string }
 
 	try {
-		const result = await prisma.kitOption.findMany({
+		const result = await prisma.warzoneKitOption.findMany({
 			where: {
 				kitBaseId
 			}

@@ -1,10 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { WarzoneKit, WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
 import { DashboardModals, ReduxModalState } from "@kittr/types/types"
-import { KitBase, Kit, KitOption } from "@kittr/prisma"
+import { createSlice } from "@reduxjs/toolkit"
 
-interface KitUpdates extends Kit {
-	base: KitBase
-	options: KitOption[]
+interface KitUpdates extends WarzoneKit {
+	base: WarzoneKitBase
+	options: WarzoneKitOption[]
 }
 
 export interface KitWithOptionalId extends Omit<KitUpdates, "id"> {
@@ -58,8 +58,8 @@ export const dashboardSlice = createSlice({
 		createNewKit: (state) => {
 			state.kitEditor.initialKit = {
 				id: undefined,
-				base: {} as KitBase,
-				options: [] as KitOption[],
+				base: {} as WarzoneKitBase,
+				options: [] as WarzoneKitOption[],
 				featured: false,
 				customTitle: "",
 				blueprint: "",
@@ -73,8 +73,8 @@ export const dashboardSlice = createSlice({
 
 			state.kitEditor.activeKit = {
 				id: undefined,
-				base: {} as KitBase,
-				options: [] as KitOption[],
+				base: {} as WarzoneKitBase,
+				options: [] as WarzoneKitOption[],
 				featured: false,
 				customTitle: "",
 				blueprint: "",
@@ -97,7 +97,7 @@ export const dashboardSlice = createSlice({
 			state.kitEditor.initialKit = {} as KitWithOptionalId
 			state.kitEditor.activeKit = {} as KitWithOptionalId
 		},
-		updateBase: (state, action: { payload: KitBase }) => {
+		updateBase: (state, action: { payload: WarzoneKitBase }) => {
 			state.kitEditor.activeKit.base = action.payload
 		},
 		updateOptions: (state, action: { payload: any[] }) => {

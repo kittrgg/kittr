@@ -1,4 +1,4 @@
-import { KitModel, KitOptionModel } from "@kittr/prisma/validator"
+import { WarzoneKitModel, WarzoneKitOptionModel } from "@kittr/prisma/validator"
 import { createController } from "@Server/createController"
 import { authenticateUser } from "@Server/middlewares/authenticateUser"
 import * as ChannelsService from "@Server/services/channels"
@@ -10,8 +10,8 @@ const upsertKitToChannel = createController()
 	.mutation("", {
 		input: z.object({
 			channelId: z.string(),
-			kit: KitModel.extend({
-				options: KitOptionModel.array().default([])
+			kit: WarzoneKitModel.extend({
+				options: WarzoneKitOptionModel.array().default([])
 			}).partial({ id: true })
 		}),
 		async resolve({ ctx, input }) {

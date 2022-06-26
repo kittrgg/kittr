@@ -1,11 +1,10 @@
-import { Kit, KitBase, KitBaseCategory, KitStat, KitOption } from "@kittr/prisma"
+import { WarzoneKit, WarzoneKitBase, WarzoneKitBaseCategory, WarzoneKitOption } from "@kittr/prisma"
 
-interface KitBaseWithCategoryAndStats extends KitBase {
-	category: KitBaseCategory
-	stats: KitStat[]
+interface KitBaseWithCategory extends WarzoneKitBase {
+	category: WarzoneKitBaseCategory
 }
 
-export interface KitWithBaseInDisplayr extends Kit {
-	base: KitBaseWithCategoryAndStats
-	options: KitOption[]
+export interface KitWithBaseInDisplayr extends WarzoneKit {
+	base: KitBaseWithCategory
+	options: WarzoneKitOption[]
 }

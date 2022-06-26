@@ -1,13 +1,13 @@
-import { NonNullable } from "@Types/index"
-import { DeserializeFullChannelProfileReturnType } from "@Services/orm/queries/channels/getFullChannelProfile"
-import { useState, useEffect, useRef } from "react"
-import ScrollContainer from "react-indiana-drag-scroll"
-import * as Styled from "./style"
-import Item from "./Item"
 import { useActiveWeapon } from "@Redux/slices/displayr/selectors"
+import { DeserializeFullChannelProfileReturnType } from "@Services/orm/queries/channels/getFullChannelProfile"
+import { NonNullable } from "@Types/index"
+import { useEffect, useRef, useState } from "react"
+import ScrollContainer from "react-indiana-drag-scroll"
+import Item from "./Item"
+import * as Styled from "./style"
 
 interface Props {
-	availableKits: NonNullable<DeserializeFullChannelProfileReturnType>["kits"]
+	availableKits: NonNullable<DeserializeFullChannelProfileReturnType>["warzoneKits"]
 }
 
 const KitScroller = ({ availableKits }: Props) => {

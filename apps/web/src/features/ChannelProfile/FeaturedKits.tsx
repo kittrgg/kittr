@@ -1,15 +1,15 @@
 import { KitList } from "@Components/shared"
 import SideScroller from "@Components/shared/SideScroller"
+import { WarzoneKit, WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
 import { basePlusTitleToUrlSafe } from "@Utils/helpers/basePlusTitleToUrlSafe"
 import { filterKitsByFeature } from "@Utils/helpers/filterKitsByFeature"
 import { Routes } from "@Utils/lookups/routes"
 import { useRouter } from "next/router"
 import { H2 } from "./style"
-import { Kit, KitBase, KitOption } from "@kittr/prisma"
 
-interface CompleteKit extends Kit {
-	base: KitBase
-	options: KitOption[]
+interface CompleteKit extends WarzoneKit {
+	base: WarzoneKitBase
+	options: WarzoneKitOption[]
 }
 
 interface Props {

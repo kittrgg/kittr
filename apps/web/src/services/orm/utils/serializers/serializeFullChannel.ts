@@ -11,10 +11,9 @@ const ChannelWithIncludeAll = Prisma.validator<Prisma.ChannelArgs>()({
 				setupPhotos: true
 			}
 		},
-		kits: {
+		warzoneKits: {
 			include: {
-				base: true,
-				options: true
+				base: true
 			}
 		},
 		links: true,

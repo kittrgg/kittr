@@ -5,7 +5,7 @@ import { getClips } from "./getClips"
 import { getRecentVideos } from "./getRecentVideos"
 import { getSchedule } from "./getSchedule"
 
-interface ProfilePageData {
+export interface ProfilePageData {
 	channelData: ITwitchChannelData
 	schedule: ITwitchScheduleSegment[]
 	clips: ITwitchClip[]

@@ -1,13 +1,13 @@
-import { useQuery } from "react-query"
 import fetch from "@Fetch"
-import { KitOption } from "@kittr/prisma"
+import { WarzoneKitOption } from "@kittr/prisma"
+import { useQuery } from "react-query"
 
 export const useOptionsByKitBase = (kitBaseId: string) => {
 	const url = `/api/kits/options?kitBaseId=${kitBaseId}`
 	const result = useQuery(
 		url,
 		async () =>
-			await fetch.get<KitOption[]>({ url }).catch((err) => {
+			await fetch.get<WarzoneKitOption[]>({ url }).catch((err) => {
 				throw err
 			}),
 		{

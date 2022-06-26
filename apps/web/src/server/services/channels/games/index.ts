@@ -24,7 +24,7 @@ export const deleteGame = async ({ channelId, gameId }: { channelId: string; gam
 					id: gameId
 				}
 			},
-			kits: {
+			warzoneKits: {
 				deleteMany: {
 					gameId
 				}

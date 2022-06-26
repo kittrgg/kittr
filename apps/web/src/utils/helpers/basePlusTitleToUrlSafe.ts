@@ -1,7 +1,7 @@
-import { KitBase, Kit } from "@kittr/prisma"
+import { WarzoneKit, WarzoneKitBase } from "@kittr/prisma"
 
-interface FullKit extends Kit {
-	base: KitBase
+interface FullKit extends WarzoneKit {
+	base: WarzoneKitBase
 }
 
 /** Pass in a kit. Will return the baseName and custom title (if applicable) as a URL safe string. */

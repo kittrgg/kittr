@@ -1,8 +1,8 @@
-import { NextApiRequest, NextApiResponse } from "next"
+import { Channel, prisma } from "@kittr/prisma"
 import { NextServerPayload } from "@kittr/types"
-import { createHandler } from "@Middlewares/createHandler"
 import { userAuth } from "@Middlewares/auth"
-import { prisma, Channel } from "@kittr/prisma"
+import { createHandler } from "@Middlewares/createHandler"
+import { NextApiRequest, NextApiResponse } from "next"
 
 const handler = createHandler(userAuth)
 
@@ -17,7 +17,7 @@ handler.delete(async (req: NextApiRequest, res: NextApiResponse<NextServerPayloa
 				games: {
 					disconnect: { id: gameId }
 				},
-				kits: {
+				warzoneKits: {
 					deleteMany: {
 						gameId
 					}
