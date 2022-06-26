@@ -1,4 +1,5 @@
-import { WarzoneAdminController } from "@Server/controllers/admin/warzone/index"
 import { createRouter } from "@Server/createRouter"
+import { warzoneKitBaseRouter } from './kitBases'
 
-export const warzoneAdminRouter = createRouter().merge("kit-bases/list", WarzoneAdminController.listKitBases)
+export const warzoneAdminRouter = createRouter()
+  .merge("kit-bases/", warzoneKitBaseRouter)

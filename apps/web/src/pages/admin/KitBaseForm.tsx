@@ -5,6 +5,7 @@ import { ActionIcon } from "@mantine/core"
 import { useState } from "react"
 import styled from "styled-components"
 import { KitBaseOptionForm } from "./KitBaseOptionForm"
+import { trpc } from "@Server/createHooks"
 
 const Container = styled.div`
 	margin-bottom: 0.5rem;
@@ -19,7 +20,8 @@ interface Props {
 
 export const KitBaseForm = ({ base, onFinished }: Props) => {
 	const [formValues, setFormValues] = useState(base)
-	const [isEditingOption, setIsEdtingOption] = useState<WarzoneKitOption | null>(null)
+	const [isEditingOption, setIsEditingOption] = useState<WarzoneKitOption | null>(null)
+const {mutate} = trpc.useMutation("admin/warzone/kit-bases/update")
 
 	const changeTextField = (key: keyof typeof base) => (e: any) => {
 		console.log(e.target.value)
@@ -74,14 +76,14 @@ export const KitBaseForm = ({ base, onFinished }: Props) => {
 					/>
 				</Container>
 				<div>
-					<Button variant="outline" onClick={onFinished} style={{ margin: "1rem 1rem 1rem 0rem" }}>
+					<Button variant="outline" onClick={ onFinished } style={{ margin: "1rem 1rem 1rem 0rem" }}>
 						Cancel
 					</Button>
-					<Button variant="filled">Save</Button>
+					<Button variant="filled" onClick={() => mutate({base: formValues})}>Save</Button>
 				</div>
 
 				{isEditingOption ? (
-					<KitBaseOptionForm option={isEditingOption} onFinished={() => setIsEdtingOption(null)} />
+					<KitBaseOptionForm option={isEditingOption} onFinished={() => setIsEditingOption(null)} />
 				) : (
 					<>
 						<Title order={2} preset="h3" style={{ marginTop: "3rem" }}>
@@ -103,7 +105,7 @@ export const KitBaseForm = ({ base, onFinished }: Props) => {
 										radius="lg"
 										size="lg"
 										style={{ float: "right" }}
-										onClick={() => setIsEdtingOption(option)}
+										onClick={() => setIsEditingOption(option)}
 									>
 										<SVG.Pencil />
 									</ActionIcon>

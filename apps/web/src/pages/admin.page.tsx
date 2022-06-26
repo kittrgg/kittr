@@ -7,8 +7,8 @@ import { trpc } from "@Server/createHooks"
 import { useState } from "react"
 import { KitBaseForm } from "./admin/KitBaseForm"
 
-const Page = ({ ...props }) => {
-	const { data: bases } = trpc.useQuery(["admin/warzonekit-bases/list"])
+const Page = () => {
+	const { data: bases } = trpc.useQuery(["admin/warzone/kit-bases/list"])
 	const [isEditingBase, setIsEditingBase] = useState<
 		| (WarzoneKitBase & {
 				availableOptions: WarzoneKitOption[]
@@ -17,14 +17,19 @@ const Page = ({ ...props }) => {
 	>(null)
 
 	if (isEditingBase) {
-		return <KitBaseForm base={isEditingBase} onFinished={() => setIsEditingBase(null)} />
+		return <KitBaseForm base={isEditingBase} onFinished={() => {
+			// mutate()
+
+			setIsEditingBase(null)
+
+		}} />
 	}
 
 	return (
 		<div style={{ margin: "1rem" }}>
 			<Section title="KIT BASES">
 				<List>
-					{(bases || []).map((base) => (
+					{(bases || []).map((base: any) => (
 						<List.Item
 							style={{ borderBottom: "1px solid white", padding: "1rem" }}
 							sx={(theme) => ({

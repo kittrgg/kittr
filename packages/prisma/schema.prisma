@@ -171,7 +171,7 @@ model WarzoneKit {
   youtubeUrl                 String?
   tiktokUrl                  String?
   quote                      String?
-  options                     WarzoneKitOption[]
+  options                    WarzoneKitOption[]
   game                       Game               @relation(fields: [gameId], references: [id])
   gameId                     String
   base                       WarzoneKitBase     @relation(fields: [baseId], references: [id])
@@ -206,7 +206,7 @@ model WarzoneKitOption {
   displayName    String
   slotKey        String
   orderPlacement Int
-  kits            WarzoneKit[]
+  kits           WarzoneKit[]
   kitBase        WarzoneKitBase @relation(fields: [kitBaseId], references: [id])
   kitBaseId      String
 }
