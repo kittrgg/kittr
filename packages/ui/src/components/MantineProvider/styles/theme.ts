@@ -46,5 +46,14 @@ export const themeStyles: Record<
 				color: "white"
 			}
 		}
-	}
+	},
+	Button: (theme: MantineTheme) => ({
+		outline: {
+			color: "white",
+			borderColor: "white"
+		}
+	}),
+	TextInput: (theme: MantineTheme) => ({
+		input: {}
+	})
 }

@@ -1,10 +1,11 @@
-import type { inferProcedureOutput, inferProcedureInput } from "@trpc/server"
 import { gamesRouter } from "@Server/routers/games"
+import type { inferProcedureInput, inferProcedureOutput } from "@trpc/server"
 import superjson from "superjson"
 import { createRouter } from "./createRouter"
+import { adminRouter } from "./routers/admin"
 import { channelsRouter } from "./routers/channels"
-import { managersRouter } from "./routers/managers"
 import { kitsRouter } from "./routers/kits"
+import { managersRouter } from "./routers/managers"
 import { twitchRouter } from "./routers/twitch"
 
 export const appRouter = createRouter()
@@ -14,6 +15,7 @@ export const appRouter = createRouter()
 	.merge("managers/", managersRouter)
 	.merge("kits/", kitsRouter)
 	.merge("twitch/", twitchRouter)
+	.merge("admin/", adminRouter)
 
 export type AppRouter = typeof appRouter
 

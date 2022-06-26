@@ -9,5 +9,5 @@ interface Props extends MantineButtonProps {
 }
 
 export const Button: React.FC<MantineButtonProps> = (props) => {
-	return <MantineButton {...props} />
+	return <MantineButton radius="lg" size="lg" {...props} />
 }

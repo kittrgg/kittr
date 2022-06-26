@@ -2,14 +2,14 @@ import { useEffect, useState } from "react"
 import styled from "styled-components"
 
 import colors from "@Colors"
-import { uploadWithHandlers } from "@Services/firebase/storage/uploadWithHandlers"
-import { download } from "@Services/firebase/storage/download"
-import { useDispatch } from "@Redux/store"
+import { Button, Spinner, SVG } from "@Components/shared"
+import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useCoverPhoto } from "@Redux/slices/dashboard/selectors"
-import { Spinner, SVG, Button } from "@Components/shared"
+import { useDispatch } from "@Redux/store"
 import { deleteFile } from "@Services/firebase/storage"
-import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
+import { download } from "@Services/firebase/storage/download"
+import { uploadWithHandlers } from "@Services/firebase/storage/uploadWithHandlers"
 
 const CoverPhotoUploader = () => {
 	const dispatch = useDispatch()
@@ -50,7 +50,7 @@ const CoverPhotoUploader = () => {
 				fileName,
 				imageFile,
 				onSuccess: async () => {
-					mutate({ channelId: data?.id!, hasCoverPhoto: true  } )
+					mutate({ channelId: data?.id!, hasCoverPhoto: true })
 				},
 				onError: () => {
 					setIsUploading(false)
@@ -67,7 +67,7 @@ const CoverPhotoUploader = () => {
 				setImage(path)
 			})
 		}
-	}, [isUploading,hasCoverPhoto,fileName ])
+	}, [isUploading, hasCoverPhoto, fileName])
 
 	const handleDelete = async (e: any) => {
 		setIsUploading(true)
@@ -75,15 +75,17 @@ const CoverPhotoUploader = () => {
 		await deleteFile({
 			id: fileName,
 			onSuccess: () => {
-					mutate({ channelId: data?.id!, hasCoverPhoto: false  })
-		},
-		onError: (error)=> {
-					dispatch(setModal({ type: "Error Notification", data: {} }))
-		} })
-
+				mutate({ channelId: data?.id!, hasCoverPhoto: false })
+			},
+			onError: (error) => {
+				dispatch(setModal({ type: "Error Notification", data: {} }))
+			}
+		})
 	}
 
 	if (isUploading) return <Spinner width="24px" />
+
+	const cacheBuster = `/?${Math.random()}`
 
 	return (
 		<div>
@@ -96,7 +98,7 @@ const CoverPhotoUploader = () => {
 			</p>
 
 			<Grid>
-				{hasCoverPhoto && <BackgroundImage backgroundImage={image} />}
+				{hasCoverPhoto && <BackgroundImage backgroundImage={image + cacheBuster} />}
 
 				<ButtonsWrapper>
 					<Label htmlFor="coverPhotoUpload">

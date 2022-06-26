@@ -79,7 +79,7 @@ const ImageUploader = ({ slot }: Props) => {
 	const handleDelete = async () => {
 		try {
 			setIsUploading(true)
-			await deleteFile({ id: fileName,   })
+			await deleteFile({ id: fileName })
 
 			removeImage({ slot, channelId: data?.id!, bool: false, channelProfileId: data?.profile?.id! })
 		} catch (error) {
@@ -136,7 +136,7 @@ const ImageUploader = ({ slot }: Props) => {
 				/>
 				{isHovered && image && (
 					<DeleteBubble onMouseEnter={() => setIsHovered(true)} onClick={handleDelete} isHovered={isHovered}>
-						<SVG.X style={{ width: "100%", height: "100%" }} fill={colors.red} />
+						<SVG.X style={{ position: "absolute", top: 4, left: 0 }} fill={colors.red} />
 					</DeleteBubble>
 				)}
 			</Label>
