@@ -1,5 +1,5 @@
 import * as z from "zod"
-import { CompleteWarzoneKitBase, RelatedWarzoneKitBaseModel } from "./index"
+import { CompleteWarzoneKit, RelatedWarzoneKitModel, CompleteWarzoneKitBase, RelatedWarzoneKitBaseModel } from "./index"
 
 export const WarzoneKitOptionModel = z.object({
   id: z.string(),
@@ -11,6 +11,7 @@ export const WarzoneKitOptionModel = z.object({
 })
 
 export interface CompleteWarzoneKitOption extends z.infer<typeof WarzoneKitOptionModel> {
+  kits: CompleteWarzoneKit[]
   kitBase: CompleteWarzoneKitBase
 }
 
@@ -20,5 +21,6 @@ export interface CompleteWarzoneKitOption extends z.infer<typeof WarzoneKitOptio
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
 export const RelatedWarzoneKitOptionModel: z.ZodSchema<CompleteWarzoneKitOption> = z.lazy(() => WarzoneKitOptionModel.extend({
+  kits: RelatedWarzoneKitModel.array(),
   kitBase: RelatedWarzoneKitBaseModel,
 }))
