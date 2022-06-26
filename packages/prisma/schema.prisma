@@ -18,6 +18,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Administrator {
+  id                 String                     @id @default(cuid())
+  firebaseUserId     String
+  role              AdminRole
+}
+
+enum AdminRole {
+  SUPER
+  DEFAULT
+}
+
 model Channel {
   id                 String                     @id @default(cuid())
   createdAt          DateTime                   @default(now())

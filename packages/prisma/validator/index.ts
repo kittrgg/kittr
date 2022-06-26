@@ -1,3 +1,4 @@
+export * from "./administrator"
 export * from "./channel"
 export * from "./channelprofile"
 export * from "./setupphoto"
