@@ -23,6 +23,15 @@ mongoose
 		const mongoOptions = await KitOption.find({}).lean()
 		const mongoChannels = await Channel.find({}).lean()
 
+		const createAdministrators = async () => {
+			await prisma.administrator.createMany({
+				data: [{
+					firebaseUserId: "123",
+					role: "DEFAULT"
+				}]
+			})
+		}
+
 		const createGames = async () => {
 			for (const game of mongoGames) {
 				await prisma.game.create({
@@ -148,7 +157,12 @@ mongoose
 				}),
 				hasCoverPhoto: channel.meta.hasCoverPhoto,
 				hasProfileImage: channel.meta.hasProfileImage,
-				affiliates: channel.meta.affiliates,
+				affiliates: Object.entries(channel.meta.affiliates || {}).map(([channelName, rest]) => ({
+					code: rest.code,
+					description: rest.description,
+					company: channelName,
+					url: rest.link as any,
+				})),
 				brandColors: channel.meta.brandColors,
 				specs: channel.meta.specs,
 				stripeId: channel.meta.stripeId,
@@ -160,101 +174,106 @@ mongoose
 			}))
 
 			for (const channel of formattedChannels) {
-				await prisma.channel.create({
-					data: {
-						id: channel.id,
-						displayName: channel.displayName,
-						urlSafeName: channel.urlSafeName,
-						viewCount: channel.viewCount,
-						games: {
-							connect: channel.games.map((game) => ({ id: game.id.toString() }))
-						},
-						gameAffiliateCodes: {
-							create: channel.games
-								.filter((game) => !!game.code)
-								.map((game) => {
-									return {
-										gameId: game.id.toString(),
-										code: game.code!
-									}
-								})
-						},
-						customGameCommands: {
-							create: channel.games
-								.filter((game) => !!game.commandString)
-								.map((game) => {
-									return {
-										game: { connect: { id: game.id.toString() } },
-										command: game.commandString!
-									}
-								})
-						},
-						managers: {
-							create: channel.managers.map((manager) => ({
-								firebaseId: manager.uid.toString(),
-								role: manager.role
-							}))
-						},
-						profile: {
-							create: {
-								hasCoverPhoto: channel.hasCoverPhoto || false,
-								hasProfileImage: channel.displayName === "JoeWo",
-								youtubeAutoplay: channel.youtubeAutoplay || false,
-								affiliates: {
-									create: Object.values(channel.affiliates || {}).map(
-										(affiliate: {
-											code?: string
-											description?: string
-											company?: string
-											url?: string
-										}) => ({
-											code: affiliate.code,
-											description: affiliate.description,
-											company: affiliate.company,
-											url: affiliate.url
-										})
-									)
-								},
-								channelPcSpecs: {
-									create: Object.entries(channel.specs || {}).map((spec) => ({
-										partType: spec[0],
-										partName: spec[1]
-									}))
-								},
-								setupPhotos: {
-									create: Object.entries(channel.setupPhotos || {}).map(
-										(photo) => {
-											return {
-												slot: Number(photo[0]),
-												exists: photo[1] as unknown as boolean
-											}
+				try {
+					await prisma.channel.create({
+						data: {
+							id: channel.id,
+							displayName: channel.displayName,
+							urlSafeName: channel.urlSafeName,
+							viewCount: channel.viewCount,
+							games: {
+								connect: channel.games.map((game) => ({ id: game.id.toString() }))
+							},
+							gameAffiliateCodes: {
+								create: channel.games
+									.filter((game) => !!game.code)
+									.map((game) => {
+										return {
+											gameId: game.id.toString(),
+											code: game.code!
 										}
-									)
-								},
-								brandColors: {
-									create: Object.entries(channel.brandColors || {}).map(
-										(entry) => ({
-											type: "PRIMARY",
-											value: entry[1]
-										})
-									)
+									})
+							},
+							customGameCommands: {
+								create: channel.games
+									.filter((game) => !!game.commandString)
+									.map((game) => {
+										return {
+											game: { connect: { id: game.id.toString() } },
+											command: game.commandString!
+										}
+									})
+							},
+							managers: {
+								create: channel.managers.map((manager) => ({
+									firebaseId: manager.uid.toString(),
+									role: manager.role
+								}))
+							},
+							profile: {
+								create: {
+									hasCoverPhoto: channel.hasCoverPhoto || false,
+									hasProfileImage: channel.displayName === "JoeWo",
+									youtubeAutoplay: channel.youtubeAutoplay || false,
+									affiliates: {
+										create: Object.values(channel.affiliates || {}).map(
+											(affiliate: {
+												code?: string
+												description?: string
+												company?: string
+												url?: string
+											}) => ({
+												code: affiliate.code,
+												description: affiliate.description,
+												company: affiliate.company,
+												url: affiliate.url
+											})
+										)
+									},
+									channelPcSpecs: {
+										create: Object.entries(channel.specs || {}).map((spec) => ({
+											partType: spec[0],
+											partName: spec[1]
+										}))
+									},
+									setupPhotos: {
+										create: Object.entries(channel.setupPhotos || {}).map(
+											(photo) => {
+												return {
+													slot: Number(photo[0]),
+													exists: photo[1] as unknown as boolean
+												}
+											}
+										)
+									},
+									brandColors: {
+										create: Object.entries(channel.brandColors || {}).map(
+											(entry) => ({
+												type: "PRIMARY",
+												value: entry[1]
+											})
+										)
+									}
 								}
+							},
+							plan: {
+								create: {
+									type: channel.premiumType as ChannelPlanType,
+									stripeSubscriptionId: channel.stripeId || ""
+								}
+							},
+							links: {
+								create: Object.entries(channel.links).map((entry) => ({
+									property: entry[0].toUpperCase() as LinkProperty,
+									value: entry[1]
+								}))
 							}
-						},
-						plan: {
-							create: {
-								type: channel.premiumType as ChannelPlanType,
-								stripeSubscriptionId: channel.stripeId || ""
-							}
-						},
-						links: {
-							create: Object.entries(channel.links).map((entry) => ({
-								property: entry[0].toUpperCase() as LinkProperty,
-								value: entry[1]
-							}))
 						}
-					}
-				})
+					})
+				} catch (err) {
+					console.log(channel.urlSafeName)
+					throw new Error(err as any)
+				}
 			}
 		}
 
@@ -398,6 +417,8 @@ mongoose
 		}
 
 		const main = async () => {
+			await createAdministrators()
+
 			console.log("Creating games...")
 			console.time("Creating games")
 			await createGames()

@@ -19,24 +19,22 @@ const Affiliates = ({ affiliates, brandColor }: Props) => {
 			<H2>AFFILIATES</H2>
 			<SpecsGrid>
 				{affiliates &&
-					Object.entries(affiliates).map((spec) => {
-						const [company, attrs] = spec
-						const { code, description, url } = attrs
+					affiliates.map((affiliate) => {
 
 						return (
-							<GridItem key={company} colorHover={brandColor}>
+							<GridItem key={affiliate.company} colorHover={brandColor}>
 								<Flex>
-									<Company>{company}</Company>
-									{description && <Description>{description}</Description>}
+									<Company>{affiliate.company}</Company>
+									{affiliate.description && <Description>{affiliate.description}</Description>}
 								</Flex>
-								{code && (
+								{affiliate.code && (
 									<Flex>
 										<Code>CODE</Code>
-										<Code>{code}</Code>
+										<Code>{affiliate.code}</Code>
 									</Flex>
 								)}
-								{url && (
-									<Link href={url} target="_blank" rel="noopener noreferrer">
+								{affiliate.url && (
+									<Link href={affiliate.url} target="_blank" rel="noopener noreferrer">
 										<SVG.Link
 											width="24px"
 											stroke={colors.lighter}

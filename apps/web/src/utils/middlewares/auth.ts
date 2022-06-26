@@ -16,7 +16,9 @@ export const userAuth = async (req: NextApiRequest, res: NextApiResponse, next: 
 
 	const token = authorization.split(" ")[1]
 
-	admin.auth
+	// console.log(admin.auth)
+
+	admin
 		.verifyIdToken(token)
 		.then((decodedToken) => {
 			req.body = { ...parsedBody, token: decodedToken }

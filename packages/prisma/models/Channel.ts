@@ -44,7 +44,7 @@ export interface ChannelModel {
 				code?: string
 				description?: string
 				company?: string
-				url?: string
+				link?: string
 			}
 		}
 		setupPhotos: {
