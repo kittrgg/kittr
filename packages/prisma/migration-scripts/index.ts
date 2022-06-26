@@ -85,7 +85,7 @@ mongoose
 			}))
 
 			for (const base of formattedBases) {
-				await prisma.kitBase.create({
+				await prisma.warzoneKitBase.create({
 					data: {
 						id: base._id.toString(),
 						displayName: base.displayName,
@@ -102,16 +102,6 @@ mongoose
 							create: base.commandCodes.map((code) => ({
 								code: code
 							}))
-						},
-						stats: {
-							create: Object.entries(base.gameInfo.stats).map((stat) => {
-								const [key, value] = stat
-
-								return {
-									displayName: key,
-									value: String(value)
-								}
-							})
 						},
 						availableOptions: {
 							create: base.gameInfo.availableOptions as any
@@ -270,7 +260,7 @@ mongoose
 
 		const createKits = async () => {
 			// I need the new options from postgres so I can use their ids
-			const newOptions = await prisma.kitOption.findMany({
+			const newOptions = await prisma.warzoneKitOption.findMany({
 				include: { kitBase: true }
 			})
 
@@ -314,7 +304,7 @@ mongoose
 
 			for (const kit of allKits) {
 				try {
-					await prisma.kit.create({
+					await prisma.warzoneKit.create({
 						data: {
 							id: kit.id,
 							customTitle: kit.userData.customTitle,
@@ -384,17 +374,17 @@ mongoose
 							...channel.overlay,
 							primaryKit: foundPrimaryKit
 								? {
-										connect: {
-											id: foundPrimaryKit
-										}
-								  }
+									connect: {
+										id: foundPrimaryKit
+									}
+								}
 								: undefined,
 							secondaryKit: foundSecondaryKit
 								? {
-										connect: {
-											id: foundSecondaryKit
-										}
-								  }
+									connect: {
+										id: foundSecondaryKit
+									}
+								}
 								: undefined,
 							channel: {
 								connect: {

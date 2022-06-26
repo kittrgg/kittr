@@ -12,14 +12,3 @@ module.exports = {
 		"no-console": 1
 	}
 }
-
-// module.exports = {
-//   extends: ["next", "prettier"],
-//   rules: {
-//     "@next/next/no-html-link-for-pages": "off",
-//     "react/jsx-key": "off",
-//     "no-extra-semi": 1,
-// 		"semi": ["warn", "never"],
-// 		"no-unused-vars": 1,
-//   },
-// };
