@@ -16,7 +16,7 @@
 		"build": "tsup src/index.tsx --format esm,cjs --dts --external react",
 		"dev:currently-ignored": "tsup src/index.tsx --format esm,cjs --watch --dts --external react",
 		"lint": "eslint \"**/*.tsx\" --fix",
-		"clean": "rm -rf .turbo  && rm -rf dist && rm -rf coverage && rm -rf node_modules",
+		"clean": "rimraf ./.turbo  && rimraf ./dist && rimraf ./coverage && rimraf ./node_modules && echo UI Cleaned...",
 		"type-check": "tsc --pretty --noEmit"
 	},
 	"devDependencies": {

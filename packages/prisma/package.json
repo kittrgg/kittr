@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "prisma db push && tsup index.ts validator/index.ts --watch --dts",
-		"clean": "rm -rf .turbo && rm -rf node_modules",
+		"clean": "rimraf ./.turbo && rimraf ./node_modules && echo Prisma Cleaned...",
 		"db-deploy": "prisma migrate deploy",
 		"db-migrate": "prisma db push --force-reset",
 		"generate-schemas": "prisma generate",

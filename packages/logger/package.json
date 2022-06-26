@@ -12,7 +12,7 @@
 		"dev": "tsup src/**/index.ts --watch --dts --outDir .",
 		"build": "tsup src/**/index.ts --dts --outDir .",
 		"lint": "eslint \"**/*.ts\" --fix",
-		"clean": "rm -rf .turbo && rm -rf nextjs  && rm -rf node && rm -rf coverage && rm -rf node_modules",
+		"clean": "rimraf ./.turbo && rimraf ./nextjs  && rimraf ./node && rimraf ./coverage && rimraf ./node_modules && echo Logger Cleaned...",
 		"type-check": "tsc --pretty --noEmit"
 	},
 	"devDependencies": {

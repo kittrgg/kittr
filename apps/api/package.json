@@ -9,7 +9,7 @@
 		"test": "jest --coverage",
 		"test:watch": "jest --watch --coverage",
 		"lint": "eslint \"**/*.ts\" --ignore-pattern node_modules/",
-		"clean": "rm -rf .turbo && rm -rf coverage && rm -rf dist && rm -rf node_modules",
+		"clean": "rimraf ./.turbo && rimraf ./coverage && rimraf ./dist && rimraf ./node_modules && echo Api Cleaned...",
 		"type-check": "tsc --pretty --noEmit"
 	},
 	"dependencies": {

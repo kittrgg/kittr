@@ -9,7 +9,7 @@
 		"tsconfig/nextjs.json"
 	],
 	"scripts": {
-		"clean": "rm -rf node_modules"
+		"clean": "rimraf ./node_modules && echo Config Cleaned..."
 	},
 	"devDependencies": {
 		"@typescript-eslint/eslint-plugin": "5.12.1",
