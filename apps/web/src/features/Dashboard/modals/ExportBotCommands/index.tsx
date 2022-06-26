@@ -1,9 +1,9 @@
 import colors from "@Colors"
-import { TCommandMethod } from "@kittr/types/types"
-import { KitBase, Kit, CommandCode } from "@kittr/prisma"
 import { Button, Modal } from "@Components/shared"
 import { useAllKitBases } from "@Hooks/api/useAllKitBases"
 import { useAllKitOptions } from "@Hooks/api/useAllKitOptions"
+import { WarzoneCommandCode, WarzoneKit, WarzoneKitBase } from "@kittr/prisma"
+import { TCommandMethod } from "@kittr/types/types"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
@@ -14,8 +14,8 @@ import UserIncludeToggle from "./IncludeUserToggle"
 import MethodToggle from "./MethodToggle"
 import TwitchStrategyToggle from "./TwitchStrategyToggle"
 
-interface KitWithCommandCodes extends Kit {
-	base: KitBase & { commandCodes: CommandCode[] }
+interface KitWithCommandCodes extends WarzoneKit {
+	base: WarzoneKitBase & { commandCodes: WarzoneCommandCode[] }
 }
 
 /**
@@ -36,7 +36,7 @@ const ExportBotCommands = () => {
 	const { data: allKitBases } = useAllKitBases()
 	const { data: allKitOptions } = useAllKitOptions()
 
-	const createKitObject = <T extends Kit>(kit: T): T => {
+	const createKitObject = <T extends WarzoneKit>(kit: T): T => {
 		return {
 			...kit,
 			base: allKitBases!.find((allBases) => allBases.id === kit.baseId)!
@@ -55,7 +55,7 @@ const ExportBotCommands = () => {
 			)}
 
 			<CommandsTable
-				kits={data?.kits.map(createKitObject) ?? []}
+				kits={data?.warzoneKits.map(createKitObject) ?? []}
 				method={method}
 				commandStrategy={commandStrategy}
 				includeUser={includeUser}

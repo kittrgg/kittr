@@ -1,5 +1,6 @@
 import colors from "@Colors"
 import SVG from "@Components/shared/SVG"
+import { WarzoneKit, WarzoneKitBase, WarzoneKitBaseCategory, WarzoneKitOption } from "@kittr/prisma"
 import { setActiveWeapon, setIsSidebarOpen } from "@Redux/slices/displayr"
 import { useActiveWeapon } from "@Redux/slices/displayr/selectors"
 import { useDispatch } from "@Redux/store"
@@ -8,11 +9,17 @@ import { Routes } from "@Utils/lookups/routes"
 import { useRouter } from "next/router"
 import { Dispatch, SetStateAction, useEffect, useRef } from "react"
 import styled from "styled-components"
-import { KitWithBaseInDisplayr } from "@Types/prisma"
 
 interface Props {
 	baseName: string
-	kits: Array<KitWithBaseInDisplayr>
+	kits: Array<
+		WarzoneKit & {
+			options: WarzoneKitOption[]
+			base: WarzoneKitBase & {
+				category: WarzoneKitBaseCategory
+			}
+		}
+	>
 	setFilterQuery: Dispatch<SetStateAction<string>>
 	featured?: true
 	noRef?: true

@@ -40,7 +40,7 @@ const ChannelProfile = () => {
 		<Container>
 			<Header {...channel} isLive={twitchInfo?.channelData?.type === "live"} imagePath={coverPhotoPath} />
 			<Games games={channel.games} urlSafeName={channel.urlSafeName} />
-			<FeaturedKits kits={channel.kits} />
+			<FeaturedKits kits={channel.warzoneKits} />
 			{isPremium ? (
 				<>
 					<PopularClips clips={twitchInfo?.clips} brandColor={primaryColor} />

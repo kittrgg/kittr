@@ -3,11 +3,11 @@ import React, { useState } from "react"
 import colors from "@Colors"
 import { Button, SearchInput } from "@Components/shared"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
+import { WarzoneKit, WarzoneKitBase, WarzoneKitBaseCategory } from "@kittr/prisma"
 import { setIsSidebarOpen } from "@Redux/slices/displayr"
 import { useChannel, useSidebarState } from "@Redux/slices/displayr/selectors"
 import { useDispatch } from "@Redux/store"
 import Ad from "@Services/venatus/Ad"
-import { KitWithBaseInDisplayr } from "@Types/prisma"
 import { filterKitsByFeature } from "@Utils/helpers/filterKitsByFeature"
 import { sortAlphabetical } from "@Utils/helpers/sortAlphabetical"
 import Item from "./Item"
@@ -34,8 +34,13 @@ const Sidebar = () => {
 
 	const sanitizeForSearch = (string: string) => string.toLowerCase().replace(/[^0-9a-zA-Z]/g, "")
 
-	const sortForUniqueKitName = (arr: KitWithBaseInDisplayr[]): string[] =>
-		arr.map((elem) => elem.base.displayName).sort((a, b) => sortAlphabetical(a, b))
+	const sortForUniqueKitName = (
+		arr: (WarzoneKit & {
+			base: WarzoneKitBase & {
+				category: WarzoneKitBaseCategory
+			}
+		})[]
+	): string[] => arr.map((elem) => elem.base.displayName).sort((a, b) => sortAlphabetical(a, b))
 
 	const kits = unfilteredKits.filter((kit) =>
 		sanitizeForSearch(kit.base.displayName).includes(sanitizeForSearch(filterQuery))

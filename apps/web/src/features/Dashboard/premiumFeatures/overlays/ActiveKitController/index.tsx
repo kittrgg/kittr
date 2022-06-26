@@ -55,7 +55,6 @@ const ActiveKit = () => {
 		path: "channels/overlay/kit/edit",
 		opts: {
 			onError: (error) => {
-				console.error(error)
 				dispatch(setModal({ type: "Error Notification", data: "" }))
 			}
 		}
@@ -301,7 +300,7 @@ const ActiveKit = () => {
 								During channel, select the active kit below to update the overlay.
 							</Styled.Paragraph>
 							<Styled.Paragraph>Primary</Styled.Paragraph>
-							{data?.kits
+							{data?.warzoneKits
 								.slice()
 								.filter((kit) => data?.overlay?.secondaryKit?.id !== kit.id)
 								.map((kit) => ({ ...kit, base: allKitBases?.find((kitBase) => kitBase.id === kit.baseId) }))
@@ -356,7 +355,7 @@ const ActiveKit = () => {
 								<Styled.Paragraph style={{ marginTop: "40px" }}>Secondary</Styled.Paragraph>
 								<Styled.Paragraph style={{ fontStyle: "italic" }}>Optional</Styled.Paragraph>
 							</FlexRow>
-							{data?.kits
+							{data?.warzoneKits
 								.slice()
 								.filter((kit) => data?.overlay?.primaryKit?.id !== kit.id)
 								.map((kit) => ({ ...kit, base: allKitBases?.find((kitBase) => kitBase.id === kit.baseId) }))

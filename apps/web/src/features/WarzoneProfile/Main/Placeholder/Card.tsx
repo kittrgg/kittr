@@ -1,9 +1,9 @@
 import colors from "@Colors"
 import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
 import SVG from "@Components/shared/SVG"
+import { WarzoneKit, WarzoneKitBase, WarzoneKitBaseCategory, WarzoneKitOption } from "@kittr/prisma"
 import { setActiveWeapon } from "@Redux/slices/displayr"
 import { useDispatch } from "@Redux/store"
-import { DeserializeFullChannelProfileReturnType } from "@Services/orm/queries/channels/getFullChannelProfile"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { Routes } from "@Utils/lookups/routes"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
@@ -12,7 +12,12 @@ import { Fragment } from "react"
 import styled from "styled-components"
 
 interface Props {
-	kit: NonNullable<DeserializeFullChannelProfileReturnType>["warzoneKits"][0]
+	kit: WarzoneKit & {
+		options: WarzoneKitOption[]
+		base: WarzoneKitBase & {
+			category: WarzoneKitBaseCategory
+		}
+	}
 	containerStyles?: any
 }
 

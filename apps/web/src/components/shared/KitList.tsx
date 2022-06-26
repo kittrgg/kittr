@@ -1,13 +1,13 @@
-import styled from "styled-components"
 import colors from "@Colors"
-import SVG from "@Components/shared/SVG"
-import { header2 } from "@Styles/typography"
 import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
-import { Kit, KitBase, KitOption } from "@kittr/prisma"
+import SVG from "@Components/shared/SVG"
+import { WarzoneKit, WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
+import { header2 } from "@Styles/typography"
+import styled from "styled-components"
 
-interface CompleteKit extends Kit {
-	base: KitBase
-	options: KitOption[]
+interface CompleteKit extends WarzoneKit {
+	base: WarzoneKitBase
+	options: WarzoneKitOption[]
 }
 
 interface Props {

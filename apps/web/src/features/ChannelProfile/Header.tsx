@@ -30,10 +30,10 @@ interface Props extends Channel {
 
 	links: ChannelLink[]
 	plan: ChannelPlan | null
-	kits: WarzoneKit[]
+	warzoneKits: WarzoneKit[]
 }
 
-const Header = ({ id, games, displayName, profile, links, plan, kits, isLive, imagePath }: Props) => {
+const Header = ({ id, games, displayName, profile, links, plan, warzoneKits: kits, isLive, imagePath }: Props) => {
 	const isPremium = plan?.type === "PREMIUM"
 	const hasCoverPhoto = profile?.hasCoverPhoto
 	const userColor = profile?.brandColors.find((color) => color.type === "PRIMARY")?.value || colors.white

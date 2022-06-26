@@ -4,13 +4,13 @@ import FullScreen from "@Components/layouts/FullScreen"
 import NavMenu from "@Components/layouts/NavMenu"
 import { useDimensions } from "@Hooks/useDimensions"
 import { useLockBodyScroll } from "@Hooks/useLockBodyScroll"
+import { WarzoneKit, WarzoneKitBase, WarzoneKitBaseCategory, WarzoneKitOption } from "@kittr/prisma"
 import { setActiveWeapon, setChannel, setIsSidebarOpen } from "@Redux/slices/displayr"
 import { useActiveWeapon, useSidebarState } from "@Redux/slices/displayr/selectors"
 import { useDispatch } from "@Redux/store"
 import { InferQueryOutput } from "@Server/index"
 import { DeserializeFullChannelProfileReturnType } from "@Services/orm/queries/channels/getFullChannelProfile"
 import type { NonNullable } from "@Types/index"
-import type { KitWithBaseInDisplayr } from "@Types/prisma"
 import { Routes } from "@Utils/lookups/routes"
 import { useRouter } from "next/router"
 import { useEffect } from "react"
@@ -39,7 +39,16 @@ const WarzoneProfile = ({ channel }: Props) => {
 
 		return () => {
 			dispatch(setChannel({} as NonNullable<DeserializeFullChannelProfileReturnType>))
-			dispatch(setActiveWeapon({} as KitWithBaseInDisplayr))
+			dispatch(
+				setActiveWeapon(
+					{} as WarzoneKit & {
+						options: WarzoneKitOption[]
+						base: WarzoneKitBase & {
+							category: WarzoneKitBaseCategory
+						}
+					}
+				)
+			)
 			// dispatch(setPopularityRates({} as IPopularityRates))
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
