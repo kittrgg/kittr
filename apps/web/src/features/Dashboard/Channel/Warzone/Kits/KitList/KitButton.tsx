@@ -3,14 +3,14 @@ import styled from "styled-components"
 import colors from "@Colors"
 import { SVG } from "@Components/shared"
 import { useAllKitOptions } from "@Hooks/api/useAllKitOptions"
-import { Kit, KitBase, KitOption } from "@kittr/prisma"
+import { WarzoneKit, WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
 import { setActiveKit, setModal } from "@Redux/slices/dashboard"
 import { useActiveKit } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
 
 interface Props {
 	favorite?: true
-	kit: Kit & { base: KitBase; options: KitOption[] }
+	kit: WarzoneKit & { base: WarzoneKitBase; options: WarzoneKitOption[] }
 }
 
 const KitButton = ({ favorite, kit }: Props) => {
@@ -18,8 +18,6 @@ const KitButton = ({ favorite, kit }: Props) => {
 	const activeKit = useActiveKit()
 	const { customTitle, base } = kit
 	const { data: allOptions, isLoading } = useAllKitOptions()
-	const {data: options, isLoading} = useKitOption({baseId})
-	const {data: options, isLoading} = useKitOption({baseId, slot})
 
 	let title = ""
 
@@ -35,15 +33,14 @@ const KitButton = ({ favorite, kit }: Props) => {
 		<Button
 			key={kit.id}
 			active={activeKit.id == kit.id}
-			onClick={() =>	{
+			onClick={() => {
 				dispatch(
 					setActiveKit({
 						...kit,
 						options: kit.options.map((opt) => allOptions!.find((allOption) => allOption.id === opt.id)!)
 					})
 				)
- }
-			}
+			}}
 		>
 			<p style={{ maskImage: "linear-gradient(to right, black 65%, transparent 92%, transparent 100%)" }}>{title}</p>
 			{favorite && (

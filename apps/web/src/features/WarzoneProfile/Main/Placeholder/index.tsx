@@ -12,7 +12,7 @@ interface Props {
 }
 
 const Cards = ({ isMobile }: Props) => {
-	const { kits } = useChannel()
+	const { warzoneKits: kits } = useChannel()
 
 	const filteredKits = kits ? kits.slice().filter((kit) => kit.featured) : []
 

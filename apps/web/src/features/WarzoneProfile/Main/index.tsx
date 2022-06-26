@@ -1,5 +1,6 @@
 import colors from "@Colors"
 import { Button, SupportUs, SVG } from "@Components/shared"
+import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
 import { useDetectAdBlock } from "@Hooks/useDetectAdBlock"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
 import { setIsSidebarOpen } from "@Redux/slices/displayr"
@@ -11,16 +12,14 @@ import { useEffect, useRef } from "react"
 import styled from "styled-components"
 import AdTile from "./AdTile"
 import Attachments from "./Attachments"
+import ChannelQuote from "./ChannelQuote"
 import FavoriteBlueprint from "./FavoriteBlueprint"
 import Imagery from "./Imagery"
 import KitScroller from "./KitScroller"
 import Placeholder from "./Placeholder"
-import ChannelQuote from "./ChannelQuote"
 import Popularity from "./Popularity"
 import TopBar from "./TopBar"
 import WeaponBlurb from "./WeaponBlurb"
-import WeaponStats from "./WeaponStats"
-import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
 
 const Marketing = () => {
 	const areAdsBlocked = useDetectAdBlock()
@@ -90,7 +89,7 @@ const Main = () => {
 							}
 						/>
 					)}
-					{isMobile && <KitScroller availableKits={channelData.kits} />}
+					{isMobile && <KitScroller availableKits={channelData.warzoneKits} />}
 					{isMobile && (
 						<div>
 							<Ad placementType="d300x50" updateTrigger={activeWeapon} />
@@ -108,7 +107,7 @@ const Main = () => {
 						</>
 					)}
 					<Marketing />
-					<WeaponStats />
+					{/* <WeaponStats /> */}
 					{isMobile && (
 						<div>
 							<Ad placementType="d300x50" updateTrigger={activeWeapon} />

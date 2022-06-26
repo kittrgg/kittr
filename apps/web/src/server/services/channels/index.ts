@@ -135,7 +135,8 @@ export const getDashboardChannel = async ({ id }: { id: string }) => {
 							category: true,
 							commandCodes: true
 						}
-					}
+					},
+					options: true
 				}
 			},
 			links: true,
@@ -232,7 +233,8 @@ export const getChannelProfileByUrlSafeName = async (urlSafeName: string) => {
 						include: {
 							category: true
 						}
-					}
+					},
+					options: true
 				}
 			},
 			links: true,

@@ -1,6 +1,6 @@
-import type { NextApiRequest, NextApiResponse } from "next"
-import { createHandler } from "@Utils/middlewares/createHandler"
 import { prisma } from "@kittr/prisma"
+import { createHandler } from "@Utils/middlewares/createHandler"
+import type { NextApiRequest, NextApiResponse } from "next"
 
 const handler = createHandler()
 

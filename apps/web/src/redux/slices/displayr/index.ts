@@ -1,18 +1,25 @@
+import { WarzoneKit, WarzoneKitBase, WarzoneKitBaseCategory, WarzoneKitOption } from "@kittr/prisma"
 import { IPopularityRates } from "@kittr/types/popularity"
 import { createSlice } from "@reduxjs/toolkit"
 import { InferQueryOutput } from "@Server/index"
-import { KitWithBaseInDisplayr } from "@Types/prisma"
+
+type ActiveWeaponKit = WarzoneKit & {
+	options: WarzoneKitOption[]
+	base: WarzoneKitBase & {
+		category: WarzoneKitBaseCategory
+	}
+}
 
 export const displayrSlice = createSlice({
 	name: "displayr",
 	initialState: {
-		activeWeapon: {} as KitWithBaseInDisplayr,
+		activeWeapon: {} as ActiveWeaponKit,
 		channel: {} as NonNullable<InferQueryOutput<"channels/profile/get">>,
 		isSidebarOpen: false,
 		popularityRates: {} as IPopularityRates
 	},
 	reducers: {
-		setActiveWeapon: (state, action: { payload: KitWithBaseInDisplayr }) => {
+		setActiveWeapon: (state, action: { payload: ActiveWeaponKit }) => {
 			state.activeWeapon = action.payload
 		},
 		setChannel: (state, action: { payload: NonNullable<InferQueryOutput<"channels/profile/get">> }) => {

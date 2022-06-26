@@ -22,13 +22,13 @@ const EditorSnackbar = () => {
 		opts: {
 			onMutate: () => {
 				// Grab the existing kit array and map them to just their titles
-				let kitArr = channelData?.kits.slice() as KitWithOptionalId[]
+				let kitArr = channelData?.warzoneKits.slice() as KitWithOptionalId[]
 
 				// Grab the new kit's name
 				const newKitName = activeKit.base.displayName + activeKit.customTitle
 
 				// Is this an existing kit being updated?
-				let index = channelData?.kits.findIndex((kit) => kit.id === activeKit.id) ?? -1 // -1 means there's no kit
+				let index = channelData?.warzoneKits.findIndex((kit) => kit.id === activeKit.id) ?? -1 // -1 means there's no kit
 
 				if (!kitArr) {
 					return
