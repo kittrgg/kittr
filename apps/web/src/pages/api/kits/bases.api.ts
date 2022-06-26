@@ -9,7 +9,7 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
 	const { gameId } = req.query as { gameId: string }
 
 	try {
-		const result = await prisma.kitBase.findMany({
+		const result = await prisma.warzoneKitBase.findMany({
 			where: {
 				gameId
 			}
