@@ -16,4 +16,9 @@ if (!admin.apps.length) {
 	}
 }
 
-export default admin.auth()
+const exports = {
+	auth: admin.auth(),
+	storage: admin.storage(),
+}
+
+export default exports

@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next"
-import auth from "@Services/firebase/admin"
+import admin from "@Services/firebase/admin"
 
 export const userAuth = async (req: NextApiRequest, res: NextApiResponse, next: any) => {
 	let parsedBody = {}
@@ -16,7 +16,7 @@ export const userAuth = async (req: NextApiRequest, res: NextApiResponse, next: 
 
 	const token = authorization.split(" ")[1]
 
-	auth
+	admin.auth
 		.verifyIdToken(token)
 		.then((decodedToken) => {
 			req.body = { ...parsedBody, token: decodedToken }

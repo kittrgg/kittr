@@ -10,7 +10,7 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
 	const { uid } = req.query
 
 	try {
-		const user = await admin.getUser(uid as string)
+		const user = await admin.auth.getUser(uid as string)
 
 		return res.status(200).json({
 			uid: user.uid,

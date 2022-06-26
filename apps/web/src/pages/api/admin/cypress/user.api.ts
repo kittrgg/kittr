@@ -13,6 +13,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 	if (process.env.NEXT_PUBLIC_ENABLE_SEEDING) {
 		console.log("Seeding firebase emulators...")
 		admin
+			.auth
 			.deleteUsers([
 				"w5lMLvVLL3uJNRuoqSWvYjNIJ1GF",
 				"VeoTKmMs72amUYzPRovBGJDJnGn1",
@@ -22,11 +23,11 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 			])
 			.then(async () => {
 				try {
-					const user1 = await admin.createUser(managersFixture["w5lMLvVLL3uJNRuoqSWvYjNIJ1GF"])
-					const user2 = await admin.createUser(managersFixture["VeoTKmMs72amUYzPRovBGJDJnGn1"])
-					const user3 = await admin.createUser(managersFixture["XnRFlNNbQ4d3K6nfEIRGBJm5nER2"])
-					const user4 = await admin.createUser(managersFixture["AnRFlNNbQ4d3K6nfEIRGBJm5nER3"])
-					const user5 = await admin.createUser(managersFixture["BnRFlNNbQ4d3K6nfEIRGBJm5nER8"])
+					const user1 = await admin.auth.createUser(managersFixture["w5lMLvVLL3uJNRuoqSWvYjNIJ1GF"])
+					const user2 = await admin.auth.createUser(managersFixture["VeoTKmMs72amUYzPRovBGJDJnGn1"])
+					const user3 = await admin.auth.createUser(managersFixture["XnRFlNNbQ4d3K6nfEIRGBJm5nER2"])
+					const user4 = await admin.auth.createUser(managersFixture["AnRFlNNbQ4d3K6nfEIRGBJm5nER3"])
+					const user5 = await admin.auth.createUser(managersFixture["BnRFlNNbQ4d3K6nfEIRGBJm5nER8"])
 
 					if (user1 && user2 && user3 && user4 && user5) {
 						console.log("Seeding firebase emulators...done")

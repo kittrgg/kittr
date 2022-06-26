@@ -174,7 +174,7 @@ model WarzoneKit {
   options                    WarzoneKitOption[]
   game                       Game               @relation(fields: [gameId], references: [id])
   gameId                     String
-  base                       WarzoneKitBase     @relation(fields: [baseId], references: [id])
+  base                       WarzoneKitBase     @relation(fields: [baseId], references: [id], onDelete: Cascade)
   baseId                     String
   channel                    Channel            @relation(fields: [channelId], references: [id], onDelete: Cascade)
   channelId                  String
@@ -207,7 +207,7 @@ model WarzoneKitOption {
   slotKey        String
   orderPlacement Int
   kits           WarzoneKit[]
-  kitBase        WarzoneKitBase @relation(fields: [kitBaseId], references: [id])
+  kitBase        WarzoneKitBase @relation(fields: [kitBaseId], references: [id], onDelete: Cascade)
   kitBaseId      String
 }
 
@@ -235,7 +235,7 @@ model WarzoneKitBaseCategory {
 model WarzoneCommandCode {
   id        String         @id @default(cuid())
   code      String
-  kitBase   WarzoneKitBase @relation(fields: [kitBaseId], references: [id])
+  kitBase   WarzoneKitBase @relation(fields: [kitBaseId], references: [id], onDelete: Cascade)
   kitBaseId String
 }
 

@@ -21,7 +21,8 @@ interface Props {
 export const KitBaseForm = ({ base, onFinished }: Props) => {
 	const [formValues, setFormValues] = useState(base)
 	const [isEditingOption, setIsEditingOption] = useState<WarzoneKitOption | null>(null)
-const {mutate} = trpc.useMutation("admin/warzone/kit-bases/update")
+const {mutate: updateBase} = trpc.useMutation("admin/warzone/kit-bases/update")
+const {mutate: deleteBase} = trpc.useMutation("admin/warzone/kit-bases/delete")
 
 	const changeTextField = (key: keyof typeof base) => (e: any) => {
 		console.log(e.target.value)
@@ -79,7 +80,8 @@ const {mutate} = trpc.useMutation("admin/warzone/kit-bases/update")
 					<Button variant="outline" onClick={ onFinished } style={{ margin: "1rem 1rem 1rem 0rem" }}>
 						Cancel
 					</Button>
-					<Button variant="filled" onClick={() => mutate({base: formValues})}>Save</Button>
+					<Button variant="filled" onClick={() => updateBase({base: formValues})}>Save</Button>
+					<Button variant="filled" color="red" onClick={() => deleteBase({kitBaseId: formValues.id})}>Delete</Button>
 				</div>
 
 				{isEditingOption ? (

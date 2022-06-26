@@ -18,10 +18,7 @@ const Page = () => {
 
 	if (isEditingBase) {
 		return <KitBaseForm base={isEditingBase} onFinished={() => {
-			// mutate()
-
 			setIsEditingBase(null)
-
 		}} />
 	}
 

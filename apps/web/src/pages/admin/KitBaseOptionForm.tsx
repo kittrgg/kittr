@@ -2,6 +2,7 @@ import { WarzoneKitOption } from "@kittr/prisma"
 import { Button, NumberInput, SubSection, Text, TextInput } from "@kittr/ui"
 import { useState } from "react"
 import styled from "styled-components"
+import { trpc } from "@Server/createHooks"
 
 const Container = styled.div`
 	margin-bottom: 0.5rem;
@@ -13,6 +14,8 @@ interface Props {
 }
 
 export const KitBaseOptionForm = ({ option, onFinished }: Props) => {
+	const {mutate: updateOption} = trpc.useMutation("admin/warzone/kit-bases/options/update")
+	const {mutate: deleteOption} = trpc.useMutation("admin/warzone/kit-bases/options/delete")
 	const [formValues, setFormValues] = useState(option)
 
 	const changeTextField = (key: keyof typeof option) => (e: any) => {
@@ -23,7 +26,7 @@ export const KitBaseOptionForm = ({ option, onFinished }: Props) => {
 		setFormValues((formValues) => ({ ...formValues, [key]: e }))
 	}
 
-	console.log(option)
+	// console.log(option)
 
 	return (
 		<SubSection
@@ -68,7 +71,8 @@ export const KitBaseOptionForm = ({ option, onFinished }: Props) => {
 				<Button variant="outline" onClick={onFinished} style={{ margin: "1rem 1rem 0rem 0rem" }}>
 					Cancel
 				</Button>
-				<Button variant="filled">Save</Button>
+				<Button variant="filled" style={{ margin: "1rem 1rem 0rem 0rem" }} onClick={() => updateOption(formValues)}>Save</Button>
+			<Button color="red" onClick={() => deleteOption({optionId: formValues.id})}>Delete</Button>
 			</div>
 		</SubSection>
 	)

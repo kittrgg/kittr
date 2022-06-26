@@ -16,7 +16,7 @@ export const authenticateAdmin = async ({ ctx, next }: { ctx: Context; next: Nex
       code: "UNAUTHORIZED"
     })
   }
-  const firebaseUser = await admin.verifyIdToken(ctx.userToken)
+  const firebaseUser = await admin.auth.verifyIdToken(ctx.userToken)
 
   const administrator = await prisma.administrator.findFirst({
     where: {

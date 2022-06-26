@@ -1,9 +1,9 @@
-import { Loader } from "."
+import { List } from "."
 
 export default {
 	title: "Loader",
-	component: Loader,
+	component: List,
 	argTypes: {}
 }
 
-export const Default = (args: any) => <Loader {...args} />
+export const Default = (args: any) => <List {...args} />
