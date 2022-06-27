@@ -9,6 +9,6 @@ interface Props extends MantineButtonProps {
 	onClick: () => void
 }
 
-export const Button: React.FC<MantineButtonProps> = (props) => {
+export const Button: React.FC<Props> = (props) => {
 	return <MantineButton radius="lg" size="lg" {...props} />
 }
