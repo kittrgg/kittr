@@ -1,11 +1,7 @@
-import { useAllKitBases } from "@Hooks/api/useAllKitBases"
-import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
+import { useAllKitBases } from "@Hooks/trpc/useAllKitBases"
 
 export const useChannelKitsByGameId = (gameId: string) => {
-	const { data } = useDashboardChannel()
-	const { data: allKitBases } = useAllKitBases()
-	const filteredKits = data?.warzoneKits
-		.map((userKit) => ({ ...userKit, base: allKitBases?.find((allKit) => allKit.id === userKit.baseId) }))
-		.filter((kit) => kit?.base?.gameId === gameId)
+	const { data: allKitBases } = useAllKitBases({ include: {} })
+	const filteredKits = allKitBases?.filter((kit) => kit?.gameId === gameId)
 	return filteredKits
 }

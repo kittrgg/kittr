@@ -2,7 +2,7 @@ import colors from "@Colors"
 import { Button, ColorPicker, MultiButton, Spinner, SVG } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import PremiumCallout from "@Features/Dashboard/PremiumCallout"
-import { useAllKitBases } from "@Hooks/api/useAllKitBases"
+import { useAllKitBases } from "@Hooks/trpc/useAllKitBases"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { setModal } from "@Redux/slices/dashboard"
 import { useManagerRole, usePremiumStatus } from "@Redux/slices/dashboard/selectors"
@@ -21,7 +21,7 @@ const ActiveKit = () => {
 	const { data } = useDashboardChannel()
 	const role = useManagerRole()
 	const { isPremium } = usePremiumStatus()
-	const { data: allKitBases } = useAllKitBases()
+	const { data: allKitBases } = useAllKitBases({include: {}})
 	const { mutate: mutateToggle, isLoading: isMutatingToggle } = useDashboardMutator({
 		path: "channels/overlay/toggle",
 		opts: {

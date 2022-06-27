@@ -1,6 +1,6 @@
 import colors from "@Colors"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
-import { useAllKitBases } from "@Hooks/api/useAllKitBases"
+import { useAllKitBases } from "@Hooks/trpc/useAllKitBases"
 import { KitWithOptionalId } from "@kittr/types/kits"
 import { clearKitEditor, resetToInitialKit, setModal } from "@Redux/slices/dashboard"
 import { useActiveKit, useChannelData, useInitialKit, useModal } from "@Redux/slices/dashboard/selectors"
@@ -16,7 +16,7 @@ const EditorSnackbar = () => {
 	const activeKit = useActiveKit()
 	const { data: channelData } = useChannelData()
 	const modal = useModal()
-	const { data: allKitBases } = useAllKitBases()
+	const { data: allKitBases } = useAllKitBases({include: {}})
 	const { mutate, isLoading } = useDashboardMutator({
 		path: "channels/kits/upsert",
 		opts: {

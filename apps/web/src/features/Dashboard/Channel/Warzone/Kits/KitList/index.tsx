@@ -1,6 +1,6 @@
 import colors from "@Colors"
 import { Button } from "@Components/shared"
-import { useAllKitBases } from "@Hooks/api/useAllKitBases"
+import { useAllKitBases } from "@Hooks/trpc/useAllKitBases"
 import { Loader } from "@kittr/ui"
 import { createNewKit } from "@Redux/slices/dashboard"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
@@ -14,7 +14,7 @@ const KitList = () => {
 	const dispatch = useDispatch()
 	const { data } = useChannelData()
 	const noKits = data?.warzoneKits.length === 0
-	const {isLoading: isLoadingBases} = useAllKitBases()
+	const {isLoading: isLoadingBases} = useAllKitBases({include: {}})
 
 	if (noKits) {
 		return (

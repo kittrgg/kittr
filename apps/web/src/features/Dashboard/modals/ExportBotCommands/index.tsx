@@ -1,6 +1,6 @@
 import colors from "@Colors"
 import { Button, Modal } from "@Components/shared"
-import { useAllKitBases } from "@Hooks/api/useAllKitBases"
+import { useAllKitBases } from "@Hooks/trpc/useAllKitBases"
 import { TCommandMethod } from "@kittr/types/types"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
@@ -27,7 +27,7 @@ const ExportBotCommands = () => {
 	const [method, setMethod] = useState<TCommandMethod>("nightbot")
 	const [commandStrategy, setCommandStrategy] = useState<"edit" | "add">("edit")
 	const [includeUser, setIncludeUser] = useState(true)
-	const { data: allKitBases } = useAllKitBases()
+	const { data: allKitBases } = useAllKitBases({include: {}})
 
 	if (!allKitBases) return null
 
