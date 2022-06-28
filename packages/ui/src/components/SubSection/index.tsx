@@ -20,7 +20,8 @@ export const SubSection = ({ title, action, children }: Props) => {
 				borderStyle: "solid",
 				borderRadius: theme.radius.lg,
 				height: "100%",
-				position: "relative"
+				position: "relative",
+				marginBottom: "1rem"
 			})}
 		>
 			{action && <Box sx={{ float: "right" }}>{action}</Box>}

@@ -1,47 +1,91 @@
 import { WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
-import { Button, List, NumberInput, Section, Text, Textarea, TextInput, Title } from "@kittr/ui"
+import { Button, List, NumberInput, Section, Select, SubSection, Text, Textarea, TextInput } from "@kittr/ui"
 import SVG from "@kittr/ui/src/components/SVG"
 import { ActionIcon } from "@mantine/core"
+import { trpc } from "@Server/createHooks"
 import { useState } from "react"
 import styled from "styled-components"
 import { KitBaseOptionForm } from "./KitBaseOptionForm"
-import { trpc } from "@Server/createHooks"
+
+const groupBy = (xs: any, key: string) => {
+	return xs.reduce(function (rv, x) {
+		;(rv[x[key]] = rv[x[key]] || []).push(x)
+		return rv
+	}, {})
+}
 
 const Container = styled.div`
 	margin-bottom: 0.5rem;
 `
 
+type FormState = WarzoneKitBase & {
+	availableOptions: WarzoneKitOption[]
+}
+
 interface Props {
-	base: WarzoneKitBase & {
-		availableOptions: WarzoneKitOption[]
-	}
+	kitBaseId?: string
+	gameId: string
 	onFinished: () => void
 }
 
-export const KitBaseForm = ({ base, onFinished }: Props) => {
-	const [formValues, setFormValues] = useState(base)
-	const [isEditingOption, setIsEditingOption] = useState<WarzoneKitOption | null>(null)
-const {mutate: updateBase} = trpc.useMutation("admin/warzone/kit-bases/update")
-const {mutate: deleteBase} = trpc.useMutation("admin/warzone/kit-bases/delete")
+export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
+	const [formValues, setFormValues] = useState<Partial<FormState>>({ gameId })
 
-	const changeTextField = (key: keyof typeof base) => (e: any) => {
-		console.log(e.target.value)
+	const { refetch } = trpc.useQuery(["admin/warzone/kit-bases/get", { kitBaseId: kitBaseId! }], {
+		enabled: !!kitBaseId,
+		onSuccess: (data) => {
+			setFormValues(data || {})
+		},
+		refetchOnMount: true
+	})
+	const { data: kitBaseCategories } = trpc.useQuery(["admin/warzone/kit-bases/categories/list"])
+
+	const [isEditingOption, setIsEditingOption] = useState<WarzoneKitOption | null>(null)
+	const [isCreatingOption, setIsCreatingOption] = useState<{
+		slotKey: string
+		kitBaseId?: string
+		gameId?: string
+	} | null>(null)
+	const { mutate: updateBase } = trpc.useMutation("admin/warzone/kit-bases/update")
+	const { mutate: createBase } = trpc.useMutation("admin/warzone/kit-bases/create")
+	const { mutate: deleteBase } = trpc.useMutation("admin/warzone/kit-bases/delete")
+
+	const changeTextField = (key: keyof FormState) => (e: any) => {
 		setFormValues((formValues) => ({ ...formValues, [key]: e.target.value }))
 	}
 
-	const changeNumberField = (key: keyof typeof base) => (e: any) => {
+	const changeNumberField = (key: keyof FormState) => (e: any) => {
 		setFormValues((formValues) => ({ ...formValues, [key]: e }))
+	}
+
+	const changeSelectField = (key: keyof FormState) => (e: any) => {
+		setFormValues((formValues) => ({ ...formValues, [key]: e }))
+	}
+
+	const getOptions = () => {
+		const groupedOptions = groupBy(formValues.availableOptions || [], "slotKey")
+
+		return {
+			Muzzle: [],
+			Barrel: [],
+			Laser: [],
+			Optic: [],
+			Stock: [],
+			Ammunition: [],
+			Underbarrel: [],
+			Perk: [],
+			...groupedOptions
+		}
 	}
 
 	return (
 		<div style={{ margin: "1rem" }}>
 			<Section
-				title="Editing Kit Base"
+				title={kitBaseId ? "Editing Kit Base" : "Creating Kit Base"}
 				action={
 					<>
-						<Text color="gray">Base ID: {base.id}</Text>
-						<Text color="gray">Game ID: {base.gameId}</Text>
-						<Text color="gray">Category ID: {base.categoryId}</Text>
+						{formValues.id && <Text color="gray">Base ID: {formValues.id}</Text>}
+						{formValues.gameId && <Text color="gray">Game ID: {formValues.gameId}</Text>}
 					</>
 				}
 			>
@@ -51,6 +95,16 @@ const {mutate: deleteBase} = trpc.useMutation("admin/warzone/kit-bases/delete")
 						placeholder="Display Name"
 						value={formValues.displayName}
 						onChange={changeTextField("displayName")}
+					/>
+				</Container>
+
+				<Container>
+					<Select
+						data={(kitBaseCategories || []).map((category) => ({ value: category.id, label: category.displayName }))}
+						label="Category"
+						placeholder="Category"
+						value={formValues.categoryId}
+						onChange={changeSelectField("categoryId")}
 					/>
 				</Container>
 
@@ -76,46 +130,109 @@ const {mutate: deleteBase} = trpc.useMutation("admin/warzone/kit-bases/delete")
 						onChange={changeNumberField("maxOptions")}
 					/>
 				</Container>
-				<div>
-					<Button variant="outline" onClick={ onFinished } style={{ margin: "1rem 1rem 1rem 0rem" }}>
-						Cancel
-					</Button>
-					<Button variant="filled" onClick={() => updateBase({base: formValues})}>Save</Button>
-					<Button variant="filled" color="red" onClick={() => deleteBase({kitBaseId: formValues.id})}>Delete</Button>
-				</div>
 
-				{isEditingOption ? (
-					<KitBaseOptionForm option={isEditingOption} onFinished={() => setIsEditingOption(null)} />
+				{isCreatingOption ? (
+					<KitBaseOptionForm
+						initialValues={isCreatingOption}
+						onFinished={() => {
+							setIsCreatingOption(null)
+							refetch()
+						}}
+					/>
+				) : isEditingOption ? (
+					<KitBaseOptionForm
+						initialValues={isEditingOption}
+						onFinished={() => {
+							setIsEditingOption(null)
+							refetch()
+						}}
+					/>
 				) : (
 					<>
-						<Title order={2} preset="h3" style={{ marginTop: "3rem" }}>
-							Available Options
-						</Title>
-
-						<List>
-							{base.availableOptions?.map((option) => (
-								<List.Item
-									style={{ borderBottom: "1px solid white", padding: "1rem" }}
-									sx={(theme) => ({
-										"&:hover": {
-											backgroundColor: theme.colors.gray[8]
-										}
-									})}
+						{/* Using formValues.id here to know if we are editing the kit base */}
+						{formValues.id &&
+							Object.entries<WarzoneKitOption[]>(getOptions()).map(([slotKey, options]) => (
+								<SubSection
+									title={slotKey}
+									action={
+										<Button
+											onClick={() =>
+												setIsCreatingOption({ slotKey, kitBaseId: formValues?.id, gameId: formValues?.gameId })
+											}
+										>
+											Add {slotKey}
+										</Button>
+									}
 								>
-									{option.displayName}
-									<ActionIcon
-										radius="lg"
-										size="lg"
-										style={{ float: "right" }}
-										onClick={() => setIsEditingOption(option)}
-									>
-										<SVG.Pencil />
-									</ActionIcon>
-								</List.Item>
+									<List>
+										{options?.map((option) => (
+											<List.Item
+												style={{ borderBottom: "1px solid white", padding: "1rem" }}
+												sx={(theme) => ({
+													"&:hover": {
+														backgroundColor: theme.colors.gray[8]
+													}
+												})}
+											>
+												{option.displayName}
+												<ActionIcon
+													radius="lg"
+													size="lg"
+													style={{ float: "right" }}
+													onClick={() => setIsEditingOption(option)}
+												>
+													<SVG.Pencil />
+												</ActionIcon>
+											</List.Item>
+										))}
+									</List>
+								</SubSection>
 							))}
-						</List>
 					</>
 				)}
+
+				<div>
+					<Button variant="outline" onClick={onFinished} style={{ margin: "1rem 1rem 1rem 0rem" }}>
+						Cancel
+					</Button>
+					<Button
+						variant="filled"
+						onClick={() => {
+							if (formValues.id) {
+								updateBase(
+									{ base: formValues },
+									{
+										onSuccess: onFinished
+									}
+								)
+							} else {
+								createBase(
+									{ base: formValues as FormState, commandCodes: [] },
+									{
+										onSuccess: onFinished
+									}
+								)
+							}
+						}}
+					>
+						Save
+					</Button>
+					<Button
+						variant="filled"
+						color="red"
+						onClick={() =>
+							deleteBase(
+								{ kitBaseId: formValues.id },
+								{
+									onSuccess: onFinished
+								}
+							)
+						}
+						style={{ margin: "1rem 0rem 0rem 0rem", float: "right" }}
+					>
+						Delete
+					</Button>
+				</div>
 			</Section>
 		</div>
 	)
