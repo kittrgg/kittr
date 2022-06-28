@@ -7,7 +7,7 @@ const ChannelsSearch = ({ ...props }) => {
 	return (
 		<AdPageWrapper title="Search | kittr" description="Who ya got? | kittr">
 			<ResponsiveBanner />
-			<ChannelSearch />
+			{/* <ChannelSearch /> */}
 			<H1>CHANNELS</H1>
 			<Paragraph>Enter a search term.</Paragraph>
 		</AdPageWrapper>

@@ -66,7 +66,7 @@ const GameProfile = () => {
 
 			<ChannelsContainer>
 				<ChannelsTitle>CHANNELS</ChannelsTitle>
-				<ChannelSearch />
+				{/* <ChannelSearch /> */}
 				{channels?.length === 0 && (
 					<>
 						<p style={{ marginTop: "24px" }}>Hm, no channels here.</p>

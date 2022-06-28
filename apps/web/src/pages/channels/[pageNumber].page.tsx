@@ -35,7 +35,7 @@ const PageOfChannels = () => {
 		return (
 			<AdPageWrapper title={`Channels - Page ${page} | kittr`} description="Full channels of channels on kittr.">
 				<H1>CHANNELS</H1>
-				<ChannelSearch />
+				{/* <ChannelSearch /> */}
 				<Paragraph>Oops, { "doesn't" } look like { "there's" } anyone here.</Paragraph>
 				<Link href={Routes.CHANNEL.LIST}>
 					<a
