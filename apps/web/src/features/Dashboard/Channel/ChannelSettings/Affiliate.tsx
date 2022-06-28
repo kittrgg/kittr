@@ -23,17 +23,6 @@ const Affiliate = () => {
 		}
 	})
 
-	// const { mutate } = useDashboardMutator(async (affiliateId: string) => {
-	// 	const result = await fetch.delete({
-	// 		url: `/api/channel/meta/affiliate`,
-	// 		body: { channelId: channelData?.id, affiliateId },
-	// 		headers: { authorization: `Bearer ${await getToken()}` }
-	// 	})
-
-	// 	if (result) {
-	// 	}
-	// })
-
 	let rootUrl = new URL(window.location.origin.toString()).host.replace("www.", "")
 
 	const commandString = `!addcom !affiliates ${rootUrl}/c/${channelData?.urlSafeName}#affiliates`
