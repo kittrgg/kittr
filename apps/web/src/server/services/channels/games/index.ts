@@ -59,6 +59,9 @@ export const getChannelsByGame = async ({
 		take,
 		include: {
 			profile: true
+		},
+		orderBy: {
+			viewCount: "desc"
 		}
 	})
 	return channels
