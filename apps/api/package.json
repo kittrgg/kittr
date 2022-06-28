@@ -3,6 +3,7 @@
 	"version": "0.0.0",
 	"scripts": {
 		"start": "ts-node src/index.ts",
+		"serve-local": "ts-node src/index.ts",
 		"dev": "nodemon src/index.ts",
 		"test": "jest --coverage",
 		"test:watch": "jest --watch --coverage",

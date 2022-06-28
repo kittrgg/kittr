@@ -4,6 +4,7 @@ import { Head, NoItemFound } from "@Components/shared"
 import WarzoneProfile from "@Features/WarzoneProfile"
 import { trpc } from "@Server/createHooks"
 import { createSSGHelper } from "@Server/createSSGHelper"
+import {prisma} from '@kittr/prisma'
 
 const GamePresentation = () => {
 	const { isFallback, query } = useRouter()

@@ -50,6 +50,9 @@
 		"seed": {
 			"cache": false
 		},
+		"start": {
+			"cache": false
+		},
 		"type-check": {
 			"outputs": []
 		}

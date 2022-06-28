@@ -32,6 +32,7 @@
 		"docker:down": "docker compose -f docker-compose.yml down",
 		"dev:deploy": "docker-compose -f docker-compose.deploy.yml up",
 		"build": "turbo run build",
+		"start": "turbo run start",
 		"test:e2e": "cd lib && cd e2e && npm run cypress:e2e",
 		"prepare": "husky install && chmod ug+x .husky/*"
 	},

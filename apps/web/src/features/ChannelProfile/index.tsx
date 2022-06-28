@@ -22,7 +22,8 @@ const ChannelProfile = () => {
 	const { data: channel } = trpc.useQuery(["channels/profile/get", urlChannel])
 	const twitchLink = channel?.links.find((channel) => channel.property === "TWITCH")?.value!
 	const { data: twitchInfo } = trpc.useQuery(["twitch/profile-page", twitchLink], {
-		enabled: !!twitchLink
+		enabled: !!twitchLink,
+		retry: false
 	})
 
 	const isPremium = channel?.plan?.type === "PREMIUM"

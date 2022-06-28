@@ -42,13 +42,15 @@ export const getStaticProps = async ({ params }: { params: { channel: string } }
 	const { channel: urlSafeName } = params
 	const ssg = await createSSGHelper()
 
-	console.log(params)
-
 	const channel = await ssg.fetchQuery("channels/profile/get", urlSafeName)
 	const twitchLink = channel?.links.find((channel) => channel.property === "TWITCH")?.value
 
-	if (twitchLink) {
-		await ssg.fetchQuery("twitch/profile-page", twitchLink)
+	try {
+		if (twitchLink) {
+			await ssg.fetchQuery("twitch/profile-page", twitchLink)
+		}
+	} catch (error) {
+		console.log(`A Twitch profile was not found for user with urlSafeName ${urlSafeName}.`)
 	}
 
 	return {

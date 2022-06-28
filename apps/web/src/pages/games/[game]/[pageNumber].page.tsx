@@ -10,6 +10,7 @@ import ResponsiveBanner from "@Services/venatus/ResponsiveBanner"
 import { Routes } from "@Utils/lookups/routes"
 import Link from "next/link"
 import { useRouter } from "next/router"
+import {prisma} from '@kittr/prisma'
 import styled from "styled-components"
 
 const CHANNELS_PER_PAGE = 10

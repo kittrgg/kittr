@@ -12,6 +12,7 @@
 		"db-deploy": "prisma migrate deploy",
 		"db-migrate": "prisma db push --force-reset",
 		"generate-schemas": "prisma generate",
+		"build": "prisma generate",
 		"db-studio": "prisma studio",
 		"migrate-data": "prisma db push --force-reset && ts-node ./migration-scripts/index.ts",
 		"seed": "prisma db push --force-reset && ts-node ./migration-scripts/index.ts",
