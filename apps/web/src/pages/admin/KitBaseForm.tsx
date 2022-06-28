@@ -8,7 +8,7 @@ import styled from "styled-components"
 import { KitBaseOptionForm } from "./KitBaseOptionForm"
 
 const groupBy = (xs: any, key: string) => {
-	return xs.reduce(function (rv, x) {
+	return xs.reduce(function (rv: any, x: any) {
 		;(rv[x[key]] = rv[x[key]] || []).push(x)
 		return rv
 	}, {})
@@ -200,7 +200,7 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 						onClick={() => {
 							if (formValues.id) {
 								updateBase(
-									{ base: formValues },
+									{ base: formValues as FormState },
 									{
 										onSuccess: onFinished
 									}
@@ -222,7 +222,7 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 						color="red"
 						onClick={() =>
 							deleteBase(
-								{ kitBaseId: formValues.id },
+								{ kitBaseId: formValues.id as string },
 								{
 									onSuccess: onFinished
 								}

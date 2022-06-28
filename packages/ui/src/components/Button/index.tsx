@@ -4,7 +4,7 @@ import {
 } from "@mantine/core"
 import React from "react"
 
-interface Props extends MantineButtonProps {
+export interface Props extends MantineButtonProps {
 	children?: React.ReactNode
 	onClick: () => void
 }
