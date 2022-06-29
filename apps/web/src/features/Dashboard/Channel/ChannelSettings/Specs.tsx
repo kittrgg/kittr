@@ -4,7 +4,6 @@ import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useSpecs } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import { getToken } from "@Services/firebase/auth/getToken"
 import { paragraph } from "@Styles/typography"
 import { useState } from "react"
 import styled from "styled-components"
@@ -63,11 +62,11 @@ const Specs = () => {
 							</SpecInfo>
 							<IconButtons>
 								<SVG.Pencil
-									data-cy={`${spec.partName.replace(/ /g, "-")}-update-spec`}
+									data-cy={`${spec.partType.replace(/ /g, "-")}-update-spec`}
 									onClick={() => dispatch(setModal({ type: "Add Spec", data: spec }))}
 								/>
 								<SVG.X
-									data-cy={`${spec.partName}-delete-spec`}
+									data-cy={`${spec.partType}-delete-spec`}
 									onClick={async () => mutate({ channelId: data?.id!, pcSpecId: spec.id })}
 								/>
 							</IconButtons>

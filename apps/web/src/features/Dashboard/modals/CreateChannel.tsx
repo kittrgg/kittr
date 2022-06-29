@@ -59,7 +59,7 @@ const CreateChannelModal = () => {
 				value={displayName}
 				onChange={(e) => setDisplayName(e.target.value)}
 			/>
-			<Error>{error}</Error>
+			<Error>{error?.message}</Error>
 			<FlexRow>
 				<Button design="transparent" text="CANCEL" onClick={() => dispatch(setModal({ type: "", data: "" }))} />
 				<Button
