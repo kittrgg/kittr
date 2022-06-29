@@ -41,7 +41,7 @@ describe("Desktop", () => {
 		cy.get("[data-cy=kit-options]")
 		cy.get("[data-cy=kit-imagery]")
 		cy.get("[data-cy=kit-popularity]")
-		cy.get("[data-cy=kit-stats]")
+		// cy.get("[data-cy=kit-stats]")
 		cy.get("[data-cy=kit-blurb]")
 	})
 

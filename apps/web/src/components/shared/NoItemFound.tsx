@@ -2,8 +2,8 @@ import Link from "next/link"
 import styled from "styled-components"
 
 import colors from "@Colors"
-import { header1, header2, paragraph } from "@Styles/typography"
 import Head from "@Components/shared/Head"
+import { header1, header2, paragraph } from "@Styles/typography"
 
 interface Props {
 	/** The type of item that couldn't be found. On kittr, these are the two main distinctions that people would be searching through. */
@@ -21,8 +21,8 @@ export const NoItemFound = ({ type }: Props) => {
 			<Wrapper style={{ alignItems: "center", justifyContent: "center" }}>
 				<Body>
 					<Header>OOPS...</Header>
-					<Paragraph>Sorry, but we { "aren't" }seeing this {type} on kittr.</Paragraph>
-					<Paragraph>{ "Let's" } get you back to the {type}s page so you can find what { "you're" } looking for.</Paragraph>
+					<Paragraph>Sorry, but we aren't seeing this {type} on kittr.</Paragraph>
+					<Paragraph>Let's get you back to the {type}s page so you can find what you're looking for.</Paragraph>
 					<Link href={`/${type}s`} passHref>
 						<StyledLink>BACK TO {type.toUpperCase()}S PAGE</StyledLink>
 					</Link>
