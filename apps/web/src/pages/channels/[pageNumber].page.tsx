@@ -1,7 +1,7 @@
 import colors from "@Colors"
 import AdPageWrapper, { H1 } from "@Components/layouts/AdPageWrapper"
 import FallbackPage from "@Components/layouts/FallbackPage"
-import { ChannelList, ChannelSearch, Paginator } from "@Components/shared"
+import { ChannelList, Paginator } from "@Components/shared"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
 import { trpc } from "@Server/createHooks"
 import { createSSGHelper } from "@Server/createSSGHelper"
@@ -36,7 +36,7 @@ const PageOfChannels = () => {
 			<AdPageWrapper title={`Channels - Page ${page} | kittr`} description="Full channels of channels on kittr.">
 				<H1>CHANNELS</H1>
 				{/* <ChannelSearch /> */}
-				<Paragraph>Oops, { "doesn't" } look like { "there's" } anyone here.</Paragraph>
+				<Paragraph>Oops, doesn't look like there's anyone here.</Paragraph>
 				<Link href={Routes.CHANNEL.LIST}>
 					<a
 						style={{
@@ -57,7 +57,7 @@ const PageOfChannels = () => {
 		<AdPageWrapper title={`Channels - Page ${page} | kittr`} description="Full channels of channels on kittr.">
 			{width < 1200 && <ResponsiveBanner />}
 			<H1>CHANNELS</H1>
-			<ChannelSearch />
+			{/* <ChannelSearch /> */}
 			<Paragraph>Select a channel to view their page with their games and featured kits.</Paragraph>
 			<div style={{ padding: "0 5%" }}>
 				<ChannelList data={channels || []} itemBackgroundColor={colors.darker} />

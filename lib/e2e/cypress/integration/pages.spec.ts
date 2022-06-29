@@ -59,10 +59,11 @@ describe("Channels Page", () => {
 		cy.get("[data-cy=channel-list-item]").should("have.length", 10)
 	})
 
-	it("Use the search bar", () => {
-		cy.get("[data-cy=channel-search-input]").type("anthonyshew{enter}")
-		cy.location("pathname").should("include", "/channels/search/anthonyshew")
-	})
+	// Hiding this test for now, will possibly add search back later
+	// it("Use the search bar", () => {
+	// 	cy.get("[data-cy=channel-search-input]").type("anthonyshew{enter}")
+	// 	cy.location("pathname").should("include", "/channels/search/anthonyshew")
+	// })
 
 	it("Navigate to a channel", () => {
 		cy.get("[data-cy=JoeWo-profile-link]").click()
@@ -83,10 +84,11 @@ describe("Individual Game Page", () => {
 		cy.viewport("macbook-16")
 	})
 
-	it("Use the search bar", () => {
-		cy.get("[data-cy=channel-search-input]").type("anthonyshew{enter}")
-		cy.location("pathname").should("include", "/channels/search/anthonyshew")
-	})
+	// Hiding this test for now, will possibly add search back later
+	// it("Use the search bar", () => {
+	// 	cy.get("[data-cy=channel-search-input]").type("anthonyshew{enter}")
+	// 	cy.location("pathname").should("include", "/channels/search/anthonyshew")
+	// })
 
 	it("Navigate to a channel", () => {
 		cy.get("[data-cy=JoeWo-profile-link]").click()
