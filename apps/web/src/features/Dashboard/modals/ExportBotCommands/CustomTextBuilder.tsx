@@ -34,7 +34,7 @@ const CustomTextBuilder = ({ commandStrategy, method }: Props) => {
 	const channelElementsStrategy = commandStrategy === "edit" ? "!command edit" : "!command add"
 
 	const { mutate, isLoading } = useDashboardMutator({
-		path: "channels/command-strings/update",
+		path: "channels/command-strings/upsert",
 		opts: {
 			onError: () => {
 				dispatch(setModal({ type: "Error Notification", data: {} }))
@@ -102,7 +102,7 @@ const CustomTextBuilder = ({ commandStrategy, method }: Props) => {
 									? false
 									: isLoading || !userString?.includes("{{link}}") || initialCode?.command === userString
 							}
-							onClick={async () => mutate({ channelId: data?.id!, newString: userString || "" })}
+							onClick={async () => mutate({gameId: activeGame, commandStringId: initialCode?.id, channelId: data?.id!, newString: userString || "" })}
 							style={{ marginLeft: "auto", padding: "6px 32px", fontSize: "16px" }}
 							dataCy="save-custom-string"
 						/>

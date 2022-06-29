@@ -87,7 +87,7 @@ describe("Games & Kits Actions", () => {
       .type("{{link}} is the best kit", { parseSpecialCharSequences: false })
     cy.get("[data-cy=save-custom-string]").click()
     cy.contains(`!editcom !loadout`)
-    cy.contains(`/c/${channel.urlSafeName}/warzone is the best`)
+    cy.contains(`/c/${channel.urlSafeName}/warzone is the best kit`)
     cy.get("[data-cy=custom-text-builder]").clear()
     cy.get("[data-cy=save-custom-string]").click()
   })

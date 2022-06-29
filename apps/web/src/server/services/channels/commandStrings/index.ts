@@ -13,13 +13,36 @@ export const getCommandString = async ({ channelId }: { channelId: string }) => 
 	return commandString
 }
 
-export const updateCommandString = async ({ newString, channelId }: { newString: string; channelId: string }) => {
-	const commandString = await prisma.channelCustomGameCommand.update({
+export const upsertCommandString = async ({
+	gameId,
+	newString,
+	channelId,
+	commandStringId
+}: {
+	gameId: string
+	newString: string;
+	channelId: string;
+	commandStringId?: string
+}) => {
+	const commandString = await prisma.channelCustomGameCommand.upsert({
 		where: {
-			id: channelId
+			id: commandStringId ?? "",
 		},
-		data: {
-			command: newString
+		create: {
+			command: newString,
+			channel: {
+				connect: {
+					id: channelId
+				}
+			},
+			game: {
+				connect: {
+					id: gameId
+				}
+			}
+		},
+		update: {
+			command: newString,
 		},
 		select: {
 			command: true

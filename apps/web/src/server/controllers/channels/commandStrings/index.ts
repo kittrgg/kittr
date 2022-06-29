@@ -18,14 +18,17 @@ const upsertCommandString = createController()
 	.middleware(authenticateUser)
 	.mutation("", {
 		input: z.object({
+			commandStringId: z.string().optional(),
 			channelId: z.string(),
-			newString: z.string()
+			newString: z.string(),
+			gameId: z.string()
 		}),
 		async resolve({ ctx, input }) {
 			await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["OWNER", "ADMIN"] })
 
-			const channel = await ChannelsCommandStringsService.updateCommandString({
-				id: input.id,
+			const channel = await ChannelsCommandStringsService.upsertCommandString({
+				gameId: input.gameId,
+				commandStringId: input.commandStringId,
 				channelId: input.channelId,
 				newString: input.newString
 			})
@@ -35,5 +38,5 @@ const upsertCommandString = createController()
 
 export const ChannelsCommandStringsController = {
 	getCommandString,
-	updateCommandString
+	upsertCommandString
 }
