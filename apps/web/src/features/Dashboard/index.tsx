@@ -20,7 +20,7 @@ import { useAllGames } from "@Hooks/trpc/useAllGames"
 import { useAllKitBases } from "@Hooks/trpc/useAllKitBases"
 
 /** The kittr dashboard. */
-const Dashboard = ({ ...props }) => {
+const Dashboard = () => {
 	const modal = useModal()
 	const user = useUser()
 	const { width } = useViewportDimensions()

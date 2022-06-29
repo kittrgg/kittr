@@ -3,7 +3,6 @@ import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useChannelView } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import { getToken } from "@Services/firebase/auth/getToken"
 import { header2 } from "@Styles/typography"
 import { useEffect, useRef, useState } from "react"
 import styled from "styled-components"
@@ -48,12 +47,11 @@ const CreatorCode = () => {
 							return inputRef.current.blur()
 						}
 					}}
-					onBlur={async () =>
+					onBlur={async () => {
 						mutate({
-							authToken: await getToken(),
-							code: { id: affiliateCode?.id!, code: affiliateCode?.code!, channelId: data?.id!, gameId: activeGame }
+							code: { id: affiliateCode?.id, code, channelId: data?.id!, gameId: activeGame }
 						})
-					}
+					}}
 					data-cy="creator-code-input"
 				/>
 			)}

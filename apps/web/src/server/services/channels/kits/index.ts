@@ -36,6 +36,7 @@ export const upsertKit = async ({
 		youtubeUrl: kit.youtubeUrl
 	}
 
+
 	const channel = await prisma.warzoneKit.upsert({
 		where: { id: kit.id ?? "" },
 		create: update,

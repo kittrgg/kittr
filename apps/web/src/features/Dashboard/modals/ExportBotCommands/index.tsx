@@ -27,7 +27,7 @@ const ExportBotCommands = () => {
 	const [method, setMethod] = useState<TCommandMethod>("nightbot")
 	const [commandStrategy, setCommandStrategy] = useState<"edit" | "add">("edit")
 	const [includeUser, setIncludeUser] = useState(true)
-	const { data: allKitBases } = useAllKitBases({include: {}})
+	const { data: allKitBases } = useAllKitBases({include: {category: true}})
 
 	if (!allKitBases) return null
 

@@ -21,7 +21,7 @@ const ActiveKit = () => {
 	const { data } = useDashboardChannel()
 	const role = useManagerRole()
 	const { isPremium } = usePremiumStatus()
-	const { data: allKitBases } = useAllKitBases({include: {}})
+	const { data: allKitBases } = useAllKitBases({include: {category: true}})
 	const { mutate: mutateToggle, isLoading: isMutatingToggle } = useDashboardMutator({
 		path: "channels/overlay/toggle",
 		opts: {

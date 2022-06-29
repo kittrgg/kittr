@@ -14,7 +14,7 @@ const getCommandString = createController().mutation("", {
 	}
 })
 
-const updateCommandString = createController()
+const upsertCommandString = createController()
 	.middleware(authenticateUser)
 	.mutation("", {
 		input: z.object({
@@ -25,6 +25,7 @@ const updateCommandString = createController()
 			await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["OWNER", "ADMIN"] })
 
 			const channel = await ChannelsCommandStringsService.updateCommandString({
+				id: input.id,
 				channelId: input.channelId,
 				newString: input.newString
 			})

@@ -5,4 +5,4 @@ export const channelsCommandStringsRouter = createRouter().merge(
 	"get",
 	ChannelsCommandStringsController.getCommandString
 )
-.merge("update", ChannelsCommandStringsController.updateCommandString)
+.merge("upsert", ChannelsCommandStringsController.upsertCommandString)

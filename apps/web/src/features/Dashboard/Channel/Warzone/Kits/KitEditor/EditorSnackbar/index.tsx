@@ -16,7 +16,7 @@ const EditorSnackbar = () => {
 	const activeKit = useActiveKit()
 	const { data: channelData } = useChannelData()
 	const modal = useModal()
-	const { data: allKitBases } = useAllKitBases({include: {}})
+	const { data: allKitBases } = useAllKitBases({include: {category: true}})
 	const { mutate, isLoading } = useDashboardMutator({
 		path: "channels/kits/upsert",
 		opts: {

@@ -1,10 +1,9 @@
 import { ChannelCreatorCode, prisma } from "@kittr/prisma"
 
-export const upsertCode = async ({ codeUpdate }: { codeUpdate: ChannelCreatorCode }) => {
-	const { channelId, gameId, code, id } = codeUpdate
+export const upsertCode = async ({ codeUpdate }: { codeUpdate: Omit<ChannelCreatorCode, "id"> & { id?: string } }) => {
+	const { channelId, gameId, code } = codeUpdate
 
-	const newCode = {
-		id,
+	const update = {
 		code,
 		game: {
 			connect: {
@@ -20,10 +19,10 @@ export const upsertCode = async ({ codeUpdate }: { codeUpdate: ChannelCreatorCod
 
 	const gameAffiliateCode = await prisma.channelCreatorCode.upsert({
 		where: {
-			id: codeUpdate.id
+			id: codeUpdate.id ?? ""
 		},
-		update: newCode,
-		create: newCode
+		update: update,
+		create: update
 	})
 
 	return gameAffiliateCode
