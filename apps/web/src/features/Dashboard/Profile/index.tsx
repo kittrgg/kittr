@@ -1,15 +1,13 @@
 import styled from "styled-components"
-import DisplayNameEditor from "./DisplayNameEditor"
 import EmailEditor from "./EmailEditor"
 import PasswordEditor from "./PasswordEditor"
 import LogoutButton from "../ProfileButtons"
 
 /** The user's profile settings. */
-const Profile = ({ ...props }) => {
+const Profile = () => {
 	return (
 		<>
 			<H1>MY ACCOUNT SETTINGS</H1>
-			<DisplayNameEditor />
 			<EmailEditor />
 			<PasswordEditor />
 			<LogoutButton />

@@ -36,7 +36,7 @@ const ProfileButtons = () => {
 			)}
 			<Container isOpen={isOpen}>
 				<Clickable data-cy="profile-container-button" onClick={() => setIsOpen(!isOpen)}>
-					{user?.displayName || user?.email}
+					{user?.email}
 					{
 						<SVG.Carat
 							width="24px"
