@@ -3,16 +3,12 @@ import { useEffect, useState } from "react"
 import colors from "@Colors"
 import { Button, TextInputBox } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
-import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
-import { useDispatch } from "@Redux/store"
-import { getToken } from "@Services/firebase/auth"
 import Title from "../../H3"
 
 /** Edit the name of the channel. */
-const DisplayNameEditor = ({ ...props }) => {
+const DisplayNameEditor = () => {
 	const [error, setError] = useState("")
-	const dispatch = useDispatch()
 	const { data } = useChannelData()
 	const [displayName, setDisplayName] = useState(data?.displayName || "")
 
@@ -21,8 +17,9 @@ const DisplayNameEditor = ({ ...props }) => {
 	const { mutate, isLoading, isSuccess } = useDashboardMutator({
 		path: "channels/update",
 		opts: {
-			onError: () => {
-				dispatch(setModal({ type: "Error Notification", data: {} }))
+			onError: (error) => {
+				setError(error.message)
+				// dispatch(setModal({ type: "Error Notification", data: {} }))
 			}
 		}
 	})

@@ -89,12 +89,20 @@ export const createChannel = async ({
 }
 
 export const updateChannel = async ({ channelId, data }: { channelId: string; data: Partial<Channel> }) => {
-	const result = await prisma.channel.update({
-		where: { id: channelId },
-		data
-	})
+	try {
+		const result = await prisma.channel.update({
+			where: { id: channelId },
+			data
+		})
 
-	return result
+		return result
+	} catch (err) {
+		throw new TRPCError({
+			code: "BAD_REQUEST",
+			message: "That name is already taken. Please try another."
+		})
+	}
+
 }
 
 export const deleteChannel = async ({ channelId }: { channelId: string }) => {

@@ -21,7 +21,7 @@ import { capitalizeFirstCharacter } from "@Utils/helpers/capitalizeFirstCharacte
 
 const managersOrder: ChannelManagerRoles[] = ["OWNER", "ADMIN", "EDITOR"]
 
-const AccountManagers = ({ ...props }) => {
+const AccountManagers = () => {
 	const dispatch = useDispatch()
 	const role = useManagerRole()
 	const auth = useUser()
@@ -57,7 +57,6 @@ const AccountManagers = ({ ...props }) => {
 					return (
 						<Manager key={manager.uid} data-cy="manager">
 							<Identity>
-								<DisplayName>{manager.displayName}</DisplayName>
 								<Email>{manager.email}</Email>
 								{role === "OWNER" && manager.role === "OWNER" && (
 									<SVG.Pencil
@@ -141,10 +140,6 @@ const Identity = styled.div`
 	flex-direction: row;
 	align-items: center;
 	justify-content: flex-start;
-`
-
-const DisplayName = styled.p`
-	letter-spacing: 2px;
 `
 
 const Email = styled.p`

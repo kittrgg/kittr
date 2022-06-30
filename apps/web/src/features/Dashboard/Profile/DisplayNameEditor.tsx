@@ -10,7 +10,7 @@ import * as Styled from "./style"
 const buttonStyle = { marginLeft: "10%" }
 
 /** Edit the display name for a user. */
-const DisplayNameEditor = ({ ...props }) => {
+const DisplayNameEditor = () => {
 	const user = useUser()
 	const [displayName, setDisplayName] = useState(user?.displayName || "")
 	const [isWorking, setIsWorking] = useState(false)
