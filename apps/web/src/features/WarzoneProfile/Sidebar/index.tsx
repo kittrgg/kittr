@@ -87,6 +87,7 @@ const Sidebar = () => {
 										)}
 									</Styled.CategoryLabel>
 									{restOfKits
+										.filter((v, i, a) => a.findIndex((t) => t.base.displayName === v.base.displayName) === i)
 										.filter((kit) => kit.base.category.displayName === category)
 										.map((kit) => {
 											const { id, base } = kit
