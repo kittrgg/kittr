@@ -34,7 +34,7 @@
 		"build": "turbo run build",
 		"start": "turbo run start",
 		"test:e2e": "cd lib && cd e2e && npm run cypress:e2e",
-		"prepare": "husky install && chmod ug+x .husky/*"
+		"prepare": "husky install"
 	},
 	"devDependencies": {
 		"envfile": "6.17.0",
