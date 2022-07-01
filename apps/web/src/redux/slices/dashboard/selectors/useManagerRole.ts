@@ -1,5 +1,4 @@
 import { useUser } from "@Hooks/useUser"
-import { IManager } from "@kittr/types/manager"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 
 /** Get the role of the currently logged in user for the channel that is open in the dashboard. */

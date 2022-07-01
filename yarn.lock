@@ -4794,6 +4794,11 @@
   resolved "https://registry.yarnpkg.com/@stripe/stripe-js/-/stripe-js-1.23.0.tgz#62eed14e83c63c3e8c27f14f6b1e6feb8496c867"
   integrity sha512-+7w4rVs71Fk8/8uzyzQB5GotHSH9mjOjxM3EYDq/3MR3I2ewELHtvWVMOqfS/9WSKCaKv7h7eFLsMZGpK5jApQ==
 
+"@supercharge/promise-pool@*":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@supercharge/promise-pool/-/promise-pool-2.3.0.tgz#9528b11d69a63ff2a342d404afb13cd011c9651a"
+  integrity sha512-KLf3JBWW4JymplvT/c5JCZhc4KrNE9EBf15FPjvklQiGcoUczSLInpV23iV5dITnvktJlwQ5xq08wfNwBk71Rg==
+
 "@svgr/babel-plugin-add-jsx-attribute@^6.0.0":
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/@svgr/babel-plugin-add-jsx-attribute/-/babel-plugin-add-jsx-attribute-6.0.0.tgz#bd6d1ff32a31b82b601e73672a789cc41e84fe18"

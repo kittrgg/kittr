@@ -12,7 +12,7 @@ export const ChannelModel = z.object({
 
 export interface CompleteChannel extends z.infer<typeof ChannelModel> {
   games: CompleteGame[]
-  gameAffiliateCodes: CompleteChannelCreatorCode[]
+  gameCreatorCodes: CompleteChannelCreatorCode[]
   customGameCommands: CompleteChannelCustomGameCommand[]
   warzoneKits: CompleteWarzoneKit[]
   overlay?: CompleteChannelKitOverlay | null
@@ -29,7 +29,7 @@ export interface CompleteChannel extends z.infer<typeof ChannelModel> {
  */
 export const RelatedChannelModel: z.ZodSchema<CompleteChannel> = z.lazy(() => ChannelModel.extend({
   games: RelatedGameModel.array(),
-  gameAffiliateCodes: RelatedChannelCreatorCodeModel.array(),
+  gameCreatorCodes: RelatedChannelCreatorCodeModel.array(),
   customGameCommands: RelatedChannelCustomGameCommandModel.array(),
   warzoneKits: RelatedWarzoneKitModel.array(),
   overlay: RelatedChannelKitOverlayModel.nullish(),

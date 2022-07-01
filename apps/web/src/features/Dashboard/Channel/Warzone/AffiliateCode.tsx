@@ -11,7 +11,7 @@ const CreatorCode = () => {
 	const dispatch = useDispatch()
 	const { gameId: activeGame } = useChannelView()
 	const { data } = useChannelData()
-	const affiliateCode = data?.gameAffiliateCodes?.find((code) => code.gameId === activeGame)
+	const affiliateCode = data?.gameCreatorCodes?.find((code) => code.gameId === activeGame)
 	const [code, setCode] = useState(affiliateCode?.code || "")
 	const [isEditing, setIsEditing] = useState(false)
 	const inputRef = useRef<HTMLInputElement>(null)

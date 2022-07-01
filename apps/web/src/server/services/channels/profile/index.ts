@@ -40,7 +40,7 @@ export const getFullChannelProfileQuery = async ({ id, urlSafeName }: { id: stri
 			links: true,
 			plan: true,
 			games: true,
-			gameAffiliateCodes: {
+			gameCreatorCodes: {
 				include: {
 					game: true
 				}
@@ -86,7 +86,7 @@ export const getChannelProfile = async ({ id, urlSafeName }: { id: string; urlSa
 			links: true,
 			plan: true,
 			games: true,
-			gameAffiliateCodes: {
+			gameCreatorCodes: {
 				include: {
 					game: true
 				}

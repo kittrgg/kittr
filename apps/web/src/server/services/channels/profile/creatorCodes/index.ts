@@ -17,7 +17,7 @@ export const upsertCode = async ({ codeUpdate }: { codeUpdate: Omit<ChannelCreat
 		}
 	}
 
-	const gameAffiliateCode = await prisma.channelCreatorCode.upsert({
+	const gameCreatorCode = await prisma.channelCreatorCode.upsert({
 		where: {
 			id: codeUpdate.id ?? ""
 		},
@@ -25,5 +25,5 @@ export const upsertCode = async ({ codeUpdate }: { codeUpdate: Omit<ChannelCreat
 		create: update
 	})
 
-	return gameAffiliateCode
+	return gameCreatorCode
 }

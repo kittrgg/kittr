@@ -37,7 +37,7 @@ model Channel {
   viewCount          Int                        @default(0)
   previousUpdater    String?
   games              Game[]
-  gameAffiliateCodes ChannelCreatorCode[]
+  gameCreatorCodes   ChannelCreatorCode[]
   customGameCommands ChannelCustomGameCommand[]
   warzoneKits        WarzoneKit[]
   overlay            ChannelKitOverlay?

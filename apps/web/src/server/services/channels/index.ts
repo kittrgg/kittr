@@ -150,7 +150,7 @@ export const getDashboardChannel = async ({ id }: { id: string }) => {
 			links: true,
 			plan: true,
 			games: true,
-			gameAffiliateCodes: {
+			gameCreatorCodes: {
 				include: {
 					game: true
 				}
@@ -202,7 +202,7 @@ export const getFullChannelProfileQuery = async ({ id, urlSafeName }: { id: stri
 			links: true,
 			plan: true,
 			games: true,
-			gameAffiliateCodes: {
+			gameCreatorCodes: {
 				include: {
 					game: true
 				}
@@ -248,7 +248,7 @@ export const getChannelProfileByUrlSafeName = async (urlSafeName: string) => {
 			links: true,
 			plan: true,
 			games: true,
-			gameAffiliateCodes: {
+			gameCreatorCodes: {
 				include: {
 					game: true
 				}

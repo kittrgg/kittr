@@ -1,15 +1,14 @@
 import colors from "@Colors"
 import SVG from "@Components/shared/SVG"
+import { WarzoneKit, WarzoneKitBase } from "@kittr/prisma"
 import { setActiveWeapon } from "@Redux/slices/displayr"
 import { useActiveWeapon } from "@Redux/slices/displayr/selectors"
 import { useDispatch } from "@Redux/store"
-import { DeserializeFullChannelProfileReturnType } from "@Services/orm/queries/channels/getFullChannelProfile"
-import { NonNullable } from "@Types/index"
 import { useEffect, useRef } from "react"
 import * as Styled from "./style"
 
 interface Props {
-	elem: NonNullable<DeserializeFullChannelProfileReturnType>["warzoneKits"][0]
+	elem: WarzoneKit & {base: WarzoneKitBase}
 }
 
 const Item = ({ elem }: Props) => {
@@ -31,7 +30,7 @@ const Item = ({ elem }: Props) => {
 		<Styled.Item
 			ref={itemRef}
 			active={activeWeapon?.customTitle === elem.customTitle}
-			onClick={() => dispatch(setActiveWeapon(elem))}
+			onClick={() => dispatch(setActiveWeapon(elem as any))}
 			data-cy={`slider-${elem.base.displayName.replace(/ /g, "-").replace("(", "-").replace(")", "-")}-${
 				elem.customTitle?.replace(/ /g, "-") || "Primary"
 			}`}

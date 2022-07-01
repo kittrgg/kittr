@@ -7,17 +7,17 @@ interface Props {
 	displayName: string
 	hasProfileImage: boolean
 	links: ChannelLink[]
-	gameAffiliateCode: string
+	gameCreatorCode: string
 }
 
-const TopBar = ({ id, displayName, hasProfileImage, gameAffiliateCode, links }: Props) => {
+const TopBar = ({ id, displayName, hasProfileImage, gameCreatorCode, links }: Props) => {
 	return (
 		<Styled.Container>
 			<Styled.Row>
 				{hasProfileImage && <ProfileImage hasProfileImage={hasProfileImage} imagePath={id} />}
 				<Styled.NameContainer data-cy="channel-name">
 					<Styled.H1>{displayName}</Styled.H1>
-					{gameAffiliateCode && <Styled.Code>CODE: {gameAffiliateCode}</Styled.Code>}
+					{gameCreatorCode && <Styled.Code>CODE: {gameCreatorCode}</Styled.Code>}
 				</Styled.NameContainer>
 			</Styled.Row>
 			<SocialIcons links={links} />

@@ -24,7 +24,8 @@
 		"ts-node": "10.5.0",
 		"tsup": "5.12.0",
 		"typescript": "4.5.5",
-		"zod-prisma": "0.5.4"
+		"zod-prisma": "0.5.4",
+		"@supercharge/promise-pool": "*"
 	},
 	"dependencies": {
 		"@prisma/client": "3.13.0",

@@ -14,7 +14,7 @@ handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<C
 		const result = await prisma.channel.update({
 			where: { id: channelId },
 			data: {
-				gameAffiliateCodes: {
+				gameCreatorCodes: {
 					upsert: {
 						where: {
 							id: gameId

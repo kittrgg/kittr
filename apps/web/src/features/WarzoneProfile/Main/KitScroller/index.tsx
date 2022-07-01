@@ -1,13 +1,12 @@
+import { WarzoneKit, WarzoneKitBase } from "@kittr/prisma"
 import { useActiveWeapon } from "@Redux/slices/displayr/selectors"
-import { DeserializeFullChannelProfileReturnType } from "@Services/orm/queries/channels/getFullChannelProfile"
-import { NonNullable } from "@Types/index"
 import { useEffect, useRef, useState } from "react"
 import ScrollContainer from "react-indiana-drag-scroll"
 import Item from "./Item"
 import * as Styled from "./style"
 
 interface Props {
-	availableKits: NonNullable<DeserializeFullChannelProfileReturnType>["warzoneKits"]
+	availableKits: Array<WarzoneKit & {base: WarzoneKitBase}>
 }
 
 const KitScroller = ({ availableKits }: Props) => {

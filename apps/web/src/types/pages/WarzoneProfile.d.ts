@@ -7,9 +7,3 @@ interface CompleteChannelAffiliateCode extends ChannelAffiliateCode {
 interface CompleteKit extends Kit {
 	kitBase: KitBase
 }
-
-export interface CompleteChannel extends Channel {
-	kits: CompleteKit[]
-	games: Game[]
-	gameAffiliateCodes: CompleteChannelAffiliateCode[]
-}

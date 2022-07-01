@@ -1,14 +1,20 @@
+// @ts-nocheck
 import {
 	ChannelManagerRoles,
 	ChannelPlanType,
 	LinkProperty
 } from "@prisma/client"
 import mongoose from "mongoose"
-import { prisma } from "../index"
+// import { prisma } from "../index"
+import { PrismaClient } from "@prisma/client"
 import { Channel } from "../models/Channel"
 import { Game } from "../models/Game"
 import { KitBase } from "../models/KitBase"
 import { KitOption } from "../models/KitOption"
+// @ts-ignore
+import { PromisePool } from '@supercharge/promise-pool'
+
+const prisma = new PrismaClient()
 
 console.time("Script Main")
 mongoose
@@ -34,6 +40,7 @@ mongoose
 
 		const createGames = async () => {
 			for (const game of mongoGames) {
+				console.log({ game: game._id })
 				await prisma.game.create({
 					data: {
 						id: game._id.toString(),
@@ -67,7 +74,7 @@ mongoose
 		}
 
 		const createKitBases = async () => {
-			const formattedBases = mongoBases.map((base) => ({
+			const formattedBases: any = mongoBases.map((base) => ({
 				...base,
 				id: base._id.toString(),
 				gameInfo: {
@@ -93,7 +100,7 @@ mongoose
 				}
 			}))
 
-			for (const base of formattedBases) {
+			await PromisePool.withConcurrency(10).for(formattedBases).process(async (base: any) => {
 				await prisma.warzoneKitBase.create({
 					data: {
 						id: base._id.toString(),
@@ -108,12 +115,15 @@ mongoose
 							}
 						},
 						commandCodes: {
-							create: base.commandCodes.map((code) => ({
-								code: code
-							}))
+							createMany: {
+								data:
+									base.commandCodes.map((code: any) => ({
+										code: code
+									}))
+							}
 						},
 						availableOptions: {
-							create: base.gameInfo.availableOptions as any
+							createMany: { data: base.gameInfo.availableOptions } as any
 						},
 						category: {
 							connectOrCreate: {
@@ -123,7 +133,43 @@ mongoose
 						}
 					}
 				})
-			}
+			})
+			// for (const base of formattedBases) {
+
+			// 	console.log({ base: base._id })
+			// 	await prisma.warzoneKitBase.create({
+			// 		data: {
+			// 			id: base._id.toString(),
+			// 			displayName: base.displayName,
+			// 			imageUrl: base.image,
+			// 			blurb: base.gameInfo.blurb,
+
+			// 			maxOptions: base.gameInfo.maxOptions,
+			// 			game: {
+			// 				connect: {
+			// 					id: base.gameId.toString()
+			// 				}
+			// 			},
+			// 			commandCodes: {
+			// 				createMany: {
+			// 					data:
+			// 						base.commandCodes.map((code: any) => ({
+			// 							code: code
+			// 						}))
+			// 				}
+			// 			},
+			// 			availableOptions: {
+			// 				createMany: { data: base.gameInfo.availableOptions } as any
+			// 			},
+			// 			category: {
+			// 				connectOrCreate: {
+			// 					where: { displayName: base.category },
+			// 					create: { displayName: base.category }
+			// 				}
+			// 			}
+			// 		}
+			// 	})
+			// }
 		}
 
 		const createChannels = async () => {
@@ -173,7 +219,7 @@ mongoose
 				youtubeAutoplay: channel.meta.youtubeAutoplay
 			}))
 
-			for (const channel of formattedChannels) {
+			await PromisePool.withConcurrency(10).for(formattedChannels).process(async (channel: any) => {
 				try {
 					await prisma.channel.create({
 						data: {
@@ -184,36 +230,46 @@ mongoose
 							games: {
 								connect: channel.games.map((game) => ({ id: game.id.toString() }))
 							},
-							gameAffiliateCodes: {
-								create: channel.games
-									.filter((game) => !!game.code)
-									.map((game) => {
-										return {
-											gameId: game.id.toString(),
-											code: game.code!
-										}
-									})
+							gameCreatorCodes: {
+								createMany: {
+									data:
+										channel.games
+											.filter((game) => !!game.code)
+											.map((game) => {
+												return {
+													gameId: game.id.toString(),
+													code: game.code!
+												}
+											})
+								}
 							},
 							customGameCommands: {
-								create: channel.games
-									.filter((game) => !!game.commandString)
-									.map((game) => {
-										return {
-											game: { connect: { id: game.id.toString() } },
-											command: game.commandString!
-										}
-									})
+								createMany: {
+									data: channel.games
+										.filter((game) => !!game.commandString)
+										.map((game) => {
+											return {
+												gameId: game.id.toString(),
+												// gameId: game.id.toString(),
+												// game: { connect: { id: game.id.toString() } },
+												command: game.commandString!
+											}
+										})
+								}
 							},
 							managers: {
-								create: channel.managers.map((manager) => ({
-									firebaseId: manager.uid.toString(),
-									role: manager.role
-								}))
+								createMany: {
+									data:
+										channel.managers.map((manager) => ({
+											firebaseId: manager.uid.toString(),
+											role: manager.role
+										}))
+								}
 							},
 							profile: {
 								create: {
 									hasCoverPhoto: channel.hasCoverPhoto || false,
-									hasProfileImage: channel.displayName === "JoeWo",
+									hasProfileImage: channel.hasProfileImage,
 									youtubeAutoplay: channel.youtubeAutoplay || false,
 									affiliates: {
 										create: Object.values(channel.affiliates || {}).map(
@@ -222,13 +278,13 @@ mongoose
 												description?: string
 												company?: string
 												url?: string
-											}) => ({
+											}): any => ({
 												code: affiliate.code,
 												description: affiliate.description,
 												company: affiliate.company,
 												url: affiliate.url
-											})
-										)
+											}) as any
+										) as any
 									},
 									channelPcSpecs: {
 										create: Object.entries(channel.specs || {}).map((spec) => ({
@@ -263,10 +319,13 @@ mongoose
 								}
 							},
 							links: {
-								create: Object.entries(channel.links).map((entry) => ({
-									property: entry[0].toUpperCase() as LinkProperty,
-									value: entry[1]
-								}))
+								createMany: {
+									data:
+										Object.entries(channel.links).map((entry) => ({
+											property: entry[0].toUpperCase() as LinkProperty,
+											value: entry[1]
+										}))
+								}
 							}
 						}
 					})
@@ -274,7 +333,7 @@ mongoose
 					console.log(channel.urlSafeName)
 					throw new Error(err as any)
 				}
-			}
+			})
 		}
 
 		const createKits = async () => {
@@ -321,7 +380,8 @@ mongoose
 				)
 				.flat()
 
-			for (const kit of allKits) {
+			await PromisePool.withConcurrency(10).for(allKits).process(async (kit: any) => {
+
 				try {
 					await prisma.warzoneKit.create({
 						data: {
@@ -355,11 +415,11 @@ mongoose
 					console.log({ kitId: kit.id })
 					console.log({ channelId: kit.channelId })
 				}
-			}
+			})
 		}
 
 		const createOverlays = async () => {
-			const channels = mongoChannels.map((channel) => {
+			const channels: any = mongoChannels.map((channel) => {
 				return {
 					channelId: channel._id,
 					kits: channel.kits,
@@ -371,17 +431,18 @@ mongoose
 				}
 			})
 
-			for (const channel of channels) {
+			await PromisePool.withConcurrency(10).for(channels).process(async (channel: any) => {
+				console.log({ overlay: channel.channelId })
 				const foundPrimaryKit = channel.kits
 					.find(
-						(kit) =>
+						(kit: any) =>
 							kit._id.toString() ===
 							channel.overlay?.primaryKit?._id?.toString()
 					)
 					?._id.toString()
 				const foundSecondaryKit = channel.kits
 					.find(
-						(kit) =>
+						(kit: any) =>
 							kit._id.toString() ===
 							channel.overlay?.secondaryKit?._id?.toString()
 					)
@@ -413,7 +474,7 @@ mongoose
 						}
 					})
 				}
-			}
+			})
 		}
 
 		const main = async () => {

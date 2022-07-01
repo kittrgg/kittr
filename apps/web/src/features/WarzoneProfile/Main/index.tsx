@@ -84,8 +84,8 @@ const Main = () => {
 							displayName={channelData.displayName}
 							hasProfileImage={channelData.profile?.hasProfileImage || false}
 							links={channelData.links}
-							gameAffiliateCode={
-								channelData.gameAffiliateCodes.find((code) => code.game.displayName === "Warzone")?.code || ""
+							gameCreatorCode={
+								channelData.gameCreatorCodes.find((code) => code.game.displayName === "Warzone")?.code || ""
 							}
 						/>
 					)}

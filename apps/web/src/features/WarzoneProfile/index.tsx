@@ -9,7 +9,6 @@ import { setActiveWeapon, setChannel, setIsSidebarOpen } from "@Redux/slices/dis
 import { useActiveWeapon, useSidebarState } from "@Redux/slices/displayr/selectors"
 import { useDispatch } from "@Redux/store"
 import { InferQueryOutput } from "@Server/index"
-import { DeserializeFullChannelProfileReturnType } from "@Services/orm/queries/channels/getFullChannelProfile"
 import type { NonNullable } from "@Types/index"
 import { Routes } from "@Utils/lookups/routes"
 import { useRouter } from "next/router"
@@ -31,14 +30,14 @@ const WarzoneProfile = ({ channel }: Props) => {
 	const { observe, height } = useDimensions()
 	useLockBodyScroll()
 
-	const code = channel?.gameAffiliateCodes.find((code) => code.game.urlSafeName === query.game)?.code
+	const code = channel?.gameCreatorCodes.find((code) => code.game.urlSafeName === query.game)?.code
 
 	useEffect(() => {
 		dispatch(setChannel(channel))
 		// dispatch(setPopularityRates(popularityRates))
 
 		return () => {
-			dispatch(setChannel({} as NonNullable<DeserializeFullChannelProfileReturnType>))
+			dispatch(setChannel({} as any))
 			dispatch(
 				setActiveWeapon(
 					{} as WarzoneKit & {
