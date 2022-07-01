@@ -25,15 +25,10 @@ jobs:
         with:
           node-version: ${{matrix.node-version}}
 
-      # - name: Cache dependencies
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: ~/.npm
-      #     key: npm-${{ hashFiles('package-lock.json') }}
-      #     restore-keys: npm-
+      - uses: c-hive/gha-yarn-cache@v2
 
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --production=true
 
       - name: Migrate DB
         env:
