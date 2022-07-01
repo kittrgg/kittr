@@ -86,7 +86,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./apps/api
+          file: ./apps/api/Dockerfile
           push: true
           tags: ghcr.io/${{github.repository}}/api:test-${{github.sha}}
 
@@ -94,7 +94,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./apps/web
+          file: ./apps/web/Dockerfile
           push: true
           tags: ghcr.io/${{github.repository}}/web:test-${{github.sha}}
 
