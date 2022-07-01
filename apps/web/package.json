@@ -16,10 +16,12 @@
 	},
 	"dependencies": {
 		"@juggle/resize-observer": "3.3.1",
+		"eslint-config-custom": "*",
 		"@kittr/logger": "*",
 		"@kittr/prisma": "*",
 		"@kittr/types": "*",
 		"@kittr/ui": "*",
+		"tsconfig": "*",
 		"@mantine/core": "^4.2.9",
 		"@mantine/hooks": "^4.2.9",
 		"@mantine/next": "^4.2.9",

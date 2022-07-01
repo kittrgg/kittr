@@ -1,37 +1,23 @@
-FROM node:16-alpine AS deps
-RUN apk add --no-cache libc6-compat
+FROM node:alpine AS builder
+RUN apk update
+# Set working directory
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
+RUN yarn global add turbo
+COPY . .
+RUN turbo prune --scope=web --docker
 
-FROM node:16-alpine AS builder
+# Add lockfile and package.json's of isolated subworkspace
+FROM node:alpine AS installer
+RUN apk update
 WORKDIR /app
-COPY ./ ./
-COPY --from=deps /app/node_modules ./node_modules
+COPY --from=builder /app/out/json/ .
+COPY --from=builder /app/out/yarn.lock ./yarn.lock
+RUN yarn install
 
-FROM node:16-alpine AS runner
+FROM node:alpine AS sourcer
+RUN apk update
 WORKDIR /app
-
-ENV NODE_ENV production
-
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nextjs -u 1001
-
-COPY --from=builder /app/next.config.js ./
-COPY --from=builder /app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package*.json ./package.json
-
-# TODO: Use standalone as seen here: https://github.com/vercel/next.js/tree/canary/examples/with-docker
-# COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-# COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-USER nextjs
-
-EXPOSE 3000
-ENV PORT 3000
-
-ENV NEXT_TELEMETRY_DISABLED 1
-
-CMD [ "node_modules/.bin/next", "start" ]
+COPY --from=installer /app/ .
+COPY --from=builder /app/out/full/ .
+COPY .gitignore .gitignore
+RUN yarn turbo run build test --scope=web --includeDependencies --no-deps
