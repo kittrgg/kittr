@@ -21,6 +21,4 @@ COPY --from=installer /app/ .
 COPY --from=builder /app/out/full/ .
 COPY .gitignore .gitignore
 
-ENV SENTRY_LOG_LEVEL debug
-
 RUN yarn turbo run build test --scope=web --includeDependencies --no-deps
