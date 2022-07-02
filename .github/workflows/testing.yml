@@ -65,6 +65,11 @@ jobs:
       #     SENTRY_LOG_LEVEL: debug
       #   run: yarn turbo run build test --scope=web --includeDependencies --no-deps
 
+      - name: Create file for sentry CLI
+        run: |
+          cd apps/web
+          echo [auth] ${{secrets.SENTRY_AUTH_TOKEN}} >> .sentryclirc
+
       - name: Run build
         env:
           NEXT_PUBLIC_ADS_DISABLED: true
