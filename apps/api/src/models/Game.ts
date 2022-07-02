@@ -1,24 +1,26 @@
-import mongoose, { Schema } from "mongoose"
+export { }
 
-const MODEL_NAME = "game"
+// import mongoose, { Schema } from "mongoose"
 
-const schema = new Schema(
-	{
-		displayName: String,
-		urlSafeName: String,
-		backgroundImage: String,
-		titleImage: String,
-		active: {
-			type: Boolean,
-			default: false
-		},
-		meta: {
-			creatorCode: String
-		}
-	},
-	{ minimize: false }
-)
+// const MODEL_NAME = "game"
 
-const Model = mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema)
+// const schema = new Schema(
+// 	{
+// 		displayName: String,
+// 		urlSafeName: String,
+// 		backgroundImage: String,
+// 		titleImage: String,
+// 		active: {
+// 			type: Boolean,
+// 			default: false
+// 		},
+// 		meta: {
+// 			creatorCode: String
+// 		}
+// 	},
+// 	{ minimize: false }
+// )
 
-export default Model
+// const Model = mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema)
+
+// export default Model

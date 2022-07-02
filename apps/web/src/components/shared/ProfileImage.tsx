@@ -39,7 +39,14 @@ export const ProfileImage = ({
 	const isMounted = useIsMounted()
 
 	useEffect(() => {
+		// This is for dev!
 		if (process.env.NEXT_PUBLIC_IS_DEV && !hasProfileImage) {
+			setErrored(true)
+			return setIsLoading(false)
+		}
+
+		// This is for prod!
+		if (!hasProfileImage) {
 			setErrored(true)
 			return setIsLoading(false)
 		}
