@@ -68,7 +68,7 @@ jobs:
       - name: Create file for sentry CLI
         run: |
           cd apps/web
-         printf [auth]\n${{secrets.SENTRY_AUTH_TOKEN}} >> .sentryclirc
+          printf [auth]\n${{secrets.SENTRY_AUTH_TOKEN}} >> .sentryclirc
 
       - name: Run build
         env:
