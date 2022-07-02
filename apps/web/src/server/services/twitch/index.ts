@@ -19,6 +19,16 @@ export const getProfile = async (twitchLink: string): Promise<ProfilePageData> =
 
 	const broadcaster_id = channelData?.id
 
+	if (!broadcaster_id) {
+		return {
+			channelData,
+			schedule: [],
+			clips: [],
+			recentVideos: []
+		}
+
+	}
+
 	const [schedule, clips, recentVideos] = await Promise.all([
 		getSchedule(broadcaster_id),
 		getClips(broadcaster_id),
