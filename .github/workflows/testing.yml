@@ -96,8 +96,8 @@ jobs:
           SENTRY_AUTH_TOKEN: ${{secrets.SENTRY_AUTH_TOKEN}}
           SENTRY_LOG_LEVEL: debug
         run: |
-        echo "$SENTRY_AUTH_TOKEN"
-        yarn build --scope=\"api\" --scope=\"web\" --include-dependencies --token="${{ secrets.TURBO_SERVER_TOKEN }}" --team="kittr"
+          echo "$SENTRY_AUTH_TOKEN"
+          yarn build --scope=\"api\" --scope=\"web\" --include-dependencies --token="${{ secrets.TURBO_SERVER_TOKEN }}" --team="kittr"
 
       - name: Run unit tests
         run: yarn test
