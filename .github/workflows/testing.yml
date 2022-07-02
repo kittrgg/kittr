@@ -69,6 +69,7 @@ jobs:
         run: |
           cd apps/web
           printf [auth]\n${{secrets.SENTRY_AUTH_TOKEN}} >> .sentryclirc
+          cat .sentryclirc
 
       - name: Run build
         env:
