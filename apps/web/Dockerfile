@@ -21,15 +21,6 @@ COPY --from=installer /app/ .
 COPY --from=builder /app/out/full/ .
 COPY .gitignore .gitignore
 
-ARG SENTRY_AUTH_TOKEN
-ENV SENTRY_AUTH_TOKEN ${SENTRY_AUTH_TOKEN}
-
-ARG SENTRY_ORG
-ENV SENTRY_ORG ${SENTRY_ORG}
-
-ARG SENTRY_PROJECT
-ENV SENTRY_PROJECT ${SENTRY_PROJECT}
-
 ENV SENTRY_LOG_LEVEL debug
 
 RUN yarn turbo run build test --scope=web --includeDependencies --no-deps
