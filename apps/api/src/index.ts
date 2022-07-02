@@ -5,8 +5,8 @@ import cors from "cors"
 import { CronJob } from "cron"
 import express from "express"
 import { createServer } from "http"
-import { generateKitStats } from "./jobs/createKitStatsAsInterval"
-import { writeViewCounts } from "./jobs/writeViewCounts"
+// import { generateKitStats } from "./jobs/createKitStatsAsInterval"
+// import { writeViewCounts } from "./jobs/writeViewCounts"
 
 dotenv.config({
 	path: process.env.NODE_ENV === "production" ? ".env" : ".env.development"

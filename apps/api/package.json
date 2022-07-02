@@ -24,7 +24,6 @@
 		"express": "4.17.3",
 		"jsonwebtoken": "8.5.1",
 		"module-alias": "2.2.2",
-		"mongoose": "6.2.3",
 		"nodemon": "2.0.15",
 		"socket.io": "4.4.1"
 	},

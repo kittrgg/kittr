@@ -1,13 +1,15 @@
-import mongoose, { Schema } from "mongoose"
+export { }
 
-const MODEL_NAME = "kitStat"
+// import mongoose, { Schema } from "mongoose"
 
-const schema = new Schema({
-	ratioOfChannelsWithBaseFeatured: Schema.Types.Mixed,
-	ratioOfChannelsWithBase: Schema.Types.Mixed,
-	forSetupComparison: Schema.Types.Mixed
-})
+// const MODEL_NAME = "kitStat"
 
-const Model = mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema)
+// const schema = new Schema({
+// 	ratioOfChannelsWithBaseFeatured: Schema.Types.Mixed,
+// 	ratioOfChannelsWithBase: Schema.Types.Mixed,
+// 	forSetupComparison: Schema.Types.Mixed
+// })
 
-export default Model
+// const Model = mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema)
+
+// export default Model
