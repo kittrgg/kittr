@@ -1,6 +1,5 @@
 import * as Logger from "@kittr/logger/node"
 import nextConnect from "next-connect"
-import dbMiddleWare from "./dbConnect"
 
 export const createHandler = (...middleware: any[]) => {
 	return nextConnect({
@@ -9,5 +8,5 @@ export const createHandler = (...middleware: any[]) => {
 			res.statusCode = 500
 			return res.end("Internal Server Error")
 		}
-	}).use(dbMiddleWare, ...middleware)
+	}).use(...middleware)
 }
