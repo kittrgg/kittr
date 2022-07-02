@@ -1,14 +1,15 @@
-import { useEffect, useRef, MutableRefObject } from "react"
-import * as Styled from "./style"
 import colors from "@Colors"
-import { handleTutorialAction, setModal, setChannelView } from "@Redux/slices/dashboard"
-import { useDispatch } from "@Redux/store"
-import { useManagerRole } from "@Redux/slices/dashboard/selectors/useManagerRole"
 import ProfileImage from "@Components/shared/ProfileImage"
-import GameButton from "./GameButton"
-import AddGameNotification from "./AddGameNotification"
+import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
+import { handleTutorialAction, setChannelView, setModal } from "@Redux/slices/dashboard"
+import { useChannelView, useModal } from "@Redux/slices/dashboard/selectors"
+import { useManagerRole } from "@Redux/slices/dashboard/selectors/useManagerRole"
+import { useDispatch } from "@Redux/store"
+import { MutableRefObject, useEffect, useRef } from "react"
 import Icon from "../Icon"
-import { useChannelData, useChannelView, useModal } from "@Redux/slices/dashboard/selectors"
+import AddGameNotification from "./AddGameNotification"
+import GameButton from "./GameButton"
+import * as Styled from "./style"
 
 /** Buttons that will appear when a channel is opened */
 const ChannelButtons = () => {
@@ -16,7 +17,7 @@ const ChannelButtons = () => {
 	const modal = useModal()
 	const ref = useRef() as MutableRefObject<HTMLButtonElement>
 	const { view, gameId } = useChannelView()
-	const { data: channelData } = useChannelData()
+	const { data: channelData } = useDashboardChannel()
 	const role = useManagerRole()
 
 	/** tutorial ref data */

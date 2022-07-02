@@ -102,7 +102,14 @@ const CustomTextBuilder = ({ commandStrategy, method }: Props) => {
 									? false
 									: isLoading || !userString?.includes("{{link}}") || initialCode?.command === userString
 							}
-							onClick={async () => mutate({gameId: activeGame, commandStringId: initialCode?.id, channelId: data?.id!, newString: userString || "" })}
+							onClick={async () =>
+								mutate({
+									gameId: activeGame,
+									commandStringId: initialCode?.id,
+									channelId: data?.id!,
+									newString: userString || ""
+								})
+							}
 							style={{ marginLeft: "auto", padding: "6px 32px", fontSize: "16px" }}
 							dataCy="save-custom-string"
 						/>

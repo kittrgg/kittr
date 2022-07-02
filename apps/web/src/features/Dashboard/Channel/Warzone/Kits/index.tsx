@@ -1,4 +1,5 @@
-import { useActiveKit, useChannelData, useModal } from "@Redux/slices/dashboard/selectors"
+import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
+import { useActiveKit, useModal } from "@Redux/slices/dashboard/selectors"
 import styled from "styled-components"
 import KitDeleteConfirmation from "../../../modals/KitDeleteConfirmation"
 import KitEditor from "./KitEditor"
@@ -7,11 +8,11 @@ import KitsPlaceholder from "./KitsPlaceholder"
 // import EditNotification from "./EditNotification"
 
 const Kits = () => {
-	const channelData = useChannelData()
+	const { data: channel } = useDashboardChannel()
 	const activeKit = useActiveKit()
 	const modal = useModal()
 
-	if (channelData?.data?.warzoneKits.length === 0 && Object.keys(activeKit).length === 0) {
+	if (channel?.warzoneKits.length === 0 && Object.keys(activeKit).length === 0) {
 		return (
 			<Container style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
 				<KitsPlaceholder />
