@@ -30,4 +30,6 @@ ENV SENTRY_ORG ${SENTRY_ORG}
 ARG SENTRY_PROJECT
 ENV SENTRY_PROJECT ${SENTRY_PROJECT}
 
+ENV SENTRY_LOG_LEVEL debug
+
 RUN yarn turbo run build test --scope=web --includeDependencies --no-deps
