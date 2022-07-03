@@ -219,7 +219,7 @@ mongoose
 				youtubeAutoplay: channel.meta.youtubeAutoplay
 			}))
 
-			await PromisePool.withConcurrency(10).for(formattedChannels).process(async (channel: any) => {
+			for (const channel of formattedChannels) {
 				try {
 					await prisma.channel.create({
 						data: {
@@ -333,8 +333,9 @@ mongoose
 					console.log(channel.urlSafeName)
 					throw new Error(err as any)
 				}
-			})
+			}
 		}
+
 
 		const createKits = async () => {
 			// I need the new options from postgres so I can use their ids

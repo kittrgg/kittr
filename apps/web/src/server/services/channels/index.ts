@@ -333,7 +333,7 @@ export const listRisingChannels = async () => {
 			viewCount: "desc"
 		},
 		where,
-		skip: randomSkip,
+		skip: Math.max(0, randomSkip),
 		take,
 		include: {
 			profile: true
