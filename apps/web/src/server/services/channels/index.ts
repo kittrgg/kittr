@@ -89,6 +89,10 @@ export const createChannel = async ({
 }
 
 export const updateChannel = async ({ channelId, data }: { channelId: string; data: Partial<Channel> }) => {
+	if (data.displayName) {
+		data.urlSafeName = toURL(data.displayName)
+	}
+
 	try {
 		const result = await prisma.channel.update({
 			where: { id: channelId },
