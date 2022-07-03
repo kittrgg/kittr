@@ -2,8 +2,8 @@ import colors from "@Colors"
 import { Button, ColorPicker, MultiButton, Spinner, SVG } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import PremiumCallout from "@Features/Dashboard/PremiumCallout"
-import { useAllKitBases } from "@Hooks/trpc/useAllKitBases"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
+import { useAllKitBases } from "@Hooks/trpc/useAllKitBases"
 import { setModal } from "@Redux/slices/dashboard"
 import { useManagerRole, usePremiumStatus } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
@@ -21,7 +21,7 @@ const ActiveKit = () => {
 	const { data } = useDashboardChannel()
 	const role = useManagerRole()
 	const { isPremium } = usePremiumStatus()
-	const { data: allKitBases } = useAllKitBases({include: {category: true}})
+	const { data: allKitBases } = useAllKitBases({ include: { category: true } })
 	const { mutate: mutateToggle, isLoading: isMutatingToggle } = useDashboardMutator({
 		path: "channels/overlay/toggle",
 		opts: {
@@ -348,7 +348,6 @@ const ActiveKit = () => {
 							{data?.warzoneKits
 								.slice()
 								.filter((kit) => data?.overlay?.primaryKit?.id !== kit.id)
-								.map((kit) => ({ ...kit, base: allKitBases?.find((kitBase) => kitBase.id === kit.baseId) }))
 								.sort((a, b) => sortAlphabetical(a.base!.displayName, b.base!.displayName))
 								.sort((kit) => {
 									if (kit.featured) {
@@ -358,7 +357,7 @@ const ActiveKit = () => {
 									}
 								})
 								.map((kit) => {
-									const name = kit.base!.displayName
+									const name = kit.base.displayName
 									const isActive = data?.overlay?.secondaryKit?.id === kit.id
 									const userTitle = kit.customTitle
 									const isFeatured = kit.featured

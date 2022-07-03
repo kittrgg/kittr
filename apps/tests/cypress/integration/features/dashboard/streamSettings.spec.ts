@@ -1,8 +1,26 @@
 /// <reference types="cypress" />
 
 import user from "../../../fixtures/login.json"
+import { basicUser, premiumUser } from "../../../plugins/seed"
+
+const { urlSafeName: basicUrlSafeName } = basicUser
+const { urlSafeName: premiumUrlSafeName } = premiumUser
+
+const getBasicUserButton = () =>
+	cy.get(`[data-cy=${basicUrlSafeName}-channel-button]`)
+
+const getPremiumUserButton = () =>
+	cy.get(`[data-cy=${premiumUrlSafeName}-channel-button]`)
 
 describe("Channel Settings", () => {
+	before(() => {
+		cy.task("db:seed-basic-user")
+	})
+
+	after(() => {
+		cy.task("db:remove-basic-user")
+	})
+
 	beforeEach(() => {
 		cy.visit("/dashboard")
 		cy.viewport("macbook-16")
@@ -10,13 +28,79 @@ describe("Channel Settings", () => {
 
 	it("Modal for more info on managers", () => {
 		cy.login(user.email, user.password)
-		cy.get("[data-cy=thetestchannel-channel-button]").click()
+		getBasicUserButton().click()
 		cy.get("[data-cy=managers-info-question]").click()
 		cy.contains("ABOUT ACCOUNT MANAGERS")
 	})
 
+	it("Adjusts YouTube autoplay", () => {
+		getBasicUserButton().click()
+		cy.get("[data-cy=toggler-value-0]").click()
+		cy.get("[data-cy=toggler-value-1]").should(
+			"have.css",
+			"background-color",
+			"rgb(155, 155, 155)"
+		)
+		cy.get("[data-cy=toggler-value-1]")
+			.invoke("attr", "data-active")
+			.should("eq", "true")
+
+		cy.get("[data-cy=toggler-value-0]").click()
+		cy.get("[data-cy=toggler-value-0]")
+			.invoke("attr", "data-active")
+			.should("eq", "true")
+	})
+
+	it("Adds a facebook link", () => {
+		getBasicUserButton().click()
+		cy.get("[data-cy=add-link-button]").click()
+		cy.get("[data-cy=FACEBOOK-add-button]").click()
+		cy.get("[name=FACEBOOK]").type("some-test-facebook-link")
+		cy.get("[data-cy=add-link-modal-button]").click()
+		cy.contains("https://www.facebook.com")
+		cy.intercept("PUT", "/api/channel/meta/links").as("updateLinks")
+		cy.get("[data-cy=save-link-changes]").click()
+		cy.contains("https://www.facebook.com")
+	})
+
+	it("Adds a discord link", () => {
+		getBasicUserButton().click()
+		cy.get("[data-cy=add-link-button]").click()
+		cy.get("[data-cy=DISCORD-add-button]").click()
+		cy.get("[name=DISCORD]").type("some-test-discord-link")
+		cy.get("[data-cy=add-link-modal-button]").click()
+		cy.contains("https://discord.gg")
+		cy.intercept("PUT", "/api/channel/meta/links").as("updateLinks")
+		cy.get("[data-cy=save-link-changes]").click()
+		cy.contains("https://discord.gg")
+	})
+
+	it("Deletes a link", () => {
+		getBasicUserButton().click()
+		cy.get("[data-cy=DISCORD-delete-button]").click()
+		cy.contains("https://discord.gg").should("not.exist")
+		cy.intercept("PUT", "/api/channel/meta/links").as("updateLinks")
+		cy.get("[data-cy=save-link-changes]").click()
+		cy.contains("https://www.facebook.com")
+	})
+
+	it("Can add managers", () => {
+		getBasicUserButton().click()
+		cy.get("[data-cy=add-manager-begin]").click()
+		cy.get("[name=email").type("fog@dev.com")
+		cy.get("[data-cy=role-selector]").select("Editor")
+		cy.get("[data-cy=confirm-manager-add]").click()
+		cy.contains("fog@dev.com")
+
+		cy.get("[data-cy=add-manager-begin]").click()
+		cy.get("[name=email").type("filod@dev.com")
+		cy.get("[data-cy=role-selector]").select("Editor")
+		cy.get("[data-cy=confirm-manager-add]").click()
+		cy.contains("filod@dev.com")
+	})
+
 	it("Shows all managers", () => {
-		cy.get("[data-cy=thetestchannel-channel-button]").click()
+		getBasicUserButton().click()
 		cy.get("[data-cy=manager]").should("have.length", 3)
 
 		cy.get("[data-cy=manager] > p")
@@ -32,73 +116,21 @@ describe("Channel Settings", () => {
 		cy.intercept("PUT", "/api/manager/promote").as("promote")
 		cy.intercept("PUT", "/api/manager/demote").as("demote")
 		cy.intercept("GET", "/api/manager/getInfo?uid=*").as("getManagerInfo")
-		cy.get("[data-cy=thetestchannel-channel-button]").click()
+		getBasicUserButton().click()
 		cy.get("[data-cy=manager] > div > [data-cy=promote]").eq(0).click()
 		cy.contains("YES, PROMOTE THEM").click()
 		cy.contains("Admin")
 		cy.get("[data-cy=manager] > div > [data-cy=demote]").eq(0).click()
 		cy.contains("YES, DEMOTE THEM").click()
-		cy.wait("@demote").then(() => {})
 		cy.contains("Admin").should("not.exist")
 	})
 
-	it("Adjusts YouTube autoplay", () => {
-		cy.get("[data-cy=thetestchannel-channel-button]").click()
-		cy.get("[data-cy=toggler-value-0]").click()
-		cy.get("[data-cy=toggler-value-1]").should(
-			"have.css",
-			"background-color",
-			"rgb(155, 155, 155)"
-		)
-		cy.get("[data-cy=toggler-value-0]").click()
-		cy.get("[data-cy=toggler-value-0]").should(
-			"have.css",
-			"background-color",
-			"rgb(155, 155, 155)"
-		)
-	})
-
-	it("Adds a link", () => {
-		cy.get("[data-cy=thetestchannel-channel-button]").click()
-		cy.get("[data-cy=add-link-button]").click()
-		cy.get("[data-cy=facebook-add-button]").click()
-		cy.get("[name=facebook]").type("https://www.facebook.com/some-test-link")
-		cy.get("[data-cy=add-link-modal-button]").click()
-		cy.contains("https://www.facebook.com")
-		cy.intercept("PUT", "/api/channel/meta/links").as("updateLinks")
-		cy.get("[data-cy=save-link-changes]").click()
-		cy.wait("@updateLinks")
-		cy.contains("https://www.facebook.com")
-	})
-
-	it("Deletes a link", () => {
-		cy.get("[data-cy=thetestchannel-channel-button]").click()
-		cy.get("[data-cy=discord-delete-button]").click()
-		cy.contains("https://discord.gg").should("not.exist")
-		cy.intercept("PUT", "/api/channel/meta/links").as("updateLinks")
-		cy.get("[data-cy=save-link-changes]").click()
-		cy.wait("@updateLinks")
-		cy.contains("https://www.facebook.com")
-	})
-
-	it("Remove a manager", () => {
-		cy.get("[data-cy=thetestchannel-channel-button]").click()
-		cy.intercept("GET", "/api/manager/getInfo?uid=*").as("getManagerInfo")
+	it("Can remove a manager", () => {
+		getBasicUserButton().click()
 		cy.get("[data-cy=remove-manager]").first().click()
-		cy.contains("testman1")
-		cy.intercept("DELETE", "/api/manager/removeManager").as("removeManager")
+		cy.contains("fog@dev.com")
 		cy.get("[data-cy=confirm-manager-removal]").click()
-		cy.wait("@removeManager")
-		cy.contains("testman1").should("not.exist")
-	})
-
-	it("Add a manager", () => {
-		cy.get("[data-cy=thetestchannel-channel-button]").click()
-		cy.get("[data-cy=add-manager-begin]").click()
-		cy.get("[name=email").type("manager3@test.com")
-		cy.get("[data-cy=role-selector]").select("Administrator")
-		cy.get("[data-cy=confirm-manager-add]").click()
-		cy.contains("testman3")
+		cy.contains("fog@dev.com").should("not.exist")
 	})
 
 	// TODO: Particuarly difficult to make pass...I just didn't feel like dealing with it.
@@ -121,13 +153,21 @@ describe("Channel Settings", () => {
 })
 
 describe("Channel Identity", () => {
+	before(() => {
+		cy.task("db:seed-basic-user")
+	})
+
+	// after(() => {
+	// 	cy.task("db:remove-basic-user")
+	// })
+
 	beforeEach(() => {
 		cy.visit("/dashboard")
 		cy.viewport("macbook-16")
 	})
 
 	it("Change channel display name", () => {
-		cy.get("[data-cy=thetestchannel-channel-button]").click()
+		getBasicUserButton().click()
 		cy.get("[name=displayName]").focus().clear().type("someothername")
 		cy.get("[data-cy=confirm-name-change]").click()
 	})
@@ -147,6 +187,14 @@ describe("Channel Identity", () => {
 })
 
 describe("Premium Features", () => {
+	before(() => {
+		cy.task("db:seed-premium-user")
+	})
+
+	after(() => {
+		cy.task("db:remove-premium-user")
+	})
+
 	beforeEach(() => {
 		cy.visit("/dashboard")
 		cy.viewport("macbook-16")
@@ -158,7 +206,7 @@ describe("Premium Features", () => {
 			return false
 		})
 
-		cy.get("[data-cy=premiumchannel-channel-button]").click()
+		getPremiumUserButton().click()
 		cy.get("[data-cy=add-a-spec]").click()
 		cy.get(".spec-select").click()
 		cy.contains("CPU").click()
@@ -175,7 +223,7 @@ describe("Premium Features", () => {
 	})
 
 	it("CRUD an affiliate", () => {
-		cy.get("[data-cy=premiumchannel-channel-button]").click()
+		getPremiumUserButton().click()
 		cy.get("[data-cy=add-an-affiliate]").click()
 		cy.get("[name=company]").type("Testing With Cypress Inc")
 		cy.get("[name=affiliate-description]").type("Da Description")
@@ -194,12 +242,12 @@ describe("Premium Features", () => {
 	})
 
 	it("Says to choose a kit in Active Kit Overlay preview", () => {
-		cy.get("[data-cy=premiumchannel-channel-button]").click()
+		getPremiumUserButton().click()
 		cy.contains("Choose a kit to see a preview.")
 	})
 
 	it("Remove a chosen kit from primary/secondary list when selected in other list", () => {
-		cy.get("[data-cy=premiumchannel-channel-button]").click()
+		getPremiumUserButton().click()
 		cy.contains("AUG (MW)").first().click()
 		cy.contains("AUG (MW)").should("have.length", 1)
 	})

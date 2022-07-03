@@ -22,6 +22,6 @@ import "./commands"
 before(() => {
 	// TODO: I need to make a seeder.
 	cy.log("Attempting to seed users and database.")
-	cy.task("db:seed")
+	// cy.task("db:seed")
 	cy.log("Seeded users and database.")
 })
