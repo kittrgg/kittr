@@ -1,7 +1,9 @@
 import React from "react"
 import { logWarning } from "@kittr/logger/nextjs"
 
-export class ErrorBoundary extends React.Component {
+// This is only being used on Venatus Ads at this time.
+// They were creating a ton of noise in Sentry and we hated it.
+export class AdErrorBoundary extends React.Component {
 	constructor(props: any) {
 		super(props)
 		this.state = { hasError: false }

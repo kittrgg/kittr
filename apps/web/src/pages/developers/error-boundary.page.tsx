@@ -1,18 +1,19 @@
-import { ErrorBoundary } from "@Components/shared/ErrorBoundary"
+import { AdErrorBoundary } from "@Components/shared/ErrorBoundary"
+import dynamic from "next/dynamic"
 
 const Inner = () => {
-	const tossError = () => {
-		throw new Error("Hey, I am in a boundary!")
-	}
+	const obj = { test: "thing" }
 
-	return <button onClick={tossError}>do a thing</button>
+	return <button>{obj}</button>
 }
+
+const NoSsr = dynamic(() => Promise.resolve(Inner), { ssr: false })
 
 const TestErrorBoundary = () => {
 	return (
-		<ErrorBoundary>
-			<Inner />
-		</ErrorBoundary>
+		<AdErrorBoundary>
+			<NoSsr />
+		</AdErrorBoundary>
 	)
 }
 
