@@ -1,8 +1,9 @@
 import colors from "@Colors"
 import Toast from "@Components/shared/Toast"
+import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { WarzoneCommandCode, WarzoneKit, WarzoneKitBase } from "@kittr/prisma"
 import { TCommandMethod } from "@kittr/types/types"
-import { useChannelData, useChannelView } from "@Redux/slices/dashboard/selectors"
+import { useChannelView } from "@Redux/slices/dashboard/selectors"
 import { useState } from "react"
 import * as Styled from "./style"
 
@@ -29,7 +30,7 @@ interface Props {
 
 /** Render the list of commands for the kits of the user. */
 const CommandsTable = ({ kits, includeMasterCommands = true, method, commandStrategy, includeUser }: Props) => {
-	const { data } = useChannelData()
+	const { data } = useDashboardChannel()
 	const { gameId } = useChannelView()
 	const [copyNotification, setCopyNotification] = useState(false)
 	const isDashboard = method === "dashboard"
@@ -42,7 +43,7 @@ const CommandsTable = ({ kits, includeMasterCommands = true, method, commandStra
 	const createChannelElementsPrefix = (code: string): string => `${channelElementsStrategy} !${code}`
 	const createUserString = (): string => (includeUser ? " $(touser)" : "")
 	const commandBase = `${rootUrl}/c/${data?.urlSafeName}/warzone`
-	const currentStringTemplate = data?.customGameCommands?.find((elem) => elem.id === gameId)?.command || ""
+	const currentStringTemplate = data?.customGameCommands?.find((elem) => elem.gameId === gameId)?.command || ""
 
 	const createCommandString = (displayName: string, baseTitle: string, code: string): string => {
 		let customizedString = ""
