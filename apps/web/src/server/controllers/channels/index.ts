@@ -16,6 +16,16 @@ const listTopChannels = createController().query("", {
 	}
 })
 
+// This method gets all channels on kittr
+const countAllChannels = createController().query("", {
+	async resolve() {
+		const total = await ChannelsService.countAllChannels()
+		return total
+	}
+})
+
+
+// This method counts channels per game
 const countChannels = createController().query("", {
 	input: z.string().optional(),
 	async resolve({ input: urlSafeName }) {
@@ -115,5 +125,6 @@ export const ChannelsController = {
 	createChannel,
 	updateChannel,
 	deleteChannel,
-	countChannels
+	countChannels,
+	countAllChannels
 }
