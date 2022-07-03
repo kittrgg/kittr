@@ -1,6 +1,7 @@
 import admin from "firebase-admin"
 import { TRPCError } from "@trpc/server"
-import {prisma, ChannelManagerRoles } from "@kittr/prisma"
+import { prisma, ChannelManagerRoles } from "@kittr/prisma"
+import { signUp, updateUserDisplayName } from "@Services/firebase/auth"
 
 export const getUserByEmail = async (email: string) => {
 	const user = await admin.auth().getUserByEmail(email)
@@ -61,4 +62,23 @@ export const checkRole = async ({
 	}
 
 	return manager
+}
+
+export const create = async ({ displayName, email, password }: {
+	displayName: string,
+	email: string,
+	password: string
+}) => {
+	const user = await signUp(email, password)
+
+	if (user.user) {
+		const update = updateUserDisplayName(displayName)
+
+		return update
+	}
+
+	throw new TRPCError({
+		code: "INTERNAL_SERVER_ERROR",
+		message: "Something went wrong."
+	})
 }

@@ -7,6 +7,7 @@ import { channelsRouter } from "./routers/channels"
 import { kitsRouter } from "./routers/kits"
 import { managersRouter } from "./routers/managers"
 import { twitchRouter } from "./routers/twitch"
+import { usersRouter } from "./routers/users"
 
 export const appRouter = createRouter()
 	.transformer(superjson)
@@ -16,6 +17,7 @@ export const appRouter = createRouter()
 	.merge("kits/", kitsRouter)
 	.merge("twitch/", twitchRouter)
 	.merge("admin/", adminRouter)
+	.merge("users/", usersRouter)
 
 export type AppRouter = typeof appRouter
 
