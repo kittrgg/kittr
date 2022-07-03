@@ -18,8 +18,8 @@ if (process.env.NEXT_PUBLIC_SENTRY_DSN)
 			"Failed to load Stripe.js",
 			"UnknownError: Connection to Indexed Database server lost. Refresh the page to try again",
 			"UnknownError: Error looking up record in object store by key range",
-			"null is not an object (evaluating 't.getBoundingClientRect')",
-			"Maximum call stack size exceeded."
+			"null is not an object (evaluating 't.getBoundingClientRect')"
+			// "Maximum call stack size exceeded."
 		],
 		// Adjust this value in production, or use tracesSampler for greater control
 		tracesSampleRate: 1.0
