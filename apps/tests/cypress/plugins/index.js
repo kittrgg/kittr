@@ -11,7 +11,13 @@
 
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
-const { prisma } = require("@kittr/prisma")
+
+const {
+	seedBasicUser,
+	removeBasicUser,
+	seedPremiumUser,
+	removePremiumUser
+} = require("./seed")
 
 /**
  * @type {Cypress.PluginConfig}
@@ -22,98 +28,17 @@ module.exports = (on, config) => {
 	// `config` is the resolved Cypress config
 
 	on("task", {
-		"db:seed": async () => {
-			await prisma.channel.upsert({
-				where: {
-					displayName: "premiumchannel"
-				},
-				update: {
-					displayName: "premiumchannel"
-				},
-				create: {
-					displayName: "premiumchannel",
-					urlSafeName: "premiumchannel",
-					games: {
-						connect: {
-							id: "60da97598821ed46dc9c008c" // Warzone Game ID
-						}
-					},
-					profile: {
-						create: {}
-					},
-					plan: {
-						create: {
-							type: "PREMIUM"
-						}
-					},
-					managers: {
-						createMany: {
-							data: [
-								{
-									firebaseId: "w5lMLvVLL3uJNRuoqSWvYjNIJ1GF",
-									role: "OWNER"
-								},
-								{
-									firebaseId: "VeoTKmMs72amUYzPRovBGJDJnGn1",
-									role: "EDITOR"
-								},
-								{
-									firebaseId: "XnRFlNNbQ4d3K6nfEIRGBJm5nER2",
-									role: "EDITOR"
-								}
-							]
-						}
-					}
-				}
-			})
-
-			return prisma.channel.upsert({
-				where: {
-					displayName: "thetestchannel"
-				},
-				update: {
-					displayName: "thetestchannel"
-				},
-				create: {
-					displayName: "thetestchannel",
-					urlSafeName: "thetestchannel",
-					games: {
-						connect: {
-							id: "60da97598821ed46dc9c008c" // Warzone Game ID
-						}
-					},
-					profile: {
-						create: {}
-					},
-					managers: {
-						createMany: {
-							data: [
-								{
-									firebaseId: "w5lMLvVLL3uJNRuoqSWvYjNIJ1GF",
-									role: "OWNER"
-								},
-								{
-									firebaseId: "VeoTKmMs72amUYzPRovBGJDJnGn1",
-									role: "EDITOR"
-								},
-								{
-									firebaseId: "XnRFlNNbQ4d3K6nfEIRGBJm5nER2",
-									role: "EDITOR"
-								}
-							]
-						}
-					}
-				}
-			})
+		"db:seed-basic-user": async () => {
+			return seedBasicUser()
 		},
-		"db:harvest": async () => {
-			return prisma.channel
-				.delete({
-					where: {
-						displayName: "premiumchannel"
-					}
-				})
-				.catch()
+		"db:remove-basic-user": async () => {
+			return removeBasicUser()
+		},
+		"db:seed-premium-user": async () => {
+			return seedPremiumUser()
+		},
+		"db:remove-premium-user": async () => {
+			return removePremiumUser()
 		}
 	})
 }

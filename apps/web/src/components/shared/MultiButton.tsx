@@ -64,6 +64,7 @@ export const MultiButton = ({
 							numberOfValues={values.length}
 							onClick={() => onClick(elem)}
 							data-cy={`toggler-value-${index}`}
+							data-active={elem.value ? activeValue === elem.value : activeValue === elem.text}
 						>
 							{elem.text}
 						</Button>

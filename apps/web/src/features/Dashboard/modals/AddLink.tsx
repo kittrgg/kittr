@@ -1,15 +1,15 @@
 import { Dispatch, SetStateAction, useState } from "react"
 import styled from "styled-components"
 
-import { ChannelLink, LinkProperty } from "@kittr/prisma"
 import colors from "@Colors"
+import { Button, Modal, SvgByType, SVGType, TextInput } from "@Components/shared"
+import { ChannelLink, LinkProperty } from "@kittr/prisma"
+import { setModal } from "@Redux/slices/dashboard"
+import { useChannelData } from "@Redux/slices/dashboard/selectors"
+import { useDispatch } from "@Redux/store"
 import { trimPrefix } from "@Utils/helpers/trimPrefix"
 import { linkLabelImages } from "@Utils/lookups/linkLabelImages"
 import { linkPrefixes } from "@Utils/lookups/linkPrefixes"
-import { setModal } from "@Redux/slices/dashboard"
-import { useDispatch } from "@Redux/store"
-import { Modal, Button, SvgByType, SVGType, TextInput } from "@Components/shared"
-import { useChannelData } from "@Redux/slices/dashboard/selectors"
 
 type LinkEdits = Array<ChannelLink> | undefined
 type SetNewLink = Dispatch<SetStateAction<ChannelLink>>
@@ -107,7 +107,7 @@ const SelectProperty = ({ linkEdits, setNewLink, setStage }: ISelectProperty) =>
 							})
 							setStage(2)
 						}}
-						data-cy={`${elem}-add-button`}
+						data-cy={`${property}-add-button`}
 					>
 						<div
 							style={
@@ -138,7 +138,7 @@ const CreateNewProperty = ({ newLink, setNewLink }: ICreateNewProperty) => {
 			<TextInput
 				type="text"
 				label={linkPrefixes[newLink.property!]}
-				name={newLink.value!}
+				name={newLink.property}
 				value={trimPrefix(linkPrefixes[newLink.property!], newLink.value!)}
 				subline="Feel free to paste in the whole link. We'll trim it up for you."
 				sublineStyles={{ color: colors.lighter }}
