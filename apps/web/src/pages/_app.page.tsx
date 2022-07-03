@@ -83,11 +83,11 @@ export default withTRPC<AppRouter>({
 		 * If you want to use SSR, you need to use the server's full URL
 		 * @link https://trpc.io/docs/ssr
 		 */
-		const url = (process.env.NEXT_PUBLIC_SOCKET_HOST as string).includes("stage") ?
-		 `https://stage-web.kittr.gg/api/trpc` :
-		 process.env.NEXT_PUBLIC_SOCKET_HOST === "https://api.kittr.gg" ?
-		 "https://kittr.gg/api/trpc" :
-		 "http://localhost:3000/api/trpc"
+		const url = (process.env.NEXT_PUBLIC_SOCKET_HOST as string).includes("stage")
+			? `https://stage-web.kittr.gg/api/trpc`
+			: process.env.NEXT_PUBLIC_SOCKET_HOST === "https://api.kittr.gg/"
+			? "https://kittr.gg/api/trpc"
+			: "http://localhost:3000/api/trpc"
 
 		return {
 			url,
