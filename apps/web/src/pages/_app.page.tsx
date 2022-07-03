@@ -85,7 +85,7 @@ export default withTRPC<AppRouter>({
 		 */
 		const url = (process.env.NEXT_PUBLIC_SOCKET_HOST as string).includes("stage")
 			? `https://stage-web.kittr.gg/api/trpc`
-			: process.env.NEXT_PUBLIC_SOCKET_HOST === "https://api.kittr.gg/"
+			: (process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL as string).includes("prod")
 			? "https://kittr.gg/api/trpc"
 			: "http://localhost:3000/api/trpc"
 
