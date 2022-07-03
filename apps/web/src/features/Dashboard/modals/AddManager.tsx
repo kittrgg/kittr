@@ -9,11 +9,10 @@ import { ChannelManagerRoles } from "@kittr/prisma"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import { getToken } from "@Services/firebase/auth/getToken"
 import { paragraph } from "@Styles/typography"
 
 /** Modal for adding a manager to a channel. */
-const AddManager = ({ ...props }) => {
+const AddManager = () => {
 	const dispatch = useDispatch()
 	const { data } = useChannelData()
 	const [email, setEmail] = useState("")
@@ -24,12 +23,12 @@ const AddManager = ({ ...props }) => {
 	const { mutate, isLoading } = useDashboardMutator({
 		path: "channels/managers/create",
 		opts: {
-			onSuccess: (result) => {
+			onSuccess: () => {
 				refetchChannel()
 				dispatch(setModal({ type: "", data: {} }))
 			},
-			onError: () => {
-				dispatch(setModal({ type: "Error Notification", data: "" }))
+			onError: (error) => {
+				setError(error.message)
 			}
 		}
 	})
