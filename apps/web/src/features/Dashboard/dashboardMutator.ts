@@ -1,8 +1,9 @@
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { trpc } from "@Server/createHooks"
-import { TMutationPaths, AppRouter } from "@Server/index"
-import type { ProcedureRecord, inferProcedureInput, inferProcedureOutput } from "@trpc/server"
+import { AppRouter, TMutationPaths } from "@Server/index"
 import { TRPCClientErrorLike, UseTRPCMutationOptions } from "@trpc/react"
+import type { inferProcedureInput, inferProcedureOutput, ProcedureRecord } from "@trpc/server"
+import { useQueryClient } from "react-query"
 import { useSocket } from "../../pages/dashboard.page"
 
 type inferProcedures<TObj extends ProcedureRecord<any, any, any, any, any, any>> = {
@@ -30,10 +31,14 @@ interface Params<T extends keyof TMutationValues & string> {
 export const useDashboardMutator = <T extends keyof TMutationValues & string>({ path, opts }: Params<T>) => {
 	const { data } = useDashboardChannel()
 	const socket = useSocket()
+	const queryClient = useQueryClient()
 
 	const mutation = trpc.useMutation(path, {
 		...opts,
 		onSettled: (...args) => {
+			// Need to make dashboard refetch
+			queryClient.invalidateQueries("channels/dashboard")
+
 			socket.emit(`dashboardChangeReporter`, data?.id)
 			opts?.onSettled?.(...args)
 		}
