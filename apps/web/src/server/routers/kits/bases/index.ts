@@ -5,3 +5,4 @@ import { optionsRouter } from "@Server/routers/kits/bases/options"
 export const kitsBasesRouter = createRouter()
   .merge("options/", optionsRouter)
   .merge("list", KitsBasesController.listBases)
+  .merge("game/list", KitsBasesController.listGameBases)

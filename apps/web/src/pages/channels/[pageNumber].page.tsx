@@ -26,7 +26,7 @@ const PageOfChannels = () => {
 		{ take: 10, skip: (Number(pageNumber) - 1) * CHANNELS_PER_PAGE }
 	])
 
-	const { data: totalChannels = 0 } = trpc.useQuery(["channels/count"])
+	const { data: totalChannels = 0 } = trpc.useQuery(["channels/countAll"])
 	const numberOfPages = Math.ceil(totalChannels / CHANNELS_PER_PAGE)
 
 	const page = Number(pageNumber)
@@ -95,7 +95,7 @@ export const getStaticProps = async ({ params }: { params: { pageNumber: string 
 	const skip = (Number(params.pageNumber) - 1) * CHANNELS_PER_PAGE
 
 	await ssg.fetchQuery("channels/top", { take: CHANNELS_PER_PAGE, skip })
-	await ssg.fetchQuery("channels/count")
+	await ssg.fetchQuery("channels/countAll")
 
 	return {
 		props: {
