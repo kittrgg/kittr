@@ -54,17 +54,21 @@ const editColor = createController()
 		}
 	})
 
-const editKit = createController().mutation("", {
-	input: z.object({
-		channelId: z.string(),
-		kitId: z.string().nullable(),
-		kitToChange: z.enum(["primaryKit", "secondaryKit"])
-	}),
-	async resolve({ input }) {
-		const channel = await ChannelsOverlaysService.editKit(input)
-		return channel
-	}
-})
+const editKit = createController()
+	.middleware(authenticateUser)
+	.mutation("", {
+		input: z.object({
+			channelId: z.string(),
+			kitId: z.string().nullable(),
+			kitToChange: z.enum(["primaryKit", "secondaryKit"])
+		}),
+		async resolve({ ctx, input }) {
+			await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["ADMIN", "EDITOR", "OWNER"] })
+
+			const channel = await ChannelsOverlaysService.editKit(input)
+			return channel
+		}
+	})
 
 export const ChannelsOverlaysController = {
 	toggle,
