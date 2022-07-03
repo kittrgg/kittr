@@ -3,7 +3,6 @@ import { Button, ColorPicker, MultiButton, Spinner, SVG } from "@Components/shar
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import PremiumCallout from "@Features/Dashboard/PremiumCallout"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
-import { useAllKitBases } from "@Hooks/trpc/useAllKitBases"
 import { setModal } from "@Redux/slices/dashboard"
 import { useManagerRole, usePremiumStatus } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
@@ -21,7 +20,6 @@ const ActiveKit = () => {
 	const { data } = useDashboardChannel()
 	const role = useManagerRole()
 	const { isPremium } = usePremiumStatus()
-	const { data: allKitBases } = useAllKitBases({ include: { category: true } })
 	const { mutate: mutateToggle, isLoading: isMutatingToggle } = useDashboardMutator({
 		path: "channels/overlay/toggle",
 		opts: {
@@ -348,7 +346,7 @@ const ActiveKit = () => {
 							{data?.warzoneKits
 								.slice()
 								.filter((kit) => data?.overlay?.primaryKit?.id !== kit.id)
-								.sort((a, b) => sortAlphabetical(a.base!.displayName, b.base!.displayName))
+								.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
 								.sort((kit) => {
 									if (kit.featured) {
 										return -1

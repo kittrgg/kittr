@@ -1,4 +1,11 @@
+import { useEffect } from "react"
+import {logInfo} from '@kittr/logger/nextjs'
+
 export default function Sandbox() {
+	useEffect(() => {
+		logInfo("This is a test.")
+	}, [])
+
 	return (
 		<div>
 			I am a sandbox for the developers.
