@@ -3,7 +3,7 @@
 	"version": "0.0.0",
 	"private": true,
 	"scripts": {
-		"test": "cypress open --config-file ./config.dev.json",
+		"test:e2e": "cypress open --config-file ./config.dev.json",
 		"clean": "rm -rf .turbo && rm -rf .next &&  rm -rf coverage && rm -rf node_modules"
 	},
 	"dependencies": {
