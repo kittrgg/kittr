@@ -92,7 +92,7 @@ jobs:
           push: true
           tags: ghcr.io/${{github.repository}}/web-${{github.sha}}
 
- deploy:
+  deploy:
     concurrency:
       group: ${{ github.ref }}
       cancel-in-progress: true
