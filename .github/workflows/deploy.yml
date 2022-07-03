@@ -40,8 +40,6 @@ jobs:
         with:
             directory: ./apps/web
             file_name: .env
-            envkey_NEXT_PUBLIC_ADS_DISABLED: true
-            envkey_NEXT_PUBLIC_ENABLE_SEEDING: true
             envkey_NEXT_PUBLIC_ENVIRONMENT: ${{secrets.NODE_ENV}}
             envkey_DB_CONNECTION_STRING: ${{secrets.DB_CONNECTION_STRING}}
             envkey_DATABASE_URL: ${{secrets.DATABASE_URL}}
