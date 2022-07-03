@@ -1,5 +1,4 @@
 import NextErrorComponent from "next/error"
-
 import * as Logger from "@kittr/logger/nextjs"
 
 const MyError = ({ statusCode, hasGetInitialPropsRun, err }) => {
