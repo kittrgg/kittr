@@ -124,7 +124,7 @@ jobs:
     concurrency:
       group: ${{ github.ref }}
       cancel-in-progress: true
-    needs: deploy
+    # needs: deploy
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
