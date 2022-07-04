@@ -131,8 +131,7 @@ jobs:
 
       - name: Cypress run
         uses: cypress-io/github-action@v2
-        env:
-          CYPRESS_DATABASE_URL: ${{secrets.CI_DATABASE_URL}}
         with:
+          env: DATABASE_URL=${{secrets.CI_DATABASE_URL}}
           working-directory: ./apps/tests
           config-file: config.ci.json
