@@ -1,13 +1,11 @@
-import { useEffect } from "react"
-import { logInfo } from "@kittr/logger/nextjs"
 import { trpc } from "@Server/createHooks"
 
 export default function Sandbox() {
-	useEffect(() => {
-		logInfo("Test from client")
-	}, [])
+	// useEffect(() => {
+	// 	logInfo("Test from client")
+	// }, [])
 
-	const query = trpc.useQuery(["admin/logger-test"])
+	const query = trpc.useQuery(["error"])
 
 	return (
 		<div>

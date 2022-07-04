@@ -5,13 +5,12 @@ import { Routes } from "@Utils/lookups/routes"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { FormEvent, useState } from "react"
-import { useMutation } from "react-query"
 import styled from "styled-components"
 import validator from "validator"
-import fetch from "@Fetch"
+import { trpc } from "@Server/createHooks"
 
 /** Form to create a user account */
-const SignUp = ({ ...props }) => {
+const SignUp = () => {
 	const router = useRouter()
 	const [gamertag, setGamertag] = useState("")
 	const [email, setEmail] = useState("")
@@ -20,16 +19,9 @@ const SignUp = ({ ...props }) => {
 	const [confirmPassword, setConfirmPassword] = useState("")
 	const [error, setError] = useState("")
 
-	const { mutate, isLoading } = useMutation(async () => {
-		try {
-			const result = await fetch.post({ url: `/api/user`, body: { displayName: gamertag, email, password } })
-
-			if (result) {
-				router.push(Routes.DASHBOARD)
-			}
-		} catch (error) {
-			return setError("Our server just reported an issue. Please try again later.")
-		}
+	const { mutate, isLoading } = trpc.useMutation("users/create", {
+		onSuccess: () => router.push(Routes.DASHBOARD),
+		onError: () => setError("Our server just reported an issue. Please try again later.")
 	})
 
 	const onSubmit = (e: FormEvent) => {
@@ -60,7 +52,7 @@ const SignUp = ({ ...props }) => {
 			return setError("Your passwords do not match.")
 		}
 
-		mutate()
+		mutate({ displayName: gamertag, email, password })
 	}
 
 	if (isLoading) {

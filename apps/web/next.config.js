@@ -12,7 +12,7 @@ const moduleExports = {
 		styledComponents: true
 	},
 	poweredByHeader: false,
-	pageExtensions: ["page.js", "page.jsx", "page.tsx", "api.ts"],
+	pageExtensions: ["page.tsx", "api.ts"],
 	async redirects() {
 		return [
 			// For Venatus

@@ -1,6 +1,6 @@
 import { Spinner } from "@Components/shared"
 import { download } from "@Services/firebase/storage"
-import { logError } from "@kittr/logger/nextjs"
+import { captureException } from "@kittr/logger/nextjs"
 import { useEffect } from "react"
 import { useQuery } from "react-query"
 
@@ -16,7 +16,7 @@ export const FirebaseStorageResolver = ({ path, noSpinner, render }: FirebaseRes
 
 	useEffect(() => {
 		if (error) {
-			logError(error)
+			captureException(error)
 		}
 	}, [error])
 

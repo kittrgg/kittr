@@ -12,9 +12,9 @@ if (process.env.NEXT_PUBLIC_SENTRY_DSN)
 			: process.env.NEXT_PUBLIC_IS_TESTING
 			? "testing"
 			: process.env.NODE_ENV,
-		allowUrls: ["https://*.kittr.gg", "http://localhost:3000"],
+		allowUrls: ["https://*.kittr.gg", "https://kittr.gg", "http://localhost:3000"],
 		ignoreErrors: [
-			"Failed to fetch",
+			// "Failed to fetch",
 			"Failed to load Stripe.js",
 			"UnknownError: Connection to Indexed Database server lost. Refresh the page to try again",
 			"UnknownError: Error looking up record in object store by key range",
