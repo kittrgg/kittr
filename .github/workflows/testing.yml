@@ -1,5 +1,7 @@
 name: Deploy Testing Environment and run E2E
 
+# I just want my sanity back at this point
+
 on:
   # pull_request:
   #   branches:
