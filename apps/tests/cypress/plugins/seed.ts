@@ -5,34 +5,37 @@ export const basicUser = {
 }
 
 export const seedBasicUser = async () => {
-	return prisma.channel.create({
-		data: {
-			displayName: basicUser.urlSafeName,
-			urlSafeName: basicUser.urlSafeName,
-			profile: {
-				create: {}
-			},
-			managers: {
-				create: {
-					firebaseId: "w5lMLvVLL3uJNRuoqSWvYjNIJ1GF",
-					role: "OWNER"
+	try {
+		return prisma.channel.create({
+			data: {
+				displayName: basicUser.urlSafeName,
+				urlSafeName: basicUser.urlSafeName,
+				profile: {
+					create: {}
+				},
+				managers: {
+					create: {
+						firebaseId: "w5lMLvVLL3uJNRuoqSWvYjNIJ1GF",
+						role: "OWNER"
+					}
 				}
 			}
-		}
-	})
-		.catch()
-		.finally(() => prisma.$disconnect())
+		})
+	} catch (e) {
+		console.log("Failed to seed basic user", e)
+	}
 }
 
 export const removeBasicUser = async () => {
-	return prisma.channel
-		.delete({
+	try {
+		return prisma.channel.delete({
 			where: {
 				displayName: basicUser.urlSafeName
 			}
 		})
-		.catch()
-		.finally(() => prisma.$disconnect())
+	} catch (e) {
+		console.log("Failed to remove basic user", e)
+	}
 }
 
 export const premiumUser = {
@@ -40,54 +43,57 @@ export const premiumUser = {
 }
 
 export const seedPremiumUser = async () => {
-	return prisma.channel.create({
-		data: {
-			displayName: premiumUser.urlSafeName,
-			urlSafeName: premiumUser.urlSafeName,
-			profile: {
-				create: {}
-			},
-			plan: {
-				create: {
-					type: "PREMIUM"
-				}
-			},
-			overlay: {
-				create: {}
-			},
-			managers: {
-				create: {
-					firebaseId: "w5lMLvVLL3uJNRuoqSWvYjNIJ1GF",
-					role: "OWNER"
-				}
-			},
-			warzoneKits: {
-				create: {
-					base: {
-						connect: {
-							id: "60df4a4fbf84855a680f88f2"
-						}
-					},
-					game: {
-						connect: {
-							id: "60da97598821ed46dc9c008c" // Warzone Game ID
+	try {
+		return prisma.channel.create({
+			data: {
+				displayName: premiumUser.urlSafeName,
+				urlSafeName: premiumUser.urlSafeName,
+				profile: {
+					create: {}
+				},
+				plan: {
+					create: {
+						type: "PREMIUM"
+					}
+				},
+				overlay: {
+					create: {}
+				},
+				managers: {
+					create: {
+						firebaseId: "w5lMLvVLL3uJNRuoqSWvYjNIJ1GF",
+						role: "OWNER"
+					}
+				},
+				warzoneKits: {
+					create: {
+						base: {
+							connect: {
+								id: "60df4a4fbf84855a680f88f2"
+							}
+						},
+						game: {
+							connect: {
+								id: "60da97598821ed46dc9c008c" // Warzone Game ID
+							}
 						}
 					}
 				}
 			}
-		}
-	})
-		.catch()
-		.finally(() => prisma.$disconnect())
+		})
+	} catch (e) {
+		console.log("Failed to seed premium user", e)
+	}
 }
 
 export const removePremiumUser = async () => {
-	return prisma.channel
-		.delete({
+	try {
+		return prisma.channel.delete({
 			where: {
 				displayName: premiumUser.urlSafeName
 			}
 		})
-		.catch()
-		.finally(() => prisma.$disconnect())
+	} catch (e) {
+		console.log("Failed to remove premium user", e)
+	}
 }
