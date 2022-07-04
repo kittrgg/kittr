@@ -7,6 +7,8 @@ export default function Sandbox() {
 
 	const query = trpc.useQuery(["error"])
 
+	console.log("Cool wow")
+
 	return (
 		<div>
 			I am a sandbox for the developers.
