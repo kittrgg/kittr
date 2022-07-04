@@ -1,5 +1,5 @@
+// @ts-nocheck
 import NextErrorComponent from "next/error"
-
 import * as Logger from "@kittr/logger/nextjs"
 
 const MyError = ({ statusCode, hasGetInitialPropsRun, err }) => {
@@ -7,6 +7,7 @@ const MyError = ({ statusCode, hasGetInitialPropsRun, err }) => {
 		// getInitialProps is not called in case of
 		// https://github.com/vercel/next.js/issues/8592. As a workaround, we pass
 		// err via _app.js so it can be captured
+		console.error(err)
 		Logger.logError(err)
 		// Flushing is not required in this case as it only happens on the client
 	}
@@ -42,6 +43,7 @@ MyError.getInitialProps = async (context) => {
 	//    Boundaries: https://reactjs.org/docs/error-boundaries.html
 
 	if (err) {
+		console.error(err)
 		Logger.captureException(err)
 
 		// Flushing before returning is necessary if deploying to Vercel, see

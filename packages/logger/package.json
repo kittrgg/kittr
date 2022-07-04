@@ -1,7 +1,7 @@
 {
 	"name": "@kittr/logger",
 	"version": "0.0.0",
-	"main" :"index.ts",
+	"main": "index.ts",
 	"exports": {
 		"./node": "./src/node/index.ts",
 		"./nextjs": "./src/nextjs/index.ts"
@@ -24,7 +24,7 @@
 	},
 	"dependencies": {
 		"@kittr/types": "*",
-		"@sentry/nextjs": "6.17.9",
-		"@sentry/node": "6.17.9"
+		"@sentry/nextjs": "7.3.0",
+		"@sentry/node": "7.3.0"
 	}
 }

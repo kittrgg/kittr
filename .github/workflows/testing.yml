@@ -4,7 +4,7 @@ on:
   # pull_request:
   #   branches:
   #     - master
-  push:
+  pull_request:
     branches:
       - stage
 
@@ -43,7 +43,6 @@ jobs:
             file_name: .env
             envkey_NEXT_PUBLIC_ADS_DISABLED: true
             envkey_NEXT_PUBLIC_ENABLE_SEEDING: true
-            envkey_NEXT_PUBLIC_ENVIRONMENT: ${{secrets.CI_NODE_ENV}}
             envkey_DB_CONNECTION_STRING: ${{secrets.CI_DB_CONNECTION_STRING}}
             envkey_DATABASE_URL: ${{secrets.CI_DATABASE_URL}}
             envkey_NEXT_PUBLIC_GOOGLE_ANALYTICS: ${{secrets.CI_NEXT_PUBLIC_GOOGLE_ANALYTICS}}
@@ -131,6 +130,8 @@ jobs:
 
       - name: Cypress run
         uses: cypress-io/github-action@v2
+        env:
+          DATABASE_URL: ${{secrets.CI_DATABASE_URL}}
         with:
-          working-directory: ./lib/e2e
+          working-directory: ./apps/tests
           config-file: config.ci.json
