@@ -16,6 +16,7 @@ import { Provider } from "react-redux"
 import superjson from "superjson"
 import { AppRouter } from "./api/trpc/[[...trpc]].api"
 import { getToken } from "@Services/firebase/auth"
+import { captureException } from "@kittr/logger/nextjs"
 
 const AppWrap = ({ Component, pageProps }: any) => {
 	return (
@@ -112,7 +113,12 @@ export default withTRPC<AppRouter>({
 				defaultOptions: {
 					queries: {
 						refetchOnMount: false,
-						refetchOnWindowFocus: false
+						refetchOnWindowFocus: false,
+						onError: (err) => {
+							console.log("I did the global.")
+							console.log(err)
+							captureException("global trpc error")
+						}
 					}
 				}
 			}
