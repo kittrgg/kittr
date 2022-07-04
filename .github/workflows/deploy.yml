@@ -1,7 +1,5 @@
 name: Deploy Production
 
-# Test
-
 on:
   push:
     branches:
@@ -31,9 +29,6 @@ jobs:
         env:
           DATABASE_URL: ${{secrets.DATABASE_URL}}
         run: cd packages/prisma && npx prisma migrate deploy
-
-      - name: Run unit tests
-        run: yarn test
 
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v1.3
