@@ -29,16 +29,16 @@ module.exports = (on, config) => {
 
 	on("task", {
 		"db:seed-basic-user": async () => {
-			return seedBasicUser().finally(async () => prisma.$disconnect())
+			return seedBasicUser()
 		},
 		"db:remove-basic-user": async () => {
-			return removeBasicUser().finally(async () => prisma.$disconnect())
+			return removeBasicUser()
 		},
 		"db:seed-premium-user": async () => {
-			return seedPremiumUser().finally(async () => prisma.$disconnect())
+			return seedPremiumUser()
 		},
 		"db:remove-premium-user": async () => {
-			return removePremiumUser().finally(async () => prisma.$disconnect())
+			return removePremiumUser()
 		}
 	})
 }

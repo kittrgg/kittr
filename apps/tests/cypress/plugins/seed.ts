@@ -20,6 +20,8 @@ export const seedBasicUser = async () => {
 			}
 		}
 	})
+		.catch()
+		.finally(() => prisma.$disconnect())
 }
 
 export const removeBasicUser = async () => {
@@ -30,6 +32,7 @@ export const removeBasicUser = async () => {
 			}
 		})
 		.catch()
+		.finally(() => prisma.$disconnect())
 }
 
 export const premiumUser = {
@@ -74,6 +77,8 @@ export const seedPremiumUser = async () => {
 			}
 		}
 	})
+		.catch()
+		.finally(() => prisma.$disconnect())
 }
 
 export const removePremiumUser = async () => {
@@ -84,4 +89,5 @@ export const removePremiumUser = async () => {
 			}
 		})
 		.catch()
+		.finally(() => prisma.$disconnect())
 }
