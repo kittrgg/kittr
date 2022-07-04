@@ -20,11 +20,11 @@ describe("Desktop Authentication Flows", () => {
 		cy.get("[data-cy=your-channels-title]")
 	})
 
-	it("Logs out", () => {
-		cy.get("[data-cy=profile-container-button]").click()
-		cy.get("[data-cy=logout-button]").click()
-		cy.contains("get kittd.")
-	})
+	// it("Logs out", () => {
+	// 	cy.get("[data-cy=profile-container-button]").click()
+	// 	cy.get("[data-cy=logout-button]").click()
+	// 	cy.contains("get kittd.")
+	// })
 
 	it("Unsuccessful login for bad email", () => {
 		// Ignore error thrown by failed authentation
