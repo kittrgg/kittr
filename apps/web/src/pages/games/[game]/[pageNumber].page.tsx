@@ -10,19 +10,17 @@ import ResponsiveBanner from "@Services/venatus/ResponsiveBanner"
 import { Routes } from "@Utils/lookups/routes"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import {prisma} from '@kittr/prisma'
+import { prisma } from "@kittr/prisma"
 import styled from "styled-components"
 
 const CHANNELS_PER_PAGE = 10
 
-const GameProfile = () => {
+const GameProfile = (props: any) => {
 	const { width } = useViewportDimensions()
-	const { query, isFallback } = useRouter()
-
+	const { query, isFallback, push } = useRouter()
 	const { pageNumber, game } = query as { pageNumber: string; game: string }
 
 	const { data: gameData } = trpc.useQuery(["games/getByUrlSafeName", game], { enabled: !!game })
-
 	const { data: channelCount = 0 } = trpc.useQuery(["channels/count", game], { enabled: !!game })
 	const numberOfPages = Math.ceil(channelCount / CHANNELS_PER_PAGE)
 
@@ -37,6 +35,10 @@ const GameProfile = () => {
 		],
 		{ enabled: !!game }
 	)
+
+	if (props.redirect) {
+		push(`/games/${game}`)
+	}
 
 	if (isFallback) return <FallbackPage />
 
@@ -140,6 +142,14 @@ export const getStaticProps = async ({ params }: { params: { game: string; pageN
 	const ssg = await createSSGHelper()
 
 	const skip = Number(Number(pageNumber) - 1) * CHANNELS_PER_PAGE
+
+	if (isNaN(skip)) {
+		return {
+			props: {
+				redirect: true
+			}
+		}
+	}
 
 	const gameQuery = await ssg.fetchQuery("games/getByUrlSafeName", game)
 	if (gameQuery) {
