@@ -1,13 +1,21 @@
 import { useEffect } from "react"
-import { logInfo } from "@kittr/logger/nextjs"
 import { trpc } from "@Server/createHooks"
+import { logInfo } from "@kittr/logger/nextjs"
 
 export default function Sandbox() {
-	useEffect(() => {
-		logInfo("Test from client")
-	}, [])
+	// useEffect(() => {
+	// 	logInfo("Test from client")
+	// }, [])
 
-	const query = trpc.useQuery(["admin/logger-test"])
+	// @ts-ignore
+	const query = trpc.useQuery(["no-exist"], {
+		// onSettled: () => logInfo("settled"),
+		// onSuccess: () => logInfo("onsuccess"),
+		// onError: () => {
+		// 	console.log("I did the call site.")
+		// 	logInfo("ya beefed it")
+		// }
+	})
 
 	return (
 		<div>

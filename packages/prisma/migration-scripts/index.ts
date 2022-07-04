@@ -100,7 +100,7 @@ mongoose
 				}
 			}))
 
-			await PromisePool.withConcurrency(10).for(formattedBases).process(async (base: any) => {
+			await PromisePool.withConcurrency(1).for(formattedBases).process(async (base: any) => {
 				await prisma.warzoneKitBase.create({
 					data: {
 						id: base._id.toString(),
@@ -173,51 +173,53 @@ mongoose
 		}
 
 		const createChannels = async () => {
-			const formattedChannels = mongoChannels.map((channel) => ({
-				id: channel._id.toString(),
-				createdAt: channel._id.getTimestamp(),
-				displayName: channel.displayName,
-				urlSafeName: channel.urlSafeName,
-				viewCount: channel.viewCount,
-				previousUpdater: channel.previousUpdater,
-				games: channel.games,
-				managers: channel.managers.map((manager) => {
-					const coerceStringToEnum = (): ChannelManagerRoles => {
-						if (manager.role === "Administrator") {
-							return "ADMIN"
-						}
-						if (manager.role === "Editor") {
+			const formattedChannels = mongoChannels
+				.filter(channel => channel.displayName === "JoeWo")
+				.map((channel) => ({
+					id: channel._id.toString(),
+					createdAt: channel._id.getTimestamp(),
+					displayName: channel.displayName,
+					urlSafeName: channel.urlSafeName,
+					viewCount: channel.viewCount,
+					previousUpdater: channel.previousUpdater,
+					games: channel.games,
+					managers: channel.managers.map((manager) => {
+						const coerceStringToEnum = (): ChannelManagerRoles => {
+							if (manager.role === "Administrator") {
+								return "ADMIN"
+							}
+							if (manager.role === "Editor") {
+								return "EDITOR"
+							}
+							if (manager.role === "Owner") {
+								return "OWNER"
+							}
+
 							return "EDITOR"
 						}
-						if (manager.role === "Owner") {
-							return "OWNER"
+
+						return {
+							...manager,
+							role: coerceStringToEnum()
 						}
-
-						return "EDITOR"
-					}
-
-					return {
-						...manager,
-						role: coerceStringToEnum()
-					}
-				}),
-				hasCoverPhoto: channel.meta.hasCoverPhoto,
-				hasProfileImage: channel.meta.hasProfileImage,
-				affiliates: Object.entries(channel.meta.affiliates || {}).map(([channelName, rest]) => ({
-					code: rest.code,
-					description: rest.description,
-					company: channelName,
-					url: rest.link as any,
-				})),
-				brandColors: channel.meta.brandColors,
-				specs: channel.meta.specs,
-				stripeId: channel.meta.stripeId,
-				premiumType:
-					channel.meta.premiumType === "premium" ? "PREMIUM" : "BASIC",
-				links: channel.meta.links,
-				setupPhotos: channel.meta.setupPhotos,
-				youtubeAutoplay: channel.meta.youtubeAutoplay
-			}))
+					}),
+					hasCoverPhoto: channel.meta.hasCoverPhoto,
+					hasProfileImage: channel.meta.hasProfileImage,
+					affiliates: Object.entries(channel.meta.affiliates || {}).map(([channelName, rest]) => ({
+						code: rest.code,
+						description: rest.description,
+						company: channelName,
+						url: rest.link as any,
+					})),
+					brandColors: channel.meta.brandColors,
+					specs: channel.meta.specs,
+					stripeId: channel.meta.stripeId,
+					premiumType:
+						channel.meta.premiumType === "premium" ? "PREMIUM" : "BASIC",
+					links: channel.meta.links,
+					setupPhotos: channel.meta.setupPhotos,
+					youtubeAutoplay: channel.meta.youtubeAutoplay
+				}))
 
 			for (const channel of formattedChannels) {
 				try {
@@ -350,6 +352,7 @@ mongoose
 
 			// The kits to map over for our creates
 			const allKits = mongoChannels
+				.filter(channel => channel.displayName === "JoeWo")
 				.map((channel) =>
 					channel.kits.map((kit, index) => ({
 						...kit,
@@ -381,7 +384,7 @@ mongoose
 				)
 				.flat()
 
-			await PromisePool.withConcurrency(10).for(allKits).process(async (kit: any) => {
+			await PromisePool.withConcurrency(1).for(allKits).process(async (kit: any) => {
 
 				try {
 					await prisma.warzoneKit.create({
@@ -481,15 +484,15 @@ mongoose
 		const main = async () => {
 			await createAdministrators()
 
-			console.log("Creating games...")
-			console.time("Creating games")
-			await createGames()
-			console.timeEnd("Creating games")
+			// console.log("Creating games...")
+			// console.time("Creating games")
+			// await createGames()
+			// console.timeEnd("Creating games")
 
-			console.log("Creating kit bases...")
-			console.time("Creating kit bases")
-			await createKitBases()
-			console.timeEnd("Creating kit bases")
+			// console.log("Creating kit bases...")
+			// console.time("Creating kit bases")
+			// await createKitBases()
+			// console.timeEnd("Creating kit bases")
 
 			console.log("Creating channels...")
 			console.time("Creating channels")
@@ -501,10 +504,10 @@ mongoose
 			await createKits()
 			console.timeEnd("Creating kits")
 
-			console.log("Creating overlays...")
-			console.time("Creating overlays")
-			await createOverlays()
-			console.timeEnd("Creating overlays")
+			// console.log("Creating overlays...")
+			// console.time("Creating overlays")
+			// await createOverlays()
+			// console.timeEnd("Creating overlays")
 		}
 
 		main()
