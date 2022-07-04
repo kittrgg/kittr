@@ -1,5 +1,5 @@
 import { gamesRouter } from "@Server/routers/games"
-import type { inferProcedureInput, inferProcedureOutput } from "@trpc/server"
+import { inferProcedureInput, inferProcedureOutput, TRPCError } from "@trpc/server"
 import superjson from "superjson"
 import { createRouter } from "./createRouter"
 import { adminRouter } from "./routers/admin"
@@ -8,9 +8,19 @@ import { kitsRouter } from "./routers/kits"
 import { managersRouter } from "./routers/managers"
 import { twitchRouter } from "./routers/twitch"
 import { usersRouter } from "./routers/users"
+import { logError } from '@kittr/logger/node'
 
 export const appRouter = createRouter()
+	.formatError(({ shape, error }) => {
+		logError(JSON.stringify({ message: shape.message, error }))
+		return shape
+	})
 	.transformer(superjson)
+	.query("error", {
+		resolve: () => {
+			throw new TRPCError({ code: "BAD_REQUEST", message: "you stink like eggs" })
+		}
+	})
 	.merge("games/", gamesRouter)
 	.merge("channels/", channelsRouter)
 	.merge("managers/", managersRouter)
