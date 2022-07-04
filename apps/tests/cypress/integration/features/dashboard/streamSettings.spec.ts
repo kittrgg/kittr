@@ -87,16 +87,16 @@ describe("Channel Settings", () => {
 	it("Can add managers", () => {
 		getBasicUserButton().click()
 		cy.get("[data-cy=add-manager-begin]").click()
-		cy.get("[name=email").type("fog@dev.com")
+		cy.get("[name=email").type("manager2@test.com")
 		cy.get("[data-cy=role-selector]").select("Editor")
 		cy.get("[data-cy=confirm-manager-add]").click()
-		cy.contains("fog@dev.com")
+		cy.contains("manager2@test.com")
 
 		cy.get("[data-cy=add-manager-begin]").click()
-		cy.get("[name=email").type("filod@dev.com")
+		cy.get("[name=email").type("manager3@test.com")
 		cy.get("[data-cy=role-selector]").select("Editor")
 		cy.get("[data-cy=confirm-manager-add]").click()
-		cy.contains("filod@dev.com")
+		cy.contains("manager3@test.com")
 	})
 
 	it("Shows all managers", () => {
@@ -128,9 +128,9 @@ describe("Channel Settings", () => {
 	it("Can remove a manager", () => {
 		getBasicUserButton().click()
 		cy.get("[data-cy=remove-manager]").first().click()
-		cy.contains("fog@dev.com")
+		cy.contains("manager2@test.com")
 		cy.get("[data-cy=confirm-manager-removal]").click()
-		cy.contains("fog@dev.com").should("not.exist")
+		cy.contains("manager2@test.com").should("not.exist")
 	})
 
 	// TODO: Particuarly difficult to make pass...I just didn't feel like dealing with it.
