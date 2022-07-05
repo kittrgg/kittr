@@ -24,7 +24,7 @@
 		"express": "4.17.3",
 		"jsonwebtoken": "8.5.1",
 		"module-alias": "2.2.2",
-		"nodemon": "2.0.15",
+		"nodemon": "2.0.18",
 		"socket.io": "4.4.1"
 	},
 	"devDependencies": {
