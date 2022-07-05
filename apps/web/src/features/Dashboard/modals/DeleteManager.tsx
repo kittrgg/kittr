@@ -1,44 +1,40 @@
 import styled from "styled-components"
 
 import colors from "@Colors"
-import { paragraph } from "@Styles/typography"
-import { getToken } from "@Services/firebase/auth/getToken"
-import { useDispatch } from "@Redux/store"
-import { setActiveView, setModal } from "@Redux/slices/dashboard"
-import { useChannelData, useModal } from "@Redux/slices/dashboard/selectors"
-import { Modal, Button, Spinner } from "@Components/shared"
-import { useUser } from "@Hooks/useUser"
-import { useManagedChannels } from "@Hooks/api/useManagedChannels"
+import { Button, Modal, Spinner } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
-import fetch from "@Fetch"
+import { useManagedChannels } from "@Hooks/api/useManagedChannels"
+import { useUser } from "@Hooks/useUser"
+import { setActiveView, setModal } from "@Redux/slices/dashboard"
+import { useChannelData, useModal } from "@Redux/slices/dashboard/selectors"
+import { useDispatch } from "@Redux/store"
+import { paragraph } from "@Styles/typography"
 
 const DeleteManager = () => {
 	const dispatch = useDispatch()
-	const { _id: channelId } = useChannelData()
+	const { data: channelData } = useChannelData()
 	const { data } = useModal()
 	const user = useUser()
 	const { refetch } = useManagedChannels()
 	const { refetch: refetchChannel } = useDashboardChannel()
 	const isSelf = user?.email === data.email
-	const { mutate, isLoading } = useDashboardMutator(async () => {
-		fetch
-			.delete({
-				url: `/api/manager/removeManager`,
-				headers: { authorization: `Bearer: ${await getToken()}` },
-				body: { uid: data.uid, channelId }
-			})
-			.then(() => {
+
+	const { mutate, isLoading } = useDashboardMutator({
+		path: "channels/managers/delete",
+		opts: {
+			onSuccess: () => {
 				refetchChannel()
 				dispatch(setModal({ type: "", data: {} }))
 
 				if (isSelf) {
 					refetch().finally(() => dispatch(setActiveView({ channelId: "", view: "Channel List" })))
 				}
-			})
-			.catch(() => {
+			},
+			onError: () => {
 				dispatch(setModal({ type: "Error Notification", data: {} }))
-			})
+			}
+		}
 	})
 
 	if (isLoading) {
@@ -65,7 +61,7 @@ const DeleteManager = () => {
 				<Button
 					design="white"
 					text={"YES, REMOVE " + (isSelf ? "MYSELF" : "THIS MANAGER")}
-					onClick={mutate}
+					onClick={() => mutate({ channelId: channelData?.id!, managerIdToDelete: data.id })}
 					style={{ marginLeft: "32px" }}
 					dataCy="confirm-manager-removal"
 				/>

@@ -7,13 +7,11 @@ import { filterKitsByFeature } from "@Utils/helpers/filterKitsByFeature"
 import { sortAlphabetical } from "@Utils/helpers/sortAlphabetical"
 import styled from "styled-components"
 import KitButton from "./KitButton"
-import { useAllKitBases } from "@Hooks/api/useAllKitBases"
 
-const KitList = ({ ...props }) => {
+const KitList = () => {
 	const dispatch = useDispatch()
-	const { kits } = useChannelData()
-	const noKits = kits.length === 0
-	const { data: kitBases } = useAllKitBases()
+	const { data } = useChannelData()
+	const noKits = data?.warzoneKits.length === 0
 
 	if (noKits) {
 		return (
@@ -26,28 +24,20 @@ const KitList = ({ ...props }) => {
 		)
 	}
 
-	const createKitObject = (kit: IKit) => {
-		return {
-			...kit,
-			base: kitBases!.find((allBases: IKitBase) => allBases._id === kit.baseId)!
-		}
-	}
-
 	return (
 		<Wrapper>
 			<Container>
-				{filterKitsByFeature(kits)
-					.map(createKitObject)
-					.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
-					.map((kit) => (
-						<KitButton key={kit._id} favorite kit={kit} />
-					))}
-				{kits && filterKitsByFeature(kits).length > 0 && <hr style={{ width: "88%", borderColor: colors.lightest }} />}
-				{kits &&
-					filterKitsByFeature(kits, false)
-						.map(createKitObject)
+				{data?.warzoneKits &&
+					filterKitsByFeature(data?.warzoneKits)
 						.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
-						.map((kit) => <KitButton key={kit._id} kit={kit} />)}
+						.map((kit) => <KitButton key={kit.id} favorite kit={kit} />)}
+				{data?.warzoneKits && filterKitsByFeature(data?.warzoneKits).length > 0 && (
+					<hr style={{ width: "88%", borderColor: colors.lightest }} />
+				)}
+				{data?.warzoneKits &&
+					filterKitsByFeature(data?.warzoneKits, false)
+						.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
+						.map((kit) => <KitButton key={kit.id} kit={kit} />)}
 			</Container>
 			<ButtonWrapper>
 				<Button

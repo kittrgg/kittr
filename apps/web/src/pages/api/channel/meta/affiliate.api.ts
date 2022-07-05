@@ -1,58 +1,123 @@
 import validator from "validator"
-import mongoose from "mongoose"
 import type { NextApiRequest, NextApiResponse } from "next"
+import { NextServerPayload } from "@kittr/types"
 import { createHandler } from "@Middlewares/createHandler"
-import Channel from "@Services/mongodb/models/Channel"
 import { userAuth } from "@Middlewares/auth"
-import { sanitize } from "@Services/mongodb/utils/sanitize"
-import { ChannelModel } from "@Models/Channel"
+import { prisma, Channel } from "@kittr/prisma"
 
 const handler = createHandler(userAuth)
 
 // Set channel's affiliate
-handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel | null>>) => {
+handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<Channel>>) => {
 	try {
-		const { _id, company, description, code, link } = JSON.parse(req.body)
+		// Upsert an affiliate for a channel
+		const { channelId, company, description, code, url } = JSON.parse(req.body) as {
+			channelId: string
+			affiliateId: string
+			company: string
+			description?: string
+			code?: string
+			url?: string
+		}
+		if (url) {
+			if (!validator.isURL(url)) return res.status(400).json({ error: true, errorMessage: "Invalid URL" })
+		}
 
-		const data = await Channel.findByIdAndUpdate(
-			{
-				_id: new mongoose.Types.ObjectId(sanitize(_id))
-			},
-			{
-				$set: {
-					[`meta.affiliates.${company.replace(/[^\w\s-]/g, "")}`]: {
-						code: sanitize(code) || "",
-						description: sanitize(description) || "",
-						link: validator.isURL(link) ? sanitize(link) || "" : ""
+		// TODO: Need input validation
+		const affiliateUpdate = {
+			company,
+			description,
+			code,
+			url
+		}
+
+		const result = await prisma.channel.update({
+			where: { id: channelId },
+			data: {
+				profile: {
+					update: {
+						affiliates: {
+							create: affiliateUpdate
+						}
 					}
 				}
-			},
-			{ new: true }
-		)
-
-		return res.status(200).json(data)
-	} catch (error) {
-		console.log(error)
-		return res.status(500).json({ error: true, errorMessage: JSON.stringify(error) })
+			}
+		})
+		return res.status(200).json(result)
+	} catch (err) {
+		console.log(err)
+		return res.status(500).json({ error: true, errorMessage: JSON.stringify(err) })
 	}
 })
 
+// Edit
+handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<Channel>>) => {
+	try {
+		// Upsert an affiliate for a channel
+		const { channelId, affiliateId, company, description, code, url } = JSON.parse(req.body) as {
+			channelId: string
+			affiliateId: string
+			company: string
+			description?: string
+			code?: string
+			url?: string
+		}
+
+		if (url) {
+			if (!validator.isURL(url)) return res.status(400).json({ error: true, errorMessage: "Invalid URL" })
+		}
+
+		// TODO: Need input validation
+		const affiliateUpdate = {
+			company,
+			description,
+			code,
+			url
+		}
+
+		const result = await prisma.channel.update({
+			where: { id: channelId },
+			data: {
+				profile: {
+					update: {
+						affiliates: {
+							update: {
+								where: {
+									id: affiliateId
+								},
+								data: affiliateUpdate
+							}
+						}
+					}
+				}
+			}
+		})
+		return res.status(200).json(result)
+	} catch (err) {
+		console.log(err)
+		return res.status(500).json({ error: true, errorMessage: JSON.stringify(err) })
+	}
+})
 // Delete a channel's affiliate
 handler.delete(async (req: NextApiRequest, res: NextApiResponse) => {
 	try {
-		const { _id, company } = JSON.parse(req.body)
+		const { channelId, affiliateId } = JSON.parse(req.body)
+		const result = await prisma.channel.update({
+			where: { id: channelId },
+			data: {
+				profile: {
+					update: {
+						affiliates: {
+							delete: {
+								id: affiliateId
+							}
+						}
+					}
+				}
+			}
+		})
 
-		const data = await Channel.findByIdAndUpdate(
-			{
-				_id: new mongoose.Types.ObjectId(sanitize(_id))
-			},
-			{
-				$unset: { [`meta.affiliates.${company.replace(/[^\w\s-]/g, "")}`]: 1 }
-			},
-			{ new: true }
-		)
-
-		return res.status(200).json(data)
+		return res.status(200).json(result)
 	} catch (error) {
 		console.log(error)
 		return res.status(500).json({ isError: true, error })

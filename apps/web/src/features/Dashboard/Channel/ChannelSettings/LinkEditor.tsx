@@ -6,45 +6,37 @@ import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { setModal } from "@Redux/slices/dashboard"
 import { useModal, usePremiumStatus } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import { getToken } from "@Services/firebase/auth/getToken"
+import { getToken } from "@Services/firebase/auth"
 import { paragraph } from "@Styles/typography"
 import { trimPrefix } from "@Utils/helpers/trimPrefix"
 import { linkPrefixes } from "@Utils/lookups/linkPrefixes"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
 import AddLink from "../../modals/AddLink"
-import fetch from "@Fetch"
 
 /** CRUD for editing the social links of a channel. */
-const LinkEditor = ({ ...props }) => {
+const LinkEditor = () => {
 	const { data } = useDashboardChannel()
 	const { isPremium } = usePremiumStatus()
 	const modal = useModal()
 	const dispatch = useDispatch()
-	const [linkEdits, setLinkEdits] = useState<[SocialPlatform, string][]>(
-		Object.entries(data?.meta.links || {}) as [SocialPlatform, string][]
-	)
+	const [linkEdits, setLinkEdits] = useState(data?.links)
 	const [areActiveChanges, setActiveChanges] = useState(false)
-	const { mutate, isLoading } = useDashboardMutator(async () => {
-		try {
-			return await fetch.put({
-				url: `/api/channel/meta/links`,
-				headers: {
-					authorization: `Bearer: ${await getToken()}`
-				},
-				body: { _id: data?._id, links: linkEdits }
-			})
-		} catch (error) {
-			dispatch(setModal({ type: "Error Notification", data: {} }))
+	const { mutate, isLoading } = useDashboardMutator({
+		path: "channels/links/upsert",
+		opts: {
+			onError: () => {
+				dispatch(setModal({ type: "Error Notification", data: {} }))
+			}
 		}
 	})
 
 	useEffect(() => {
-		setLinkEdits(Object.entries(data?.meta.links || {}) as [SocialPlatform, string][])
-	}, [data?.meta.links])
+		setLinkEdits(Object.values(data?.links || {}))
+	}, [data?.links])
 
 	useEffect(() => {
-		if (Object.entries(data?.meta.links || {}).length !== linkEdits.length) {
+		if (Object.entries(data?.links || {}).length !== linkEdits?.length) {
 			return setActiveChanges(true)
 		}
 
@@ -52,7 +44,9 @@ const LinkEditor = ({ ...props }) => {
 
 		// Loop through link edits, then compare the key-value array to see if every link is still the same
 		linkEdits.forEach((link) => {
-			if (Object.entries(data?.meta.links || {}).find((ogLink) => ogLink[0] === link[0] && ogLink[1] === link[1])) {
+			if (
+				Object.entries(data?.links || {}).find((ogLink) => ogLink[0] === link?.value && ogLink[1].value === link.value)
+			) {
 				comparisons.push(false)
 			} else {
 				comparisons.push(true)
@@ -60,23 +54,36 @@ const LinkEditor = ({ ...props }) => {
 		})
 
 		setActiveChanges(comparisons.some((elem) => elem === true))
-	}, [linkEdits, data?.meta.links])
+	}, [linkEdits, data?.links])
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>, link: [string, string]) => {
-		let newEdit = linkEdits.slice()
-		const editIndex = newEdit.findIndex((linkToEdit) => link[0] === linkToEdit[0])
-		newEdit[editIndex][1] = `${linkPrefixes[linkEdits[editIndex][0]]}${trimPrefix(
-			linkPrefixes[linkEdits[editIndex][0]],
-			e.target.value
-		)}`
+		let newEdit = linkEdits?.slice() ?? []
+		const editIndex =
+			newEdit?.findIndex((linkToEdit) => {
+				return link[0] === linkToEdit.property
+			}) ?? -1
+
+		if (!linkEdits) {
+			console.error("No link edits found.")
+		} else {
+			newEdit[editIndex].value = `${linkPrefixes[linkEdits[editIndex].property]}${trimPrefix(
+				linkPrefixes[linkEdits[editIndex].property],
+				e.target.value
+			)}`
+		}
 
 		setLinkEdits(newEdit)
 	}
 
 	const removeLink = (property: string) => {
-		let newEdit = linkEdits.slice()
-		const editIndex = newEdit.findIndex((linkToEdit) => property === linkToEdit[0])
-		newEdit.splice(editIndex, 1)
+		let newEdit = linkEdits?.slice()
+		const editIndex = newEdit?.findIndex((linkToEdit) => property === linkToEdit.value) ?? -1
+
+		if (editIndex !== -1) {
+			console.error("No edit index found.")
+		}
+
+		newEdit?.splice(editIndex, 1)
 
 		setLinkEdits(newEdit)
 	}
@@ -98,7 +105,8 @@ const LinkEditor = ({ ...props }) => {
 				Feel free to paste in the whole link. We will trim it up for you. Yes, we know, we love you, too.
 			</Paragraph>
 			{modal.type === "Add Link" && <AddLink linkEdits={linkEdits} setLinkEdits={setLinkEdits} />}
-			{linkEdits.map(([property, link]) => {
+			{linkEdits?.map((link) => {
+				const { property, value } = link
 				return (
 					<Container
 						key={property}
@@ -118,7 +126,7 @@ const LinkEditor = ({ ...props }) => {
 							type="text"
 							label={linkPrefixes[property]}
 							name={property}
-							value={trimPrefix(linkPrefixes[property], link) as string}
+							value={trimPrefix(linkPrefixes[property], value) as string}
 							labelStyles={{
 								display: "flex",
 								flexDirection: "row",
@@ -127,7 +135,7 @@ const LinkEditor = ({ ...props }) => {
 								color: colors.lighter
 							}}
 							inputStyles={{ flex: "1", marginLeft: "0" }}
-							onChange={(e) => handleChange(e, [property, link])}
+							onChange={(e) => handleChange(e, [property, value])}
 						/>
 						<Button
 							design="transparent"
@@ -160,7 +168,7 @@ const LinkEditor = ({ ...props }) => {
 							design="white"
 							disabled={!areActiveChanges}
 							text="Save Changes"
-							onClick={mutate}
+							onClick={async () => mutate({ channelId: data?.id!, links: linkEdits! })}
 							style={{
 								margin: "0 auto"
 							}}

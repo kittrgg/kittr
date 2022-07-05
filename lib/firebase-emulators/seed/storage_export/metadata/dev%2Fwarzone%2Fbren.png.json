@@ -1,0 +1,20 @@
+{
+  "name": "warzone/bren.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699130,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "61bad808-50e5-4d92-ba31-f60859be215b"
+  ],
+  "etag": "O1bkSuVYyWpCJ7ZWjeh8qpHQRag",
+  "timeCreated": "2022-05-21T17:04:59.131Z",
+  "updated": "2022-05-21T17:04:59.131Z",
+  "size": 15062,
+  "md5Hash": "ie4gobqPB4//x9ICo0PRMg==",
+  "crc32c": "411857557"
+}

@@ -1,23 +1,27 @@
 import type { NextApiRequest, NextApiResponse } from "next"
+import { NextServerPayload } from "@kittr/types"
 import { createHandler } from "@Utils/middlewares/createHandler"
-import mongoose from "mongoose"
-import { Channel } from "@Services/mongodb/models"
-import { ChannelModel } from "@Services/mongodb/models/Channel"
 import { userAuth } from "@Middlewares/auth"
-import { sanitize } from "@Services/mongodb/utils/sanitize"
+import { prisma, Channel } from "@kittr/prisma"
 
 const handler = createHandler(userAuth)
 
-handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel | null>>) => {
-	const { _id } = JSON.parse(req.body)
+handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<Channel>>) => {
+	const { id } = JSON.parse(req.body)
 
 	try {
-		const data = await Channel.findOneAndUpdate(
-			{ _id: new mongoose.Types.ObjectId(sanitize(_id)) },
-			{ $set: { "meta.hasProfileImage": true, "meta.profileImage": sanitize(_id) } }
-		)
+		const result = await prisma.channel.update({
+			where: { id },
+			data: {
+				profile: {
+					update: {
+						hasProfileImage: true
+					}
+				}
+			}
+		})
 
-		return res.status(200).json(data)
+		return res.status(200).json(result)
 	} catch (error) {
 		return res.status(400).json({ error: true, errorMessage: JSON.stringify(error) })
 	}

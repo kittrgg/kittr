@@ -2,12 +2,12 @@ import { sortAlphabetical } from "@Utils/helpers/sortAlphabetical"
 
 import * as Styled from "./style"
 import { useDispatch } from "@Redux/store"
-import { useAllKitsByGameId } from "@Hooks/api/useAllKitsByGameId"
+import { useAllKitsByGameId } from "@Hooks/trpc/useAllKitsByGameId"
 import { updateBase, updateOptions } from "@Redux/slices/dashboard"
 import { useActiveKit, useChannelView } from "@Redux/slices/dashboard/selectors"
 import { Selector } from "@Components/shared"
 
-const ChooseBase = ({ ...props }) => {
+const ChooseBase = () => {
 	const { gameId } = useChannelView()
 	const { data, isLoading } = useAllKitsByGameId(gameId)
 	const dispatch = useDispatch()
@@ -31,10 +31,10 @@ const ChooseBase = ({ ...props }) => {
 							: null
 					}
 					options={data
-						?.sort((a: IKitBase, b: IKitBase) => {
+						?.sort((a, b) => {
 							return sortAlphabetical(a.displayName.toLowerCase(), b.displayName.toLowerCase())
 						})
-						.map((option: IKitBase) => ({
+						.map((option) => ({
 							label: option.displayName,
 							value: option
 						}))}

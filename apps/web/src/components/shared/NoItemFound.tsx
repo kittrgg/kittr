@@ -2,8 +2,8 @@ import Link from "next/link"
 import styled from "styled-components"
 
 import colors from "@Colors"
-import { header1, header2, paragraph } from "@Styles/typography"
 import Head from "@Components/shared/Head"
+import { header1, header2, paragraph } from "@Styles/typography"
 
 interface Props {
 	/** The type of item that couldn't be found. On kittr, these are the two main distinctions that people would be searching through. */

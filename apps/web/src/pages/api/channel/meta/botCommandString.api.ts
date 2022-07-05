@@ -1,28 +1,39 @@
-import mongoose from "mongoose"
 import type { NextApiRequest, NextApiResponse } from "next"
+import { NextServerPayload } from "@kittr/types"
 import { createHandler } from "@Middlewares/createHandler"
-import Channel, { ChannelModel } from "@Services/mongodb/models/Channel"
 import { userAuth } from "@Middlewares/auth"
-import { sanitize } from "@Services/mongodb/utils/sanitize"
+import { prisma, ChannelCustomGameCommand } from "@kittr/prisma"
 
 const handler = createHandler(userAuth)
 
 // Edit command string for channel's game
-handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel | null>>) => {
-	const { commandString, gameId, channelId } = JSON.parse(req.body)
-
+handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelCustomGameCommand>>) => {
 	try {
-		const data = await Channel.findByIdAndUpdate(
-			{ _id: new mongoose.Types.ObjectId(sanitize(channelId)) },
-			{ $set: { "games.$[game].commandString": sanitize(commandString) } },
-			{
-				arrayFilters: [{ "game.id": new mongoose.Types.ObjectId(sanitize(gameId)) }],
-				new: true
-			}
-		)
+		const { channelId, commandId, gameId, commandString } = JSON.parse(req.body)
 
-		return res.status(200).json(data)
+		const update = {
+			command: commandString,
+			channel: {
+				connect: {
+					id: channelId
+				}
+			},
+			game: {
+				connect: {
+					id: gameId
+				}
+			}
+		}
+
+		const result = await prisma.channelCustomGameCommand.upsert({
+			where: { id: commandId ?? "" },
+			create: update,
+			update
+		})
+
+		return res.status(200).json(result)
 	} catch (error) {
+		console.log(error)
 		return res.status(400).json({ error: true, errorMessage: JSON.stringify(error) })
 	}
 })

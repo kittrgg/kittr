@@ -1,48 +1,35 @@
 import styled from "styled-components"
 
 import colors from "@Colors"
-import { useDispatch } from "@Redux/store"
-import { setModal, setActiveKit } from "@Redux/slices/dashboard"
 import { SVG } from "@Components/shared"
+import { WarzoneKit, WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
+import { setActiveKit, setModal } from "@Redux/slices/dashboard"
 import { useActiveKit } from "@Redux/slices/dashboard/selectors"
-import { useAllKitOptions } from "@Hooks/api/useAllKitOptions"
+import { useDispatch } from "@Redux/store"
 
 interface Props {
 	favorite?: true
-	kit: IKit
+	kit: WarzoneKit & { base: WarzoneKitBase; options: WarzoneKitOption[] }
 }
 
 const KitButton = ({ favorite, kit }: Props) => {
 	const dispatch = useDispatch()
 	const activeKit = useActiveKit()
-	const {
-		userData: { customTitle },
-		base: { displayName }
-	} = kit
-	const { data: allOptions, isLoading } = useAllKitOptions()
+	const { customTitle, base } = kit
 
 	let title = ""
 
 	if (customTitle) {
-		title = `${displayName} (${customTitle})`
+		title = `${base.displayName} (${customTitle})`
 	} else {
-		title = `${displayName}`
+		title = `${base.displayName}`
 	}
-
-	if (isLoading) return null
 
 	return (
 		<Button
-			key={kit._id}
-			active={activeKit._id == kit._id}
-			onClick={() =>
-				dispatch(
-					setActiveKit({
-						...kit,
-						options: kit.options.map((opt) => allOptions!.find((allOption: any) => allOption._id === opt)!)
-					})
-				)
-			}
+			key={kit.id}
+			active={activeKit.id == kit.id}
+			onClick={() => dispatch(setActiveKit(kit)) }
 		>
 			<p style={{ maskImage: "linear-gradient(to right, black 65%, transparent 92%, transparent 100%)" }}>{title}</p>
 			{favorite && (
@@ -59,7 +46,7 @@ const KitButton = ({ favorite, kit }: Props) => {
 				/>
 			)}
 			<SVG.Export
-				stroke={activeKit._id === kit._id ? colors.darker : colors.light}
+				stroke={activeKit.id === kit.id ? colors.darker : colors.light}
 				style={{
 					position: "absolute",
 					top: "50%",
@@ -76,7 +63,7 @@ const KitButton = ({ favorite, kit }: Props) => {
 						})
 					)
 				}}
-				dataCy={`${displayName}-quick-export`}
+				dataCy={`${base.displayName}-quick-export`}
 			/>
 		</Button>
 	)

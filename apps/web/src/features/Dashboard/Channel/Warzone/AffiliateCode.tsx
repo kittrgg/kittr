@@ -1,30 +1,29 @@
 import colors from "@Colors"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
+import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useChannelView } from "@Redux/slices/dashboard/selectors"
-import { getToken } from "@Services/firebase/auth/getToken"
+import { useDispatch } from "@Redux/store"
 import { header2 } from "@Styles/typography"
 import { useEffect, useRef, useState } from "react"
 import styled from "styled-components"
-import fetch from "@Fetch"
-import { useDispatch } from "@Redux/store"
-import { setModal } from "@Redux/slices/dashboard"
 
-const CreatorCode = ({ ...props }) => {
+const CreatorCode = () => {
 	const dispatch = useDispatch()
 	const { gameId: activeGame } = useChannelView()
-	const { _id: channelId, games } = useChannelData()
-	const [code, setCode] = useState(games.find((game) => game.id === activeGame)?.code || "")
+	const { data } = useChannelData()
+	const affiliateCode = data?.gameCreatorCodes?.find((code) => code.gameId === activeGame)
+	const [code, setCode] = useState(affiliateCode?.code || "")
 	const [isEditing, setIsEditing] = useState(false)
 	const inputRef = useRef<HTMLInputElement>(null)
-	const { mutate, error } = useDashboardMutator(async () => {
-		const result = await fetch.put<any>({
-			url: `/api/channel/meta/code`,
-			headers: { authorization: `Bearer: ${await getToken()}` },
-			body: { code, channelId, gameId: games.find((game) => game.id === activeGame)?.id }
-		})
-
-		if (result) {
-			setIsEditing(false)
+	const { mutate } = useDashboardMutator({
+		path: "channels/profile/creator-codes/upsert",
+		opts: {
+			onSuccess: () => {
+				setIsEditing(false)
+			},
+			onError: () => {
+				dispatch(setModal({ type: "Error Notification", data: {} }))
+			}
 		}
 	})
 
@@ -33,10 +32,6 @@ const CreatorCode = ({ ...props }) => {
 			inputRef.current.focus()
 		}
 	}, [isEditing])
-
-	if (error) {
-		dispatch(setModal({ type: "Error Notification", data: {} }))
-	}
 
 	return (
 		<Code>
@@ -52,7 +47,11 @@ const CreatorCode = ({ ...props }) => {
 							return inputRef.current.blur()
 						}
 					}}
-					onBlur={mutate}
+					onBlur={async () => {
+						mutate({
+							code: { id: affiliateCode?.id, code, channelId: data?.id!, gameId: activeGame }
+						})
+					}}
 					data-cy="creator-code-input"
 				/>
 			)}

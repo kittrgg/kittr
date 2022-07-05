@@ -1,28 +1,21 @@
-import type { NextApiRequest, NextApiResponse } from "next"
-import { createHandler } from "@Utils/middlewares/createHandler"
+import { prisma, WarzoneKitOption } from "@kittr/prisma"
+import { NextServerPayload } from "@kittr/types"
 import { adminAuth } from "@Utils/middlewares/auth"
-import mongoose from "mongoose"
-import { KitBase } from "@Services/mongodb/models"
+import { createHandler } from "@Utils/middlewares/createHandler"
+import type { NextApiRequest, NextApiResponse } from "next"
 
 const handler = createHandler(adminAuth)
 
-// Delete a kit base
-handler.delete(async (req: NextApiRequest, res: NextApiResponse) => {
-	const { baseId, optionId } = req.body
+// Delete a kit option
+handler.delete(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<WarzoneKitOption>>) => {
+	const { id } = req.body
 
-	KitBase.findOneAndUpdate(
-		{ _id: new mongoose.Types.ObjectId(baseId) },
-		{
-			$pull: {
-				"gameInfo.availableOptions": { optionId }
-			}
-		},
-		{ new: true },
-		(errors, data) => {
-			if (errors) return res.status(400).json({ success: false, errors })
-			return res.status(200).json({ data })
-		}
-	)
+	try {
+		const data = await prisma.warzoneKitOption.delete({ where: { id } })
+		return res.status(200).json(data)
+	} catch (err) {
+		return res.status(400).json({ error: true, errorMessage: JSON.stringify(err) })
+	}
 })
 
 export default handler

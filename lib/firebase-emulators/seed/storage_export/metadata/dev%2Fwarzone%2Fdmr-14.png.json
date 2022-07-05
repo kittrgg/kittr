@@ -1,0 +1,20 @@
+{
+  "name": "warzone/dmr-14.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699274,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "3da61918-bc3b-48b2-8472-8e8908ba7398"
+  ],
+  "etag": "sEFhTLWJ9mp2MBezxdS2YtgJStE",
+  "timeCreated": "2022-05-21T17:04:59.274Z",
+  "updated": "2022-05-21T17:04:59.274Z",
+  "size": 38145,
+  "md5Hash": "wxb+jC1/9zdb0iZtmRq5yg==",
+  "crc32c": "2520354566"
+}

@@ -1,11 +1,15 @@
+// import { IPopularityRates } from "@kittr/types"
 import colors from "@Colors"
 import FullScreen from "@Components/layouts/FullScreen"
 import NavMenu from "@Components/layouts/NavMenu"
 import { useDimensions } from "@Hooks/useDimensions"
 import { useLockBodyScroll } from "@Hooks/useLockBodyScroll"
-import { setActiveWeapon, setChannel, setIsSidebarOpen, setPopularityRates } from "@Redux/slices/displayr"
+import { WarzoneKit, WarzoneKitBase, WarzoneKitBaseCategory, WarzoneKitOption } from "@kittr/prisma"
+import { setActiveWeapon, setChannel, setIsSidebarOpen } from "@Redux/slices/displayr"
 import { useActiveWeapon, useSidebarState } from "@Redux/slices/displayr/selectors"
 import { useDispatch } from "@Redux/store"
+import { InferQueryOutput } from "@Server/index"
+import type { NonNullable } from "@Types/index"
 import { Routes } from "@Utils/lookups/routes"
 import { useRouter } from "next/router"
 import { useEffect } from "react"
@@ -14,11 +18,10 @@ import ChannelMain from "./Main"
 import Sidebar from "./Sidebar"
 
 interface Props {
-	channel: IChannel
-	popularityRates: IPopularityRates
+	channel: NonNullable<InferQueryOutput<"channels/profile/get">>
 }
 
-const Channels = ({ channel, popularityRates }: Props) => {
+const WarzoneProfile = ({ channel }: Props) => {
 	const router = useRouter()
 	const { query } = router
 	const dispatch = useDispatch()
@@ -27,14 +30,25 @@ const Channels = ({ channel, popularityRates }: Props) => {
 	const { observe, height } = useDimensions()
 	useLockBodyScroll()
 
+	const code = channel?.gameCreatorCodes.find((code) => code.game.urlSafeName === query.game)?.code
+
 	useEffect(() => {
 		dispatch(setChannel(channel))
-		dispatch(setPopularityRates(popularityRates))
+		// dispatch(setPopularityRates(popularityRates))
 
 		return () => {
-			dispatch(setChannel({} as IChannel))
-			dispatch(setActiveWeapon({} as IKit))
-			dispatch(setPopularityRates({} as IPopularityRates))
+			dispatch(setChannel({} as any))
+			dispatch(
+				setActiveWeapon(
+					{} as WarzoneKit & {
+						options: WarzoneKitOption[]
+						base: WarzoneKitBase & {
+							category: WarzoneKitBaseCategory
+						}
+					}
+				)
+			)
+			// dispatch(setPopularityRates({} as IPopularityRates))
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
@@ -44,19 +58,16 @@ const Channels = ({ channel, popularityRates }: Props) => {
 
 		if (activeWeapon) {
 			if (Object.keys(activeWeapon).length === 0 && weaponQuery) {
-				const { kits } = channel
-				const filteredKits = kits
+				const filteredKits = channel?.warzoneKits
 					.filter((elem) => elem.base.displayName.replace(/ /g, "-") === weaponQuery)
-					.sort((a, b) => Number(b.userData.featured) - Number(a.userData.featured))
+					.sort((a, b) => Number(b.featured) - Number(a.featured))
 
-				const firstKit = filteredKits[0]
+				const [firstKit] = filteredKits!
 				dispatch(setActiveWeapon(firstKit))
 			}
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeWeapon, query.weapon, query.k])
-
-	const activeGame = channel.games ? channel.games.find((game: IGame) => game.urlSafeName === query.game) : { code: "" }
 
 	return (
 		<FullScreen
@@ -76,7 +87,7 @@ const Channels = ({ channel, popularityRates }: Props) => {
 				middleComponent={
 					<>
 						<HeaderTitle>{`${query.channel || ("" as string)}`}</HeaderTitle>
-						{activeGame?.code && <CreatorCode>CODE: {activeGame?.code}</CreatorCode>}
+						{code && <CreatorCode>CODE: {code}</CreatorCode>}
 					</>
 				}
 			/>
@@ -88,7 +99,7 @@ const Channels = ({ channel, popularityRates }: Props) => {
 	)
 }
 
-export default Channels
+export default WarzoneProfile
 
 // Styled Components
 

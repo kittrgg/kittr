@@ -1,0 +1,20 @@
+{
+  "name": "warzone/combat-shield.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699165,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "629c93f2-cc71-4a49-be79-c546bffad254"
+  ],
+  "etag": "T+XQ11BSL6DHLHDLNwpcXllCanA",
+  "timeCreated": "2022-05-21T17:04:59.166Z",
+  "updated": "2022-05-21T17:04:59.166Z",
+  "size": 9365,
+  "md5Hash": "kfJDKgVfcg9189uuls0vbQ==",
+  "crc32c": "2263048961"
+}

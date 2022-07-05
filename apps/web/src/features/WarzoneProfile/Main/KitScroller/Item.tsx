@@ -1,13 +1,14 @@
+import colors from "@Colors"
 import SVG from "@Components/shared/SVG"
+import { WarzoneKit, WarzoneKitBase } from "@kittr/prisma"
+import { setActiveWeapon } from "@Redux/slices/displayr"
+import { useActiveWeapon } from "@Redux/slices/displayr/selectors"
+import { useDispatch } from "@Redux/store"
 import { useEffect, useRef } from "react"
 import * as Styled from "./style"
-import colors from "@Colors"
-import { useActiveWeapon } from "@Redux/slices/displayr/selectors"
-import { setActiveWeapon } from "@Redux/slices/displayr"
-import { useDispatch } from "@Redux/store"
 
 interface Props {
-	elem: IKit
+	elem: WarzoneKit & {base: WarzoneKitBase}
 }
 
 const Item = ({ elem }: Props) => {
@@ -16,7 +17,7 @@ const Item = ({ elem }: Props) => {
 	const itemRef = useRef<HTMLButtonElement>(null)
 
 	useEffect(() => {
-		if (activeWeapon?.userData?.customTitle === elem.userData.customTitle && itemRef.current) {
+		if (activeWeapon?.customTitle === elem.customTitle && itemRef.current) {
 			itemRef.current.scrollIntoView({
 				inline: "center",
 				block: "nearest"
@@ -28,16 +29,14 @@ const Item = ({ elem }: Props) => {
 	return (
 		<Styled.Item
 			ref={itemRef}
-			active={activeWeapon?.userData?.customTitle === elem.userData.customTitle}
-			onClick={() => dispatch(setActiveWeapon(elem))}
+			active={activeWeapon?.customTitle === elem.customTitle}
+			onClick={() => dispatch(setActiveWeapon(elem as any))}
 			data-cy={`slider-${elem.base.displayName.replace(/ /g, "-").replace("(", "-").replace(")", "-")}-${
-				elem.userData.customTitle.replace(/ /g, "-") || "Primary"
+				elem.customTitle?.replace(/ /g, "-") || "Primary"
 			}`}
 		>
-			{elem.userData.customTitle || elem.base.displayName}{" "}
-			{elem.userData.featured && (
-				<SVG.Star style={{ marginLeft: "4px" }} width="20px" fill={colors.gold} stroke="none" />
-			)}
+			{elem.customTitle || elem.base.displayName}{" "}
+			{elem.featured && <SVG.Star style={{ marginLeft: "4px" }} width="20px" fill={colors.gold} stroke="none" />}
 		</Styled.Item>
 	)
 }

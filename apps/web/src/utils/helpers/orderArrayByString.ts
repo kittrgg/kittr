@@ -36,17 +36,15 @@ export const customOrderArray = <T>({ sortingArray, keyToSort, indexToSort, arra
 	}
 
 	if (keyToSort) {
-		return (
-			array
-				// Create a new instance of the array with slice
-				.slice()
-				.sort((a: any, b: any) => {
-					if (sortingArray.indexOf(a[keyToSort]) === -1) return 1
-					if (sortingArray.indexOf(b[keyToSort]) === -1) return -1
-					return sortingArray.indexOf(a[keyToSort]) - sortingArray.indexOf(b[keyToSort])
-				})
-		)
+		const arr = array
+			// Create a new instance of the array with slice
+			.slice()
+			.sort((a: any, b: any) => {
+				if (sortingArray.indexOf(a[keyToSort]) === -1) return 1
+				if (sortingArray.indexOf(b[keyToSort]) === -1) return -1
+				return sortingArray.indexOf(a[keyToSort]) - sortingArray.indexOf(b[keyToSort])
+			})
+		return arr
 	}
-
 	return array
 }

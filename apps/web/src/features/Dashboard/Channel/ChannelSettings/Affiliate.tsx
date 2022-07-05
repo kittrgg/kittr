@@ -4,32 +4,28 @@ import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { setModal } from "@Redux/slices/dashboard"
 import { useAffiliates, useChannelData } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import { getToken } from "@Services/firebase/auth/getToken"
 import { paragraph } from "@Styles/typography"
 import { useState } from "react"
 import styled from "styled-components"
-import fetch from "@Fetch"
 
 const Affiliate = () => {
 	const [copyNotification, setCopyNotification] = useState(false)
 	const dispatch = useDispatch()
 	const affiliates = useAffiliates()
-	const { _id, urlSafeName } = useChannelData()
-	const { mutate } = useDashboardMutator(async (company: string) => {
-		const result = await fetch.delete({
-			url: `/api/channel/meta/affiliate`,
-			body: { _id, company },
-			headers: { authorization: `Bearer ${await getToken()}` }
-		})
+	const { data: channelData } = useChannelData()
 
-		if (result) {
-			dispatch(setModal({ type: "", data: "" }))
+	const { mutate } = useDashboardMutator({
+		path: "channels/profile/affiliates/delete",
+		opts: {
+			onSuccess: () => {
+				dispatch(setModal({ type: "", data: "" }))
+			}
 		}
 	})
 
 	let rootUrl = new URL(window.location.origin.toString()).host.replace("www.", "")
 
-	const commandString = `!addcom !affiliates ${rootUrl}/c/${urlSafeName}#affiliates`
+	const commandString = `!addcom !affiliates ${rootUrl}/c/${channelData?.urlSafeName}#affiliates`
 
 	const copyToClipboard = (string: string) => {
 		navigator.clipboard.writeText(string)
@@ -67,30 +63,32 @@ const Affiliate = () => {
 					</THead>
 					<TBody>
 						{affiliates &&
-							Object.entries<{ description: string; code: string; link: string }>(
-								affiliates as Record<string, any>
-							).map((affiliate) => {
-								const [company, values] = affiliate
-								const { description, code, link } = values
+							Object.values(affiliates).map((affiliate) => {
+								const { description, company, code, url, id } = affiliate
 
 								return (
-									<Spec key={code + link}>
+									<Spec key={company + id}>
 										<Label>{company}</Label>
 										<td>{description}</td>
 										<td>{code}</td>
-										<td>{link}</td>
+										<td>{url}</td>
 										<Icon>
 											<SVG.Pencil
-												data-cy={`${company.replace(/ /g, "-")}-edit-affiliate`}
+												data-cy={`${company?.replace(/ /g, "-")}-edit-affiliate`}
 												onClick={() =>
-													dispatch(setModal({ type: "Add Affiliate", data: { company, description, code, link } }))
+													dispatch(
+														setModal({
+															type: "Add Affiliate",
+															data: { id: affiliate.id, company, description, code, url }
+														})
+													)
 												}
 											/>
 										</Icon>
 										<Icon>
 											<SVG.X
-												data-cy={`${company.replace(/ /g, "-")}-delete-affiliate`}
-												onClick={() => mutate(affiliate[0])}
+												data-cy={`${company?.replace(/ /g, "-")}-delete-affiliate`}
+												onClick={() => mutate({ affiliateId: affiliate.id, channelId: channelData?.id! })}
 											/>
 										</Icon>
 									</Spec>

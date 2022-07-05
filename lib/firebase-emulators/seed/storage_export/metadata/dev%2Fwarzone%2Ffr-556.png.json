@@ -1,0 +1,20 @@
+{
+  "name": "warzone/fr-556.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699391,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "97f50741-5b74-434d-9b2b-928c308995ee"
+  ],
+  "etag": "+BWzjtNTDhm32+5OENmxJP5Ab4U",
+  "timeCreated": "2022-05-21T17:04:59.391Z",
+  "updated": "2022-05-21T17:04:59.391Z",
+  "size": 90383,
+  "md5Hash": "ewHxWhUTVgtWdHBay5iIXw==",
+  "crc32c": "4064683027"
+}

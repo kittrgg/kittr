@@ -6,9 +6,9 @@ import { barlow, header2, paragraph } from "@Styles/typography"
 
 const WINNERS = [
 	{
-		icon: "/media/icons/channeler.svg",
-		iconAlt: "Channeler Icon",
-		title: "CHANNELERS",
+		icon: "/media/icons/player.svg",
+		iconAlt: "player Icon",
+		title: "PLAYERS",
 		text: "Increased professionalism, a sleeker viewer experience, and more YouTube views if you're into them. Yup. Let kittr help your channel reach its potential with about 15 minutes of effort from you or a mod."
 	},
 	{

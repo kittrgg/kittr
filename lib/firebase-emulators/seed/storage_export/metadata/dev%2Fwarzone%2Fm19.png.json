@@ -1,0 +1,20 @@
+{
+  "name": "warzone/m19.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699502,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "9f04338a-63b7-448d-bd2e-25d8f37ae26c"
+  ],
+  "etag": "YmP2Dnil7aKgoCzVE6jntgjTACc",
+  "timeCreated": "2022-05-21T17:04:59.502Z",
+  "updated": "2022-05-21T17:04:59.502Z",
+  "size": 40714,
+  "md5Hash": "iyULHTEgZ3XJiUonlW47Dg==",
+  "crc32c": "2664804787"
+}

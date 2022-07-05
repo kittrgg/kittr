@@ -58,11 +58,6 @@ const NavMenu = ({ wrapperRef, breakpoint = 769, backFunction, middleComponent }
 							CHANNELS
 						</StyledLink>
 					</Link>
-					<Link href={Routes.BLOG.LIST} passHref>
-						<StyledLink data-cy="desktop-blog-link" active={pathname.startsWith(Routes.BLOG.LIST)}>
-							BLOG
-						</StyledLink>
-					</Link>
 					<AuthenticationLinks isLoggedIn={isLoggedIn} pathname={pathname} />
 				</Container>
 			</Wrapper>

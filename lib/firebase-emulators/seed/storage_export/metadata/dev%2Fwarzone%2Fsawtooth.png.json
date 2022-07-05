@@ -1,0 +1,20 @@
+{
+  "name": "warzone/sawtooth.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699616,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "9b34afc7-3be6-4490-936e-9d7b444a6fc5"
+  ],
+  "etag": "nST7CRnuuxZPzaY87Aq3QzIumMk",
+  "timeCreated": "2022-05-21T17:04:59.616Z",
+  "updated": "2022-05-21T17:04:59.616Z",
+  "size": 6032,
+  "md5Hash": "vx6vj83shNumukrDh6knIA==",
+  "crc32c": "2336350350"
+}

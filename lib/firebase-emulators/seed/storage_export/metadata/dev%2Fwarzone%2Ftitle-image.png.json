@@ -1,0 +1,20 @@
+{
+  "name": "warzone/title-image.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699891,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "d2806303-2ec2-4c3c-b5ff-02614797dc5d"
+  ],
+  "etag": "0Q3wKKLz6+8G/G7ddquuIMTK6Sw",
+  "timeCreated": "2022-05-21T17:04:59.891Z",
+  "updated": "2022-05-21T17:04:59.891Z",
+  "size": 532546,
+  "md5Hash": "C0mcJLk1OYfQ3bWE2Pcz7A==",
+  "crc32c": "1137727301"
+}

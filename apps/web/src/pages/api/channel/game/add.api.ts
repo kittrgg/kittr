@@ -1,26 +1,24 @@
-import mongoose from "mongoose"
 import { NextApiRequest, NextApiResponse } from "next"
+import { NextServerPayload } from "@kittr/types"
 import { createHandler } from "@Middlewares/createHandler"
-import Channel, { ChannelModel } from "@Services/mongodb/models/Channel"
 import { userAuth } from "@Middlewares/auth"
-import { sanitize } from "@Services/mongodb/utils/sanitize"
+import { prisma, Channel } from "@kittr/prisma"
 
 const handler = createHandler(userAuth)
 
 // Add a game to a channel
-handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel>>) => {
+handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<Channel>>) => {
 	const { gameId, channelId } = JSON.parse(req.body)
 
 	try {
-		const result = await Channel.findOneAndUpdate(
-			{ _id: sanitize(channelId) },
-			{
-				$addToSet: {
-					games: { id: new mongoose.Types.ObjectId(sanitize(gameId)) }
+		const result = await prisma.channel.update({
+			where: { id: channelId },
+			data: {
+				games: {
+					connect: { id: gameId }
 				}
-			},
-			{ upsert: true, new: true }
-		)
+			}
+		})
 
 		return res.status(200).json(result)
 	} catch (error) {

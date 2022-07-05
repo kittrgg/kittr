@@ -1,0 +1,20 @@
+{
+  "name": "warzone/3-line-rifle.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699025,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "064f8d1f-0bc5-4710-b742-ef8fee09fa1b"
+  ],
+  "etag": "UeYwGSlt9Y1pmAvu1+eDc/vwWgk",
+  "timeCreated": "2022-05-21T17:04:59.025Z",
+  "updated": "2022-05-21T17:04:59.025Z",
+  "size": 9292,
+  "md5Hash": "/16EvgNYVfjwjJ3oZNLrxA==",
+  "crc32c": "2288826953"
+}

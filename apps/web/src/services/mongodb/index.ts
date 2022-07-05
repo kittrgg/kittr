@@ -1,6 +1,0 @@
-export * from "./queries/blog"
-export * from "./queries/games"
-export * from "./queries/kits"
-export * from "./queries/channels"
-export * from "./queries/stats"
-export * from "./models"

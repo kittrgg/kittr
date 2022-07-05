@@ -1,46 +1,34 @@
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 
 import colors from "@Colors"
-import { getToken } from "@Services/firebase/auth/getToken"
-import { TextInputBox, Button } from "@Components/shared"
-import { setModal } from "@Redux/slices/dashboard"
-import { useDispatch } from "@Redux/store"
+import { Button, TextInputBox } from "@Components/shared"
+import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
 import Title from "../../H3"
-import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
-import fetch from "@Fetch"
-import { ChannelModel } from "@Models/Channel"
 
 /** Edit the name of the channel. */
-const DisplayNameEditor = ({ ...props }) => {
+const DisplayNameEditor = () => {
 	const [error, setError] = useState("")
-	const dispatch = useDispatch()
-	const { displayName: name } = useChannelData()
-	const { _id } = useChannelData()
-	const [displayName, setDisplayName] = useState(name || "")
-	const [isPersisted, setIsPersisted] = useState(false)
+	const { data } = useChannelData()
+	const [displayName, setDisplayName] = useState(data?.displayName || "")
 
-	const { mutate, isLoading } = useDashboardMutator(async () => {
-		try {
-			const result = await fetch.put<ChannelModel | NextClientEndpointError>({
-				url: `/api/channel/meta/displayName`,
-				headers: { authorization: `Bearer: ${await getToken()}` },
-				body: { _id, property: "displayName", value: displayName }
-			})
+	const originalName = data?.displayName || ""
 
-			if (result) {
-				setIsPersisted(true)
+	const { mutate, isLoading, isSuccess } = useDashboardMutator({
+		path: "channels/update",
+		opts: {
+			onError: (error) => {
+				setError(error.message)
+				// dispatch(setModal({ type: "Error Notification", data: {} }))
 			}
-		} catch (error) {
-			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}
 	})
 
 	useEffect(() => {
-		setDisplayName(name)
-	}, [name])
+		setDisplayName(displayName)
+	}, [displayName])
 
-	const isChanged = name !== displayName
+	const isChanged = originalName !== displayName
 
 	return (
 		<>
@@ -52,7 +40,7 @@ const DisplayNameEditor = ({ ...props }) => {
 				subline={
 					error
 						? error
-						: isPersisted
+						: isSuccess
 						? "Your display name was changed. Make sure you update all your links and commands!"
 						: "Careful! Changing your display name also changes your links. Ye be warned..."
 				}
@@ -67,7 +55,7 @@ const DisplayNameEditor = ({ ...props }) => {
 				design="white"
 				text="Save Changes"
 				disabled={!isChanged || isLoading}
-				onClick={mutate}
+				onClick={async () => mutate({ channelId: data?.id!, data: { displayName } })}
 				style={{
 					marginTop: "24px",
 					opacity: isLoading ? 0.3 : isChanged ? 1 : 0,

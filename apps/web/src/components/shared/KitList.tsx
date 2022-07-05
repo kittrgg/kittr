@@ -1,13 +1,18 @@
+import colors from "@Colors"
+import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
+import SVG from "@Components/shared/SVG"
+import { WarzoneKit, WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
+import { header2 } from "@Styles/typography"
 import styled from "styled-components"
 
-import colors from "@Colors"
-import SVG from "@Components/shared/SVG"
-import { header2 } from "@Styles/typography"
-import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
+interface CompleteKit extends WarzoneKit {
+	base: WarzoneKitBase
+	options: WarzoneKitOption[]
+}
 
 interface Props {
 	/** Array of kits to render. */
-	data: IKit[]
+	data: CompleteKit[]
 	/** onClick handler for if user click's on a kit's card. */
 	onClick?: any
 }
@@ -21,7 +26,7 @@ export const KitList = ({ data, onClick }: Props) => {
 		<>
 			{data.map((elem) => {
 				return (
-					<Card key={elem._id} onClick={() => onClick(elem)}>
+					<Card key={elem.id} onClick={() => onClick(elem)}>
 						<SVG.Star
 							width="15px"
 							fill={colors.gold}
@@ -30,13 +35,11 @@ export const KitList = ({ data, onClick }: Props) => {
 						/>
 						<div>
 							<KitTitle>
-								{elem.userData.customTitle
-									? `${elem.base.displayName} - ${elem.userData.customTitle}`
-									: `${elem.base.displayName}`}
+								{elem.customTitle ? `${elem.base.displayName} - ${elem.customTitle}` : `${elem.base.displayName}`}
 							</KitTitle>
 							<ImageContainer>
 								<FirebaseStorageResolver
-									path={elem.base.image}
+									path={elem.base.imageUrl}
 									noSpinner
 									render={(data) => (
 										<img
@@ -51,7 +54,7 @@ export const KitList = ({ data, onClick }: Props) => {
 						<Options>
 							{elem.options.map((option) => {
 								return (
-									<OptionItem key={option._id}>
+									<OptionItem key={option.id}>
 										<OptionSlot>{option.slotKey} - </OptionSlot>
 										<Option>{option.displayName}</Option>
 									</OptionItem>

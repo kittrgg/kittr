@@ -48,7 +48,7 @@ const BackgroundImageUploader = ({ fileName, label, imageWidth, imageHeight, han
 
 	const handleDelete = async () => {
 		try {
-			const result = await deleteFile(fileName)
+			const result = await deleteFile({ id: fileName })
 
 			if (result) {
 				handleChange ? handleChange() : null

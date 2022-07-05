@@ -2,38 +2,34 @@ import { useState } from "react"
 import styled from "styled-components"
 
 import colors from "@Colors"
-import { paragraph } from "@Styles/typography"
-import { useDispatch } from "@Redux/store"
-import { setModal } from "@Redux/slices/dashboard"
-import { getToken } from "@Services/firebase/auth/getToken"
-import { useChannelData } from "@Redux/slices/dashboard/selectors"
-import { Modal, Button, SVG, TextInput } from "@Components/shared"
+import { Button, Modal, SVG, TextInput } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
-import fetch from "@Fetch"
+import { ChannelManagerRoles } from "@kittr/prisma"
+import { setModal } from "@Redux/slices/dashboard"
+import { useChannelData } from "@Redux/slices/dashboard/selectors"
+import { useDispatch } from "@Redux/store"
+import { paragraph } from "@Styles/typography"
 
 /** Modal for adding a manager to a channel. */
-const AddManager = ({ ...props }) => {
+const AddManager = () => {
 	const dispatch = useDispatch()
-	const { _id: channelId } = useChannelData()
+	const { data } = useChannelData()
 	const [email, setEmail] = useState("")
-	const [role, setRole] = useState("")
+	const [role, setRole] = useState<ChannelManagerRoles>("EDITOR")
 	const [error, setError] = useState("")
 	const { refetch: refetchChannel } = useDashboardChannel()
-	const { mutate, isLoading } = useDashboardMutator(async () => {
-		try {
-			const result = await fetch.post({
-				url: `/api/manager/addNewManager`,
-				headers: { authorization: `Bearer: ${await getToken()}` },
-				body: { email, channelId, role }
-			})
 
-			if (result) {
+	const { mutate, isLoading } = useDashboardMutator({
+		path: "channels/managers/create",
+		opts: {
+			onSuccess: () => {
 				refetchChannel()
 				dispatch(setModal({ type: "", data: {} }))
+			},
+			onError: (error) => {
+				setError(error.message)
 			}
-		} catch (error) {
-			dispatch(setModal({ type: "Error Notification", data: "" }))
 		}
 	})
 
@@ -85,13 +81,13 @@ const AddManager = ({ ...props }) => {
 						value={role}
 						onChange={(e) => {
 							setError("")
-							setRole(e.target.value)
+							setRole(e.target.value as ChannelManagerRoles)
 						}}
 						data-cy="role-selector"
 					>
 						<option value="">-</option>
-						<option value="Administrator">Administrator</option>
-						<option value="Editor">Editor</option>
+						<option value="ADMIN">Administrator</option>
+						<option value="EDITOR">Editor</option>
 					</Select>
 				</ColumnFlex>
 			</RowFlex>
@@ -107,7 +103,7 @@ const AddManager = ({ ...props }) => {
 					design="white"
 					text={isLoading ? "..." : "Add"}
 					disabled={isLoading || !role || email.length === 0}
-					onClick={mutate}
+					onClick={async () => mutate({ channelId: data?.id!, data: { email, role } })}
 					style={{ margin: "0 auto" }}
 					dataCy="confirm-manager-add"
 				/>

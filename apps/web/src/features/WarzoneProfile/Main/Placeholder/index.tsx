@@ -12,9 +12,9 @@ interface Props {
 }
 
 const Cards = ({ isMobile }: Props) => {
-	const { kits } = useChannel()
+	const { warzoneKits: kits } = useChannel()
 
-	const filteredKits = kits ? kits.slice().filter((kit) => kit.userData.featured) : []
+	const filteredKits = kits ? kits.slice().filter((kit) => kit.featured) : []
 
 	// Ensure that the ad gets removed when the placeholder is no longer in view.
 	useEffect(() => {

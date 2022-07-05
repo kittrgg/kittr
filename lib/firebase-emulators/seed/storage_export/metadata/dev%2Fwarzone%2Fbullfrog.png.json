@@ -1,0 +1,20 @@
+{
+  "name": "warzone/bullfrog.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699142,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "2e3f4d04-2e66-4133-8526-1bb24eea97cd"
+  ],
+  "etag": "iQ6FCjIJBHLL5qZLKZ5kCFry0UE",
+  "timeCreated": "2022-05-21T17:04:59.142Z",
+  "updated": "2022-05-21T17:04:59.142Z",
+  "size": 40657,
+  "md5Hash": "qz/kABxokuZ5yRG8y9Qh1Q==",
+  "crc32c": "3317686305"
+}

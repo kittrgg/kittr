@@ -8,9 +8,7 @@ import { updateFeatured } from "@Redux/slices/dashboard"
 
 const Featured = ({ ...props }) => {
 	const dispatch = useDispatch()
-	const {
-		userData: { featured }
-	} = useActiveKit()
+	const { featured } = useActiveKit()
 
 	return (
 		<Styled.Container>

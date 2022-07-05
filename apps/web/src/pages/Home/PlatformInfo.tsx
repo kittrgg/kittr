@@ -10,10 +10,9 @@ const PlatformInfo = ({ ...props }) => {
 		<Container>
 			<Header>play bettr with kittr.</Header>
 			<Summary>
-				At kittr, we strive to create a <strong>better channeling experience</strong> for Twitch channelers, moderators,
-				and viewers alike. kittr is the place for channelers to{" "}
-				<strong>easily share kits with their communities</strong> in a sick-looking way. Everything about kittr is nice
-				and simple - there’s not much more to it!
+				At kittr, we strive to create a <strong>better channeling experience</strong> for Twitch players, moderators,
+				and viewers alike. kittr is the place for players to <strong>easily share kits with their communities</strong>{" "}
+				in a sick-looking way. Everything about kittr is nice and simple - there’s not much more to it!
 			</Summary>
 			<TilesContainer>
 				<Tile>

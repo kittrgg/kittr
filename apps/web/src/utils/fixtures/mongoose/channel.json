@@ -1,5 +1,5 @@
 {
-	"_id": "60fc8c30f88b1f382cead186",
+	"id": "60fc8c30f88b1f382cead186",
 	"meta": {
 		"hasProfileImage": false,
 		"profileImage": "",
@@ -22,7 +22,7 @@
 	],
 	"kits": [
 		{
-			"_id": "6123362d3635383f9ccda92b",
+			"id": "6123362d3635383f9ccda92b",
 			"baseId": "60df5bd4bf84855a680f8922",
 			"options": [],
 			"userData": {
@@ -33,7 +33,7 @@
 			}
 		},
 		{
-			"_id": "6129b862bf572f418c971179",
+			"id": "6129b862bf572f418c971179",
 			"baseId": "60df4a4fbf84855a680f88f2",
 			"options": [],
 			"userData": {
@@ -44,7 +44,7 @@
 			}
 		},
 		{
-			"_id": "612c185fade60e31b415cacc",
+			"id": "612c185fade60e31b415cacc",
 			"baseId": "60df48fbbf84855a680f88e6",
 			"options": [
 				"60e1d97fbf84855a680f8eed",
@@ -61,7 +61,7 @@
 			}
 		},
 		{
-			"_id": "612c18b6ade60e31b415cadd",
+			"id": "612c18b6ade60e31b415cadd",
 			"baseId": "60df6050bf84855a680f894d",
 			"options": [],
 			"userData": {
@@ -72,7 +72,7 @@
 			}
 		},
 		{
-			"_id": "612c18c3ade60e31b415cae2",
+			"id": "612c18c3ade60e31b415cae2",
 			"baseId": "61252d6022975356085a1a07",
 			"options": [],
 			"userData": {

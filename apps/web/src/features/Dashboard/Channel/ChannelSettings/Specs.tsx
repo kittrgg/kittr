@@ -4,38 +4,31 @@ import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useSpecs } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import { getToken } from "@Services/firebase/auth/getToken"
 import { paragraph } from "@Styles/typography"
 import { useState } from "react"
 import styled from "styled-components"
-import fetch from "@Fetch"
 
 const Specs = () => {
 	const [copyNotification, setCopyNotification] = useState(false)
 	const dispatch = useDispatch()
 	const specs = useSpecs()
-	const { _id, urlSafeName } = useChannelData()
-	const { mutate } = useDashboardMutator<any, string, string>(async (keyName) => {
-		try {
-			const result = await fetch.delete({
-				url: `/api/channel/meta/specs`,
-				body: { _id, keyName },
-				headers: {
-					authorization: `Bearer ${await getToken()}`
-				}
-			})
+	const { data } = useChannelData()
 
-			if (result) {
+	const { mutate } = useDashboardMutator({
+		path: "channels/profile/pc-specs/delete",
+		opts: {
+			onSuccess: () => {
 				dispatch(setModal({ type: "", data: "" }))
+			},
+			onError: () => {
+				dispatch(setModal({ type: "Error Notification", data: {} }))
 			}
-		} catch (error) {
-			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}
 	})
 
 	let rootUrl = new URL(window.location.origin.toString()).host.replace("www.", "")
 
-	const commandString = `!addcom !specs ${rootUrl}/c/${urlSafeName}#specs`
+	const commandString = `!addcom !specs ${rootUrl}/c/${data?.urlSafeName}#specs`
 
 	const copyToClipboard = (string: string) => {
 		navigator.clipboard.writeText(string)
@@ -60,19 +53,22 @@ const Specs = () => {
 				)}
 			</Title>
 			{specs &&
-				Object.entries<string>(specs).map((spec, index) => {
+				Object.values(data?.profile?.channelPcSpecs || {}).map((spec, index) => {
 					return (
-						<Spec key={`${spec[0]}-${index}`}>
+						<Spec key={`${spec.id}-${index}`}>
 							<SpecInfo>
-								<Label>{spec[0]}</Label>
-								<span>{spec[1]}</span>
+								<Label>{spec.partType}</Label>
+								<span>{spec.partName}</span>
 							</SpecInfo>
 							<IconButtons>
 								<SVG.Pencil
-									data-cy={`${spec[0].replace(/ /g, "-")}-update-spec`}
-									onClick={() => dispatch(setModal({ type: "Add Spec", data: { keyName: spec[0] } }))}
+									data-cy={`${spec.partType.replace(/ /g, "-")}-update-spec`}
+									onClick={() => dispatch(setModal({ type: "Add Spec", data: spec }))}
 								/>
-								<SVG.X data-cy={`${spec[0]}-delete-spec`} onClick={() => mutate(spec[0])} />
+								<SVG.X
+									data-cy={`${spec.partType}-delete-spec`}
+									onClick={async () => mutate({ channelId: data?.id!, pcSpecId: spec.id })}
+								/>
 							</IconButtons>
 						</Spec>
 					)

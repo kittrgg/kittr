@@ -1,16 +1,18 @@
-import { useState, useEffect, useRef, Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react"
 import styled, { keyframes, ThemeProvider } from "styled-components"
 
+import { OverlayKit } from "@kittr/types"
+import { InferQueryOutput } from "@Server/index"
+import { header1, header2, montserrat, paragraph } from "@Styles/typography"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
-import { header1, header2, montserrat, paragraph } from "@Styles/typography"
 
 interface Props {
 	_id: string
 	previewWidth?: number
-	data: any
-	activeKit: IKit
-	setActiveKit: Dispatch<SetStateAction<IKit>>
+	data?: InferQueryOutput<"channels/overlay/get">
+	activeKit: OverlayKit
+	setActiveKit: Dispatch<SetStateAction<OverlayKit>>
 }
 
 const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Props) => {
@@ -44,10 +46,10 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 			setIsDataVisible(false)
 			await delay(FADE_DURATION * 1000)
 
-			if (activeKit._id === data.primaryKit._id) {
-				setActiveKit(data.secondaryKit)
+			if (activeKit.id === data?.primaryKit?.id) {
+				setActiveKit(data?.secondaryKit as OverlayKit)
 			} else {
-				setActiveKit(data.primaryKit)
+				setActiveKit(data?.primaryKit as OverlayKit)
 			}
 		}
 
@@ -69,7 +71,7 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 
 	const hasAKitSelected =
 		Object.keys(data.primaryKit || {}).length > 0 || Object.keys(data.secondaryKit || {}).length > 0
-	const isRendered = data.isOverlayVisible === "on" && hasAKitSelected
+	const isRendered = data.isOverlayVisible && hasAKitSelected
 	const isOverlayVisible = !!previewWidth || isRendered
 
 	return (
@@ -86,7 +88,7 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 						{activeKit?.base?.displayName}
 					</BaseName>
 					<CommandInfo isDataVisible={isDataVisible} fadeDuration={FADE_DURATION}>
-						kittr.gg | !{activeKit?.base?.commandCodes[0]}
+						kittr.gg | !{activeKit?.base?.commandCodes[0].code}
 					</CommandInfo>
 				</Meta>
 				<OptionsWrapper>

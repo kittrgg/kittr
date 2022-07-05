@@ -7,7 +7,7 @@ import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { useActiveWeapon } from "@Redux/slices/displayr/selectors/useActiveWeapon"
 
-const Attachments = ({ ...props }) => {
+const Attachments = () => {
 	const activeWeapon = useActiveWeapon()
 	const options = activeWeapon.options
 

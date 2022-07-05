@@ -6,26 +6,16 @@ import colors from "@Colors"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
 import { header2, paragraph } from "@Styles/typography"
 import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
+import { Game, Genre, Platform } from "@kittr/prisma"
 
-interface Props {
+interface GameWithGenresAndPlatforms extends Game {
+	genres: Genre[]
+	platforms: Platform[]
+}
+
+interface Props extends GameWithGenresAndPlatforms {
 	/** Optionally display the game without any of it's meta information. */
 	noText?: true
-	/** Is the game currently active on the platform? If not, it will show as coming soon. */
-	active: boolean
-	/** What is this game's name? */
-	displayName: string
-	/** Cover art for the game. */
-	titleImage: string
-	/** Studio that developed this game. */
-	developer: string
-	/** Genres that this game belongs to. */
-	genres: string[]
-	/** Platforms that this game can be played on. */
-	platforms: string[]
-	/** The original release date for the game. */
-	releaseDate: Date
-	/** Name of the game translated into a version that is safe for URIs. */
-	urlSafeName: string
 	/** Optional function to run when the card is clicked. */
 	onClick?: (...args: any) => any
 }
@@ -36,7 +26,7 @@ export const GameCard = ({
 	active,
 	displayName,
 	urlSafeName,
-	titleImage,
+	titleImageUrl,
 	developer,
 	genres,
 	platforms,
@@ -47,46 +37,56 @@ export const GameCard = ({
 
 	return (
 		<FirebaseStorageResolver
-			path={titleImage}
+			path={titleImageUrl}
 			noSpinner
-			render={(img) => (
-				<Container onClick={onClick} active={active} titleImage={img} data-cy={`${urlSafeName}-button`}>
-					{(width as number) > 550 && (
-						<ImageContainer>
-							<img src={img} alt={displayName} style={{ width: "100%" }} />
-						</ImageContainer>
-					)}
+			render={(img) => {
+				return (
+					<Container onClick={onClick} active={active} titleImage={img} data-cy={`${urlSafeName}-button`}>
+						{(width as number) > 550 && (
+							<ImageContainer>
+								<img src={img} alt={displayName} style={{ width: "100%" }} />
+							</ImageContainer>
+						)}
 
-					{!noText && (
-						<MetaInfo>
-							<H2>{displayName}</H2>
-							<div>
-								<Paragraph>{developer}</Paragraph>
-								<Paragraph>
-									{genres.map((elem, index) => {
-										return <Fragment key={elem}>{index === genres.length - 1 ? `${elem}` : `${elem}, `}</Fragment>
-									})}
-								</Paragraph>
-								<Paragraph>
-									{platforms.map((elem, index) => {
-										return <Fragment key={elem}>{index === platforms.length - 1 ? `${elem}` : `${elem}, `}</Fragment>
-									})}
-								</Paragraph>
-								<Paragraph>Released {toHumanReadableDate(releaseDate)}</Paragraph>
-							</div>
-						</MetaInfo>
-					)}
+						{!noText && (
+							<MetaInfo>
+								<H2>{displayName}</H2>
+								<div>
+									<Paragraph>{developer}</Paragraph>
+									<Paragraph>
+										{genres.map((elem, index) => {
+											return (
+												<Fragment key={elem.id}>
+													{index === genres.length - 1 ? `${elem.displayName}` : `${elem.displayName}, `}
+												</Fragment>
+											)
+										})}
+									</Paragraph>
+									<Paragraph>
+										{platforms.map((elem, index) => {
+											return (
+												<Fragment key={elem.id}>
+													{index === platforms.length - 1 ? `${elem.displayName}` : `${elem.displayName}, `}
+												</Fragment>
+											)
+										})}
+									</Paragraph>
+									<Paragraph>Released {toHumanReadableDate(releaseDate)}</Paragraph>
+								</div>
+							</MetaInfo>
+						)}
 
-					{!active && (
-						<>
-							<ComingSoon>
-								<p style={{ cursor: "default" }}>COMING</p>
-								<p style={{ cursor: "default" }}>SOON</p>
-							</ComingSoon>
-						</>
-					)}
-				</Container>
-			)}
+						{!active && (
+							<>
+								<ComingSoon>
+									<p style={{ cursor: "default" }}>COMING</p>
+									<p style={{ cursor: "default" }}>SOON</p>
+								</ComingSoon>
+							</>
+						)}
+					</Container>
+				)
+			}}
 		/>
 	)
 }

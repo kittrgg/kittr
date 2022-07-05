@@ -20,8 +20,7 @@ import "./commands"
 // require('./commands')
 
 before(() => {
+	// TODO: I need to make a seeder.
 	cy.log("Attempting to seed users and database.")
-	cy.request("POST", "/api/admin/cypress/user")
-	cy.request("POST", "/api/admin/cypress/seedDatabase")
 	cy.log("Seeded users and database.")
 })

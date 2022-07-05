@@ -1,0 +1,20 @@
+{
+  "name": "warzone/357.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699034,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "af03c03e-4b11-4a94-b5d1-fcf0ccf29180"
+  ],
+  "etag": "T1CNh3ozCpf6tvfMT2vTk3hXte0",
+  "timeCreated": "2022-05-21T17:04:59.034Z",
+  "updated": "2022-05-21T17:04:59.034Z",
+  "size": 43507,
+  "md5Hash": "kfwjM3XQNUQ4HHSjwG3vfA==",
+  "crc32c": "3963848431"
+}

@@ -1,19 +1,18 @@
 import { useState, useEffect } from "react"
 import * as Styled from "./style"
 import CursorSelector from "./CursorSelector"
-import { useActiveWeapon } from "@Redux/slices/displayr/selectors"
-import { useSelector } from "@Redux/store"
+import { useActiveWeapon, useChannel } from "@Redux/slices/displayr/selectors"
 import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
 
 const WeaponPicture = ({ ...props }) => {
-	const youtubeAutoplay = useSelector((state) => state.displayr.channel.meta.youtubeAutoplay)
+	const channel = useChannel()
+	const youtubeAutoplay = channel.profile?.youtubeAutoplay
 	const activeWeapon = useActiveWeapon()
-	const { userData, base } = activeWeapon
-	const { youtubeURL, tiktokId } = userData
-	const { displayName, image } = base
+	const { base, youtubeUrl, tiktokUrl } = activeWeapon
+	const { displayName, imageUrl } = base
 
-	const split = youtubeURL?.split("&t=") || ""
-	const youtubeId = split[0] || youtubeURL
+	const split = youtubeUrl?.split("&t=") || ""
+	const youtubeId = split[0] || youtubeUrl
 
 	const youtubeString = new URL(`https://youtube.com/embed/${youtubeId}`)
 	youtubeString.searchParams.append("autoplay", youtubeAutoplay ? "1" : "0")
@@ -21,9 +20,9 @@ const WeaponPicture = ({ ...props }) => {
 	youtubeString.searchParams.append("rel", "0")
 
 	const imageryArray = [
-		["youtube", youtubeURL],
-		["tiktok", tiktokId],
-		["image", image]
+		["youtube", youtubeUrl],
+		["tiktok", tiktokUrl],
+		["image", imageUrl]
 	].filter((elem) => !!elem[1])
 	const [cursor, setCursor] = useState(0)
 
@@ -54,14 +53,14 @@ const WeaponPicture = ({ ...props }) => {
 
 				{imageryArray[cursor]?.[0] === "tiktok" && (
 					<Styled.TiktokWrapper>
-						<iframe src={`https://www.tiktok.com/embed/${tiktokId}`} allowFullScreen />
+						<iframe src={`https://www.tiktok.com/embed/${tiktokUrl}`} allowFullScreen />
 					</Styled.TiktokWrapper>
 				)}
 
 				{imageryArray[cursor]?.[0] === "image" && (
 					<Styled.ImageWrapper>
 						<FirebaseStorageResolver
-							path={image}
+							path={imageUrl}
 							noSpinner
 							render={(data) => (
 								<img

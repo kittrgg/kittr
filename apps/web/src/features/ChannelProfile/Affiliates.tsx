@@ -1,5 +1,6 @@
 import colors from "@Colors"
 import { SVG } from "@Components/shared"
+import { ChannelAffiliate } from "@kittr/prisma"
 import { paragraph } from "@Styles/typography"
 import styled from "styled-components"
 
@@ -7,13 +8,7 @@ import { H2, GridItem, SpecsGrid } from "./style"
 
 interface Props {
 	brandColor: string
-	affiliates?: {
-		[key: string]: {
-			code?: string
-			description?: string
-			link?: string
-		}
-	}
+	affiliates: ChannelAffiliate[]
 }
 
 const Affiliates = ({ affiliates, brandColor }: Props) => {
@@ -24,24 +19,22 @@ const Affiliates = ({ affiliates, brandColor }: Props) => {
 			<H2>AFFILIATES</H2>
 			<SpecsGrid>
 				{affiliates &&
-					Object.entries(affiliates).map((spec) => {
-						const [company, attrs] = spec
-						const { code, description, link } = attrs
+					affiliates.map((affiliate) => {
 
 						return (
-							<GridItem key={company} colorHover={brandColor}>
+							<GridItem key={affiliate.company} colorHover={brandColor}>
 								<Flex>
-									<Company>{company}</Company>
-									{description && <Description>{description}</Description>}
+									<Company>{affiliate.company}</Company>
+									{affiliate.description && <Description>{affiliate.description}</Description>}
 								</Flex>
-								{code && (
+								{affiliate.code && (
 									<Flex>
 										<Code>CODE</Code>
-										<Code>{code}</Code>
+										<Code>{affiliate.code}</Code>
 									</Flex>
 								)}
-								{link && (
-									<Link href={link} target="_blank" rel="noopener noreferrer">
+								{affiliate.url && (
+									<Link href={affiliate.url} target="_blank" rel="noopener noreferrer">
 										<SVG.Link
 											width="24px"
 											stroke={colors.lighter}

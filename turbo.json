@@ -41,9 +41,16 @@
 			"outputs": []
 		},
 		"dev": {
+			"dependsOn": ["^build"],
 			"cache": false
 		},
 		"clean": {
+			"cache": false
+		},
+		"seed": {
+			"cache": false
+		},
+		"start": {
 			"cache": false
 		},
 		"type-check": {

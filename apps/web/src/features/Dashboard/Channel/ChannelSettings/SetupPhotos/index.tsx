@@ -7,7 +7,7 @@ import ImageUploader from "./ImageUploader"
 import Toast from "@Components/shared/Toast"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 
-const SetupPhotos = ({ ...props }) => {
+const SetupPhotos = () => {
 	const [copyNotification, setCopyNotification] = useState(false)
 	const { data } = useDashboardChannel()
 
@@ -27,7 +27,7 @@ const SetupPhotos = ({ ...props }) => {
 					Setup Photos
 					<SVG.PremiumWithCircle width="24px" style={{ position: "relative", top: "6px", marginLeft: "12px" }} />
 				</span>
-				{Object.values(data?.meta.setupPhotos || {}).filter((photo) => photo).length > 0 && (
+				{Object.values(data?.profile?.setupPhotos || {}).filter((photo) => photo).length > 0 && (
 					<Button
 						design="transparent"
 						onClick={() => copyToClipboard(commandString)}

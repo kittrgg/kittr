@@ -1,52 +1,62 @@
-import { useState, useEffect } from "react"
-import styled from "styled-components"
-
 import colors from "@Colors"
+import { trpc } from "@Server/createHooks"
 import { download } from "@Services/firebase/storage"
-import Header from "./Header"
-import Games from "./Games"
+import { useRouter } from "next/router"
+import { useEffect, useState } from "react"
+import styled from "styled-components"
+import Affiliates from "./Affiliates"
 import FeaturedKits from "./FeaturedKits"
-import SetupPhotos from "./SetupPhotos"
+import Games from "./Games"
+import Header from "./Header"
 import PopularClips from "./PopularClips"
+import PremiumCallout from "./PremiumCallout"
 import RecentVideos from "./RecentVideos"
 import Schedule from "./Schedule"
+import SetupPhotos from "./SetupPhotos"
 import Specs from "./Specs"
-import Affiliates from "./Affiliates"
-import PremiumCallout from "./PremiumCallout"
 
-interface Props {
-	channel: IChannel
-	twitchInfo: ITwitchDataForProfilePage
-}
+const ChannelProfile = () => {
+	const { query } = useRouter()
+	const { channel: urlChannel } = query as { channel: string }
 
-const ChannelProfile = ({ channel, twitchInfo }: Props) => {
-	const isPremium = !!channel.meta.premiumType
-	const hasCoverPhoto = !!channel.meta.hasCoverPhoto
-	const primaryColor = channel.meta.brandColors?.primary || colors.white
+	const { data: channel } = trpc.useQuery(["channels/profile/get", urlChannel])
+	const twitchLink = channel?.links.find((channel) => channel.property === "TWITCH")?.value!
+	const { data: twitchInfo } = trpc.useQuery(["twitch/profile-page", twitchLink], {
+		enabled: !!twitchLink,
+		retry: false
+	})
+
+	const isPremium = channel?.plan?.type === "PREMIUM"
+	const hasCoverPhoto = channel?.profile?.hasCoverPhoto
+	const primaryColor = channel?.profile?.brandColors.find((color) => color.type === "PRIMARY")?.value || colors.white
 	const [coverPhotoPath, setCoverPhotoPath] = useState("")
 
 	useEffect(() => {
-		if (isPremium && hasCoverPhoto) download(`${channel._id}-profile-cover-photo`, (path) => setCoverPhotoPath(path))
-	}, [channel._id, hasCoverPhoto, isPremium])
+		if (isPremium && hasCoverPhoto) download(`${channel.id}-profile-cover-photo`, (path) => setCoverPhotoPath(path))
+	}, [channel?.id, hasCoverPhoto, isPremium])
+
+	if (!channel) return null
 
 	return (
 		<Container>
-			<Header {...channel} isLive={twitchInfo.channelData?.type === "live"} imagePath={coverPhotoPath} />
-			<Games {...channel} />
-			<FeaturedKits {...channel} />
+			<Header {...channel} isLive={twitchInfo?.channelData?.type === "live"} imagePath={coverPhotoPath} />
+			<Games games={channel.games} urlSafeName={channel.urlSafeName} />
+			<FeaturedKits kits={channel.warzoneKits} />
 			{isPremium ? (
 				<>
-					<PopularClips clips={twitchInfo.clips} brandColor={primaryColor} />
+					<PopularClips clips={twitchInfo?.clips} brandColor={primaryColor} />
 					<RecentVideos
-						videos={twitchInfo.recentVideos}
+						videos={twitchInfo?.recentVideos}
 						brandColor={primaryColor}
 						coverPhotoPath={coverPhotoPath}
-						profileImagePath={channel.meta.profileImage}
+						hasProfileImage={!!channel.profile?.hasProfileImage}
+						profileImagePath={channel.profile?.hasProfileImage ? channel.id : ""}
 					/>
-					<Schedule schedule={twitchInfo.schedule} brandColor={primaryColor} />
-					<SetupPhotos {...channel} />
-					<Specs specs={channel.meta.specs} brandColor={primaryColor} />
-					<Affiliates affiliates={channel.meta.affiliates} brandColor={primaryColor} />
+
+					<Schedule schedule={twitchInfo?.schedule} brandColor={primaryColor} />
+					<SetupPhotos id={channel.id} setupPhotos={channel.profile?.setupPhotos || []} />
+					<Specs specs={channel.profile?.channelPcSpecs || []} brandColor={primaryColor} />
+					<Affiliates affiliates={channel.profile?.affiliates || []} brandColor={primaryColor} />
 				</>
 			) : (
 				<PremiumCallout />

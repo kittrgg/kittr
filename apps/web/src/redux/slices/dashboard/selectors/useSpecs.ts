@@ -4,5 +4,5 @@ import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 export const useSpecs = () => {
 	const { data } = useDashboardChannel()
 
-	return data?.meta.specs
+	return data?.profile?.channelPcSpecs
 }

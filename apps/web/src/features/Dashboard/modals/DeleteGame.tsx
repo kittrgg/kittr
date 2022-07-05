@@ -1,37 +1,32 @@
 import styled from "styled-components"
 
 import colors from "@Colors"
-import { header2 } from "@Styles/typography"
-import { getToken } from "@Services/firebase/auth/getToken"
-import { useDispatch, useSelector } from "@Redux/store"
-import { setModal, setChannelView } from "@Redux/slices/dashboard"
-import { useChannelData } from "@Redux/slices/dashboard/selectors"
-import { Modal, Button } from "@Components/shared"
+import { Button, Modal } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
+import { setChannelView, setModal } from "@Redux/slices/dashboard"
+import { useChannelData } from "@Redux/slices/dashboard/selectors"
+import { useDispatch, useSelector } from "@Redux/store"
+import { header2 } from "@Styles/typography"
 import { useSocket } from "pages/dashboard.page"
-import fetch from "@Fetch"
 
 /** Modal to delete a game from a channel. */
 const DeleteGameModal = () => {
 	const dispatch = useDispatch()
-	const { _id } = useChannelData()
+	const { data: channelData } = useChannelData()
 	const gameId = useSelector((state) => state.dashboard.modal.data.idToDelete)
 	const socket = useSocket()
-	const { mutate, isLoading } = useDashboardMutator(async () => {
-		try {
-			fetch
-				.delete({
-					url: `/api/channel/game/delete`,
-					headers: { authorization: `Bearer: ${await getToken()}` },
-					body: { gameId, channelId: _id }
-				})
-				.then(() => {
-					socket.emit(`gameDelete`, _id)
-					dispatch(setModal({ type: "", data: "" }))
-					dispatch(setChannelView({ gameId: "", view: "Deleted Game Notification" }))
-				})
-		} catch (error) {
-			dispatch(setModal({ type: "Error Notification", data: {} }))
+
+	const { mutate, isLoading } = useDashboardMutator({
+		path: "channels/games/delete",
+		opts: {
+			onSuccess: () => {
+				socket.emit(`gameDelete`, channelData?.id)
+				dispatch(setModal({ type: "", data: "" }))
+				dispatch(setChannelView({ gameId: "", view: "Deleted Game Notification" }))
+			},
+			onError: () => {
+				dispatch(setModal({ type: "Error Notification", data: {} }))
+			}
 		}
 	})
 
@@ -44,7 +39,7 @@ const DeleteGameModal = () => {
 					design="white"
 					text="DELETE FOREVER"
 					disabled={isLoading}
-					onClick={mutate}
+					onClick={() => mutate({ gameId, channelId: channelData?.id! })}
 					dataCy="delete-game-button"
 				/>
 			</ButtonFlex>

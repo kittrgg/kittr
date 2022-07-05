@@ -16,18 +16,18 @@ import ErrorNotification from "./modals/ErrorNotification"
 import Tutorial from "./modals/Tutorial"
 import Profile from "./Profile"
 import Sidebar from "./Sidebar"
-import { useAllGames } from "@Hooks/api/useAllGames"
-import { useAllKitBases } from "@Hooks/api/useAllKitBases"
+import { useAllGames } from "@Hooks/trpc/useAllGames"
+import { useAllKitBases } from "@Hooks/trpc/useAllKitBases"
 
 /** The kittr dashboard. */
-const Dashboard = ({ ...props }) => {
+const Dashboard = () => {
 	const modal = useModal()
 	const user = useUser()
 	const { width } = useViewportDimensions()
 	const { view } = useDashboardView()
 	const containerRef = useRef(null)
-	const { isLoading: gamesLoading } = useAllGames()
-	const { isLoading: kitsLoading } = useAllKitBases()
+	const { isLoading: gamesLoading } = useAllGames({ include: { _count: true } })
+	const { isLoading: kitsLoading } = useAllKitBases({ include: { commandCodes: true } })
 
 	if (width < 1075) {
 		return (

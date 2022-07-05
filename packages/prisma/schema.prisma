@@ -1,0 +1,271 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
+}
+
+generator zod {
+  provider              = "zod-prisma"
+  output                = "./validator"
+  relationModel         = true
+  modelCase             = "PascalCase"
+  modelSuffix           = "Model"
+  useDecimalJs          = true
+  prismaJsonNullability = true
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Administrator {
+  id                 String                     @id @default(cuid())
+  firebaseUserId     String
+  role              AdminRole
+}
+
+enum AdminRole {
+  SUPER
+  DEFAULT
+}
+
+model Channel {
+  id                 String                     @id @default(cuid())
+  createdAt          DateTime                   @default(now())
+  displayName        String                     @unique
+  urlSafeName        String                     @unique
+  viewCount          Int                        @default(0)
+  previousUpdater    String?
+  games              Game[]
+  gameCreatorCodes   ChannelCreatorCode[]
+  customGameCommands ChannelCustomGameCommand[]
+  warzoneKits        WarzoneKit[]
+  overlay            ChannelKitOverlay?
+  managers           ChannelManager[]
+  profile            ChannelProfile?
+  plan               ChannelPlan?
+  links              ChannelLink[]
+}
+
+model ChannelProfile {
+  id              String              @id @default(cuid())
+  brandColors     ChannelBrandColor[]
+  hasCoverPhoto   Boolean             @default(false)
+  hasProfileImage Boolean             @default(false)
+  youtubeAutoplay Boolean             @default(false)
+  channelPcSpecs  ChannelPcSpec[]
+  affiliates      ChannelAffiliate[]
+  setupPhotos     SetupPhoto[]
+  channel         Channel             @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  channelId       String              @unique
+}
+
+model SetupPhoto {
+  id               String         @id @default(cuid())
+  channelProfile   ChannelProfile @relation(fields: [channelProfileId], references: [id])
+  channelProfileId String
+  slot             Int
+  exists           Boolean
+
+  @@unique([channelProfileId, slot])
+}
+
+enum LinkProperty {
+  TWITCH
+  YOUTUBE
+  INSTAGRAM
+  TWITTER
+  FACEBOOK
+  DISCORD
+  TIKTOK
+}
+
+model ChannelLink {
+  id        String       @id @default(cuid())
+  property  LinkProperty
+  value     String
+  channel   Channel      @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  channelId String
+}
+
+model ChannelPlan {
+  id                   String          @id @default(cuid())
+  stripeSubscriptionId String?
+  type                 ChannelPlanType @default(BASIC)
+  channel              Channel         @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  channelId            String          @unique
+}
+
+enum ChannelPlanType {
+  PREMIUM
+  BASIC
+}
+
+model ChannelPcSpec {
+  id               String         @id @default(cuid())
+  partType         String
+  partName         String
+  channelProfile   ChannelProfile @relation(fields: [channelProfileId], references: [id])
+  channelProfileId String
+}
+
+model ChannelAffiliate {
+  id               String          @id @default(cuid())
+  code             String?
+  description      String?
+  company          String?
+  url              String?
+  channelProfile   ChannelProfile? @relation(fields: [channelProfileId], references: [id])
+  channelProfileId String?
+}
+
+model ChannelBrandColor {
+  id               String                 @id @default(cuid())
+  type             ChannelBrandColorTypes
+  value            String
+  channelProfile   ChannelProfile?        @relation(fields: [channelProfileId], references: [id])
+  channelProfileId String?
+}
+
+enum ChannelBrandColorTypes {
+  PRIMARY
+  SECONDARY
+  ACCENT
+}
+
+model ChannelManager {
+  id         String              @id @default(cuid())
+  firebaseId String
+  role       ChannelManagerRoles
+  channel    Channel             @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  channelId  String
+}
+
+enum ChannelManagerRoles {
+  OWNER
+  ADMIN
+  EDITOR
+}
+
+model ChannelKitOverlay {
+  id                       String      @id @default(cuid())
+  channel                  Channel     @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  channelId                String      @unique
+  backgroundColorPrimary   String?
+  backgroundColorSecondary String?
+  textColorPrimary         String?
+  textColorSecondary       String?
+  textColorAccent          String?
+  isOverlayVisible         Boolean     @default(false)
+  primaryKit               WarzoneKit? @relation(name: "primaryKitOverlay", fields: [primaryKitId], references: [id])
+  primaryKitId             String?     @unique
+  secondaryKit             WarzoneKit? @relation(name: "secondaryKitOverlay", fields: [secondaryKitId], references: [id])
+  secondaryKitId           String?     @unique
+}
+
+model WarzoneKit {
+  id                         String             @id @default(cuid())
+  customTitle                String?
+  blueprint                  String?
+  featured                   Boolean            @default(false)
+  youtubeUrl                 String?
+  tiktokUrl                  String?
+  quote                      String?
+  options                    WarzoneKitOption[]
+  game                       Game               @relation(fields: [gameId], references: [id])
+  gameId                     String
+  base                       WarzoneKitBase     @relation(fields: [baseId], references: [id], onDelete: Cascade)
+  baseId                     String
+  channel                    Channel            @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  channelId                  String
+  channelKitOverlayPrimary   ChannelKitOverlay? @relation(name: "primaryKitOverlay")
+  channelKitOverlaySecondary ChannelKitOverlay? @relation(name: "secondaryKitOverlay")
+}
+
+model ChannelCustomGameCommand {
+  id        String  @id @default(cuid())
+  command   String
+  game      Game    @relation(fields: [gameId], references: [id])
+  gameId    String
+  channel   Channel @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  channelId String
+}
+
+model ChannelCreatorCode {
+  id        String  @id @default(cuid())
+  channel   Channel @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  channelId String
+  game      Game    @relation(fields: [gameId], references: [id])
+  gameId    String
+  code      String
+}
+
+model WarzoneKitOption {
+  id             String         @id @default(cuid())
+  gameId         String
+  displayName    String
+  slotKey        String
+  orderPlacement Int
+  kits           WarzoneKit[]
+  kitBase        WarzoneKitBase @relation(fields: [kitBaseId], references: [id], onDelete: Cascade)
+  kitBaseId      String
+}
+
+model WarzoneKitBase {
+  id               String                 @id @default(cuid())
+  displayName      String
+  game             Game                   @relation(fields: [gameId], references: [id])
+  gameId           String
+  imageUrl         String
+  blurb            String
+  maxOptions       Int
+  commandCodes     WarzoneCommandCode[]
+  availableOptions WarzoneKitOption[]
+  category         WarzoneKitBaseCategory @relation(fields: [categoryId], references: [id])
+  categoryId       String
+  kits             WarzoneKit[]
+}
+
+model WarzoneKitBaseCategory {
+  id          String           @id @default(cuid())
+  displayName String           @unique
+  kit         WarzoneKitBase[]
+}
+
+model WarzoneCommandCode {
+  id        String         @id @default(cuid())
+  code      String
+  kitBase   WarzoneKitBase @relation(fields: [kitBaseId], references: [id], onDelete: Cascade)
+  kitBaseId String
+}
+
+model Game {
+  id                   String                     @id @default(cuid())
+  displayName          String
+  urlSafeName          String
+  backgroundImageUrl   String
+  titleImageUrl        String
+  active               Boolean
+  blurDataUrl          String
+  developer            String
+  genres               Genre[]
+  platforms            Platform[]
+  releaseDate          DateTime
+  channels             Channel[]
+  channelCreatorCodes  ChannelCreatorCode[]
+  customCommandStrings ChannelCustomGameCommand[]
+  warzoneKitBases      WarzoneKitBase[]
+  warzoneKits          WarzoneKit[]
+}
+
+model Platform {
+  id          String @id @default(cuid())
+  displayName String @unique
+  games       Game[]
+}
+
+model Genre {
+  id          String @id @default(cuid())
+  displayName String @unique
+  games       Game[]
+}

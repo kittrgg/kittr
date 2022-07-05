@@ -15,10 +15,13 @@ import SetNewOwner from "../../modals/SetNewOwner"
 import ManagerRoleChange from "../../modals/ManagerRoleChange"
 import DeleteManager from "../../modals/DeleteManager"
 import H3 from "../../H3"
+import { customOrderArray } from "@Utils/helpers/orderArrayByString"
+import { ChannelManagerRoles } from "@kittr/prisma"
+import { capitalizeFirstCharacter } from "@Utils/helpers/capitalizeFirstCharacter"
 
-const managersOrder = ["Owner", "Administrator", "Editor"]
+const managersOrder: ChannelManagerRoles[] = ["OWNER", "ADMIN", "EDITOR"]
 
-const AccountManagers = ({ ...props }) => {
+const AccountManagers = () => {
 	const dispatch = useDispatch()
 	const role = useManagerRole()
 	const auth = useUser()
@@ -34,7 +37,6 @@ const AccountManagers = ({ ...props }) => {
 			{type === "Add Manager" && <AddManager />}
 			{type === "Manager Role Change" && <ManagerRoleChange />}
 			{type === "Delete Manager" && <DeleteManager />}
-			{type === "About Account Managers" && <AboutAccountManagers />}
 			<H3>
 				ACCOUNT MANAGERS
 				<SVG.QuestionMark
@@ -47,68 +49,63 @@ const AccountManagers = ({ ...props }) => {
 			{error && <p>Uh oh, an error occurred. Let us know with the error code: 4397, please.</p>}
 			{isLoading && <Spinner />}
 			{data &&
-				data
-					.slice()
-					// Organize so Owner is always first, Editor is always last
-					.sort((a: IManager, b: IManager) => {
-						if (managersOrder.indexOf(a.role) === -1) return 1
-						if (managersOrder.indexOf(b.role) === -1) return -1
-						return managersOrder.indexOf(a.role) - managersOrder.indexOf(b.role)
-					})
-					.map((manager: IManagerData) => {
-						return (
-							<Manager key={manager.uid} data-cy="manager">
-								<Identity>
-									<DisplayName>{manager.displayName}</DisplayName>
-									<Email>{manager.email}</Email>
-									{role === "Owner" && manager.role === "Owner" && (
-										<SVG.Pencil
-											width="20px"
-											style={{ marginRight: "8px", cursor: "pointer" }}
-											onClick={() => dispatch(setModal({ type: "Confirm Changing Owner", data: {} }))}
-											dataCy="change-owner-start"
-										/>
-									)}
-									{
-										// Never if the manager is the owner
-										manager.role !== "Owner" &&
-											// Never on yourself
-											manager.email !== auth?.email &&
-											// Never if you are an editor
-											role !== "Editor" &&
-											// Never if you are the same role
-											role !== manager.role && (
-												<>
-													<SVG.Pencil
-														width="20px"
-														style={{ marginRight: "8px", cursor: "pointer" }}
-														onClick={() => dispatch(setModal({ type: "Manager Role Change", data: manager }))}
-														dataCy={manager.role === "Editor" ? "promote" : "demote"}
-													/>
-													<SVG.X
-														width="24px"
-														style={{ cursor: "pointer" }}
-														onClick={() => dispatch(setModal({ type: "Delete Manager", data: manager }))}
-														dataCy={"remove-manager"}
-													/>
-												</>
-											)
-									}
-									{role !== "Owner" && manager.email === auth?.email && (
-										<SVG.X
-											width="24px"
-											style={{ cursor: "pointer" }}
-											onClick={() => dispatch(setModal({ type: "Delete Manager", data: manager }))}
-											dataCy={"remove-manager"}
-										/>
-									)}
-								</Identity>
-								<Role>{manager.role}</Role>
-							</Manager>
-						)
-					})}
+				customOrderArray<typeof data[0]>({
+					array: data,
+					sortingArray: managersOrder,
+					keyToSort: "role"
+				}).map((manager: typeof data[0]) => {
+					return (
+						<Manager key={manager.uid} data-cy="manager">
+							<Identity>
+								<Email>{manager.email}</Email>
+								{role === "OWNER" && manager.role === "OWNER" && (
+									<SVG.Pencil
+										width="20px"
+										style={{ marginRight: "8px", cursor: "pointer" }}
+										onClick={() => dispatch(setModal({ type: "Confirm Changing Owner", data: {} }))}
+										dataCy="change-owner-start"
+									/>
+								)}
+								{
+									// Never if the manager is the owner
+									manager.role !== "OWNER" &&
+										// Never on yourself
+										manager.email !== auth?.email &&
+										// Never if you are an editor
+										role !== "EDITOR" &&
+										// Never if you are the same role
+										role !== manager.role && (
+											<>
+												<SVG.Pencil
+													width="20px"
+													style={{ marginRight: "8px", cursor: "pointer" }}
+													onClick={() => dispatch(setModal({ type: "Manager Role Change", data: manager }))}
+													dataCy={manager.role === "EDITOR" ? "promote" : "demote"}
+												/>
+												<SVG.X
+													width="24px"
+													style={{ cursor: "pointer" }}
+													onClick={() => dispatch(setModal({ type: "Delete Manager", data: manager }))}
+													dataCy={"remove-manager"}
+												/>
+											</>
+										)
+								}
+								{role !== "OWNER" && manager.email === auth?.email && (
+									<SVG.X
+										width="24px"
+										style={{ cursor: "pointer" }}
+										onClick={() => dispatch(setModal({ type: "Delete Manager", data: manager }))}
+										dataCy={"remove-manager"}
+									/>
+								)}
+							</Identity>
+							<Role>{capitalizeFirstCharacter(manager.role)}</Role>
+						</Manager>
+					)
+				})}
 
-			{role !== "Editor" && (
+			{role !== "EDITOR" && (
 				<Button
 					design="transparent"
 					text="ADD MANAGER"
@@ -143,10 +140,6 @@ const Identity = styled.div`
 	flex-direction: row;
 	align-items: center;
 	justify-content: flex-start;
-`
-
-const DisplayName = styled.p`
-	letter-spacing: 2px;
 `
 
 const Email = styled.p`

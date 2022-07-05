@@ -4,7 +4,7 @@ import styled from "styled-components"
 
 interface Props {
 	/** Total number of kits on the platform. Will be rounded up to the nearest hundred. */
-	totalNumberOfKits: number
+	totalNumberOfKits?: number
 }
 
 /** The beautiful opening of the kittr home page. */
@@ -16,7 +16,7 @@ const Hero = ({ totalNumberOfKits }: Props) => {
 			</ImageContainer>
 			<Copy>
 				<Headline>get kittd.</Headline>
-				<KitsTotal>{totalNumberOfKits}+ kits</KitsTotal>
+				<KitsTotal>{totalNumberOfKits || 0}+ kits</KitsTotal>
 				<Subline>The place for streamers to share kits - and for you to use them.</Subline>
 			</Copy>
 			<ScreenieContainer>
@@ -42,6 +42,7 @@ const Container = styled.div`
 	height: 100vh;
 	z-index: -1;
 	overflow: hidden;
+	margin-top: -50px;
 `
 
 const ImageContainer = styled.div`

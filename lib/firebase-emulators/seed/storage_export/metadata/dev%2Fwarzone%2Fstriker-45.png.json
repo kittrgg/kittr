@@ -1,0 +1,20 @@
+{
+  "name": "warzone/striker-45.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699650,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "83914b03-135d-47e3-84fc-52000c748061"
+  ],
+  "etag": "L2SjYlKOtP7YYq+K6EH7zZGJ25w",
+  "timeCreated": "2022-05-21T17:04:59.650Z",
+  "updated": "2022-05-21T17:04:59.650Z",
+  "size": 76240,
+  "md5Hash": "BcO65Q0kFH6NOY3MysLWSQ==",
+  "crc32c": "1239878899"
+}

@@ -1,16 +1,17 @@
 import React, { useState } from "react"
 
-import * as Styled from "./styles"
 import colors from "@Colors"
+import { Button, SearchInput } from "@Components/shared"
+import { useViewportDimensions } from "@Hooks/useViewportDimensions"
+import { WarzoneKit, WarzoneKitBase, WarzoneKitBaseCategory } from "@kittr/prisma"
+import { setIsSidebarOpen } from "@Redux/slices/displayr"
+import { useChannel, useSidebarState } from "@Redux/slices/displayr/selectors"
+import { useDispatch } from "@Redux/store"
+import Ad from "@Services/venatus/Ad"
 import { filterKitsByFeature } from "@Utils/helpers/filterKitsByFeature"
 import { sortAlphabetical } from "@Utils/helpers/sortAlphabetical"
-import { useDispatch } from "@Redux/store"
-import { useChannel, useSidebarState } from "@Redux/slices/displayr/selectors"
-import { setIsSidebarOpen } from "@Redux/slices/displayr"
-import { useViewportDimensions } from "@Hooks/useViewportDimensions"
 import Item from "./Item"
-import { SearchInput, Button } from "@Components/shared"
-import Ad from "@Services/venatus/Ad"
+import * as Styled from "./styles"
 
 const CATEGORIES = [
 	"Assault Rifle",
@@ -24,34 +25,32 @@ const CATEGORIES = [
 ]
 const CATEGORY_SPLIT = 19
 
-const Sidebar = ({ ...props }) => {
+const Sidebar = () => {
 	const dispatch = useDispatch()
 	const isSidebarOpen = useSidebarState()
-	const { kits: unfilteredKits = [] } = useChannel()
+	const { warzoneKits: unfilteredKits = [] } = useChannel()
 	const { width } = useViewportDimensions()
 	const [filterQuery, setFilterQuery] = useState("")
 
 	const sanitizeForSearch = (string: string) => string.toLowerCase().replace(/[^0-9a-zA-Z]/g, "")
 
-	const sortKits = (kitArray: IKit[]) =>
-		kitArray
-			.filter((v, i, a) => a.findIndex((t) => t.base.displayName === v.base.displayName) === i)
-			.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
-
-	const sortForUniqueKitName = (arr: IKit[]) =>
-		arr.map((elem) => elem.base.displayName).sort((a, b) => sortAlphabetical(a, b))
+	const sortForUniqueKitName = (
+		arr: (WarzoneKit & {
+			base: WarzoneKitBase & {
+				category: WarzoneKitBaseCategory
+			}
+		})[]
+	): string[] => arr.map((elem) => elem.base.displayName).sort((a, b) => sortAlphabetical(a, b))
 
 	const kits = unfilteredKits.filter((kit) =>
 		sanitizeForSearch(kit.base.displayName).includes(sanitizeForSearch(filterQuery))
 	)
 
 	const featuredKits = filterKitsByFeature(kits)
-	const featuredFilter = sortKits(featuredKits)
-	const uniqueListItems = sortForUniqueKitName(featuredFilter)
+	const uniqueListItems = sortForUniqueKitName(featuredKits)
 
-	const restOfKits = kits.filter((elem) => !elem.userData.featured)
-	const filteredRest = sortKits(restOfKits)
-	const restListItems = sortForUniqueKitName(filteredRest)
+	const restOfKits = kits.filter((elem) => !elem.featured)
+	const restListItems = sortForUniqueKitName(restOfKits)
 
 	return (
 		<Styled.Wrapper isSidebarOpen={isSidebarOpen} viewportWidth={width} data-cy="kit-list">
@@ -83,15 +82,16 @@ const Sidebar = ({ ...props }) => {
 							return (
 								<React.Fragment key={category}>
 									<Styled.CategoryLabel>
-										{filteredRest.filter((kit) => kit.base.category === category).length > 0 && (
+										{restOfKits.filter((kit) => kit.base.category.displayName === category).length > 0 && (
 											<>{`${category}s`.toUpperCase()}</>
 										)}
 									</Styled.CategoryLabel>
-									{filteredRest
-										.filter((kit) => kit.base.category === category)
+									{restOfKits
+										.filter((v, i, a) => a.findIndex((t) => t.base.displayName === v.base.displayName) === i)
+										.filter((kit) => kit.base.category.displayName === category)
 										.map((kit) => {
-											const { _id, base } = kit
-											return <Item key={_id} kits={kits} baseName={base.displayName} setFilterQuery={setFilterQuery} />
+											const { id, base } = kit
+											return <Item key={id} kits={kits} baseName={base.displayName} setFilterQuery={setFilterQuery} />
 										})}
 								</React.Fragment>
 							)

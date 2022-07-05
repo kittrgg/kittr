@@ -1,0 +1,20 @@
+{
+  "name": "warzone/finn.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699379,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "1a2e8f2c-c708-47f1-a04a-e5a587568e70"
+  ],
+  "etag": "triS5n0waOWI1C2V4Z39aHQJhCI",
+  "timeCreated": "2022-05-21T17:04:59.380Z",
+  "updated": "2022-05-21T17:04:59.380Z",
+  "size": 65074,
+  "md5Hash": "3Opmz0pR5vGGL7MDglADpQ==",
+  "crc32c": "1590221932"
+}

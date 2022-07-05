@@ -1,0 +1,20 @@
+{
+  "name": "warzone/combat-shotgun.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699198,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "1166a598-6598-4043-ac81-530d4e45383b"
+  ],
+  "etag": "98V+pAhD2goE6WNblBidy6o3LKQ",
+  "timeCreated": "2022-05-21T17:04:59.198Z",
+  "updated": "2022-05-21T17:04:59.198Z",
+  "size": 11249,
+  "md5Hash": "1TND70Vke1zIM/ze3eP+0w==",
+  "crc32c": "414630290"
+}

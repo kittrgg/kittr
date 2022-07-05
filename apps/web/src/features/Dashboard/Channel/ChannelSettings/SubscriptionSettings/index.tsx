@@ -1,57 +1,39 @@
-import { fromUnixTime, differenceInDays } from "date-fns"
+import { differenceInDays, fromUnixTime } from "date-fns"
 import styled from "styled-components"
 
 import colors from "@Colors"
-import { paragraph } from "@Styles/typography"
-import PlanTile from "./PlanTile"
-import { useModal, usePremiumStatus } from "@Redux/slices/dashboard/selectors"
-import { getToken } from "@Services/firebase/auth/getToken"
-import { useQuery } from "react-query"
-import { useDispatch } from "@Redux/store"
-import { setModal } from "@Redux/slices/dashboard"
 import PremiumPlans from "@Features/Dashboard/modals/PremiumPlan"
-import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import fetch from "@Fetch"
+import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
+import { setModal } from "@Redux/slices/dashboard"
+import { useModal, usePremiumStatus } from "@Redux/slices/dashboard/selectors"
+import { useDispatch } from "@Redux/store"
+import { trpc } from "@Server/createHooks"
+import { getToken } from "@Services/firebase/auth/getToken"
+import { paragraph } from "@Styles/typography"
 import { isFetchError } from "@Utils/helpers/typeGuards"
+import PlanTile from "./PlanTile"
 
 const SubscriptionSettings = ({ ...props }) => {
 	const dispatch = useDispatch()
 	const modal = useModal()
 	const { isPremium } = usePremiumStatus()
 	const { data } = useDashboardChannel()
-	const { data: subscriptionEnd } = useQuery(
-		`/api/channel/meta/premium?stripeId=${data?.meta.stripeId}`,
-		async () => {
-			const result = await fetch.get<{ periodEnd: number }>({
-				url: `/api/channel/meta/premium?stripeId=${data?.meta.stripeId}`,
-				headers: {
-					authorization: `Bearer: ${await getToken()}`
-				}
-			})
 
-			return result.periodEnd
-		},
-		{
-			enabled: isPremium,
-			cacheTime: 60000,
-			refetchOnWindowFocus: false
-		}
+	const { data: subscriptionEnd } = trpc.useQuery(
+		[
+			"channels/plan/subscription-end",
+			{ stripeSubscriptionId: data?.plan?.stripeSubscriptionId!, channelId: data?.id! }
+		],
+		{ enabled: !!data?.plan?.stripeSubscriptionId }
 	)
-
-	const { data: cardLast4 } = useQuery(
-		`/api/stripe/getPaymentMethod?subId=${data?.meta.stripeId}`,
-		async () => {
-			const result = await fetch.get<{ last4: string }>({
-				url: `/api/stripe/getPaymentMethod?subId=${data?.meta.stripeId}`,
-				headers: { authorization: `Bearer: ${await getToken()}` }
-			})
-
-			return result.last4
-		},
+	const { data: cardLast4 } = trpc.useQuery(
+		[
+			"channels/plan/card-last-4-digits",
+			{ stripeSubscriptionId: data?.plan?.stripeSubscriptionId!, channelId: data?.id! }
+		],
 		{
-			enabled: isPremium,
-			cacheTime: 60000,
-			refetchOnWindowFocus: false
+			enabled: !!data?.plan?.stripeSubscriptionId
 		}
 	)
 
@@ -61,7 +43,7 @@ const SubscriptionSettings = ({ ...props }) => {
 		const result = await fetch.post<{ url: string }>({
 			url: apiRoute,
 			headers: { authorization: `Bearer ${await getToken()}` },
-			body: { _id: data?._id, displayName: data?.displayName, urlSafeName: data?.urlSafeName }
+			body: { _id: data?.id, displayName: data?.displayName, urlSafeName: data?.urlSafeName }
 		})
 
 		if (isFetchError(result)) {

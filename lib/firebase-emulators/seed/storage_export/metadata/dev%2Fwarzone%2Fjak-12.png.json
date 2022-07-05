@@ -1,0 +1,20 @@
+{
+  "name": "warzone/jak-12.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699429,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "e267deea-de50-44db-9c04-f0c628d4b09b"
+  ],
+  "etag": "tETH6OlG8pu4BdQMC9bCcFjSJ+M",
+  "timeCreated": "2022-05-21T17:04:59.429Z",
+  "updated": "2022-05-21T17:04:59.429Z",
+  "size": 83625,
+  "md5Hash": "zvbgi9oLUp9HTSNWrgImHg==",
+  "crc32c": "2022037368"
+}

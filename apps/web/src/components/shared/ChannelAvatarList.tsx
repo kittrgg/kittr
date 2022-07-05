@@ -1,12 +1,17 @@
-import styled from "styled-components"
-
 import colors from "@Colors"
 import ProfileImage from "@Components/shared/ProfileImage"
+import { Channel, ChannelProfile } from "@kittr/prisma"
+import { useTheme } from "@kittr/ui"
 import { header2 } from "@Styles/typography"
+import styled from "styled-components"
+
+interface ChannelWithProfile extends Channel {
+	profile?: ChannelProfile
+}
 
 interface Props {
 	/** Array of channels to render. */
-	data: Array<IChannel>
+	channels: ChannelWithProfile[]
 	/** Do you want to show the live icon for these channels? */
 	isLive?: boolean
 	/** Function to be ran when user clicks on a channel. */
@@ -14,14 +19,25 @@ interface Props {
 }
 
 /** Renders the list of channels using their profile image and display name. */
-export const ChannelAvatarList = ({ data, isLive, onClick }: Props) => {
+export const ChannelAvatarList = ({ channels, isLive, onClick }: Props) => {
+	const theme = useTheme()
 	return (
 		<>
-			{data.map((elem) => {
+			{channels.map((channel) => {
 				return (
-					<Identity key={elem._id} data-cy={`${elem.displayName}-button`} onClick={() => onClick && onClick(elem)}>
-						<ProfileImage size="100px" imagePath={elem.meta.profileImage} isLive={isLive} />
-						<Name>{elem.displayName}</Name>
+					<Identity
+						key={channel.id}
+						data-cy={`${channel.displayName}-button`}
+						onClick={() => onClick && onClick(channel)}
+						theme={theme}
+					>
+						<ProfileImage
+							size="100px"
+							imagePath={channel.id}
+							hasProfileImage={!!channel.profile?.hasProfileImage}
+							isLive={isLive}
+						/>
+						<Name>{channel.displayName}</Name>
 					</Identity>
 				)
 			})}
@@ -31,7 +47,7 @@ export const ChannelAvatarList = ({ data, isLive, onClick }: Props) => {
 
 export default ChannelAvatarList
 
-const Identity = styled.div`
+const Identity = styled.div<{ theme?: any }>`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -40,13 +56,25 @@ const Identity = styled.div`
 	min-width: 200px;
 	padding: 12px;
 	border-radius: 12px;
-	box-shadow: 2px 2px 5px 2px ${colors.dark};
 	text-align: center;
 	cursor: pointer;
 	overflow: hidden;
+	margin: 0 10px;
+	transition: 0.25s;
 
-	&:hover {
-		background-color: ${colors.light};
+	// box-shadow: 2px 2px 5px 2px ${colors.dark};
+	// &:hover {
+	// 	background-color: ${colors.light};
+	// }
+
+	background-color: ${({ theme }) => theme.colors.brand[9]};
+	@media (hover: hover) {
+		&:hover {
+			background-color: ${colors.light};
+			transform: scale(1.1);
+			transition-timing-function: ease-in-out;
+			transition-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+		}
 	}
 `
 

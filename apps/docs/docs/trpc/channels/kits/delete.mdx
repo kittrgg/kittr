@@ -1,0 +1,20 @@
+# Delete Kit from Channel
+
+Remove a kit from a channel. Also removes the kit from the database.
+
+# Usage
+
+```js
+const { data: channel } = trpc.useQuery([
+	"channels/games/kits/delete",
+	{ id: "123", kitId: "789" }
+])
+```
+
+# Returns
+
+This query returns the newly updated Channel object with the kit deleted.
+
+```json
+ // TODO: Payload, please
+```

@@ -8,10 +8,7 @@ import { useDispatch } from "@Redux/store"
 
 const CustomTitle = ({ ...props }) => {
 	const dispatch = useDispatch()
-	const {
-		base,
-		userData: { customTitle }
-	} = useActiveKit()
+	const { base, customTitle } = useActiveKit()
 
 	return (
 		<Styled.Container>
@@ -25,11 +22,11 @@ const CustomTitle = ({ ...props }) => {
 				name="customTitle"
 				label={`${base?.displayName ? base.displayName : ""} (`}
 				labelStyles={{ color: colors.lighter, marginTop: "12px" }}
-				value={customTitle}
+				value={customTitle ?? ""}
 				onChange={(e) => {
 					if (e.target.value.length === 0) return dispatch(updateCustomTitle(""))
 					if (e.target.value.length > 20 || !validator.matches(e.target.value, /^[a-z0-9 ]+$/i)) {
-						dispatch(updateCustomTitle(customTitle))
+						dispatch(updateCustomTitle(customTitle ?? ""))
 					} else {
 						dispatch(updateCustomTitle(e.target.value))
 					}

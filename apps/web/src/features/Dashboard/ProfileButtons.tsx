@@ -16,16 +16,16 @@ import styled from "styled-components"
  * The "View Profile" and logging out buttons for the user in the dashboard.
  * "View Profile" will only apply if the user has a channel open.
  */
-const ProfileButtons = ({ ...props }) => {
+const ProfileButtons = () => {
 	const router = useRouter()
-	const channelData = useChannelData()
+	const { data: channelData } = useChannelData()
 	const [isOpen, setIsOpen] = useState(false)
 	const dispatch = useDispatch()
 	const user = useUser()
 
 	return (
 		<Flex>
-			{channelData?.urlSafeName && (
+			{channelData?.displayName && (
 				<LinkStyles
 					href={Routes.CHANNEL.createPath(channelData?.urlSafeName)}
 					target="_blank"
@@ -36,7 +36,7 @@ const ProfileButtons = ({ ...props }) => {
 			)}
 			<Container isOpen={isOpen}>
 				<Clickable data-cy="profile-container-button" onClick={() => setIsOpen(!isOpen)}>
-					{user?.displayName || user?.email}
+					{user?.email}
 					{
 						<SVG.Carat
 							width="24px"

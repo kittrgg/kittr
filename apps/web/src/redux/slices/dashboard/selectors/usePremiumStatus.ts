@@ -4,10 +4,10 @@ import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 export const usePremiumStatus = () => {
 	const { data } = useDashboardChannel()
 
-	const premiumType = data?.meta.premiumType
+	const premiumType = data?.plan?.type
 
 	return {
 		premiumType,
-		isPremium: !!premiumType
+		isPremium: premiumType === "PREMIUM"
 	}
 }

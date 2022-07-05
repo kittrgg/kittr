@@ -1,9 +1,11 @@
-export const linkPrefixes: Record<SocialPlatform, string> = {
-	twitch: "https://www.twitch.tv/",
-	twitter: "https://twitter.com/",
-	youtube: "https://www.youtube.com/",
-	instagram: "https://www.instagram.com/",
-	facebook: "https://www.facebook.com/",
-	discord: "https://discord.gg/",
-	tiktok: "https://www.tiktok.com/@"
+import { LinkProperty } from "@kittr/prisma"
+
+export const linkPrefixes: Record<LinkProperty, string> = {
+	TWITCH: "https://www.twitch.tv/",
+	TWITTER: "https://twitter.com/",
+	YOUTUBE: "https://www.youtube.com/",
+	INSTAGRAM: "https://www.instagram.com/",
+	FACEBOOK: "https://www.facebook.com/",
+	DISCORD: "https://discord.gg/",
+	TIKTOK: "https://www.tiktok.com/@"
 }

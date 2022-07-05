@@ -1,0 +1,20 @@
+{
+  "name": "warzone/gracey-auto.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699411,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "de2c8031-6c79-40f9-8792-82e7f292cc4f"
+  ],
+  "etag": "dA4m86GhOAtai/LjzwfjqCO2Oeo",
+  "timeCreated": "2022-05-21T17:04:59.412Z",
+  "updated": "2022-05-21T17:04:59.412Z",
+  "size": 11923,
+  "md5Hash": "8E3CeE10xKN/1hQF3S/pjg==",
+  "crc32c": "4162045608"
+}

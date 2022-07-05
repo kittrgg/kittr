@@ -1,0 +1,20 @@
+{
+  "name": "warzone/an-94.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699076,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "4a947add-5b8a-4f38-a8c4-795c30e5e9ce"
+  ],
+  "etag": "4odBY79axWObtQm43jHiETtV+bQ",
+  "timeCreated": "2022-05-21T17:04:59.076Z",
+  "updated": "2022-05-21T17:04:59.076Z",
+  "size": 79004,
+  "md5Hash": "yY62lhyfkyORFezRXoispw==",
+  "crc32c": "1733195379"
+}

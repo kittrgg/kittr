@@ -1,17 +1,20 @@
-import type { NextApiRequest, NextApiResponse } from "next"
+import { prisma } from "@kittr/prisma"
 import { createHandler } from "@Utils/middlewares/createHandler"
-import { KitBase } from "@Services/mongodb/models"
-import { sanitize } from "@Services/mongodb/utils/sanitize"
+import type { NextApiRequest, NextApiResponse } from "next"
 
 const handler = createHandler()
 
 // Fetch kits depending on a game's _id
 handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
-	const { gameId } = req.query
+	const { gameId } = req.query as { gameId: string }
 
 	try {
-		const data = await KitBase.find({ gameId: sanitize(gameId) })
-		return res.status(200).json(data)
+		const result = await prisma.warzoneKitBase.findMany({
+			where: {
+				gameId
+			}
+		})
+		return res.status(200).json(result)
 	} catch (error) {
 		return res.status(500).json(error)
 	}

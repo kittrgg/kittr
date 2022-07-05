@@ -1,35 +1,61 @@
-import styled from "styled-components"
-
 import colors from "@Colors"
-import { header1, header2 } from "@Styles/typography"
 import ProfileImage from "@Components/shared/ProfileImage"
 import SocialIcons from "@Components/shared/SocialIcons"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
+import {
+	Channel,
+	ChannelBrandColor,
+	ChannelLink,
+	ChannelPcSpec,
+	ChannelPlan,
+	ChannelProfile,
+	Game,
+	SetupPhoto,
+	WarzoneKit
+} from "@kittr/prisma"
+import { header1, header2 } from "@Styles/typography"
+import styled from "styled-components"
 
-const Header = ({
-	games,
-	displayName,
-	meta,
-	kits,
-	isLive,
-	imagePath
-}: IChannel & { isLive: boolean; imagePath: string }) => {
-	const isPremium = !!meta.premiumType
-	const hasCoverPhoto = meta.hasCoverPhoto
-	const userColor = meta.brandColors?.primary || colors.white
+interface Props extends Channel {
+	isLive: boolean
+	imagePath: string
+	games: Game[]
+	profile:
+		| (ChannelProfile & {
+				brandColors: ChannelBrandColor[]
+				setupPhotos: SetupPhoto[]
+				channelPcSpecs: ChannelPcSpec[]
+		  })
+		| null
+
+	links: ChannelLink[]
+	plan: ChannelPlan | null
+	warzoneKits: WarzoneKit[]
+}
+
+const Header = ({ id, games, displayName, profile, links, plan, warzoneKits: kits, isLive, imagePath }: Props) => {
+	const isPremium = plan?.type === "PREMIUM"
+	const hasCoverPhoto = profile?.hasCoverPhoto
+	const userColor = profile?.brandColors.find((color) => color.type === "PRIMARY")?.value || colors.white
 	const { width } = useViewportDimensions()
 
 	return (
 		<Wrapper hasCoverPhoto={isPremium && !!hasCoverPhoto} imagePath={imagePath}>
 			<Avatar>
-				<ProfileImage size="150px" imagePath={meta.profileImage} border={isPremium ? userColor : ""} isLive={isLive} />
+				<ProfileImage
+					size="150px"
+					hasProfileImage={!!profile?.hasProfileImage}
+					imagePath={id}
+					border={isPremium ? userColor : ""}
+					isLive={isLive}
+				/>
 				<AvatarInfo>
 					<H1>{displayName}</H1>
 					<Counts>
 						{games.length} {games.length === 1 ? "game" : "games"}, {kits.length} kits
 					</Counts>
 					<SocialIcons
-						links={meta.links}
+						links={links}
 						iconSize={30}
 						colorHover={userColor}
 						style={{ flexWrap: width > 750 ? "nowrap" : "wrap", rowGap: "10px" }}

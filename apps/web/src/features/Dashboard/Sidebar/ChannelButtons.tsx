@@ -1,33 +1,28 @@
-import { useEffect, useRef, MutableRefObject } from "react"
-import * as Styled from "./style"
 import colors from "@Colors"
-import { handleTutorialAction, setModal, setChannelView } from "@Redux/slices/dashboard"
-import { useDispatch } from "@Redux/store"
-import { useManagerRole } from "@Redux/slices/dashboard/selectors/useManagerRole"
-
 import ProfileImage from "@Components/shared/ProfileImage"
-import GameButton from "./GameButton"
-import AddGameNotification from "./AddGameNotification"
+import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
+import { handleTutorialAction, setChannelView, setModal } from "@Redux/slices/dashboard"
+import { useChannelView, useModal } from "@Redux/slices/dashboard/selectors"
+import { useManagerRole } from "@Redux/slices/dashboard/selectors/useManagerRole"
+import { useDispatch } from "@Redux/store"
+import { MutableRefObject, useEffect, useRef } from "react"
 import Icon from "../Icon"
-import { useChannelData, useChannelView, useModal } from "@Redux/slices/dashboard/selectors"
-import { useAllGames } from "@Hooks/api/useAllGames"
+import AddGameNotification from "./AddGameNotification"
+import GameButton from "./GameButton"
+import * as Styled from "./style"
 
 /** Buttons that will appear when a channel is opened */
-const ChannelButtons = ({ ...props }) => {
+const ChannelButtons = () => {
 	const dispatch = useDispatch()
 	const modal = useModal()
 	const ref = useRef() as MutableRefObject<HTMLButtonElement>
 	const { view, gameId } = useChannelView()
-	const {
-		meta: { profileImage },
-		games
-	} = useChannelData()
+	const { data: channelData } = useDashboardChannel()
 	const role = useManagerRole()
-	const { data } = useAllGames()
 
 	/** tutorial ref data */
 	useEffect(() => {
-		if (modal.data?.page === 4 && ref?.current && role === "Owner") {
+		if (modal.data?.page === 4 && ref?.current && role === "OWNER") {
 			dispatch(
 				setModal({
 					type: "Tutorial",
@@ -49,23 +44,20 @@ const ChannelButtons = ({ ...props }) => {
 					style={{ backgroundColor: "transparent" }}
 					onClick={() => dispatch(setChannelView({ gameId: "", view: "Channel Settings" }))}
 				>
-					<ProfileImage size="70px" imagePath={profileImage} alwaysRefresh />
+					<ProfileImage
+						size="70px"
+						imagePath={channelData?.profile?.hasProfileImage ? channelData?.id : undefined}
+						hasProfileImage={!!channelData?.profile?.hasProfileImage}
+						alwaysRefresh
+					/>
 				</Styled.Button>
 			</Styled.ButtonContainer>
 
-			{games &&
-				data &&
-				games.map((game) => {
-					return (
-						<GameButton
-							key={data.find((allGame) => allGame._id === game.id)?._id}
-							game={data.find((allGame) => allGame._id === game.id) as IGame}
-							activeView={gameId === data.find((allGame) => allGame._id === game.id)?.id}
-						/>
-					)
-				})}
+			{channelData?.games?.map((game) => {
+				return <GameButton key={game.id} game={game} activeView={gameId === game.id} />
+			})}
 
-			{role === "Owner" && (
+			{role === "OWNER" && (
 				<>
 					<Styled.ButtonContainer isActive={false} style={{ marginBottom: "32px" }}>
 						<Styled.Button
@@ -92,7 +84,7 @@ const ChannelButtons = ({ ...props }) => {
 						>
 							<Icon src="/media/icons/plus.svg" alt="Add a Game" />
 						</Styled.Button>
-						{games.length === 0 && <AddGameNotification />}
+						{channelData?.games?.length === 0 && <AddGameNotification />}
 					</Styled.ButtonContainer>
 				</>
 			)}

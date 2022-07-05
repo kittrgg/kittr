@@ -1,21 +1,19 @@
 import colors from "@Colors"
 import AdPageWrapper, { H1 } from "@Components/layouts/AdPageWrapper"
 import GameCard from "@Components/shared/GameCard"
+import { useAllGames } from "@Hooks/trpc/useAllGames"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
-import { allGamesQuery } from "@Services/mongodb"
+import { createSSGHelper } from "@Server/createSSGHelper"
 import ResponsiveBanner from "@Services/venatus/ResponsiveBanner"
-import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
 import { Routes } from "@Utils/lookups/routes"
 import { useRouter } from "next/router"
 import styled from "styled-components"
 
-interface Props {
-	games: Array<IGame>
-}
-
-const GamesIndex = ({ games }: Props) => {
+const GamesIndex = () => {
 	const { width } = useViewportDimensions()
 	const router = useRouter()
+
+	const { data: games } = useAllGames({ include: { genres: true, platforms: true } })
 
 	return (
 		<AdPageWrapper title="Games | kittr" description="Library of games on kittr. Get kitted.">
@@ -27,7 +25,7 @@ const GamesIndex = ({ games }: Props) => {
 					games.map((elem) => {
 						return (
 							<GameCard
-								key={elem._id}
+								key={elem.id}
 								{...elem}
 								onClick={() => elem.active && router.push(Routes.GAMES.createPath(elem.urlSafeName))}
 							/>
@@ -40,11 +38,13 @@ const GamesIndex = ({ games }: Props) => {
 }
 
 export const getStaticProps = async () => {
-	await connectToDatabase()
+	const ssg = await createSSGHelper()
+
+	await ssg.fetchQuery("games/list", { genres: true, platforms: true })
 
 	return {
 		props: {
-			games: await allGamesQuery()
+			trpcState: ssg.dehydrate()
 		},
 		revalidate: 60
 	}

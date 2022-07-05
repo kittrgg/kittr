@@ -16,7 +16,7 @@ import * as Styled from "./style"
 const Sidebar = ({ ...props }) => {
 	const { height } = useViewportDimensions()
 	const modal = useModal()
-	const channelData = useChannelData()
+	const { data } = useChannelData()
 	const activeView = useSelector((state) => state.dashboard.activeView.view)
 	const dispatch = useDispatch()
 
@@ -69,7 +69,7 @@ const Sidebar = ({ ...props }) => {
 					</Styled.Button>
 				</Styled.ButtonContainer>
 
-				{channelData?._id && <ChannelButtons />}
+				{data?.id && <ChannelButtons />}
 
 				<Styled.SupportButton
 					style={

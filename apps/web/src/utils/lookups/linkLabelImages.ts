@@ -1,9 +1,11 @@
-export const linkLabelImages: Record<SocialPlatform, string> = {
-	twitch: "/media/icons/twitch.svg",
-	twitter: "/media/icons/twitter.svg",
-	youtube: "/media/icons/youtube.svg",
-	instagram: "/media/icons/instagram.svg",
-	facebook: "/media/icons/facebook.svg",
-	discord: "/media/icons/discord.svg",
-	tiktok: "/media/icons/tiktok.svg"
+import { LinkProperty } from "@kittr/prisma"
+
+export const linkLabelImages: Record<LinkProperty, string> = {
+	TWITCH: "/media/icons/twitch.svg",
+	TWITTER: "/media/icons/twitter.svg",
+	YOUTUBE: "/media/icons/youtube.svg",
+	INSTAGRAM: "/media/icons/instagram.svg",
+	FACEBOOK: "/media/icons/facebook.svg",
+	DISCORD: "/media/icons/discord.svg",
+	TIKTOK: "/media/icons/tiktok.svg"
 }

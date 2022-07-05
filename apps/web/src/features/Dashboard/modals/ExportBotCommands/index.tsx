@@ -1,7 +1,7 @@
 import colors from "@Colors"
 import { Button, Modal } from "@Components/shared"
-import { useAllKitBases } from "@Hooks/api/useAllKitBases"
-import { useAllKitOptions } from "@Hooks/api/useAllKitOptions"
+import { useAllKitBases } from "@Hooks/trpc/useAllKitBases"
+import { TCommandMethod } from "@kittr/types/types"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
@@ -21,23 +21,15 @@ import TwitchStrategyToggle from "./TwitchStrategyToggle"
  * and using different platforms for inputting the commands to their chat.
  *
  * */
-const ExportBotCommands = ({ ...props }) => {
+const ExportBotCommands = () => {
 	const dispatch = useDispatch()
-	const { kits } = useChannelData()
+	const { data } = useChannelData()
 	const [method, setMethod] = useState<TCommandMethod>("nightbot")
 	const [commandStrategy, setCommandStrategy] = useState<"edit" | "add">("edit")
 	const [includeUser, setIncludeUser] = useState(true)
-	const { data: allKitBases } = useAllKitBases()
-	const { data: allKitOptions } = useAllKitOptions()
+	const { data: allKitBases } = useAllKitBases({include: {category: true}})
 
-	const createKitObject = (kit: IKit) => {
-		return {
-			...kit,
-			base: allKitBases!.find((allBases) => allBases._id === kit.baseId)!
-		}
-	}
-
-	if (!allKitBases || !allKitOptions) return null
+	if (!allKitBases) return null
 
 	return (
 		<Modal backgroundClickToClose title="EXPORT BOT COMMANDS">
@@ -49,7 +41,7 @@ const ExportBotCommands = ({ ...props }) => {
 			)}
 
 			<CommandsTable
-				kits={kits.map(createKitObject)}
+				kits={data?.warzoneKits?? []}
 				method={method}
 				commandStrategy={commandStrategy}
 				includeUser={includeUser}

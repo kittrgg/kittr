@@ -1,17 +1,25 @@
-FROM node:16-alpine as base
+FROM node:alpine AS builder
+RUN apk update
+# Set working directory
+WORKDIR /app
+RUN yarn global add turbo
+COPY . .
+RUN turbo prune --scope=api --docker
 
-# Create app directory
-WORKDIR /home/node/app
+# Add lockfile and package.json's of isolated subworkspace
+FROM node:alpine AS installer
+RUN apk update
+WORKDIR /app
+COPY --from=builder /app/out/json/ .
+COPY --from=builder /app/out/yarn.lock ./yarn.lock
+RUN yarn install
 
-# Install app dependencies
-COPY package*.json ./
-RUN npm ci --only=production
-
-# Bundle app source
-COPY ./ ./
+FROM node:alpine AS sourcer
+RUN apk update
+WORKDIR /app
+COPY --from=installer /app/ .
+COPY --from=builder /app/out/full/ .
 
 EXPOSE 5000
 
-ENV NODE_ENV production
-
-CMD [ "node", "./dist/src/index.js" ]
+CMD [ "npx", "ts-node", "apps/api/src/index.ts" ]

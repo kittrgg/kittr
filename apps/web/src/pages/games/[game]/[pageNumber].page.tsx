@@ -4,62 +4,73 @@ import FallbackPage from "@Components/layouts/FallbackPage"
 import { ChannelList, ChannelSearch, NoItemFound, Paginator } from "@Components/shared"
 import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
-import { channelsByGameQuery, gameByUrlSafeNameQuery, totalChannelsByGameQuery } from "@Services/mongodb"
-import { Game } from "@Services/mongodb/models"
+import { trpc } from "@Server/createHooks"
+import { createSSGHelper } from "@Server/createSSGHelper"
 import ResponsiveBanner from "@Services/venatus/ResponsiveBanner"
-import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
 import { Routes } from "@Utils/lookups/routes"
-import { GetStaticProps } from "next"
 import Link from "next/link"
 import { useRouter } from "next/router"
+import { prisma } from "@kittr/prisma"
 import styled from "styled-components"
-
-interface Props {
-	gameDoesNotExist?: true
-	game: IGame
-	channels: IChannel[]
-	totalChannels: number
-	numberOfPages: number
-}
 
 const CHANNELS_PER_PAGE = 10
 
-const GameProfile = ({ gameDoesNotExist, game, channels, totalChannels, numberOfPages }: Props) => {
+const GameProfile = (props: any) => {
 	const { width } = useViewportDimensions()
-	const {
-		query: { pageNumber },
-		isFallback
-	} = useRouter()
+	const { query, isFallback, push } = useRouter()
+	const { pageNumber, game } = query as { pageNumber: string; game: string }
+
+	const { data: gameData } = trpc.useQuery(["games/getByUrlSafeName", game], { enabled: !!game })
+	const { data: channelCount = 0 } = trpc.useQuery(["channels/count", game], { enabled: !!game })
+	const numberOfPages = Math.ceil(channelCount / CHANNELS_PER_PAGE)
+
+	const { data: channels } = trpc.useQuery(
+		[
+			"channels/games/list",
+			{
+				urlSafeName: game,
+				take: CHANNELS_PER_PAGE,
+				skip: Number(Number(pageNumber) - 1) * CHANNELS_PER_PAGE
+			}
+		],
+		{ enabled: !!game }
+	)
+
+	if (props.redirect) {
+		push(`/games/${game}`)
+	}
+
 	if (isFallback) return <FallbackPage />
 
-	const { displayName, backgroundImage, titleImage, urlSafeName } = game
 	const page = Number(pageNumber)
-
-	if (Object.keys(game).length === 0 || isNaN(page) || gameDoesNotExist) return <NoItemFound type="game" />
+	if (!gameData || isNaN(page)) return <NoItemFound type="game" />
 
 	return (
-		<AdPageWrapper title={`${displayName} | kittr`} description={`Check out who is playing ${displayName} on kittr.`}>
+		<AdPageWrapper
+			title={`${gameData.displayName} | kittr`}
+			description={`Check out who is playing ${gameData.displayName} on kittr.`}
+		>
 			{width < 1200 && <ResponsiveBanner />}
 			<FlexRow>
 				<FirebaseStorageResolver
-					path={backgroundImage}
+					path={gameData.backgroundImageUrl}
 					noSpinner
 					render={(img) => <BackgroundImage backgroundImage={img} />}
 				/>
 				<ImageContainer>
 					<FirebaseStorageResolver
-						path={titleImage}
+						path={gameData.titleImageUrl}
 						noSpinner
-						render={(img) => <Image src={img} alt={displayName} />}
+						render={(img) => <Image src={img} alt={gameData.displayName} />}
 					/>
 				</ImageContainer>
-				<GameTitle>{displayName.toUpperCase()}</GameTitle>
+				<GameTitle>{gameData.displayName.toUpperCase()}</GameTitle>
 			</FlexRow>
 
 			<ChannelsContainer>
 				<ChannelsTitle>CHANNELS</ChannelsTitle>
-				<ChannelSearch />
-				{channels.length === 0 && (
+				{/* <ChannelSearch /> */}
+				{channels?.length === 0 && (
 					<>
 						<p style={{ marginTop: "24px" }}>Hm, no channels here.</p>
 
@@ -77,17 +88,17 @@ const GameProfile = ({ gameDoesNotExist, game, channels, totalChannels, numberOf
 						</Link>
 					</>
 				)}
-				{channels.length > 0 && (
+				{channels && channels.length > 0 && (
 					<>
-						<ChannelList data={channels} itemBackgroundColor="#2F2F31" gameLink={urlSafeName} />
+						<ChannelList data={channels} itemBackgroundColor="#2F2F31" gameLink={game} />
 						<Paginator
-							totalResults={totalChannels}
+							totalResults={channelCount ?? 0}
 							currentPageResultStart={(page - 1) * 10 + 1}
 							currentPageResultEnd={page * 10 + 1}
 							isFirstPage={page === 1}
 							isLastPage={page === numberOfPages}
 							currentPage={page}
-							pageRoot={Routes.GAMES.createPath(game.urlSafeName)}
+							pageRoot={Routes.GAMES.createPath(game)}
 						/>
 					</>
 				)}
@@ -98,9 +109,16 @@ const GameProfile = ({ gameDoesNotExist, game, channels, totalChannels, numberOf
 }
 
 export const getStaticPaths = async () => {
-	await connectToDatabase()
-
-	const games = await Game.find().lean<Array<IGame>>()
+	const games = await prisma.game.findMany({
+		orderBy: [
+			{
+				active: "asc"
+			},
+			{
+				displayName: "desc"
+			}
+		]
+	})
 	const paths = games.map((game) => {
 		return [1, 2, 3].map((elem: number) => {
 			return {
@@ -113,42 +131,41 @@ export const getStaticPaths = async () => {
 	})
 
 	return {
-		paths: paths[0],
+		paths: paths.flat(),
 		fallback: true
 	}
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const { game, pageNumber } = params as { game: string; pageNumber: string }
-	await connectToDatabase()
+export const getStaticProps = async ({ params }: { params: { game: string; pageNumber: string } }) => {
+	const { game, pageNumber } = params
 
-	const gameQuery = await gameByUrlSafeNameQuery(game)
-	const totalChannels = await totalChannelsByGameQuery(gameQuery._id)
+	const ssg = await createSSGHelper()
 
-	if (!totalChannels) {
+	const skip = Number(Number(pageNumber) - 1) * CHANNELS_PER_PAGE
+
+	if (isNaN(skip)) {
 		return {
 			props: {
-				gameDoesNotExist: true,
-				game: {
-					displayName: "",
-					backgroundImage: "",
-					titleImage: "",
-					urlSafeName: ""
-				}
+				redirect: true
 			}
 		}
 	}
 
+	const gameQuery = await ssg.fetchQuery("games/getByUrlSafeName", game)
+	if (gameQuery) {
+		await Promise.all([
+			await ssg.fetchQuery("channels/count", game),
+			await ssg.fetchQuery("channels/games/list", {
+				urlSafeName: game,
+				take: CHANNELS_PER_PAGE,
+				skip
+			})
+		])
+	}
+
 	return {
 		props: {
-			game: gameQuery,
-			channels: await channelsByGameQuery({
-				gameId: gameQuery._id,
-				limit: CHANNELS_PER_PAGE,
-				skip: Number(Number(pageNumber) - 1) * CHANNELS_PER_PAGE
-			}),
-			totalChannels,
-			numberOfPages: Math.ceil(totalChannels / CHANNELS_PER_PAGE)
+			trpcState: ssg.dehydrate()
 		},
 		revalidate: 60
 	}

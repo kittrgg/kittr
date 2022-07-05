@@ -1,6 +1,6 @@
-import dynamic from "next/dynamic"
-import Ad from "@Services/venatus/Ad"
 import { useDimensions } from "@Hooks/useDimensions"
+import Ad from "@Services/venatus/Ad"
+import dynamic from "next/dynamic"
 
 interface Props {
 	/** What placement type should we show for a large screen? Defaults to s728x90. */

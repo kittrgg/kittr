@@ -15,7 +15,7 @@ const Footer = ({ paddingRight }: Props) => {
 	const isLoggedIn = !!user?.uid
 
 	return (
-		<Container style={{ paddingRight: paddingRight }}>
+		<Container style={{ paddingRight: paddingRight, marginTop: "auto" }}>
 			<LinkList>
 				<Link href={Routes.ROOT} passHref>
 					<StyledLink>HOME</StyledLink>
@@ -25,9 +25,6 @@ const Footer = ({ paddingRight }: Props) => {
 				</Link>
 				<Link href={Routes.CHANNEL.LIST} passHref>
 					<StyledLink data-cy="footer-channels-link">CHANNELS</StyledLink>
-				</Link>
-				<Link href={Routes.BLOG.LIST} passHref>
-					<StyledLink data-cy="footer-blog-link">BLOG</StyledLink>
 				</Link>
 				<Link href={Routes.ABOUT} passHref>
 					<StyledLink data-cy="footer-about-link">ABOUT</StyledLink>

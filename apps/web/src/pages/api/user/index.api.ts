@@ -1,3 +1,4 @@
+import { NextServerPayload } from "@kittr/types/types"
 import { createHandler } from "@Middlewares/createHandler"
 import { signUp, updateUserDisplayName } from "@Services/firebase/auth"
 import { badWordFilter } from "@Utils/helpers/badWordFilter"

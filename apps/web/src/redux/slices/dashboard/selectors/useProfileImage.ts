@@ -4,5 +4,5 @@ import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 export const useProfileImage = () => {
 	const { data } = useDashboardChannel()
 
-	return data?.meta.profileImage
+	return data?.profile?.hasProfileImage ? data?.id : null
 }

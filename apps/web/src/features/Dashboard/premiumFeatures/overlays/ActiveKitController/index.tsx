@@ -2,51 +2,50 @@ import colors from "@Colors"
 import { Button, ColorPicker, MultiButton, Spinner, SVG } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import PremiumCallout from "@Features/Dashboard/PremiumCallout"
-import { useAllKitBases } from "@Hooks/api/useAllKitBases"
-import { useAllKitOptions } from "@Hooks/api/useAllKitOptions"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { setModal } from "@Redux/slices/dashboard"
 import { useManagerRole, usePremiumStatus } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import { getToken } from "@Services/firebase/auth/getToken"
 import { caption, paragraph } from "@Styles/typography"
 import { sortAlphabetical } from "@Utils/helpers/sortAlphabetical"
 import { ActiveKitOverlay } from "@Utils/lookups/overlays"
 import { Routes } from "@Utils/lookups/routes"
-import { useSocket } from "pages/dashboard.page"
 import styled from "styled-components"
 import H3 from "../../../H3"
 import Preview from "./Preview"
 import * as Styled from "./style"
-import fetch from "@Fetch"
 
-interface IMutation {
-	key: string
-	change: any
-}
-
-const ActiveKit = ({ ...props }) => {
-	const socket = useSocket()
+const ActiveKit = () => {
 	const dispatch = useDispatch()
 	const { data } = useDashboardChannel()
 	const role = useManagerRole()
 	const { isPremium } = usePremiumStatus()
-	const { data: allKitBases } = useAllKitBases()
-	const { data: allOptions } = useAllKitOptions()
-	const { mutate, isLoading: isMutating } = useDashboardMutator(async ({ key, change }: IMutation) => {
-		try {
-			const result = await fetch.post({
-				url: `/api/channel/overlay`,
-				headers: { authorization: `Bearer: ${await getToken()}` },
-				body: { channelId: data?._id, key, change }
-			})
-
-			if (result) {
-				socket.emit(`overlayChangeReporter`, data?.urlSafeName)
+	const { mutate: mutateToggle, isLoading: isMutatingToggle } = useDashboardMutator({
+		path: "channels/overlay/toggle",
+		opts: {
+			onError: (error) => {
+				console.error(error)
+				dispatch(setModal({ type: "Error Notification", data: "" }))
 			}
-		} catch (err) {
-			console.error(err)
-			dispatch(setModal({ type: "Error Notification", data: "" }))
+		}
+	})
+
+	const { mutate: mutateColor } = useDashboardMutator({
+		path: "channels/overlay/color/edit",
+		opts: {
+			onError: (error) => {
+				console.error(error)
+				dispatch(setModal({ type: "Error Notification", data: "" }))
+			}
+		}
+	})
+
+	const { mutate: mutateKit } = useDashboardMutator({
+		path: "channels/overlay/kit/edit",
+		opts: {
+			onError: (error) => {
+				dispatch(setModal({ type: "Error Notification", data: "" }))
+			}
 		}
 	})
 
@@ -58,7 +57,7 @@ const ActiveKit = ({ ...props }) => {
 		)
 	}
 
-	if (role === "Editor") {
+	if (role === "EDITOR") {
 		return (
 			<div>
 				<p>
@@ -69,7 +68,7 @@ const ActiveKit = ({ ...props }) => {
 		)
 	}
 
-	if (role === "Owner" || role === "Administrator") {
+	if (role === "OWNER" || role === "ADMIN") {
 		return (
 			<div>
 				<H3 style={{ marginBottom: "24px" }}>ACTIVE KIT</H3>
@@ -79,7 +78,7 @@ const ActiveKit = ({ ...props }) => {
 					<GridWrapper>
 						<Styled.Paragraph>This overlay will show the kit currently in use on channel.</Styled.Paragraph>
 						<Styled.Paragraph>
-							During channel, the channeler or mod will manually select the active kit below to update the overlay.{" "}
+							During channel, the player or mod will manually select the active kit below to update the overlay.{" "}
 						</Styled.Paragraph>
 						<Styled.Paragraph>There are four overlay styles available:</Styled.Paragraph>
 						<ul style={{ marginLeft: "52px" }}>
@@ -104,17 +103,12 @@ const ActiveKit = ({ ...props }) => {
 								</Caption>
 							</div>
 							<div style={{ width: "300px" }}>
-								{isMutating ? (
+								{isMutatingToggle ? (
 									<Spinner width="24px" />
 								) : (
 									<MultiButton
-										activeValue={data?.overlay?.isOverlayVisible || "off"}
-										onClick={() =>
-											mutate({
-												key: "isOverlayVisible",
-												change: data?.overlay?.isOverlayVisible === "on" ? "off" : "on"
-											})
-										}
+										activeValue={data?.overlay?.isOverlayVisible ? "on" : "off"}
+										onClick={() => mutateToggle({ channelId: data?.id!, newState: !data?.overlay?.isOverlayVisible })}
 										wrapperBackgroundColor={colors.dark20}
 										values={[
 											{
@@ -219,9 +213,10 @@ const ActiveKit = ({ ...props }) => {
 											designVariant="Small Circle"
 											defaultColor={data?.overlay?.backgroundColorPrimary || colors.lightest}
 											onChangeComplete={(e: any) =>
-												mutate({
-													key: "backgroundColorPrimary",
-													change: e
+												mutateColor({
+													channelId: data?.id!,
+													color: e,
+													colorKeyToChange: "backgroundColorPrimary"
 												})
 											}
 										/>
@@ -232,9 +227,10 @@ const ActiveKit = ({ ...props }) => {
 											designVariant="Small Circle"
 											defaultColor={data?.overlay?.backgroundColorSecondary || colors.darker}
 											onChangeComplete={(e: any) =>
-												mutate({
-													key: "backgroundColorSecondary",
-													change: e
+												mutateColor({
+													channelId: data?.id!,
+													color: e,
+													colorKeyToChange: "backgroundColorSecondary"
 												})
 											}
 										/>
@@ -248,9 +244,10 @@ const ActiveKit = ({ ...props }) => {
 											designVariant="Small Circle"
 											defaultColor={data?.overlay?.textColorPrimary || colors.white}
 											onChangeComplete={(e: any) =>
-												mutate({
-													key: "textColorPrimary",
-													change: e
+												mutateColor({
+													channelId: data?.id!,
+													color: e,
+													colorKeyToChange: "textColorPrimary"
 												})
 											}
 										/>
@@ -261,9 +258,10 @@ const ActiveKit = ({ ...props }) => {
 											designVariant="Small Circle"
 											defaultColor={data?.overlay?.textColorSecondary || colors.darker}
 											onChangeComplete={(e: any) =>
-												mutate({
-													key: "textColorSecondary",
-													change: e
+												mutateColor({
+													channelId: data?.id!,
+													color: e,
+													colorKeyToChange: "textColorSecondary"
 												})
 											}
 										/>
@@ -274,9 +272,10 @@ const ActiveKit = ({ ...props }) => {
 											designVariant="Small Circle"
 											defaultColor={data?.overlay?.textColorAccent || colors.lighter}
 											onChangeComplete={(e: any) =>
-												mutate({
-													key: "textColorAccent",
-													change: e
+												mutateColor({
+													channelId: data?.id!,
+													color: e,
+													colorKeyToChange: "textColorAccent"
 												})
 											}
 										/>
@@ -290,40 +289,32 @@ const ActiveKit = ({ ...props }) => {
 								During channel, select the active kit below to update the overlay.
 							</Styled.Paragraph>
 							<Styled.Paragraph>Primary</Styled.Paragraph>
-							{data?.kits
+							{data?.warzoneKits
 								.slice()
-								.filter((kit) => data?.overlay?.secondaryKit?._id !== kit._id)
-								.map((kit) => ({ ...kit, base: allKitBases?.find((kitBase: IKitBase) => kitBase._id === kit.baseId) }))
-								.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
+								.filter((kit) => data?.overlay?.secondaryKit?.id !== kit.id)
+								.sort((a, b) => sortAlphabetical(a.base!.displayName, b.base!.displayName))
 								.sort((kit) => {
-									if (kit.userData.featured) {
+									if (kit.featured) {
 										return -1
 									} else {
 										return 1
 									}
 								})
 								.map((kit) => {
-									const name = kit.base.displayName
-									const isActive = data?.overlay?.primaryKit?._id === kit._id
-									const userTitle = kit.userData.customTitle
-									const isFeatured = kit.userData.featured
+									const name = kit?.base?.displayName
+									const isActive = data?.overlay?.primaryKit?.id === kit.id
+									const userTitle = kit.customTitle
+									const isFeatured = kit.featured
 
 									return (
 										<KitButton
-											key={name + userTitle}
+											key={`${name} ${userTitle}`}
 											isActive={isActive}
 											onClick={() => {
 												if (isActive) {
-													mutate({ key: "primaryKit", change: {} })
+													mutateKit({ channelId: data?.id!, kitId: null, kitToChange: "primaryKit" })
 												} else {
-													const newKit = {
-														...kit,
-														base: allKitBases?.find((allBases: IKitBase) => allBases._id === kit.baseId),
-														options: kit.options.map((opt: IKitOptionRaw) =>
-															allOptions?.find((allOption: any) => allOption._id === opt)
-														)
-													}
-													mutate({ key: "primaryKit", change: newKit })
+													mutateKit({ channelId: data?.id!, kitId: kit.id, kitToChange: "primaryKit" })
 												}
 											}}
 										>
@@ -352,13 +343,12 @@ const ActiveKit = ({ ...props }) => {
 								<Styled.Paragraph style={{ marginTop: "40px" }}>Secondary</Styled.Paragraph>
 								<Styled.Paragraph style={{ fontStyle: "italic" }}>Optional</Styled.Paragraph>
 							</FlexRow>
-							{data?.kits
+							{data?.warzoneKits
 								.slice()
-								.filter((kit) => data?.overlay?.primaryKit?._id !== kit._id)
-								.map((kit) => ({ ...kit, base: allKitBases?.find((kitBase: IKitBase) => kitBase._id === kit.baseId) }))
+								.filter((kit) => data?.overlay?.primaryKit?.id !== kit.id)
 								.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
 								.sort((kit) => {
-									if (kit.userData.featured) {
+									if (kit.featured) {
 										return -1
 									} else {
 										return 1
@@ -366,9 +356,9 @@ const ActiveKit = ({ ...props }) => {
 								})
 								.map((kit) => {
 									const name = kit.base.displayName
-									const isActive = data?.overlay?.secondaryKit?._id === kit._id
-									const userTitle = kit.userData.customTitle
-									const isFeatured = kit.userData.featured
+									const isActive = data?.overlay?.secondaryKit?.id === kit.id
+									const userTitle = kit.customTitle
+									const isFeatured = kit.featured
 
 									return (
 										<KitButton
@@ -376,17 +366,9 @@ const ActiveKit = ({ ...props }) => {
 											isActive={isActive}
 											onClick={() => {
 												if (isActive) {
-													mutate({ key: "secondaryKit", change: {} })
+													mutateKit({ channelId: data?.id!, kitId: null, kitToChange: "secondaryKit" })
 												} else {
-													const newKit = {
-														...kit,
-														base: allKitBases?.find((allBases: IKitBase) => allBases._id === kit.baseId),
-														options: kit.options.map((opt: IKitOptionRaw) =>
-															allOptions?.find((allOption: any) => allOption._id === opt)
-														)
-													}
-
-													mutate({ key: "secondaryKit", change: newKit })
+													mutateKit({ channelId: data?.id!, kitId: kit.id, kitToChange: "secondaryKit" })
 												}
 											}}
 										>

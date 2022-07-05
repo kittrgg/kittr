@@ -1,11 +1,12 @@
-import { useState, useEffect, useRef } from "react"
-import ScrollContainer from "react-indiana-drag-scroll"
-import * as Styled from "./style"
-import Item from "./Item"
+import { WarzoneKit, WarzoneKitBase } from "@kittr/prisma"
 import { useActiveWeapon } from "@Redux/slices/displayr/selectors"
+import { useEffect, useRef, useState } from "react"
+import ScrollContainer from "react-indiana-drag-scroll"
+import Item from "./Item"
+import * as Styled from "./style"
 
 interface Props {
-	availableKits: IKit[]
+	availableKits: Array<WarzoneKit & {base: WarzoneKitBase}>
 }
 
 const KitScroller = ({ availableKits }: Props) => {
@@ -14,10 +15,10 @@ const KitScroller = ({ availableKits }: Props) => {
 	const containerRef = useRef<HTMLDivElement>(null)
 
 	const matchedBase = availableKits
-		.filter((elem: IKit) => elem.base.displayName === activeWeapon?.base?.displayName)
+		.filter((elem) => elem.base.displayName === activeWeapon?.base?.displayName)
 		.sort((a, b) => {
-			if (a.userData.customTitle < b.userData.customTitle) return -1
-			if (a.userData.customTitle > b.userData.customTitle) return 1
+			if ((a.customTitle ?? "") < (b.customTitle ?? "")) return -1
+			if ((a.customTitle ?? "") > (b.customTitle ?? "")) return 1
 			return 0
 		})
 
@@ -80,9 +81,9 @@ const KitScroller = ({ availableKits }: Props) => {
 		>
 			<Styled.Wrapper>
 				{matchedBase
-					.sort((a, b) => Number(b.userData.featured) - Number(a.userData.featured))
-					.map((elem: IKit) => {
-						return <Item key={elem._id} elem={elem} />
+					.sort((a, b) => Number(b.featured) - Number(a.featured))
+					.map((elem) => {
+						return <Item key={elem.id} elem={elem} />
 					})}
 			</Styled.Wrapper>
 		</ScrollContainer>

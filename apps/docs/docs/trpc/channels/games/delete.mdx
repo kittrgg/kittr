@@ -1,0 +1,20 @@
+# Delete Game from Channel
+
+Delete game from a channel.
+
+# Usage
+
+```js
+const { data: channel } = trpc.useQuery([
+	"channels/games/delete",
+	{ id: "123", gameId: "789" }
+])
+```
+
+# Returns
+
+This query returns the newly updated Channel object.
+
+```json
+ // TODO: Payload, please
+```

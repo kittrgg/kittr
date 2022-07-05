@@ -1,23 +1,28 @@
 import type { NextApiRequest, NextApiResponse } from "next"
+import { NextServerPayload } from "@kittr/types"
 import { createHandler } from "@Middlewares/createHandler"
-import Channel, { ChannelModel } from "@Services/mongodb/models/Channel"
 import { userAuth } from "@Utils/middlewares/auth"
-import { sanitize } from "@Services/mongodb/utils/sanitize"
+import { prisma, Channel } from "@kittr/prisma"
 
 const handler = createHandler(userAuth)
 
 // Edit youtube autoplay setting
-handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel | null>>) => {
-	const { _id, boolean } = JSON.parse(req.body)
+handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<Channel>>) => {
+	const { id, boolean } = JSON.parse(req.body)
 
 	try {
-		const data = await Channel.findByIdAndUpdate(
-			{ _id: sanitize(_id) },
-			{ $set: { "meta.youtubeAutoplay": sanitize(boolean) } },
-			{ new: true }
-		)
+		const result = await prisma.channel.update({
+			where: { id },
+			data: {
+				profile: {
+					update: {
+						youtubeAutoplay: boolean
+					}
+				}
+			}
+		})
 
-		return res.status(200).json(data)
+		return res.status(200).json(result)
 	} catch (error) {
 		return res.status(400).json({ error: true, errorMessage: JSON.stringify(error) })
 	}

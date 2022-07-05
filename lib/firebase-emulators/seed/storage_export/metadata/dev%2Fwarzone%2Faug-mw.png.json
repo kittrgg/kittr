@@ -1,0 +1,20 @@
+{
+  "name": "warzone/aug-mw.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699084,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "8757c38b-4adc-4e27-996c-4a039580fcf4"
+  ],
+  "etag": "raTriYDQxmovYWoebwlYnwQhZx0",
+  "timeCreated": "2022-05-21T17:04:59.085Z",
+  "updated": "2022-05-21T17:04:59.085Z",
+  "size": 81688,
+  "md5Hash": "U1Y1jr4VyByoDZJK7h2Abw==",
+  "crc32c": "704944050"
+}

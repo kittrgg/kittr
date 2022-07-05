@@ -1,0 +1,26 @@
+# Create Affiliate
+
+Create a busines affiliate for a channel. Affiliates sponsors of the stream/channel/streamer/etc.
+
+# Usage
+
+```js
+const { data: channel } = trpc.useQuery([
+	"channels/profile/affiliates/create",
+	{
+		channelProfileId: "123a",
+		code: "STREAMERMAN",
+		company: "Azure",
+		description: "Use code at checkout!",
+		url: "https:// twitch.tv/anthonyfromkittr"
+	}
+])
+```
+
+# Returns
+
+This query returns the Channel object for the dashboard with the new affiliate.
+
+```json
+ // TODO: Payload, please
+```

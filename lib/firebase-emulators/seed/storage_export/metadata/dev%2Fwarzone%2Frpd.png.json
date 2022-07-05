@@ -1,0 +1,20 @@
+{
+  "name": "warzone/rpd.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699613,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "9b97b367-376e-45b1-bc40-68f1a47e31f2"
+  ],
+  "etag": "qdwnZHVnfDupoJ1onsIIK/hlXgw",
+  "timeCreated": "2022-05-21T17:04:59.614Z",
+  "updated": "2022-05-21T17:04:59.614Z",
+  "size": 44653,
+  "md5Hash": "g0HQ1lluH3rtCQvo1reaDg==",
+  "crc32c": "1791361800"
+}

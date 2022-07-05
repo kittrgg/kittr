@@ -1,55 +1,80 @@
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 import styled from "styled-components"
 
 import colors from "@Colors"
-import { paragraph } from "@Styles/typography"
-import { useDispatch } from "@Redux/store"
-import { Modal, Selector, TextInputBox, Button, Spinner } from "@Components/shared"
-import { getToken } from "@Services/firebase/auth/getToken"
-import { setModal } from "@Redux/slices/dashboard"
-import ErrorNotification from "./ErrorNotification"
-import { useModal, useChannelData } from "@Redux/slices/dashboard/selectors"
+import { Button, Modal, Selector, Spinner, TextInputBox } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
-import fetch from "@Fetch"
+import { setModal } from "@Redux/slices/dashboard"
+import { useChannelData, useModal } from "@Redux/slices/dashboard/selectors"
+import { useDispatch } from "@Redux/store"
+import { paragraph } from "@Styles/typography"
+import ErrorNotification from "./ErrorNotification"
 
-/** Modal for adding a spec to the channel's PC setup. */
-const AddSpecModal = ({ ...props }) => {
+/** Modal for adding or editing a spec to the channel's PC setup. */
+const AddSpecModal = () => {
 	const dispatch = useDispatch()
-	const { _id } = useChannelData()
+	const { data: channelData } = useChannelData()
 	const { data } = useModal()
-	const [keyName, setKeyName] = useState("")
-	const [description, setDescription] = useState("")
+	const [partType, setPartType] = useState("")
+	const [partName, setPartName] = useState("")
 
-	const { mutate, isLoading, error } = useDashboardMutator(async () => {
-		const result = await fetch.post({
-			url: `/api/channel/meta/specs`,
-			headers: { authorization: `Bearer ${await getToken()}` },
-			body: { _id, keyName, description }
-		})
-
-		if (result) {
-			dispatch(setModal({ type: "", data: "" }))
+	const {
+		mutate: updateSpec,
+		isLoading: isUpdateLoading,
+		error: updateError
+	} = useDashboardMutator({
+		path: "channels/profile/pc-specs/update",
+		opts: {
+			onSuccess: () => {
+				dispatch(setModal({ type: "", data: "" }))
+			}
 		}
 	})
 
+	const {
+		mutate: createSpec,
+		isLoading: isCreateLoading,
+		error: createError
+	} = useDashboardMutator({
+		path: "channels/profile/pc-specs/create",
+		opts: {
+			onSuccess: () => {
+				dispatch(setModal({ type: "", data: "" }))
+			}
+		}
+	})
+
+	const submit = () => {
+		if (data?.id) {
+			updateSpec({
+				channelId: channelData?.id!,
+				pcSpecId: data?.id,
+				data: { partType, partName }
+			})
+		} else {
+			createSpec({ channelId: channelData?.id!, data: { partType, partName } })
+		}
+	}
+
 	useEffect(() => {
-		if (data?.keyName) {
-			setKeyName(data.keyName)
+		if (data) {
+			setPartType(data.partType)
+			setPartName(data.partName)
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
-	if (error) return <ErrorNotification />
-	if (isLoading) return <Spinner width="24px" />
+	if (updateError || createError) return <ErrorNotification />
+	if (isUpdateLoading || isCreateLoading) return <Spinner width="24px" />
 
 	return (
 		<Modal backgroundClickToClose title="ADD SPEC">
 			<Selector
 				className="spec-select"
 				isCreatable
-				onChange={(option: any) => setKeyName(option.label.replace(/[^\w\s-]/g, ""))}
+				onChange={(option: any) => setPartType(option.label.replace(/[^\w\s-]/g, ""))}
 				placeholder="Select from list or type here to create your own"
-				value={keyName ? { label: keyName, value: keyName } : null}
+				value={partType ? { label: partType, value: partType } : null}
 				styles={{
 					container: (base, state) => ({
 						...base,
@@ -89,8 +114,8 @@ const AddSpecModal = ({ ...props }) => {
 			<InputLabel>Description</InputLabel>
 			<TextInputBox
 				data-cy="input-spec-name"
-				value={description}
-				onChange={(e) => setDescription(e.target.value)}
+				value={partName}
+				onChange={(e) => setPartName(e.target.value)}
 				name="specDescription"
 				type="text"
 				inputStyles={{ marginLeft: "0", width: "100%" }}
@@ -98,8 +123,8 @@ const AddSpecModal = ({ ...props }) => {
 			<Button
 				data-cy="confirm-add-spec"
 				design="white"
-				onClick={mutate}
-				disabled={!keyName || !description}
+				onClick={submit}
+				disabled={!partType || !partName}
 				text="SAVE"
 				style={{ margin: "84px auto 0" }}
 			/>

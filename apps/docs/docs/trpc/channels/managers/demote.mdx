@@ -1,0 +1,22 @@
+# Demote a Manager
+
+Demote a current manager of a channel from "ADMIN" to "EDITOR".
+
+# Usage
+
+Note: The managerId is the the id from the database, not Firebase.
+
+```js
+const { data: channel } = trpc.useQuery([
+	"channels/managers/demote",
+	{ channelId: "123", managerId: "456" }
+])
+```
+
+# Returns
+
+This query returns the newly updated Channel object with the newly demoted manager.
+
+```json
+ // TODO: Payload, please
+```

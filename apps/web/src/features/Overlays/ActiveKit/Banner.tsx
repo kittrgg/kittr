@@ -1,16 +1,19 @@
-import { useState, useEffect, Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import styled, { keyframes, ThemeProvider } from "styled-components"
 
+import { IKitOption, OverlayKit } from "@kittr/types"
+import { header1, header2, montserrat, paragraph } from "@Styles/typography"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
-import { header1, header2, montserrat, paragraph } from "@Styles/typography"
+
+import { InferQueryOutput } from "@Server/index"
 
 interface Props {
 	_id: string
 	previewWidth?: number
-	data: any
-	activeKit: IKit
-	setActiveKit: Dispatch<SetStateAction<IKit>>
+	data?: InferQueryOutput<"channels/overlay/get">
+	activeKit: OverlayKit
+	setActiveKit: Dispatch<SetStateAction<OverlayKit>>
 }
 
 const Banner = ({ _id, previewWidth, data, activeKit, setActiveKit }: Props) => {
@@ -48,10 +51,10 @@ const Banner = ({ _id, previewWidth, data, activeKit, setActiveKit }: Props) => 
 			setIsDataVisible(false)
 			await delay(OPACITY_TIMER * 100)
 
-			if (activeKit._id === data.primaryKit._id) {
-				setActiveKit(data.secondaryKit)
+			if (activeKit.id === data?.primaryKit?.id) {
+				setActiveKit(data?.secondaryKit as OverlayKit)
 			} else {
-				setActiveKit(data.primaryKit)
+				setActiveKit(data?.primaryKit as OverlayKit)
 			}
 		}
 
@@ -73,7 +76,7 @@ const Banner = ({ _id, previewWidth, data, activeKit, setActiveKit }: Props) => 
 
 	const hasAKitSelected =
 		Object.keys(data.primaryKit || {}).length > 0 || Object.keys(data.secondaryKit || {}).length > 0
-	const isRendered = data.isOverlayVisible === "on" && hasAKitSelected
+	const isRendered = data.isOverlayVisible && hasAKitSelected
 	const isOverlayVisible = !!previewWidth || isRendered
 
 	return (
@@ -89,7 +92,7 @@ const Banner = ({ _id, previewWidth, data, activeKit, setActiveKit }: Props) => 
 				<Main>
 					<Meta isDataVisible={isDataVisible} opacitySwap={OPACITY_TIMER}>
 						<BaseName>{activeKit?.base?.displayName}</BaseName>
-						<CommandInfo>kittr.gg | !{activeKit?.base?.commandCodes[0]}</CommandInfo>
+						<CommandInfo>kittr.gg | !{activeKit?.base?.commandCodes[0].code}</CommandInfo>
 					</Meta>
 					<OptionsWrapper
 						isDataVisible={isDataVisible}

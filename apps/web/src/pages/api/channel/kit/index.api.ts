@@ -1,119 +1,79 @@
-import type { NextApiRequest, NextApiResponse } from "next"
-import mongoose, { UpdateWriteOpResult } from "mongoose"
-import { createHandler } from "@Utils/middlewares/createHandler"
-import { Channel } from "@Services/mongodb/models"
+import { prisma, WarzoneKit, WarzoneKitOption } from "@kittr/prisma"
+import { NextServerPayload } from "@kittr/types"
 import { userAuth } from "@Middlewares/auth"
-import { sanitize } from "@Services/mongodb/utils/sanitize"
-import { ChannelModel } from "@Models/Channel"
+import { createHandler } from "@Utils/middlewares/createHandler"
+import type { NextApiRequest, NextApiResponse } from "next"
+
+interface KitWithOptions extends WarzoneKit {
+	options: WarzoneKitOption[]
+}
 
 const handler = createHandler(userAuth)
 
 // Upsert a kit to a channel
-handler.post(
-	async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<UpdateWriteOpResult | ChannelModel | null>>) => {
-		const {
-			kitId,
-			channelId,
-			kitBase,
-			previousUpdater,
-			customTitle = "",
-			options = [],
-			blueprint = "",
-			featured = false,
-			youtubeURL = "",
-			tiktokId = "",
-			quote = ""
-		} = JSON.parse(req.body)
-
-		const optionsArray = Object.values<IKitOption>(options)
-			.filter((opt) => opt._id.length > 0)
-			.map((opt) => new mongoose.Types.ObjectId(opt._id))
-
-		if (!kitId) {
-			try {
-				const data = await Channel.updateOne(
-					{ _id: sanitize(channelId) },
-					{
-						$push: {
-							kits: {
-								_id: new mongoose.Types.ObjectId(),
-								baseId: sanitize(kitBase),
-								options: sanitize(optionsArray),
-								userData: {
-									customTitle: sanitize(customTitle),
-									blueprint: sanitize(blueprint),
-									featured: sanitize(featured),
-									youtubeURL: sanitize(youtubeURL),
-									tiktokId: sanitize(tiktokId),
-									quote: sanitize(quote)
-								}
-							}
-						},
-						previousUpdater
-					}
-				)
-
-				return res.status(200).json(data)
-			} catch (error) {
-				return res.status(400).json({ error: true, errorMessage: JSON.stringify(error) })
-			}
-		}
-
-		if (kitId) {
-			try {
-				const data = await Channel.findOneAndUpdate(
-					{
-						_id: sanitize(channelId),
-						kits: {
-							$elemMatch: {
-								_id: new mongoose.Types.ObjectId(sanitize(kitId))
-							}
-						}
-					},
-					{
-						$set: {
-							"kits.$[kit]": {
-								_id: new mongoose.Types.ObjectId(sanitize(kitId)),
-								baseId: sanitize(kitBase),
-								options: sanitize(optionsArray),
-								userData: {
-									customTitle: sanitize(customTitle),
-									blueprint: sanitize(blueprint),
-									featured: sanitize(featured),
-									youtubeURL: sanitize(youtubeURL),
-									tiktokId: sanitize(tiktokId),
-									quote: sanitize(quote)
-								}
-							}
-						},
-						previousUpdater
-					},
-					{
-						arrayFilters: [{ "kit._id": new mongoose.Types.ObjectId(sanitize(kitId)) }],
-						new: true
-					}
-				)
-
-				return res.status(200).json(data)
-			} catch (error) {
-				return res.status(400).json({ error: true, errorMessage: JSON.stringify(error) })
-			}
-		}
+handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<WarzoneKit>>) => {
+	const { channelId, token, previousUpdater, kit } = JSON.parse(req.body) as {
+		channelId: string
+		token: any
+		previousUpdater: string
+		kit: KitWithOptions
 	}
-)
-
-// Delete a channel's kit
-handler.delete(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel | null>>) => {
-	const { channelId, kitId } = JSON.parse(req.body)
 
 	try {
-		const data = await Channel.findOneAndUpdate(
-			{ _id: channelId },
-			{ $pull: { kits: { _id: new mongoose.Types.ObjectId(sanitize(kitId)) } } },
-			{ new: true }
-		)
+		const update = {
+			base: {
+				connect: {
+					id: kit.baseId
+				}
+			},
+			channel: {
+				connect: {
+					id: channelId
+				}
+			},
+			game: {
+				connect: {
+					id: kit.gameId
+				}
+			},
+			options: {
+				connect: kit.options.map((opt) => ({
+					id: opt.id
+				}))
+			},
+			blueprint: kit.blueprint,
+			featured: kit.featured,
+			customTitle: kit.customTitle,
+			quote: kit.quote,
+			tiktokUrl: kit.tiktokUrl,
+			youtubeUrl: kit.youtubeUrl
+		}
+
+		const data = await prisma.warzoneKit.upsert({
+			where: { id: kit.id ?? "" },
+			create: update,
+			update: update
+		})
 
 		return res.status(200).json(data)
+	} catch (err) {
+		console.error(err)
+		return res.status(500).json({ error: true, errorMessage: JSON.stringify(err) })
+	}
+})
+
+// Delete a channel's kit
+handler.delete(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<WarzoneKit | null>>) => {
+	const { kitId } = JSON.parse(req.body)
+
+	try {
+		const result = await prisma.warzoneKit.delete({
+			where: {
+				id: kitId
+			}
+		})
+
+		return res.status(200).json(result)
 	} catch (error) {
 		return res.status(400).json({ error: true, errorMessage: JSON.stringify(error) })
 	}

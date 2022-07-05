@@ -1,24 +1,24 @@
 import { Dispatch, SetStateAction, useState } from "react"
 import styled from "styled-components"
 
-import { capitalizeFirstCharacter } from "@Utils/helpers/capitalizeFirstCharacter"
 import colors from "@Colors"
+import { Button, Modal, SvgByType, SVGType, TextInput } from "@Components/shared"
+import { ChannelLink, LinkProperty } from "@kittr/prisma"
+import { setModal } from "@Redux/slices/dashboard"
+import { useChannelData } from "@Redux/slices/dashboard/selectors"
+import { useDispatch } from "@Redux/store"
 import { trimPrefix } from "@Utils/helpers/trimPrefix"
 import { linkLabelImages } from "@Utils/lookups/linkLabelImages"
 import { linkPrefixes } from "@Utils/lookups/linkPrefixes"
-import { setModal } from "@Redux/slices/dashboard"
-import { useDispatch } from "@Redux/store"
-import { Modal, Button, SvgByType, SVGType, TextInput } from "@Components/shared"
 
-type Link = [SocialPlatform, string]
-type LinkEdits = Array<Link>
-type SetNewLink = Dispatch<SetStateAction<[SocialPlatform, string]>>
+type LinkEdits = Array<ChannelLink> | undefined
+type SetNewLink = Dispatch<SetStateAction<ChannelLink>>
 type Stage = 1 | 2
 type SetStage = Dispatch<SetStateAction<Stage>>
 
 interface Props {
 	linkEdits: LinkEdits
-	setLinkEdits: Dispatch<SetStateAction<LinkEdits>>
+	setLinkEdits: Dispatch<SetStateAction<Array<ChannelLink> | undefined>>
 }
 
 interface ISelectProperty {
@@ -28,20 +28,26 @@ interface ISelectProperty {
 }
 
 interface ICreateNewProperty {
-	newLink: Link
+	newLink: ChannelLink
 	setNewLink: SetNewLink
 }
 
 /** The modal that adds a social link to a user. */
 const AddLink = ({ linkEdits, setLinkEdits }: Props) => {
 	const dispatch = useDispatch()
+	const { data: channelData } = useChannelData()
 	const [stage, setStage] = useState<Stage>(1)
-	const [newLink, setNewLink] = useState<Link>(["" as SocialPlatform, ""])
+	const [newLink, setNewLink] = useState<ChannelLink>({
+		id: "",
+		channelId: "",
+		property: "" as LinkProperty,
+		value: ""
+	})
 
 	return (
 		<Modal backgroundClickToClose title="ADD LINK">
 			{stage === 1 && <SelectProperty linkEdits={linkEdits} setNewLink={setNewLink} setStage={setStage} />}
-			{stage == 2 && <CreateNewProperty newLink={newLink} setNewLink={setNewLink} />}
+			{stage === 2 && <CreateNewProperty newLink={newLink} setNewLink={setNewLink} />}
 			<ButtonFlex>
 				<Button
 					design="transparent"
@@ -51,7 +57,12 @@ const AddLink = ({ linkEdits, setLinkEdits }: Props) => {
 							? () => dispatch(setModal({ type: "", data: {} }))
 							: () => {
 									setStage(1)
-									setNewLink(["" as SocialPlatform, ""])
+									setNewLink({
+										id: "",
+										channelId: channelData?.id ?? "",
+										property: "" as LinkProperty,
+										value: ""
+									})
 							  }
 					}
 				/>
@@ -60,6 +71,7 @@ const AddLink = ({ linkEdits, setLinkEdits }: Props) => {
 						design="white"
 						text="Add"
 						onClick={() => {
+							if (!linkEdits) return
 							setLinkEdits([...linkEdits, newLink])
 							dispatch(setModal({ type: "", data: {} }))
 						}}
@@ -75,27 +87,34 @@ const AddLink = ({ linkEdits, setLinkEdits }: Props) => {
 export default AddLink
 
 const SelectProperty = ({ linkEdits, setNewLink, setStage }: ISelectProperty) => {
+	const { data: channelData } = useChannelData()
+
 	return (
 		<Grid>
-			{Object.keys(linkLabelImages).map((elem) => {
+			{Object.entries(linkLabelImages).map((elem) => {
+				const [property, imgPath] = elem as [LinkProperty, string]
+
 				return (
 					<GridItemButton
-						key={elem}
-						disabled={linkEdits.some((link: [string, string]) => link[0] === elem)}
+						key={property}
+						disabled={linkEdits?.some((link) => link.property === property)}
 						onClick={() => {
-							setNewLink([elem as SocialPlatform, ""])
+							setNewLink({
+								id: "",
+								channelId: channelData?.id ?? "",
+								property,
+								value: ""
+							})
 							setStage(2)
 						}}
-						data-cy={`${elem}-add-button`}
+						data-cy={`${property}-add-button`}
 					>
 						<div
 							style={
-								linkEdits.find((link: [string, string]) => link[0] === elem)
-									? { filter: "grayscale(50%) blur(4px)" }
-									: {}
+								linkEdits?.find((link) => link.property === property) ? { filter: "grayscale(50%) blur(4px)" } : {}
 							}
 						>
-							<SvgByType type={capitalizeFirstCharacter(elem) as SVGType} alt="Channel to Add" />
+							<SvgByType type={property as SVGType} alt="Channel to Add" />
 						</div>
 					</GridItemButton>
 				)
@@ -105,6 +124,8 @@ const SelectProperty = ({ linkEdits, setNewLink, setStage }: ISelectProperty) =>
 }
 
 const CreateNewProperty = ({ newLink, setNewLink }: ICreateNewProperty) => {
+	const { data: channelData } = useChannelData()
+
 	return (
 		<div
 			style={{
@@ -116,17 +137,20 @@ const CreateNewProperty = ({ newLink, setNewLink }: ICreateNewProperty) => {
 		>
 			<TextInput
 				type="text"
-				label={linkPrefixes[newLink[0]]}
-				name={newLink[0]}
-				value={trimPrefix(linkPrefixes[newLink[0]], newLink[1])}
+				label={linkPrefixes[newLink.property!]}
+				name={newLink.property}
+				value={trimPrefix(linkPrefixes[newLink.property!], newLink.value!)}
 				subline="Feel free to paste in the whole link. We'll trim it up for you."
 				sublineStyles={{ color: colors.lighter }}
 				inputStyles={{ marginLeft: "0" }}
 				onChange={(e) => {
-					let newEdit = newLink.slice() as [SocialPlatform, string]
-					newEdit[1] = `${linkPrefixes[newLink[0]]}${trimPrefix(linkPrefixes[newLink[0]], e.target.value)}`
+					let newEdit = { ...newLink, value: newLink.value ?? "" }
+					newEdit.value = `${linkPrefixes[newLink.property!]}${trimPrefix(
+						linkPrefixes[newLink.property!],
+						e.target.value
+					)}`
 
-					setNewLink(newEdit)
+					setNewLink({ id: "", channelId: channelData?.id ?? "", property: newEdit.property, value: newEdit.value })
 				}}
 			/>
 		</div>

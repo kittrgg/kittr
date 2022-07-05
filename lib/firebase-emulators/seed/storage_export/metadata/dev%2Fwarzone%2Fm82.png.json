@@ -1,0 +1,20 @@
+{
+  "name": "warzone/m82.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699498,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "4c185474-4f7d-44e5-bd69-fbe8baaf0432"
+  ],
+  "etag": "1wto68tabL2fCupv/Yg6W12fgwU",
+  "timeCreated": "2022-05-21T17:04:59.498Z",
+  "updated": "2022-05-21T17:04:59.498Z",
+  "size": 36033,
+  "md5Hash": "+3gdWNRb7W5H4kGv+fYHtA==",
+  "crc32c": "4150707146"
+}

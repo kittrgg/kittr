@@ -1,0 +1,91 @@
+version: 2
+updates:
+  # root
+  - package-ecosystem: "npm"
+    directory: "/"
+    commit-message:
+      prefix: "yarn"
+      include: "scope"
+    target-branch: "develop"
+    schedule:
+      interval: "daily"
+
+  # api
+  - package-ecosystem: "npm"
+    directory: "/apps/api"
+    commit-message:
+      prefix: "yarn"
+      include: "scope"
+    target-branch: "develop"
+    schedule:
+      interval: "daily"
+
+  # docs
+  - package-ecosystem: "npm"
+    directory: "/apps/docs"
+    commit-message:
+      prefix: "yarn"
+      include: "scope"
+    target-branch: "develop"
+    schedule:
+      interval: "daily"
+
+  # web
+  - package-ecosystem: "npm"
+    directory: "/apps/web"
+    commit-message:
+      prefix: "yarn"
+      include: "scope"
+    target-branch: "develop"
+    schedule:
+      interval: "daily"
+
+  # Cypress
+  - package-ecosystem: "npm"
+    directory: "/lib/e2e/cypress"
+    commit-message:
+      prefix: "yarn"
+      include: "scope"
+    target-branch: "develop"
+    schedule:
+      interval: "daily"
+
+  # config
+  - package-ecosystem: "npm"
+    directory: "/packages/config"
+    commit-message:
+      prefix: "yarn"
+      include: "scope"
+    target-branch: "develop"
+    schedule:
+      interval: "daily"
+
+  # logger
+  - package-ecosystem: "npm"
+    directory: "/packages/logger"
+    commit-message:
+      prefix: "yarn"
+      include: "scope"
+    target-branch: "develop"
+    schedule:
+      interval: "daily"
+
+  # prisma
+  - package-ecosystem: "npm"
+    directory: "/packages/prisma"
+    commit-message:
+      prefix: "yarn"
+      include: "scope"
+    target-branch: "develop"
+    schedule:
+      interval: "daily"
+
+  # ui
+  - package-ecosystem: "npm"
+    directory: "/packages/ui"
+    commit-message:
+      prefix: "yarn"
+      include: "scope"
+    target-branch: "develop"
+    schedule:
+      interval: "daily"

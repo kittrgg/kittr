@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react"
 import { useRouter } from "next/router"
 import { isClient } from "@Utils/helpers/isClient"
+import { AdErrorBoundary } from "@Components/shared/ErrorBoundary"
 
 interface Props {
 	/** Venatus ad unit type. */
@@ -46,9 +47,11 @@ const Ad = ({ placementType, updateTrigger, containerStyles }: Props) => {
 	if (typeof window !== "undefined" && window.location.pathname.includes("stage-web")) return null
 
 	return (
-		<div style={{ width: "100%", overflow: "hidden", ...containerStyles }}>
-			<div ref={adRef} className="vm-placement" data-id={adDictionary[placementType]} />
-		</div>
+		<AdErrorBoundary>
+			<div style={{ width: "100%", overflow: "hidden", ...containerStyles }}>
+				<div ref={adRef} className="vm-placement" data-id={adDictionary[placementType]} />
+			</div>
+		</AdErrorBoundary>
 	)
 }
 

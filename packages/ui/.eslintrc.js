@@ -1,1 +1,5 @@
-module.exports = require("config/eslint-preset")
+module.exports = {
+  "rules": {
+    "import/no-anonymous-default-export": 0
+  }
+}

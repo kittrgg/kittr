@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import PageWrapper from "@Components/layouts/PageWrapper"
 import * as Styled from "@Styles/legalPages"
 
@@ -20,7 +22,7 @@ const Terms = ({ ...props }) => {
 				<p>
 					These Terms of Use described the legally binding terms and conditions that oversee your use of the Site. BY
 					LOGGING INTO THE SITE, YOU ARE BEING COMPLIANT THAT THESE TERMS and you represent that you have the authority
-					and capacity to enter into these Terms. YOU SHOULD BE AT LEAST 18 YEARS OF AGE TO ACCESS THE SITE. IF YOU
+					and capacity to enter into these Terms. YOU SHOULD BE AT LEAST 18 YEARS OF AGE TO ACCESS THE SITE. IF YOU
 					DISAGREE WITH ALL OF THE PROVISION OF THESE TERMS, DO NOT LOG INTO AND/OR USE THE SITE.
 				</p>
 
@@ -190,16 +192,16 @@ const Terms = ({ ...props }) => {
 					The site is provided on an "as-is" and "as available" basis, and company and our suppliers expressly disclaim
 					any and all warranties and conditions of any kind, whether express, implied, or statutory, including all
 					warranties or conditions of merchantability, fitness for a particular purpose, title, quiet enjoyment,
-					accuracy, or non-infringement.  We and our suppliers make not guarantee that the site will meet your
+					accuracy, or non-infringement. We and our suppliers make not guarantee that the site will meet your
 					requirements, will be available on an uninterrupted, timely, secure, or error-free basis, or will be accurate,
-					reliable, free of viruses or other harmful code, complete, legal, or safe.  If applicable law requires any
+					reliable, free of viruses or other harmful code, complete, legal, or safe. If applicable law requires any
 					warranties with respect to the site, all such warranties are limited in duration to ninety (90) days from the
 					date of first use.
 				</p>
 
 				<p>
 					Some jurisdictions do not allow the exclusion of implied warranties, so the above exclusion may not apply to
-					you.  Some jurisdictions do not allow limitations on how long an implied warranty lasts, so the above
+					you. Some jurisdictions do not allow limitations on how long an implied warranty lasts, so the above
 					limitation may not apply to you.
 				</p>
 
@@ -210,7 +212,7 @@ const Terms = ({ ...props }) => {
 					third-party for any lost profits, lost data, costs of procurement of substitute products, or any indirect,
 					consequential, exemplary, incidental, special or punitive damages arising from or relating to these terms or
 					your use of, or incapability to use the site even if company has been advised of the possibility of such
-					damages.  Access to and use of the site is at your own discretion and risk, and you will be solely responsible
+					damages. Access to and use of the site is at your own discretion and risk, and you will be solely responsible
 					for any damage to your device or computer system, or loss of data resulting therefrom.
 				</p>
 

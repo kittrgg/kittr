@@ -1,47 +1,21 @@
-import mongoose from "mongoose"
-import type { NextApiRequest, NextApiResponse } from "next"
+import { prisma } from "@kittr/prisma"
 import { createHandler } from "@Utils/middlewares/createHandler"
-import { KitBase } from "@Services/mongodb/models"
-import { sanitize } from "@Services/mongodb/utils/sanitize"
+import type { NextApiRequest, NextApiResponse } from "next"
 
 const handler = createHandler()
 
-// Fetch options by kitId
+// Fetch options by kit
 handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
-	const { kitBaseId } = req.query
+	const { kitBaseId } = req.query as { kitBaseId: string }
 
 	try {
-		const data = await KitBase.aggregate()
-			.match({ _id: new mongoose.Types.ObjectId(sanitize(kitBaseId)) })
-			.lookup({
-				from: "kitoptions",
-				let: { options: "$gameInfo.availableOptions.optionId" },
-				pipeline: [{ $match: { $expr: { $in: ["$_id", "$$options"] } } }],
-				as: "output"
-			})
-			.addFields({
-				"gameInfo.availableOptions": {
-					$map: {
-						input: "$gameInfo.availableOptions",
-						as: "opts",
-						in: {
-							$mergeObjects: [
-								"$$opts",
-								{
-									displayName: {
-										$arrayElemAt: ["$output.displayName", { $indexOfArray: ["$output._id", "$$opts.optionId"] }]
-									}
-								},
-								{
-									slotKey: { $arrayElemAt: ["$output.slotKey", { $indexOfArray: ["$output._id", "$$opts.optionId"] }] }
-								}
-							]
-						}
-					}
-				}
-			})
+		const result = await prisma.warzoneKitOption.findMany({
+			where: {
+				kitBaseId
+			}
+		})
 
-		return res.status(200).json({ data: data[0].gameInfo.availableOptions })
+		return res.status(200).json(result)
 	} catch (error) {
 		return res.status(500).json({ error })
 	}

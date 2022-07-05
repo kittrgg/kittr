@@ -2,56 +2,57 @@ import { useEffect, useState } from "react"
 import styled from "styled-components"
 
 import colors from "@Colors"
-import { uploadWithHandlers } from "@Services/firebase/storage/uploadWithHandlers"
-import { download } from "@Services/firebase/storage/download"
-import { getToken } from "@Services/firebase/auth/getToken"
-import { useDispatch } from "@Redux/store"
+import { Button, Spinner, SVG } from "@Components/shared"
+import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useCoverPhoto } from "@Redux/slices/dashboard/selectors"
-import { Spinner, SVG, Button } from "@Components/shared"
+import { useDispatch } from "@Redux/store"
 import { deleteFile } from "@Services/firebase/storage"
-import fetch from "@Fetch"
-import { isFetchError } from "@Utils/helpers/typeGuards"
-import { ChannelModel } from "@Models/Channel"
+import { download } from "@Services/firebase/storage/download"
+import { uploadWithHandlers } from "@Services/firebase/storage/uploadWithHandlers"
 
-const CoverPhotoUploader = ({ ...props }) => {
+const CoverPhotoUploader = () => {
 	const dispatch = useDispatch()
-	const { _id } = useChannelData()
+	const { data } = useChannelData()
 	const hasCoverPhoto = useCoverPhoto()
 	const [isUploading, setIsUploading] = useState(false)
 	const [image, setImage] = useState("")
 
-	const fileName = `${_id}-profile-cover-photo`
+	const fileName = `${data?.id}-profile-cover-photo`
+
+	const { mutate } = useDashboardMutator({
+		path: "channels/profile/cover-photo/update",
+		opts: {
+			onSuccess: (data) => {
+				if (data?.profile?.hasCoverPhoto) {
+					download(data?.id, (path) => {
+						setIsUploading(false)
+					})
+				}
+			},
+			onError: () => {
+				setIsUploading(false)
+				dispatch(setModal({ type: "Error Notification", data: {} }))
+			}
+		}
+	})
 
 	const handleUpload = async (e: any) => {
 		e.preventDefault()
 		setIsUploading(true)
 
+		if (!data?.id) return
+
 		const imageFile = e.target.files[0]
 
 		if (imageFile) {
 			uploadWithHandlers({
-				imageFile,
 				fileName,
-				maxWidthOrHeight: 2500,
+				imageFile,
 				onSuccess: async () => {
-					const response = await fetch.post<ChannelModel | NextClientEndpointError>({
-						url: `/api/channel/meta/coverPhoto`,
-						headers: { authorization: `Bearer: ${await getToken()}` },
-						body: { hasCoverPhoto: true, channelId: _id }
-					})
-
-					if (isFetchError(response)) {
-						setIsUploading(false)
-						dispatch(setModal({ type: "Error Notification", data: {} }))
-					} else {
-						download(fileName, (path) => {
-							setIsUploading(false)
-							setImage(path)
-						})
-					}
+					mutate({ channelId: data?.id!, hasCoverPhoto: true })
 				},
-				onError: async () => {
+				onError: () => {
 					setIsUploading(false)
 					dispatch(setModal({ type: "Error Notification", data: {} }))
 				}
@@ -66,26 +67,25 @@ const CoverPhotoUploader = ({ ...props }) => {
 				setImage(path)
 			})
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isUploading])
+	}, [isUploading, hasCoverPhoto, fileName])
 
 	const handleDelete = async (e: any) => {
 		setIsUploading(true)
 		setImage("")
-		const deleted = await deleteFile(fileName)
-
-		const response = await fetch.post({
-			url: `/api/channel/meta/coverPhoto`,
-			headers: { authorization: `Bearer: ${await getToken()}` },
-			body: { hasCoverPhoto: false, channelId: _id }
+		await deleteFile({
+			id: fileName,
+			onSuccess: () => {
+				mutate({ channelId: data?.id!, hasCoverPhoto: false })
+			},
+			onError: (error) => {
+				dispatch(setModal({ type: "Error Notification", data: {} }))
+			}
 		})
-		if (response && deleted) {
-			setIsUploading(false)
-		}
-		setIsUploading(false)
 	}
 
 	if (isUploading) return <Spinner width="24px" />
+
+	const cacheBuster = `/?${Math.random()}`
 
 	return (
 		<div>
@@ -98,7 +98,7 @@ const CoverPhotoUploader = ({ ...props }) => {
 			</p>
 
 			<Grid>
-				{hasCoverPhoto && <BackgroundImage backgroundImage={image} />}
+				{hasCoverPhoto && <BackgroundImage backgroundImage={image + cacheBuster} />}
 
 				<ButtonsWrapper>
 					<Label htmlFor="coverPhotoUpload">

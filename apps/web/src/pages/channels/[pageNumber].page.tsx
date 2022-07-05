@@ -1,26 +1,19 @@
 import colors from "@Colors"
 import AdPageWrapper, { H1 } from "@Components/layouts/AdPageWrapper"
 import FallbackPage from "@Components/layouts/FallbackPage"
-import { ChannelList, ChannelSearch, Paginator } from "@Components/shared"
+import { ChannelList, Paginator } from "@Components/shared"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
-import { getChannelsQuery, totalChannelsQuery } from "@Services/mongodb"
+import { trpc } from "@Server/createHooks"
+import { createSSGHelper } from "@Server/createSSGHelper"
 import ResponsiveBanner from "@Services/venatus/ResponsiveBanner"
-import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
 import { Routes } from "@Utils/lookups/routes"
-import { GetStaticProps } from "next"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import styled from "styled-components"
 
 const CHANNELS_PER_PAGE = 10
 
-interface Props {
-	channels: Array<IChannel>
-	totalChannels: number
-	numberOfPages: number
-}
-
-const PageOfChannels = ({ channels, totalChannels, numberOfPages }: Props) => {
+const PageOfChannels = () => {
 	const { width } = useViewportDimensions()
 	const {
 		isFallback,
@@ -28,13 +21,21 @@ const PageOfChannels = ({ channels, totalChannels, numberOfPages }: Props) => {
 	} = useRouter()
 	if (isFallback) return <FallbackPage />
 
+	const { data: channels } = trpc.useQuery([
+		"channels/top",
+		{ take: 10, skip: (Number(pageNumber) - 1) * CHANNELS_PER_PAGE }
+	])
+
+	const { data: totalChannels = 0 } = trpc.useQuery(["channels/countAll"])
+	const numberOfPages = Math.ceil(totalChannels / CHANNELS_PER_PAGE)
+
 	const page = Number(pageNumber)
 
-	if (channels.length === 0 || isNaN(page)) {
+	if ((channels && channels.length === 0) || isNaN(page)) {
 		return (
 			<AdPageWrapper title={`Channels - Page ${page} | kittr`} description="Full channels of channels on kittr.">
 				<H1>CHANNELS</H1>
-				<ChannelSearch />
+				{/* <ChannelSearch /> */}
 				<Paragraph>Oops, doesn't look like there's anyone here.</Paragraph>
 				<Link href={Routes.CHANNEL.LIST}>
 					<a
@@ -56,10 +57,10 @@ const PageOfChannels = ({ channels, totalChannels, numberOfPages }: Props) => {
 		<AdPageWrapper title={`Channels - Page ${page} | kittr`} description="Full channels of channels on kittr.">
 			{width < 1200 && <ResponsiveBanner />}
 			<H1>CHANNELS</H1>
-			<ChannelSearch />
+			{/* <ChannelSearch /> */}
 			<Paragraph>Select a channel to view their page with their games and featured kits.</Paragraph>
 			<div style={{ padding: "0 5%" }}>
-				<ChannelList data={channels} itemBackgroundColor={colors.darker} />
+				<ChannelList data={channels || []} itemBackgroundColor={colors.darker} />
 				<Paginator
 					totalResults={totalChannels}
 					currentPageResultStart={(page - 1) * 10 + 1}
@@ -76,7 +77,6 @@ const PageOfChannels = ({ channels, totalChannels, numberOfPages }: Props) => {
 }
 
 export const getStaticPaths = async () => {
-	await connectToDatabase()
 	const paths = [1, 2, 3].map((elem) => ({
 		params: {
 			pageNumber: String(elem)
@@ -89,19 +89,17 @@ export const getStaticPaths = async () => {
 	}
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }: any) => {
-	await connectToDatabase()
+export const getStaticProps = async ({ params }: { params: { pageNumber: string } }) => {
+	const ssg = await createSSGHelper()
 
-	const [totalChannels, channels] = await Promise.all([
-		totalChannelsQuery(),
-		getChannelsQuery({ limit: 10, skip: (Number(params.pageNumber) - 1) * CHANNELS_PER_PAGE })
-	])
+	const skip = (Number(params.pageNumber) - 1) * CHANNELS_PER_PAGE
+
+	await ssg.fetchQuery("channels/top", { take: CHANNELS_PER_PAGE, skip })
+	await ssg.fetchQuery("channels/countAll")
 
 	return {
 		props: {
-			channels,
-			totalChannels,
-			numberOfPages: Math.ceil(totalChannels / CHANNELS_PER_PAGE)
+			trpcState: ssg.dehydrate()
 		},
 		revalidate: 60
 	}

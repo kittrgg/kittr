@@ -1,0 +1,20 @@
+{
+  "name": "warzone/katana.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699443,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "973b4d69-2fe6-45f9-9226-4f7d79c96630"
+  ],
+  "etag": "Orw7hhrhnnOmJ8Tgt6BuYr1B2Uc",
+  "timeCreated": "2022-05-21T17:04:59.443Z",
+  "updated": "2022-05-21T17:04:59.443Z",
+  "size": 4843,
+  "md5Hash": "Rt9iQ7xgz/ZYc3WA4iJ+yA==",
+  "crc32c": "3188112430"
+}

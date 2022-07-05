@@ -4,7 +4,8 @@ import { getDownloadURL, ref } from "firebase/storage"
 /** Return the path to the Firebase document. */
 export const download = async (fileName: string, handler?: (...args: any) => any) => {
 	try {
-		const path = await getDownloadURL(ref(storage, fileName))
+		const storageRef = ref(storage, fileName)
+		const path = await getDownloadURL(storageRef)
 
 		if (path && handler) return handler(path)
 		if (path) return path

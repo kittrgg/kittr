@@ -1,17 +1,19 @@
-import { useState, useEffect, Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import styled, { ThemeProvider } from "styled-components"
 
+import { OverlayKit } from "@kittr/types"
+import { InferQueryOutput } from "@Server/index"
+import { header1, header2, montserrat, paragraph } from "@Styles/typography"
+import { asyncDelay } from "@Utils/helpers/asyncDelay"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
-import { asyncDelay } from "@Utils/helpers/asyncDelay"
-import { header1, header2, montserrat, paragraph } from "@Styles/typography"
 
 interface Props {
 	_id: string
 	previewWidth?: number
-	data: any
-	activeKit: IKit
-	setActiveKit: Dispatch<SetStateAction<IKit>>
+	data?: InferQueryOutput<"channels/overlay/get">
+	activeKit: OverlayKit
+	setActiveKit: Dispatch<SetStateAction<OverlayKit>>
 }
 
 const DATA_SWITCH_TIMER = 5000
@@ -65,15 +67,15 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 		const switchKit = async () => {
 			if (hasAnActiveKit) {
 				if (cursor === 0) {
-					const kitCount = [data.primaryKit, data.secondaryKit].filter(
+					const kitCount = [data?.primaryKit, data?.secondaryKit].filter(
 						(kit) => !!kit && Object.keys(kit).length > 0
 					).length
 
 					if (kitCount > 1) {
-						if (activeKit._id === data.primaryKit._id) {
-							setActiveKit(data.secondaryKit)
+						if (activeKit.id === data?.primaryKit?.id) {
+							setActiveKit(data?.secondaryKit as OverlayKit)
 						} else {
-							setActiveKit(data.primaryKit)
+							setActiveKit(data?.primaryKit as OverlayKit)
 						}
 					}
 				}
@@ -105,7 +107,7 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 
 	const hasAKitSelected =
 		Object.keys(data.primaryKit || {}).length > 0 || Object.keys(data.secondaryKit || {}).length > 0
-	const isRendered = data.isOverlayVisible === "on" && hasAKitSelected
+	const isRendered = data.isOverlayVisible && hasAKitSelected
 	const isOverlayVisible = !!previewWidth || isRendered
 
 	return (
@@ -122,7 +124,7 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 						{activeKit?.base?.displayName}
 					</BaseName>
 					<CommandInfo isVisible={isBaseVisible} fadeDuration={OPACITY_DURATION}>
-						!{activeKit?.base?.commandCodes[0]}
+						!{activeKit?.base?.commandCodes[0].code}
 					</CommandInfo>
 				</Meta>
 				<OptionWrapper isVisible={isOptionVisible} fadeDuration={OPACITY_DURATION}>

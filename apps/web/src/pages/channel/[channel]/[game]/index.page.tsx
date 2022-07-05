@@ -1,44 +1,30 @@
-import { GetStaticProps } from "next"
 import { useRouter } from "next/router"
-
-import { connectToDatabase } from "@Utils/helpers/connectToDatabase"
-import { Channel, Game, KitStat } from "@Services/mongodb/models"
-import { gameByUrlSafeNameQuery, getChannelProfileQuery } from "@Services/mongodb"
-import WarzoneProfile from "@Features/WarzoneProfile"
-import { NoItemFound, Head } from "@Components/shared"
 import FallbackPage from "@Components/layouts/FallbackPage"
+import { Head, NoItemFound } from "@Components/shared"
+import WarzoneProfile from "@Features/WarzoneProfile"
+import { trpc } from "@Server/createHooks"
+import { createSSGHelper } from "@Server/createSSGHelper"
+import {prisma} from '@kittr/prisma'
 
-interface Props {
-	channel: IChannel
-	game: IGame
-	ratioOfChannelsWithBase: IRatioOfChannelsWithBase[]
-	ratioOfChannelsWithBaseFeatured: IRatioOfChannelsWithBaseFeatured[]
-	forSetupComparison: IForSetupComparison[]
-}
+const GamePresentation = () => {
+	const { isFallback, query } = useRouter()
+	const { game: urlGame, channel: urlChannel } = query as { game: string; channel: string }
 
-const GamePresentation = ({
-	channel,
-	game,
-	ratioOfChannelsWithBase,
-	ratioOfChannelsWithBaseFeatured,
-	forSetupComparison
-}: Props) => {
-	const { isFallback } = useRouter()
+	const { data: game } = trpc.useQuery(["games/getByUrlSafeName", urlGame])
+	const { data: channel } = trpc.useQuery(["channels/profile/get", urlChannel])
+
 	if (isFallback) return <FallbackPage />
 
-	if (Object.keys(channel).length === 0) {
+	if (!channel) {
 		return (
 			<>
-				<Head
-					title={`Game Not Found | kittr`}
-					description={`${channel.displayName} doesn't seem to play that game! | kittr`}
-				/>
+				<Head title={`Game Not Found | kittr`} description={`${urlChannel} doesn't seem to play that game! | kittr`} />
 				<NoItemFound type="game" />
 			</>
 		)
 	}
 
-	if (game.urlSafeName === "warzone") {
+	if (game?.urlSafeName === "warzone") {
 		return (
 			<>
 				<Head
@@ -47,11 +33,11 @@ const GamePresentation = ({
 				/>
 				<WarzoneProfile
 					channel={channel}
-					popularityRates={{
-						ratioOfChannelsWithBase,
-						ratioOfChannelsWithBaseFeatured,
-						forSetupComparison
-					}}
+					// popularityRates={{
+					// 	ratioOfChannelsWithBase,
+					// 	ratioOfChannelsWithBaseFeatured,
+					// 	forSetupComparison
+					// }}
 				/>
 			</>
 		)
@@ -59,38 +45,30 @@ const GamePresentation = ({
 
 	return (
 		<>
-			<Head
-				title={`Game Not Found | kittr`}
-				description={`${channel.displayName} doesn't seem to play that game! | kittr`}
-			/>
+			<Head title={`Game Not Found | kittr`} description={`${urlChannel} doesn't seem to play that game! | kittr`} />
 			<NoItemFound type="channel" />
 		</>
 	)
 }
 
 export const getStaticPaths = async () => {
-	await connectToDatabase()
-
-	const games = await Game.find().lean<Array<IGame>>()
-	const leanChannels = await Channel.find({}, ["-kits"], {
-		sort: {
-			viewCount: -1
+	const channels = await prisma.channel.findMany({
+		orderBy: {
+			viewCount: "desc"
 		},
-		limit: 30
-	}).lean<Array<IChannel>>()
-	const channels = leanChannels.map((channel) => ({
-		...channel,
-		_id: channel._id.toString(),
-		createdDate: channel.createdDate.toString(),
-		games: channel.games.map((game: IGame) => ({ ...game, id: game.id.toString() }))
-	}))
+		take: 30,
+		include: {
+			games: true
+		}
+	})
 
+	// I need a mapping of all the games on the top 30 channels
 	const paths = channels.map((channel) => {
 		return channel.games.map((game) => {
 			return {
 				params: {
 					channel: channel.urlSafeName,
-					game: games.find((juego) => juego._id.toString() === game.id.toString())?.urlSafeName
+					game: game.urlSafeName
 				}
 			}
 		})
@@ -102,22 +80,20 @@ export const getStaticPaths = async () => {
 	}
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const { channel: urlSafeName, game } = params as { channel: string; game: string }
-	await connectToDatabase()
+export const getStaticProps = async ({ params }: { params: { channel: string; game: string } }) => {
+	const { channel: urlChannel, game: urlGame } = params
+	const ssg = await createSSGHelper()
 
-	const [gameQuery, channel] = await Promise.all([gameByUrlSafeNameQuery(game), getChannelProfileQuery(urlSafeName)])
+	await ssg.fetchQuery("games/getByUrlSafeName", urlGame)
+	await ssg.fetchQuery("channels/profile/get", urlChannel)
 
-	const kitStats = await KitStat.find()
-	const { ratioOfChannelsWithBase, ratioOfChannelsWithBaseFeatured, forSetupComparison } = kitStats[0]
+	// TODO: Bring back kit stats!
+	// const kitStats = await KitStat.find()
+	// const { ratioOfChannelsWithBase, ratioOfChannelsWithBaseFeatured, forSetupComparison } = kitStats[0]
 
 	return {
 		props: {
-			channel,
-			game: gameQuery,
-			ratioOfChannelsWithBase,
-			ratioOfChannelsWithBaseFeatured,
-			forSetupComparison
+			trpcState: ssg.dehydrate()
 		},
 		revalidate: 15
 	}

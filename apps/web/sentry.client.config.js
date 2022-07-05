@@ -2,7 +2,7 @@
 // The config you add here will be used whenever the server handles a request.
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
-import * as Sentry from "@sentry/nextjs"
+import * as Sentry from "@kittr/logger/nextjs"
 
 if (process.env.NEXT_PUBLIC_SENTRY_DSN)
 	Sentry.init({
@@ -12,6 +12,14 @@ if (process.env.NEXT_PUBLIC_SENTRY_DSN)
 			: process.env.NEXT_PUBLIC_IS_TESTING
 			? "testing"
 			: process.env.NODE_ENV,
+		allowUrls: ["https://*.kittr.gg", "https://kittr.gg", "http://localhost:3000"],
+		ignoreErrors: [
+			// "Failed to fetch",
+			"Failed to load Stripe.js",
+			"UnknownError: Connection to Indexed Database server lost. Refresh the page to try again",
+			"UnknownError: Error looking up record in object store by key range",
+			"null is not an object (evaluating 't.getBoundingClientRect')"
+		],
 		// Adjust this value in production, or use tracesSampler for greater control
 		tracesSampleRate: 1.0
 		// ...

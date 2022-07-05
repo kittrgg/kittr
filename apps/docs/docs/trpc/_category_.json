@@ -1,0 +1,8 @@
+{
+	"label": "tRPC or Bust",
+	"position": 1,
+	"link": {
+		"type": "generated-index",
+		"description": "tRPC is a typesafe end-to-end API solution."
+	}
+}

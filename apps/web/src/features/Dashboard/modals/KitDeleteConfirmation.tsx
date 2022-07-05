@@ -1,36 +1,30 @@
 import styled from "styled-components"
 
-import { header2 } from "@Styles/typography"
-import { getToken } from "@Services/firebase/auth/getToken"
-import { useSelector, useDispatch } from "@Redux/store"
+import { Button, Modal, Spinner } from "@Components/shared"
+import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { clearKitEditor, setModal } from "@Redux/slices/dashboard"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
-import { Modal, Button, Spinner } from "@Components/shared"
-import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
-import fetch from "@Fetch"
+import { useDispatch, useSelector } from "@Redux/store"
+import { header2 } from "@Styles/typography"
 
 const KitDeleteConfirmation = () => {
-	const { _id } = useChannelData()
+	const { data: channelData } = useChannelData()
 	const data = useSelector((state) => state.dashboard.modal.data)
 	const dispatch = useDispatch()
-	const { mutate, isLoading } = useDashboardMutator(async () => {
-		try {
-			const result = await fetch.delete({
-				url: `/api/channel/kit`,
-				headers: { authorization: `Bearer: ${await getToken()}` },
-				body: { channelId: _id, kitId }
-			})
-
-			if (result) {
+	const { mutate, isLoading } = useDashboardMutator({
+		path: "channels/kits/delete",
+		opts: {
+			onSuccess: () => {
 				dispatch(setModal({ type: "", data: {} }))
 				dispatch(clearKitEditor())
+			},
+			onError: () => {
+				dispatch(setModal({ type: "Error Notification", data: {} }))
 			}
-		} catch (error) {
-			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}
 	})
 
-	const { base, _id: kitId } = data
+	const { base, id: kitId } = data
 
 	if (isLoading) {
 		return (
@@ -45,7 +39,12 @@ const KitDeleteConfirmation = () => {
 			<Warning>ARE YOU SURE YOU WANT TO DELETE YOUR {base.displayName} KIT?</Warning>
 			<Flex>
 				<Button design="transparent" text="NO, KEEP IT" onClick={() => dispatch(setModal({ type: "", data: null }))} />
-				<Button design="white" text="YES, REMOVE FROM KITS" onClick={mutate} style={{ marginLeft: "48px" }} />
+				<Button
+					design="white"
+					text="YES, REMOVE FROM KITS"
+					onClick={() => mutate({ channelId: channelData?.id!, kitId })}
+					style={{ marginLeft: "48px" }}
+				/>
 			</Flex>
 		</Modal>
 	)

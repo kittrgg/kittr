@@ -1,0 +1,20 @@
+{
+  "name": "warzone/renetti.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699618,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "cf342e46-5325-4d5e-9dbb-1f0af07fc0a3"
+  ],
+  "etag": "6ossBs+ZG6/tbg0DokF6BIQHNxg",
+  "timeCreated": "2022-05-21T17:04:59.618Z",
+  "updated": "2022-05-21T17:04:59.618Z",
+  "size": 43771,
+  "md5Hash": "1m2p/k1S5tNI0mnzyFYB4g==",
+  "crc32c": "3528001191"
+}

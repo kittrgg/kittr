@@ -5,21 +5,26 @@ import { download } from "@Services/firebase/storage"
 import { H2 } from "./style"
 import { Spinner } from "@Components/shared"
 import { SideScroller } from "@Components/shared"
+import { SetupPhoto } from "@kittr/prisma"
 
-const SetupPhotos = ({ _id, meta }: IChannel) => {
-	const { setupPhotos } = meta
+interface Props {
+	id: string
+	setupPhotos: SetupPhoto[]
+}
+
+const SetupPhotos = ({ id, setupPhotos }: Props) => {
 	const [isLoading, setIsLoading] = useState(true)
 	const [photoPathsArray, setPhotoPathsArray] = useState<Array<string>>([])
 
 	useEffect(() => {
-		// Turn the setupPhotoes from the DB into an array of only the ones that exist
+		// Turn the setupPhotos from the DB into an array of only the ones that exist
 		const setupEntries = Object.entries(setupPhotos || {}).filter((elem) => !!elem[1])
 
 		const fetchImages = async () => {
 			// Fetch only the images that exist
 			const result = await Promise.all(
 				setupEntries.map(async (entry) => {
-					return await download(`${_id}-setup-photo-${entry[0]}`)
+					return await download(`${id}-setup-photo-${entry[0]}`)
 				})
 			)
 
@@ -30,7 +35,7 @@ const SetupPhotos = ({ _id, meta }: IChannel) => {
 		}
 
 		fetchImages()
-	}, [_id, setupPhotos])
+	}, [id, setupPhotos])
 
 	if (isLoading) {
 		return (

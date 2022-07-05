@@ -1,13 +1,15 @@
-import mongoose, { Schema } from "mongoose"
+export { }
 
-const MODEL_NAME = "kitOption"
+// import mongoose, { Schema } from "mongoose"
 
-const schema = new Schema({
-	gameId: String,
-	displayName: String,
-	slotKey: String
-})
+// const MODEL_NAME = "kitOption"
 
-const Model = mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema)
+// const schema = new Schema({
+// 	gameId: String,
+// 	displayName: String,
+// 	slotKey: String
+// })
 
-export default Model
+// const Model = mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema)
+
+// export default Model

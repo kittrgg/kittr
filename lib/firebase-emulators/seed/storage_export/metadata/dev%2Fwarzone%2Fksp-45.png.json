@@ -1,0 +1,20 @@
+{
+  "name": "warzone/ksp-45.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699478,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "4093b89b-13a9-4666-b2d8-d9019d4d4060"
+  ],
+  "etag": "UH9vSNYm4EBqjZAV21mcssdGEWY",
+  "timeCreated": "2022-05-21T17:04:59.478Z",
+  "updated": "2022-05-21T17:04:59.478Z",
+  "size": 56605,
+  "md5Hash": "/eAUG8czQNJvxTUUvPn6qA==",
+  "crc32c": "3366068372"
+}

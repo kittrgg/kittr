@@ -21,25 +21,25 @@ interface Props {
 const Channel = ({ containerRef }: Props) => {
 	const socket = useSocket()
 	const dispatch = useDispatch()
-	const _id = useSelector((state) => state.dashboard.activeView.channelId)
+	const id = useSelector((state) => state.dashboard.activeView.channelId)
 	const { view } = useChannelView()
 	const user = useUser()
 	const { data, isLoading, refetch } = useDashboardChannel()
 
 	useEffect(() => {
-		socket.on(`dashboard=${_id}`, () => refetch())
+		socket.on(`dashboard=${id}`, () => refetch())
 
-		socket.on(`gameDelete=${_id}`, () => {
+		socket.on(`gameDelete=${id}`, () => {
 			dispatch(setChannelView({ gameId: "", view: "Channel Settings" }))
 			refetch()
 		})
 
-		socket.on(`channelDelete=${_id}`, () => {
+		socket.on(`channelDelete=${id}`, () => {
 			dispatch(setActiveView({ channelId: "", view: "Channel List" }))
 			dispatch(setChannelView({ gameId: "", view: "Channel Settings" }))
 		})
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [_id, dispatch, user?.uid, socket])
+	}, [id, dispatch, user?.uid, socket])
 
 	if (isLoading) {
 		return <Spinner width="100%" height="100px" dataCy="loading-channel" />

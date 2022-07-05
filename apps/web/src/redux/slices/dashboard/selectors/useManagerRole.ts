@@ -6,7 +6,7 @@ export const useManagerRole = () => {
 	const { data } = useDashboardChannel()
 	const user = useUser()
 
-	const manager = data?.managers?.find((manager) => manager.uid === user?.uid) || { uid: "", role: "" }
+	const manager = data?.managers?.find((manager) => manager.firebaseId === user?.uid) || { uid: "", role: "" }
 
 	return manager.role
 }

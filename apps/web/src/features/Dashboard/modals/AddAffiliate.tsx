@@ -1,38 +1,57 @@
-import validator from "validator"
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 import styled from "styled-components"
+import validator from "validator"
 
 import colors from "@Colors"
-import { paragraph } from "@Styles/typography"
-import { useDispatch } from "@Redux/store"
-import { Modal, TextInputBox, Button, Spinner } from "@Components/shared"
-import { getToken } from "@Services/firebase/auth/getToken"
-import { setModal } from "@Redux/slices/dashboard"
-import { useModal, useChannelData } from "@Redux/slices/dashboard/selectors"
+import { Button, Modal, Spinner, TextInputBox } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
-import fetch from "@Fetch"
+import { setModal } from "@Redux/slices/dashboard"
+import { useChannelData, useModal } from "@Redux/slices/dashboard/selectors"
+import { useDispatch } from "@Redux/store"
+import { paragraph } from "@Styles/typography"
 
 /** Modal for adding a spec to the channel's PC setup. */
-const AddSpecModal = ({ ...props }) => {
+const AddAffiliateModal = ({ ...props }) => {
 	const dispatch = useDispatch()
-	const { _id } = useChannelData()
+	const { data: channelData } = useChannelData()
 	const { data } = useModal()
 
 	const [company, setCompany] = useState(data?.company || "")
 	const [description, setDescription] = useState(data?.description || "")
 	const [code, setCode] = useState(data?.code || "")
-	const [link, setLink] = useState(data?.link || "")
-	const { mutate, isLoading, error } = useDashboardMutator(async () => {
-		const result = await fetch.post({
-			url: `/api/channel/meta/affiliate`,
-			headers: { authorization: `Bearer ${await getToken()}` },
-			body: { _id, company, description, code, link }
-		})
+	const [url, setUrl] = useState(data?.url || "")
 
-		if (result) {
-			dispatch(setModal({ type: "", data: "" }))
+	const { mutate: createAffiliate, isLoading: isCreatingAffiliate } = useDashboardMutator({
+		path: "channels/profile/affiliates/create",
+		opts: {
+			onSuccess: () => {
+				dispatch(setModal({ type: "", data: "" }))
+			},
+			onError: () => {
+				dispatch(setModal({ type: "Error Notification", data: "" }))
+			}
 		}
 	})
+
+	const { mutate: updateAffiliate, isLoading: isUpdatingAffiliate } = useDashboardMutator({
+		path: "channels/profile/affiliates/update",
+		opts: {
+			onSuccess: () => {
+				dispatch(setModal({ type: "", data: "" }))
+			},
+			onError: () => {
+				dispatch(setModal({ type: "Error Notification", data: "" }))
+			}
+		}
+	})
+
+	const submit = () => {
+		if (data?.id) {
+			updateAffiliate({ channelId: channelData?.id!, data: { id: data?.id!, company, description, code, url } })
+		} else {
+			createAffiliate({ channelId: channelData?.id!, data: { company, description, code, url } })
+		}
+	}
 
 	useEffect(() => {
 		if (data?.company) {
@@ -41,11 +60,7 @@ const AddSpecModal = ({ ...props }) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
-	if (error) {
-		dispatch(setModal({ type: "Error Notification", data: "" }))
-	}
-
-	if (isLoading) return <Spinner width="24px" />
+	if (isCreatingAffiliate || isUpdatingAffiliate) return <Spinner width="24px" />
 
 	return (
 		<Modal backgroundClickToClose title="ADD AFFILIATE">
@@ -87,8 +102,8 @@ const AddSpecModal = ({ ...props }) => {
 				<Optional>Optional</Optional>
 			</InputLabel>
 			<TextInputBox
-				value={link}
-				onChange={(e) => setLink(e.target.value)}
+				value={url}
+				onChange={(e) => setUrl(e.target.value)}
 				name="link"
 				type="text"
 				inputStyles={{ marginLeft: "0", width: "100%", minWidth: "700px" }}
@@ -97,10 +112,8 @@ const AddSpecModal = ({ ...props }) => {
 			<Button
 				data-cy="confirm-add-affiliate"
 				design="white"
-				onClick={mutate}
-				disabled={
-					!company || ![description, code].some((elem) => elem.length) || (link ? !validator.isURL(link) : false)
-				}
+				onClick={submit}
+				disabled={!company || ![description, code].some((elem) => elem.length) || (url ? !validator.isURL(url) : false)}
 				text="SAVE"
 				style={{ margin: "84px auto 0" }}
 			/>
@@ -108,7 +121,7 @@ const AddSpecModal = ({ ...props }) => {
 	)
 }
 
-export default AddSpecModal
+export default AddAffiliateModal
 
 // Styled Components
 

@@ -1,12 +1,13 @@
 import styled from "styled-components"
 
+import { ITwitchScheduleSegment } from "@kittr/types"
 import colors from "@Colors"
 import { SideScroller } from "@Components/shared"
 import { header1, header2, paragraph } from "@Styles/typography"
-import { format } from "date-fns"
+import { format, getMilliseconds } from "date-fns"
 
 interface Props {
-	schedule: ITwitchScheduleSegment[]
+	schedule?: ITwitchScheduleSegment[]
 	brandColor: string
 }
 
@@ -14,11 +15,11 @@ const MobileSchedule = ({ schedule, brandColor }: Props) => {
 	return (
 		<section id="schedule">
 			<SideScroller childMargin="24px" wrapperStyles={{ width: "100vw" }}>
-				{schedule.map((channel) => {
+				{schedule?.map((channel) => {
 					const { category, start_time, end_time, title } = channel
 
 					return (
-						<Item brandColor={brandColor} key={start_time}>
+						<Item brandColor={brandColor} key={getMilliseconds(start_time)}>
 							<StartDate>{format(new Date(start_time), "MM/dd/yyyy")}</StartDate>
 							{category?.name && <Category>{category?.name || "No Category"}</Category>}
 							{title && <Title>{title || "Untitled Channel"}</Title>}

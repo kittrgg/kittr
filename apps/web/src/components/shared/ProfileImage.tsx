@@ -5,8 +5,10 @@ import { useEffect, useState } from "react"
 import styled from "styled-components"
 
 interface Props {
+	/** If user has profile image. */
+	hasProfileImage: boolean
 	/** Path for the image. */
-	imagePath?: string
+	imagePath?: string | null
 	/** The width and height of the image. This image is always a square. */
 	size?: string
 	/** A border color to apply to the image. */
@@ -23,33 +25,58 @@ interface Props {
  *
  * If an image has not been provided, we will render a placeholder.
  */
-export const ProfileImage = ({ imagePath, size = "50px", border, isLive = false, alwaysRefresh }: Props) => {
+export const ProfileImage = ({
+	imagePath,
+	hasProfileImage,
+	size = "50px",
+	border,
+	isLive = false,
+	alwaysRefresh
+}: Props) => {
 	const [path, setPath] = useState("")
 	const [isLoading, setIsLoading] = useState(true)
 	const [errored, setErrored] = useState(false)
 	const isMounted = useIsMounted()
-	const isDevelopment = process.env.NEXT_PUBLIC_ENVIRONMENT === "development"
 
 	useEffect(() => {
-		if (imagePath && !isDevelopment) {
+		// This is for dev!
+		if (process.env.NEXT_PUBLIC_IS_DEV && !hasProfileImage) {
+			setErrored(true)
+			return setIsLoading(false)
+		}
+
+		// This is for prod!
+		if (!hasProfileImage) {
+			setErrored(true)
+			return setIsLoading(false)
+		}
+
+		if (imagePath) {
 			const fetchImage = async () => {
 				try {
 					const uri = await download(imagePath)
 
-					if (uri && isMounted) {
+					if (uri && isMounted()) {
 						setPath(uri)
+						setErrored(false)
+						setIsLoading(false)
+					}
+
+					if (!uri) {
+						setErrored(true)
 						setIsLoading(false)
 					}
 				} catch (err) {
 					setErrored(true)
+					setIsLoading(false)
 				}
 			}
 
 			fetchImage()
 		}
-	}, [imagePath, isMounted, isDevelopment])
+	}, [imagePath, isMounted, hasProfileImage])
 
-	if (!imagePath || errored || isDevelopment) {
+	if (!imagePath || errored) {
 		return (
 			<Wrapper imageSize={size}>
 				<ImageContainer data-cy="profile-image" imageSize={size}>
@@ -111,6 +138,10 @@ const ImageContainer = styled.div<{ imageSize: string | undefined }>`
 	height: ${(props) => (props.imageSize ? props.imageSize : "125px")};
 	border-radius: 100%;
 	overflow: hidden;
+
+	& > img {
+		vertical-align: baseline;
+	}
 
 	& > img:-moz-loading {
 		visibility: hidden;

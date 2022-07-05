@@ -1,5 +1,7 @@
 import colors from "@Colors"
+import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
 import SVG from "@Components/shared/SVG"
+import { WarzoneKit, WarzoneKitBase, WarzoneKitBaseCategory, WarzoneKitOption } from "@kittr/prisma"
 import { setActiveWeapon } from "@Redux/slices/displayr"
 import { useDispatch } from "@Redux/store"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
@@ -8,16 +10,20 @@ import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
 import { useRouter } from "next/router"
 import { Fragment } from "react"
 import styled from "styled-components"
-import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
 
 interface Props {
-	kit: IKit
+	kit: WarzoneKit & {
+		options: WarzoneKitOption[]
+		base: WarzoneKitBase & {
+			category: WarzoneKitBaseCategory
+		}
+	}
 	containerStyles?: any
 }
 
 const Card = ({ kit, containerStyles }: Props) => {
 	const dispatch = useDispatch()
-	const { options, userData, base } = kit
+	const { featured, base, options } = kit
 	const router = useRouter()
 	const { channel, game } = router.query
 
@@ -33,15 +39,13 @@ const Card = ({ kit, containerStyles }: Props) => {
 			data-cy={`placeholder-button`}
 		>
 			<HeaderContainer>
-				{userData.featured && (
-					<SVG.Star width="10px" fill={colors.gold} stroke={colors.gold} style={{ marginRight: "8px" }} />
-				)}
+				{featured && <SVG.Star width="10px" fill={colors.gold} stroke={colors.gold} style={{ marginRight: "8px" }} />}
 				{base.displayName.toUpperCase()}
 			</HeaderContainer>
 
 			<ImageContainer>
 				<FirebaseStorageResolver
-					path={base.image}
+					path={base.imageUrl}
 					noSpinner
 					render={(data) => (
 						<img

@@ -1,40 +1,48 @@
+import { NextServerPayload } from "@kittr/types/types"
 import type { NextApiRequest, NextApiResponse } from "next"
 import { createHandler } from "@Utils/middlewares/createHandler"
 import { userAuth } from "@Utils/middlewares/auth"
-import mongoose from "mongoose"
-import Channel, { ChannelModel } from "@Services/mongodb/models/Channel"
-import { sanitize } from "@Services/mongodb/utils/sanitize"
+import { prisma, ChannelManager } from "@kittr/prisma"
 
 const handler = createHandler(userAuth)
 
-// Demote a manager in a channel
-handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelModel>>) => {
-	const { uid, channelId, token } = JSON.parse(req.body)
+// Promote a manager in a channel
+handler.put(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<ChannelManager>>) => {
+	const { managerIdToUpdate, channelId, token } = JSON.parse(req.body)
 
 	try {
-		const result = await Channel.find({ _id: new mongoose.Types.ObjectId(channelId) }).lean()
-		const userRole = result[0].managers.find((manager: IManager) => manager.uid === token.uid)?.role
-
-		if (userRole === "Owner") {
-			const result = await Channel.findOneAndUpdate(
-				{
-					"_id": new mongoose.Types.ObjectId(channelId),
-					"managers.uid": { $eq: sanitize(uid) }
-				},
-				{ $set: { "managers.$": { uid: sanitize(uid), role: "Editor" } } },
-				{ new: true }
-			)
-
-			if (result) {
-				return res.status(200).json(result)
+		// Can this user perform this action?
+		// Check their token for their uid and see if that uid is an owner or admin on this channel
+		const manager = await prisma.channelManager.findFirst({
+			where: {
+				channelId,
+				firebaseId: token.uid,
+				role: "OWNER" || "ADMIN"
 			}
-		} else {
+		})
+
+		if (!manager) {
 			return res
-				.status(403)
-				.json({ error: true, errorMessage: "You do not have permission to demote another manager." })
+				.status(404)
+				.json({ error: true, errorMessage: "You do not have permission to perform this action on this channel." })
 		}
+
+		const update = await prisma.channelManager.update({
+			where: {
+				id: managerIdToUpdate
+			},
+			data: {
+				role: "EDITOR"
+			}
+		})
+
+		return res.status(200).json(update)
 	} catch (error) {
-		return res.status(500).json({ error: true, errorMessage: "We messed up. Error Code (1957)" })
+		console.log(error)
+		return res.status(500).json({
+			error: true,
+			errorMessage: "We did something wrong. Error Code 7455"
+		})
 	}
 })
 

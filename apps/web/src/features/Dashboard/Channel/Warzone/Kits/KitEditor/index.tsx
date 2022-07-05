@@ -7,8 +7,8 @@ import { setModal, resetToInitialKit, clearKitEditor } from "@Redux/slices/dashb
 
 import ChooseBase from "./ChooseBase"
 import Featured from "./Featured"
-import YoutubeId from "./YoutubeURL"
-import TiktokId from "./TiktokId"
+import YoutubeId from "./YoutubeUrl"
+import TiktokId from "./TiktokUrl"
 import CustomTitle from "./CustomTitle"
 import Options from "./Options"
 import Blueprint from "./Blueprint"
@@ -19,7 +19,7 @@ import QuickCommandExport from "../../../../modals/ExportBotCommands/QuickComman
 import { useModal } from "@Redux/slices/dashboard/selectors"
 
 /** The Kit Editor. Where the magic happens. */
-const KitEditor = ({ ...props }) => {
+const KitEditor = () => {
 	const dispatch = useDispatch()
 	const activeKit = useActiveKit()
 	const modal = useModal()
@@ -44,7 +44,7 @@ const KitEditor = ({ ...props }) => {
 			<Styled.Wrapper ref={scrollRef}>
 				<Styled.HorizFlex>
 					<Styled.Header style={{ marginBottom: "12px" }}>KIT EDITOR</Styled.Header>
-					{activeKit.base?._id && (
+					{activeKit.base?.id && (
 						<SVG.TrashCan
 							style={{ width: "20px", marginRight: "24px", cursor: "pointer" }}
 							onClick={() => {

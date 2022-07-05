@@ -3,9 +3,9 @@ import styled from "styled-components"
 import colors from "@Colors"
 import PremiumCallout from "@Features/Dashboard/PremiumCallout"
 import SubscriptionSettings from "@Features/Dashboard/Channel/ChannelSettings/SubscriptionSettings"
-import { useManagerRole, useModal, usePremiumStatus, useChannelData } from "@Redux/slices/dashboard/selectors"
+import { useManagerRole, useModal, usePremiumStatus } from "@Redux/slices/dashboard/selectors"
+import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { header1 } from "@Styles/typography"
-import BuyHomeChannelBoostr from "../../../Promo/BuyHomeChannelBoostr"
 import AddAffiliate from "../../modals/AddAffiliate"
 import AddSpec from "../../modals/AddSpec"
 import PremiumSignUp from "../../modals/PremiumSignUp"
@@ -23,20 +23,21 @@ import ThemeColor from "./ThemeColor"
 import YouTubeAutoplayEditor from "./YouTubeAutoplayEditor"
 
 const ChannelSettings = ({ ...props }) => {
-	const { displayName } = useChannelData()
+	const { isLoading, data } = useDashboardChannel()
 	const role = useManagerRole()
 	const modal = useModal()
 	const { isPremium } = usePremiumStatus()
 
+	if (isLoading) return <div>Loading...</div>
+
 	return (
 		<>
-			{modal.type === "Buy Home Channel Boostr" && <BuyHomeChannelBoostr />}
 			{modal.type === "Premium Sign Up" && <PremiumSignUp />}
 			{modal.type === "Add Spec" && <AddSpec />}
 			{modal.type === "Add Affiliate" && <AddAffiliate />}
-			<Header>{displayName}'s SETTINGS</Header>
+			<Header>{data?.displayName}'s SETTINGS</Header>
 			<Grid>
-				{!isPremium && role !== "Editor" && (
+				{!isPremium && role !== "EDITOR" && (
 					<GridItem>
 						<GridTitle>SUBSCRIPTION SETTINGS</GridTitle>
 						<SubscriptionSettings />
@@ -44,19 +45,19 @@ const ChannelSettings = ({ ...props }) => {
 				)}
 				<GridItem>
 					<GridTitle>ACCOUNT INFORMATION</GridTitle>
-					{role !== "Editor" && <ImageEditor />}
-					{role !== "Editor" && <DisplayNameEditor />}
+					{role !== "EDITOR" && <ImageEditor />}
+					{role !== "EDITOR" && <DisplayNameEditor />}
 					<AccountManagers />
 				</GridItem>
 				<GridItem>
 					<GridTitle>PROFILE PAGE CUSTOMIZATION</GridTitle>
-					{role === "Editor" && (
+					{role === "EDITOR" && (
 						<p>
 							You are not allowed to change the profile's settings as an Editor. If you think you should be able to, ask
 							the channel Owner or an Administrator for permission.
 						</p>
 					)}
-					{role !== "Editor" && (
+					{role !== "EDITOR" && (
 						<Grid style={{ gap: "60px" }}>
 							{isPremium ? (
 								<>
@@ -73,20 +74,20 @@ const ChannelSettings = ({ ...props }) => {
 							)}
 						</Grid>
 					)}
-					{role !== "Editor" && <LinkEditor />}
-					{role !== "Editor" && <YouTubeAutoplayEditor />}
+					{role !== "EDITOR" && <LinkEditor />}
+					{role !== "EDITOR" && <YouTubeAutoplayEditor />}
 				</GridItem>
 				<GridItem>
 					<GridTitle>OVERLAY CONTROLLER</GridTitle>
 					<Overlays />
 				</GridItem>
-				{isPremium && role !== "Editor" && (
+				{isPremium && role !== "EDITOR" && (
 					<GridItem>
 						<GridTitle>SUBSCRIPTION SETTINGS</GridTitle>
 						<SubscriptionSettings />
 					</GridItem>
 				)}
-				{role === "Owner" && <ChannelDeleter />}
+				{role === "OWNER" && <ChannelDeleter />}
 			</Grid>
 		</>
 	)

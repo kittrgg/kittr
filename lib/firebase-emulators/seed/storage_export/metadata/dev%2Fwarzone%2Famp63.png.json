@@ -1,0 +1,20 @@
+{
+  "name": "warzone/amp63.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699071,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "4d1fff33-ac34-48cd-be67-f54af715e52b"
+  ],
+  "etag": "xCsM0DxIssQU5hVYGy70jc5qXNw",
+  "timeCreated": "2022-05-21T17:04:59.071Z",
+  "updated": "2022-05-21T17:04:59.071Z",
+  "size": 34233,
+  "md5Hash": "KKu3F3HA4rW6+Dwuzmm6qA==",
+  "crc32c": "1287245089"
+}

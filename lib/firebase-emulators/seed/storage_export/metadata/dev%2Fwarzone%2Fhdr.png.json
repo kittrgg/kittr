@@ -1,0 +1,20 @@
+{
+  "name": "warzone/hdr.png",
+  "bucket": "dev",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1653152699419,
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "cacheControl": "public, max-age=3600",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "595c96d4-8fa9-4ed1-95d8-dad6a2be2f48"
+  ],
+  "etag": "131MVzjakwcPn6DRYuGuj6KEdsc",
+  "timeCreated": "2022-05-21T17:04:59.420Z",
+  "updated": "2022-05-21T17:04:59.420Z",
+  "size": 50180,
+  "md5Hash": "0vNEKPedR/BvXDDTbKGYGQ==",
+  "crc32c": "1862296694"
+}

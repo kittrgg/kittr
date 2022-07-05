@@ -1,41 +1,27 @@
-import { Channel } from "@Services/mongodb/models"
 import { grabLoginName } from "./utils/grabLoginName"
 import { getChannelData } from "./endpoints/getChannelData"
 import { getSchedule } from "./endpoints/getSchedule"
 import { getClips } from "./endpoints/getClips"
 import { getRecentVideos } from "./endpoints/getRecentVideos"
+import { ITwitchScheduleSegment, ITwitchClip, ITwitchChannelData, ITwitchVideo } from "@kittr/types"
+import { UnwrapPromise } from "@kittr/prisma"
+
+interface ProfilePageData {
+	channelData: ITwitchChannelData
+	schedule: ITwitchScheduleSegment[]
+	clips: ITwitchClip[]
+	recentVideos: ITwitchVideo[]
+}
 
 /** Get a single channel's information for their profile page. */
-export const profilePageQuery = async (urlSafeName: string) => {
-	const [rawChannel] = await Channel.aggregate<{ twitchUrl: string }>([
-		{
-			$match: {
-				urlSafeName: urlSafeName
-			}
-		},
-		{
-			$project: {
-				twitchUrl: "$meta.links.twitch"
-			}
-		}
-	])
+export const profilePageQuery = async (twitchLink: string) => {
+	let response = {} as ProfilePageData
 
-	if (!rawChannel) return null
-
-	const channelTwitchLogin = grabLoginName(rawChannel.twitchUrl || "")
+	const channelTwitchLogin = grabLoginName(twitchLink || "")
 
 	const [channelData] = await getChannelData(channelTwitchLogin)
 
-	if (!channelData)
-		return {
-			channelMetadata: null,
-			schedule: [],
-			clips: [],
-			recentVideos: [],
-			recentFollowers: []
-		}
-
-	const broadcaster_id = channelData.id
+	const broadcaster_id = channelData?.id
 
 	const [schedule, clips, recentVideos] = await Promise.all([
 		getSchedule(broadcaster_id),
@@ -43,10 +29,12 @@ export const profilePageQuery = async (urlSafeName: string) => {
 		getRecentVideos(broadcaster_id)
 	])
 
-	return {
-		channelData,
-		schedule,
-		clips,
-		recentVideos
-	}
+	response.channelData = channelData
+	response.schedule = schedule
+	response.clips = clips
+	response.recentVideos = recentVideos
+
+	return response
 }
+
+export type ProfilePageQueryReturnType = UnwrapPromise<ReturnType<typeof profilePageQuery>>

@@ -1,34 +1,29 @@
-import { Channel } from "@Services/mongodb/models"
+import { ITwitchLiveChannels } from "@kittr/types/twitch"
 import { headers } from "@Services/twitch/utils/auth"
-import { serializeChannels } from "@Services/mongodb/utils/serializeChannels"
 import { grabLoginName } from "./utils/grabLoginName"
 import fetch from "@Fetch"
+import { LinkProperty } from "@kittr/prisma"
+import { Channel, ChannelLink } from "@kittr/prisma"
+import { getTopChannelsWithLinksQuery } from "@Services/orm/queries/channels"
+
+export interface ChannelWithLinks extends Channel {
+	links: ChannelLink[]
+}
+
+const getTwitchLink = (channel: ChannelWithLinks) =>
+	channel.links.find((link) => link.property === LinkProperty.TWITCH)?.value ?? ""
 
 export const liveChannelsQuery = async () => {
-	const popularChannels = await Channel.aggregate<IChannel>([
-		{
-			$match: {
-				"meta.hasProfileImage": true
-			}
-		},
-		{
-			$sort: {
-				viewCount: -1
-			}
-		},
-		{
-			$limit: 100
-		}
-	])
+	const popularChannels = await getTopChannelsWithLinksQuery({ take: 100 })
 
 	// Create the url for the Twitch API fetch
-	const buildLiveStreamRequest = (channels: IChannel[]): string => {
+	const buildLiveStreamRequest = (channels: ChannelWithLinks[]): string => {
 		try {
 			const requestBase = "https://api.twitch.tv/helix/streams/?user_login="
 
 			// Grab the login names from the channels
 			const channelNames = channels
-				.map((channel) => grabLoginName(channel.meta.links.twitch || ""))
+				.map((channel) => grabLoginName(getTwitchLink(channel)))
 				.filter((str: string | undefined) => str !== undefined)
 
 			// Put together the base and the channel names
@@ -67,11 +62,10 @@ export const liveChannelsQuery = async () => {
 		const data = popularChannels.filter((channel) =>
 			currentlyLiveChannels
 				.map((channel) => channel.user_login)
-				.includes(channel.meta.links.twitch?.substring(channel.meta.links.twitch.lastIndexOf("/") + 1) as string)
+				.includes(getTwitchLink(channel).substring(getTwitchLink(channel).lastIndexOf("/") + 1) as string)
 		)
-		const serialized = await serializeChannels(data)
 
-		return serialized
+		return data
 	} catch (error) {
 		console.error(error)
 		return []

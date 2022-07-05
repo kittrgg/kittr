@@ -1,12 +1,10 @@
 import { Button, GameCard, Modal, Spinner } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
-import { useAllGames } from "@Hooks/api/useAllGames"
+import { useAllGames } from "@Hooks/trpc/useAllGames"
 import { handleTutorialAction, setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch, useSelector } from "@Redux/store"
-import { getToken } from "@Services/firebase/auth/getToken"
 import styled from "styled-components"
-import fetch from "@Fetch"
 
 /** The modal that adds a game to a channel. */
 const AddGameModal = ({ ...props }) => {
@@ -14,16 +12,13 @@ const AddGameModal = ({ ...props }) => {
 	const modal = useModal()
 	const { channelId } = useSelector((state) => state.dashboard.activeView)
 	const channelData = useChannelData()
-	const { isLoading, data } = useAllGames()
-	const { mutate, isLoading: isMutating } = useDashboardMutator<void, NextClientEndpointError, IGame>(async (game) => {
-		try {
-			const result = await fetch.post({
-				url: `/api/channel/game/add`,
-				headers: { authorization: `Bearer: ${await getToken()}` },
-				body: { gameId: game._id, channelId }
-			})
 
-			if (result) {
+	const { isLoading, data } = useAllGames({ include: { genres: true, platforms: true } })
+
+	const { mutate, isLoading: isMutating } = useDashboardMutator({
+		path: "channels/games/add",
+		opts: {
+			onSuccess: () => {
 				dispatch(
 					handleTutorialAction({
 						condition: modal.data?.isTutorial,
@@ -31,9 +26,10 @@ const AddGameModal = ({ ...props }) => {
 						falseState: { type: "", data: {} }
 					})
 				)
+			},
+			onError: () => {
+				dispatch(setModal({ type: "Error Notification", data: "" }))
 			}
-		} catch (err) {
-			dispatch(setModal({ type: "Error Notification", data: "" }))
 		}
 	})
 
@@ -47,7 +43,7 @@ const AddGameModal = ({ ...props }) => {
 		)
 	}
 
-	const gamesToExclude = channelData.games.map((game) => game.id)
+	const gamesToExclude = channelData.data?.games.map((game) => game.id) ?? []
 
 	return (
 		<Modal backgroundClickToClose={false} title="ADD GAME" onUserClose={handleTutorial}>
@@ -66,15 +62,15 @@ const AddGameModal = ({ ...props }) => {
 				{data &&
 					!isMutating &&
 					data
-						.filter((game: IGame) => !gamesToExclude.includes(game._id))
-						.map((game: IGame) => {
+						.filter((game) => !gamesToExclude.includes(game.id))
+						.map((game) => {
 							return (
 								<GameCard
-									key={game._id}
+									key={game.id}
 									{...game}
 									noText
 									onClick={() => {
-										if (game.active) mutate(game)
+										if (game.active) mutate({ gameId: game.id, channelId: channelId })
 									}}
 								/>
 							)

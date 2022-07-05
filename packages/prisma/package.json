@@ -1,0 +1,39 @@
+{
+	"name": "@kittr/prisma",
+	"version": "0.1.1",
+	"private": true,
+	"exports": {
+		".": "./index.ts",
+		"./validator": "./validator/index.ts"
+	},
+	"scripts": {
+		"dev": "prisma db push --accept-data-loss",
+		"clean": "rm -rf .turbo && rm -rf node_modules",
+		"db-deploy": "prisma migrate deploy",
+		"db-migrate": "prisma db push --force-reset",
+		"generate-schemas": "prisma generate",
+		"build": "prisma generate",
+		"db-studio": "prisma studio",
+		"migrate-data": "ts-node ./migration-scripts/index.ts",
+		"seed": "prisma db push --force-reset && ts-node ./migration-scripts/index.ts",
+		"nuke": "ts-node ./migration-scripts/nuke.ts",
+		"db-format": "prisma format"
+	},
+	"devDependencies": {
+		"prisma": "3.13.0",
+		"ts-node": "10.5.0",
+		"tsup": "5.12.0",
+		"typescript": "4.5.5",
+		"zod-prisma": "0.5.4",
+		"@supercharge/promise-pool": "*"
+	},
+	"dependencies": {
+		"@prisma/client": "3.13.0",
+		"mongoose": "6.2.3"
+	},
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"prisma": {
+		"seed": "ts-node ./seed.ts"
+	}
+}
