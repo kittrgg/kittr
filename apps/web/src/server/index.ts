@@ -11,14 +11,16 @@ import { usersRouter } from "./routers/users"
 import { captureException } from '@kittr/logger/node'
 
 export const appRouter = createRouter()
-	.formatError(({ shape, error }) => {
-		captureException({ message: shape.message, error })
+	.formatError(({ shape, error, path, ctx, type, input }) => {
+		console.log({ path, ctx, type, input, shape, error })
+		captureException({ path, ctx, type, input, shape, error })
 		return shape
 	})
 	.transformer(superjson)
 	.query("error", {
 		resolve: () => {
 			throw new TRPCError({ code: "BAD_REQUEST", message: "you stink like eggs" })
+			return "string"
 		}
 	})
 	.merge("games/", gamesRouter)
