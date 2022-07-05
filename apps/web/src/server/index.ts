@@ -8,11 +8,11 @@ import { kitsRouter } from "./routers/kits"
 import { managersRouter } from "./routers/managers"
 import { twitchRouter } from "./routers/twitch"
 import { usersRouter } from "./routers/users"
-import { captureException } from '@kittr/logger/node'
+import { logError } from '@kittr/logger/node'
 
 export const appRouter = createRouter()
 	.formatError(({ shape, error }) => {
-		captureException({ message: shape.message, error })
+		logError(JSON.stringify( { message: shape.message, error } ))
 		return shape
 	})
 	.transformer(superjson)
