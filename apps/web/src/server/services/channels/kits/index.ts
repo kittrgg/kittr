@@ -36,6 +36,17 @@ export const upsertKit = async ({
 		youtubeUrl: kit.youtubeUrl
 	}
 
+	// Remove options from kit when updating so upsert can work correctly
+	if (kit.id) {
+		await prisma.warzoneKit.update({
+			where: { id: kit.id ?? "" },
+			data: {
+				options: {
+					set: []
+				}
+			}
+		})
+	}
 
 	const channel = await prisma.warzoneKit.upsert({
 		where: { id: kit.id ?? "" },
