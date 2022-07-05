@@ -12,7 +12,7 @@ import { logError } from '@kittr/logger/node'
 
 export const appRouter = createRouter()
 	.formatError(({ shape, error }) => {
-		logError(JSON.stringify( { message: shape.message, error } ))
+		logError(JSON.stringify({ message: shape.message, error }))
 		return shape
 	})
 	.transformer(superjson)
