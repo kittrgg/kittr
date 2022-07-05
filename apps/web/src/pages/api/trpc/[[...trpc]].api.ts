@@ -1,5 +1,4 @@
 import * as trpcNext from "@trpc/server/adapters/next"
-import Cors from 'cors'
 import { createContext } from "@Server/context"
 import { appRouter } from "@Server/index"
 import { NextApiRequest, NextApiResponse, NextApiHandler } from "next"
