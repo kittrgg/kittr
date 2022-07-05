@@ -12,7 +12,7 @@
 		"type-check": "tsc --pretty --noEmit"
 	},
 	"dependencies": {
-		"@google-analytics/data": "2.8.0",
+		"@google-analytics/data": "3.0.0",
 		"@kittr/logger": "*",
 		"@kittr/prisma": "*",
 		"eslint-config-custom": "*",
