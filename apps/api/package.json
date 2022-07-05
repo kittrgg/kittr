@@ -32,7 +32,7 @@
 		"@types/express": "4.17.13",
 		"@types/jsonwebtoken": "8.5.8",
 		"@types/module-alias": "2.0.1",
-		"@types/node": "17.0.21",
+		"@types/node": "18.0.1",
 		"eslint-config-custom": "*",
 		"kill-port": "1.6.1",
 		"ts-jest": "27.1.3",
