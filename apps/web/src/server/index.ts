@@ -12,7 +12,6 @@ import { captureException } from '@kittr/logger/node'
 
 export const appRouter = createRouter()
 	.formatError(({ shape, error, path, ctx, type, input }) => {
-		console.log({ path, ctx, type, input, shape, error })
 		captureException({ path, ctx, type, input, shape, error })
 		return shape
 	})
