@@ -19,7 +19,6 @@ export const appRouter = createRouter()
 	.query("error", {
 		resolve: () => {
 			throw new TRPCError({ code: "BAD_REQUEST", message: "you stink like eggs" })
-			return "string"
 		}
 	})
 	.merge("games/", gamesRouter)
