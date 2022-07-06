@@ -1,5 +1,4 @@
 import { prisma } from "@kittr/prisma"
-import { captureMessage } from '@sentry/nextjs'
 
 export const listChannels = (managerFirebaseUid: string) => {
 
@@ -16,8 +15,6 @@ export const listChannels = (managerFirebaseUid: string) => {
 			managers: true
 		}
 	})
-
-	captureMessage(`${JSON.stringify(result)} found for firebaseUid: ${managerFirebaseUid}`)
 
 	return result
 }
