@@ -8,11 +8,10 @@ import { kitsRouter } from "./routers/kits"
 import { managersRouter } from "./routers/managers"
 import { twitchRouter } from "./routers/twitch"
 import { usersRouter } from "./routers/users"
-import { captureException } from '@kittr/logger/node'
 
 export const appRouter = createRouter()
 	.formatError(({ shape, error, path, ctx, type, input }) => {
-		captureException({ path, ctx, type, input, shape, error })
+
 		return shape
 	})
 	.transformer(superjson)
