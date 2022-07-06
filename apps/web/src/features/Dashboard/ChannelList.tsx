@@ -4,14 +4,12 @@ import { useUser } from "@Hooks/useUser"
 import { setActiveView, setChannelView, setModal } from "@Redux/slices/dashboard"
 import { useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch, useSelector } from "@Redux/store"
-import { trpc } from "@Server/createHooks"
 import { header1, header2, paragraph } from "@Styles/typography"
 import { capitalizeFirstCharacter } from "@Utils/helpers/capitalizeFirstCharacter"
 import { MutableRefObject, useEffect, useRef } from "react"
 import styled from "styled-components"
 import CreateChannelModal from "./modals/CreateChannel"
 import LogoutButton from "./ProfileButtons"
-import { captureException } from "@sentry/nextjs"
 import { useManagedChannels } from "@Hooks/api/useManagedChannels"
 
 /** List the channels for a user */
@@ -106,7 +104,9 @@ const ChannelList = () => {
 								</FlexRow>
 								<Role>
 									Your role is{" "}
-									{capitalizeFirstCharacter(elem.managers.find((manager) => manager.firebaseId === user?.uid)?.role!)}{" "}
+									{capitalizeFirstCharacter(
+										elem.managers.find((manager) => manager.firebaseId === user?.uid)?.role! ?? ""
+									)}{" "}
 									for this channel.
 								</Role>
 							</ChannelContainer>
