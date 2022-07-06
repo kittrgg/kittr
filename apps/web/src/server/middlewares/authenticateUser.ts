@@ -2,7 +2,6 @@ import { Context } from "@Server/context"
 import { TRPCError } from "@trpc/server"
 import admin from "@Services/firebase/admin"
 import { MiddlewareResult } from "@trpc/server/src/internals/middlewares"
-import { captureException } from "@sentry/node"
 
 type NextFunction<T> = {
 	<T>(): Promise<MiddlewareResult<T>>
@@ -12,7 +11,6 @@ type NextFunction<T> = {
 export const authenticateUser = async ({ ctx, next }: { ctx: Context; next: NextFunction<typeof ctx> }) => {
 
 	if (!ctx.userToken) {
-		captureException("User was not authorized!!!!")
 		throw new TRPCError({
 			code: "UNAUTHORIZED"
 		})
