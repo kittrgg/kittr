@@ -19,7 +19,9 @@ const ChannelProfile = () => {
 	const { query } = useRouter()
 	const { channel: urlChannel } = query as { channel: string }
 
-	const { data: channel } = trpc.useQuery(["channels/profile/get", urlChannel])
+	const { data: channel } = trpc.useQuery(["channels/profile/get", urlChannel], {
+		enabled: !!urlChannel
+	})
 	const twitchLink = channel?.links.find((channel) => channel.property === "TWITCH")?.value!
 	const { data: twitchInfo } = trpc.useQuery(["twitch/profile-page", twitchLink], {
 		enabled: !!twitchLink,

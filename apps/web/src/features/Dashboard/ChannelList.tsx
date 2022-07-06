@@ -11,6 +11,7 @@ import { MutableRefObject, useEffect, useRef } from "react"
 import styled from "styled-components"
 import CreateChannelModal from "./modals/CreateChannel"
 import LogoutButton from "./ProfileButtons"
+import { captureException } from "@sentry/nextjs"
 
 /** List the channels for a user */
 const ChannelList = () => {
@@ -23,7 +24,8 @@ const ChannelList = () => {
 		isFetching: isFetchingChannels,
 		refetch
 	} = trpc.useQuery(["managers/channels/list"], {
-		refetchOnMount: true
+		refetchOnMount: true,
+		onError: (error) => captureException(error)
 	})
 	const user = useUser()
 	const modal = useSelector((state) => state.dashboard.modal)
