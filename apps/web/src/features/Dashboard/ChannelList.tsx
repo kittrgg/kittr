@@ -106,7 +106,9 @@ const ChannelList = () => {
 								</FlexRow>
 								<Role>
 									Your role is{" "}
-									{capitalizeFirstCharacter(elem.managers.find((manager) => manager.firebaseId === user?.uid)?.role!)}{" "}
+									{capitalizeFirstCharacter(
+										elem.managers.find((manager) => manager.firebaseId === user?.uid)?.role! ?? ""
+									)}{" "}
 									for this channel.
 								</Role>
 							</ChannelContainer>
