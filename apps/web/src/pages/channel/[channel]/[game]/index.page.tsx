@@ -4,13 +4,15 @@ import { Head, NoItemFound } from "@Components/shared"
 import WarzoneProfile from "@Features/WarzoneProfile"
 import { trpc } from "@Server/createHooks"
 import { createSSGHelper } from "@Server/createSSGHelper"
-import {prisma} from '@kittr/prisma'
+import { prisma } from "@kittr/prisma"
 
 const GamePresentation = () => {
 	const { isFallback, query } = useRouter()
 	const { game: urlGame, channel: urlChannel } = query as { game: string; channel: string }
 
-	const { data: game } = trpc.useQuery(["games/getByUrlSafeName", urlGame])
+	const { data: game } = trpc.useQuery(["games/getByUrlSafeName", urlGame], {
+		enabled: !!urlGame
+	})
 	const { data: channel } = trpc.useQuery(["channels/profile/get", urlChannel], {
 		enabled: !!urlChannel
 	})
