@@ -11,7 +11,9 @@ const GamePresentation = () => {
 	const { game: urlGame, channel: urlChannel } = query as { game: string; channel: string }
 
 	const { data: game } = trpc.useQuery(["games/getByUrlSafeName", urlGame])
-	const { data: channel } = trpc.useQuery(["channels/profile/get", urlChannel])
+	const { data: channel } = trpc.useQuery(["channels/profile/get", urlChannel], {
+		enabled: !!urlChannel
+	})
 
 	if (isFallback) return <FallbackPage />
 

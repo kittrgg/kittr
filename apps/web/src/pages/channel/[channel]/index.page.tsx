@@ -10,7 +10,9 @@ import { useRouter } from "next/router"
 const ChannelProfilePage = () => {
 	const { isFallback, query } = useRouter()
 	const { channel: urlChannel } = query as { channel: string }
-	const { data: channel } = trpc.useQuery(["channels/profile/get", urlChannel])
+	const { data: channel } = trpc.useQuery(["channels/profile/get", urlChannel], {
+		enabled: !!urlChannel
+	})
 
 	if (isFallback) return <FallbackPage />
 

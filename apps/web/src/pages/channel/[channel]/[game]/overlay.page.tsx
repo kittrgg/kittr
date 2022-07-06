@@ -8,7 +8,9 @@ export const Overlay = () => {
 	const { query } = useRouter()
 	const { channel: urlChannel } = query as { game: string; channel: string }
 
-	const { data: channel } = trpc.useQuery(["channels/profile/get", urlChannel])
+	const { data: channel } = trpc.useQuery(["channels/profile/get", urlChannel], {
+		enabled: !!urlChannel
+	})
 
 	if (channel?.plan?.type === "PREMIUM") {
 		return <KitOverlay id={channel.id} />
