@@ -1,6 +1,8 @@
 import { prisma } from "@kittr/prisma"
+import { captureMessage } from '@sentry/nextjs'
 
 export const listChannels = (managerFirebaseUid: string) => {
+
 	const result = prisma.channel.findMany({
 		where: {
 			managers: {
@@ -14,6 +16,8 @@ export const listChannels = (managerFirebaseUid: string) => {
 			managers: true
 		}
 	})
+
+	captureMessage(`${JSON.stringify(result)} found for firebaseUid: ${managerFirebaseUid}`)
 
 	return result
 }

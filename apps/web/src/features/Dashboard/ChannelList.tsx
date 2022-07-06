@@ -12,6 +12,7 @@ import styled from "styled-components"
 import CreateChannelModal from "./modals/CreateChannel"
 import LogoutButton from "./ProfileButtons"
 import { captureException } from "@sentry/nextjs"
+import { useManagedChannels } from "@Hooks/api/useManagedChannels"
 
 /** List the channels for a user */
 const ChannelList = () => {
@@ -19,14 +20,8 @@ const ChannelList = () => {
 	const modalData = useModal().data
 	const ref = useRef() as MutableRefObject<HTMLButtonElement>
 	const divRef = useRef() as MutableRefObject<HTMLDivElement>
-	const {
-		data: channels,
-		isFetching: isFetchingChannels,
-		refetch
-	} = trpc.useQuery(["managers/channels/list"], {
-		refetchOnMount: true,
-		onError: (error) => captureException(error)
-	})
+	const { data: channels, isFetching: isFetchingChannels, refetch } = useManagedChannels()
+
 	const user = useUser()
 	const modal = useSelector((state) => state.dashboard.modal)
 
