@@ -15,6 +15,12 @@ const moduleExports = {
 	pageExtensions: ["page.tsx", "api.ts"],
 	async redirects() {
 		return [
+			{
+				source: "/:path*",
+				has: [{ type: "host", value: "www.kittr.gg" }],
+				destination: "https://kittr.gg/:path*",
+				permanent: true
+			},
 			// For Venatus
 			{
 				source: "/ads.txt",
