@@ -24,6 +24,6 @@ COPY .gitignore .gitignore
 ENV PORT 3000
 EXPOSE 3000
 
-RUN yarn turbo run build test --scope=web --includeDependencies --no-deps
+RUN yarn turbo run build test --scope=web --include-dependencies --no-deps
 
 CMD ["yarn", "start"]

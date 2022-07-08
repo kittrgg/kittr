@@ -22,7 +22,9 @@ const EditorSnackbar = () => {
 		opts: {
 			onMutate: () => {
 				// Grab the existing kit array and map them to just their titles
-				let kitArr = channelData?.warzoneKits.slice() as Array<Omit<WarzoneKit, "id"> & {id?: string, base: WarzoneKitBase, options: WarzoneKitOption[] }>
+				let kitArr = channelData?.warzoneKits.slice() as Array<
+					Omit<WarzoneKit, "id"> & { id?: string; base: WarzoneKitBase; options: WarzoneKitOption[] }
+				>
 
 				// Grab the new kit's name
 				const newKitName = activeKit.base.displayName + activeKit.customTitle
@@ -109,6 +111,49 @@ const EditorSnackbar = () => {
 	}
 
 	const upsertKit = () => {
+		// Grab the existing kit array and map them to just their titles
+		let kitArr = channelData?.warzoneKits.slice() as Array<
+			Omit<WarzoneKit, "id"> & { id?: string; base: WarzoneKitBase; options: WarzoneKitOption[] }
+		>
+
+		// Grab the new kit's name
+		const newKitName = activeKit.base.displayName + activeKit.customTitle
+
+		// Is this an existing kit being updated?
+		let index = channelData?.warzoneKits.findIndex((kit) => kit.id === activeKit.id) ?? -1 // -1 means there's no kit
+
+		if (!kitArr) {
+			return
+		}
+
+		if (index !== -1) {
+			// Replace the existing kit with its new data
+			kitArr[index] = activeKit
+		} else {
+			// Add the new kit to the array
+			kitArr.push(activeKit)
+		}
+
+		if (
+			kitArr
+				.map((kit) => ({
+					...kit,
+					base:
+						allKitBases?.find((allBase) => {
+							return allBase.id === kit.base.id
+						}) || activeKit.base
+				}))
+				// Map to just the names
+				.map((kit) => {
+					return kit.base.displayName + kit.customTitle
+				})
+
+				// Compare to ensure that there are no dupes
+				.filter((existingKitName) => newKitName === existingKitName).length > 1
+		) {
+			return dispatch(setModal({ type: "Kit Naming Warning", data: {} }))
+		}
+		
 		mutate({
 			channelId: channelData?.id!,
 			kit: {
