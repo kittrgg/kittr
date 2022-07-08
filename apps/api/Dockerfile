@@ -22,4 +22,4 @@ COPY --from=builder /app/out/full/ .
 
 EXPOSE 5000
 
-CMD [ "npx", "ts-node", "apps/api/src/index.ts"  ]
+CMD ["npx", "prisma", "generate", "--shchema=packages/prisma/schema.prisma", "&&", "npx", "ts-node", "apps/api/src/index.ts"  ]
