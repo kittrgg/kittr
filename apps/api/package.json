@@ -16,7 +16,7 @@
 		"tsconfig": "*",
 		"cors": "2.8.5",
 		"cron": "1.8.2",
-		"dotenv": "16.0.0",
+		"dotenv": "16.0.1",
 		"express": "4.17.3",
 		"module-alias": "2.2.2",
 		"socket.io": "4.4.1"
