@@ -6,7 +6,7 @@ import { CronJob } from "cron"
 import express from "express"
 import { createServer } from "http"
 // import { generateKitStats } from "./jobs/createKitStatsAsInterval"
-// import { writeViewCounts } from "./jobs/writeViewCounts"
+import { writeViewCounts } from "./jobs/writeViewCounts"
 
 dotenv.config({
 	path: process.env.NODE_ENV === "production" ? ".env" : ".env.development"
@@ -49,25 +49,26 @@ app.post("/stripe-webhook-reporter", (req, res) => {
 	return res.status(200).json({ success: true })
 })
 
-// if (process.env.NODE_ENV === "production") {
-// const viewCounts = new CronJob(
-// 		// Hourly
-// 		"0 * * * *",
-// 		() => {
-// 			try {
-// 				writeViewCounts()
-// 			} catch (error) {
-// 				console.error(error)
-// 			}
-// 		},
-// 		null,
-// 		true,
-// 		"America/Los_Angeles"
-// 	)
-// 	viewCounts.start()
-// }
+if (process.env.NODE_ENV === "production") {
+	const viewCounts = new CronJob(
+		// Every night at 3 AM
+		"0 3 * * *",
+		() => {
+			try {
+				writeViewCounts()
+			} catch (error) {
+				Logger.captureException(error)
+				console.error(error)
+			}
+		},
+		null,
+		true,
+		"America/Los_Angeles"
+	)
+	viewCounts.start()
+}
 
-// // Every night at 3 AM
+// Every night at 3 AM
 // const kitStats = new CronJob(
 // 	"0 3 * * *",
 // 	() => generateKitStats(),

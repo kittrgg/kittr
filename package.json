@@ -49,9 +49,6 @@
 		"npm": ">=8.0.0",
 		"node": ">=16.0.0"
 	},
-	"dependencies": {
-		"cross-env": "^7.0.3"
-	},
 	"lint-staged": {
 		"apps/**/*.{js,ts,jsx,tsx}": [
 			"eslint --fix ."

@@ -1,7 +1,7 @@
 import colors from "@Colors"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useAllKitBases } from "@Hooks/trpc/useAllKitBases"
-import { KitWithOptionalId } from "@kittr/types/kits"
+import { WarzoneKit, WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
 import { clearKitEditor, resetToInitialKit, setModal } from "@Redux/slices/dashboard"
 import { useActiveKit, useChannelData, useInitialKit, useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
@@ -22,7 +22,7 @@ const EditorSnackbar = () => {
 		opts: {
 			onMutate: () => {
 				// Grab the existing kit array and map them to just their titles
-				let kitArr = channelData?.warzoneKits.slice() as KitWithOptionalId[]
+				let kitArr = channelData?.warzoneKits.slice() as Array<Omit<WarzoneKit, "id"> & {id?: string, base: WarzoneKitBase, options: WarzoneKitOption[] }>
 
 				// Grab the new kit's name
 				const newKitName = activeKit.base.displayName + activeKit.customTitle
@@ -52,7 +52,9 @@ const EditorSnackbar = () => {
 								}) || activeKit.base
 						}))
 						// Map to just the names
-						.map((kit) => kit.base.gameId + kit.base.displayName)
+						.map((kit) => {
+							return kit.base.displayName + kit.customTitle
+						})
 
 						// Compare to ensure that there are no dupes
 						.filter((existingKitName) => newKitName === existingKitName).length > 1
