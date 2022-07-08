@@ -22,4 +22,4 @@ COPY --from=builder /app/out/full/ .
 
 EXPOSE 5000
 
-CMD [ "yarn", "start"  ]
+CMD [ "npx", "ts-node", "apps/api/src/index.ts"  ]
