@@ -16,7 +16,7 @@
 	},
 	"devDependencies": {
 		"@types/jest": "27.4.0",
-		"eslint": "8.10.0",
+		"eslint": "8.19.0",
 		"eslint-config-custom": "*",
 		"jest": "27.5.1",
 		"ts-jest": "27.1.3",
