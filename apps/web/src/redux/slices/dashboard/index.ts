@@ -27,8 +27,8 @@ export const dashboardSlice = createSlice({
 			view: ""
 		},
 		kitEditor: {
-			initialKit: {} as KitWithOptionalId,
-			activeKit: {} as KitWithOptionalId
+			initialKit: {} as Omit<WarzoneKit, "id"> & {id?: string,base: WarzoneKitBase, options: WarzoneKitOption[]},
+			activeKit: {} as Omit<WarzoneKit, "id"> & {id?: string,base: WarzoneKitBase, options: WarzoneKitOption[]},
 		},
 		overlayEditor: {
 			kit: {} as any
