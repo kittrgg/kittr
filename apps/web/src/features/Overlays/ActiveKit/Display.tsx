@@ -19,7 +19,7 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 	const [isDataVisible, setIsDataVisible] = useState(true)
 	const optionsRef = useRef<any>(null)
 
-	const SWAP_TIMER = Object.keys(activeKit).length ? activeKit.options.length * 2 * 1.5 : 0
+	const SWAP_TIMER = (Object.keys(activeKit ?? {}) ?? []).length ? activeKit.options.length * 2 * 1.5 : 0
 	const FADE_DURATION = 0.2
 
 	// Handle two kits at once
@@ -96,7 +96,7 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 						scrollValue={optionsRef.current ? optionsRef.current.scrollHeight - optionsRef.current.clientHeight : 0}
 						fadeDuration={FADE_DURATION}
 					>
-						{Object.keys(activeKit).length > 0 &&
+						{(Object.keys(activeKit ?? {}) ?? []).length > 0 &&
 							customOrderArray<{ slotKey: string; displayName: string }>({
 								sortingArray: warzoneSlotsOrder,
 								keyToSort: "slotKey",

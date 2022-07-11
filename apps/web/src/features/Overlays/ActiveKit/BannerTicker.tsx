@@ -19,7 +19,7 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 	const [isDataVisible, setIsDataVisible] = useState(true)
 	const optionsRef = useRef<any>(null)
 
-	const SCROLL_DURATION = Object.keys(activeKit || {}).length ? activeKit.options.length * 4 : 0
+	const SCROLL_DURATION = ( Object.keys(activeKit || {}) ?? [] ).length ? activeKit.options.length * 4 : 0
 	const FADE_DURATION = 0.2
 
 	// Handle two kits at once

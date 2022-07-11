@@ -26,7 +26,7 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 	const [cursor, setCursor] = useState(0)
 
 	const activeKitOptions =
-		Object.keys(activeKit || {}).length > 0
+		(Object.keys(activeKit ?? {}) ?? []).length > 0
 			? customOrderArray<{ slotKey: string; displayName: string }>({
 					sortingArray: warzoneSlotsOrder,
 					keyToSort: "slotKey",
@@ -34,7 +34,7 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 			  })
 			: []
 
-	const hasAnActiveKit = Object.keys(activeKit || {}).length
+	const hasAnActiveKit = (Object.keys(activeKit ?? {}) ?? []).length
 
 	useEffect(() => {
 		let interval: any = null

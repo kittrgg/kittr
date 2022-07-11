@@ -19,7 +19,7 @@ interface Props {
 const Banner = ({ _id, previewWidth, data, activeKit, setActiveKit }: Props) => {
 	const [isDataVisible, setIsDataVisible] = useState(true)
 
-	const SWAP_TIMER = Object.keys(activeKit || {}).length ? activeKit.options?.length * 3 : 0
+	const SWAP_TIMER = (Object.keys(activeKit ?? {}) ?? []).length ? activeKit.options?.length * 3 : 0
 	const NO_SCROLL_SWAP_TIMER = 8000
 	const OPACITY_TIMER = 2
 
@@ -100,7 +100,7 @@ const Banner = ({ _id, previewWidth, data, activeKit, setActiveKit }: Props) => 
 						opacitySwap={OPACITY_TIMER}
 					>
 						<Options duration={SWAP_TIMER} numOfItems={activeKit?.options?.length || 0}>
-							{Object.keys(activeKit || {}).length > 0 &&
+							{(Object.keys(activeKit ?? {}) ?? []).length > 0 &&
 								customOrderArray<IKitOption>({
 									sortingArray: warzoneSlotsOrder,
 									keyToSort: "slotKey",
