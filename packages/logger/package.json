@@ -15,7 +15,7 @@
 		"type-check": "tsc --pretty --noEmit"
 	},
 	"devDependencies": {
-		"@types/jest": "27.4.0",
+		"@types/jest": "28.1.5",
 		"eslint": "8.10.0",
 		"eslint-config-custom": "*",
 		"jest": "27.5.1",
