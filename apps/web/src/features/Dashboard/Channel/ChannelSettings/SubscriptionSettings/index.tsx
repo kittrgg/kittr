@@ -3,18 +3,15 @@ import styled from "styled-components"
 
 import colors from "@Colors"
 import PremiumPlans from "@Features/Dashboard/modals/PremiumPlan"
-import fetch from "@Fetch"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { setModal } from "@Redux/slices/dashboard"
 import { useModal, usePremiumStatus } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
 import { trpc } from "@Server/createHooks"
-import { getToken } from "@Services/firebase/auth/getToken"
 import { paragraph } from "@Styles/typography"
-import { isFetchError } from "@Utils/helpers/typeGuards"
 import PlanTile from "./PlanTile"
 
-const SubscriptionSettings = ({ ...props }) => {
+const SubscriptionSettings = () => {
 	const dispatch = useDispatch()
 	const modal = useModal()
 	const { isPremium } = usePremiumStatus()
@@ -37,21 +34,22 @@ const SubscriptionSettings = ({ ...props }) => {
 		}
 	)
 
-	const handleUpgrade = async () => {
-		const apiRoute = isPremium ? `/api/payments/managePremium` : `/api/payments/buyPremium`
-
-		const result = await fetch.post<{ url: string }>({
-			url: apiRoute,
-			headers: { authorization: `Bearer ${await getToken()}` },
-			body: { _id: data?.id, displayName: data?.displayName, urlSafeName: data?.urlSafeName }
-		})
-
-		if (isFetchError(result)) {
-			return dispatch(setModal({ type: "Error Notification", data: {} }))
+	const { mutate: buyPremium } = trpc.useMutation("stripe/buy-premium", {
+		onSuccess: (result) => {
+			window.open(result.url as string, "_blank")
+		},
+		onError: () => {
+			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}
-
-		window.open(result.url, "_blank")
-	}
+	})
+	const { mutate: managePremium } = trpc.useMutation("stripe/manage-premium", {
+		onSuccess: (result) => {
+			window.open(result.url as string, "_blank")
+		},
+		onError: () => {
+			dispatch(setModal({ type: "Error Notification", data: {} }))
+		}
+	})
 
 	return (
 		<div>
@@ -81,7 +79,11 @@ const SubscriptionSettings = ({ ...props }) => {
 					buttonStyle="white"
 					buttonText={isPremium ? "MANAGE" : "UPGRADE"}
 					description="Active Kit Overlay, AutoBot, profile customization, and more!"
-					buttonAction={handleUpgrade}
+					buttonAction={() =>
+						isPremium
+							? managePremium({ channelId: data?.id! })
+							: buyPremium({ channelId: data?.id!, displayName: data?.displayName!, urlSafeName: data?.urlSafeName! })
+					}
 					planType="premium"
 				/>
 			</Grid>
@@ -93,7 +95,7 @@ const SubscriptionSettings = ({ ...props }) => {
 						{cardLast4 && <Paragraph style={{ color: colors.lighter }}>Card ending in {cardLast4}</Paragraph>}
 					</HorizFlex>
 					<Paragraph style={{ marginTop: "54px", color: colors.lighter }}>
-						If you’d like to adjust your the tip on your Premium subscription, cancel your current subscription, then
+						If you'd like to adjust your the tip on your Premium subscription, cancel your current subscription, then
 						reinstate it with your desired tip. You will be charged $5 for restarting the subscription, so we recommend
 						waiting until the end of your current subscription to make adjustments.
 					</Paragraph>
