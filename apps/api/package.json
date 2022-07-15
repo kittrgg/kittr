@@ -2,7 +2,7 @@
 	"name": "api",
 	"version": "0.0.0",
 	"scripts": {
-		"start": "ts-node src/index.ts",
+		"start": "npx ts-node src/index.ts",
 		"dev": "nodemon src/index.ts",
 		"lint": "eslint --fix .",
 		"clean": "rm -rf .turbo && rm -rf coverage && rm -rf dist && rm -rf node_modules",
