@@ -8,5 +8,5 @@ export const createHandler = (...middleware: any[]) => {
 			res.statusCode = 500
 			return res.end("Internal Server Error")
 		}
-	}).use(...middleware)
+	})
 }
