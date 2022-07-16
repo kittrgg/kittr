@@ -39,6 +39,7 @@ export const buyPremium = createController()
 
         return session
       } catch (error) {
+        console.log(error)
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: "Error #: 97334"
