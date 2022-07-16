@@ -9,6 +9,7 @@ import { managersRouter } from "./routers/managers"
 import { twitchRouter } from "./routers/twitch"
 import { usersRouter } from "./routers/users"
 import { captureMessage, } from '@kittr/logger/node'
+import { stripeRouter } from "@Server/routers/stripe"
 
 export const appRouter = createRouter()
 	.formatError(({ shape, error, path, ctx, type, input }) => {
@@ -22,6 +23,7 @@ export const appRouter = createRouter()
 	.merge("kits/", kitsRouter)
 	.merge("twitch/", twitchRouter)
 	.merge("admin/", adminRouter)
+	.merge("stripe/", stripeRouter)
 	.merge("users/", usersRouter)
 
 export type AppRouter = typeof appRouter
