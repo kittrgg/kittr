@@ -33,8 +33,8 @@ export const buyPremium = createController()
           ],
           allow_promotion_codes: true,
           metadata: { channelId: input.channelId, displayName: input.displayName, urlSafeName: input.urlSafeName },
-          success_url: `${origin}/premium-success?session_id={CHECKOUT_SESSION_ID}`,
-          cancel_url: `${origin}/back-to-dashboard`
+          success_url: `https://kittr.gg/premium-success?session_id={CHECKOUT_SESSION_ID}`,
+          cancel_url: `https://kittr.gg/back-to-dashboard`
         })
 
         return session
