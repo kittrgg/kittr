@@ -8,7 +8,6 @@ import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { header1 } from "@Styles/typography"
 import AddAffiliate from "../../modals/AddAffiliate"
 import AddSpec from "../../modals/AddSpec"
-import PremiumSignUp from "../../modals/PremiumSignUp"
 import Overlays from "../../premiumFeatures/overlays"
 import AccountManagers from "./AccountManagers"
 import Affiliate from "./Affiliate"
@@ -32,7 +31,6 @@ const ChannelSettings = ({ ...props }) => {
 
 	return (
 		<>
-			{modal.type === "Premium Sign Up" && <PremiumSignUp />}
 			{modal.type === "Add Spec" && <AddSpec />}
 			{modal.type === "Add Affiliate" && <AddAffiliate />}
 			<Header>{data?.displayName}'s SETTINGS</Header>
