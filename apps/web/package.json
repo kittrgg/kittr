@@ -53,15 +53,14 @@
 		"socket.io-client": "4.4.1",
 		"stripe": "8.205.0",
 		"styled-components": "5.3.3",
-		"superjson": "^1.9.1",
+		"superjson": "1.9.1",
 		"tsconfig": "*",
-		"uuid": "8.3.2",
 		"validator": "13.7.0",
-		"zod": "^3.17.3"
+		"zod": "3.17.3"
 	},
 	"devDependencies": {
 		"@types/jsonwebtoken": "8.5.8",
-		"@types/micro": "^7.3.7",
+		"@types/micro": "7.3.7",
 		"@types/react": "17.0.39",
 		"@types/react-select": "5.0.1",
 		"@types/styled-components": "5.1.23",
