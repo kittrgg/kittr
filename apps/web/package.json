@@ -32,7 +32,7 @@
 		"@trpc/server": "9.26.2",
 		"browser-image-compression": "2.0.0",
 		"date-fns": "2.28.0",
-		"firebase": "9.8.1",
+		"firebase": "9.9.0",
 		"firebase-admin": "10.2.0",
 		"firebase-tools": "10.2.1",
 		"jsonwebtoken": "8.5.1",
