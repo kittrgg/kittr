@@ -21,11 +21,9 @@ interface Props {
  *
  * This component is currently only being used on the channel's profile page and may not have much more utility to it than that...
  */
-export const KitList = ({ data, onClick }: Props) => {
-	return (
+export const KitList = ({ data, onClick }: Props) => (
 		<>
-			{data.map((elem) => {
-				return (
+			{data.map((elem) => (
 					<Card key={elem.id} onClick={() => onClick(elem)}>
 						<SVG.Star
 							width="15px"
@@ -52,21 +50,17 @@ export const KitList = ({ data, onClick }: Props) => {
 							</ImageContainer>
 						</div>
 						<Options>
-							{elem.options.map((option) => {
-								return (
+							{elem.options.map((option) => (
 									<OptionItem key={option.id}>
 										<OptionSlot>{option.slotKey} - </OptionSlot>
 										<Option>{option.displayName}</Option>
 									</OptionItem>
-								)
-							})}
+								))}
 						</Options>
 					</Card>
-				)
-			})}
+				))}
 		</>
 	)
-}
 
 export default KitList
 

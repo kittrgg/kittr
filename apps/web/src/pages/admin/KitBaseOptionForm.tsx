@@ -34,7 +34,7 @@ export const KitBaseOptionForm = ({ initialValues, onFinished }: Props) => {
 
 	return (
 		<SubSection
-			title={initialValues?.id ? `Editing Kit Base Option: ${initialValues?.displayName}` : `Creating Kit Base Option`}
+			title={initialValues?.id ? `Editing Kit Base Option: ${initialValues?.displayName}` : "Creating Kit Base Option"}
 			action={
 				<>
 					{initialValues?.id && <Text color="gray">Option ID: {initialValues.id}</Text>}
@@ -85,9 +85,7 @@ export const KitBaseOptionForm = ({ initialValues, onFinished }: Props) => {
 							})
 						} else {
 							if (!formValues.kitBaseId) {
-								console.error(
-									"You must create the kit first before adding options! We need the kitBaseId to associate them! :)"
-								)
+								console.error("You must create the kit first before adding options! We need the kitBaseId to associate them! :)")
 							} else {
 								console.log({ baseId: formValues.kitBaseId, option: formValues })
 								createOption(

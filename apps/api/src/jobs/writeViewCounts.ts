@@ -1,4 +1,4 @@
-import { prisma } from '@kittr/prisma'
+import { prisma } from "@kittr/prisma"
 import { BetaAnalyticsDataClient } from "@google-analytics/data/build/src/v1beta"
 import { StreamerViewCounts } from "@kittr/types"
 
@@ -20,9 +20,7 @@ const analyticsReportSchemas = {
   ]
 }
 
-const getChannelViewCounts = async (
-  dateRange: StreamerViewCounts
-): Promise<Record<string, number>> => {
+const getChannelViewCounts = async (dateRange: StreamerViewCounts): Promise<Record<string, number>> => {
   console.log("Trying to streamer view counts...")
 
   try {
@@ -88,18 +86,14 @@ export const writeViewCounts = async () => {
 
   const bulkWrites = Object.entries(channelData)
   console.log("Starting bulk write...")
-  await prisma.$transaction(
-    bulkWrites.map(([channelUrlSafeName, viewCount]) => {
-      return prisma.channel.update({
+  await prisma.$transaction(bulkWrites.map(([channelUrlSafeName, viewCount]) => prisma.channel.update({
         where: {
           urlSafeName: channelUrlSafeName
         },
         data: {
           viewCount
         }
-      })
-    })
-  )
+      })))
 
   console.log("Bulk write for view counts finished!")
 }

@@ -4,8 +4,8 @@
 	"private": true,
 	"main": "index.js",
 	"files": [
-		"./base.json",
-		"./nextjs.json",
-		"./react-library.json"
+		"base.json",
+		"nextjs.json",
+		"react-library.json"
 	]
 }

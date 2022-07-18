@@ -7,8 +7,7 @@ interface Props {
 }
 
 /** The beautiful hero for the mod landing page. */
-const Hero = ({ totalNumberOfKits }: Props) => {
-	return (
+const Hero = ({ totalNumberOfKits }: Props) => (
 		<Container>
 			<ImageContainer>
 				<img src="/media/hero.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
@@ -21,7 +20,6 @@ const Hero = ({ totalNumberOfKits }: Props) => {
 			</Copy>
 		</Container>
 	)
-}
 
 export default Hero
 

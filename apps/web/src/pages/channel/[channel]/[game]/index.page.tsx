@@ -22,7 +22,7 @@ const GamePresentation = () => {
 	if (!channel) {
 		return (
 			<>
-				<Head title={`Game Not Found | kittr`} description={`${urlChannel} doesn't seem to play that game! | kittr`} />
+				<Head title={"Game Not Found | kittr"} description={`${urlChannel} doesn't seem to play that game! | kittr`} />
 				<NoItemFound type="game" />
 			</>
 		)
@@ -49,7 +49,7 @@ const GamePresentation = () => {
 
 	return (
 		<>
-			<Head title={`Game Not Found | kittr`} description={`${urlChannel} doesn't seem to play that game! | kittr`} />
+			<Head title={"Game Not Found | kittr"} description={`${urlChannel} doesn't seem to play that game! | kittr`} />
 			<NoItemFound type="channel" />
 		</>
 	)
@@ -67,16 +67,12 @@ export const getStaticPaths = async () => {
 	})
 
 	// I need a mapping of all the games on the top 30 channels
-	const paths = channels.map((channel) => {
-		return channel.games.map((game) => {
-			return {
+	const paths = channels.map((channel) => channel.games.map((game) => ({
 				params: {
 					channel: channel.urlSafeName,
 					game: game.urlSafeName
 				}
-			}
-		})
-	})
+			})))
 
 	return {
 		paths: paths.flat(),

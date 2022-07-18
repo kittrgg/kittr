@@ -1,9 +1,6 @@
 name: Deploy Testing Environment and run E2E
 
 on:
-  # pull_request:
-  #   branches:
-  #     - master
   pull_request:
     branches:
       - stage
@@ -32,9 +29,6 @@ jobs:
         env:
           DATABASE_URL: ${{secrets.CI_DATABASE_URL}}
         run: cd packages/prisma && npx prisma migrate deploy
-
-      - name: Run unit tests
-        run: yarn test
 
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v1.3

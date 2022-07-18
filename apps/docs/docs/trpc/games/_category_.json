@@ -1,8 +1,0 @@
-{
-	"label": "Games",
-	"position": 1,
-	"link": {
-		"type": "generated-index",
-		"description": "Games API Definition"
-	}
-}

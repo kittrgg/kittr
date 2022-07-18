@@ -12,7 +12,7 @@ export const buyPremium = createController()
       displayName: z.string(),
       urlSafeName: z.string()
     }),
-    async resolve({ ctx, input }) {
+    async resolve({ input }) {
       try {
         const session = await stripe.checkout.sessions.create({
           mode: "subscription",
@@ -33,12 +33,13 @@ export const buyPremium = createController()
           ],
           allow_promotion_codes: true,
           metadata: { channelId: input.channelId, displayName: input.displayName, urlSafeName: input.urlSafeName },
-          success_url: `${origin}/premium-success?session_id={CHECKOUT_SESSION_ID}`,
-          cancel_url: `${origin}/back-to-dashboard`
+          success_url: `https://kittr.gg/premium-success?session_id={CHECKOUT_SESSION_ID}`,
+          cancel_url: `https://kittr.gg/back-to-dashboard`
         })
 
         return session
       } catch (error) {
+        console.log(error)
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: "Error #: 97334"
@@ -53,7 +54,7 @@ export const managePremium = createController()
     input: z.object({
       channelId: z.string()
     }),
-    async resolve({ ctx, input }) {
+    async resolve({ input }) {
       try {
         const channel = await prisma.channel.findFirst({
           where: {

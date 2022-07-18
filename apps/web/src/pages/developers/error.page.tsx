@@ -9,8 +9,6 @@ const Inner = () => {
 	// return <button>test</button>
 }
 
-const TestErrorBoundary = () => {
-	return <Inner />
-}
+const TestErrorBoundary = () => <Inner />
 
 export default TestErrorBoundary

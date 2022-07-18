@@ -20,8 +20,7 @@ interface Props {
 }
 
 /** Standardized page wrapper for general use. Does not contain ad units. */
-const PageWrapper = ({ title, description, children, pageTitle }: Props) => {
-	return (
+const PageWrapper = ({ title, description, children, pageTitle }: Props) => (
 		<>
 			<Head title={title} description={description} />
 			<AppShell padding={0} header={<Header />}>
@@ -45,6 +44,5 @@ const PageWrapper = ({ title, description, children, pageTitle }: Props) => {
 			</AppShell>
 		</>
 	)
-}
 
 export default PageWrapper

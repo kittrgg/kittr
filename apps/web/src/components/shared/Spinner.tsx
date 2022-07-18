@@ -30,8 +30,7 @@ export const Spinner = ({
 	pathColor = colors.white,
 	style,
 	dataCy
-}: Props) => {
-	return (
+}: Props) => (
 		<div
 			style={{
 				position: "relative",
@@ -73,7 +72,6 @@ export const Spinner = ({
 			</div>
 		</div>
 	)
-}
 
 export default Spinner
 

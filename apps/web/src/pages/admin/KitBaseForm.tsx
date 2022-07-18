@@ -7,12 +7,10 @@ import { useState } from "react"
 import styled from "styled-components"
 import { KitBaseOptionForm } from "./KitBaseOptionForm"
 
-const groupBy = (xs: any, key: string) => {
-	return xs.reduce(function (rv: any, x: any) {
+const groupBy = (xs: any, key: string) => xs.reduce((rv: any, x: any) => {
 		;(rv[x[key]] = rv[x[key]] || []).push(x)
 		return rv
 	}, {})
-}
 
 const Container = styled.div`
 	margin-bottom: 0.5rem;
@@ -156,8 +154,7 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 									title={slotKey}
 									action={
 										<Button
-											onClick={() =>
-												setIsCreatingOption({ slotKey, kitBaseId: formValues?.id, gameId: formValues?.gameId })
+											onClick={() => setIsCreatingOption({ slotKey, kitBaseId: formValues?.id, gameId: formValues?.gameId })
 											}
 										>
 											Add {slotKey}
@@ -220,8 +217,7 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 					<Button
 						variant="filled"
 						color="red"
-						onClick={() =>
-							deleteBase(
+						onClick={() => deleteBase(
 								{ kitBaseId: formValues.id as string },
 								{
 									onSuccess: onFinished

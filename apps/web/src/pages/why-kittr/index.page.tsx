@@ -16,8 +16,7 @@ interface Props {
 	totalNumberOfKits: number
 }
 
-const WhyKittr = ({ totalNumberOfKits }: Props) => {
-	return (
+const WhyKittr = ({ totalNumberOfKits }: Props) => (
 		<>
 			<Head title="Improve Your Channel in 15 Minutes | kittr" description="." />
 			<Hero totalNumberOfKits={totalNumberOfKits} />
@@ -45,7 +44,6 @@ const WhyKittr = ({ totalNumberOfKits }: Props) => {
 			</div>
 		</>
 	)
-}
 
 export default WhyKittr
 

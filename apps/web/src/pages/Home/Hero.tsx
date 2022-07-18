@@ -8,8 +8,7 @@ interface Props {
 }
 
 /** The beautiful opening of the kittr home page. */
-const Hero = ({ totalNumberOfKits }: Props) => {
-	return (
+const Hero = ({ totalNumberOfKits }: Props) => (
 		<Container>
 			<ImageContainer>
 				<img src="/media/hero.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
@@ -28,7 +27,6 @@ const Hero = ({ totalNumberOfKits }: Props) => {
 			</ScreenieContainer>
 		</Container>
 	)
-}
 
 export default Hero
 

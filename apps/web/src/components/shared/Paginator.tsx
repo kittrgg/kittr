@@ -33,8 +33,7 @@ export const Paginator = ({
 	isFirstPage,
 	isLastPage,
 	pageRoot
-}: Props) => {
-	return (
+}: Props) => (
 		<Container>
 			<p style={{ margin: "24px 0" }}>
 				Viewing {currentPageResultStart} - {Math.min(currentPageResultEnd, totalResults)} of {totalResults} results.
@@ -74,7 +73,6 @@ export const Paginator = ({
 			</Navigation>
 		</Container>
 	)
-}
 
 export default Paginator
 
