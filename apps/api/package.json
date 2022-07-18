@@ -13,7 +13,7 @@
 		"@kittr/logger": "*",
 		"@kittr/prisma": "*",
 		"cors": "2.8.5",
-		"cron": "2.0.0",
+		"cron": "2.1.0",
 		"dotenv": "16.0.1",
 		"express": "4.17.3",
 		"socket.io": "4.4.1"
