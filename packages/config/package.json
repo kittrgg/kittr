@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"devDependencies": {
 		"eslint-config-next": "12.2.0",
-		"eslint-config-prettier": "8.3.0",
+		"eslint-config-prettier": "8.5.0",
 		"eslint-plugin-only-warn": "1.0.3",
 		"eslint-plugin-react": "7.28.0"
 	},
