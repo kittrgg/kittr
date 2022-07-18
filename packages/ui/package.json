@@ -24,7 +24,7 @@
 		"react-dom": "17.0.2"
 	},
 	"devDependencies": {
-		"@babel/core": "7.18.5",
+		"@babel/core": "7.18.9",
 		"@react-theming/storybook-addon": "1.1.6",
 		"@storybook/addon-actions": "6.5.9",
 		"@storybook/addon-essentials": "6.5.9",
@@ -33,7 +33,7 @@
 		"@storybook/builder-vite": "0.2.0",
 		"@storybook/react": "6.5.9",
 		"@storybook/testing-library": "0.0.13",
-		"@testing-library/jest-dom": "5.16.2",
+		"@testing-library/jest-dom": "5.16.4",
 		"@testing-library/react": "12.1.5",
 		"@types/react": "17.0.2",
 		"@types/react-dom": "17.0.2",
@@ -41,6 +41,6 @@
 		"babel-loader": "8.2.5",
 		"eslint-config-custom": "*",
 		"typescript": "4.7.4",
-		"vite": "3.0.1"
+		"vite": "3.0.2"
 	}
 }
