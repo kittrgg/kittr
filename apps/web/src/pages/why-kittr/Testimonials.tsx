@@ -50,27 +50,23 @@ const TESTIMONIALS = [
 	}
 ]
 
-const LastSection = () => {
-	return (
+const LastSection = () => (
 		<section>
 			<Styled.H2>TESTIMONIALS</Styled.H2>
 			<Styled.P>STILL { "DON'T" }BELIEVE US? { "HERE'S"} WHAT THE COMMUNITY SAYS.</Styled.P>
 			<Wrapper>
 				<Scrolltainer>
-					{TESTIMONIALS.map(({ name, role, quote }) => {
-						return (
+					{TESTIMONIALS.map(({ name, role, quote }) => (
 							<Item key={name}>
 								<Name>{name}</Name>
 								<Role>{role}</Role>
 								<Quote>{quote}</Quote>
 							</Item>
-						)
-					})}
+						))}
 				</Scrolltainer>
 			</Wrapper>
 		</section>
 	)
-}
 
 export default LastSection
 

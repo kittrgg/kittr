@@ -3,8 +3,7 @@ import Link from "next/link"
 import styled from "styled-components"
 
 /** A logo image with a link wrapper for headers */
-const LogoImage = ({ ...props }) => {
-	return (
+const LogoImage = ({ ...props }) => (
 		<Link href={Routes.ROOT} passHref>
 			<a>
 				<ImageContainer>
@@ -13,7 +12,6 @@ const LogoImage = ({ ...props }) => {
 			</a>
 		</Link>
 	)
-}
 
 export default LogoImage
 

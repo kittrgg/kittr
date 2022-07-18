@@ -39,8 +39,7 @@ export const GameCard = ({
 		<FirebaseStorageResolver
 			path={titleImageUrl}
 			noSpinner
-			render={(img) => {
-				return (
+			render={(img) => (
 					<Container onClick={onClick} active={active} titleImage={img} data-cy={`${urlSafeName}-button`}>
 						{(width as number) > 550 && (
 							<ImageContainer>
@@ -54,22 +53,18 @@ export const GameCard = ({
 								<div>
 									<Paragraph>{developer}</Paragraph>
 									<Paragraph>
-										{genres.map((elem, index) => {
-											return (
+										{genres.map((elem, index) => (
 												<Fragment key={elem.id}>
 													{index === genres.length - 1 ? `${elem.displayName}` : `${elem.displayName}, `}
 												</Fragment>
-											)
-										})}
+											))}
 									</Paragraph>
 									<Paragraph>
-										{platforms.map((elem, index) => {
-											return (
+										{platforms.map((elem, index) => (
 												<Fragment key={elem.id}>
 													{index === platforms.length - 1 ? `${elem.displayName}` : `${elem.displayName}, `}
 												</Fragment>
-											)
-										})}
+											))}
 									</Paragraph>
 									<Paragraph>Released {toHumanReadableDate(releaseDate)}</Paragraph>
 								</div>
@@ -85,8 +80,7 @@ export const GameCard = ({
 							</>
 						)}
 					</Container>
-				)
-			}}
+				)}
 		/>
 	)
 }

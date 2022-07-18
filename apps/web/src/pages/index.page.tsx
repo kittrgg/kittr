@@ -16,7 +16,7 @@ const Home = () => {
 
 	return (
 		<PageWrapper title="Home | kittr" description="Where the pros post their kits. Get kitted.">
-			<Hero totalNumberOfKits={Math.floor( totalNumberOfKits! /1000 ) * 1000} />
+			<Hero totalNumberOfKits={Math.floor(totalNumberOfKits! / 1000) * 1000} />
 			<ResponsiveAdBanner />
 			<Body
 				games={games}

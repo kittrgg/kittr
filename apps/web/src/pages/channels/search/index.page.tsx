@@ -3,8 +3,7 @@ import AdPageWrapper, { H1 } from "@Components/layouts/AdPageWrapper"
 import { ChannelSearch } from "@Components/shared"
 import ResponsiveBanner from "@Services/venatus/ResponsiveBanner"
 
-const ChannelsSearch = ({ ...props }) => {
-	return (
+const ChannelsSearch = ({ ...props }) => (
 		<AdPageWrapper title="Search | kittr" description="Who ya got? | kittr">
 			<ResponsiveBanner />
 			{/* <ChannelSearch /> */}
@@ -12,7 +11,6 @@ const ChannelsSearch = ({ ...props }) => {
 			<Paragraph>Enter a search term.</Paragraph>
 		</AdPageWrapper>
 	)
-}
 
 export default ChannelsSearch
 

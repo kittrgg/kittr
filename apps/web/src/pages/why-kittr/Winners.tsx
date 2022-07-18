@@ -31,13 +31,11 @@ const WINNERS = [
 	}
 ]
 
-const Winners = ({ ...props }) => {
-	return (
+const Winners = ({ ...props }) => (
 		<>
 			<Styled.H2>WHO LOVES KITTR?</Styled.H2>
 			<Grid>
-				{WINNERS.map(({ title, text, icon, iconAlt }) => {
-					return (
+				{WINNERS.map(({ title, text, icon, iconAlt }) => (
 						<GridItem key={title}>
 							<GridItemTopRow>
 								<GridIconContainer>
@@ -47,13 +45,11 @@ const Winners = ({ ...props }) => {
 							</GridItemTopRow>
 							<GridText>{text}</GridText>
 						</GridItem>
-					)
-				})}
+					))}
 			</Grid>
 			<CallToAction marginTop="48px" marginBottom="48px" header="get started with kittr." />
 		</>
 	)
-}
 
 export default Winners
 

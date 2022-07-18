@@ -15,12 +15,10 @@ interface Props {
 }
 
 /** List of all of the games on the platform. This component is only a fragment. Therefore, it needs a container or wrapper around it to be given proper alignment. */
-export const GameList = ({ data, hoverScale = true, onClick, withVisitText }: Props) => {
-	return (
+export const GameList = ({ data, hoverScale = true, onClick, withVisitText }: Props) => (
 		<>
 			{data &&
-				data.map((elem) => {
-					return (
+				data.map((elem) => (
 						<ListItem
 							key={elem.displayName}
 							active={elem.active}
@@ -48,11 +46,9 @@ export const GameList = ({ data, hoverScale = true, onClick, withVisitText }: Pr
 								)}
 							</ImageContainer>
 						</ListItem>
-					)
-				})}
+					))}
 		</>
 	)
-}
 
 export default GameList
 

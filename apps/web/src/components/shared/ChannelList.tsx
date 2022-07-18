@@ -40,12 +40,9 @@ export const ChannelList = ({ data, itemBackgroundColor = colors.darker, gameLin
 							data-cy="channel-list-item"
 							key={elem.displayName}
 							backgroundColor={itemBackgroundColor}
-							onClick={() =>
-								router.push(
-									gameLink
+							onClick={() => router.push(gameLink
 										? Routes.CHANNEL.GAME.createPath(elem.urlSafeName, gameLink)
-										: Routes.CHANNEL.createPath(elem.urlSafeName)
-								)
+										: Routes.CHANNEL.createPath(elem.urlSafeName))
 							}
 						>
 							<Identity data-cy={`${elem.urlSafeName}-profile-link`}>

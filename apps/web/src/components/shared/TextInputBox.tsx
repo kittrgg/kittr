@@ -39,8 +39,7 @@ export const TextInputBox = ({
 	onChange,
 	onFocus,
 	onBlur
-}: Props) => {
-	return (
+}: Props) => (
 		<>
 			<Input
 				width={width}
@@ -57,7 +56,6 @@ export const TextInputBox = ({
 			{subline && <Subline style={sublineStyles}>{subline}</Subline>}
 		</>
 	)
-}
 
 export default TextInputBox
 

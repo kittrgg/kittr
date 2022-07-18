@@ -14,8 +14,7 @@ interface Props {
 	autoComplete?: "off" | "on"
 }
 
-export const SearchInput = ({ value, onChange, clearSearch, autoComplete = "off" }: Props) => {
-	return (
+export const SearchInput = ({ value, onChange, clearSearch, autoComplete = "off" }: Props) => (
 		<div style={{ position: "relative" }}>
 			<Input
 				type="text"
@@ -47,7 +46,6 @@ export const SearchInput = ({ value, onChange, clearSearch, autoComplete = "off"
 			)}
 		</div>
 	)
-}
 
 export default SearchInput
 
