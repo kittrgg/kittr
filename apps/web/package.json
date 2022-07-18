@@ -46,7 +46,7 @@
 		"react-dom": "17.0.2",
 		"react-indiana-drag-scroll": "2.1.0",
 		"react-query": "3.39.16",
-		"react-markdown": "8.0.0",
+		"react-markdown": "8.0.3",
 		"react-redux": "7.2.6",
 		"react-select": "5.2.2",
 		"redux": "4.1.2",
