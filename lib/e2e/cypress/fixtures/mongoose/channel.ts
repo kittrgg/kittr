@@ -1,0 +1,106 @@
+export default {
+	_id: "60fc8c30f88b1f382cead186",
+	meta: {
+		hasProfileImage: false,
+		profileImage: "",
+		links: {
+			discord: "https://discord.gg/bJHZMg3Kh5",
+			instagram: "https://www.instagram.com/testagram/?hl=en",
+			twitter: "https://twitter.com/theunrealashew",
+			tiktok: "https://www.tiktok.com/@atest?lang=en",
+			twitch: "https://www.twitch.tv/kittrgg",
+			youtube: "https://www.youtube.com/thetesturl"
+		},
+		youtubeAutoplay: true
+	},
+	games: [
+		{
+			id: "60da97598821ed46dc9c008c",
+			commandString: "test me out {{link}}",
+			code: ""
+		}
+	],
+	kits: [
+		{
+			_id: "6123362d3635383f9ccda92b",
+			baseId: "60df5bd4bf84855a680f8922",
+			options: [],
+			userData: {
+				customTitle: "",
+				blueprint: "",
+				featured: false,
+				youtubeURL: "ExsrFvIsKk4&t=334s"
+			}
+		},
+		{
+			_id: "6129b862bf572f418c971179",
+			baseId: "60df4a4fbf84855a680f88f2",
+			options: [],
+			userData: {
+				customTitle: "",
+				blueprint: "",
+				featured: true,
+				youtubeURL: ""
+			}
+		},
+		{
+			_id: "612c185fade60e31b415cacc",
+			baseId: "60df48fbbf84855a680f88e6",
+			options: [
+				"60e1d97fbf84855a680f8eed",
+				"60e1d9d0bf84855a680f8f01",
+				"60e353d7bf84855a680f9697",
+				"60e354d8bf84855a680f96e7",
+				"60e35bb9bf84855a680f9803"
+			],
+			userData: {
+				customTitle: "",
+				blueprint: "",
+				featured: false,
+				youtubeURL: ""
+			}
+		},
+		{
+			_id: "612c18b6ade60e31b415cadd",
+			baseId: "60df6050bf84855a680f894d",
+			options: [],
+			userData: {
+				customTitle: "",
+				blueprint: "",
+				featured: false,
+				youtubeURL: ""
+			}
+		},
+		{
+			_id: "612c18c3ade60e31b415cae2",
+			baseId: "61252d6022975356085a1a07",
+			options: [],
+			userData: {
+				customTitle: "",
+				blueprint: "",
+				featured: false,
+				youtubeURL: ""
+			}
+		}
+	],
+	managers: [
+		{
+			uid: "w5lMLvVLL3uJNRuoqSWvYjNIJ1GF",
+			role: "Owner"
+		},
+		{
+			uid: "VeoTKmMs72amUYzPRovBGJDJnGn1",
+			role: "Editor"
+		},
+		{
+			uid: "XnRFlNNbQ4d3K6nfEIRGBJm5nER2",
+			role: "Editor"
+		}
+	],
+	createdDate: "2021-07-24T21:54:56.149Z",
+	displayName: "thetestchannel",
+	urlSafeName: "thetestchannel",
+	__v: 0,
+	previousUpdater: "anthonyshew",
+	viewCount: 2250
+}

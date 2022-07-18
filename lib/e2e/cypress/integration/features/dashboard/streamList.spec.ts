@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
-import user from "../../../fixtures/login.json"
-import newChannel from "../../../fixtures/mongoose/newChannel.json"
+import user from "../../../fixtures/login"
+import newChannel from "../../../fixtures/mongoose/newChannel"
 
 describe("Channel List View", () => {
 	beforeEach(() => {

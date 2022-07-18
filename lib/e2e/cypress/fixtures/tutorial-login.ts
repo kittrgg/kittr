@@ -1,0 +1,5 @@
+export default {
+	uid: "BnRFlNNbQ4d3K6nfEIRGBJm5nER8",
+	email: "manager4@test.com",
+	password: "123123"
+}

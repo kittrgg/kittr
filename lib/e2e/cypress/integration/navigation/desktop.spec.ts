@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import user from "../../fixtures/login.json"
+import user from "../../fixtures/login"
 
 describe("Desktop Navigation", () => {
 	beforeEach(() => {

@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
-import user from "../../../fixtures/login.json"
-import channel from "../../../fixtures/mongoose/channel.json"
+import user from "../../../fixtures/login"
+import channel from "../../../fixtures/mongoose/channel"
 
 describe("Games & Kits Actions", () => {
   beforeEach(() => {

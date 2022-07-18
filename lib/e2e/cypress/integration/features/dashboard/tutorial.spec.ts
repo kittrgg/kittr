@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
-import user from "../../../fixtures/tutorial-login.json"
-import tutorialChannel from "../../../fixtures/tutorial-channel.json"
+import user from "../../../fixtures/tutorial-login"
+import tutorialChannel from "../../../fixtures/tutorial-channel"
 
 describe("Dashboard Tutorial", () => {
 	beforeEach(() => {
