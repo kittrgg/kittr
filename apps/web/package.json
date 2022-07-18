@@ -30,7 +30,7 @@
 		"@trpc/next": "9.24.0",
 		"@trpc/react": "9.24.0",
 		"@trpc/server": "9.24.0",
-		"browser-image-compression": "1.0.17",
+		"browser-image-compression": "2.0.0",
 		"date-fns": "2.28.0",
 		"firebase": "9.8.1",
 		"firebase-admin": "10.2.0",

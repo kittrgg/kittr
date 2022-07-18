@@ -6288,12 +6288,11 @@ brorand@^1.0.1, brorand@^1.1.0:
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
   integrity sha512-cKV8tMCEpQs4hK/ik71d6LrPOnpkpGBR0wzxqr68g2m/LB2GxVYQroAjMJZRVM1Y4BCjCKc3vAamxSzOY2RP+w==
 
-browser-image-compression@1.0.17:
-  version "1.0.17"
-  resolved "https://registry.yarnpkg.com/browser-image-compression/-/browser-image-compression-1.0.17.tgz#5b97bb65297dadfee123be6c40ecb355c4758cf2"
-  integrity sha512-TMDh3gyNlVA5Vvn0D0AdWr33s2ftIeokHK406z8cYlLJ4ANAq1x6eMaSzqedDoZwUGyTVB+0rhNVaSFgM3YAZg==
+browser-image-compression@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/browser-image-compression/-/browser-image-compression-2.0.0.tgz#f421381a76d474d4da7dcd82810daf595b09bef6"
+  integrity sha512-kBlkZo13yOOfcmrPW0M0K/UdZPogIQj2gRvXIM3FktAnfW6VRq9aY2RI+F6O0x6DMj1Xm+WLGgWcFK8Fu/ddnw==
   dependencies:
-    core-js "^3.16.1"
     uzip "0.20201231.0"
 
 browserify-aes@^1.0.0, browserify-aes@^1.0.4:
@@ -7327,11 +7326,6 @@ core-js@^3.0.4, core-js@^3.6.5, core-js@^3.8.2:
   version "3.23.1"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.23.1.tgz#9f9a9255115f62c512db56d567f636da32ca0b78"
   integrity sha512-wfMYHWi1WQjpgZNC9kAlN4ut04TM9fUTdi7CqIoTVM7yaiOUQTklOzfb+oWH3r9edQcT3F887swuVmxrV+CC8w==
-
-core-js@^3.16.1:
-  version "3.21.1"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.21.1.tgz#f2e0ddc1fc43da6f904706e8e955bc19d06a0d94"
-  integrity sha512-FRq5b/VMrWlrmCzwRrpDYNxyHP9BcAZC+xHJaqTgIE5091ZV1NTmyh0sGOg5XqpnHvR0svdy0sv1gWA1zmhxig==
 
 core-util-is@1.0.2:
   version "1.0.2"
