@@ -40,7 +40,7 @@ const NavMenu = ({ wrapperRef, breakpoint = 769, backFunction, middleComponent }
 				<MobileNav breakpoint={breakpoint} backFunction={backFunction} middleComponent={middleComponent} />
 			</Wrapper>
 		)
-	} else {
+	}
 		return (
 			<Wrapper ref={wrapperRef} shadow={(windowScroll as number) > 0}>
 				<Container breakpoint={breakpoint}>
@@ -62,7 +62,7 @@ const NavMenu = ({ wrapperRef, breakpoint = 769, backFunction, middleComponent }
 				</Container>
 			</Wrapper>
 		)
-	}
+
 }
 
 export default NavMenu
@@ -76,7 +76,7 @@ const AuthenticationLinks = ({ isLoggedIn, pathname }: { isLoggedIn: boolean; pa
 				</StyledLink>
 			</Link>
 		)
-	} else {
+	}
 		return (
 			<div>
 				<Link href={Routes.SIGN_UP} passHref>
@@ -99,7 +99,7 @@ const AuthenticationLinks = ({ isLoggedIn, pathname }: { isLoggedIn: boolean; pa
 				</Link>
 			</div>
 		)
-	}
+
 }
 
 // Styled Components
@@ -110,7 +110,7 @@ const Wrapper = styled.div<{ shadow: boolean }>`
 	left: 0;
 	right: 0;
 	z-index: 999;
-	box-shadow: ${(props) => (props.shadow ? `0 0 10px 2px black` : "none")};
+	box-shadow: ${(props) => (props.shadow ? "0 0 10px 2px black" : "none")};
 	background-color: ${colors.middleOpacity98};
 	transition: 0.1s;
 `

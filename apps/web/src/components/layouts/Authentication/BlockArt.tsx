@@ -9,8 +9,7 @@ interface Props {
 	left: string
 }
 
-const Block = ({ size, top, left }: Props) => {
-	return (
+const Block = ({ size, top, left }: Props) => (
 		<div
 			key={size + top + left}
 			style={{
@@ -27,21 +26,18 @@ const Block = ({ size, top, left }: Props) => {
 			}}
 		/>
 	)
-}
 
 /** Spawns squares for background art in randomly generated positions with randomly generated sizes. */
 const BlockArt = ({ ...props }) => {
 	const isBrowser = useIsBrowser()
 	const blockCount = 15
-	const blockCoordinates = useRef(
-		isBrowser
+	const blockCoordinates = useRef(isBrowser
 			? [...Array(blockCount)].map((_) => ({
 					size: getRandomNumFromRange(8, 20),
 					top: getRandomNumFromRange(10, 90),
 					left: getRandomNumFromRange(10, 90)
 			  }))
-			: []
-	)
+			: [])
 
 	return (
 		<div

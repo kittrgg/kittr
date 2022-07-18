@@ -45,8 +45,7 @@ const FEATURE_SET = [
 ]
 
 /** Features that are currently a part of the platform */
-const Features = ({ ...props }) => {
-	return (
+const Features = ({ ...props }) => (
 		<section style={{ zIndex: 1 }}>
 			<ImageContainer>
 				<img
@@ -58,8 +57,7 @@ const Features = ({ ...props }) => {
 			<Styled.P>Quite a bit better than a Google Sheet, huh?</Styled.P>
 			<Styled.H2>FEATURES</Styled.H2>
 			<Grid>
-				{FEATURE_SET.map((feature) => {
-					return (
+				{FEATURE_SET.map((feature) => (
 						<GridItem key={feature.title}>
 							<IconContainer>
 								<img
@@ -71,13 +69,11 @@ const Features = ({ ...props }) => {
 							<CardTitle>{feature.title}</CardTitle>
 							<CardParagraph dangerouslySetInnerHTML={{ __html: feature.paragraph }} />
 						</GridItem>
-					)
-				})}
+					))}
 			</Grid>
 			<CallToAction marginBottom="60px" header="channel bettr with kittr." />
 		</section>
 	)
-}
 
 export default Features
 

@@ -8,7 +8,7 @@ export type AppRouter = typeof appRouter
 // export API handler
 export default trpcNext.createNextApiHandler({
 	router: appRouter,
-	createContext: createContext,
+	createContext,
 	batching: {
 		enabled: true
 	}

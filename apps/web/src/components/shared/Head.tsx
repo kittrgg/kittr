@@ -8,8 +8,7 @@ interface Props {
 }
 
 /** Provide meta for this view using next/head. */
-export const Head = ({ description, title }: Props) => {
-	return (
+export const Head = ({ description, title }: Props) => (
 		<NextHead>
 			<title>{title}</title>
 			<meta name="description" content={description} />
@@ -33,6 +32,5 @@ export const Head = ({ description, title }: Props) => {
 			<meta property="og:type" content="website" />
 		</NextHead>
 	)
-}
 
 export default Head

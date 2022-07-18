@@ -12,7 +12,7 @@ export const buyPremium = createController()
       displayName: z.string(),
       urlSafeName: z.string()
     }),
-    async resolve({ ctx, input }) {
+    async resolve({ input }) {
       try {
         const session = await stripe.checkout.sessions.create({
           mode: "subscription",
@@ -54,7 +54,7 @@ export const managePremium = createController()
     input: z.object({
       channelId: z.string()
     }),
-    async resolve({ ctx, input }) {
+    async resolve({ input }) {
       try {
         const channel = await prisma.channel.findFirst({
           where: {

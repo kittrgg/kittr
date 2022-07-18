@@ -11,8 +11,8 @@ const EmailChanged = ({ ...props }) => {
 	return (
 		<div className={classes.body}>
 			<Head
-				title={`Email Change Started | kittr`}
-				description={`You've started the process to change your email address. | kittr`}
+				title={"Email Change Started | kittr"}
+				description={"You've started the process to change your email address. | kittr"}
 			/>
 			<div className={classes.errorBody}>
 				<Title order={1} className={classes.errorHeader}>
@@ -31,12 +31,12 @@ const EmailChanged = ({ ...props }) => {
 
 export default EmailChanged
 
-const useStyles = createStyles((theme, _param, getRef) => {
+const useStyles = createStyles((theme, _param, getRef) =>
 	// add reusable styles like headers, links, to MantineProvider theme
-	return {
+	 ({
 		body: {
 			display: "flex",
-			height: `100vh`,
+			height: "100vh",
 			alignItems: "center",
 			justifyContent: "center",
 			color: theme.white,
@@ -54,7 +54,7 @@ const useStyles = createStyles((theme, _param, getRef) => {
 			fontSize: "28px",
 			textAlign: "left",
 			letterSpacing: "3px",
-			fontFamily: '"Barlow Condensed", serif'
+			fontFamily: "\"Barlow Condensed\", serif"
 		},
 
 		errorParagraph: {
@@ -83,13 +83,12 @@ const useStyles = createStyles((theme, _param, getRef) => {
 			"fontSize": "16px",
 			"fontWeight": 600,
 			"letterSpacing": "2px",
-			"fontDamily": '"Montserrat", sans-serif',
+			"fontDamily": "\"Montserrat\", sans-serif",
 
 			"&:hover": {
 				backgroundColor: `${colors.dark}`,
 				color: `${colors.white}`
 			}
 		}
-	}
-})
+	}))
 

@@ -1,6 +1,6 @@
 import { trpc } from "@Server/createHooks"
 
-export default function Sandbox() {
+export default function Sandbox () {
 	// useEffect(() => {
 	// 	logInfo("Test from client")
 	// }, [])

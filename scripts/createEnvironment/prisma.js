@@ -7,7 +7,6 @@ const main = async () => {
 	const file = {}
 
 	file.DATABASE_URL = inputs.DATABASE_URL
-	file.MONGOOSE_CONNECTION_STRING = inputs.DB_CONNECTION_STRING
 	await writeFile("./packages/prisma/.env", stringify(file))
 }
 
@@ -20,4 +19,3 @@ main()
 		console.error(err)
 		process.exit(1)
 	})
-

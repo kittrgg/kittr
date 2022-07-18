@@ -23,8 +23,7 @@ export const ChannelAvatarList = ({ channels, isLive, onClick }: Props) => {
 	const theme = useTheme()
 	return (
 		<>
-			{channels.map((channel) => {
-				return (
+			{channels.map((channel) => (
 					<Identity
 						key={channel.id}
 						data-cy={`${channel.displayName}-button`}
@@ -39,8 +38,7 @@ export const ChannelAvatarList = ({ channels, isLive, onClick }: Props) => {
 						/>
 						<Name>{channel.displayName}</Name>
 					</Identity>
-				)
-			})}
+				))}
 		</>
 	)
 }

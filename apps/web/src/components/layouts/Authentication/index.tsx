@@ -18,8 +18,7 @@ interface Props {
 }
 
 /** Layout used for authentication related pages. Signups, logins, etc. */
-const Authentication = ({ title, children }: Props) => {
-	return (
+const Authentication = ({ title, children }: Props) => (
 		<Wrapper>
 			<BlockArt />
 			<NavMenu />
@@ -29,7 +28,6 @@ const Authentication = ({ title, children }: Props) => {
 			</Container>
 		</Wrapper>
 	)
-}
 
 export default Authentication
 

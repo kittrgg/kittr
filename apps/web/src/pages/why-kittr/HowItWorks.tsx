@@ -31,12 +31,10 @@ const STEPS = [
 	}
 ]
 
-const HowItWorks = ({}) => {
-	return (
+const HowItWorks = ({}) => (
 		<section style={{ maxWidth: "1000px", margin: "0 auto" }}>
 			<Styled.H2>HOW IT WORKS</Styled.H2>
-			{STEPS.map((step) => {
-				return (
+			{STEPS.map((step) => (
 					<StepContainer key={step.title}>
 						<StepHeaderFlex>
 							<StepHeader>{step.title}</StepHeader>
@@ -46,12 +44,10 @@ const HowItWorks = ({}) => {
 							<img src={step.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
 						</StepImageContainer>
 					</StepContainer>
-				)
-			})}
+				))}
 			<CallToAction marginTop="60px" marginBottom="48px" header="start sharing today." />
 		</section>
 	)
-}
 
 export default HowItWorks
 
