@@ -33,7 +33,7 @@
 		"browser-image-compression": "2.0.0",
 		"date-fns": "2.28.0",
 		"firebase": "9.9.0",
-		"firebase-admin": "10.2.0",
+		"firebase-admin": "11.0.0",
 		"firebase-tools": "10.2.1",
 		"jsonwebtoken": "8.5.1",
 		"micro": "9.3.4",
