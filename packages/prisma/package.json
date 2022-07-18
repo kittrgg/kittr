@@ -20,7 +20,7 @@
 		"db-format": "prisma format"
 	},
 	"devDependencies": {
-		"prisma": "3.13.0",
+		"prisma": "4.0.0",
 		"ts-node": "10.9.1",
 		"tsup": "5.12.0",
 		"typescript": "4.7.4",
@@ -28,7 +28,7 @@
 		"@supercharge/promise-pool": "*"
 	},
 	"dependencies": {
-		"@prisma/client": "3.13.0"
+		"@prisma/client": "4.0.0"
 	},
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
