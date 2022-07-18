@@ -28,9 +28,7 @@ describe("Desktop Authentication Flows", () => {
 
 	it("Unsuccessful login for bad email", () => {
 		// Ignore error thrown by failed authentation
-		Cypress.on("uncaught:exception", (err) => {
-			return false
-		})
+		Cypress.on("uncaught:exception", () => false)
 
 		cy.get("[name=email]").type("asdf")
 		cy.get("[data-cy=login-button]").click()
@@ -39,9 +37,7 @@ describe("Desktop Authentication Flows", () => {
 
 	it("Unsuccessful login for bad credentials", () => {
 		// Ignore error thrown by failed authentation
-		Cypress.on("uncaught:exception", (err) => {
-			return false
-		})
+		Cypress.on("uncaught:exception", () => false)
 
 		cy.contains("LOG IN")
 		cy.get("[name=email]").type("test123@test123.com")

@@ -21,7 +21,6 @@ module.exports = {
 		"func-style": "warn",
 		"function-paren-newline": "warn",
 		"implicit-arrow-linebreak": "warn",
-		"import/extensions": "warn",
 		"import/first": "warn",
 		"import/no-anonymous-default-export": "off",
 		"import/no-mutable-exports": "warn",
@@ -71,7 +70,6 @@ module.exports = {
 		"space-before-function-paren": "warn",
 		"space-in-parens": "warn",
 		"space-infix-ops": "warn",
-		"spaced-comment": "warn",
 		"wrap-iife": "warn"
 	}
 }
