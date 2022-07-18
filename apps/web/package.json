@@ -67,7 +67,7 @@
 		"@types/uuid": "8.3.4",
 		"@types/validator": "13.7.1",
 		"babel-plugin-styled-components": "2.0.6",
-		"dotenv": "16.0.0",
+		"dotenv": "16.0.1",
 		"eslint": "8.10.0",
 		"eslint-config-custom": "*",
 		"next-transpile-modules": "9.0.0",
