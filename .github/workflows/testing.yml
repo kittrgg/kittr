@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - stage
+  # to manually run the workflow
   workflow_dispatch:
 
 jobs:
@@ -86,8 +87,9 @@ jobs:
           file: ./apps/web/Dockerfile
           push: true
           tags: ghcr.io/${{github.repository}}/web:test-${{github.sha}}
-          cache-from: type=registry,ref=${{ github.actor }}/simplewhale:buildcache
-          cache-to: type=registry,ref=${{ github.actor }}/simplewhale:buildcache,mode=max
+          # should enable caching to lower run times
+          cache-from: type=registry,ref=${{ github.actor }}/api:test-${{github.sha}}
+          cache-to: type=registry,ref=${{ github.actor }}/api:test-${{github.sha}},mode=max
 
   deploy:
     concurrency:
