@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - stage
+  workflow_dispatch:
 
 jobs:
   build-and-unit-test:
@@ -85,6 +86,8 @@ jobs:
           file: ./apps/web/Dockerfile
           push: true
           tags: ghcr.io/${{github.repository}}/web:test-${{github.sha}}
+          cache-from: type=registry,ref=${{ github.actor }}/simplewhale:buildcache
+          cache-to: type=registry,ref=${{ github.actor }}/simplewhale:buildcache,mode=max
 
   deploy:
     concurrency:
