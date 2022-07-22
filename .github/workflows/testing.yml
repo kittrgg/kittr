@@ -81,15 +81,15 @@ jobs:
           tags: ghcr.io/${{github.repository}}/api:test-${{github.sha}}
 
       - name: Build and push web testing image
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: .
           file: ./apps/web/Dockerfile
           push: true
           tags: ghcr.io/${{github.repository}}/web:test-${{github.sha}}
           # should enable caching to lower run times
-          cache-from: type=registry,ref=${{ github.actor }}/api:test-${{github.sha}}
-          cache-to: type=registry,ref=${{ github.actor }}/api:test-${{github.sha}},mode=max
+          cache-from: type=registry,ref=ghcr.io/${{ github.actor }}/web:test-${{github.sha}}
+          cache-to: type=registry,ref=ghcr.io/${{ github.actor }}/web:test-${{github.sha}},mode=max
 
   deploy:
     concurrency:
