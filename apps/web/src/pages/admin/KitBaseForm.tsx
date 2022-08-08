@@ -64,14 +64,27 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 		const groupedOptions = groupBy(formValues.availableOptions || [], "slotKey")
 
 		return {
-			Muzzle: [],
-			Barrel: [],
-			Laser: [],
-			Optic: [],
-			Stock: [],
-			Ammunition: [],
-			Underbarrel: [],
-			Perk: [],
+			"Cable": [],
+			"Muzzle": [],
+			"Arms": [],
+			"Barrel": [],
+			"Laser": [],
+			"Guard": [],
+			"Optic": [],
+			"Stock": [],
+			"Underbarrel": [],
+			"Trigger Action": [],
+			"Bolt Assembly": [],
+			"Bolt": [],
+			"Magazine": [],
+			"Ammunition": [],
+			"Ammo Type": [],
+			"Rear Grip": [],
+			"Pump Grip": [],
+			"Perk": [],
+			"Pumps": [],
+			"Perk 1": [],
+			"Perk 2": [],
 			...groupedOptions
 		}
 	}
