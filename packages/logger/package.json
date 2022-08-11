@@ -18,7 +18,7 @@
 	},
 	"dependencies": {
 		"@kittr/types": "*",
-		"@sentry/nextjs": "7.7.0",
+		"@sentry/nextjs": "7.10.0",
 		"@sentry/node": "7.7.0"
 	}
 }
