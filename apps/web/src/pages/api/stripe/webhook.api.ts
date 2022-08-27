@@ -62,7 +62,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 				const customerCancelled = await prisma.channel.update({
 					where: {
 						// @ts-ignore
-						id: event.object.metadata.id || event.data.object.metadata._id // _id needed for pre-Prisma migration accounts
+						id: event.object.metadata.channelId || event.data.object.metadata._id // _id needed for pre-Prisma migration accounts
 					},
 					data: {
 						plan: {
