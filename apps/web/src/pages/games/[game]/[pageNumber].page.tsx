@@ -119,16 +119,18 @@ export const getStaticPaths = async () => {
 			}
 		]
 	})
-	const paths = games.map((game) => [1, 2, 3].map((elem: number) => ({
-				params: {
-					game: game.urlSafeName,
-					pageNumber: String(elem)
-				}
-			})))
+	const paths = games.map((game) =>
+		[1, 2, 3].map((elem: number) => ({
+			params: {
+				game: game.urlSafeName,
+				pageNumber: String(elem)
+			}
+		}))
+	)
 
 	return {
 		paths: paths.flat(),
-		fallback: true
+		fallback: "blocking"
 	}
 }
 
