@@ -30,8 +30,7 @@ export const ContactUs = ({ ...props }) => {
 
 	return (
 		<Grid columns={12} className={classes.grid}>
-			{PROPERTIES.map((property) => {
-				return (
+			{PROPERTIES.map((property) => (
 					<Grid.Col key={property.title} className={classes.gridColumn}>
 						<img src={property.image} alt={property.imageAlt} width={75} height={75} />
 						<Title order={2} className={classes.title}>
@@ -56,8 +55,7 @@ export const ContactUs = ({ ...props }) => {
 							{property.secondaryText}
 						</UnstyledButton>
 					</Grid.Col>
-				)
-			})}
+				))}
 		</Grid>
 	)
 }
@@ -69,7 +67,7 @@ const useStyles = createStyles((theme) => {
 		fontSize: "18px",
 		fontWeight: 600,
 		letterSpacing: "2px",
-		fontFamily: '"Montserrat", sans-serif'
+		fontFamily: "\"Montserrat\", sans-serif"
 	}
 
 	return {

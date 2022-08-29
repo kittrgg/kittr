@@ -1,8 +1,7 @@
 import * as Styled from "@Styles/legalPages"
 import PageWrapper from "@Components/layouts/PageWrapper"
 
-const PrivacyPolicy = ({ ...props }) => {
-	return (
+const PrivacyPolicy = ({ ...props }) => (
 		<PageWrapper title="Privacy Policy | kittr" description="kittr's Privacy Policy">
 			<Styled.Container>
 				<h2>Privacy Policy</h2>
@@ -168,6 +167,5 @@ const PrivacyPolicy = ({ ...props }) => {
 			</Styled.Container>
 		</PageWrapper>
 	)
-}
 
 export default PrivacyPolicy

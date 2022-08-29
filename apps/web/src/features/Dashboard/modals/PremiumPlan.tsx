@@ -6,8 +6,7 @@ import { header2, paragraph } from "@Styles/typography"
 import { useDispatch } from "@Redux/store"
 import { setModal } from "@Redux/slices/dashboard"
 import { usePremiumStatus, useChannelData } from "@Redux/slices/dashboard/selectors"
-import { getToken } from "@Services/firebase/auth/getToken"
-import fetch from "@Fetch"
+import { trpc } from "@Server/createHooks"
 
 const CENTER_SVG = {
 	position: "absolute",
@@ -32,18 +31,22 @@ const PremiumPlans = () => {
 	const { data: channelData } = useChannelData()
 	const { isPremium } = usePremiumStatus()
 
-	const handleUpgrade = async () => {
-		const apiRoute = isPremium ? `/api/payments/managePremium` : `/api/payments/buyPremium`
-
-		fetch
-			.post<{ url: string }>({
-				url: apiRoute,
-				headers: { authorization: `Bearer ${await getToken()}` },
-				body: { id: channelData?.id, displayName: channelData?.displayName, urlSafeName: channelData?.urlSafeName }
-			})
-			.then((checkoutSession) => window.open(checkoutSession.url, "_blank"))
-			.catch(() => dispatch(setModal({ type: "Error Notification", data: {} })))
-	}
+	const { mutate: buyPremium } = trpc.useMutation("stripe/buy-premium", {
+		onSuccess: (result) => {
+			window.open(result.url as string, "_blank")
+		},
+		onError: () => {
+			dispatch(setModal({ type: "Error Notification", data: {} }))
+		}
+	})
+	const { mutate: managePremium } = trpc.useMutation("stripe/manage-premium", {
+		onSuccess: (result) => {
+			window.open(result.url as string, "_blank")
+		},
+		onError: () => {
+			dispatch(setModal({ type: "Error Notification", data: {} }))
+		}
+	})
 
 	return (
 		<Modal title="COMPARE PLANS" style={{ position: "relative" }}>
@@ -107,7 +110,20 @@ const PremiumPlans = () => {
 					text="CLOSE"
 					onClick={() => dispatch(setModal({ type: "", data: "" }))}
 				/>
-				<Button type="button" design="premium" text={isPremium ? "MANAGE" : "UPGRADE"} onClick={handleUpgrade} />
+				<Button
+					type="button"
+					design="premium"
+					text={isPremium ? "MANAGE" : "UPGRADE"}
+					onClick={() =>
+						isPremium
+							? managePremium({ channelId: channelData?.id! })
+							: buyPremium({
+									channelId: channelData?.id!,
+									displayName: channelData?.displayName!,
+									urlSafeName: channelData?.urlSafeName!
+							  })
+					}
+				/>
 			</ButtonsContainer>
 		</Modal>
 	)

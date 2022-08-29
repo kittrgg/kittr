@@ -44,8 +44,7 @@ export const MultiButton = ({
 	onClick,
 	dataCy,
 	infoLabels
-}: Props) => {
-	return (
+}: Props) => (
 		<>
 			<InfoLabelWrapper>
 				{infoLabels?.map((infoLabel, index) => (
@@ -53,8 +52,7 @@ export const MultiButton = ({
 				))}
 			</InfoLabelWrapper>
 			<Wrapper backgroundColor={wrapperBackgroundColor} data-cy={dataCy}>
-				{values.map((elem, index: number) => {
-					return (
+				{values.map((elem, index: number) => (
 						<Button
 							key={elem.text}
 							active={elem.value ? activeValue === elem.value : activeValue === elem.text}
@@ -68,12 +66,10 @@ export const MultiButton = ({
 						>
 							{elem.text}
 						</Button>
-					)
-				})}
+					))}
 			</Wrapper>
 		</>
 	)
-}
 
 export default MultiButton
 

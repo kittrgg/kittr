@@ -5,8 +5,7 @@ import Link from "next/link"
 import styled from "styled-components"
 
 /** Information about the platform itself. */
-const PlatformInfo = ({ ...props }) => {
-	return (
+const PlatformInfo = ({ ...props }) => (
 		<Container>
 			<Header>play bettr with kittr.</Header>
 			<Summary>
@@ -56,7 +55,6 @@ const PlatformInfo = ({ ...props }) => {
 			</TilesContainer>
 		</Container>
 	)
-}
 
 export default PlatformInfo
 

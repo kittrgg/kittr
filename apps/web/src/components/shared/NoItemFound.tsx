@@ -11,8 +11,7 @@ interface Props {
 }
 
 /** If a game or channel can't be found, render this component. It is a full-screen so there is no need for any layout with it. */
-export const NoItemFound = ({ type }: Props) => {
-	return (
+export const NoItemFound = ({ type }: Props) => (
 		<>
 			<Head
 				title={`No ${type.charAt(0).toUpperCase() + type.slice(1)} Found | kittr`}
@@ -30,7 +29,6 @@ export const NoItemFound = ({ type }: Props) => {
 			</Wrapper>
 		</>
 	)
-}
 
 export default NoItemFound
 
