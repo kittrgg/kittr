@@ -11,7 +11,7 @@ const handler = createHandler()
 // Create a Stripe subscription manager
 handler.post(
 	async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<Stripe.BillingPortal.Session | null>>) => {
-		const { id } = JSON.parse(req.body)
+		const { id } = req.body
 		const origin = req.headers.origin
 
 		try {

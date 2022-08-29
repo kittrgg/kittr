@@ -10,7 +10,7 @@ const handler = createHandler()
 // Create a Stripe subscription checkout
 handler.post(
 	async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<Stripe.Response<Stripe.Checkout.Session>>>) => {
-		const { _id, displayName, urlSafeName } = JSON.parse(req.body)
+		const { id, displayName, urlSafeName } = req.body
 		const origin = req.headers.origin
 
 		try {
@@ -20,7 +20,7 @@ handler.post(
 				line_items: [
 					{
 						price: process.env.SUBSCRIPTION_PRICE_ID,
-						quantity: 1
+						quantity: 1,
 					},
 					{
 						price: process.env.MONTHLY_TIP_PRICE_ID,
@@ -32,7 +32,7 @@ handler.post(
 					}
 				],
 				allow_promotion_codes: true,
-				metadata: { _id, displayName, urlSafeName },
+				metadata: { id, displayName, urlSafeName },
 				success_url: `${origin}/premium-success?session_id={CHECKOUT_SESSION_ID}`,
 				cancel_url: `${origin}/back-to-dashboard`
 			})
