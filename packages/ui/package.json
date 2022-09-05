@@ -17,7 +17,7 @@
 		"@mantine/core": "3.6.9",
 		"@mantine/dates": "3.6.9",
 		"@mantine/hooks": "3.6.9",
-		"@mantine/next": "3.6.9",
+		"@mantine/next": "5.2.5",
 		"@mantine/rte": "3.6.9",
 		"react-device-detect": "2.2.2",
 		"react": "17.0.2",
