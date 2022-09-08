@@ -7,7 +7,7 @@ if (!admin.apps.length) {
 	} else {
 		try {
 			admin.initializeApp({
-				credential: admin.credential.cert(JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS as any))
+				credential: admin.credential.cert(process.env.GOOGLE_APPLICATION_CREDENTIALS as any)
 			})
 		} catch (err) {
 			console.error(err)
