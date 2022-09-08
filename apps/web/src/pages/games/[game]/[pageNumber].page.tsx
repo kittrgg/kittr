@@ -119,14 +119,12 @@ export const getStaticPaths = async () => {
 			}
 		]
 	})
-	const paths = games.map((game) =>
-		[1, 2, 3].map((elem: number) => ({
+	const paths = games.map((game) => [1, 2, 3].map((elem: number) => ({
 			params: {
 				game: game.urlSafeName,
 				pageNumber: String(elem)
 			}
-		}))
-	)
+		})))
 
 	return {
 		paths: paths.flat(),

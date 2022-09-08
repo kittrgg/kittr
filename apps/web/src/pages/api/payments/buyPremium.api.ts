@@ -8,8 +8,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, { apiVersion:
 const handler = createHandler()
 
 // Create a Stripe subscription checkout
-handler.post(
-	async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<Stripe.Response<Stripe.Checkout.Session>>>) => {
+handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<Stripe.Response<Stripe.Checkout.Session>>>) => {
 		const { id, displayName, urlSafeName } = req.body
 		const origin = req.headers.origin
 
@@ -20,7 +19,7 @@ handler.post(
 				line_items: [
 					{
 						price: process.env.SUBSCRIPTION_PRICE_ID,
-						quantity: 1,
+						quantity: 1
 					},
 					{
 						price: process.env.MONTHLY_TIP_PRICE_ID,
@@ -42,7 +41,6 @@ handler.post(
 			console.error("threw in session creation", error)
 			return res.status(500).json({ error: true, errorMessage: JSON.stringify(error) })
 		}
-	}
-)
+	})
 
 export default handler
