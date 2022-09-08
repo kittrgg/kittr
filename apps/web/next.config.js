@@ -8,6 +8,9 @@ const withTM = require("next-transpile-modules")(["@kittr/logger", "@kittr/prism
 const { withSentryConfig } = require("@sentry/nextjs")
 
 const moduleExports = {
+	eslint: {
+		ignoreDuringBuilds: true
+	},
 	compiler: {
 		styledComponents: true
 	},
