@@ -8,12 +8,12 @@ import { kitsRouter } from "./routers/kits"
 import { managersRouter } from "./routers/managers"
 import { twitchRouter } from "./routers/twitch"
 import { usersRouter } from "./routers/users"
-import { captureMessage, } from '@kittr/logger/node'
+import { captureMessage } from "@kittr/logger/node"
 import { stripeRouter } from "@Server/routers/stripe"
 
 export const appRouter = createRouter()
 	.formatError(({ shape, error, path, ctx, type, input }) => {
-		captureMessage(`${error.code}: ${path}` ?? "Unknown tRPC path", { level: "error", tags: { fart: "butt" }, extra: { type }, contexts: { error: { ...error }, ctx: { ...ctx }, input: { input: JSON.stringify(input) } } })
+		captureMessage(`${error.code}: ${path}` ?? "Unknown tRPC path", { level: "error", tags: { isKittr: true }, extra: { type }, contexts: { error: { ...error }, ctx: { ...ctx }, input: { input: JSON.stringify(input) } } })
 		return shape
 	})
 	.transformer(superjson)
