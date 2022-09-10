@@ -14,18 +14,6 @@ services:
     volumes:
       - kittr-database:/var/lib/postgresql/data
 
-  mongo:
-    container_name: mongo
-    image: mongo:5
-    restart: always
-    ports:
-      - 27017:27017
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-    volumes:
-      - ./volumes/mongo:/data/db
-
   firebase-emulators:
     container_name: firebase-emulators
     ports:

@@ -3,10 +3,10 @@
 	"version": "0.0.0",
 	"scripts": {
 		"start": "npx ts-node src/index.ts",
-		"dev": "nodemon src/index.ts",
-		"lint": "eslint --fix .",
-		"clean": "rm -rf .turbo && rm -rf coverage && rm -rf dist && rm -rf node_modules",
-		"type-check": "tsc --pretty --noEmit"
+		"IGNORED_dev": "nodemon src/index.ts",
+		"IGNORED_lint": "eslint --fix .",
+		"IGNORED_clean": "rm -rf .turbo && rm -rf coverage && rm -rf dist && rm -rf node_modules",
+		"IGNORED_type-check": "tsc --pretty --noEmit"
 	},
 	"dependencies": {
 		"@google-analytics/data": "3.0.0",
