@@ -8,7 +8,6 @@ const MyError = ({ statusCode, hasGetInitialPropsRun, err }) => {
 		// getInitialProps is not called in case of
 		// https://github.com/vercel/next.js/issues/8592. As a workaround, we pass
 		// err via _app.js so it can be captured
-		console.log("1")
 		captureException(error, { tags: { isKittr: true } })
 		// Flushing is not required in this case as it only happens on the client
 	}
@@ -44,7 +43,6 @@ MyError.getInitialProps = async (context) => {
 	//    Boundaries: https://reactjs.org/docs/error-boundaries.html
 
 	if (err) {
-		console.log("12")
 		captureException(error, { tags: { isKittr: true } })
 
 		// Flushing before returning is necessary if deploying to Vercel, see
@@ -58,7 +56,6 @@ MyError.getInitialProps = async (context) => {
 	// information about what the error might be. This is unexpected and may
 	// indicate a bug introduced in Next.js, so record it in Logger
 
-	console.log("123")
 	captureException(error, { tags: { isKittr: true } })
 	await flush(2000)
 

@@ -11,7 +11,7 @@ const Page = () => {
 	const { data: bases, refetch } = trpc.useQuery(["admin/warzone/kit-bases/list"])
 	const [isCreatingBase, setIsCreatingBase] = useState(false)
 	const [isEditingBase, setIsEditingBase] = useState<
-		|(WarzoneKitBase & {
+		| (WarzoneKitBase & {
 				availableOptions: WarzoneKitOption[]
 		  })
 		| null

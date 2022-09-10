@@ -6,7 +6,6 @@ Sentry.init({
 	dsn: SENTRY_DSN,
 	tracesSampleRate: 1.0,
 	beforeSend: (event) => {
-		console.log(event.tags.isKittr)
 		if (event.tags.isKittr) {
 			return event
 		}

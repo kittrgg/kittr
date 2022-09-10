@@ -26,7 +26,6 @@ const Specs = ({ specs, brandColor }: Props) => {
 						indexToSort: 0,
 						array: specs
 					}).map((spec) => {
-						console.log({ spec })
 						const { partName, partType } = spec
 
 						return (

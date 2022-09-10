@@ -51,7 +51,6 @@ const ImageEditor = () => {
 				imageFile,
 				onSuccess: async () => {
 					mutate({ channelId: data?.id! })
-					console.log("okay, yeah")
 				},
 				onError: () => {
 					setIsUploading(false)
