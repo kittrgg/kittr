@@ -4,9 +4,12 @@ const SENTRY_DSN = process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN
 
 Sentry.init({
 	dsn: SENTRY_DSN,
-	tracesSampleRate: 1.0
-	// beforeSend: (event) => {
-	// 	console.log(event)
-	// 	return event
-	// }
+	tracesSampleRate: 1.0,
+	beforeSend: (event) => {
+		console.log(event.tags.isKittr)
+		if (event.tags.isKittr) {
+			return event
+		}
+		return null
+	}
 })

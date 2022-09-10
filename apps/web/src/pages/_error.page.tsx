@@ -1,14 +1,15 @@
 // @ts-nocheck
 import NextErrorComponent from "next/error"
-import { captureException, flush } from "@kittr/logger/nextjs"
+import { flush } from "@sentry/nextjs"
+import { captureException } from "@sentry/nextjs"
 
 const MyError = ({ statusCode, hasGetInitialPropsRun, err }) => {
 	if (!hasGetInitialPropsRun && err) {
 		// getInitialProps is not called in case of
 		// https://github.com/vercel/next.js/issues/8592. As a workaround, we pass
 		// err via _app.js so it can be captured
-		console.error({ firstOne: err })
-		captureException(err)
+		console.log("1")
+		captureException(error, { tags: { isKittr: true } })
 		// Flushing is not required in this case as it only happens on the client
 	}
 
@@ -43,8 +44,8 @@ MyError.getInitialProps = async (context) => {
 	//    Boundaries: https://reactjs.org/docs/error-boundaries.html
 
 	if (err) {
-		console.error({ err })
-		captureException(err)
+		console.log("12")
+		captureException(error, { tags: { isKittr: true } })
 
 		// Flushing before returning is necessary if deploying to Vercel, see
 		// https://vercel.com/docs/platform/limits#streaming-responses
@@ -56,7 +57,9 @@ MyError.getInitialProps = async (context) => {
 	// If this point is reached, getInitialProps was called without any
 	// information about what the error might be. This is unexpected and may
 	// indicate a bug introduced in Next.js, so record it in Logger
-	captureException(new Error(`_error.js getInitialProps missing data at path: ${asPath}`))
+
+	console.log("123")
+	captureException(error, { tags: { isKittr: true } })
 	await flush(2000)
 
 	return errorInitialProps

@@ -1,6 +1,6 @@
 import { Spinner } from "@Components/shared"
 import { download } from "@Services/firebase/storage"
-import { captureException } from "@kittr/logger/nextjs"
+import { captureException } from "@Services/captureException"
 import { useEffect } from "react"
 import { useQuery } from "react-query"
 

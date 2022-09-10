@@ -7,6 +7,7 @@ import { Title } from "@kittr/ui"
 import { AppShell, Container } from "@mantine/core"
 import Footer from "./Footer"
 import Header from "./NavMenu"
+import { ErrorBoundary } from "@Components/shared/ErrorBoundary"
 
 interface Props {
 	/** Head title for meta information */
@@ -21,28 +22,28 @@ interface Props {
 
 /** Standardized page wrapper for general use. Does not contain ad units. */
 const PageWrapper = ({ title, description, children, pageTitle }: Props) => (
-		<>
-			<Head title={title} description={description} />
-			<AppShell padding={0} header={<Header />}>
-				<div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-					<Container
-						fluid
-						sx={{
-							paddingTop: "100px",
-							flex: 1,
-							margin: "2rem",
-							maxWidth: "2500px"
-						}}
-					>
-						<Title order={1} preset="h1" sx={{ marginBottom: "1rem" }}>
-							{pageTitle}
-						</Title>
-						{children}
-					</Container>
-					<Footer />
-				</div>
-			</AppShell>
-		</>
-	)
+	<>
+		<Head title={title} description={description} />
+		<AppShell padding={0} header={<Header />}>
+			<div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+				<Container
+					fluid
+					sx={{
+						paddingTop: "100px",
+						flex: 1,
+						margin: "2rem",
+						maxWidth: "2500px"
+					}}
+				>
+					<Title order={1} preset="h1" sx={{ marginBottom: "1rem" }}>
+						{pageTitle}
+					</Title>
+					<ErrorBoundary>{children}</ErrorBoundary>
+				</Container>
+				<Footer />
+			</div>
+		</AppShell>
+	</>
+)
 
 export default PageWrapper

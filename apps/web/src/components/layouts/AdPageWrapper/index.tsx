@@ -9,6 +9,7 @@ import NavMenu from "../NavMenu"
 import Footer from "../Footer"
 import { Head, SupportUs } from "@Components/shared"
 import AdUnits from "./AdUnits"
+import { ErrorBoundary } from "@Components/shared/ErrorBoundary"
 
 interface Props {
 	/** If you'd like to remove the ads from this page, set this to false. Defaults to true. */
@@ -60,7 +61,9 @@ const AdPageWrapper = ({ withAds = true, title, description, children }: Props) 
 			<Head title={title} description={description} />
 			<NavMenu />
 			<Grid>
-				<ContentColumn>{children}</ContentColumn>
+				<ContentColumn>
+					<ErrorBoundary>{children}</ErrorBoundary>
+				</ContentColumn>
 				{withAds && width > 1200 && (
 					<AdvertisingColumn>
 						<BackgroundImage src="/media/sidebar-background.svg" />
