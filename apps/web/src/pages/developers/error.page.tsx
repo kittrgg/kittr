@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { ErrorBoundary } from "@Components/shared/ErrorBoundary"
+import { SwallowErrorBoundary, NoSwallowErrorBoundary } from "@Components/shared/ErrorBoundary"
 
 const Inner = () => {
 	const [doError, setDoError] = useState(false)
@@ -10,9 +10,14 @@ const Inner = () => {
 }
 
 const TestErrorBoundary = () => (
-	<ErrorBoundary>
-		<Inner />
-	</ErrorBoundary>
+	<>
+		<SwallowErrorBoundary>
+			<Inner />
+		</SwallowErrorBoundary>
+		<NoSwallowErrorBoundary>
+			<Inner />
+		</NoSwallowErrorBoundary>
+	</>
 )
 
 export default TestErrorBoundary
