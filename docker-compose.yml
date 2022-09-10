@@ -1,6 +1,17 @@
 version: "3"
 
 services:
+  mysql:
+    container_name: kittr-mysql
+    ports:
+      - 3306:3306
+    image: mysql:8.0.30
+    environment:
+      - MYSQL_USER=dev
+      - MYSQL_PASSWORD=dev
+      - MYSQL_DATABASE=dev
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+
   postgres:
     container_name: postgres
     ports:
@@ -13,18 +24,6 @@ services:
     restart: always
     volumes:
       - kittr-database:/var/lib/postgresql/data
-
-  mongo:
-    container_name: mongo
-    image: mongo:5
-    restart: always
-    ports:
-      - 27017:27017
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-    volumes:
-      - ./volumes/mongo:/data/db
 
   firebase-emulators:
     container_name: firebase-emulators

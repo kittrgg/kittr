@@ -1,6 +1,6 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["fullTextSearch", "referentialIntegrity"]
+  previewFeatures = ["fullTextSearch"]
 }
 
 generator zod {
@@ -14,9 +14,8 @@ generator zod {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
-  referentialIntegrity = "prisma"
 }
 
 model Administrator {
