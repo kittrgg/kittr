@@ -29,12 +29,10 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 	try {
 		event = stripe.webhooks.constructEvent(buf, sig, process.env.STRIPE_WEBHOOK_SECRET as string)
 
-		console.log(event)
-
 		// Handle the event
 		switch (event.type) {
 			case "customer.subscription.created": {
-				console.log({ sessionCompleted: event.type })
+				console.log({ subscriptionCreated: event.type })
 				// @ts-ignore
 				const signUp = await prisma.channel.update({
 					where: {

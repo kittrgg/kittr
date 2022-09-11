@@ -1,7 +1,7 @@
 import { Button } from "@kittr/ui"
 
 export default {
-	title: "Button",
+	title: "Atom/Button",
 	component: Button
 }
 
