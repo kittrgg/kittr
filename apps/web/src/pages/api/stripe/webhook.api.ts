@@ -4,6 +4,7 @@ import { createHandler } from "@Middlewares/createHandler"
 import { buffer } from "micro"
 import type { NextApiRequest, NextApiResponse } from "next"
 import Stripe from "stripe"
+import { withSentry } from "@sentry/nextjs"
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, { apiVersion: "2020-08-27" })
 
@@ -30,7 +31,10 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 
 		// Handle the event
 		switch (event.type) {
-			case "checkout.session.completed":
+			case "checkout.session.completed": {
+				console.log({ sessionCompleted: event.type })
+				// @ts-ignore
+				console.log({ sessionCompletedObject: event.type.data.object })
 				const signUp = await prisma.channel.update({
 					where: {
 						// @ts-ignore
@@ -45,20 +49,12 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 					}
 				})
 
-				if (signUp) {
-					await fetch.post({
-						url: localURL || `https://${apiURL}.kittr.gg/stripe-webhook-reporter`,
-						body: {
-							// @ts-ignore
-							id: event.object.metadata.id || event.data.object.metadata._id // _id needed for pre-Prisma migration accounts
-						}
-					})
+				console.log({ signUp })
 
-					return res.status(200).json({ success: true })
-				}
-
-				break
-			case "customer.subscription.deleted":
+				return res.status(200).json({ success: true })
+			}
+			case "customer.subscription.deleted": {
+				console.log({ subscriptionDeleted: event.type })
 				const customerCancelled = await prisma.channel.update({
 					where: {
 						// @ts-ignore
@@ -84,8 +80,10 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 
 					return res.status(200).json({ cancelled: true })
 				}
+			}
 				break
 			case "subscription_schedule.updated":
+				console.log({ subScheduleUpdated: event.type })
 				// @ts-ignore
 				if (event.data.object.status === "past_due") {
 					// @ts-ignore
@@ -128,4 +126,4 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 	}
 })
 
-export default handler
+export default withSentry(handler)
