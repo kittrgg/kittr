@@ -1,9 +1,5 @@
 import { Prisma, prisma } from "@kittr/prisma"
 
-const include = Prisma.validator<Prisma.ChannelInclude>()({
-	links: true
-})
-
 interface Params {
 	take: number
 }
@@ -19,7 +15,14 @@ export const getTopChannelsWithLinksQuery = async ({ take }: Params) => {
 			viewCount: "desc"
 		},
 		take,
-		include
+		include: {
+			links: true,
+			profile: {
+				select: {
+					hasProfileImage: true
+				}
+			}
+		}
 	})
 
 	return result
