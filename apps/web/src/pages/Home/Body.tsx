@@ -2,7 +2,6 @@ import colors from "@Colors"
 import { ChannelAvatarList, GameList } from "@Components/shared"
 import { Channel, ChannelLink, ChannelProfile, Game } from "@kittr/prisma"
 import { Section, SideScroller } from "@kittr/ui"
-import { header2 } from "@Styles/typography"
 import { Routes } from "@Utils/lookups/routes"
 import Link from "next/link"
 import { useRouter } from "next/router"
@@ -96,20 +95,6 @@ const Container = styled.div`
 	z-index: 1;
 	margin: 0 24px;
 	margin-top: 36px;
-`
-
-const H2 = styled.h2`
-	margin-right: 12px;
-	margin-bottom: 12px;
-	${header2};
-`
-
-const SectionHeader = styled.div`
-	display: flex;
-	flex-direction: row;
-	align-items: flex-start;
-	justify-content: space-between;
-	margin-top: 32px;
 `
 
 const StyledLink = styled.a`
