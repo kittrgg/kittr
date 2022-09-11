@@ -13,9 +13,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<
 	const { id, displayName, urlSafeName } = req.body
 	const origin = req.headers.origin
 
-	console.log({ id })
-	console.log({ displayName })
-	console.log({ urlSafeName })
+	console.log({ id, displayName, urlSafeName })
 
 	try {
 		const session = await stripe.checkout.sessions.create({
@@ -40,8 +38,6 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<
 			success_url: `${origin}/premium-success?session_id={CHECKOUT_SESSION_ID}`,
 			cancel_url: `${origin}/back-to-dashboard`
 		})
-
-		console.log({ session })
 
 		return res.status(200).json(session)
 	} catch (error) {
