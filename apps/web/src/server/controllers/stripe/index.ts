@@ -32,7 +32,6 @@ export const buyPremium = createController()
             }
           ],
           allow_promotion_codes: true,
-          payment_intent_data: { metadata: { channelId: input.channelId, displayName: input.displayName, urlSafeName: input.urlSafeName } },
           subscription_data: { metadata: { channelId: input.channelId, displayName: input.displayName, urlSafeName: input.urlSafeName } },
           metadata: { channelId: input.channelId, displayName: input.displayName, urlSafeName: input.urlSafeName },
           success_url: "https://kittr.gg/premium-success?session_id={CHECKOUT_SESSION_ID}",
