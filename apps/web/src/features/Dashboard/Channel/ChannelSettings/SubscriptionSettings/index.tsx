@@ -15,7 +15,7 @@ const SubscriptionSettings = () => {
 	const dispatch = useDispatch()
 	const modal = useModal()
 	const { isPremium } = usePremiumStatus()
-	const { data } = useDashboardChannel()
+	const { data, refetch: refetchChannel } = useDashboardChannel()
 
 	const { data: subscriptionEnd } = trpc.useQuery(
 		[
@@ -37,6 +37,7 @@ const SubscriptionSettings = () => {
 	const { mutate: buyPremium } = trpc.useMutation("stripe/buy-premium", {
 		onSuccess: (result) => {
 			window.open(result.url as string, "_blank")
+			refetchChannel()
 		},
 		onError: () => {
 			dispatch(setModal({ type: "Error Notification", data: {} }))
