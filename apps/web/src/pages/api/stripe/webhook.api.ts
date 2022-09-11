@@ -36,7 +36,6 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 			case "customer.subscription.created": {
 				console.log({ sessionCompleted: event.type })
 				// @ts-ignore
-				console.log({ sessionCompletedObject: event.type.data.object })
 				const signUp = await prisma.channel.update({
 					where: {
 						// @ts-ignore
