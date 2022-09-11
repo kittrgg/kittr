@@ -32,9 +32,8 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 		// Handle the event
 		switch (event.type) {
 			case "customer.subscription.created": {
-				console.log({ subscriptionCreated: event.type })
 				// @ts-ignore
-				const signUp = await prisma.channel.update({
+				return await prisma.channel.update({
 					where: {
 						// @ts-ignore
 						id: event.data.object.metadata.id || event.data.object.metadata._id // _id needed for pre-Prisma migration accounts
@@ -48,12 +47,9 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 					}
 				})
 
-				console.log({ signUp })
-
 				return res.status(200).json({ success: true })
 			}
 			case "customer.subscription.deleted": {
-				console.log({ subscriptionDeleted: event.type })
 				const customerCancelled = await prisma.channel.update({
 					where: {
 						// @ts-ignore
@@ -82,7 +78,6 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 			}
 				break
 			case "subscription_schedule.updated":
-				console.log({ subScheduleUpdated: event.type })
 				// @ts-ignore
 				if (event.data.object.status === "past_due") {
 					// @ts-ignore

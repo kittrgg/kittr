@@ -13,7 +13,6 @@ export const buyPremium = createController()
       urlSafeName: z.string()
     }),
     async resolve({ input }) {
-      console.log({ input })
       try {
         const session = await stripe.checkout.sessions.create({
           mode: "subscription",
@@ -33,7 +32,7 @@ export const buyPremium = createController()
             }
           ],
           allow_promotion_codes: true,
-          metadata: { channelId: input.channelId, displayName: input.displayName, urlSafeName: input.urlSafeName },
+          metadata: { test: "value", channelId: input.channelId, displayName: input.displayName, urlSafeName: input.urlSafeName },
           success_url: "https://kittr.gg/premium-success?session_id={CHECKOUT_SESSION_ID}",
           cancel_url: "https://kittr.gg/back-to-dashboard"
         })
