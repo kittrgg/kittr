@@ -1,7 +1,5 @@
-import { Center } from "@mantine/core"
 import { withThemes } from "@react-theming/storybook-addon"
-import { MantineProvider } from "../src/components/MantineProvider/index"
-import { theme } from "../src/components/MantineProvider/styles/theme"
+import { MantineProvider, Center } from "@kittr/ui"
 
 // export const parameters = {
 // 	actions: { argTypesRegex: "^on[A-Z].*" },
@@ -12,9 +10,6 @@ import { theme } from "../src/components/MantineProvider/styles/theme"
 // 		}
 // 	 }
 // }
-
-const dark = { themeName: "Dark", ...theme, colorScheme: "dark" }
-const light = { themeName: "Light", ...theme, colorScheme: "light" }
 
 export const onThemeSwitch = (context) => {
 	const { theme } = context
@@ -31,11 +26,7 @@ export const onThemeSwitch = (context) => {
 }
 
 const providerFn = ({ theme, children }) => {
-	return (
-		<MantineProvider withNormalizeCSS withGlobalStyles theme={theme}>
-			{children}
-		</MantineProvider>
-	)
+	return <MantineProvider>{children}</MantineProvider>
 }
 
 export const decorators = [
