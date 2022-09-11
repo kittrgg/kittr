@@ -57,10 +57,10 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 				return subscriptionHandler(event)
 			}
 			case "customer.subscription.deleted": {
-				const customerCancelled = await prisma.channel.update({
+				const cancelled = await prisma.channel.update({
 					where: {
 						// @ts-ignore
-						id: event.object.metadata.channelId || event.data.object.metadata._id // _id needed for pre-Prisma migration accounts
+						id: event.data.object.metadata.channelId
 					},
 					data: {
 						plan: {
@@ -71,17 +71,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 					}
 				})
 
-				if (customerCancelled) {
-					await fetch.post({
-						url: localURL || `https://${apiURL}.kittr.gg/stripe-webhook-reporter`,
-						body: {
-							// @ts-ignore
-							id: event.object.metadata.id || event.data.object.metadata._id // _id needed for pre-Prisma migration accounts
-						}
-					})
-
-					return res.status(200).json({ cancelled: true })
-				}
+				return res.status(200).json({ cancelled })
 			}
 				break
 			case "subscription_schedule.updated":

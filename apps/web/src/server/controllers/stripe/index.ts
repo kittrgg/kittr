@@ -3,6 +3,7 @@ import { authenticateUser } from "@Server/middlewares/authenticateUser"
 import { z } from "zod"
 import { stripe } from "@Services/stripe"
 import { TRPCError } from "@trpc/server"
+import { prisma } from "@kittr/prisma"
 import { getUrl } from "@Utils/helpers/getUrl"
 
 export const buyPremium = createController()
