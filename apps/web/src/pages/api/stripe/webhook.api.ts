@@ -26,7 +26,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 	const localURL = process.env.NODE_ENV === "development" ? "http://api:5000/stripe-webhook-reporter" : ""
 	const apiURL = process.env.NEXT_PUBLIC_ENABLE_SEEDING === "true" ? "stage-api" : "api"
 
-	const subscriptionHandler = (event: Stripe.Event) => {
+	const subscriptionHandler = async (event: Stripe.Event) => {
 		// @ts-ignore
 		const result = await prisma.channel.update({
 			where: {
