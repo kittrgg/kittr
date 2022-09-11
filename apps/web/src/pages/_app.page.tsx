@@ -53,7 +53,7 @@ const MyApp = ({ Component, pageProps }: any) => {
 						marginBottom: "0 !important"
 					},
 					// Make sure that Venatus ads are always a minimum of 320px wide.
-					"[data-ref=\"vm-preloader\"]": {
+					'[data-ref="vm-preloader"]': {
 						minWidth: "320px !important"
 					},
 					// // This hides a warning about how you are using firebase emulators
@@ -76,14 +76,14 @@ const MyApp = ({ Component, pageProps }: any) => {
 }
 
 export default withTRPC<AppRouter>({
-	config ({}) {
+	config({}) {
 		/*
 		 * If you want to use SSR, you need to use the server's full URL
 		 * @link https://trpc.io/docs/ssr
 		 */
 		const url =
 			process.env.NEXT_PUBLIC_VERCEL_ENV === "preview"
-				? (process.env.NEXT_PUBLIC_VERCEL_URL as string)
+				? "/api/trpc"
 				: process.env.NEXT_PUBLIC_VERCEL_ENV === "production"
 				? "https://www.kittr.gg/api/trpc"
 				: "http://localhost:3000/api/trpc"
@@ -103,7 +103,8 @@ export default withTRPC<AppRouter>({
 			links: [
 				// adds pretty logs to your console in development and logs errors in production
 				loggerLink({
-					enabled: (opts) => process.env.NODE_ENV === "development" || (opts.direction === "down" && opts.result instanceof Error)
+					enabled: (opts) =>
+						process.env.NODE_ENV === "development" || (opts.direction === "down" && opts.result instanceof Error)
 				}),
 				httpBatchLink({
 					url
