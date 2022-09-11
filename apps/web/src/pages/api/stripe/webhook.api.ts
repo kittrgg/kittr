@@ -31,7 +31,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 
 		// Handle the event
 		switch (event.type) {
-			case "checkout.session.completed": {
+			case "customer.subscription.created": {
 				console.log({ sessionCompleted: event.type })
 				// @ts-ignore
 				console.log({ sessionCompletedObject: event.type.data.object })
