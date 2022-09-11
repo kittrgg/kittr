@@ -1,7 +1,7 @@
 import { createController } from "@Server/createController"
 import { authenticateUser } from "@Server/middlewares/authenticateUser"
-import { z } from 'zod'
-import { stripe } from '@Services/stripe'
+import { z } from "zod"
+import { stripe } from "@Services/stripe"
 import { TRPCError } from "@trpc/server"
 
 export const buyPremium = createController()
@@ -13,6 +13,7 @@ export const buyPremium = createController()
       urlSafeName: z.string()
     }),
     async resolve({ input }) {
+      console.log({ input })
       try {
         const session = await stripe.checkout.sessions.create({
           mode: "subscription",
@@ -33,8 +34,8 @@ export const buyPremium = createController()
           ],
           allow_promotion_codes: true,
           metadata: { channelId: input.channelId, displayName: input.displayName, urlSafeName: input.urlSafeName },
-          success_url: `https://kittr.gg/premium-success?session_id={CHECKOUT_SESSION_ID}`,
-          cancel_url: `https://kittr.gg/back-to-dashboard`
+          success_url: "https://kittr.gg/premium-success?session_id={CHECKOUT_SESSION_ID}",
+          cancel_url: "https://kittr.gg/back-to-dashboard"
         })
 
         return session
@@ -82,7 +83,7 @@ export const managePremium = createController()
         const subscription = await stripe.subscriptions.retrieve(channel.plan?.stripeSubscriptionId)
         const session = await stripe.billingPortal.sessions.create({
           customer: subscription.customer as string,
-          return_url: `https://kittr.gg/back-to-dashboard`
+          return_url: "https://kittr.gg/back-to-dashboard"
         })
 
         return session
