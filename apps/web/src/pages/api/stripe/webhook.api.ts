@@ -26,28 +26,35 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 	const localURL = process.env.NODE_ENV === "development" ? "http://api:5000/stripe-webhook-reporter" : ""
 	const apiURL = process.env.NEXT_PUBLIC_ENABLE_SEEDING === "true" ? "stage-api" : "api"
 
+	const subscriptionHandler = (event: Stripe.Event) => {
+		// @ts-ignore
+		const result = await prisma.channel.update({
+			where: {
+				// @ts-ignore
+				id: event.data.object.metadata.channelId
+			},
+			data: {
+				plan: {
+					update: {
+						type: "PREMIUM"
+					}
+				}
+			}
+		})
+
+		return res.status(200).json({ result })
+	}
+
 	try {
 		event = stripe.webhooks.constructEvent(buf, sig, process.env.STRIPE_WEBHOOK_SECRET as string)
 
 		// Handle the event
 		switch (event.type) {
 			case "customer.subscription.created": {
-				// @ts-ignore
-				return await prisma.channel.update({
-					where: {
-						// @ts-ignore
-						id: event.data.object.metadata.id || event.data.object.metadata._id // _id needed for pre-Prisma migration accounts
-					},
-					data: {
-						plan: {
-							update: {
-								type: "PREMIUM"
-							}
-						}
-					}
-				})
-
-				return res.status(200).json({ success: true })
+				return subscriptionHandler(event)
+			}
+			case "customer.subscription.updated": {
+				return subscriptionHandler(event)
 			}
 			case "customer.subscription.deleted": {
 				const customerCancelled = await prisma.channel.update({
