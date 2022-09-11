@@ -6,7 +6,7 @@ export const getTrpcUrl =
       : "http://localhost:3000/api/trpc"
 
 export const getUrl = process.env.NEXT_PUBLIC_VERCEL_ENV === "preview"
-  ? process.env.NEXT_PUBLIC_VERCEL_URL
+  ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
   : process.env.NEXT_PUBLIC_VERCEL_ENV === "production"
     ? "https://www.kittr.gg"
     : "http://localhost:3000"
