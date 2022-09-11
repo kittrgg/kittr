@@ -12,6 +12,9 @@ export const listChannels = (managerFirebaseUid: string) => {
 		},
 		include: {
 			profile: true,
+			plan: {
+				select: { type: true }
+			},
 			managers: true
 		}
 	})

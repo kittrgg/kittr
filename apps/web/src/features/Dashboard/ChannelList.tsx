@@ -62,8 +62,8 @@ const ChannelList = () => {
 				{!isFetchingChannels &&
 					!!user &&
 					channels &&
-					channels.map((elem) => {
-						return (
+					channels.map((elem) => (
+						<BorderWrapper isPremium={elem.plan?.type === "PREMIUM"}>
 							<ChannelContainer
 								key={elem.id}
 								ref={divRef}
@@ -110,8 +110,8 @@ const ChannelList = () => {
 									for this channel.
 								</Role>
 							</ChannelContainer>
-						)
-					})}
+						</BorderWrapper>
+					))}
 
 				{!isFetchingChannels && channels?.length === 0 && (
 					<>
@@ -174,13 +174,19 @@ const Header = styled.h1`
 	${header1};
 `
 
+const BorderWrapper = styled.div<{ isPremium: boolean }>`
+	margin: 20px 0;
+	padding: 5px;
+	background-image: ${(props) => (props.isPremium ? colors.premiumGradient : colors.darker)};
+	border-radius: 20px;
+`
+
 const ChannelContainer = styled.div`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
-	margin: 20px 0;
-	padding: 32px 54px;
+	padding: 18px;
 	background-color: ${colors.darker};
 	border-radius: 20px;
 	cursor: pointer;
