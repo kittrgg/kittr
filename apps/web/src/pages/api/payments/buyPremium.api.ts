@@ -10,10 +10,9 @@ const handler = createHandler()
 
 // Create a Stripe subscription checkout
 handler.post(async (req: NextApiRequest, res: NextApiResponse<NextServerPayload<Stripe.Response<Stripe.Checkout.Session>>>) => {
+	console.log({ body: req.body })
 	const { id, displayName, urlSafeName } = req.body
 	const origin = req.headers.origin
-
-	console.log({ id, displayName, urlSafeName })
 
 	try {
 		const session = await stripe.checkout.sessions.create({
