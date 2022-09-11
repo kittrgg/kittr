@@ -36,10 +36,10 @@ const SubscriptionSettings = () => {
 
 	const { mutate: buyPremium } = trpc.useMutation("stripe/buy-premium", {
 		onSuccess: (result) => {
-			window.open(result.url as string, "_blank")
 			console.log("refetching...")
 			refetchChannel()
 			console.log("refetched")
+			window.open(result.url as string, "_blank")
 		},
 		onError: () => {
 			dispatch(setModal({ type: "Error Notification", data: {} }))
@@ -47,10 +47,10 @@ const SubscriptionSettings = () => {
 	})
 	const { mutate: managePremium } = trpc.useMutation("stripe/manage-premium", {
 		onSuccess: (result) => {
-			window.open(result.url as string, "_blank")
 			console.log("1 refetching...")
 			refetchChannel()
 			console.log("2 refetching...")
+			window.open(result.url as string, "_blank")
 		},
 		onError: () => {
 			dispatch(setModal({ type: "Error Notification", data: {} }))
