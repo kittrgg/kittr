@@ -1,6 +1,7 @@
 export { useMantineTheme as useTheme } from "@mantine/core"
 export * from "./Accordion"
 export * from "./Button"
+export * from "./Center"
 export * from "./List"
 export * from "./Loader"
 export * from "./MantineProvider"
