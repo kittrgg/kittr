@@ -23,7 +23,7 @@ const io = new Server(httpServer, {
 
 Logger.init({
 	dsn: process.env.SENTRY_DSN,
-	environment: process.env.IS_TESTING ? "testing" : process.env.NODE_ENV
+	environment: process.env.IS_PREVIEW ? "Preview" : process.env.NODE_ENV
 })
 
 app.use(Logger.Handlers.requestHandler())
@@ -42,12 +42,12 @@ app.get("/error", () => {
 	throw new Error("Test error")
 })
 
-// Triggers refetches for the Stripe subscription webhook
-app.post("/stripe-webhook-reporter", (req, res) => {
-	const { _id } = req.body
-	io.emit(`dashboard=${_id}`, "Trigger refetch!")
-	return res.status(200).json({ success: true })
-})
+// // Triggers refetches for the Stripe subscription webhook
+// app.post("/stripe-webhook-reporter", (req, res) => {
+// 	const { _id } = req.body
+// 	io.emit(`dashboard=${_id}`, "Trigger refetch!")
+// 	return res.status(200).json({ success: true })
+// })
 
 if (process.env.NODE_ENV === "production") {
 	const viewCounts = new CronJob(
