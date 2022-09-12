@@ -2,7 +2,6 @@
 	"name": "@kittr/storybook",
 	"private": true,
 	"version": "0.0.0",
-	"main": "./src/components/index.ts",
 	"license": "MIT",
 	"scripts": {
 		"lint": "eslint --fix",
