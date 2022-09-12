@@ -1,13 +1,9 @@
-# fly.toml file generated for kittr-api on 2022-09-11T20:03:17-07:00
+# fly.toml file generated for kittr-api on 2022-09-11T20:49:25-07:00
 
 app = "kittr-api"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
-
-[build]
-  [build.args]
-    NODE_VERSION = "16"
 
 [env]
   PORT = "8080"
