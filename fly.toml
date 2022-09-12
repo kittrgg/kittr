@@ -1,13 +1,9 @@
-# fly.toml file generated for kittr-api on 2022-09-11T15:23:35-07:00
+# fly.toml file generated for kittr-api on 2022-09-11T20:03:17-07:00
 
 app = "kittr-api"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
-
-[build]
-  builder = "heroku/buildpacks:20"
-  dockerfile = "Dockerfile.api"
 
 [env]
   PORT = "8080"

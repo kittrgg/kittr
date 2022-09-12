@@ -2,7 +2,8 @@
 	"name": "api",
 	"version": "0.0.0",
 	"scripts": {
-		"start": "npx ts-node -T src/index.ts",
+		"build": "npx tsup ./src/index.ts",
+		"start": "npx ts-node ./src/index.ts",
 		"dev": "nodemon src/index.ts",
 		"lint": "eslint --fix .",
 		"clean": "rm -rf .turbo && rm -rf coverage && rm -rf dist && rm -rf node_modules",
@@ -12,6 +13,7 @@
 		"@google-analytics/data": "3.0.0",
 		"@kittr/logger": "*",
 		"@kittr/prisma": "*",
+		"@swc/core": "1.3.0",
 		"cors": "2.8.5",
 		"cron": "2.1.0",
 		"dotenv": "16.0.1",
