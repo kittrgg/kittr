@@ -1,5 +1,14 @@
-import { withThemes } from "@react-theming/storybook-addon"
+import React from "react"
+// import { withThemes } from "@react-theming/storybook-addon"
 import { MantineProvider, Center } from "@kittr/ui"
+
+export const parameters = {
+	options: {
+		storySort: {
+			order: ["Inputs", "Typography", "Atoms", "Molecules", "Organisms"]
+		}
+	}
+}
 
 // export const parameters = {
 // 	actions: { argTypesRegex: "^on[A-Z].*" },
@@ -11,29 +20,38 @@ import { MantineProvider, Center } from "@kittr/ui"
 // 	 }
 // }
 
-export const onThemeSwitch = (context) => {
-	const { theme } = context
-	const background = theme.colorScheme === "dark" ? "#1D1D1F" : "#ffffff"
-	const parameters = {
-		backgrounds: {
-			default: background
-		}
-		// Pass backgrounds: null to disable background switching at all
-	}
-	return {
-		parameters
-	}
-}
+// const dark = { themeName: "Dark", ...theme, colorScheme: "dark" }
+// const light = { themeName: "Light", ...theme, colorScheme: "light" }
 
-const providerFn = ({ theme, children }) => {
-	return <MantineProvider>{children}</MantineProvider>
-}
+// const onThemeSwitch = (context) => {
+// 	const { theme } = context
+// 	const background = theme.colorScheme === "dark" ? "#1D1D1F" : "#ffffff"
+// 	const parameters = {
+// 		backgrounds: {
+// 			default: background
+// 		}
+// 		// Pass backgrounds: null to disable background switching at all
+// 	}
+// 	return {
+// 		parameters
+// 	}
+// }
+
+// const providerFn = ({ theme, children }) => {
+// 	return (
+// 		<MantineProvider withNormalizeCSS withGlobalStyles theme={theme}>
+// 			{children}
+// 		</MantineProvider>
+// 	)
+// }
 
 export const decorators = [
 	(Story) => (
-		<Center sx={{ minHeight: "calc( 100vh - 2rem )" }}>
-			<Story />
-		</Center>
-	),
-	withThemes(null as any, [dark, light], { providerFn, onThemeSwitch })
+		<MantineProvider withNormalizeCSS withGlobalStyles>
+			<Center sx={{ minHeight: "calc( 100vh - 2rem )" }}>
+				<Story />
+			</Center>
+		</MantineProvider>
+	)
+	// withThemes(null as any, [dark, light], { providerFn, onThemeSwitch })
 ]
