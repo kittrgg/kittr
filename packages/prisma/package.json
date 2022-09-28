@@ -20,7 +20,7 @@
 		"db-format": "prisma format"
 	},
 	"devDependencies": {
-		"prisma": "4.0.0",
+		"prisma": "4.4.0",
 		"ts-node": "10.9.1",
 		"tsup": "5.12.0",
 		"typescript": "4.7.4",
