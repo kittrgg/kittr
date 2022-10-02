@@ -28,14 +28,13 @@ const Banner = ({ _id, previewWidth, data, activeKit, setActiveKit }: Props) => 
 	useEffect(() => {
 		let timeout: any = null
 
-		const delay = async (period: number) => {
-			return await new Promise((resolve) => {
+		const delay = async (period: number) =>
+			await new Promise((resolve) => {
 				timeout = setTimeout(() => {
 					resolve(null)
 					clearTimeout(timeout)
 				}, period)
 			})
-		}
 
 		const showItem = async () => {
 			setIsDataVisible(true)
@@ -105,14 +104,12 @@ const Banner = ({ _id, previewWidth, data, activeKit, setActiveKit }: Props) => 
 									sortingArray: warzoneSlotsOrder,
 									keyToSort: "slotKey",
 									array: activeKit.options || []
-								}).map((elem) => {
-									return (
-										<div key={elem.displayName} style={{ width: "200px", minWidth: "200px" }}>
-											<Slot>{elem.slotKey}</Slot>
-											<Selection>{elem.displayName.toUpperCase()}</Selection>
-										</div>
-									)
-								})}
+								}).map((elem) => (
+									<div key={elem.displayName} style={{ width: "200px", minWidth: "200px" }}>
+										<Slot>{elem.slotKey}</Slot>
+										<Selection>{elem.displayName.toUpperCase()}</Selection>
+									</div>
+								))}
 						</Options>
 					</OptionsWrapper>
 				</Main>

@@ -18,8 +18,9 @@ interface Props {
 const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Props) => {
 	const [isDataVisible, setIsDataVisible] = useState(true)
 	const optionsRef = useRef<any>(null)
+	console.log(activeKit)
 
-	const SCROLL_DURATION = ( Object.keys(activeKit || {}) ?? [] ).length ? activeKit.options.length * 4 : 0
+	const SCROLL_DURATION = (Object.keys(activeKit || {}) ?? []).length ? activeKit.options.length * 4 : 0
 	const FADE_DURATION = 0.2
 
 	// Handle two kits at once
@@ -27,14 +28,13 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 	useEffect(() => {
 		let timeout: any = null
 
-		const delay = async (period: number) => {
-			return await new Promise((resolve) => {
+		const delay = async (period: number) =>
+			await new Promise((resolve) => {
 				timeout = setTimeout(() => {
 					resolve(null)
 					clearTimeout(timeout)
 				}, period)
 			})
-		}
 
 		const showItem = async () => {
 			setIsDataVisible(true)
@@ -104,14 +104,12 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 								sortingArray: warzoneSlotsOrder,
 								keyToSort: "slotKey",
 								array: activeKit.options || []
-							}).map((elem: any, _: any) => {
-								return (
-									<Option key={elem.displayName}>
-										<Slot>{elem.slotKey}</Slot>
-										<Selection>{elem.displayName.toUpperCase()}</Selection>
-									</Option>
-								)
-							})}
+							}).map((elem: any, _: any) => (
+								<Option key={elem.displayName}>
+									<Slot>{elem.slotKey}</Slot>
+									<Selection>{elem.displayName.toUpperCase()}</Selection>
+								</Option>
+							))}
 					</Options>
 				</OptionsWrapper>
 			</Wrapper>
