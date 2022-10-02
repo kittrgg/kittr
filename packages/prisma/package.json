@@ -16,6 +16,7 @@
 		"db-studio": "prisma studio",
 		"migrate-data": "ts-node ./migration-scripts/index.ts",
 		"seed": "prisma db push --force-reset && ts-node ./migration-scripts/index.ts",
+		"seed-from-file": "docker exec -i postgres pg_restore -U turboAf -v -d prisma -c < ./dbdumpfromprisma.pgsql",
 		"nuke": "ts-node ./migration-scripts/nuke.ts",
 		"db-format": "prisma format"
 	},
