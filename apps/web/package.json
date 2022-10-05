@@ -21,7 +21,7 @@
 		"@kittr/ui": "*",
 		"@mantine/core": "4.2.9",
 		"@mantine/hooks": "4.2.9",
-		"@mantine/next": "4.2.9",
+		"@mantine/next": "5.5.4",
 		"@reduxjs/toolkit": "1.7.2",
 		"@sentry/nextjs": "7.3.0",
 		"@stripe/react-stripe-js": "1.7.0",
