@@ -9,7 +9,7 @@
 		"type-check": "tsc --pretty --noEmit"
 	},
 	"dependencies": {
-		"@google-analytics/data": "3.0.0",
+		"@google-analytics/data": "3.1.0",
 		"@kittr/logger": "*",
 		"@kittr/prisma": "*",
 		"cors": "2.8.5",
