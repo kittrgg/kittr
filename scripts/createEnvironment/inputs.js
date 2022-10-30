@@ -1,6 +1,7 @@
 module.exports = {
 	apps: {
 		web: {
+			NEXT_PUBLIC_IS_DEV: process.env.NEXT_PUBLIC_IS_DEV,
 			DATABASE_URL: process.env.DATABASE_URL,
 			NEXT_PUBLIC_SOCKET_HOST: process.env.NEXT_PUBLIC_SOCKET_HOST,
 			NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:
