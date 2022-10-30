@@ -8,7 +8,7 @@
 	],
 	"packageManager": "yarn@1.22.16",
 	"scripts": {
-		"dx": "run-s env:clear env:dev dev",
+		"dx": "run-s env:clear env:dev docker:up dev",
 		"dx:db-seed": "node ./scripts/createEnvironment/prisma.js && turbo run seed",
 		"dx:db-view": "run-s env:prisma db-studio",
 		"dx:db-nuke": "cd packages && cd prisma && yarn db-reset",
