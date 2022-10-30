@@ -7,9 +7,9 @@ services:
       - 5432:5432
     image: postgres:alpine
     environment:
-      - POSTGRES_USER=turboAf
-      - POSTGRES_PASSWORD=getTurbo
-      - POSTGRES_DB=prisma
+      - POSTGRES_USER=dev
+      - POSTGRES_PASSWORD=dev
+      - POSTGRES_DB=dev
     restart: always
     volumes:
       - kittr-database:/var/lib/postgresql/data
@@ -29,7 +29,6 @@ services:
       - ./lib/firebase-emulators/storage.rules:/src/storage.rules
       - ./lib/firebase-emulators/seed:/src/firebase/seed
     command: firebase emulators:start --project dev --import=./firebase/seed --debug
-
 volumes:
   kittr-database:
     driver: local

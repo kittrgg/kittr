@@ -1,4 +1,3 @@
-// @ts-nocheck
 import NextErrorComponent from "next/error"
 import { flush } from "@sentry/nextjs"
 import { captureException } from "@sentry/nextjs"
@@ -8,7 +7,7 @@ const MyError = ({ statusCode, hasGetInitialPropsRun, err }) => {
 		// getInitialProps is not called in case of
 		// https://github.com/vercel/next.js/issues/8592. As a workaround, we pass
 		// err via _app.js so it can be captured
-		captureException(error, { tags: { isKittr: true } })
+		captureException(err, { tags: { isKittr: true } })
 		// Flushing is not required in this case as it only happens on the client
 	}
 
@@ -43,7 +42,7 @@ MyError.getInitialProps = async (context) => {
 	//    Boundaries: https://reactjs.org/docs/error-boundaries.html
 
 	if (err) {
-		captureException(error, { tags: { isKittr: true } })
+		captureException(err, { tags: { isKittr: true } })
 
 		// Flushing before returning is necessary if deploying to Vercel, see
 		// https://vercel.com/docs/platform/limits#streaming-responses
