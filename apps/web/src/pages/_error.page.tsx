@@ -1,3 +1,4 @@
+// @ts-nocheck
 import NextErrorComponent from "next/error"
 import { flush } from "@sentry/nextjs"
 import { captureException } from "@sentry/nextjs"
