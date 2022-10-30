@@ -21,7 +21,7 @@
 		"test": "turbo run test",
 		"clean": "turbo run clean && echo Removing top-level node_modules... && rm -rf node_modules && echo All clean!",
 		"format": "prettier --write \"**/*.{ts,tsx,md}\"",
-		"kill-ports": "kill-port 3000,3001,5000,5555",
+		"kill-ports": "kill-port 3000,3001,5555",
 		"dev": "turbo run dev",
 		"db-studio": "cd packages/prisma && yarn db-studio",
 		"env:clear": "node ./scripts/createEnvironment/clear.js",

@@ -1,4 +1,3 @@
-
 # Welcome to kittr
 
 # Getting Started
@@ -47,10 +46,7 @@ git checkout migration
 When working locally, these ports are available:
 
 - Web front-end: [http://localhost:3000](http://localhost:3000)
-- Documentation: [http://localhost:3001](http://localhost:3001)
-- API: [http://localhost:5000](http://localhost:5000)
-- Mongo Express: [http://localhost:5001](http://localhost:5001) (View your Mongo data in your browser!)
-- Mongo: http://localhost:27017 (You shouldn't need to interact with this port directly.)
+- API: [http://localhost:3001](http://localhost:3001)
 
 - Firebase Emulator UI: [http://localhost:4000](http://localhost:4000)
 - Firebase Auth Emulator: http://localhost:4001 (You shouldn't need to interact with this port directly.)
