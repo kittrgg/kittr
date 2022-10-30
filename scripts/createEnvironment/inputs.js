@@ -1,6 +1,8 @@
 module.exports = {
 	apps: {
 		web: {
+			SENTRY_IGNORE_API_RESOLUTION_ERROR:
+				process.env.SENTRY_IGNORE_API_RESOLUTION_ERROR,
 			NEXT_PUBLIC_IS_DEV: process.env.NEXT_PUBLIC_IS_DEV,
 			DATABASE_URL: process.env.DATABASE_URL,
 			NEXT_PUBLIC_SOCKET_HOST: process.env.NEXT_PUBLIC_SOCKET_HOST,
