@@ -14,7 +14,6 @@
 		"dx:db-nuke": "cd packages && cd prisma && yarn db-reset",
 		"dx:db-snapshot": "docker exec postgres pg_dump -U turboAf -Fc -f backup.sql prisma",
 		"dx:seed-snapshot": "docker exec -i postgres dropdb dev -U dev && echo DB dropped. && docker exec -i postgres pg_restore -U dev -d template1 -v \"backup.pgsql\" --create ",
-		"dx:seed-from-do": "pg_restore -h localhost -p 5432 -U dev -d dev < dbdump.sql",
 		"dx:storybook": "cd packages/ui && yarn storybook",
 		"type-check": "turbo run type-check",
 		"lint": "turbo run lint",
