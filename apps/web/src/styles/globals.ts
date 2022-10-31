@@ -68,9 +68,4 @@ body {
 [data-ref="vm-preloader"] {
   min-width: 320px !important
 }
-
-// This hides a warning about how you are using firebase emulators
-.firebase-emulator-warning {
-  display: none;
-}
 `
