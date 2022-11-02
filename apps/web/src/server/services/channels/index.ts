@@ -106,7 +106,6 @@ export const updateChannel = async ({ channelId, data }: { channelId: string; da
 			message: "That name is already taken. Please try another."
 		})
 	}
-
 }
 
 export const deleteChannel = async ({ channelId }: { channelId: string }) => {
@@ -136,6 +135,22 @@ export const getDashboardChannel = async ({ id }: { id: string }) => {
 			},
 			managers: true,
 			warzoneKits: {
+				orderBy: {
+					base: {
+						displayName: "asc"
+					}
+				},
+				include: {
+					base: {
+						include: {
+							category: true,
+							commandCodes: true
+						}
+					},
+					options: true
+				}
+			},
+			warzone2Kits: {
 				orderBy: {
 					base: {
 						displayName: "asc"
@@ -284,7 +299,6 @@ export const listTopChannels = async ({ skip = 0, take = 10 }: ListParams) => {
 	return result as ChannelWithProfile[]
 }
 
-
 export const countAllChannels = async () => {
 	const total = await prisma.channel.count()
 	return total
@@ -401,3 +415,4 @@ export const listLiveChannels = async () => {
 		return []
 	}
 }
+

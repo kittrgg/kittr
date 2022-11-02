@@ -15,7 +15,7 @@ import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 // import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
 
 /** The Warzone screen for a channel. */
-const Warzone = () => {
+const Warzone2 = () => {
 	const { gameId } = useChannelView()
 	const { data } = useDashboardChannel()
 	const modal = useSelector((state) => state.dashboard.modal.type)
@@ -48,7 +48,7 @@ const Warzone = () => {
 	return <p>How did you get here?</p>
 }
 
-export default Warzone
+export default Warzone2
 
 // Styled Components
 

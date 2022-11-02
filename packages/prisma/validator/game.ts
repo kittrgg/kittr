@@ -1,5 +1,5 @@
 import * as z from "zod"
-import { CompleteGenre, RelatedGenreModel, CompletePlatform, RelatedPlatformModel, CompleteChannel, RelatedChannelModel, CompleteChannelCreatorCode, RelatedChannelCreatorCodeModel, CompleteChannelCustomGameCommand, RelatedChannelCustomGameCommandModel, CompleteWarzoneKitBase, RelatedWarzoneKitBaseModel, CompleteWarzoneKit, RelatedWarzoneKitModel } from "./index"
+import { CompleteGenre, RelatedGenreModel, CompletePlatform, RelatedPlatformModel, CompleteChannel, RelatedChannelModel, CompleteChannelCreatorCode, RelatedChannelCreatorCodeModel, CompleteChannelCustomGameCommand, RelatedChannelCustomGameCommandModel, CompleteWarzoneKitBase, RelatedWarzoneKitBaseModel, CompleteWarzoneKit, RelatedWarzoneKitModel, CompleteWarzone2KitBase, RelatedWarzone2KitBaseModel, CompleteWarzone2Kit, RelatedWarzone2KitModel } from "./index"
 
 export const GameModel = z.object({
   id: z.string(),
@@ -21,6 +21,8 @@ export interface CompleteGame extends z.infer<typeof GameModel> {
   customCommandStrings: CompleteChannelCustomGameCommand[]
   warzoneKitBases: CompleteWarzoneKitBase[]
   warzoneKits: CompleteWarzoneKit[]
+  warzone2KitBases: CompleteWarzone2KitBase[]
+  warzone2Kits: CompleteWarzone2Kit[]
 }
 
 /**
@@ -36,4 +38,6 @@ export const RelatedGameModel: z.ZodSchema<CompleteGame> = z.lazy(() => GameMode
   customCommandStrings: RelatedChannelCustomGameCommandModel.array(),
   warzoneKitBases: RelatedWarzoneKitBaseModel.array(),
   warzoneKits: RelatedWarzoneKitModel.array(),
+  warzone2KitBases: RelatedWarzone2KitBaseModel.array(),
+  warzone2Kits: RelatedWarzone2KitModel.array(),
 }))

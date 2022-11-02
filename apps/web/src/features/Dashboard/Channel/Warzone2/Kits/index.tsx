@@ -12,7 +12,7 @@ const Kits = () => {
 	const activeKit = useActiveKit()
 	const modal = useModal()
 
-	if (channel?.warzoneKits.length === 0 && Object.keys(activeKit).length === 0) {
+	if (channel?.warzone2Kits.length === 0 && Object.keys(activeKit).length === 0) {
 		return (
 			<Container style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
 				<KitsPlaceholder />

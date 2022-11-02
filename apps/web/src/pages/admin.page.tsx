@@ -1,40 +1,37 @@
 // import Admin from "@Features/Admin"
 
 import { Button, Title } from "@kittr/ui"
+import { trpc } from "@Server/createHooks"
 import Link from "next/link"
+import { useRouter } from "next/router"
 
-// Hard coded now but for modularity will have to link to db in future
-const GAMEINFO = [
-	{
-		title: "Warzone",
-		link: "/admin/warzone"
-	},
-	{
-		title: "Warzone2",
-		link: "/admin/warzone2"
-	}
-]
+const Page = () => {
+	const router = useRouter()
+	const { data: games } = trpc.useQuery(["games/list", { _count: true }])
 
-const Page = () => (
-	// {
-	// return (
-	<div style={{ margin: "1rem" }}>
-		<div style={{ display: "flex", justifyContent: "space-between" }}>
-			<Title>Games</Title>
+	return (
+		<div style={{ margin: "1rem" }}>
+			<div style={{ display: "flex", justifyContent: "space-between" }}>
+				<Title>Games</Title>
 
-			{/* This is a nothing burger placeholder for now.
+				{/* This is a nothing burger placeholder for now.
 			Needs implementation after Warzone2 */}
-			<Button onClick={() => {}}>Create Game</Button>
-		</div>
+				<Button
+					onClick={() => {
+						router.push("/admin/creategame")
+					}}
+				>
+					Create Game
+				</Button>
+			</div>
 
-		{GAMEINFO.map((game) => (
-			<Link href={game.link}>
-				<Button onClick={() => {}}>{game.title}</Button>
-			</Link>
-		))}
-	</div>
-)
-// )
-// }
+			{games?.map((game) => (
+				<Link href={"/admin/" + game?.urlSafeName} passHref>
+					<Button onClick={() => {}}>{game?.urlSafeName.toUpperCase()}</Button>
+				</Link>
+			))}
+		</div>
+	)
+}
 export default Page
 

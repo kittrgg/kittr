@@ -6,6 +6,14 @@ export const list = async ({ kitBaseId }: { kitBaseId: string }) => {
 			kitBaseId
 		}
 	})
+	const wz2Result = await prisma.warzone2KitOption.findMany({
+		where: {
+			kitBaseId
+		}
+	})
 
-	return result
+	// TODO: Relation with services/kits/bases, needs to be changed to add more games.
+	if (!wz2Result[0]) return result
+	return wz2Result
 }
+

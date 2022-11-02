@@ -3,13 +3,14 @@ import styled from "styled-components"
 import { Button, Modal, Spinner } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { clearKitEditor, setModal } from "@Redux/slices/dashboard"
-import { useChannelData } from "@Redux/slices/dashboard/selectors"
+import { useChannelData, useChannelView } from "@Redux/slices/dashboard/selectors"
 import { useDispatch, useSelector } from "@Redux/store"
 import { header2 } from "@Styles/typography"
 
 const KitDeleteConfirmation = () => {
 	const { data: channelData } = useChannelData()
 	const data = useSelector((state) => state.dashboard.modal.data)
+	const { view } = useChannelView()
 	const dispatch = useDispatch()
 	const { mutate, isLoading } = useDashboardMutator({
 		path: "channels/kits/delete",
@@ -42,7 +43,7 @@ const KitDeleteConfirmation = () => {
 				<Button
 					design="white"
 					text="YES, REMOVE FROM KITS"
-					onClick={() => mutate({ channelId: channelData?.id!, kitId })}
+					onClick={() => mutate({ channelId: channelData?.id!, kitId: kitId, gameView: view })}
 					style={{ marginLeft: "48px" }}
 				/>
 			</Flex>
@@ -65,3 +66,4 @@ const Flex = styled.div`
 	justify-content: space-between;
 	margin-top: 48px;
 `
+

@@ -1,14 +1,14 @@
-import { WarzoneCommandCodeModel, WarzoneKitBaseModel, WarzoneKitOptionModel } from "@kittr/prisma/validator"
+import { Warzone2CommandCodeModel, Warzone2KitBaseModel, Warzone2KitOptionModel } from "@kittr/prisma/validator"
 import { createController } from "@Server/createController"
 import { authenticateAdmin } from "@Server/middlewares/authenticateAdmin"
-import * as AdminWarzoneService from "@Server/services/admin/warzone"
+import * as AdminWarzone2Service from "@Server/services/admin/warzone2"
 import { z } from "zod"
 
 const listKitBases = createController()
 	.middleware(authenticateAdmin)
 	.query("", {
 		async resolve() {
-			const result = await AdminWarzoneService.listKitBases()
+			const result = await AdminWarzone2Service.listKitBases()
 
 			return result
 		}
@@ -21,7 +21,7 @@ const getKitBase = createController()
 			kitBaseId: z.string()
 		}),
 		async resolve({ input }) {
-			const result = await AdminWarzoneService.getKitBase(input)
+			const result = await AdminWarzone2Service.getKitBase(input)
 
 			return result
 		}
@@ -31,7 +31,7 @@ const listKitBaseCategories = createController()
 	.middleware(authenticateAdmin)
 	.query("", {
 		async resolve() {
-			const result = await AdminWarzoneService.listKitBaseCategories()
+			const result = await AdminWarzone2Service.listKitBaseCategories()
 
 			return result
 		}
@@ -41,13 +41,13 @@ export const createBase = createController()
 	.middleware(authenticateAdmin)
 	.mutation("", {
 		input: z.object({
-			base: WarzoneKitBaseModel.omit({ id: true }),
-			commandCodes: z.array(WarzoneCommandCodeModel)
+			base: Warzone2KitBaseModel.omit({ id: true }),
+			commandCodes: z.array(Warzone2CommandCodeModel)
 			// categoryId: z.string(),
-			// options: z.array(WarzoneKitOptionModel)
+			// options: z.array(Warzone2KitOptionModel)
 		}),
 		async resolve({ input }) {
-			const updatedBase = await AdminWarzoneService.createKitBase({
+			const updatedBase = await AdminWarzone2Service.createKitBase({
 				base: input.base,
 				commandCodes: input.commandCodes.map((code) => code.code)
 			})
@@ -60,13 +60,13 @@ export const updateBase = createController()
 	.middleware(authenticateAdmin)
 	.mutation("", {
 		input: z.object({
-			base: WarzoneKitBaseModel
-			// commandCodes: z.array(WarzoneCommandCodeModel),
+			base: Warzone2KitBaseModel
+			// commandCodes: z.array(Warzone2CommandCodeModel),
 			// categoryId: z.string(),
-			// options: z.array(WarzoneKitOptionModel)
+			// options: z.array(Warzone2KitOptionModel)
 		}),
 		async resolve({ input }) {
-			const updatedBase = await AdminWarzoneService.updateKitBase({
+			const updatedBase = await AdminWarzone2Service.updateKitBase({
 				base: input.base
 				// categoryId: input.categoryId,
 				// commandCodes: input.commandCodes,
@@ -84,7 +84,7 @@ export const deleteBase = createController()
 			kitBaseId: z.string()
 		}),
 		async resolve({ input }) {
-			const updatedBase = await AdminWarzoneService.deleteKitBase({
+			const updatedBase = await AdminWarzone2Service.deleteKitBase({
 				kitBaseId: input.kitBaseId
 			})
 
@@ -97,10 +97,10 @@ export const updateOptionsForBase = createController()
 	.mutation("", {
 		input: z.object({
 			baseId: z.string(),
-			options: z.array(WarzoneKitOptionModel)
+			options: z.array(Warzone2KitOptionModel)
 		}),
 		async resolve({ input }) {
-			const updatedBase = await AdminWarzoneService.updateOptionsForBase({
+			const updatedBase = await AdminWarzone2Service.updateOptionsForBase({
 				baseId: input.baseId,
 				options: input.options
 			})
@@ -114,10 +114,10 @@ export const createOption = createController()
 	.mutation("", {
 		input: z.object({
 			baseId: z.string(),
-			option: WarzoneKitOptionModel.omit({ id: true })
+			option: Warzone2KitOptionModel.omit({ id: true })
 		}),
 		async resolve({ input }) {
-			const updatedBase = await AdminWarzoneService.createOption(input)
+			const updatedBase = await AdminWarzone2Service.createOption(input)
 
 			return updatedBase
 		}
@@ -126,9 +126,9 @@ export const createOption = createController()
 export const updateOption = createController()
 	.middleware(authenticateAdmin)
 	.mutation("", {
-		input: WarzoneKitOptionModel,
+		input: Warzone2KitOptionModel,
 		async resolve({ input }) {
-			const updatedBase = await AdminWarzoneService.updateOption(input)
+			const updatedBase = await AdminWarzone2Service.updateOption(input)
 
 			return updatedBase
 		}
@@ -141,13 +141,13 @@ export const deleteOption = createController()
 			optionId: z.string()
 		}),
 		async resolve({ input }) {
-			const deletedOption = await AdminWarzoneService.deleteOption(input.optionId)
+			const deletedOption = await AdminWarzone2Service.deleteOption(input.optionId)
 
 			return deletedOption
 		}
 	})
 
-export const WarzoneAdminController = {
+export const Warzone2AdminController = {
 	listKitBases,
 	getKitBase,
 	listKitBaseCategories,

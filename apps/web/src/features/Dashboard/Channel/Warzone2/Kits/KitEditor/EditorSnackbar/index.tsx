@@ -1,9 +1,15 @@
 import colors from "@Colors"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useAllKitBases } from "@Hooks/trpc/useAllKitBases"
-import { WarzoneKit, WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
+import { Warzone2Kit, Warzone2KitBase, Warzone2KitOption } from "@kittr/prisma"
 import { clearKitEditor, resetToInitialKit, setModal } from "@Redux/slices/dashboard"
-import { useActiveKit, useChannelData, useInitialKit, useModal } from "@Redux/slices/dashboard/selectors"
+import {
+	useActiveKit,
+	useChannelData,
+	useChannelView,
+	useInitialKit,
+	useModal
+} from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
 import { paragraph } from "@Styles/typography"
 import { isFetchError } from "@Utils/helpers/typeGuards"
@@ -15,6 +21,7 @@ const EditorSnackbar = () => {
 	const initialKit = useInitialKit()
 	const activeKit = useActiveKit()
 	const { data: channelData } = useChannelData()
+	const { view } = useChannelView()
 	const modal = useModal()
 	const { data: allKitBases } = useAllKitBases({ include: { category: true } })
 	const { mutate, isLoading } = useDashboardMutator({
@@ -22,15 +29,15 @@ const EditorSnackbar = () => {
 		opts: {
 			onMutate: () => {
 				// Grab the existing kit array and map them to just their titles
-				let kitArr = channelData?.warzoneKits.slice() as Array<
-					Omit<WarzoneKit, "id"> & { id?: string; base: WarzoneKitBase; options: WarzoneKitOption[] }
+				let kitArr = channelData?.warzone2Kits.slice() as Array<
+					Omit<Warzone2Kit, "id"> & { id?: string; base: Warzone2KitBase; options: Warzone2KitOption[] }
 				>
 
 				// Grab the new kit's name
 				const newKitName = activeKit.base.displayName + activeKit.customTitle
 
 				// Is this an existing kit being updated?
-				let index = channelData?.warzoneKits.findIndex((kit) => kit.id === activeKit.id) ?? -1 // -1 means there's no kit
+				let index = channelData?.warzone2Kits.findIndex((kit) => kit.id === activeKit.id) ?? -1 // -1 means there's no kit
 
 				if (!kitArr) {
 					return
@@ -112,15 +119,15 @@ const EditorSnackbar = () => {
 
 	const upsertKit = () => {
 		// Grab the existing kit array and map them to just their titles
-		let kitArr = channelData?.warzoneKits.slice() as Array<
-			Omit<WarzoneKit, "id"> & { id?: string; base: WarzoneKitBase; options: WarzoneKitOption[] }
+		let kitArr = channelData?.warzone2Kits.slice() as Array<
+			Omit<Warzone2Kit, "id"> & { id?: string; base: Warzone2KitBase; options: Warzone2KitOption[] }
 		>
 
 		// Grab the new kit's name
 		const newKitName = activeKit.base.displayName + activeKit.customTitle
 
 		// Is this an existing kit being updated?
-		let index = channelData?.warzoneKits.findIndex((kit) => kit.id === activeKit.id) ?? -1 // -1 means there's no kit
+		let index = channelData?.warzone2Kits.findIndex((kit) => kit.id === activeKit.id) ?? -1 // -1 means there's no kit
 
 		if (!kitArr) {
 			return
@@ -169,7 +176,7 @@ const EditorSnackbar = () => {
 				tiktokUrl: activeKit.tiktokUrl,
 				quote: activeKit.quote
 			},
-			gameView: ""
+			gameView: view
 		})
 	}
 
