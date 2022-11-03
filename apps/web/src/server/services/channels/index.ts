@@ -26,8 +26,7 @@ interface ListParams {
 	take?: number
 }
 
-const getTwitchLink = (channel: ChannelWithLinks) =>
-	channel.links.find((link) => link.property === LinkProperty.TWITCH)?.value ?? ""
+const getTwitchLink = (channel: ChannelWithLinks) => channel.links.find((link) => link.property === LinkProperty.TWITCH)?.value ?? ""
 
 export const createChannel = async ({
 	displayName,
@@ -36,11 +35,10 @@ export const createChannel = async ({
 	displayName: string
 	ownerFirebaseId: string
 }) => {
-	if (displayName.length > 26)
-		throw new TRPCError({
-			code: "BAD_REQUEST",
-			message: "That name is too long. 25 characters or less"
-		})
+	if (displayName.length > 26) throw new TRPCError({
+		code: "BAD_REQUEST",
+		message: "That name is too long. 25 characters or less"
+	})
 
 	if (badWordFilter(displayName)) {
 		throw new TRPCError({
@@ -264,6 +262,21 @@ export const getChannelProfileByUrlSafeName = async (urlSafeName: string) => {
 					options: true
 				}
 			},
+			warzone2Kits: {
+				orderBy: {
+					base: {
+						displayName: "asc"
+					}
+				},
+				include: {
+					base: {
+						include: {
+							category: true
+						}
+					},
+					options: true
+				}
+			},
 			links: true,
 			plan: true,
 			games: true,
@@ -403,11 +416,9 @@ export const listLiveChannels = async () => {
 	const currentlyLiveChannels = await getStreams()
 
 	try {
-		const data = popularChannels.filter((channel) =>
-			currentlyLiveChannels
-				.map((channel) => channel.user_login)
-				.includes(getTwitchLink(channel).substring(getTwitchLink(channel).lastIndexOf("/") + 1) as string)
-		)
+		const data = popularChannels.filter((channel) => currentlyLiveChannels
+			.map((channel) => channel.user_login)
+			.includes(getTwitchLink(channel).substring(getTwitchLink(channel).lastIndexOf("/") + 1) as string))
 
 		return data as ChannelWithLinks[]
 	} catch (error) {
@@ -415,4 +426,3 @@ export const listLiveChannels = async () => {
 		return []
 	}
 }
-

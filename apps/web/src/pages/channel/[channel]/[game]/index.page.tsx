@@ -67,12 +67,14 @@ export const getStaticPaths = async () => {
 	})
 
 	// I need a mapping of all the games on the top 30 channels
-	const paths = channels.map((channel) => channel.games.map((game) => ({
+	const paths = channels.map((channel) =>
+		channel.games.map((game) => ({
 			params: {
 				channel: channel.urlSafeName,
 				game: game.urlSafeName
 			}
-		})))
+		}))
+	)
 
 	return {
 		paths: paths.flat(),
