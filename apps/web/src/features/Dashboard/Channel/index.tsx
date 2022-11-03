@@ -52,11 +52,10 @@ const Channel = ({ containerRef }: Props) => {
 			<ChannelTopBar />
 			{view === "Channel Settings" && <ChannelSettings containerRef={containerRef} />}
 			{view === "warzone" && <Warzone />}
-			{view === "warzone2" && <Warzone2 />}
+			{view === "wz2" && <Warzone2 />}
 			{view === "Deleted Game Notification" && <DeletedGameNotification />}
 		</>
 	)
 }
 
 export default Channel
-
