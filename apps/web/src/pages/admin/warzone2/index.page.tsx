@@ -11,7 +11,7 @@ import Link from "next/link"
 
 const Page = () => {
 	const { data: bases, refetch } = trpc.useQuery(["admin/warzone2/kit-bases/list"])
-	const { data: game } = trpc.useQuery(["games/getByUrlSafeName", "warzone2"])
+	const { data: game } = trpc.useQuery(["games/getByUrlSafeName", "wz2"])
 	const [isCreatingBase, setIsCreatingBase] = useState(false)
 	const [isEditingBase, setIsEditingBase] = useState<
 		| (Warzone2KitBase & {

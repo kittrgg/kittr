@@ -1,9 +1,17 @@
+/* eslint-disable max-len */
 import React, { useState } from "react"
 
 import colors from "@Colors"
 import { Button, SearchInput } from "@Components/shared"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
-import { WarzoneKit, WarzoneKitBase, WarzoneKitBaseCategory } from "@kittr/prisma"
+import {
+	Warzone2Kit,
+	Warzone2KitBase,
+	Warzone2KitBaseCategory,
+	WarzoneKit,
+	WarzoneKitBase,
+	WarzoneKitBaseCategory
+} from "@kittr/prisma"
 import { setIsSidebarOpen } from "@Redux/slices/displayr"
 import { useChannel, useSidebarState } from "@Redux/slices/displayr/selectors"
 import { useDispatch } from "@Redux/store"
@@ -12,6 +20,7 @@ import { filterKitsByFeature } from "@Utils/helpers/filterKitsByFeature"
 import { sortAlphabetical } from "@Utils/helpers/sortAlphabetical"
 import Item from "./Item"
 import * as Styled from "./styles"
+import { useRouter } from "next/router"
 
 const CATEGORIES = [
 	"Assault Rifle",
@@ -28,16 +37,20 @@ const CATEGORY_SPLIT = 19
 const Sidebar = () => {
 	const dispatch = useDispatch()
 	const isSidebarOpen = useSidebarState()
-	const { warzoneKits: unfilteredKits = [] } = useChannel()
+	const { warzoneKits: unfilteredKits = [], warzone2Kits: unfilteredwz2Kits = [] } = useChannel()
 	const { width } = useViewportDimensions()
 	const [filterQuery, setFilterQuery] = useState("")
+	const router = useRouter()
+	const {
+		query: { game }
+	} = router
 
 	const sanitizeForSearch = (string: string) => string.toLowerCase().replace(/[^0-9a-zA-Z]/g, "")
 
 	const sortForUniqueKitName = (
-		arr: (WarzoneKit & {
-			base: WarzoneKitBase & {
-				category: WarzoneKitBaseCategory
+		arr: ((WarzoneKit | Warzone2Kit) & {
+			base: (WarzoneKitBase | Warzone2KitBase) & {
+				category: WarzoneKitBaseCategory | Warzone2KitBaseCategory
 			}
 		})[]
 	): string[] => arr.map((elem) => elem.base.displayName).sort((a, b) => sortAlphabetical(a, b))
@@ -46,10 +59,14 @@ const Sidebar = () => {
 		sanitizeForSearch(kit.base.displayName).includes(sanitizeForSearch(filterQuery))
 	)
 
-	const featuredKits = filterKitsByFeature(kits)
+	const wz2Kits = unfilteredwz2Kits.filter((kit) =>
+		sanitizeForSearch(kit.base.displayName).includes(sanitizeForSearch(filterQuery))
+	)
+
+	const featuredKits = filterKitsByFeature(game === "wz2" ? wz2Kits : kits)
 	const uniqueListItems = sortForUniqueKitName(featuredKits)
 
-	const restOfKits = kits.filter((elem) => !elem.featured)
+	const restOfKits = game === "wz2" ? wz2Kits.filter((elem) => !elem.featured) : kits.filter((elem) => !elem.featured)
 	const restListItems = sortForUniqueKitName(restOfKits)
 
 	return (
@@ -135,3 +152,4 @@ const Sidebar = () => {
 }
 
 export default Sidebar
+

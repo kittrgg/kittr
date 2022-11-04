@@ -28,7 +28,7 @@ const GamePresentation = () => {
 		)
 	}
 
-	if (game?.urlSafeName === "warzone") {
+	if (game?.urlSafeName === "warzone" || game?.urlSafeName === "wz2") {
 		return (
 			<>
 				<Head
@@ -100,3 +100,4 @@ export const getStaticProps = async ({ params }: { params: { channel: string; ga
 }
 
 export default GamePresentation
+

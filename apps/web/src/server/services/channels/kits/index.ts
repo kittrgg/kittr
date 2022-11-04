@@ -40,7 +40,7 @@ export const upsertKit = async ({
 	}
 
 	// Remove options from kit when updating so upsert can work correctly
-	if (kit.id && gameView === "warzone2") {
+	if (kit.id && gameView === "wz2") {
 		await prisma.warzone2Kit.update({
 			where: { id: kit.id ?? "" },
 			data: {
@@ -60,7 +60,7 @@ export const upsertKit = async ({
 		})
 	}
 
-	if (gameView === "warzone2") {
+	if (gameView === "wz2") {
 		const channel = await prisma.warzone2Kit.upsert({
 			where: { id: kit.id ?? "" },
 			create: update,
@@ -89,7 +89,7 @@ export const deleteKit = async ({
 	channelId: string
 	gameView: string
 }) => {
-	if (gameView === "warzone2") {
+	if (gameView === "wz2") {
 		const deletedKit = await prisma.channel.update({
 			where: { id: channelId },
 			data: {

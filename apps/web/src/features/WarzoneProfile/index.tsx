@@ -4,7 +4,16 @@ import FullScreen from "@Components/layouts/FullScreen"
 import NavMenu from "@Components/layouts/NavMenu"
 import { useDimensions } from "@Hooks/useDimensions"
 import { useLockBodyScroll } from "@Hooks/useLockBodyScroll"
-import { WarzoneKit, WarzoneKitBase, WarzoneKitBaseCategory, WarzoneKitOption } from "@kittr/prisma"
+import {
+	Warzone2Kit,
+	Warzone2KitBase,
+	Warzone2KitBaseCategory,
+	Warzone2KitOption,
+	WarzoneKit,
+	WarzoneKitBase,
+	WarzoneKitBaseCategory,
+	WarzoneKitOption
+} from "@kittr/prisma"
 import { setActiveWeapon, setChannel, setIsSidebarOpen } from "@Redux/slices/displayr"
 import { useActiveWeapon, useSidebarState } from "@Redux/slices/displayr/selectors"
 import { useDispatch } from "@Redux/store"
@@ -40,10 +49,10 @@ const WarzoneProfile = ({ channel }: Props) => {
 			dispatch(setChannel({} as any))
 			dispatch(
 				setActiveWeapon(
-					{} as WarzoneKit & {
-						options: WarzoneKitOption[]
-						base: WarzoneKitBase & {
-							category: WarzoneKitBaseCategory
+					{} as (WarzoneKit | Warzone2Kit) & {
+						options: WarzoneKitOption[] | Warzone2KitOption[]
+						base: (WarzoneKitBase | Warzone2KitBase) & {
+							category: WarzoneKitBaseCategory | Warzone2KitBaseCategory
 						}
 					}
 				)
@@ -61,8 +70,11 @@ const WarzoneProfile = ({ channel }: Props) => {
 				const filteredKits = channel?.warzoneKits
 					.filter((elem) => elem.base.displayName.replace(/ /g, "-") === weaponQuery)
 					.sort((a, b) => Number(b.featured) - Number(a.featured))
+				const filteredWz2Kits = channel?.warzone2Kits
+					.filter((elem) => elem.base.displayName.replace(/ /g, "-") === weaponQuery)
+					.sort((a, b) => Number(b.featured) - Number(a.featured))
 
-				const [firstKit] = filteredKits!
+				const [firstKit] = router.query.game === "wz2" ? filteredWz2Kits! : filteredKits!
 				dispatch(setActiveWeapon(firstKit))
 			}
 		}
@@ -123,3 +135,4 @@ const CreatorCode = styled.p`
 	margin-top: 4px;
 	color: ${colors.lighter};
 `
+
