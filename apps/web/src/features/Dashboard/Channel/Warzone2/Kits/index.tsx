@@ -12,7 +12,7 @@ const Kits = () => {
 	const activeKit = useActiveKit()
 	const modal = useModal()
 
-	if (channel?.warzone2Kits.length === 0 && Object.keys(activeKit).length === 0) {
+	if (channel?.warzoneTwoKits.length === 0 && Object.keys(activeKit).length === 0) {
 		return (
 			<Container style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
 				<KitsPlaceholder />
@@ -65,4 +65,3 @@ const EditorPlaceholderMessage = styled.p`
 	font-size: 22px;
 	letter-spacing: 2px;
 `
-

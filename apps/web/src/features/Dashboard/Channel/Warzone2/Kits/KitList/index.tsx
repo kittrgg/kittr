@@ -11,7 +11,7 @@ import KitButton from "./KitButton"
 const KitList = () => {
 	const dispatch = useDispatch()
 	const { data } = useChannelData()
-	const noKits = data?.warzone2Kits.length === 0
+	const noKits = data?.warzoneTwoKits.length === 0
 
 	if (noKits) {
 		return (
@@ -27,15 +27,15 @@ const KitList = () => {
 	return (
 		<Wrapper>
 			<Container>
-				{data?.warzone2Kits &&
-					filterKitsByFeature(data?.warzone2Kits)
+				{data?.warzoneTwoKits &&
+					filterKitsByFeature(data?.warzoneTwoKits)
 						.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
 						.map((kit) => <KitButton key={kit.id} favorite kit={kit} />)}
-				{data?.warzone2Kits && filterKitsByFeature(data?.warzone2Kits).length > 0 && (
+				{data?.warzoneTwoKits && filterKitsByFeature(data?.warzoneTwoKits).length > 0 && (
 					<hr style={{ width: "88%", borderColor: colors.lightest }} />
 				)}
-				{data?.warzone2Kits &&
-					filterKitsByFeature(data?.warzone2Kits, false)
+				{data?.warzoneTwoKits &&
+					filterKitsByFeature(data?.warzoneTwoKits, false)
 						.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
 						.map((kit) => <KitButton key={kit.id} kit={kit} />)}
 			</Container>
@@ -99,4 +99,3 @@ const Message = styled.p`
 	font-size: 18px;
 	letter-spacing: 2px;
 `
-

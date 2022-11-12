@@ -1,7 +1,7 @@
 import colors from "@Colors"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useAllKitBases } from "@Hooks/trpc/useAllKitBases"
-import { Warzone2Kit, Warzone2KitBase, Warzone2KitOption } from "@kittr/prisma"
+import { WarzoneTwoKit, WarzoneTwoKitBase, WarzoneTwoKitOption } from "@kittr/prisma"
 import { clearKitEditor, resetToInitialKit, setModal } from "@Redux/slices/dashboard"
 import {
 	useActiveKit,
@@ -29,15 +29,15 @@ const EditorSnackbar = () => {
 		opts: {
 			onMutate: () => {
 				// Grab the existing kit array and map them to just their titles
-				let kitArr = channelData?.warzone2Kits.slice() as Array<
-					Omit<Warzone2Kit, "id"> & { id?: string; base: Warzone2KitBase; options: Warzone2KitOption[] }
+				const kitArr = channelData?.warzoneTwoKits.slice() as Array<
+					Omit<WarzoneTwoKit, "id"> & { id?: string; base: WarzoneTwoKitBase; options: WarzoneTwoKitOption[] }
 				>
 
 				// Grab the new kit's name
 				const newKitName = activeKit.base.displayName + activeKit.customTitle
 
 				// Is this an existing kit being updated?
-				let index = channelData?.warzone2Kits.findIndex((kit) => kit.id === activeKit.id) ?? -1 // -1 means there's no kit
+				const index = channelData?.warzoneTwoKits.findIndex((kit) => kit.id === activeKit.id) ?? -1 // -1 means there's no kit
 
 				if (!kitArr) {
 					return
@@ -55,15 +55,10 @@ const EditorSnackbar = () => {
 					kitArr
 						.map((kit) => ({
 							...kit,
-							base:
-								allKitBases?.find((allBase) => {
-									return allBase.id === kit.base.id
-								}) || activeKit.base
+							base: allKitBases?.find((allBase) => allBase.id === kit.base.id) || activeKit.base
 						}))
 						// Map to just the names
-						.map((kit) => {
-							return kit.base.displayName + kit.customTitle
-						})
+						.map((kit) => kit.base.displayName + kit.customTitle)
 
 						// Compare to ensure that there are no dupes
 						.filter((existingKitName) => newKitName === existingKitName).length > 1
@@ -119,15 +114,15 @@ const EditorSnackbar = () => {
 
 	const upsertKit = () => {
 		// Grab the existing kit array and map them to just their titles
-		let kitArr = channelData?.warzone2Kits.slice() as Array<
-			Omit<Warzone2Kit, "id"> & { id?: string; base: Warzone2KitBase; options: Warzone2KitOption[] }
+		const kitArr = channelData?.warzoneTwoKits.slice() as Array<
+			Omit<WarzoneTwoKit, "id"> & { id?: string; base: WarzoneTwoKitBase; options: WarzoneTwoKitOption[] }
 		>
 
 		// Grab the new kit's name
 		const newKitName = activeKit.base.displayName + activeKit.customTitle
 
 		// Is this an existing kit being updated?
-		let index = channelData?.warzone2Kits.findIndex((kit) => kit.id === activeKit.id) ?? -1 // -1 means there's no kit
+		const index = channelData?.warzoneTwoKits.findIndex((kit) => kit.id === activeKit.id) ?? -1 // -1 means there's no kit
 
 		if (!kitArr) {
 			return
@@ -145,15 +140,10 @@ const EditorSnackbar = () => {
 			kitArr
 				.map((kit) => ({
 					...kit,
-					base:
-						allKitBases?.find((allBase) => {
-							return allBase.id === kit.base.id
-						}) || activeKit.base
+					base: allKitBases?.find((allBase) => allBase.id === kit.base.id) || activeKit.base
 				}))
 				// Map to just the names
-				.map((kit) => {
-					return kit.base.displayName + kit.customTitle
-				})
+				.map((kit) => kit.base.displayName + kit.customTitle)
 
 				// Compare to ensure that there are no dupes
 				.filter((existingKitName) => newKitName === existingKitName).length > 1
@@ -278,4 +268,3 @@ const SaveButton = styled.button`
 		color: ${colors.white};
 	}
 `
-

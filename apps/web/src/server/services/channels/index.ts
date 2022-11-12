@@ -148,7 +148,7 @@ export const getDashboardChannel = async ({ id }: { id: string }) => {
 					options: true
 				}
 			},
-			warzone2Kits: {
+			warzoneTwoKits: {
 				orderBy: {
 					base: {
 						displayName: "asc"
@@ -262,7 +262,7 @@ export const getChannelProfileByUrlSafeName = async (urlSafeName: string) => {
 					options: true
 				}
 			},
-			warzone2Kits: {
+			warzoneTwoKits: {
 				orderBy: {
 					base: {
 						displayName: "asc"

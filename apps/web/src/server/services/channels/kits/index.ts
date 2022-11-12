@@ -1,12 +1,12 @@
 /* eslint-disable max-len */
-import { prisma, Warzone2Kit, Warzone2KitOption, WarzoneKit, WarzoneKitOption } from "@kittr/prisma"
+import { prisma, WarzoneTwoKit, WarzoneTwoKitOption, WarzoneKit, WarzoneKitOption } from "@kittr/prisma"
 
 export const upsertKit = async ({
 	channelId,
 	kit,
 	gameView
 }: {
-	kit: Partial<WarzoneKit | Warzone2Kit> & { options?: WarzoneKitOption[] | Warzone2KitOption[] | null }
+	kit: Partial<WarzoneKit | WarzoneTwoKit> & { options?: WarzoneKitOption[] | WarzoneTwoKitOption[] | null }
 	channelId: string
 	gameView: string
 }) => {
@@ -41,7 +41,7 @@ export const upsertKit = async ({
 
 	// Remove options from kit when updating so upsert can work correctly
 	if (kit.id && gameView === "wz2") {
-		await prisma.warzone2Kit.update({
+		await prisma.warzoneTwoKit.update({
 			where: { id: kit.id ?? "" },
 			data: {
 				options: {
@@ -61,10 +61,10 @@ export const upsertKit = async ({
 	}
 
 	if (gameView === "wz2") {
-		const channel = await prisma.warzone2Kit.upsert({
+		const channel = await prisma.warzoneTwoKit.upsert({
 			where: { id: kit.id ?? "" },
 			create: update,
-			update: update
+			update
 		})
 
 		return channel
@@ -74,7 +74,7 @@ export const upsertKit = async ({
 	const channel = await prisma.warzoneKit.upsert({
 		where: { id: kit.id ?? "" },
 		create: update,
-		update: update
+		update
 	})
 
 	return channel
@@ -93,7 +93,7 @@ export const deleteKit = async ({
 		const deletedKit = await prisma.channel.update({
 			where: { id: channelId },
 			data: {
-				warzone2Kits: {
+				warzoneTwoKits: {
 					delete: {
 						id: kitId
 					}
@@ -115,4 +115,3 @@ export const deleteKit = async ({
 	})
 	return deletedKit
 }
-

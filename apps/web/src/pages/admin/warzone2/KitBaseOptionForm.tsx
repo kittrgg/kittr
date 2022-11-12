@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { Warzone2KitOption } from "@kittr/prisma"
+import { WarzoneTwoKitOption } from "@kittr/prisma"
 import { Button, NumberInput, SubSection, Text, TextInput } from "@kittr/ui"
 import { trpc } from "@Server/createHooks"
 import { useState } from "react"
@@ -9,7 +9,7 @@ const Container = styled.div`
 	margin-bottom: 0.5rem;
 `
 
-type FormState = Warzone2KitOption
+type FormState = WarzoneTwoKitOption
 
 interface Props {
 	initialValues: Partial<FormState> | null
@@ -86,7 +86,9 @@ export const KitBaseOptionForm = ({ initialValues, onFinished }: Props) => {
 							})
 						} else {
 							if (!formValues.kitBaseId) {
-								console.error("You must create the kit first before adding options! We need the kitBaseId to associate them! :)")
+								console.error(
+									"You must create the kit first before adding options! We need the kitBaseId to associate them! :)"
+								)
 							} else {
 								console.log({ baseId: formValues.kitBaseId, option: formValues })
 								createOption(
@@ -120,4 +122,3 @@ export const KitBaseOptionForm = ({ initialValues, onFinished }: Props) => {
 		</SubSection>
 	)
 }
-

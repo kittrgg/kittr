@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { Warzone2KitBase, Warzone2KitOption } from "@kittr/prisma"
+import { WarzoneTwoKitBase, WarzoneTwoKitOption } from "@kittr/prisma"
 import { Button, List, NumberInput, Section, Select, SubSection, Text, Textarea, TextInput } from "@kittr/ui"
 import SVG from "@kittr/ui/src/components/SVG"
 import { ActionIcon } from "@mantine/core"
@@ -8,7 +8,8 @@ import { useState } from "react"
 import styled from "styled-components"
 import { KitBaseOptionForm } from "./KitBaseOptionForm"
 
-const groupBy = (xs: any, key: string) => xs.reduce((rv: any, x: any) => {
+const groupBy = (xs: any, key: string) =>
+	xs.reduce((rv: any, x: any) => {
 		;(rv[x[key]] = rv[x[key]] || []).push(x)
 		return rv
 	}, {})
@@ -17,8 +18,8 @@ const Container = styled.div`
 	margin-bottom: 0.5rem;
 `
 
-type FormState = Warzone2KitBase & {
-	availableOptions: Warzone2KitOption[]
+type FormState = WarzoneTwoKitBase & {
+	availableOptions: WarzoneTwoKitOption[]
 }
 
 interface Props {
@@ -39,7 +40,7 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 	})
 	const { data: kitBaseCategories } = trpc.useQuery(["admin/warzone2/kit-bases/categories/list"])
 
-	const [isEditingOption, setIsEditingOption] = useState<Warzone2KitOption | null>(null)
+	const [isEditingOption, setIsEditingOption] = useState<WarzoneTwoKitOption | null>(null)
 	const [isCreatingOption, setIsCreatingOption] = useState<{
 		slotKey: string
 		kitBaseId?: string
@@ -163,12 +164,13 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 					<>
 						{/* Using formValues.id here to know if we are editing the kit base */}
 						{formValues.id &&
-							Object.entries<Warzone2KitOption[]>(getOptions()).map(([slotKey, options]) => (
+							Object.entries<WarzoneTwoKitOption[]>(getOptions()).map(([slotKey, options]) => (
 								<SubSection
 									title={slotKey}
 									action={
 										<Button
-											onClick={() => setIsCreatingOption({ slotKey, kitBaseId: formValues?.id, gameId: formValues?.gameId })
+											onClick={() =>
+												setIsCreatingOption({ slotKey, kitBaseId: formValues?.id, gameId: formValues?.gameId })
 											}
 										>
 											Add {slotKey}
@@ -231,7 +233,8 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 					<Button
 						variant="filled"
 						color="red"
-						onClick={() => deleteBase(
+						onClick={() =>
+							deleteBase(
 								{ kitBaseId: formValues.id as string },
 								{
 									onSuccess: onFinished
@@ -247,4 +250,3 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 		</div>
 	)
 }
-

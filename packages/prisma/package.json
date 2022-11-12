@@ -11,7 +11,7 @@
 		"clean": "rm -rf .turbo && rm -rf node_modules",
 		"db-deploy": "prisma migrate deploy",
 		"db-migrate": "prisma db push --force-reset",
-		"generate-schemas": "prisma generate",
+		"db-generate": "prisma generate",
 		"build": "prisma generate",
 		"db-studio": "prisma studio",
 		"db-format": "prisma format",

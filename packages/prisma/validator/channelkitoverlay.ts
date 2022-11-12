@@ -1,5 +1,5 @@
 import * as z from "zod"
-import { CompleteChannel, RelatedChannelModel, CompleteWarzoneKit, RelatedWarzoneKitModel, CompleteWarzone2Kit, RelatedWarzone2KitModel } from "./index"
+import { CompleteChannel, RelatedChannelModel, CompleteWarzoneKit, RelatedWarzoneKitModel, CompleteWarzoneTwoKit, RelatedWarzoneTwoKitModel } from "./index"
 
 export const ChannelKitOverlayModel = z.object({
   id: z.string(),
@@ -12,16 +12,16 @@ export const ChannelKitOverlayModel = z.object({
   isOverlayVisible: z.boolean(),
   primaryKitId: z.string().nullish(),
   secondaryKitId: z.string().nullish(),
-  primaryWz2KitId: z.string().nullish(),
-  secondaryWz2KitId: z.string().nullish(),
+  primaryWzTwoKitId: z.string().nullish(),
+  secondaryWzTwoKitId: z.string().nullish(),
 })
 
 export interface CompleteChannelKitOverlay extends z.infer<typeof ChannelKitOverlayModel> {
   channel: CompleteChannel
   primaryKit?: CompleteWarzoneKit | null
   secondaryKit?: CompleteWarzoneKit | null
-  primaryWz2Kit?: CompleteWarzone2Kit | null
-  secondaryWz2Kit?: CompleteWarzone2Kit | null
+  primaryWzTwoKit?: CompleteWarzoneTwoKit | null
+  secondaryWzTwoKit?: CompleteWarzoneTwoKit | null
 }
 
 /**
@@ -33,6 +33,6 @@ export const RelatedChannelKitOverlayModel: z.ZodSchema<CompleteChannelKitOverla
   channel: RelatedChannelModel,
   primaryKit: RelatedWarzoneKitModel.nullish(),
   secondaryKit: RelatedWarzoneKitModel.nullish(),
-  primaryWz2Kit: RelatedWarzone2KitModel.nullish(),
-  secondaryWz2Kit: RelatedWarzone2KitModel.nullish(),
+  primaryWzTwoKit: RelatedWarzoneTwoKitModel.nullish(),
+  secondaryWzTwoKit: RelatedWarzoneTwoKitModel.nullish(),
 }))

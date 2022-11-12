@@ -1,7 +1,7 @@
-import { prisma, Warzone2KitBase, Warzone2KitOption } from "@kittr/prisma"
+import { prisma, WarzoneTwoKitBase, WarzoneTwoKitOption } from "@kittr/prisma"
 
 export const listKitBases = async () => {
-	const result = await prisma.warzone2KitBase.findMany({
+	const result = await prisma.warzoneTwoKitBase.findMany({
 		include: {
 			availableOptions: true
 		}
@@ -11,7 +11,7 @@ export const listKitBases = async () => {
 }
 
 export const getKitBase = async ({ kitBaseId }: { kitBaseId: string }) => {
-	const result = await prisma.warzone2KitBase.findFirst({
+	const result = await prisma.warzoneTwoKitBase.findFirst({
 		where: {
 			id: kitBaseId
 		},
@@ -24,7 +24,7 @@ export const getKitBase = async ({ kitBaseId }: { kitBaseId: string }) => {
 }
 
 export const listKitBaseCategories = async () => {
-	const result = await prisma.warzone2KitBaseCategory.findMany({})
+	const result = await prisma.warzoneTwoKitBaseCategory.findMany({})
 
 	return result
 }
@@ -33,10 +33,10 @@ export const createKitBase = async ({
 	base,
 	commandCodes
 }: {
-	base: Omit<Warzone2KitBase, "id">
+	base: Omit<WarzoneTwoKitBase, "id">
 	commandCodes: string[]
 }) => {
-	const result = await prisma.warzone2KitBase.create({
+	const result = await prisma.warzoneTwoKitBase.create({
 		data: {
 			...base,
 			commandCodes: {
@@ -51,14 +51,14 @@ export const createKitBase = async ({
 export const updateKitBase = async ({
 	base
 }: // categoryId,
-// commandCodes,
-//  options
-{
-	base: Warzone2KitBase
-	// categoryId: string,
-	// commandCodes: WarzoneCommandCode[]
-	// options: WarzoneKitOption[]
-}) => {
+	// commandCodes,
+	//  options
+	{
+		base: WarzoneTwoKitBase
+		// categoryId: string,
+		// commandCodes: WarzoneCommandCode[]
+		// options: WarzoneKitOption[]
+	}) => {
 	const {
 		id,
 		// categoryId: removeCatId,
@@ -66,7 +66,7 @@ export const updateKitBase = async ({
 		...data
 	} = base
 
-	const result = await prisma.warzone2KitBase.update({
+	const result = await prisma.warzoneTwoKitBase.update({
 		where: {
 			id
 		},
@@ -90,7 +90,7 @@ export const updateKitBase = async ({
 }
 
 export const deleteKitBase = async ({ kitBaseId }: { kitBaseId: string }) => {
-	const result = prisma.warzone2KitBase.delete({
+	const result = prisma.warzoneTwoKitBase.delete({
 		where: {
 			id: kitBaseId
 		}
@@ -99,8 +99,8 @@ export const deleteKitBase = async ({ kitBaseId }: { kitBaseId: string }) => {
 	return result
 }
 
-export const updateOptionsForBase = async ({ baseId, options }: { baseId: string; options: Warzone2KitOption[] }) => {
-	const result = await prisma.warzone2KitBase.update({
+export const updateOptionsForBase = async ({ baseId, options }: { baseId: string; options: WarzoneTwoKitOption[] }) => {
+	const result = await prisma.warzoneTwoKitBase.update({
 		where: {
 			id: baseId
 		},
@@ -119,10 +119,10 @@ export const updateOptionsForBase = async ({ baseId, options }: { baseId: string
 	return result
 }
 
-export const createOption = async ({ baseId, option }: { baseId: string; option: Omit<Warzone2KitOption, "id"> }) => {
+export const createOption = async ({ baseId, option }: { baseId: string; option: Omit<WarzoneTwoKitOption, "id"> }) => {
 	const { kitBaseId, ...rest } = option
 
-	const result = await prisma.warzone2KitOption.create({
+	const result = await prisma.warzoneTwoKitOption.create({
 		data: {
 			...rest,
 			kitBase: {
@@ -136,10 +136,10 @@ export const createOption = async ({ baseId, option }: { baseId: string; option:
 	return result
 }
 
-export const updateOption = async (option: Warzone2KitOption) => {
+export const updateOption = async (option: WarzoneTwoKitOption) => {
 	const { id, ...rest } = option
 
-	const result = await prisma.warzone2KitOption.update({
+	const result = await prisma.warzoneTwoKitOption.update({
 		where: {
 			id: option.id
 		},
@@ -150,7 +150,7 @@ export const updateOption = async (option: Warzone2KitOption) => {
 }
 
 export const deleteOption = async (optionId: string) => {
-	const result = await prisma.warzone2KitOption.delete({
+	const result = await prisma.warzoneTwoKitOption.delete({
 		where: {
 			id: optionId
 		}
@@ -158,4 +158,3 @@ export const deleteOption = async (optionId: string) => {
 
 	return result
 }
-

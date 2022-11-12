@@ -5,10 +5,10 @@ import NavMenu from "@Components/layouts/NavMenu"
 import { useDimensions } from "@Hooks/useDimensions"
 import { useLockBodyScroll } from "@Hooks/useLockBodyScroll"
 import {
-	Warzone2Kit,
-	Warzone2KitBase,
-	Warzone2KitBaseCategory,
-	Warzone2KitOption,
+	WarzoneTwoKit,
+	WarzoneTwoKitBase,
+	WarzoneTwoKitBaseCategory,
+	WarzoneTwoKitOption,
 	WarzoneKit,
 	WarzoneKitBase,
 	WarzoneKitBaseCategory,
@@ -49,10 +49,10 @@ const WarzoneProfile = ({ channel }: Props) => {
 			dispatch(setChannel({} as any))
 			dispatch(
 				setActiveWeapon(
-					{} as (WarzoneKit | Warzone2Kit) & {
-						options: WarzoneKitOption[] | Warzone2KitOption[]
-						base: (WarzoneKitBase | Warzone2KitBase) & {
-							category: WarzoneKitBaseCategory | Warzone2KitBaseCategory
+					{} as (WarzoneKit | WarzoneTwoKit) & {
+						options: WarzoneKitOption[] | WarzoneTwoKitOption[]
+						base: (WarzoneKitBase | WarzoneTwoKitBase) & {
+							category: WarzoneKitBaseCategory | WarzoneTwoKitBaseCategory
 						}
 					}
 				)
@@ -70,7 +70,7 @@ const WarzoneProfile = ({ channel }: Props) => {
 				const filteredKits = channel?.warzoneKits
 					.filter((elem) => elem.base.displayName.replace(/ /g, "-") === weaponQuery)
 					.sort((a, b) => Number(b.featured) - Number(a.featured))
-				const filteredWz2Kits = channel?.warzone2Kits
+				const filteredWz2Kits = channel?.warzoneTwoKits
 					.filter((elem) => elem.base.displayName.replace(/ /g, "-") === weaponQuery)
 					.sort((a, b) => Number(b.featured) - Number(a.featured))
 
@@ -135,4 +135,3 @@ const CreatorCode = styled.p`
 	margin-top: 4px;
 	color: ${colors.lighter};
 `
-

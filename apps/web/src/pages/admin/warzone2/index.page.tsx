@@ -1,7 +1,7 @@
 /* eslint-disable func-call-spacing */
 /* eslint-disable max-len */
 import { useState } from "react"
-import { Warzone2KitBase, Warzone2KitOption } from "@kittr/prisma"
+import { WarzoneTwoKitBase, WarzoneTwoKitOption } from "@kittr/prisma"
 import { Button, List, Section } from "@kittr/ui"
 import SVG from "@kittr/ui/src/components/SVG"
 import { ActionIcon } from "@mantine/core"
@@ -14,8 +14,8 @@ const Page = () => {
 	const { data: game } = trpc.useQuery(["games/getByUrlSafeName", "wz2"])
 	const [isCreatingBase, setIsCreatingBase] = useState(false)
 	const [isEditingBase, setIsEditingBase] = useState<
-		| (Warzone2KitBase & {
-				availableOptions: Warzone2KitOption[]
+		| (WarzoneTwoKitBase & {
+				availableOptions: WarzoneTwoKitOption[]
 		  })
 		| null
 	>(null)
@@ -76,4 +76,3 @@ const Page = () => {
 }
 
 export default Page
-

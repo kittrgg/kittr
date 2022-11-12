@@ -6,7 +6,7 @@ export const list = async ({ kitBaseId }: { kitBaseId: string }) => {
 			kitBaseId
 		}
 	})
-	const wz2Result = await prisma.warzone2KitOption.findMany({
+	const wz2Result = await prisma.warzoneTwoKitOption.findMany({
 		where: {
 			kitBaseId
 		}
@@ -16,4 +16,3 @@ export const list = async ({ kitBaseId }: { kitBaseId: string }) => {
 	if (!wz2Result[0]) return result
 	return wz2Result
 }
-

@@ -5,9 +5,9 @@ import colors from "@Colors"
 import { Button, SearchInput } from "@Components/shared"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
 import {
-	Warzone2Kit,
-	Warzone2KitBase,
-	Warzone2KitBaseCategory,
+	WarzoneTwoKit,
+	WarzoneTwoKitBase,
+	WarzoneTwoKitBaseCategory,
 	WarzoneKit,
 	WarzoneKitBase,
 	WarzoneKitBaseCategory
@@ -37,7 +37,7 @@ const CATEGORY_SPLIT = 19
 const Sidebar = () => {
 	const dispatch = useDispatch()
 	const isSidebarOpen = useSidebarState()
-	const { warzoneKits: unfilteredKits = [], warzone2Kits: unfilteredwz2Kits = [] } = useChannel()
+	const { warzoneKits: unfilteredKits = [], warzoneTwoKits: unfilteredwz2Kits = [] } = useChannel()
 	const { width } = useViewportDimensions()
 	const [filterQuery, setFilterQuery] = useState("")
 	const router = useRouter()
@@ -48,9 +48,9 @@ const Sidebar = () => {
 	const sanitizeForSearch = (string: string) => string.toLowerCase().replace(/[^0-9a-zA-Z]/g, "")
 
 	const sortForUniqueKitName = (
-		arr: ((WarzoneKit | Warzone2Kit) & {
-			base: (WarzoneKitBase | Warzone2KitBase) & {
-				category: WarzoneKitBaseCategory | Warzone2KitBaseCategory
+		arr: ((WarzoneKit | WarzoneTwoKit) & {
+			base: (WarzoneKitBase | WarzoneTwoKitBase) & {
+				category: WarzoneKitBaseCategory | WarzoneTwoKitBaseCategory
 			}
 		})[]
 	): string[] => arr.map((elem) => elem.base.displayName).sort((a, b) => sortAlphabetical(a, b))
@@ -80,42 +80,38 @@ const Sidebar = () => {
 					/>
 				</Styled.SearchWrapper>
 
-				{uniqueListItems.map((baseName) => {
-					return (
-						<Item
-							key={baseName}
-							kits={filterKitsByFeature(kits)}
-							baseName={baseName}
-							featured
-							setFilterQuery={setFilterQuery}
-						/>
-					)
-				})}
+				{uniqueListItems.map((baseName) => (
+					<Item
+						key={baseName}
+						kits={filterKitsByFeature(kits)}
+						baseName={baseName}
+						featured
+						setFilterQuery={setFilterQuery}
+					/>
+				))}
 
 				{filterKitsByFeature(kits).length > 0 && <hr style={{ width: "88%", borderColor: colors.lightest }} />}
 
 				{unfilteredKits && unfilteredKits.length > CATEGORY_SPLIT
-					? CATEGORIES.map((category) => {
-							return (
-								<React.Fragment key={category}>
-									<Styled.CategoryLabel>
-										{restOfKits.filter((kit) => kit.base.category.displayName === category).length > 0 && (
-											<>{`${category}s`.toUpperCase()}</>
-										)}
-									</Styled.CategoryLabel>
-									{restOfKits
-										.filter((v, i, a) => a.findIndex((t) => t.base.displayName === v.base.displayName) === i)
-										.filter((kit) => kit.base.category.displayName === category)
-										.map((kit) => {
-											const { id, base } = kit
-											return <Item key={id} kits={kits} baseName={base.displayName} setFilterQuery={setFilterQuery} />
-										})}
-								</React.Fragment>
-							)
-					  })
-					: restListItems.map((baseName) => {
-							return <Item key={baseName} kits={kits} baseName={baseName} setFilterQuery={setFilterQuery} />
-					  })}
+					? CATEGORIES.map((category) => (
+							<React.Fragment key={category}>
+								<Styled.CategoryLabel>
+									{restOfKits.filter((kit) => kit.base.category.displayName === category).length > 0 && (
+										<>{`${category}s`.toUpperCase()}</>
+									)}
+								</Styled.CategoryLabel>
+								{restOfKits
+									.filter((v, i, a) => a.findIndex((t) => t.base.displayName === v.base.displayName) === i)
+									.filter((kit) => kit.base.category.displayName === category)
+									.map((kit) => {
+										const { id, base } = kit
+										return <Item key={id} kits={kits} baseName={base.displayName} setFilterQuery={setFilterQuery} />
+									})}
+							</React.Fragment>
+					  ))
+					: restListItems.map((baseName) => (
+							<Item key={baseName} kits={kits} baseName={baseName} setFilterQuery={setFilterQuery} />
+					  ))}
 
 				{(width as number) < 1051 && (
 					<Button
@@ -152,4 +148,3 @@ const Sidebar = () => {
 }
 
 export default Sidebar
-
