@@ -8,6 +8,6 @@ export const gamesRouter = createRouter()
 	.merge("getById", GamesController.getGameById)
 	.merge("list", GamesController.listGames)
 	.mutation("add", {
-		input: GameModel.omit({ id: true }).extend({ genres: z.array(GenreModel), platforms: z.array(PlatformModel) }),
+		input: GameModel.omit({ id: true }),
 		resolve: () => "success"
 	})
