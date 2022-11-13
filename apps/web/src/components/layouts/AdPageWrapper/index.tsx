@@ -5,10 +5,9 @@ import { Head, SupportUs } from "@Components/shared"
 import { ErrorBoundary } from "@Components/shared/ErrorBoundary"
 import { useDetectAdBlock } from "@Hooks/useDetectAdBlock"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
-import { header1 } from "@Styles/typography"
+import { Grid } from "@mantine/core"
 import { useRouter } from "next/router"
 import { useState, useEffect, ReactNode } from "react"
-import styled from "styled-components"
 
 interface Props {
 	/** If you'd like to remove the ads from this page, set this to false. Defaults to true. */
@@ -59,15 +58,19 @@ const AdPageWrapper = ({ withAds = true, title, description, children }: Props) 
 		>
 			<Head title={title} description={description} />
 			<NavMenu />
-			<Grid>
-				<ContentColumn>
+			<Grid grow>
+				<Grid.Col span={8} pb="18px">
 					<ErrorBoundary>{children}</ErrorBoundary>
-				</ContentColumn>
+				</Grid.Col>
 				{withAds && width > 1200 && (
-					<AdvertisingColumn>
-						<BackgroundImage src="/media/sidebar-background.svg" />
+					<Grid.Col span={1}>
+						<Image
+							src="/media/sidebar-background.svg"
+							sx={{ position: "absolute", top: -0, right: "0%", zIndex: -1, width: "20%" }}
+							alt="sidebar-bg"
+						/>
 						{adBlock ? <SupportUs containerStyles={{ position: "relative", top, right: "12px" }} /> : <AdUnits />}
-					</AdvertisingColumn>
+					</Grid.Col>
 				)}
 			</Grid>
 			<Footer />
@@ -76,43 +79,3 @@ const AdPageWrapper = ({ withAds = true, title, description, children }: Props) 
 }
 
 export default AdPageWrapper
-
-// Styled Components
-
-export const H1 = styled.h1`
-	margin: 12px 0;
-	padding: 0 5%;
-	${header1};
-`
-
-const Grid = styled.div`
-	display: grid;
-	grid-template-columns: 1fr 320px;
-
-	@media (max-width: 1200px) {
-		grid-template-columns: 1fr;
-	} ;
-`
-
-const ContentColumn = styled.div`
-	padding-bottom: 18px;
-`
-
-const AdvertisingColumn = styled.div`
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	justify-content: flex-start;
-	height: 100%;
-	padding: 10px;
-	overflow: hidden;
-`
-
-const BackgroundImage = styled.img`
-	position: absolute;
-	top: 0;
-	right: -50%;
-	width: 125%;
-	z-index: -1;
-`

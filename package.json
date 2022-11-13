@@ -53,5 +53,8 @@
 		"packages/**/*.{js,ts,jsx,tsx}": [
 			"eslint --fix ."
 		]
+	},
+	"dependencies": {
+		"@mantine/core": "^5.7.1"
 	}
 }

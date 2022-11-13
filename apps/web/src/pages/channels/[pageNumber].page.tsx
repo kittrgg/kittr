@@ -1,5 +1,5 @@
 import colors from "@Colors"
-import AdPageWrapper, { H1 } from "@Components/layouts/AdPageWrapper"
+import AdPageWrapper from "@Components/layouts/AdPageWrapper"
 import FallbackPage from "@Components/layouts/FallbackPage"
 import { ChannelList, Paginator } from "@Components/shared"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
@@ -7,6 +7,7 @@ import { trpc } from "@Server/createHooks"
 import { createSSGHelper } from "@Server/createSSGHelper"
 import ResponsiveBanner from "@Services/venatus/ResponsiveBanner"
 import { Routes } from "@Utils/lookups/routes"
+import { Title } from "@kittr/ui"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import styled from "styled-components"
@@ -34,7 +35,9 @@ const PageOfChannels = () => {
 	if ((channels && channels.length === 0) || isNaN(page)) {
 		return (
 			<AdPageWrapper title={`Channels - Page ${page} | kittr`} description="Full channels of channels on kittr.">
-				<H1>CHANNELS</H1>
+				<Title preset="h1" sx={{ margin: "12px 0", padding: "0 5%" }}>
+					CHANNELS
+				</Title>
 				{/* <ChannelSearch /> */}
 				<Paragraph>Oops, doesn't look like there's anyone here.</Paragraph>
 				<Link href={Routes.CHANNEL.LIST}>
@@ -56,7 +59,9 @@ const PageOfChannels = () => {
 	return (
 		<AdPageWrapper title={`Channels - Page ${page} | kittr`} description="Full channels of channels on kittr.">
 			{width < 1200 && <ResponsiveBanner />}
-			<H1>CHANNELS</H1>
+			<Title preset="h1" sx={{ margin: "12px 0", padding: "0 5%" }}>
+				CHANNELS
+			</Title>
 			{/* <ChannelSearch /> */}
 			<Paragraph>Select a channel to view their page with their games and featured kits.</Paragraph>
 			<div style={{ padding: "0 5%" }}>
