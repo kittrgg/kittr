@@ -1,4 +1,4 @@
-export { useMantineTheme as useTheme } from "@mantine/core"
+export { useMantineTheme as useTheme, MultiSelect } from "@mantine/core"
 export * from "./Accordion"
 export * from "./Button"
 export * from "./Center"

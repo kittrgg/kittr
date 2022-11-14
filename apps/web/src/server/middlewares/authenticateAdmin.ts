@@ -2,7 +2,7 @@ import { Context } from "@Server/context"
 import { TRPCError } from "@trpc/server"
 import admin from "@Services/firebase/admin"
 import { MiddlewareResult } from "@trpc/server/src/internals/middlewares"
-import { prisma } from '@kittr/prisma'
+import { prisma } from "@kittr/prisma"
 
 type NextFunction<T> = {
   <T>(): Promise<MiddlewareResult<T>>
@@ -21,7 +21,7 @@ export const authenticateAdmin = async ({ ctx, next }: { ctx: Context; next: Nex
   const administrator = await prisma.administrator.findFirst({
     where: {
       firebaseUserId: firebaseUser.uid
-    },
+    }
   })
 
   if (!administrator) {
