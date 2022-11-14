@@ -20,9 +20,12 @@ const ActiveKitOverlay = ({ id, previewWidth, overlayStyle }: Props) => {
 	const [activeKit, setActiveKit] = useState<OverlayKit>({} as OverlayKit)
 	const { width, height } = useViewportDimensions()
 
+	console.log(data)
+
 	useEffect(() => {
 		if (data) {
-			const update = Object.keys(data?.primaryKit || {}).length > 0 ? data?.primaryKit : data?.secondaryKit
+			const update =
+				Object.keys(data?.primaryWzTwoKit || {}).length > 0 ? data?.primaryWzTwoKit : data?.secondaryWzTwoKit
 
 			if (activeKit?.id !== update?.id) {
 				setActiveKit(update || ({} as OverlayKit))

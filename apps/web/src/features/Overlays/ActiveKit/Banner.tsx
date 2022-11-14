@@ -9,14 +9,13 @@ import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
 import { InferQueryOutput } from "@Server/index"
 
 interface Props {
-	_id: string
 	previewWidth?: number
 	data?: InferQueryOutput<"channels/overlay/get">
 	activeKit: OverlayKit
 	setActiveKit: Dispatch<SetStateAction<OverlayKit>>
 }
 
-const Banner = ({ _id, previewWidth, data, activeKit, setActiveKit }: Props) => {
+const Banner = ({ previewWidth, data, activeKit, setActiveKit }: Props) => {
 	const [isDataVisible, setIsDataVisible] = useState(true)
 
 	const SWAP_TIMER = (Object.keys(activeKit ?? {}) ?? []).length ? activeKit.options?.length * 3 : 0
@@ -50,15 +49,15 @@ const Banner = ({ _id, previewWidth, data, activeKit, setActiveKit }: Props) => 
 			setIsDataVisible(false)
 			await delay(OPACITY_TIMER * 100)
 
-			if (activeKit.id === data?.primaryKit?.id) {
-				setActiveKit(data?.secondaryKit as OverlayKit)
+			if (activeKit.id === data?.primaryWzTwoKit?.id) {
+				setActiveKit(data?.secondaryWzTwoKit as OverlayKit)
 			} else {
-				setActiveKit(data?.primaryKit as OverlayKit)
+				setActiveKit(data?.primaryWzTwoKit as OverlayKit)
 			}
 		}
 
 		if (data) {
-			const kitCount = [data.primaryKit, data.secondaryKit].filter(
+			const kitCount = [data.primaryWzTwoKit, data.secondaryWzTwoKit].filter(
 				(kit) => !!kit && Object.keys(kit || {}).length > 0
 			).length
 
@@ -74,7 +73,7 @@ const Banner = ({ _id, previewWidth, data, activeKit, setActiveKit }: Props) => 
 	if (!data) return null
 
 	const hasAKitSelected =
-		Object.keys(data.primaryKit || {}).length > 0 || Object.keys(data.secondaryKit || {}).length > 0
+		Object.keys(data.primaryWzTwoKit || {}).length > 0 || Object.keys(data.secondaryWzTwoKit || {}).length > 0
 	const isRendered = data.isOverlayVisible && hasAKitSelected
 	const isOverlayVisible = !!previewWidth || isRendered
 

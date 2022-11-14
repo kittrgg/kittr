@@ -27,14 +27,13 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 	useEffect(() => {
 		let timeout: any = null
 
-		const delay = async (period: number) => {
-			return await new Promise((resolve) => {
+		const delay = async (period: number) =>
+			await new Promise((resolve) => {
 				timeout = setTimeout(() => {
 					resolve(null)
 					clearTimeout(timeout)
 				}, period)
 			})
-		}
 
 		const showItem = async () => {
 			setIsDataVisible(true)
@@ -46,15 +45,17 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 			setIsDataVisible(false)
 			await delay(FADE_DURATION * 1000)
 
-			if (activeKit.id === data?.primaryKit?.id) {
-				setActiveKit(data?.secondaryKit as OverlayKit)
+			if (activeKit.id === data?.primaryWzTwoKit?.id) {
+				setActiveKit(data?.secondaryWzTwoKit as OverlayKit)
 			} else {
-				setActiveKit(data?.primaryKit as OverlayKit)
+				setActiveKit(data?.primaryWzTwoKit as OverlayKit)
 			}
 		}
 
 		if (data) {
-			const kitCount = [data.primaryKit, data.secondaryKit].filter((kit) => !!kit && Object.keys(kit).length > 0).length
+			const kitCount = [data.primaryWzTwoKit, data.secondaryWzTwoKit].filter(
+				(kit) => !!kit && Object.keys(kit).length > 0
+			).length
 
 			if (kitCount > 1) {
 				showItem()
@@ -68,7 +69,7 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 	if (!data) return null
 
 	const hasAKitSelected =
-		Object.keys(data.primaryKit || {}).length > 0 || Object.keys(data.secondaryKit || {}).length > 0
+		Object.keys(data.primaryWzTwoKit || {}).length > 0 || Object.keys(data.secondaryWzTwoKit || {}).length > 0
 	const isRendered = data.isOverlayVisible && hasAKitSelected
 	const isOverlayVisible = !!previewWidth || isRendered
 
@@ -101,14 +102,12 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 								sortingArray: warzoneSlotsOrder,
 								keyToSort: "slotKey",
 								array: activeKit.options || []
-							}).map((elem: any, _: any) => {
-								return (
-									<Option key={elem.displayName}>
-										<Slot>{elem.slotKey}</Slot>
-										<Selection>{elem.displayName.toUpperCase()}</Selection>
-									</Option>
-								)
-							})}
+							}).map((elem: any, _: any) => (
+								<Option key={elem.displayName}>
+									<Slot>{elem.slotKey}</Slot>
+									<Selection>{elem.displayName.toUpperCase()}</Selection>
+								</Option>
+							))}
 					</Options>
 				</OptionsWrapper>
 			</Wrapper>

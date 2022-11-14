@@ -158,13 +158,9 @@ model ChannelKitOverlay {
   textColorSecondary       String?
   textColorAccent          String?
   isOverlayVisible         Boolean      @default(false)
-  primaryKit               WarzoneKit?  @relation(name: "primaryKitOverlay", fields: [primaryKitId], references: [id])
-  primaryKitId             String?      @unique
-  secondaryKit             WarzoneKit?  @relation(name: "secondaryKitOverlay", fields: [secondaryKitId], references: [id])
-  secondaryKitId           String?      @unique
-  primaryWzTwoKit            WarzoneTwoKit? @relation(name: "primaryKitOverlay", fields: [primaryWzTwoKitId], references: [id])
+  primaryWzTwoKit            WarzoneTwoKit? @relation(name: "primaryWzTwoKitOverlay", fields: [primaryWzTwoKitId], references: [id])
   primaryWzTwoKitId          String?      @unique
-  secondaryWzTwoKit          WarzoneTwoKit? @relation(name: "secondaryKitOverlay", fields: [secondaryWzTwoKitId], references: [id])
+  secondaryWzTwoKit          WarzoneTwoKit? @relation(name: "secondaryWzTwoKitOverlay", fields: [secondaryWzTwoKitId], references: [id])
   secondaryWzTwoKitId        String?      @unique
 }
 
@@ -183,8 +179,6 @@ model WarzoneKit {
   baseId                     String
   channel                    Channel            @relation(fields: [channelId], references: [id], onDelete: Cascade)
   channelId                  String
-  channelKitOverlayPrimary   ChannelKitOverlay? @relation(name: "primaryKitOverlay")
-  channelKitOverlaySecondary ChannelKitOverlay? @relation(name: "secondaryKitOverlay")
 }
 
 model WarzoneTwoKit {
@@ -202,8 +196,8 @@ model WarzoneTwoKit {
   baseId                     String
   channel                    Channel             @relation(fields: [channelId], references: [id], onDelete: Cascade)
   channelId                  String
-  channelKitOverlayPrimary   ChannelKitOverlay?  @relation(name: "primaryKitOverlay")
-  channelKitOverlaySecondary ChannelKitOverlay?  @relation(name: "secondaryKitOverlay")
+  channelKitOverlayPrimary   ChannelKitOverlay?  @relation(name: "primaryWzTwoKitOverlay")
+  channelKitOverlaySecondary ChannelKitOverlay?  @relation(name: "secondaryWzTwoKitOverlay")
 }
 
 model ChannelCustomGameCommand {

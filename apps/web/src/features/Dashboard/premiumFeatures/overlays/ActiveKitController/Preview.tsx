@@ -23,7 +23,7 @@ const Preview = ({ overlay }: Props) => {
 	const overlayOptions = Object.values(ActiveKitOverlay)
 
 	const hasAKitSelected =
-		Object.keys(overlay?.primaryKit || {}).length > 0 || Object.keys(overlay?.secondaryKit || {}).length > 0
+		Object.keys(overlay?.primaryWzTwoKit || {}).length > 0 || Object.keys(overlay?.secondaryWzTwoKit || {}).length > 0
 
 	return (
 		<>

@@ -50,9 +50,8 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 				setCursor((cursor) => {
 					if (cursor < length) {
 						return cursor + 1
-					} else {
-						return 0
 					}
+					return 0
 				})
 			}
 
@@ -67,15 +66,15 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 		const switchKit = async () => {
 			if (hasAnActiveKit) {
 				if (cursor === 0) {
-					const kitCount = [data?.primaryKit, data?.secondaryKit].filter(
+					const kitCount = [data?.primaryWzTwoKit, data?.secondaryWzTwoKit].filter(
 						(kit) => !!kit && Object.keys(kit).length > 0
 					).length
 
 					if (kitCount > 1) {
-						if (activeKit.id === data?.primaryKit?.id) {
-							setActiveKit(data?.secondaryKit as OverlayKit)
+						if (activeKit.id === data?.primaryWzTwoKit?.id) {
+							setActiveKit(data?.secondaryWzTwoKit as OverlayKit)
 						} else {
-							setActiveKit(data?.primaryKit as OverlayKit)
+							setActiveKit(data?.primaryWzTwoKit as OverlayKit)
 						}
 					}
 				}
@@ -106,7 +105,7 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 	if (!data) return null
 
 	const hasAKitSelected =
-		Object.keys(data.primaryKit || {}).length > 0 || Object.keys(data.secondaryKit || {}).length > 0
+		Object.keys(data.primaryWzTwoKit || {}).length > 0 || Object.keys(data.secondaryWzTwoKit || {}).length > 0
 	const isRendered = data.isOverlayVisible && hasAKitSelected
 	const isOverlayVisible = !!previewWidth || isRendered
 

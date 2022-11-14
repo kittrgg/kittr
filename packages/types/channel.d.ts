@@ -57,19 +57,8 @@ interface IOverlayTheme {
 
 interface IOverlayData {
 	displayName: string
-	primaryKit?: IKit
-	secondaryKit?: IKit
-}
-
-interface IOverlay {
-	isOverlayVisible?: "off" | "on"
-	backgroundColorPrimary: string
-	backgroundColorSecondary: string
-	textColorPrimary: string
-	textColorSecondary: string
-	textColorAccent: string
-	primaryKit?: IKit
-	secondaryKit?: IKit
+	primaryWzKit?: IKit
+	secondaryWzKit?: IKit
 }
 
 export interface Channel {

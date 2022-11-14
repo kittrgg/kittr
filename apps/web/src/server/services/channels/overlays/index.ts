@@ -25,7 +25,7 @@ export const getOverlay = async (id?: string) => {
 			}
 		},
 		include: {
-			primaryKit: {
+			primaryWzTwoKit: {
 				include: {
 					base: {
 						include: {
@@ -35,7 +35,7 @@ export const getOverlay = async (id?: string) => {
 					options: true
 				}
 			},
-			secondaryKit: {
+			secondaryWzTwoKit: {
 				include: {
 					base: {
 						include: {
@@ -91,9 +91,11 @@ export const editKit = async ({
 }: {
 	channelId: string
 	kitId: string | null
-	kitToChange: "primaryKit" | "secondaryKit"
+	kitToChange: "primaryWzTwoKit" | "secondaryWzTwoKit"
 }) => {
-	const kitIdToChange = kitToChange === "primaryKit" ? "primaryKitId" : "secondaryKitId"
+	const kitIdToChange = kitToChange === "primaryWzTwoKit" ? "primaryWzTwoKitId" : "secondaryWzTwoKitId"
+
+	console.log({ kitId, kitToChange })
 
 	const channel = await prisma.channelKitOverlay.update({
 		where: { channelId },

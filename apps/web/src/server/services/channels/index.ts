@@ -174,8 +174,8 @@ export const getDashboardChannel = async ({ id }: { id: string }) => {
 			},
 			overlay: {
 				include: {
-					primaryKit: true,
-					secondaryKit: true
+					primaryWzTwoKit: true,
+					secondaryWzTwoKit: true
 				}
 			}
 		}
