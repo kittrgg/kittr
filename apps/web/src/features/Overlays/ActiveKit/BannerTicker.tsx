@@ -6,6 +6,7 @@ import { InferQueryOutput } from "@Server/index"
 import { header1, header2, montserrat, paragraph } from "@Styles/typography"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
+import colors from "@Styles/colors"
 
 interface Props {
 	_id: string
@@ -133,7 +134,9 @@ const Wrapper = styled.div`
 	opacity: ${(props) => (props.theme.isOverlayVisible ? 1 : 0)};
 	transition: 0.4s;
 	background-color: ${(props) =>
-		props.theme.customBackground ? props.theme.customBackground : props.theme.backgroundColorPrimary};
+		props.theme.customBackground
+			? props.theme.customBackground
+			: props.theme.backgroundColorPrimary ?? colors.lightest};
 	transform: ${(props) => (props.theme.previewWidth ? `scale(${Math.min(1, props.theme.previewWidth / 1920)})` : "")};
 `
 
@@ -147,12 +150,14 @@ const Meta = styled.div`
 	white-space: nowrap;
 
 	background-color: ${(props) =>
-		props.theme.customBackground ? props.theme.customBackground : props.theme.backgroundColorSecondary};
+		props.theme.customBackground
+			? props.theme.customBackground
+			: props.theme.backgroundColorSecondary ?? colors.darker};
 `
 
 const BaseName = styled.p<{ isDataVisible: boolean; fadeDuration: number }>`
 	${header2};
-	color: ${(props) => props.theme.textColorPrimary};
+	color: ${(props) => props.theme.textColorPrimary ?? colors.white};
 	opacity: ${(props) => (props.isDataVisible ? 1 : 0)};
 	transition: ${(props) => props.fadeDuration}s;
 `
@@ -160,7 +165,7 @@ const BaseName = styled.p<{ isDataVisible: boolean; fadeDuration: number }>`
 const CommandInfo = styled.p<{ isDataVisible: boolean; fadeDuration: number }>`
 	margin-left: 44px;
 	${paragraph};
-	color: ${(props) => props.theme.textColorAccent};
+	color: ${(props) => props.theme.textColorAccent ?? colors.lighter};
 	font-weight: 700;
 	opacity: ${(props) => (props.isDataVisible ? 1 : 0)};
 	transition: ${(props) => props.fadeDuration}s;
@@ -171,7 +176,9 @@ const OptionsWrapper = styled.div`
 	height: 32px;
 	overflow: hidden;
 	background-color: ${(props) =>
-		props.theme.customBackground ? props.theme.customBackground : props.theme.backgroundColorPrimary};
+		props.theme.customBackground
+			? props.theme.customBackground
+			: props.theme.backgroundColorPrimary ?? colors.lightest};
 `
 
 const marquee = (duration: number, scrollValue: number) => keyframes`
@@ -211,7 +218,7 @@ const Option = styled.div`
 
 const Slot = styled.p`
 	display: inline-block;
-	color: ${(props) => props.theme.textColorSecondary};
+	color: ${(props) => props.theme.textColorSecondary ?? colors.darker};
 	${montserrat};
 	font-weight: 600;
 	font-size: 18px;
@@ -222,7 +229,7 @@ const Selection = styled.p`
 	display: inline-block;
 	width: 90%;
 	margin-left: 24px;
-	color: ${(props) => props.theme.textColorPrimary};
+	color: ${(props) => props.theme.textColorPrimary ?? colors.white};
 	${header1};
 	font-size: 24px;
 	overflow: hidden;

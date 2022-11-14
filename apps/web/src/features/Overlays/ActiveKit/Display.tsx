@@ -6,6 +6,7 @@ import { InferQueryOutput } from "@Server/index"
 import { header1, header2, montserrat, paragraph } from "@Styles/typography"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
+import colors from "@Styles/colors"
 
 interface Props {
 	_id: string
@@ -129,7 +130,9 @@ const Wrapper = styled.div`
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
 	background-color: ${(props) =>
-		props.theme.customBackground ? props.theme.customBackground : props.theme.backgroundColorPrimary};
+		props.theme.customBackground
+			? props.theme.customBackground
+			: props.theme.backgroundColorPrimary ?? colors.lightest};
 	top: ${(props) => (props.theme.isOverlayVisible ? "0px" : "40px")};
 	opacity: ${(props) => (props.theme.isOverlayVisible ? 1 : 0)};
 	transition: 0.4s;
@@ -144,21 +147,23 @@ const Meta = styled.div`
 	width: 100%;
 	padding: 18px 0;
 	background-color: ${(props) =>
-		props.theme.customBackground ? props.theme.customBackground : props.theme.backgroundColorSecondary};
+		props.theme.customBackground
+			? props.theme.customBackground
+			: props.theme.backgroundColorSecondary ?? colors.darker};
 	white-space: nowrap;
 `
 
 const BaseName = styled.p<{ isDataVisible: boolean; fadeDuration: number }>`
 	${header2};
 	font-size: 30px;
-	color: ${(props) => props.theme.textColorPrimary};
+	color: ${(props) => props.theme.textColorPrimary ?? colors.white};
 	opacity: ${(props) => (props.isDataVisible ? 1 : 0)};
 	transition: ${(props) => props.fadeDuration}s;
 `
 
 const CommandInfo = styled.p<{ isDataVisible: boolean; fadeDuration: number }>`
 	${paragraph};
-	color: ${(props) => props.theme.textColorAccent};
+	color: ${(props) => props.theme.textColorAccent ?? colors.lighter};
 	font-size: 22px;
 	font-weight: 700;
 	opacity: ${(props) => (props.isDataVisible ? 1 : 0)};
@@ -170,7 +175,9 @@ const OptionsWrapper = styled.div`
 	width: 100%;
 	height: 32px;
 	background-color: ${(props) =>
-		props.theme.customBackground ? props.theme.customBackground : props.theme.backgroundColorPrimary};
+		props.theme.customBackground
+			? props.theme.customBackground
+			: props.theme.backgroundColorPrimary ?? colors.lightest};
 	overflow: hidden;
 `
 
@@ -211,7 +218,7 @@ const Option = styled.div`
 
 const Slot = styled.p`
 	display: inline-block;
-	color: ${(props) => props.theme.textColorSecondary};
+	color: ${(props) => props.theme.textColorSecondary ?? colors.darker};
 	${montserrat};
 	font-weight: 600;
 	font-size: 24px;
@@ -221,7 +228,7 @@ const Slot = styled.p`
 const Selection = styled.p`
 	display: inline-block;
 	width: 100%;
-	color: ${(props) => props.theme.textColorPrimary};
+	color: ${(props) => props.theme.textColorPrimary ?? colors.white};
 	${header1};
 	font-size: 36px;
 	overflow: hidden;

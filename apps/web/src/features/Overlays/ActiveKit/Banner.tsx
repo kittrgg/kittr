@@ -5,6 +5,7 @@ import { IKitOption, OverlayKit } from "@kittr/types"
 import { header1, header2, montserrat, paragraph } from "@Styles/typography"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
+import colors from "@Styles/colors"
 
 import { InferQueryOutput } from "@Server/index"
 
@@ -142,7 +143,7 @@ const BackgroundArt = styled.div`
 	width: ${(props) => (props.theme.customBackground ? "0" : "100%")};
 	height: 90%;
 	text-align: center;
-	background-color: ${(props) => props.theme.backgroundColorSecondary};
+	background-color: ${(props) => props.theme.backgroundColorSecondary ?? colors.darker};
 	clip-path: polygon(6% 0, 94% 0, 100% 100%, 0% 100%);
 `
 
@@ -155,7 +156,7 @@ const Main = styled.div`
 	height: 100%;
 	margin: 0 auto;
 	padding: 0 6%;
-	background: ${(props) => (props.theme.customBackground ? "" : props.theme.backgroundColorPrimary)};
+	background: ${(props) => (props.theme.customBackground ? "" : props.theme.backgroundColorPrimary ?? colors.lightest)};
 	clip-path: ${(props) => (props.theme.customBackground ? "" : "polygon(6% 0, 94% 0, 100% 100%, 0% 100%)")};
 `
 
@@ -172,13 +173,13 @@ const Meta = styled.div<{ isDataVisible: boolean; opacitySwap: number }>`
 
 const BaseName = styled.p`
 	${header2};
-	color: ${(props) => props.theme.textColorPrimary};
+	color: ${(props) => props.theme.textColorPrimary ?? colors.white};
 `
 
 const CommandInfo = styled.p`
 	margin-top: 8px;
 	${paragraph};
-	color: ${(props) => props.theme.textColorAccent};
+	color: ${(props) => props.theme.textColorAccent ?? colors.lighter};
 	font-weight: 700;
 `
 
@@ -212,7 +213,7 @@ const Options = styled.div<{ duration: number; numOfItems: number }>`
 `
 
 const Slot = styled.p`
-	color: ${(props) => props.theme.textColorSecondary};
+	color: ${(props) => props.theme.textColorSecondary ?? colors.darker};
 	${montserrat};
 	font-weight: 600;
 	font-size: 18px;
@@ -221,7 +222,7 @@ const Slot = styled.p`
 const Selection = styled.p`
 	width: 90%;
 	margin: 0 auto;
-	color: ${(props) => props.theme.textColorPrimary};
+	color: ${(props) => props.theme.textColorPrimary ?? colors.white};
 	${header1};
 	font-size: 24px;
 	overflow: hidden;
