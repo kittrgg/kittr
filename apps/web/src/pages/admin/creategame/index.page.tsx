@@ -105,7 +105,6 @@ const Page = () => {
 					return <TextInput label={input} onChange={({ target }) => handleInputChange(target, input)} />
 				})}
 
-				{!isFormComplete() && <Text color={colors.red}>Fill out form fully before submitting...</Text>}
 				<MultiSelect
 					label="Genres"
 					data={genres.map((el) => ({ label: el.displayName, value: el.id }))}
@@ -116,6 +115,7 @@ const Page = () => {
 					data={platforms.map((el) => ({ label: el.displayName, value: el.id }))}
 					onChange={(val) => setGameInputs((prev) => ({ ...prev, platforms: val }))}
 				/>
+				{!isFormComplete() && <Text color={colors.red}>Fill out form fully before submitting...</Text>}
 
 				<Button
 					mt="0.75rem"
@@ -135,3 +135,4 @@ const Page = () => {
 }
 
 export default Page
+
