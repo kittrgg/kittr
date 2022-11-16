@@ -1,5 +1,5 @@
 import * as z from "zod"
-import { CompleteGame, RelatedGameModel, CompleteChannelCreatorCode, RelatedChannelCreatorCodeModel, CompleteChannelCustomGameCommand, RelatedChannelCustomGameCommandModel, CompleteWarzoneKit, RelatedWarzoneKitModel, CompleteChannelKitOverlay, RelatedChannelKitOverlayModel, CompleteChannelManager, RelatedChannelManagerModel, CompleteChannelProfile, RelatedChannelProfileModel, CompleteChannelPlan, RelatedChannelPlanModel, CompleteChannelLink, RelatedChannelLinkModel } from "./index"
+import { CompleteGame, RelatedGameModel, CompleteChannelCreatorCode, RelatedChannelCreatorCodeModel, CompleteChannelCustomGameCommand, RelatedChannelCustomGameCommandModel, CompleteWarzoneKit, RelatedWarzoneKitModel, CompleteWarzoneTwoKit, RelatedWarzoneTwoKitModel, CompleteChannelKitOverlay, RelatedChannelKitOverlayModel, CompleteChannelManager, RelatedChannelManagerModel, CompleteChannelProfile, RelatedChannelProfileModel, CompleteChannelPlan, RelatedChannelPlanModel, CompleteChannelLink, RelatedChannelLinkModel } from "./index"
 
 export const ChannelModel = z.object({
   id: z.string(),
@@ -15,6 +15,7 @@ export interface CompleteChannel extends z.infer<typeof ChannelModel> {
   gameCreatorCodes: CompleteChannelCreatorCode[]
   customGameCommands: CompleteChannelCustomGameCommand[]
   warzoneKits: CompleteWarzoneKit[]
+  warzoneTwoKits: CompleteWarzoneTwoKit[]
   overlay?: CompleteChannelKitOverlay | null
   managers: CompleteChannelManager[]
   profile?: CompleteChannelProfile | null
@@ -32,6 +33,7 @@ export const RelatedChannelModel: z.ZodSchema<CompleteChannel> = z.lazy(() => Ch
   gameCreatorCodes: RelatedChannelCreatorCodeModel.array(),
   customGameCommands: RelatedChannelCustomGameCommandModel.array(),
   warzoneKits: RelatedWarzoneKitModel.array(),
+  warzoneTwoKits: RelatedWarzoneTwoKitModel.array(),
   overlay: RelatedChannelKitOverlayModel.nullish(),
   managers: RelatedChannelManagerModel.array(),
   profile: RelatedChannelProfileModel.nullish(),

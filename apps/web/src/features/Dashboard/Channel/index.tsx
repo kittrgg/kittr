@@ -12,6 +12,7 @@ import Spinner from "@Components/shared/Spinner"
 import Head from "@Components/shared/Head"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { useSocket } from "../../../pages/dashboard.page"
+import Warzone2 from "./Warzone2"
 
 interface Props {
 	containerRef: any
@@ -51,6 +52,7 @@ const Channel = ({ containerRef }: Props) => {
 			<ChannelTopBar />
 			{view === "Channel Settings" && <ChannelSettings containerRef={containerRef} />}
 			{view === "warzone" && <Warzone />}
+			{view === "wz2" && <Warzone2 />}
 			{view === "Deleted Game Notification" && <DeletedGameNotification />}
 		</>
 	)

@@ -12,12 +12,17 @@ const upsertKitToChannel = createController()
 			channelId: z.string(),
 			kit: WarzoneKitModel.extend({
 				options: WarzoneKitOptionModel.array().default([])
-			}).partial({ id: true })
+			}).partial({ id: true }),
+			gameView: z.string()
 		}),
 		async resolve({ ctx, input }) {
 			await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["ADMIN", "EDITOR", "OWNER"] })
 
-			const channel = await ChannelsService.upsertKit({ channelId: input.channelId, kit: input.kit })
+			const channel = await ChannelsService.upsertKit({
+				channelId: input.channelId,
+				kit: input.kit,
+				gameView: input.gameView
+			})
 			return channel
 		}
 	})
@@ -27,12 +32,17 @@ const deleteKitFromChannel = createController()
 	.mutation("", {
 		input: z.object({
 			channelId: z.string(),
-			kitId: z.string()
+			kitId: z.string(),
+			gameView: z.string()
 		}),
 		async resolve({ ctx, input }) {
 			await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["ADMIN", "EDITOR", "OWNER"] })
 
-			const channel = await ChannelsService.deleteKit({ channelId: input.channelId, kitId: input.kitId })
+			const channel = await ChannelsService.deleteKit({
+				channelId: input.channelId,
+				kitId: input.kitId,
+				gameView: input.gameView
+			})
 			return channel
 		}
 	})
@@ -41,3 +51,4 @@ export const ChannelsKitsController = {
 	upsertKitToChannel,
 	deleteKitFromChannel
 }
+

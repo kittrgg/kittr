@@ -7,7 +7,7 @@ services:
       - 5432:5432
     image: postgres:alpine
     environment:
-      - POSTGRES_USER=dev
+      - POSTGRES_USER=turboAf
       - POSTGRES_PASSWORD=dev
       - POSTGRES_DB=dev
     restart: always
@@ -32,3 +32,4 @@ services:
 volumes:
   kittr-database:
     driver: local
+

@@ -45,3 +45,6 @@ volumes
 dev.env.json
 dev.env.local.json
 .vercel
+
+storybook-static
+dump.sql

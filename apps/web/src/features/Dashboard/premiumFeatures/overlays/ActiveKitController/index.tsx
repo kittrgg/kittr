@@ -49,7 +49,7 @@ const ActiveKit = () => {
 		}
 	})
 
-	let rootUrl = new URL(window.location.origin.toString()).host.replace("www.", "")
+	const rootUrl = new URL(window.location.origin.toString()).host.replace("www.", "")
 
 	const copyToClipboard = () => {
 		navigator.clipboard.writeText(
@@ -82,13 +82,11 @@ const ActiveKit = () => {
 						</Styled.Paragraph>
 						<Styled.Paragraph>There are four overlay styles available:</Styled.Paragraph>
 						<ul style={{ marginLeft: "52px" }}>
-							{Object.values(ActiveKitOverlay).map((overlay, index) => {
-								return (
-									<Styled.Paragraph key={overlay.style} as="li" style={{ marginTop: index === 0 ? "" : "24px" }}>
-										{overlay.style}
-									</Styled.Paragraph>
-								)
-							})}
+							{Object.values(ActiveKitOverlay).map((overlay, index) => (
+								<Styled.Paragraph key={overlay.style} as="li" style={{ marginTop: index === 0 ? "" : "24px" }}>
+									{overlay.style}
+								</Styled.Paragraph>
+							))}
 						</ul>
 						<FlexRow>
 							<div style={{ marginTop: "36px", flex: ".8" }}>
@@ -289,20 +287,19 @@ const ActiveKit = () => {
 								During channel, select the active kit below to update the overlay.
 							</Styled.Paragraph>
 							<Styled.Paragraph>Primary</Styled.Paragraph>
-							{data?.warzoneKits
+							{data?.warzoneTwoKits
 								.slice()
-								.filter((kit) => data?.overlay?.secondaryKit?.id !== kit.id)
+								.filter((kit) => data?.overlay?.secondaryWzTwoKit?.id !== kit.id)
 								.sort((a, b) => sortAlphabetical(a.base!.displayName, b.base!.displayName))
 								.sort((kit) => {
 									if (kit.featured) {
 										return -1
-									} else {
-										return 1
 									}
+									return 1
 								})
 								.map((kit) => {
 									const name = kit?.base?.displayName
-									const isActive = data?.overlay?.primaryKit?.id === kit.id
+									const isActive = data?.overlay?.primaryWzTwoKit?.id === kit.id
 									const userTitle = kit.customTitle
 									const isFeatured = kit.featured
 
@@ -312,9 +309,9 @@ const ActiveKit = () => {
 											isActive={isActive}
 											onClick={() => {
 												if (isActive) {
-													mutateKit({ channelId: data?.id!, kitId: null, kitToChange: "primaryKit" })
+													mutateKit({ channelId: data?.id!, kitId: null, kitToChange: "primaryWzTwoKit" })
 												} else {
-													mutateKit({ channelId: data?.id!, kitId: kit.id, kitToChange: "primaryKit" })
+													mutateKit({ channelId: data?.id!, kitId: kit.id, kitToChange: "primaryWzTwoKit" })
 												}
 											}}
 										>
@@ -343,20 +340,19 @@ const ActiveKit = () => {
 								<Styled.Paragraph style={{ marginTop: "40px" }}>Secondary</Styled.Paragraph>
 								<Styled.Paragraph style={{ fontStyle: "italic" }}>Optional</Styled.Paragraph>
 							</FlexRow>
-							{data?.warzoneKits
+							{data?.warzoneTwoKits
 								.slice()
-								.filter((kit) => data?.overlay?.primaryKit?.id !== kit.id)
+								.filter((kit) => data?.overlay?.primaryWzTwoKit?.id !== kit.id)
 								.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
 								.sort((kit) => {
 									if (kit.featured) {
 										return -1
-									} else {
-										return 1
 									}
+									return 1
 								})
 								.map((kit) => {
 									const name = kit.base.displayName
-									const isActive = data?.overlay?.secondaryKit?.id === kit.id
+									const isActive = data?.overlay?.secondaryWzTwoKit?.id === kit.id
 									const userTitle = kit.customTitle
 									const isFeatured = kit.featured
 
@@ -366,9 +362,9 @@ const ActiveKit = () => {
 											isActive={isActive}
 											onClick={() => {
 												if (isActive) {
-													mutateKit({ channelId: data?.id!, kitId: null, kitToChange: "secondaryKit" })
+													mutateKit({ channelId: data?.id!, kitId: null, kitToChange: "secondaryWzTwoKit" })
 												} else {
-													mutateKit({ channelId: data?.id!, kitId: kit.id, kitToChange: "secondaryKit" })
+													mutateKit({ channelId: data?.id!, kitId: kit.id, kitToChange: "secondaryWzTwoKit" })
 												}
 											}}
 										>

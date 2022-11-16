@@ -7,6 +7,7 @@ import { header1, header2, montserrat, paragraph } from "@Styles/typography"
 import { asyncDelay } from "@Utils/helpers/asyncDelay"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
+import colors from "@Styles/colors"
 
 interface Props {
 	_id: string
@@ -50,9 +51,8 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 				setCursor((cursor) => {
 					if (cursor < length) {
 						return cursor + 1
-					} else {
-						return 0
 					}
+					return 0
 				})
 			}
 
@@ -67,15 +67,15 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 		const switchKit = async () => {
 			if (hasAnActiveKit) {
 				if (cursor === 0) {
-					const kitCount = [data?.primaryKit, data?.secondaryKit].filter(
+					const kitCount = [data?.primaryWzTwoKit, data?.secondaryWzTwoKit].filter(
 						(kit) => !!kit && Object.keys(kit).length > 0
 					).length
 
 					if (kitCount > 1) {
-						if (activeKit.id === data?.primaryKit?.id) {
-							setActiveKit(data?.secondaryKit as OverlayKit)
+						if (activeKit.id === data?.primaryWzTwoKit?.id) {
+							setActiveKit(data?.secondaryWzTwoKit as OverlayKit)
 						} else {
-							setActiveKit(data?.primaryKit as OverlayKit)
+							setActiveKit(data?.primaryWzTwoKit as OverlayKit)
 						}
 					}
 				}
@@ -106,7 +106,7 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 	if (!data) return null
 
 	const hasAKitSelected =
-		Object.keys(data.primaryKit || {}).length > 0 || Object.keys(data.secondaryKit || {}).length > 0
+		Object.keys(data.primaryWzTwoKit || {}).length > 0 || Object.keys(data.secondaryWzTwoKit || {}).length > 0
 	const isRendered = data.isOverlayVisible && hasAKitSelected
 	const isOverlayVisible = !!previewWidth || isRendered
 
@@ -159,7 +159,9 @@ const Wrapper = styled.div`
 	opacity: ${(props) => (props.theme.isOverlayVisible ? 1 : 0)};
 	transition: 0.4s;
 	background-color: ${(props) =>
-		props.theme.customBackground ? props.theme.customBackground : props.theme.backgroundColorPrimary};
+		props.theme.customBackground
+			? props.theme.customBackground
+			: props.theme.backgroundColorPrimary ?? colors.lightest};
 	transform: ${(props) => (props.theme.previewWidth ? `scale(${Math.min(1, props.theme.previewWidth / 640)})` : "")};
 `
 
@@ -174,14 +176,16 @@ const Meta = styled.div<{ fadeDuration: number }>`
 	padding: 0 20px;
 	white-space: nowrap;
 	background-color: ${(props) =>
-		props.theme.customBackground ? props.theme.customBackground : props.theme.backgroundColorSecondary};
+		props.theme.customBackground
+			? props.theme.customBackground
+			: props.theme.backgroundColorSecondary ?? colors.darker};
 	overflow: hidden;
 `
 
 const BaseName = styled.p<{ isVisible: boolean; fadeDuration: number }>`
 	${header2};
 	width: 100%;
-	color: ${(props) => props.theme.textColorPrimary};
+	color: ${(props) => props.theme.textColorPrimary ?? colors.white};
 	opacity: ${(props) => (props.isVisible ? 1 : 0)};
 	transition: ${(props) => props.fadeDuration}s;
 	overflow: hidden;
@@ -193,7 +197,7 @@ const BaseName = styled.p<{ isVisible: boolean; fadeDuration: number }>`
 const CommandInfo = styled.p<{ isVisible: boolean; fadeDuration: number }>`
 	${paragraph};
 	width: 100%;
-	color: ${(props) => props.theme.textColorAccent};
+	color: ${(props) => props.theme.textColorAccent ?? colors.lighter};
 	font-weight: 700;
 	opacity: ${(props) => (props.isVisible ? 1 : 0)};
 	transition: ${(props) => props.fadeDuration}s;
@@ -227,7 +231,7 @@ const Option = styled.div`
 
 const Slot = styled.p`
 	display: inline-block;
-	color: ${(props) => props.theme.textColorSecondary};
+	color: ${(props) => props.theme.textColorSecondary ?? colors.darker};
 	${montserrat};
 	font-weight: 600;
 	font-size: 18px;
@@ -237,7 +241,7 @@ const Slot = styled.p`
 const Selection = styled.p`
 	display: inline-block;
 	width: 90%;
-	color: ${(props) => props.theme.textColorPrimary};
+	color: ${(props) => props.theme.textColorPrimary ?? colors.white};
 	${header1};
 	font-size: 24px;
 	overflow: hidden;

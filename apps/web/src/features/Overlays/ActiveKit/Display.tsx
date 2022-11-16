@@ -6,6 +6,7 @@ import { InferQueryOutput } from "@Server/index"
 import { header1, header2, montserrat, paragraph } from "@Styles/typography"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
+import colors from "@Styles/colors"
 
 interface Props {
 	_id: string
@@ -27,14 +28,13 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 	useEffect(() => {
 		let timeout: any = null
 
-		const delay = async (period: number) => {
-			return await new Promise((resolve) => {
+		const delay = async (period: number) =>
+			await new Promise((resolve) => {
 				timeout = setTimeout(() => {
 					resolve(null)
 					clearTimeout(timeout)
 				}, period)
 			})
-		}
 
 		const showItem = async () => {
 			setIsDataVisible(true)
@@ -46,15 +46,17 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 			setIsDataVisible(false)
 			await delay(FADE_DURATION * 1000)
 
-			if (activeKit.id === data?.primaryKit?.id) {
-				setActiveKit(data?.secondaryKit as OverlayKit)
+			if (activeKit.id === data?.primaryWzTwoKit?.id) {
+				setActiveKit(data?.secondaryWzTwoKit as OverlayKit)
 			} else {
-				setActiveKit(data?.primaryKit as OverlayKit)
+				setActiveKit(data?.primaryWzTwoKit as OverlayKit)
 			}
 		}
 
 		if (data) {
-			const kitCount = [data.primaryKit, data.secondaryKit].filter((kit) => !!kit && Object.keys(kit).length > 0).length
+			const kitCount = [data.primaryWzTwoKit, data.secondaryWzTwoKit].filter(
+				(kit) => !!kit && Object.keys(kit).length > 0
+			).length
 
 			if (kitCount > 1) {
 				showItem()
@@ -68,7 +70,7 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 	if (!data) return null
 
 	const hasAKitSelected =
-		Object.keys(data.primaryKit || {}).length > 0 || Object.keys(data.secondaryKit || {}).length > 0
+		Object.keys(data.primaryWzTwoKit || {}).length > 0 || Object.keys(data.secondaryWzTwoKit || {}).length > 0
 	const isRendered = data.isOverlayVisible && hasAKitSelected
 	const isOverlayVisible = !!previewWidth || isRendered
 
@@ -101,14 +103,12 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 								sortingArray: warzoneSlotsOrder,
 								keyToSort: "slotKey",
 								array: activeKit.options || []
-							}).map((elem: any, _: any) => {
-								return (
-									<Option key={elem.displayName}>
-										<Slot>{elem.slotKey}</Slot>
-										<Selection>{elem.displayName.toUpperCase()}</Selection>
-									</Option>
-								)
-							})}
+							}).map((elem: any, _: any) => (
+								<Option key={elem.displayName}>
+									<Slot>{elem.slotKey}</Slot>
+									<Selection>{elem.displayName.toUpperCase()}</Selection>
+								</Option>
+							))}
 					</Options>
 				</OptionsWrapper>
 			</Wrapper>
@@ -130,7 +130,9 @@ const Wrapper = styled.div`
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
 	background-color: ${(props) =>
-		props.theme.customBackground ? props.theme.customBackground : props.theme.backgroundColorPrimary};
+		props.theme.customBackground
+			? props.theme.customBackground
+			: props.theme.backgroundColorPrimary ?? colors.lightest};
 	top: ${(props) => (props.theme.isOverlayVisible ? "0px" : "40px")};
 	opacity: ${(props) => (props.theme.isOverlayVisible ? 1 : 0)};
 	transition: 0.4s;
@@ -145,21 +147,23 @@ const Meta = styled.div`
 	width: 100%;
 	padding: 18px 0;
 	background-color: ${(props) =>
-		props.theme.customBackground ? props.theme.customBackground : props.theme.backgroundColorSecondary};
+		props.theme.customBackground
+			? props.theme.customBackground
+			: props.theme.backgroundColorSecondary ?? colors.darker};
 	white-space: nowrap;
 `
 
 const BaseName = styled.p<{ isDataVisible: boolean; fadeDuration: number }>`
 	${header2};
 	font-size: 30px;
-	color: ${(props) => props.theme.textColorPrimary};
+	color: ${(props) => props.theme.textColorPrimary ?? colors.white};
 	opacity: ${(props) => (props.isDataVisible ? 1 : 0)};
 	transition: ${(props) => props.fadeDuration}s;
 `
 
 const CommandInfo = styled.p<{ isDataVisible: boolean; fadeDuration: number }>`
 	${paragraph};
-	color: ${(props) => props.theme.textColorAccent};
+	color: ${(props) => props.theme.textColorAccent ?? colors.lighter};
 	font-size: 22px;
 	font-weight: 700;
 	opacity: ${(props) => (props.isDataVisible ? 1 : 0)};
@@ -171,7 +175,9 @@ const OptionsWrapper = styled.div`
 	width: 100%;
 	height: 32px;
 	background-color: ${(props) =>
-		props.theme.customBackground ? props.theme.customBackground : props.theme.backgroundColorPrimary};
+		props.theme.customBackground
+			? props.theme.customBackground
+			: props.theme.backgroundColorPrimary ?? colors.lightest};
 	overflow: hidden;
 `
 
@@ -212,7 +218,7 @@ const Option = styled.div`
 
 const Slot = styled.p`
 	display: inline-block;
-	color: ${(props) => props.theme.textColorSecondary};
+	color: ${(props) => props.theme.textColorSecondary ?? colors.darker};
 	${montserrat};
 	font-weight: 600;
 	font-size: 24px;
@@ -222,7 +228,7 @@ const Slot = styled.p`
 const Selection = styled.p`
 	display: inline-block;
 	width: 100%;
-	color: ${(props) => props.theme.textColorPrimary};
+	color: ${(props) => props.theme.textColorPrimary ?? colors.white};
 	${header1};
 	font-size: 36px;
 	overflow: hidden;

@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { WarzoneKitOption } from "@kittr/prisma"
 import { Button, NumberInput, SubSection, Text, TextInput } from "@kittr/ui"
 import { trpc } from "@Server/createHooks"
@@ -119,3 +120,4 @@ export const KitBaseOptionForm = ({ initialValues, onFinished }: Props) => {
 		</SubSection>
 	)
 }
+

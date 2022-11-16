@@ -60,7 +60,7 @@ const editKit = createController()
 		input: z.object({
 			channelId: z.string(),
 			kitId: z.string().nullable(),
-			kitToChange: z.enum(["primaryKit", "secondaryKit"])
+			kitToChange: z.enum(["primaryWzTwoKit", "secondaryWzTwoKit"])
 		}),
 		async resolve({ ctx, input }) {
 			await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["ADMIN", "EDITOR", "OWNER"] })

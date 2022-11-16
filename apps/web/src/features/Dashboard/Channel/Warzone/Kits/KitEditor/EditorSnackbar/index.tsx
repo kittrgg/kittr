@@ -153,7 +153,7 @@ const EditorSnackbar = () => {
 		) {
 			return dispatch(setModal({ type: "Kit Naming Warning", data: {} }))
 		}
-		
+
 		mutate({
 			channelId: channelData?.id!,
 			kit: {
@@ -168,7 +168,8 @@ const EditorSnackbar = () => {
 				youtubeUrl: activeKit.youtubeUrl,
 				tiktokUrl: activeKit.tiktokUrl,
 				quote: activeKit.quote
-			}
+			},
+			gameView: ""
 		})
 	}
 
@@ -270,3 +271,4 @@ const SaveButton = styled.button`
 		color: ${colors.white};
 	}
 `
+

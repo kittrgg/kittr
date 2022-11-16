@@ -6,16 +6,12 @@ import { Button, List, Section } from "@kittr/ui"
 import SVG from "@kittr/ui/src/components/SVG"
 import { ActionIcon } from "@mantine/core"
 import { trpc } from "@Server/createHooks"
-import { KitBaseForm } from "../KitBaseForm"
+import { KitBaseForm } from "./KitBaseForm"
 import Link from "next/link"
-import { useRouter } from "next/router"
 
 const Page = () => {
-	const router = useRouter()
-	// Using slug so that we can reform the KitBase Editors to other games without hard coding new pages for each game.
-	const { slug } = router.query
 	// TODO: Not sure how to handle this type error, need some backend knowledging here.
-	const { data: bases, refetch } = trpc.useQuery([`admin/${slug}/kit-bases/list`])
+	const { data: bases, refetch } = trpc.useQuery(["admin/warzone/kit-bases/list"])
 	const [isCreatingBase, setIsCreatingBase] = useState(false)
 	const [isEditingBase, setIsEditingBase] = useState<
 		| (WarzoneKitBase & {
@@ -23,6 +19,8 @@ const Page = () => {
 		  })
 		| null
 	>(null)
+
+	console.log(bases)
 
 	if (isCreatingBase) {
 		console.log("Game ID", bases![0].gameId)

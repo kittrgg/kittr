@@ -19,9 +19,9 @@ datasource db {
 }
 
 model Administrator {
-  id                 String                     @id @default(cuid())
-  firebaseUserId     String
-  role              AdminRole
+  id             String    @id @default(cuid())
+  firebaseUserId String
+  role           AdminRole
 }
 
 enum AdminRole {
@@ -40,6 +40,7 @@ model Channel {
   gameCreatorCodes   ChannelCreatorCode[]
   customGameCommands ChannelCustomGameCommand[]
   warzoneKits        WarzoneKit[]
+  warzoneTwoKits       WarzoneTwoKit[]
   overlay            ChannelKitOverlay?
   managers           ChannelManager[]
   profile            ChannelProfile?
@@ -148,19 +149,19 @@ enum ChannelManagerRoles {
 }
 
 model ChannelKitOverlay {
-  id                       String      @id @default(cuid())
-  channel                  Channel     @relation(fields: [channelId], references: [id], onDelete: Cascade)
-  channelId                String      @unique
+  id                       String       @id @default(cuid())
+  channel                  Channel      @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  channelId                String       @unique
   backgroundColorPrimary   String?
   backgroundColorSecondary String?
   textColorPrimary         String?
   textColorSecondary       String?
   textColorAccent          String?
-  isOverlayVisible         Boolean     @default(false)
-  primaryKit               WarzoneKit? @relation(name: "primaryKitOverlay", fields: [primaryKitId], references: [id])
-  primaryKitId             String?     @unique
-  secondaryKit             WarzoneKit? @relation(name: "secondaryKitOverlay", fields: [secondaryKitId], references: [id])
-  secondaryKitId           String?     @unique
+  isOverlayVisible         Boolean      @default(false)
+  primaryWzTwoKit            WarzoneTwoKit? @relation(name: "primaryWzTwoKitOverlay", fields: [primaryWzTwoKitId], references: [id])
+  primaryWzTwoKitId          String?      @unique
+  secondaryWzTwoKit          WarzoneTwoKit? @relation(name: "secondaryWzTwoKitOverlay", fields: [secondaryWzTwoKitId], references: [id])
+  secondaryWzTwoKitId        String?      @unique
 }
 
 model WarzoneKit {
@@ -178,8 +179,25 @@ model WarzoneKit {
   baseId                     String
   channel                    Channel            @relation(fields: [channelId], references: [id], onDelete: Cascade)
   channelId                  String
-  channelKitOverlayPrimary   ChannelKitOverlay? @relation(name: "primaryKitOverlay")
-  channelKitOverlaySecondary ChannelKitOverlay? @relation(name: "secondaryKitOverlay")
+}
+
+model WarzoneTwoKit {
+  id                         String              @id @default(cuid())
+  customTitle                String?
+  blueprint                  String?
+  featured                   Boolean             @default(false)
+  youtubeUrl                 String?
+  tiktokUrl                  String?
+  quote                      String?
+  options                    WarzoneTwoKitOption[]
+  game                       Game                @relation(fields: [gameId], references: [id])
+  gameId                     String
+  base                       WarzoneTwoKitBase     @relation(fields: [baseId], references: [id], onDelete: Cascade)
+  baseId                     String
+  channel                    Channel             @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  channelId                  String
+  channelKitOverlayPrimary   ChannelKitOverlay?  @relation(name: "primaryWzTwoKitOverlay")
+  channelKitOverlaySecondary ChannelKitOverlay?  @relation(name: "secondaryWzTwoKitOverlay")
 }
 
 model ChannelCustomGameCommand {
@@ -211,6 +229,17 @@ model WarzoneKitOption {
   kitBaseId      String
 }
 
+model WarzoneTwoKitOption {
+  id             String          @id @default(cuid())
+  gameId         String
+  displayName    String
+  slotKey        String
+  orderPlacement Int
+  kits           WarzoneTwoKit[]
+  kitBase        WarzoneTwoKitBase @relation(fields: [kitBaseId], references: [id], onDelete: Cascade)
+  kitBaseId      String
+}
+
 model WarzoneKitBase {
   id               String                 @id @default(cuid())
   displayName      String
@@ -226,16 +255,44 @@ model WarzoneKitBase {
   kits             WarzoneKit[]
 }
 
+model WarzoneTwoKitBase {
+  id               String                  @id @default(cuid())
+  displayName      String
+  game             Game                    @relation(fields: [gameId], references: [id])
+  gameId           String
+  imageUrl         String
+  blurb            String
+  maxOptions       Int
+  commandCodes     WarzoneTwoCommandCode[]
+  availableOptions WarzoneTwoKitOption[]
+  category         WarzoneTwoKitBaseCategory @relation(fields: [categoryId], references: [id])
+  categoryId       String
+  kits             WarzoneTwoKit[]
+}
+
 model WarzoneKitBaseCategory {
   id          String           @id @default(cuid())
   displayName String           @unique
   kit         WarzoneKitBase[]
 }
 
+model WarzoneTwoKitBaseCategory {
+  id          String            @id @default(cuid())
+  displayName String            @unique
+  kit         WarzoneTwoKitBase[]
+}
+
 model WarzoneCommandCode {
   id        String         @id @default(cuid())
   code      String
   kitBase   WarzoneKitBase @relation(fields: [kitBaseId], references: [id], onDelete: Cascade)
+  kitBaseId String
+}
+
+model WarzoneTwoCommandCode {
+  id        String          @id @default(cuid())
+  code      String
+  kitBase   WarzoneTwoKitBase @relation(fields: [kitBaseId], references: [id], onDelete: Cascade)
   kitBaseId String
 }
 
@@ -256,6 +313,8 @@ model Game {
   customCommandStrings ChannelCustomGameCommand[]
   warzoneKitBases      WarzoneKitBase[]
   warzoneKits          WarzoneKit[]
+  warzoneTwoKitBases     WarzoneTwoKitBase[]
+  warzoneTwoKits         WarzoneTwoKit[]
 }
 
 model Platform {

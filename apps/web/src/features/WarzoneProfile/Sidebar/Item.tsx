@@ -45,7 +45,7 @@ const Item = ({ baseName, featured, kits, setFilterQuery }: Props) => {
 			return 0
 		})
 
-	const firstMatchedBaseUserTitle = ` (${matchedBase[0].customTitle})`
+	const firstMatchedBaseUserTitle = ` (${matchedBase[0]?.customTitle})`
 
 	const onClick = () => {
 		dispatch(setActiveWeapon(matchedBase[0]))
@@ -222,3 +222,4 @@ const KitCount = styled.p<{ isActive: boolean }>`
 	color: ${(props) => (props.isActive ? colors.darker : colors.lightest)};
 	font-size: 16px;
 `
+

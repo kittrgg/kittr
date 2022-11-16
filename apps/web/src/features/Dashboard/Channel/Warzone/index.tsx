@@ -29,7 +29,7 @@ const Warzone = () => {
 				<Container>
 					<ChannelTopBar />
 					<HeaderWrap>
-						<Header>WARZONE</Header>
+						<Header>{gameInfo.urlSafeName.toUpperCase()}</Header>
 						<HeaderContent>
 							<AffiliateCode />
 							<Button
@@ -96,3 +96,4 @@ const HeaderContent = styled.div`
 	align-items: flex-start;
 	justify-content: space-between;
 `
+

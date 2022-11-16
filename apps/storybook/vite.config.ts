@@ -1,6 +1,4 @@
 // eslint-disable-next-line spaced-comment
-/// <reference types="vitest" />
-// eslint-disable-next-line spaced-comment
 /// <reference types="vite/client" />
 
 import { defineConfig } from "vite"
