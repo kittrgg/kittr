@@ -42,15 +42,17 @@ export const createBase = createController()
 	.mutation("", {
 		input: z.object({
 			base: WarzoneTwoKitBaseModel.omit({ id: true }),
-			commandCodes: z.array(WarzoneTwoCommandCodeModel)
-			// categoryId: z.string(),
-			// options: z.array(Warzone2KitOptionModel)
+			commandCodes: z.string()
 		}),
 		async resolve({ input }) {
+			const commandCodesArr = input.commandCodes.split(",").map((el) => el.trim())
+
 			const updatedBase = await AdminWarzone2Service.createKitBase({
 				base: input.base,
-				commandCodes: input.commandCodes.map((code) => code.code)
+				commandCodes: commandCodesArr
 			})
+
+			console.log({ updatedBase })
 
 			return updatedBase
 		}
@@ -61,15 +63,15 @@ export const updateBase = createController()
 	.mutation("", {
 		input: z.object({
 			base: WarzoneTwoKitBaseModel
-			// commandCodes: z.array(Warzone2CommandCodeModel),
 			// categoryId: z.string(),
 			// options: z.array(Warzone2KitOptionModel)
 		}),
 		async resolve({ input }) {
+
+
 			const updatedBase = await AdminWarzone2Service.updateKitBase({
 				base: input.base
 				// categoryId: input.categoryId,
-				// commandCodes: input.commandCodes,
 				// options: input.options
 			})
 
