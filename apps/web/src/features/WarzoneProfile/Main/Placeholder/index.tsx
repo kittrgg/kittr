@@ -17,11 +17,12 @@ const Cards = ({ isMobile }: Props) => {
 	const filteredKits = kits ? kits.slice().filter((kit) => kit.featured) : []
 
 	// Ensure that the ad gets removed when the placeholder is no longer in view.
-	useEffect(() => {
-		return () => {
+	useEffect(
+		() => () => {
 			;(window.top as any).__vm_remove_category = ["richmedia_all"]
-		}
-	}, [])
+		},
+		[]
+	)
 
 	return (
 		<PlaceholderContainer>
@@ -34,7 +35,7 @@ const Cards = ({ isMobile }: Props) => {
 				}
 				SELECT A KIT.
 			</PlaceholderCallToAction>
-			<CardsContainer>
+			{/* <CardsContainer>
 				{filteredKits && (
 					<>
 						{filteredKits[0] && (
@@ -48,7 +49,7 @@ const Cards = ({ isMobile }: Props) => {
 						)}
 					</>
 				)}
-			</CardsContainer>
+			</CardsContainer> */}
 			<Ad placementType="rmFooter" />
 		</PlaceholderContainer>
 	)
