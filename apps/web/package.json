@@ -50,7 +50,7 @@
 		"redux": "4.1.2",
 		"socket.io-client": "4.4.1",
 		"stripe": "8.205.0",
-		"styled-components": "5.3.3",
+		"styled-components": "5.3.6",
 		"superjson": "1.9.1",
 		"tsconfig": "*",
 		"validator": "13.7.0",
