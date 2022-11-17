@@ -3,7 +3,7 @@ import { Button, Modal } from "@Components/shared"
 import { useAllKitBases } from "@Hooks/trpc/useAllKitBases"
 import { TCommandMethod } from "@kittr/types/types"
 import { setModal } from "@Redux/slices/dashboard"
-import { useChannelData } from "@Redux/slices/dashboard/selectors"
+import { useChannelData, useChannelView, useDashboardView } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
 import { useState } from "react"
 import CommandsTable from "./CommandsTable"
@@ -28,6 +28,10 @@ const ExportBotCommands = () => {
 	const [commandStrategy, setCommandStrategy] = useState<"edit" | "add">("edit")
 	const [includeUser, setIncludeUser] = useState(true)
 	const { data: allKitBases } = useAllKitBases({ include: { category: true } })
+	const { gameId } = useChannelView()
+
+	const allKits = [...(data?.warzoneTwoKits ?? []), ...(data?.warzoneKits ?? [])]
+	const filterKits = allKits.filter((kit) => kit.base.gameId === gameId)
 
 	if (!allKitBases) return null
 
@@ -40,12 +44,7 @@ const ExportBotCommands = () => {
 				<TwitchStrategyToggle commandStrategy={commandStrategy} setCommandStrategy={setCommandStrategy} />
 			)}
 
-			<CommandsTable
-				kits={data?.warzoneKits ?? []}
-				method={method}
-				commandStrategy={commandStrategy}
-				includeUser={includeUser}
-			/>
+			<CommandsTable kits={filterKits} method={method} commandStrategy={commandStrategy} includeUser={includeUser} />
 
 			<Button
 				design="transparent"
