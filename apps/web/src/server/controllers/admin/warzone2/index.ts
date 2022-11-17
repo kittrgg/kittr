@@ -1,8 +1,9 @@
-import { WarzoneTwoCommandCodeModel, WarzoneTwoKitBaseModel, WarzoneTwoKitOptionModel } from "@kittr/prisma/validator"
+import { WarzoneTwoKitBaseModel, WarzoneTwoKitOptionModel } from "@kittr/prisma/validator"
 import { createController } from "@Server/createController"
 import { authenticateAdmin } from "@Server/middlewares/authenticateAdmin"
 import * as AdminWarzone2Service from "@Server/services/admin/warzone2"
 import { z } from "zod"
+import { prisma } from "@kittr/prisma"
 
 const listKitBases = createController()
 	.middleware(authenticateAdmin)
