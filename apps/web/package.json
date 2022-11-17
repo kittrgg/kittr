@@ -62,7 +62,7 @@
 		"@types/react": "17.0.39",
 		"@types/react-select": "5.0.1",
 		"@types/styled-components": "5.1.23",
-		"@types/validator": "13.7.4",
+		"@types/validator": "13.7.10",
 		"babel-plugin-styled-components": "2.0.7",
 		"dotenv": "16.0.1",
 		"eslint-config-custom": "*",
