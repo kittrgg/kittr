@@ -1,4 +1,4 @@
-import { prisma, WarzoneTwoKitBase, WarzoneTwoKitOption } from "@kittr/prisma"
+import { prisma, WarzoneTwoKitBase, WarzoneTwoCommandCode, WarzoneTwoKitOption } from "@kittr/prisma"
 
 export const listKitBases = async () => {
 	const result = await prisma.warzoneTwoKitBase.findMany({
@@ -16,11 +16,12 @@ export const getKitBase = async ({ kitBaseId }: { kitBaseId: string }) => {
 			id: kitBaseId
 		},
 		include: {
-			availableOptions: true
+			availableOptions: true,
+			commandCodes: true
 		}
 	})
 
-	return result
+	return { ...result, commandCodes: result?.commandCodes.map((el) => el.code).join(",") }
 }
 
 export const listKitBaseCategories = async () => {
@@ -49,14 +50,13 @@ export const createKitBase = async ({
 }
 
 export const updateKitBase = async ({
-	base
-}: // categoryId,
-	// commandCodes,
-	//  options
+	base,
+	commandCodes
+}:
 	{
-		base: WarzoneTwoKitBase
+		base: WarzoneTwoKitBase,
 		// categoryId: string,
-		// commandCodes: WarzoneCommandCode[]
+		commandCodes: string[] | null
 		// options: WarzoneKitOption[]
 	}) => {
 	const {
@@ -66,20 +66,28 @@ export const updateKitBase = async ({
 		...data
 	} = base
 
+	await prisma.warzoneTwoCommandCode.deleteMany({
+		where: {
+			AND: [
+				{ kitBaseId: base.id }
+			]
+		}
+	})
+
 	const result = await prisma.warzoneTwoKitBase.update({
 		where: {
 			id
 		},
 		data: {
-			...data
+			...data,
 			// category: {
 			// 	connect: {
 			// 		id: categoryId
 			// 	}
 			// },
-			// commandCodes: {
-			// 	connectOrCreate: commandCodes.map(code => ({ create: code, where: code }))
-			// },
+			commandCodes: {
+				create: commandCodes?.map((el) => ({ code: el }))
+			}
 			// availableOptions: {
 			// 	connectOrCreate: options.map(option => ({ create: option, where: option }))
 			// },

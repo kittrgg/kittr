@@ -12,6 +12,9 @@ import Link from "next/link"
 const Page = () => {
 	const { data: bases, refetch } = trpc.useQuery(["admin/warzone2/kit-bases/list"])
 	const { data: game } = trpc.useQuery(["games/getByUrlSafeName", "wz2"])
+	const { mutate, isLoading } = trpc.useMutation(["admin/warzone2/kit-bases/copy"], {
+		onSuccess: () => refetch()
+	})
 	const [isCreatingBase, setIsCreatingBase] = useState(false)
 	const [isEditingBase, setIsEditingBase] = useState<
 		| (WarzoneTwoKitBase & {
@@ -53,7 +56,7 @@ const Page = () => {
 			</Link>
 			<Section title="KIT BASES" action={<Button onClick={() => setIsCreatingBase(true)}>Create</Button>}>
 				<List>
-					{(bases || []).map((base: any) => (
+					{(bases || []).map((base) => (
 						<List.Item
 							style={{ borderBottom: "1px solid white", padding: "1rem" }}
 							sx={(theme) => ({
@@ -63,6 +66,15 @@ const Page = () => {
 							})}
 						>
 							{base.displayName}
+							<Button
+								size="sm"
+								ml="xl"
+								loading={isLoading}
+								color="orange"
+								onClick={() => mutate({ baseToCopy: base.id })}
+							>
+								Copy
+							</Button>
 							<ActionIcon radius="lg" size="lg" style={{ float: "right" }} onClick={() => setIsEditingBase(base)}>
 								<SVG.Pencil />
 							</ActionIcon>
@@ -76,4 +88,3 @@ const Page = () => {
 }
 
 export default Page
-

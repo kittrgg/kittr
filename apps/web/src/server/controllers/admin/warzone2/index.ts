@@ -62,15 +62,22 @@ export const updateBase = createController()
 	.middleware(authenticateAdmin)
 	.mutation("", {
 		input: z.object({
-			base: WarzoneTwoKitBaseModel
+			base: WarzoneTwoKitBaseModel,
+			commandCodes: z.string().nullable()
 			// categoryId: z.string(),
 			// options: z.array(Warzone2KitOptionModel)
 		}),
 		async resolve({ input }) {
 
+			await prisma.warzoneTwoCommandCode.deleteMany({
+				where: {
+					kitBaseId: input.base.id
+				}
+			})
 
 			const updatedBase = await AdminWarzone2Service.updateKitBase({
-				base: input.base
+				base: input.base,
+				commandCodes: input.commandCodes?.split(",") ?? null
 				// categoryId: input.categoryId,
 				// options: input.options
 			})

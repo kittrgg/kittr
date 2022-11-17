@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { WarzoneTwoKitBase, WarzoneTwoKitOption } from "@kittr/prisma"
+import { WarzoneTwoCommandCode, WarzoneTwoKitBase, WarzoneTwoKitOption } from "@kittr/prisma"
 import { Button, List, NumberInput, Section, Select, SubSection, Text, Textarea, TextInput } from "@kittr/ui"
 import SVG from "@kittr/ui/src/components/SVG"
 import { ActionIcon } from "@mantine/core"
@@ -149,6 +149,7 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 				<TextInput
 					label="Command Codes"
 					description="Comma separated list of command codes. Will be coerced to array of values for DB for you."
+					value={formValues.commandCodes}
 					onChange={changeTextField("commandCodes")}
 				/>
 
@@ -221,7 +222,7 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 						onClick={() => {
 							if (formValues.id) {
 								updateBase(
-									{ base: formValues as FormState },
+									{ base: formValues as FormState, commandCodes: formValues.commandCodes ?? null },
 									{
 										onSuccess: onFinished
 									}
