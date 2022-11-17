@@ -31,11 +31,12 @@ export const warzone2KitBaseRouter = createRouter()
 
 			if (!baseToCopyWithAttachments) return null
 
-			const { id, gameId, availableOptions, category, commandCodes, ...rest } = baseToCopyWithAttachments
+			const { id, gameId, availableOptions, displayName, category, commandCodes, ...rest } = baseToCopyWithAttachments
 
 			const result = await prisma.warzoneTwoKitBase.create({
 				data: {
 					...rest,
+					displayName: displayName + " (copy)",
 					gameId,
 					commandCodes: { create: commandCodes.map((el) => ({ code: el.code })) },
 					categoryId: category.id,
