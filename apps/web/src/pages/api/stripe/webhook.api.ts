@@ -36,6 +36,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 			data: {
 				plan: {
 					update: {
+						stripeSubscriptionId: (event.data.object as Stripe.Subscription).id,
 						type: "PREMIUM"
 					}
 				}

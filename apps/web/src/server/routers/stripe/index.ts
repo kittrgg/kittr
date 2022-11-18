@@ -1,5 +1,5 @@
 import { createRouter } from "@Server/createRouter"
-import { StripeController } from '@Server/controllers/stripe'
+import { StripeController } from "@Server/controllers/stripe"
 
 export const stripeRouter = createRouter()
   .merge("buy-premium", StripeController.buyPremium)
