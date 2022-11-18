@@ -28,7 +28,7 @@
 		"@stripe/stripe-js": "1.23.0",
 		"@trpc/client": "9.26.0",
 		"@trpc/next": "9.26.2",
-		"@trpc/react": "9.26.2",
+		"@trpc/react": "9.27.4",
 		"@trpc/server": "9.26.2",
 		"browser-image-compression": "2.0.0",
 		"date-fns": "2.28.0",
