@@ -22,7 +22,7 @@
 		"@mantine/core": "4.2.9",
 		"@mantine/hooks": "4.2.9",
 		"@mantine/next": "4.2.9",
-		"@reduxjs/toolkit": "1.7.2",
+		"@reduxjs/toolkit": "1.9.0",
 		"@sentry/nextjs": "7.3.0",
 		"@stripe/react-stripe-js": "1.7.0",
 		"@stripe/stripe-js": "1.23.0",
