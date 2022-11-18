@@ -35,7 +35,7 @@ jobs:
         uses: ./tooling/github-actions/install
 
       - name: Run Prettier (auto-fix)
-        run: pnpm prettier-fix
+        run: yarn prettier-write
 
       - name: Commit Prettier fixes
         if: ${{ github.event_name == 'pull_request' }}
