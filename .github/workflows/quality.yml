@@ -63,7 +63,7 @@ jobs:
           node-version: '16'
           cache: 'yarn'
       - name: Install deps
-        run: yarn  --prefer-offline
+        run: yarn  --prefer-offline --frozen-lockfile
       - name: Lint
         run: npx turbo run lint
 
