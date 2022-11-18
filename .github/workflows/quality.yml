@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+  pull_request:
+
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -61,7 +63,7 @@ jobs:
           node-version: '16'
           cache: 'yarn'
       - name: Install deps
-        run: yarn --prefer-offline
+        run: yarn  --prefer-offline
       - name: Lint
         run: npx turbo run lint
 
