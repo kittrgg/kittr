@@ -47,7 +47,7 @@ jobs:
             git status --porcelain
             git config user.name "${{ github.actor }}"
             git config user.email "${{ github.actor }}@users.noreply.github.com"
-            git commit -am "Apply Prettier fixes" --no-verify
+            git commit -am "Apply Prettier fixes in Github Action" --no-verify
             git push
           fi
 
