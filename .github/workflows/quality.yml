@@ -27,7 +27,7 @@ jobs:
         with:
           # Commits made with the default `GITHUB_TOKEN` won't trigger workflows.
           # See: https://docs.github.com/en/actions/security-guides/automatic-token-authentication#using-the-github_token-in-a-workflow
-          token: ${{ secrets.GH_TOKEN_REPO_SCOPE }}
+          # token: ${{ secrets.GH_TOKEN_REPO_SCOPE }}
           # We need to use the branch ref or we can't push fixes.
           ref: ${{ github.event.pull_request.head.ref || '' }}
 
