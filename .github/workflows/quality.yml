@@ -32,7 +32,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref || '' }}
 
       - name: Install
-        uses: ./tooling/github-actions/composite-actions/install
+        uses: ./tooling/github-actions/install
 
       - name: Run Prettier (auto-fix)
         run: pnpm prettier-fix
