@@ -22,4 +22,4 @@ runs:
     - name: Yarn
       shell: bash
       if: steps.yarn-cache.outputs.cache-hit != 'true'
-      run: yarn install --frozen-lockfile --prefer-offline --non-interactive --ignore-scripts
+      run: yarn install --frozen-lockfile --prefer-offline --non-interactive
