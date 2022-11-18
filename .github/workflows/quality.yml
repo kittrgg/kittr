@@ -57,15 +57,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v2
         with:
-          node-version: '16'
-          cache: 'yarn'
-      - name: Install deps
-        run: yarn  --prefer-offline --frozen-lockfile
-      - name: Lint
-        run: npx turbo run lint
+          node-version: ${{ matrix.node-version }}
+      - uses: actions/cache@v2
+        name: yarn-cache
+        id: yarn-cache
+        with:
+          path: |
+            **/node_modules
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn
+      - name: Yarn
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install --frozen-lockfile --prefer-offline --non-interactive --ignore-scripts
 
   # types:
   #   name: 'TypeScript'
