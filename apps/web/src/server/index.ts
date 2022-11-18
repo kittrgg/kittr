@@ -13,7 +13,12 @@ import { stripeRouter } from "@Server/routers/stripe"
 
 export const appRouter = createRouter()
 	.formatError(({ shape, error, path, ctx, type, input }) => {
-		captureMessage(`${error.code}: ${path}` ?? "Unknown tRPC path", { level: "error", tags: { isKittr: true }, extra: { type }, contexts: { error: { ...error }, ctx: { ...ctx }, input: { input: JSON.stringify(input) } } })
+		captureMessage(`${error.code}: ${path}` ?? "Unknown tRPC path", {
+			level: "error",
+			tags: { isKittr: true },
+			extra: { type },
+			contexts: { error: { ...error }, ctx: { ...ctx }, input: { input: JSON.stringify(input) } }
+		})
 		return shape
 	})
 	.transformer(superjson)

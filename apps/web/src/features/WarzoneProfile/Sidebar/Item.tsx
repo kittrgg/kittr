@@ -222,4 +222,3 @@ const KitCount = styled.p<{ isActive: boolean }>`
 	color: ${(props) => (props.isActive ? colors.darker : colors.lightest)};
 	font-size: 16px;
 `
-

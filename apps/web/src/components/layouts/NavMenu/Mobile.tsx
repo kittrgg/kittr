@@ -60,7 +60,8 @@ const Container = styled.div<{ withBackground: boolean; breakpoint?: number }>`
 	align-items: center;
 	justify-content: space-between;
 	padding: 5px 30px;
-	background: ${(props) => (props.withBackground ? `linear-gradient(180deg, ${colors.lightest} 0%, rgba(29,29,31, .8) 100%)` : "transparent")};
+	background: ${(props) =>
+		props.withBackground ? `linear-gradient(180deg, ${colors.lightest} 0%, rgba(29,29,31, .8) 100%)` : "transparent"};
 
 	@media (max-width: ${(props) => props.breakpoint || 769}px) {
 		display: flex;

@@ -17,33 +17,28 @@ interface Props {
 }
 
 const WhyKittr = ({ totalNumberOfKits }: Props) => (
-		<>
-			<Head title="Improve Your Channel in 15 Minutes | kittr" description="." />
-			<Hero totalNumberOfKits={totalNumberOfKits} />
-			<div style={{ margin: "0 24px" }}>
-				<Features />
-				<HowItWorks />
-				<Winners />
-				<Testimonials />
-				<Styled.H2>CONTACT US</Styled.H2>
-				<Styled.P>STILL HAVE QUESTIONS? { "WE'VE" } GOT YOUR BACK.</Styled.P>
-				<ContactUs />
-				<CallToAction marginTop="32px" header="get kittd." />
-				<div style={{ marginBottom: "32px", textAlign: "center" }}>
-					<Link href={Routes.ROOT} passHref>
-						<Styled.LinkButton
-							design="transparent"
-							target="_blank"
-							rel="noopener no referrer"
-							style={{ marginTop: "0" }}
-						>
-							VISIT SITE
-						</Styled.LinkButton>
-					</Link>
-				</div>
+	<>
+		<Head title="Improve Your Channel in 15 Minutes | kittr" description="." />
+		<Hero totalNumberOfKits={totalNumberOfKits} />
+		<div style={{ margin: "0 24px" }}>
+			<Features />
+			<HowItWorks />
+			<Winners />
+			<Testimonials />
+			<Styled.H2>CONTACT US</Styled.H2>
+			<Styled.P>STILL HAVE QUESTIONS? {"WE'VE"} GOT YOUR BACK.</Styled.P>
+			<ContactUs />
+			<CallToAction marginTop="32px" header="get kittd." />
+			<div style={{ marginBottom: "32px", textAlign: "center" }}>
+				<Link href={Routes.ROOT} passHref>
+					<Styled.LinkButton design="transparent" target="_blank" rel="noopener no referrer" style={{ marginTop: "0" }}>
+						VISIT SITE
+					</Styled.LinkButton>
+				</Link>
 			</div>
-		</>
-	)
+		</div>
+	</>
+)
 
 export default WhyKittr
 

@@ -51,4 +51,3 @@ const ChooseBase = () => {
 }
 
 export default ChooseBase
-

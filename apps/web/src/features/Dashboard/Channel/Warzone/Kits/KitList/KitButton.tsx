@@ -26,11 +26,7 @@ const KitButton = ({ favorite, kit }: Props) => {
 	}
 
 	return (
-		<Button
-			key={kit.id}
-			active={activeKit.id == kit.id}
-			onClick={() => dispatch(setActiveKit(kit)) }
-		>
+		<Button key={kit.id} active={activeKit.id == kit.id} onClick={() => dispatch(setActiveKit(kit))}>
 			<p style={{ maskImage: "linear-gradient(to right, black 65%, transparent 92%, transparent 100%)" }}>{title}</p>
 			{favorite && (
 				<SVG.Star

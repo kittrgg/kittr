@@ -7,10 +7,12 @@ import { withSentry } from "@sentry/nextjs"
 export type AppRouter = typeof appRouter
 
 // export API handler
-export default withSentry(trpcNext.createNextApiHandler({
-	router: appRouter,
-	createContext,
-	batching: {
-		enabled: true
-	}
-}))
+export default withSentry(
+	trpcNext.createNextApiHandler({
+		router: appRouter,
+		createContext,
+		batching: {
+			enabled: true
+		}
+	})
+)

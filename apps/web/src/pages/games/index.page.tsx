@@ -23,12 +23,12 @@ const GamesIndex = () => {
 			<GamesWrapper>
 				{games &&
 					games.map((elem) => (
-							<GameCard
-								key={elem.id}
-								{...elem}
-								onClick={() => elem.active && router.push(Routes.GAMES.createPath(elem.urlSafeName))}
-							/>
-						))}
+						<GameCard
+							key={elem.id}
+							{...elem}
+							onClick={() => elem.active && router.push(Routes.GAMES.createPath(elem.urlSafeName))}
+						/>
+					))}
 			</GamesWrapper>
 			{width < 1200 && <ResponsiveBanner largeWidthAdUnit="d728x90" smallWidthAdUnit="s300x250" />}
 		</AdPageWrapper>

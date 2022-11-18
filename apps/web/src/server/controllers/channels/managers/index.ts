@@ -16,7 +16,6 @@ const listManagers = createController()
 			await checkRole({ firebaseUserId: ctx.user.uid, channelId, roles: ["ADMIN", "OWNER", "EDITOR"] })
 			if (managers.length === 0) return []
 
-
 			const result = ChannelsManagersService.listManagers({ managers })
 			return result
 		}

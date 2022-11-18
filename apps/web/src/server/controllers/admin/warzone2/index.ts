@@ -69,7 +69,6 @@ export const updateBase = createController()
 			// options: z.array(Warzone2KitOptionModel)
 		}),
 		async resolve({ input }) {
-
 			await prisma.warzoneTwoCommandCode.deleteMany({
 				where: {
 					kitBaseId: input.base.id

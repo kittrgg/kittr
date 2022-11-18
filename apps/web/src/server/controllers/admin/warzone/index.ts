@@ -159,4 +159,3 @@ export const WarzoneAdminController = {
 	createOption,
 	deleteOption
 }
-

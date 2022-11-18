@@ -33,7 +33,7 @@ export default EmailChanged
 
 const useStyles = createStyles((theme, _param, getRef) =>
 	// add reusable styles like headers, links, to MantineProvider theme
-	 ({
+	({
 		body: {
 			display: "flex",
 			height: "100vh",
@@ -54,7 +54,7 @@ const useStyles = createStyles((theme, _param, getRef) =>
 			fontSize: "28px",
 			textAlign: "left",
 			letterSpacing: "3px",
-			fontFamily: "\"Barlow Condensed\", serif"
+			fontFamily: '"Barlow Condensed", serif'
 		},
 
 		errorParagraph: {
@@ -83,12 +83,12 @@ const useStyles = createStyles((theme, _param, getRef) =>
 			"fontSize": "16px",
 			"fontWeight": 600,
 			"letterSpacing": "2px",
-			"fontDamily": "\"Montserrat\", sans-serif",
+			"fontDamily": '"Montserrat", sans-serif',
 
 			"&:hover": {
 				backgroundColor: `${colors.dark}`,
 				color: `${colors.white}`
 			}
 		}
-	}))
-
+	})
+)

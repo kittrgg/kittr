@@ -64,9 +64,13 @@ export const checkRole = async ({
 	return manager
 }
 
-export const create = async ({ displayName, email, password }: {
-	displayName: string,
-	email: string,
+export const create = async ({
+	displayName,
+	email,
+	password
+}: {
+	displayName: string
+	email: string
 	password: string
 }) => {
 	const user = await signUp(email, password)

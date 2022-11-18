@@ -19,15 +19,15 @@ interface Props {
 
 /** Layout used for authentication related pages. Signups, logins, etc. */
 const Authentication = ({ title, children }: Props) => (
-		<Wrapper>
-			<BlockArt />
-			<NavMenu />
-			<Container>
-				<FormTitle>{title}</FormTitle>
-				{children}
-			</Container>
-		</Wrapper>
-	)
+	<Wrapper>
+		<BlockArt />
+		<NavMenu />
+		<Container>
+			<FormTitle>{title}</FormTitle>
+			{children}
+		</Container>
+	</Wrapper>
+)
 
 export default Authentication
 

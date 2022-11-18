@@ -56,23 +56,24 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 			case "customer.subscription.updated": {
 				return subscriptionHandler(event)
 			}
-			case "customer.subscription.deleted": {
-				const cancelled = await prisma.channel.update({
-					where: {
-						// @ts-ignore
-						id: event.data.object.metadata.channelId
-					},
-					data: {
-						plan: {
-							update: {
-								type: "BASIC"
+			case "customer.subscription.deleted":
+				{
+					const cancelled = await prisma.channel.update({
+						where: {
+							// @ts-ignore
+							id: event.data.object.metadata.channelId
+						},
+						data: {
+							plan: {
+								update: {
+									type: "BASIC"
+								}
 							}
 						}
-					}
-				})
+					})
 
-				return res.status(200).json({ cancelled })
-			}
+					return res.status(200).json({ cancelled })
+				}
 				break
 			case "subscription_schedule.updated":
 				// @ts-ignore

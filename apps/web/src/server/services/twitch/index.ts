@@ -26,7 +26,6 @@ export const getProfile = async (twitchLink: string): Promise<ProfilePageData> =
 			clips: [],
 			recentVideos: []
 		}
-
 	}
 
 	const [schedule, clips, recentVideos] = await Promise.all([

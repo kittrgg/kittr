@@ -65,4 +65,3 @@ const EditorPlaceholderMessage = styled.p`
 	font-size: 22px;
 	letter-spacing: 2px;
 `
-

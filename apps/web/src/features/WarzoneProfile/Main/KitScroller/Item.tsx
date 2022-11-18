@@ -8,7 +8,7 @@ import { useEffect, useRef } from "react"
 import * as Styled from "./style"
 
 interface Props {
-	elem: WarzoneKit & {base: WarzoneKitBase}
+	elem: WarzoneKit & { base: WarzoneKitBase }
 }
 
 const Item = ({ elem }: Props) => {

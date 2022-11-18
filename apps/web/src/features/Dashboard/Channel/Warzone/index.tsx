@@ -96,4 +96,3 @@ const HeaderContent = styled.div`
 	align-items: flex-start;
 	justify-content: space-between;
 `
-

@@ -2,12 +2,13 @@ import * as z from "zod"
 import { CompleteKitBase, RelatedKitBaseModel } from "./index"
 
 export const KitBaseCategoryModel = z.object({
-  id: z.string(),
-  displayName: z.string(),
+	id: z.string(),
+	displayName: z.string()
 })
 
-export interface CompleteKitBaseCategory extends z.infer<typeof KitBaseCategoryModel> {
-  kit: CompleteKitBase[]
+export interface CompleteKitBaseCategory
+	extends z.infer<typeof KitBaseCategoryModel> {
+	kit: CompleteKitBase[]
 }
 
 /**
@@ -15,6 +16,9 @@ export interface CompleteKitBaseCategory extends z.infer<typeof KitBaseCategoryM
  *
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
-export const RelatedKitBaseCategoryModel: z.ZodSchema<CompleteKitBaseCategory> = z.lazy(() => KitBaseCategoryModel.extend({
-  kit: RelatedKitBaseModel.array(),
-}))
+export const RelatedKitBaseCategoryModel: z.ZodSchema<CompleteKitBaseCategory> =
+	z.lazy(() =>
+		KitBaseCategoryModel.extend({
+			kit: RelatedKitBaseModel.array()
+		})
+	)

@@ -69,7 +69,8 @@ const Options = () => {
 			</Styled.HorizFlex>
 			<Styled.AttachmentsFlex>
 				{isLoading && <Loader />}
-				{!isLoading && availableOptions &&
+				{!isLoading &&
+					availableOptions &&
 					slots?.map((slot: string) => {
 						return (
 							<div key={slot} style={{ marginBottom: "18px", flexBasis: "40%" }}>

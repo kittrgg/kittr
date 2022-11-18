@@ -40,22 +40,22 @@ export const TextInputBox = ({
 	onFocus,
 	onBlur
 }: Props) => (
-		<>
-			<Input
-				width={width}
-				type={type}
-				name={name}
-				placeholder={placeholder}
-				value={value}
-				onChange={onChange}
-				onFocus={onFocus}
-				onBlur={onBlur}
-				style={inputStyles}
-				autoComplete="off"
-			/>
-			{subline && <Subline style={sublineStyles}>{subline}</Subline>}
-		</>
-	)
+	<>
+		<Input
+			width={width}
+			type={type}
+			name={name}
+			placeholder={placeholder}
+			value={value}
+			onChange={onChange}
+			onFocus={onFocus}
+			onBlur={onBlur}
+			style={inputStyles}
+			autoComplete="off"
+		/>
+		{subline && <Subline style={sublineStyles}>{subline}</Subline>}
+	</>
+)
 
 export default TextInputBox
 

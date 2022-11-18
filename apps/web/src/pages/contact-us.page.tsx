@@ -19,14 +19,13 @@ const ContactUs = ({ ...props }) => {
 export default ContactUs
 
 const useStyles = createStyles((theme) => ({
-		title: {
-			marginBottom: "24px",
-			padding: "0 5%",
-			fontSize: "36px",
-			fontWeight: 900,
-			letterSpacing: "3px",
-			fontFamily: "\"Barlow Condensed\", serif",
-			color: theme.white
-		}
-	}))
-
+	title: {
+		marginBottom: "24px",
+		padding: "0 5%",
+		fontSize: "36px",
+		fontWeight: 900,
+		letterSpacing: "3px",
+		fontFamily: '"Barlow Condensed", serif',
+		color: theme.white
+	}
+}))

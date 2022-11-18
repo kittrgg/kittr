@@ -6,7 +6,7 @@ import Item from "./Item"
 import * as Styled from "./style"
 
 interface Props {
-	availableKits: Array<WarzoneKit & {base: WarzoneKitBase}>
+	availableKits: Array<WarzoneKit & { base: WarzoneKitBase }>
 }
 
 const KitScroller = ({ availableKits }: Props) => {

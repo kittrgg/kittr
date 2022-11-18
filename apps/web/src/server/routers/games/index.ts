@@ -17,8 +17,7 @@ export const gamesRouter = createRouter()
 	})
 	.middleware(authenticateAdmin)
 	.mutation("add", {
-		input: GameModel.omit({ id: true }).extend({ genres: z.array(z.string()), platforms: z.array(z.string()) })
-		,
+		input: GameModel.omit({ id: true }).extend({ genres: z.array(z.string()), platforms: z.array(z.string()) }),
 		resolve: async ({ input }) => {
 			const { genres, platforms, ...game } = input
 

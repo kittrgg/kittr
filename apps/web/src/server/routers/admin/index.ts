@@ -12,4 +12,3 @@ export const adminRouter = createRouter()
 			return "tested"
 		}
 	})
-

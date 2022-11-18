@@ -15,7 +15,7 @@ const ChannelsSearch = () => {
 	// const { data, isFetching } = useChannelSearch(searchTerm as string)
 
 	// TODO: Re-enable search functionality!
-return <p>404</p>
+	return <p>404</p>
 
 	// return (
 	// 	<AdPageWrapper

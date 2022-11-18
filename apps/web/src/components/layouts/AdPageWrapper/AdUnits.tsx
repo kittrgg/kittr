@@ -1,6 +1,6 @@
 import Ad from "@Services/venatus/Ad"
 
-const AdUnits = ({ ...props }) =>
+const AdUnits = ({ ...props }) => (
 	// const [adColumn, setAdColumn] = useState("none")
 	// const [adUnit, setAdUnit] = useState<"d300x250" | "s300x250" | "d728x90" | "s728x90" | "d300x50" | "rmFooter" | "rmVideo" | "rmStickyRight" | undefined>(undefined)
 
@@ -47,12 +47,10 @@ const AdUnits = ({ ...props }) =>
 
 	// console.log(adUnit)
 
-	 (
-		<>
-			<Ad placementType="d300x250" />
-			<Ad placementType="s300x250" containerStyles={{ marginTop: "12px" }} />
-		</>
-	)
-
+	<>
+		<Ad placementType="d300x250" />
+		<Ad placementType="s300x250" containerStyles={{ marginTop: "12px" }} />
+	</>
+)
 
 export default AdUnits

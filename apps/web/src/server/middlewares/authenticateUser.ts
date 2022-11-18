@@ -9,7 +9,6 @@ type NextFunction<T> = {
 }
 
 export const authenticateUser = async ({ ctx, next }: { ctx: Context; next: NextFunction<typeof ctx> }) => {
-
 	if (!ctx.userToken) {
 		throw new TRPCError({
 			code: "UNAUTHORIZED"

@@ -32,24 +32,24 @@ const WINNERS = [
 ]
 
 const Winners = ({ ...props }) => (
-		<>
-			<Styled.H2>WHO LOVES KITTR?</Styled.H2>
-			<Grid>
-				{WINNERS.map(({ title, text, icon, iconAlt }) => (
-						<GridItem key={title}>
-							<GridItemTopRow>
-								<GridIconContainer>
-									<img src={icon} alt={iconAlt} width="40px" height="40px" />
-								</GridIconContainer>
-								<GridTitle>{title}</GridTitle>
-							</GridItemTopRow>
-							<GridText>{text}</GridText>
-						</GridItem>
-					))}
-			</Grid>
-			<CallToAction marginTop="48px" marginBottom="48px" header="get started with kittr." />
-		</>
-	)
+	<>
+		<Styled.H2>WHO LOVES KITTR?</Styled.H2>
+		<Grid>
+			{WINNERS.map(({ title, text, icon, iconAlt }) => (
+				<GridItem key={title}>
+					<GridItemTopRow>
+						<GridIconContainer>
+							<img src={icon} alt={iconAlt} width="40px" height="40px" />
+						</GridIconContainer>
+						<GridTitle>{title}</GridTitle>
+					</GridItemTopRow>
+					<GridText>{text}</GridText>
+				</GridItem>
+			))}
+		</Grid>
+		<CallToAction marginTop="48px" marginBottom="48px" header="get started with kittr." />
+	</>
+)
 
 export default Winners
 

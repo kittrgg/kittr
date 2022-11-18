@@ -9,7 +9,7 @@ const upsertCode = createController()
 	.middleware(authenticateUser)
 	.mutation("", {
 		input: z.object({
-			code: ChannelCreatorCodeModel.partial({id: true})
+			code: ChannelCreatorCodeModel.partial({ id: true })
 		}),
 		async resolve({ ctx, input }) {
 			await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.code.channelId, roles: ["OWNER", "ADMIN"] })

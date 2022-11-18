@@ -32,22 +32,22 @@ const STEPS = [
 ]
 
 const HowItWorks = ({}) => (
-		<section style={{ maxWidth: "1000px", margin: "0 auto" }}>
-			<Styled.H2>HOW IT WORKS</Styled.H2>
-			{STEPS.map((step) => (
-					<StepContainer key={step.title}>
-						<StepHeaderFlex>
-							<StepHeader>{step.title}</StepHeader>
-							<StepHeaderHelper>{step.titleHelper}</StepHeaderHelper>
-						</StepHeaderFlex>
-						<StepImageContainer border={step.border}>
-							<img src={step.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-						</StepImageContainer>
-					</StepContainer>
-				))}
-			<CallToAction marginTop="60px" marginBottom="48px" header="start sharing today." />
-		</section>
-	)
+	<section style={{ maxWidth: "1000px", margin: "0 auto" }}>
+		<Styled.H2>HOW IT WORKS</Styled.H2>
+		{STEPS.map((step) => (
+			<StepContainer key={step.title}>
+				<StepHeaderFlex>
+					<StepHeader>{step.title}</StepHeader>
+					<StepHeaderHelper>{step.titleHelper}</StepHeaderHelper>
+				</StepHeaderFlex>
+				<StepImageContainer border={step.border}>
+					<img src={step.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+				</StepImageContainer>
+			</StepContainer>
+		))}
+		<CallToAction marginTop="60px" marginBottom="48px" header="start sharing today." />
+	</section>
+)
 
 export default HowItWorks
 

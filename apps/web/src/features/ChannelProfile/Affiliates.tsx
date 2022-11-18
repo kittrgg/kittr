@@ -20,7 +20,6 @@ const Affiliates = ({ affiliates, brandColor }: Props) => {
 			<SpecsGrid>
 				{affiliates &&
 					affiliates.map((affiliate) => {
-
 						return (
 							<GridItem key={affiliate.company} colorHover={brandColor}>
 								<Flex>

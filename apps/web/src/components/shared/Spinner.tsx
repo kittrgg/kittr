@@ -31,47 +31,47 @@ export const Spinner = ({
 	style,
 	dataCy
 }: Props) => (
+	<div
+		style={{
+			position: "relative",
+			width,
+			height,
+			...style
+		}}
+		data-cy={dataCy}
+	>
 		<div
 			style={{
-				position: "relative",
-				width,
-				height,
-				...style
+				position: "absolute",
+				inset: 0,
+				display: "flex",
+				justifyContent: "center",
+				alignItems: "center",
+				overflow: "hidden"
 			}}
-			data-cy={dataCy}
 		>
-			<div
+			<svg
+				width="100%"
+				height="100%"
 				style={{
-					position: "absolute",
-					inset: 0,
-					display: "flex",
-					justifyContent: "center",
-					alignItems: "center",
-					overflow: "hidden"
+					maxHeight: height,
+					transform: `rotate(${Math.floor(Math.random() * (360 - 0 * 1) + 0)}deg)`
 				}}
+				viewBox="0 0 32 32"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
 			>
-				<svg
-					width="100%"
-					height="100%"
-					style={{
-						maxHeight: height,
-						transform: `rotate(${Math.floor(Math.random() * (360 - 0 * 1) + 0)}deg)`
-					}}
-					viewBox="0 0 32 32"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<circle cx="16" cy="16" r="15" stroke={circleColor} strokeWidth="2" />
-					<Path
-						d="M16 31C24.2843 31 31 24.2843 31 16C31 7.71573 24.2843 1 16 1"
-						stroke={pathColor}
-						strokeWidth="2"
-						strokeLinecap="round"
-					/>
-				</svg>
-			</div>
+				<circle cx="16" cy="16" r="15" stroke={circleColor} strokeWidth="2" />
+				<Path
+					d="M16 31C24.2843 31 31 24.2843 31 16C31 7.71573 24.2843 1 16 1"
+					stroke={pathColor}
+					strokeWidth="2"
+					strokeLinecap="round"
+				/>
+			</svg>
 		</div>
-	)
+	</div>
+)
 
 export default Spinner
 

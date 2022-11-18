@@ -1,9 +1,8 @@
 import { prisma, ChannelManager, ChannelManagerRoles } from "@kittr/prisma"
 import { getUserByEmail } from "@Server/services/users"
-import admin from '@Services/firebase/admin'
+import admin from "@Services/firebase/admin"
 
 export const listManagers = async ({ managers }: { managers: ChannelManager[] }) => {
-
 	// Get details from Firebase
 	const managerDetails = managers.map(async (manager) => {
 		return await admin.getUser(manager.firebaseId)
@@ -13,11 +12,11 @@ export const listManagers = async ({ managers }: { managers: ChannelManager[] })
 	const listWithAuthData = await Promise.all(managerDetails)
 
 	// Merge Firebase uid with
-	const merged = managers.map(manager => {
-		const firebaseDetails = listWithAuthData.find(m => m.uid === manager.firebaseId)
+	const merged = managers.map((manager) => {
+		const firebaseDetails = listWithAuthData.find((m) => m.uid === manager.firebaseId)
 
-		return {...manager, uid: firebaseDetails?.uid, email: firebaseDetails?.email }
-	 })
+		return { ...manager, uid: firebaseDetails?.uid, email: firebaseDetails?.email }
+	})
 
 	return merged
 }

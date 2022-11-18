@@ -271,4 +271,3 @@ const SaveButton = styled.button`
 		color: ${colors.white};
 	}
 `
-

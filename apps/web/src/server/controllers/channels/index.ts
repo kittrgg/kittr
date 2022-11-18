@@ -24,7 +24,6 @@ const countAllChannels = createController().query("", {
 	}
 })
 
-
 // This method counts channels per game
 const countChannels = createController().query("", {
 	input: z.string().optional(),

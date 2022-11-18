@@ -52,6 +52,4 @@ export const warzone2KitBaseRouter = createRouter()
 
 			return result
 		}
-
-
 	})

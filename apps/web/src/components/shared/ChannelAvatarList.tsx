@@ -24,21 +24,21 @@ export const ChannelAvatarList = ({ channels, isLive, onClick }: Props) => {
 	return (
 		<>
 			{channels.map((channel) => (
-					<Identity
-						key={channel.id}
-						data-cy={`${channel.displayName}-button`}
-						onClick={() => onClick && onClick(channel)}
-						theme={theme}
-					>
-						<ProfileImage
-							size="100px"
-							imagePath={channel.id}
-							hasProfileImage={!!channel.profile?.hasProfileImage}
-							isLive={isLive}
-						/>
-						<Name>{channel.displayName}</Name>
-					</Identity>
-				))}
+				<Identity
+					key={channel.id}
+					data-cy={`${channel.displayName}-button`}
+					onClick={() => onClick && onClick(channel)}
+					theme={theme}
+				>
+					<ProfileImage
+						size="100px"
+						imagePath={channel.id}
+						hasProfileImage={!!channel.profile?.hasProfileImage}
+						isLive={isLive}
+					/>
+					<Name>{channel.displayName}</Name>
+				</Identity>
+			))}
 		</>
 	)
 }

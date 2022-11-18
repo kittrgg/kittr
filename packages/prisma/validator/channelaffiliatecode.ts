@@ -1,16 +1,22 @@
 import * as z from "zod"
-import { CompleteChannel, RelatedChannelModel, CompleteGame, RelatedGameModel } from "./index"
+import {
+	CompleteChannel,
+	RelatedChannelModel,
+	CompleteGame,
+	RelatedGameModel
+} from "./index"
 
 export const ChannelAffiliateCodeModel = z.object({
-  id: z.string(),
-  channelId: z.string(),
-  gameId: z.string(),
-  code: z.string(),
+	id: z.string(),
+	channelId: z.string(),
+	gameId: z.string(),
+	code: z.string()
 })
 
-export interface CompleteChannelAffiliateCode extends z.infer<typeof ChannelAffiliateCodeModel> {
-  channel: CompleteChannel
-  game: CompleteGame
+export interface CompleteChannelAffiliateCode
+	extends z.infer<typeof ChannelAffiliateCodeModel> {
+	channel: CompleteChannel
+	game: CompleteGame
 }
 
 /**
@@ -18,7 +24,10 @@ export interface CompleteChannelAffiliateCode extends z.infer<typeof ChannelAffi
  *
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
-export const RelatedChannelAffiliateCodeModel: z.ZodSchema<CompleteChannelAffiliateCode> = z.lazy(() => ChannelAffiliateCodeModel.extend({
-  channel: RelatedChannelModel,
-  game: RelatedGameModel,
-}))
+export const RelatedChannelAffiliateCodeModel: z.ZodSchema<CompleteChannelAffiliateCode> =
+	z.lazy(() =>
+		ChannelAffiliateCodeModel.extend({
+			channel: RelatedChannelModel,
+			game: RelatedGameModel
+		})
+	)

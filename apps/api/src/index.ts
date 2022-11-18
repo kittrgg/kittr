@@ -107,4 +107,6 @@ io.on("connection", async (socket) => {
 
 app.use(Logger.Handlers.errorHandler())
 
-httpServer.listen(process.env.PORT || 3001, () => console.log(`Server is running on port: ${process.env.PORT || 3001}...`))
+httpServer.listen(process.env.PORT || 3001, () =>
+	console.log(`Server is running on port: ${process.env.PORT || 3001}...`)
+)
