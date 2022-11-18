@@ -15,6 +15,7 @@ export const warzoneSlotsOrder = [
 	"Ammunition",
 	"Ammo Type",
 	"Rear Grip",
+	"Lever",
 	"Comb",
 	"Rear Grip / Comb",
 	"Pump Grip",
