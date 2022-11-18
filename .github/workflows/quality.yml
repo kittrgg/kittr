@@ -72,8 +72,6 @@ jobs:
 
       - name: Install
         uses: ./tooling/github-actions/install
-        with:
-          npm-token: ${{ secrets.NPM_TOKEN }}
 
       - name: Cache TypeScript TSBuild Info Files
         id: cache-typescript-tsbuildinfo
