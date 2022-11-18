@@ -1,9 +1,6 @@
 name: Quality
 
 on:
-  push:
-    branches:
-      - master
   pull_request:
 
 concurrency:
