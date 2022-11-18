@@ -110,6 +110,9 @@ export const deleteChannel = async ({ channelId }: { channelId: string }) => {
 	const channel = await prisma.channel.delete({
 		where: {
 			id: channelId
+		},
+		include: {
+			plan: true
 		}
 	})
 
