@@ -61,7 +61,7 @@ jobs:
           node-version: '16'
           cache: 'yarn'
       - name: Install deps
-        run: yarn
+        run: yarn --prefer-offline
       - name: Lint
         run: npx turbo run lint
 
