@@ -62,31 +62,29 @@ jobs:
       - name: Lint
         run: npx turbo run lint
 
-  # types:
-  #   name: 'TypeScript'
-  #   timeout-minutes: 15
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v3
+  types:
+    name: 'TypeScript'
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-  #   - name: Set up Node.js
-  #     uses: actions/setup-node@v3
-  #     with:
-  #       node-version-file: '.nvmrc'
-  #       registry-url: 'https://registry.npmjs.org'
-  #       cache: 'yarn'
+      - name: Install
+        uses: ./tooling/github-actions/install
+        with:
+          npm-token: ${{ secrets.NPM_TOKEN }}
 
-  #     - name: Cache TypeScript TSBuild Info Files
-  #       id: cache-typescript-tsbuildinfo
-  #       uses: actions/cache@v3
-  #       with:
-  #         path: node_modules/.cache/*-tsbuildinfo.json
-  #         # We use the commit hash as the key to always update the cache as a
-  #         # workaround to this issue:
-  #         # https://github.com/actions/cache/issues/106
-  #         key: ${{ runner.os }}-cache-typescript-tsbuildinfo-${{ github.sha }}
-  #         restore-keys: ${{ runner.os }}-cache-typescript-tsbuildinfo-
+      - name: Cache TypeScript TSBuild Info Files
+        id: cache-typescript-tsbuildinfo
+        uses: actions/cache@v3
+        with:
+          path: node_modules/.cache/*-tsbuildinfo.json
+          # We use the commit hash as the key to always update the cache as a
+          # workaround to this issue:
+          # https://github.com/actions/cache/issues/106
+          key: ${{ runner.os }}-cache-typescript-tsbuildinfo-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-cache-typescript-tsbuildinfo-
 
-  #     - name: Run TypeScript type check
-  #       run: yarn type-check
+      - name: Run TypeScript type check
+        run: yarn type-check
