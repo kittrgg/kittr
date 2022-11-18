@@ -188,26 +188,28 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 									}
 								>
 									<List>
-										{options?.map((option) => (
-											<List.Item
-												style={{ borderBottom: "1px solid white", padding: "1rem" }}
-												sx={(theme) => ({
-													"&:hover": {
-														backgroundColor: theme.colors.gray[8]
-													}
-												})}
-											>
-												{option.displayName}
-												<ActionIcon
-													radius="lg"
-													size="lg"
-													style={{ float: "right" }}
-													onClick={() => setIsEditingOption(option)}
+										{options
+											?.sort((a, b) => Number(a.orderPlacement) - Number(b.orderPlacement))
+											.map((option) => (
+												<List.Item
+													style={{ borderBottom: "1px solid white", padding: "1rem" }}
+													sx={(theme) => ({
+														"&:hover": {
+															backgroundColor: theme.colors.gray[8]
+														}
+													})}
 												>
-													<SVG.Pencil />
-												</ActionIcon>
-											</List.Item>
-										))}
+													{option.displayName}
+													<ActionIcon
+														radius="lg"
+														size="lg"
+														style={{ float: "right" }}
+														onClick={() => setIsEditingOption(option)}
+													>
+														<SVG.Pencil />
+													</ActionIcon>
+												</List.Item>
+											))}
 									</List>
 								</SubSection>
 							))}
