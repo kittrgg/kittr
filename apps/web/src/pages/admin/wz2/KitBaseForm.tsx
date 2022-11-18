@@ -84,6 +84,7 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 			"Ammo Type": [],
 			"Rear Grip": [],
 			"Comb": [],
+			"Rear Grip/Comb": [],
 			"Pump Grip": [],
 			"Perk": [],
 			"Pumps": [],
