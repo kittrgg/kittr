@@ -12,6 +12,7 @@ export const warzoneSlotsOrder = [
 	"Bolt Assembly",
 	"Bolt",
 	"Magazine",
+	"Rail",
 	"Ammunition",
 	"Ammo Type",
 	"Rear Grip",
