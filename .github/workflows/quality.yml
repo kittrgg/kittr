@@ -59,7 +59,7 @@ jobs:
       - name: Install deps
         run: yarn
       - name: Lint
-        run: turbo run lint
+        run: npx turbo run lint
 
   # types:
   #   name: 'TypeScript'
