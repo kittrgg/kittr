@@ -17,64 +17,46 @@ env:
   TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
 
 jobs:
-  # prettier:
-  #   name: 'Prettier'
-  #   timeout-minutes: 10
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v3
-  #       with:
-  #         # Commits made with the default `GITHUB_TOKEN` won't trigger workflows.
-  #         # See: https://docs.github.com/en/actions/security-guides/automatic-token-authentication#using-the-github_token-in-a-workflow
-  #         token: ${{ secrets.GH_TOKEN_REPO_SCOPE }}
-  #         # We need to use the branch ref or we can't push fixes.
-  #         ref: ${{ github.event.pull_request.head.ref || '' }}
+  prettier:
+    name: 'Prettier'
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          # Commits made with the default `GITHUB_TOKEN` won't trigger workflows.
+          # See: https://docs.github.com/en/actions/security-guides/automatic-token-authentication#using-the-github_token-in-a-workflow
+          token: ${{ secrets.GH_TOKEN_REPO_SCOPE }}
+          # We need to use the branch ref or we can't push fixes.
+          ref: ${{ github.event.pull_request.head.ref || '' }}
 
-  #     - name: Install
-  #       uses: ./tooling/github-actions/composite-actions/install
-  #       with:
-  #         npm-token: ${{ secrets.NPM_TOKEN }}
+      - name: Install
+        uses: ./tooling/github-actions/composite-actions/install
 
-  #     - name: Run Prettier (auto-fix)
-  #       run: pnpm prettier-fix
+      - name: Run Prettier (auto-fix)
+        run: pnpm prettier-fix
 
-  #     - name: Commit Prettier fixes
-  #       if: ${{ github.event_name == 'pull_request' }}
-  #       run: |
-  #         if [ -z "$(git status --porcelain)" ]; then
-  #           echo "No Prettier issues were found."
-  #         else
-  #           echo "The following files were modified by Prettier and will be updated on your branch:"
-  #           git status --porcelain
-  #           git config user.name "${{ github.actor }}"
-  #           git config user.email "${{ github.actor }}@users.noreply.github.com"
-  #           git commit -am "Apply Prettier fixes" --no-verify
-  #           git push
-  #         fi
+      - name: Commit Prettier fixes
+        if: ${{ github.event_name == 'pull_request' }}
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "No Prettier issues were found."
+          else
+            echo "The following files were modified by Prettier and will be updated on your branch:"
+            git status --porcelain
+            git config user.name "${{ github.actor }}"
+            git config user.email "${{ github.actor }}@users.noreply.github.com"
+            git commit -am "Apply Prettier fixes" --no-verify
+            git push
+          fi
   eslint:
     name: 'ESLint'
     timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-      - uses: actions/cache@v3
-        name: yarn-cache
-        id: yarn-cache
-        with:
-          path: |
-            **/node_modules
-            ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn
-      - name: Yarn
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile --prefer-offline --non-interactive --ignore-scripts
+      - name: Setup and install
+        uses: ./tooling/github-actions/install
       - name: Lint
         run: npx turbo run lint
 
