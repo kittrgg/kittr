@@ -66,6 +66,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 					data: {
 						plan: {
 							update: {
+								stripeSubscriptionId: null,
 								type: "BASIC"
 							}
 						}
@@ -89,6 +90,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 						data: {
 							plan: {
 								update: {
+									stripeSubscriptionId: null,
 									type: "BASIC"
 								}
 							}
