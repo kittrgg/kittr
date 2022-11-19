@@ -23,8 +23,8 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 
 	let event: Stripe.Event
 
-	const localURL = process.env.NODE_ENV === "development" ? "http://api:3001/stripe-webhook-reporter" : ""
-	const apiURL = process.env.NEXT_PUBLIC_ENABLE_SEEDING === "true" ? "stage-api" : "api"
+	const localURL = process.env.VERCEL_ENV === "development" ? "http://api:3001/stripe-webhook-reporter" : ""
+	const apiURL = process.env.VERCEL_ENV === "true" ? "stage-api" : "api"
 
 	const subscriptionHandler = async (event: Stripe.Event) => {
 		// @ts-ignore
