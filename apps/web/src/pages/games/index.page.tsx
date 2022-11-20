@@ -22,7 +22,9 @@ const GamesIndex = () => {
 			<Paragraph>Find channels & kits by game. Stay tuned for more games coming very soon!</Paragraph>
 			<GamesWrapper>
 				{games &&
-					games.map((elem) => (
+					games
+						.sort((game) => (game.active ? -1 : 1))
+						.map((elem) => (
 							<GameCard
 								key={elem.id}
 								{...elem}
@@ -71,3 +73,4 @@ const GamesWrapper = styled.div`
 		justify-content: center;
 	}
 `
+
