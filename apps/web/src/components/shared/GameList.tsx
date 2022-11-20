@@ -16,39 +16,41 @@ interface Props {
 
 /** List of all of the games on the platform. This component is only a fragment. Therefore, it needs a container or wrapper around it to be given proper alignment. */
 export const GameList = ({ data, hoverScale = true, onClick, withVisitText }: Props) => (
-		<>
-			{data &&
-				data.map((elem) => (
-						<ListItem
-							key={elem.displayName}
-							active={elem.active}
-							hoverScale={hoverScale}
-							onClick={() => elem.active && onClick && onClick(elem)}
-							data-cy={`${elem.urlSafeName}-button`}
-							style={{ marginRight: "2rem" }}
-						>
-							<ImageContainer>
-								<FirebaseStorageResolver
-									noSpinner
-									path={elem.titleImageUrl}
-									render={(data) => <img src={data} alt={`${elem.displayName} Cover Art`} style={{ width: "100%" }} />}
-								/>
-								{!elem.active && (
-									<ComingSoon>
-										<p>COMING</p>
-										<p>SOON</p>
-									</ComingSoon>
-								)}
-								{withVisitText && (
-									<VisitTextContainer>
-										<p>{"Visit >"}</p>
-									</VisitTextContainer>
-								)}
-							</ImageContainer>
-						</ListItem>
-					))}
-		</>
-	)
+	<>
+		{data &&
+			data
+				.sort((game) => (game.active ? -1 : 1))
+				.map((elem) => (
+					<ListItem
+						key={elem.displayName}
+						active={elem.active}
+						hoverScale={hoverScale}
+						onClick={() => elem.active && onClick && onClick(elem)}
+						data-cy={`${elem.urlSafeName}-button`}
+						style={{ marginRight: "2rem" }}
+					>
+						<ImageContainer>
+							<FirebaseStorageResolver
+								noSpinner
+								path={elem.titleImageUrl}
+								render={(data) => <img src={data} alt={`${elem.displayName} Cover Art`} style={{ width: "100%" }} />}
+							/>
+							{!elem.active && (
+								<ComingSoon>
+									<p>COMING</p>
+									<p>SOON</p>
+								</ComingSoon>
+							)}
+							{withVisitText && (
+								<VisitTextContainer>
+									<p>{"Visit >"}</p>
+								</VisitTextContainer>
+							)}
+						</ImageContainer>
+					</ListItem>
+				))}
+	</>
+)
 
 export default GameList
 
@@ -124,3 +126,4 @@ const VisitTextContainer = styled.div`
 	${header2};
 	font-size: 18px;
 `
+
