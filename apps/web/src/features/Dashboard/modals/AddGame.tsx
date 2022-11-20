@@ -63,6 +63,7 @@ const AddGameModal = ({ ...props }) => {
 					!isMutating &&
 					data
 						.filter((game) => !gamesToExclude.includes(game.id))
+						.sort((game) => (game.active ? -1 : 1))
 						.map((game) => {
 							return (
 								<GameCard
@@ -105,3 +106,4 @@ const ButtonFlex = styled.div`
 	justify-content: space-around;
 	margin-top: 24px;
 `
+
