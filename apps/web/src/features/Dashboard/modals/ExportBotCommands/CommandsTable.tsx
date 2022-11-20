@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import colors from "@Colors"
 import Toast from "@Components/shared/Toast"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
@@ -31,7 +32,7 @@ interface Props {
 /** Render the list of commands for the kits of the user. */
 const CommandsTable = ({ kits, includeMasterCommands = true, method, commandStrategy, includeUser }: Props) => {
 	const { data } = useDashboardChannel()
-	const { gameId } = useChannelView()
+	const { gameId, view } = useChannelView()
 	const [copyNotification, setCopyNotification] = useState(false)
 	const isDashboard = method === "dashboard"
 	const dashboardStrategy = commandStrategy === "edit" ? "!editcom" : "!addcom"
@@ -42,7 +43,7 @@ const CommandsTable = ({ kits, includeMasterCommands = true, method, commandStra
 	const createNightbotPrefix = (code: string): string => `${dashboardStrategy} !${code}`
 	const createChannelElementsPrefix = (code: string): string => `${channelElementsStrategy} !${code}`
 	const createUserString = (): string => (includeUser ? " $(touser)" : "")
-	const commandBase = `${rootUrl}/c/${data?.urlSafeName}/warzone`
+	const commandBase = `${rootUrl}/c/${data?.urlSafeName}${view === "wz2" ? "/wz2" : "/warzone"}`
 	const currentStringTemplate = data?.customGameCommands?.find((elem) => elem.gameId === gameId)?.command || ""
 
 	const createCommandString = (displayName: string, baseTitle: string, code: string): string => {
@@ -197,3 +198,4 @@ const CommandsTable = ({ kits, includeMasterCommands = true, method, commandStra
 }
 
 export default CommandsTable
+
