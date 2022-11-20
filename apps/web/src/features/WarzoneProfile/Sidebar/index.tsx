@@ -24,6 +24,7 @@ import { useRouter } from "next/router"
 
 const CATEGORIES = [
 	"Assault Rifle",
+	"Battle Rifle",
 	"SMG",
 	"Shotgun",
 	"LMG",
