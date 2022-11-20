@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable max-len */
 import { WarzoneTwoCommandCode, WarzoneTwoKitBase, WarzoneTwoKitOption } from "@kittr/prisma"
 import { Button, List, NumberInput, Section, Select, SubSection, Text, Textarea, TextInput } from "@kittr/ui"
 import SVG from "@kittr/ui/src/components/SVG"
@@ -80,10 +80,14 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 			"Bolt Assembly": [],
 			"Bolt": [],
 			"Magazine": [],
+			"Rail": [],
 			"Ammunition": [],
 			"Ammo Type": [],
+			"Loader": [],
 			"Rear Grip": [],
+			"Lever": [],
 			"Comb": [],
+			"Rear Grip/Comb": [],
 			"Pump Grip": [],
 			"Perk": [],
 			"Pumps": [],
@@ -187,26 +191,28 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 									}
 								>
 									<List>
-										{options?.map((option) => (
-											<List.Item
-												style={{ borderBottom: "1px solid white", padding: "1rem" }}
-												sx={(theme) => ({
-													"&:hover": {
-														backgroundColor: theme.colors.gray[8]
-													}
-												})}
-											>
-												{option.displayName}
-												<ActionIcon
-													radius="lg"
-													size="lg"
-													style={{ float: "right" }}
-													onClick={() => setIsEditingOption(option)}
+										{options
+											?.sort((a, b) => Number(a.orderPlacement) - Number(b.orderPlacement))
+											.map((option) => (
+												<List.Item
+													style={{ borderBottom: "1px solid white", padding: "1rem" }}
+													sx={(theme) => ({
+														"&:hover": {
+															backgroundColor: theme.colors.gray[8]
+														}
+													})}
 												>
-													<SVG.Pencil />
-												</ActionIcon>
-											</List.Item>
-										))}
+													{option.displayName}
+													<ActionIcon
+														radius="lg"
+														size="lg"
+														style={{ float: "right" }}
+														onClick={() => setIsEditingOption(option)}
+													>
+														<SVG.Pencil />
+													</ActionIcon>
+												</List.Item>
+											))}
 									</List>
 								</SubSection>
 							))}

@@ -4,6 +4,9 @@ import { authenticateUser } from "@Server/middlewares/authenticateUser"
 import * as ChannelsService from "@Server/services/channels"
 import { checkRole } from "@Server/services/users"
 import { z } from "zod"
+import Stripe from "stripe"
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, { apiVersion: "2020-08-27" })
 
 const listTopChannels = createController().query("", {
 	input: z.object({
@@ -23,6 +26,7 @@ const countAllChannels = createController().query("", {
 		return total
 	}
 })
+
 
 // This method counts channels per game
 const countChannels = createController().query("", {
@@ -110,7 +114,13 @@ const deleteChannel = createController()
 		async resolve({ ctx, input: { channelId } }) {
 			await checkRole({ firebaseUserId: ctx.user.uid, channelId, roles: ["OWNER"] })
 
+
 			const channel = await ChannelsService.deleteChannel({ channelId })
+
+			if (channel.plan?.stripeSubscriptionId) {
+				await stripe.subscriptions.del(channel.plan?.stripeSubscriptionId)
+			}
+
 			return channel
 		}
 	})

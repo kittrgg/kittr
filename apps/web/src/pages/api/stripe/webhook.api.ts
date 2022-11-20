@@ -23,8 +23,8 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 
 	let event: Stripe.Event
 
-	const localURL = process.env.NODE_ENV === "development" ? "http://api:3001/stripe-webhook-reporter" : ""
-	const apiURL = process.env.NEXT_PUBLIC_ENABLE_SEEDING === "true" ? "stage-api" : "api"
+	const localURL = process.env.VERCEL_ENV === "development" ? "http://api:3001/stripe-webhook-reporter" : ""
+	const apiURL = process.env.VERCEL_ENV === "preview" ? "stage-api" : "api"
 
 	const subscriptionHandler = async (event: Stripe.Event) => {
 		// @ts-ignore
@@ -36,6 +36,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 			data: {
 				plan: {
 					update: {
+						stripeSubscriptionId: (event.data.object as Stripe.Subscription).id,
 						type: "PREMIUM"
 					}
 				}
@@ -56,24 +57,24 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 			case "customer.subscription.updated": {
 				return subscriptionHandler(event)
 			}
-			case "customer.subscription.deleted":
-				{
-					const cancelled = await prisma.channel.update({
-						where: {
-							// @ts-ignore
-							id: event.data.object.metadata.channelId
-						},
-						data: {
-							plan: {
-								update: {
-									type: "BASIC"
-								}
+			case "customer.subscription.deleted": {
+				const cancelled = await prisma.channel.update({
+					where: {
+						// @ts-ignore
+						id: event.data.object.metadata.channelId
+					},
+					data: {
+						plan: {
+							update: {
+								stripeSubscriptionId: null,
+								type: "BASIC"
 							}
 						}
-					})
+					}
+				})
 
-					return res.status(200).json({ cancelled })
-				}
+				return res.status(200).json({ cancelled })
+			}
 				break
 			case "subscription_schedule.updated":
 				// @ts-ignore
@@ -89,6 +90,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 						data: {
 							plan: {
 								update: {
+									stripeSubscriptionId: null,
 									type: "BASIC"
 								}
 							}
