@@ -17,13 +17,12 @@ const listBases = createController().query("", {
 	}
 })
 
-
 const listGameBases = createController().query("", {
 	input: z.object({
 		game: z.string()
 	}),
 	async resolve({ input }) {
-		const result = await KitsBasesService.listGameBases( input.game )
+		const result = await KitsBasesService.listGameBases(input.game)
 		return result
 	}
 })

@@ -1,5 +1,5 @@
-import { prisma } from "@kittr/prisma"
 import { getUserByEmail } from "@Server/services/users"
+import { prisma } from "@kittr/prisma"
 
 export const editOwner = async ({
 	channelId,

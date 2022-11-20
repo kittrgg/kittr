@@ -1,12 +1,11 @@
-import validator from "validator"
+import BackToLogin from "./BackToLogin"
+import colors from "@Colors"
+import Button from "@Components/shared/Button"
+import TextInput from "@Components/shared/TextInput"
+import { requestForgotPassword } from "@Services/firebase/auth/requestForgotPassword"
 import { useState, Dispatch, SetStateAction, FormEvent } from "react"
 import styled from "styled-components"
-import { requestForgotPassword } from "@Services/firebase/auth/requestForgotPassword"
-
-import BackToLogin from "./BackToLogin"
-import TextInput from "@Components/shared/TextInput"
-import Button from "@Components/shared/Button"
-import colors from "@Colors"
+import validator from "validator"
 
 interface Props {
 	setStep: Dispatch<SetStateAction<number>>

@@ -1,6 +1,3 @@
-import { gamesRouter } from "@Server/routers/games"
-import { inferProcedureInput, inferProcedureOutput, TRPCError } from "@trpc/server"
-import superjson from "superjson"
 import { createRouter } from "./createRouter"
 import { adminRouter } from "./routers/admin"
 import { channelsRouter } from "./routers/channels"
@@ -8,12 +5,20 @@ import { kitsRouter } from "./routers/kits"
 import { managersRouter } from "./routers/managers"
 import { twitchRouter } from "./routers/twitch"
 import { usersRouter } from "./routers/users"
-import { captureMessage } from "@kittr/logger/node"
+import { gamesRouter } from "@Server/routers/games"
 import { stripeRouter } from "@Server/routers/stripe"
+import { captureMessage } from "@kittr/logger/node"
+import { inferProcedureInput, inferProcedureOutput, TRPCError } from "@trpc/server"
+import superjson from "superjson"
 
 export const appRouter = createRouter()
 	.formatError(({ shape, error, path, ctx, type, input }) => {
-		captureMessage(`${error.code}: ${path}` ?? "Unknown tRPC path", { level: "error", tags: { isKittr: true }, extra: { type }, contexts: { error: { ...error }, ctx: { ...ctx }, input: { input: JSON.stringify(input) } } })
+		captureMessage(`${error.code}: ${path}` ?? "Unknown tRPC path", {
+			level: "error",
+			tags: { isKittr: true },
+			extra: { type },
+			contexts: { error: { ...error }, ctx: { ...ctx }, input: { input: JSON.stringify(input) } }
+		})
 		return shape
 	})
 	.transformer(superjson)

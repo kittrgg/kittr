@@ -1,8 +1,8 @@
-import colors from "@Colors"
-import { TCommandMethod } from "@kittr/types"
-import MultiButton from "@Components/shared/MultiButton"
-import { Dispatch, SetStateAction } from "react"
 import * as Styled from "./style"
+import colors from "@Colors"
+import MultiButton from "@Components/shared/MultiButton"
+import { TCommandMethod } from "@kittr/types"
+import { Dispatch, SetStateAction } from "react"
 
 interface Props {
 	/** Workflows that users can utilize to add their commands to their channel */

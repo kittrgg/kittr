@@ -1,6 +1,6 @@
 import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
-import { Game } from "@kittr/prisma"
 import { header2 } from "@Styles/typography"
+import { Game } from "@kittr/prisma"
 import styled from "styled-components"
 
 interface Props {
@@ -126,4 +126,3 @@ const VisitTextContainer = styled.div`
 	${header2};
 	font-size: 18px;
 `
-

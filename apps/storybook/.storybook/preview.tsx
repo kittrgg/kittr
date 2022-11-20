@@ -1,6 +1,6 @@
-import React from "react"
 // import { withThemes } from "@react-theming/storybook-addon"
 import { MantineProvider, Center } from "@kittr/ui"
+import React from "react"
 
 export const parameters = {
 	options: {

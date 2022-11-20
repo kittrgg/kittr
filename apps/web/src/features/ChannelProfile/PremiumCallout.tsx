@@ -1,7 +1,6 @@
-import styled from "styled-components"
-
 import colors from "@Colors"
 import { SVG } from "@Components/shared"
+import styled from "styled-components"
 
 const PremiumCallout = ({ ...props }) => {
 	return (

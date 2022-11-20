@@ -1,7 +1,6 @@
-import { createStyles, Grid, Title, UnstyledButton } from "@mantine/core"
-
 import colors from "@Colors"
 import { Routes } from "@Utils/lookups/routes"
+import { createStyles, Grid, Title, UnstyledButton } from "@mantine/core"
 
 const PROPERTIES = [
 	{
@@ -31,31 +30,31 @@ export const ContactUs = ({ ...props }) => {
 	return (
 		<Grid columns={12} className={classes.grid}>
 			{PROPERTIES.map((property) => (
-					<Grid.Col key={property.title} className={classes.gridColumn}>
-						<img src={property.image} alt={property.imageAlt} width={75} height={75} />
-						<Title order={2} className={classes.title}>
-							{property.title}
-						</Title>
-						<UnstyledButton
-							component="a"
-							href={property.primaryLink}
-							target="_blank"
-							rel="noopener noreferrer"
-							className={classes.linkButton}
-						>
-							{property.primaryText}
-						</UnstyledButton>
-						<UnstyledButton
-							component="a"
-							href={property.secondaryLink}
-							target="_blank"
-							rel="noopener noreferrer"
-							className={classes.secondaryLinkButton}
-						>
-							{property.secondaryText}
-						</UnstyledButton>
-					</Grid.Col>
-				))}
+				<Grid.Col key={property.title} className={classes.gridColumn}>
+					<img src={property.image} alt={property.imageAlt} width={75} height={75} />
+					<Title order={2} className={classes.title}>
+						{property.title}
+					</Title>
+					<UnstyledButton
+						component="a"
+						href={property.primaryLink}
+						target="_blank"
+						rel="noopener noreferrer"
+						className={classes.linkButton}
+					>
+						{property.primaryText}
+					</UnstyledButton>
+					<UnstyledButton
+						component="a"
+						href={property.secondaryLink}
+						target="_blank"
+						rel="noopener noreferrer"
+						className={classes.secondaryLinkButton}
+					>
+						{property.secondaryText}
+					</UnstyledButton>
+				</Grid.Col>
+			))}
 		</Grid>
 	)
 }
@@ -67,7 +66,7 @@ const useStyles = createStyles((theme) => {
 		fontSize: "18px",
 		fontWeight: 600,
 		letterSpacing: "2px",
-		fontFamily: "\"Montserrat\", sans-serif"
+		fontFamily: '"Montserrat", sans-serif'
 	}
 
 	return {
@@ -129,4 +128,3 @@ const useStyles = createStyles((theme) => {
 		}
 	}
 })
-

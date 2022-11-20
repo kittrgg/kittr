@@ -1,3 +1,4 @@
+import AddLink from "../../modals/AddLink"
 import colors from "@Colors"
 import { Button, Spinner, SVG, SvgByType, SVGType } from "@Components/shared"
 import TextInput from "@Components/shared/TextInput"
@@ -12,7 +13,6 @@ import { trimPrefix } from "@Utils/helpers/trimPrefix"
 import { linkPrefixes } from "@Utils/lookups/linkPrefixes"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
-import AddLink from "../../modals/AddLink"
 
 /** CRUD for editing the social links of a channel. */
 const LinkEditor = () => {

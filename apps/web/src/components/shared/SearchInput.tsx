@@ -1,7 +1,6 @@
-import styled from "styled-components"
-
-import SVG from "@Components/shared/SVG"
 import colors from "@Colors"
+import SVG from "@Components/shared/SVG"
+import styled from "styled-components"
 
 interface Props {
 	/** User's search term. */
@@ -15,37 +14,37 @@ interface Props {
 }
 
 export const SearchInput = ({ value, onChange, clearSearch, autoComplete = "off" }: Props) => (
-		<div style={{ position: "relative" }}>
-			<Input
-				type="text"
-				name="channelSearch"
-				placeholder="Search..."
-				autoComplete={autoComplete}
-				value={value as string}
-				onChange={onChange}
-				data-cy="search-input"
+	<div style={{ position: "relative" }}>
+		<Input
+			type="text"
+			name="channelSearch"
+			placeholder="Search..."
+			autoComplete={autoComplete}
+			value={value as string}
+			onChange={onChange}
+			data-cy="search-input"
+		/>
+		{value.length > 0 && (
+			<SVG.X
+				data-cy="clear-search"
+				width="12px"
+				fill={colors.red}
+				style={{
+					padding: "12px",
+					height: "20px",
+					position: "absolute",
+					right: "8px",
+					top: "50%",
+					transform: "translateY(-50%)",
+					borderTopRightRadius: "12px",
+					borderBottomRightRadius: "12px",
+					cursor: "pointer"
+				}}
+				onClick={clearSearch}
 			/>
-			{value.length > 0 && (
-				<SVG.X
-					data-cy="clear-search"
-					width="12px"
-					fill={colors.red}
-					style={{
-						padding: "12px",
-						height: "20px",
-						position: "absolute",
-						right: "8px",
-						top: "50%",
-						transform: "translateY(-50%)",
-						borderTopRightRadius: "12px",
-						borderBottomRightRadius: "12px",
-						cursor: "pointer"
-					}}
-					onClick={clearSearch}
-				/>
-			)}
-		</div>
-	)
+		)}
+	</div>
+)
 
 export default SearchInput
 

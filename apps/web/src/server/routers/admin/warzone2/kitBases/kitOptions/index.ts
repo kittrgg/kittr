@@ -5,4 +5,3 @@ export const optionsRouter = createRouter()
 	.merge("update", Warzone2AdminController.updateOption)
 	.merge("create", Warzone2AdminController.createOption)
 	.merge("delete", Warzone2AdminController.deleteOption)
-

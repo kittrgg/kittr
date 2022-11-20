@@ -1,6 +1,6 @@
-import { ChannelLink } from "@kittr/prisma"
 import * as Styled from "./style"
 import { SocialIcons, ProfileImage } from "@Components/shared"
+import { ChannelLink } from "@kittr/prisma"
 
 interface Props {
 	id: string

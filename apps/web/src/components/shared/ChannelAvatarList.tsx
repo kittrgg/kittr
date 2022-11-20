@@ -1,8 +1,8 @@
 import colors from "@Colors"
 import ProfileImage from "@Components/shared/ProfileImage"
+import { header2 } from "@Styles/typography"
 import { Channel, ChannelProfile } from "@kittr/prisma"
 import { useTheme } from "@kittr/ui"
-import { header2 } from "@Styles/typography"
 import styled from "styled-components"
 
 interface ChannelWithProfile extends Channel {
@@ -24,21 +24,21 @@ export const ChannelAvatarList = ({ channels, isLive, onClick }: Props) => {
 	return (
 		<>
 			{channels.map((channel) => (
-					<Identity
-						key={channel.id}
-						data-cy={`${channel.displayName}-button`}
-						onClick={() => onClick && onClick(channel)}
-						theme={theme}
-					>
-						<ProfileImage
-							size="100px"
-							imagePath={channel.id}
-							hasProfileImage={!!channel.profile?.hasProfileImage}
-							isLive={isLive}
-						/>
-						<Name>{channel.displayName}</Name>
-					</Identity>
-				))}
+				<Identity
+					key={channel.id}
+					data-cy={`${channel.displayName}-button`}
+					onClick={() => onClick && onClick(channel)}
+					theme={theme}
+				>
+					<ProfileImage
+						size="100px"
+						imagePath={channel.id}
+						hasProfileImage={!!channel.profile?.hasProfileImage}
+						isLive={isLive}
+					/>
+					<Name>{channel.displayName}</Name>
+				</Identity>
+			))}
 		</>
 	)
 }

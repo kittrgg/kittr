@@ -1,6 +1,6 @@
+import fetch from "@Fetch"
 import { Channel } from "@kittr/prisma"
 import { useQuery } from "react-query"
-import fetch from "@Fetch"
 
 export const useChannelSearch = (searchTerm: string) => {
 	const url = `/api/channels/search?searchTerm=${searchTerm}`

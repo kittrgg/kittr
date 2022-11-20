@@ -1,11 +1,10 @@
-import styled from "styled-components"
-
 import { Button, Modal, Spinner } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { clearKitEditor, setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useChannelView } from "@Redux/slices/dashboard/selectors"
 import { useDispatch, useSelector } from "@Redux/store"
 import { header2 } from "@Styles/typography"
+import styled from "styled-components"
 
 const KitDeleteConfirmation = () => {
 	const { data: channelData } = useChannelData()
@@ -66,4 +65,3 @@ const Flex = styled.div`
 	justify-content: space-between;
 	margin-top: 48px;
 `
-

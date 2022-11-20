@@ -1,9 +1,17 @@
 // import { IPopularityRates } from "@kittr/types"
+import ChannelMain from "./Main"
+import Sidebar from "./Sidebar"
 import colors from "@Colors"
 import FullScreen from "@Components/layouts/FullScreen"
 import NavMenu from "@Components/layouts/NavMenu"
 import { useDimensions } from "@Hooks/useDimensions"
 import { useLockBodyScroll } from "@Hooks/useLockBodyScroll"
+import { setActiveWeapon, setChannel, setIsSidebarOpen } from "@Redux/slices/displayr"
+import { useActiveWeapon, useSidebarState } from "@Redux/slices/displayr/selectors"
+import { useDispatch } from "@Redux/store"
+import { InferQueryOutput } from "@Server/index"
+import type { NonNullable } from "@Types/index"
+import { Routes } from "@Utils/lookups/routes"
 import {
 	WarzoneTwoKit,
 	WarzoneTwoKitBase,
@@ -14,17 +22,9 @@ import {
 	WarzoneKitBaseCategory,
 	WarzoneKitOption
 } from "@kittr/prisma"
-import { setActiveWeapon, setChannel, setIsSidebarOpen } from "@Redux/slices/displayr"
-import { useActiveWeapon, useSidebarState } from "@Redux/slices/displayr/selectors"
-import { useDispatch } from "@Redux/store"
-import { InferQueryOutput } from "@Server/index"
-import type { NonNullable } from "@Types/index"
-import { Routes } from "@Utils/lookups/routes"
 import { useRouter } from "next/router"
 import { useEffect } from "react"
 import styled from "styled-components"
-import ChannelMain from "./Main"
-import Sidebar from "./Sidebar"
 
 interface Props {
 	channel: NonNullable<InferQueryOutput<"channels/profile/get">>

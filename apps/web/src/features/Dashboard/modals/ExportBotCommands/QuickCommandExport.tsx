@@ -1,12 +1,12 @@
-import { TCommandMethod } from "@kittr/types/types"
+import * as Styled from "./style"
 import colors from "@Colors"
 import { Button, Modal, MultiButton } from "@Components/shared"
 import CommandsTable from "@Features/Dashboard/modals/ExportBotCommands/CommandsTable"
 import { setModal } from "@Redux/slices/dashboard"
 import { useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
+import { TCommandMethod } from "@kittr/types/types"
 import { useState } from "react"
-import * as Styled from "./style"
 
 const QuickCommandExport = ({ ...props }) => {
 	const dispatch = useDispatch()

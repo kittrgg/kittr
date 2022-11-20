@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 import colors from "@Colors"
+import { trpc } from "@Server/createHooks"
 import { Button, MultiSelect, Section, Text, TextInput } from "@kittr/ui"
 import { Switch } from "@mantine/core"
-import { trpc } from "@Server/createHooks"
 import { useState } from "react"
 
 interface GameInputs {
@@ -135,4 +135,3 @@ const Page = () => {
 }
 
 export default Page
-

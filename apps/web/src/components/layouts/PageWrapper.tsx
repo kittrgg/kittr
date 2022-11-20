@@ -1,13 +1,12 @@
 // <PageWrapper /> and <AdPageWrapper /> should end up getting molded into one component probably.
 // It should probably be that <AdPageWrapper /> has a "noAds" option on it.
-import { ReactNode } from "react"
-
-import Head from "@Components/shared/Head"
-import { Title } from "@kittr/ui"
-import { AppShell, Container } from "@mantine/core"
 import Footer from "./Footer"
 import Header from "./NavMenu"
 import { ErrorBoundary } from "@Components/shared/ErrorBoundary"
+import Head from "@Components/shared/Head"
+import { Title } from "@kittr/ui"
+import { AppShell, Container } from "@mantine/core"
+import { ReactNode } from "react"
 
 interface Props {
 	/** Head title for meta information */

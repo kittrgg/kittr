@@ -1,7 +1,7 @@
 // @ts-nocheck
-import NextErrorComponent from "next/error"
 import { flush } from "@sentry/nextjs"
 import { captureException } from "@sentry/nextjs"
+import NextErrorComponent from "next/error"
 
 const MyError = ({ statusCode, hasGetInitialPropsRun, err }) => {
 	if (!hasGetInitialPropsRun && err) {

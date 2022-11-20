@@ -1,17 +1,16 @@
-import styled from "styled-components"
-
-import colors from "@Colors"
-import { header1 } from "@Styles/typography"
-
-import { useSelector, useDispatch } from "@Redux/store"
-import { setModal } from "@Redux/slices/dashboard"
-import { useChannelView } from "@Redux/slices/dashboard/selectors"
-import Button from "@Components/shared/Button"
 import ChannelTopBar from "../../UserIdentity"
+import ExportBotCommands from "../../modals/ExportBotCommands"
 import AffiliateCode from "./AffiliateCode"
 import Kits from "./Kits"
-import ExportBotCommands from "../../modals/ExportBotCommands"
+import colors from "@Colors"
+import Button from "@Components/shared/Button"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
+import { setModal } from "@Redux/slices/dashboard"
+import { useChannelView } from "@Redux/slices/dashboard/selectors"
+import { useSelector, useDispatch } from "@Redux/store"
+import { header1 } from "@Styles/typography"
+import styled from "styled-components"
+
 // import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
 
 /** The Warzone screen for a channel. */
@@ -96,4 +95,3 @@ const HeaderContent = styled.div`
 	align-items: flex-start;
 	justify-content: space-between;
 `
-

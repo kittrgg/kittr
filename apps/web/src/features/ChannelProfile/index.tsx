@@ -1,9 +1,3 @@
-import colors from "@Colors"
-import { trpc } from "@Server/createHooks"
-import { download } from "@Services/firebase/storage"
-import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
-import styled from "styled-components"
 import Affiliates from "./Affiliates"
 import FeaturedKits from "./FeaturedKits"
 import Games from "./Games"
@@ -14,6 +8,12 @@ import RecentVideos from "./RecentVideos"
 import Schedule from "./Schedule"
 import SetupPhotos from "./SetupPhotos"
 import Specs from "./Specs"
+import colors from "@Colors"
+import { trpc } from "@Server/createHooks"
+import { download } from "@Services/firebase/storage"
+import { useRouter } from "next/router"
+import { useEffect, useState } from "react"
+import styled from "styled-components"
 
 const ChannelProfile = () => {
 	const { query } = useRouter()

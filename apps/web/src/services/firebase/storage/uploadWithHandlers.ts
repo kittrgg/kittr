@@ -1,5 +1,5 @@
-import compressor from "browser-image-compression"
 import { upload } from "@Services/firebase/storage/upload"
+import compressor from "browser-image-compression"
 
 interface IFunc {
 	/**

@@ -1,10 +1,10 @@
-import validator from "validator"
 import * as Styled from "./style"
 import colors from "@Colors"
 import TextInput from "@Components/shared/TextInput"
-import { useActiveKit } from "@Redux/slices/dashboard/selectors"
 import { updateCustomTitle } from "@Redux/slices/dashboard"
+import { useActiveKit } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
+import validator from "validator"
 
 const CustomTitle = ({ ...props }) => {
 	const dispatch = useDispatch()

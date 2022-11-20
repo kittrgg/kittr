@@ -1,10 +1,10 @@
-import { ITwitchLiveChannels } from "@kittr/types/twitch"
-import { headers } from "@Services/twitch/utils/auth"
 import { grabLoginName } from "./utils/grabLoginName"
 import fetch from "@Fetch"
+import { getTopChannelsWithLinksQuery } from "@Services/orm/queries/channels"
+import { headers } from "@Services/twitch/utils/auth"
 import { LinkProperty } from "@kittr/prisma"
 import { Channel, ChannelLink } from "@kittr/prisma"
-import { getTopChannelsWithLinksQuery } from "@Services/orm/queries/channels"
+import { ITwitchLiveChannels } from "@kittr/types/twitch"
 
 export interface ChannelWithLinks extends Channel {
 	links: ChannelLink[]

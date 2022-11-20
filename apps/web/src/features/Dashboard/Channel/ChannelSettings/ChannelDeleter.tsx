@@ -1,10 +1,10 @@
-import styled from "styled-components"
-import colors from "@Colors"
-import { useDispatch, useSelector } from "@Redux/store"
-import Button from "@Components/shared/Button"
 import ChannelDeleteModal from "../../modals/ChannelDelete"
+import colors from "@Colors"
+import Button from "@Components/shared/Button"
 import { setModal } from "@Redux/slices/dashboard"
+import { useDispatch, useSelector } from "@Redux/store"
 import { header2 } from "@Styles/typography"
+import styled from "styled-components"
 
 const Container = styled.div``
 

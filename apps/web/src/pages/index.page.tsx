@@ -1,11 +1,11 @@
+import Body from "./Home/Body"
+import Hero from "./Home/Hero"
+import PlatformInfo from "./Home/PlatformInfo"
 import PageWrapper from "@Components/layouts/PageWrapper"
 import { useAllGames } from "@Hooks/trpc/useAllGames"
 import { trpc } from "@Server/createHooks"
 import { createSSGHelper } from "@Server/createSSGHelper"
 import ResponsiveAdBanner from "@Services/venatus/ResponsiveBanner"
-import Body from "./Home/Body"
-import Hero from "./Home/Hero"
-import PlatformInfo from "./Home/PlatformInfo"
 
 const Home = () => {
 	const { data: games } = useAllGames({ include: { _count: true } })

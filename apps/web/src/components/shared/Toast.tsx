@@ -1,8 +1,7 @@
-import { useEffect, Dispatch, SetStateAction, ReactNode } from "react"
-import styled from "styled-components"
-
 import colors from "@Colors"
 import { useIsMounted } from "@Hooks/useIsMounted"
+import { useEffect, Dispatch, SetStateAction, ReactNode } from "react"
+import styled from "styled-components"
 
 interface Props {
 	visible: boolean

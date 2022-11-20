@@ -1,7 +1,6 @@
-import styled from "styled-components"
-
 import { Modal } from "@Components/shared"
 import { header2 } from "@Styles/typography"
+import styled from "styled-components"
 
 /** Notify of any errors that happen. */
 const ErrorNotification = () => {

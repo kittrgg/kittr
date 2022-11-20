@@ -73,4 +73,3 @@ const GamesWrapper = styled.div`
 		justify-content: center;
 	}
 `
-

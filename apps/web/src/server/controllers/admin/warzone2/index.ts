@@ -1,9 +1,9 @@
-import { WarzoneTwoKitBaseModel, WarzoneTwoKitOptionModel } from "@kittr/prisma/validator"
 import { createController } from "@Server/createController"
 import { authenticateAdmin } from "@Server/middlewares/authenticateAdmin"
 import * as AdminWarzone2Service from "@Server/services/admin/warzone2"
-import { z } from "zod"
 import { prisma } from "@kittr/prisma"
+import { WarzoneTwoKitBaseModel, WarzoneTwoKitOptionModel } from "@kittr/prisma/validator"
+import { z } from "zod"
 
 const listKitBases = createController()
 	.middleware(authenticateAdmin)
@@ -69,7 +69,6 @@ export const updateBase = createController()
 			// options: z.array(Warzone2KitOptionModel)
 		}),
 		async resolve({ input }) {
-
 			await prisma.warzoneTwoCommandCode.deleteMany({
 				where: {
 					kitBaseId: input.base.id

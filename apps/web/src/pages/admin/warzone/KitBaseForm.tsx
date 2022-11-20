@@ -1,11 +1,11 @@
+import { KitBaseOptionForm } from "./KitBaseOptionForm"
+import { trpc } from "@Server/createHooks"
 import { WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
 import { Button, List, NumberInput, Section, Select, SubSection, Text, Textarea, TextInput } from "@kittr/ui"
 import SVG from "@kittr/ui/src/components/SVG"
 import { ActionIcon } from "@mantine/core"
-import { trpc } from "@Server/createHooks"
 import { useState } from "react"
 import styled from "styled-components"
-import { KitBaseOptionForm } from "./KitBaseOptionForm"
 
 const groupBy = (xs: any, key: string) =>
 	xs.reduce((rv: any, x: any) => {

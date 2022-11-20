@@ -1,8 +1,8 @@
-import { useState, createContext, ReactNode } from "react"
-import SVG from "@Components/shared/SVG"
-import styled from "styled-components"
 import colors from "@Colors"
+import SVG from "@Components/shared/SVG"
 import { header2 } from "@Styles/typography"
+import { useState, createContext, ReactNode } from "react"
+import styled from "styled-components"
 
 interface IProvider {
 	isOpen: Boolean

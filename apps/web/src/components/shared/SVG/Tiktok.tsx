@@ -1,5 +1,7 @@
+import colors from "@Colors"
 import { useState } from "react"
-import colors from "@Colors" /** The Tiktok logo. Use fill for color. */
+
+/** The Tiktok logo. Use fill for color. */
 export const Tiktok = (props: any) => {
 	const [isHovered, setIsHovered] = useState(false)
 

@@ -1,9 +1,8 @@
-import { useState } from "react"
-
-import Head from "@Components/shared/Head"
-import AuthLayout from "@Components/layouts/Authentication"
 import EmailInput from "./EmailInput"
 import Success from "./Success"
+import AuthLayout from "@Components/layouts/Authentication"
+import Head from "@Components/shared/Head"
+import { useState } from "react"
 
 const ForgotPassword = ({ ...props }) => {
 	const [step, setStep] = useState(1)

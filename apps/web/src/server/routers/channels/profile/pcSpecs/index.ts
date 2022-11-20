@@ -1,5 +1,5 @@
-import { createRouter } from "@Server/createRouter"
 import { ChannelsPcSpecsController } from "@Server/controllers/channels/pcSpecs"
+import { createRouter } from "@Server/createRouter"
 
 export const channelsPcSpecsRouter = createRouter()
 	.merge("list", ChannelsPcSpecsController.listPcSpec)

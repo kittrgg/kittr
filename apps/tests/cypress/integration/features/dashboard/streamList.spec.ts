@@ -1,5 +1,4 @@
 /// <reference types="cypress" />
-
 import newChannel from "../../../fixtures/mongoose/newChannel.json"
 import { basicUser } from "../../../plugins/seed"
 

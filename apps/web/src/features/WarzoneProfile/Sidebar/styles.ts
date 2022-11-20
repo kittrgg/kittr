@@ -1,6 +1,6 @@
-import styled from "styled-components"
 import colors from "@Colors"
 import { caption } from "@Styles/typography"
+import styled from "styled-components"
 
 export const Wrapper = styled.aside<{ isSidebarOpen: boolean; viewportWidth: number }>`
 	position: relative;

@@ -1,9 +1,9 @@
-import { createRouter } from "@Server/createRouter"
 import { GamesController } from "@Server/controllers/games"
+import { createRouter } from "@Server/createRouter"
+import { authenticateAdmin } from "@Server/middlewares/authenticateAdmin"
+import { prisma } from "@kittr/prisma"
 import { GameModel } from "@kittr/prisma/validator"
 import { z } from "zod"
-import { prisma } from "@kittr/prisma"
-import { authenticateAdmin } from "@Server/middlewares/authenticateAdmin"
 
 export const gamesRouter = createRouter()
 	.merge("getByUrlSafeName", GamesController.getGameByUrlSafeName)
@@ -17,8 +17,7 @@ export const gamesRouter = createRouter()
 	})
 	.middleware(authenticateAdmin)
 	.mutation("add", {
-		input: GameModel.omit({ id: true }).extend({ genres: z.array(z.string()), platforms: z.array(z.string()) })
-		,
+		input: GameModel.omit({ id: true }).extend({ genres: z.array(z.string()), platforms: z.array(z.string()) }),
 		resolve: async ({ input }) => {
 			const { genres, platforms, ...game } = input
 

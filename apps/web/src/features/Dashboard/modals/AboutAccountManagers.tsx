@@ -1,11 +1,10 @@
-import styled from "styled-components"
-
 import colors from "@Colors"
-import { paragraph } from "@Styles/typography"
-import { useDispatch } from "@Redux/store"
+import { Modal, Button, SVG } from "@Components/shared"
 import { setModal } from "@Redux/slices/dashboard"
 import { useManagerRole } from "@Redux/slices/dashboard/selectors/"
-import { Modal, Button, SVG } from "@Components/shared"
+import { useDispatch } from "@Redux/store"
+import { paragraph } from "@Styles/typography"
+import styled from "styled-components"
 
 const CENTER_SVG = {
 	position: "absolute",

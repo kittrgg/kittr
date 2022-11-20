@@ -1,5 +1,5 @@
-import { useState } from "react"
 import colors from "@Colors"
+import { useState } from "react"
 
 /** The Discord logo. Use fill for color. */
 export const Discord = (props: any) => {

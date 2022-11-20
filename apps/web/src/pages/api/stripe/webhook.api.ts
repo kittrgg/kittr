@@ -1,10 +1,10 @@
 import fetch from "@Fetch"
-import { prisma } from "@kittr/prisma"
 import { createHandler } from "@Middlewares/createHandler"
+import { prisma } from "@kittr/prisma"
+import { withSentry } from "@sentry/nextjs"
 import { buffer } from "micro"
 import type { NextApiRequest, NextApiResponse } from "next"
 import Stripe from "stripe"
-import { withSentry } from "@sentry/nextjs"
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, { apiVersion: "2020-08-27" })
 
@@ -57,24 +57,25 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 			case "customer.subscription.updated": {
 				return subscriptionHandler(event)
 			}
-			case "customer.subscription.deleted": {
-				const cancelled = await prisma.channel.update({
-					where: {
-						// @ts-ignore
-						id: event.data.object.metadata.channelId
-					},
-					data: {
-						plan: {
-							update: {
-								stripeSubscriptionId: null,
-								type: "BASIC"
+			case "customer.subscription.deleted":
+				{
+					const cancelled = await prisma.channel.update({
+						where: {
+							// @ts-ignore
+							id: event.data.object.metadata.channelId
+						},
+						data: {
+							plan: {
+								update: {
+									stripeSubscriptionId: null,
+									type: "BASIC"
+								}
 							}
 						}
-					}
-				})
+					})
 
-				return res.status(200).json({ cancelled })
-			}
+					return res.status(200).json({ cancelled })
+				}
 				break
 			case "subscription_schedule.updated":
 				// @ts-ignore

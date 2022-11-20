@@ -1,6 +1,6 @@
-import { useState } from "react"
 import { ErrorBoundary } from "@Components/shared/ErrorBoundary"
 import { captureException } from "@Services/captureException"
+import { useState } from "react"
 
 const Inner = () => {
 	const [doError, setDoError] = useState(false)

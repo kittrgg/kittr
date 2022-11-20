@@ -8,9 +8,9 @@ import { trpc } from "@Server/createHooks"
 import { createSSGHelper } from "@Server/createSSGHelper"
 import ResponsiveBanner from "@Services/venatus/ResponsiveBanner"
 import { Routes } from "@Utils/lookups/routes"
+import { prisma } from "@kittr/prisma"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { prisma } from "@kittr/prisma"
 import styled from "styled-components"
 
 const CHANNELS_PER_PAGE = 10
@@ -119,12 +119,14 @@ export const getStaticPaths = async () => {
 			}
 		]
 	})
-	const paths = games.map((game) => [1, 2, 3].map((elem: number) => ({
+	const paths = games.map((game) =>
+		[1, 2, 3].map((elem: number) => ({
 			params: {
 				game: game.urlSafeName,
 				pageNumber: String(elem)
 			}
-		})))
+		}))
+	)
 
 	return {
 		paths: paths.flat(),

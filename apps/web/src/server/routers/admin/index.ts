@@ -1,7 +1,7 @@
-import { createRouter } from "@Server/createRouter"
 import { warzoneAdminRouter } from "./warzone"
-import { logInfo } from "@kittr/logger/node"
 import { warzone2AdminRouter } from "./warzone2"
+import { createRouter } from "@Server/createRouter"
+import { logInfo } from "@kittr/logger/node"
 
 export const adminRouter = createRouter()
 	.merge("warzone/", warzoneAdminRouter)
@@ -12,4 +12,3 @@ export const adminRouter = createRouter()
 			return "tested"
 		}
 	})
-

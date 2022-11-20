@@ -1,10 +1,10 @@
+import { Title } from "../Title"
 import {
 	Accordion as MantineAccordion,
 	AccordionItem,
 	AccordionProps
 } from "@mantine/core"
 import React from "react"
-import { Title } from "../Title"
 
 type AccordionListItem = { title: string; content: React.ReactNode }
 

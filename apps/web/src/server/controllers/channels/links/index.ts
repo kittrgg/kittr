@@ -1,9 +1,9 @@
 import { createController } from "@Server/createController"
-import * as ChannelsService from "@Server/services/channels"
-import { z } from "zod"
-import { ChannelLinkModel } from "@kittr/prisma/validator"
-import { checkRole } from "@Server/services/users"
 import { authenticateUser } from "@Server/middlewares/authenticateUser"
+import * as ChannelsService from "@Server/services/channels"
+import { checkRole } from "@Server/services/users"
+import { ChannelLinkModel } from "@kittr/prisma/validator"
+import { z } from "zod"
 
 const upsertLinks = createController()
 	.middleware(authenticateUser)

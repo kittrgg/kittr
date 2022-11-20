@@ -1,23 +1,22 @@
+import Channel from "./Channel"
+import ChannelList from "./ChannelList"
+import EmailVerification from "./EmailVerificationForm"
+import Login from "./Login"
+import Profile from "./Profile"
+import Sidebar from "./Sidebar"
+import ErrorNotification from "./modals/ErrorNotification"
+import Tutorial from "./modals/Tutorial"
 import colors from "@Colors"
 import FullScreen from "@Components/layouts/FullScreen"
 import Spinner from "@Components/shared/Spinner"
+import { useAllGames } from "@Hooks/trpc/useAllGames"
+import { useAllKitBases } from "@Hooks/trpc/useAllKitBases"
 import { useUser } from "@Hooks/useUser"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
 import { useDashboardView, useModal } from "@Redux/slices/dashboard/selectors"
 import { Routes } from "@Utils/lookups/routes"
 import { useRef } from "react"
-
 import styled from "styled-components"
-import Channel from "./Channel"
-import ChannelList from "./ChannelList"
-import EmailVerification from "./EmailVerificationForm"
-import Login from "./Login"
-import ErrorNotification from "./modals/ErrorNotification"
-import Tutorial from "./modals/Tutorial"
-import Profile from "./Profile"
-import Sidebar from "./Sidebar"
-import { useAllGames } from "@Hooks/trpc/useAllGames"
-import { useAllKitBases } from "@Hooks/trpc/useAllKitBases"
 
 /** The kittr dashboard. */
 const Dashboard = () => {
@@ -102,4 +101,3 @@ const Container = styled.main`
 		border: 5px solid transparent;
 	}
 `
-

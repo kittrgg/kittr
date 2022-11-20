@@ -1,6 +1,7 @@
-import { ReactNode } from "react"
-import { useViewportDimensions } from "@Hooks/useViewportDimensions"
 import colors from "@Colors"
+import { useViewportDimensions } from "@Hooks/useViewportDimensions"
+import { ReactNode } from "react"
+
 interface Props {
 	/** Optional onClick function. Most often used when this component is being used as a background for a modal. */
 	onClick?: (...args: any[]) => void

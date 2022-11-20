@@ -1,7 +1,7 @@
-import { useEffect, useRef } from "react"
-import { useRouter } from "next/router"
-import { isClient } from "@Utils/helpers/isClient"
 import { ErrorBoundary } from "@Components/shared/ErrorBoundary"
+import { isClient } from "@Utils/helpers/isClient"
+import { useRouter } from "next/router"
+import { useEffect, useRef } from "react"
 
 interface Props {
 	/** Venatus ad unit type. */

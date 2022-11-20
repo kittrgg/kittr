@@ -1,5 +1,5 @@
-import * as Sentry from "@sentry/nextjs"
 import { consoleLog, logError, logWarning, logInfo, logDebug } from "../nextjs"
+import * as Sentry from "@sentry/nextjs"
 
 jest.mock("@sentry/nextjs", () => ({
 	captureException: jest.fn(),

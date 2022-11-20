@@ -1,13 +1,12 @@
-import { useState, useRef, MutableRefObject, useEffect } from "react"
-
 import * as Styled from "./style"
 import colors from "@Colors"
-import { useDispatch } from "@Redux/store"
+import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
+import SVG from "@Components/shared/SVG"
 import { setChannelView, setModal, handleTutorialAction } from "@Redux/slices/dashboard"
 import { useManagerRole, useModal } from "@Redux/slices/dashboard/selectors"
-import SVG from "@Components/shared/SVG"
-import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
+import { useDispatch } from "@Redux/store"
 import { Game } from "@kittr/prisma"
+import { useState, useRef, MutableRefObject, useEffect } from "react"
 
 interface Props {
 	/** The game for this button. */

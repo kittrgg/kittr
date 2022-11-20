@@ -1,13 +1,12 @@
-import { useState, useEffect } from "react"
-import styled from "styled-components"
-
 import colors from "@Colors"
-import { paragraph, header2 } from "@Styles/typography"
-import { useDispatch } from "@Redux/store"
+import FullScreen from "@Components/layouts/FullScreen"
+import { Modal, Button } from "@Components/shared"
 import { handleTutorialAction } from "@Redux/slices/dashboard"
 import { useModal } from "@Redux/slices/dashboard/selectors"
-import { Modal, Button } from "@Components/shared"
-import FullScreen from "@Components/layouts/FullScreen"
+import { useDispatch } from "@Redux/store"
+import { paragraph, header2 } from "@Styles/typography"
+import { useState, useEffect } from "react"
+import styled from "styled-components"
 
 const PAGE_CONTENT = [
 	{

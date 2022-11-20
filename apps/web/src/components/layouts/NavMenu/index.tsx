@@ -1,3 +1,5 @@
+import LogoImageLink from "./LogoImageLink"
+import MobileNav from "./Mobile"
 import colors from "@Colors"
 import { useUser } from "@Hooks/useUser"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
@@ -8,8 +10,6 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import { ReactNode } from "react"
 import styled from "styled-components"
-import LogoImageLink from "./LogoImageLink"
-import MobileNav from "./Mobile"
 
 interface Props {
 	/** A React reference object to forward to the header's container. */
@@ -41,28 +41,27 @@ const NavMenu = ({ wrapperRef, breakpoint = 769, backFunction, middleComponent }
 			</Wrapper>
 		)
 	}
-		return (
-			<Wrapper ref={wrapperRef} shadow={(windowScroll as number) > 0}>
-				<Container breakpoint={breakpoint}>
-					<LogoImageLink />
-					<Link href={Routes.GAMES.LIST} passHref>
-						<StyledLink data-cy="desktop-games-link" active={pathname.startsWith(Routes.GAMES.LIST)}>
-							GAMES
-						</StyledLink>
-					</Link>
-					<Link href={Routes.CHANNEL.LIST} passHref>
-						<StyledLink
-							data-cy="desktop-channels-link"
-							active={pathname.startsWith(Routes.CHANNEL.LIST) || pathname.startsWith(Routes.CHANNEL.LIST)}
-						>
-							CHANNELS
-						</StyledLink>
-					</Link>
-					<AuthenticationLinks isLoggedIn={isLoggedIn} pathname={pathname} />
-				</Container>
-			</Wrapper>
-		)
-
+	return (
+		<Wrapper ref={wrapperRef} shadow={(windowScroll as number) > 0}>
+			<Container breakpoint={breakpoint}>
+				<LogoImageLink />
+				<Link href={Routes.GAMES.LIST} passHref>
+					<StyledLink data-cy="desktop-games-link" active={pathname.startsWith(Routes.GAMES.LIST)}>
+						GAMES
+					</StyledLink>
+				</Link>
+				<Link href={Routes.CHANNEL.LIST} passHref>
+					<StyledLink
+						data-cy="desktop-channels-link"
+						active={pathname.startsWith(Routes.CHANNEL.LIST) || pathname.startsWith(Routes.CHANNEL.LIST)}
+					>
+						CHANNELS
+					</StyledLink>
+				</Link>
+				<AuthenticationLinks isLoggedIn={isLoggedIn} pathname={pathname} />
+			</Container>
+		</Wrapper>
+	)
 }
 
 export default NavMenu
@@ -77,29 +76,28 @@ const AuthenticationLinks = ({ isLoggedIn, pathname }: { isLoggedIn: boolean; pa
 			</Link>
 		)
 	}
-		return (
-			<div>
-				<Link href={Routes.SIGN_UP} passHref>
-					<StyledLink
-						data-cy="desktop-sign-up-link"
-						active={pathname.startsWith(Routes.SIGN_UP)}
-						style={{ paddingRight: "20px", borderRight: `2px solid ${colors.light}` }}
-					>
-						SIGN UP
-					</StyledLink>
-				</Link>
-				<Link href={Routes.DASHBOARD} passHref>
-					<StyledLink
-						data-cy="desktop-dashboard-link-no-auth"
-						active={pathname.startsWith(Routes.DASHBOARD)}
-						style={{ paddingLeft: "20px" }}
-					>
-						LOG IN
-					</StyledLink>
-				</Link>
-			</div>
-		)
-
+	return (
+		<div>
+			<Link href={Routes.SIGN_UP} passHref>
+				<StyledLink
+					data-cy="desktop-sign-up-link"
+					active={pathname.startsWith(Routes.SIGN_UP)}
+					style={{ paddingRight: "20px", borderRight: `2px solid ${colors.light}` }}
+				>
+					SIGN UP
+				</StyledLink>
+			</Link>
+			<Link href={Routes.DASHBOARD} passHref>
+				<StyledLink
+					data-cy="desktop-dashboard-link-no-auth"
+					active={pathname.startsWith(Routes.DASHBOARD)}
+					style={{ paddingLeft: "20px" }}
+				>
+					LOG IN
+				</StyledLink>
+			</Link>
+		</div>
+	)
 }
 
 // Styled Components

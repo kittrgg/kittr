@@ -1,3 +1,4 @@
+import KitButton from "./KitButton"
 import colors from "@Colors"
 import { Button } from "@Components/shared"
 import { createNewKit } from "@Redux/slices/dashboard"
@@ -6,7 +7,6 @@ import { useDispatch } from "@Redux/store"
 import { filterKitsByFeature } from "@Utils/helpers/filterKitsByFeature"
 import { sortAlphabetical } from "@Utils/helpers/sortAlphabetical"
 import styled from "styled-components"
-import KitButton from "./KitButton"
 
 const KitList = () => {
 	const dispatch = useDispatch()

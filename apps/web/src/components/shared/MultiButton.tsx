@@ -45,31 +45,31 @@ export const MultiButton = ({
 	dataCy,
 	infoLabels
 }: Props) => (
-		<>
-			<InfoLabelWrapper>
-				{infoLabels?.map((infoLabel, index) => (
-					<InfoLabel key={index}>{infoLabel}</InfoLabel>
-				))}
-			</InfoLabelWrapper>
-			<Wrapper backgroundColor={wrapperBackgroundColor} data-cy={dataCy}>
-				{values.map((elem, index: number) => (
-						<Button
-							key={elem.text}
-							active={elem.value ? activeValue === elem.value : activeValue === elem.text}
-							backgroundColor={elem.backgroundColor || colors.lighter}
-							textInactiveColor={elem.textInactiveColor || colors.white}
-							textActiveColor={elem.textActiveColor || colors.white}
-							numberOfValues={values.length}
-							onClick={() => onClick(elem)}
-							data-cy={`toggler-value-${index}`}
-							data-active={elem.value ? activeValue === elem.value : activeValue === elem.text}
-						>
-							{elem.text}
-						</Button>
-					))}
-			</Wrapper>
-		</>
-	)
+	<>
+		<InfoLabelWrapper>
+			{infoLabels?.map((infoLabel, index) => (
+				<InfoLabel key={index}>{infoLabel}</InfoLabel>
+			))}
+		</InfoLabelWrapper>
+		<Wrapper backgroundColor={wrapperBackgroundColor} data-cy={dataCy}>
+			{values.map((elem, index: number) => (
+				<Button
+					key={elem.text}
+					active={elem.value ? activeValue === elem.value : activeValue === elem.text}
+					backgroundColor={elem.backgroundColor || colors.lighter}
+					textInactiveColor={elem.textInactiveColor || colors.white}
+					textActiveColor={elem.textActiveColor || colors.white}
+					numberOfValues={values.length}
+					onClick={() => onClick(elem)}
+					data-cy={`toggler-value-${index}`}
+					data-active={elem.value ? activeValue === elem.value : activeValue === elem.text}
+				>
+					{elem.text}
+				</Button>
+			))}
+		</Wrapper>
+	</>
+)
 
 export default MultiButton
 

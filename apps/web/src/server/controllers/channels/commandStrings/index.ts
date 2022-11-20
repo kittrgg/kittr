@@ -1,8 +1,8 @@
 import { createController } from "@Server/createController"
-import * as ChannelsCommandStringsService from "@Server/services/channels/commandStrings"
-import { z } from "zod"
 import { authenticateUser } from "@Server/middlewares/authenticateUser"
+import * as ChannelsCommandStringsService from "@Server/services/channels/commandStrings"
 import { checkRole } from "@Server/services/users"
+import { z } from "zod"
 
 const getCommandString = createController().mutation("", {
 	input: z.object({

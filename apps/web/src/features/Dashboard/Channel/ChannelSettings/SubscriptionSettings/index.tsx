@@ -1,6 +1,4 @@
-import { differenceInDays, fromUnixTime } from "date-fns"
-import styled from "styled-components"
-
+import PlanTile from "./PlanTile"
 import colors from "@Colors"
 import PremiumPlans from "@Features/Dashboard/modals/PremiumPlan"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
@@ -9,7 +7,8 @@ import { useModal, usePremiumStatus } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
 import { trpc } from "@Server/createHooks"
 import { paragraph } from "@Styles/typography"
-import PlanTile from "./PlanTile"
+import { differenceInDays, fromUnixTime } from "date-fns"
+import styled from "styled-components"
 
 const SubscriptionSettings = () => {
 	const dispatch = useDispatch()

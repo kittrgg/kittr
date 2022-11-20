@@ -1,5 +1,4 @@
-import styled from "styled-components"
-
+import H3 from "../../H3"
 import colors from "@Colors"
 import { MultiButton, Spinner } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
@@ -8,7 +7,7 @@ import { setModal } from "@Redux/slices/dashboard"
 import { useDispatch } from "@Redux/store"
 import { getToken } from "@Services/firebase/auth/getToken"
 import { paragraph } from "@Styles/typography"
-import H3 from "../../H3"
+import styled from "styled-components"
 
 const YouTubeAutoplayEditor = ({ ...props }) => {
 	const dispatch = useDispatch()

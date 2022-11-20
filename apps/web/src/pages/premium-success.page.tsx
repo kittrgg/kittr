@@ -1,11 +1,11 @@
-import styled, { keyframes } from "styled-components"
 import colors from "@Colors"
 import FullScreen from "@Components/layouts/FullScreen"
 import { SVG } from "@Components/shared"
-import { useEffect } from "react"
 import { header1 } from "@Styles/typography"
-import { useRouter } from "next/router"
 import { getUrl } from "@Utils/helpers/getUrl"
+import { useRouter } from "next/router"
+import { useEffect } from "react"
+import styled, { keyframes } from "styled-components"
 
 const PremiumSuccess = () => {
 	const { push } = useRouter()

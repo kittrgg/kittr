@@ -1,6 +1,6 @@
+import colors from "@Colors"
 import { ReactNode } from "react"
 import styled from "styled-components"
-import colors from "@Colors"
 
 interface Props {
 	/** Input types for "text" based inputs */

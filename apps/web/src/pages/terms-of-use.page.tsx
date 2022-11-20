@@ -1,5 +1,4 @@
 /* eslint-disable */
-
 import PageWrapper from "@Components/layouts/PageWrapper"
 import * as Styled from "@Styles/legalPages"
 

@@ -1,13 +1,14 @@
 /* eslint-disable func-call-spacing */
+
 /* eslint-disable max-len */
-import { useState } from "react"
+import { KitBaseForm } from "./KitBaseForm"
+import { trpc } from "@Server/createHooks"
 import { WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
 import { Button, List, Section } from "@kittr/ui"
 import SVG from "@kittr/ui/src/components/SVG"
 import { ActionIcon } from "@mantine/core"
-import { trpc } from "@Server/createHooks"
-import { KitBaseForm } from "./KitBaseForm"
 import Link from "next/link"
+import { useState } from "react"
 
 const Page = () => {
 	// TODO: Not sure how to handle this type error, need some backend knowledging here.
@@ -78,4 +79,3 @@ const Page = () => {
 }
 
 export default Page
-

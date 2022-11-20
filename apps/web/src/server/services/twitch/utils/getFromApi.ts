@@ -1,5 +1,5 @@
-import { headers } from "@Services/twitch/utils/auth"
 import fetch from "@Fetch"
+import { headers } from "@Services/twitch/utils/auth"
 
 interface IFunc {
 	/**

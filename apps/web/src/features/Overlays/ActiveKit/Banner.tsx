@@ -1,13 +1,11 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react"
-import styled, { keyframes, ThemeProvider } from "styled-components"
-
-import { IKitOption, OverlayKit } from "@kittr/types"
+import { InferQueryOutput } from "@Server/index"
+import colors from "@Styles/colors"
 import { header1, header2, montserrat, paragraph } from "@Styles/typography"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
-import colors from "@Styles/colors"
-
-import { InferQueryOutput } from "@Server/index"
+import { IKitOption, OverlayKit } from "@kittr/types"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
+import styled, { keyframes, ThemeProvider } from "styled-components"
 
 interface Props {
 	previewWidth?: number

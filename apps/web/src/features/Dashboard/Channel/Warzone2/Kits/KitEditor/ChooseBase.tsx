@@ -1,11 +1,10 @@
-import { sortAlphabetical } from "@Utils/helpers/sortAlphabetical"
-
 import * as Styled from "./style"
-import { useDispatch } from "@Redux/store"
+import { Selector } from "@Components/shared"
 import { useAllKitsByGameId } from "@Hooks/trpc/useAllKitsByGameId"
 import { updateBase, updateOptions } from "@Redux/slices/dashboard"
 import { useActiveKit, useChannelView } from "@Redux/slices/dashboard/selectors"
-import { Selector } from "@Components/shared"
+import { useDispatch } from "@Redux/store"
+import { sortAlphabetical } from "@Utils/helpers/sortAlphabetical"
 
 const ChooseBase = () => {
 	const { gameId } = useChannelView()
@@ -51,4 +50,3 @@ const ChooseBase = () => {
 }
 
 export default ChooseBase
-

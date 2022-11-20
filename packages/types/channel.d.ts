@@ -1,6 +1,6 @@
+import { IGame } from "./game"
 import { IKit, IKitRaw } from "./kits"
 import { IManager } from "./manager"
-import { IGame } from "./game"
 
 interface ChannelLinks {
 	twitch?: string

@@ -1,8 +1,8 @@
-import { WarzoneKitModel, WarzoneKitOptionModel } from "@kittr/prisma/validator"
 import { createController } from "@Server/createController"
 import { authenticateUser } from "@Server/middlewares/authenticateUser"
 import * as ChannelsService from "@Server/services/channels"
 import { checkRole } from "@Server/services/users"
+import { WarzoneKitModel, WarzoneKitOptionModel } from "@kittr/prisma/validator"
 import { z } from "zod"
 
 const upsertKitToChannel = createController()
@@ -51,4 +51,3 @@ export const ChannelsKitsController = {
 	upsertKitToChannel,
 	deleteKitFromChannel
 }
-

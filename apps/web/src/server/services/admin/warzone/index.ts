@@ -29,7 +29,13 @@ export const listKitBaseCategories = async () => {
 	return result
 }
 
-export const createKitBase = async ({ base, commandCodes }: { base: Omit<WarzoneKitBase, "id">; commandCodes: string[] }) => {
+export const createKitBase = async ({
+	base,
+	commandCodes
+}: {
+	base: Omit<WarzoneKitBase, "id">
+	commandCodes: string[]
+}) => {
 	const result = await prisma.warzoneKitBase.create({
 		data: {
 			...base,
@@ -45,14 +51,14 @@ export const createKitBase = async ({ base, commandCodes }: { base: Omit<Warzone
 export const updateKitBase = async ({
 	base
 }: // categoryId,
-	// commandCodes,
-	//  options
-	{
-		base: WarzoneKitBase
-		// categoryId: string,
-		// commandCodes: WarzoneCommandCode[]
-		// options: WarzoneKitOption[]
-	}) => {
+// commandCodes,
+//  options
+{
+	base: WarzoneKitBase
+	// categoryId: string,
+	// commandCodes: WarzoneCommandCode[]
+	// options: WarzoneKitOption[]
+}) => {
 	const {
 		id,
 		// categoryId: removeCatId,

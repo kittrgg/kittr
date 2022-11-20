@@ -1,15 +1,14 @@
+import H3 from "../../../H3"
+import * as Styled from "./style"
+import colors from "@Colors"
+import { SVG } from "@Components/shared"
+import Overlay from "@Features/Overlays/ActiveKit"
+import useDimensions from "@Hooks/useDimensions"
+import { useChannelData } from "@Redux/slices/dashboard/selectors"
+import { ActiveKitOverlay } from "@Utils/lookups/overlays"
+import { ActiveKitOverlays } from "@kittr/types"
 import { useState } from "react"
 import styled from "styled-components"
-import * as Styled from "./style"
-
-import { ActiveKitOverlays } from "@kittr/types"
-import { ActiveKitOverlay } from "@Utils/lookups/overlays"
-import colors from "@Colors"
-import { useChannelData } from "@Redux/slices/dashboard/selectors"
-import H3 from "../../../H3"
-import Overlay from "@Features/Overlays/ActiveKit"
-import { SVG } from "@Components/shared"
-import useDimensions from "@Hooks/useDimensions"
 
 interface Props {
 	overlay: any

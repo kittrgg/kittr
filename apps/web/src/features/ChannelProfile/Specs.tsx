@@ -1,10 +1,9 @@
+import { GridItem, H2, SpecsGrid } from "./style"
 import colors from "@Colors"
 import { paragraph } from "@Styles/typography"
-import styled from "styled-components"
-
-import { ChannelPcSpec } from "@kittr/prisma"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
-import { GridItem, H2, SpecsGrid } from "./style"
+import { ChannelPcSpec } from "@kittr/prisma"
+import styled from "styled-components"
 
 const SORT_ORDER = ["Case", "CPU", "CPU Cooler", "Motherboard", "RAM", "GPU", "Storage", "Monitor", "Keyboard", "Mouse"]
 
