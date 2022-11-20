@@ -17,7 +17,6 @@
 		"@juggle/resize-observer": "3.3.1",
 		"@kittr/logger": "*",
 		"@kittr/prisma": "*",
-		"@kittr/types": "*",
 		"@kittr/ui": "*",
 		"@mantine/core": "4.2.9",
 		"@mantine/hooks": "4.2.9",
@@ -58,6 +57,8 @@
 		"zod": "3.17.3"
 	},
 	"devDependencies": {
+		"@kittr/config": "*",
+		"@kittr/types": "*",
 		"@types/jsonwebtoken": "8.5.8",
 		"@types/micro": "7.3.7",
 		"@types/react": "17.0.39",
