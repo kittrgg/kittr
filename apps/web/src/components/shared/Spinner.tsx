@@ -17,6 +17,7 @@ interface Props {
 	/** The color of the path that animates through the circle outline. Defaults to colors.white */
 	pathColor?: string
 	/** Styles to be applied to the spinner's container. */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	style?: any
 	/** Cypress testing attribute */
 	dataCy?: string

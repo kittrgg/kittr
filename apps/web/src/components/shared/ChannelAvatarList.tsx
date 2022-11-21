@@ -46,7 +46,7 @@ export const ChannelAvatarList = ({ channels, isLive, onClick }: Props) => {
 
 export default ChannelAvatarList
 
-const Identity = styled.div<{ theme?: any }>`
+const Identity = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;

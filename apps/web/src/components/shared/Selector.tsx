@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import colors from "@Colors"
 import Select, { Props } from "react-select"
 import CreatableSelect from "react-select/creatable"

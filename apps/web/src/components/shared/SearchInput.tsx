@@ -6,8 +6,10 @@ interface Props {
 	/** User's search term. */
 	value: string
 	/** onChange handler for the text input. */
-	onChange: (...args: any) => any
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	onChange: (ev: any) => any
 	/** Clear the user's search term. Does not submit the form action unless done so explicitly in the function. */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	clearSearch: (...args: any) => any
 	/** Should the browser offer up auto-completions? Defaults to "off". */
 	autoComplete?: "off" | "on"

@@ -1,7 +1,7 @@
 import colors from "@Colors"
 import SVG from "@Components/shared/SVG"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
-import { ReactNode, RefObject, useEffect, useMemo, useRef, useState } from "react"
+import { ReactNode, Ref, RefObject, useEffect, useMemo, useRef, useState } from "react"
 import { isMobile } from "react-device-detect"
 import ScrollContainer from "react-indiana-drag-scroll"
 import styled from "styled-components"
@@ -38,7 +38,7 @@ export const SideScroller = ({ wrapperStyles, childMargin, children }: Props) =>
 			ref.current?.addEventListener("scroll", handleScroll)
 		}
 
-		let observerRefValue: any = null
+		let observerRefValue: HTMLElement | null = null
 
 		const observer = new IntersectionObserver(onScrollChange)
 
