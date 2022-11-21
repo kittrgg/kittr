@@ -67,7 +67,6 @@
 		"@types/validator": "13.7.4",
 		"babel-plugin-styled-components": "2.0.7",
 		"dotenv": "16.0.1",
-		"eslint-config-custom": "*",
 		"next-transpile-modules": "9.0.0",
 		"typescript": "4.7.4"
 	}
