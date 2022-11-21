@@ -60,6 +60,7 @@ export default GameList
 interface IListItem {
 	active: boolean
 	hoverScale: boolean
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	onClick: (...args: any) => any
 }
 

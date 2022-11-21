@@ -28,10 +28,13 @@ interface Props {
 	/** React CSS Properties for the subline. */
 	sublineStyles?: React.CSSProperties
 	/** onChange handler for the input. */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	onChange: (...args: any) => any
 	/** Optional onFocus handler for the input. */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	onFocus?: (...args: any) => any
 	/** Optional onBlur handler for the input. */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	onBlur?: (...args: any) => any
 }
 

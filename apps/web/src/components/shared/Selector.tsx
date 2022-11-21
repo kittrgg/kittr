@@ -7,7 +7,7 @@ export const Selector = ({ ...props }: Props & { isCreatable?: boolean }) => {
 	const { styles, ...restOfProps } = props
 
 	const style = {
-		control: (base: any, state: any) => ({
+		control: (base: any) => ({
 			...base,
 			backgroundColor: "transparent",
 			cursor: "pointer",
@@ -16,13 +16,13 @@ export const Selector = ({ ...props }: Props & { isCreatable?: boolean }) => {
 			color: colors.white,
 			border: "none"
 		}),
-		singleValue: (base: any, state: any) => ({
+		singleValue: (base: any) => ({
 			...base,
 			fontSize: "18px",
 			color: colors.lighter,
 			letterSpacing: "2px"
 		}),
-		placeholder: (base: any, state: any) => ({
+		placeholder: (base: any) => ({
 			...base,
 			fontSize: "18px",
 			color: colors.lighter,
@@ -33,7 +33,7 @@ export const Selector = ({ ...props }: Props & { isCreatable?: boolean }) => {
 			display: "none",
 			color: colors.lighter
 		}),
-		menu: (base: any, state: any) => ({
+		menu: (base: any) => ({
 			...base,
 			backgroundColor: colors.dark,
 			marginTop: "5px",
@@ -43,7 +43,7 @@ export const Selector = ({ ...props }: Props & { isCreatable?: boolean }) => {
 			border: `1px solid ${colors.white}`,
 			overflow: "hidden"
 		}),
-		menuList: (base: any, state: any) => ({
+		menuList: (base: any) => ({
 			...base,
 			"paddingRight": "12px",
 			"&::-webkit-scrollbar": {

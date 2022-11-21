@@ -16,6 +16,7 @@ interface Props extends GameWithGenresAndPlatforms {
 	/** Optionally display the game without any of it's meta information. */
 	noText?: true
 	/** Optional function to run when the card is clicked. */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	onClick?: (...args: any) => any
 }
 
