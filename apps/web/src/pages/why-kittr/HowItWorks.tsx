@@ -31,7 +31,7 @@ const STEPS = [
 	}
 ]
 
-const HowItWorks = ({}) => (
+const HowItWorks = () => (
 	<section style={{ maxWidth: "1000px", margin: "0 auto" }}>
 		<Styled.H2>HOW IT WORKS</Styled.H2>
 		{STEPS.map((step) => (

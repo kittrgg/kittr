@@ -45,7 +45,7 @@ const FEATURE_SET = [
 ]
 
 /** Features that are currently a part of the platform */
-const Features = ({ ...props }) => (
+const Features = () => (
 	<section style={{ zIndex: 1 }}>
 		<ImageContainer>
 			<img

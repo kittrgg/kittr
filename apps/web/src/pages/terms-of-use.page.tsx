@@ -2,7 +2,7 @@
 import PageWrapper from "@Components/layouts/PageWrapper"
 import * as Styled from "@Styles/legalPages"
 
-const Terms = ({ ...props }) => {
+const Terms = () => {
 	return (
 		<PageWrapper title="Terms of Use | kittr" description="kittr's Terms of Use">
 			<Styled.Container>

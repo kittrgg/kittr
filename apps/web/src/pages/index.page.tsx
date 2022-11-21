@@ -14,9 +14,11 @@ const Home = () => {
 	const { data: risingChannels } = trpc.useQuery(["channels/rising"])
 	const { data: liveChannels } = trpc.useQuery(["channels/live"])
 
+	if (!totalNumberOfKits) return null
+
 	return (
 		<PageWrapper title="Home | kittr" description="Where the pros post their kits. Get kitted.">
-			<Hero totalNumberOfKits={Math.floor(totalNumberOfKits! / 1000) * 1000} />
+			<Hero totalNumberOfKits={Math.floor(totalNumberOfKits / 1000) * 1000} />
 			<ResponsiveAdBanner />
 			<Body
 				games={games}

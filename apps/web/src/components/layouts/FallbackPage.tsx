@@ -2,7 +2,7 @@ import FullScreen from "./FullScreen"
 import Spinner from "@Components/shared/Spinner"
 
 /** Used when Next.js is creating an ISR page for the first time. */
-const FallbackPage = ({ ...props }) => (
+const FallbackPage = () => (
 	<FullScreen
 		style={{
 			display: "flex",

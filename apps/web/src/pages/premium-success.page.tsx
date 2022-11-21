@@ -12,6 +12,7 @@ const PremiumSuccess = () => {
 
 	useEffect(() => {
 		setTimeout(() => push(`${getUrl}/dashboard`), 3000)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	return (

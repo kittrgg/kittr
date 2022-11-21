@@ -1,6 +1,6 @@
 import Ad from "@Services/venatus/Ad"
 
-const AdUnits = ({ ...props }) => (
+const AdUnits = () => (
 	// const [adColumn, setAdColumn] = useState("none")
 	// const [adUnit, setAdUnit] = useState<"d300x250" | "s300x250" | "d728x90" | "s728x90" | "d300x50" | "rmFooter" | "rmVideo" | "rmStickyRight" | undefined>(undefined)
 

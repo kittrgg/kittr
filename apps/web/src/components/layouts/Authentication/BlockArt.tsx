@@ -28,12 +28,12 @@ const Block = ({ size, top, left }: Props) => (
 )
 
 /** Spawns squares for background art in randomly generated positions with randomly generated sizes. */
-const BlockArt = ({ ...props }) => {
+const BlockArt = () => {
 	const isBrowser = useIsBrowser()
 	const blockCount = 15
 	const blockCoordinates = useRef(
 		isBrowser
-			? [...Array(blockCount)].map((_) => ({
+			? [...Array(blockCount)].map(() => ({
 					size: getRandomNumFromRange(8, 20),
 					top: getRandomNumFromRange(10, 90),
 					left: getRandomNumFromRange(10, 90)

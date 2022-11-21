@@ -1,13 +1,13 @@
 import PageWrapper from "@Components/layouts/PageWrapper"
 import * as Styled from "@Styles/legalPages"
 
-const PrivacyPolicy = ({ ...props }) => (
+const PrivacyPolicy = () => (
 	<PageWrapper title="Privacy Policy | kittr" description="kittr's Privacy Policy">
 		<Styled.Container>
 			<h2>Privacy Policy</h2>
 			<p>
-				Your privacy is important to us. It is {"kittr's"}policy to respect your privacy and comply with any applicable
-				law and regulation regarding any personal information we may collect about you, including across our website,{" "}
+				Your privacy is important to us. It is kittr's policy to respect your privacy and comply with any applicable law
+				and regulation regarding any personal information we may collect about you, including across our website,{" "}
 				<a href="https://kittr.gg">https://kittr.gg</a>, and other sites we own and operate.{" "}
 			</p>
 			<p>This policy is effective as of 11 July 2021 and was last updated on 11 July 2021. </p>

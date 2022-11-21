@@ -10,7 +10,7 @@ interface Props {
 	/** Breakpoint as passed by down by navigation master component */
 	breakpoint: number
 	/** Optional back location as passed down by navigation master component */
-	backFunction?: (...args: any) => any
+	backFunction?: (ev: React.MouseEvent) => void
 	/** Center component for the banner style */
 	middleComponent?: ReactNode
 }
