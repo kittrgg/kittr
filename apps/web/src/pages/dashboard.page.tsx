@@ -1,9 +1,9 @@
 import Head from "@Components/shared/Head"
 import Dashboard from "@Features/Dashboard"
 import { useContext, createContext } from "react"
-import { io } from "socket.io-client"
+import { io, Socket as TSocket } from "socket.io-client"
 
-const Socket = createContext(null as any)
+const Socket = createContext<TSocket | null>(null)
 
 export const useSocket = () => useContext(Socket)
 

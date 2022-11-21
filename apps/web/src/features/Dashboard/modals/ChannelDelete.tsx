@@ -22,7 +22,7 @@ const ChannelDeleteModal = () => {
 		path: "channels/delete",
 		opts: {
 			onSuccess: () => {
-				socket.emit(`channelDelete`, channelData?.id)
+				socket?.emit(`channelDelete`, channelData?.id)
 				dispatch(setActiveView({ channelId: "", view: "Channel List" }))
 				dispatch(setModal({ type: "", data: {} }))
 				refetch()

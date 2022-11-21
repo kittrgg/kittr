@@ -27,14 +27,14 @@ const Channel = ({ containerRef }: Props) => {
 	const { data, isLoading, refetch } = useDashboardChannel()
 
 	useEffect(() => {
-		socket.on(`dashboard=${id}`, () => refetch())
+		socket?.on(`dashboard=${id}`, () => refetch())
 
-		socket.on(`gameDelete=${id}`, () => {
+		socket?.on(`gameDelete=${id}`, () => {
 			dispatch(setChannelView({ gameId: "", view: "Channel Settings" }))
 			refetch()
 		})
 
-		socket.on(`channelDelete=${id}`, () => {
+		socket?.on(`channelDelete=${id}`, () => {
 			dispatch(setActiveView({ channelId: "", view: "Channel List" }))
 			dispatch(setChannelView({ gameId: "", view: "Channel Settings" }))
 		})

@@ -31,7 +31,7 @@ const WINNERS = [
 	}
 ]
 
-const Winners = ({ ...props }) => (
+const Winners = () => (
 	<>
 		<Styled.H2>WHO LOVES KITTR?</Styled.H2>
 		<Grid>

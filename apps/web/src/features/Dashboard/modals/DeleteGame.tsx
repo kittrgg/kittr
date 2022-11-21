@@ -19,7 +19,7 @@ const DeleteGameModal = () => {
 		path: "channels/games/delete",
 		opts: {
 			onSuccess: () => {
-				socket.emit(`gameDelete`, channelData?.id)
+				socket?.emit(`gameDelete`, channelData?.id)
 				dispatch(setModal({ type: "", data: "" }))
 				dispatch(setChannelView({ gameId: "", view: "Deleted Game Notification" }))
 			},

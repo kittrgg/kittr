@@ -8,7 +8,7 @@ const myErrorHandler = (error: Error) => {
 
 const Fallback = () => <p>Something went wrong. Please reload the page.</p>
 
-export const ErrorBoundary = ({ children }: { children: React.ReactChildren }) => (
+export const ErrorBoundary = ({ children }: { children: React.ReactNode }) => (
 	<ReactErrorBoundary FallbackComponent={Fallback} onError={myErrorHandler}>
 		{children}
 	</ReactErrorBoundary>

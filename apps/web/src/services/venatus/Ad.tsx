@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+/* eslint-disable @typescript-eslint/no-extra-semi */
 import { ErrorBoundary } from "@Components/shared/ErrorBoundary"
 import { isClient } from "@Utils/helpers/isClient"
 import { useRouter } from "next/router"

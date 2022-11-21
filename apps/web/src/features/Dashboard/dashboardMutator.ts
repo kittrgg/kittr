@@ -39,7 +39,7 @@ export const useDashboardMutator = <T extends keyof TMutationValues & string>({ 
 			// Need to make dashboard refetch
 			queryClient.invalidateQueries("channels/dashboard")
 
-			socket.emit(`dashboardChangeReporter`, data?.id)
+			socket?.emit(`dashboardChangeReporter`, data?.id)
 			opts?.onSettled?.(...args)
 		}
 	})

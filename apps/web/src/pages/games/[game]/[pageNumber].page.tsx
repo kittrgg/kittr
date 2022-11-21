@@ -15,7 +15,7 @@ import styled from "styled-components"
 
 const CHANNELS_PER_PAGE = 10
 
-const GameProfile = () => {
+const GameProfile = ({ redirect }: { redirect: boolean }) => {
 	const { width } = useViewportDimensions()
 	const { query, isFallback, push } = useRouter()
 	const { pageNumber, game } = query as { pageNumber: string; game: string }
@@ -36,7 +36,7 @@ const GameProfile = () => {
 		{ enabled: !!game }
 	)
 
-	if (props.redirect) {
+	if (redirect) {
 		push(`/games/${game}`)
 	}
 
