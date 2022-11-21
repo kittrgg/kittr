@@ -1,6 +1,6 @@
-import styled from "styled-components"
 import colors from "@Colors"
 import { header4 } from "@Styles/typography"
+import styled from "styled-components"
 
 export const Header = styled.h2`
 	padding-left: 28px;

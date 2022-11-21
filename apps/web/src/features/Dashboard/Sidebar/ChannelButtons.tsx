@@ -1,3 +1,7 @@
+import Icon from "../Icon"
+import AddGameNotification from "./AddGameNotification"
+import GameButton from "./GameButton"
+import * as Styled from "./style"
 import colors from "@Colors"
 import ProfileImage from "@Components/shared/ProfileImage"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
@@ -6,10 +10,6 @@ import { useChannelView, useModal } from "@Redux/slices/dashboard/selectors"
 import { useManagerRole } from "@Redux/slices/dashboard/selectors/useManagerRole"
 import { useDispatch } from "@Redux/store"
 import { MutableRefObject, useEffect, useRef } from "react"
-import Icon from "../Icon"
-import AddGameNotification from "./AddGameNotification"
-import GameButton from "./GameButton"
-import * as Styled from "./style"
 
 /** Buttons that will appear when a channel is opened */
 const ChannelButtons = () => {

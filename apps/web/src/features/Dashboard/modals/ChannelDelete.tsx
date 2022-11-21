@@ -1,6 +1,3 @@
-import { useState } from "react"
-import styled from "styled-components"
-
 import colors from "@Colors"
 import { Button, Modal, TextInput } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
@@ -11,6 +8,8 @@ import { useDispatch } from "@Redux/store"
 import { getToken } from "@Services/firebase/auth"
 import { header2 } from "@Styles/typography"
 import { useSocket } from "pages/dashboard.page"
+import { useState } from "react"
+import styled from "styled-components"
 
 /** Modal to allow the user to delete the channel. */
 const ChannelDeleteModal = () => {
@@ -23,7 +22,7 @@ const ChannelDeleteModal = () => {
 		path: "channels/delete",
 		opts: {
 			onSuccess: () => {
-				socket.emit(`channelDelete`, channelData?.id)
+				socket?.emit(`channelDelete`, channelData?.id)
 				dispatch(setActiveView({ channelId: "", view: "Channel List" }))
 				dispatch(setModal({ type: "", data: {} }))
 				refetch()

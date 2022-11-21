@@ -1,5 +1,5 @@
-import * as Sentry from "@sentry/node"
 import { consoleLog, logError, logWarning, logInfo, logDebug } from "../node"
+import * as Sentry from "@sentry/node"
 
 jest.mock("@sentry/node", () => ({
 	captureException: jest.fn(),

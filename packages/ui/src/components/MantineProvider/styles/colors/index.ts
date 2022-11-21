@@ -1,9 +1,9 @@
 import { gray } from "./gray"
-import { teal } from "./teal"
-import { yellow } from "./yellow"
+import { green } from "./green"
 import { navy } from "./navy"
 import { red } from "./red"
-import { green } from "./green"
+import { teal } from "./teal"
+import { yellow } from "./yellow"
 
 export const colors = {
 	gray,

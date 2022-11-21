@@ -1,11 +1,11 @@
-import Button from "@Components/shared/Button"
-import TextInput from "@Components/shared/TextInput"
-import { useState } from "react"
-import styled from "styled-components"
 import * as Styled from "../style"
 import NewPassword from "./NewPassword"
 import Reauthenticate from "./Reauthenticate"
 import SuccessMessage from "./SuccessMessage"
+import Button from "@Components/shared/Button"
+import TextInput from "@Components/shared/TextInput"
+import { useState } from "react"
+import styled from "styled-components"
 
 const FlexRow = styled.div`
 	display: flex;

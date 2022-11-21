@@ -1,10 +1,9 @@
+import { H2, GridItem, SpecsGrid } from "./style"
 import colors from "@Colors"
 import { SVG } from "@Components/shared"
-import { ChannelAffiliate } from "@kittr/prisma"
 import { paragraph } from "@Styles/typography"
+import { ChannelAffiliate } from "@kittr/prisma"
 import styled from "styled-components"
-
-import { H2, GridItem, SpecsGrid } from "./style"
 
 interface Props {
 	brandColor: string
@@ -20,7 +19,6 @@ const Affiliates = ({ affiliates, brandColor }: Props) => {
 			<SpecsGrid>
 				{affiliates &&
 					affiliates.map((affiliate) => {
-
 						return (
 							<GridItem key={affiliate.company} colorHover={brandColor}>
 								<Flex>

@@ -1,9 +1,8 @@
-import styled from "styled-components"
-
 import colors from "@Colors"
-import { paragraph } from "@Styles/typography"
-import { useActiveWeapon } from "@Redux/slices/displayr/selectors"
 import { SVG } from "@Components/shared"
+import { useActiveWeapon } from "@Redux/slices/displayr/selectors"
+import { paragraph } from "@Styles/typography"
+import styled from "styled-components"
 
 const FavoriteBlueprint = ({ ...props }) => {
 	const activeWeapon = useActiveWeapon()

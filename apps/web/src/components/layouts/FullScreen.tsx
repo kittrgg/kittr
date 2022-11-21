@@ -1,11 +1,12 @@
-import { ReactNode } from "react"
-import { useViewportDimensions } from "@Hooks/useViewportDimensions"
 import colors from "@Colors"
+import { useViewportDimensions } from "@Hooks/useViewportDimensions"
+import { ReactNode } from "react"
+
 interface Props {
 	/** Optional onClick function. Most often used when this component is being used as a background for a modal. */
-	onClick?: (...args: any[]) => void
+	onClick?: (ev: React.MouseEvent) => void
 	/** Optional styling to apply to the div that takes over the screen. */
-	style?: {}
+	style?: Record<string, unknown>
 	/** React children to render within full screen div. */
 	children?: ReactNode
 }
@@ -31,7 +32,7 @@ const FullScreen = ({ onClick, style, children }: Props) => {
 			onClick={(e) => {
 				if (onClick) {
 					e.stopPropagation()
-					onClick()
+					onClick(e)
 				}
 			}}
 		>

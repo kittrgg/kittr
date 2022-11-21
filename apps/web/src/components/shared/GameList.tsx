@@ -1,6 +1,6 @@
 import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
-import { Game } from "@kittr/prisma"
 import { header2 } from "@Styles/typography"
+import { Game } from "@kittr/prisma"
 import styled from "styled-components"
 
 interface Props {
@@ -9,6 +9,7 @@ interface Props {
 	/** Do you want the games to do a zoom-in animation when hovered? Defaults to true. */
 	hoverScale?: boolean
 	/** Function to run when the game is clicked on. */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	onClick?: (...args: any) => any
 	/** Show visit text at the bottom of the game's art. */
 	withVisitText?: true
@@ -59,6 +60,7 @@ export default GameList
 interface IListItem {
 	active: boolean
 	hoverScale: boolean
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	onClick: (...args: any) => any
 }
 
@@ -126,4 +128,3 @@ const VisitTextContainer = styled.div`
 	${header2};
 	font-size: 18px;
 `
-

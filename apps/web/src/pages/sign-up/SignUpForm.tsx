@@ -1,13 +1,13 @@
 import colors from "@Colors"
 import AuthLayout from "@Components/layouts/Authentication"
 import { Button, Spinner, TextInput } from "@Components/shared"
+import { trpc } from "@Server/createHooks"
 import { Routes } from "@Utils/lookups/routes"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { FormEvent, useState } from "react"
 import styled from "styled-components"
 import validator from "validator"
-import { trpc } from "@Server/createHooks"
 
 /** Form to create a user account */
 const SignUp = () => {

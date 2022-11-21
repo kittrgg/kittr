@@ -6,7 +6,7 @@ import { useRef, useState } from "react"
 import styled from "styled-components"
 
 /** A search input built specfically for searching channels. Will automatically handle redirection to page for channels search results. */
-export const ChannelSearch = ({ ...props }) => {
+export const ChannelSearch = () => {
 	const router = useRouter()
 	const [searchTerm, setSearchTerm] = useState(router.query.searchTerm || "")
 	const inputRef = useRef<HTMLInputElement>(null)

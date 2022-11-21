@@ -1,7 +1,7 @@
+import NamingWarning from "./NamingWarning"
 import colors from "@Colors"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useAllKitBases } from "@Hooks/trpc/useAllKitBases"
-import { WarzoneTwoKit, WarzoneTwoKitBase, WarzoneTwoKitOption } from "@kittr/prisma"
 import { clearKitEditor, resetToInitialKit, setModal } from "@Redux/slices/dashboard"
 import {
 	useActiveKit,
@@ -13,8 +13,8 @@ import {
 import { useDispatch } from "@Redux/store"
 import { paragraph } from "@Styles/typography"
 import { isFetchError } from "@Utils/helpers/typeGuards"
+import { WarzoneTwoKit, WarzoneTwoKitBase, WarzoneTwoKitOption } from "@kittr/prisma"
 import styled from "styled-components"
-import NamingWarning from "./NamingWarning"
 
 const EditorSnackbar = () => {
 	const dispatch = useDispatch()

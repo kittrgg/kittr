@@ -106,4 +106,3 @@ const ButtonFlex = styled.div`
 	justify-content: space-around;
 	margin-top: 24px;
 `
-

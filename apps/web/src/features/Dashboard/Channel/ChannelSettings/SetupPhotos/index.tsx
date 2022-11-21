@@ -1,11 +1,10 @@
-import { useState } from "react"
-import styled from "styled-components"
-
+import ImageUploader from "./ImageUploader"
 import colors from "@Colors"
 import { Button, SVG } from "@Components/shared"
-import ImageUploader from "./ImageUploader"
 import Toast from "@Components/shared/Toast"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
+import { useState } from "react"
+import styled from "styled-components"
 
 const SetupPhotos = () => {
 	const [copyNotification, setCopyNotification] = useState(false)

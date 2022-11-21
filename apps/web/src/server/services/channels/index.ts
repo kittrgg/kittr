@@ -1,12 +1,12 @@
 import fetch from "@Fetch"
-import { Channel, ChannelLink, ChannelProfile, LinkProperty, prisma } from "@kittr/prisma"
-import { ITwitchLiveChannels } from "@kittr/types"
 import { getTopChannelsWithLinksQuery } from "@Services/orm"
 import { headers } from "@Services/twitch/utils/auth"
 import { grabLoginName } from "@Services/twitch/utils/grabLoginName"
-import { TRPCError } from "@trpc/server"
 import { badWordFilter } from "@Utils/helpers/badWordFilter"
 import { toURL } from "@Utils/helpers/toURL"
+import { Channel, ChannelLink, ChannelProfile, LinkProperty, prisma } from "@kittr/prisma"
+import { ITwitchLiveChannels } from "@kittr/types"
+import { TRPCError } from "@trpc/server"
 
 export * from "./games"
 export * from "./kits"
@@ -26,7 +26,8 @@ interface ListParams {
 	take?: number
 }
 
-const getTwitchLink = (channel: ChannelWithLinks) => channel.links.find((link) => link.property === LinkProperty.TWITCH)?.value ?? ""
+const getTwitchLink = (channel: ChannelWithLinks) =>
+	channel.links.find((link) => link.property === LinkProperty.TWITCH)?.value ?? ""
 
 export const createChannel = async ({
 	displayName,
@@ -35,10 +36,11 @@ export const createChannel = async ({
 	displayName: string
 	ownerFirebaseId: string
 }) => {
-	if (displayName.length > 26) throw new TRPCError({
-		code: "BAD_REQUEST",
-		message: "That name is too long. 25 characters or less"
-	})
+	if (displayName.length > 26)
+		throw new TRPCError({
+			code: "BAD_REQUEST",
+			message: "That name is too long. 25 characters or less"
+		})
 
 	if (badWordFilter(displayName)) {
 		throw new TRPCError({
@@ -419,9 +421,11 @@ export const listLiveChannels = async () => {
 	const currentlyLiveChannels = await getStreams()
 
 	try {
-		const data = popularChannels.filter((channel) => currentlyLiveChannels
-			.map((channel) => channel.user_login)
-			.includes(getTwitchLink(channel).substring(getTwitchLink(channel).lastIndexOf("/") + 1) as string))
+		const data = popularChannels.filter((channel) =>
+			currentlyLiveChannels
+				.map((channel) => channel.user_login)
+				.includes(getTwitchLink(channel).substring(getTwitchLink(channel).lastIndexOf("/") + 1) as string)
+		)
 
 		return data as ChannelWithLinks[]
 	} catch (error) {

@@ -1,10 +1,10 @@
-import { grabLoginName } from "./utils/grabLoginName"
 import { getChannelData } from "./endpoints/getChannelData"
-import { getSchedule } from "./endpoints/getSchedule"
 import { getClips } from "./endpoints/getClips"
 import { getRecentVideos } from "./endpoints/getRecentVideos"
-import { ITwitchScheduleSegment, ITwitchClip, ITwitchChannelData, ITwitchVideo } from "@kittr/types"
+import { getSchedule } from "./endpoints/getSchedule"
+import { grabLoginName } from "./utils/grabLoginName"
 import { UnwrapPromise } from "@kittr/prisma"
+import { ITwitchScheduleSegment, ITwitchClip, ITwitchChannelData, ITwitchVideo } from "@kittr/types"
 
 interface ProfilePageData {
 	channelData: ITwitchChannelData

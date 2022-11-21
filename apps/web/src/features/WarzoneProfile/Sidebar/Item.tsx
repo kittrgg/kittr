@@ -1,11 +1,11 @@
 import colors from "@Colors"
 import SVG from "@Components/shared/SVG"
-import { WarzoneKit, WarzoneKitBase, WarzoneKitBaseCategory, WarzoneKitOption } from "@kittr/prisma"
 import { setActiveWeapon, setIsSidebarOpen } from "@Redux/slices/displayr"
 import { useActiveWeapon } from "@Redux/slices/displayr/selectors"
 import { useDispatch } from "@Redux/store"
 import { sortAlphabetical } from "@Utils/helpers/sortAlphabetical"
 import { Routes } from "@Utils/lookups/routes"
+import { WarzoneKit, WarzoneKitBase, WarzoneKitBaseCategory, WarzoneKitOption } from "@kittr/prisma"
 import { useRouter } from "next/router"
 import { Dispatch, SetStateAction, useEffect, useRef } from "react"
 import styled from "styled-components"
@@ -222,4 +222,3 @@ const KitCount = styled.p<{ isActive: boolean }>`
 	color: ${(props) => (props.isActive ? colors.darker : colors.lightest)};
 	font-size: 16px;
 `
-

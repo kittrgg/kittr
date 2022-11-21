@@ -1,10 +1,9 @@
-import styled from "styled-components"
-
-import { ITwitchScheduleSegment } from "@kittr/types"
 import colors from "@Colors"
 import { SideScroller } from "@Components/shared"
 import { header1, header2, paragraph } from "@Styles/typography"
+import { ITwitchScheduleSegment } from "@kittr/types"
 import { format, getMilliseconds } from "date-fns"
+import styled from "styled-components"
 
 interface Props {
 	schedule?: ITwitchScheduleSegment[]

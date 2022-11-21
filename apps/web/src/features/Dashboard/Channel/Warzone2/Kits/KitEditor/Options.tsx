@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react"
-
-import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
 import * as Styled from "./style"
+import { Selector } from "@Components/shared"
 import { useOptionsByKitBase } from "@Hooks/api/useOptionsbyKitBase"
 import { useIsMounted } from "@Hooks/useIsMounted"
-import { getArrayUniques } from "@Utils/helpers/getArrayUniques"
-import { useDispatch } from "@Redux/store"
-import { useActiveKit } from "@Redux/slices/dashboard/selectors"
 import { updateOptions } from "@Redux/slices/dashboard"
-import { Selector } from "@Components/shared"
+import { useActiveKit } from "@Redux/slices/dashboard/selectors"
+import { useDispatch } from "@Redux/store"
+import { getArrayUniques } from "@Utils/helpers/getArrayUniques"
+import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
 import { Loader } from "@kittr/ui"
+import React, { useState, useEffect } from "react"
 
 const animationDuration = 1000
 
@@ -69,7 +68,8 @@ const Options = () => {
 			</Styled.HorizFlex>
 			<Styled.AttachmentsFlex>
 				{isLoading && <Loader />}
-				{!isLoading && availableOptions &&
+				{!isLoading &&
+					availableOptions &&
 					slots?.map((slot: string) => {
 						return (
 							<div key={slot} style={{ marginBottom: "18px", flexBasis: "40%" }}>

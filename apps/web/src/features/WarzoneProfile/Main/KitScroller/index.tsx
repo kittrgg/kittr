@@ -1,12 +1,12 @@
-import { WarzoneKit, WarzoneKitBase } from "@kittr/prisma"
-import { useActiveWeapon } from "@Redux/slices/displayr/selectors"
-import { useEffect, useRef, useState } from "react"
-import ScrollContainer from "react-indiana-drag-scroll"
 import Item from "./Item"
 import * as Styled from "./style"
+import { useActiveWeapon } from "@Redux/slices/displayr/selectors"
+import { WarzoneKit, WarzoneKitBase } from "@kittr/prisma"
+import { useEffect, useRef, useState } from "react"
+import ScrollContainer from "react-indiana-drag-scroll"
 
 interface Props {
-	availableKits: Array<WarzoneKit & {base: WarzoneKitBase}>
+	availableKits: Array<WarzoneKit & { base: WarzoneKitBase }>
 }
 
 const KitScroller = ({ availableKits }: Props) => {

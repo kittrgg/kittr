@@ -1,9 +1,9 @@
-import React from "react"
 import {
 	Text as MantineTitle,
 	TitleProps,
 	useMantineTheme
 } from "@mantine/core"
+import React from "react"
 
 const fontFamily = "Barlow Condensed, serif"
 

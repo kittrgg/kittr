@@ -1,5 +1,4 @@
 /// <reference types="cypress" />
-
 import user from "../../../fixtures/login.json"
 import { basicUser } from "../../../plugins/seed"
 

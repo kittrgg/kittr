@@ -1,12 +1,12 @@
 /* eslint-disable max-len */
+import * as Styled from "./style"
 import colors from "@Colors"
 import Toast from "@Components/shared/Toast"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
+import { useChannelView } from "@Redux/slices/dashboard/selectors"
 import { WarzoneCommandCode, WarzoneKit, WarzoneKitBase } from "@kittr/prisma"
 import { TCommandMethod } from "@kittr/types/types"
-import { useChannelView } from "@Redux/slices/dashboard/selectors"
 import { useState } from "react"
-import * as Styled from "./style"
 
 interface KitBaseWithCodes extends WarzoneKitBase {
 	commandCodes: WarzoneCommandCode[]
@@ -198,4 +198,3 @@ const CommandsTable = ({ kits, includeMasterCommands = true, method, commandStra
 }
 
 export default CommandsTable
-

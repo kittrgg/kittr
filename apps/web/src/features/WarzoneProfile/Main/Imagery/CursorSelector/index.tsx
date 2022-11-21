@@ -1,6 +1,6 @@
-import { Dispatch, SetStateAction } from "react"
 import colors from "@Colors"
 import SVG from "@Components/shared/SVG"
+import { Dispatch, SetStateAction } from "react"
 
 interface Props {
 	cursor: number

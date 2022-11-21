@@ -1,15 +1,14 @@
-import { Dispatch, SetStateAction, useState } from "react"
-import styled from "styled-components"
-
 import colors from "@Colors"
 import { Button, Modal, SvgByType, SVGType, TextInput } from "@Components/shared"
-import { ChannelLink, LinkProperty } from "@kittr/prisma"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
 import { trimPrefix } from "@Utils/helpers/trimPrefix"
 import { linkLabelImages } from "@Utils/lookups/linkLabelImages"
 import { linkPrefixes } from "@Utils/lookups/linkPrefixes"
+import { ChannelLink, LinkProperty } from "@kittr/prisma"
+import { Dispatch, SetStateAction, useState } from "react"
+import styled from "styled-components"
 
 type LinkEdits = Array<ChannelLink> | undefined
 type SetNewLink = Dispatch<SetStateAction<ChannelLink>>

@@ -1,7 +1,6 @@
 // import Admin from "@Features/Admin"
-
-import { Button, Title } from "@kittr/ui"
 import { trpc } from "@Server/createHooks"
+import { Button, Title } from "@kittr/ui"
 import Link from "next/link"
 import { useRouter } from "next/router"
 
@@ -26,12 +25,11 @@ const Page = () => {
 			</div>
 
 			{games?.map((game) => (
-				<Link href={"/admin/" + game?.urlSafeName} passHref>
-					<Button onClick={() => {}}>{game?.urlSafeName.toUpperCase()}</Button>
+				<Link key={game.id} href={"/admin/" + game?.urlSafeName} passHref>
+					<Button onClick={() => ({})}>{game?.urlSafeName.toUpperCase()}</Button>
 				</Link>
 			))}
 		</div>
 	)
 }
 export default Page
-

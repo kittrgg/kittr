@@ -1,9 +1,8 @@
-import { useState } from "react"
 import * as Styled from "../style"
-
 import Reauthenticate from "./Reauthenticate"
-import UpdateEmail from "./UpdateEmail"
 import SuccessMessage from "./SuccessMessage"
+import UpdateEmail from "./UpdateEmail"
+import { useState } from "react"
 
 const EmailEditor = ({ ...props }) => {
 	const [step, setStep] = useState(1)

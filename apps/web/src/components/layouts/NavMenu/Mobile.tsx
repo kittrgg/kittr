@@ -1,17 +1,16 @@
+import LogoImageLink from "./LogoImageLink"
+import Menu from "./MobilePane"
+import colors from "@Colors"
+import SVG from "@Components/shared/SVG"
+import { header2 } from "@Styles/typography"
 import { useState, ReactNode } from "react"
 import styled from "styled-components"
-
-import colors from "@Colors"
-import { header2 } from "@Styles/typography"
-import Menu from "./MobilePane"
-import SVG from "@Components/shared/SVG"
-import LogoImageLink from "./LogoImageLink"
 
 interface Props {
 	/** Breakpoint as passed by down by navigation master component */
 	breakpoint: number
 	/** Optional back location as passed down by navigation master component */
-	backFunction?: (...args: any) => any
+	backFunction?: (ev: React.MouseEvent) => void
 	/** Center component for the banner style */
 	middleComponent?: ReactNode
 }
@@ -60,7 +59,8 @@ const Container = styled.div<{ withBackground: boolean; breakpoint?: number }>`
 	align-items: center;
 	justify-content: space-between;
 	padding: 5px 30px;
-	background: ${(props) => (props.withBackground ? `linear-gradient(180deg, ${colors.lightest} 0%, rgba(29,29,31, .8) 100%)` : "transparent")};
+	background: ${(props) =>
+		props.withBackground ? `linear-gradient(180deg, ${colors.lightest} 0%, rgba(29,29,31, .8) 100%)` : "transparent"};
 
 	@media (max-width: ${(props) => props.breakpoint || 769}px) {
 		display: flex;

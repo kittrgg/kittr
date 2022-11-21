@@ -1,11 +1,10 @@
-import styled from "styled-components"
-
 import colors from "@Colors"
 import { SVG } from "@Components/shared"
-import { WarzoneKit, WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
 import { setActiveKit, setModal } from "@Redux/slices/dashboard"
 import { useActiveKit } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
+import { WarzoneKit, WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
+import styled from "styled-components"
 
 interface Props {
 	favorite?: true
@@ -26,11 +25,7 @@ const KitButton = ({ favorite, kit }: Props) => {
 	}
 
 	return (
-		<Button
-			key={kit.id}
-			active={activeKit.id == kit.id}
-			onClick={() => dispatch(setActiveKit(kit)) }
-		>
+		<Button key={kit.id} active={activeKit.id == kit.id} onClick={() => dispatch(setActiveKit(kit))}>
 			<p style={{ maskImage: "linear-gradient(to right, black 65%, transparent 92%, transparent 100%)" }}>{title}</p>
 			{favorite && (
 				<SVG.Star

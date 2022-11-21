@@ -1,18 +1,17 @@
-import { useEffect } from "react"
-import { useDispatch, useSelector } from "@Redux/store"
-import { useUser } from "@Hooks/useUser"
-import { useChannelView } from "@Redux/slices/dashboard/selectors"
-import { setActiveView, setChannelView } from "@Redux/slices/dashboard"
-
-import ChannelSettings from "./ChannelSettings"
-import Warzone from "./Warzone"
-import ChannelTopBar from "../UserIdentity"
-import DeletedGameNotification from "./DeletedGameNotification"
-import Spinner from "@Components/shared/Spinner"
-import Head from "@Components/shared/Head"
-import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { useSocket } from "../../../pages/dashboard.page"
+import ChannelTopBar from "../UserIdentity"
+import ChannelSettings from "./ChannelSettings"
+import DeletedGameNotification from "./DeletedGameNotification"
+import Warzone from "./Warzone"
 import Warzone2 from "./Warzone2"
+import Head from "@Components/shared/Head"
+import Spinner from "@Components/shared/Spinner"
+import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
+import { useUser } from "@Hooks/useUser"
+import { setActiveView, setChannelView } from "@Redux/slices/dashboard"
+import { useChannelView } from "@Redux/slices/dashboard/selectors"
+import { useDispatch, useSelector } from "@Redux/store"
+import { useEffect } from "react"
 
 interface Props {
 	containerRef: any
@@ -28,14 +27,14 @@ const Channel = ({ containerRef }: Props) => {
 	const { data, isLoading, refetch } = useDashboardChannel()
 
 	useEffect(() => {
-		socket.on(`dashboard=${id}`, () => refetch())
+		socket?.on(`dashboard=${id}`, () => refetch())
 
-		socket.on(`gameDelete=${id}`, () => {
+		socket?.on(`gameDelete=${id}`, () => {
 			dispatch(setChannelView({ gameId: "", view: "Channel Settings" }))
 			refetch()
 		})
 
-		socket.on(`channelDelete=${id}`, () => {
+		socket?.on(`channelDelete=${id}`, () => {
 			dispatch(setActiveView({ channelId: "", view: "Channel List" }))
 			dispatch(setChannelView({ gameId: "", view: "Channel Settings" }))
 		})

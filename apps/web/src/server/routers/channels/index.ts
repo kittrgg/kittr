@@ -1,13 +1,13 @@
-import { ChannelsController } from "@Server/controllers/channels"
-import { createRouter } from "@Server/createRouter"
-import { channelsCommandStringsRouter } from "@Server/routers/channels/commandStrings"
-import { channelsManagersRouter } from "@Server/routers/channels/managers"
-import { channelsOverlayRouter } from "@Server/routers/channels/overlays"
 import { channelsGamesRouter } from "./games"
 import { channelsKitsRouter } from "./kits"
 import { channelsLinksRouter } from "./links"
 import { channelsPlanRouter } from "./plan"
 import { channelsProfileRouter } from "./profile"
+import { ChannelsController } from "@Server/controllers/channels"
+import { createRouter } from "@Server/createRouter"
+import { channelsCommandStringsRouter } from "@Server/routers/channels/commandStrings"
+import { channelsManagersRouter } from "@Server/routers/channels/managers"
+import { channelsOverlayRouter } from "@Server/routers/channels/overlays"
 
 export const channelsRouter = createRouter()
 	.merge("games/", channelsGamesRouter)

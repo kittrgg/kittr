@@ -1,12 +1,11 @@
-import { toHumanReadableDate } from "@Utils/helpers/toHumanReadableDate"
-import { Fragment } from "react"
-import styled from "styled-components"
 import colors from "@Colors"
-
+import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
 import { header2, paragraph } from "@Styles/typography"
-import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
+import { toHumanReadableDate } from "@Utils/helpers/toHumanReadableDate"
 import { Game, Genre, Platform } from "@kittr/prisma"
+import { Fragment } from "react"
+import styled from "styled-components"
 
 interface GameWithGenresAndPlatforms extends Game {
 	genres: Genre[]
@@ -17,6 +16,7 @@ interface Props extends GameWithGenresAndPlatforms {
 	/** Optionally display the game without any of it's meta information. */
 	noText?: true
 	/** Optional function to run when the card is clicked. */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	onClick?: (...args: any) => any
 }
 
@@ -40,47 +40,47 @@ export const GameCard = ({
 			path={titleImageUrl}
 			noSpinner
 			render={(img) => (
-					<Container onClick={onClick} active={active} titleImage={img} data-cy={`${urlSafeName}-button`}>
-						{(width as number) > 550 && (
-							<ImageContainer>
-								<img src={img} alt={displayName} style={{ width: "100%" }} />
-							</ImageContainer>
-						)}
+				<Container onClick={onClick} active={active} titleImage={img} data-cy={`${urlSafeName}-button`}>
+					{(width as number) > 550 && (
+						<ImageContainer>
+							<img src={img} alt={displayName} style={{ width: "100%" }} />
+						</ImageContainer>
+					)}
 
-						{!noText && (
-							<MetaInfo>
-								<H2>{displayName}</H2>
-								<div>
-									<Paragraph>{developer}</Paragraph>
-									<Paragraph>
-										{genres.map((elem, index) => (
-												<Fragment key={elem.id}>
-													{index === genres.length - 1 ? `${elem.displayName}` : `${elem.displayName}, `}
-												</Fragment>
-											))}
-									</Paragraph>
-									<Paragraph>
-										{platforms.map((elem, index) => (
-												<Fragment key={elem.id}>
-													{index === platforms.length - 1 ? `${elem.displayName}` : `${elem.displayName}, `}
-												</Fragment>
-											))}
-									</Paragraph>
-									<Paragraph>Released {toHumanReadableDate(releaseDate)}</Paragraph>
-								</div>
-							</MetaInfo>
-						)}
+					{!noText && (
+						<MetaInfo>
+							<H2>{displayName}</H2>
+							<div>
+								<Paragraph>{developer}</Paragraph>
+								<Paragraph>
+									{genres.map((elem, index) => (
+										<Fragment key={elem.id}>
+											{index === genres.length - 1 ? `${elem.displayName}` : `${elem.displayName}, `}
+										</Fragment>
+									))}
+								</Paragraph>
+								<Paragraph>
+									{platforms.map((elem, index) => (
+										<Fragment key={elem.id}>
+											{index === platforms.length - 1 ? `${elem.displayName}` : `${elem.displayName}, `}
+										</Fragment>
+									))}
+								</Paragraph>
+								<Paragraph>Released {toHumanReadableDate(releaseDate)}</Paragraph>
+							</div>
+						</MetaInfo>
+					)}
 
-						{!active && (
-							<>
-								<ComingSoon>
-									<p style={{ cursor: "default" }}>COMING</p>
-									<p style={{ cursor: "default" }}>SOON</p>
-								</ComingSoon>
-							</>
-						)}
-					</Container>
-				)}
+					{!active && (
+						<>
+							<ComingSoon>
+								<p style={{ cursor: "default" }}>COMING</p>
+								<p style={{ cursor: "default" }}>SOON</p>
+							</ComingSoon>
+						</>
+					)}
+				</Container>
+			)}
 		/>
 	)
 }

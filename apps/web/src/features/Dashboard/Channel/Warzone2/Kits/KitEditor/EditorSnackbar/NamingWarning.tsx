@@ -1,13 +1,11 @@
-import styled from "styled-components"
 import colors from "@Colors"
-
-import { useDispatch } from "@Redux/store"
-import { setModal } from "@Redux/slices/dashboard"
-
-import Modal from "@Components/shared/Modal"
 import Button from "@Components/shared/Button"
+import Modal from "@Components/shared/Modal"
 import SVG from "@Components/shared/SVG"
+import { setModal } from "@Redux/slices/dashboard"
+import { useDispatch } from "@Redux/store"
 import { header2 } from "@Styles/typography"
+import styled from "styled-components"
 
 const NamingWarning = ({ ...props }) => {
 	const dispatch = useDispatch()

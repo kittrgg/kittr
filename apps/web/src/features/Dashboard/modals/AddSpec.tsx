@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react"
-import styled from "styled-components"
-
+import ErrorNotification from "./ErrorNotification"
 import colors from "@Colors"
 import { Button, Modal, Selector, Spinner, TextInputBox } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
@@ -8,7 +6,8 @@ import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
 import { paragraph } from "@Styles/typography"
-import ErrorNotification from "./ErrorNotification"
+import { useEffect, useState } from "react"
+import styled from "styled-components"
 
 /** Modal for adding or editing a spec to the channel's PC setup. */
 const AddSpecModal = () => {

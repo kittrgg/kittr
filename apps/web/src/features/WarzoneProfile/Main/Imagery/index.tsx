@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react"
-import * as Styled from "./style"
 import CursorSelector from "./CursorSelector"
-import { useActiveWeapon, useChannel } from "@Redux/slices/displayr/selectors"
+import * as Styled from "./style"
 import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
+import { useActiveWeapon, useChannel } from "@Redux/slices/displayr/selectors"
+import { useState, useEffect } from "react"
 
 const WeaponPicture = ({ ...props }) => {
 	const channel = useChannel()

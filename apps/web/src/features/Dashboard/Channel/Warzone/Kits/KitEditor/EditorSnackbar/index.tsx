@@ -1,14 +1,14 @@
+import NamingWarning from "./NamingWarning"
 import colors from "@Colors"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useAllKitBases } from "@Hooks/trpc/useAllKitBases"
-import { WarzoneKit, WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
 import { clearKitEditor, resetToInitialKit, setModal } from "@Redux/slices/dashboard"
 import { useActiveKit, useChannelData, useInitialKit, useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
 import { paragraph } from "@Styles/typography"
 import { isFetchError } from "@Utils/helpers/typeGuards"
+import { WarzoneKit, WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
 import styled from "styled-components"
-import NamingWarning from "./NamingWarning"
 
 const EditorSnackbar = () => {
 	const dispatch = useDispatch()
@@ -271,4 +271,3 @@ const SaveButton = styled.button`
 		color: ${colors.white};
 	}
 `
-

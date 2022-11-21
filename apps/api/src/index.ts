@@ -1,12 +1,12 @@
-import dotenv from "dotenv"
-import * as Logger from "@kittr/logger/node"
-import { Server } from "socket.io"
-import cors from "cors"
-import { CronJob } from "cron"
-import express from "express"
-import { createServer } from "http"
 // import { generateKitStats } from "./jobs/createKitStatsAsInterval"
 import { writeViewCounts } from "./jobs/writeViewCounts"
+import * as Logger from "@kittr/logger/node"
+import cors from "cors"
+import { CronJob } from "cron"
+import dotenv from "dotenv"
+import express from "express"
+import { createServer } from "http"
+import { Server } from "socket.io"
 
 dotenv.config({
 	path: process.env.NODE_ENV === "production" ? ".env" : ".env.development"
@@ -107,4 +107,6 @@ io.on("connection", async (socket) => {
 
 app.use(Logger.Handlers.errorHandler())
 
-httpServer.listen(process.env.PORT || 3001, () => console.log(`Server is running on port: ${process.env.PORT || 3001}...`))
+httpServer.listen(process.env.PORT || 3001, () =>
+	console.log(`Server is running on port: ${process.env.PORT || 3001}...`)
+)

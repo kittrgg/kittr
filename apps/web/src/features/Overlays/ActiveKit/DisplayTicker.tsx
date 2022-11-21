@@ -1,13 +1,12 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react"
-import styled, { ThemeProvider } from "styled-components"
-
-import { OverlayKit } from "@kittr/types"
 import { InferQueryOutput } from "@Server/index"
+import colors from "@Styles/colors"
 import { header1, header2, montserrat, paragraph } from "@Styles/typography"
 import { asyncDelay } from "@Utils/helpers/asyncDelay"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
-import colors from "@Styles/colors"
+import { OverlayKit } from "@kittr/types"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
+import styled, { ThemeProvider } from "styled-components"
 
 interface Props {
 	_id: string

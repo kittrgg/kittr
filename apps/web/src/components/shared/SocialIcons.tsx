@@ -1,8 +1,8 @@
 import { SvgByType, SVGType } from "@Components/shared"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
-import styled from "styled-components"
 import { ChannelLink, LinkProperty } from "@kittr/prisma"
 import { CSSProperties } from "react"
+import styled from "styled-components"
 
 const linkOrder: LinkProperty[] = ["TWITCH", "YOUTUBE", "FACEBOOK", "TWITTER", "TIKTOK", "INSTAGRAM", "DISCORD"]
 

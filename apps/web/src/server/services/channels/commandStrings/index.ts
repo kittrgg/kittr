@@ -20,13 +20,13 @@ export const upsertCommandString = async ({
 	commandStringId
 }: {
 	gameId: string
-	newString: string;
-	channelId: string;
+	newString: string
+	channelId: string
 	commandStringId?: string
 }) => {
 	const commandString = await prisma.channelCustomGameCommand.upsert({
 		where: {
-			id: commandStringId ?? "",
+			id: commandStringId ?? ""
 		},
 		create: {
 			command: newString,
@@ -42,7 +42,7 @@ export const upsertCommandString = async ({
 			}
 		},
 		update: {
-			command: newString,
+			command: newString
 		},
 		select: {
 			command: true

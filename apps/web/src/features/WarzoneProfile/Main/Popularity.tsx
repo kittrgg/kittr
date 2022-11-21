@@ -1,3 +1,5 @@
+import * as Styled from "./style"
+import { useActiveWeapon, usePopularityRates } from "@Redux/slices/displayr/selectors"
 import {
 	IRatioOfChannelsWithBase,
 	IRatioOfChannelsWithBaseFeatured,
@@ -5,8 +7,6 @@ import {
 	IKitOption
 } from "@kittr/types"
 import { useState, useEffect } from "react"
-import * as Styled from "./style"
-import { useActiveWeapon, usePopularityRates } from "@Redux/slices/displayr/selectors"
 
 const Popularity = ({ ...props }) => {
 	// const [setupsWithSameAttachmentsRatio, setSetupsWithSameAttachmentsRatio] = useState(0)

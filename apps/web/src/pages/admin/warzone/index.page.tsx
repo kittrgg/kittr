@@ -1,13 +1,12 @@
-/* eslint-disable func-call-spacing */
-/* eslint-disable max-len */
-import { useState } from "react"
+/* eslint-disable */
+import { KitBaseForm } from "./KitBaseForm"
+import { trpc } from "@Server/createHooks"
 import { WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
 import { Button, List, Section } from "@kittr/ui"
 import SVG from "@kittr/ui/src/components/SVG"
 import { ActionIcon } from "@mantine/core"
-import { trpc } from "@Server/createHooks"
-import { KitBaseForm } from "./KitBaseForm"
 import Link from "next/link"
+import { useState } from "react"
 
 const Page = () => {
 	// TODO: Not sure how to handle this type error, need some backend knowledging here.
@@ -23,9 +22,11 @@ const Page = () => {
 	console.log(bases)
 
 	if (isCreatingBase) {
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		console.log("Game ID", bases![0].gameId)
 		return (
 			<KitBaseForm
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 				gameId={bases![0].gameId}
 				onFinished={() => {
 					setIsCreatingBase(false)
@@ -38,6 +39,7 @@ const Page = () => {
 	if (isEditingBase) {
 		return (
 			<KitBaseForm
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 				gameId={bases![0].gameId}
 				kitBaseId={isEditingBase.id}
 				onFinished={() => {
@@ -51,12 +53,13 @@ const Page = () => {
 	return (
 		<div style={{ margin: "1rem" }}>
 			<Link href="/admin">
-				<Button onClick={() => {}}>Back to Admin Home</Button>
+				<Button onClick={() => ({})}>Back to Admin Home</Button>
 			</Link>
 			<Section title="KIT BASES" action={<Button onClick={() => setIsCreatingBase(true)}>Create</Button>}>
 				<List>
-					{(bases || []).map((base: any) => (
+					{(bases || []).map((base) => (
 						<List.Item
+							key={base.id}
 							style={{ borderBottom: "1px solid white", padding: "1rem" }}
 							sx={(theme) => ({
 								"&:hover": {
@@ -78,4 +81,3 @@ const Page = () => {
 }
 
 export default Page
-

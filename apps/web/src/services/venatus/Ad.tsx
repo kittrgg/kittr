@@ -1,7 +1,10 @@
-import { useEffect, useRef } from "react"
-import { useRouter } from "next/router"
-import { isClient } from "@Utils/helpers/isClient"
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+/* eslint-disable @typescript-eslint/no-extra-semi */
 import { ErrorBoundary } from "@Components/shared/ErrorBoundary"
+import { isClient } from "@Utils/helpers/isClient"
+import { useRouter } from "next/router"
+import { useEffect, useRef } from "react"
 
 interface Props {
 	/** Venatus ad unit type. */

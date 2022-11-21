@@ -1,11 +1,11 @@
-import { useRouter } from "next/router"
-import styled from "styled-components"
-
-import { useChannelSearch } from "@Hooks/api/useChannelSearch"
-import { useViewportDimensions } from "@Hooks/useViewportDimensions"
+/* eslint-disable */
 import AdPageWrapper, { H1 } from "@Components/layouts/AdPageWrapper"
 import { ChannelSearch, ChannelList, Spinner } from "@Components/shared"
+import { useChannelSearch } from "@Hooks/api/useChannelSearch"
+import { useViewportDimensions } from "@Hooks/useViewportDimensions"
 import ResponsiveBanner from "@Services/venatus/ResponsiveBanner"
+import { useRouter } from "next/router"
+import styled from "styled-components"
 
 const ChannelsSearch = () => {
 	const { width } = useViewportDimensions()
@@ -15,7 +15,7 @@ const ChannelsSearch = () => {
 	// const { data, isFetching } = useChannelSearch(searchTerm as string)
 
 	// TODO: Re-enable search functionality!
-return <p>404</p>
+	return <p>404</p>
 
 	// return (
 	// 	<AdPageWrapper

@@ -1,7 +1,8 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import NextErrorComponent from "next/error"
 import { flush } from "@sentry/nextjs"
 import { captureException } from "@sentry/nextjs"
+import NextErrorComponent from "next/error"
 
 const MyError = ({ statusCode, hasGetInitialPropsRun, err }) => {
 	if (!hasGetInitialPropsRun && err) {
@@ -18,7 +19,7 @@ const MyError = ({ statusCode, hasGetInitialPropsRun, err }) => {
 MyError.getInitialProps = async (context) => {
 	const errorInitialProps = await NextErrorComponent.getInitialProps(context)
 
-	const { res, err, asPath } = context
+	const { res, err } = context
 
 	// Workaround for https://github.com/vercel/next.js/issues/8592, mark when
 	// getInitialProps has run

@@ -1,9 +1,15 @@
 /* eslint-disable max-len */
-import React, { useState } from "react"
-
+import Item from "./Item"
+import * as Styled from "./styles"
 import colors from "@Colors"
 import { Button, SearchInput } from "@Components/shared"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
+import { setIsSidebarOpen } from "@Redux/slices/displayr"
+import { useChannel, useSidebarState } from "@Redux/slices/displayr/selectors"
+import { useDispatch } from "@Redux/store"
+import Ad from "@Services/venatus/Ad"
+import { filterKitsByFeature } from "@Utils/helpers/filterKitsByFeature"
+import { sortAlphabetical } from "@Utils/helpers/sortAlphabetical"
 import {
 	WarzoneTwoKit,
 	WarzoneTwoKitBase,
@@ -12,15 +18,8 @@ import {
 	WarzoneKitBase,
 	WarzoneKitBaseCategory
 } from "@kittr/prisma"
-import { setIsSidebarOpen } from "@Redux/slices/displayr"
-import { useChannel, useSidebarState } from "@Redux/slices/displayr/selectors"
-import { useDispatch } from "@Redux/store"
-import Ad from "@Services/venatus/Ad"
-import { filterKitsByFeature } from "@Utils/helpers/filterKitsByFeature"
-import { sortAlphabetical } from "@Utils/helpers/sortAlphabetical"
-import Item from "./Item"
-import * as Styled from "./styles"
 import { useRouter } from "next/router"
+import React, { useState } from "react"
 
 const CATEGORIES = [
 	"Assault Rifle",

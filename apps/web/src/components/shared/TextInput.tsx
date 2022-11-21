@@ -1,6 +1,6 @@
+import colors from "@Colors"
 import { ReactNode } from "react"
 import styled from "styled-components"
-import colors from "@Colors"
 
 interface Props {
 	/** Input types for "text" based inputs */
@@ -28,10 +28,13 @@ interface Props {
 	/** React CSS Properties for the subline. */
 	sublineStyles?: React.CSSProperties
 	/** onChange handler for the input. */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	onChange: (...args: any) => any
 	/** Optional onFocus handler for the input. */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	onFocus?: (...args: any) => any
 	/** Optional onBlur handler for the input. */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	onBlur?: (...args: any) => any
 }
 

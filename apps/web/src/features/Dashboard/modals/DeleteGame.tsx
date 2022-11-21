@@ -1,5 +1,3 @@
-import styled from "styled-components"
-
 import colors from "@Colors"
 import { Button, Modal } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
@@ -8,6 +6,7 @@ import { useChannelData } from "@Redux/slices/dashboard/selectors"
 import { useDispatch, useSelector } from "@Redux/store"
 import { header2 } from "@Styles/typography"
 import { useSocket } from "pages/dashboard.page"
+import styled from "styled-components"
 
 /** Modal to delete a game from a channel. */
 const DeleteGameModal = () => {
@@ -20,7 +19,7 @@ const DeleteGameModal = () => {
 		path: "channels/games/delete",
 		opts: {
 			onSuccess: () => {
-				socket.emit(`gameDelete`, channelData?.id)
+				socket?.emit(`gameDelete`, channelData?.id)
 				dispatch(setModal({ type: "", data: "" }))
 				dispatch(setChannelView({ gameId: "", view: "Deleted Game Notification" }))
 			},

@@ -1,7 +1,7 @@
-import styled from "styled-components"
+import LogoutButton from "../ProfileButtons"
 import EmailEditor from "./EmailEditor"
 import PasswordEditor from "./PasswordEditor"
-import LogoutButton from "../ProfileButtons"
+import styled from "styled-components"
 
 /** The user's profile settings. */
 const Profile = () => {

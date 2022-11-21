@@ -1,9 +1,8 @@
 /* eslint-disable */
-import { createStyles, Grid } from "@mantine/core"
-
 import colors from "@Colors"
 import PageWrapper from "@Components/layouts/PageWrapper"
 import { Accordion, Section, Text } from "@kittr/ui"
+import { createStyles, Grid } from "@mantine/core"
 
 const FAQ = () => {
 	return (

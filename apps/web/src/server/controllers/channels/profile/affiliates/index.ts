@@ -1,8 +1,8 @@
-import { ChannelAffiliateModel } from "@kittr/prisma/validator"
 import { createController } from "@Server/createController"
 import { authenticateUser } from "@Server/middlewares/authenticateUser"
 import * as ChannelsService from "@Server/services/channels"
 import { checkRole } from "@Server/services/users"
+import { ChannelAffiliateModel } from "@kittr/prisma/validator"
 import { z } from "zod"
 
 const createAffiliate = createController()

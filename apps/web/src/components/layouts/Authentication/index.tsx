@@ -1,10 +1,9 @@
-import { ReactNode } from "react"
-import styled from "styled-components"
-
-import { header1 } from "@Styles/typography"
+import BlockArt from "./BlockArt"
 import colors from "@Colors"
 import NavMenu from "@Components/layouts/NavMenu"
-import BlockArt from "./BlockArt"
+import { header1 } from "@Styles/typography"
+import { ReactNode } from "react"
+import styled from "styled-components"
 
 interface Props {
 	/**
@@ -19,15 +18,15 @@ interface Props {
 
 /** Layout used for authentication related pages. Signups, logins, etc. */
 const Authentication = ({ title, children }: Props) => (
-		<Wrapper>
-			<BlockArt />
-			<NavMenu />
-			<Container>
-				<FormTitle>{title}</FormTitle>
-				{children}
-			</Container>
-		</Wrapper>
-	)
+	<Wrapper>
+		<BlockArt />
+		<NavMenu />
+		<Container>
+			<FormTitle>{title}</FormTitle>
+			{children}
+		</Container>
+	</Wrapper>
+)
 
 export default Authentication
 

@@ -1,7 +1,8 @@
-import { useState } from "react"
 import colors from "@Colors"
+import { useState } from "react"
 
 /** The Twitch Logo as an svg. Use fill for color. Defaults to white. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const Twitch = (props: any) => {
 	const [isHovered, setIsHovered] = useState(false)
 

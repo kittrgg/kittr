@@ -1,15 +1,14 @@
-import { useState, useEffect, ReactNode } from "react"
-import { useRouter } from "next/router"
-import styled from "styled-components"
-
-import { header1 } from "@Styles/typography"
-import { useViewportDimensions } from "@Hooks/useViewportDimensions"
-import { useDetectAdBlock } from "@Hooks/useDetectAdBlock"
-import NavMenu from "../NavMenu"
 import Footer from "../Footer"
-import { Head, SupportUs } from "@Components/shared"
+import NavMenu from "../NavMenu"
 import AdUnits from "./AdUnits"
+import { Head, SupportUs } from "@Components/shared"
 import { ErrorBoundary } from "@Components/shared/ErrorBoundary"
+import { useDetectAdBlock } from "@Hooks/useDetectAdBlock"
+import { useViewportDimensions } from "@Hooks/useViewportDimensions"
+import { header1 } from "@Styles/typography"
+import { useRouter } from "next/router"
+import { useState, useEffect, ReactNode } from "react"
+import styled from "styled-components"
 
 interface Props {
 	/** If you'd like to remove the ads from this page, set this to false. Defaults to true. */

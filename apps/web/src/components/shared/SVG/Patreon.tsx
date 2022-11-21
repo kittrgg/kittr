@@ -1,6 +1,7 @@
 import colors from "@Colors"
 
 /** The Patreon Logo as an svg. Use fill for color. Defaults to white. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const Patreon = (props: any) => {
 	const { width = "100%", fill = colors.white, dataCy, ...rest } = props
 

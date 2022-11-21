@@ -1,11 +1,9 @@
 /* eslint-disable */
-
+import PageWrapper from "@Components/layouts/PageWrapper"
+import { Routes } from "@Utils/lookups/routes"
+import { Section, Text } from "@kittr/ui"
 import { Grid } from "@mantine/core"
 import Link from "next/link"
-
-import PageWrapper from "@Components/layouts/PageWrapper"
-import { Section, Text } from "@kittr/ui"
-import { Routes } from "@Utils/lookups/routes"
 
 const About = () => {
 	return (

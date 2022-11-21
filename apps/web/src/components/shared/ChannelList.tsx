@@ -1,12 +1,12 @@
 import colors from "@Colors"
 import ProfileImage from "@Components/shared/ProfileImage"
-import SocialIcons from "@Components/shared/SocialIcons"
 import SVG from "@Components/shared/SVG"
+import SocialIcons from "@Components/shared/SocialIcons"
 import { header2 } from "@Styles/typography"
 import { Routes } from "@Utils/lookups/routes"
+import { Channel, ChannelProfile, ChannelLink } from "@kittr/prisma"
 import { useRouter } from "next/router"
 import styled from "styled-components"
-import { Channel, ChannelProfile, ChannelLink } from "@kittr/prisma"
 
 interface FullChannel extends Channel {
 	profile?: ChannelProfile | null
@@ -40,9 +40,12 @@ export const ChannelList = ({ data, itemBackgroundColor = colors.darker, gameLin
 							data-cy="channel-list-item"
 							key={elem.displayName}
 							backgroundColor={itemBackgroundColor}
-							onClick={() => router.push(gameLink
+							onClick={() =>
+								router.push(
+									gameLink
 										? Routes.CHANNEL.GAME.createPath(elem.urlSafeName, gameLink)
-										: Routes.CHANNEL.createPath(elem.urlSafeName))
+										: Routes.CHANNEL.createPath(elem.urlSafeName)
+								)
 							}
 						>
 							<Identity data-cy={`${elem.urlSafeName}-profile-link`}>

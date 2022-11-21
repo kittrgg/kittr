@@ -1,8 +1,8 @@
 import colors from "@Colors"
 import ProfileImage from "@Components/shared/ProfileImage"
+import { header2 } from "@Styles/typography"
 import { Channel, ChannelProfile } from "@kittr/prisma"
 import { useTheme } from "@kittr/ui"
-import { header2 } from "@Styles/typography"
 import styled from "styled-components"
 
 interface ChannelWithProfile extends Channel {
@@ -15,6 +15,7 @@ interface Props {
 	/** Do you want to show the live icon for these channels? */
 	isLive?: boolean
 	/** Function to be ran when user clicks on a channel. */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	onClick: (...args: any) => any
 }
 
@@ -24,28 +25,28 @@ export const ChannelAvatarList = ({ channels, isLive, onClick }: Props) => {
 	return (
 		<>
 			{channels.map((channel) => (
-					<Identity
-						key={channel.id}
-						data-cy={`${channel.displayName}-button`}
-						onClick={() => onClick && onClick(channel)}
-						theme={theme}
-					>
-						<ProfileImage
-							size="100px"
-							imagePath={channel.id}
-							hasProfileImage={!!channel.profile?.hasProfileImage}
-							isLive={isLive}
-						/>
-						<Name>{channel.displayName}</Name>
-					</Identity>
-				))}
+				<Identity
+					key={channel.id}
+					data-cy={`${channel.displayName}-button`}
+					onClick={() => onClick && onClick(channel)}
+					theme={theme}
+				>
+					<ProfileImage
+						size="100px"
+						imagePath={channel.id}
+						hasProfileImage={!!channel.profile?.hasProfileImage}
+						isLive={isLive}
+					/>
+					<Name>{channel.displayName}</Name>
+				</Identity>
+			))}
 		</>
 	)
 }
 
 export default ChannelAvatarList
 
-const Identity = styled.div<{ theme?: any }>`
+const Identity = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;

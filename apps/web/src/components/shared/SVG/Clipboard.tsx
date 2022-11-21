@@ -1,6 +1,7 @@
 import colors from "@Colors"
 
 /** A clipboard. Use stroke for color. Defaults to white. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const Clipboard = (props: any) => {
 	const { width = "100%", stroke = colors.white, dataCy, ...rest } = props
 

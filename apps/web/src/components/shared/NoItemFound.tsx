@@ -1,9 +1,8 @@
-import Link from "next/link"
-import styled from "styled-components"
-
 import colors from "@Colors"
 import Head from "@Components/shared/Head"
 import { header1, header2, paragraph } from "@Styles/typography"
+import Link from "next/link"
+import styled from "styled-components"
 
 interface Props {
 	/** The type of item that couldn't be found. On kittr, these are the two main distinctions that people would be searching through. */
@@ -12,23 +11,23 @@ interface Props {
 
 /** If a game or channel can't be found, render this component. It is a full-screen so there is no need for any layout with it. */
 export const NoItemFound = ({ type }: Props) => (
-		<>
-			<Head
-				title={`No ${type.charAt(0).toUpperCase() + type.slice(1)} Found | kittr`}
-				description={`Hmm, no ${type} found.`}
-			/>
-			<Wrapper style={{ alignItems: "center", justifyContent: "center" }}>
-				<Body>
-					<Header>OOPS...</Header>
-					<Paragraph>Sorry, but we aren't seeing this {type} on kittr.</Paragraph>
-					<Paragraph>Let's get you back to the {type}s page so you can find what you're looking for.</Paragraph>
-					<Link href={`/${type}s`} passHref>
-						<StyledLink>BACK TO {type.toUpperCase()}S PAGE</StyledLink>
-					</Link>
-				</Body>
-			</Wrapper>
-		</>
-	)
+	<>
+		<Head
+			title={`No ${type.charAt(0).toUpperCase() + type.slice(1)} Found | kittr`}
+			description={`Hmm, no ${type} found.`}
+		/>
+		<Wrapper style={{ alignItems: "center", justifyContent: "center" }}>
+			<Body>
+				<Header>OOPS...</Header>
+				<Paragraph>Sorry, but we aren't seeing this {type} on kittr.</Paragraph>
+				<Paragraph>Let's get you back to the {type}s page so you can find what you're looking for.</Paragraph>
+				<Link href={`/${type}s`} passHref>
+					<StyledLink>BACK TO {type.toUpperCase()}S PAGE</StyledLink>
+				</Link>
+			</Body>
+		</Wrapper>
+	</>
+)
 
 export default NoItemFound
 

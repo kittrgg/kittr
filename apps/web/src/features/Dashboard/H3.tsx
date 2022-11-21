@@ -1,8 +1,7 @@
-import { CSSProperties, ReactNode } from "react"
-import styled from "styled-components"
-
 import colors from "@Colors"
 import { paragraph } from "@Styles/typography"
+import { CSSProperties, ReactNode } from "react"
+import styled from "styled-components"
 
 interface Props {
 	children: string | ReactNode

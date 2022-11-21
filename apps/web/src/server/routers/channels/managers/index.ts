@@ -1,6 +1,6 @@
-import { createRouter } from "@Server/createRouter"
 import { channelsManagersOwnersRouter } from "./owners"
 import { ChannelsManagersController } from "@Server/controllers/channels/managers"
+import { createRouter } from "@Server/createRouter"
 
 export const channelsManagersRouter = createRouter()
 	.merge("owner/", channelsManagersOwnersRouter)

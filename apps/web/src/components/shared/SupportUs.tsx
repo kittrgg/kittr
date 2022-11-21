@@ -97,12 +97,13 @@ export default SupportUs
 // Styled Components
 
 const Container = styled.div<{ containerStyles?: string; numOfColumns: number }>`
-	${(props) => (!props.numOfColumns
+	${(props) =>
+		!props.numOfColumns
 			? ""
 			: `
                 display: grid;
                 grid-template-columns: repeat(${props.numOfColumns}, 1fr);
-            `)};
+            `};
 	grid-column-gap: 16px;
 	width: 310px;
 	padding: 36px 32px;

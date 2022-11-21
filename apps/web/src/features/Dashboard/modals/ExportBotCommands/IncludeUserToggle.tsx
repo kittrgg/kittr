@@ -1,7 +1,7 @@
+import * as Styled from "./style"
 import colors from "@Colors"
 import MultiButton from "@Components/shared/MultiButton"
 import { Dispatch, SetStateAction } from "react"
-import * as Styled from "./style"
 
 interface Props {
 	/** User option to include $(touser) in the command. */

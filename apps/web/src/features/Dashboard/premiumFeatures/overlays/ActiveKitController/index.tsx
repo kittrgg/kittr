@@ -1,7 +1,10 @@
+import H3 from "../../../H3"
+import Preview from "./Preview"
+import * as Styled from "./style"
 import colors from "@Colors"
 import { Button, ColorPicker, MultiButton, Spinner, SVG } from "@Components/shared"
-import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import PremiumCallout from "@Features/Dashboard/PremiumCallout"
+import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { setModal } from "@Redux/slices/dashboard"
 import { useManagerRole, usePremiumStatus } from "@Redux/slices/dashboard/selectors"
@@ -11,9 +14,6 @@ import { sortAlphabetical } from "@Utils/helpers/sortAlphabetical"
 import { ActiveKitOverlay } from "@Utils/lookups/overlays"
 import { Routes } from "@Utils/lookups/routes"
 import styled from "styled-components"
-import H3 from "../../../H3"
-import Preview from "./Preview"
-import * as Styled from "./style"
 
 const ActiveKit = () => {
 	const dispatch = useDispatch()

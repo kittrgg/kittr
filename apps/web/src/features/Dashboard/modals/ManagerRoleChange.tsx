@@ -1,5 +1,3 @@
-import styled from "styled-components"
-
 import colors from "@Colors"
 import { Button, Modal, Spinner } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
@@ -7,6 +5,7 @@ import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
 import { paragraph } from "@Styles/typography"
+import styled from "styled-components"
 
 const DeleteManager = () => {
 	const dispatch = useDispatch()

@@ -1,6 +1,7 @@
 import colors from "@Colors"
 
 /** Two curling arrows forming a circle. Use fill for color. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const Renew = (props: any) => {
 	const { width = "100%", fill = colors.white, dataCy, ...rest } = props
 

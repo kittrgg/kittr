@@ -1,8 +1,8 @@
-import styled from "styled-components"
-import colors from "@Colors"
-import * as Styled from "./style"
 import CallToAction from "./CallToAction"
+import * as Styled from "./style"
+import colors from "@Colors"
 import { barlow, header2, paragraph } from "@Styles/typography"
+import styled from "styled-components"
 
 const WINNERS = [
 	{
@@ -31,25 +31,25 @@ const WINNERS = [
 	}
 ]
 
-const Winners = ({ ...props }) => (
-		<>
-			<Styled.H2>WHO LOVES KITTR?</Styled.H2>
-			<Grid>
-				{WINNERS.map(({ title, text, icon, iconAlt }) => (
-						<GridItem key={title}>
-							<GridItemTopRow>
-								<GridIconContainer>
-									<img src={icon} alt={iconAlt} width="40px" height="40px" />
-								</GridIconContainer>
-								<GridTitle>{title}</GridTitle>
-							</GridItemTopRow>
-							<GridText>{text}</GridText>
-						</GridItem>
-					))}
-			</Grid>
-			<CallToAction marginTop="48px" marginBottom="48px" header="get started with kittr." />
-		</>
-	)
+const Winners = () => (
+	<>
+		<Styled.H2>WHO LOVES KITTR?</Styled.H2>
+		<Grid>
+			{WINNERS.map(({ title, text, icon, iconAlt }) => (
+				<GridItem key={title}>
+					<GridItemTopRow>
+						<GridIconContainer>
+							<img src={icon} alt={iconAlt} width="40px" height="40px" />
+						</GridIconContainer>
+						<GridTitle>{title}</GridTitle>
+					</GridItemTopRow>
+					<GridText>{text}</GridText>
+				</GridItem>
+			))}
+		</Grid>
+		<CallToAction marginTop="48px" marginBottom="48px" header="get started with kittr." />
+	</>
+)
 
 export default Winners
 
