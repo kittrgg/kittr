@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createHandler } from "@Middlewares/createHandler"
 import { NextServerPayload } from "@kittr/types/types"
 import type { NextApiRequest, NextApiResponse } from "next"

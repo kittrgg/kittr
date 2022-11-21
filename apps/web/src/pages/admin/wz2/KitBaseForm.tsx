@@ -1,4 +1,4 @@
-/* eslint-disable max-len */
+/* eslint-disable */
 import { KitBaseOptionForm } from "./KitBaseOptionForm"
 import { trpc } from "@Server/createHooks"
 import { WarzoneTwoKitBase, WarzoneTwoKitOption } from "@kittr/prisma"

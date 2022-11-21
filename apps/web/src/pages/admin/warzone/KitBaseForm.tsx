@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { KitBaseOptionForm } from "./KitBaseOptionForm"
 import { trpc } from "@Server/createHooks"
 import { WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"

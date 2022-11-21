@@ -1,4 +1,4 @@
-/* eslint-disable max-len */
+/* eslint-disable */
 import { trpc } from "@Server/createHooks"
 import { WarzoneTwoKitOption } from "@kittr/prisma"
 import { Button, NumberInput, SubSection, Text, TextInput } from "@kittr/ui"

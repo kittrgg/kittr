@@ -1,6 +1,4 @@
-/* eslint-disable func-call-spacing */
-
-/* eslint-disable max-len */
+/* eslint-disable */
 import { KitBaseForm } from "./KitBaseForm"
 import { trpc } from "@Server/createHooks"
 import { WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
