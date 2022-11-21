@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import colors from "@Colors"
 import { trpc } from "@Server/createHooks"
 import { Button, MultiSelect, Section, Text, TextInput } from "@kittr/ui"
@@ -101,8 +100,10 @@ const Page = () => {
 						)
 					}
 
-					// @ts-ignore
-					return <TextInput label={input} onChange={({ target }) => handleInputChange(target, input)} />
+					return (
+						// eslint-disable-next-line @typescript-eslint/no-explicit-any
+						<TextInput key={input} label={input} onChange={({ target }) => handleInputChange(target, input as any)} />
+					)
 				})}
 
 				<MultiSelect

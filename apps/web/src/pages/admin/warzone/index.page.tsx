@@ -24,9 +24,11 @@ const Page = () => {
 	console.log(bases)
 
 	if (isCreatingBase) {
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		console.log("Game ID", bases![0].gameId)
 		return (
 			<KitBaseForm
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 				gameId={bases![0].gameId}
 				onFinished={() => {
 					setIsCreatingBase(false)
@@ -39,6 +41,7 @@ const Page = () => {
 	if (isEditingBase) {
 		return (
 			<KitBaseForm
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 				gameId={bases![0].gameId}
 				kitBaseId={isEditingBase.id}
 				onFinished={() => {
@@ -52,12 +55,13 @@ const Page = () => {
 	return (
 		<div style={{ margin: "1rem" }}>
 			<Link href="/admin">
-				<Button onClick={() => {}}>Back to Admin Home</Button>
+				<Button onClick={() => ({})}>Back to Admin Home</Button>
 			</Link>
 			<Section title="KIT BASES" action={<Button onClick={() => setIsCreatingBase(true)}>Create</Button>}>
 				<List>
-					{(bases || []).map((base: any) => (
+					{(bases || []).map((base) => (
 						<List.Item
+							key={base.id}
 							style={{ borderBottom: "1px solid white", padding: "1rem" }}
 							sx={(theme) => ({
 								"&:hover": {

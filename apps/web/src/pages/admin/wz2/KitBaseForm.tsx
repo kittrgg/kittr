@@ -1,15 +1,18 @@
 /* eslint-disable max-len */
 import { KitBaseOptionForm } from "./KitBaseOptionForm"
 import { trpc } from "@Server/createHooks"
-import { WarzoneTwoCommandCode, WarzoneTwoKitBase, WarzoneTwoKitOption } from "@kittr/prisma"
+import { WarzoneTwoKitBase, WarzoneTwoKitOption } from "@kittr/prisma"
 import { Button, List, NumberInput, Section, Select, SubSection, Text, Textarea, TextInput } from "@kittr/ui"
 import SVG from "@kittr/ui/src/components/SVG"
 import { ActionIcon } from "@mantine/core"
 import { useState } from "react"
 import styled from "styled-components"
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const groupBy = (xs: any, key: string) =>
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	xs.reduce((rv: any, x: any) => {
+		// eslint-disable-next-line @typescript-eslint/no-extra-semi
 		;(rv[x[key]] = rv[x[key]] || []).push(x)
 		return rv
 	}, {})
@@ -32,6 +35,7 @@ interface Props {
 export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 	const [formValues, setFormValues] = useState<Partial<FormState>>({ gameId })
 
+	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 	const { refetch } = trpc.useQuery(["admin/warzone2/kit-bases/get", { kitBaseId: kitBaseId! }], {
 		enabled: !!kitBaseId,
 		onSuccess: (data) => {
@@ -51,14 +55,17 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 	const { mutate: createBase } = trpc.useMutation("admin/warzone2/kit-bases/create")
 	const { mutate: deleteBase } = trpc.useMutation("admin/warzone2/kit-bases/delete")
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const changeTextField = (key: keyof FormState) => (e: any) => {
 		setFormValues((formValues) => ({ ...formValues, [key]: e.target.value }))
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const changeNumberField = (key: keyof FormState) => (e: any) => {
 		setFormValues((formValues) => ({ ...formValues, [key]: e }))
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const changeSelectField = (key: keyof FormState) => (e: any) => {
 		setFormValues((formValues) => ({ ...formValues, [key]: e }))
 	}
@@ -179,6 +186,7 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 						{formValues.id &&
 							Object.entries<WarzoneTwoKitOption[]>(getOptions()).map(([slotKey, options]) => (
 								<SubSection
+									key={slotKey}
 									title={slotKey}
 									action={
 										<Button
@@ -195,6 +203,7 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 											?.sort((a, b) => Number(a.orderPlacement) - Number(b.orderPlacement))
 											.map((option) => (
 												<List.Item
+													key={option.id}
 													style={{ borderBottom: "1px solid white", padding: "1rem" }}
 													sx={(theme) => ({
 														"&:hover": {
@@ -235,6 +244,7 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 								)
 							} else {
 								createBase(
+									// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 									// @ts-ignore
 									{ base: formValues as FormState, commandCodes: formValues.commandCodes },
 									{

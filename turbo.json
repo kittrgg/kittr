@@ -17,6 +17,7 @@
 				"$IS_PREVIEW",
 				"$MONTHLY_TIP_PRICE_ID",
 				"$NEXT_PUBLIC_API_KEY",
+				"$NEXT_PUBLIC_ADS_DISABLED",
 				"$NEXT_PUBLIC_FIREBASE_DATABASE_URL",
 				"$NEXT_PUBLIC_GOOGLE_ANALYTICS",
 				"$NEXT_PUBLIC_IS_DEV",
@@ -33,7 +34,8 @@
 				"$STRIPE_WEBHOOK_SECRET",
 				"$SUBSCRIPTION_PRICE_ID",
 				"$TWITCH_CLIENT_ID",
-				"$TWITCH_CLIENT_SECRET"
+				"$TWITCH_CLIENT_SECRET",
+				"$VERCEL_ENV"
 			],
 			"outputs": ["dist/**", ".next/**", "build/**"]
 		},

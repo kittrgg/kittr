@@ -18,13 +18,15 @@ import { ReactQueryDevtools } from "react-query/devtools"
 import { Provider } from "react-redux"
 import superjson from "superjson"
 
-const AppWrap = ({ Component, pageProps }: any) => (
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const AppWrap = ({ Component, pageProps }: { Component: React.FC; pageProps: Record<any, any> }) => (
 	<Provider store={store}>
 		<MyApp Component={Component} pageProps={pageProps} />
 	</Provider>
 )
 
-const MyApp = ({ Component, pageProps }: any) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const MyApp = ({ Component, pageProps }: { Component: React.FC; pageProps: Record<any, any> }) => {
 	const router = useRouter()
 	const dispatch = useDispatch()
 	const isFallback = useSelector((state) => state.global.fallbackLoader)
@@ -32,6 +34,7 @@ const MyApp = ({ Component, pageProps }: any) => {
 	useEffect(() => {
 		router.events.on("routeChangeStart", (url) => {
 			if (url !== window.location.pathname) {
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-extra-semi
 				;(window as any).routeTimeout = setTimeout(() => {
 					dispatch(setFallbackLoader(true)), 500
 				})
@@ -39,6 +42,7 @@ const MyApp = ({ Component, pageProps }: any) => {
 		})
 
 		router.events.on("routeChangeComplete", () => {
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			clearTimeout((window as any).routeTimeout)
 			dispatch(setFallbackLoader(false))
 		})
@@ -94,7 +98,7 @@ export default withTRPC<AppRouter>({
 				// adds pretty logs to your console in development and logs errors in production
 				loggerLink({
 					enabled: (opts) =>
-						process.env.NODE_ENV === "development" || (opts.direction === "down" && opts.result instanceof Error)
+						process.env.VERCEL_ENV !== "production" || (opts.direction === "down" && opts.result instanceof Error)
 				}),
 				httpBatchLink({
 					url: getTrpcUrl
