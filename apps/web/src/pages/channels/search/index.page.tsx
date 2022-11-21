@@ -1,9 +1,9 @@
 import AdPageWrapper, { H1 } from "@Components/layouts/AdPageWrapper"
-import { ChannelSearch } from "@Components/shared"
+// import { ChannelSearch } from "@Components/shared"
 import ResponsiveBanner from "@Services/venatus/ResponsiveBanner"
 import styled from "styled-components"
 
-const ChannelsSearch = ({ ...props }) => (
+const ChannelsSearch = () => (
 	<AdPageWrapper title="Search | kittr" description="Who ya got? | kittr">
 		<ResponsiveBanner />
 		{/* <ChannelSearch /> */}

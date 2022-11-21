@@ -24,7 +24,7 @@ const PROPERTIES = [
 ]
 
 /** Features tiles on how to contact us with links if applicable. */
-export const ContactUs = ({ ...props }) => {
+export const ContactUs = () => {
 	const { classes } = useStyles()
 
 	return (

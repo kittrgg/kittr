@@ -1,3 +1,4 @@
+/* eslint-disable */
 import AdPageWrapper, { H1 } from "@Components/layouts/AdPageWrapper"
 import { ChannelSearch, ChannelList, Spinner } from "@Components/shared"
 import { useChannelSearch } from "@Hooks/api/useChannelSearch"

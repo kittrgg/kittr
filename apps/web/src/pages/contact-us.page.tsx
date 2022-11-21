@@ -2,7 +2,7 @@ import PageWrapper from "@Components/layouts/PageWrapper"
 import ContactTiles from "@Components/shared/ContactUs"
 import { createStyles, Title } from "@mantine/core"
 
-const ContactUs = ({ ...props }) => {
+const ContactUs = () => {
 	const { classes } = useStyles()
 
 	return (

@@ -4,7 +4,7 @@ import AuthLayout from "@Components/layouts/Authentication"
 import Head from "@Components/shared/Head"
 import { useState } from "react"
 
-const ForgotPassword = ({ ...props }) => {
+const ForgotPassword = () => {
 	const [step, setStep] = useState(1)
 
 	return (

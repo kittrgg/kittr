@@ -5,7 +5,7 @@ import Link from "next/link"
 import styled from "styled-components"
 
 /** Simple link to get back to the /dashboard route */
-const BackToLogin = ({ ...props }) => (
+const BackToLogin = () => (
 	<Link href={Routes.DASHBOARD} passHref>
 		<StyledLink>Back to login.</StyledLink>
 	</Link>

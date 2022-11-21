@@ -1,7 +1,7 @@
 import colors from "@Colors"
 import AdPageWrapper from "@Components/layouts/AdPageWrapper"
 import FallbackPage from "@Components/layouts/FallbackPage"
-import { ChannelList, ChannelSearch, NoItemFound, Paginator } from "@Components/shared"
+import { ChannelList, NoItemFound, Paginator } from "@Components/shared"
 import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
 import { trpc } from "@Server/createHooks"
@@ -15,7 +15,7 @@ import styled from "styled-components"
 
 const CHANNELS_PER_PAGE = 10
 
-const GameProfile = (props: any) => {
+const GameProfile = () => {
 	const { width } = useViewportDimensions()
 	const { query, isFallback, push } = useRouter()
 	const { pageNumber, game } = query as { pageNumber: string; game: string }
