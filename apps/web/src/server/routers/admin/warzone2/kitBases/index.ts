@@ -1,9 +1,9 @@
-import { Warzone2AdminController } from "@Server/controllers/admin/warzone2/index"
-import { createRouter } from "@Server/createRouter"
 import { categoriesRouter } from "./kitCategories"
 import { optionsRouter } from "./kitOptions"
-import { z } from "zod"
+import { Warzone2AdminController } from "@Server/controllers/admin/warzone2/index"
+import { createRouter } from "@Server/createRouter"
 import { prisma } from "@kittr/prisma"
+import { z } from "zod"
 
 export const warzone2KitBaseRouter = createRouter()
 	.merge("options/", optionsRouter)
@@ -52,6 +52,4 @@ export const warzone2KitBaseRouter = createRouter()
 
 			return result
 		}
-
-
 	})

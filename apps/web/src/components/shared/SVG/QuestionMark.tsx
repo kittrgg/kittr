@@ -1,6 +1,7 @@
 import colors from "@Colors"
 
 /** A question mark in a circle. Use stroke for color. Defaults to colors.lightest. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const QuestionMark = (props: any) => {
 	const { width = "100%", stroke = colors.lightest, dataCy, ...rest } = props
 

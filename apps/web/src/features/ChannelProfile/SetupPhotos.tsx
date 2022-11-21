@@ -1,11 +1,10 @@
-import { useState, useEffect } from "react"
-import styled from "styled-components"
-
-import { download } from "@Services/firebase/storage"
 import { H2 } from "./style"
 import { Spinner } from "@Components/shared"
 import { SideScroller } from "@Components/shared"
+import { download } from "@Services/firebase/storage"
 import { SetupPhoto } from "@kittr/prisma"
+import { useState, useEffect } from "react"
+import styled from "styled-components"
 
 interface Props {
 	id: string

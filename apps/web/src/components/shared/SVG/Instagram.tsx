@@ -1,7 +1,8 @@
-import { useState } from "react"
 import colors from "@Colors"
+import { useState } from "react"
 
 /** The Instagram logo. Use fill for color. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const Instagram = (props: any) => {
 	const [isHovered, setIsHovered] = useState(false)
 

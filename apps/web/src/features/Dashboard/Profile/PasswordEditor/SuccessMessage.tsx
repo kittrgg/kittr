@@ -1,6 +1,6 @@
-import { useEffect } from "react"
-import { logOut } from "@Services/firebase/auth/logOut"
 import { useDispatch } from "@Redux/store"
+import { logOut } from "@Services/firebase/auth/logOut"
+import { useEffect } from "react"
 
 const SucessMessage = ({ ...props }) => {
 	const dispatch = useDispatch()

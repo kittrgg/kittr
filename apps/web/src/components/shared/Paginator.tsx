@@ -1,8 +1,8 @@
+import colors from "@Colors"
+import SVG from "@Components/shared/SVG"
 import Link from "next/link"
 import styled from "styled-components"
 
-import colors from "@Colors"
-import SVG from "@Components/shared/SVG"
 interface Props {
 	/** Total amount of results. */
 	totalResults: number
@@ -34,45 +34,45 @@ export const Paginator = ({
 	isLastPage,
 	pageRoot
 }: Props) => (
-		<Container>
-			<p style={{ margin: "24px 0" }}>
-				Viewing {currentPageResultStart} - {Math.min(currentPageResultEnd, totalResults)} of {totalResults} results.
-			</p>
-			<Navigation>
-				{!isFirstPage && (
-					<Link href={`${pageRoot}/${currentPage - 1}`} passHref>
-						<PageLink data-cy="decrement-page">
-							<SVG.Carat
-								width="14px"
-								style={{
-									height: "14px",
-									marginRight: "8px",
-									transform: "rotate(-90deg)"
-								}}
-							/>
-							Prev
-						</PageLink>
-					</Link>
-				)}
-				{!isFirstPage && !isLastPage && <CurrentPageIndicator>{currentPage}</CurrentPageIndicator>}
-				{!isLastPage && (
-					<Link href={`${pageRoot}/${currentPage + 1}`} passHref>
-						<PageLink data-cy="increment-page">
-							Next
-							<SVG.Carat
-								width="14px"
-								style={{
-									height: "14px",
-									marginLeft: "8px",
-									transform: "rotate(90deg)"
-								}}
-							/>
-						</PageLink>
-					</Link>
-				)}
-			</Navigation>
-		</Container>
-	)
+	<Container>
+		<p style={{ margin: "24px 0" }}>
+			Viewing {currentPageResultStart} - {Math.min(currentPageResultEnd, totalResults)} of {totalResults} results.
+		</p>
+		<Navigation>
+			{!isFirstPage && (
+				<Link href={`${pageRoot}/${currentPage - 1}`} passHref>
+					<PageLink data-cy="decrement-page">
+						<SVG.Carat
+							width="14px"
+							style={{
+								height: "14px",
+								marginRight: "8px",
+								transform: "rotate(-90deg)"
+							}}
+						/>
+						Prev
+					</PageLink>
+				</Link>
+			)}
+			{!isFirstPage && !isLastPage && <CurrentPageIndicator>{currentPage}</CurrentPageIndicator>}
+			{!isLastPage && (
+				<Link href={`${pageRoot}/${currentPage + 1}`} passHref>
+					<PageLink data-cy="increment-page">
+						Next
+						<SVG.Carat
+							width="14px"
+							style={{
+								height: "14px",
+								marginLeft: "8px",
+								transform: "rotate(90deg)"
+							}}
+						/>
+					</PageLink>
+				</Link>
+			)}
+		</Navigation>
+	</Container>
+)
 
 export default Paginator
 

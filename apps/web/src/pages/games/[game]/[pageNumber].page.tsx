@@ -1,21 +1,21 @@
 import colors from "@Colors"
 import AdPageWrapper from "@Components/layouts/AdPageWrapper"
 import FallbackPage from "@Components/layouts/FallbackPage"
-import { ChannelList, ChannelSearch, NoItemFound, Paginator } from "@Components/shared"
+import { ChannelList, NoItemFound, Paginator } from "@Components/shared"
 import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
 import { trpc } from "@Server/createHooks"
 import { createSSGHelper } from "@Server/createSSGHelper"
 import ResponsiveBanner from "@Services/venatus/ResponsiveBanner"
 import { Routes } from "@Utils/lookups/routes"
+import { prisma } from "@kittr/prisma"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { prisma } from "@kittr/prisma"
 import styled from "styled-components"
 
 const CHANNELS_PER_PAGE = 10
 
-const GameProfile = (props: any) => {
+const GameProfile = ({ redirect }: { redirect: boolean }) => {
 	const { width } = useViewportDimensions()
 	const { query, isFallback, push } = useRouter()
 	const { pageNumber, game } = query as { pageNumber: string; game: string }
@@ -36,7 +36,7 @@ const GameProfile = (props: any) => {
 		{ enabled: !!game }
 	)
 
-	if (props.redirect) {
+	if (redirect) {
 		push(`/games/${game}`)
 	}
 
@@ -119,12 +119,14 @@ export const getStaticPaths = async () => {
 			}
 		]
 	})
-	const paths = games.map((game) => [1, 2, 3].map((elem: number) => ({
+	const paths = games.map((game) =>
+		[1, 2, 3].map((elem: number) => ({
 			params: {
 				game: game.urlSafeName,
 				pageNumber: String(elem)
 			}
-		})))
+		}))
+	)
 
 	return {
 		paths: paths.flat(),

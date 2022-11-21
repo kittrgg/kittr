@@ -38,7 +38,7 @@ export const SideScroller = ({ wrapperStyles, childMargin, children }: Props) =>
 			ref.current?.addEventListener("scroll", handleScroll)
 		}
 
-		let observerRefValue: any = null
+		let observerRefValue: HTMLElement | null = null
 
 		const observer = new IntersectionObserver(onScrollChange)
 

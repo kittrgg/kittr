@@ -1,10 +1,9 @@
-import styled from "styled-components"
-
 import { Modal, ContactUs } from "@Components/shared"
-import { header2 } from "@Styles/typography"
-import { useModal } from "@Redux/slices/dashboard/selectors"
 import { setModal } from "@Redux/slices/dashboard"
+import { useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
+import { header2 } from "@Styles/typography"
+import styled from "styled-components"
 
 /** Support modal to allow users to find ways to contact us. */
 const SupportModal = ({ ...props }) => {

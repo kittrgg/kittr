@@ -1,10 +1,9 @@
-import { ReactNode } from "react"
-import styled from "styled-components"
-
 import colors from "@Colors"
 import { Button, SVG } from "@Components/shared"
-import { header2, paragraph } from "@Styles/typography"
 import { usePremiumStatus } from "@Redux/slices/dashboard/selectors"
+import { header2, paragraph } from "@Styles/typography"
+import { ReactNode } from "react"
+import styled from "styled-components"
 
 interface Props {
 	planType?: "premium"

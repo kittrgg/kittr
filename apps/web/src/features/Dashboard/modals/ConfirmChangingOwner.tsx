@@ -1,10 +1,9 @@
-import styled from "styled-components"
 import colors from "@Colors"
-
-import { useDispatch } from "@Redux/store"
-import { setModal } from "@Redux/slices/dashboard"
 import { Modal, Button } from "@Components/shared"
+import { setModal } from "@Redux/slices/dashboard"
+import { useDispatch } from "@Redux/store"
 import { header2, paragraph } from "@Styles/typography"
+import styled from "styled-components"
 
 /** Modal for confirming a change of owner on the channel. */
 const ConfirmChangingOwner = ({ ...props }) => {

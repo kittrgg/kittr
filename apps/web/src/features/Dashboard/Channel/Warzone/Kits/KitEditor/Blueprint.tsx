@@ -1,8 +1,8 @@
 import * as Styled from "./style"
 import TextInput from "@Components/shared/TextInput"
-import { useDispatch } from "@Redux/store"
-import { useActiveKit } from "@Redux/slices/dashboard/selectors"
 import { updateBlueprint } from "@Redux/slices/dashboard"
+import { useActiveKit } from "@Redux/slices/dashboard/selectors"
+import { useDispatch } from "@Redux/store"
 
 const Blueprint = ({ ...props }) => {
 	const dispatch = useDispatch()

@@ -1,3 +1,8 @@
+import AddGameModal from "../modals/AddGame"
+import DeleteGameModal from "../modals/DeleteGame"
+import SupportModal from "../modals/Support"
+import ChannelButtons from "./ChannelButtons"
+import * as Styled from "./style"
 import SVG from "@Components/shared/SVG"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
 import { handleTutorialAction, setActiveView } from "@Redux/slices/dashboard"
@@ -6,11 +11,6 @@ import { useDispatch, useSelector } from "@Redux/store"
 import colors from "@Styles/colors"
 import { Routes } from "@Utils/lookups/routes"
 import Link from "next/link"
-import AddGameModal from "../modals/AddGame"
-import DeleteGameModal from "../modals/DeleteGame"
-import SupportModal from "../modals/Support"
-import ChannelButtons from "./ChannelButtons"
-import * as Styled from "./style"
 
 /** Dashboard sidebar */
 const Sidebar = ({ ...props }) => {

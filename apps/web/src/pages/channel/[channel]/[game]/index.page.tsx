@@ -1,10 +1,10 @@
-import { useRouter } from "next/router"
 import FallbackPage from "@Components/layouts/FallbackPage"
 import { Head, NoItemFound } from "@Components/shared"
 import WarzoneProfile from "@Features/WarzoneProfile"
 import { trpc } from "@Server/createHooks"
 import { createSSGHelper } from "@Server/createSSGHelper"
 import { prisma } from "@kittr/prisma"
+import { useRouter } from "next/router"
 
 const GamePresentation = () => {
 	const { isFallback, query } = useRouter()
@@ -67,12 +67,14 @@ export const getStaticPaths = async () => {
 	})
 
 	// I need a mapping of all the games on the top 30 channels
-	const paths = channels.map((channel) => channel.games.map((game) => ({
+	const paths = channels.map((channel) =>
+		channel.games.map((game) => ({
 			params: {
 				channel: channel.urlSafeName,
 				game: game.urlSafeName
 			}
-		})))
+		}))
+	)
 
 	return {
 		paths: paths.flat(),
@@ -100,4 +102,3 @@ export const getStaticProps = async ({ params }: { params: { channel: string; ga
 }
 
 export default GamePresentation
-

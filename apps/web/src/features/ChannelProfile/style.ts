@@ -1,7 +1,6 @@
-import styled from "styled-components"
-
 import colors from "@Colors"
 import { header2 } from "@Styles/typography"
+import styled from "styled-components"
 
 export const H2 = styled.h2`
 	margin: 0 0 24px 5%;

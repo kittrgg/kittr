@@ -1,5 +1,5 @@
-import styled from "styled-components"
 import colors from "@Colors"
+import styled from "styled-components"
 
 export const Wrapper = styled.div`
 	display: flex;

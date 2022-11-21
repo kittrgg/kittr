@@ -1,11 +1,10 @@
-import styled from "styled-components"
-
 import colors from "@Colors"
-import { paragraph } from "@Styles/typography"
 import { SVG } from "@Components/shared"
-import { useDispatch } from "@Redux/store"
 import { setModal } from "@Redux/slices/dashboard"
 import { useManagerRole } from "@Redux/slices/dashboard/selectors"
+import { useDispatch } from "@Redux/store"
+import { paragraph } from "@Styles/typography"
+import styled from "styled-components"
 
 interface Props {
 	text: string

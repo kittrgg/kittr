@@ -1,11 +1,10 @@
+import { H2 } from "./style"
+import colors from "@Colors"
+import { SideScroller, ProfileImage } from "@Components/shared"
+import { montserrat } from "@Styles/typography"
+import { ITwitchVideo } from "@kittr/types"
 import { getDate, getMonth, getYear } from "date-fns"
 import styled from "styled-components"
-
-import { ITwitchVideo } from "@kittr/types"
-import { SideScroller, ProfileImage } from "@Components/shared"
-import { H2 } from "./style"
-import { montserrat } from "@Styles/typography"
-import colors from "@Colors"
 
 interface Props {
 	videos?: ITwitchVideo[]

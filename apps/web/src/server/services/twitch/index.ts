@@ -1,9 +1,9 @@
-import { ITwitchChannelData, ITwitchClip, ITwitchScheduleSegment, ITwitchVideo } from "@kittr/types"
-import { grabLoginName } from "@Services/twitch/utils/grabLoginName"
 import { getChannelData } from "./getChannelData"
 import { getClips } from "./getClips"
 import { getRecentVideos } from "./getRecentVideos"
 import { getSchedule } from "./getSchedule"
+import { grabLoginName } from "@Services/twitch/utils/grabLoginName"
+import { ITwitchChannelData, ITwitchClip, ITwitchScheduleSegment, ITwitchVideo } from "@kittr/types"
 
 export interface ProfilePageData {
 	channelData: ITwitchChannelData
@@ -26,7 +26,6 @@ export const getProfile = async (twitchLink: string): Promise<ProfilePageData> =
 			clips: [],
 			recentVideos: []
 		}
-
 	}
 
 	const [schedule, clips, recentVideos] = await Promise.all([

@@ -1,17 +1,15 @@
-import { useState } from "react"
-import styled from "styled-components"
-
 import colors from "@Colors"
 import { Spinner } from "@Components/shared"
 import ProfileImage from "@Components/shared/ProfileImage"
+import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useProfileImage } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
 import { download } from "@Services/firebase/storage/download"
 import { uploadWithHandlers } from "@Services/firebase/storage/uploadWithHandlers"
 import { caption } from "@Styles/typography"
-
-import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
+import { useState } from "react"
+import styled from "styled-components"
 
 /** Change the channel's profile image */
 const ImageEditor = () => {

@@ -1,6 +1,7 @@
 import colors from "@Colors"
 
 /** It's a star. Accepts both stroke and fill for color. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const Star = (props: any) => {
 	const { width = "100%", stroke = colors.white, fill = "transparent", dataCy, ...rest } = props
 

@@ -52,13 +52,12 @@ export const createKitBase = async ({
 export const updateKitBase = async ({
 	base,
 	commandCodes
-}:
-	{
-		base: WarzoneTwoKitBase,
-		// categoryId: string,
-		commandCodes: string[] | null
-		// options: WarzoneKitOption[]
-	}) => {
+}: {
+	base: WarzoneTwoKitBase
+	// categoryId: string,
+	commandCodes: string[] | null
+	// options: WarzoneKitOption[]
+}) => {
 	const {
 		id,
 		// categoryId: removeCatId,
@@ -68,9 +67,7 @@ export const updateKitBase = async ({
 
 	await prisma.warzoneTwoCommandCode.deleteMany({
 		where: {
-			AND: [
-				{ kitBaseId: base.id }
-			]
+			AND: [{ kitBaseId: base.id }]
 		}
 	})
 

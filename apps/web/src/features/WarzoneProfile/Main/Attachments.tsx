@@ -1,11 +1,10 @@
-import { Fragment } from "react"
-import styled from "styled-components"
-
 import * as Styled from "./style"
 import colors from "@Colors"
-import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
-import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { useActiveWeapon } from "@Redux/slices/displayr/selectors/useActiveWeapon"
+import { customOrderArray } from "@Utils/helpers/orderArrayByString"
+import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
+import { Fragment } from "react"
+import styled from "styled-components"
 
 const Attachments = () => {
 	const activeWeapon = useActiveWeapon()

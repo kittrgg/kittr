@@ -1,6 +1,6 @@
 import colors from "@Colors"
-import styled from "styled-components"
 import { header1, header2 } from "@Styles/typography"
+import styled from "styled-components"
 
 interface Props {
 	totalNumberOfKits: number
@@ -8,18 +8,18 @@ interface Props {
 
 /** The beautiful hero for the mod landing page. */
 const Hero = ({ totalNumberOfKits }: Props) => (
-		<Container>
-			<ImageContainer>
-				<img src="/media/hero.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-			</ImageContainer>
-			<Copy>
-				<img src="/media/logo.svg" alt="" style={{ width: "100px", height: "100px" }} />
-				<Headline>get kittd.</Headline>
-				<KitsTotal>{totalNumberOfKits}+ kits</KitsTotal>
-				<Subline>In 15 minutes, your !loadout command can look like this.</Subline>
-			</Copy>
-		</Container>
-	)
+	<Container>
+		<ImageContainer>
+			<img src="/media/hero.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+		</ImageContainer>
+		<Copy>
+			<img src="/media/logo.svg" alt="" style={{ width: "100px", height: "100px" }} />
+			<Headline>get kittd.</Headline>
+			<KitsTotal>{totalNumberOfKits}+ kits</KitsTotal>
+			<Subline>In 15 minutes, your !loadout command can look like this.</Subline>
+		</Copy>
+	</Container>
+)
 
 export default Hero
 

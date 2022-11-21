@@ -1,12 +1,11 @@
-import { CSSProperties, ReactNode } from "react"
-import styled from "styled-components"
-
 import colors from "@Colors"
-import { header1 } from "@Styles/typography"
-import { useDispatch } from "@Redux/store"
-import { setModal } from "@Redux/slices/dashboard"
 import FullScreen from "@Components/layouts/FullScreen"
 import SVG from "@Components/shared/SVG"
+import { setModal } from "@Redux/slices/dashboard"
+import { useDispatch } from "@Redux/store"
+import { header1 } from "@Styles/typography"
+import { CSSProperties, ReactNode } from "react"
+import styled from "styled-components"
 
 interface Props {
 	/** Title to show at the top of the modal. */
@@ -14,6 +13,7 @@ interface Props {
 	/** Should the modal close if you click on the background dimmer? */
 	backgroundClickToClose?: boolean
 	/** An optional function to call when the user clicks the X or clicks the background to close it.  */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	onUserClose?: (...args: any) => any
 	/** React children to use as the content of the modal. */
 	children: ReactNode

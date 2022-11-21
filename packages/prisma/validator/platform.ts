@@ -1,13 +1,13 @@
-import * as z from "zod"
 import { CompleteGame, RelatedGameModel } from "./index"
+import * as z from "zod"
 
 export const PlatformModel = z.object({
-  id: z.string(),
-  displayName: z.string(),
+	id: z.string(),
+	displayName: z.string()
 })
 
 export interface CompletePlatform extends z.infer<typeof PlatformModel> {
-  games: CompleteGame[]
+	games: CompleteGame[]
 }
 
 /**
@@ -15,6 +15,8 @@ export interface CompletePlatform extends z.infer<typeof PlatformModel> {
  *
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
-export const RelatedPlatformModel: z.ZodSchema<CompletePlatform> = z.lazy(() => PlatformModel.extend({
-  games: RelatedGameModel.array(),
-}))
+export const RelatedPlatformModel: z.ZodSchema<CompletePlatform> = z.lazy(() =>
+	PlatformModel.extend({
+		games: RelatedGameModel.array()
+	})
+)

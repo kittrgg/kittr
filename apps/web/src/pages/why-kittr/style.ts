@@ -1,6 +1,6 @@
-import styled from "styled-components"
 import colors from "@Colors"
 import { header1, header2, paragraph } from "@Styles/typography"
+import styled from "styled-components"
 
 export const ImageContainer = styled.div`
 	width: 50vw;

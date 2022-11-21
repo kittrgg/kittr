@@ -1,4 +1,3 @@
-import { createElement } from "react"
 import { Arrow } from "./Arrow"
 import { Carat } from "./Carat"
 import { CheckMark } from "./CheckMark"
@@ -28,6 +27,7 @@ import { Twitch as TWITCH } from "./Twitch"
 import { Twitter as TWITTER } from "./Twitter"
 import { X } from "./X"
 import { Youtube as YOUTUBE } from "./Youtube"
+import { createElement } from "react"
 
 export type SVGType = keyof typeof SVG
 
@@ -79,4 +79,6 @@ interface SVGByTypeProps {
 }
 
 /** Use an SVG by specifying which one you want. You must pass a "type" prop! */
-export const SvgByType = ({ type, ...props }: SVGByTypeProps & React.AllHTMLAttributes<any>) => createElement(SVG[type], props)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const SvgByType = ({ type, ...props }: SVGByTypeProps & React.AllHTMLAttributes<any>) =>
+	createElement(SVG[type], props)

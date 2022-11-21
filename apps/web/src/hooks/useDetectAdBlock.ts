@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react"
 import { isClient } from "@Utils/helpers/isClient"
+import { useState, useEffect } from "react"
 
 interface Interface {
 	(): boolean

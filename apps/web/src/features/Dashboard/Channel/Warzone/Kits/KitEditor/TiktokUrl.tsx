@@ -1,9 +1,9 @@
 import * as Styled from "./style"
 import colors from "@Colors"
 import TextInput from "@Components/shared/TextInput"
-import { useDispatch } from "@Redux/store"
 import { updateTiktokId } from "@Redux/slices/dashboard"
 import { useActiveKit } from "@Redux/slices/dashboard/selectors"
+import { useDispatch } from "@Redux/store"
 
 const TiktokId = () => {
 	const dispatch = useDispatch()

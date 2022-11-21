@@ -1,7 +1,3 @@
-import { useEffect, useState } from "react"
-import styled from "styled-components"
-import validator from "validator"
-
 import colors from "@Colors"
 import { Button, Modal, Spinner, TextInputBox } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
@@ -9,6 +5,9 @@ import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
 import { paragraph } from "@Styles/typography"
+import { useEffect, useState } from "react"
+import styled from "styled-components"
+import validator from "validator"
 
 /** Modal for adding a spec to the channel's PC setup. */
 const AddAffiliateModal = ({ ...props }) => {

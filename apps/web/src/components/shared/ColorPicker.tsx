@@ -1,9 +1,8 @@
-import { useState } from "react"
-import styled from "styled-components"
-
 import colors from "@Colors"
 import { useDebounce } from "@Hooks/useDebounce"
 import { useDidMountEffect } from "@Hooks/useDidMountEffect"
+import { useState } from "react"
+import styled from "styled-components"
 
 type DesignVariants = "Big Square" | "Small Circle"
 

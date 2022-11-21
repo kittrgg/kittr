@@ -1,8 +1,8 @@
-import styled from "styled-components"
 import colors from "@Colors"
+import { useActiveWeapon } from "@Redux/slices/displayr/selectors"
 import Ad from "@Services/venatus/Ad"
 import { caption } from "@Styles/typography"
-import { useActiveWeapon } from "@Redux/slices/displayr/selectors"
+import styled from "styled-components"
 
 const AdTile = ({ ...props }) => {
 	const activeWeapon = useActiveWeapon()

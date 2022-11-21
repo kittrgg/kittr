@@ -1,6 +1,7 @@
 import colors from "@Colors"
 
 /** A list icon. Defaults to white. Use stroke for color. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const List = (props: any) => {
 	const { width = "100%", stroke = colors.white, onClick, dataCy, ...rest } = props
 

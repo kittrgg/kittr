@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 
-const BackToDashboard = ({ ...props }) => {
+const BackToDashboard = () => {
 	useEffect(() => {
 		window.close()
 	}, [])

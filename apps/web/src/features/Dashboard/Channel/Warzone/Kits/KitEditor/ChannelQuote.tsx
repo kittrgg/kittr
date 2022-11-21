@@ -1,11 +1,10 @@
-import styled from "styled-components"
-
 import * as Styled from "./style"
 import colors from "@Colors"
-import { paragraph } from "@Styles/typography"
-import { useActiveKit } from "@Redux/slices/dashboard/selectors"
 import { updateChannelQuote } from "@Redux/slices/dashboard"
+import { useActiveKit } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
+import { paragraph } from "@Styles/typography"
+import styled from "styled-components"
 
 const ChannelQuote = () => {
 	const dispatch = useDispatch()

@@ -1,10 +1,9 @@
 import * as Styled from "./style"
 import colors from "@Colors"
-
 import MultiButton from "@Components/shared/MultiButton"
-import { useDispatch } from "@Redux/store"
-import { useActiveKit } from "@Redux/slices/dashboard/selectors"
 import { updateFeatured } from "@Redux/slices/dashboard"
+import { useActiveKit } from "@Redux/slices/dashboard/selectors"
+import { useDispatch } from "@Redux/store"
 
 const Featured = ({ ...props }) => {
 	const dispatch = useDispatch()

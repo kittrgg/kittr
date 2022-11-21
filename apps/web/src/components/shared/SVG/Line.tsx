@@ -1,6 +1,7 @@
 import colors from "@Colors"
 
 /** A bottom of a box with an arrow pointing upwards out of it. Use stroke for color. Defaults to white. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const Line = (props: any) => {
 	const { width = "100%", stroke = colors.white, onClick, dataCy, ...rest } = props
 

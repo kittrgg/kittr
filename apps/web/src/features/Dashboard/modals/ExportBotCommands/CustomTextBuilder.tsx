@@ -1,14 +1,14 @@
+import * as Styled from "./style"
 import colors from "@Colors"
 import Button from "@Components/shared/Button"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
-import { TCommandMethod } from "@kittr/types/types"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useChannelView, useManagerRole } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
 import { paragraph } from "@Styles/typography"
+import { TCommandMethod } from "@kittr/types/types"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
-import * as Styled from "./style"
 
 interface Props {
 	/** Method which the user will be utilizing for adding their commands */

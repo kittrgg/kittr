@@ -1,6 +1,6 @@
-import { Prisma } from "@kittr/prisma"
 import { trpc } from "@Server/createHooks"
-import { InferQueryInput, } from "@Server/index"
+import { InferQueryInput } from "@Server/index"
+import { Prisma } from "@kittr/prisma"
 
 type TQueryInput = InferQueryInput<"kits/bases/list">
 

@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { createHandler } from "@Middlewares/createHandler"
 import { NextServerPayload } from "@kittr/types/types"
 import type { NextApiRequest, NextApiResponse } from "next"
-import { createHandler } from "@Middlewares/createHandler"
-
 import Stripe from "stripe"
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, { apiVersion: "2020-08-27" })

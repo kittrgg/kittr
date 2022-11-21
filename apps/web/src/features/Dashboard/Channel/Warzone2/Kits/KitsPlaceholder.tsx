@@ -1,11 +1,10 @@
-import { useRef, MutableRefObject, useEffect } from "react"
-import styled from "styled-components"
-
+import colors from "@Colors"
+import Button from "@Components/shared/Button"
 import { createNewKit, setModal } from "@Redux/slices/dashboard"
 import { useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import colors from "@Colors"
-import Button from "@Components/shared/Button"
+import { useRef, MutableRefObject, useEffect } from "react"
+import styled from "styled-components"
 
 const Container = styled.div`
 	padding: 80px 100px;

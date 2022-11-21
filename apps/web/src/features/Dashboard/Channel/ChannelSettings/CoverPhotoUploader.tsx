@@ -1,6 +1,3 @@
-import { useEffect, useState } from "react"
-import styled from "styled-components"
-
 import colors from "@Colors"
 import { Button, Spinner, SVG } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
@@ -10,6 +7,8 @@ import { useDispatch } from "@Redux/store"
 import { deleteFile } from "@Services/firebase/storage"
 import { download } from "@Services/firebase/storage/download"
 import { uploadWithHandlers } from "@Services/firebase/storage/uploadWithHandlers"
+import { useEffect, useState } from "react"
+import styled from "styled-components"
 
 const CoverPhotoUploader = () => {
 	const dispatch = useDispatch()

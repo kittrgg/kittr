@@ -12,7 +12,7 @@ interface Props {
 	/** HTML5 disabled attribute. Can this button be disabled by certain application behavior? Use this flag. */
 	disabled?: boolean
 	/** Function to run on the click of the button. */
-	onClick?: (...args: any) => any
+	onClick?: (ev: React.MouseEvent) => void
 	/** React CSSProperties object to override base design. While this button comes with design presets, you may need to override those styles for certain use cases. */
 	style?: CSSProperties
 	/** Cypress testing value for targeting button. */

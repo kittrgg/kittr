@@ -1,6 +1,7 @@
 import colors from "@Colors"
 
 /** An X to use for ...x-ing things. Use fill for color. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const X = (props: any) => {
 	const { width = "100%", fill = colors.white, dataCy, ...rest } = props
 

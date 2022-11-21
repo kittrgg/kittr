@@ -1,15 +1,14 @@
-import { useState } from "react"
-import styled from "styled-components"
-
 import colors from "@Colors"
-import { header2, montserrat } from "@Styles/typography"
-import { useDispatch } from "@Redux/store"
-import { setModal } from "@Redux/slices/dashboard"
-import { useChannelData } from "@Redux/slices/dashboard/selectors"
-import { useChannelManagers } from "@Hooks/api/useChannelManagers"
 import { Modal, Button, Spinner } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
+import { useChannelManagers } from "@Hooks/api/useChannelManagers"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
+import { setModal } from "@Redux/slices/dashboard"
+import { useChannelData } from "@Redux/slices/dashboard/selectors"
+import { useDispatch } from "@Redux/store"
+import { header2, montserrat } from "@Styles/typography"
+import { useState } from "react"
+import styled from "styled-components"
 
 /** Modal to allow a user to set a new owner for the channel. */
 const SetNewOwner = () => {

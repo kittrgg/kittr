@@ -1,8 +1,8 @@
-import { ResizeObserver, ResizeObserverEntry } from "@juggle/resize-observer"
-import { isClient } from "@Utils/helpers/isClient"
-import { useState, useRef, useEffect, useCallback } from "react"
 // @ts-ignore
 import { useLatestRef } from "./useLatestRef"
+import { isClient } from "@Utils/helpers/isClient"
+import { ResizeObserver, ResizeObserverEntry } from "@juggle/resize-observer"
+import { useState, useRef, useEffect, useCallback } from "react"
 
 export const observerErr =
 	"💡 react-cool-dimensions: the browser doesn't support Resize Observer, please use polyfill: https://github.com/wellyshen/react-cool-dimensions#resizeobserver-polyfill"

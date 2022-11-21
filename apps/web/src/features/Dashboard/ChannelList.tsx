@@ -1,5 +1,8 @@
+import LogoutButton from "./ProfileButtons"
+import CreateChannelModal from "./modals/CreateChannel"
 import colors from "@Colors"
 import { Button, ProfileImage, Spinner, SupportUs, SVG } from "@Components/shared"
+import { useManagedChannels } from "@Hooks/api/useManagedChannels"
 import { useUser } from "@Hooks/useUser"
 import { setActiveView, setChannelView, setModal } from "@Redux/slices/dashboard"
 import { useModal } from "@Redux/slices/dashboard/selectors"
@@ -8,9 +11,6 @@ import { header1, header2, paragraph } from "@Styles/typography"
 import { capitalizeFirstCharacter } from "@Utils/helpers/capitalizeFirstCharacter"
 import { MutableRefObject, useEffect, useRef } from "react"
 import styled from "styled-components"
-import CreateChannelModal from "./modals/CreateChannel"
-import LogoutButton from "./ProfileButtons"
-import { useManagedChannels } from "@Hooks/api/useManagedChannels"
 
 /** List the channels for a user */
 const ChannelList = () => {

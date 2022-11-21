@@ -1,9 +1,9 @@
 import { createController } from "@Server/createController"
-import * as ChannelsPcSpecsService from "@Server/services/channels/pcSpecs"
-import { z } from "zod"
-import { ChannelPcSpecModel } from "@kittr/prisma/validator"
 import { authenticateUser } from "@Server/middlewares/authenticateUser"
+import * as ChannelsPcSpecsService from "@Server/services/channels/pcSpecs"
 import { checkRole } from "@Server/services/users"
+import { ChannelPcSpecModel } from "@kittr/prisma/validator"
+import { z } from "zod"
 
 const listPcSpec = createController().mutation("", {
 	input: z.object({

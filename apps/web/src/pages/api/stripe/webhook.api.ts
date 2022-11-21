@@ -1,10 +1,10 @@
 import fetch from "@Fetch"
-import { prisma } from "@kittr/prisma"
 import { createHandler } from "@Middlewares/createHandler"
+import { prisma } from "@kittr/prisma"
+import { withSentry } from "@sentry/nextjs"
 import { buffer } from "micro"
 import type { NextApiRequest, NextApiResponse } from "next"
 import Stripe from "stripe"
-import { withSentry } from "@sentry/nextjs"
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, { apiVersion: "2020-08-27" })
 
@@ -27,11 +27,11 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 	const apiURL = process.env.VERCEL_ENV === "preview" ? "stage-api" : "api"
 
 	const subscriptionHandler = async (event: Stripe.Event) => {
-		// @ts-ignore
+		const metadata = (event.data.object as Stripe.Subscription).metadata
+
 		const result = await prisma.channel.update({
 			where: {
-				// @ts-ignore
-				id: event.data.object.metadata.channelId
+				id: metadata.channelId
 			},
 			data: {
 				plan: {
@@ -57,35 +57,35 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 			case "customer.subscription.updated": {
 				return subscriptionHandler(event)
 			}
-			case "customer.subscription.deleted": {
-				const cancelled = await prisma.channel.update({
-					where: {
-						// @ts-ignore
-						id: event.data.object.metadata.channelId
-					},
-					data: {
-						plan: {
-							update: {
-								stripeSubscriptionId: null,
-								type: "BASIC"
+			case "customer.subscription.deleted":
+				{
+					const metadata = (event.data.object as Stripe.Subscription).metadata
+
+					const cancelled = await prisma.channel.update({
+						where: {
+							id: metadata.channelId
+						},
+						data: {
+							plan: {
+								update: {
+									stripeSubscriptionId: null,
+									type: "BASIC"
+								}
 							}
 						}
-					}
-				})
+					})
 
-				return res.status(200).json({ cancelled })
-			}
+					return res.status(200).json({ cancelled })
+				}
 				break
 			case "subscription_schedule.updated":
-				// @ts-ignore
-				if (event.data.object.status === "past_due") {
-					// @ts-ignore
-					const cancelSubscription = await stripe.subscriptions.del(event.data.object.id)
+				const subscriptionObject = event.data.object as Stripe.Subscription
+				if (subscriptionObject.status === "past_due") {
+					const cancelSubscription = await stripe.subscriptions.del(subscriptionObject.id)
 
 					const paymentLapse = await prisma.channel.update({
 						where: {
-							// @ts-ignore
-							id: event.object.metadata.id || event.data.object.metadata._id // _id needed for pre-Prisma migration accounts
+							id: subscriptionObject.metadata.id || subscriptionObject.metadata._id // _id needed for pre-Prisma migration accounts
 						},
 						data: {
 							plan: {
@@ -101,8 +101,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 						await fetch.post({
 							url: localURL || `https://${apiURL}.kittr.gg/stripe-webhook-reporter`,
 							body: {
-								// @ts-ignore
-								id: event.object.metadata.id || event.data.object.metadata._id // _id needed for pre-Prisma migration accounts
+								id: subscriptionObject.metadata.id || subscriptionObject.metadata._id // _id needed for pre-Prisma migration accounts
 							}
 						})
 
@@ -114,6 +113,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 				console.log(`Unhandled event type ${event.type}`)
 				return res.status(200).send("Unhandled event")
 		}
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	} catch (err: any) {
 		console.log(err)
 		return res.status(400).send(`Webhook Error: ${err.message}`)

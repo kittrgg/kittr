@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react"
-
+import Title from "../../H3"
 import colors from "@Colors"
 import { Button, TextInputBox } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
-import Title from "../../H3"
+import { useEffect, useState } from "react"
 
 /** Edit the name of the channel. */
 const DisplayNameEditor = () => {

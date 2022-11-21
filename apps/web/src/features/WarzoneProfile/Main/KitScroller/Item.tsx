@@ -1,14 +1,14 @@
+import * as Styled from "./style"
 import colors from "@Colors"
 import SVG from "@Components/shared/SVG"
-import { WarzoneKit, WarzoneKitBase } from "@kittr/prisma"
 import { setActiveWeapon } from "@Redux/slices/displayr"
 import { useActiveWeapon } from "@Redux/slices/displayr/selectors"
 import { useDispatch } from "@Redux/store"
+import { WarzoneKit, WarzoneKitBase } from "@kittr/prisma"
 import { useEffect, useRef } from "react"
-import * as Styled from "./style"
 
 interface Props {
-	elem: WarzoneKit & {base: WarzoneKitBase}
+	elem: WarzoneKit & { base: WarzoneKitBase }
 }
 
 const Item = ({ elem }: Props) => {

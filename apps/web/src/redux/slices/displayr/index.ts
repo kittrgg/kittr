@@ -1,7 +1,7 @@
+import { InferQueryOutput } from "@Server/index"
 import { WarzoneKit, WarzoneKitBase, WarzoneKitBaseCategory, WarzoneKitOption } from "@kittr/prisma"
 import { IPopularityRates } from "@kittr/types/popularity"
 import { createSlice } from "@reduxjs/toolkit"
-import { InferQueryOutput } from "@Server/index"
 
 type ActiveWeaponKit = WarzoneKit & {
 	options: WarzoneKitOption[]

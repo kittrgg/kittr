@@ -1,9 +1,9 @@
-import { Game } from "@kittr/prisma"
+import { H2 } from "./style"
 import GameList from "@Components/shared/GameList"
 import SideScroller from "@Components/shared/SideScroller"
 import { Routes } from "@Utils/lookups/routes"
+import { Game } from "@kittr/prisma"
 import { useRouter } from "next/router"
-import { H2 } from "./style"
 
 interface Props {
 	games: Game[]

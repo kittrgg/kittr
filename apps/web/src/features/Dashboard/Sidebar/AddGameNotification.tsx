@@ -1,6 +1,6 @@
-import styled, { keyframes } from "styled-components"
 import colors from "@Colors"
 import SVG from "@Components/shared/SVG"
+import styled, { keyframes } from "styled-components"
 
 /** If a user doesn't have a game yet,
  * they are probably a new account and

@@ -1,6 +1,6 @@
-import { ITwitchClip } from "@kittr/types/twitch"
-import * as Logger from "@kittr/logger/node"
 import { getFromApi } from "../utils/getFromApi"
+import * as Logger from "@kittr/logger/node"
+import { ITwitchClip } from "@kittr/types/twitch"
 
 interface IFunc {
 	/**

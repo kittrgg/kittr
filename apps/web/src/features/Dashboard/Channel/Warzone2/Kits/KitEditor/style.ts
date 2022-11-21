@@ -1,6 +1,6 @@
-import styled from "styled-components"
 import colors from "@Colors"
 import { header2, paragraph } from "@Styles/typography"
+import styled from "styled-components"
 
 export const Wrapper = styled.div`
 	flex: 1;

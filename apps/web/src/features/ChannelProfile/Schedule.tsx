@@ -1,3 +1,10 @@
+import MobileSchedule from "./MobileSchedule"
+import { H2 } from "./style"
+import colors from "@Colors"
+import useDimensions from "@Hooks/useDimensions"
+import { useViewportDimensions } from "@Hooks/useViewportDimensions"
+import { caption, paragraph } from "@Styles/typography"
+import { ITwitchScheduleSegment } from "@kittr/types"
 import {
 	getMonth,
 	getDate,
@@ -13,14 +20,6 @@ import {
 } from "date-fns"
 import { Fragment } from "react"
 import styled from "styled-components"
-
-import { ITwitchScheduleSegment } from "@kittr/types"
-import colors from "@Colors"
-import { caption, paragraph } from "@Styles/typography"
-import useDimensions from "@Hooks/useDimensions"
-import { useViewportDimensions } from "@Hooks/useViewportDimensions"
-import { H2 } from "./style"
-import MobileSchedule from "./MobileSchedule"
 
 interface Props {
 	schedule?: ITwitchScheduleSegment[]

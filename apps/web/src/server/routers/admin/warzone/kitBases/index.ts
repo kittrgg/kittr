@@ -1,7 +1,7 @@
-import { WarzoneAdminController } from "@Server/controllers/admin/warzone/index"
-import { createRouter } from "@Server/createRouter"
 import { categoriesRouter } from "./kitCategories"
 import { optionsRouter } from "./kitOptions"
+import { WarzoneAdminController } from "@Server/controllers/admin/warzone/index"
+import { createRouter } from "@Server/createRouter"
 
 export const warzoneKitBaseRouter = createRouter()
 	.merge("options/", optionsRouter)

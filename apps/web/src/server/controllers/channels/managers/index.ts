@@ -1,8 +1,8 @@
-import { ChannelManagerModel } from "@kittr/prisma/validator"
 import { createController } from "@Server/createController"
 import { authenticateUser } from "@Server/middlewares/authenticateUser"
 import * as ChannelsManagersService from "@Server/services/channels/managers"
 import { checkRole } from "@Server/services/users"
+import { ChannelManagerModel } from "@kittr/prisma/validator"
 import { z } from "zod"
 
 const listManagers = createController()
@@ -15,7 +15,6 @@ const listManagers = createController()
 		async resolve({ ctx, input: { channelId, managers } }) {
 			await checkRole({ firebaseUserId: ctx.user.uid, channelId, roles: ["ADMIN", "OWNER", "EDITOR"] })
 			if (managers.length === 0) return []
-
 
 			const result = ChannelsManagersService.listManagers({ managers })
 			return result

@@ -2,6 +2,7 @@ import colors from "@Colors"
 import ProfileImage from "@Components/shared/ProfileImage"
 import SocialIcons from "@Components/shared/SocialIcons"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
+import { header1, header2 } from "@Styles/typography"
 import {
 	Channel,
 	ChannelBrandColor,
@@ -13,7 +14,6 @@ import {
 	SetupPhoto,
 	WarzoneKit
 } from "@kittr/prisma"
-import { header1, header2 } from "@Styles/typography"
 import styled from "styled-components"
 
 interface Props extends Channel {

@@ -1,5 +1,5 @@
-import { updateProfile } from "firebase/auth"
 import { getCurrentUser } from "./getCurrentUser"
+import { updateProfile } from "firebase/auth"
 
 export const updateUserDisplayName = async (displayName: string) => {
 	const user = getCurrentUser()

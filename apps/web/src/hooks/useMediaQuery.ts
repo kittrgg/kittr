@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react"
 // @ts-ignore
-
 import { isClient } from "@Utils/helpers/isClient"
 import { isWebApiSupported } from "@Utils/helpers/isWebApiSupported"
+import { useEffect, useState } from "react"
 
 const errorMessage =
 	"matchMedia is not supported, this could happen both because window.matchMedia is not supported by" +

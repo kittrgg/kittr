@@ -1,6 +1,7 @@
 import colors from "@Colors"
 
 /** The Facebook logo. Use fill for color. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const Facebook = (props: any) => {
 	const { width = "100%", fill = colors.white, dataCy, ...rest } = props
 

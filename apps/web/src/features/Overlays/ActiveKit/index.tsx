@@ -1,13 +1,12 @@
-import { useEffect, useMemo, useState } from "react"
-import { io } from "socket.io-client"
-
+import Banner from "./Banner"
 import BannerTicker from "@Features/Overlays/ActiveKit/BannerTicker"
 import Display from "@Features/Overlays/ActiveKit/Display"
 import DisplayTicker from "@Features/Overlays/ActiveKit/DisplayTicker"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
-import { OverlayKit } from "@kittr/types"
 import { trpc } from "@Server/createHooks"
-import Banner from "./Banner"
+import { OverlayKit } from "@kittr/types"
+import { useEffect, useMemo, useState } from "react"
+import { io } from "socket.io-client"
 
 interface Props {
 	id: string

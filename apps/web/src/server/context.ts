@@ -3,7 +3,7 @@ import * as trpcNext from "@trpc/server/adapters/next"
 
 type CreateContextOptions = {
 	userToken: string | undefined
-};
+}
 
 /**
  * Inner function for `createContext` where we create the context.
