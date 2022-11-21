@@ -46,6 +46,7 @@ const getChannelViewCounts = async (
 			}
 		})
 
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		return response.rows!.reduce((acc, row) => {
 			/**
 			 * This splits the string coming in as the example below:
