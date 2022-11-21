@@ -61,7 +61,7 @@ const AddGameModal = ({ ...props }) => {
 			<Grid>
 				{data &&
 					!isMutating &&
-					data
+					[...data]
 						.filter((game) => !gamesToExclude.includes(game.id))
 						.sort((game) => (game.active ? -1 : 1))
 						.map((game) => {

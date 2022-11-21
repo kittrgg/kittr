@@ -19,7 +19,7 @@ interface Props {
 export const GameList = ({ data, hoverScale = true, onClick, withVisitText }: Props) => (
 	<>
 		{data &&
-			data
+			[...data]
 				.sort((game) => (game.active ? -1 : 1))
 				.map((elem) => (
 					<ListItem
