@@ -14,6 +14,7 @@ interface Props {
 	/** Array of kits to render. */
 	data: CompleteKit[]
 	/** onClick handler for if user click's on a kit's card. */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	onClick?: any
 }
 

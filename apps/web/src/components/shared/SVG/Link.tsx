@@ -1,6 +1,7 @@
 import colors from "@Colors"
 
 /** A link icon. Use stroke for color. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const Link = (props: any) => {
 	const { width = "100%", stroke = colors.white, dataCy, ...rest } = props
 

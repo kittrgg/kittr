@@ -15,6 +15,7 @@ interface Props {
 	/** Do you want to show the live icon for these channels? */
 	isLive?: boolean
 	/** Function to be ran when user clicks on a channel. */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	onClick: (...args: any) => any
 }
 

@@ -13,6 +13,7 @@ interface Props {
 	/** Should the modal close if you click on the background dimmer? */
 	backgroundClickToClose?: boolean
 	/** An optional function to call when the user clicks the X or clicks the background to close it.  */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	onUserClose?: (...args: any) => any
 	/** React children to use as the content of the modal. */
 	children: ReactNode

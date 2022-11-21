@@ -1,6 +1,7 @@
 import colors from "@Colors"
 
 /** A check mark. Use fill for color. Defaults to white. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const Circle = (props: any) => {
 	const { width = "100%", fill = colors.white, dataCy, ...rest } = props
 

@@ -1,6 +1,7 @@
 import colors from "@Colors"
 
 /** A placeholder avatar image for users who don't upload one. Use fill for color. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const EmptyAvatar = (props: any) => {
 	const { width = "100%", fill = colors.white, dataCy, ...rest } = props
 

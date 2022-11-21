@@ -1,6 +1,7 @@
 import colors from "@Colors"
 
 /** Cog for settings button. Use stroke for color. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const CogWheel = (props: any) => {
 	const { width = "100%", stroke = colors.white, dataCy, ...rest } = props
 

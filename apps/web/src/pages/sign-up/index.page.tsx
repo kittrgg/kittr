@@ -5,7 +5,7 @@ import { Routes } from "@Utils/lookups/routes"
 import { useRouter } from "next/router"
 import { useEffect } from "react"
 
-const SignUp = ({ ...props }) => {
+const SignUp = () => {
 	const router = useRouter()
 	const user = useUser()
 

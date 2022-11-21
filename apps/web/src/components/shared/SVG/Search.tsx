@@ -1,6 +1,7 @@
 import colors from "@Colors"
 
 /** Magnifying glass icon. Use fill for color. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const Search = (props: any) => {
 	const { width = "100%", fill = colors.light, dataCy, ...rest } = props
 

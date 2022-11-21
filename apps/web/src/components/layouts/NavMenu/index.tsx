@@ -8,16 +8,16 @@ import { header4 } from "@Styles/typography"
 import { Routes } from "@Utils/lookups/routes"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { ReactNode } from "react"
+import { ReactNode, Ref } from "react"
 import styled from "styled-components"
 
 interface Props {
 	/** A React reference object to forward to the header's container. */
-	wrapperRef?: any
+	wrapperRef?: Ref<HTMLDivElement> | undefined
 	/** Optional breakpoint at which to switch to mobile vs. desktop. Defaults to 769. */
 	breakpoint?: number
 	/** Optionally turns the logo on the left into a back button. */
-	backFunction?: (...args: any) => any
+	backFunction?: (ev: React.MouseEvent) => void
 	/**
 	 * Optionally render a center screen component in the mobile version. Turns the header into a banner style with a different background.
 	 *

@@ -1,6 +1,7 @@
 import colors from "@Colors"
 
 /** Arrow with a tail. Defaults position is pointing up. Use stroke for color. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const Arrow = (props: any) => {
 	const { width = "100%", stroke = colors.white, dataCy, ...rest } = props
 

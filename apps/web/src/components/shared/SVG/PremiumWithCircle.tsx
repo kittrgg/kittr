@@ -6,6 +6,7 @@ import colors from "@Colors"
  *
  * Use background color
  **/
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const PremiumWithCircle = (props: any) => {
 	const { width = "100%", stroke = colors.white, backgroundColor = colors.premium, dataCy, ...rest } = props
 

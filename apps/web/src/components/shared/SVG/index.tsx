@@ -79,5 +79,6 @@ interface SVGByTypeProps {
 }
 
 /** Use an SVG by specifying which one you want. You must pass a "type" prop! */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const SvgByType = ({ type, ...props }: SVGByTypeProps & React.AllHTMLAttributes<any>) =>
 	createElement(SVG[type], props)

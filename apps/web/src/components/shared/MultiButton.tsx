@@ -29,6 +29,7 @@ interface Props {
 	/** Current user selection. */
 	activeValue: string | boolean
 	/** Optional onClick handler to run on user's selection. */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	onClick: (...args: any) => any
 	/** Cypress data attribute. */
 	dataCy?: string

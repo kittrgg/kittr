@@ -1,6 +1,7 @@
 import colors from "@Colors"
 
 /** The Premium Tier diamond icon. Use fill for color. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const Premium = (props: any) => {
 	const { width = "100%", stroke = colors.white, dataCy, ...rest } = props
 

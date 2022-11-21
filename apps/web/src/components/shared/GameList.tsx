@@ -9,6 +9,7 @@ interface Props {
 	/** Do you want the games to do a zoom-in animation when hovered? Defaults to true. */
 	hoverScale?: boolean
 	/** Function to run when the game is clicked on. */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	onClick?: (...args: any) => any
 	/** Show visit text at the bottom of the game's art. */
 	withVisitText?: true

@@ -1,6 +1,7 @@
 import colors from "@Colors"
 
 /** A quotation mark to use for visuals. Use fill for color. Defaults to colors.white. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const QuotationMark = (props: any) => {
 	const { width = "100%", fill = colors.white, dataCy, ...rest } = props
 

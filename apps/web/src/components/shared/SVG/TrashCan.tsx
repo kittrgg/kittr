@@ -1,6 +1,7 @@
 import colors from "@Colors"
 
 /** An object visualization of Anthony Shew. Use stroke for color. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const TrashCan = (props: any) => {
 	const { width = "100%", stroke = colors.white, dataCy, ...rest } = props
 
