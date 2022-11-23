@@ -106,6 +106,7 @@ const Main = () => {
 							<Imagery />
 						</>
 					)}
+					<ChannelQuote />
 					<Marketing />
 					{/* <WeaponStats /> */}
 					{isMobile && (
@@ -118,7 +119,6 @@ const Main = () => {
 						<WeaponBlurb />
 						<FavoriteBlueprint favorite={activeWeapon?.blueprint} />
 					</div>
-					<ChannelQuote />
 					{isMobile && (
 						<div>
 							<Ad placementType="s300x250" updateTrigger={activeWeapon} />
