@@ -22,7 +22,7 @@ const GamePresentation = () => {
 	if (!channel) {
 		return (
 			<>
-				<Head title={"Game Not Found | kittr"} description={`${urlChannel} doesn't seem to play that game! | kittr`} />
+				<Head title="Game Not Found | kittr" description={`${urlChannel} doesn't seem to play that game! | kittr`} />
 				<NoItemFound type="game" />
 			</>
 		)
@@ -49,7 +49,7 @@ const GamePresentation = () => {
 
 	return (
 		<>
-			<Head title={"Game Not Found | kittr"} description={`${urlChannel} doesn't seem to play that game! | kittr`} />
+			<Head title="Game Not Found | kittr" description={`${urlChannel} doesn't seem to play that game! | kittr`} />
 			<NoItemFound type="channel" />
 		</>
 	)
