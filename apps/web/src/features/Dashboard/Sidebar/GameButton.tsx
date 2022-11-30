@@ -38,6 +38,8 @@ const GameButton = ({ game, activeView }: Props) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [modal.data?.page, ref?.current])
 
+	const isOwnerOrAdmin = role === "ADMIN" || role === "OWNER"
+
 	return (
 		<Styled.ButtonContainer
 			style={{ zIndex: modal.type === "Tutorial" ? 101 : 100 }}
@@ -71,7 +73,7 @@ const GameButton = ({ game, activeView }: Props) => {
 					)}
 				/>
 			</Styled.Button>
-			{role === "OWNER" && (
+			{isOwnerOrAdmin && (
 				<Styled.DeleteGameBubble
 					onMouseEnter={() => setIsHovered(true)}
 					onMouseLeave={() => setIsHovered(false)}

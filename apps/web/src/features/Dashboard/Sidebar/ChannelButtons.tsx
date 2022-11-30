@@ -36,6 +36,8 @@ const ChannelButtons = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [modal.data?.page, ref?.current, role])
 
+	const isOwnerOrAdmin = role === "ADMIN" || role === "OWNER"
+
 	return (
 		<>
 			<hr style={{ width: "60%", borderColor: colors.light }} />
@@ -57,7 +59,7 @@ const ChannelButtons = () => {
 				return <GameButton key={game.id} game={game} activeView={gameId === game.id} />
 			})}
 
-			{role === "OWNER" && (
+			{isOwnerOrAdmin && (
 				<>
 					<Styled.ButtonContainer isActive={false} style={{ marginBottom: "32px" }}>
 						<Styled.Button
