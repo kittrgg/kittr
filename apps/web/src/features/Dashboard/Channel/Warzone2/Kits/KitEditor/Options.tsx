@@ -1,4 +1,5 @@
 import * as Styled from "./style"
+import colors from "@Colors"
 import { Selector } from "@Components/shared"
 import { useOptionsByKitBase } from "@Hooks/api/useOptionsbyKitBase"
 import { useIsMounted } from "@Hooks/useIsMounted"
@@ -7,10 +8,26 @@ import { useActiveKit } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
 import { getArrayUniques } from "@Utils/helpers/getArrayUniques"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
-import { Loader } from "@kittr/ui"
+import { Loader, TextInput } from "@kittr/ui"
+import { Grid } from "@mantine/core"
 import React, { useState, useEffect } from "react"
 
 const animationDuration = 1000
+
+export const handleHorzTuneName = (slotName: string) => {
+	switch (slotName) {
+		case "Optic":
+			return "Eye Position"
+		case "Ammunition":
+			return "Load"
+		case "Rear Grip":
+			return "Width"
+		case "Comb":
+			return "Thickness"
+		default:
+			return "Length"
+	}
+}
 
 const Options = () => {
 	const dispatch = useDispatch()
@@ -33,8 +50,20 @@ const Options = () => {
 			(a: string, b: string) => warzoneSlotsOrder.indexOf(a) - warzoneSlotsOrder.indexOf(b)
 		)
 
-	const addToOptions = (displayName: string, slot: string) => {
+	const addToOptions = (displayName: string, slot: string, activeTune?: string) => {
 		const newCurrent = current.slice()
+
+		// When tune input is being adjusted
+		if (activeTune) {
+			const newTune = parseFloat(displayName)
+			const copyCurrentOptions = [...current]
+			const index = newCurrent.findIndex((elem) => elem.slotKey === slot)
+			const copyCurrentObj = { ...newCurrent[index] }
+			// Bad way to use displayName without changing structure of function - should be seperate for tune adjustments
+			copyCurrentObj[activeTune] = newTune
+			copyCurrentOptions[index] = copyCurrentObj
+			return dispatch(updateOptions(copyCurrentOptions))
+		}
 
 		if (displayName === "") {
 			const index = newCurrent.findIndex((elem) => elem.slotKey === slot)
@@ -42,7 +71,7 @@ const Options = () => {
 			return dispatch(updateOptions(newCurrent))
 		}
 
-		let toAdd = availableOptions?.find((opt) => opt.displayName === displayName && opt.slotKey === slot)
+		const toAdd = availableOptions?.find((opt) => opt.displayName === displayName && opt.slotKey === slot)
 
 		const index = newCurrent.findIndex((elem) => elem.slotKey === toAdd?.slotKey)
 
@@ -97,6 +126,36 @@ const Options = () => {
 											}))
 									]}
 								/>
+								{current.find((opt) => opt.slotKey === slot)?.displayName && (
+									<Grid>
+										<Grid.Col span={6}>
+											<TextInput
+												onChange={(e) => addToOptions(e.target.value, slot, "tuneHorz")}
+												type="number"
+												step="0.1"
+												// TODO: i don't have a clue how to handle this typescript
+												value={current.find((opt) => opt.slotKey === slot)?.tuneHorz}
+												label={handleHorzTuneName(slot)}
+												radius="md"
+												size="sm"
+												sx={{ input: { background: colors.light } }}
+											/>
+										</Grid.Col>
+										<Grid.Col span={6}>
+											<TextInput
+												type="number"
+												step="0.1"
+												onChange={(e) => addToOptions(e.target.value, slot, "tuneVert")}
+												// TODO: i don't have a clue how to handle this typescript
+												value={current.find((opt) => opt.slotKey === slot)?.tuneVert}
+												label="Weight"
+												radius="md"
+												size="sm"
+												sx={{ input: { background: colors.light } }}
+											/>
+										</Grid.Col>
+									</Grid>
+								)}
 							</div>
 						)
 					})}

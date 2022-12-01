@@ -105,6 +105,18 @@ const EditorSnackbar = () => {
 			changes.push(true)
 		}
 
+		// Checks if any tunes have changed from initialKit
+		Object.keys(initialKit.options).map((key) => {
+			if (
+				initialKit.options[key]?.tuneVert !== activeKit.options[key]?.tuneVert ||
+				initialKit.options[key]?.tuneHorz !== activeKit.options[key]?.tuneHorz
+			) {
+				changes.push(true)
+			} else {
+				changes.push(false)
+			}
+		})
+
 		return changes.some((elem) => elem == true)
 	}
 

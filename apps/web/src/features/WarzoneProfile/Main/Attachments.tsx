@@ -1,9 +1,11 @@
 import * as Styled from "./style"
 import colors from "@Colors"
+import { handleHorzTuneName } from "@Features/Dashboard/Channel/Warzone2/Kits/KitEditor/Options"
 import { useActiveWeapon } from "@Redux/slices/displayr/selectors/useActiveWeapon"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
-import { Fragment } from "react"
+import { TextInput } from "@kittr/ui"
+import { Grid } from "@mantine/core"
 import styled from "styled-components"
 
 const Attachments = () => {
@@ -20,10 +22,34 @@ const Attachments = () => {
 				array: options
 			}).map((slot) => {
 				return (
-					<Fragment key={slot.slotKey}>
-						<Styled.KitOptionLabel>{slot.slotKey}</Styled.KitOptionLabel>
-						<Styled.KitOption>{slot.displayName.toUpperCase()}</Styled.KitOption>
-					</Fragment>
+					<div key={slot.slotKey} style={{ display: "flex", justifyContent: "space-between" }}>
+						<div>
+							<Styled.KitOptionLabel>{slot.slotKey}</Styled.KitOptionLabel>
+							<Styled.KitOption>{slot.displayName.toUpperCase()}</Styled.KitOption>
+						</div>
+
+						{(options.find((opt) => opt.slotKey === slot.slotKey)?.tuneHorz > 0 ||
+							options.find((opt) => opt.slotKey === slot.slotKey)?.tuneVert > 0) && (
+							<div style={{ width: "50%", display: "flex", gap: "20px" }}>
+								<TextInput
+									size="sm"
+									disabled={true}
+									// TODO: i don't have a clue how to handle this typescript
+									value={options.find((opt) => opt.slotKey === slot.slotKey)?.tuneHorz}
+									label={handleHorzTuneName(slot.slotKey)}
+									sx={{ input: { background: colors.light } }}
+								/>
+								<TextInput
+									size="sm"
+									disabled={true}
+									// TODO: i don't have a clue how to handle this typescript
+									value={options.find((opt) => opt.slotKey === slot.slotKey)?.tuneVert}
+									label="Weight"
+									sx={{ input: { background: colors.light } }}
+								/>
+							</div>
+						)}
+					</div>
 				)
 			})}
 		</Container>
@@ -39,14 +65,14 @@ export const Container = styled.div<{ numOfOptions: number }>`
 	align-self: center;
 	width: 100%;
 	height: ${(props) => Math.max(props.numOfOptions * 100, 80)}px;
-	padding: 0 8%;
+	padding: 3% 8%;
 	background: ${colors.lightest};
 	border-radius: 25px;
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
-	justify-content: center;
+	justify-content: space-between;
+	align-items: space-around;
 
 	@media (max-width: 650px) {
 		height: ${(props) => Math.max(props.numOfOptions * 75, 80)}px;

@@ -1,10 +1,10 @@
-import { WarzoneKit, WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
+import { WarzoneKit, WarzoneKitBase, WarzoneKitOption, WarzoneTwoKitBase, WarzoneTwoKitOption } from "@kittr/prisma"
 import { DashboardModals, ReduxModalState } from "@kittr/types/types"
 import { createSlice } from "@reduxjs/toolkit"
 
 interface KitUpdates extends WarzoneKit {
-	base: WarzoneKitBase
-	options: WarzoneKitOption[]
+	base: WarzoneKitBase | WarzoneTwoKitBase
+	options: WarzoneKitOption[] | WarzoneTwoKitOption[]
 }
 
 export interface KitWithOptionalId extends Omit<KitUpdates, "id"> {
@@ -27,8 +27,16 @@ export const dashboardSlice = createSlice({
 			view: ""
 		},
 		kitEditor: {
-			initialKit: {} as Omit<WarzoneKit, "id"> & { id?: string; base: WarzoneKitBase; options: WarzoneKitOption[] },
-			activeKit: {} as Omit<WarzoneKit, "id"> & { id?: string; base: WarzoneKitBase; options: WarzoneKitOption[] }
+			initialKit: {} as Omit<WarzoneKit, "id"> & {
+				id?: string
+				base: WarzoneKitBase | WarzoneTwoKitBase
+				options: WarzoneKitOption[] | WarzoneTwoKitOption[]
+			},
+			activeKit: {} as Omit<WarzoneKit, "id"> & {
+				id?: string
+				base: WarzoneKitBase | WarzoneTwoKitBase
+				options: WarzoneKitOption[] | WarzoneTwoKitOption[]
+			}
 		},
 		overlayEditor: {
 			kit: {} as any
@@ -58,8 +66,8 @@ export const dashboardSlice = createSlice({
 		createNewKit: (state) => {
 			state.kitEditor.initialKit = {
 				id: undefined,
-				base: {} as WarzoneKitBase,
-				options: [] as WarzoneKitOption[],
+				base: {} as WarzoneKitBase | WarzoneTwoKitBase,
+				options: [] as WarzoneKitOption[] | WarzoneTwoKitOption[],
 				featured: false,
 				customTitle: "",
 				blueprint: "",
@@ -73,8 +81,8 @@ export const dashboardSlice = createSlice({
 
 			state.kitEditor.activeKit = {
 				id: undefined,
-				base: {} as WarzoneKitBase,
-				options: [] as WarzoneKitOption[],
+				base: {} as WarzoneKitBase | WarzoneTwoKitBase,
+				options: [] as WarzoneKitOption[] | WarzoneTwoKitOption[],
 				featured: false,
 				customTitle: "",
 				blueprint: "",
