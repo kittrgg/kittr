@@ -105,7 +105,7 @@ export const dashboardSlice = createSlice({
 			state.kitEditor.initialKit = {} as KitWithOptionalId
 			state.kitEditor.activeKit = {} as KitWithOptionalId
 		},
-		updateBase: (state, action: { payload: WarzoneKitBase }) => {
+		updateBase: (state, action: { payload: WarzoneKitBase | WarzoneTwoKitBase }) => {
 			state.kitEditor.activeKit.base = action.payload
 		},
 		updateOptions: (state, action: { payload: any[] }) => {

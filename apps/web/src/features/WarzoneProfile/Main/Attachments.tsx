@@ -4,8 +4,8 @@ import { handleHorzTuneName } from "@Features/Dashboard/Channel/Warzone2/Kits/Ki
 import { useActiveWeapon } from "@Redux/slices/displayr/selectors/useActiveWeapon"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
+import { WarzoneTwoKitOption } from "@kittr/prisma"
 import { TextInput } from "@kittr/ui"
-import { Grid } from "@mantine/core"
 import styled from "styled-components"
 
 const Attachments = () => {
@@ -28,14 +28,14 @@ const Attachments = () => {
 							<Styled.KitOption>{slot.displayName.toUpperCase()}</Styled.KitOption>
 						</div>
 
-						{(options.find((opt) => opt.slotKey === slot.slotKey)?.tuneHorz > 0 ||
-							options.find((opt) => opt.slotKey === slot.slotKey)?.tuneVert > 0) && (
+						{((options.find((opt) => opt.slotKey === slot.slotKey) as WarzoneTwoKitOption)?.tuneHorz > 0 ||
+							(options.find((opt) => opt.slotKey === slot.slotKey) as WarzoneTwoKitOption)?.tuneVert > 0) && (
 							<div style={{ width: "50%", display: "flex", gap: "20px" }}>
 								<TextInput
 									size="sm"
 									disabled={true}
 									// TODO: i don't have a clue how to handle this typescript
-									value={options.find((opt) => opt.slotKey === slot.slotKey)?.tuneHorz}
+									value={(options.find((opt) => opt.slotKey === slot.slotKey) as WarzoneTwoKitOption)?.tuneHorz}
 									label={handleHorzTuneName(slot.slotKey)}
 									sx={{ input: { background: colors.light } }}
 								/>
@@ -43,7 +43,7 @@ const Attachments = () => {
 									size="sm"
 									disabled={true}
 									// TODO: i don't have a clue how to handle this typescript
-									value={options.find((opt) => opt.slotKey === slot.slotKey)?.tuneVert}
+									value={(options.find((opt) => opt.slotKey === slot.slotKey) as WarzoneTwoKitOption)?.tuneVert}
 									label="Weight"
 									sx={{ input: { background: colors.light } }}
 								/>

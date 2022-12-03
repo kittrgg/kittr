@@ -1,12 +1,20 @@
 import { InferQueryOutput } from "@Server/index"
-import { WarzoneKit, WarzoneKitBase, WarzoneKitBaseCategory, WarzoneKitOption } from "@kittr/prisma"
+import {
+	WarzoneKit,
+	WarzoneKitBase,
+	WarzoneKitBaseCategory,
+	WarzoneKitOption,
+	WarzoneTwoKitBase,
+	WarzoneTwoKitBaseCategory,
+	WarzoneTwoKitOption
+} from "@kittr/prisma"
 import { IPopularityRates } from "@kittr/types/popularity"
 import { createSlice } from "@reduxjs/toolkit"
 
 type ActiveWeaponKit = WarzoneKit & {
-	options: WarzoneKitOption[]
-	base: WarzoneKitBase & {
-		category: WarzoneKitBaseCategory
+	options: WarzoneKitOption[] | WarzoneTwoKitOption[]
+	base: (WarzoneKitBase | WarzoneTwoKitBase) & {
+		category: WarzoneKitBaseCategory | WarzoneTwoKitBaseCategory
 	}
 }
 

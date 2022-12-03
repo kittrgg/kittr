@@ -13,7 +13,7 @@ import {
 import { useDispatch } from "@Redux/store"
 import { paragraph } from "@Styles/typography"
 import { isFetchError } from "@Utils/helpers/typeGuards"
-import { WarzoneTwoKit, WarzoneTwoKitBase, WarzoneTwoKitOption } from "@kittr/prisma"
+import { WarzoneKit, WarzoneKitBase, WarzoneKitOption, WarzoneTwoKitBase, WarzoneTwoKitOption } from "@kittr/prisma"
 import styled from "styled-components"
 
 const EditorSnackbar = () => {
@@ -30,7 +30,11 @@ const EditorSnackbar = () => {
 			onMutate: () => {
 				// Grab the existing kit array and map them to just their titles
 				const kitArr = channelData?.warzoneTwoKits.slice() as Array<
-					Omit<WarzoneTwoKit, "id"> & { id?: string; base: WarzoneTwoKitBase; options: WarzoneTwoKitOption[] }
+					Omit<WarzoneKit, "id"> & {
+						id?: string
+						base: WarzoneKitBase | WarzoneTwoKitBase
+						options: WarzoneKitOption[] | WarzoneTwoKitOption[]
+					}
 				>
 
 				// Grab the new kit's name
@@ -108,8 +112,10 @@ const EditorSnackbar = () => {
 		// Checks if any tunes have changed from initialKit
 		Object.keys(initialKit.options).map((key) => {
 			if (
-				initialKit.options[key]?.tuneVert !== activeKit.options[key]?.tuneVert ||
-				initialKit.options[key]?.tuneHorz !== activeKit.options[key]?.tuneHorz
+				(initialKit.options[Number(key)] as WarzoneTwoKitOption)?.tuneVert !==
+					(activeKit.options[Number(key)] as WarzoneTwoKitOption)?.tuneVert ||
+				(initialKit.options[Number(key)] as WarzoneTwoKitOption)?.tuneHorz !==
+					(activeKit.options[Number(key)] as WarzoneTwoKitOption)?.tuneHorz
 			) {
 				changes.push(true)
 			} else {
@@ -127,7 +133,11 @@ const EditorSnackbar = () => {
 	const upsertKit = () => {
 		// Grab the existing kit array and map them to just their titles
 		const kitArr = channelData?.warzoneTwoKits.slice() as Array<
-			Omit<WarzoneTwoKit, "id"> & { id?: string; base: WarzoneTwoKitBase; options: WarzoneTwoKitOption[] }
+			Omit<WarzoneKit, "id"> & {
+				id?: string
+				base: WarzoneKitBase | WarzoneTwoKitBase
+				options: WarzoneKitOption[] | WarzoneTwoKitOption[]
+			}
 		>
 
 		// Grab the new kit's name

@@ -233,8 +233,8 @@ model WarzoneTwoKitOption {
   id             String          @id @default(cuid())
   gameId         String
   displayName    String
-  tuneHorz       Float?         @default(0.00)
-  tuneVert       Float?         @default(0.00)
+  tuneHorz       Float         @default(0.00)
+  tuneVert       Float         @default(0.00)
   slotKey        String
   orderPlacement Int
   kits           WarzoneTwoKit[]

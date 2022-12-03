@@ -8,11 +8,16 @@ import { useActiveKit } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
 import { getArrayUniques } from "@Utils/helpers/getArrayUniques"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
+import { WarzoneKitOption, WarzoneTwoKitOption } from "@kittr/prisma"
 import { Loader, TextInput } from "@kittr/ui"
 import { Grid } from "@mantine/core"
 import React, { useState, useEffect } from "react"
 
 const animationDuration = 1000
+
+interface IWarzoneTwoKit extends WarzoneTwoKitOption {
+	[key: string]: number | string
+}
 
 export const handleHorzTuneName = (slotName: string) => {
 	switch (slotName) {
@@ -51,18 +56,18 @@ const Options = () => {
 		)
 
 	const addToOptions = (displayName: string, slot: string, activeTune?: string) => {
-		const newCurrent = current.slice()
+		const newCurrent: WarzoneKitOption[] | WarzoneTwoKitOption[] = current.slice()
 
 		// When tune input is being adjusted
 		if (activeTune) {
 			const newTune = parseFloat(displayName)
-			const copyCurrentOptions = [...current]
-			const index = newCurrent.findIndex((elem) => elem.slotKey === slot)
-			const copyCurrentObj = { ...newCurrent[index] }
-			// Bad way to use displayName without changing structure of function - should be seperate for tune adjustments
+			const index = (newCurrent as WarzoneTwoKitOption[]).findIndex((elem) => elem.slotKey === slot)
+			const copyCurrentObj = { ...newCurrent[index] } as IWarzoneTwoKit
+
 			copyCurrentObj[activeTune] = newTune
-			copyCurrentOptions[index] = copyCurrentObj
-			return dispatch(updateOptions(copyCurrentOptions))
+			newCurrent[index] = copyCurrentObj
+
+			return dispatch(updateOptions(newCurrent))
 		}
 
 		if (displayName === "") {
@@ -132,9 +137,9 @@ const Options = () => {
 											<TextInput
 												onChange={(e) => addToOptions(e.target.value, slot, "tuneHorz")}
 												type="number"
-												step="0.1"
+												step={0.1}
 												// TODO: i don't have a clue how to handle this typescript
-												value={current.find((opt) => opt.slotKey === slot)?.tuneHorz}
+												value={(current.find((opt) => opt.slotKey === slot) as WarzoneTwoKitOption)?.tuneHorz}
 												label={handleHorzTuneName(slot)}
 												radius="md"
 												size="sm"
@@ -144,10 +149,10 @@ const Options = () => {
 										<Grid.Col span={6}>
 											<TextInput
 												type="number"
-												step="0.1"
+												step={0.1}
 												onChange={(e) => addToOptions(e.target.value, slot, "tuneVert")}
 												// TODO: i don't have a clue how to handle this typescript
-												value={current.find((opt) => opt.slotKey === slot)?.tuneVert}
+												value={(current.find((opt) => opt.slotKey === slot) as WarzoneTwoKitOption)?.tuneVert}
 												label="Weight"
 												radius="md"
 												size="sm"
