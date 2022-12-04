@@ -11,12 +11,12 @@
 		"build": "build-storybook"
 	},
 	"dependencies": {
-		"@kittr/ui": "*",
+		"@kittr/ui": "workspace:*",
 		"react": "17.0.2",
 		"react-dom": "17.0.2"
 	},
 	"devDependencies": {
-		"@kittr/config": "*",
+		"@kittr/config": "workspace:*",
 		"@babel/core": "7.18.9",
 		"@react-theming/storybook-addon": "1.1.6",
 		"@storybook/addon-actions": "6.5.9",

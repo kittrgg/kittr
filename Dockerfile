@@ -1,3 +1,5 @@
+# THIS FILE IS OUTDATED
+# NEEDS TO BE RECONFIGURED TO PNPM
 FROM node:16-slim AS builder
 RUN apt-get update
 RUN apt-get install -y openssl
@@ -14,7 +16,7 @@ RUN apt-get install -y openssl
 WORKDIR /app
 COPY --from=builder /app/out/json/ .
 COPY --from=builder /app/out/yarn.lock ./yarn.lock
-RUN yarn install
+RUN pnpm install
 
 FROM node:16-slim AS sourcer
 RUN apt-get update
