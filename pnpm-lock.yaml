@@ -163,7 +163,6 @@ importers:
       firebase: 9.9.0
       firebase-admin: 10.2.0
       firebase-tools: 10.2.1
-      immer: 9.0.16
       jsonwebtoken: 8.5.1
       micro: 9.3.4
       next: 12.2.0
@@ -176,7 +175,7 @@ importers:
       react-indiana-drag-scroll: 2.2.0
       react-markdown: 8.0.0
       react-query: 3.39.2
-      react-redux: 7.2.6
+      react-redux: ^7.2.6
       react-select: 5.2.2
       redux: 4.1.2
       socket.io-client: 4.4.1
@@ -195,7 +194,7 @@ importers:
       '@mantine/core': 4.2.9_tjfrnn6zd63jqcxewats6glji4
       '@mantine/hooks': 4.2.9_react@17.0.2
       '@mantine/next': 4.2.9_n6wt5coplmkajw3twvkywh6bim
-      '@reduxjs/toolkit': 1.9.1_g7iv2n2puphpvmcbz4lgg4le54
+      '@reduxjs/toolkit': 1.9.1_csuupx2mfbspdz76fkecdgkise
       '@sentry/nextjs': 7.3.0_next@12.2.0+react@17.0.2
       '@stripe/react-stripe-js': 1.7.0_doku6le4lt7iiaiprcfbfdgrdy
       '@stripe/stripe-js': 1.23.0
@@ -208,7 +207,6 @@ importers:
       firebase: 9.9.0
       firebase-admin: 10.2.0
       firebase-tools: 10.2.1
-      immer: 9.0.16
       jsonwebtoken: 8.5.1
       micro: 9.3.4
       next: 12.2.0_sfoxds7t5ydpegc3knd667wn6m
@@ -220,7 +218,7 @@ importers:
       react-indiana-drag-scroll: 2.2.0_sfoxds7t5ydpegc3knd667wn6m
       react-markdown: 8.0.0_udcsdvdzjr5ns727jqoeu7kyda
       react-query: 3.39.2_sfoxds7t5ydpegc3knd667wn6m
-      react-redux: 7.2.6_sfoxds7t5ydpegc3knd667wn6m
+      react-redux: 7.2.9_sfoxds7t5ydpegc3knd667wn6m
       react-select: 5.2.2_xd63vgjm47lzoal5ybyqmsdesy
       redux: 4.1.2
       socket.io-client: 4.4.1
@@ -3965,7 +3963,7 @@ packages:
       react: 17.0.2
     dev: false
 
-  /@reduxjs/toolkit/1.9.1_g7iv2n2puphpvmcbz4lgg4le54:
+  /@reduxjs/toolkit/1.9.1_csuupx2mfbspdz76fkecdgkise:
     resolution: {integrity: sha512-HikrdY+IDgRfRYlCTGUQaiCxxDDgM1mQrRbZ6S1HFZX5ZYuJ4o8EstNmhTwHdPl2rTmLxzwSu0b3AyeyTlR+RA==}
     peerDependencies:
       react: ^16.9.0 || ^17.0.0 || ^18
@@ -3978,7 +3976,7 @@ packages:
     dependencies:
       immer: 9.0.16
       react: 17.0.2
-      react-redux: 7.2.6_sfoxds7t5ydpegc3knd667wn6m
+      react-redux: 7.2.9_sfoxds7t5ydpegc3knd667wn6m
       redux: 4.2.0
       redux-thunk: 2.4.2_redux@4.2.0
       reselect: 4.1.7
@@ -16932,10 +16930,10 @@ packages:
       react-dom: 17.0.2_react@17.0.2
     dev: false
 
-  /react-redux/7.2.6_sfoxds7t5ydpegc3knd667wn6m:
-    resolution: {integrity: sha512-10RPdsz0UUrRL1NZE0ejTkucnclYSgXp5q+tB5SWx2qeG2ZJQJyymgAhwKy73yiL/13btfB6fPr+rgbMAaZIAQ==}
+  /react-redux/7.2.9_sfoxds7t5ydpegc3knd667wn6m:
+    resolution: {integrity: sha512-Gx4L3uM182jEEayZfRbI/G11ZpYdNAnBs70lFVMNdHJI76XYtR+7m0MN+eAs7UHBPhWXcnFPaS+9owSCJQHNpQ==}
     peerDependencies:
-      react: ^16.8.3 || ^17
+      react: ^16.8.3 || ^17 || ^18
       react-dom: '*'
       react-native: '*'
     peerDependenciesMeta:

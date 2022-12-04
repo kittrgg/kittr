@@ -5,7 +5,7 @@ import { io, Socket as TSocket } from "socket.io-client"
 
 const Socket  = createContext<TSocket | null>(null)
 
-export const useSocket = () => useContext(Socket)
+export const useSocket: () => TSocket<any, any> | null = () => useContext(Socket)
 
 const Dash = () => (
 	<Socket.Provider value={io(process.env.NEXT_PUBLIC_SOCKET_HOST as string)}>
