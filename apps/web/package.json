@@ -52,7 +52,6 @@
 		"stripe": "8.205.0",
 		"styled-components": "5.3.3",
 		"superjson": "1.9.1",
-		"tsconfig": "workspace:*",
 		"validator": "13.7.0",
 		"zod": "3.17.3"
 	},
@@ -68,6 +67,7 @@
 		"babel-plugin-styled-components": "2.0.7",
 		"dotenv": "16.0.1",
 		"next-transpile-modules": "9.0.0",
+		"tsconfig": "workspace:*",
 		"typescript": "4.7.4"
 	}
 }

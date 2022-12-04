@@ -1,6 +1,6 @@
 import {
 	Text as MantineTitle,
-	TitleProps,
+	TitleProps as MantineTitleProps,
 	useMantineTheme
 } from "@mantine/core"
 import React from "react"
@@ -58,12 +58,12 @@ export const TITLE_PRESETS = {
 	}
 }
 
-interface Props extends TitleProps {
+export interface TitleProps extends MantineTitleProps {
 	/** Use a preset defined styling property. */
 	preset?: keyof typeof TITLE_PRESETS
 }
 
-export const Title = ({ preset, children, sx, ...props }: Props) => {
+export const Title = ({ preset, children, sx, ...props }: TitleProps) => {
 	const styles = preset ? TITLE_PRESETS[preset] : {}
 	// const { colors } = useMantineTheme()
 

@@ -142,21 +142,17 @@ export const TEXT_PRESETS = {
 	}
 }
 
-interface Props extends SharedTextProps {
+export interface TextProps extends SharedTextProps {
 	/** Use a preset of defined properties. */
 	preset?: keyof typeof TEXT_PRESETS
 	children: ReactNode
 }
 
-export const Text = ({ preset, children, ...props }: Props) => {
+export const Text = ({ preset, children, ...props }: TextProps) => {
 	const styles = preset ? TEXT_PRESETS[preset] : {}
 	const { colors } = useMantineTheme()
 
 	return (
-		// <MantineText
-		// 	sx={{ color: props.color || colors.navy[9], ...styles, ...props.sx }}
-		// 	{...props}
-		// >
 		<MantineText sx={{ ...styles, ...props.sx }} {...props}>
 			{children}
 		</MantineText>
