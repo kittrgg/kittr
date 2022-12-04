@@ -48,7 +48,7 @@ class MyDocument extends Document {
 								data-site-id="6124b025a3fb50273241cb6a"
 								data-mode="scan"
 								async
-							></script>
+							/>
 						)}
 						<script
 							async

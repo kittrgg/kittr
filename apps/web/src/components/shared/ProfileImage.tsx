@@ -40,7 +40,7 @@ export const ProfileImage = ({
 
 	useEffect(() => {
 		// This is for dev!
-		if (process.env.NEXT_PUBLIC_IS_DEV && !hasProfileImage) {
+		if (process.env.VERCEL_ENV === "development" && !hasProfileImage) {
 			setErrored(true)
 			return setIsLoading(false)
 		}
@@ -97,7 +97,7 @@ export const ProfileImage = ({
 		<Wrapper imageSize={size}>
 			<ImageContainer data-cy="profile-image" imageSize={size}>
 				{isLoading ? (
-					<img src={"/media/shimmer.svg"} alt="" style={{ width: "100%" }} loading="lazy" />
+					<img src="/media/shimmer.svg" alt="" style={{ width: "100%" }} loading="lazy" />
 				) : (
 					<>
 						<img
