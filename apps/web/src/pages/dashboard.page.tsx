@@ -3,7 +3,7 @@ import Dashboard from "@Features/Dashboard"
 import { useContext, createContext, Context } from "react"
 import { io, Socket as TSocket } from "socket.io-client"
 
-const Socket  = createContext<TSocket | null>(null)
+const Socket = createContext<TSocket | null>(null)
 
 export const useSocket: () => TSocket<any, any> | null = () => useContext(Socket)
 
