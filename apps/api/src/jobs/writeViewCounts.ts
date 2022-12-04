@@ -1,6 +1,10 @@
 import { BetaAnalyticsDataClient } from "@google-analytics/data/build/src/v1beta"
 import { prisma } from "@kittr/prisma"
-import { StreamerViewCounts } from "@kittr/types"
+
+export interface StreamerViewCounts {
+	startDate: string
+	endDate: string
+}
 
 const analyticsDataClient = new BetaAnalyticsDataClient({
 	credentials: JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS || "{}")

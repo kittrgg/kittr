@@ -23,6 +23,7 @@
 	"devDependencies": {
 		"@kittr/config": "workspace:*",
 		"tsconfig": "workspace:*",
+		"@types/cors": "2.8.5",
 		"@types/cron": "2.0.0",
 		"@types/express": "4.17.13",
 		"@types/node": "17.0.21",

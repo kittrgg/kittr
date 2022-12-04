@@ -39,6 +39,9 @@
 			],
 			"outputs": ["dist/**", ".next/**", "build/**"]
 		},
+		"topo": {
+			"dependsOn": ["^topo"]
+		},
 		"test": {
 			"dependsOn": ["^build"],
 			"outputs": ["coverage/**"]
@@ -61,6 +64,7 @@
 			"cache": false
 		},
 		"type-check": {
+			"dependsOn": ["^topo"],
 			"outputs": []
 		}
 	}
