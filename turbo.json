@@ -3,7 +3,7 @@
 		"build": {
 			"dependsOn": [
 				"^build",
-				"^db:generate",
+				"db:generate",
 				"$DATABASE_URL",
 				"$ENVIRONMENT",
 				"$FIREBASE_APP_ID",
@@ -41,7 +41,7 @@
 			"outputs": ["dist/**", ".next/**", "build/**"]
 		},
 		"topo": {
-			"dependsOn": ["^topo"]
+			"dependsOn": ["db:generate", "^topo"]
 		},
     "db:generate": {
       "cache": false
@@ -59,7 +59,7 @@
 			"outputs": []
 		},
 		"dev": {
-			"dependsOn": ["^db:generate"],
+			"dependsOn": ["db:generate"],
 			"cache": false
 		},
 		"clean": {
