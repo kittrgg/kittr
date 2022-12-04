@@ -3,14 +3,14 @@ import { ChannelPlanType } from "@prisma/client"
 import { CompleteChannel, RelatedChannelModel } from "./index"
 
 export const ChannelPlanModel = z.object({
-  id: z.string(),
-  stripeSubscriptionId: z.string().nullish(),
-  type: z.nativeEnum(ChannelPlanType),
-  channelId: z.string(),
+	id: z.string(),
+	stripeSubscriptionId: z.string().nullish(),
+	type: z.nativeEnum(ChannelPlanType),
+	channelId: z.string()
 })
 
 export interface CompleteChannelPlan extends z.infer<typeof ChannelPlanModel> {
-  channel: CompleteChannel
+	channel: CompleteChannel
 }
 
 /**
@@ -18,6 +18,9 @@ export interface CompleteChannelPlan extends z.infer<typeof ChannelPlanModel> {
  *
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
-export const RelatedChannelPlanModel: z.ZodSchema<CompleteChannelPlan> = z.lazy(() => ChannelPlanModel.extend({
-  channel: RelatedChannelModel,
-}))
+export const RelatedChannelPlanModel: z.ZodSchema<CompleteChannelPlan> = z.lazy(
+	() =>
+		ChannelPlanModel.extend({
+			channel: RelatedChannelModel
+		})
+)
