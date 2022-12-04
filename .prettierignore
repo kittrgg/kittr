@@ -6,3 +6,6 @@ Dockerfile.*
 **/node_modules
 *.log
 public
+
+# Codegen
+packages/prisma/validator/**
