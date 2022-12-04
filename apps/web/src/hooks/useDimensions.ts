@@ -117,7 +117,7 @@ export const useDimensions = <T extends HTMLElement | null>({
 	useEffect(() => {
 		if (!("ResizeObserver" in window) && isClient()) {
 			// eslint-disable-next-line prettier/prettier
-			(window.ResizeObserver as any) = ResizeObserver
+			(window as any).ResizeObserver = ResizeObserver
 			;(window as any).ResizeObserverEntry = ResizeObserverEntry
 		}
 
