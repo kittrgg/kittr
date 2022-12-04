@@ -3,14 +3,14 @@ import { LinkProperty } from "@prisma/client"
 import { CompleteChannel, RelatedChannelModel } from "./index"
 
 export const ChannelLinkModel = z.object({
-	id: z.string(),
-	property: z.nativeEnum(LinkProperty),
-	value: z.string(),
-	channelId: z.string()
+  id: z.string(),
+  property: z.nativeEnum(LinkProperty),
+  value: z.string(),
+  channelId: z.string(),
 })
 
 export interface CompleteChannelLink extends z.infer<typeof ChannelLinkModel> {
-	channel: CompleteChannel
+  channel: CompleteChannel
 }
 
 /**
@@ -18,9 +18,6 @@ export interface CompleteChannelLink extends z.infer<typeof ChannelLinkModel> {
  *
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
-export const RelatedChannelLinkModel: z.ZodSchema<CompleteChannelLink> = z.lazy(
-	() =>
-		ChannelLinkModel.extend({
-			channel: RelatedChannelModel
-		})
-)
+export const RelatedChannelLinkModel: z.ZodSchema<CompleteChannelLink> = z.lazy(() => ChannelLinkModel.extend({
+  channel: RelatedChannelModel,
+}))

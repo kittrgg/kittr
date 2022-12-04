@@ -2,17 +2,16 @@ import * as z from "zod"
 import { CompleteChannelProfile, RelatedChannelProfileModel } from "./index"
 
 export const ChannelAffiliateModel = z.object({
-	id: z.string(),
-	code: z.string().nullish(),
-	description: z.string().nullish(),
-	company: z.string().nullish(),
-	url: z.string().nullish(),
-	channelProfileId: z.string().nullish()
+  id: z.string(),
+  code: z.string().nullish(),
+  description: z.string().nullish(),
+  company: z.string().nullish(),
+  url: z.string().nullish(),
+  channelProfileId: z.string().nullish(),
 })
 
-export interface CompleteChannelAffiliate
-	extends z.infer<typeof ChannelAffiliateModel> {
-	channelProfile?: CompleteChannelProfile | null
+export interface CompleteChannelAffiliate extends z.infer<typeof ChannelAffiliateModel> {
+  channelProfile?: CompleteChannelProfile | null
 }
 
 /**
@@ -20,9 +19,6 @@ export interface CompleteChannelAffiliate
  *
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
-export const RelatedChannelAffiliateModel: z.ZodSchema<CompleteChannelAffiliate> =
-	z.lazy(() =>
-		ChannelAffiliateModel.extend({
-			channelProfile: RelatedChannelProfileModel.nullish()
-		})
-	)
+export const RelatedChannelAffiliateModel: z.ZodSchema<CompleteChannelAffiliate> = z.lazy(() => ChannelAffiliateModel.extend({
+  channelProfile: RelatedChannelProfileModel.nullish(),
+}))

@@ -3,6 +3,7 @@
 		"build": {
 			"dependsOn": [
 				"^build",
+				"^db:generate",
 				"$DATABASE_URL",
 				"$ENVIRONMENT",
 				"$FIREBASE_APP_ID",
@@ -42,6 +43,12 @@
 		"topo": {
 			"dependsOn": ["^topo"]
 		},
+    "db:generate": {
+      "cache": false
+    },
+    "db:push": {
+      "cache": false
+    },
 		"test": {
 			"dependsOn": ["^build"],
 			"outputs": ["coverage/**"]
@@ -52,7 +59,7 @@
 			"outputs": []
 		},
 		"dev": {
-			"dependsOn": ["^build"],
+			"dependsOn": ["^db:generate"],
 			"cache": false
 		},
 		"clean": {
