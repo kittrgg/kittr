@@ -14,6 +14,7 @@
 	},
 	"devDependencies": {
 		"@kittr/config": "workspace:*",
+		"tsconfig": "workspace:*",
 		"@kittr/types": "workspace:*",
 		"typescript": "4.7.4"
 	},
