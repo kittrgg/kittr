@@ -25,4 +25,4 @@ runs:
     - name: pnpm
       shell: bash
       if: steps.pnpm-cache.outputs.cache-hit != 'true'
-      run: pnpm install --frozen-lockfile --prefer-offline --non-interactive
+      run: pnpm install --frozen-lockfile --prefer-offline
