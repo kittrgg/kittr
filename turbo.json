@@ -37,6 +37,7 @@
   "pipeline": {
     "build": {
       "dependsOn": [
+				"db:generate",
         "^build"
       ],
       "outputs": [
@@ -88,6 +89,7 @@
     },
     "type-check": {
       "dependsOn": [
+				"db:generate",
         "^topo"
       ]
     }
