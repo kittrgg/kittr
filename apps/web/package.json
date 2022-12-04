@@ -34,6 +34,7 @@
 		"firebase": "9.9.0",
 		"firebase-admin": "10.2.0",
 		"firebase-tools": "10.2.1",
+		"immer": "9.0.16",
 		"jsonwebtoken": "8.5.1",
 		"micro": "9.3.4",
 		"next": "12.2.0",

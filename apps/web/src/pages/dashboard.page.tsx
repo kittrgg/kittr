@@ -3,9 +3,9 @@ import Dashboard from "@Features/Dashboard"
 import { useContext, createContext, Context } from "react"
 import { io, Socket as TSocket} from "socket.io-client"
 
-const Socket:Context<TSocket<any, any> | null>  = createContext<TSocket | null>(null)
+const Socket  = createContext<TSocket | null>(null)
 
-export const useSocket: () => TSocket<any, any> | null = () => useContext(Socket)
+export const useSocket = () => useContext(Socket)
 
 const Dash = () => (
 	<Socket.Provider value={io(process.env.NEXT_PUBLIC_SOCKET_HOST as string)}>
