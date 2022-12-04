@@ -1,4 +1,3 @@
-// @ts-ignore
 import { useLatestRef } from "./useLatestRef"
 import { isClient } from "@Utils/helpers/isClient"
 import { ResizeObserver, ResizeObserverEntry } from "@juggle/resize-observer"
