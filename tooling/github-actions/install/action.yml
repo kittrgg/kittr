@@ -4,25 +4,38 @@ description: "Sets up Node.js and runs install"
 runs:
   using: composite
   steps:
-    # - name: Checkout
-    #   uses: actions/checkout@v3
-    - uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-    - uses: pnpm/action-setup@v2
-      with:
-        version: 7.17.1
-    - uses: actions/cache@v3
-      name: pnpm-cache
-      id: pnpm-cache
-      with:
-        path: |
-          **/node_modules
-          ${{ steps.pnpm-cache-dir-path.outputs.dir }}
-        key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-        restore-keys: |
-          ${{ runner.os }}-pnpm
-    - name: pnpm
+    - name: Install pnpm with corepack
       shell: bash
-      if: steps.pnpm-cache.outputs.cache-hit != 'true'
-      run: pnpm install --frozen-lockfile --prefer-offline
+      run: corepack enable && pnpm --version
+
+    - name: Get pnpm store directory
+      id: pnpm-cache
+      shell: bash
+      run: echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+    - name: Generate cache key and install command
+      uses: actions/github-script@v6
+      id: workspaces
+      with:
+        script: |-
+          const workspaces = `${{ inputs.workspaces }}`.trim().split('\n').filter(Boolean)
+          if (!workspaces.length) {
+            return {
+              install: 'pnpm install',
+              cachekey: ''
+            }
+          }
+          const withFilterFlags = workspaces.map(workspace => `--filter ${workspace}...`).join(' ')
+          return {
+            install: `pnpm --workspace-root ${withFilterFlags} install`,
+            cachekey: `-workspaces-${workspaces.join('-')}`
+          }
+
+    - name: Restore pnpm global cache
+      uses: actions/cache@v3
+      with:
+        path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+        key: ${{ runner.os }}-pnpm-store${{ fromJSON(steps.workspaces.outputs.result).cachekey }}-${{ hashFiles('pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+          ${{ runner.os }}-pnpm-store-
