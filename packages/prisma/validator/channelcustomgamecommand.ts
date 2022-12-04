@@ -1,22 +1,16 @@
 import * as z from "zod"
-import {
-	CompleteGame,
-	RelatedGameModel,
-	CompleteChannel,
-	RelatedChannelModel
-} from "./index"
+import { CompleteGame, RelatedGameModel, CompleteChannel, RelatedChannelModel } from "./index"
 
 export const ChannelCustomGameCommandModel = z.object({
-	id: z.string(),
-	command: z.string(),
-	gameId: z.string(),
-	channelId: z.string()
+  id: z.string(),
+  command: z.string(),
+  gameId: z.string(),
+  channelId: z.string(),
 })
 
-export interface CompleteChannelCustomGameCommand
-	extends z.infer<typeof ChannelCustomGameCommandModel> {
-	game: CompleteGame
-	channel: CompleteChannel
+export interface CompleteChannelCustomGameCommand extends z.infer<typeof ChannelCustomGameCommandModel> {
+  game: CompleteGame
+  channel: CompleteChannel
 }
 
 /**
@@ -24,10 +18,7 @@ export interface CompleteChannelCustomGameCommand
  *
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
-export const RelatedChannelCustomGameCommandModel: z.ZodSchema<CompleteChannelCustomGameCommand> =
-	z.lazy(() =>
-		ChannelCustomGameCommandModel.extend({
-			game: RelatedGameModel,
-			channel: RelatedChannelModel
-		})
-	)
+export const RelatedChannelCustomGameCommandModel: z.ZodSchema<CompleteChannelCustomGameCommand> = z.lazy(() => ChannelCustomGameCommandModel.extend({
+  game: RelatedGameModel,
+  channel: RelatedChannelModel,
+}))

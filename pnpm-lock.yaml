@@ -132,7 +132,7 @@ importers:
       '@mantine/core': 4.2.9
       '@mantine/hooks': 4.2.9
       '@mantine/next': 4.2.9
-      '@reduxjs/toolkit': 1.7.2
+      '@reduxjs/toolkit': 1.9.1
       '@sentry/nextjs': 7.3.0
       '@stripe/react-stripe-js': 1.7.0
       '@stripe/stripe-js': 1.23.0
@@ -184,7 +184,7 @@ importers:
       '@mantine/core': 4.2.9_tjfrnn6zd63jqcxewats6glji4
       '@mantine/hooks': 4.2.9_react@17.0.2
       '@mantine/next': 4.2.9_n6wt5coplmkajw3twvkywh6bim
-      '@reduxjs/toolkit': 1.7.2_g7iv2n2puphpvmcbz4lgg4le54
+      '@reduxjs/toolkit': 1.9.1_g7iv2n2puphpvmcbz4lgg4le54
       '@sentry/nextjs': 7.3.0_next@12.2.0+react@17.0.2
       '@stripe/react-stripe-js': 1.7.0_doku6le4lt7iiaiprcfbfdgrdy
       '@stripe/stripe-js': 1.23.0
@@ -281,6 +281,7 @@ importers:
       '@prisma/client': 4.0.0
       prisma: 4.0.0
       ts-node: 10.9.1
+      tsconfig: workspace:*
       tsup: 5.12.0
       typescript: 4.7.4
       zod: 3.17.3
@@ -291,6 +292,7 @@ importers:
       '@kittr/config': link:../config
       prisma: 4.0.0
       ts-node: 10.9.1_typescript@4.7.4
+      tsconfig: link:../tsconfig
       tsup: 5.12.0_6oasmw356qmm23djlsjgkwvrtm
       typescript: 4.7.4
       zod: 3.17.3
@@ -4004,11 +4006,11 @@ packages:
       react: 17.0.2
     dev: true
 
-  /@reduxjs/toolkit/1.7.2_g7iv2n2puphpvmcbz4lgg4le54:
-    resolution: {integrity: sha512-wwr3//Ar8ZhM9bS58O+HCIaMlR4Y6SNHfuszz9hKnQuFIKvwaL3Kmjo6fpDKUOjo4Lv54Yi299ed8rofCJ/Vjw==}
+  /@reduxjs/toolkit/1.9.1_g7iv2n2puphpvmcbz4lgg4le54:
+    resolution: {integrity: sha512-HikrdY+IDgRfRYlCTGUQaiCxxDDgM1mQrRbZ6S1HFZX5ZYuJ4o8EstNmhTwHdPl2rTmLxzwSu0b3AyeyTlR+RA==}
     peerDependencies:
-      react: ^16.9.0 || ^17.0.0 || 18.0.0-beta
-      react-redux: ^7.2.1 || ^8.0.0-beta
+      react: ^16.9.0 || ^17.0.0 || ^18
+      react-redux: ^7.2.1 || ^8.0.2
     peerDependenciesMeta:
       react:
         optional: true
@@ -4018,8 +4020,8 @@ packages:
       immer: 9.0.16
       react: 17.0.2
       react-redux: 7.2.6_sfoxds7t5ydpegc3knd667wn6m
-      redux: 4.1.2
-      redux-thunk: 2.4.2_redux@4.1.2
+      redux: 4.2.0
+      redux-thunk: 2.4.2_redux@4.2.0
       reselect: 4.1.7
     dev: false
 
@@ -6171,7 +6173,7 @@ packages:
   /@types/cors/2.8.5:
     resolution: {integrity: sha512-GmK8AKu8i+s+EChK/uZ5IbrXPcPaQKWaNSGevDT/7o3gFObwSUQwqb1jMqxuo+YPvj0ckGzINI+EO7EHcmJjKg==}
     dependencies:
-      '@types/express': 4.17.14
+      '@types/express': 4.17.13
     dev: true
 
   /@types/cron/2.0.0:
@@ -6239,6 +6241,7 @@ packages:
       '@types/express-serve-static-core': 4.17.31
       '@types/qs': 6.9.7
       '@types/serve-static': 1.15.0
+    dev: false
 
   /@types/glob/7.2.0:
     resolution: {integrity: sha512-ZUxbzKl0IfJILTS6t7ip5fQQM/J3TJYubDm3nMbgubNNYS62eXeUpoLUC8/7fJNiFYHTrGPQn7hspDUzIHX3UA==}
@@ -6442,7 +6445,7 @@ packages:
       '@types/hoist-non-react-statics': 3.3.1
       '@types/react': 17.0.39
       hoist-non-react-statics: 3.3.2
-      redux: 4.1.2
+      redux: 4.2.0
     dev: false
 
   /@types/react-select/5.0.1_xd63vgjm47lzoal5ybyqmsdesy:
@@ -17407,16 +17410,22 @@ packages:
       esprima: 4.0.1
     dev: false
 
-  /redux-thunk/2.4.2_redux@4.1.2:
+  /redux-thunk/2.4.2_redux@4.2.0:
     resolution: {integrity: sha512-+P3TjtnP0k/FEjcBL5FZpoovtvrTNT/UXd4/sluaSyrURlSlhLSzEdfsTBW7WsKB6yPvgd7q/iZPICFjW4o57Q==}
     peerDependencies:
       redux: ^4
     dependencies:
-      redux: 4.1.2
+      redux: 4.2.0
     dev: false
 
   /redux/4.1.2:
     resolution: {integrity: sha512-SH8PglcebESbd/shgf6mii6EIoRM0zrQyjcuQ+ojmfxjTtE0z9Y8pa62iA/OJ58qjP6j27uyW4kUF4jl/jd6sw==}
+    dependencies:
+      '@babel/runtime': 7.20.6
+    dev: false
+
+  /redux/4.2.0:
+    resolution: {integrity: sha512-oSBmcKKIuIR4ME29/AeNUnl5L+hvBq7OaJWzaptTQJAntaPvxIJqfnjbaEiCzzaIz+XmVILfqAM3Ob0aXLPfjA==}
     dependencies:
       '@babel/runtime': 7.20.6
     dev: false

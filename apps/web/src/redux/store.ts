@@ -1,7 +1,7 @@
 import { dashboardSlice } from "./slices/dashboard"
 import { displayrSlice } from "./slices/displayr"
 import { globalSlice } from "@Redux/slices/global"
-import { configureStore } from "@reduxjs/toolkit"
+import { configureStore  } from "@reduxjs/toolkit"
 import { TypedUseSelectorHook, useDispatch as useAppDispatch, useSelector as useAppSelector } from "react-redux"
 
 export const store = configureStore({

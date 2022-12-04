@@ -1,4 +1,4 @@
-import { initializeApp } from "@firebase/app"
+import { initializeApp } from "firebase/app"
 import { connectAuthEmulator, getAuth } from "firebase/auth"
 import { connectStorageEmulator, getStorage } from "firebase/storage"
 

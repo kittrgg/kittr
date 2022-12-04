@@ -23,6 +23,7 @@
 		"prisma": "4.0.0",
 		"ts-node": "10.9.1",
 		"tsup": "5.12.0",
+		"tsconfig": "workspace:*",
 		"typescript": "4.7.4",
 		"zod": "3.17.3",
 		"zod-prisma": "0.5.4"
