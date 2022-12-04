@@ -21,6 +21,7 @@
 		"socket.io": "4.5.1"
 	},
 	"devDependencies": {
+		"eslint": "8.29.0",
 		"@kittr/config": "workspace:*",
 		"tsconfig": "workspace:*",
 		"@types/cors": "2.8.5",

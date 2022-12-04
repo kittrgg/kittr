@@ -15,7 +15,7 @@ export const SupportUs = ({ containerStyles }: Props) => {
 
 	return (
 		<Container ref={observe} numOfColumns={numOfColumns} containerStyles={containerStyles as string}>
-			<H6>SUPPORT {"KITTR'S"} CREATOR</H6>
+			<H6>SUPPORT KITTR'S CREATOR</H6>
 			<Paragraph numOfColumns={numOfColumns}>
 				kittr is made by one guy and supported by the community. For as little as $1, you can help make kittr continue
 				to be possible. Thank you all.

@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "@kittr/ui": "workspace:*",
+    "@kittr/config": "workspace:*",
     "@babel/core": "^7.20.5",
     "@storybook/addon-actions": "^6.5.14",
     "@storybook/addon-backgrounds": "^6.5.14",

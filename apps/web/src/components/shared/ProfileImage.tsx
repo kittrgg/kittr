@@ -97,7 +97,7 @@ export const ProfileImage = ({
 		<Wrapper imageSize={size}>
 			<ImageContainer data-cy="profile-image" imageSize={size}>
 				{isLoading ? (
-					<img src={"/media/shimmer.svg"} alt="" style={{ width: "100%" }} loading="lazy" />
+					<img src="/media/shimmer.svg" alt="" style={{ width: "100%" }} loading="lazy" />
 				) : (
 					<>
 						<img

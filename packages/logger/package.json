@@ -13,9 +13,10 @@
 		"type-check": "tsc --pretty --noEmit"
 	},
 	"devDependencies": {
+		"eslint": "8.29.0",
 		"@kittr/config": "workspace:*",
-		"tsconfig": "workspace:*",
 		"@kittr/types": "workspace:*",
+		"tsconfig": "workspace:*",
 		"typescript": "4.7.4"
 	},
 	"dependencies": {

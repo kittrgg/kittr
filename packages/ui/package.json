@@ -11,6 +11,7 @@
 	},
 	"dependencies": {
 		"@kittr/logger": "workspace:*",
+		"@kittr/config": "workspace:*",
 		"@mantine/core": "3.6.9",
 		"@mantine/dates": "3.6.9",
 		"@mantine/hooks": "3.6.9",
@@ -22,6 +23,7 @@
 	},
 	"devDependencies": {
 		"@kittr/config": "workspace:*",
+		"eslint": "8.29.0",
 		"@kittr/types": "workspace:*",
 		"@babel/core": "7.18.9",
 		"@types/react": "17.0.2",
