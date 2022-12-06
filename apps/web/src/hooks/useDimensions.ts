@@ -1,4 +1,3 @@
-// @ts-ignore
 import { useLatestRef } from "./useLatestRef"
 import { isClient } from "@Utils/helpers/isClient"
 import { ResizeObserver, ResizeObserverEntry } from "@juggle/resize-observer"
@@ -117,7 +116,8 @@ export const useDimensions = <T extends HTMLElement | null>({
 
 	useEffect(() => {
 		if (!("ResizeObserver" in window) && isClient()) {
-			window.ResizeObserver = ResizeObserver
+			// eslint-disable-next-line prettier/prettier
+			;(window as any).ResizeObserver = ResizeObserver
 			;(window as any).ResizeObserverEntry = ResizeObserverEntry
 		}
 
