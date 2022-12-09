@@ -190,6 +190,7 @@ model WarzoneTwoKit {
   tiktokUrl                  String?
   quote                      String?
   options                    WarzoneTwoKitOption[]
+  tuning             WarzoneTwoKitOptionTuning[]  
   game                       Game                @relation(fields: [gameId], references: [id])
   gameId                     String
   base                       WarzoneTwoKitBase     @relation(fields: [baseId], references: [id], onDelete: Cascade)
@@ -198,6 +199,16 @@ model WarzoneTwoKit {
   channelId                  String
   channelKitOverlayPrimary   ChannelKitOverlay?  @relation(name: "primaryWzTwoKitOverlay")
   channelKitOverlaySecondary ChannelKitOverlay?  @relation(name: "secondaryWzTwoKitOverlay")
+}
+
+model WarzoneTwoKitOptionTuning {
+  id             String         @id @default(cuid())
+  kit            WarzoneTwoKit  @relation(fields: [kitId], references: [id])  
+  kitId          String 
+  kitOption      WarzoneTwoKitOption  @relation(fields: [kitOptionId], references: [id])  
+  kitOptionId    String 
+  horz          Float @default(0.0)
+  vert          Float @default(0.0)
 }
 
 model ChannelCustomGameCommand {
@@ -233,13 +244,12 @@ model WarzoneTwoKitOption {
   id             String          @id @default(cuid())
   gameId         String
   displayName    String
-  tuneHorz       Float         @default(0.00)
-  tuneVert       Float         @default(0.00)
   slotKey        String
   orderPlacement Int
   kits           WarzoneTwoKit[]
   kitBase        WarzoneTwoKitBase @relation(fields: [kitBaseId], references: [id], onDelete: Cascade)
   kitBaseId      String
+  tuning         WarzoneTwoKitOptionTuning[] 
 }
 
 model WarzoneKitBase {

@@ -63,7 +63,7 @@ export const upsertKit = async ({
 	if (gameView === "wz2") {
 		const channel = await prisma.warzoneTwoKit.upsert({
 			where: { id: kit.id ?? "" },
-			create: update,
+			create: { ...update, options: {} },
 			update
 		})
 

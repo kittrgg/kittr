@@ -1,4 +1,11 @@
-import { WarzoneKit, WarzoneKitBase, WarzoneKitOption, WarzoneTwoKitBase, WarzoneTwoKitOption } from "@kittr/prisma"
+import {
+	WarzoneKit,
+	WarzoneKitBase,
+	WarzoneKitOption,
+	WarzoneTwoKit,
+	WarzoneTwoKitBase,
+	WarzoneTwoKitOption
+} from "@kittr/prisma"
 import { DashboardModals, ReduxModalState } from "@kittr/types/types"
 import { createSlice } from "@reduxjs/toolkit"
 
@@ -27,7 +34,7 @@ export const dashboardSlice = createSlice({
 			view: ""
 		},
 		kitEditor: {
-			initialKit: {} as Omit<WarzoneKit, "id"> & {
+			initialKit: {} as Omit<WarzoneKit | WarzoneTwoKit, "id"> & {
 				id?: string
 				base: WarzoneKitBase | WarzoneTwoKitBase
 				options: WarzoneKitOption[] | WarzoneTwoKitOption[]
