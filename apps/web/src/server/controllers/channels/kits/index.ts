@@ -2,7 +2,7 @@ import { createController } from "@Server/createController"
 import { authenticateUser } from "@Server/middlewares/authenticateUser"
 import * as ChannelsService from "@Server/services/channels"
 import { checkRole } from "@Server/services/users"
-import { WarzoneKitModel, WarzoneKitOptionModel } from "@kittr/prisma/validator"
+import { WarzoneTwoKitModel, WarzoneTwoKitOptionModel } from "@kittr/prisma/validator"
 import { z } from "zod"
 
 const upsertKitToChannel = createController()
@@ -10,8 +10,8 @@ const upsertKitToChannel = createController()
 	.mutation("", {
 		input: z.object({
 			channelId: z.string(),
-			kit: WarzoneKitModel.extend({
-				options: WarzoneKitOptionModel.array().default([])
+			kit: WarzoneTwoKitModel.extend({
+				options: WarzoneTwoKitOptionModel.array().default([])
 			}).partial({ id: true }),
 			gameView: z.string()
 		}),

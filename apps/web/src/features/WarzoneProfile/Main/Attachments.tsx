@@ -28,8 +28,8 @@ const Attachments = () => {
 							<Styled.KitOption>{slot.displayName.toUpperCase()}</Styled.KitOption>
 						</div>
 
-						{((options.find((opt) => opt.slotKey === slot.slotKey) as WarzoneTwoKitOption)?.tuneHorz > 0 ||
-							(options.find((opt) => opt.slotKey === slot.slotKey) as WarzoneTwoKitOption)?.tuneVert > 0) && (
+						{(options.find((opt) => opt.slotKey === slot.slotKey)?.tuneHorz > 0 ||
+							options.find((opt) => opt.slotKey === slot.slotKey)?.tuneVert > 0) && (
 							<div style={{ width: "50%", display: "flex", gap: "20px" }}>
 								<TextInput
 									size="sm"
