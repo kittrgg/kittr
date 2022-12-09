@@ -1,12 +1,10 @@
 import * as z from "zod"
-import { CompleteWarzoneTwoKit, RelatedWarzoneTwoKitModel, CompleteWarzoneTwoKitBase, RelatedWarzoneTwoKitBaseModel } from "./index"
+import { CompleteWarzoneTwoKit, RelatedWarzoneTwoKitModel, CompleteWarzoneTwoKitBase, RelatedWarzoneTwoKitBaseModel, CompleteWarzoneTwoKitOptionTuning, RelatedWarzoneTwoKitOptionTuningModel } from "./index"
 
 export const WarzoneTwoKitOptionModel = z.object({
   id: z.string(),
   gameId: z.string(),
   displayName: z.string(),
-  tuneHorz: z.number(),
-  tuneVert: z.number(),
   slotKey: z.string(),
   orderPlacement: z.number().int(),
   kitBaseId: z.string(),
@@ -15,6 +13,7 @@ export const WarzoneTwoKitOptionModel = z.object({
 export interface CompleteWarzoneTwoKitOption extends z.infer<typeof WarzoneTwoKitOptionModel> {
   kits: CompleteWarzoneTwoKit[]
   kitBase: CompleteWarzoneTwoKitBase
+  tuning: CompleteWarzoneTwoKitOptionTuning[]
 }
 
 /**
@@ -25,4 +24,5 @@ export interface CompleteWarzoneTwoKitOption extends z.infer<typeof WarzoneTwoKi
 export const RelatedWarzoneTwoKitOptionModel: z.ZodSchema<CompleteWarzoneTwoKitOption> = z.lazy(() => WarzoneTwoKitOptionModel.extend({
   kits: RelatedWarzoneTwoKitModel.array(),
   kitBase: RelatedWarzoneTwoKitBaseModel,
+  tuning: RelatedWarzoneTwoKitOptionTuningModel.array(),
 }))

@@ -36,10 +36,12 @@ export const handleHorzTuneName = (slotName: string) => {
 
 const Options = () => {
 	const dispatch = useDispatch()
-	const { base, options: current } = useActiveKit()
+	const { base, options: current, tuning } = useActiveKit()
 	const isMounted = useIsMounted()
 	const { data: availableOptions, isLoading } = useOptionsByKitBase(base?.id)
 	const [animationTrigger, setAnimationTrigger] = useState(false)
+
+	console.log(tuning)
 
 	useEffect(() => {
 		setTimeout(() => {
@@ -139,7 +141,7 @@ const Options = () => {
 												type="number"
 												step={0.1}
 												// TODO: i don't have a clue how to handle this typescript
-												value={(current.find((opt) => opt.slotKey === slot) as WarzoneTwoKitOption)?.tuneHorz}
+												value={current.find((opt) => opt.slotKey === slot)}
 												label={handleHorzTuneName(slot)}
 												radius="md"
 												size="sm"
@@ -151,8 +153,7 @@ const Options = () => {
 												type="number"
 												step={0.1}
 												onChange={(e) => addToOptions(e.target.value, slot, "tuneVert")}
-												// TODO: i don't have a clue how to handle this typescript
-												value={(current.find((opt) => opt.slotKey === slot) as WarzoneTwoKitOption)?.tuneVert}
+												value={current.find((opt) => opt.slotKey === slot)}
 												label="Weight"
 												radius="md"
 												size="sm"

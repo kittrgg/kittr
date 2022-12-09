@@ -1,11 +1,9 @@
 import * as Styled from "./style"
 import colors from "@Colors"
-import { handleHorzTuneName } from "@Features/Dashboard/Channel/Warzone2/Kits/KitEditor/Options"
 import { useActiveWeapon } from "@Redux/slices/displayr/selectors/useActiveWeapon"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
-import { WarzoneTwoKitOption } from "@kittr/prisma"
-import { TextInput } from "@kittr/ui"
+import { Fragment } from "react"
 import styled from "styled-components"
 
 const Attachments = () => {
@@ -22,34 +20,10 @@ const Attachments = () => {
 				array: options
 			}).map((slot) => {
 				return (
-					<div key={slot.slotKey} style={{ display: "flex", justifyContent: "space-between" }}>
-						<div>
-							<Styled.KitOptionLabel>{slot.slotKey}</Styled.KitOptionLabel>
-							<Styled.KitOption>{slot.displayName.toUpperCase()}</Styled.KitOption>
-						</div>
-
-						{(options.find((opt) => opt.slotKey === slot.slotKey)?.tuneHorz > 0 ||
-							options.find((opt) => opt.slotKey === slot.slotKey)?.tuneVert > 0) && (
-							<div style={{ width: "50%", display: "flex", gap: "20px" }}>
-								<TextInput
-									size="sm"
-									disabled={true}
-									// TODO: i don't have a clue how to handle this typescript
-									value={(options.find((opt) => opt.slotKey === slot.slotKey) as WarzoneTwoKitOption)?.tuneHorz}
-									label={handleHorzTuneName(slot.slotKey)}
-									sx={{ input: { background: colors.light } }}
-								/>
-								<TextInput
-									size="sm"
-									disabled={true}
-									// TODO: i don't have a clue how to handle this typescript
-									value={(options.find((opt) => opt.slotKey === slot.slotKey) as WarzoneTwoKitOption)?.tuneVert}
-									label="Weight"
-									sx={{ input: { background: colors.light } }}
-								/>
-							</div>
-						)}
-					</div>
+					<Fragment key={slot.slotKey}>
+						<Styled.KitOptionLabel>{slot.slotKey}</Styled.KitOptionLabel>
+						<Styled.KitOption>{slot.displayName.toUpperCase()}</Styled.KitOption>
+					</Fragment>
 				)
 			})}
 		</Container>

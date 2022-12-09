@@ -4,7 +4,8 @@ import {
 	WarzoneKitOption,
 	WarzoneTwoKit,
 	WarzoneTwoKitBase,
-	WarzoneTwoKitOption
+	WarzoneTwoKitOption,
+	WarzoneTwoKitOptionTuning
 } from "@kittr/prisma"
 import { DashboardModals, ReduxModalState } from "@kittr/types/types"
 import { createSlice } from "@reduxjs/toolkit"
@@ -12,6 +13,7 @@ import { createSlice } from "@reduxjs/toolkit"
 interface KitUpdates extends WarzoneKit {
 	base: WarzoneKitBase | WarzoneTwoKitBase
 	options: WarzoneKitOption[] | WarzoneTwoKitOption[]
+	tuning: WarzoneTwoKitOptionTuning[]
 }
 
 export interface KitWithOptionalId extends Omit<KitUpdates, "id"> {
@@ -38,11 +40,13 @@ export const dashboardSlice = createSlice({
 				id?: string
 				base: WarzoneKitBase | WarzoneTwoKitBase
 				options: WarzoneKitOption[] | WarzoneTwoKitOption[]
+				tuning: WarzoneTwoKitOptionTuning[]
 			},
 			activeKit: {} as Omit<WarzoneKit, "id"> & {
 				id?: string
 				base: WarzoneKitBase | WarzoneTwoKitBase
 				options: WarzoneKitOption[] | WarzoneTwoKitOption[]
+				tuning: WarzoneTwoKitOptionTuning[]
 			}
 		},
 		overlayEditor: {
@@ -75,6 +79,7 @@ export const dashboardSlice = createSlice({
 				id: undefined,
 				base: {} as WarzoneKitBase | WarzoneTwoKitBase,
 				options: [] as WarzoneKitOption[] | WarzoneTwoKitOption[],
+				tuning: [] as WarzoneTwoKitOptionTuning[],
 				featured: false,
 				customTitle: "",
 				blueprint: "",
@@ -90,6 +95,7 @@ export const dashboardSlice = createSlice({
 				id: undefined,
 				base: {} as WarzoneKitBase | WarzoneTwoKitBase,
 				options: [] as WarzoneKitOption[] | WarzoneTwoKitOption[],
+				tuning: [] as WarzoneTwoKitOptionTuning[],
 				featured: false,
 				customTitle: "",
 				blueprint: "",
