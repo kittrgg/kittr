@@ -124,6 +124,9 @@ export const dashboardSlice = createSlice({
 		updateOptions: (state, action: { payload: any[] }) => {
 			state.kitEditor.activeKit.options = action.payload
 		},
+		updateTunes: (state, action: { payload: any[] }) => {
+			state.kitEditor.activeKit.tuning = action.payload
+		},
 		updateFeatured: (state, action: { payload: boolean }) => {
 			state.kitEditor.activeKit.featured = action.payload
 		},
@@ -160,6 +163,7 @@ export const {
 	clearKitEditor,
 	updateBase,
 	updateOptions,
+	updateTunes,
 	updateFeatured,
 	updateCustomTitle,
 	updateBlueprint,

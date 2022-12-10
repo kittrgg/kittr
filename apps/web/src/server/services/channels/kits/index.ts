@@ -1,12 +1,21 @@
 /* eslint-disable max-len */
-import { prisma, WarzoneTwoKit, WarzoneTwoKitOption, WarzoneKit, WarzoneKitOption } from "@kittr/prisma"
+import {
+	prisma,
+	WarzoneTwoKit,
+	WarzoneTwoKitOption,
+	WarzoneKit,
+	WarzoneKitOption,
+	WarzoneTwoKitOptionTuning
+} from "@kittr/prisma"
 
 export const upsertKit = async ({
 	channelId,
 	kit,
 	gameView
 }: {
-	kit: Partial<WarzoneKit | WarzoneTwoKit> & { options?: WarzoneKitOption[] | WarzoneTwoKitOption[] | null }
+	kit: Partial<WarzoneKit | WarzoneTwoKit> & { options?: WarzoneKitOption[] | WarzoneTwoKitOption[] | null } & {
+		tuning?: WarzoneTwoKitOptionTuning[] | null
+	}
 	channelId: string
 	gameView: string
 }) => {
@@ -63,7 +72,15 @@ export const upsertKit = async ({
 	if (gameView === "wz2") {
 		const channel = await prisma.warzoneTwoKit.upsert({
 			where: { id: kit.id ?? "" },
-			create: { ...update, options: {} },
+			create: {
+				...update,
+				tuning: {
+					connectOrCreate: kit.tuning?.map((tune) => ({
+						where: { id: tune.kitOptionId },
+						create: { horz: tune.horz, vert: tune.vert, kitOptionId: tune.kitOptionId }
+					}))
+				}
+			},
 			update
 		})
 

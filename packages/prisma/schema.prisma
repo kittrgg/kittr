@@ -190,7 +190,7 @@ model WarzoneTwoKit {
   tiktokUrl                  String?
   quote                      String?
   options                    WarzoneTwoKitOption[]
-  tuning             WarzoneTwoKitOptionTuning[]  
+  tuning                     WarzoneTwoKitOptionTuning[]  
   game                       Game                @relation(fields: [gameId], references: [id])
   gameId                     String
   base                       WarzoneTwoKitBase     @relation(fields: [baseId], references: [id], onDelete: Cascade)

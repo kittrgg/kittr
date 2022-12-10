@@ -3,21 +3,17 @@ import colors from "@Colors"
 import { Selector } from "@Components/shared"
 import { useOptionsByKitBase } from "@Hooks/api/useOptionsbyKitBase"
 import { useIsMounted } from "@Hooks/useIsMounted"
-import { updateOptions } from "@Redux/slices/dashboard"
+import { updateOptions, updateTunes } from "@Redux/slices/dashboard"
 import { useActiveKit } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
 import { getArrayUniques } from "@Utils/helpers/getArrayUniques"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
-import { WarzoneKitOption, WarzoneTwoKitOption } from "@kittr/prisma"
+import { WarzoneKitOption, WarzoneTwoKitOption, WarzoneTwoKitOptionTuning } from "@kittr/prisma"
 import { Loader, TextInput } from "@kittr/ui"
 import { Grid } from "@mantine/core"
 import React, { useState, useEffect } from "react"
 
 const animationDuration = 1000
-
-interface IWarzoneTwoKit extends WarzoneTwoKitOption {
-	[key: string]: number | string
-}
 
 export const handleHorzTuneName = (slotName: string) => {
 	switch (slotName) {
@@ -41,8 +37,6 @@ const Options = () => {
 	const { data: availableOptions, isLoading } = useOptionsByKitBase(base?.id)
 	const [animationTrigger, setAnimationTrigger] = useState(false)
 
-	console.log(tuning)
-
 	useEffect(() => {
 		setTimeout(() => {
 			if (isMounted()) {
@@ -57,28 +51,44 @@ const Options = () => {
 			(a: string, b: string) => warzoneSlotsOrder.indexOf(a) - warzoneSlotsOrder.indexOf(b)
 		)
 
-	const addToOptions = (displayName: string, slot: string, activeTune?: string) => {
+	const addToOptions = (inputValue: string, slot: string, activeTune?: "horz" | "vert", tuneIdx?: number) => {
 		const newCurrent: WarzoneKitOption[] | WarzoneTwoKitOption[] = current.slice()
 
 		// When tune input is being adjusted
-		if (activeTune) {
-			const newTune = parseFloat(displayName)
-			const index = (newCurrent as WarzoneTwoKitOption[]).findIndex((elem) => elem.slotKey === slot)
-			const copyCurrentObj = { ...newCurrent[index] } as IWarzoneTwoKit
+		if (activeTune && tuneIdx !== undefined && tuneIdx !== -1) {
+			const newTune = parseFloat(inputValue)
+			// copy tuning array
+			const copyTunes: Omit<WarzoneTwoKitOptionTuning[], "id"> = [...tuning]
 
-			copyCurrentObj[activeTune] = newTune
-			newCurrent[index] = copyCurrentObj
+			// copy tune object to mutate
+			const copyTune = {
+				...copyTunes[tuneIdx],
+				kitOptionId: newCurrent[tuneIdx].id,
+				kitId: newCurrent[tuneIdx].kitBaseId
+			}
+			copyTune[activeTune] = newTune
 
-			return dispatch(updateOptions(newCurrent))
+			// if tune doesn't exist - set default value to 0
+			if (!copyTune.hasOwnProperty("horz")) {
+				copyTune["horz"] = 0
+			}
+			if (!copyTune.hasOwnProperty("vert")) {
+				copyTune["vert"] = 0
+			}
+
+			// assign mutated tune object to correctly indexed tunes copy
+			copyTunes[tuneIdx] = copyTune
+
+			return dispatch(updateTunes(copyTunes))
 		}
 
-		if (displayName === "") {
+		if (inputValue === "") {
 			const index = newCurrent.findIndex((elem) => elem.slotKey === slot)
 			newCurrent.splice(index, 1)
 			return dispatch(updateOptions(newCurrent))
 		}
 
-		const toAdd = availableOptions?.find((opt) => opt.displayName === displayName && opt.slotKey === slot)
+		const toAdd = availableOptions?.find((opt) => opt.displayName === inputValue && opt.slotKey === slot)
 
 		const index = newCurrent.findIndex((elem) => elem.slotKey === toAdd?.slotKey)
 
@@ -106,7 +116,7 @@ const Options = () => {
 				{isLoading && <Loader />}
 				{!isLoading &&
 					availableOptions &&
-					slots?.map((slot: string) => {
+					slots?.map((slot: string, idx) => {
 						return (
 							<div key={slot} style={{ marginBottom: "18px", flexBasis: "40%" }}>
 								<Styled.Header>{slot}</Styled.Header>
@@ -137,11 +147,11 @@ const Options = () => {
 									<Grid>
 										<Grid.Col span={6}>
 											<TextInput
-												onChange={(e) => addToOptions(e.target.value, slot, "tuneHorz")}
+												onChange={(e) => addToOptions(e.target.value, slot, "horz", idx)}
 												type="number"
 												step={0.1}
 												// TODO: i don't have a clue how to handle this typescript
-												value={current.find((opt) => opt.slotKey === slot)}
+												value={tuning[idx]?.horz ?? 0}
 												label={handleHorzTuneName(slot)}
 												radius="md"
 												size="sm"
@@ -152,8 +162,8 @@ const Options = () => {
 											<TextInput
 												type="number"
 												step={0.1}
-												onChange={(e) => addToOptions(e.target.value, slot, "tuneVert")}
-												value={current.find((opt) => opt.slotKey === slot)}
+												onChange={(e) => addToOptions(e.target.value, slot, "vert", idx)}
+												value={tuning[idx]?.vert ?? 0}
 												label="Weight"
 												radius="md"
 												size="sm"
