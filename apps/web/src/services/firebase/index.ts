@@ -1,4 +1,4 @@
-import { initializeApp } from "@firebase/app"
+import { initializeApp, getApp } from "@firebase/app"
 import { connectAuthEmulator, getAuth } from "firebase/auth"
 import { connectStorageEmulator, getStorage } from "firebase/storage"
 
@@ -15,12 +15,19 @@ export const firebaseConfig = {
 
 // Must be called before any other Firebase APIs can be used
 // eslint-disable-next-line
-const firebase = initializeApp(firebaseConfig)
+
+try {
+	getApp()
+} catch {
+	initializeApp(firebaseConfig)
+}
 
 export const auth = getAuth()
 export const storage = getStorage()
 
-if (process.env.NEXT_PUBLIC_IS_DEV && !auth.emulatorConfig) {
-	connectAuthEmulator(auth, `http://${process.env.NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST}`, { disableWarnings: true })
-	connectStorageEmulator(storage, "localhost", 4002)
-}
+// We used to use this code for doing localized firebase emulators.
+// They became pretty toxic so we're not going to use them right now.
+// if (process.env.NEXT_PUBLIC_IS_DEV && !auth.emulatorConfig) {
+// 	connectAuthEmulator(auth, `http://${process.env.NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST}`, { disableWarnings: true })
+// 	connectStorageEmulator(storage, "localhost", 4002)
+// }
