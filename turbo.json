@@ -33,7 +33,8 @@
 		"SUBSCRIPTION_PRICE_ID",
 		"TWITCH_CLIENT_ID",
 		"TWITCH_CLIENT_SECRET",
-		"VERCEL_ENV"
+		"VERCEL_ENV",
+		"VERCEL_URL"
 	],
   "pipeline": {
     "build": {
