@@ -1,4 +1,4 @@
-import { initializeApp } from "@firebase/app"
+import { initializeApp, getApp } from "@firebase/app"
 import { connectAuthEmulator, getAuth } from "firebase/auth"
 import { connectStorageEmulator, getStorage } from "firebase/storage"
 
@@ -15,7 +15,11 @@ export const firebaseConfig = {
 
 // Must be called before any other Firebase APIs can be used
 // eslint-disable-next-line
-const firebase = initializeApp(firebaseConfig)
+try {
+	getApp()
+} catch {
+	const firebase = initializeApp(firebaseConfig)
+}
 
 export const auth = getAuth()
 export const storage = getStorage()
