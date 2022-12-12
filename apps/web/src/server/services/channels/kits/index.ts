@@ -14,7 +14,7 @@ export const upsertKit = async ({
 	gameView
 }: {
 	kit: Partial<WarzoneKit | WarzoneTwoKit> & { options?: WarzoneKitOption[] | WarzoneTwoKitOption[] | null } & {
-		tuning?: WarzoneTwoKitOptionTuning[] | null
+		tuning?: (Omit<WarzoneTwoKitOptionTuning, "id"> & { id?: string })[] | null
 	}
 	channelId: string
 	gameView: string
@@ -70,13 +70,14 @@ export const upsertKit = async ({
 	}
 
 	if (gameView === "wz2") {
+		console.log(kit.tuning)
 		const channel = await prisma.warzoneTwoKit.upsert({
 			where: { id: kit.id ?? "" },
 			create: {
 				...update,
 				tuning: {
 					connectOrCreate: kit.tuning?.map((tune) => ({
-						where: { id: tune.kitOptionId },
+						where: { id: tune.id ?? "" },
 						create: { horz: tune.horz, vert: tune.vert, kitOptionId: tune.kitOptionId }
 					}))
 				}

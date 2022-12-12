@@ -64,7 +64,7 @@ const Options = () => {
 			const copyTune = {
 				...copyTunes[tuneIdx],
 				kitOptionId: newCurrent[tuneIdx].id,
-				kitId: newCurrent[tuneIdx].kitBaseId
+				kitId: newCurrent[tuneIdx].id
 			}
 			copyTune[activeTune] = newTune
 

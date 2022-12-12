@@ -13,14 +13,7 @@ import {
 import { useDispatch } from "@Redux/store"
 import { paragraph } from "@Styles/typography"
 import { isFetchError } from "@Utils/helpers/typeGuards"
-import {
-	WarzoneKitBase,
-	WarzoneKitOption,
-	WarzoneTwoKit,
-	WarzoneTwoKitBase,
-	WarzoneTwoKitOption,
-	WarzoneTwoKitOptionTuning
-} from "@kittr/prisma"
+import { WarzoneTwoKit, WarzoneTwoKitBase, WarzoneTwoKitOption, WarzoneTwoKitOptionTuning } from "@kittr/prisma"
 import styled from "styled-components"
 
 type WarzoneTwoKitOmitID = Omit<WarzoneTwoKit, "id"> & {

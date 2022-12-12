@@ -1,20 +1,16 @@
 import { initializeApp, getApp } from "@firebase/app"
-import { connectAuthEmulator, getAuth } from "firebase/auth"
-import { connectStorageEmulator, getStorage } from "firebase/storage"
+import { getAuth } from "firebase/auth"
+import { getStorage } from "firebase/storage"
 
 export const firebaseConfig = {
-	apiKey: process.env.NEXT_PUBLIC_API_KEY || "dev",
-	authDomain: process.env.FIREBASE_AUTH_DOMAIN || "dev",
-	databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL || "dev",
-	projectId: process.env.FIREBASE_PROJECT_ID || "dev",
-	storageBucket: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL || "dev",
-	messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID || "dev",
-	appId: process.env.FIREBASE_APP_ID || "dev",
-	measurementId: process.env.FIREBASE_MEASUREMENT_ID || "dev"
+	apiKey: process.env.NEXT_PUBLIC_API_KEY,
+	authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+	projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+	storageBucket: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
+	messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+	appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+	measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 }
-
-// Must be called before any other Firebase APIs can be used
-// eslint-disable-next-line
 
 try {
 	getApp()

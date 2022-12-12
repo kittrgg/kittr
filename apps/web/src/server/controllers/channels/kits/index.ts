@@ -40,7 +40,7 @@ const upsertWz2KitToChannel = createController()
 			channelId: z.string(),
 			kit: WarzoneTwoKitModel.extend({
 				options: WarzoneTwoKitOptionModel.array().default([]),
-				tuning: WarzoneTwoKitOptionTuningModel.partial({ id: true }).array().default([])
+				tuning: WarzoneTwoKitOptionTuningModel.partial({ id: true, horz: true, vert: true }).array().default([])
 			}).partial({ id: true }),
 			gameView: z.string()
 		}),
@@ -49,7 +49,16 @@ const upsertWz2KitToChannel = createController()
 
 			const channel = await ChannelsService.upsertKit({
 				channelId: input.channelId,
-				kit: input.kit,
+				kit: {
+					...input.kit,
+					tuning: input.kit.tuning.map((tune) => ({
+						id: tune.id,
+						horz: tune.horz ?? 0,
+						vert: tune.vert ?? 0,
+						kitOptionId: tune.kitOptionId,
+						kitId: tune.kitId
+					}))
+				},
 				gameView: input.gameView
 			})
 			return channel
