@@ -32,7 +32,7 @@ export const handleHorzTuneName = (slotName: string) => {
 
 const Options = () => {
 	const dispatch = useDispatch()
-	const { base, options: current, tuning } = useActiveKit()
+	const { base, options: current, tuning, id: activeKitId } = useActiveKit()
 	const isMounted = useIsMounted()
 	const { data: availableOptions, isLoading } = useOptionsByKitBase(base?.id)
 	const [animationTrigger, setAnimationTrigger] = useState(false)
@@ -64,7 +64,7 @@ const Options = () => {
 			const copyTune = {
 				...copyTunes[tuneIdx],
 				kitOptionId: newCurrent[tuneIdx].id,
-				kitId: newCurrent[tuneIdx].id
+				kitId: activeKitId!
 			}
 			copyTune[activeTune] = newTune
 

@@ -70,7 +70,6 @@ export const upsertKit = async ({
 	}
 
 	if (gameView === "wz2") {
-		console.log(kit.tuning)
 		const channel = await prisma.warzoneTwoKit.upsert({
 			where: { id: kit.id ?? "" },
 			create: {
@@ -82,7 +81,18 @@ export const upsertKit = async ({
 					}))
 				}
 			},
-			update
+			update: {
+				...update,
+				tuning: {
+					upsert: kit.tuning?.map((tune) => {
+						return {
+							where: { id: tune.id ?? "" },
+							create: { horz: tune.horz, vert: tune.vert, kitOptionId: tune.kitOptionId },
+							update: { horz: tune.horz, vert: tune.vert, kitOptionId: tune.kitOptionId }
+						}
+					})
+				}
+			}
 		})
 
 		return channel
