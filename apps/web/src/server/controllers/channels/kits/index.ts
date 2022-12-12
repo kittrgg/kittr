@@ -39,9 +39,10 @@ const upsertWz2KitToChannel = createController()
 		input: z.object({
 			channelId: z.string(),
 			kit: WarzoneTwoKitModel.extend({
+				id: z.string().optional(),
 				options: WarzoneTwoKitOptionModel.array().default([]),
 				tuning: WarzoneTwoKitOptionTuningModel.partial({ id: true, horz: true, vert: true }).array().default([])
-			}).partial({ id: true }),
+			}),
 			gameView: z.string()
 		}),
 		async resolve({ ctx, input }) {
