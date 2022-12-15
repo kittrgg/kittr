@@ -1,5 +1,6 @@
 import { useDimensions } from "@Hooks/useDimensions"
 import Ad from "@Services/venatus/Ad"
+import { useViewportSize } from "@mantine/hooks"
 import dynamic from "next/dynamic"
 
 interface Props {
@@ -22,7 +23,8 @@ const ResponsiveBanner = ({
 	smallWidthAdUnit = "d300x50",
 	containerStyles = { margin: "18px 0" }
 }: Props) => {
-	const { observe, width } = useDimensions()
+	const { observe } = useDimensions()
+	const { width } = useViewportSize()
 
 	return (
 		<div ref={observe}>

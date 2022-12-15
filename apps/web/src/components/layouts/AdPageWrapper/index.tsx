@@ -4,8 +4,8 @@ import AdUnits from "./AdUnits"
 import { Head, SupportUs } from "@Components/shared"
 import { ErrorBoundary } from "@Components/shared/ErrorBoundary"
 import { useDetectAdBlock } from "@Hooks/useDetectAdBlock"
-import { useViewportDimensions } from "@Hooks/useViewportDimensions"
-import { Grid } from "@mantine/core"
+import { Grid, Image } from "@mantine/core"
+import { useViewportSize } from "@mantine/hooks"
 import { useRouter } from "next/router"
 import { useState, useEffect, ReactNode } from "react"
 
@@ -30,7 +30,7 @@ interface Props {
  */
 const AdPageWrapper = ({ withAds = true, title, description, children }: Props) => {
 	const [top, setTop] = useState("")
-	const { width } = useViewportDimensions()
+	const { width } = useViewportSize()
 	const adBlock = useDetectAdBlock()
 	const { pathname } = useRouter()
 
