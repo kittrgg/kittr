@@ -56,17 +56,16 @@ const Options = () => {
 
 		// When tune input is being adjusted
 		if (activeTune && tuneIdx !== undefined && tuneIdx !== -1) {
-			const newTune = parseFloat(inputValue)
 			// copy tuning array
 			const copyTunes: Omit<WarzoneTwoKitOptionTuning[], "id"> = [...tuning]
 
 			// copy tune object to mutate
 			const copyTune = {
 				...copyTunes[tuneIdx],
-				kitOptionId: newCurrent[tuneIdx].id,
+				kitOptionId: newCurrent.find((newC) => newC.slotKey === slot)!.id,
 				kitId: activeKitId!
 			}
-			copyTune[activeTune] = newTune
+			copyTune[activeTune] = Number(inputValue)
 
 			// if tune doesn't exist - set default value to 0
 			if (!copyTune.hasOwnProperty("horz")) {
@@ -143,6 +142,7 @@ const Options = () => {
 											}))
 									]}
 								/>
+
 								{current.find((opt) => opt.slotKey === slot)?.displayName && (
 									<Grid>
 										<Grid.Col span={6}>
@@ -150,8 +150,12 @@ const Options = () => {
 												onChange={(e) => addToOptions(e.target.value, slot, "horz", idx)}
 												type="number"
 												step={0.1}
-												// TODO: i don't have a clue how to handle this typescript
-												value={tuning[idx]?.horz ?? 0}
+												value={
+													tuning.find(
+														(tune) =>
+															tune.kitOptionId === availableOptions.find((option) => option.slotKey === slot)?.id
+													)?.horz ?? 0
+												}
 												label={handleHorzTuneName(slot)}
 												radius="md"
 												size="sm"
@@ -163,7 +167,12 @@ const Options = () => {
 												type="number"
 												step={0.1}
 												onChange={(e) => addToOptions(e.target.value, slot, "vert", idx)}
-												value={tuning[idx]?.vert ?? 0}
+												value={
+													tuning.find(
+														(tune) =>
+															tune.kitOptionId === availableOptions.find((option) => option.slotKey === slot)?.id
+													)?.vert ?? 0
+												}
 												label="Weight"
 												radius="md"
 												size="sm"
