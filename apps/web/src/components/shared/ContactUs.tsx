@@ -35,22 +35,10 @@ export const ContactUs = () => {
 					<Title order={2} className={classes.title}>
 						{property.title}
 					</Title>
-					<Button
-						component="a"
-						href={property.primaryLink}
-						target="_blank"
-						rel="noopener noreferrer"
-						className={classes.linkButton}
-					>
+					<Button component="a" href={property.primaryLink} target="_blank" rel="noopener noreferrer" mb="xl">
 						{property.primaryText}
 					</Button>
-					<Button
-						component="a"
-						href={property.secondaryLink}
-						target="_blank"
-						rel="noopener noreferrer"
-						className={classes.secondaryLinkButton}
-					>
+					<Button component="a" href={property.secondaryLink} target="_blank" rel="noopener noreferrer">
 						{property.secondaryText}
 					</Button>
 				</Grid.Col>
