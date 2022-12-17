@@ -8,14 +8,15 @@ import React from "react"
 
 type AccordionListItem = { title: string; content: React.ReactNode }
 
-interface Props extends Omit<AccordionProps, "children"> {
+export interface Props extends Omit<AccordionProps, "children"> {
 	items: AccordionListItem[]
 }
 
 export const Accordion = ({ items, ...rest }: Props) => (
 	<MantineAccordion iconPosition="right" {...rest}>
-		{items.map((item) => (
+		{items.map((item, idx) => (
 			<AccordionItem
+				key={idx}
 				style={{}}
 				label={
 					<Title order={3} preset="h4">
