@@ -7,7 +7,7 @@
 		"lint": "eslint --fix",
 		"clean": "rm -rf .turbo  && rm -rf dist && rm -rf coverage && rm -rf node_modules",
 		"type-check": "tsc --pretty --noEmit",
-		"storybook": "start-storybook -p 3002 --no-manager-cache",
+		"dev": "start-storybook -p 3002 --no-manager-cache",
 		"build": "build-storybook"
 	},
 	"dependencies": {
@@ -33,6 +33,6 @@
 		"@vitejs/plugin-react": "2.0.0",
 		"babel-loader": "8.2.5",
 		"typescript": "4.9.3",
-		"vite": "3.0.2"
+		"vite": "^4.0.1"
 	}
 }
