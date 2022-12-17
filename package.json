@@ -11,6 +11,7 @@
 		"dx": "dotenv -- run-s docker:up dev",
 		"dx:storybook": "cd packages/ui && yarn storybook",
 		"dev": "turbo run dev",
+		"db:deploy": "dotenv -- turbo run db:deploy",
 		"dx:db-seed": "node ./scripts/createEnvironment/prisma.js && turbo run seed",
 		"dx:db-view": "run-s env:prisma db:studio",
 		"dx:db-nuke": "cd packages && cd prisma && yarn db:reset",

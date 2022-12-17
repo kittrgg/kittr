@@ -12,8 +12,6 @@ export const firebaseConfig = {
 	measurementId: process.env.FIREBASE_MEASUREMENT_ID
 }
 
-console.log(firebaseConfig)
-
 // Must be called before any other Firebase APIs can be used
 // eslint-disable-next-line
 try {

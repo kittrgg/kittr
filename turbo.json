@@ -39,62 +39,39 @@
 	],
   "pipeline": {
     "build": {
-      "dependsOn": [
-				"db:generate",
-        "^build"
-      ],
-      "outputs": [
-        "dist/**",
-        ".next/**",
-        "build/**"
-      ]
+      "dependsOn": ["db:deploy", "db:generate", "^build" ],
+      "outputs": [ "dist/**", ".next/**", "build/**" ]
     },
+		"db:deploy": {
+			"cache": false
+		},
     "topo": {
-      "dependsOn": [
-        "db:generate",
-        "^topo"
-      ]
+      "dependsOn": [ "db:generate", "^topo" ]
     },
     "db:generate": {
       "cache": false
     },
+    "lint": {
+      "dependsOn": ["^topo"],
+      "outputs": []
+    },
     "db:push": {
       "cache": false
     },
-    "test": {
-      "dependsOn": [
-        "^build"
-      ],
-      "outputs": [
-        "coverage/**"
-      ]
+    "type-check": {
+      "dependsOn": [ "db:generate", "^topo" ]
     },
-    "lint": {
-      "outputs": []
+    "test": {
+      "dependsOn": [ "^topo", "^build" ],
+      "outputs": [ "coverage/**" ]
     },
     "dev": {
-      "dependsOn": [
-        "db:generate"
-      ],
-      "cache": false
-    },
-    "clean": {
+      "dependsOn": [ "db:generate" ],
       "cache": false
     },
     "seed": {
-      "dependsOn": [
-        "db:generate"
-      ],
+      "dependsOn": [ "db:generate" ],
       "cache": false
-    },
-    "start": {
-      "cache": false
-    },
-    "type-check": {
-      "dependsOn": [
-				"db:generate",
-        "^topo"
-      ]
     }
   }
 }
