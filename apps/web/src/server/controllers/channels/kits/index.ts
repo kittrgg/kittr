@@ -42,7 +42,7 @@ const upsertWz2KitToChannel = createController()
 				id: z.string().optional(),
 				options: WarzoneTwoKitOptionModel.array().default([]),
 				tuning: WarzoneTwoKitOptionTuningModel.partial({ id: true, horz: true, vert: true })
-					.extend({ id: z.string().optional() })
+					.extend({ kitId: z.string().optional() })
 					.array()
 					.default([])
 			}),

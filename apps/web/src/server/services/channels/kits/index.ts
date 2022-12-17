@@ -14,7 +14,7 @@ export const upsertKit = async ({
 	gameView
 }: {
 	kit: Partial<WarzoneKit | WarzoneTwoKit> & { options?: WarzoneKitOption[] | WarzoneTwoKitOption[] | null } & {
-		tuning?: (Omit<WarzoneTwoKitOptionTuning, "id"> & { id?: string })[] | null
+		tuning?: (Omit<WarzoneTwoKitOptionTuning, "id" | "kitId"> & { id?: string; kitId?: string })[] | null
 	}
 	channelId: string
 	gameView: string
