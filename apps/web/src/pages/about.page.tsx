@@ -44,7 +44,7 @@ const About = () => {
 						</Text>
 					</Section>
 				</Grid.Col>
-				<Grid.Col span={4} >
+				<Grid.Col span={4}>
 					<Section title="WHO WE SERVE">
 						<Text>
 							Twitch <strong>players</strong>, <strong>moderators</strong>, and <strong>viewers</strong> all love using
