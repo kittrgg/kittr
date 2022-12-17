@@ -1,18 +1,15 @@
 import admin from "firebase-admin"
 
 if (!admin.apps.length) {
-	if (process.env.NEXT_PUBLIC_IS_DEV) {
-		console.log("Using admin in emulator mode.")
-		admin.initializeApp({ projectId: "dev" })
-	} else {
-		try {
-			admin.initializeApp({
-				credential: admin.credential.cert(JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS as any))
-			})
-		} catch (err) {
-			console.error(err)
-			console.error("Something is wrong with your Firebase key.")
-		}
+	try {
+		admin.initializeApp({
+			// serviceAccountId: process.env.FIREBASE_PROJECT_ID,
+			// databaseURL: process.env.FIREBASE_DATABASE_URL,
+			projectId: process.env.FIREBASE_PROJECT_ID
+		})
+	} catch (err) {
+		console.error(err)
+		console.error("Something is wrong with your Firebase key.")
 	}
 }
 

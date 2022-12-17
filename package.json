@@ -8,7 +8,7 @@
 	],
 	"packageManager": "yarn@1.22.16",
 	"scripts": {
-		"dx": "run-s env:clear env:dev docker:up dev",
+		"dx": "dotenv -- run-s docker:up dev",
 		"dx:db-seed": "node ./scripts/createEnvironment/prisma.js && turbo run seed",
 		"dx:db-view": "run-s env:prisma db:studio",
 		"dx:db-nuke": "cd packages && cd prisma && yarn db:reset",
@@ -35,6 +35,7 @@
 		"test:e2e": "cd lib && cd e2e && npm run cypress:e2e"
 	},
 	"devDependencies": {
+		"dotenv-cli": "^6.0.0",
 		"envfile": "6.17.0",
 		"kill-port": "2.0.1",
 		"lint-staged": "12.3.4",
@@ -53,5 +54,7 @@
 		"packages/**/*.{js,ts,jsx,tsx}": [
 			"eslint --fix ."
 		]
+	},
+	"dependencies": {
 	}
 }
