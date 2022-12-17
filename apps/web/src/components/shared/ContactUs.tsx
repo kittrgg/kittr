@@ -1,6 +1,6 @@
 import colors from "@Colors"
 import { Routes } from "@Utils/lookups/routes"
-import { createStyles, Grid, Title, UnstyledButton } from "@mantine/core"
+import { createStyles, Grid, Title, Button } from "@mantine/core"
 
 const PROPERTIES = [
 	{
@@ -35,7 +35,7 @@ export const ContactUs = () => {
 					<Title order={2} className={classes.title}>
 						{property.title}
 					</Title>
-					<UnstyledButton
+					<Button
 						component="a"
 						href={property.primaryLink}
 						target="_blank"
@@ -43,8 +43,8 @@ export const ContactUs = () => {
 						className={classes.linkButton}
 					>
 						{property.primaryText}
-					</UnstyledButton>
-					<UnstyledButton
+					</Button>
+					<Button
 						component="a"
 						href={property.secondaryLink}
 						target="_blank"
@@ -52,7 +52,7 @@ export const ContactUs = () => {
 						className={classes.secondaryLinkButton}
 					>
 						{property.secondaryText}
-					</UnstyledButton>
+					</Button>
 				</Grid.Col>
 			))}
 		</Grid>

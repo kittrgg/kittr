@@ -9,27 +9,21 @@
 	"packageManager": "yarn@1.22.16",
 	"scripts": {
 		"dx": "dotenv -- run-s docker:up dev",
+		"dx:storybook": "cd packages/ui && yarn storybook",
+		"dev": "turbo run dev",
 		"dx:db-seed": "node ./scripts/createEnvironment/prisma.js && turbo run seed",
 		"dx:db-view": "run-s env:prisma db:studio",
 		"dx:db-nuke": "cd packages && cd prisma && yarn db:reset",
 		"dx:db-snapshot": "docker exec postgres pg_dump -U turboAf -Fc -f backup.sql prisma",
 		"dx:seed-snapshot": "docker exec -i postgres dropdb dev -U dev && echo DB dropped. && docker exec -i postgres pg_restore -U dev -d template1 -v \"backup.pgsql\" --create ",
-		"dx:storybook": "cd packages/ui && yarn storybook",
 		"type-check": "turbo run type-check",
 		"lint": "turbo run lint",
 		"test": "turbo run test",
-		"clean": "turbo run clean && echo Removing top-level node_modules... && rm -rf node_modules && echo All clean!",
-		"prettier-write": "prettier --write \"**/*.{ts,tsx,md}\"",
-		"kill-ports": "kill-port 3000,3001,5555",
-		"dev": "turbo run dev",
-		"db-studio": "cd packages/prisma && yarn db:studio",
-		"env:clear": "node ./scripts/createEnvironment/clear.js",
-		"env:prisma": "node ./scripts/createEnvironment/prisma.js && yarn docker:up",
-		"env:local-prod": "node ./scripts/createEnvironment/local-prod.js",
-		"env:dev": "node ./scripts/createEnvironment/dev.js && yarn docker:up",
+		"clean": "npx npkill",
 		"docker:up": "docker compose -f docker-compose.yml up --build -d",
 		"docker:down": "docker compose -f docker-compose.yml down",
-		"dev:deploy": "docker-compose -f docker-compose.deploy.yml up",
+		"prettier-write": "prettier --write \"**/*.{ts,tsx,md}\"",
+		"kill-ports": "kill-port 3000,3001,5555",
 		"build:api": "turbo run build --filter=api",
 		"start:api": "turbo run start --filter=api",
 		"test:e2e": "cd lib && cd e2e && npm run cypress:e2e"
@@ -42,10 +36,6 @@
 		"npm-run-all": "4.1.5",
 		"prettier": "2.7.1",
 		"turbo": "1.6.3"
-	},
-	"engines": {
-		"npm": ">=8.0.0",
-		"node": ">=16.0.0"
 	},
 	"lint-staged": {
 		"apps/**/*.{js,ts,jsx,tsx}": [

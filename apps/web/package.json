@@ -14,13 +14,13 @@
 		"type-check": "tsc --pretty --noEmit"
 	},
 	"dependencies": {
-		"@juggle/resize-observer": "3.3.1",
 		"@kittr/logger": "*",
 		"@kittr/prisma": "*",
 		"@kittr/ui": "*",
-		"@mantine/core": "4.2.9",
-		"@mantine/hooks": "4.2.9",
-		"@mantine/next": "4.2.9",
+		"@juggle/resize-observer": "3.3.1",
+		"@mantine/core": "3.6.9",
+		"@mantine/hooks": "3.6.9",
+		"@mantine/next": "3.6.9",
 		"@reduxjs/toolkit": "1.7.2",
 		"@sentry/nextjs": "7.3.0",
 		"@stripe/react-stripe-js": "1.7.0",
