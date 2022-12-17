@@ -3,8 +3,8 @@ import admin from "firebase-admin"
 if (!admin.apps.length) {
 	try {
 		admin.initializeApp({
-			// serviceAccountId: process.env.FIREBASE_PROJECT_ID,
-			// databaseURL: process.env.FIREBASE_DATABASE_URL,
+			storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+			databaseURL: process.env.FIREBASE_DATABASE_URL,
 			projectId: process.env.FIREBASE_PROJECT_ID
 		})
 	} catch (err) {
