@@ -6,7 +6,8 @@ import {
 	WarzoneKitOption,
 	WarzoneTwoKitBase,
 	WarzoneTwoKitBaseCategory,
-	WarzoneTwoKitOption
+	WarzoneTwoKitOption,
+	WarzoneTwoKitOptionTuning
 } from "@kittr/prisma"
 import { IPopularityRates } from "@kittr/types/popularity"
 import { createSlice } from "@reduxjs/toolkit"
@@ -16,6 +17,7 @@ type ActiveWeaponKit = WarzoneKit & {
 	base: (WarzoneKitBase | WarzoneTwoKitBase) & {
 		category: WarzoneKitBaseCategory | WarzoneTwoKitBaseCategory
 	}
+	tuning?: WarzoneTwoKitOptionTuning[]
 }
 
 export const displayrSlice = createSlice({

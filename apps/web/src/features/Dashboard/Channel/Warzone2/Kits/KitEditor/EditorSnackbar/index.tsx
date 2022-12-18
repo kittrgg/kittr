@@ -118,7 +118,7 @@ const EditorSnackbar = () => {
 
 		// Checks if any tunes have changed from initialKit
 		initialKit.tuning.map((tune, idx) => {
-			if (tune.horz !== activeKit.tuning[idx].horz || tune.vert !== activeKit.tuning[idx].vert) {
+			if (tune.horz !== activeKit.tuning[idx]?.horz || tune.vert !== activeKit.tuning[idx]?.vert) {
 				changes.push(true)
 			} else {
 				changes.push(false)
