@@ -4,7 +4,7 @@ import { Selector } from "@Components/shared"
 import { useOptionsByKitBase } from "@Hooks/api/useOptionsbyKitBase"
 import { useIsMounted } from "@Hooks/useIsMounted"
 import { updateOptions, updateTunes } from "@Redux/slices/dashboard"
-import { useActiveKit } from "@Redux/slices/dashboard/selectors"
+import { useActiveKit, useChannelView } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
 import { getArrayUniques } from "@Utils/helpers/getArrayUniques"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
@@ -52,7 +52,7 @@ const Options = () => {
 		)
 
 	const addToOptions = (inputValue: string, slot: string) => {
-		const newCurrent: WarzoneKitOption[] | WarzoneTwoKitOption[] = current.slice()
+		const newCurrent: WarzoneTwoKitOption[] = current.slice()
 
 		if (inputValue === "") {
 			const index = newCurrent.findIndex((elem) => elem.slotKey === slot)
@@ -73,11 +73,14 @@ const Options = () => {
 		}
 
 		const copyTunes = Array.from(newCurrent, (option) => ({
-			id: tuning[tuning.findIndex((tune) => tune.kitOptionId === option.id)]?.id ?? "",
+			// id: tuning[tuning.findIndex((tune) => tune.kitOptionId === option.id)]?.id ?? "",
+			id: tuning.find((tune) => tune.kitOptionId === option.id)?.id ?? "",
 			kitId: option.kitBaseId,
 			kitOptionId: option.id,
-			horz: tuning[tuning.findIndex((tune) => tune.kitOptionId === option.id)]?.horz ?? 0,
-			vert: tuning[tuning.findIndex((tune) => tune.kitOptionId === option.id)]?.vert ?? 0
+			horz: tuning.find((tune) => tune.kitOptionId === option.id)?.horz ?? 0,
+			vert: tuning.find((tune) => tune.kitOptionId === option.id)?.vert ?? 0
+			// horz: tuning[tuning.findIndex((tune) => tune.kitOptionId === option.id)]?.horz ?? 0,
+			// vert: tuning[tuning.findIndex((tune) => tune.kitOptionId === option.id)]?.vert ?? 0
 		}))
 		dispatch(updateTunes(copyTunes))
 
@@ -88,7 +91,17 @@ const Options = () => {
 	const addToTunes = (inputValue: number | undefined, slot: string, activeTune?: "horz" | "vert") => {
 		const newCurrent: WarzoneKitOption[] | WarzoneTwoKitOption[] = current.slice()
 
-		if (activeTune) {
+		if (tuning.length === 0) {
+			const copyTunes = Array.from(newCurrent, (option) => ({
+				id: tuning[tuning.findIndex((tune) => tune.kitOptionId === option.id)]?.id ?? "",
+				kitId: option.kitBaseId,
+				kitOptionId: option.id,
+				horz: tuning[tuning.findIndex((tune) => tune.kitOptionId === option.id)]?.horz ?? 0,
+				vert: tuning[tuning.findIndex((tune) => tune.kitOptionId === option.id)]?.vert ?? 0
+			}))
+			dispatch(updateTunes(copyTunes))
+		}
+		if (activeTune && tuning.length === newCurrent.length) {
 			// copy tuning array
 			const copyTunes: Omit<WarzoneTwoKitOptionTuning, "id">[] = [...tuning]
 
@@ -103,7 +116,7 @@ const Options = () => {
 			copyTune[activeTune] = inputValue as number
 
 			copyTunes[
-				copyTunes.findIndex((tune) => tune.kitOptionId === availableOptions?.find((opt) => opt.slotKey === slot)?.id)
+				copyTunes.findIndex((tune) => tune.kitOptionId === newCurrent?.find((opt) => opt.slotKey === slot)?.id)
 			] = copyTune
 
 			return dispatch(updateTunes(copyTunes))
@@ -158,11 +171,8 @@ const Options = () => {
 												step={0.1}
 												precision={2}
 												value={
-													tuning[
-														tuning.findIndex(
-															(tune) => tune.kitOptionId === availableOptions?.find((opt) => opt.slotKey === slot)?.id
-														)
-													]?.horz
+													tuning.find((tune) => tune.kitOptionId === current?.find((opt) => opt.slotKey === slot)?.id)
+														?.horz ?? 0
 												}
 												label={handleHorzTuneName(slot)}
 												radius="md"
@@ -176,11 +186,8 @@ const Options = () => {
 												step={0.1}
 												precision={2}
 												value={
-													tuning[
-														tuning.findIndex(
-															(tune) => tune.kitOptionId === availableOptions?.find((opt) => opt.slotKey === slot)?.id
-														)
-													]?.vert
+													tuning.find((tune) => tune.kitOptionId === current?.find((opt) => opt.slotKey === slot)?.id)
+														?.vert ?? 0
 												}
 												label="Weight"
 												radius="md"
