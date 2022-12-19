@@ -101,6 +101,7 @@ const Options = () => {
 			}))
 			dispatch(updateTunes(copyTunes))
 		}
+		// if tune is being edited and tuning length is same as current options length
 		if (activeTune && tuning.length === newCurrent.length) {
 			// copy tuning array
 			const copyTunes: Omit<WarzoneTwoKitOptionTuning, "id">[] = [...tuning]
@@ -115,6 +116,7 @@ const Options = () => {
 			// set correct tune to inputValue
 			copyTune[activeTune] = inputValue as number
 
+			// mutate the correctly indexed tune in tuning array
 			copyTunes[
 				copyTunes.findIndex((tune) => tune.kitOptionId === newCurrent?.find((opt) => opt.slotKey === slot)?.id)
 			] = copyTune
