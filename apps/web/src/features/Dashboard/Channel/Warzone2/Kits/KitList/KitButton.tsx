@@ -3,13 +3,13 @@ import { SVG } from "@Components/shared"
 import { setActiveKit, setModal } from "@Redux/slices/dashboard"
 import { useActiveKit, useChannelData } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import { WarzoneKit, WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
+import { WarzoneKit, WarzoneKitBase, WarzoneKitOption, WarzoneTwoKitOptionTuning } from "@kittr/prisma"
 import { Button } from "@kittr/ui"
 import styled from "styled-components"
 
 interface Props {
 	favorite?: true
-	kit: WarzoneKit & { base: WarzoneKitBase; options: WarzoneKitOption[] }
+	kit: WarzoneKit & { base: WarzoneKitBase; options: WarzoneKitOption[]; tuning: WarzoneTwoKitOptionTuning[] }
 }
 
 const KitButton = ({ favorite, kit }: Props) => {
