@@ -1,4 +1,5 @@
 import { Select } from "."
+import { ComponentStory, ComponentMeta } from "@storybook/react"
 
 export default {
 	title: "Select",
@@ -8,7 +9,7 @@ export default {
 			control: "text"
 		}
 	}
-}
+} as ComponentMeta<typeof Select>
 
 export const Default = (args: any) => (
 	<Select

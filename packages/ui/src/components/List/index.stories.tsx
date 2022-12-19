@@ -26,7 +26,7 @@ Default.args = {
 				<ActionIcon
 					radius="lg"
 					size="lg"
-					style={{ float: "right" }}
+					style={{ float: "right", bottom: 7 }}
 					onClick={() => console.log("Icon Clicked")}
 				>
 					<SVG.Pencil />

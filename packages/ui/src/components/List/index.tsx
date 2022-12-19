@@ -3,7 +3,7 @@ import { List as MantineList, ListProps } from "@mantine/core"
 export type ListItem = {
 	id: number
 	displayName: string
-	icon?: JSX.Element
+	icon?: React.ReactNode
 }
 
 export interface ListItemProps extends ListProps {
@@ -33,22 +33,3 @@ export const List = ({ items, ...props }: ListItemProps) => {
 		</MantineList>
 	)
 }
-// <List.Item
-// 	key={base.id}
-// 	style={{ borderBottom: "1px solid white", padding: "1rem" }}
-// 	sx={(theme) => ({
-// 		"&:hover": {
-// 			backgroundColor: theme.colors.gray[8]
-// 		}
-// 	})}
-// >
-// 	{base.displayName}
-// 	<ActionIcon
-// 		radius="lg"
-// 		size="lg"
-// 		style={{ float: "right" }}
-// 		onClick={() => setIsEditingBase(base)}
-// 	>
-// 		<SVG.Pencil />
-// 	</ActionIcon>
-// </List.Item>

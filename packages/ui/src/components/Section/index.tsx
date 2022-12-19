@@ -2,7 +2,7 @@ import { Title } from "../Title"
 import { Box } from "@mantine/core"
 import React from "react"
 
-interface Props {
+export interface Props {
 	title?: string
 	action?: React.ReactNode
 	children?: React.ReactNode
