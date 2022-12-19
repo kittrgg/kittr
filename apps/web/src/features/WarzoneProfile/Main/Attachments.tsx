@@ -30,18 +30,23 @@ const Attachments = () => {
 
 						{tunes !== undefined && (
 							<Grid style={{ width: "50%", marginLeft: "4%" }}>
-								<Grid.Col span={6}>
-									<Text>{handleHorzTuneName(slot.slotKey)}</Text>
-									<Box sx={{ backgroundColor: "rgb(0,0,0,0.2)", padding: "0.5em", borderRadius: "10px" }}>
-										{tunes[tunes.findIndex((tune) => tune.kitOptionId === slot.id)].horz}
-									</Box>
-								</Grid.Col>
-								<Grid.Col span={6}>
-									<Text>Weight</Text>
-									<Box sx={{ backgroundColor: "rgb(0,0,0,0.2)", padding: "0.5em", borderRadius: "10px" }}>
-										{tunes[tunes.findIndex((tune) => tune.kitOptionId === slot.id)].vert}
-									</Box>
-								</Grid.Col>
+								{tunes[tunes.findIndex((tune) => tune.kitOptionId === slot.id)]?.horz ? (
+									<Grid.Col span={6}>
+										<Text>{handleHorzTuneName(slot.slotKey)}</Text>
+										<Box sx={{ backgroundColor: "rgb(0,0,0,0.2)", padding: "0.5em", borderRadius: "10px" }}>
+											{tunes[tunes.findIndex((tune) => tune.kitOptionId === slot.id)].horz}
+										</Box>
+									</Grid.Col>
+								) : null}
+
+								{tunes[tunes.findIndex((tune) => tune.kitOptionId === slot.id)]?.vert ? (
+									<Grid.Col span={6}>
+										<Text>Weight</Text>
+										<Box sx={{ backgroundColor: "rgb(0,0,0,0.2)", padding: "0.5em", borderRadius: "10px" }}>
+											{tunes[tunes.findIndex((tune) => tune.kitOptionId === slot.id)].vert}
+										</Box>
+									</Grid.Col>
+								) : null}
 							</Grid>
 						)}
 					</Fragment>
