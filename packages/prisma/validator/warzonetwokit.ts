@@ -1,5 +1,5 @@
 import * as z from "zod"
-import { CompleteWarzoneTwoKitOption, RelatedWarzoneTwoKitOptionModel, CompleteGame, RelatedGameModel, CompleteWarzoneTwoKitBase, RelatedWarzoneTwoKitBaseModel, CompleteChannel, RelatedChannelModel, CompleteChannelKitOverlay, RelatedChannelKitOverlayModel } from "./index"
+import { CompleteWarzoneTwoKitOption, RelatedWarzoneTwoKitOptionModel, CompleteWarzoneTwoKitOptionTuning, RelatedWarzoneTwoKitOptionTuningModel, CompleteGame, RelatedGameModel, CompleteWarzoneTwoKitBase, RelatedWarzoneTwoKitBaseModel, CompleteChannel, RelatedChannelModel, CompleteChannelKitOverlay, RelatedChannelKitOverlayModel } from "./index"
 
 export const WarzoneTwoKitModel = z.object({
   id: z.string(),
@@ -16,6 +16,7 @@ export const WarzoneTwoKitModel = z.object({
 
 export interface CompleteWarzoneTwoKit extends z.infer<typeof WarzoneTwoKitModel> {
   options: CompleteWarzoneTwoKitOption[]
+  tuning: CompleteWarzoneTwoKitOptionTuning[]
   game: CompleteGame
   base: CompleteWarzoneTwoKitBase
   channel: CompleteChannel
@@ -30,6 +31,7 @@ export interface CompleteWarzoneTwoKit extends z.infer<typeof WarzoneTwoKitModel
  */
 export const RelatedWarzoneTwoKitModel: z.ZodSchema<CompleteWarzoneTwoKit> = z.lazy(() => WarzoneTwoKitModel.extend({
   options: RelatedWarzoneTwoKitOptionModel.array(),
+  tuning: RelatedWarzoneTwoKitOptionTuningModel.array(),
   game: RelatedGameModel,
   base: RelatedWarzoneTwoKitBaseModel,
   channel: RelatedChannelModel,

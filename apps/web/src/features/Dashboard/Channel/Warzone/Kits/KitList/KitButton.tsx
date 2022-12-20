@@ -25,6 +25,8 @@ const KitButton = ({ favorite, kit }: Props) => {
 	}
 
 	return (
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
 		<Button key={kit.id} active={activeKit.id == kit.id} onClick={() => dispatch(setActiveKit(kit))}>
 			<p style={{ maskImage: "linear-gradient(to right, black 65%, transparent 92%, transparent 100%)" }}>{title}</p>
 			{favorite && (
