@@ -59,7 +59,7 @@ const AdPageWrapper = ({ withAds = true, title, description, children }: Props) 
 			<Head title={title} description={description} />
 			<NavMenu />
 			<Grid grow>
-				<Grid.Col span={8} pb="18px">
+				<Grid.Col span={8}>
 					<ErrorBoundary>{children}</ErrorBoundary>
 				</Grid.Col>
 				{withAds && width > 1200 && (
