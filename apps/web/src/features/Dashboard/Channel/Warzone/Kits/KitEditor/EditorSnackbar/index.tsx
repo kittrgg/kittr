@@ -22,7 +22,7 @@ const EditorSnackbar = () => {
 		opts: {
 			onMutate: () => {
 				// Grab the existing kit array and map them to just their titles
-				let kitArr = channelData?.warzoneKits.slice() as Array<
+				const kitArr = channelData?.warzoneKits.slice() as Array<
 					Omit<WarzoneKit, "id"> & { id?: string; base: WarzoneKitBase; options: WarzoneKitOption[] }
 				>
 
@@ -30,7 +30,7 @@ const EditorSnackbar = () => {
 				const newKitName = activeKit.base.displayName + activeKit.customTitle
 
 				// Is this an existing kit being updated?
-				let index = channelData?.warzoneKits.findIndex((kit) => kit.id === activeKit.id) ?? -1 // -1 means there's no kit
+				const index = channelData?.warzoneKits.findIndex((kit) => kit.id === activeKit.id) ?? -1 // -1 means there's no kit
 
 				if (!kitArr) {
 					return
@@ -112,7 +112,7 @@ const EditorSnackbar = () => {
 
 	const upsertKit = () => {
 		// Grab the existing kit array and map them to just their titles
-		let kitArr = channelData?.warzoneKits.slice() as Array<
+		const kitArr = channelData?.warzoneKits.slice() as Array<
 			Omit<WarzoneKit, "id"> & { id?: string; base: WarzoneKitBase; options: WarzoneKitOption[] }
 		>
 
@@ -120,7 +120,7 @@ const EditorSnackbar = () => {
 		const newKitName = activeKit.base.displayName + activeKit.customTitle
 
 		// Is this an existing kit being updated?
-		let index = channelData?.warzoneKits.findIndex((kit) => kit.id === activeKit.id) ?? -1 // -1 means there's no kit
+		const index = channelData?.warzoneKits.findIndex((kit) => kit.id === activeKit.id) ?? -1 // -1 means there's no kit
 
 		if (!kitArr) {
 			return

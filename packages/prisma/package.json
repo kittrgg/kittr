@@ -9,6 +9,7 @@
 	"scripts": {
 		"clean": "rm -rf .turbo && rm -rf node_modules",
 		"db:deploy": "prisma migrate deploy",
+		"db:create-migrations": "prisma migrate dev",
 		"db:migrate": "prisma db push --force-reset",
 		"db:generate": "prisma generate",
 		"db:push": "prisma db push --skip-generate",

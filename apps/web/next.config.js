@@ -3,6 +3,8 @@
 // https://nextjs.org/docs/api-reference/next.config.js/introduction
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
+const isDeployment = Boolean(process.env.VERCEL_URL)
+
 const withTM = require("next-transpile-modules")(["@kittr/logger", "@kittr/prisma", "@kittr/types", "@kittr/ui"])
 
 const { withSentryConfig } = require("@sentry/nextjs")
@@ -94,4 +96,6 @@ const sentryWebpackPluginOptions = {
 
 // Make sure adding Sentry options is the last code to run before exporting, to
 // ensure that your source maps include changes from all other Webpack plugins
-module.exports = withSentryConfig(withTM(moduleExports, sentryWebpackPluginOptions))
+module.exports = isDeployment
+	? withSentryConfig(withTM(moduleExports), sentryWebpackPluginOptions)
+	: withTM(moduleExports)

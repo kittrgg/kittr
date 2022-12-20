@@ -13,31 +13,42 @@ import {
 import { useDispatch } from "@Redux/store"
 import { paragraph } from "@Styles/typography"
 import { isFetchError } from "@Utils/helpers/typeGuards"
-import { WarzoneTwoKit, WarzoneTwoKitBase, WarzoneTwoKitOption } from "@kittr/prisma"
+import { WarzoneTwoKit, WarzoneTwoKitBase, WarzoneTwoKitOption, WarzoneTwoKitOptionTuning } from "@kittr/prisma"
 import styled from "styled-components"
+
+type WarzoneTwoKitOmitID = Omit<WarzoneTwoKit, "id"> & {
+	id?: string | undefined
+	base: WarzoneTwoKitBase
+	options: WarzoneTwoKitOption[]
+	tuning: WarzoneTwoKitOptionTuning[]
+}
 
 const EditorSnackbar = () => {
 	const dispatch = useDispatch()
-	const initialKit = useInitialKit()
-	const activeKit = useActiveKit()
+	const initialKit = useInitialKit() as WarzoneTwoKitOmitID
+	const activeKit = useActiveKit() as WarzoneTwoKitOmitID
 	const { data: channelData } = useChannelData()
 	const { view } = useChannelView()
 	const modal = useModal()
 	const { data: allKitBases } = useAllKitBases({ include: { category: true } })
 	const { mutate, isLoading } = useDashboardMutator({
-		path: "channels/kits/upsert",
+		path: "channels/kits/upsertWz2Kit",
 		opts: {
 			onMutate: () => {
 				// Grab the existing kit array and map them to just their titles
 				const kitArr = channelData?.warzoneTwoKits.slice() as Array<
-					Omit<WarzoneTwoKit, "id"> & { id?: string; base: WarzoneTwoKitBase; options: WarzoneTwoKitOption[] }
+					Omit<WarzoneTwoKit, "id"> & {
+						id?: string
+						base: WarzoneTwoKitBase
+						options: WarzoneTwoKitOption[]
+					}
 				>
 
 				// Grab the new kit's name
 				const newKitName = activeKit.base.displayName + activeKit.customTitle
 
 				// Is this an existing kit being updated?
-				const index = channelData?.warzoneTwoKits.findIndex((kit) => kit.id === activeKit.id) ?? -1 // -1 means there's no kit
+				const index = channelData?.warzoneTwoKits.findIndex((kit: WarzoneTwoKit) => kit.id === activeKit.id) ?? -1 // -1 means there's no kit
 
 				if (!kitArr) {
 					return
@@ -105,6 +116,21 @@ const EditorSnackbar = () => {
 			changes.push(true)
 		}
 
+		// Checks if any tunes have changed from initialKit
+		initialKit.tuning.map((tune, idx) => {
+			if (tune.horz !== activeKit.tuning[idx]?.horz || tune.vert !== activeKit.tuning[idx]?.vert) {
+				changes.push(true)
+			} else {
+				changes.push(false)
+			}
+		})
+
+		if (activeKit.tuning.length > initialKit.tuning.length) {
+			changes.push(true)
+		} else {
+			changes.push(false)
+		}
+
 		return changes.some((elem) => elem == true)
 	}
 
@@ -114,9 +140,7 @@ const EditorSnackbar = () => {
 
 	const upsertKit = () => {
 		// Grab the existing kit array and map them to just their titles
-		const kitArr = channelData?.warzoneTwoKits.slice() as Array<
-			Omit<WarzoneTwoKit, "id"> & { id?: string; base: WarzoneTwoKitBase; options: WarzoneTwoKitOption[] }
-		>
+		const kitArr = channelData?.warzoneTwoKits.slice() as Array<WarzoneTwoKitOmitID>
 
 		// Grab the new kit's name
 		const newKitName = activeKit.base.displayName + activeKit.customTitle
@@ -159,7 +183,8 @@ const EditorSnackbar = () => {
 				gameId: activeKit.base.gameId,
 				baseId: activeKit.base.id,
 				customTitle: activeKit.customTitle,
-				options: activeKit.options,
+				options: activeKit.options as WarzoneTwoKitOption[],
+				tuning: activeKit.tuning as WarzoneTwoKitOptionTuning[],
 				blueprint: activeKit.blueprint,
 				featured: activeKit.featured,
 				youtubeUrl: activeKit.youtubeUrl,
