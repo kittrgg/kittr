@@ -15,3 +15,13 @@ export const Default = Template.bind({})
 Default.args = {
 	variant: "dots"
 }
+
+export const Bars = Template.bind({})
+Bars.args = {
+	variant: "bars"
+}
+
+export const Oval = Template.bind({})
+Oval.args = {
+	variant: "oval"
+}

@@ -18,3 +18,36 @@ const Template: ComponentStory<typeof Button> = (args) => (
 )
 
 export const Default = Template.bind({})
+Default.args = {
+	variant: "default"
+}
+
+export const Filled = Template.bind({})
+Filled.args = {
+	variant: "filled"
+}
+
+export const Gradient = Template.bind({})
+Gradient.args = {
+	variant: "gradient"
+}
+
+export const Light = Template.bind({})
+Light.args = {
+	variant: "light"
+}
+
+export const Outline = Template.bind({})
+Outline.args = {
+	variant: "outline"
+}
+
+export const Subtle = Template.bind({})
+Subtle.args = {
+	variant: "subtle"
+}
+
+export const White = Template.bind({})
+White.args = {
+	variant: "white"
+}

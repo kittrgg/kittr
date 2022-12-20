@@ -10,7 +10,7 @@ export default {
 } as ComponentMeta<typeof NumberInput>
 
 const Template: ComponentStory<typeof NumberInput> = (args) => (
-	<NumberInput {...args} />
+	<NumberInput value={0} {...args} />
 )
 
 export const Default = Template.bind({})
@@ -22,7 +22,7 @@ Filled.args = {
 
 export const Description = Template.bind({})
 Description.args = {
-	description: "Button Description"
+	description: "Button Description/Title"
 }
 
 export const Step_and_Precision = Template.bind({})
