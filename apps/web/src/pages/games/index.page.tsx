@@ -1,16 +1,16 @@
-import colors from "@Colors"
-import AdPageWrapper, { H1 } from "@Components/layouts/AdPageWrapper"
+import AdPageWrapper from "@Components/layouts/AdPageWrapper"
 import GameCard from "@Components/shared/GameCard"
 import { useAllGames } from "@Hooks/trpc/useAllGames"
-import { useViewportDimensions } from "@Hooks/useViewportDimensions"
 import { createSSGHelper } from "@Server/createSSGHelper"
 import ResponsiveBanner from "@Services/venatus/ResponsiveBanner"
 import { Routes } from "@Utils/lookups/routes"
+import { Text, Title } from "@kittr/ui"
+import { Grid } from "@mantine/core"
+import { useViewportSize } from "@mantine/hooks"
 import { useRouter } from "next/router"
-import styled from "styled-components"
 
 const GamesIndex = () => {
-	const { width } = useViewportDimensions()
+	const { width } = useViewportSize()
 	const router = useRouter()
 
 	const { data: games } = useAllGames({ include: { genres: true, platforms: true } })
@@ -18,20 +18,27 @@ const GamesIndex = () => {
 	return (
 		<AdPageWrapper title="Games | kittr" description="Library of games on kittr. Get kitted.">
 			{width < 1200 && <ResponsiveBanner />}
-			<H1>GAMES</H1>
-			<Paragraph>Find channels & kits by game. Stay tuned for more games coming very soon!</Paragraph>
-			<GamesWrapper>
+			<Title preset="h1" ml="5%">
+				GAMES
+			</Title>
+			<Text ml="5%" mt="lg" style={{ width: "75%", lineHeight: "1.25em" }}>
+				Find channels & kits by game. Stay tuned for more games coming very soon!
+			</Text>
+			{/* <GamesWrapper> */}
+			<Grid>
 				{games &&
 					[...games]
 						.sort((game) => (game.active ? -1 : 1))
 						.map((elem) => (
-							<GameCard
-								key={elem.id}
-								{...elem}
-								onClick={() => elem.active && router.push(Routes.GAMES.createPath(elem.urlSafeName))}
-							/>
+							<Grid.Col md={6} key={elem.id}>
+								<GameCard
+									{...elem}
+									onClick={() => elem.active && router.push(Routes.GAMES.createPath(elem.urlSafeName))}
+								/>
+							</Grid.Col>
 						))}
-			</GamesWrapper>
+			</Grid>
+			{/* </GamesWrapper> */}
 			{width < 1200 && <ResponsiveBanner largeWidthAdUnit="d728x90" smallWidthAdUnit="s300x250" />}
 		</AdPageWrapper>
 	)
@@ -51,25 +58,3 @@ export const getStaticProps = async () => {
 }
 
 export default GamesIndex
-
-// Styled Components
-
-const Paragraph = styled.p`
-	margin: 24px 24px 0 5%;
-	padding-right: 24px;
-	color: ${colors.white};
-	font-family: "Montserrat", serif;
-`
-
-const GamesWrapper = styled.div`
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	margin: 0 auto;
-
-	@media (max-width: 1050px) {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-	}
-`
