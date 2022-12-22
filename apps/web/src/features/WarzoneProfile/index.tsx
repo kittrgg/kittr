@@ -51,7 +51,7 @@ const WarzoneProfile = ({ channel }: Props) => {
 				onClose={() => dispatch(setIsSidebarOpen(false))}
 				hideCloseButton={width >= MOBILE_WIDTH}
 				noOverlay={width >= MOBILE_WIDTH}
-				size="320px"
+				// size="auto"
 				styles={{
 					closeButton: { marginTop: height },
 					drawer: { marginTop: width >= MOBILE_WIDTH ? height : 0 }

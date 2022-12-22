@@ -138,7 +138,7 @@ const Sidebar = () => {
 											: unsortedKit.base.category.displayName === category) && !unsortedKit.featured
 								)
 								.map((kit) => {
-									// If the kit has a customTitle - display an accordion with the kits that have a customTitle
+									// If the kit has a customTitle - display an accordion with the kits that have a customTitle and the base kit that has no customTitle
 									if (kit?.customTitle) {
 										return (
 											<>
