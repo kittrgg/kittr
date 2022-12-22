@@ -1,4 +1,3 @@
-import FallbackPage from "@Components/layouts/FallbackPage"
 import PageWrapper from "@Components/layouts/PageWrapper"
 import { NoItemFound } from "@Components/shared"
 import ChannelProfile from "@Features/ChannelProfile"
@@ -8,13 +7,11 @@ import { getTopChannelsQuery } from "@Services/orm"
 import { useRouter } from "next/router"
 
 const ChannelProfilePage = () => {
-	const { isFallback, query } = useRouter()
+	const { query } = useRouter()
 	const { channel: urlChannel } = query as { channel: string }
 	const { data: channel } = trpc.useQuery(["channels/profile/get", urlChannel], {
 		enabled: !!urlChannel
 	})
-
-	if (isFallback) return <FallbackPage />
 
 	if (!channel) {
 		return <NoItemFound type="channel" />

@@ -11,14 +11,19 @@ import WeaponBlurb from "./WeaponBlurb"
 import colors from "@Colors"
 import { Button, SupportUs, SVG } from "@Components/shared"
 import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
+import { useChannelProfileData } from "@Hooks/trpc/useChannelProfileData"
+import { useActiveChannelKit } from "@Hooks/useActiveChannelKit"
 import { useDetectAdBlock } from "@Hooks/useDetectAdBlock"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
 import { setIsSidebarOpen } from "@Redux/slices/displayr"
-import { useActiveWeapon, useChannel } from "@Redux/slices/displayr/selectors"
+import { useSidebarState } from "@Redux/slices/displayr/selectors"
 import { useDispatch } from "@Redux/store"
 import Ad from "@Services/venatus/Ad"
+import { ChannelCreatorCode, Game } from "@kittr/prisma"
+import { SimpleGrid } from "@mantine/core"
+import { useScrollLock } from "@mantine/hooks"
 import { useRouter } from "next/router"
-import { useEffect, useRef } from "react"
+import { useEffect } from "react"
 import styled from "styled-components"
 
 const Marketing = () => {
@@ -39,20 +44,37 @@ const Marketing = () => {
 
 const Main = () => {
 	const dispatch = useDispatch()
-	const activeWeapon = useActiveWeapon()
-	const channelData = useChannel()
+	// const activeWeapon = useActiveWeapon()
+	// const channelData = useChannel()
 	const { width } = useViewportDimensions()
 	const isMobile = width <= 1050
-	const containerRef = useRef(null) as any
+	// const containerRef = useRef(null) as any
 	const { query, isReady } = useRouter()
 	const weaponTerm = Object.keys(query).length > 1 ? query.weapon || query.k : ""
+	const { data: channelData } = useChannelProfileData()
+	const activeWeapon = useActiveChannelKit()
+	const isSidebarOpen = useSidebarState()
+	const [scrollLocked, setScrollLocked] = useScrollLock()
 
 	useEffect(() => {
-		if (containerRef.current) [containerRef.current.scroll(0, 0)]
-	}, [query])
+		if (isSidebarOpen && isMobile) {
+			setScrollLocked(true)
+		} else {
+			setScrollLocked(false)
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isSidebarOpen, isMobile])
 
 	return (
-		<Container ref={containerRef} hasWeapon={!!weaponTerm}>
+		<SimpleGrid
+			cols={2}
+			breakpoints={[{ maxWidth: 1050, cols: 1 }]}
+			style={{
+				paddingLeft: !isMobile ? "325px" : 0,
+				paddingRight: "1em",
+				paddingTop: "5.5rem"
+			}}
+		>
 			<FirebaseStorageResolver
 				path="/warzone/background-image.png"
 				noSpinner
@@ -78,18 +100,26 @@ const Main = () => {
 			)}
 			{activeWeapon && Object.keys(activeWeapon).length > 0 && weaponTerm && (
 				<>
-					{!isMobile && (
+					{!isMobile && channelData && (
 						<TopBar
 							id={channelData.id}
 							displayName={channelData.displayName}
 							hasProfileImage={channelData.profile?.hasProfileImage || false}
 							links={channelData.links}
 							gameCreatorCode={
-								channelData.gameCreatorCodes.find((code) => code.game.displayName === "Warzone")?.code || ""
+								channelData.gameCreatorCodes.find(
+									(
+										code: ChannelCreatorCode & {
+											game: Game
+										}
+									) => code.game.displayName === "Warzone"
+								)?.code || ""
 							}
 						/>
 					)}
-					{isMobile && <KitScroller availableKits={channelData.warzoneKits} />}
+					{isMobile && channelData && (
+						<KitScroller availableKits={channelData.warzoneKits ?? channelData.warzoneTwoKits} />
+					)}
 					{isMobile && (
 						<div>
 							<Ad placementType="d300x50" updateTrigger={activeWeapon} />
@@ -117,7 +147,7 @@ const Main = () => {
 					<Popularity />
 					<div style={{ display: "grid", gap: "12px" }}>
 						<WeaponBlurb />
-						<FavoriteBlueprint favorite={activeWeapon?.blueprint} />
+						<FavoriteBlueprint />
 					</div>
 					{isMobile && (
 						<div>
@@ -128,7 +158,7 @@ const Main = () => {
 			)}
 			{!activeWeapon && weaponTerm && <Placeholder isMobile={isMobile} />}
 			{channelData && !weaponTerm && isReady && <Placeholder isMobile={isMobile} />}
-		</Container>
+		</SimpleGrid>
 	)
 }
 
@@ -136,40 +166,40 @@ export default Main
 
 // Styled Components
 
-const Container = styled.div<{ hasWeapon: boolean }>`
-	flex: 1;
-	position: relative;
-	overflow-x: hidden;
-	overflow-y: auto;
-	display: ${(props) => (props.hasWeapon ? "grid" : "")};
-	grid-template-columns: ${(props) => (props.hasWeapon ? "1fr 1fr" : "1fr")};
-	gap: 12px;
+// const Container = styled.div<{ hasWeapon: boolean }>`
+// 	flex: 1;
+// 	position: relative;
+// 	overflow-x: hidden;
+// 	overflow-y: auto;
+// 	display: ${(props) => (props.hasWeapon ? "grid" : "")};
+// 	grid-template-columns: ${(props) => (props.hasWeapon ? "1fr 1fr" : "1fr")};
+// 	gap: 12px;
 
-	padding: 0 2% 36px;
+// 	padding: 0 2% 36px;
 
-	@media (max-width: 1050px) {
-		flex: initial;
-		grid-template-columns: 1fr;
-		width: 100%;
-		margin-top: 0;
-		padding-top: 0;
-		overflow-y: auto;
-		-webkit-overflow-scrolling: touch;
-	}
+// 	@media (max-width: 1050px) {
+// 		flex: initial;
+// 		grid-template-columns: 1fr;
+// 		width: 100%;
+// 		margin-top: 0;
+// 		padding-top: 0;
+// 		overflow-y: auto;
+// 		-webkit-overflow-scrolling: touch;
+// 	}
 
-	&::-webkit-scrollbar {
-		width: 8px;
-	}
+// 	&::-webkit-scrollbar {
+// 		width: 8px;
+// 	}
 
-	&::-webkit-scrollbar-track {
-		background: transparent;
-	}
+// 	&::-webkit-scrollbar-track {
+// 		background: transparent;
+// 	}
 
-	&::-webkit-scrollbar-thumb {
-		background-color: ${colors.lightest};
-		border: 5px solid transparent;
-	}
-`
+// 	&::-webkit-scrollbar-thumb {
+// 		background-color: ${colors.lightest};
+// 		border: 5px solid transparent;
+// 	}
+// `
 
 const BackgroundImage = styled.div<{ imagePath: string }>`
 	position: fixed;

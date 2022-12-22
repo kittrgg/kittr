@@ -4,9 +4,9 @@ import { useActiveWeapon } from "@Redux/slices/displayr/selectors"
 import { paragraph } from "@Styles/typography"
 import styled from "styled-components"
 
-const FavoriteBlueprint = ({ ...props }) => {
+const FavoriteBlueprint = () => {
 	const activeWeapon = useActiveWeapon()
-	const favorite = activeWeapon.blueprint
+	const favorite = activeWeapon?.blueprint
 
 	if (favorite) {
 		return (

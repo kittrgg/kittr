@@ -1,7 +1,7 @@
 import { AppRouter } from "./api/trpc/[[...trpc]].api"
-import FallbackPage from "@Components/layouts/FallbackPage"
-import { setFallbackLoader } from "@Redux/slices/global"
-import { store, useDispatch, useSelector } from "@Redux/store"
+// import FallbackPage from "@Components/layouts/FallbackPage"
+// import { setFallbackLoader } from "@Redux/slices/global"
+import { store } from "@Redux/store"
 import { getToken } from "@Services/firebase/auth"
 import GlobalStyles from "@Styles/globals"
 import OverlayStyles from "@Styles/overlay"
@@ -13,7 +13,7 @@ import { httpBatchLink } from "@trpc/client/links/httpBatchLink"
 import { loggerLink } from "@trpc/client/links/loggerLink"
 import { withTRPC } from "@trpc/next"
 import { useRouter } from "next/router"
-import { useEffect } from "react"
+// import { useEffect } from "react"
 import { ReactQueryDevtools } from "react-query/devtools"
 import { Provider } from "react-redux"
 import superjson from "superjson"
@@ -28,25 +28,25 @@ const AppWrap = ({ Component, pageProps }: { Component: React.FC; pageProps: Rec
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const MyApp = ({ Component, pageProps }: { Component: React.FC; pageProps: Record<any, any> }) => {
 	const router = useRouter()
-	const dispatch = useDispatch()
-	const isFallback = useSelector((state) => state.global.fallbackLoader)
+	// const dispatch = useDispatch()
+	// const isFallback = useSelector((state) => state.global.fallbackLoader)
 
-	useEffect(() => {
-		router.events.on("routeChangeStart", (url) => {
-			if (url !== window.location.pathname) {
-				// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-extra-semi
-				;(window as any).routeTimeout = setTimeout(() => {
-					dispatch(setFallbackLoader(true)), 500
-				})
-			}
-		})
+	// useEffect(() => {
+	// 	router.events.on("routeChangeStart", (url) => {
+	// 		if (url !== window.location.pathname) {
+	// 			// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-extra-semi
+	// 			;(window as any).routeTimeout = setTimeout(() => {
+	// 				dispatch(setFallbackLoader(true)), 500
+	// 			})
+	// 		}
+	// 	})
 
-		router.events.on("routeChangeComplete", () => {
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			clearTimeout((window as any).routeTimeout)
-			dispatch(setFallbackLoader(false))
-		})
-	}, [router.events, dispatch])
+	// 	router.events.on("routeChangeComplete", () => {
+	// 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	// 		clearTimeout((window as any).routeTimeout)
+	// 		dispatch(setFallbackLoader(false))
+	// 	})
+	// }, [router.events, dispatch])
 
 	return (
 		<MantineProvider>
@@ -69,8 +69,9 @@ const MyApp = ({ Component, pageProps }: { Component: React.FC; pageProps: Recor
 			) : (
 				<GlobalStyles />
 			)}
-			{isFallback && <FallbackPage />}
-			{!isFallback && <Component {...pageProps} />}
+			{/* {isFallback && <FallbackPage />}
+			{!isFallback && <Component {...pageProps} />} */}
+			<Component {...pageProps} />
 			<ReactQueryDevtools />
 		</MantineProvider>
 	)

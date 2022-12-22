@@ -1,8 +1,6 @@
 import colors from "@Colors"
 import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
 import SVG from "@Components/shared/SVG"
-import { setActiveWeapon } from "@Redux/slices/displayr"
-import { useDispatch } from "@Redux/store"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { Routes } from "@Utils/lookups/routes"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
@@ -22,7 +20,6 @@ interface Props {
 }
 
 const Card = ({ kit, containerStyles }: Props) => {
-	const dispatch = useDispatch()
 	const { featured, base, options } = kit
 	const router = useRouter()
 	const { channel, game } = router.query
@@ -31,12 +28,12 @@ const Card = ({ kit, containerStyles }: Props) => {
 		<Body
 			style={containerStyles}
 			onClick={() => {
-				dispatch(setActiveWeapon(kit))
+				// dispatch(setActiveWeapon(kit))
 				router.push(
 					Routes.CHANNEL.GAME.createPath(channel as string, game as string, `?k=${base.displayName.replace(/ /g, "-")}`)
 				)
 			}}
-			data-cy={`placeholder-button`}
+			data-cy="placeholder-button"
 		>
 			<HeaderContainer>
 				{featured && <SVG.Star width="10px" fill={colors.gold} stroke={colors.gold} style={{ marginRight: "8px" }} />}
