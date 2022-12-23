@@ -20,6 +20,7 @@
 		"dx:seed-snapshot": "docker exec -i postgres dropdb dev -U dev && echo DB dropped. && docker exec -i postgres pg_restore -U dev -d template1 -v \"backup.pgsql\" --create ",
 		"dx:sb": "turbo run dev --filter=storybook",
 		"type-check": "turbo run type-check",
+		"build": "dotenv -- turbo run build",
 		"lint": "turbo run lint",
 		"test": "turbo run test",
 		"clean": "npx npkill",
