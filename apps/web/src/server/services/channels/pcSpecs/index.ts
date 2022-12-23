@@ -50,7 +50,6 @@ export const createPcSpec = async ({
 
 export const updatePcSpec = async ({
 	pcSpecId,
-	channelId,
 	data
 }: {
 	pcSpecId: string
@@ -67,7 +66,7 @@ export const updatePcSpec = async ({
 	return pcSpec
 }
 
-export const deletePcSpec = async ({ channelId, pcSpecId }: { channelId: string; pcSpecId: string }) => {
+export const deletePcSpec = async ({ pcSpecId }: { channelId: string; pcSpecId: string }) => {
 	const pcSpec = await prisma.channelPcSpec.delete({
 		where: {
 			id: pcSpecId

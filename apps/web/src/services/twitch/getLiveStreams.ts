@@ -42,6 +42,7 @@ export const liveChannelsQuery = async () => {
 		if (!url) return []
 
 		try {
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			const data = await fetch.get<{ data: any }>({ url, headers: await headers(), redirect: "follow" })
 
 			if (!data.data) {

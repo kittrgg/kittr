@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { isClient } from "@Utils/helpers/isClient"
 import { isWebApiSupported } from "@Utils/helpers/isWebApiSupported"

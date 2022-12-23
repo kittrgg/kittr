@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // import { IPopularityRates } from "@kittr/types"
 import ChannelMain from "./Main"
 import Sidebar from "./Sidebar"
@@ -74,6 +75,7 @@ const WarzoneProfile = ({ channel }: Props) => {
 					.filter((elem) => elem.base.displayName.replace(/ /g, "-") === weaponQuery)
 					.sort((a, b) => Number(b.featured) - Number(a.featured))
 
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 				const [firstKit] = router.query.game === "wz2" ? filteredWz2Kits! : filteredKits!
 				dispatch(setActiveWeapon(firstKit))
 			}

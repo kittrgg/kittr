@@ -11,5 +11,6 @@ type TQueryInput = InferQueryInput<"games/list">
 export const useAllGames = <T extends TQueryInput>({ include }: { include: T }) => {
 	type GameResponse = Prisma.GameGetPayload<{ include: typeof include }>
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	return trpc.useQuery<"games/list", any, GameResponse[]>(["games/list", include])
 }

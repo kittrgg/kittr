@@ -143,7 +143,7 @@ const CreateNewProperty = ({ newLink, setNewLink }: ICreateNewProperty) => {
 				sublineStyles={{ color: colors.lighter }}
 				inputStyles={{ marginLeft: "0" }}
 				onChange={(e) => {
-					let newEdit = { ...newLink, value: newLink.value ?? "" }
+					const newEdit = { ...newLink, value: newLink.value ?? "" }
 					newEdit.value = `${linkPrefixes[newLink.property!]}${trimPrefix(
 						linkPrefixes[newLink.property!],
 						e.target.value

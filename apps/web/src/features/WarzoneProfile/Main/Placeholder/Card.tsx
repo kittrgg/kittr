@@ -36,7 +36,7 @@ const Card = ({ kit, containerStyles }: Props) => {
 					Routes.CHANNEL.GAME.createPath(channel as string, game as string, `?k=${base.displayName.replace(/ /g, "-")}`)
 				)
 			}}
-			data-cy={`placeholder-button`}
+			data-cy="placeholder-button"
 		>
 			<HeaderContainer>
 				{featured && <SVG.Star width="10px" fill={colors.gold} stroke={colors.gold} style={{ marginRight: "8px" }} />}
