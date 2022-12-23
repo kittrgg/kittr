@@ -45,7 +45,6 @@ const WarzoneProfile = ({ channel }: Props) => {
 					</>
 				}
 			/>
-			{/* <Body headerHeight={height}> */}
 			<Drawer
 				opened={isSidebarOpen || width >= MOBILE_WIDTH}
 				onClose={() => dispatch(setIsSidebarOpen(false))}
@@ -59,7 +58,6 @@ const WarzoneProfile = ({ channel }: Props) => {
 				<Sidebar />
 			</Drawer>
 			<ChannelMain />
-			{/* </Body> */}
 		</div>
 	)
 }
