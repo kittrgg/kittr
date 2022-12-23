@@ -1,8 +1,4 @@
-import {
-	SharedTextProps,
-	Text as MantineText,
-	useMantineTheme
-} from "@mantine/core"
+import { TextProps, Text as MantineText, useMantineTheme } from "@mantine/core"
 import { ReactNode } from "react"
 
 const fontFamily = "Montserrat, sans-serif"
@@ -142,7 +138,7 @@ export const TEXT_PRESETS = {
 	}
 }
 
-interface Props extends SharedTextProps {
+interface Props extends TextProps {
 	/** Use a preset of defined properties. */
 	preset?: keyof typeof TEXT_PRESETS
 	children: ReactNode
@@ -150,7 +146,6 @@ interface Props extends SharedTextProps {
 
 export const Text = ({ preset, children, ...props }: Props) => {
 	const styles = preset ? TEXT_PRESETS[preset] : {}
-	const { colors } = useMantineTheme()
 
 	return (
 		// <MantineText

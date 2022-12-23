@@ -2,7 +2,7 @@ import { Title } from "../Title"
 import { Box } from "@mantine/core"
 import React from "react"
 
-interface Props {
+export interface SectionProps {
 	title?: string
 	action?: React.ReactNode
 	children?: React.ReactNode
@@ -16,7 +16,7 @@ export const Section = ({
 	hoverable,
 	children,
 	transparent
-}: Props) => {
+}: SectionProps) => {
 	return (
 		<Box
 			sx={(theme) => ({

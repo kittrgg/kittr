@@ -1,4 +1,4 @@
-import { Prisma, prisma, Channel } from "@kittr/prisma"
+import { Prisma, prisma } from "@kittr/prisma"
 
 export const ChannelWithIncludes = Prisma.validator<Prisma.ChannelArgs>()({
 	include: {

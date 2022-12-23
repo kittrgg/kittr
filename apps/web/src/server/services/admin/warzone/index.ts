@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { prisma, WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
 
 export const listKitBases = async () => {

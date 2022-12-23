@@ -23,7 +23,7 @@ const Affiliate = () => {
 		}
 	})
 
-	let rootUrl = new URL(window.location.origin.toString()).host.replace("www.", "")
+	const rootUrl = new URL(window.location.origin.toString()).host.replace("www.", "")
 
 	const commandString = `!addcom !affiliates ${rootUrl}/c/${channelData?.urlSafeName}#affiliates`
 
@@ -57,8 +57,8 @@ const Affiliate = () => {
 							<th style={{ width: "30%", borderBottom: `1px solid ${colors.lighter}` }}>Deal Description</th>
 							<th style={{ width: "15%", borderBottom: `1px solid ${colors.lighter}` }}>Code</th>
 							<th style={{ width: "15%", borderBottom: `1px solid ${colors.lighter}` }}>Link</th>
-							<th style={{ width: "5%" }}></th>
-							<th style={{ width: "5%" }}></th>
+							<th style={{ width: "5%" }} />
+							<th style={{ width: "5%" }} />
 						</tr>
 					</THead>
 					<TBody>

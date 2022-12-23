@@ -124,7 +124,7 @@ const ChannelList = () => {
 							}}
 						>
 							<Button
-								design={"default"}
+								design="default"
 								text="Need some guidance? Click here for tutorial!"
 								onClick={() => {
 									dispatch(setModal({ type: "Tutorial", data: { page: 1 } }))

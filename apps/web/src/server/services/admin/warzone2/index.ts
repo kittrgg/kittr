@@ -1,4 +1,4 @@
-import { prisma, WarzoneTwoKitBase, WarzoneTwoCommandCode, WarzoneTwoKitOption } from "@kittr/prisma"
+import { prisma, WarzoneTwoKitBase, WarzoneTwoKitOption } from "@kittr/prisma"
 
 export const listKitBases = async () => {
 	const result = await prisma.warzoneTwoKitBase.findMany({
@@ -125,6 +125,7 @@ export const updateOptionsForBase = async ({ baseId, options }: { baseId: string
 }
 
 export const createOption = async ({ baseId, option }: { baseId: string; option: Omit<WarzoneTwoKitOption, "id"> }) => {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const { kitBaseId, ...rest } = option
 
 	const result = await prisma.warzoneTwoKitOption.create({
@@ -142,6 +143,7 @@ export const createOption = async ({ baseId, option }: { baseId: string; option:
 }
 
 export const updateOption = async (option: WarzoneTwoKitOption) => {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const { id, ...rest } = option
 
 	const result = await prisma.warzoneTwoKitOption.update({

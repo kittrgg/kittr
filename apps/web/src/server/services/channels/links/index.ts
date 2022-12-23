@@ -1,6 +1,7 @@
 import { prisma, ChannelLink } from "@kittr/prisma"
 
 export const updateLinks = async ({ channelId, links }: { channelId: string; links: ChannelLink[] }) => {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [_, newLinks] = await prisma.$transaction([
 		prisma.channelLink.deleteMany({
 			where: {
@@ -15,6 +16,7 @@ export const updateLinks = async ({ channelId, links }: { channelId: string; lin
 				links: {
 					createMany: {
 						data: links.map((link) => {
+							// eslint-disable-next-line @typescript-eslint/no-unused-vars
 							const { channelId, id, ...rest } = link
 							return rest
 						})

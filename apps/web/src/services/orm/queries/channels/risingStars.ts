@@ -4,7 +4,7 @@ const include = Prisma.validator<Prisma.ChannelInclude>()({
 	profile: true
 })
 
-export interface TChannelWithIncludeProfile extends Channel {}
+export type TChannelWithIncludeProfile = Channel
 
 export const getRisingStarsQuery = async ({
 	limit,

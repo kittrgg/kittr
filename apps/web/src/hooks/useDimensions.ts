@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useLatestRef } from "./useLatestRef"
 import { isClient } from "@Utils/helpers/isClient"
 import { ResizeObserver, ResizeObserverEntry } from "@juggle/resize-observer"

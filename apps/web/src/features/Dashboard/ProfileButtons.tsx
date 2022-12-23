@@ -37,18 +37,16 @@ const ProfileButtons = () => {
 			<Container isOpen={isOpen}>
 				<Clickable data-cy="profile-container-button" onClick={() => setIsOpen(!isOpen)}>
 					{user?.email}
-					{
-						<SVG.Carat
-							width="24px"
-							style={{
-								position: "relative",
-								top: "4px",
-								marginLeft: "12px",
-								transform: isOpen ? "" : "rotate(180deg)",
-								transition: ".2s"
-							}}
-						/>
-					}
+					<SVG.Carat
+						width="24px"
+						style={{
+							position: "relative",
+							top: "4px",
+							marginLeft: "12px",
+							transform: isOpen ? "" : "rotate(180deg)",
+							transition: ".2s"
+						}}
+					/>
 				</Clickable>
 				<Button
 					design="white"

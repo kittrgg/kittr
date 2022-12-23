@@ -35,7 +35,7 @@ const TiktokId = () => {
 			<TextInput
 				type="text"
 				name="tiktokVideoId"
-				label={"https://www.tiktok.com/"}
+				label="https://www.tiktok.com/"
 				labelStyles={{ color: colors.lighter, display: "block", marginTop: "12px", textTransform: "initial" }}
 				value={tiktokUrl ?? ""}
 				subline={`If you want to just copy-paste the whole Tiktok link, we'll trim it for you. We know, we know, you're welcome. (Note that we cannot accept links from the mobile app. If it starts with "vm.tiktok.com", it won't work!)`}

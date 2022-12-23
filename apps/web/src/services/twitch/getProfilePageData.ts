@@ -15,7 +15,7 @@ interface ProfilePageData {
 
 /** Get a single channel's information for their profile page. */
 export const profilePageQuery = async (twitchLink: string) => {
-	let response = {} as ProfilePageData
+	const response = {} as ProfilePageData
 
 	const channelTwitchLogin = grabLoginName(twitchLink || "")
 

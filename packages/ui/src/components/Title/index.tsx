@@ -1,9 +1,4 @@
-import {
-	Text as MantineTitle,
-	TitleProps,
-	useMantineTheme
-} from "@mantine/core"
-import React from "react"
+import { Text as MantineTitle, TitleProps } from "@mantine/core"
 
 const fontFamily = "Barlow Condensed, serif"
 
@@ -65,11 +60,12 @@ interface Props extends TitleProps {
 
 export const Title = ({ preset, children, sx, ...props }: Props) => {
 	const styles = preset ? TITLE_PRESETS[preset] : {}
-	// const { colors } = useMantineTheme()
+
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const { size, ...rest } = props
 
 	return (
-		// <MantineTitle sx={{ color: colors.navy[9], ...styles, ...sx }} {...props}>
-		<MantineTitle sx={{ ...styles, ...sx }} {...props}>
+		<MantineTitle sx={{ ...styles, ...sx }} {...rest}>
 			{children}
 		</MantineTitle>
 	)

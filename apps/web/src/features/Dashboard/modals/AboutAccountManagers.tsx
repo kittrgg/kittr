@@ -39,7 +39,7 @@ const AboutAccountManagers = () => {
 			<Table>
 				<thead>
 					<tr>
-						<Th></Th>
+						<Th />
 						<Th>Owner{role === "OWNER" ? " (You)" : ""}</Th>
 						<Th>Administrators{role === "ADMIN" ? " (You)" : ""}</Th>
 						<Th>Editors{role === "EDITOR" ? " (You)" : ""}</Th>

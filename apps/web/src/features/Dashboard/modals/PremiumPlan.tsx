@@ -58,7 +58,7 @@ const PremiumPlans = () => {
 				</colgroup>
 				<thead>
 					<tr>
-						<Th></Th>
+						<Th />
 						<Th>
 							BASIC
 							<HeaderSubline>FREE</HeaderSubline>

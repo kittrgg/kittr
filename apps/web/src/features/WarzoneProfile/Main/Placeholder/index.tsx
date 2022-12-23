@@ -27,12 +27,7 @@ const Cards = ({ isMobile }: Props) => {
 	return (
 		<PlaceholderContainer>
 			<PlaceholderCallToAction>
-				{
-					<SVG.Arrow
-						width="18px"
-						style={{ marginRight: "12px", transform: `rotate(${isMobile ? "0deg" : "-90deg"})` }}
-					/>
-				}
+				<SVG.Arrow width="18px" style={{ marginRight: "12px", transform: `rotate(${isMobile ? "0deg" : "-90deg"})` }} />
 				SELECT A KIT.
 			</PlaceholderCallToAction>
 			{/* <CardsContainer>

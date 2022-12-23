@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { categoriesRouter } from "./kitCategories"
 import { optionsRouter } from "./kitOptions"
 import { Warzone2AdminController } from "@Server/controllers/admin/warzone2/index"

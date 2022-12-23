@@ -8,7 +8,9 @@ export const useChannelManagers = () => {
 		[
 			"channels/managers/list",
 			{
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
 				channelId: channel?.id!,
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 				managers: managers!
 			}
 		],
