@@ -7,10 +7,9 @@ import { trpc } from "@Server/createHooks"
 import { createSSGHelper } from "@Server/createSSGHelper"
 import ResponsiveBanner from "@Services/venatus/ResponsiveBanner"
 import { Routes } from "@Utils/lookups/routes"
-import { Title } from "@kittr/ui"
+import { Text, Title } from "@kittr/ui"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import styled from "styled-components"
 
 const CHANNELS_PER_PAGE = 10
 
@@ -39,7 +38,9 @@ const PageOfChannels = () => {
 					CHANNELS
 				</Title>
 				{/* <ChannelSearch /> */}
-				<Paragraph>Oops, doesn't look like there's anyone here.</Paragraph>
+				<Text m="25px 25px 0 5%" sx={{ paddingRight: "24px" }}>
+					Oops, doesn't look like there's anyone here.
+				</Text>
 				<Link href={Routes.CHANNEL.LIST}>
 					<a
 						style={{
@@ -63,7 +64,9 @@ const PageOfChannels = () => {
 				CHANNELS
 			</Title>
 			{/* <ChannelSearch /> */}
-			<Paragraph>Select a channel to view their page with their games and featured kits.</Paragraph>
+			<Text m="25px 25px 0 5%" sx={{ paddingRight: "24px" }}>
+				Select a channel to view their page with their games and featured kits.
+			</Text>
 			<div style={{ padding: "0 5%" }}>
 				<ChannelList data={channels || []} itemBackgroundColor={colors.darker} />
 				<Paginator
@@ -111,12 +114,3 @@ export const getStaticProps = async ({ params }: { params: { pageNumber: string 
 }
 
 export default PageOfChannels
-
-// Styled Components
-
-const Paragraph = styled.p`
-	margin: 24px 24px 0 5%;
-	padding-right: 24px;
-	color: ${colors.white};
-	font-family: "Montserrat", serif;
-`
