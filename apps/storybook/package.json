@@ -4,8 +4,6 @@
 	"version": "0.0.0",
 	"license": "MIT",
 	"scripts": {
-		"lint": "eslint --fix",
-		"clean": "rm -rf .turbo  && rm -rf dist && rm -rf coverage && rm -rf node_modules",
 		"type-check": "tsc --pretty --noEmit",
 		"dev": "start-storybook -p 3002 --no-manager-cache",
 		"build": "build-storybook"
@@ -13,10 +11,11 @@
 	"dependencies": {
 		"@kittr/ui": "*",
 		"react": "^18.2.0",
-		"react-dom": "18.2.0"
+		"react-dom": "^18.2.0"
 	},
 	"devDependencies": {
-		"@kittr/config": "*",
+		"@kittr/config": "workspace:*",
+		"tsconfig": "workspace:*",
 		"@babel/core": "7.18.9",
 		"@react-theming/storybook-addon": "1.1.6",
 		"@storybook/addon-actions": "6.5.9",
