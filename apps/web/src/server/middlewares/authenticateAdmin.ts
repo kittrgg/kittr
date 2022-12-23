@@ -4,6 +4,7 @@ import { prisma } from "@kittr/prisma"
 import { TRPCError } from "@trpc/server"
 import { MiddlewareResult } from "@trpc/server/src/internals/middlewares"
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 type NextFunction<T> = {
 	<T>(): Promise<MiddlewareResult<T>>
 	<T>(opts: { ctx: T }): Promise<MiddlewareResult<T>>

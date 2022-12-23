@@ -6,6 +6,7 @@ interface IParams {
 	/** If the element type is an array, the index to use for the sort. */
 	indexToSort?: number
 	/** The array to be sorted. */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	array: any[]
 }
 
@@ -27,6 +28,7 @@ export const customOrderArray = <T>({ sortingArray, keyToSort, indexToSort, arra
 			array
 				// Create a new instance of the array with slice
 				.slice()
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 				.sort((a: any, b: any) => {
 					if (sortingArray.indexOf(a[indexToSort]) === -1) return 1
 					if (sortingArray.indexOf(b[indexToSort]) === -1) return -1
@@ -39,6 +41,7 @@ export const customOrderArray = <T>({ sortingArray, keyToSort, indexToSort, arra
 		const arr = array
 			// Create a new instance of the array with slice
 			.slice()
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			.sort((a: any, b: any) => {
 				if (sortingArray.indexOf(a[keyToSort]) === -1) return 1
 				if (sortingArray.indexOf(b[keyToSort]) === -1) return -1

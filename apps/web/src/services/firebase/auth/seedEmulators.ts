@@ -2,6 +2,7 @@
 // THEY CAN ONLY BE USED IN PROPERLY SET ENVIRONMENTS
 // IF YOU ARE UNSURE OF HOW TO HANDLE THESE ENDPOINTS, DO NOT TOUCH THEM
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const admin = require("firebase-admin")
 
 // This is only exported to satisfy the modules requirement for Typescript

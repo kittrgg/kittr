@@ -33,7 +33,7 @@ const CustomTitle = ({ ...props }) => {
 				}}
 				inputStyles={{ width: "50%", minWidth: "390px", marginLeft: "0", marginTop: "12px" }}
 			/>
-			<Styled.ClosingParenthesis style={{ color: colors.lighter }}>{")"}</Styled.ClosingParenthesis>
+			<Styled.ClosingParenthesis style={{ color: colors.lighter }}>)</Styled.ClosingParenthesis>
 		</Styled.Container>
 	)
 }

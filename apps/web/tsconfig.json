@@ -2,6 +2,8 @@
 	"extends": "tsconfig/nextjs.json",
 	"compilerOptions": {
 		"baseUrl": "./src",
+		"declarationMap": false,
+		"declaration": false,
 		"paths": {
 			"@Colors": ["styles/colors"],
 			"@Components/*": ["components/*"],

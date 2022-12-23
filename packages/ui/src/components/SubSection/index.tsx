@@ -2,7 +2,7 @@ import { Title } from "../Title"
 import { Box } from "@mantine/core"
 import React from "react"
 
-interface Props {
+export interface SubSectionProps {
 	title?: string
 	action?: React.ReactNode
 	children?: React.ReactNode
@@ -10,7 +10,7 @@ interface Props {
 	transparent?: boolean
 }
 
-export const SubSection = ({ title, action, children }: Props) => {
+export const SubSection = ({ title, action, children }: SubSectionProps) => {
 	return (
 		<Box
 			sx={(theme) => ({

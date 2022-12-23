@@ -85,7 +85,7 @@ const AccountManagers = () => {
 													width="24px"
 													style={{ cursor: "pointer" }}
 													onClick={() => dispatch(setModal({ type: "Delete Manager", data: manager }))}
-													dataCy={"remove-manager"}
+													dataCy="remove-manager"
 												/>
 											</>
 										)
@@ -95,7 +95,7 @@ const AccountManagers = () => {
 										width="24px"
 										style={{ cursor: "pointer" }}
 										onClick={() => dispatch(setModal({ type: "Delete Manager", data: manager }))}
-										dataCy={"remove-manager"}
+										dataCy="remove-manager"
 									/>
 								)}
 							</Identity>

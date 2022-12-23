@@ -38,7 +38,7 @@ const CommandsTable = ({ kits, includeMasterCommands = true, method, commandStra
 	const dashboardStrategy = commandStrategy === "edit" ? "!editcom" : "!addcom"
 	const channelElementsStrategy = commandStrategy === "edit" ? "!command edit" : "!command add"
 
-	let rootUrl = new URL(window.location.origin.toString()).host.replace("www.", "")
+	const rootUrl = new URL(window.location.origin.toString()).host.replace("www.", "")
 
 	const createNightbotPrefix = (code: string): string => `${dashboardStrategy} !${code}`
 	const createChannelElementsPrefix = (code: string): string => `${channelElementsStrategy} !${code}`

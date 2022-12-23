@@ -1,4 +1,4 @@
-import { theme, themeStyles } from "./styles/theme"
+import { theme } from "./styles/theme"
 import {
 	MantineProvider as MantineLibProvider,
 	MantineProviderProps
@@ -15,12 +15,7 @@ export const MantineProvider = ({
 	...props
 }: MantineProviderMantineProviderProps) => {
 	return (
-		<MantineLibProvider
-			withNormalizeCSS
-			theme={theme}
-			styles={themeStyles}
-			{...props}
-		>
+		<MantineLibProvider withNormalizeCSS theme={theme} {...props}>
 			{children}
 		</MantineLibProvider>
 	)
