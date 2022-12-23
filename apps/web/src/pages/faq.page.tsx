@@ -9,9 +9,9 @@ const items = [
 		title: "What is kittr?",
 		content: (
 			<Text>
-				Kittr is how you share your loadouts with your channel community. We saw that there wasn't really
-				any great way for a player to share loadouts on Twitch - so we made one. There were ways,
-				certainly...But no outstanding solution to this obviously common channel need.
+				Kittr is how you share your loadouts with your channel community. We saw that there wasn't really any great way
+				for a player to share loadouts on Twitch - so we made one. There were ways, certainly...But no outstanding
+				solution to this obviously common channel need.
 			</Text>
 		)
 	},
@@ -20,14 +20,13 @@ const items = [
 		content: (
 			<>
 				<Text>
-					A player or mod can make an account and pick out the games that will be found on channel. From
-					there, you can make a bunch of kits (loadouts, setups, whatever you like to call them) and
-					export the bot commands for those kits into your Twitch chat. The whole thing takes 20 minutes
-					tops.
+					A player or mod can make an account and pick out the games that will be found on channel. From there, you can
+					make a bunch of kits (loadouts, setups, whatever you like to call them) and export the bot commands for those
+					kits into your Twitch chat. The whole thing takes 20 minutes tops.
 				</Text>
 				<Text>
-					Now, the next time that someone types in your text command, they'll be given the link to kittr
-					for that particular kit - or just the screen for everything if they are coming from !loadouts.
+					Now, the next time that someone types in your text command, they'll be given the link to kittr for that
+					particular kit - or just the screen for everything if they are coming from !loadouts.
 				</Text>
 			</>
 		)
@@ -37,13 +36,13 @@ const items = [
 		content: (
 			<>
 				<p>
-					We truly believe that we are the best option for sharing loadouts/setups/customizations to your
-					channel's audience. What we have looks and feels great, does its job (sharing info with your
-					peeps), and can help your YouTube performance, too.
+					We truly believe that we are the best option for sharing loadouts/setups/customizations to your channel's
+					audience. What we have looks and feels great, does its job (sharing info with your peeps), and can help your
+					YouTube performance, too.
 				</p>
 				<p>
-					Comparing to other options that you may have for sharing your loadouts with your audience, we
-					think we have easily the best option right here.
+					Comparing to other options that you may have for sharing your loadouts with your audience, we think we have
+					easily the best option right here.
 				</p>
 			</>
 		)
@@ -52,10 +51,9 @@ const items = [
 		title: "How could kittr help my YouTube views?",
 		content: (
 			<p>
-				On our platform, you can embed your YouTube videos that go with a certain weapon or item. This
-				way, we're putting your content front and center every time someone wants to find out about your
-				kit. That's just one more opportunity that someone can press play. We also have an autoplay
-				feature that can be enabled.
+				On our platform, you can embed your YouTube videos that go with a certain weapon or item. This way, we're
+				putting your content front and center every time someone wants to find out about your kit. That's just one more
+				opportunity that someone can press play. We also have an autoplay feature that can be enabled.
 			</p>
 		)
 	},
@@ -64,14 +62,14 @@ const items = [
 		content: (
 			<>
 				<p>
-					As a mod, you have chat to contend with most of the time. That's probably enough of a job right
-					there by itself. We want to make keeping a solid, accurate, beautiful set of commands for the
-					channel's kits easy to handle.
+					As a mod, you have chat to contend with most of the time. That's probably enough of a job right there by
+					itself. We want to make keeping a solid, accurate, beautiful set of commands for the channel's kits easy to
+					handle.
 				</p>
 				<p>
-					On kittr, it can take about 15-20 minutes to set up a brand new profile. After that, making an
-					edit to a command can take as little as 5 seconds of your time and 3 clicks with your pointer
-					finger. Now get back over there and wrangle chat!
+					On kittr, it can take about 15-20 minutes to set up a brand new profile. After that, making an edit to a
+					command can take as little as 5 seconds of your time and 3 clicks with your pointer finger. Now get back over
+					there and wrangle chat!
 				</p>
 			</>
 		)
@@ -81,15 +79,13 @@ const items = [
 		content: (
 			<>
 				<p>
-					Let's face it: Your Google Sheet is ugly and difficult for your users to read. Our opinion is
-					that no matter how hard you try, you're not going to end up with something that looks better
-					than our Kit Displayr.
+					Let's face it: Your Google Sheet is ugly and difficult for your users to read. Our opinion is that no matter
+					how hard you try, you're not going to end up with something that looks better than our Kit Displayr.
 				</p>
 				<p>
-					On top of that, our platform is easier to create and edit than a Google Sheet. In a Google
-					Sheet, you'll have to find the right cell to edit, type in your edit, make sure you have no
-					typos, format it right, it's just a whole thing. But on kittr, you make two or three clicks and
-					your edit is DONE. No mistakes, no worries.
+					On top of that, our platform is easier to create and edit than a Google Sheet. In a Google Sheet, you'll have
+					to find the right cell to edit, type in your edit, make sure you have no typos, format it right, it's just a
+					whole thing. But on kittr, you make two or three clicks and your edit is DONE. No mistakes, no worries.
 				</p>
 			</>
 		)
@@ -99,15 +95,13 @@ const items = [
 		content: (
 			<>
 				<p>
-					Sure, you could just respond about the kit right there in chat with a text response to your
-					command. But that's just so...boring, isn't it? And, on top of that, those text commands can
-					really start piling up and clog up chat. Chat is a place for your community to interact, not
-					read the same text commands all day!
+					Sure, you could just respond about the kit right there in chat with a text response to your command. But
+					that's just so...boring, isn't it? And, on top of that, those text commands can really start piling up and
+					clog up chat. Chat is a place for your community to interact, not read the same text commands all day!
 				</p>
 				<p>
-					Additionally, you're right back to the problem you had with a Google Sheet when you are working
-					with plain text. Typos, formatting, sweating it out to make sure the info is correct. Let us
-					handle that hard part!
+					Additionally, you're right back to the problem you had with a Google Sheet when you are working with plain
+					text. Typos, formatting, sweating it out to make sure the info is correct. Let us handle that hard part!
 				</p>
 			</>
 		)
@@ -117,23 +111,22 @@ const items = [
 		content: (
 			<>
 				<p>
-					Let's be honest. If someone requested your loadout kit, they probably just want to know about
-					the attachments. They are already probably watching you use the setup right there on channel. If
-					they ask for your kit, they probably just want to know. We've asked a lot, a lot, A LOT of
-					viewers over time with this project and they all say the exact same thing: They hate it when the
-					player links to a YouTube video for their loadout commands.
+					Let's be honest. If someone requested your loadout kit, they probably just want to know about the attachments.
+					They are already probably watching you use the setup right there on channel. If they ask for your kit, they
+					probably just want to know. We've asked a lot, a lot, A LOT of viewers over time with this project and they
+					all say the exact same thing: They hate it when the player links to a YouTube video for their loadout
+					commands.
 				</p>
 				<p>
-					Let's do better than that by offering up your YouTube content in a more pleasant way. Embed your
-					YouTube content on our platform and your viewers can watch it more passively as they take in
-					more information about your kit. We actually think that you will end up with MORE youtube views
-					if you link to us. Here's why.
+					Let's do better than that by offering up your YouTube content in a more pleasant way. Embed your YouTube
+					content on our platform and your viewers can watch it more passively as they take in more information about
+					your kit. We actually think that you will end up with MORE youtube views if you link to us. Here's why.
 				</p>
 				<p>
-					Our analytics show that visitors to our site visit about 6-8 kits on average. So, if you've
-					embedded your content, that's WAY more times that someone has your content in front of them -
-					and they'll actually watch it if they want to watch it (better engagement metrics!). We also
-					have an option to enable auto-playing if you prefer it.
+					Our analytics show that visitors to our site visit about 6-8 kits on average. So, if you've embedded your
+					content, that's WAY more times that someone has your content in front of them - and they'll actually watch it
+					if they want to watch it (better engagement metrics!). We also have an option to enable auto-playing if you
+					prefer it.
 				</p>
 			</>
 		)
@@ -142,8 +135,8 @@ const items = [
 		title: "How much does kittr cost to use?",
 		content: (
 			<p>
-				It's free. We want to help player, not hurt them. Our goal is to help your channel get better, not
-				reach in your wallet.
+				It's free. We want to help player, not hurt them. Our goal is to help your channel get better, not reach in your
+				wallet.
 			</p>
 		)
 	}
@@ -155,17 +148,15 @@ const FAQ = () => {
 			<Grid>
 				<Grid.Col>
 					<Section>
-						<Accordion
-						>
-							{items.map(item => {
+						<Accordion>
+							{items.map((item) => {
 								return (
 									<Accordion.Item value={item.title}>
-        <Accordion.Control>{item.title}</Accordion.Control>
-        <Accordion.Panel>{item.content}</Accordion.Panel>
-      </Accordion.Item>
+										<Accordion.Control>{item.title}</Accordion.Control>
+										<Accordion.Panel>{item.content}</Accordion.Panel>
+									</Accordion.Item>
 								)
 							})}
-
 						</Accordion>
 					</Section>
 				</Grid.Col>
