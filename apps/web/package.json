@@ -14,9 +14,9 @@
 		"type-check": "tsc --pretty --noEmit"
 	},
 	"dependencies": {
-		"@kittr/logger": "workspace:*",
-		"@kittr/prisma": "workspace:*",
-		"@kittr/ui": "workspace:*",
+		"@kittr/logger": "*",
+		"@kittr/prisma": "*",
+		"@kittr/ui": "*",
 		"@juggle/resize-observer": "3.3.1",
 		"@mantine/core": "3.6.9",
 		"@mantine/hooks": "3.6.9",
@@ -53,13 +53,13 @@
 		"stripe": "8.205.0",
 		"styled-components": "5.3.3",
 		"superjson": "1.9.1",
-		"tsconfig": "workspace:*",
+		"tsconfig": "*",
 		"validator": "13.7.0",
 		"zod": "3.17.3"
 	},
 	"devDependencies": {
-		"@kittr/config": "workspace:*",
-		"@kittr/types": "workspace:*",
+		"@kittr/config": "*",
+		"@kittr/types": "*",
 		"@types/jsonwebtoken": "8.5.8",
 		"@types/micro": "7.3.7",
 		"@types/react": "^18.0.26",

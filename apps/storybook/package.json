@@ -14,8 +14,8 @@
 		"react-dom": "^18.2.0"
 	},
 	"devDependencies": {
-		"@kittr/config": "workspace:*",
-		"tsconfig": "workspace:*",
+		"@kittr/config": "*",
+		"tsconfig": "*",
 		"@babel/core": "7.18.9",
 		"@react-theming/storybook-addon": "1.1.6",
 		"@storybook/addon-actions": "6.5.9",

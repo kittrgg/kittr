@@ -7,7 +7,7 @@
 		"clean": "rm -rf .turbo && rm -rf .next &&  rm -rf coverage && rm -rf node_modules"
 	},
 	"dependencies": {
-		"@kittr/prisma": "workspace:*"
+		"@kittr/prisma": "*"
 	},
 	"devDependencies": {
 		"cypress": "9.5.0",
