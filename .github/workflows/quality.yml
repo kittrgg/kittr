@@ -34,7 +34,7 @@ jobs:
         uses: ./tooling/github-actions/install
 
       - name: Run Prettier (auto-fix)
-        run: pnpm prettier-write
+        run: yarn prettier-write
 
       - name: Commit Prettier fixes
         if: ${{ github.event_name == 'pull_request' }}
@@ -85,4 +85,4 @@ jobs:
           restore-keys: ${{ runner.os }}-cache-typescript-tsbuildinfo-
 
       - name: Run TypeScript type check
-        run: pnpm type-check
+        run: yarn type-check
