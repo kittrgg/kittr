@@ -51,7 +51,7 @@ const Attachments = () => {
 							<Styled.KitOption>{slot.displayName.toUpperCase()}</Styled.KitOption>
 
 							{tunes !== undefined && (
-								<Grid style={{ width: "50%", marginLeft: "4%" }}>
+								<Grid style={{ width: "80%", marginLeft: "4%" }}>
 									{tunes[tunes.findIndex((tune) => tune.kitOptionId === slot.id)]?.horz ? (
 										<Grid.Col span={6}>
 											<Text>{handleHorzTuneName(slot.slotKey)}</Text>
@@ -87,17 +87,18 @@ export const Container = styled.div<{ numOfOptions: number; numOfTunes: number }
 	justify-self: center;
 	align-self: center;
 	width: 100%;
-	height: ${(props) => Math.max((props.numOfOptions + props.numOfTunes / 1.9) * 100, 80)}px;
-	padding: 3% 8%;
+	// height: ${(props) => Math.max((props.numOfOptions + props.numOfTunes / 4) * 100, 80)}px;
+	padding: 2em 8%;
 	background: ${colors.lightest};
 	border-radius: 25px;
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
+	justify-content: center;
 	align-items: space-around;
+	// gap: 0.5em;
 
 	@media (max-width: 650px) {
-		height: ${(props) => Math.max((props.numOfOptions + props.numOfTunes / 1.25) * 75, 80)}px;
+		// height: ${(props) => Math.max((props.numOfOptions + props.numOfTunes / 1.25) * 75, 80)}px;
 	}
 `

@@ -24,7 +24,7 @@ const SidebarButton: React.FC<SidebarButtonProps> = ({ kit, featured, subButton,
 	const selected = matchDisplayQuery(kitNameQuery, kit, kit?.customTitle ? true : false)
 	const defaultStyle = { backgroundColor: selected ? colors.dark20 : colors.light, margin: "0.5em 0" }
 	const subButtonStyle = {
-		width: "80%",
+		width: "90%",
 		backgroundColor: selected ? colors.dark20 : colors.light,
 		marginLeft: "auto",
 		marginTop: "0.25em"
@@ -38,7 +38,7 @@ const SidebarButton: React.FC<SidebarButtonProps> = ({ kit, featured, subButton,
 			styles={{ label: { textAlign: "left", width: "100%" } }}
 			{...props}
 		>
-			{kit?.customTitle ? kit?.customTitle : kit?.base?.displayName}
+			{kit?.customTitle ? kit?.customTitle : subButton ? "Default" : kit?.base?.displayName}
 		</Button>
 	)
 }
@@ -65,7 +65,6 @@ const CATEGORIES = [
 	"Sniper Rifle",
 	"Handgun"
 ]
-const CATEGORY_SPLIT = 19
 
 const Sidebar = () => {
 	const { width } = useViewportSize()
@@ -93,7 +92,7 @@ const Sidebar = () => {
 				/>
 			</div>
 			<hr style={{ width: "88%", borderColor: colors.lightest }} />
-			<ScrollArea style={{ height: isMobile ? "40%" : "70%", padding: "0 1em" }}>
+			<ScrollArea style={{ height: isMobile ? "80%" : "92%", padding: "0 1em" }}>
 				{/* if there are favorited kits and no filterQuery - display them at the top of the scroller */}
 				{filteredByFavorite.length > 0 &&
 					!filterQuery &&
@@ -125,7 +124,15 @@ const Sidebar = () => {
 					return (
 						<>
 							<Title preset="h4" ml="0.75em">
-								{category}
+								{/* 
+								If there is a filter query - filter allkits to the search query and find index of category - else find index on unfiltered kits
+								 *** If index is -1 that means there is no kit so it won't show category name *** 
+								 */}
+								{(filterQuery
+									? allKits
+											.filter((kit) => kit.base.displayName.toLowerCase().includes(filterQuery))
+											.findIndex((kit) => kit.base.category.displayName === category) !== -1
+									: allKits.findIndex((kit) => kit.base.category.displayName === category) !== -1) && category}
 							</Title>
 							{/* Kits are filtered by categories and does not include featured kits. */}
 							{allKits
@@ -152,7 +159,8 @@ const Sidebar = () => {
 													disableIconRotation
 													styles={{
 														control: { backgroundColor: colors.light, padding: "0.6em" },
-														label: { fontSize: "1.2em", fontWeight: "600", color: colors.white, paddingLeft: "0.7em" }
+														label: { fontSize: "1.2em", fontWeight: "600", color: colors.white, paddingLeft: "0.7em" },
+														contentInner: { padding: 0 }
 													}}
 												>
 													<Accordion.Item label={kit.base.displayName}>
@@ -163,6 +171,7 @@ const Sidebar = () => {
 																<SidebarButton
 																	key={sub.id}
 																	kit={sub}
+																	featured={sub.featured}
 																	subButton={true}
 																	onClick={() => {
 																		router.push(
@@ -190,6 +199,7 @@ const Sidebar = () => {
 												<SidebarButton
 													key={kit.id}
 													kit={kit}
+													featured={kit.featured}
 													onClick={() => {
 														router.push(
 															Routes.CHANNEL.GAME.createPath(
@@ -212,15 +222,6 @@ const Sidebar = () => {
 					)
 				})}
 			</ScrollArea>
-			{allKits.length > CATEGORY_SPLIT && (
-				<div style={{ padding: "1rem" }}>
-					<Text preset="sm" style={{ lineHeight: "1.25em" }}>
-						Ads are annoying but keep this site running. Thank you for understanding.
-						<br />- The Guy That Makes kittr
-					</Text>
-					<Ad placementType="d300x250" />
-				</div>
-			)}
 		</>
 	)
 }
