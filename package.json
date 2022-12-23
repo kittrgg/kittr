@@ -3,7 +3,7 @@
 	"version": "0.0.0",
 	"private": true,
 	"workspaces": [ "apps/**", "packages/**" ],
-"packageManager": "yarn@1.22.0",
+	"packageManager": "yarn@1.22.0",
 	"scripts": {
 		"dx": "dotenv -- run-s docker:up dev",
 		"dx:storybook": "cd packages/ui && yarn storybook",
