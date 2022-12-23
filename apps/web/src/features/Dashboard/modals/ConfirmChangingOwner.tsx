@@ -24,7 +24,7 @@ const ConfirmChangingOwner = ({ ...props }) => {
 				/>
 				<Button
 					design="white"
-					text={"YES, PICK A NEW OWNER"}
+					text="YES, PICK A NEW OWNER"
 					onClick={() => dispatch(setModal({ type: "Set New Owner", data: {} }))}
 					style={{ margin: "0 auto", marginLeft: "24px" }}
 					dataCy="confirm-changing-owner"

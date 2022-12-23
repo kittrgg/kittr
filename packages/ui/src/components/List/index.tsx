@@ -1,3 +1,11 @@
-import { List as MantineList } from "@mantine/core"
+import { List as MantineList, ListProps } from "@mantine/core"
 
-export const List = MantineList
+export type ListItemProps = ListProps
+
+const List = ({ children, ...props }: ListItemProps) => {
+	return <MantineList {...props}>{children}</MantineList>
+}
+
+List.Item = MantineList.Item
+
+export { List }

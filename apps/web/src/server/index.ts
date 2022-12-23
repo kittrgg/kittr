@@ -8,7 +8,7 @@ import { usersRouter } from "./routers/users"
 import { gamesRouter } from "@Server/routers/games"
 import { stripeRouter } from "@Server/routers/stripe"
 import { captureMessage } from "@kittr/logger/node"
-import { inferProcedureInput, inferProcedureOutput, TRPCError } from "@trpc/server"
+import { inferProcedureInput, inferProcedureOutput } from "@trpc/server"
 import superjson from "superjson"
 
 export const appRouter = createRouter()

@@ -57,7 +57,7 @@ const LinkEditor = () => {
 	}, [linkEdits, data?.links])
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>, link: [string, string]) => {
-		let newEdit = linkEdits?.slice() ?? []
+		const newEdit = linkEdits?.slice() ?? []
 		const editIndex =
 			newEdit?.findIndex((linkToEdit) => {
 				return link[0] === linkToEdit.property
@@ -76,7 +76,7 @@ const LinkEditor = () => {
 	}
 
 	const removeLink = (property: string) => {
-		let newEdit = linkEdits?.slice()
+		const newEdit = linkEdits?.slice()
 		const editIndex = newEdit?.findIndex((linkToEdit) => property === linkToEdit.value) ?? -1
 
 		if (editIndex !== -1) {
@@ -163,18 +163,16 @@ const LinkEditor = () => {
 					/>
 				</div>
 				<div style={{ flex: 0.5, textAlign: "center" }}>
-					{
-						<Button
-							design="white"
-							disabled={!areActiveChanges}
-							text="Save Changes"
-							onClick={async () => mutate({ channelId: data?.id!, links: linkEdits! })}
-							style={{
-								margin: "0 auto"
-							}}
-							dataCy="save-link-changes"
-						/>
-					}
+					<Button
+						design="white"
+						disabled={!areActiveChanges}
+						text="Save Changes"
+						onClick={async () => mutate({ channelId: data?.id!, links: linkEdits! })}
+						style={{
+							margin: "0 auto"
+						}}
+						dataCy="save-link-changes"
+					/>
 				</div>
 			</ButtonFlex>
 		</>

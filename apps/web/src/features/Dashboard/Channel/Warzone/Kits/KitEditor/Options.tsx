@@ -42,7 +42,7 @@ const Options = () => {
 			return dispatch(updateOptions(newCurrent))
 		}
 
-		let toAdd = availableOptions?.find((opt) => opt.displayName === displayName && opt.slotKey === slot)
+		const toAdd = availableOptions?.find((opt) => opt.displayName === displayName && opt.slotKey === slot)
 
 		const index = newCurrent.findIndex((elem) => elem.slotKey === toAdd?.slotKey)
 

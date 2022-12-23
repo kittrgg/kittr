@@ -36,7 +36,7 @@ const YoutubeId = ({ ...props }) => {
 			<TextInput
 				type="text"
 				name="youtubeUrl"
-				label={"https://www.youtube.com/watch?v="}
+				label="https://www.youtube.com/watch?v="
 				labelStyles={{ color: colors.lighter, display: "block", marginTop: "12px", textTransform: "initial" }}
 				value={youtubeUrl || ""}
 				subline="If you want to just copy-paste the whole YouTube link, we'll trim it for you. We know, we know, you're welcome."
