@@ -13,11 +13,11 @@ dotenv.config({
 })
 
 const app = express()
-app.use(cors({ origin: "*" }))
+app.use(cors({ origin: "workspace:*" }))
 const httpServer = createServer(app)
 const io = new Server(httpServer, {
 	cors: {
-		origin: "*"
+		origin: "workspace:*"
 	}
 })
 
