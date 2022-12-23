@@ -10,19 +10,11 @@
 		"type-check": "tsc --pretty --noEmit"
 	},
 	"dependencies": {
-<<<<<<< HEAD
 		"@mantine/core": "^5.9.5",
 		"@mantine/dates": "^5.9.5",
 		"@mantine/hooks": "^5.9.5",
 		"@mantine/next": "^5.9.5",
 		"@mantine/rte": "^5.9.5",
-=======
-		"@mantine/core": "3.6.9",
-		"@mantine/dates": "3.6.9",
-		"@mantine/hooks": "3.6.9",
-		"@mantine/rte": "3.6.9",
-		"dayjs": "^1.11.7",
->>>>>>> 07f478c80611381e3aec5216e2bb30c99f6d246a
 		"react-device-detect": "2.2.2",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0"

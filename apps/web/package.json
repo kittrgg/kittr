@@ -62,12 +62,7 @@
 		"@kittr/types": "workspace:*",
 		"@types/jsonwebtoken": "8.5.8",
 		"@types/micro": "7.3.7",
-<<<<<<< HEAD
 		"@types/react": "^18.0.26",
-=======
-		"@types/react": "17.0.39",
-		"@types/react-redux": "^7.1.24",
->>>>>>> 07f478c80611381e3aec5216e2bb30c99f6d246a
 		"@types/react-select": "5.0.1",
 		"@types/styled-components": "5.1.23",
 		"@types/validator": "13.7.4",
