@@ -14,22 +14,6 @@ services:
     volumes:
       - kittr-database:/var/lib/postgresql/data
 
-  firebase-emulators:
-    container_name: firebase-emulators
-    ports:
-      - 4000:4000
-      - 4001:4001
-      - 4002:4002
-    build:
-      context: ./lib/firebase-emulators
-      dockerfile: Dockerfile
-    image: firebase-emulator:firebase-emulator
-    volumes:
-      - ./lib/firebase-emulators/firebase.json:/src/firebase.json
-      - ./lib/firebase-emulators/storage.rules:/src/storage.rules
-      - ./lib/firebase-emulators/seed:/src/firebase/seed
-    command: firebase emulators:start --project dev --import=./firebase/seed --debug
 volumes:
   kittr-database:
     driver: local
-

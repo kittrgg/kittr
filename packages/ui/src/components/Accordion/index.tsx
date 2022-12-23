@@ -6,7 +6,10 @@ import {
 } from "@mantine/core"
 import React from "react"
 
-type AccordionListItem = { title: string; content: React.ReactNode }
+type AccordionListItem = {
+	title: string
+	content: React.ReactNode
+}
 
 export interface Props extends Omit<AccordionProps, "children"> {
 	items: AccordionListItem[]
@@ -17,7 +20,6 @@ export const Accordion = ({ items, ...rest }: Props) => (
 		{items.map((item, idx) => (
 			<AccordionItem
 				key={idx}
-				style={{}}
 				label={
 					<Title order={3} preset="h4">
 						{item.title}

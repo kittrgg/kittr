@@ -7,15 +7,17 @@
 		"FIREBASE_CLIENT_EMAIL",
 		"FIREBASE_COOKIE_SECRET_CURRENT",
 		"FIREBASE_COOKIE_SECRET_PREVIOUS",
+		"FIREBASE_DATABASE_URL",
 		"FIREBASE_MEASUREMENT_ID",
 		"FIREBASE_MESSAGING_SENDER_ID",
 		"FIREBASE_PROJECT_ID",
 		"GOOGLE_APPLICATION_CREDENTIALS",
+		"IS_DEV",
 		"IS_PREVIEW",
 		"MONTHLY_TIP_PRICE_ID",
-		"NEXT_PUBLIC_API_KEY",
 		"NEXT_PUBLIC_ADS_DISABLED",
-		"NEXT_PUBLIC_FIREBASE_DATABASE_URL",
+		"NEXT_PUBLIC_FIREBASE_API_KEY",
+		"NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET",
 		"NEXT_PUBLIC_GOOGLE_ANALYTICS",
 		"NEXT_PUBLIC_IS_DEV",
 		"NEXT_PUBLIC_SENTRY_DSN",
@@ -32,66 +34,44 @@
 		"SUBSCRIPTION_PRICE_ID",
 		"TWITCH_CLIENT_ID",
 		"TWITCH_CLIENT_SECRET",
-		"VERCEL_ENV"
+		"VERCEL_ENV",
+		"VERCEL_URL"
 	],
   "pipeline": {
     "build": {
-      "dependsOn": [
-				"db:generate",
-        "^build"
-      ],
-      "outputs": [
-        "dist/**",
-        ".next/**",
-        "build/**"
-      ]
+      "dependsOn": ["db:deploy", "db:generate", "^build" ],
+      "outputs": [ "dist/**", ".next/**", "build/**" ]
     },
+		"db:deploy": {
+			"cache": false
+		},
     "topo": {
-      "dependsOn": [
-        "db:generate",
-        "^topo"
-      ]
+      "dependsOn": [ "db:generate", "^topo" ]
     },
     "db:generate": {
       "cache": false
     },
+    "lint": {
+      "dependsOn": ["^topo"],
+      "outputs": []
+    },
     "db:push": {
       "cache": false
     },
-    "test": {
-      "dependsOn": [
-        "^build"
-      ],
-      "outputs": [
-        "coverage/**"
-      ]
+    "type-check": {
+      "dependsOn": [ "db:generate", "^topo" ]
     },
-    "lint": {
-      "outputs": []
+    "test": {
+      "dependsOn": [ "^topo", "^build" ],
+      "outputs": [ "coverage/**" ]
     },
     "dev": {
-      "dependsOn": [
-        "db:generate"
-      ],
-      "cache": false
-    },
-    "clean": {
+      "dependsOn": [ "db:generate" ],
       "cache": false
     },
     "seed": {
-      "dependsOn": [
-        "db:generate"
-      ],
+      "dependsOn": [ "db:generate" ],
       "cache": false
-    },
-    "start": {
-      "cache": false
-    },
-    "type-check": {
-      "dependsOn": [
-				"db:generate",
-        "^topo"
-      ]
     }
   }
 }
