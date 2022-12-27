@@ -33,7 +33,7 @@ const PageOfChannels = () => {
 
 	if ((channels && channels.length === 0) || isNaN(page)) {
 		return (
-            <AdPageWrapper title={`Channels - Page ${page} | kittr`} description="Full channels of channels on kittr.">
+			<AdPageWrapper title={`Channels - Page ${page} | kittr`} description="Full channels of channels on kittr.">
 				<Title preset="h1" sx={{ margin: "12px 0", padding: "0 5%" }}>
 					CHANNELS
 				</Title>
@@ -42,19 +42,18 @@ const PageOfChannels = () => {
 					Oops, doesn't look like there's anyone here.
 				</Text>
 				<Link
-                    href={Routes.CHANNEL.LIST}
-                    style={{
-                        display: "block",
-                        marginTop: "24px",
-                        marginLeft: "24px",
-                        color: colors.white
-                    }}>
-					
-						Back to Earth
-					
+					href={Routes.CHANNEL.LIST}
+					style={{
+						display: "block",
+						marginTop: "24px",
+						marginLeft: "24px",
+						color: colors.white
+					}}
+				>
+					Back to Earth
 				</Link>
 			</AdPageWrapper>
-        );
+		)
 	}
 
 	return (

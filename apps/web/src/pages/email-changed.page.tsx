@@ -8,7 +8,7 @@ const EmailChanged = () => {
 	const { classes } = useStyles()
 
 	return (
-        <div className={classes.body}>
+		<div className={classes.body}>
 			<Head
 				title="Email Change Started | kittr"
 				description={"You've started the process to change your email address. | kittr"}
@@ -25,7 +25,7 @@ const EmailChanged = () => {
 				</Link>
 			</div>
 		</div>
-    );
+	)
 }
 
 export default EmailChanged

@@ -34,7 +34,7 @@ const Body = ({ games, popularChannels, risingStars, liveChannels }: Props) => {
 	const routeChannel = (elem: Channel) => router.push(Routes.CHANNEL.createPath(elem.urlSafeName))
 
 	return (
-        <Container>
+		<Container>
 			<Section
 				title="GAMES"
 				transparent
@@ -84,7 +84,7 @@ const Body = ({ games, popularChannels, risingStars, liveChannels }: Props) => {
 				{risingStars && <ChannelAvatarList channels={risingStars} onClick={routeChannel} />}
 			</SideScroller>
 		</Container>
-    );
+	)
 }
 
 export default Body

@@ -51,7 +51,7 @@ const Page = () => {
 	}
 
 	return (
-        <div style={{ margin: "1rem" }}>
+		<div style={{ margin: "1rem" }}>
 			<Link href="/admin" legacyBehavior>
 				<Button onClick={() => ({})}>Back to Admin Home</Button>
 			</Link>
@@ -77,7 +77,7 @@ const Page = () => {
 			</Section>
 			{/* <Admin /> */}
 		</div>
-    );
+	)
 }
 
 export default Page

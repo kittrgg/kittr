@@ -64,7 +64,7 @@ const SignUp = () => {
 	}
 
 	return (
-        <AuthLayout title="SIGN UP">
+		<AuthLayout title="SIGN UP">
 			<Paragraph style={{ margin: "0" }}>
 				This is your personal account so use your own info here. Channel specific stuff will come in a minute.
 			</Paragraph>
@@ -139,7 +139,7 @@ const SignUp = () => {
 				<Button design="white" text="CREATE ACCOUNT" onClick={onSubmit} />
 			</form>
 		</AuthLayout>
-    );
+	)
 }
 
 export default SignUp
