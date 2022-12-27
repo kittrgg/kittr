@@ -67,78 +67,80 @@ const Item = ({ baseName, featured, kits, setFilterQuery }: Props) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isReady])
 
-	return <>
-        <Container
-            data-cy={`${baseName.replace(/ /g, "-")}-button`}
-            ref={featured ? undefined : containerRef}
-            isActive={weaponQuery === baseNameCleanse}
-            onClick={onClick}
-        >
-            {featured && (
-                <SVG.Star
-                    fill={colors.gold}
-                    stroke="transparent"
-                    style={{ position: "absolute", top: "12px", right: "12px", width: "14px" }}
-                />
-            )}
-            <Title>{`${baseName}${
-                matchedBase.length === 1 && firstMatchedBaseUserTitle.length > 3 ? firstMatchedBaseUserTitle : ""
-            }`}</Title>
-            {/* BRANDON THE WAMPUS WAS HERE */}
-            {matchedBase.length > 1 && (
-                <KitCount isActive={weaponQuery === baseNameCleanse}>({matchedBase.length})</KitCount>
-            )}
-        </Container>
-        <Wrapper
-            data-cy={`${baseName.replace(/ /g, "-").replace("(", "-").replace(")", "-")}-variants-container`}
-            isOpen={weaponQuery === baseNameCleanse}
-        >
-            <HeightAnimate ref={childRef}>
-                {weaponQuery === baseNameCleanse &&
-                    matchedBase.length > 1 &&
-                    matchedBase
-                        .sort((a, b) => sortAlphabetical(a.customTitle || "", b.customTitle || ""))
-                        .sort((a, b) => Number(b.featured) - Number(a.featured))
-                        .map((elem) => {
-                            return (
-                                <SubItem
-                                    active={
-                                        activeWeapon?.base?.displayName === elem.base.displayName &&
-                                        activeWeapon.customTitle === elem.customTitle
-                                    }
-                                    key={elem.id}
-                                    onClick={() => {
-                                        // dispatch(setActiveWeapon(elem))
-                                        dispatch(setIsSidebarOpen(false))
-                                        router.push(
-                                            Routes.CHANNEL.GAME.createPath(
-                                                channel as string,
-                                                game as string,
-                                                `?k=${baseName.replace(/ /g, "-")}`
-                                            ),
-                                            undefined,
-                                            { shallow: true }
-                                        )
-                                    }}
-                                    data-cy={`${elem.base.displayName.replace(/ /g, "-").replace("(", "-").replace(")", "-")}-${
-                                        elem.customTitle?.replace(/ /g, "-") || "Primary"
-                                    }`}
-                                >
-                                    <SubItemTitle>{elem.customTitle || elem.base.displayName}</SubItemTitle>
-                                    {elem.featured && (
-                                        <SVG.Star
-                                            style={{ position: "absolute", top: "50%", transform: "translateY(-50%)", right: "0px" }}
-                                            width="14px"
-                                            stroke="transparent"
-                                            fill={colors.gold}
-                                        />
-                                    )}
-                                </SubItem>
-                            );
-                        })}
-            </HeightAnimate>
-        </Wrapper>
-    </>;
+	return (
+		<>
+			<Container
+				data-cy={`${baseName.replace(/ /g, "-")}-button`}
+				ref={featured ? undefined : containerRef}
+				isActive={weaponQuery === baseNameCleanse}
+				onClick={onClick}
+			>
+				{featured && (
+					<SVG.Star
+						fill={colors.gold}
+						stroke="transparent"
+						style={{ position: "absolute", top: "12px", right: "12px", width: "14px" }}
+					/>
+				)}
+				<Title>{`${baseName}${
+					matchedBase.length === 1 && firstMatchedBaseUserTitle.length > 3 ? firstMatchedBaseUserTitle : ""
+				}`}</Title>
+				{/* BRANDON THE WAMPUS WAS HERE */}
+				{matchedBase.length > 1 && (
+					<KitCount isActive={weaponQuery === baseNameCleanse}>({matchedBase.length})</KitCount>
+				)}
+			</Container>
+			<Wrapper
+				data-cy={`${baseName.replace(/ /g, "-").replace("(", "-").replace(")", "-")}-variants-container`}
+				isOpen={weaponQuery === baseNameCleanse}
+			>
+				<HeightAnimate ref={childRef}>
+					{weaponQuery === baseNameCleanse &&
+						matchedBase.length > 1 &&
+						matchedBase
+							.sort((a, b) => sortAlphabetical(a.customTitle || "", b.customTitle || ""))
+							.sort((a, b) => Number(b.featured) - Number(a.featured))
+							.map((elem) => {
+								return (
+									<SubItem
+										active={
+											activeWeapon?.base?.displayName === elem.base.displayName &&
+											activeWeapon.customTitle === elem.customTitle
+										}
+										key={elem.id}
+										onClick={() => {
+											// dispatch(setActiveWeapon(elem))
+											dispatch(setIsSidebarOpen(false))
+											router.push(
+												Routes.CHANNEL.GAME.createPath(
+													channel as string,
+													game as string,
+													`?k=${baseName.replace(/ /g, "-")}`
+												),
+												undefined,
+												{ shallow: true }
+											)
+										}}
+										data-cy={`${elem.base.displayName.replace(/ /g, "-").replace("(", "-").replace(")", "-")}-${
+											elem.customTitle?.replace(/ /g, "-") || "Primary"
+										}`}
+									>
+										<SubItemTitle>{elem.customTitle || elem.base.displayName}</SubItemTitle>
+										{elem.featured && (
+											<SVG.Star
+												style={{ position: "absolute", top: "50%", transform: "translateY(-50%)", right: "0px" }}
+												width="14px"
+												stroke="transparent"
+												fill={colors.gold}
+											/>
+										)}
+									</SubItem>
+								)
+							})}
+				</HeightAnimate>
+			</Wrapper>
+		</>
+	)
 }
 
 export default Item

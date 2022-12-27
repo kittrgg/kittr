@@ -42,7 +42,7 @@ const NavMenu = ({ wrapperRef, breakpoint = 769, backFunction, middleComponent }
 		)
 	}
 	return (
-        <Wrapper ref={wrapperRef} shadow={(windowScroll as number) > 0}>
+		<Wrapper ref={wrapperRef} shadow={(windowScroll as number) > 0}>
 			<Container breakpoint={breakpoint}>
 				<LogoImageLink />
 				<Link href={Routes.GAMES.LIST} passHref legacyBehavior>
@@ -61,7 +61,7 @@ const NavMenu = ({ wrapperRef, breakpoint = 769, backFunction, middleComponent }
 				<AuthenticationLinks isLoggedIn={isLoggedIn} pathname={pathname} />
 			</Container>
 		</Wrapper>
-    );
+	)
 }
 
 export default NavMenu
@@ -69,15 +69,15 @@ export default NavMenu
 const AuthenticationLinks = ({ isLoggedIn, pathname }: { isLoggedIn: boolean; pathname: string }) => {
 	if (isLoggedIn) {
 		return (
-            <Link href={Routes.DASHBOARD} passHref legacyBehavior>
+			<Link href={Routes.DASHBOARD} passHref legacyBehavior>
 				<StyledLink data-cy="desktop-dashboard-link-authed" active={pathname.startsWith(Routes.DASHBOARD)}>
 					DASHBOARD
 				</StyledLink>
 			</Link>
-        );
+		)
 	}
 	return (
-        <div>
+		<div>
 			<Link href={Routes.SIGN_UP} passHref legacyBehavior>
 				<StyledLink
 					data-cy="desktop-sign-up-link"
@@ -97,7 +97,7 @@ const AuthenticationLinks = ({ isLoggedIn, pathname }: { isLoggedIn: boolean; pa
 				</StyledLink>
 			</Link>
 		</div>
-    );
+	)
 }
 
 // Styled Components

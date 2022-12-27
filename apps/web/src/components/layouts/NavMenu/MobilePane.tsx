@@ -21,7 +21,7 @@ const MobileNavPane = ({ isOpen, setIsOpen }: Props) => {
 	const isLoggedIn = !!user?.uid
 
 	return (
-        <FullScreen
+		<FullScreen
 			onClick={() => setIsOpen(false)}
 			style={{
 				zIndex: "99999",
@@ -84,7 +84,7 @@ const MobileNavPane = ({ isOpen, setIsOpen }: Props) => {
 				)}
 			</Body>
 		</FullScreen>
-    );
+	)
 }
 
 export default MobileNavPane

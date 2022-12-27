@@ -10,11 +10,8 @@ import { useRouter } from "next/router"
 import React, { useState } from "react"
 
 interface SidebarButtonProps extends ButtonProps {
-	/** WarzoneKit & WarzoneKitBase | WarzoneTwoKit & WarzoneTwoKitBase */
 	kit: (WarzoneKit & { base: WarzoneKitBase }) | (WarzoneTwoKit & { base: WarzoneTwoKitBase })
-	/** If the button has a featured kit it will show a gold star in rightIcon */
 	featured?: boolean
-	/** If button is in the accordion - technically if the kit has a customTitle it will be a sub button */
 	subButton?: boolean
 }
 
@@ -23,7 +20,7 @@ const SidebarButton: React.FC<SidebarButtonProps> = ({ kit, featured, subButton,
 		query: { k }
 	} = useRouter()
 	const kitNameQuery = k as string
-	const selected = matchDisplayQuery(kitNameQuery, kit, subButton)
+	const selected = matchDisplayQuery(kitNameQuery, kit, kit?.customTitle ? true : false)
 	const defaultStyle = { backgroundColor: selected ? colors.dark20 : colors.light, margin: "0.5em 0" }
 	const subButtonStyle = {
 		width: "90%",
@@ -45,11 +42,6 @@ const SidebarButton: React.FC<SidebarButtonProps> = ({ kit, featured, subButton,
 	)
 }
 
-/** Matches kit base name with ?k= router query
- * - if kit has a customTitle it will match kit base name + customTitle to ?k= router query
- *
- * @returns Boolean
- * */
 const matchDisplayQuery = (
 	kitNameQuery: string,
 	kit: (WarzoneKit & { base: WarzoneKitBase }) | (WarzoneTwoKit & { base: WarzoneTwoKitBase }),
@@ -87,6 +79,8 @@ const Sidebar = () => {
 	const allKits = game === "wz2" ? unfilteredwz2Kits : unfilteredKits
 	const filteredByFavorite = allKits.filter((kit) => kit.featured)
 
+	console.log({ unfilteredKits, unfilteredwz2Kits })
+
 	return (
 		<>
 			<div style={{ padding: "0 1em" }}>
@@ -102,7 +96,7 @@ const Sidebar = () => {
 				{filteredByFavorite.length > 0 &&
 					!filterQuery &&
 					filteredByFavorite.map((favKit) => (
-						<React.Fragment key={favKit.id}>
+						<>
 							<Title preset="h4" ml="0.75em">
 								Favorites
 							</Title>
@@ -123,11 +117,11 @@ const Sidebar = () => {
 									)
 								}}
 							/>
-						</React.Fragment>
+						</>
 					))}
 				{CATEGORIES.map((category) => {
 					return (
-						<React.Fragment key={category}>
+						<>
 							<Title preset="h4" ml="0.75em">
 								{/*
 								If there is a filter query - filter allkits to the search query and find index of category - else find index on unfiltered kits
@@ -153,74 +147,77 @@ const Sidebar = () => {
 									// If the kit has a customTitle - display an accordion with the kits that have a customTitle and the base kit that has no customTitle
 									if (kit?.customTitle) {
 										return (
-											<Accordion
-												key={kit.id}
-												iconPosition="right"
-												icon={
-													<Text>
-														({allKits.filter((subKit) => kit.base.displayName === subKit.base.displayName).length})
-													</Text>
-												}
-												disableIconRotation
-												styles={{
-													control: { backgroundColor: colors.light, padding: "0.6em" },
-													label: { fontSize: "1.2em", fontWeight: "600", color: colors.white, paddingLeft: "0.7em" },
-													contentInner: { padding: 0 }
-												}}
-											>
-												<Accordion.Item label={kit.base.displayName}>
-													{/* Finds similar kits by matching the filtered kit base displayname with the kit that has a customTitle */}
-													{allKits
-														.filter((subKit) => kit.base.displayName === subKit.base.displayName)
-														.map((sub) => (
-															<SidebarButton
-																key={sub.id}
-																kit={sub}
-																featured={sub.featured}
-																subButton={true}
-																onClick={() => {
-																	router.push(
-																		Routes.CHANNEL.GAME.createPath(
-																			channel as string,
-																			game as string,
-																			`?k=${sub.base.displayName.replace(/ /g, "-")}
+											<>
+												<Accordion
+													iconPosition="right"
+													icon={
+														<Text>
+															({allKits.filter((subKit) => kit.base.displayName === subKit.base.displayName).length})
+														</Text>
+													}
+													disableIconRotation
+													styles={{
+														control: { backgroundColor: colors.light, padding: "0.6em" },
+														label: { fontSize: "1.2em", fontWeight: "600", color: colors.white, paddingLeft: "0.7em" },
+														contentInner: { padding: 0 }
+													}}
+												>
+													<Accordion.Item label={kit.base.displayName}>
+														{/* Finds similar kits by matching the filtered kit base displayname with the kit that has a customTitle */}
+														{allKits
+															.filter((subKit) => kit.base.displayName === subKit.base.displayName)
+															.map((sub) => (
+																<SidebarButton
+																	key={sub.id}
+																	kit={sub}
+																	featured={sub.featured}
+																	subButton={true}
+																	onClick={() => {
+																		router.push(
+																			Routes.CHANNEL.GAME.createPath(
+																				channel as string,
+																				game as string,
+																				`?k=${sub.base.displayName.replace(/ /g, "-")}
 										${sub.customTitle && sub.customTitle.replace(/ /g, "-")}`
-																		),
-																		undefined,
-																		{ shallow: true }
-																	)
-																}}
-															/>
-														))}
-												</Accordion.Item>
-											</Accordion>
+																			),
+																			undefined,
+																			{ shallow: true }
+																		)
+																	}}
+																/>
+															))}
+													</Accordion.Item>
+												</Accordion>
+											</>
 										)
 									}
 									// if there is only one kit with this displayName then show only the button
 									if (allKits.filter((subKit) => kit.base.displayName === subKit.base.displayName).length === 1) {
 										return (
-											<SidebarButton
-												key={kit.id}
-												kit={kit}
-												featured={kit.featured}
-												onClick={() => {
-													router.push(
-														Routes.CHANNEL.GAME.createPath(
-															channel as string,
-															game as string,
-															`?k=${kit.base.displayName.replace(/ /g, "-")}
+											<>
+												<SidebarButton
+													key={kit.id}
+													kit={kit}
+													featured={kit.featured}
+													onClick={() => {
+														router.push(
+															Routes.CHANNEL.GAME.createPath(
+																channel as string,
+																game as string,
+																`?k=${kit.base.displayName.replace(/ /g, "-")}
 										${kit.customTitle && kit.customTitle.replace(/ /g, "-")}`
-														),
-														undefined,
-														{ shallow: true }
-													)
-												}}
-											/>
+															),
+															undefined,
+															{ shallow: true }
+														)
+													}}
+												/>
+											</>
 										)
 									}
 								})}
 							{/* Ad placement */}
-						</React.Fragment>
+						</>
 					)
 				})}
 			</ScrollArea>

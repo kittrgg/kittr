@@ -36,7 +36,7 @@ const Specs = () => {
 	}
 
 	return (
-        <div>
+		<div>
 			<Title>
 				<span>
 					PC Specs
@@ -55,7 +55,7 @@ const Specs = () => {
 			{specs &&
 				Object.values(data?.profile?.channelPcSpecs || {}).map((spec, index) => {
 					return (
-                        <Spec key={`${spec.id}-${index}`}>
+						<Spec key={`${spec.id}-${index}`}>
 							<SpecInfo>
 								<Label>{spec.partType}</Label>
 								<span>{spec.partName}</span>
@@ -71,7 +71,7 @@ const Specs = () => {
 								/>
 							</IconButtons>
 						</Spec>
-                    );
+					)
 				})}
 			<Button
 				data-cy="add-a-spec"
@@ -85,7 +85,7 @@ const Specs = () => {
 				<p style={{ marginLeft: "44px" }}>!specs copied to clipboard</p>
 			</Toast>
 		</div>
-    );
+	)
 }
 
 export default Specs
