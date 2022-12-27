@@ -20,7 +20,7 @@ import { useSidebarState } from "@Redux/slices/displayr/selectors"
 import { useDispatch } from "@Redux/store"
 import Ad from "@Services/venatus/Ad"
 import { ChannelCreatorCode, Game } from "@kittr/prisma"
-import { SimpleGrid } from "@mantine/core"
+import { Container, SimpleGrid } from "@mantine/core"
 import { useScrollLock } from "@mantine/hooks"
 import { useRouter } from "next/router"
 import { useEffect } from "react"
@@ -54,16 +54,16 @@ const Main = () => {
 	const { data: channelData } = useChannelProfileData()
 	const activeWeapon = useActiveChannelKit()
 	const isSidebarOpen = useSidebarState()
-	const [scrollLocked, setScrollLocked] = useScrollLock()
+	// const [scrollLocked, setScrollLocked] = useScrollLock()
 
-	useEffect(() => {
-		if (isSidebarOpen && isMobile) {
-			setScrollLocked(true)
-		} else {
-			setScrollLocked(false)
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isSidebarOpen, isMobile])
+	// useEffect(() => {
+	// 	if (isSidebarOpen && isMobile) {
+	// 		setScrollLocked(true)
+	// 	} else {
+	// 		setScrollLocked(false)
+	// 	}
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, [isSidebarOpen, isMobile])
 
 	return (
 		<SimpleGrid
@@ -156,8 +156,15 @@ const Main = () => {
 					)}
 				</>
 			)}
-			{!activeWeapon && weaponTerm && <Placeholder isMobile={isMobile} />}
-			{channelData && !weaponTerm && isReady && <Placeholder isMobile={isMobile} />}
+			{!activeWeapon && (
+				<Container style={{ marginTop: isMobile ? "2em" : "10em" }}>
+					<SVG.Arrow
+						width="18px"
+						style={{ marginRight: "12px", transform: `rotate(${isMobile ? "0deg" : "-90deg"})` }}
+					/>
+					SELECT A KIT.
+				</Container>
+			)}
 		</SimpleGrid>
 	)
 }

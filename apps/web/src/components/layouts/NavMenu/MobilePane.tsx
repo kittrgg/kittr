@@ -15,7 +15,7 @@ interface Props {
 }
 
 const MobileNavPane = ({ isOpen, setIsOpen }: Props) => {
-	useLockBodyScroll(isOpen)
+	// useLockBodyScroll(isOpen)
 	const { pathname } = useRouter()
 	const user = useUser()
 	const isLoggedIn = !!user?.uid

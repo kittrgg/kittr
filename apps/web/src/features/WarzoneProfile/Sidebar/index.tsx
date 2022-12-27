@@ -79,7 +79,7 @@ const Sidebar = () => {
 	const allKits = game === "wz2" ? unfilteredwz2Kits : unfilteredKits
 	const filteredByFavorite = allKits.filter((kit) => kit.featured)
 
-	console.log({ unfilteredKits, unfilteredwz2Kits })
+	// console.log({ unfilteredKits, unfilteredwz2Kits })
 
 	return (
 		<>
@@ -91,7 +91,7 @@ const Sidebar = () => {
 				/>
 			</div>
 			<hr style={{ width: "88%", borderColor: colors.lightest }} />
-			<ScrollArea style={{ height: isMobile ? "80%" : "92%", padding: "0 1em" }}>
+			<ScrollArea style={{ height: isMobile ? "75vh" : "85vh", padding: "0 1em" }}>
 				{/* if there are favorited kits and no filterQuery - display them at the top of the scroller */}
 				{filteredByFavorite.length > 0 &&
 					!filterQuery &&
@@ -129,7 +129,7 @@ const Sidebar = () => {
 								 */}
 								{(filterQuery
 									? allKits
-											.filter((kit) => kit.base.displayName.toLowerCase().includes(filterQuery))
+											.filter((kit) => kit.base.displayName.toLowerCase().includes(filterQuery.toLowerCase()))
 											.findIndex((kit) => kit.base.category.displayName === category) !== -1
 									: allKits.findIndex((kit) => kit.base.category.displayName === category) !== -1) && category}
 							</Title>
@@ -149,42 +149,53 @@ const Sidebar = () => {
 										return (
 											<>
 												<Accordion
-													iconPosition="right"
-													icon={
+													chevronPosition="right"
+													chevron={
 														<Text>
 															({allKits.filter((subKit) => kit.base.displayName === subKit.base.displayName).length})
 														</Text>
 													}
-													disableIconRotation
+													disableChevronRotation
 													styles={{
-														control: { backgroundColor: colors.light, padding: "0.6em" },
-														label: { fontSize: "1.2em", fontWeight: "600", color: colors.white, paddingLeft: "0.7em" },
-														contentInner: { padding: 0 }
+														control: {
+															backgroundColor: colors.light,
+															padding: "0.5em",
+															borderRadius: "16px",
+															fontSize: "1.2em",
+															color: colors.white,
+															paddingLeft: "1.35em"
+														},
+														label: { fontWeight: 600 },
+														content: { padding: 0 },
+														itemTitle: { fontWeight: "bold" },
+														item: { border: "transparent" }
 													}}
 												>
-													<Accordion.Item label={kit.base.displayName}>
+													<Accordion.Item value={kit.base.displayName}>
 														{/* Finds similar kits by matching the filtered kit base displayname with the kit that has a customTitle */}
+														<Accordion.Control>{kit.base.displayName}</Accordion.Control>
 														{allKits
 															.filter((subKit) => kit.base.displayName === subKit.base.displayName)
 															.map((sub) => (
-																<SidebarButton
-																	key={sub.id}
-																	kit={sub}
-																	featured={sub.featured}
-																	subButton={true}
-																	onClick={() => {
-																		router.push(
-																			Routes.CHANNEL.GAME.createPath(
-																				channel as string,
-																				game as string,
-																				`?k=${sub.base.displayName.replace(/ /g, "-")}
-										${sub.customTitle && sub.customTitle.replace(/ /g, "-")}`
-																			),
-																			undefined,
-																			{ shallow: true }
-																		)
-																	}}
-																/>
+																<Accordion.Panel key={sub.id}>
+																	<SidebarButton
+																		kit={sub}
+																		featured={sub.featured}
+																		subButton={true}
+																		onClick={() => {
+																			router.push(
+																				Routes.CHANNEL.GAME.createPath(
+																					channel as string,
+																					game as string,
+																					`?k=${sub.base.displayName.replace(/ /g, "-")}
+																				${sub.customTitle && sub.customTitle.replace(/ /g, "-")}`
+																				),
+																				undefined,
+																				{ shallow: true }
+																			)
+																		}}
+																	/>
+																</Accordion.Panel>
 															))}
 													</Accordion.Item>
 												</Accordion>
