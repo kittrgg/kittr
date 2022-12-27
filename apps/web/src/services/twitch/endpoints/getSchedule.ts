@@ -23,6 +23,7 @@ export const getSchedule: IFunc = async (broadcaster_id) => {
 
 		if (!data?.segments) return []
 		return data.segments.filter((segment) => segment.is_recurring)
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	} catch (error: any) {
 		// This user does not have a schedule.
 		// Because of that, we need to provide an empty array so nothing breaks.

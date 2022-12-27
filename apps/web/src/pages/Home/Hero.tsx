@@ -76,8 +76,9 @@ const Subline = styled.h3`
 `
 
 const ScreenieContainer = styled.div`
-	width: 50vw;
+	width: 65%;
 	min-width: 260px;
+	max-width: 1000px;
 	margin: 0 auto 36px;
 	overflow: hidden;
 	border-radius: 12px;

@@ -26,7 +26,7 @@ const Specs = () => {
 		}
 	})
 
-	let rootUrl = new URL(window.location.origin.toString()).host.replace("www.", "")
+	const rootUrl = new URL(window.location.origin.toString()).host.replace("www.", "")
 
 	const commandString = `!addcom !specs ${rootUrl}/c/${data?.urlSafeName}#specs`
 

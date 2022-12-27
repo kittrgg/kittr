@@ -10,7 +10,7 @@ const SetupPhotos = () => {
 	const [copyNotification, setCopyNotification] = useState(false)
 	const { data } = useDashboardChannel()
 
-	let rootUrl = new URL(window.location.origin.toString()).host.replace("www.", "")
+	const rootUrl = new URL(window.location.origin.toString()).host.replace("www.", "")
 
 	const commandString = `!addcom !setup ${rootUrl}/c/${data?.urlSafeName}#setup`
 

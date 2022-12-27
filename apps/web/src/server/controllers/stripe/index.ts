@@ -113,7 +113,7 @@ export const getPaymentMethod = createController()
 				const { card } = await stripe.paymentMethods.retrieve(default_payment_method as string)
 
 				return { last4: card?.last4 }
-			} catch (err: any) {
+			} catch (err) {
 				throw new TRPCError({
 					code: "BAD_REQUEST",
 					message: "Error #: 18910"

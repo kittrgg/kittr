@@ -8,6 +8,7 @@ export const getAuthToken = async () => {
 	}&client_secret=${process.env.TWITCH_SECRET as string}&grant_type=client_credentials&scope=`
 
 	try {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		const data = await fetch.post<any>({ url: tokenUrl, redirect: "follow" })
 
 		if (data.access_token) {

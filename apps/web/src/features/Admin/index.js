@@ -1,8 +1,8 @@
-import { useState } from "react"
-import { useQuery } from "react-query"
 import * as Styled from "./style"
 import FullScreen from "@Components/layouts/FullScreen"
 import { Selector } from "@Components/shared"
+import { useState } from "react"
+import { useQuery } from "react-query"
 
 const Admin = ({ ...props }) => {
 	const [allBases, setAllBases] = useState([])

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { storage } from "@Services/firebase"
 import { deleteObject, ref } from "firebase/storage"
 

@@ -1,10 +1,13 @@
 import { Section } from "."
 import { Text } from "../Text"
+import { ComponentStory, ComponentMeta } from "@storybook/react"
 
 export default {
-	title: "Section",
+	title: "Molecule/Section",
 	component: Section
-}
+} as ComponentMeta<typeof Section>
+
+// const Template: ComponentStory<typeof Section> = (args) => <Section {...args} />
 
 export const Default = () => (
 	<Section title="OUR STORY">

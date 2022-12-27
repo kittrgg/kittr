@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // import { IPopularityRates } from "@kittr/types"
 import ChannelMain from "./Main"
 import Sidebar from "./Sidebar"

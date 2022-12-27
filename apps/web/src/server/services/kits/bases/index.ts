@@ -8,7 +8,7 @@ export const listBases = async <T extends Prisma.WarzoneKitBaseInclude>(include:
 	return wz2Bases
 }
 
-export const listGameBases = async (gameId: string, urlSafeName?: string) => {
+export const listGameBases = async (gameId: string) => {
 	const bases = await prisma.warzoneKitBase.findMany({
 		where: {
 			gameId

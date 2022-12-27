@@ -5,11 +5,11 @@
 
 const isDeployment = Boolean(process.env.VERCEL_URL)
 
-const withTM = require("next-transpile-modules")(["@kittr/logger", "@kittr/prisma", "@kittr/types", "@kittr/ui"])
-
 const { withSentryConfig } = require("@sentry/nextjs")
 
+/** @type {import('next').NextConfig} */
 const moduleExports = {
+	transpilePackages: ["@kittr/logger", "@kittr/prisma", "@kittr/types", "@kittr/ui"],
 	eslint: {
 		ignoreDuringBuilds: true
 	},
@@ -96,6 +96,4 @@ const sentryWebpackPluginOptions = {
 
 // Make sure adding Sentry options is the last code to run before exporting, to
 // ensure that your source maps include changes from all other Webpack plugins
-module.exports = isDeployment
-	? withSentryConfig(withTM(moduleExports), sentryWebpackPluginOptions)
-	: withTM(moduleExports)
+module.exports = isDeployment ? withSentryConfig(moduleExports, sentryWebpackPluginOptions) : moduleExports
