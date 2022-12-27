@@ -116,7 +116,7 @@ const Sidebar = () => {
 											channel as string,
 											game as string,
 											`?k=${favKit.base.displayName.replace(/ /g, "-")}
-        ${favKit.customTitle && favKit.customTitle.replace(/ /g, "-")}`
+			${favKit.customTitle && favKit.customTitle.replace(/ /g, "-")}`
 										),
 										undefined,
 										{ shallow: true }
@@ -130,9 +130,9 @@ const Sidebar = () => {
 						<React.Fragment key={category}>
 							<Title preset="h4" ml="0.75em">
 								{/*
-                            If there is a filter query - filter allkits to the search query and find index of category - else find index on unfiltered kits
-                             *** If index is -1 that means there is no kit so it won't show category name ***
-                             */}
+								If there is a filter query - filter allkits to the search query and find index of category - else find index on unfiltered kits
+								 *** If index is -1 that means there is no kit so it won't show category name ***
+								 */}
 								{(filterQuery
 									? allKits
 											.filter((kit) => kit.base.displayName.toLowerCase().includes(filterQuery))
@@ -184,7 +184,7 @@ const Sidebar = () => {
 																			channel as string,
 																			game as string,
 																			`?k=${sub.base.displayName.replace(/ /g, "-")}
-                                    ${sub.customTitle && sub.customTitle.replace(/ /g, "-")}`
+										${sub.customTitle && sub.customTitle.replace(/ /g, "-")}`
 																		),
 																		undefined,
 																		{ shallow: true }
@@ -209,7 +209,7 @@ const Sidebar = () => {
 															channel as string,
 															game as string,
 															`?k=${kit.base.displayName.replace(/ /g, "-")}
-                                    ${kit.customTitle && kit.customTitle.replace(/ /g, "-")}`
+										${kit.customTitle && kit.customTitle.replace(/ /g, "-")}`
 														),
 														undefined,
 														{ shallow: true }
