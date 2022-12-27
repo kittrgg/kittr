@@ -7,7 +7,7 @@ import { Center, Grid } from "@mantine/core"
 import Link from "next/link"
 
 const StyledLink = ({ href, children }: { href: string; children: string }) => (
-	<Link href={href} passHref>
+	<Link href={href} passHref legacyBehavior>
 		<Text color={colors.white} m="18px" sx={{ textDecoration: "none", textAlign: "center", cursor: "pointer" }}>
 			{children}
 		</Text>

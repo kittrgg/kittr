@@ -25,7 +25,7 @@ const Card = ({ kit, containerStyles }: Props) => {
 	const { channel, game } = router.query
 
 	return (
-		<Body
+        <Body
 			style={containerStyles}
 			onClick={() => {
 				// dispatch(setActiveWeapon(kit))
@@ -71,7 +71,7 @@ const Card = ({ kit, containerStyles }: Props) => {
 					})}
 			</Container>
 		</Body>
-	)
+    );
 }
 
 export default Card

@@ -33,7 +33,7 @@ const Affiliate = () => {
 	}
 
 	return (
-		<div>
+        <div>
 			<Title>
 				<span>
 					Affiliate Links & Codes
@@ -67,7 +67,7 @@ const Affiliate = () => {
 								const { description, company, code, url, id } = affiliate
 
 								return (
-									<Spec key={company + id}>
+                                    <Spec key={company + id}>
 										<Label>{company}</Label>
 										<td>{description}</td>
 										<td>{code}</td>
@@ -92,7 +92,7 @@ const Affiliate = () => {
 											/>
 										</Icon>
 									</Spec>
-								)
+                                );
 							})}
 					</TBody>
 				</Table>
@@ -110,7 +110,7 @@ const Affiliate = () => {
 				<p style={{ marginLeft: "44px" }}>!affiliates copied to clipboard</p>
 			</Toast>
 		</div>
-	)
+    );
 }
 
 export default Affiliate

@@ -24,7 +24,7 @@ const Item = ({ elem }: Props) => {
 	}, [activeWeapon])
 
 	return (
-		<Styled.Item
+        <Styled.Item
 			ref={itemRef}
 			active={activeWeapon?.customTitle === elem.customTitle}
 			// onClick={() => dispatch(setActiveWeapon(elem as any))}
@@ -35,7 +35,7 @@ const Item = ({ elem }: Props) => {
 			{elem.customTitle || elem.base.displayName}{" "}
 			{elem.featured && <SVG.Star style={{ marginLeft: "4px" }} width="20px" fill={colors.gold} stroke="none" />}
 		</Styled.Item>
-	)
+    );
 }
 
 export default Item

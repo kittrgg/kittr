@@ -9,7 +9,7 @@ const Page = () => {
 	const { data: games } = trpc.useQuery(["games/list", { _count: true }])
 
 	return (
-		<div style={{ margin: "1rem" }}>
+        <div style={{ margin: "1rem" }}>
 			<div style={{ display: "flex", justifyContent: "space-between" }}>
 				<Title>Games</Title>
 
@@ -25,11 +25,15 @@ const Page = () => {
 			</div>
 
 			{games?.map((game) => (
-				<Link key={game.id} href={"/admin/" + game?.urlSafeName} passHref>
+				<Link
+                    key={game.id}
+                    href={"/admin/" + game?.urlSafeName}
+                    passHref
+                    legacyBehavior>
 					<Button onClick={() => ({})}>{game?.urlSafeName.toUpperCase()}</Button>
 				</Link>
 			))}
 		</div>
-	)
+    );
 }
 export default Page

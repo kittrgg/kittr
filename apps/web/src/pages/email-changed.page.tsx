@@ -8,7 +8,7 @@ const EmailChanged = () => {
 	const { classes } = useStyles()
 
 	return (
-		<div className={classes.body}>
+        <div className={classes.body}>
 			<Head
 				title="Email Change Started | kittr"
 				description={"You've started the process to change your email address. | kittr"}
@@ -20,12 +20,12 @@ const EmailChanged = () => {
 				<p className={classes.errorParagraph}>Visit your new email address and click the link to confirm the change.</p>
 				<p className={classes.errorParagraph}>If you change your mind about this new email address...</p>
 				<p className={classes.errorParagraph}>Your previous email address still works.</p>
-				<Link href={Routes.DASHBOARD} passHref>
-					<a className={classes.errorLink}>BACK TO LOGIN</a>
+				<Link href={Routes.DASHBOARD} passHref className={classes.errorLink}>
+					BACK TO LOGIN
 				</Link>
 			</div>
 		</div>
-	)
+    );
 }
 
 export default EmailChanged

@@ -34,12 +34,12 @@ const Body = ({ games, popularChannels, risingStars, liveChannels }: Props) => {
 	const routeChannel = (elem: Channel) => router.push(Routes.CHANNEL.createPath(elem.urlSafeName))
 
 	return (
-		<Container>
+        <Container>
 			<Section
 				title="GAMES"
 				transparent
 				action={
-					<Link href={Routes.GAMES.LIST} passHref>
+					<Link href={Routes.GAMES.LIST} passHref legacyBehavior>
 						<StyledLink>SEE ALL</StyledLink>
 					</Link>
 				}
@@ -54,7 +54,7 @@ const Body = ({ games, popularChannels, risingStars, liveChannels }: Props) => {
 			<SideScroller
 				title="LIVE NOW"
 				action={
-					<Link href={Routes.CHANNEL.LIST} passHref>
+					<Link href={Routes.CHANNEL.LIST} passHref legacyBehavior>
 						<StyledLink>SEE ALL</StyledLink>
 					</Link>
 				}
@@ -65,7 +65,7 @@ const Body = ({ games, popularChannels, risingStars, liveChannels }: Props) => {
 			<SideScroller
 				title="TRENDING CHANNELS"
 				action={
-					<Link href={Routes.CHANNEL.LIST} passHref>
+					<Link href={Routes.CHANNEL.LIST} passHref legacyBehavior>
 						<StyledLink>SEE ALL</StyledLink>
 					</Link>
 				}
@@ -76,7 +76,7 @@ const Body = ({ games, popularChannels, risingStars, liveChannels }: Props) => {
 			<SideScroller
 				title="RISING STARS"
 				action={
-					<Link href={Routes.CHANNEL.LIST} passHref>
+					<Link href={Routes.CHANNEL.LIST} passHref legacyBehavior>
 						<StyledLink>SEE ALL</StyledLink>
 					</Link>
 				}
@@ -84,7 +84,7 @@ const Body = ({ games, popularChannels, risingStars, liveChannels }: Props) => {
 				{risingStars && <ChannelAvatarList channels={risingStars} onClick={routeChannel} />}
 			</SideScroller>
 		</Container>
-	)
+    );
 }
 
 export default Body

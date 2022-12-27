@@ -62,7 +62,7 @@ const AddAffiliateModal = ({ ...props }) => {
 	if (isCreatingAffiliate || isUpdatingAffiliate) return <Spinner width="24px" />
 
 	return (
-		<Modal backgroundClickToClose title="ADD AFFILIATE">
+        <Modal backgroundClickToClose title="ADD AFFILIATE">
 			<InputLabel>Company</InputLabel>
 			<TextInputBox
 				value={company}
@@ -117,7 +117,7 @@ const AddAffiliateModal = ({ ...props }) => {
 				style={{ margin: "84px auto 0" }}
 			/>
 		</Modal>
-	)
+    );
 }
 
 export default AddAffiliateModal

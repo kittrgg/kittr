@@ -16,7 +16,7 @@ const PlatformInfo = () => (
 		<TilesContainer>
 			<Tile>
 				<h3>PICK A GAME</h3>
-				<Link href={Routes.GAMES.LIST} passHref>
+				<Link href={Routes.GAMES.LIST} passHref legacyBehavior>
 					<StackLink data-cy="game-library-button">
 						<ImageContainer>
 							<img
@@ -30,7 +30,7 @@ const PlatformInfo = () => (
 			</Tile>
 			<Tile>
 				<h3>PICK A CHANNEL</h3>
-				<Link href={Routes.CHANNEL.LIST} passHref>
+				<Link href={Routes.CHANNEL.LIST} passHref legacyBehavior>
 					<StackLink data-cy="channels-link-button">
 						<ImageContainer>
 							<img

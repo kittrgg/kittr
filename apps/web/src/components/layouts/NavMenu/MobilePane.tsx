@@ -21,7 +21,7 @@ const MobileNavPane = ({ isOpen, setIsOpen }: Props) => {
 	const isLoggedIn = !!user?.uid
 
 	return (
-		<FullScreen
+        <FullScreen
 			onClick={() => setIsOpen(false)}
 			style={{
 				zIndex: "99999",
@@ -39,15 +39,15 @@ const MobileNavPane = ({ isOpen, setIsOpen }: Props) => {
 					</ImageContainer>
 				</CloseButton>
 				<LinksList>
-					<Link href={Routes.ROOT} passHref>
+					<Link href={Routes.ROOT} passHref legacyBehavior>
 						<StyledLink active={pathname === Routes.ROOT}>HOME</StyledLink>
 					</Link>
-					<Link href={Routes.GAMES.LIST} passHref>
+					<Link href={Routes.GAMES.LIST} passHref legacyBehavior>
 						<StyledLink data-cy="mobile-games-link" active={pathname.startsWith(Routes.GAMES.LIST)}>
 							GAMES
 						</StyledLink>
 					</Link>
-					<Link href={Routes.CHANNEL.LIST} passHref>
+					<Link href={Routes.CHANNEL.LIST} passHref legacyBehavior>
 						<StyledLink
 							data-cy="mobile-channels-link"
 							active={pathname.startsWith(Routes.CHANNEL.LIST) || pathname.startsWith(Routes.CHANNEL.LIST)}
@@ -59,12 +59,12 @@ const MobileNavPane = ({ isOpen, setIsOpen }: Props) => {
 				<LinksList>
 					{!isLoggedIn && (
 						<>
-							<Link href={Routes.SIGN_UP} passHref>
+							<Link href={Routes.SIGN_UP} passHref legacyBehavior>
 								<StyledLink data-cy="mobile-sign-up-link" active={pathname.startsWith(Routes.SIGN_UP)}>
 									SIGN UP
 								</StyledLink>
 							</Link>
-							<Link href={Routes.DASHBOARD} passHref>
+							<Link href={Routes.DASHBOARD} passHref legacyBehavior>
 								<StyledLink data-cy="mobile-dashboard-link-no-auth" active={pathname.startsWith(Routes.DASHBOARD)}>
 									LOG IN
 								</StyledLink>
@@ -73,7 +73,7 @@ const MobileNavPane = ({ isOpen, setIsOpen }: Props) => {
 					)}
 				</LinksList>
 				{isLoggedIn && (
-					<Link href={Routes.DASHBOARD} passHref>
+					<Link href={Routes.DASHBOARD} passHref legacyBehavior>
 						<StyledLink
 							data-cy="mobile-dashboard-link-authed"
 							active={pathname === Routes.DASHBOARD || pathname.startsWith(Routes.DASHBOARD)}
@@ -84,7 +84,7 @@ const MobileNavPane = ({ isOpen, setIsOpen }: Props) => {
 				)}
 			</Body>
 		</FullScreen>
-	)
+    );
 }
 
 export default MobileNavPane

@@ -7,7 +7,7 @@ import Link from "next/link"
 
 const About = () => {
 	return (
-		<PageWrapper title="About Us | kittr" description="Learn about the two of us that make kittr." pageTitle="ABOUT">
+        <PageWrapper title="About Us | kittr" description="Learn about the two of us that make kittr." pageTitle="ABOUT">
 			<Grid gutter="xl">
 				<Grid.Col>
 					<Section title="OUR STORY">
@@ -74,7 +74,7 @@ const About = () => {
 						<Text>
 							If you have any questions, try visiting{" "}
 							<Link href={Routes.FAQ}>
-								<a>our FAQ page</a>
+								our FAQ page
 							</Link>
 							. If you don't find the answer you are looking for there, head over or{" "}
 							<Link href={Routes.CONTACT}>our contact page</Link>.
@@ -83,7 +83,7 @@ const About = () => {
 				</Grid.Col>
 			</Grid>
 		</PageWrapper>
-	)
+    );
 }
 
 export default About

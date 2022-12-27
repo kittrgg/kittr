@@ -15,7 +15,7 @@ interface Props {
 const CallToAction = ({ marginTop, marginBottom, header }: Props) => (
 	<Container marginTop={marginTop} marginBottom={marginBottom}>
 		<Header>{header}</Header>
-		<Link href={Routes.SIGN_UP} passHref>
+		<Link href={Routes.SIGN_UP} passHref legacyBehavior>
 			<LinkButton target="_blank" rel="noopener noreferrer">
 				SIGN UP
 			</LinkButton>

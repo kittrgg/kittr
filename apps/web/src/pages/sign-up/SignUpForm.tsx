@@ -64,7 +64,7 @@ const SignUp = () => {
 	}
 
 	return (
-		<AuthLayout title="SIGN UP">
+        <AuthLayout title="SIGN UP">
 			<Paragraph style={{ margin: "0" }}>
 				This is your personal account so use your own info here. Channel specific stuff will come in a minute.
 			</Paragraph>
@@ -131,15 +131,15 @@ const SignUp = () => {
 				/>
 				<Paragraph>
 					Already registered?
-					<Link href={Routes.DASHBOARD}>
-						<a style={{ marginLeft: "8px" }}>Login.</a>
+					<Link href={Routes.DASHBOARD} style={{ marginLeft: "8px" }}>
+						Login.
 					</Link>
 				</Paragraph>
 				<Error>{error}</Error>
 				<Button design="white" text="CREATE ACCOUNT" onClick={onSubmit} />
 			</form>
 		</AuthLayout>
-	)
+    );
 }
 
 export default SignUp

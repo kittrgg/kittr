@@ -67,7 +67,7 @@ const AddSpecModal = () => {
 	if (isUpdateLoading || isCreateLoading) return <Spinner width="24px" />
 
 	return (
-		<Modal backgroundClickToClose title="ADD SPEC">
+        <Modal backgroundClickToClose title="ADD SPEC">
 			<Selector
 				className="spec-select"
 				isCreatable
@@ -128,7 +128,7 @@ const AddSpecModal = () => {
 				style={{ margin: "84px auto 0" }}
 			/>
 		</Modal>
-	)
+    );
 }
 
 export default AddSpecModal

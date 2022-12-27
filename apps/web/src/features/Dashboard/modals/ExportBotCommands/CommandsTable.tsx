@@ -76,7 +76,7 @@ const CommandsTable = ({ kits, includeMasterCommands = true, method, commandStra
 	}
 
 	return (
-		<div style={{ marginBottom: "64px" }}>
+        <div style={{ marginBottom: "64px" }}>
 			<Styled.SubText style={{ marginTop: "64px" }}>
 				Note - The command will include all kits using the same Kit Base.
 			</Styled.SubText>
@@ -194,7 +194,7 @@ const CommandsTable = ({ kits, includeMasterCommands = true, method, commandStra
 				<p style={{ marginLeft: "44px" }}>Link copied to clipboard</p>
 			</Toast>
 		</div>
-	)
+    );
 }
 
 export default CommandsTable

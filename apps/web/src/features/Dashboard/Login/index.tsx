@@ -34,7 +34,7 @@ const Login = ({ ...props }) => {
 		})
 	}
 	return (
-		<AuthLayout title="LOG IN">
+        <AuthLayout title="LOG IN">
 			<form onSubmit={onSubmit} noValidate>
 				<TextInput
 					type="email"
@@ -65,10 +65,10 @@ const Login = ({ ...props }) => {
 				<CreateAccount>
 					Not registered yet?
 					<Link href={Routes.SIGN_UP}>
-						<a>Create an account.</a>
+						Create an account.
 					</Link>
 				</CreateAccount>
-				<Link href={Routes.FORGOT_PASSWORD} passHref>
+				<Link href={Routes.FORGOT_PASSWORD} passHref legacyBehavior>
 					<LinkBox style={{ display: "inline-block" }}>Forgot password?</LinkBox>
 				</Link>
 
@@ -99,7 +99,7 @@ const Login = ({ ...props }) => {
 				</ButtonFlex>
 			</form>
 		</AuthLayout>
-	)
+    );
 }
 
 export default Login

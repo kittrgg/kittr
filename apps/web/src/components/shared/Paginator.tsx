@@ -40,7 +40,7 @@ export const Paginator = ({
 		</p>
 		<Navigation>
 			{!isFirstPage && (
-				<Link href={`${pageRoot}/${currentPage - 1}`} passHref>
+				<Link href={`${pageRoot}/${currentPage - 1}`} passHref legacyBehavior>
 					<PageLink data-cy="decrement-page">
 						<SVG.Carat
 							width="14px"
@@ -56,7 +56,7 @@ export const Paginator = ({
 			)}
 			{!isFirstPage && !isLastPage && <CurrentPageIndicator>{currentPage}</CurrentPageIndicator>}
 			{!isLastPage && (
-				<Link href={`${pageRoot}/${currentPage + 1}`} passHref>
+				<Link href={`${pageRoot}/${currentPage + 1}`} passHref legacyBehavior>
 					<PageLink data-cy="increment-page">
 						Next
 						<SVG.Carat

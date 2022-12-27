@@ -11,7 +11,7 @@ const CustomTitle = ({ ...props }) => {
 	const { base, customTitle } = useActiveKit()
 
 	return (
-		<Styled.Container>
+        <Styled.Container>
 			<Styled.HorizFlex>
 				<Styled.Header>DESCRIPTION</Styled.Header>
 				<Styled.HeaderHelper>(Optional - Limit 20 characters)</Styled.HeaderHelper>
@@ -35,7 +35,7 @@ const CustomTitle = ({ ...props }) => {
 			/>
 			<Styled.ClosingParenthesis style={{ color: colors.lighter }}>)</Styled.ClosingParenthesis>
 		</Styled.Container>
-	)
+    );
 }
 
 export default CustomTitle

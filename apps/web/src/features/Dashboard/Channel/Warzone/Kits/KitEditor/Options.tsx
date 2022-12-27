@@ -59,7 +59,7 @@ const Options = () => {
 	}
 
 	return (
-		<Styled.Container>
+        <Styled.Container>
 			<Styled.HorizFlex>
 				<Styled.Header>ATTACHMENTS</Styled.Header>
 				<Styled.HeaderHelper animate={animationTrigger} animationDuration={animationDuration}>
@@ -72,7 +72,7 @@ const Options = () => {
 					availableOptions &&
 					slots?.map((slot: string) => {
 						return (
-							<div key={slot} style={{ marginBottom: "18px", flexBasis: "40%" }}>
+                            <div key={slot} style={{ marginBottom: "18px", flexBasis: "40%" }}>
 								<Styled.Header>{slot}</Styled.Header>
 								<Selector
 									className={`${slot.replace(/ /g, "-")}-selector`}
@@ -98,11 +98,11 @@ const Options = () => {
 									]}
 								/>
 							</div>
-						)
+                        );
 					})}
 			</Styled.AttachmentsFlex>
 		</Styled.Container>
-	)
+    );
 }
 
 export default Options

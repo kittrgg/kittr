@@ -46,7 +46,7 @@ const GameProfile = ({ redirect }: { redirect: boolean }) => {
 	if (!gameData || isNaN(page)) return <NoItemFound type="game" />
 
 	return (
-		<AdPageWrapper
+        <AdPageWrapper
 			title={`${gameData.displayName} | kittr`}
 			description={`Check out who is playing ${gameData.displayName} on kittr.`}
 		>
@@ -74,17 +74,17 @@ const GameProfile = ({ redirect }: { redirect: boolean }) => {
 					<>
 						<p style={{ marginTop: "24px" }}>Hm, no channels here.</p>
 
-						<Link href={Routes.GAMES.LIST}>
-							<a
-								style={{
-									display: "block",
-									marginTop: "24px",
-									marginLeft: "24px",
-									color: colors.white
-								}}
-							>
+						<Link
+                            href={Routes.GAMES.LIST}
+                            style={{
+                                display: "block",
+                                marginTop: "24px",
+                                marginLeft: "24px",
+                                color: colors.white
+                            }}>
+							
 								Back to Earth
-							</a>
+							
 						</Link>
 					</>
 				)}
@@ -105,7 +105,7 @@ const GameProfile = ({ redirect }: { redirect: boolean }) => {
 				{width < 1200 && <ResponsiveBanner largeWidthAdUnit="d728x90" smallWidthAdUnit="s300x250" />}
 			</ChannelsContainer>
 		</AdPageWrapper>
-	)
+    );
 }
 
 export const getStaticPaths = async () => {
