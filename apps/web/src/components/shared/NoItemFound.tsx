@@ -21,7 +21,7 @@ export const NoItemFound = ({ type }: Props) => (
 				<Header>OOPS...</Header>
 				<Paragraph>Sorry, but we aren't seeing this {type} on kittr.</Paragraph>
 				<Paragraph>Let's get you back to the {type}s page so you can find what you're looking for.</Paragraph>
-				<Link href={`/${type}s`} passHref>
+				<Link href={`/${type}s`} passHref legacyBehavior>
 					<StyledLink>BACK TO {type.toUpperCase()}S PAGE</StyledLink>
 				</Link>
 			</Body>

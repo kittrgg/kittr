@@ -64,11 +64,9 @@ const Login = ({ ...props }) => {
 				/>
 				<CreateAccount>
 					Not registered yet?
-					<Link href={Routes.SIGN_UP}>
-						<a>Create an account.</a>
-					</Link>
+					<Link href={Routes.SIGN_UP}>Create an account.</Link>
 				</CreateAccount>
-				<Link href={Routes.FORGOT_PASSWORD} passHref>
+				<Link href={Routes.FORGOT_PASSWORD} passHref legacyBehavior>
 					<LinkBox style={{ display: "inline-block" }}>Forgot password?</LinkBox>
 				</Link>
 

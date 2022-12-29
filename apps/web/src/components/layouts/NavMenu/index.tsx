@@ -45,12 +45,12 @@ const NavMenu = ({ wrapperRef, breakpoint = 769, backFunction, middleComponent }
 		<Wrapper ref={wrapperRef} shadow={(windowScroll as number) > 0}>
 			<Container breakpoint={breakpoint}>
 				<LogoImageLink />
-				<Link href={Routes.GAMES.LIST} passHref>
+				<Link href={Routes.GAMES.LIST} passHref legacyBehavior>
 					<StyledLink data-cy="desktop-games-link" active={pathname.startsWith(Routes.GAMES.LIST)}>
 						GAMES
 					</StyledLink>
 				</Link>
-				<Link href={Routes.CHANNEL.LIST} passHref>
+				<Link href={Routes.CHANNEL.LIST} passHref legacyBehavior>
 					<StyledLink
 						data-cy="desktop-channels-link"
 						active={pathname.startsWith(Routes.CHANNEL.LIST) || pathname.startsWith(Routes.CHANNEL.LIST)}
@@ -69,7 +69,7 @@ export default NavMenu
 const AuthenticationLinks = ({ isLoggedIn, pathname }: { isLoggedIn: boolean; pathname: string }) => {
 	if (isLoggedIn) {
 		return (
-			<Link href={Routes.DASHBOARD} passHref>
+			<Link href={Routes.DASHBOARD} passHref legacyBehavior>
 				<StyledLink data-cy="desktop-dashboard-link-authed" active={pathname.startsWith(Routes.DASHBOARD)}>
 					DASHBOARD
 				</StyledLink>
@@ -78,7 +78,7 @@ const AuthenticationLinks = ({ isLoggedIn, pathname }: { isLoggedIn: boolean; pa
 	}
 	return (
 		<div>
-			<Link href={Routes.SIGN_UP} passHref>
+			<Link href={Routes.SIGN_UP} passHref legacyBehavior>
 				<StyledLink
 					data-cy="desktop-sign-up-link"
 					active={pathname.startsWith(Routes.SIGN_UP)}
@@ -87,7 +87,7 @@ const AuthenticationLinks = ({ isLoggedIn, pathname }: { isLoggedIn: boolean; pa
 					SIGN UP
 				</StyledLink>
 			</Link>
-			<Link href={Routes.DASHBOARD} passHref>
+			<Link href={Routes.DASHBOARD} passHref legacyBehavior>
 				<StyledLink
 					data-cy="desktop-dashboard-link-no-auth"
 					active={pathname.startsWith(Routes.DASHBOARD)}

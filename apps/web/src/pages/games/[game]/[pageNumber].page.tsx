@@ -74,17 +74,16 @@ const GameProfile = ({ redirect }: { redirect: boolean }) => {
 					<>
 						<p style={{ marginTop: "24px" }}>Hm, no channels here.</p>
 
-						<Link href={Routes.GAMES.LIST}>
-							<a
-								style={{
-									display: "block",
-									marginTop: "24px",
-									marginLeft: "24px",
-									color: colors.white
-								}}
-							>
-								Back to Earth
-							</a>
+						<Link
+							href={Routes.GAMES.LIST}
+							style={{
+								display: "block",
+								marginTop: "24px",
+								marginLeft: "24px",
+								color: colors.white
+							}}
+						>
+							Back to Earth
 						</Link>
 					</>
 				)}

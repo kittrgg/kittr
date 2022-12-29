@@ -6,7 +6,7 @@ import styled from "styled-components"
 
 /** Simple link to get back to the /dashboard route */
 const BackToLogin = () => (
-	<Link href={Routes.DASHBOARD} passHref>
+	<Link href={Routes.DASHBOARD} passHref legacyBehavior>
 		<StyledLink>Back to login.</StyledLink>
 	</Link>
 )

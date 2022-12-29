@@ -50,7 +50,7 @@ const Page = () => {
 
 	return (
 		<div style={{ margin: "1rem" }}>
-			<Link href="/admin">
+			<Link href="/admin" legacyBehavior>
 				<Button onClick={() => {}}>Back to Admin Home</Button>
 			</Link>
 			<Section title="KIT BASES" action={<Button onClick={() => setIsCreatingBase(true)}>Create</Button>}>

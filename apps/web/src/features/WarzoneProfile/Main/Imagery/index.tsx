@@ -1,14 +1,18 @@
 import CursorSelector from "./CursorSelector"
 import * as Styled from "./style"
 import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
-import { useActiveWeapon, useChannel } from "@Redux/slices/displayr/selectors"
+import { useChannelProfileData } from "@Hooks/trpc/useChannelProfileData"
+import { useActiveChannelKit } from "@Hooks/useActiveChannelKit"
 import { useState, useEffect } from "react"
 
-const WeaponPicture = ({ ...props }) => {
-	const channel = useChannel()
-	const youtubeAutoplay = channel.profile?.youtubeAutoplay
-	const activeWeapon = useActiveWeapon()
-	const { base, youtubeUrl, tiktokUrl } = activeWeapon
+const WeaponPicture = () => {
+	const { data: channelData } = useChannelProfileData()
+	const activeWeapon = useActiveChannelKit()
+
+	// const channel = useChannel()
+	const youtubeAutoplay = channelData?.profile?.youtubeAutoplay
+	// const activeWeapon = useActiveWeapon()
+	const { base, youtubeUrl, tiktokUrl } = activeWeapon!
 	const { displayName, imageUrl } = base
 
 	const split = youtubeUrl?.split("&t=") || ""

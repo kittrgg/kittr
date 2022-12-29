@@ -1,9 +1,9 @@
 import * as Styled from "./style"
-import { useActiveWeapon } from "@Redux/slices/displayr/selectors"
+import { useActiveChannelKit } from "@Hooks/useActiveChannelKit"
 
 const BottomBlurb = () => {
-	const activeWeapon = useActiveWeapon()
-	const blurb = activeWeapon.base.blurb
+	const activeWeapon = useActiveChannelKit()
+	const blurb = activeWeapon?.base?.blurb
 
 	return (
 		<Styled.Container data-cy="kit-blurb">

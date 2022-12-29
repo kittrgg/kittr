@@ -17,12 +17,12 @@ const Cards = ({ isMobile }: Props) => {
 	const filteredKits = kits ? kits.slice().filter((kit) => kit.featured) : []
 
 	// Ensure that the ad gets removed when the placeholder is no longer in view.
-	useEffect(
-		() => () => {
-			;(window.top as any).__vm_remove_category = ["richmedia_all"]
-		},
-		[]
-	)
+	// useEffect(
+	// 	() => () => {
+	// 		;(window.top as any).__vm_remove_category = ["richmedia_all"]
+	// 	},
+	// 	[]
+	// )
 
 	return (
 		<PlaceholderContainer>

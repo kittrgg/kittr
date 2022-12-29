@@ -25,7 +25,7 @@ const Page = () => {
 			</div>
 
 			{games?.map((game) => (
-				<Link key={game.id} href={"/admin/" + game?.urlSafeName} passHref>
+				<Link key={game.id} href={"/admin/" + game?.urlSafeName} passHref legacyBehavior>
 					<Button onClick={() => ({})}>{game?.urlSafeName.toUpperCase()}</Button>
 				</Link>
 			))}

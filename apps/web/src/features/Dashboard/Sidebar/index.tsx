@@ -28,16 +28,15 @@ const Sidebar = ({ ...props }) => {
 			<Styled.Container height={height as number}>
 				<div style={{ marginBottom: "10px" }}>
 					<Styled.ButtonContainer isActive={activeView === "not applicable"}>
-						<Link href={Routes.ROOT}>
-							<a
-								style={{
-									position: "absolute",
-									inset: "5px",
-									cursor: "pointer"
-								}}
-							>
-								<img src="/media/logo-no-text-square-beta.svg" alt="kittr logo" style={{ width: "60%" }} />
-							</a>
+						<Link
+							href={Routes.ROOT}
+							style={{
+								position: "absolute",
+								inset: "5px",
+								cursor: "pointer"
+							}}
+						>
+							<img src="/media/logo-no-text-square-beta.svg" alt="kittr logo" style={{ width: "60%" }} />
 						</Link>
 					</Styled.ButtonContainer>
 				</div>

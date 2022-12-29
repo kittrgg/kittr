@@ -39,7 +39,7 @@ const Body = ({ games, popularChannels, risingStars, liveChannels }: Props) => {
 				title="GAMES"
 				transparent
 				action={
-					<Link href={Routes.GAMES.LIST} passHref>
+					<Link href={Routes.GAMES.LIST} passHref legacyBehavior>
 						<StyledLink>SEE ALL</StyledLink>
 					</Link>
 				}
@@ -54,7 +54,7 @@ const Body = ({ games, popularChannels, risingStars, liveChannels }: Props) => {
 			<SideScroller
 				title="LIVE NOW"
 				action={
-					<Link href={Routes.CHANNEL.LIST} passHref>
+					<Link href={Routes.CHANNEL.LIST} passHref legacyBehavior>
 						<StyledLink>SEE ALL</StyledLink>
 					</Link>
 				}
@@ -65,7 +65,7 @@ const Body = ({ games, popularChannels, risingStars, liveChannels }: Props) => {
 			<SideScroller
 				title="TRENDING CHANNELS"
 				action={
-					<Link href={Routes.CHANNEL.LIST} passHref>
+					<Link href={Routes.CHANNEL.LIST} passHref legacyBehavior>
 						<StyledLink>SEE ALL</StyledLink>
 					</Link>
 				}
@@ -76,7 +76,7 @@ const Body = ({ games, popularChannels, risingStars, liveChannels }: Props) => {
 			<SideScroller
 				title="RISING STARS"
 				action={
-					<Link href={Routes.CHANNEL.LIST} passHref>
+					<Link href={Routes.CHANNEL.LIST} passHref legacyBehavior>
 						<StyledLink>SEE ALL</StyledLink>
 					</Link>
 				}

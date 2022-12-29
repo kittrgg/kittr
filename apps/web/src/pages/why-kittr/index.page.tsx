@@ -30,7 +30,7 @@ const WhyKittr = ({ totalNumberOfKits }: Props) => (
 			<ContactUs />
 			<CallToAction marginTop="32px" header="get kittd." />
 			<div style={{ marginBottom: "32px", textAlign: "center" }}>
-				<Link href={Routes.ROOT} passHref>
+				<Link href={Routes.ROOT} passHref legacyBehavior>
 					<Styled.LinkButton design="transparent" target="_blank" rel="noopener no referrer" style={{ marginTop: "0" }}>
 						VISIT SITE
 					</Styled.LinkButton>

@@ -1,6 +1,6 @@
 import colors from "@Colors"
 import SVG from "@Components/shared/SVG"
-import { setActiveWeapon, setIsSidebarOpen } from "@Redux/slices/displayr"
+import { setIsSidebarOpen } from "@Redux/slices/displayr"
 import { useActiveWeapon } from "@Redux/slices/displayr/selectors"
 import { useDispatch } from "@Redux/store"
 import { sortAlphabetical } from "@Utils/helpers/sortAlphabetical"
@@ -48,10 +48,14 @@ const Item = ({ baseName, featured, kits, setFilterQuery }: Props) => {
 	const firstMatchedBaseUserTitle = ` (${matchedBase[0]?.customTitle})`
 
 	const onClick = () => {
-		dispatch(setActiveWeapon(matchedBase[0]))
+		// dispatch(setActiveWeapon(matchedBase[0]))
 		dispatch(setIsSidebarOpen(false))
 		setFilterQuery("")
-		router.push(Routes.CHANNEL.GAME.createPath(channel as string, game as string, `?k=${baseName.replace(/ /g, "-")}`))
+		router.push(
+			Routes.CHANNEL.GAME.createPath(channel as string, game as string, `?k=${baseName.replace(/ /g, "-")}`),
+			undefined,
+			{ shallow: true }
+		)
 	}
 
 	useEffect(() => {
@@ -105,7 +109,7 @@ const Item = ({ baseName, featured, kits, setFilterQuery }: Props) => {
 										}
 										key={elem.id}
 										onClick={() => {
-											dispatch(setActiveWeapon(elem))
+											// dispatch(setActiveWeapon(elem))
 											dispatch(setIsSidebarOpen(false))
 											router.push(
 												Routes.CHANNEL.GAME.createPath(

@@ -6,7 +6,7 @@ import styled from "styled-components"
 
 const FavoriteBlueprint = () => {
 	const activeWeapon = useActiveWeapon()
-	const quote = activeWeapon.quote
+	const quote = activeWeapon?.quote
 
 	if (quote) {
 		return (

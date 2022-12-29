@@ -131,8 +131,8 @@ const SignUp = () => {
 				/>
 				<Paragraph>
 					Already registered?
-					<Link href={Routes.DASHBOARD}>
-						<a style={{ marginLeft: "8px" }}>Login.</a>
+					<Link href={Routes.DASHBOARD} style={{ marginLeft: "8px" }}>
+						Login.
 					</Link>
 				</Paragraph>
 				<Error>{error}</Error>

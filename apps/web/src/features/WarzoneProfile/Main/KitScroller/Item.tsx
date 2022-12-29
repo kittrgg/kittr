@@ -1,9 +1,7 @@
 import * as Styled from "./style"
 import colors from "@Colors"
 import SVG from "@Components/shared/SVG"
-import { setActiveWeapon } from "@Redux/slices/displayr"
 import { useActiveWeapon } from "@Redux/slices/displayr/selectors"
-import { useDispatch } from "@Redux/store"
 import { WarzoneKit, WarzoneKitBase } from "@kittr/prisma"
 import { useEffect, useRef } from "react"
 
@@ -12,7 +10,6 @@ interface Props {
 }
 
 const Item = ({ elem }: Props) => {
-	const dispatch = useDispatch()
 	const activeWeapon = useActiveWeapon()
 	const itemRef = useRef<HTMLButtonElement>(null)
 
@@ -30,7 +27,7 @@ const Item = ({ elem }: Props) => {
 		<Styled.Item
 			ref={itemRef}
 			active={activeWeapon?.customTitle === elem.customTitle}
-			onClick={() => dispatch(setActiveWeapon(elem as any))}
+			// onClick={() => dispatch(setActiveWeapon(elem as any))}
 			data-cy={`slider-${elem.base.displayName.replace(/ /g, "-").replace("(", "-").replace(")", "-")}-${
 				elem.customTitle?.replace(/ /g, "-") || "Primary"
 			}`}

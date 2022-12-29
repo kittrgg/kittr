@@ -20,8 +20,8 @@ const EmailChanged = () => {
 				<p className={classes.errorParagraph}>Visit your new email address and click the link to confirm the change.</p>
 				<p className={classes.errorParagraph}>If you change your mind about this new email address...</p>
 				<p className={classes.errorParagraph}>Your previous email address still works.</p>
-				<Link href={Routes.DASHBOARD} passHref>
-					<a className={classes.errorLink}>BACK TO LOGIN</a>
+				<Link href={Routes.DASHBOARD} passHref className={classes.errorLink}>
+					BACK TO LOGIN
 				</Link>
 			</div>
 		</div>
