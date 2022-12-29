@@ -1,10 +1,10 @@
 import { createContext } from "@Server/context"
 import { appRouter } from "@Server/index"
-import { createSSGHelpers as createTrcpSsgHelpers } from "@trpc/react/ssg"
+import { createProxySSGHelpers } from "@trpc/react-query/ssg"
 import superjson from "superjson"
 
 export const createSSGHelper = async () =>
-	createTrcpSsgHelpers({
+	createProxySSGHelpers({
 		router: appRouter,
 		ctx: await createContext(),
 		transformer: superjson

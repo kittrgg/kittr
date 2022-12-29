@@ -4,7 +4,7 @@ import { trpc } from "@Server/createTRPCNext"
 export const useDashboardChannel = () => {
 	const id = useSelector((state) => state.dashboard.activeView.channelId)
 
-	return trpc.useQuery(["channels/dashboard", id], {
+	return trpc.channels.dashboard.useQuery(id, {
 		enabled: !!id
 	})
 }
