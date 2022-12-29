@@ -1,4 +1,4 @@
-import { trpc } from "@Server/createHooks"
+import { trpc } from "@Server/createTRPCNext"
 import { InferQueryInput } from "@Server/index"
 import { Prisma } from "@kittr/prisma"
 

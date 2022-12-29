@@ -1,8 +1,8 @@
 import PageWrapper from "@Components/layouts/PageWrapper"
 import { NoItemFound } from "@Components/shared"
 import ChannelProfile from "@Features/ChannelProfile"
-import { trpc } from "@Server/createHooks"
 import { createSSGHelper } from "@Server/createSSGHelper"
+import { trpc } from "@Server/createTRPCNext"
 import { getTopChannelsQuery } from "@Services/orm"
 import { useRouter } from "next/router"
 

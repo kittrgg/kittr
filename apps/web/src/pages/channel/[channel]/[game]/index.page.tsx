@@ -1,8 +1,8 @@
 import FallbackPage from "@Components/layouts/FallbackPage"
 import { Head, NoItemFound } from "@Components/shared"
 import WarzoneProfile from "@Features/WarzoneProfile"
-import { trpc } from "@Server/createHooks"
 import { createSSGHelper } from "@Server/createSSGHelper"
+import { trpc } from "@Server/createTRPCNext"
 import { prisma } from "@kittr/prisma"
 import { useRouter } from "next/router"
 

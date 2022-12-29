@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { KitBaseOptionForm } from "./KitBaseOptionForm"
-import { trpc } from "@Server/createHooks"
+import { trpc } from "@Server/createTRPCNext"
 import { WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
 import { Button, List, NumberInput, Section, Select, SubSection, Text, Textarea, TextInput } from "@kittr/ui"
 import SVG from "@kittr/ui/src/components/SVG"

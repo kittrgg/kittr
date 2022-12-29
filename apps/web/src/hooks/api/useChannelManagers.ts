@@ -1,5 +1,5 @@
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
-import { trpc } from "@Server/createHooks"
+import { trpc } from "@Server/createTRPCNext"
 
 export const useChannelManagers = () => {
 	const { data: channel } = useDashboardChannel()

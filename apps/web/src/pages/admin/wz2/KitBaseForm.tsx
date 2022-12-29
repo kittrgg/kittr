@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { KitBaseOptionForm } from "./KitBaseOptionForm"
-import { trpc } from "@Server/createHooks"
+import { trpc } from "@Server/createTRPCNext"
 import { WarzoneTwoKitBase, WarzoneTwoKitOption } from "@kittr/prisma"
 import { Button, List, NumberInput, Section, Select, SubSection, Text, Textarea, TextInput } from "@kittr/ui"
 import SVG from "@kittr/ui/src/components/SVG"
@@ -36,7 +36,7 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 	const [formValues, setFormValues] = useState<Partial<FormState>>({ gameId })
 
 	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-	const { refetch } = trpc.useQuery(["admin/warzone2/kit-bases/get", { kitBaseId: kitBaseId! }], {
+	const { refetch } = trpc.admin.warzone2.kitBases.get.useQuery({ kitBaseId: kitBaseId! }, {
 		enabled: !!kitBaseId,
 		onSuccess: (data) => {
 			setFormValues(data || {})

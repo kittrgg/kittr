@@ -1,6 +1,6 @@
 import { useSocket } from "../../pages/dashboard.page"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
-import { trpc } from "@Server/createHooks"
+import { trpc } from "@Server/createTRPCNext"
 import { AppRouter, TMutationPaths } from "@Server/index"
 import { TRPCClientErrorLike, UseTRPCMutationOptions } from "@trpc/react"
 import type { inferProcedureInput, inferProcedureOutput, ProcedureRecord } from "@trpc/server"

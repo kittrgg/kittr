@@ -9,12 +9,12 @@ import { getTrpcUrl } from "@Utils/helpers/getUrl"
 import { Routes } from "@Utils/lookups/routes"
 import { MantineProvider } from "@kittr/ui"
 import { Global } from "@mantine/core"
+// import { useEffect } from "react"
+import { ReactQueryDevtools } from "@tanstack/react-query/devtools"
 import { httpBatchLink } from "@trpc/client/links/httpBatchLink"
 import { loggerLink } from "@trpc/client/links/loggerLink"
-import { withTRPC } from "@trpc/next"
+import { createTRPCNext } from "@trpc/next"
 import { useRouter } from "next/router"
-// import { useEffect } from "react"
-import { ReactQueryDevtools } from "react-query/devtools"
 import { Provider } from "react-redux"
 import superjson from "superjson"
 
@@ -77,7 +77,7 @@ const MyApp = ({ Component, pageProps }: { Component: React.FC; pageProps: Recor
 	)
 }
 
-export default withTRPC<AppRouter>({
+const trpc = createTRPCNext<AppRouter>({
 	config({}) {
 		/*
 		 * If you want to use SSR, you need to use the server's full URL
@@ -119,4 +119,6 @@ export default withTRPC<AppRouter>({
 	 * @link https://trpc.io/docs/ssr
 	 */
 	// ssr: true
-})(AppWrap)
+})
+
+export default trpc.withTRPC(MyApp)

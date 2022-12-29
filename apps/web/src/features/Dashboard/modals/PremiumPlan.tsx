@@ -3,7 +3,7 @@ import { Button, Modal, SVG } from "@Components/shared"
 import { setModal } from "@Redux/slices/dashboard"
 import { usePremiumStatus, useChannelData } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import { trpc } from "@Server/createHooks"
+import { trpc } from "@Server/createTRPCNext"
 import { header2, paragraph } from "@Styles/typography"
 import styled from "styled-components"
 

@@ -3,8 +3,8 @@ import Hero from "./Home/Hero"
 import PlatformInfo from "./Home/PlatformInfo"
 import PageWrapper from "@Components/layouts/PageWrapper"
 import { useAllGames } from "@Hooks/trpc/useAllGames"
-import { trpc } from "@Server/createHooks"
 import { createSSGHelper } from "@Server/createSSGHelper"
+import { trpc } from "@Server/createTRPCNext"
 import ResponsiveAdBanner from "@Services/venatus/ResponsiveBanner"
 
 const Home = () => {

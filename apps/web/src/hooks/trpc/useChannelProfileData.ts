@@ -1,4 +1,4 @@
-import { trpc } from "@Server/createHooks"
+import { trpc } from "@Server/createTRPCNext"
 import { useRouter } from "next/router"
 
 /**
