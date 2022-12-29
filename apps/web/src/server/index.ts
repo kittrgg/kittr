@@ -1,17 +1,19 @@
 import { Context } from "./context"
 import { WarzoneAdminController } from "./controllers/admin/warzone"
+import { GamesController } from "./controllers/games"
 import { createRouter } from "./createRouter"
 import { channelsRouter } from "./routers/channels"
 import { kitsRouter } from "./routers/kits"
 import { managersRouter } from "./routers/managers"
-import { twitchRouter } from "./routers/twitch"
+import { TwitchController } from "@Server/controllers/twitch"
 import { UsersController } from "@Server/controllers/users"
 import { authenticateAdmin } from "@Server/middlewares/authenticateAdmin"
-import { gamesRouter } from "@Server/routers/games"
 import { stripeRouter } from "@Server/routers/stripe"
 import { captureMessage } from "@kittr/logger/node"
+import { GameModel } from "@kittr/prisma/validator"
 import { inferProcedureInput, inferProcedureOutput, initTRPC } from "@trpc/server"
 import superjson from "superjson"
+import { z } from "zod"
 
 export const t = initTRPC.context<Context>().create({
 	transformer: superjson,
@@ -43,11 +45,11 @@ export const legacyRouter = createRouter()
 	})
 	.transformer(superjson)
 	// .merge("admin/", adminRouter)
-	.merge("games/", gamesRouter)
+	// .merge("games/", gamesRouter)
 	.merge("channels/", channelsRouter)
 	.merge("managers/", managersRouter)
 	.merge("kits/", kitsRouter)
-	.merge("twitch/", twitchRouter)
+	// .merge("twitch/", twitchRouter)
 	.merge("stripe/", stripeRouter)
 	// .merge("users/", usersRouter)
 	.interop()
@@ -79,6 +81,31 @@ const mainRouter = router({
 	}),
 	users: router({
 		create: UsersController.create
+	}),
+	twitch: router({
+		"profile-page": TwitchController.getProfile
+	}),
+	games: router({
+		"getByUrlSafeName": GamesController.getGameByUrlSafeName,
+		"getById": GamesController.getGameById,
+		"list": GamesController.listGames,
+		"list-genres": publicProcedure.query(async () => await prisma.genre.findMany()),
+		"list-platforms": publicProcedure.query(async () => await prisma.platform.findMany()),
+		"add": adminProcedure
+			.input(GameModel.omit({ id: true }).extend({ genres: z.array(z.string()), platforms: z.array(z.string()) }))
+			.query(async ({ input }) => {
+				const { genres, platforms, ...game } = input
+
+				const savedGame = await prisma.game.create({
+					data: {
+						...game,
+						genres: { connect: genres.map((id) => ({ id })) },
+						platforms: { connect: platforms.map((id) => ({ id })) }
+					}
+				})
+
+				return savedGame
+			})
 	})
 })
 
