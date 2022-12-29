@@ -38,7 +38,13 @@ const SidebarButton: React.FC<SidebarButtonProps> = ({ kit, featured, subButton,
 			styles={{ label: { textAlign: "left", width: "100%" } }}
 			{...props}
 		>
-			{useBaseName ? kit?.base.displayName : kit?.customTitle ? kit?.customTitle : subButton ? "Default" : kit?.base?.displayName}
+			{useBaseName
+				? kit?.base.displayName
+				: kit?.customTitle
+				? kit?.customTitle
+				: subButton
+				? "Default"
+				: kit?.base?.displayName}
 		</Button>
 	)
 }
@@ -92,12 +98,11 @@ const Sidebar = () => {
 			<hr style={{ width: "88%", borderColor: colors.lightest }} />
 			<ScrollArea style={{ height: isMobile ? "75vh" : "85vh", padding: "0 1em" }}>
 				{/* if there are favorited kits and no filterQuery - display them at the top of the scroller */}
-				{filteredByFavorite.length > 0 &&
-					!filterQuery &&
-						<>
-					<Title preset="h4" ml="0.75em">
-						Favorites
-					</Title>
+				{filteredByFavorite.length > 0 && !filterQuery && (
+					<>
+						<Title preset="h4" ml="0.75em">
+							Favorites
+						</Title>
 						{filteredByFavorite.map((favKit) => (
 							<SidebarButton
 								key={favKit.id}
@@ -117,8 +122,9 @@ const Sidebar = () => {
 									)
 								}}
 							/>
-							))}
-						</>}
+						))}
+					</>
+				)}
 				{CATEGORIES.map((category) => {
 					return (
 						<>
@@ -135,13 +141,12 @@ const Sidebar = () => {
 							</Title>
 							{/* Kits are filtered by categories and does not include featured kits. */}
 							{allKits
-								.filter(
-									(unsortedKit) =>
-										// if there is a filter query search - find kits that include query and similar categories   else - find kits that are in similar categories 
-										(filterQuery
-											? unsortedKit.base.displayName.toLowerCase().includes(filterQuery.toLowerCase()) &&
-											  unsortedKit.base.category.displayName === category
-											: unsortedKit.base.category.displayName === category)
+								.filter((unsortedKit) =>
+									// if there is a filter query search - find kits that include query and similar categories   else - find kits that are in similar categories
+									filterQuery
+										? unsortedKit.base.displayName.toLowerCase().includes(filterQuery.toLowerCase()) &&
+										  unsortedKit.base.category.displayName === category
+										: unsortedKit.base.category.displayName === category
 								)
 								.map((kit) => {
 									// If the kit has a customTitle - display an accordion with the kits that have a customTitle and the base kit that has no customTitle
