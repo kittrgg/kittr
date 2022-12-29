@@ -1,17 +1,37 @@
+import { Context } from "./context"
+import { WarzoneAdminController } from "./controllers/admin/warzone"
 import { createRouter } from "./createRouter"
-import { adminRouter } from "./routers/admin"
 import { channelsRouter } from "./routers/channels"
 import { kitsRouter } from "./routers/kits"
 import { managersRouter } from "./routers/managers"
 import { twitchRouter } from "./routers/twitch"
 import { usersRouter } from "./routers/users"
+import { authenticateAdmin } from "@Server/middlewares/authenticateAdmin"
 import { gamesRouter } from "@Server/routers/games"
 import { stripeRouter } from "@Server/routers/stripe"
 import { captureMessage } from "@kittr/logger/node"
-import { inferProcedureInput, inferProcedureOutput } from "@trpc/server"
+import { inferProcedureInput, inferProcedureOutput, initTRPC } from "@trpc/server"
 import superjson from "superjson"
 
-export const appRouter = createRouter()
+export const t = initTRPC.context<Context>().create({
+	transformer: superjson,
+	errorFormatter({ shape }) {
+		return {
+			...shape,
+			data: {
+				...shape.data
+			}
+		}
+	}
+})
+
+export const router = t.router
+export const mergeRouters = t.mergeRouters
+export const publicProcedure = t.procedure
+export const adminProcedure = t.procedure.use(authenticateAdmin)
+export const middleware = t.middleware
+
+export const legacyRouter = createRouter()
 	.formatError(({ shape, error, path, ctx, type, input }) => {
 		captureMessage(`${error.code}: ${path}` ?? "Unknown tRPC path", {
 			level: "error",
@@ -27,9 +47,38 @@ export const appRouter = createRouter()
 	.merge("managers/", managersRouter)
 	.merge("kits/", kitsRouter)
 	.merge("twitch/", twitchRouter)
-	.merge("admin/", adminRouter)
 	.merge("stripe/", stripeRouter)
 	.merge("users/", usersRouter)
+	.interop()
+
+const mainRouter = router({
+	admin: router({
+		warzone: router({
+			kitBases: router({
+				options: router({}),
+				categories: router({}),
+				list: WarzoneAdminController.listKitBases,
+				get: WarzoneAdminController.getKitBase,
+				create: WarzoneAdminController.createBase,
+				update: WarzoneAdminController.updateBase,
+				delete: WarzoneAdminController.deleteBase
+			})
+		}),
+		warzone2: router({
+			kitBases: router({
+				options: router({}),
+				categories: router({}),
+				list: WarzoneAdminController.listKitBases,
+				get: WarzoneAdminController.getKitBase,
+				create: WarzoneAdminController.createBase,
+				update: WarzoneAdminController.updateBase,
+				delete: WarzoneAdminController.deleteBase
+			})
+		})
+	})
+})
+
+export const appRouter = mergeRouters(legacyRouter, mainRouter)
 
 export type AppRouter = typeof appRouter
 

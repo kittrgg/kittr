@@ -1,16 +1,9 @@
-import { Context } from "@Server/context"
+import { middleware } from "../"
 import admin from "@Services/firebase/admin"
 import { prisma } from "@kittr/prisma"
 import { TRPCError } from "@trpc/server"
-import { MiddlewareResult } from "@trpc/server/src/internals/middlewares"
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-type NextFunction<T> = {
-	<T>(): Promise<MiddlewareResult<T>>
-	<T>(opts: { ctx: T }): Promise<MiddlewareResult<T>>
-}
-
-export const authenticateAdmin = async ({ ctx, next }: { ctx: Context; next: NextFunction<typeof ctx> }) => {
+export const authenticateAdmin = middleware(async ({ ctx, next }) => {
 	if (!ctx.userToken) {
 		throw new TRPCError({
 			code: "UNAUTHORIZED"
@@ -37,4 +30,4 @@ export const authenticateAdmin = async ({ ctx, next }: { ctx: Context; next: Nex
 			adminUser: administrator
 		}
 	})
-}
+})

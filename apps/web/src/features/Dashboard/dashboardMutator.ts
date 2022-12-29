@@ -6,7 +6,7 @@ import { TRPCClientErrorLike, UseTRPCMutationOptions } from "@trpc/react"
 import type { inferProcedureInput, inferProcedureOutput, ProcedureRecord } from "@trpc/server"
 import { useQueryClient } from "react-query"
 
-type inferProcedures<TObj extends ProcedureRecord<any, any, any, any, any, any>> = {
+type inferProcedures<TObj extends ProcedureRecord> = {
 	[TPath in keyof TObj]: {
 		input: inferProcedureInput<TObj[TPath]>
 		output: inferProcedureOutput<TObj[TPath]>

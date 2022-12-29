@@ -4308,32 +4308,34 @@
     javascript-natural-sort "0.7.1"
     lodash "4.17.21"
 
-"@trpc/client@9.26.0":
-  version "9.26.0"
-  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-9.26.0.tgz#d50a84f2b6a912d3039b52a08d16fde10f4de63c"
-  integrity sha512-zkKXkqZIKseXqybBU8U4odcGCTtDBG/Gu04mfMJ8UyzpG12uzZ5xRkbuufRChgx1oA27/mi3aW/8h6mI34cxyA==
-  dependencies:
-    "@babel/runtime" "^7.9.0"
+"@trpc/client@^10.7.0":
+  version "10.7.0"
+  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-10.7.0.tgz#73793dfdfd1a0b8d0484c69bfc558dfd28843fe6"
+  integrity sha512-xCPc2hp37REJst6TXMkJvdc85CHvxpVY6YVdZIjl7uCYoQcrstwy8AWi7ElB3x7e19Cweke+9CAaUXKwAE1AKQ==
 
-"@trpc/next@9.26.2":
-  version "9.26.2"
-  resolved "https://registry.yarnpkg.com/@trpc/next/-/next-9.26.2.tgz#4ae95513b81971070c321b932bb4f3407b5d1e86"
-  integrity sha512-CTSQ2G8m/GONbEnf7asDlmoiBCY/WPihuVnev4BWRu6cDnEe2CtVxo34biWknpiGacEykTzH9dEWBDmZAGReJA==
+"@trpc/next@^10.7.0":
+  version "10.7.0"
+  resolved "https://registry.yarnpkg.com/@trpc/next/-/next-10.7.0.tgz#33ec7d134f9d3093e59cba1170dcb75bc9b914c0"
+  integrity sha512-ZLY4J9IgEHN2op0UM14NCwCDyodRUw8Pmxgnpr62+UMIhDll6uggb2an8Op87l9EeYdKhKe2VavDWphI8vFGgw==
   dependencies:
-    "@babel/runtime" "^7.9.0"
     react-ssr-prepass "^1.5.0"
 
-"@trpc/react@9.26.2":
-  version "9.26.2"
-  resolved "https://registry.yarnpkg.com/@trpc/react/-/react-9.26.2.tgz#fbea785e4cc206646c215cc1d371ccf21eeda79f"
-  integrity sha512-YCwn+Cd1/Yl6qB+/ZSF9A+32prBU4Z7un5Ms/q79mC090deCdfOL0IGNrv/7kX5EtsuOSo0RR/NUTo9f+xx1NA==
+"@trpc/react-query@^10.7.0":
+  version "10.7.0"
+  resolved "https://registry.yarnpkg.com/@trpc/react-query/-/react-query-10.7.0.tgz#37cd9a3ab5db0e9bcf012cfec3669ce0ecc055e1"
+  integrity sha512-dSSmYid6NWocU32QMsH6qWEqnW4mbp7hX01hxsBfAA2mGYD8b4Kgc9ripw4MpPNbsJElJFyWDHfb/UHnhywWbA==
+
+"@trpc/react@^9.27.4":
+  version "9.27.4"
+  resolved "https://registry.yarnpkg.com/@trpc/react/-/react-9.27.4.tgz#0320e0cbd416506959ddc65a10758fc41d70fb65"
+  integrity sha512-bP74Tf6vWcMoWYiTAvbWrieV9cFQiKUDKRoRj0+VeGJbxdbhdJyUzv4zos0T4SiSKuhgoEm9bP4jWU2NhNhpIA==
   dependencies:
     "@babel/runtime" "^7.9.0"
 
-"@trpc/server@9.26.2":
-  version "9.26.2"
-  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-9.26.2.tgz#2386d0d0c76b9d6cbdcef3006ea3221729617c21"
-  integrity sha512-J1kP072cVYC5H2qFhiLQ/gV57s0of++9QLLKf9n8mVfx300tecKQW2eu/oFvRCDPRTTQ1prHz9zm15IzLwoRrw==
+"@trpc/server@^10.7.0":
+  version "10.7.0"
+  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-10.7.0.tgz#97c451cb5963c70fba68f4813c56111331baec3c"
+  integrity sha512-kFhlqhzZt5PwVRRDci8oJKMMFGjjq9189stT6bvS9xuuLjRzzwhMShRi99sm/jqhdjWmlXyO3Ncx0rnghUvH+w==
 
 "@ts-morph/common@~0.12.3":
   version "0.12.3"
