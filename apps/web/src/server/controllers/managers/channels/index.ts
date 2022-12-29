@@ -1,16 +1,25 @@
-import { createController } from "@Server/createController"
-import { authenticateUser } from "@Server/middlewares/authenticateUser"
-import * as ManagersChannelsService from "@Server/services/managers/channels"
+import { authedProcedure } from "@Server/index"
 
-const listChannels = createController()
-	.middleware(authenticateUser)
-	.query("", {
-		async resolve({ ctx }) {
-			const channels = await ManagersChannelsService.listChannels(ctx.user.uid)
-
-			return channels
+const listChannels = authedProcedure.query(async ({ ctx }) => {
+	const channels = prisma.channel.findMany({
+		where: {
+			managers: {
+				some: {
+					firebaseId: ctx.user.uid
+				}
+			}
+		},
+		include: {
+			profile: true,
+			plan: {
+				select: { type: true }
+			},
+			managers: true
 		}
 	})
+
+	return channels
+})
 
 export const ManagersChannelsController = {
 	listChannels

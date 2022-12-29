@@ -4,11 +4,12 @@ import { GamesController } from "./controllers/games"
 import { createRouter } from "./createRouter"
 import { channelsRouter } from "./routers/channels"
 import { kitsRouter } from "./routers/kits"
-import { managersRouter } from "./routers/managers"
+import { ManagersChannelsController } from "@Server/controllers/managers/channels"
+import { StripeController } from "@Server/controllers/stripe"
 import { TwitchController } from "@Server/controllers/twitch"
 import { UsersController } from "@Server/controllers/users"
 import { authenticateAdmin } from "@Server/middlewares/authenticateAdmin"
-import { stripeRouter } from "@Server/routers/stripe"
+import { authenticateUser } from "@Server/middlewares/authenticateUser"
 import { captureMessage } from "@kittr/logger/node"
 import { GameModel } from "@kittr/prisma/validator"
 import { inferProcedureInput, inferProcedureOutput, initTRPC } from "@trpc/server"
@@ -31,6 +32,7 @@ export const router = t.router
 export const mergeRouters = t.mergeRouters
 export const publicProcedure = t.procedure
 export const adminProcedure = t.procedure.use(authenticateAdmin)
+export const authedProcedure = t.procedure.use(authenticateUser)
 export const middleware = t.middleware
 
 export const legacyRouter = createRouter()
@@ -47,10 +49,10 @@ export const legacyRouter = createRouter()
 	// .merge("admin/", adminRouter)
 	// .merge("games/", gamesRouter)
 	.merge("channels/", channelsRouter)
-	.merge("managers/", managersRouter)
+	// .merge("managers/", managersRouter)
 	.merge("kits/", kitsRouter)
 	// .merge("twitch/", twitchRouter)
-	.merge("stripe/", stripeRouter)
+	// .merge("stripe/", stripeRouter)
 	// .merge("users/", usersRouter)
 	.interop()
 
@@ -106,6 +108,15 @@ const mainRouter = router({
 
 				return savedGame
 			})
+	}),
+	stripe: router({
+		"buy-premium": StripeController.buyPremium,
+		"manage-premium": StripeController.managePremium
+	}),
+	managers: router({
+		channels: router({
+			list: ManagersChannelsController.listChannels
+		})
 	})
 })
 
