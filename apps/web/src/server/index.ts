@@ -5,7 +5,7 @@ import { channelsRouter } from "./routers/channels"
 import { kitsRouter } from "./routers/kits"
 import { managersRouter } from "./routers/managers"
 import { twitchRouter } from "./routers/twitch"
-import { usersRouter } from "./routers/users"
+import { UsersController } from "@Server/controllers/users"
 import { authenticateAdmin } from "@Server/middlewares/authenticateAdmin"
 import { gamesRouter } from "@Server/routers/games"
 import { stripeRouter } from "@Server/routers/stripe"
@@ -42,13 +42,14 @@ export const legacyRouter = createRouter()
 		return shape
 	})
 	.transformer(superjson)
+	// .merge("admin/", adminRouter)
 	.merge("games/", gamesRouter)
 	.merge("channels/", channelsRouter)
 	.merge("managers/", managersRouter)
 	.merge("kits/", kitsRouter)
 	.merge("twitch/", twitchRouter)
 	.merge("stripe/", stripeRouter)
-	.merge("users/", usersRouter)
+	// .merge("users/", usersRouter)
 	.interop()
 
 const mainRouter = router({
@@ -75,6 +76,9 @@ const mainRouter = router({
 				delete: WarzoneAdminController.deleteBase
 			})
 		})
+	}),
+	users: router({
+		create: UsersController.create
 	})
 })
 
