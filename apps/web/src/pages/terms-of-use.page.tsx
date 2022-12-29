@@ -8,7 +8,7 @@ const Terms = () => {
 			<Styled.Container>
 				<h2>Website Terms of Use</h2>
 
-				<p>Version 1.4</p>
+				<p>Version 1.5</p>
 
 				<p>
 					The kittr website located at https://kittr.gg is a copyrighted work belonging to In the Zone Development.
