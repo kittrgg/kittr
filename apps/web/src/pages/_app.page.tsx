@@ -15,6 +15,7 @@ import { httpBatchLink } from "@trpc/client/links/httpBatchLink"
 import { loggerLink } from "@trpc/client/links/loggerLink"
 import { createTRPCNext } from "@trpc/next"
 import { useRouter } from "next/router"
+// import { useEffect } from "react"
 import { Provider } from "react-redux"
 import superjson from "superjson"
 
