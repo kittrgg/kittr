@@ -36,13 +36,16 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 	const [formValues, setFormValues] = useState<Partial<FormState>>({ gameId })
 
 	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-	const { refetch } = trpc.admin.warzone2.kitBases.get.useQuery({ kitBaseId: kitBaseId! }, {
-		enabled: !!kitBaseId,
-		onSuccess: (data) => {
-			setFormValues(data || {})
-		},
-		refetchOnMount: true
-	})
+	const { refetch } = trpc.admin.warzone2.kitBases.get.useQuery(
+		{ kitBaseId: kitBaseId! },
+		{
+			enabled: !!kitBaseId,
+			onSuccess: (data) => {
+				setFormValues(data || {})
+			},
+			refetchOnMount: true
+		}
+	)
 	const { data: kitBaseCategories } = trpc.useQuery(["admin/warzone2/kit-bases/categories/list"])
 
 	const [isEditingOption, setIsEditingOption] = useState<WarzoneTwoKitOption | null>(null)
