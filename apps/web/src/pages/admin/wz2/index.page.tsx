@@ -9,7 +9,7 @@ import Link from "next/link"
 import { useState } from "react"
 
 const Page = () => {
-	const { data: bases, refetch } = trpc.listKitBases.useQuery() 
+	const { data: bases, refetch } = trpc.listKitBases.useQuery()
 	const { data: game } = trpc.getGameByUrlSafeName.useQuery("wz2")
 	const { mutate, isLoading } = trpc.updateBase.useMutation({
 		onSuccess: () => refetch()
@@ -71,7 +71,7 @@ const Page = () => {
 								loading={isLoading}
 								color="orange"
 								// TODO: Needs review
-								onClick={() => mutate({base})}
+								onClick={() => mutate({ base })}
 							>
 								Copy
 							</Button>

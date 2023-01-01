@@ -31,13 +31,16 @@ interface Props {
 export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 	const [formValues, setFormValues] = useState<Partial<FormState>>({ gameId })
 
-    const { refetch } = trpc.getKitBase.useQuery({ kitBaseId: kitBaseId! }, {
-        enabled: !!kitBaseId,
-        onSuccess: (data) => {
-            setFormValues(data || {})
-        },
-        refetchOnMount: true
-    })
+	const { refetch } = trpc.getKitBase.useQuery(
+		{ kitBaseId: kitBaseId! },
+		{
+			enabled: !!kitBaseId,
+			onSuccess: (data) => {
+				setFormValues(data || {})
+			},
+			refetchOnMount: true
+		}
+	)
 	const { data: kitBaseCategories } = trpc.listKitBaseCategories.useQuery()
 
 	const [isEditingOption, setIsEditingOption] = useState<WarzoneKitOption | null>(null)
