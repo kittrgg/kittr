@@ -8,7 +8,7 @@ export const Overlay = () => {
 	const { query } = useRouter()
 	const { channel: urlChannel } = query as { game: string; channel: string }
 
-	const { data: channel } = trpc.useQuery(["channels/profile/get", urlChannel], {
+	const { data: channel } = trpc.getChannelProfile.useQuery(urlChannel, {
 		enabled: !!urlChannel
 	})
 
@@ -22,10 +22,12 @@ export const Overlay = () => {
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 	const ssg = await createSSGHelper()
 
-	const channel = await ssg.fetchQuery("channels/profile/get", query.channel as string)
+	// const channel = await ssg.fetchQuery("channels/profile/get", query.channel as string)
+	const channel = await ssg.getChannelProfile.fetch(query.channel as string)
 
 	if (channel) {
-		await ssg.fetchQuery("channels/overlay/get", channel.id)
+		// await ssg.fetchQuery("channels/overlay/get", channel.id)
+		await ssg.getOverlay.fetch(channel.id)
 	}
 
 	return {

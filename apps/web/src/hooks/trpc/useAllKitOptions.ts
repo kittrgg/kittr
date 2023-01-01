@@ -1,7 +1,7 @@
 import { trpc } from "@Server/createTRPCNext"
 
-export const useAllKitOptions = ({ kitBaseId }: { kitBaseId: string }) => {
-	const query = trpc.useQuery(["kits/bases/options/list", { kitBaseId }])
+export const useAllKitOptions = () => {
+	const query = trpc.listBases.useQuery({ availableOptions: true })
 
 	return query
 }

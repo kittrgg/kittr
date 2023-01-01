@@ -36,7 +36,7 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 	const [formValues, setFormValues] = useState<Partial<FormState>>({ gameId })
 
 	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-	const { refetch } = trpc.admin.warzone2.kitBases.get.useQuery(
+	const { refetch } = trpc.getKitBase.useQuery(
 		{ kitBaseId: kitBaseId! },
 		{
 			enabled: !!kitBaseId,
@@ -46,7 +46,7 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 			refetchOnMount: true
 		}
 	)
-	const { data: kitBaseCategories } = trpc.useQuery(["admin/warzone2/kit-bases/categories/list"])
+	const { data: kitBaseCategories } = trpc.listKitBaseCategories.useQuery()
 
 	const [isEditingOption, setIsEditingOption] = useState<WarzoneTwoKitOption | null>(null)
 	const [isCreatingOption, setIsCreatingOption] = useState<{
@@ -54,9 +54,9 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 		kitBaseId?: string
 		gameId?: string
 	} | null>(null)
-	const { mutate: updateBase } = trpc.useMutation("admin/warzone2/kit-bases/update")
-	const { mutate: createBase } = trpc.useMutation("admin/warzone2/kit-bases/create")
-	const { mutate: deleteBase } = trpc.useMutation("admin/warzone2/kit-bases/delete")
+	const { mutate: updateBase } = trpc.updateBase.useMutation()
+	const { mutate: createBase } = trpc.createBase.useMutation()
+	const { mutate: deleteBase } = trpc.deleteBase.useMutation()
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const changeTextField = (key: keyof FormState) => (e: any) => {

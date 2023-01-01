@@ -2,7 +2,7 @@ import { publicProcedure } from "@Server/index"
 import * as KitsOptionsService from "@Server/services/kits/options"
 import { z } from "zod"
 
-const list = publicProcedure
+const listOptions = publicProcedure
 	.input(
 		z.object({
 			kitBaseId: z.string()
@@ -14,5 +14,5 @@ const list = publicProcedure
 	})
 
 export const KitsBasesOptionsController = {
-	list
+	listOptions
 }

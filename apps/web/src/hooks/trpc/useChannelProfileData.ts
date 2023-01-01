@@ -10,7 +10,7 @@ export const useChannelProfileData = () => {
 		query: { channel }
 	} = useRouter()
 	const urlChannel = channel as string
-	const query = trpc.useQuery(["channels/profile/get", urlChannel], {
+	const query = trpc.getChannelProfile.useQuery(urlChannel, {
 		enabled: !!urlChannel
 	})
 

@@ -1,6 +1,8 @@
 import { Context } from "./context"
 import { WarzoneAdminController } from "./controllers/admin/warzone"
+import { Warzone2AdminController } from "./controllers/admin/warzone2"
 import { GamesController } from "./controllers/games"
+// import { createRouter } from "./createRouter"
 import { ChannelsController } from "@Server/controllers/channels"
 import { ChannelsCommandStringsController } from "@Server/controllers/channels/commandStrings"
 import { ChannelsGamesController } from "@Server/controllers/channels/games"
@@ -26,11 +28,12 @@ import { ManagersChannelsController } from "@Server/controllers/managers/channel
 import { StripeController } from "@Server/controllers/stripe"
 import { TwitchController } from "@Server/controllers/twitch"
 import { UsersController } from "@Server/controllers/users"
-import { authenticateAdmin } from "@Server/middlewares/authenticateAdmin"
-import { authenticateUser } from "@Server/middlewares/authenticateUser"
+// import { authenticateAdmin } from "@Server/middlewares/authenticateAdmin"
+// import { authenticateUser } from "@Server/middlewares/authenticateUser"
+import admin from "@Services/firebase/admin"
 import { captureMessage } from "@kittr/logger/node"
 import { GameModel } from "@kittr/prisma/validator"
-import { inferRouterInputs, inferRouterOutputs } from "@trpc/server"
+import { inferRouterInputs, inferRouterOutputs, TRPCError } from "@trpc/server"
 import { inferProcedureInput, inferProcedureOutput, initTRPC } from "@trpc/server"
 import superjson from "superjson"
 import { z } from "zod"
@@ -48,12 +51,57 @@ export const t = initTRPC.context<Context>().create({
 	}
 })
 
-export const router = t.router
+export const middleware = t.middleware
+
+export const authenticateAdmin = middleware(async ({ ctx, next }) => {
+	if (!ctx.userToken) {
+		throw new TRPCError({
+			code: "UNAUTHORIZED"
+		})
+	}
+	const firebaseUser = await admin.verifyIdToken(ctx.userToken)
+
+	const administrator = await prisma.administrator.findFirst({
+		where: {
+			firebaseUserId: firebaseUser.uid
+		}
+	})
+
+	if (!administrator) {
+		throw new TRPCError({
+			code: "UNAUTHORIZED",
+			message: "It doesn't look like you're a site administrator."
+		})
+	}
+
+	return next({
+		ctx: {
+			user: firebaseUser,
+			adminUser: administrator
+		}
+	})
+})
+
+export const authenticateUser = middleware(async ({ ctx, next }) => {
+	if (!ctx.userToken) {
+		throw new TRPCError({
+			code: "UNAUTHORIZED"
+		})
+	}
+	const firebaseUser = await admin.verifyIdToken(ctx.userToken)
+
+	return next({
+		ctx: {
+			user: firebaseUser
+		}
+	})
+})
+
 export const mergeRouters = t.mergeRouters
 export const publicProcedure = t.procedure
+export const router = t.router
 export const adminProcedure = t.procedure.use(authenticateAdmin)
 export const authedProcedure = t.procedure.use(authenticateUser)
-export const middleware = t.middleware
 
 // export const legacyRouter = createRouter()
 // 	.formatError(({ shape, error, path, ctx, type, input }) => {
@@ -66,173 +114,44 @@ export const middleware = t.middleware
 // 		return shape
 // 	})
 // 	.transformer(superjson)
-// 	// .merge("admin/", adminRouter)
-// 	// .merge("games/", gamesRouter)
-// 	// .merge("channels/", channelsRouter)
-// 	// .merge("managers/", managersRouter)
-// 	// .merge("kits/", kitsRouter)
-// 	// .merge("twitch/", twitchRouter)
-// 	// .merge("stripe/", stripeRouter)
-// 	// .merge("users/", usersRouter)
+// 	.merge("admin/", adminRouter)
+// 	.merge("games/", gamesRouter)
+// 	.merge("channels/", channelsRouter)
+// 	.merge("managers/", managersRouter)
+// 	.merge("kits/", kitsRouter)
+// 	.merge("twitch/", twitchRouter)
+// 	.merge("stripe/", stripeRouter)
+// 	.merge("users/", usersRouter)
 
-export const appRouter = router({
-	kits: router({
-		bases: router({
-			"options": router({
-				list: KitsBasesOptionsController.list
-			}),
-			"list": KitsBasesController.listBases,
-			"game-list": KitsBasesController.listGameBases
-		}),
-		count: KitsController.countKits
-	}),
-	channels: router({
-		"games": router({
-			list: ChannelsGamesController.listChannelsForGame,
-			add: ChannelsGamesController.addGameToChannel,
-			delete: ChannelsGamesController.deleteGameFromChannel
-		}),
-		"kits": router({
-			upsert: ChannelsKitsController.upsertKitToChannel,
-			upsertWz2Kit: ChannelsKitsController.upsertWz2KitToChannel,
-			delete: ChannelsKitsController.deleteKitFromChannel
-		}),
-		"profile": router({
-			"affiliates": router({
-				create: ChannelsProfileAffiliatesController.createAffiliate,
-				update: ChannelsProfileAffiliatesController.updateAffiliate,
-				delete: ChannelsProfileAffiliatesController.deleteAffiliate
-			}),
-			"pc-specs": router({
-				list: ChannelsPcSpecsController.listPcSpec,
-				get: ChannelsPcSpecsController.getPcSpec,
-				create: ChannelsPcSpecsController.createPcSpec,
-				update: ChannelsPcSpecsController.updatePcSpec,
-				delete: ChannelsPcSpecsController.deletePcSpec
-			}),
-			"creator-codes": router({
-				upsert: ChannelsProfileCreatorCodesController.upsertCode
-			}),
-			"youtube-autoplay": router({
-				upsert: ChannelsProfileYouTubeAutoplayController.toggle
-			}),
-			"brand-color": router({
-				upsert: ChannelsProfileBrandColorsController.upsertBrandColor
-			}),
-			"setup-photos": router({
-				update: ChannelsProfileSetupPhotosController.updateSetupPhotos
-			}),
-			"image": router({
-				update: ChannelsProfileImageController.updateProfileImage
-			}),
-			"cover-photo": router({
-				update: ChannelsProfileCoverPhotoController.update
-			}),
-			"get": ChannelsProfileController.getChannelProfile
-		}),
-		"overlay": router({
-			color: router({
-				edit: ChannelsOverlaysController.editColor
-			}),
-			kit: router({
-				edit: ChannelsOverlaysController.editKit
-			}),
-			toggle: ChannelsOverlaysController.toggle,
-			get: ChannelsOverlaysController.getOverlay
-		}),
-		"managers": router({
-			owner: router({
-				edit: ChannelsManagersOwnersController.editOwner
-			}),
-			list: ChannelsManagersController.listManagers,
-			create: ChannelsManagersController.createManager,
-			demote: ChannelsManagersController.demoteManager,
-			promote: ChannelsManagersController.promoteManager,
-			delete: ChannelsManagersController.deleteManager
-		}),
-		"command-strings": router({
-			get: ChannelsCommandStringsController.getCommandString,
-			upsert: ChannelsCommandStringsController.upsertCommandString
-		}),
-		"links": router({
-			upsert: ChannelsLinksController.upsertLinks
-		}),
-		"plan": router({
-			"get": ChannelsPlanController.getPlan,
-			"subscription-end": ChannelsPlanController.getSubscriptionEnd,
-			"card-last-4-digits": ChannelsPlanController.getCardLast4Digits
-		}),
-		"top": ChannelsController.listTopChannels,
-		"rising": ChannelsController.listRisingChannels,
-		"live": ChannelsController.getDashboardChannel,
-		"dashboard": ChannelsController.getDashboardChannel,
-		"count": ChannelsController.countChannels,
-		"countAll": ChannelsController.countAllChannels,
-		"create": ChannelsController.createChannel,
-		"update": ChannelsController.updateChannel,
-		"delete": ChannelsController.deleteChannel
-	}),
-	admin: router({
-		warzone: router({
-			kitBases: router({
-				options: router({}),
-				categories: router({}),
-				list: WarzoneAdminController.listKitBases,
-				get: WarzoneAdminController.getKitBase,
-				create: WarzoneAdminController.createBase,
-				update: WarzoneAdminController.updateBase,
-				delete: WarzoneAdminController.deleteBase
-			})
-		}),
-		warzone2: router({
-			kitBases: router({
-				options: router({}),
-				categories: router({}),
-				list: WarzoneAdminController.listKitBases,
-				get: WarzoneAdminController.getKitBase,
-				create: WarzoneAdminController.createBase,
-				update: WarzoneAdminController.updateBase,
-				delete: WarzoneAdminController.deleteBase
-			})
-		})
-	}),
-	users: router({
-		create: UsersController.create
-	}),
-	twitch: router({
-		"profile-page": TwitchController.getProfile
-	}),
-	games: router({
-		"getByUrlSafeName": GamesController.getGameByUrlSafeName,
-		"getById": GamesController.getGameById,
-		"list": GamesController.listGames,
-		"list-genres": publicProcedure.query(async () => await prisma.genre.findMany()),
-		"list-platforms": publicProcedure.query(async () => await prisma.platform.findMany()),
-		"add": adminProcedure
-			.input(GameModel.omit({ id: true }).extend({ genres: z.array(z.string()), platforms: z.array(z.string()) }))
-			.query(async ({ input }) => {
-				const { genres, platforms, ...game } = input
-
-				const savedGame = await prisma.game.create({
-					data: {
-						...game,
-						genres: { connect: genres.map((id) => ({ id })) },
-						platforms: { connect: platforms.map((id) => ({ id })) }
-					}
-				})
-
-				return savedGame
-			})
-	}),
-	stripe: router({
-		"buy-premium": StripeController.buyPremium,
-		"manage-premium": StripeController.managePremium
-	}),
-	managers: router({
-		channels: router({
-			list: ManagersChannelsController.listChannels
-		})
-	})
+export const appRouter = t.router({
+	...WarzoneAdminController,
+	...Warzone2AdminController,
+	...GamesController,
+	...ChannelsController,
+	...ChannelsCommandStringsController,
+	...ChannelsGamesController,
+	...ChannelsKitsController,
+	...ChannelsLinksController,
+	...ChannelsManagersController,
+	...ChannelsManagersOwnersController,
+	...ChannelsOverlaysController,
+	...ChannelsPcSpecsController,
+	...ChannelsPlanController,
+	...ChannelsProfileController,
+	...ChannelsProfileAffiliatesController,
+	...ChannelsProfileBrandColorsController,
+	...ChannelsProfileCoverPhotoController,
+	...ChannelsProfileCreatorCodesController,
+	...ChannelsProfileImageController,
+	...ChannelsProfileSetupPhotosController,
+	...ChannelsProfileYouTubeAutoplayController,
+	...KitsController,
+	...KitsBasesController,
+	...KitsBasesOptionsController,
+	...ManagersChannelsController,
+	...StripeController,
+	...TwitchController,
+	...UsersController
 })
 
 export type AppRouter = typeof appRouter

@@ -3,5 +3,6 @@ import { trpc } from "@Server/createTRPCNext"
 
 export const useManagedChannels = () => {
 	const user = useUser()
-	return trpc.useQuery(["managers/channels/list"], { enabled: !!user })
+	// TODO: not sure if this is correct
+	return trpc.listChannels.useQuery(undefined, { enabled: !!user })
 }

@@ -16,24 +16,18 @@ const SubscriptionSettings = () => {
 	const { isPremium } = usePremiumStatus()
 	const { data, refetch: refetchChannel } = useDashboardChannel()
 
-	const { data: subscriptionEnd } = trpc.useQuery(
-		[
-			"channels/plan/subscription-end",
-			{ stripeSubscriptionId: data?.plan?.stripeSubscriptionId!, channelId: data?.id! }
-		],
+	const { data: subscriptionEnd } = trpc.getSubscriptionEnd.useQuery(
+		{ stripeSubscriptionId: data?.plan?.stripeSubscriptionId, channelId: data?.id },
 		{ enabled: !!data?.plan?.stripeSubscriptionId }
 	)
-	const { data: cardLast4 } = trpc.useQuery(
-		[
-			"channels/plan/card-last-4-digits",
-			{ stripeSubscriptionId: data?.plan?.stripeSubscriptionId!, channelId: data?.id! }
-		],
+	const { data: cardLast4 } = trpc.getCardLast4Digits.useQuery(
+		{ stripeSubscriptionId: data?.plan?.stripeSubscriptionId, channelId: data?.id },
 		{
 			enabled: !!data?.plan?.stripeSubscriptionId
 		}
 	)
 
-	const { mutate: buyPremium } = trpc.useMutation("stripe/buy-premium", {
+	const { mutate: buyPremium } = trpc.buyPremium.useMutation({
 		onSuccess: (result) => {
 			window.open(result.url as string, "_blank")
 		},
@@ -41,7 +35,7 @@ const SubscriptionSettings = () => {
 			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}
 	})
-	const { mutate: managePremium } = trpc.useMutation("stripe/manage-premium", {
+	const { mutate: managePremium } = trpc.managePremium.useMutation({
 		onSuccess: (result) => {
 			window.open(result.url as string, "_blank")
 		},
@@ -80,8 +74,8 @@ const SubscriptionSettings = () => {
 					description="Active Kit Overlay, AutoBot, profile customization, and more!"
 					buttonAction={() =>
 						isPremium
-							? managePremium({ channelId: data?.id! })
-							: buyPremium({ channelId: data?.id!, displayName: data?.displayName!, urlSafeName: data?.urlSafeName! })
+							? managePremium({ channelId: data?.id })
+							: buyPremium({ channelId: data?.id, displayName: data?.displayName, urlSafeName: data?.urlSafeName })
 					}
 					planType="premium"
 				/>

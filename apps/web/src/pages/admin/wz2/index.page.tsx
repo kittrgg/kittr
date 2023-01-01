@@ -9,9 +9,9 @@ import Link from "next/link"
 import { useState } from "react"
 
 const Page = () => {
-	const { data: bases, refetch } = trpc.useQuery(["admin/warzone2/kit-bases/list"])
-	const { data: game } = trpc.useQuery(["games/getByUrlSafeName", "wz2"])
-	const { mutate, isLoading } = trpc.useMutation(["admin/warzone2/kit-bases/copy"], {
+	const { data: bases, refetch } = trpc.listKitBases.useQuery() 
+	const { data: game } = trpc.getGameByUrlSafeName.useQuery("wz2")
+	const { mutate, isLoading } = trpc.updateBase.useMutation({
 		onSuccess: () => refetch()
 	})
 	const [isCreatingBase, setIsCreatingBase] = useState(false)
@@ -55,7 +55,7 @@ const Page = () => {
 			</Link>
 			<Section title="KIT BASES" action={<Button onClick={() => setIsCreatingBase(true)}>Create</Button>}>
 				<List>
-					{(bases || []).map((base) => (
+					{(bases || [])?.map((base) => (
 						<List.Item
 							style={{ borderBottom: "1px solid white", padding: "1rem" }}
 							sx={(theme) => ({
@@ -70,7 +70,8 @@ const Page = () => {
 								ml="xl"
 								loading={isLoading}
 								color="orange"
-								onClick={() => mutate({ baseToCopy: base.id })}
+								// TODO: Needs review
+								onClick={() => mutate({base})}
 							>
 								Copy
 							</Button>

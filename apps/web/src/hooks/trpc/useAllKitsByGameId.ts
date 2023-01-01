@@ -1,6 +1,6 @@
 import { trpc } from "@Server/createTRPCNext"
 
 export const useAllKitsByGameId = (gameId: string) => {
-	const query = trpc.useQuery(["kits/bases/game-list", { game: gameId }])
+	const query = trpc.listGameBases.useQuery({ game: gameId })
 	return query
 }

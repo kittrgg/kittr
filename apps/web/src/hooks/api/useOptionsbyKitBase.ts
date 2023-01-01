@@ -1,7 +1,8 @@
 import { trpc } from "@Server/createTRPCNext"
 
 export const useOptionsByKitBase = (kitBaseId: string) => {
-	const query = trpc.useQuery(["kits/bases/options/list", { kitBaseId }], { enabled: !!kitBaseId })
+	// TODO: No listkitoptions but i think it is included in response data
+	const query = trpc.getKitBase.useQuery({ kitBaseId: kitBaseId }, { enabled: !!kitBaseId })
 
 	return query
 }

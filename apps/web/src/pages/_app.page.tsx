@@ -78,7 +78,7 @@ const MyApp = ({ Component, pageProps }: { Component: React.FC; pageProps: Recor
 	)
 }
 
-const trpc = createTRPCNext<AppRouter>({
+export const trpc = createTRPCNext<AppRouter>({
 	config({}) {
 		/*
 		 * If you want to use SSR, you need to use the server's full URL

@@ -10,7 +10,7 @@ import { useState } from "react"
 
 const Page = () => {
 	// TODO: Not sure how to handle this type error, need some backend knowledging here.
-	const { data: bases, refetch } = trpc.useQuery(["admin/warzone/kit-bases/list"])
+	const { data: bases, refetch } = trpc.listKitBases.useQuery()
 	const [isCreatingBase, setIsCreatingBase] = useState(false)
 	const [isEditingBase, setIsEditingBase] = useState<
 		| (WarzoneKitBase & {

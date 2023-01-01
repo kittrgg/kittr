@@ -17,9 +17,9 @@ interface Props {
 }
 
 export const KitBaseOptionForm = ({ initialValues, onFinished }: Props) => {
-	const { mutate: updateOption } = trpc.useMutation("admin/warzone2/kit-bases/options/update")
-	const { mutate: createOption } = trpc.useMutation("admin/warzone2/kit-bases/options/create")
-	const { mutate: deleteOption } = trpc.useMutation("admin/warzone2/kit-bases/options/delete")
+	const { mutate: updateOption } = trpc.updateOption.useMutation()
+	const { mutate: createOption } = trpc.createOption.useMutation()
+	const { mutate: deleteOption } = trpc.deleteOption.useMutation()
 
 	const [formValues, setFormValues] = useState<Partial<FormState>>(initialValues || {})
 
