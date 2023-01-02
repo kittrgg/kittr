@@ -123,35 +123,164 @@ export const authedProcedure = t.procedure.use(authenticateUser)
 // 	.merge("stripe/", stripeRouter)
 // 	.merge("users/", usersRouter)
 
-export const appRouter = t.router({
-	...WarzoneAdminController,
-	...Warzone2AdminController,
-	...GamesController,
-	...ChannelsController,
-	...ChannelsCommandStringsController,
-	...ChannelsGamesController,
-	...ChannelsKitsController,
-	...ChannelsLinksController,
-	...ChannelsManagersController,
-	...ChannelsManagersOwnersController,
-	...ChannelsOverlaysController,
-	...ChannelsPcSpecsController,
-	...ChannelsPlanController,
-	...ChannelsProfileController,
-	...ChannelsProfileAffiliatesController,
-	...ChannelsProfileBrandColorsController,
-	...ChannelsProfileCoverPhotoController,
-	...ChannelsProfileCreatorCodesController,
-	...ChannelsProfileImageController,
-	...ChannelsProfileSetupPhotosController,
-	...ChannelsProfileYouTubeAutoplayController,
-	...KitsController,
-	...KitsBasesController,
-	...KitsBasesOptionsController,
-	...ManagersChannelsController,
-	...StripeController,
-	...TwitchController,
-	...UsersController
+export const appRouter = router({
+	kits: router({
+		bases: router({
+			"options": router({
+				list: KitsBasesOptionsController.listOptions
+			}),
+			"list": KitsBasesController.listBases,
+			"game-list": KitsBasesController.listGameBases
+		}),
+		count: KitsController.countKits
+	}),
+	channels: router({
+		"games": router({
+			list: ChannelsGamesController.listChannelsForGame,
+			add: ChannelsGamesController.addGameToChannel,
+			delete: ChannelsGamesController.deleteGameFromChannel
+		}),
+		"kits": router({
+			upsert: ChannelsKitsController.upsertKitToChannel,
+			upsertWz2Kit: ChannelsKitsController.upsertWz2KitToChannel,
+			delete: ChannelsKitsController.deleteKitFromChannel
+		}),
+		"profile": router({
+			"affiliates": router({
+				create: ChannelsProfileAffiliatesController.createAffiliate,
+				update: ChannelsProfileAffiliatesController.updateAffiliate,
+				delete: ChannelsProfileAffiliatesController.deleteAffiliate
+			}),
+			"pc-specs": router({
+				list: ChannelsPcSpecsController.listPcSpec,
+				get: ChannelsPcSpecsController.getPcSpec,
+				create: ChannelsPcSpecsController.createPcSpec,
+				update: ChannelsPcSpecsController.updatePcSpec,
+				delete: ChannelsPcSpecsController.deletePcSpec
+			}),
+			"creator-codes": router({
+				upsert: ChannelsProfileCreatorCodesController.upsertCode
+			}),
+			"youtube-autoplay": router({
+				upsert: ChannelsProfileYouTubeAutoplayController.toggle
+			}),
+			"brand-color": router({
+				upsert: ChannelsProfileBrandColorsController.upsertBrandColor
+			}),
+			"setup-photos": router({
+				update: ChannelsProfileSetupPhotosController.updateSetupPhotos
+			}),
+			"image": router({
+				update: ChannelsProfileImageController.updateProfileImage
+			}),
+			"cover-photo": router({
+				update: ChannelsProfileCoverPhotoController.update
+			}),
+			"get": ChannelsProfileController.getChannelProfile
+		}),
+		"overlay": router({
+			color: router({
+				edit: ChannelsOverlaysController.editColor
+			}),
+			kit: router({
+				edit: ChannelsOverlaysController.editKit
+			}),
+			toggle: ChannelsOverlaysController.toggle,
+			get: ChannelsOverlaysController.getOverlay
+		}),
+		"managers": router({
+			owner: router({
+				edit: ChannelsManagersOwnersController.editOwner
+			}),
+			list: ChannelsManagersController.listManagers,
+			create: ChannelsManagersController.createManager,
+			demote: ChannelsManagersController.demoteManager,
+			promote: ChannelsManagersController.promoteManager,
+			delete: ChannelsManagersController.deleteManager
+		}),
+		"command-strings": router({
+			get: ChannelsCommandStringsController.getCommandString,
+			upsert: ChannelsCommandStringsController.upsertCommandString
+		}),
+		"links": router({
+			upsert: ChannelsLinksController.upsertLinks
+		}),
+		"plan": router({
+			"get": ChannelsPlanController.getPlan,
+			"subscription-end": ChannelsPlanController.getSubscriptionEnd,
+			"card-last-4-digits": ChannelsPlanController.getCardLast4Digits
+		}),
+		"top": ChannelsController.listTopChannels,
+		"rising": ChannelsController.listRisingChannels,
+		"live": ChannelsController.getDashboardChannel,
+		"dashboard": ChannelsController.getDashboardChannel,
+		"count": ChannelsController.countChannels,
+		"countAll": ChannelsController.countAllChannels,
+		"create": ChannelsController.createChannel,
+		"update": ChannelsController.updateChannel,
+		"delete": ChannelsController.deleteChannel
+	}),
+	admin: router({
+		warzone: router({
+			kitBases: router({
+				options: router({}),
+				categories: router({}),
+				list: WarzoneAdminController.listKitBases,
+				get: WarzoneAdminController.getKitBase,
+				create: WarzoneAdminController.createBase,
+				update: WarzoneAdminController.updateBase,
+				delete: WarzoneAdminController.deleteBase
+			})
+		}),
+		warzone2: router({
+			kitBases: router({
+				options: router({}),
+				categories: router({}),
+				list: WarzoneAdminController.listKitBases,
+				get: WarzoneAdminController.getKitBase,
+				create: WarzoneAdminController.createBase,
+				update: WarzoneAdminController.updateBase,
+				delete: WarzoneAdminController.deleteBase
+			})
+		})
+	}),
+	users: router({
+		create: UsersController.create
+	}),
+	twitch: router({
+		"profile-page": TwitchController.getProfile
+	}),
+	games: router({
+		"getByUrlSafeName": GamesController.getGameByUrlSafeName,
+		"getById": GamesController.getGameById,
+		"list": GamesController.listGames,
+		"list-genres": publicProcedure.query(async () => await prisma.genre.findMany()),
+		"list-platforms": publicProcedure.query(async () => await prisma.platform.findMany()),
+		"add": adminProcedure
+			.input(GameModel.omit({ id: true }).extend({ genres: z.array(z.string()), platforms: z.array(z.string()) }))
+			.query(async ({ input }) => {
+				const { genres, platforms, ...game } = input
+
+				const savedGame = await prisma.game.create({
+					data: {
+						...game,
+						genres: { connect: genres.map((id) => ({ id })) },
+						platforms: { connect: platforms.map((id) => ({ id })) }
+					}
+				})
+
+				return savedGame
+			})
+	}),
+	stripe: router({
+		"buy-premium": StripeController.buyPremium,
+		"manage-premium": StripeController.managePremium
+	}),
+	managers: router({
+		channels: router({
+			list: ManagersChannelsController.listChannels
+		})
+	})
 })
 
 export type AppRouter = typeof appRouter
