@@ -1,10 +1,11 @@
 import colors from "@Colors"
 import { Button, Modal, TextInput } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
-import { useManagedChannels } from "@Hooks/api/useManagedChannels"
+// import { useManagedChannels } from "@Hooks/api/useManagedChannels"
 import { setActiveView, setModal } from "@Redux/slices/dashboard"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
+import { trpc } from "@Server/createTRPCNext"
 import { getToken } from "@Services/firebase/auth"
 import { header2 } from "@Styles/typography"
 import { useSocket } from "pages/dashboard.page"
@@ -17,7 +18,7 @@ const ChannelDeleteModal = () => {
 	const dispatch = useDispatch()
 	const { data: channelData } = useChannelData()
 	const [input, setInput] = useState("")
-	const { refetch } = useManagedChannels()
+	const { refetch } = trpc.managers.channels.list.useQuery()
 	const { mutate } = useDashboardMutator({
 		path: "channels/delete",
 		opts: {
@@ -51,7 +52,7 @@ const ChannelDeleteModal = () => {
 					design="transparent"
 					text="DELETE FOREVER"
 					disabled={channelData?.displayName !== input}
-					onClick={async () => mutate({ channelId: channelData?.id! })}
+					onClick={async () => mutate({ channelId: channelData?.id ?? "" })}
 					style={{ backgroundColor: colors.red }}
 				/>
 			</FlexRow>

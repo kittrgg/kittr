@@ -9,9 +9,9 @@ import Link from "next/link"
 import { useState } from "react"
 
 const Page = () => {
-	const { data: bases, refetch } = trpc.listKitBases.useQuery()
-	const { data: game } = trpc.getGameByUrlSafeName.useQuery("wz2")
-	const { mutate, isLoading } = trpc.updateBase.useMutation({
+	const { data: bases, refetch } = trpc.admin.warzone2.kitBases.list.useQuery()
+	const { data: game } = trpc.games.getByUrlSafeName.useQuery("wz2")
+	const { mutate, isLoading } = trpc.admin.warzone2.kitBases.update.useMutation({
 		onSuccess: () => refetch()
 	})
 	const [isCreatingBase, setIsCreatingBase] = useState(false)

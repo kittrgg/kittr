@@ -20,11 +20,11 @@ const GameProfile = ({ redirect }: { redirect: boolean }) => {
 	const { query, isFallback, push } = useRouter()
 	const { pageNumber, game } = query as { pageNumber: string; game: string }
 
-	const { data: gameData } = trpc.getGameByUrlSafeName.useQuery(game, { enabled: !!game })
-	const { data: channelCount = 0 } = trpc.countChannels.useQuery(game, { enabled: !!game })
+	const { data: gameData } = trpc.games.getByUrlSafeName.useQuery(game, { enabled: !!game })
+	const { data: channelCount = 0 } = trpc.channels.count.useQuery(game, { enabled: !!game })
 	const numberOfPages = Math.ceil(channelCount / CHANNELS_PER_PAGE)
 
-	const { data: channels } = trpc.listChannelsForGame.useQuery(
+	const { data: channels } = trpc.channels.games.list.useQuery(
 		{
 			urlSafeName: game,
 			take: CHANNELS_PER_PAGE,
@@ -145,19 +145,12 @@ export const getStaticProps = async ({ params }: { params: { game: string; pageN
 		}
 	}
 
-	// const gameQuery = await ssg.fetchQuery("games/getByUrlSafeName", game)
-	const gameQuery = await ssg.getGameByUrlSafeName.fetch(game)
+	const gameQuery = await ssg.games.getByUrlSafeName.fetch(game)
 	if (gameQuery) {
 		await Promise.all([
-			// await ssg.fetchQuery("channels/count", game),
-			await ssg.countChannels.fetch(game),
+			await ssg.channels.count.fetch(game),
 
-			// await ssg.fetchQuery("channels/games/list", {
-			// 	urlSafeName: game,
-			// 	take: CHANNELS_PER_PAGE,
-			// 	skip
-			// })
-			await ssg.listChannelsForGame.fetch({
+			await ssg.channels.games.list.fetch({
 				urlSafeName: game,
 				take: CHANNELS_PER_PAGE,
 				skip

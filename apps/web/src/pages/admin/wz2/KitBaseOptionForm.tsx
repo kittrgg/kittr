@@ -17,9 +17,10 @@ interface Props {
 }
 
 export const KitBaseOptionForm = ({ initialValues, onFinished }: Props) => {
-	const { mutate: updateOption } = trpc.updateOption.useMutation()
-	const { mutate: createOption } = trpc.createOption.useMutation()
-	const { mutate: deleteOption } = trpc.deleteOption.useMutation()
+	// TODO: Missing controller in trpc
+	// const { mutate: updateOption } = trpc.admin.warzone2.kitBases.options.update.useMutation()
+	// const { mutate: createOption } = trpc.admin.warzone2.kitBases.options.create.useMutation()
+	// const { mutate: deleteOption } = trpc.admin.warzone2.kitBases.options.delete.useMutation()
 
 	const [formValues, setFormValues] = useState<Partial<FormState>>(initialValues || {})
 

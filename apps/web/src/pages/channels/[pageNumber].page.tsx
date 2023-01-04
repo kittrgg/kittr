@@ -21,12 +21,12 @@ const PageOfChannels = () => {
 	} = useRouter()
 	if (isFallback) return <FallbackPage />
 
-	const { data: channels } = trpc.listTopChannels.useQuery({
+	const { data: channels } = trpc.channels.top.useQuery({
 		take: 10,
 		skip: (Number(pageNumber) - 1) * CHANNELS_PER_PAGE
 	})
 
-	const { data: totalChannels = 0 } = trpc.countChannels.useQuery()
+	const { data: totalChannels = 0 } = trpc.channels.countAll.useQuery()
 	const numberOfPages = Math.ceil(totalChannels / CHANNELS_PER_PAGE)
 
 	const page = Number(pageNumber)
@@ -103,8 +103,8 @@ export const getStaticProps = async ({ params }: { params: { pageNumber: string 
 
 	// await ssg.fetchQuery("channels/top", { take: CHANNELS_PER_PAGE, skip })
 	// await ssg.fetchQuery("channels/countAll")
-	await ssg.listTopChannels.fetch({ take: CHANNELS_PER_PAGE, skip })
-	await ssg.countAllChannels.fetch()
+	await ssg.channels.top.fetch({ take: CHANNELS_PER_PAGE, skip })
+	await ssg.channels.countAll.fetch()
 
 	return {
 		props: {

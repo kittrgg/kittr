@@ -15,7 +15,7 @@ interface Props {
 }
 
 const ActiveKitOverlay = ({ id, previewWidth, overlayStyle }: Props) => {
-	const { data, refetch } = trpc.getOverlay.useQuery(id)
+	const { data, refetch } = trpc.channels.overlay.get.useQuery(id)
 	const [activeKit, setActiveKit] = useState<OverlayKit>({} as OverlayKit)
 	const { width, height } = useViewportDimensions()
 

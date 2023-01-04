@@ -1,10 +1,11 @@
 import colors from "@Colors"
 import { Button, Modal, Spinner, TextInput } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
-import { useManagedChannels } from "@Hooks/api/useManagedChannels"
+// import { useManagedChannels } from "@Hooks/api/useManagedChannels"
 import { handleTutorialAction, setModal } from "@Redux/slices/dashboard"
 import { useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
+import { trpc } from "@Server/createTRPCNext"
 import { paragraph } from "@Styles/typography"
 import { useState } from "react"
 import styled from "styled-components"
@@ -12,7 +13,7 @@ import styled from "styled-components"
 const CreateChannelModal = () => {
 	const dispatch = useDispatch()
 	const { data } = useModal()
-	const { refetch } = useManagedChannels()
+	const { refetch } = trpc.managers.channels.list.useQuery()
 	const [displayName, setDisplayName] = useState("")
 
 	const { mutate, isLoading, error } = useDashboardMutator({

@@ -9,7 +9,7 @@ import { useRouter } from "next/router"
 const ChannelProfilePage = () => {
 	const { query } = useRouter()
 	const { channel: urlChannel } = query as { channel: string }
-	const { data: channel } = trpc.getChannelProfile.useQuery(urlChannel, {
+	const { data: channel } = trpc.channels.profile.get.useQuery(urlChannel, {
 		enabled: !!urlChannel
 	})
 
@@ -41,15 +41,13 @@ export const getStaticProps = async ({ params }: { params: { channel: string } }
 	const { channel: urlSafeName } = params
 	const ssg = await createSSGHelper()
 
-	// const channel = await ssg.fetchQuery("channels/profile/get", urlSafeName)
-	const channel = await ssg.getChannelProfile.fetch(urlSafeName)
+	const channel = await ssg.channels.profile.get.fetch(urlSafeName)
 
 	const twitchLink = channel?.links.find((channel) => channel.property === "TWITCH")?.value
 
 	try {
 		if (twitchLink) {
-			// await ssg.fetchQuery("twitch/profile-page", twitchLink)
-			await ssg.getProfile.fetch(twitchLink)
+			await ssg.twitch["profile-page"].fetch(twitchLink)
 		}
 	} catch (error) {
 		console.log(`A Twitch profile was not found for user with urlSafeName ${urlSafeName}.`)

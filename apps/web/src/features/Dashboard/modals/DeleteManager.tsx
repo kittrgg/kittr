@@ -2,11 +2,12 @@ import colors from "@Colors"
 import { Button, Modal, Spinner } from "@Components/shared"
 import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
-import { useManagedChannels } from "@Hooks/api/useManagedChannels"
+// import { useManagedChannels } from "@Hooks/api/useManagedChannels"
 import { useUser } from "@Hooks/useUser"
 import { setActiveView, setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
+import { trpc } from "@Server/createTRPCNext"
 import { paragraph } from "@Styles/typography"
 import styled from "styled-components"
 
@@ -15,7 +16,7 @@ const DeleteManager = () => {
 	const { data: channelData } = useChannelData()
 	const { data } = useModal()
 	const user = useUser()
-	const { refetch } = useManagedChannels()
+	const { refetch } = trpc.managers.channels.list.useQuery()
 	const { refetch: refetchChannel } = useDashboardChannel()
 	const isSelf = user?.email === data.email
 
@@ -60,7 +61,7 @@ const DeleteManager = () => {
 				<Button
 					design="white"
 					text={"YES, REMOVE " + (isSelf ? "MYSELF" : "THIS MANAGER")}
-					onClick={() => mutate({ channelId: channelData?.id!, managerIdToDelete: data.id })}
+					onClick={() => mutate({ channelId: channelData?.id ?? "", managerIdToDelete: data.id })}
 					style={{ marginLeft: "32px" }}
 					dataCy="confirm-manager-removal"
 				/>

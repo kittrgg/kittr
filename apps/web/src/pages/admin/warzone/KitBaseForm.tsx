@@ -31,7 +31,7 @@ interface Props {
 export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 	const [formValues, setFormValues] = useState<Partial<FormState>>({ gameId })
 
-	const { refetch } = trpc.getKitBase.useQuery(
+	const { refetch } = trpc.admin.warzone.kitBases.get.useQuery(
 		{ kitBaseId: kitBaseId! },
 		{
 			enabled: !!kitBaseId,
@@ -41,7 +41,7 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 			refetchOnMount: true
 		}
 	)
-	const { data: kitBaseCategories } = trpc.listKitBaseCategories.useQuery()
+	const { data: kitBaseCategories } = trpc.kits.bases.list.useQuery({category: true})
 
 	const [isEditingOption, setIsEditingOption] = useState<WarzoneKitOption | null>(null)
 	const [isCreatingOption, setIsCreatingOption] = useState<{
@@ -49,9 +49,9 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 		kitBaseId?: string
 		gameId?: string
 	} | null>(null)
-	const { mutate: updateBase } = trpc.updateBase.useMutation()
-	const { mutate: createBase } = trpc.createBase.useMutation()
-	const { mutate: deleteBase } = trpc.deleteBase.useMutation()
+	const { mutate: updateBase } = trpc.admin.warzone.kitBases.update.useMutation()
+	const { mutate: createBase } = trpc.admin.warzone.kitBases.create.useMutation()
+	const { mutate: deleteBase } = trpc.admin.warzone.kitBases.delete.useMutation()
 
 	const changeTextField = (key: keyof FormState) => (e: any) => {
 		setFormValues((formValues) => ({ ...formValues, [key]: e.target.value }))

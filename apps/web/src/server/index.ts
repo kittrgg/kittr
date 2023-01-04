@@ -31,6 +31,7 @@ import { UsersController } from "@Server/controllers/users"
 // import { authenticateAdmin } from "@Server/middlewares/authenticateAdmin"
 // import { authenticateUser } from "@Server/middlewares/authenticateUser"
 import admin from "@Services/firebase/admin"
+import { download } from "@Services/firebase/storage"
 import { captureMessage } from "@kittr/logger/node"
 import { GameModel } from "@kittr/prisma/validator"
 import { inferRouterInputs, inferRouterOutputs, TRPCError } from "@trpc/server"
@@ -212,7 +213,7 @@ export const appRouter = router({
 		}),
 		"top": ChannelsController.listTopChannels,
 		"rising": ChannelsController.listRisingChannels,
-		"live": ChannelsController.getDashboardChannel,
+		"live": ChannelsController.listLiveChannels,
 		"dashboard": ChannelsController.getDashboardChannel,
 		"count": ChannelsController.countChannels,
 		"countAll": ChannelsController.countAllChannels,
@@ -223,8 +224,9 @@ export const appRouter = router({
 	admin: router({
 		warzone: router({
 			kitBases: router({
+				// TODO: Missing controller
 				options: router({}),
-				categories: router({}),
+				categories: WarzoneAdminController.listKitBaseCategories,
 				list: WarzoneAdminController.listKitBases,
 				get: WarzoneAdminController.getKitBase,
 				create: WarzoneAdminController.createBase,
@@ -234,13 +236,14 @@ export const appRouter = router({
 		}),
 		warzone2: router({
 			kitBases: router({
+				// TODO: Missing controller
 				options: router({}),
-				categories: router({}),
-				list: WarzoneAdminController.listKitBases,
-				get: WarzoneAdminController.getKitBase,
-				create: WarzoneAdminController.createBase,
-				update: WarzoneAdminController.updateBase,
-				delete: WarzoneAdminController.deleteBase
+				categories: Warzone2AdminController.listKitBaseCategories,
+				list: Warzone2AdminController.listKitBases,
+				get: Warzone2AdminController.getKitBase,
+				create: Warzone2AdminController.createBase,
+				update: Warzone2AdminController.updateBase,
+				delete: Warzone2AdminController.deleteBase
 			})
 		})
 	}),
@@ -258,7 +261,7 @@ export const appRouter = router({
 		"list-platforms": publicProcedure.query(async () => await prisma.platform.findMany()),
 		"add": adminProcedure
 			.input(GameModel.omit({ id: true }).extend({ genres: z.array(z.string()), platforms: z.array(z.string()) }))
-			.query(async ({ input }) => {
+			.mutation(async ({ input }) => {
 				const { genres, platforms, ...game } = input
 
 				const savedGame = await prisma.game.create({
@@ -279,6 +282,14 @@ export const appRouter = router({
 	managers: router({
 		channels: router({
 			list: ManagersChannelsController.listChannels
+		})
+	}),
+	// TODO: Review this
+	firebase: router({
+		resolver: publicProcedure.input(z.object({ path: z.string() })).query(async ({ input }) => {
+			const url = download(input.path)
+
+			return url
 		})
 	})
 })

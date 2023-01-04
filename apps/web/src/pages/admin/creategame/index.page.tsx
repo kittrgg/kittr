@@ -18,9 +18,9 @@ interface GameInputs {
 }
 
 const Page = () => {
-	const { mutate: addGame, isLoading } = trpc.addGameToChannel.useMutation()
-	const { data: genres, isLoading: isLoadingGenres } = trpc.listGames.useQuery({ genres: true })
-	const { data: platforms, isLoading: isLoadingPlatforms } = trpc.listGames.useQuery({ platforms: true })
+	const { mutate: addGame, isLoading } = trpc.games.add.useMutation()
+	const { data: genres, isLoading: isLoadingGenres } = trpc.games.list.useQuery({ genres: true })
+	const { data: platforms, isLoading: isLoadingPlatforms } = trpc.games.list.useQuery({ platforms: true })
 
 	const [gameInputs, setGameInputs] = useState<GameInputs>({
 		active: false,
@@ -122,8 +122,7 @@ const Page = () => {
 					mt="0.75rem"
 					loading={isLoading}
 					onClick={() => {
-						// TODO: there is no channelID or gameID on gameInputs
-						// addGame({ channelId: gameInputs. }, { onSuccess: () => console.log("Okay to clear...") })
+						addGame({ ...gameInputs }, { onSuccess: () => console.log("Okay to clear...") })
 					}}
 					disabled={!isFormComplete()}
 				>
