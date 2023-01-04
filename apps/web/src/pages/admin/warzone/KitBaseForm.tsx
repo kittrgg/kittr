@@ -41,7 +41,7 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 			refetchOnMount: true
 		}
 	)
-	const { data: kitBaseCategories } = trpc.kits.bases.list.useQuery({category: true})
+	const { data: kitBaseCategories } = trpc.kits.bases.list.useQuery({ category: true })
 
 	const [isEditingOption, setIsEditingOption] = useState<WarzoneKitOption | null>(null)
 	const [isCreatingOption, setIsCreatingOption] = useState<{
