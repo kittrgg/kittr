@@ -71,7 +71,7 @@ const Page = () => {
 								loading={isLoading}
 								color="orange"
 								// TODO: Needs review
-								onClick={() => mutate({ base })}
+								onClick={() => mutate({ base: base, commandCodes: base.commandCodes.join(',') })}
 							>
 								Copy
 							</Button>
