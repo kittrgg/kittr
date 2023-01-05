@@ -1,5 +1,5 @@
 import { Button, GameCard, Modal, Spinner } from "@Components/shared"
-import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
+import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { handleTutorialAction, setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch, useSelector } from "@Redux/store"
@@ -7,29 +7,28 @@ import { trpc } from "@Server/createTRPCNext"
 import styled from "styled-components"
 
 /** The modal that adds a game to a channel. */
-const AddGameModal = ({ ...props }) => {
+const AddGameModal = () => {
 	const dispatch = useDispatch()
 	const modal = useModal()
+	const { refetch: refetchDashboard } = useDashboardChannel()
 	const { channelId } = useSelector((state) => state.dashboard.activeView)
 	const channelData = useChannelData()
 
-	const { isLoading, data } = trpc.games.list.useQuery({ genres: true, platforms: true })
+	const { isLoading, data } = trpc.games.list.useQuery()
 
-	const { mutate, isLoading: isMutating } = useDashboardMutator({
-		path: "channels/games/add",
-		opts: {
-			onSuccess: () => {
-				dispatch(
-					handleTutorialAction({
-						condition: modal.data?.isTutorial,
-						trueState: { type: "Tutorial", data: { page: 5, ref: modal.data?.ref } },
-						falseState: { type: "", data: {} }
-					})
-				)
-			},
-			onError: () => {
-				dispatch(setModal({ type: "Error Notification", data: "" }))
-			}
+	const { mutate, isLoading: isMutating } = trpc.channels.games.add.useMutation({
+		onSuccess: () => {
+			dispatch(
+				handleTutorialAction({
+					condition: modal.data?.isTutorial,
+					trueState: { type: "Tutorial", data: { page: 5, ref: modal.data?.ref } },
+					falseState: { type: "", data: {} }
+				})
+			)
+			refetchDashboard()
+		},
+		onError: () => {
+			dispatch(setModal({ type: "Error Notification", data: "" }))
 		}
 	})
 

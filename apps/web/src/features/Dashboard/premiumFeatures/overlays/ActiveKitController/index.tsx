@@ -4,11 +4,11 @@ import * as Styled from "./style"
 import colors from "@Colors"
 import { Button, ColorPicker, MultiButton, Spinner, SVG } from "@Components/shared"
 import PremiumCallout from "@Features/Dashboard/PremiumCallout"
-import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { setModal } from "@Redux/slices/dashboard"
 import { useManagerRole, usePremiumStatus } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
+import { trpc } from "@Server/createTRPCNext"
 import { caption, paragraph } from "@Styles/typography"
 import { sortAlphabetical } from "@Utils/helpers/sortAlphabetical"
 import { ActiveKitOverlay } from "@Utils/lookups/overlays"
@@ -20,32 +20,21 @@ const ActiveKit = () => {
 	const { data } = useDashboardChannel()
 	const role = useManagerRole()
 	const { isPremium } = usePremiumStatus()
-	const { mutate: mutateToggle, isLoading: isMutatingToggle } = useDashboardMutator({
-		path: "channels/overlay/toggle",
-		opts: {
-			onError: (error) => {
-				console.error(error)
-				dispatch(setModal({ type: "Error Notification", data: "" }))
-			}
+	const { mutate: mutateToggle, isLoading: isMutatingToggle } = trpc.channels.overlay.toggle.useMutation({
+		onError: (error) => {
+			dispatch(setModal({ type: "Error Notification", data: "" }))
 		}
 	})
 
-	const { mutate: mutateColor } = useDashboardMutator({
-		path: "channels/overlay/color/edit",
-		opts: {
-			onError: (error) => {
-				console.error(error)
-				dispatch(setModal({ type: "Error Notification", data: "" }))
-			}
+	const { mutate: mutateColor } = trpc.channels.overlay.color.edit.useMutation({
+		onError: (error) => {
+			dispatch(setModal({ type: "Error Notification", data: "" }))
 		}
 	})
 
-	const { mutate: mutateKit } = useDashboardMutator({
-		path: "channels/overlay/kit/edit",
-		opts: {
-			onError: (error) => {
-				dispatch(setModal({ type: "Error Notification", data: "" }))
-			}
+	const { mutate: mutateKit } = trpc.channels.overlay.kit.edit.useMutation({
+		onError: (error) => {
+			dispatch(setModal({ type: "Error Notification", data: "" }))
 		}
 	})
 

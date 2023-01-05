@@ -1,24 +1,20 @@
 import H3 from "../../H3"
 import colors from "@Colors"
 import { MultiButton, Spinner } from "@Components/shared"
-import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { setModal } from "@Redux/slices/dashboard"
 import { useDispatch } from "@Redux/store"
-import { getToken } from "@Services/firebase/auth/getToken"
+import { trpc } from "@Server/createTRPCNext"
 import { paragraph } from "@Styles/typography"
 import styled from "styled-components"
 
-const YouTubeAutoplayEditor = ({ ...props }) => {
+const YouTubeAutoplayEditor = () => {
 	const dispatch = useDispatch()
 	const { data } = useDashboardChannel()
 
-	const { mutate, isLoading } = useDashboardMutator({
-		path: "channels/profile/youtube-autoplay/upsert",
-		opts: {
-			onError: () => {
-				dispatch(setModal({ type: "Error Notification", data: {} }))
-			}
+	const { mutate, isLoading } = trpc.channels.profile["youtube-autoplay"].upsert.useMutation({
+		onError: () => {
+			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}
 	})
 

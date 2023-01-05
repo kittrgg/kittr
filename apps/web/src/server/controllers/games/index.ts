@@ -2,24 +2,16 @@ import { publicProcedure } from "@Server/index"
 import * as GamesService from "@Server/services/games"
 import { z } from "zod"
 
-const listGames = publicProcedure
-	.input(
-		z.object({
-			_count: z.boolean().optional(),
-			genres: z.boolean().optional(),
-			platforms: z.boolean().optional(),
-			kitBases: z.boolean().optional(),
-			channels: z.boolean().optional(),
-			channelAffiliateCodes: z.boolean().optional(),
-			customCommandStrings: z.boolean().optional(),
-			kits: z.boolean().optional(),
-			kitOptions: z.boolean().optional()
-		})
-	)
-	.query(async ({ input }) => {
-		const result = await GamesService.getAllGames(input)
-		return result
+const listGames = publicProcedure.query(async () => {
+	const game = await prisma.game.findMany({
+		include: {
+			genres: true,
+			platforms: true
+		}
 	})
+
+	return game
+})
 
 const getGameByUrlSafeName = publicProcedure.input(z.string()).query(async ({ input: urlSafeName }) => {
 	const game = await GamesService.getGameByUrlSafeName(urlSafeName)

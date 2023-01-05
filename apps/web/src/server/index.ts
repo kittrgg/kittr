@@ -2,7 +2,6 @@ import { Context } from "./context"
 import { WarzoneAdminController } from "./controllers/admin/warzone"
 import { Warzone2AdminController } from "./controllers/admin/warzone2"
 import { GamesController } from "./controllers/games"
-// import { createRouter } from "./createRouter"
 import { ChannelsController } from "@Server/controllers/channels"
 import { ChannelsCommandStringsController } from "@Server/controllers/channels/commandStrings"
 import { ChannelsGamesController } from "@Server/controllers/channels/games"
@@ -28,14 +27,12 @@ import { ManagersChannelsController } from "@Server/controllers/managers/channel
 import { StripeController } from "@Server/controllers/stripe"
 import { TwitchController } from "@Server/controllers/twitch"
 import { UsersController } from "@Server/controllers/users"
-// import { authenticateAdmin } from "@Server/middlewares/authenticateAdmin"
-// import { authenticateUser } from "@Server/middlewares/authenticateUser"
 import admin from "@Services/firebase/admin"
 import { download } from "@Services/firebase/storage"
 import { captureMessage } from "@kittr/logger/node"
 import { GameModel } from "@kittr/prisma/validator"
 import { inferRouterInputs, inferRouterOutputs, TRPCError } from "@trpc/server"
-import { inferProcedureInput, inferProcedureOutput, initTRPC } from "@trpc/server"
+import { initTRPC } from "@trpc/server"
 import superjson from "superjson"
 import { z } from "zod"
 
@@ -256,6 +253,7 @@ export const appRouter = router({
 	games: router({
 		"getByUrlSafeName": GamesController.getGameByUrlSafeName,
 		"getById": GamesController.getGameById,
+		"count": publicProcedure.query(async () => prisma.game.findMany({ include: { _count: true } })),
 		"list": GamesController.listGames,
 		"list-genres": publicProcedure.query(async () => await prisma.genre.findMany()),
 		"list-platforms": publicProcedure.query(async () => await prisma.platform.findMany()),
@@ -284,10 +282,9 @@ export const appRouter = router({
 			list: ManagersChannelsController.listChannels
 		})
 	}),
-	// TODO: Review this
 	firebase: router({
 		resolver: publicProcedure.input(z.object({ path: z.string() })).query(async ({ input }) => {
-			const url = download(input.path)
+			const url = await download(input.path)
 
 			return url
 		})

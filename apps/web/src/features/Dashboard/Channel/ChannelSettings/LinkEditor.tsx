@@ -2,12 +2,11 @@ import AddLink from "../../modals/AddLink"
 import colors from "@Colors"
 import { Button, Spinner, SVG, SvgByType, SVGType } from "@Components/shared"
 import TextInput from "@Components/shared/TextInput"
-import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { setModal } from "@Redux/slices/dashboard"
 import { useModal, usePremiumStatus } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import { getToken } from "@Services/firebase/auth"
+import { trpc } from "@Server/createTRPCNext"
 import { paragraph } from "@Styles/typography"
 import { trimPrefix } from "@Utils/helpers/trimPrefix"
 import { linkPrefixes } from "@Utils/lookups/linkPrefixes"
@@ -22,12 +21,10 @@ const LinkEditor = () => {
 	const dispatch = useDispatch()
 	const [linkEdits, setLinkEdits] = useState(data?.links)
 	const [areActiveChanges, setActiveChanges] = useState(false)
-	const { mutate, isLoading } = useDashboardMutator({
-		path: "channels/links/upsert",
-		opts: {
-			onError: () => {
-				dispatch(setModal({ type: "Error Notification", data: {} }))
-			}
+
+	const { mutate, isLoading } = trpc.channels.links.upsert.useMutation({
+		onError: () => {
+			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}
 	})
 

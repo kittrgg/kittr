@@ -8,7 +8,7 @@ import { createSSGHelper } from "@Server/createSSGHelper"
 import ResponsiveAdBanner from "@Services/venatus/ResponsiveBanner"
 
 const Home = () => {
-	const { data: games } = trpc.games.list.useQuery({ _count: true })
+	const { data: games } = trpc.games.count.useQuery()
 	const { data: totalNumberOfKits } = trpc.kits.count.useQuery()
 	const { data: popularChannels } = trpc.channels.top.useQuery({ take: 10 })
 	const { data: risingChannels } = trpc.channels.rising.useQuery()
@@ -40,7 +40,7 @@ export const getStaticProps = async () => {
 
 	Promise.all([
 		await ssg.kits.count.fetch(),
-		await ssg.games.list.fetch({ _count: true }),
+		await ssg.games.list.fetch(),
 		await ssg.channels.top.fetch({ take: 10 }),
 		await ssg.channels.rising.fetch(),
 		await ssg.channels.live.fetch()

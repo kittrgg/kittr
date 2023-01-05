@@ -13,7 +13,7 @@ const GamesIndex = () => {
 	const { width } = useViewportSize()
 	const router = useRouter()
 
-	const { data: games } = trpc.games.list.useQuery({ genres: true, platforms: true })
+	const { data: games } = trpc.games.list.useQuery()
 
 	return (
 		<AdPageWrapper title="Games | kittr" description="Library of games on kittr. Get kitted.">
@@ -47,7 +47,7 @@ const GamesIndex = () => {
 export const getStaticProps = async () => {
 	const ssg = await createSSGHelper()
 
-	await ssg.games.list.fetch({ genres: true, platforms: true })
+	await ssg.games.list.fetch()
 
 	return {
 		props: {

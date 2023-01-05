@@ -1,11 +1,10 @@
 import colors from "@Colors"
 import { Modal, Button, Spinner } from "@Components/shared"
-import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useChannelManagers } from "@Hooks/api/useChannelManagers"
-import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
+import { trpc } from "@Server/createTRPCNext"
 import { header2, montserrat } from "@Styles/typography"
 import { useState } from "react"
 import styled from "styled-components"
@@ -14,15 +13,11 @@ import styled from "styled-components"
 const SetNewOwner = () => {
 	const dispatch = useDispatch()
 	const [newOwner, setNewOwner] = useState("-")
-	const { data: channelData } = useChannelData()
+	const { data: channelData, refetch: refetchDashboard } = useChannelData()
 	const { data, isLoading } = useChannelManagers()
-	const { refetch: refetchChannel } = useDashboardChannel()
 
-	const { mutate: mutateOwner, isLoading: isMutatingOwner } = useDashboardMutator({
-		path: "channels/managers/owner/edit",
-		opts: {
-			onSuccess: () => refetchChannel()
-		}
+	const { mutate: mutateOwner, isLoading: isMutatingOwner } = trpc.channels.managers.owner.edit.useMutation({
+		onSuccess: () => refetchDashboard()
 	})
 
 	return (

@@ -1,26 +1,24 @@
 import { Button, Modal, Spinner } from "@Components/shared"
-import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { clearKitEditor, setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useChannelView } from "@Redux/slices/dashboard/selectors"
 import { useDispatch, useSelector } from "@Redux/store"
+import { trpc } from "@Server/createTRPCNext"
 import { header2 } from "@Styles/typography"
 import styled from "styled-components"
 
 const KitDeleteConfirmation = () => {
-	const { data: channelData } = useChannelData()
+	const { data: channelData, refetch: refetchDashboard } = useChannelData()
 	const data = useSelector((state) => state.dashboard.modal.data)
 	const { view } = useChannelView()
 	const dispatch = useDispatch()
-	const { mutate, isLoading } = useDashboardMutator({
-		path: "channels/kits/delete",
-		opts: {
-			onSuccess: () => {
-				dispatch(setModal({ type: "", data: {} }))
-				dispatch(clearKitEditor())
-			},
-			onError: () => {
-				dispatch(setModal({ type: "Error Notification", data: {} }))
-			}
+	const { mutate, isLoading } = trpc.channels.kits.delete.useMutation({
+		onSuccess: () => {
+			dispatch(setModal({ type: "", data: {} }))
+			dispatch(clearKitEditor())
+			refetchDashboard()
+		},
+		onError: () => {
+			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}
 	})
 

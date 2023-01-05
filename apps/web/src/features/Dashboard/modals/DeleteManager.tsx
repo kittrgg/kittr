@@ -1,6 +1,5 @@
 import colors from "@Colors"
 import { Button, Modal, Spinner } from "@Components/shared"
-import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 // import { useManagedChannels } from "@Hooks/api/useManagedChannels"
 import { useUser } from "@Hooks/useUser"
@@ -20,20 +19,17 @@ const DeleteManager = () => {
 	const { refetch: refetchChannel } = useDashboardChannel()
 	const isSelf = user?.email === data.email
 
-	const { mutate, isLoading } = useDashboardMutator({
-		path: "channels/managers/delete",
-		opts: {
-			onSuccess: () => {
-				refetchChannel()
-				dispatch(setModal({ type: "", data: {} }))
+	const { mutate, isLoading } = trpc.channels.managers.delete.useMutation({
+		onSuccess: () => {
+			dispatch(setModal({ type: "", data: {} }))
 
-				if (isSelf) {
-					refetch().finally(() => dispatch(setActiveView({ channelId: "", view: "Channel List" })))
-				}
-			},
-			onError: () => {
-				dispatch(setModal({ type: "Error Notification", data: {} }))
+			if (isSelf) {
+				refetch().finally(() => dispatch(setActiveView({ channelId: "", view: "Channel List" })))
 			}
+			refetchChannel()
+		},
+		onError: () => {
+			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}
 	})
 

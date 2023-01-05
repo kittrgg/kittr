@@ -1,8 +1,8 @@
 import Title from "../../H3"
 import colors from "@Colors"
 import { Button, TextInputBox } from "@Components/shared"
-import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
+import { trpc } from "@Server/createTRPCNext"
 import { useEffect, useState } from "react"
 
 /** Edit the name of the channel. */
@@ -13,13 +13,9 @@ const DisplayNameEditor = () => {
 
 	const originalName = data?.displayName || ""
 
-	const { mutate, isLoading, isSuccess } = useDashboardMutator({
-		path: "channels/update",
-		opts: {
-			onError: (error) => {
-				setError(error.message)
-				// dispatch(setModal({ type: "Error Notification", data: {} }))
-			}
+	const { mutate, isSuccess, isLoading } = trpc.channels.update.useMutation({
+		onError: (error) => {
+			setError(error.message)
 		}
 	})
 

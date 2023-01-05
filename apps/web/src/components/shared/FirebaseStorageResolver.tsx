@@ -1,10 +1,7 @@
 import { Spinner } from "@Components/shared"
 import { trpc } from "@Server/createTRPCNext"
 import { captureException } from "@Services/captureException"
-// import { download } from "@Services/firebase/storage"
 import { useEffect } from "react"
-
-// import { useQuery } from "react-query"
 
 interface FirebaseResolverProps {
 	path: string
@@ -20,7 +17,7 @@ export const FirebaseStorageResolver = ({ path, noSpinner, render }: FirebaseRes
 
 	useEffect(() => {
 		if (error) {
-			captureException(error)
+			captureException({ name: "Firebase Resolver Error", ...error })
 		}
 	}, [error])
 
