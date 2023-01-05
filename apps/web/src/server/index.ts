@@ -127,6 +127,19 @@ export const appRouter = router({
 			"options": router({
 				list: KitsBasesOptionsController.listOptions
 			}),
+			"listByGameUrlSafeName": publicProcedure
+				.input(z.object({ gameUrlSafeName: z.string() }))
+				.query(async ({ input }) => {
+					if (input.gameUrlSafeName === "wz2") {
+						return await prisma.warzoneTwoKitBase.findMany()
+					}
+
+					if (input.gameUrlSafeName === "warzone") {
+						return await prisma.warzoneKitBase.findMany()
+					}
+
+					throw new TRPCError({ code: "BAD_REQUEST", message: "Not a valid urlSafeName." })
+				}),
 			"list": KitsBasesController.listBases,
 			"game-list": KitsBasesController.listGameBases
 		}),

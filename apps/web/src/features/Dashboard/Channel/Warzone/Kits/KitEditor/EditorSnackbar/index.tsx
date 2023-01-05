@@ -17,6 +17,8 @@ const EditorSnackbar = () => {
 	const { refetch: refetchDashboard } = useDashboardChannel()
 	const { data: channelData } = useChannelData()
 	const modal = useModal()
+
+	const { data: allKitBases } = trpc.kits.bases.listByGameUrlSafeName.useQuery({ gameUrlSafeName: view })
 	const { mutate, isLoading } = trpc.channels.kits.upsert.useMutation({
 		onMutate: () => {
 			// Grab the existing kit array and map them to just their titles
