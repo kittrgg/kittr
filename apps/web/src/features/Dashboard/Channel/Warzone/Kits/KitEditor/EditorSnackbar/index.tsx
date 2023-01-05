@@ -2,7 +2,13 @@ import NamingWarning from "./NamingWarning"
 import colors from "@Colors"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { clearKitEditor, resetToInitialKit, setModal } from "@Redux/slices/dashboard"
-import { useActiveKit, useChannelData, useInitialKit, useModal } from "@Redux/slices/dashboard/selectors"
+import {
+	useActiveKit,
+	useChannelData,
+	useChannelView,
+	useInitialKit,
+	useModal
+} from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
 import { trpc } from "@Server/createTRPCNext"
 import { paragraph } from "@Styles/typography"
@@ -14,6 +20,7 @@ const EditorSnackbar = () => {
 	const dispatch = useDispatch()
 	const initialKit = useInitialKit()
 	const activeKit = useActiveKit()
+	const { view } = useChannelView()
 	const { refetch: refetchDashboard } = useDashboardChannel()
 	const { data: channelData } = useChannelData()
 	const modal = useModal()

@@ -1,5 +1,6 @@
 import * as Styled from "./style"
 import { Selector } from "@Components/shared"
+import { useOptionsByKitBase } from "@Hooks/api/useOptionsbyKitBase"
 import { useIsMounted } from "@Hooks/useIsMounted"
 import { updateOptions } from "@Redux/slices/dashboard"
 import { useActiveKit } from "@Redux/slices/dashboard/selectors"
@@ -17,6 +18,8 @@ const Options = () => {
 	const { base, options: current } = useActiveKit()
 	const isMounted = useIsMounted()
 	const [animationTrigger, setAnimationTrigger] = useState(false)
+
+	const { data: availableOptions, isLoading } = useOptionsByKitBase(base?.id)
 
 	useEffect(() => {
 		setTimeout(() => {

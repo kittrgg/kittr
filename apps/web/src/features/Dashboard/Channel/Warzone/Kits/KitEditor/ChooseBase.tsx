@@ -7,7 +7,7 @@ import { trpc } from "@Server/createTRPCNext"
 import { sortAlphabetical } from "@Utils/helpers/sortAlphabetical"
 
 const ChooseBase = () => {
-	const { gameId, view } = useChannelView()
+	const { view } = useChannelView()
 	const dispatch = useDispatch()
 	const { base } = useActiveKit()
 

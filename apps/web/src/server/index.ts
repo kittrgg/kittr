@@ -234,8 +234,11 @@ export const appRouter = router({
 	admin: router({
 		warzone: router({
 			kitBases: router({
-				// TODO: Missing controller
-				options: router({}),
+				options: router({
+					create: WarzoneAdminController.createOption,
+					update: WarzoneAdminController.updateOption,
+					delete: WarzoneAdminController.deleteOption
+				}),
 				categories: WarzoneAdminController.listKitBaseCategories,
 				list: WarzoneAdminController.listKitBases,
 				get: WarzoneAdminController.getKitBase,
@@ -247,7 +250,11 @@ export const appRouter = router({
 		warzone2: router({
 			kitBases: router({
 				// TODO: Missing controller
-				options: router({}),
+				options: router({
+					create: Warzone2AdminController.createOption,
+					update: Warzone2AdminController.updateOption,
+					delete: Warzone2AdminController.deleteOption
+				}),
 				categories: Warzone2AdminController.listKitBaseCategories,
 				list: Warzone2AdminController.listKitBases,
 				get: Warzone2AdminController.getKitBase,
