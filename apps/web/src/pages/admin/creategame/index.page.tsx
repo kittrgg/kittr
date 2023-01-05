@@ -19,8 +19,8 @@ interface GameInputs {
 
 const Page = () => {
 	const { mutate: addGame, isLoading } = trpc.games.add.useMutation()
-	const { data: genres, isLoading: isLoadingGenres } = trpc.games.list.useQuery({ genres: true })
-	const { data: platforms, isLoading: isLoadingPlatforms } = trpc.games.list.useQuery({ platforms: true })
+	const { data: platforms, isLoading: isLoadingPlatforms } = trpc.games["list-platforms"].useQuery()
+	const { data: genres, isLoading: isLoadingGenres } = trpc.games["list-platforms"].useQuery()
 
 	const [gameInputs, setGameInputs] = useState<GameInputs>({
 		active: false,

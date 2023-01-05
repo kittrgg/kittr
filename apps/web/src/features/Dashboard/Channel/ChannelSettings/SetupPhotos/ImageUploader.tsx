@@ -37,7 +37,7 @@ const ImageUploader = ({ slot }: Props) => {
 		}
 	})
 
-	const { mutate: removeImage } = trpc.channels.profile["setup-photos"].update({
+	const { mutate: removeImage } = trpc.channels.profile["setup-photos"].update.useMutation({
 		onSuccess: () => {
 			setIsUploading(false)
 			setImage("")

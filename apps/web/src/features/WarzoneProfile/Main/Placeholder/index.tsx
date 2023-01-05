@@ -4,7 +4,6 @@ import SVG from "@Components/shared/SVG"
 import { useChannel } from "@Redux/slices/displayr/selectors"
 import Ad from "@Services/venatus/Ad"
 import { header4 } from "@Styles/typography"
-import { useEffect } from "react"
 import styled from "styled-components"
 
 interface Props {

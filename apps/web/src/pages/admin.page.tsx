@@ -6,7 +6,7 @@ import { useRouter } from "next/router"
 
 const Page = () => {
 	const router = useRouter()
-	const { data: games } = trpc.games.list.useQuery({ _count: true })
+	const { data: games } = trpc.games.list.useQuery()
 
 	return (
 		<div style={{ margin: "1rem" }}>

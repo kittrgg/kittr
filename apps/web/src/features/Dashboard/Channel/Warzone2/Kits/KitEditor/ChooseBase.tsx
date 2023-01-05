@@ -5,9 +5,11 @@ import { updateBase, updateOptions } from "@Redux/slices/dashboard"
 import { useActiveKit, useChannelView } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
 import { sortAlphabetical } from "@Utils/helpers/sortAlphabetical"
+import { trpc } from "@Server/createTRPCNext"
 
 const ChooseBase = () => {
 	const { gameId } = useChannelView()
+	const {data, isLoading} = trpc.kits.bases.list.byGameId.useQuery({gameId})
 	const { data, isLoading } = useAllKitsByGameId(gameId)
 	const dispatch = useDispatch()
 	const { base } = useActiveKit()

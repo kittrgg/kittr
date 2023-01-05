@@ -24,7 +24,7 @@ const Dashboard = () => {
 	const { width } = useViewportDimensions()
 	const { view } = useDashboardView()
 	const containerRef = useRef(null)
-	const { isLoading: gamesLoading } = trpc.games.list.useQuery({ _count: true })
+	const { isLoading: gamesLoading } = trpc.games.list.useQuery()
 	const { isLoading: kitsLoading } = trpc.kits.bases.list.useQuery({ commandCodes: true })
 
 	if (width < 1075) {
