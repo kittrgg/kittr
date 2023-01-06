@@ -1,4 +1,4 @@
-import { publicProcedure } from "@Server/index"
+import { publicProcedure } from "@Server/initTRPC"
 import * as KitsOptionsService from "@Server/services/kits/options"
 import { z } from "zod"
 

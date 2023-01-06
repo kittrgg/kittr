@@ -1,4 +1,4 @@
-import { authedProcedure } from "@Server/index"
+import { authedProcedure } from "@Server/initTRPC"
 
 const listChannels = authedProcedure.query(async ({ ctx }) => {
 	const channels = prisma.channel.findMany({

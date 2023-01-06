@@ -1,4 +1,4 @@
-import { authedProcedure, publicProcedure } from "@Server/index"
+import { authedProcedure, publicProcedure } from "@Server/initTRPC"
 import * as ChannelsOverlaysService from "@Server/services/channels/overlays"
 import { checkRole } from "@Server/services/users"
 import { z } from "zod"

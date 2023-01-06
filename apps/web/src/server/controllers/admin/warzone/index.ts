@@ -1,4 +1,4 @@
-import { adminProcedure } from "@Server/index"
+import { adminProcedure } from "@Server/initTRPC"
 import * as AdminWarzoneService from "@Server/services/admin/warzone"
 import { WarzoneCommandCodeModel, WarzoneKitBaseModel, WarzoneKitOptionModel } from "@kittr/prisma/validator"
 import { z } from "zod"

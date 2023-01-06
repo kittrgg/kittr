@@ -1,5 +1,4 @@
-import { authedProcedure } from "@Server/index"
-import { authenticateUser } from "@Server/middlewares/authenticateUser"
+import { authedProcedure } from "@Server/initTRPC"
 import { stripe } from "@Services/stripe"
 import { getUrl } from "@Utils/helpers/getUrl"
 import { prisma } from "@kittr/prisma"

@@ -1,4 +1,4 @@
-import { publicProcedure } from "@Server/index"
+import { publicProcedure } from "@Server/initTRPC"
 import * as KitsService from "@Server/services/kits"
 
 const countKits = publicProcedure.query(async () => {

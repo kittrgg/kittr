@@ -1,4 +1,4 @@
-import { authedProcedure } from "@Server/index"
+import { authedProcedure } from "@Server/initTRPC"
 import * as ChannelsProfileImageService from "@Server/services/channels/profile/image"
 import { checkRole } from "@Server/services/users"
 import { z } from "zod"

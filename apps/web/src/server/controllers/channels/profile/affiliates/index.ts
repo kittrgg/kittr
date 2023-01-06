@@ -1,4 +1,4 @@
-import { authedProcedure } from "@Server/index"
+import { authedProcedure } from "@Server/initTRPC"
 import * as ChannelsService from "@Server/services/channels"
 import { checkRole } from "@Server/services/users"
 import { ChannelAffiliateModel } from "@kittr/prisma/validator"

@@ -1,7 +1,7 @@
-import { Context } from "./context"
 import { WarzoneAdminController } from "./controllers/admin/warzone"
 import { Warzone2AdminController } from "./controllers/admin/warzone2"
 import { GamesController } from "./controllers/games"
+import { adminProcedure, publicProcedure, router, t } from "./initTRPC"
 import { ChannelsController } from "@Server/controllers/channels"
 import { ChannelsCommandStringsController } from "@Server/controllers/channels/commandStrings"
 import { ChannelsGamesController } from "@Server/controllers/channels/games"
@@ -27,99 +27,10 @@ import { ManagersChannelsController } from "@Server/controllers/managers/channel
 import { StripeController } from "@Server/controllers/stripe"
 import { TwitchController } from "@Server/controllers/twitch"
 import { UsersController } from "@Server/controllers/users"
-import admin from "@Services/firebase/admin"
 import { download } from "@Services/firebase/storage"
-import { captureMessage } from "@kittr/logger/node"
 import { GameModel } from "@kittr/prisma/validator"
 import { inferRouterInputs, inferRouterOutputs, TRPCError } from "@trpc/server"
-import { initTRPC } from "@trpc/server"
-import superjson from "superjson"
 import { z } from "zod"
-
-export const t = initTRPC.context<Context>().create({
-	transformer: superjson,
-	errorFormatter({ shape, error, path, type, input, ctx }) {
-		captureMessage(`${error.code}: ${path}` ?? "Unknown tRPC path", {
-			level: "error",
-			tags: { isKittr: true },
-			extra: { type },
-			contexts: { error: { ...error }, ctx: { ...ctx }, input: { input: JSON.stringify(input) } }
-		})
-		return shape
-	}
-})
-
-export const middleware = t.middleware
-
-export const authenticateAdmin = middleware(async ({ ctx, next }) => {
-	if (!ctx.userToken) {
-		throw new TRPCError({
-			code: "UNAUTHORIZED"
-		})
-	}
-	const firebaseUser = await admin.verifyIdToken(ctx.userToken)
-
-	const administrator = await prisma.administrator.findFirst({
-		where: {
-			firebaseUserId: firebaseUser.uid
-		}
-	})
-
-	if (!administrator) {
-		throw new TRPCError({
-			code: "UNAUTHORIZED",
-			message: "It doesn't look like you're a site administrator."
-		})
-	}
-
-	return next({
-		ctx: {
-			user: firebaseUser,
-			adminUser: administrator
-		}
-	})
-})
-
-export const authenticateUser = middleware(async ({ ctx, next }) => {
-	if (!ctx.userToken) {
-		throw new TRPCError({
-			code: "UNAUTHORIZED"
-		})
-	}
-	const firebaseUser = await admin.verifyIdToken(ctx.userToken)
-
-	return next({
-		ctx: {
-			user: firebaseUser
-		}
-	})
-})
-
-export const mergeRouters = t.mergeRouters
-export const publicProcedure = t.procedure
-export const router = t.router
-export const adminProcedure = t.procedure.use(authenticateAdmin)
-export const authedProcedure = t.procedure.use(authenticateUser)
-
-// export const legacyRouter = createRouter()
-// 	.formatError(({ shape, error, path, ctx, type, input }) => {
-// 		captureMessage(`${error.code}: ${path}` ?? "Unknown tRPC path", {
-// 			level: "error",
-// 			tags: { isKittr: true },
-// 			extra: { type },
-// 			contexts: { error: { ...error }, ctx: { ...ctx }, input: { input: JSON.stringify(input) } }
-// 		})
-// 		return shape
-// 	})
-// 	.transformer(superjson)
-// 	.merge("admin/", adminRouter)
-// 	.merge("games/", gamesRouter)
-// 	.merge("channels/", channelsRouter)
-// 	.merge("managers/", managersRouter)
-// 	.merge("kits/", kitsRouter)
-// 	.merge("twitch/", twitchRouter)
-// 	.merge("stripe/", stripeRouter)
-// 	.merge("users/", usersRouter)
 
 export const appRouter = router({
 	kits: router({
