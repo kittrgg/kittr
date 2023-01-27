@@ -1,7 +1,7 @@
-import { trpc } from "@Server/createTRPCNext"
-import { RouterInput } from "@Server/index"
+// import { trpc } from "@Server/createTRPCNext"
+// import { RouterInput } from "@Server/index"
 // import { InferQueryInput } from "@Server/index"
-import { Prisma } from "@kittr/prisma"
+// import { Prisma } from "@kittr/prisma"
 
 // type TQueryInput = RouterInput["listBases"]
 
@@ -10,3 +10,5 @@ import { Prisma } from "@kittr/prisma"
 
 // 	return query
 // }
+
+export {}

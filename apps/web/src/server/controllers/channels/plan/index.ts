@@ -1,5 +1,4 @@
 import { authedProcedure, publicProcedure } from "@Server/initTRPC"
-import { authenticateUser } from "@Server/initTRPC"
 import * as ChannelsPlanService from "@Server/services/channels/plan"
 import { checkRole } from "@Server/services/users"
 import { TRPCError } from "@trpc/server"

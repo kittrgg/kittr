@@ -1,5 +1,4 @@
 import { authedProcedure } from "@Server/initTRPC"
-import { authenticateUser } from "@Server/initTRPC"
 import * as ChannelsManagersService from "@Server/services/channels/managers"
 import { checkRole } from "@Server/services/users"
 import { ChannelManagerModel } from "@kittr/prisma/validator"

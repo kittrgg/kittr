@@ -1,14 +1,15 @@
 import * as Styled from "./style"
-import { useActiveWeapon, usePopularityRates } from "@Redux/slices/displayr/selectors"
-import {
-	IRatioOfChannelsWithBase,
-	IRatioOfChannelsWithBaseFeatured,
-	IForSetupComparison,
-	IKitOption
-} from "@kittr/types"
-import { useState, useEffect } from "react"
 
-const Popularity = ({ ...props }) => {
+// import { useActiveWeapon, usePopularityRates } from "@Redux/slices/displayr/selectors"
+// import {
+// 	IRatioOfChannelsWithBase,
+// 	IRatioOfChannelsWithBaseFeatured,
+// 	IForSetupComparison,
+// 	IKitOption
+// } from "@kittr/types"
+// import { useState, useEffect } from "react"
+
+const Popularity = () => {
 	// const [setupsWithSameAttachmentsRatio, setSetupsWithSameAttachmentsRatio] = useState(0)
 	// const activeWeapon = useActiveWeapon()
 	// const rates = usePopularityRates()

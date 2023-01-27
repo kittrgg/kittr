@@ -20,9 +20,7 @@ import { useDispatch } from "@Redux/store"
 import Ad from "@Services/venatus/Ad"
 import { ChannelCreatorCode, Game } from "@kittr/prisma"
 import { Container, SimpleGrid } from "@mantine/core"
-import { useScrollLock } from "@mantine/hooks"
 import { useRouter } from "next/router"
-import { useEffect } from "react"
 import styled from "styled-components"
 
 const Marketing = () => {
@@ -48,11 +46,12 @@ const Main = () => {
 	const { width } = useViewportDimensions()
 	const isMobile = width <= 1050
 	// const containerRef = useRef(null) as any
-	const { query, isReady } = useRouter()
+	// const { query, isReady } = useRouter()
+	const { query } = useRouter()
 	const weaponTerm = Object.keys(query).length > 1 ? query.weapon || query.k : ""
 	const { data: channelData } = useChannelProfileData()
 	const activeWeapon = useActiveChannelKit()
-	const isSidebarOpen = useSidebarState()
+	// const isSidebarOpen = useSidebarState()
 	// const [scrollLocked, setScrollLocked] = useScrollLock()
 
 	// useEffect(() => {

@@ -117,7 +117,7 @@ export const useDimensions = <T extends HTMLElement | null>({
 
 	useEffect(() => {
 		if (!("ResizeObserver" in window) && isClient()) {
-			// eslint-disable-next-line prettier/prettier
+			// eslint-disable-next-line prettier/prettier, @typescript-eslint/no-extra-semi
 			;(window as any).ResizeObserver = ResizeObserver
 			;(window as any).ResizeObserverEntry = ResizeObserverEntry
 		}

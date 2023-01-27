@@ -24,6 +24,7 @@ importers:
       '@kittr/config': workspace:*
       '@kittr/logger': workspace:*
       '@kittr/prisma': workspace:*
+      '@kittr/tsconfig': workspace:*
       '@kittr/types': workspace:*
       '@swc/core': 1.3.0
       '@types/cors': ^2.8.13
@@ -38,7 +39,6 @@ importers:
       nodemon: 2.0.19
       socket.io: 4.5.1
       ts-node: 10.9.1
-      tsconfig: workspace:*
       tsup: ^6.5.0
       typescript: 4.9.3
     dependencies:
@@ -52,7 +52,8 @@ importers:
       express: 4.18.1
       socket.io: 4.5.1
     devDependencies:
-      '@kittr/config': link:../../packages/config
+      '@kittr/config': link:../../packages/eslint-config
+      '@kittr/tsconfig': link:../../packages/tsconfig
       '@kittr/types': link:../../packages/types
       '@types/cors': 2.8.13
       '@types/cron': 2.0.0
@@ -61,7 +62,6 @@ importers:
       kill-port: 2.0.1
       nodemon: 2.0.19
       ts-node: 10.9.1_g3pt7bzvwrekepewi5v5rqgt3i
-      tsconfig: link:../../packages/tsconfig
       tsup: 6.5.0_cm5yr3nb2mszw5ho4myxbn7zwq
       typescript: 4.9.3
 
@@ -69,6 +69,7 @@ importers:
     specifiers:
       '@babel/core': 7.18.9
       '@kittr/config': workspace:*
+      '@kittr/tsconfig': workspace:*
       '@kittr/ui': workspace:*
       '@react-theming/storybook-addon': 1.1.6
       '@storybook/addon-actions': 6.5.9
@@ -84,7 +85,6 @@ importers:
       babel-loader: 8.2.5
       react: ^18.2.0
       react-dom: ^18.2.0
-      tsconfig: workspace:*
       typescript: 4.9.3
       vite: ^4.0.4
     dependencies:
@@ -93,7 +93,8 @@ importers:
       react-dom: 18.2.0_react@18.2.0
     devDependencies:
       '@babel/core': 7.18.9
-      '@kittr/config': link:../../packages/config
+      '@kittr/config': link:../../packages/eslint-config
+      '@kittr/tsconfig': link:../../packages/tsconfig
       '@react-theming/storybook-addon': 1.1.6_kak3kinl7ummpbebwihuaekkda
       '@storybook/addon-actions': 6.5.9_biqbaboplfbrettd7655fr4n2y
       '@storybook/addon-essentials': 6.5.9_u6giwfganuh7b4iu3o7pqj4ylm
@@ -106,7 +107,6 @@ importers:
       '@types/react-dom': 18.0.10
       '@vitejs/plugin-react': 2.0.0_vite@4.0.4
       babel-loader: 8.2.5_7uc2ny5pnz7ums2wq2q562bf6y
-      tsconfig: link:../../packages/tsconfig
       typescript: 4.9.3
       vite: 4.0.4
 
@@ -129,6 +129,7 @@ importers:
       '@kittr/config': workspace:*
       '@kittr/logger': workspace:*
       '@kittr/prisma': workspace:*
+      '@kittr/tsconfig': workspace:*
       '@kittr/types': workspace:*
       '@kittr/ui': workspace:*
       '@mantine/core': ^5.10.2
@@ -173,7 +174,6 @@ importers:
       stripe: 8.205.0
       styled-components: 5.3.3
       superjson: 1.9.1
-      tsconfig: workspace:*
       typescript: 4.9.3
       validator: 13.7.0
       zod: 3.17.3
@@ -222,7 +222,8 @@ importers:
       validator: 13.7.0
       zod: 3.17.3
     devDependencies:
-      '@kittr/config': link:../../packages/config
+      '@kittr/config': link:../../packages/eslint-config
+      '@kittr/tsconfig': link:../../packages/tsconfig
       '@kittr/types': link:../../packages/types
       '@types/jsonwebtoken': 8.5.8
       '@types/micro': 7.3.7
@@ -231,10 +232,9 @@ importers:
       '@types/styled-components': 5.1.23
       '@types/validator': 13.7.4
       babel-plugin-styled-components: 2.0.7_styled-components@5.3.3
-      tsconfig: link:../../packages/tsconfig
       typescript: 4.9.3
 
-  packages/config:
+  packages/eslint-config:
     specifiers:
       '@trivago/prettier-plugin-sort-imports': 3.2.0
       '@typescript-eslint/eslint-plugin': 5.33.1
@@ -272,7 +272,7 @@ importers:
       '@sentry/nextjs': 7.7.0_next@12.3.4+react@18.2.0
       '@sentry/node': 7.7.0
     devDependencies:
-      '@kittr/config': link:../config
+      '@kittr/config': link:../eslint-config
       '@kittr/types': link:../types
       '@sentry/types': 7.34.0
       typescript: 4.9.3
@@ -280,11 +280,11 @@ importers:
   packages/prisma:
     specifiers:
       '@kittr/config': workspace:*
+      '@kittr/tsconfig': workspace:*
       '@prisma/client': 4.0.0
       '@types/node': ^16.18.11
       prisma: 4.0.0
       ts-node: 10.9.1
-      tsconfig: workspace:*
       tsup: 5.12.0
       typescript: 4.9.3
       zod: 3.17.3
@@ -292,11 +292,11 @@ importers:
     dependencies:
       '@prisma/client': 4.0.0_prisma@4.0.0
     devDependencies:
-      '@kittr/config': link:../config
+      '@kittr/config': link:../eslint-config
+      '@kittr/tsconfig': link:../tsconfig
       '@types/node': 16.18.11
       prisma: 4.0.0
       ts-node: 10.9.1_kdoazjjbodcwagz6yx6a7ztgpu
-      tsconfig: link:../tsconfig
       tsup: 5.12.0_2dtigtkb225m7ii7q45utxqwgi
       typescript: 4.9.3
       zod: 3.17.3
@@ -312,6 +312,7 @@ importers:
     specifiers:
       '@babel/core': 7.18.9
       '@kittr/config': workspace:*
+      '@kittr/tsconfig': workspace:*
       '@kittr/types': workspace:*
       '@mantine/core': ^5.10.2
       '@mantine/dates': ^5.10.2
@@ -325,7 +326,6 @@ importers:
       react: ^18.2.0
       react-device-detect: 2.2.2
       react-dom: ^18.2.0
-      tsconfig: workspace:*
       typescript: 4.9.3
     dependencies:
       '@mantine/core': 5.10.2_bgdfy3qhwgihjpd7hjoiv47mfe
@@ -338,13 +338,13 @@ importers:
       react-dom: 18.2.0_react@18.2.0
     devDependencies:
       '@babel/core': 7.18.9
-      '@kittr/config': link:../config
+      '@kittr/config': link:../eslint-config
+      '@kittr/tsconfig': link:../tsconfig
       '@kittr/types': link:../types
       '@storybook/react': 6.5.9_bs3ikg2i5gprqwh5wmhy4bsmta
       '@types/react': 18.0.27
       '@types/react-dom': 18.0.10
       eslint: 8.32.0
-      tsconfig: link:../tsconfig
       typescript: 4.9.3
 
 packages:
@@ -404,14 +404,14 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/code-frame': 7.18.6
-      '@babel/generator': 7.13.9
+      '@babel/generator': 7.20.7
       '@babel/helper-compilation-targets': 7.20.7_@babel+core@7.13.10
       '@babel/helper-module-transforms': 7.20.11
       '@babel/helpers': 7.20.13
-      '@babel/parser': 7.14.6
+      '@babel/parser': 7.20.13
       '@babel/template': 7.20.7
-      '@babel/traverse': 7.13.0
-      '@babel/types': 7.13.0
+      '@babel/traverse': 7.20.13
+      '@babel/types': 7.20.7
       convert-source-map: 1.9.0
       debug: 4.3.4
       gensync: 1.0.0-beta.2
@@ -448,7 +448,7 @@ packages:
   /@babel/generator/7.13.9:
     resolution: {integrity: sha512-mHOOmY0Axl/JCTkxTU6Lf5sWOg/v8nUa+Xkt4zMTftX0wqmb6Sh7J8gvcehBw7q0AhrhAR+FDacKjCZ2X8K+Sw==}
     dependencies:
-      '@babel/types': 7.13.0
+      '@babel/types': 7.20.7
       jsesc: 2.5.2
       source-map: 0.5.7
     dev: true
@@ -728,7 +728,7 @@ packages:
     engines: {node: '>=6.0.0'}
     hasBin: true
     dependencies:
-      '@babel/types': 7.13.0
+      '@babel/types': 7.20.7
     dev: true
 
   /@babel/parser/7.20.13:
@@ -1833,11 +1833,11 @@ packages:
     resolution: {integrity: sha512-xys5xi5JEhzC3RzEmSGrs/b3pJW/o87SypZ+G/PhaE7uqVQNv/jlmVIBXuoh5atqQ434LfXV+sf23Oxj0bchJQ==}
     dependencies:
       '@babel/code-frame': 7.18.6
-      '@babel/generator': 7.13.9
+      '@babel/generator': 7.20.7
       '@babel/helper-function-name': 7.19.0
       '@babel/helper-split-export-declaration': 7.18.6
-      '@babel/parser': 7.14.6
-      '@babel/types': 7.13.0
+      '@babel/parser': 7.20.13
+      '@babel/types': 7.20.7
       debug: 4.3.4
       globals: 11.12.0
       lodash: 4.17.21
@@ -11532,7 +11532,7 @@ packages:
       eslint-scope: 7.1.1
       eslint-utils: 3.0.0_eslint@8.4.1
       eslint-visitor-keys: 3.3.0
-      espree: 9.2.0
+      espree: 9.4.1
       esquery: 1.4.0
       esutils: 2.0.3
       fast-deep-equal: 3.1.3
