@@ -67,7 +67,7 @@
 		"@types/styled-components": "5.1.23",
 		"@types/validator": "13.7.4",
 		"babel-plugin-styled-components": "2.0.7",
-		"tsconfig": "workspace:*",
+		"@kittr/tsconfig": "workspace:*",
 		"typescript": "4.9.3"
 	}
 }

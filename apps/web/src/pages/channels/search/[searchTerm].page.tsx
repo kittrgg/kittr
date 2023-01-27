@@ -1,7 +1,7 @@
 /* eslint-disable */
 import AdPageWrapper from "@Components/layouts/AdPageWrapper"
 import { ChannelSearch, ChannelList, Spinner } from "@Components/shared"
-import { useChannelSearch } from "@Hooks/api/useChannelSearch"
+// import { useChannelSearch } from "@Hooks/api/useChannelSearch"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
 import ResponsiveBanner from "@Services/venatus/ResponsiveBanner"
 import { useRouter } from "next/router"

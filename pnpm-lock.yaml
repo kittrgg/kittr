@@ -24,6 +24,7 @@ importers:
       '@kittr/config': workspace:*
       '@kittr/logger': workspace:*
       '@kittr/prisma': workspace:*
+      '@kittr/tsconfig': workspace:*
       '@kittr/types': workspace:*
       '@swc/core': 1.3.0
       '@types/cors': ^2.8.13
@@ -38,7 +39,6 @@ importers:
       nodemon: 2.0.19
       socket.io: 4.5.1
       ts-node: 10.9.1
-      tsconfig: workspace:*
       tsup: ^6.5.0
       typescript: 4.9.3
     dependencies:
@@ -53,6 +53,7 @@ importers:
       socket.io: 4.5.1
     devDependencies:
       '@kittr/config': link:../../packages/config
+      '@kittr/tsconfig': link:../../packages/tsconfig
       '@kittr/types': link:../../packages/types
       '@types/cors': 2.8.13
       '@types/cron': 2.0.0
@@ -61,7 +62,6 @@ importers:
       kill-port: 2.0.1
       nodemon: 2.0.19
       ts-node: 10.9.1_g3pt7bzvwrekepewi5v5rqgt3i
-      tsconfig: link:../../packages/tsconfig
       tsup: 6.5.0_cm5yr3nb2mszw5ho4myxbn7zwq
       typescript: 4.9.3
 
@@ -69,6 +69,7 @@ importers:
     specifiers:
       '@babel/core': 7.18.9
       '@kittr/config': workspace:*
+      '@kittr/tsconfig': workspace:*
       '@kittr/ui': workspace:*
       '@react-theming/storybook-addon': 1.1.6
       '@storybook/addon-actions': 6.5.9
@@ -84,7 +85,6 @@ importers:
       babel-loader: 8.2.5
       react: ^18.2.0
       react-dom: ^18.2.0
-      tsconfig: workspace:*
       typescript: 4.9.3
       vite: ^4.0.4
     dependencies:
@@ -94,6 +94,7 @@ importers:
     devDependencies:
       '@babel/core': 7.18.9
       '@kittr/config': link:../../packages/config
+      '@kittr/tsconfig': link:../../packages/tsconfig
       '@react-theming/storybook-addon': 1.1.6_kak3kinl7ummpbebwihuaekkda
       '@storybook/addon-actions': 6.5.9_biqbaboplfbrettd7655fr4n2y
       '@storybook/addon-essentials': 6.5.9_u6giwfganuh7b4iu3o7pqj4ylm
@@ -106,7 +107,6 @@ importers:
       '@types/react-dom': 18.0.10
       '@vitejs/plugin-react': 2.0.0_vite@4.0.4
       babel-loader: 8.2.5_7uc2ny5pnz7ums2wq2q562bf6y
-      tsconfig: link:../../packages/tsconfig
       typescript: 4.9.3
       vite: 4.0.4
 
@@ -129,6 +129,7 @@ importers:
       '@kittr/config': workspace:*
       '@kittr/logger': workspace:*
       '@kittr/prisma': workspace:*
+      '@kittr/tsconfig': workspace:*
       '@kittr/types': workspace:*
       '@kittr/ui': workspace:*
       '@mantine/core': ^5.10.2
@@ -173,7 +174,6 @@ importers:
       stripe: 8.205.0
       styled-components: 5.3.3
       superjson: 1.9.1
-      tsconfig: workspace:*
       typescript: 4.9.3
       validator: 13.7.0
       zod: 3.17.3
@@ -223,6 +223,7 @@ importers:
       zod: 3.17.3
     devDependencies:
       '@kittr/config': link:../../packages/config
+      '@kittr/tsconfig': link:../../packages/tsconfig
       '@kittr/types': link:../../packages/types
       '@types/jsonwebtoken': 8.5.8
       '@types/micro': 7.3.7
@@ -231,7 +232,6 @@ importers:
       '@types/styled-components': 5.1.23
       '@types/validator': 13.7.4
       babel-plugin-styled-components: 2.0.7_styled-components@5.3.3
-      tsconfig: link:../../packages/tsconfig
       typescript: 4.9.3
 
   packages/config:
@@ -280,11 +280,11 @@ importers:
   packages/prisma:
     specifiers:
       '@kittr/config': workspace:*
+      '@kittr/tsconfig': workspace:*
       '@prisma/client': 4.0.0
       '@types/node': ^16.18.11
       prisma: 4.0.0
       ts-node: 10.9.1
-      tsconfig: workspace:*
       tsup: 5.12.0
       typescript: 4.9.3
       zod: 3.17.3
@@ -293,10 +293,10 @@ importers:
       '@prisma/client': 4.0.0_prisma@4.0.0
     devDependencies:
       '@kittr/config': link:../config
+      '@kittr/tsconfig': link:../tsconfig
       '@types/node': 16.18.11
       prisma: 4.0.0
       ts-node: 10.9.1_kdoazjjbodcwagz6yx6a7ztgpu
-      tsconfig: link:../tsconfig
       tsup: 5.12.0_2dtigtkb225m7ii7q45utxqwgi
       typescript: 4.9.3
       zod: 3.17.3
@@ -312,6 +312,7 @@ importers:
     specifiers:
       '@babel/core': 7.18.9
       '@kittr/config': workspace:*
+      '@kittr/tsconfig': workspace:*
       '@kittr/types': workspace:*
       '@mantine/core': ^5.10.2
       '@mantine/dates': ^5.10.2
@@ -325,7 +326,6 @@ importers:
       react: ^18.2.0
       react-device-detect: 2.2.2
       react-dom: ^18.2.0
-      tsconfig: workspace:*
       typescript: 4.9.3
     dependencies:
       '@mantine/core': 5.10.2_bgdfy3qhwgihjpd7hjoiv47mfe
@@ -339,12 +339,12 @@ importers:
     devDependencies:
       '@babel/core': 7.18.9
       '@kittr/config': link:../config
+      '@kittr/tsconfig': link:../tsconfig
       '@kittr/types': link:../types
       '@storybook/react': 6.5.9_bs3ikg2i5gprqwh5wmhy4bsmta
       '@types/react': 18.0.27
       '@types/react-dom': 18.0.10
       eslint: 8.32.0
-      tsconfig: link:../tsconfig
       typescript: 4.9.3
 
 packages:

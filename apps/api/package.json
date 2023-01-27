@@ -30,7 +30,7 @@
 		"nodemon": "2.0.19",
 		"ts-node": "10.9.1",
 		"tsup": "^6.5.0",
-		"tsconfig": "workspace:*",
+		"@kittr/tsconfig": "workspace:*",
 		"typescript": "4.9.3"
 	}
 }
