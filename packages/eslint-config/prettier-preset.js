@@ -7,11 +7,7 @@ module.exports = {
 	semi: false,
 	printWidth: 110,
 	arrowParens: "always",
-	importOrder: [
-		"^@(kittr|ee)/(.*)$",
-		"^~/(.*)$",
-		"^[./]",
-	],
+	importOrder: ["^@(kittr|ee)/(.*)$", "^~/(.*)$", "^[./]"],
 	importOrderSeparation: true,
-	endOfLine: "auto",
+	endOfLine: "auto"
 }
