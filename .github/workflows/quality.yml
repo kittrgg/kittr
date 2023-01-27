@@ -34,7 +34,7 @@ jobs:
         uses: ./tooling/github-actions/install
 
       - name: Run Prettier
-        run: yarn format
+        run: pnpm format
 
   # eslint:
   #   name: "ESLint"
@@ -74,4 +74,4 @@ jobs:
           restore-keys: ${{ runner.os }}-cache-typescript-tsbuildinfo-
 
       - name: Run TypeScript type check
-        run: yarn type-check
+        run: pnpm typecheck

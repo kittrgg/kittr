@@ -7,7 +7,6 @@
 		"./validator": "./validator/index.ts"
 	},
 	"scripts": {
-		"clean": "rm -rf .turbo && rm -rf node_modules",
 		"db:deploy": "prisma migrate deploy",
 		"db:create-migrations": "prisma migrate dev",
 		"db:migrate": "prisma db push --force-reset",
@@ -16,18 +15,19 @@
 		"db:studio": "prisma studio",
 		"db:format": "prisma format",
 		"seed": "prisma db push --force-reset && ts-node ./migration-scripts/index.ts",
-		"type-check": "tsc --noEmit",
+		"typecheck": "tsc --noEmit",
 		"seed-from-file": "docker exec -i postgres pg_restore -U turboAf -v -d dev < ./seed/dbdumpfromprisma.pgsql"
 	},
 	"devDependencies": {
-		"@kittr/config": "*",
+		"@kittr/config": "workspace:*",
+		"@types/node": "^16.18.11",
 		"prisma": "4.0.0",
 		"ts-node": "10.9.1",
 		"tsup": "5.12.0",
+		"tsconfig": "workspace:*",
 		"typescript": "4.9.3",
 		"zod": "3.17.3",
-		"zod-prisma": "0.5.4",
-		"@types/node": "^16.0.0"
+		"zod-prisma": "0.5.4"
 	},
 	"dependencies": {
 		"@prisma/client": "4.0.0"
