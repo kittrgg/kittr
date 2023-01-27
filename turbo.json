@@ -61,7 +61,7 @@
     "db:push": {
       "cache": false
     },
-    "type-check": {
+    "typecheck": {
       "dependsOn": [ "db:generate", "^topo" ]
     },
     "test": {

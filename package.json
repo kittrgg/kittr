@@ -6,7 +6,7 @@
 		"apps/**",
 		"packages/**"
 	],
-	"packageManager": "yarn@1.22.0",
+	"packageManager": "pnpm@7.26.1",
 	"scripts": {
 		"dx": "dotenv -- run-s docker:up dev",
 		"dx:storybook": "cd packages/ui && pnpm storybook",
@@ -19,12 +19,12 @@
 		"dx:db-snapshot": "docker exec postgres pg_dump -U turboAf -Fc -f backup.sql prisma",
 		"dx:seed-snapshot": "docker exec -i postgres dropdb dev -U dev && echo DB dropped. && docker exec -i postgres pg_restore -U dev -d template1 -v \"backup.pgsql\" --create ",
 		"dx:sb": "turbo run dev --filter=storybook",
-		"type-check": "turbo run type-check",
+		"typecheck": "turbo typecheck --continue --output-logs=errors-only",
 		"build": "turbo run build",
 		"build:local": "dotenv -- turbo run build",
-		"lint": "turbo run lint",
-		"test": "turbo run test",
-		"clean": "npx npkill",
+		"lint": "turbo run lint --continue",
+		"test": "turbo run test --continue",
+		"clean": "find . -name node_modules -o -name .turbo -o -name .next -o -name dist -type d -prune | xargs rm -rf",
 		"docker:up": "docker compose -f docker-compose.yml up --build -d",
 		"docker:down": "docker compose -f docker-compose.yml down",
 		"format": "prettier \"**/*.{ts,tsx,md}\"",
@@ -39,6 +39,6 @@
 		"kill-port": "2.0.1",
 		"npm-run-all": "4.1.5",
 		"prettier": "2.7.1",
-		"turbo": "latest"
+		"turbo": "^1.7.0"
 	}
 }

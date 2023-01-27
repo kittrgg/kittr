@@ -4,7 +4,7 @@
 	"version": "0.0.0",
 	"license": "MIT",
 	"scripts": {
-		"type-check": "tsc --pretty --noEmit",
+		"typecheck": "tsc --pretty --noEmit",
 		"dev": "start-storybook -p 3002 --no-manager-cache",
 		"build": "build-storybook"
 	},
@@ -24,12 +24,12 @@
 		"@storybook/builder-vite": "0.2.0",
 		"@storybook/cli": "^6.5.16",
 		"@storybook/react": "6.5.9",
-		"@types/react": "^18.0.26",
-		"@types/react-dom": "^18.0.9",
+		"@types/react": "^18.0.27",
+		"@types/react-dom": "^18.0.10",
 		"@vitejs/plugin-react": "2.0.0",
 		"babel-loader": "8.2.5",
 		"tsconfig": "workspace:*",
 		"typescript": "4.9.3",
-		"vite": "^4.0.1"
+		"vite": "^4.0.4"
 	}
 }
