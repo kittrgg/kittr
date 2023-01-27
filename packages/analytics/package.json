@@ -1,0 +1,20 @@
+{
+	"name": "@kittr/analytics",
+	"private": true,
+	"version": "0.0.0",
+	"main": "./src/index.ts",
+	"license": "MIT",
+	"scripts": {
+		"lint": "eslint .",
+		"typecheck": "tsc --noEmit"
+	},
+	"dependencies": {
+		"@vercel/analytics": "^0.1.8"
+	},
+	"devDependencies": {
+		"@kittr/config": "workspace:*",
+		"eslint": "^8.32.0",
+		"@kittr/tsconfig": "workspace:*",
+		"typescript": "4.9.3"
+	}
+}

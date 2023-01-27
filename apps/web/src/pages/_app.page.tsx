@@ -7,6 +7,7 @@ import GlobalStyles from "@Styles/globals"
 import OverlayStyles from "@Styles/overlay"
 import { getTrpcUrl } from "@Utils/helpers/getUrl"
 import { Routes } from "@Utils/lookups/routes"
+import { Analytics } from "@kittr/analytics"
 import { MantineProvider } from "@kittr/ui"
 import { Global } from "@mantine/core"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
@@ -23,6 +24,7 @@ const MyApp = ({ Component, pageProps }: { Component: React.FC; pageProps: Recor
 
 	return (
 		<Provider store={store}>
+			<Analytics />
 			<MantineProvider>
 				<Global
 					styles={() => ({
