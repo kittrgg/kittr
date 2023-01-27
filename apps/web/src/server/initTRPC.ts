@@ -25,7 +25,12 @@ export const authenticateAdmin = middleware(async ({ ctx, next }) => {
 			code: "UNAUTHORIZED"
 		})
 	}
+
+	console.warn({ userToken: ctx.userToken })
+
 	const firebaseUser = await admin.verifyIdToken(ctx.userToken)
+
+	console.warn({ firebaseUser })
 
 	const administrator = await prisma.administrator.findFirst({
 		where: {
@@ -54,7 +59,12 @@ export const authenticateUser = middleware(async ({ ctx, next }) => {
 			code: "UNAUTHORIZED"
 		})
 	}
+
+	console.warn({ token: ctx.userToken })
+
 	const firebaseUser = await admin.verifyIdToken(ctx.userToken)
+
+	console.warn({ firebaseUser })
 
 	return next({
 		ctx: {
