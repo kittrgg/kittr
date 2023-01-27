@@ -60,15 +60,6 @@ export const trpc = createTRPCNext<AppRouter>({
 		 */
 		return {
 			getUrl: getTrpcUrl,
-			headers: async () => ({
-				authorization: await getToken()
-			}),
-			// fetch: async (requestUrl, test) => {
-			// 	return fetch(requestUrl, {
-			// 		...test,
-			// 		headers: { ...test?.headers, authorization: (await getToken()) ?? "" }
-			// 	})
-			// },
 			transformer: superjson,
 			links: [
 				// adds pretty logs to your console in development and logs errors in production
@@ -77,7 +68,10 @@ export const trpc = createTRPCNext<AppRouter>({
 						process.env.VERCEL_ENV !== "production" || (opts.direction === "down" && opts.result instanceof Error)
 				}),
 				httpBatchLink({
-					url: getTrpcUrl
+					url: getTrpcUrl,
+					headers: async () => ({
+						authorization: await getToken()
+					})
 				})
 			],
 			queryClientConfig: {
