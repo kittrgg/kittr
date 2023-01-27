@@ -1,8 +1,8 @@
 import FallbackPage from "@Components/layouts/FallbackPage"
 import { Head, NoItemFound } from "@Components/shared"
 import WarzoneProfile from "@Features/WarzoneProfile"
-import { trpc } from "@Server/createHooks"
 import { createSSGHelper } from "@Server/createSSGHelper"
+import { trpc } from "@Server/createTRPCNext"
 import { prisma } from "@kittr/prisma"
 import { useRouter } from "next/router"
 
@@ -10,10 +10,10 @@ const GamePresentation = () => {
 	const { isFallback, query } = useRouter()
 	const { game: urlGame, channel: urlChannel } = query as { game: string; channel: string }
 
-	const { data: game } = trpc.useQuery(["games/getByUrlSafeName", urlGame], {
+	const { data: game } = trpc.games.getByUrlSafeName.useQuery(urlGame, {
 		enabled: !!urlGame
 	})
-	const { data: channel } = trpc.useQuery(["channels/profile/get", urlChannel], {
+	const { data: channel } = trpc.channels.profile.get.useQuery(urlChannel, {
 		enabled: !!urlChannel
 	})
 
@@ -86,8 +86,8 @@ export const getStaticProps = async ({ params }: { params: { channel: string; ga
 	const { channel: urlChannel, game: urlGame } = params
 	const ssg = await createSSGHelper()
 
-	await ssg.fetchQuery("games/getByUrlSafeName", urlGame)
-	await ssg.fetchQuery("channels/profile/get", urlChannel)
+	await ssg.games.getByUrlSafeName.fetch(urlGame)
+	await ssg.channels.profile.get.fetch(urlChannel)
 
 	// TODO: Bring back kit stats!
 	// const kitStats = await KitStat.find()

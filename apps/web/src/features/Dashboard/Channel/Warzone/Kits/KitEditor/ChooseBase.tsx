@@ -1,16 +1,17 @@
 import * as Styled from "./style"
 import { Selector } from "@Components/shared"
-import { useAllKitsByGameId } from "@Hooks/trpc/useAllKitsByGameId"
 import { updateBase, updateOptions } from "@Redux/slices/dashboard"
 import { useActiveKit, useChannelView } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
+import { trpc } from "@Server/createTRPCNext"
 import { sortAlphabetical } from "@Utils/helpers/sortAlphabetical"
 
 const ChooseBase = () => {
-	const { gameId } = useChannelView()
-	const { data, isLoading } = useAllKitsByGameId(gameId)
+	const { view } = useChannelView()
 	const dispatch = useDispatch()
 	const { base } = useActiveKit()
+
+	const { data, isLoading } = trpc.kits.bases.listByGameUrlSafeName.useQuery({ gameUrlSafeName: view })
 
 	return (
 		<Styled.Container>

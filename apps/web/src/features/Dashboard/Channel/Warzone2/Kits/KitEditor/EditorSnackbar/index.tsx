@@ -1,7 +1,6 @@
 import NamingWarning from "./NamingWarning"
 import colors from "@Colors"
-import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
-import { useAllKitBases } from "@Hooks/trpc/useAllKitBases"
+import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { clearKitEditor, resetToInitialKit, setModal } from "@Redux/slices/dashboard"
 import {
 	useActiveKit,
@@ -11,6 +10,7 @@ import {
 	useModal
 } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
+import { trpc } from "@Server/createTRPCNext"
 import { paragraph } from "@Styles/typography"
 import { isFetchError } from "@Utils/helpers/typeGuards"
 import { WarzoneTwoKit, WarzoneTwoKitBase, WarzoneTwoKitOption, WarzoneTwoKitOptionTuning } from "@kittr/prisma"
@@ -28,65 +28,65 @@ const EditorSnackbar = () => {
 	const initialKit = useInitialKit() as WarzoneTwoKitOmitID
 	const activeKit = useActiveKit() as WarzoneTwoKitOmitID
 	const { data: channelData } = useChannelData()
+	const { refetch: refetchDashboard } = useDashboardChannel()
 	const { view } = useChannelView()
 	const modal = useModal()
-	const { data: allKitBases } = useAllKitBases({ include: { category: true } })
-	const { mutate, isLoading } = useDashboardMutator({
-		path: "channels/kits/upsertWz2Kit",
-		opts: {
-			onMutate: () => {
-				// Grab the existing kit array and map them to just their titles
-				const kitArr = channelData?.warzoneTwoKits.slice() as Array<
-					Omit<WarzoneTwoKit, "id"> & {
-						id?: string
-						base: WarzoneTwoKitBase
-						options: WarzoneTwoKitOption[]
-					}
-				>
 
-				// Grab the new kit's name
-				const newKitName = activeKit.base.displayName + activeKit.customTitle
-
-				// Is this an existing kit being updated?
-				const index = channelData?.warzoneTwoKits.findIndex((kit: WarzoneTwoKit) => kit.id === activeKit.id) ?? -1 // -1 means there's no kit
-
-				if (!kitArr) {
-					return
+	const { data: allKitBases } = trpc.kits.bases.listByGameUrlSafeName.useQuery({ gameUrlSafeName: view })
+	const { mutate, isLoading } = trpc.channels.kits.upsertWz2Kit.useMutation({
+		onMutate: () => {
+			// Grab the existing kit array and map them to just their titles
+			const kitArr = channelData?.warzoneTwoKits.slice() as Array<
+				Omit<WarzoneTwoKit, "id"> & {
+					id?: string
+					base: WarzoneTwoKitBase
+					options: WarzoneTwoKitOption[]
 				}
+			>
 
-				if (index !== -1) {
-					// Replace the existing kit with its new data
-					kitArr[index] = activeKit
-				} else {
-					// Add the new kit to the array
-					kitArr.push(activeKit)
-				}
+			// Grab the new kit's name
+			const newKitName = activeKit.base.displayName + activeKit.customTitle
 
-				if (
-					kitArr
-						.map((kit) => ({
-							...kit,
-							base: allKitBases?.find((allBase) => allBase.id === kit.base.id) || activeKit.base
-						}))
-						// Map to just the names
-						.map((kit) => kit.base.displayName + kit.customTitle)
+			// Is this an existing kit being updated?
+			const index = channelData?.warzoneTwoKits.findIndex((kit: WarzoneTwoKit) => kit.id === activeKit.id) ?? -1 // -1 means there's no kit
 
-						// Compare to ensure that there are no dupes
-						.filter((existingKitName) => newKitName === existingKitName).length > 1
-				) {
-					return dispatch(setModal({ type: "Kit Naming Warning", data: {} }))
-				}
-			},
-			onSuccess: (result: any) => {
-				if (isFetchError(result)) {
-					dispatch(setModal({ type: "Error Notification", data: {} }))
-				} else {
-					dispatch(clearKitEditor())
-				}
-			},
-			onError: () => {
-				dispatch(setModal({ type: "Error Notification", data: {} }))
+			if (!kitArr) {
+				return
 			}
+
+			if (index !== -1) {
+				// Replace the existing kit with its new data
+				kitArr[index] = activeKit
+			} else {
+				// Add the new kit to the array
+				kitArr.push(activeKit)
+			}
+
+			if (
+				kitArr
+					.map((kit) => ({
+						...kit,
+						base: allKitBases?.find((allBase) => allBase.id === kit.base.id) || activeKit.base
+					}))
+					// Map to just the names
+					.map((kit) => kit.base.displayName + kit.customTitle)
+
+					// Compare to ensure that there are no dupes
+					.filter((existingKitName) => newKitName === existingKitName).length > 1
+			) {
+				return dispatch(setModal({ type: "Kit Naming Warning", data: {} }))
+			}
+		},
+		onSuccess: (result: any) => {
+			if (isFetchError(result)) {
+				dispatch(setModal({ type: "Error Notification", data: {} }))
+			} else {
+				dispatch(clearKitEditor())
+			}
+			refetchDashboard()
+		},
+		onError: () => {
+			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}
 	})
 

@@ -1,10 +1,10 @@
 import * as Styled from "./style"
 import colors from "@Colors"
 import Button from "@Components/shared/Button"
-import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useChannelView, useManagerRole } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
+import { trpc } from "@Server/createTRPCNext"
 import { paragraph } from "@Styles/typography"
 import { TCommandMethod } from "@kittr/types/types"
 import { useEffect, useState } from "react"
@@ -26,19 +26,17 @@ const CustomTextBuilder = ({ commandStrategy, method }: Props) => {
 	const dispatch = useDispatch()
 	const role = useManagerRole()
 	const { gameId: activeGame } = useChannelView()
-	const { data } = useChannelData()
+	const { data, refetch: refetchChannel } = useChannelData()
 	const initialCode = data?.customGameCommands.find((code) => code.gameId === activeGame)
 	const [userString, setUserString] = useState(initialCode?.command)
 
 	const nightbotStrategy = commandStrategy === "edit" ? "!editcom" : "!addcom"
 	const channelElementsStrategy = commandStrategy === "edit" ? "!command edit" : "!command add"
 
-	const { mutate, isLoading } = useDashboardMutator({
-		path: "channels/command-strings/upsert",
-		opts: {
-			onError: () => {
-				dispatch(setModal({ type: "Error Notification", data: {} }))
-			}
+	const { mutate, isLoading } = trpc.channels["command-strings"].upsert.useMutation({
+		onError: () => {
+			dispatch(setModal({ type: "Error Notification", data: {} }))
+			refetchChannel()
 		}
 	})
 

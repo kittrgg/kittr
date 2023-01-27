@@ -1,9 +1,10 @@
 import colors from "@Colors"
 import { Button, Spinner, SVG } from "@Components/shared"
-import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
+import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useCoverPhoto } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
+import { trpc } from "@Server/createTRPCNext"
 import { deleteFile } from "@Services/firebase/storage"
 import { download } from "@Services/firebase/storage/download"
 import { uploadWithHandlers } from "@Services/firebase/storage/uploadWithHandlers"
@@ -12,6 +13,7 @@ import styled from "styled-components"
 
 const CoverPhotoUploader = () => {
 	const dispatch = useDispatch()
+	const { refetch: refetchDashboard } = useDashboardChannel()
 	const { data } = useChannelData()
 	const hasCoverPhoto = useCoverPhoto()
 	const [isUploading, setIsUploading] = useState(false)
@@ -19,20 +21,18 @@ const CoverPhotoUploader = () => {
 
 	const fileName = `${data?.id}-profile-cover-photo`
 
-	const { mutate } = useDashboardMutator({
-		path: "channels/profile/cover-photo/update",
-		opts: {
-			onSuccess: (data) => {
-				if (data?.profile?.hasCoverPhoto) {
-					download(data?.id, (path) => {
-						setIsUploading(false)
-					})
-				}
-			},
-			onError: () => {
-				setIsUploading(false)
-				dispatch(setModal({ type: "Error Notification", data: {} }))
+	const { mutate } = trpc.channels.profile["cover-photo"].update.useMutation({
+		onSuccess: (data) => {
+			if (data?.profile?.hasCoverPhoto) {
+				download(data?.id, (path) => {
+					setIsUploading(false)
+				})
 			}
+			refetchDashboard()
+		},
+		onError: () => {
+			setIsUploading(false)
+			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}
 	})
 
@@ -49,6 +49,7 @@ const CoverPhotoUploader = () => {
 				fileName,
 				imageFile,
 				onSuccess: async () => {
+					// eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
 					mutate({ channelId: data?.id!, hasCoverPhoto: true })
 				},
 				onError: () => {
@@ -74,6 +75,7 @@ const CoverPhotoUploader = () => {
 		await deleteFile({
 			id: fileName,
 			onSuccess: () => {
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
 				mutate({ channelId: data?.id!, hasCoverPhoto: false })
 			},
 			onError: (error) => {

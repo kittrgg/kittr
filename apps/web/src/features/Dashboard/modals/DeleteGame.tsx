@@ -1,9 +1,9 @@
 import colors from "@Colors"
 import { Button, Modal } from "@Components/shared"
-import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { setChannelView, setModal } from "@Redux/slices/dashboard"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
 import { useDispatch, useSelector } from "@Redux/store"
+import { trpc } from "@Server/createTRPCNext"
 import { header2 } from "@Styles/typography"
 import { useSocket } from "pages/dashboard.page"
 import styled from "styled-components"
@@ -11,21 +11,20 @@ import styled from "styled-components"
 /** Modal to delete a game from a channel. */
 const DeleteGameModal = () => {
 	const dispatch = useDispatch()
-	const { data: channelData } = useChannelData()
+	const { data: channelData, refetch: refetchDashboard } = useChannelData()
+
 	const gameId = useSelector((state) => state.dashboard.modal.data.idToDelete)
 	const socket = useSocket()
 
-	const { mutate, isLoading } = useDashboardMutator({
-		path: "channels/games/delete",
-		opts: {
-			onSuccess: () => {
-				socket?.emit(`gameDelete`, channelData?.id)
-				dispatch(setModal({ type: "", data: "" }))
-				dispatch(setChannelView({ gameId: "", view: "Deleted Game Notification" }))
-			},
-			onError: () => {
-				dispatch(setModal({ type: "Error Notification", data: {} }))
-			}
+	const { mutate, isLoading } = trpc.channels.games.delete.useMutation({
+		onSuccess: () => {
+			socket?.emit(`gameDelete`, channelData?.id)
+			dispatch(setModal({ type: "", data: "" }))
+			dispatch(setChannelView({ gameId: "", view: "Deleted Game Notification" }))
+			refetchDashboard()
+		},
+		onError: () => {
+			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}
 	})
 

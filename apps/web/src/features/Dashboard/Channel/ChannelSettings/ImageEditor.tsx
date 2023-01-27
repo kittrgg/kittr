@@ -1,10 +1,11 @@
 import colors from "@Colors"
 import { Spinner } from "@Components/shared"
 import ProfileImage from "@Components/shared/ProfileImage"
-import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
+import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useProfileImage } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
+import { trpc } from "@Server/createTRPCNext"
 import { download } from "@Services/firebase/storage/download"
 import { uploadWithHandlers } from "@Services/firebase/storage/uploadWithHandlers"
 import { caption } from "@Styles/typography"
@@ -14,23 +15,22 @@ import styled from "styled-components"
 /** Change the channel's profile image */
 const ImageEditor = () => {
 	const dispatch = useDispatch()
+	const { refetch: refetchDashboard } = useDashboardChannel()
 	const { data } = useChannelData()
 	const profileImage = useProfileImage()
 	const [isUploading, setIsUploading] = useState(false)
 
-	const { mutate } = useDashboardMutator({
-		path: "channels/profile/image/update",
-		opts: {
-			onSuccess: () => {
-				// Filename is the channelId
-				download(data?.id!, (path) => {
-					setIsUploading(false)
-				})
-			},
-			onError: () => {
+	const { mutate } = trpc.channels.profile.image.update.useMutation({
+		onSuccess: () => {
+			// Filename is the channelId
+			download(data?.id!, () => {
 				setIsUploading(false)
-				dispatch(setModal({ type: "Error Notification", data: {} }))
-			}
+			})
+			refetchDashboard()
+		},
+		onError: () => {
+			setIsUploading(false)
+			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}
 	})
 

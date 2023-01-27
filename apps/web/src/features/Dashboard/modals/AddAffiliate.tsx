@@ -1,18 +1,20 @@
 import colors from "@Colors"
 import { Button, Modal, Spinner, TextInputBox } from "@Components/shared"
-import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
+import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
+import { trpc } from "@Server/createTRPCNext"
 import { paragraph } from "@Styles/typography"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
 import validator from "validator"
 
 /** Modal for adding a spec to the channel's PC setup. */
-const AddAffiliateModal = ({ ...props }) => {
+const AddAffiliateModal = () => {
 	const dispatch = useDispatch()
 	const { data: channelData } = useChannelData()
+	const { refetch: refetchDashboard } = useDashboardChannel()
 	const { data } = useModal()
 
 	const [company, setCompany] = useState(data?.company || "")
@@ -20,29 +22,27 @@ const AddAffiliateModal = ({ ...props }) => {
 	const [code, setCode] = useState(data?.code || "")
 	const [url, setUrl] = useState(data?.url || "")
 
-	const { mutate: createAffiliate, isLoading: isCreatingAffiliate } = useDashboardMutator({
-		path: "channels/profile/affiliates/create",
-		opts: {
+	const { mutate: createAffiliate, isLoading: isCreatingAffiliate } =
+		trpc.channels.profile.affiliates.create.useMutation({
 			onSuccess: () => {
 				dispatch(setModal({ type: "", data: "" }))
+				refetchDashboard()
 			},
 			onError: () => {
 				dispatch(setModal({ type: "Error Notification", data: "" }))
 			}
-		}
-	})
+		})
 
-	const { mutate: updateAffiliate, isLoading: isUpdatingAffiliate } = useDashboardMutator({
-		path: "channels/profile/affiliates/update",
-		opts: {
+	const { mutate: updateAffiliate, isLoading: isUpdatingAffiliate } =
+		trpc.channels.profile.affiliates.update.useMutation({
 			onSuccess: () => {
 				dispatch(setModal({ type: "", data: "" }))
+				refetchDashboard()
 			},
 			onError: () => {
 				dispatch(setModal({ type: "Error Notification", data: "" }))
 			}
-		}
-	})
+		})
 
 	const submit = () => {
 		if (data?.id) {

@@ -1,10 +1,10 @@
 import colors from "@Colors"
 import { Button, Modal, SVG, TextInput } from "@Components/shared"
-import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
+import { trpc } from "@Server/createTRPCNext"
 import { paragraph } from "@Styles/typography"
 import { ChannelManagerRoles } from "@kittr/prisma"
 import { useState } from "react"
@@ -19,16 +19,13 @@ const AddManager = () => {
 	const [error, setError] = useState("")
 	const { refetch: refetchChannel } = useDashboardChannel()
 
-	const { mutate, isLoading } = useDashboardMutator({
-		path: "channels/managers/create",
-		opts: {
-			onSuccess: () => {
-				refetchChannel()
-				dispatch(setModal({ type: "", data: {} }))
-			},
-			onError: (error) => {
-				setError(error.message)
-			}
+	const { mutate, isLoading } = trpc.channels.managers.create.useMutation({
+		onSuccess: () => {
+			dispatch(setModal({ type: "", data: {} }))
+			refetchChannel()
+		},
+		onError: (error: any) => {
+			setError(error.message)
 		}
 	})
 

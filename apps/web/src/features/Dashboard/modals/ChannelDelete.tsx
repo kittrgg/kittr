@@ -1,11 +1,11 @@
 import colors from "@Colors"
 import { Button, Modal, TextInput } from "@Components/shared"
-import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
-import { useManagedChannels } from "@Hooks/api/useManagedChannels"
+import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
+// import { useManagedChannels } from "@Hooks/api/useManagedChannels"
 import { setActiveView, setModal } from "@Redux/slices/dashboard"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import { getToken } from "@Services/firebase/auth"
+import { trpc } from "@Server/createTRPCNext"
 import { header2 } from "@Styles/typography"
 import { useSocket } from "pages/dashboard.page"
 import { useState } from "react"
@@ -17,19 +17,18 @@ const ChannelDeleteModal = () => {
 	const dispatch = useDispatch()
 	const { data: channelData } = useChannelData()
 	const [input, setInput] = useState("")
-	const { refetch } = useManagedChannels()
-	const { mutate } = useDashboardMutator({
-		path: "channels/delete",
-		opts: {
-			onSuccess: () => {
-				socket?.emit(`channelDelete`, channelData?.id)
-				dispatch(setActiveView({ channelId: "", view: "Channel List" }))
-				dispatch(setModal({ type: "", data: {} }))
-				refetch()
-			},
-			onError: () => {
-				dispatch(setModal({ type: "Error Notification", data: {} }))
-			}
+	const { refetch: refetchDashboard } = useDashboardChannel()
+	const { refetch } = trpc.managers.channels.list.useQuery()
+	const { mutate } = trpc.channels.delete.useMutation({
+		onSuccess: () => {
+			socket?.emit(`channelDelete`, channelData?.id)
+			dispatch(setActiveView({ channelId: "", view: "Channel List" }))
+			dispatch(setModal({ type: "", data: {} }))
+			refetch()
+			refetchDashboard()
+		},
+		onError: () => {
+			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}
 	})
 
@@ -51,7 +50,7 @@ const ChannelDeleteModal = () => {
 					design="transparent"
 					text="DELETE FOREVER"
 					disabled={channelData?.displayName !== input}
-					onClick={async () => mutate({ channelId: channelData?.id! })}
+					onClick={async () => mutate({ channelId: channelData?.id ?? "" })}
 					style={{ backgroundColor: colors.red }}
 				/>
 			</FlexRow>

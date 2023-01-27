@@ -3,7 +3,7 @@ import BannerTicker from "@Features/Overlays/ActiveKit/BannerTicker"
 import Display from "@Features/Overlays/ActiveKit/Display"
 import DisplayTicker from "@Features/Overlays/ActiveKit/DisplayTicker"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
-import { trpc } from "@Server/createHooks"
+import { trpc } from "@Server/createTRPCNext"
 import { OverlayKit } from "@kittr/types"
 import { useEffect, useMemo, useState } from "react"
 import { io } from "socket.io-client"
@@ -15,7 +15,7 @@ interface Props {
 }
 
 const ActiveKitOverlay = ({ id, previewWidth, overlayStyle }: Props) => {
-	const { data, refetch } = trpc.useQuery(["channels/overlay/get", id])
+	const { data, refetch } = trpc.channels.overlay.get.useQuery(id)
 	const [activeKit, setActiveKit] = useState<OverlayKit>({} as OverlayKit)
 	const { width, height } = useViewportDimensions()
 

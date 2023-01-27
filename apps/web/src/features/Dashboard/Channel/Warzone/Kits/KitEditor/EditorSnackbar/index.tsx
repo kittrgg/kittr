@@ -1,10 +1,16 @@
 import NamingWarning from "./NamingWarning"
 import colors from "@Colors"
-import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
-import { useAllKitBases } from "@Hooks/trpc/useAllKitBases"
+import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { clearKitEditor, resetToInitialKit, setModal } from "@Redux/slices/dashboard"
-import { useActiveKit, useChannelData, useInitialKit, useModal } from "@Redux/slices/dashboard/selectors"
+import {
+	useActiveKit,
+	useChannelData,
+	useChannelView,
+	useInitialKit,
+	useModal
+} from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
+import { trpc } from "@Server/createTRPCNext"
 import { paragraph } from "@Styles/typography"
 import { isFetchError } from "@Utils/helpers/typeGuards"
 import { WarzoneKit, WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
@@ -14,66 +20,68 @@ const EditorSnackbar = () => {
 	const dispatch = useDispatch()
 	const initialKit = useInitialKit()
 	const activeKit = useActiveKit()
+	const { view } = useChannelView()
+	const { refetch: refetchDashboard } = useDashboardChannel()
 	const { data: channelData } = useChannelData()
 	const modal = useModal()
-	const { data: allKitBases } = useAllKitBases({ include: { category: true } })
-	const { mutate, isLoading } = useDashboardMutator({
-		path: "channels/kits/upsert",
-		opts: {
-			onMutate: () => {
-				// Grab the existing kit array and map them to just their titles
-				const kitArr = channelData?.warzoneKits.slice() as Array<
-					Omit<WarzoneKit, "id"> & { id?: string; base: WarzoneKitBase; options: WarzoneKitOption[] }
-				>
 
-				// Grab the new kit's name
-				const newKitName = activeKit.base.displayName + activeKit.customTitle
+	const { data: allKitBases } = trpc.kits.bases.listByGameUrlSafeName.useQuery({ gameUrlSafeName: view })
+	const { mutate, isLoading } = trpc.channels.kits.upsert.useMutation({
+		onMutate: () => {
+			// Grab the existing kit array and map them to just their titles
+			const kitArr = channelData?.warzoneKits.slice() as Array<
+				Omit<WarzoneKit, "id"> & { id?: string; base: WarzoneKitBase; options: WarzoneKitOption[] }
+			>
 
-				// Is this an existing kit being updated?
-				const index = channelData?.warzoneKits.findIndex((kit) => kit.id === activeKit.id) ?? -1 // -1 means there's no kit
+			// Grab the new kit's name
+			const newKitName = activeKit.base.displayName + activeKit.customTitle
 
-				if (!kitArr) {
-					return
-				}
+			// Is this an existing kit being updated?
+			const index = channelData?.warzoneKits.findIndex((kit) => kit.id === activeKit.id) ?? -1 // -1 means there's no kit
 
-				if (index !== -1) {
-					// Replace the existing kit with its new data
-					kitArr[index] = activeKit
-				} else {
-					// Add the new kit to the array
-					kitArr.push(activeKit)
-				}
-
-				if (
-					kitArr
-						.map((kit) => ({
-							...kit,
-							base:
-								allKitBases?.find((allBase) => {
-									return allBase.id === kit.base.id
-								}) || activeKit.base
-						}))
-						// Map to just the names
-						.map((kit) => {
-							return kit.base.displayName + kit.customTitle
-						})
-
-						// Compare to ensure that there are no dupes
-						.filter((existingKitName) => newKitName === existingKitName).length > 1
-				) {
-					return dispatch(setModal({ type: "Kit Naming Warning", data: {} }))
-				}
-			},
-			onSuccess: (result: any) => {
-				if (isFetchError(result)) {
-					dispatch(setModal({ type: "Error Notification", data: {} }))
-				} else {
-					dispatch(clearKitEditor())
-				}
-			},
-			onError: () => {
-				dispatch(setModal({ type: "Error Notification", data: {} }))
+			if (!kitArr) {
+				return
 			}
+
+			if (index !== -1) {
+				// Replace the existing kit with its new data
+				kitArr[index] = activeKit
+			} else {
+				// Add the new kit to the array
+				kitArr.push(activeKit)
+			}
+
+			if (
+				kitArr
+					.map((kit) => ({
+						...kit,
+						base:
+							allKitBases?.find((allBase) => {
+								return allBase.id === kit.base.id
+							}) || activeKit.base
+					}))
+					// Map to just the names
+					.map((kit) => {
+						return kit.base.displayName + kit.customTitle
+					})
+
+					// Compare to ensure that there are no dupes
+					.filter((existingKitName) => newKitName === existingKitName).length > 1
+			) {
+				return dispatch(setModal({ type: "Kit Naming Warning", data: {} }))
+			}
+		},
+		onSuccess: (result: any) => {
+			if (isFetchError(result)) {
+				dispatch(setModal({ type: "Error Notification", data: {} }))
+			} else {
+				dispatch(clearKitEditor())
+			}
+
+			refetchDashboard()
+		},
+		onError: () => {
+			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}
 	})
 

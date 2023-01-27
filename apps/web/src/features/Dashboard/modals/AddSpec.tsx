@@ -1,10 +1,11 @@
 import ErrorNotification from "./ErrorNotification"
 import colors from "@Colors"
 import { Button, Modal, Selector, Spinner, TextInputBox } from "@Components/shared"
-import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
+import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
+import { trpc } from "@Server/createTRPCNext"
 import { paragraph } from "@Styles/typography"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
@@ -12,6 +13,7 @@ import styled from "styled-components"
 /** Modal for adding or editing a spec to the channel's PC setup. */
 const AddSpecModal = () => {
 	const dispatch = useDispatch()
+	const { refetch: refetchDashboard } = useDashboardChannel()
 	const { data: channelData } = useChannelData()
 	const { data } = useModal()
 	const [partType, setPartType] = useState("")
@@ -21,12 +23,10 @@ const AddSpecModal = () => {
 		mutate: updateSpec,
 		isLoading: isUpdateLoading,
 		error: updateError
-	} = useDashboardMutator({
-		path: "channels/profile/pc-specs/update",
-		opts: {
-			onSuccess: () => {
-				dispatch(setModal({ type: "", data: "" }))
-			}
+	} = trpc.channels.profile["pc-specs"].update.useMutation({
+		onSuccess: () => {
+			dispatch(setModal({ type: "", data: "" }))
+			refetchDashboard()
 		}
 	})
 
@@ -34,12 +34,10 @@ const AddSpecModal = () => {
 		mutate: createSpec,
 		isLoading: isCreateLoading,
 		error: createError
-	} = useDashboardMutator({
-		path: "channels/profile/pc-specs/create",
-		opts: {
-			onSuccess: () => {
-				dispatch(setModal({ type: "", data: "" }))
-			}
+	} = trpc.channels.profile["pc-specs"].create.useMutation({
+		onSuccess: () => {
+			dispatch(setModal({ type: "", data: "" }))
+			refetchDashboard()
 		}
 	})
 

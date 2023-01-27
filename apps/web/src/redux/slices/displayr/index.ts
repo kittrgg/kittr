@@ -1,4 +1,4 @@
-import { InferQueryOutput } from "@Server/index"
+import { RouterInput } from "@Server/index"
 import {
 	WarzoneKit,
 	WarzoneKitBase,
@@ -24,7 +24,7 @@ export const displayrSlice = createSlice({
 	name: "displayr",
 	initialState: {
 		activeWeapon: {} as ActiveWeaponKit,
-		channel: {} as NonNullable<InferQueryOutput<"channels/profile/get">>,
+		channel: {} as NonNullable<RouterInput["channels"]["profile"]["get"]>,
 		isSidebarOpen: false,
 		popularityRates: {} as IPopularityRates
 	},
@@ -32,7 +32,7 @@ export const displayrSlice = createSlice({
 		setActiveWeapon: (state, action: { payload: ActiveWeaponKit }) => {
 			state.activeWeapon = action.payload
 		},
-		setChannel: (state, action: { payload: NonNullable<InferQueryOutput<"channels/profile/get">> }) => {
+		setChannel: (state, action: { payload: NonNullable<RouterInput["channels"]["profile"]["get"]> }) => {
 			state.channel = action.payload
 		},
 		setIsSidebarOpen: (state, action: { payload: boolean }) => {

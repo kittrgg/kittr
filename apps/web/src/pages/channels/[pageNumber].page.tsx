@@ -3,8 +3,8 @@ import AdPageWrapper from "@Components/layouts/AdPageWrapper"
 import FallbackPage from "@Components/layouts/FallbackPage"
 import { ChannelList, Paginator } from "@Components/shared"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
-import { trpc } from "@Server/createHooks"
 import { createSSGHelper } from "@Server/createSSGHelper"
+import { trpc } from "@Server/createTRPCNext"
 import ResponsiveBanner from "@Services/venatus/ResponsiveBanner"
 import { Routes } from "@Utils/lookups/routes"
 import { Text, Title } from "@kittr/ui"
@@ -21,12 +21,12 @@ const PageOfChannels = () => {
 	} = useRouter()
 	if (isFallback) return <FallbackPage />
 
-	const { data: channels } = trpc.useQuery([
-		"channels/top",
-		{ take: 10, skip: (Number(pageNumber) - 1) * CHANNELS_PER_PAGE }
-	])
+	const { data: channels } = trpc.channels.top.useQuery({
+		take: 10,
+		skip: (Number(pageNumber) - 1) * CHANNELS_PER_PAGE
+	})
 
-	const { data: totalChannels = 0 } = trpc.useQuery(["channels/countAll"])
+	const { data: totalChannels = 0 } = trpc.channels.countAll.useQuery()
 	const numberOfPages = Math.ceil(totalChannels / CHANNELS_PER_PAGE)
 
 	const page = Number(pageNumber)
@@ -101,8 +101,10 @@ export const getStaticProps = async ({ params }: { params: { pageNumber: string 
 
 	const skip = (Number(params.pageNumber) - 1) * CHANNELS_PER_PAGE
 
-	await ssg.fetchQuery("channels/top", { take: CHANNELS_PER_PAGE, skip })
-	await ssg.fetchQuery("channels/countAll")
+	// await ssg.fetchQuery("channels/top", { take: CHANNELS_PER_PAGE, skip })
+	// await ssg.fetchQuery("channels/countAll")
+	await ssg.channels.top.fetch({ take: CHANNELS_PER_PAGE, skip })
+	await ssg.channels.countAll.fetch()
 
 	return {
 		props: {

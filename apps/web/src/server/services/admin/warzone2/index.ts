@@ -3,7 +3,8 @@ import { prisma, WarzoneTwoKitBase, WarzoneTwoKitOption } from "@kittr/prisma"
 export const listKitBases = async () => {
 	const result = await prisma.warzoneTwoKitBase.findMany({
 		include: {
-			availableOptions: true
+			availableOptions: true,
+			commandCodes: true
 		}
 	})
 

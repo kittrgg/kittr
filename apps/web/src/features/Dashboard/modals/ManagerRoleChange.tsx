@@ -1,38 +1,34 @@
 import colors from "@Colors"
 import { Button, Modal, Spinner } from "@Components/shared"
-import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
+import { trpc } from "@Server/createTRPCNext"
 import { paragraph } from "@Styles/typography"
 import styled from "styled-components"
 
 const DeleteManager = () => {
 	const dispatch = useDispatch()
-	const { data: channelData } = useChannelData()
+	const { data: channelData, refetch: refetchDashboard } = useChannelData()
 	const { data } = useModal()
 
-	const { mutate: demote, isLoading: isDemoting } = useDashboardMutator({
-		path: "channels/managers/demote",
-		opts: {
-			onSuccess: () => {
-				dispatch(setModal({ type: "", data: {} }))
-			},
-			onError: () => {
-				dispatch(setModal({ type: "Error Notification", data: {} }))
-			}
+	const { mutate: demote, isLoading: isDemoting } = trpc.channels.managers.demote.useMutation({
+		onSuccess: () => {
+			dispatch(setModal({ type: "", data: {} }))
+			refetchDashboard()
+		},
+		onError: () => {
+			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}
 	})
 
-	const { mutate: promote, isLoading: isPromoting } = useDashboardMutator({
-		path: "channels/managers/promote",
-		opts: {
-			onSuccess: () => {
-				dispatch(setModal({ type: "", data: {} }))
-			},
-			onError: () => {
-				dispatch(setModal({ type: "Error Notification", data: {} }))
-			}
+	const { mutate: promote, isLoading: isPromoting } = trpc.channels.managers.promote.useMutation({
+		onSuccess: () => {
+			dispatch(setModal({ type: "", data: {} }))
+			refetchDashboard()
+		},
+		onError: () => {
+			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}
 	})
 

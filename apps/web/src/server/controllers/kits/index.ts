@@ -1,11 +1,9 @@
-import { createController } from "@Server/createController"
+import { publicProcedure } from "@Server/initTRPC"
 import * as KitsService from "@Server/services/kits"
 
-const countKits = createController().query("", {
-	async resolve() {
-		const result = await KitsService.countKits()
-		return result
-	}
+const countKits = publicProcedure.query(async () => {
+	const result = await KitsService.countKits()
+	return result
 })
 
 export const KitsController = {

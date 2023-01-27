@@ -3,7 +3,7 @@ import { Button, Modal, SVG } from "@Components/shared"
 import { setModal } from "@Redux/slices/dashboard"
 import { usePremiumStatus, useChannelData } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import { trpc } from "@Server/createHooks"
+import { trpc } from "@Server/createTRPCNext"
 import { header2, paragraph } from "@Styles/typography"
 import styled from "styled-components"
 
@@ -30,7 +30,7 @@ const PremiumPlans = () => {
 	const { data: channelData } = useChannelData()
 	const { isPremium } = usePremiumStatus()
 
-	const { mutate: buyPremium } = trpc.useMutation("stripe/buy-premium", {
+	const { mutate: buyPremium } = trpc.stripe["buy-premium"].useMutation({
 		onSuccess: (result) => {
 			window.open(result.url as string, "_blank")
 		},
@@ -38,7 +38,7 @@ const PremiumPlans = () => {
 			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}
 	})
-	const { mutate: managePremium } = trpc.useMutation("stripe/manage-premium", {
+	const { mutate: managePremium } = trpc.stripe["manage-premium"].useMutation({
 		onSuccess: (result) => {
 			window.open(result.url as string, "_blank")
 		},
@@ -115,11 +115,11 @@ const PremiumPlans = () => {
 					text={isPremium ? "MANAGE" : "UPGRADE"}
 					onClick={() =>
 						isPremium
-							? managePremium({ channelId: channelData?.id! })
+							? managePremium({ channelId: channelData?.id ?? "" })
 							: buyPremium({
-									channelId: channelData?.id!,
-									displayName: channelData?.displayName!,
-									urlSafeName: channelData?.urlSafeName!
+									channelId: channelData?.id ?? "",
+									displayName: channelData?.displayName ?? "",
+									urlSafeName: channelData?.urlSafeName ?? ""
 							  })
 					}
 				/>

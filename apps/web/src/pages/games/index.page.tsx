@@ -1,7 +1,7 @@
 import AdPageWrapper from "@Components/layouts/AdPageWrapper"
 import GameCard from "@Components/shared/GameCard"
-import { useAllGames } from "@Hooks/trpc/useAllGames"
 import { createSSGHelper } from "@Server/createSSGHelper"
+import { trpc } from "@Server/createTRPCNext"
 import ResponsiveBanner from "@Services/venatus/ResponsiveBanner"
 import { Routes } from "@Utils/lookups/routes"
 import { Text, Title } from "@kittr/ui"
@@ -13,7 +13,7 @@ const GamesIndex = () => {
 	const { width } = useViewportSize()
 	const router = useRouter()
 
-	const { data: games } = useAllGames({ include: { genres: true, platforms: true } })
+	const { data: games } = trpc.games.list.useQuery()
 
 	return (
 		<AdPageWrapper title="Games | kittr" description="Library of games on kittr. Get kitted.">
@@ -47,7 +47,7 @@ const GamesIndex = () => {
 export const getStaticProps = async () => {
 	const ssg = await createSSGHelper()
 
-	await ssg.fetchQuery("games/list", { genres: true, platforms: true })
+	await ssg.games.list.fetch()
 
 	return {
 		props: {

@@ -8,7 +8,7 @@ import { useDimensions } from "@Hooks/useDimensions"
 import { setIsSidebarOpen } from "@Redux/slices/displayr"
 import { useSidebarState } from "@Redux/slices/displayr/selectors"
 import { useDispatch } from "@Redux/store"
-import { InferQueryOutput } from "@Server/index"
+import { RouterOutput } from "@Server/index"
 import type { NonNullable } from "@Types/index"
 import { Routes } from "@Utils/lookups/routes"
 import { Drawer } from "@mantine/core"
@@ -17,7 +17,7 @@ import { useRouter } from "next/router"
 import styled from "styled-components"
 
 interface Props {
-	channel: NonNullable<InferQueryOutput<"channels/profile/get">>
+	channel: NonNullable<RouterOutput["channels"]["profile"]["get"]>
 }
 
 const MOBILE_WIDTH = 1050

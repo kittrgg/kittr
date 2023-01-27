@@ -5,7 +5,7 @@ import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { setModal } from "@Redux/slices/dashboard"
 import { useModal, usePremiumStatus } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import { trpc } from "@Server/createHooks"
+import { trpc } from "@Server/createTRPCNext"
 import { paragraph } from "@Styles/typography"
 import { differenceInDays, fromUnixTime } from "date-fns"
 import styled from "styled-components"
@@ -16,24 +16,18 @@ const SubscriptionSettings = () => {
 	const { isPremium } = usePremiumStatus()
 	const { data, refetch: refetchChannel } = useDashboardChannel()
 
-	const { data: subscriptionEnd } = trpc.useQuery(
-		[
-			"channels/plan/subscription-end",
-			{ stripeSubscriptionId: data?.plan?.stripeSubscriptionId!, channelId: data?.id! }
-		],
+	const { data: subscriptionEnd } = trpc.channels.plan["subscription-end"].useQuery(
+		{ stripeSubscriptionId: data?.plan?.stripeSubscriptionId ?? "", channelId: data?.id ?? "" },
 		{ enabled: !!data?.plan?.stripeSubscriptionId }
 	)
-	const { data: cardLast4 } = trpc.useQuery(
-		[
-			"channels/plan/card-last-4-digits",
-			{ stripeSubscriptionId: data?.plan?.stripeSubscriptionId!, channelId: data?.id! }
-		],
+	const { data: cardLast4 } = trpc.channels.plan["card-last-4-digits"].useQuery(
+		{ stripeSubscriptionId: data?.plan?.stripeSubscriptionId ?? "", channelId: data?.id ?? "" },
 		{
 			enabled: !!data?.plan?.stripeSubscriptionId
 		}
 	)
 
-	const { mutate: buyPremium } = trpc.useMutation("stripe/buy-premium", {
+	const { mutate: buyPremium } = trpc.stripe["buy-premium"].useMutation({
 		onSuccess: (result) => {
 			window.open(result.url as string, "_blank")
 		},
@@ -41,7 +35,7 @@ const SubscriptionSettings = () => {
 			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}
 	})
-	const { mutate: managePremium } = trpc.useMutation("stripe/manage-premium", {
+	const { mutate: managePremium } = trpc.stripe["manage-premium"].useMutation({
 		onSuccess: (result) => {
 			window.open(result.url as string, "_blank")
 		},
@@ -80,8 +74,12 @@ const SubscriptionSettings = () => {
 					description="Active Kit Overlay, AutoBot, profile customization, and more!"
 					buttonAction={() =>
 						isPremium
-							? managePremium({ channelId: data?.id! })
-							: buyPremium({ channelId: data?.id!, displayName: data?.displayName!, urlSafeName: data?.urlSafeName! })
+							? managePremium({ channelId: data?.id ?? "" })
+							: buyPremium({
+									channelId: data?.id ?? "",
+									displayName: data?.displayName ?? "",
+									urlSafeName: data?.urlSafeName ?? ""
+							  })
 					}
 					planType="premium"
 				/>

@@ -1,9 +1,10 @@
 import colors from "@Colors"
 import { Button, SVG, Toast } from "@Components/shared"
-import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
+import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useSpecs } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
+import { trpc } from "@Server/createTRPCNext"
 import { paragraph } from "@Styles/typography"
 import { useState } from "react"
 import styled from "styled-components"
@@ -12,17 +13,16 @@ const Specs = () => {
 	const [copyNotification, setCopyNotification] = useState(false)
 	const dispatch = useDispatch()
 	const specs = useSpecs()
+	const { refetch: refetchDashboard } = useDashboardChannel()
 	const { data } = useChannelData()
 
-	const { mutate } = useDashboardMutator({
-		path: "channels/profile/pc-specs/delete",
-		opts: {
-			onSuccess: () => {
-				dispatch(setModal({ type: "", data: "" }))
-			},
-			onError: () => {
-				dispatch(setModal({ type: "Error Notification", data: {} }))
-			}
+	const { mutate } = trpc.channels.profile["pc-specs"].delete.useMutation({
+		onSuccess: () => {
+			dispatch(setModal({ type: "", data: "" }))
+			refetchDashboard()
+		},
+		onError: () => {
+			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}
 	})
 
