@@ -10,16 +10,16 @@ runs:
       with:
         node-version: ${{ matrix.node-version }}
     - uses: actions/cache@v3
-      name: yarn-cache
-      id: yarn-cache
+      name: pnpm-cache
+      id: pnpm-cache
       with:
         path: |
           **/node_modules
-          ${{ steps.yarn-cache-dir-path.outputs.dir }}
-        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          ${{ steps.pnpm-cache-dir-path.outputs.dir }}
+        key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
         restore-keys: |
-          ${{ runner.os }}-yarn
-    - name: Yarn
+          ${{ runner.os }}-pnpm
+    - name: pnpm
       shell: bash
-      if: steps.yarn-cache.outputs.cache-hit != 'true'
-      run: yarn install --frozen-lockfile --prefer-offline --non-interactive
+      if: steps.pnpm-cache.outputs.cache-hit != 'true'
+      run: pnpm install --frozen-lockfile --prefer-offline

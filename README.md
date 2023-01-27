@@ -7,7 +7,7 @@
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 - If you are on Windows, make sure that you switch your Docker Desktop to Linux containers. You won't be able to spin up the docker compose containers without it!
 - [Node.js](https://nodejs.org/en/download/)
-- yarn
+- pnpm
 
 ## Installation
 
@@ -29,15 +29,15 @@ git checkout migration
 - Provide values for `TWITCH_CLIENT_ID` and `TWITCH_SECRET`.
   - We can't provide you with these values because they are indiviual to you. To get your Twitch tokens, visit [your Twitch developers console](https://dev.twitch.tv/console/apps) and create an application token. (For the URLs that it asks for, you can use http://localhost:3000.)
 
-4. Run `yarn install`.
+4. Run `pnpm install`.
 
-5. Run `yarn env:dev`.
+5. Run `pnpm env:dev`.
 
-6. Run `yarn dx`.
+6. Run `pnpm dx`.
 
-7. If this is your first time developing kittr, you will need to seed your local Mongo instance at this time. To do so, open a new shall and use `yarn dx:mongo-seed`. You should get a message saying "Let's get kittd."
+7. If this is your first time developing kittr, you will need to seed your local Mongo instance at this time. To do so, open a new shall and use `pnpm dx:mongo-seed`. You should get a message saying "Let's get kittd."
 
-8. Now, run `yarn dx:db-seed` in that new shell, too. This takes the data from MongoDB to Postgres so you can use it for our migration.
+8. Now, run `pnpm dx:db-seed` in that new shell, too. This takes the data from MongoDB to Postgres so you can use it for our migration.
 
 9. Visit kittr at [http://localhost:3000](http://localhost:3000)
 
