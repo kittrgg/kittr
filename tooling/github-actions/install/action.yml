@@ -4,11 +4,15 @@ description: "Sets up Node.js and runs install"
 runs:
   using: composite
   steps:
-    # - name: Checkout
-    #   uses: actions/checkout@v3
+
     - uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
+
+    - name: Install pnpm
+      shell: bash
+      run: npm i -g pnpm
+
     - uses: actions/cache@v3
       name: pnpm-cache
       id: pnpm-cache
