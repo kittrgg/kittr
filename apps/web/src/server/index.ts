@@ -1,7 +1,7 @@
 import { WarzoneAdminController } from "./controllers/admin/warzone"
 import { Warzone2AdminController } from "./controllers/admin/warzone2"
 import { GamesController } from "./controllers/games"
-import { adminProcedure, publicProcedure, router, t } from "./initTRPC"
+import { adminProcedure, publicProcedure, router } from "./initTRPC"
 import { ChannelsController } from "@Server/controllers/channels"
 import { ChannelsCommandStringsController } from "@Server/controllers/channels/commandStrings"
 import { ChannelsGamesController } from "@Server/controllers/channels/games"

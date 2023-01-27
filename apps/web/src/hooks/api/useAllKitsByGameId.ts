@@ -1,6 +1,6 @@
-import fetch from "@Fetch"
-import { trpc } from "@Server/createTRPCNext"
-import { IKitBase } from "@kittr/types/kits"
+// import fetch from "@Fetch"
+// import { trpc } from "@Server/createTRPCNext"
+// import { IKitBase } from "@kittr/types/kits"
 
 // import { useQuery } from "react-query"
 
@@ -9,3 +9,5 @@ import { IKitBase } from "@kittr/types/kits"
 // 	const result = trpc.kits.bases["game-list"].useQuery({ game: gameId })
 // 	return result
 // }
+
+export {}
