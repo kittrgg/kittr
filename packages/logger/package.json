@@ -9,8 +9,8 @@
 	"private": true,
 	"scripts": { },
 	"devDependencies": {
-		"@kittr/config": "*",
-		"@kittr/types": "*",
+		"@kittr/config": "workspace:*",
+		"@kittr/types": "workspace:*",
 		"typescript": "4.9.3",
 		"@sentry/types": "^7.7.0"
 	},

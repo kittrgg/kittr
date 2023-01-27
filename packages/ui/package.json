@@ -20,11 +20,11 @@
 		"react-dom": "^18.2.0"
 	},
 	"devDependencies": {
-		"@kittr/config": "*",
-		"tsconfig": "*",
+		"@kittr/config": "workspace:*",
+		"tsconfig": "workspace:*",
 		"@storybook/react": "6.5.9",
 		"eslint": "^8.30.0",
-		"@kittr/types": "*",
+		"@kittr/types": "workspace:*",
 		"@babel/core": "7.18.9",
 		"@types/react": "^18.0.26",
 		"@types/react-dom": "^18.0.9",
