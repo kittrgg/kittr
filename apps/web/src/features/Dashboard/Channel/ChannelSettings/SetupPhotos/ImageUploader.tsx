@@ -1,9 +1,9 @@
 import colors from "@Colors"
 import { Spinner, SVG } from "@Components/shared"
-import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { setModal } from "@Redux/slices/dashboard"
 import { useDispatch } from "@Redux/store"
+import { trpc } from "@Server/createTRPCNext"
 import { deleteFile, download } from "@Services/firebase/storage"
 import { uploadWithHandlers } from "@Services/firebase/storage/uploadWithHandlers"
 import { paragraph } from "@Styles/typography"
@@ -23,34 +23,29 @@ const ImageUploader = ({ slot }: Props) => {
 
 	const fileName = `${data?.id}-setup-photo-${slot}`
 
-	const { mutate: uploadImage } = useDashboardMutator({
-		path: "channels/profile/setup-photos/update",
-		opts: {
-			onSuccess: () => {
-				download(fileName, (path) => {
-					setIsUploading(false)
-					setImage(path)
-				})
-				refetchDashboard()
-			},
-			onError: () => {
+	const { mutate: uploadImage } = trpc.channels.profile["setup-photos"].update.useMutation({
+		onSuccess: () => {
+			download(fileName, (path) => {
 				setIsUploading(false)
-				dispatch(setModal({ type: "Error Notification", data: {} }))
-			}
+				setImage(path)
+			})
+			refetchDashboard()
+		},
+		onError: () => {
+			setIsUploading(false)
+			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}
 	})
-	const { mutate: removeImage } = useDashboardMutator({
-		path: "channels/profile/setup-photos/update",
-		opts: {
-			onSuccess: () => {
-				setIsUploading(false)
-				setImage("")
-				refetchDashboard()
-			},
-			onError: () => {
-				setIsUploading(false)
-				dispatch(setModal({ type: "Error Notification", data: {} }))
-			}
+
+	const { mutate: removeImage } = trpc.channels.profile["setup-photos"].update.useMutation({
+		onSuccess: () => {
+			setIsUploading(false)
+			setImage("")
+			refetchDashboard()
+		},
+		onError: () => {
+			setIsUploading(false)
+			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}
 	})
 

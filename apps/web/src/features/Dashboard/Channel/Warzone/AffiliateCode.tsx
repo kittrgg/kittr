@@ -1,8 +1,9 @@
 import colors from "@Colors"
-import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
+import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useChannelView } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
+import { trpc } from "@Server/createTRPCNext"
 import { header2 } from "@Styles/typography"
 import { useEffect, useRef, useState } from "react"
 import styled from "styled-components"
@@ -10,20 +11,20 @@ import styled from "styled-components"
 const CreatorCode = () => {
 	const dispatch = useDispatch()
 	const { gameId: activeGame } = useChannelView()
+	const { refetch: refetchDashboard } = useDashboardChannel()
 	const { data } = useChannelData()
 	const affiliateCode = data?.gameCreatorCodes?.find((code) => code.gameId === activeGame)
 	const [code, setCode] = useState(affiliateCode?.code || "")
 	const [isEditing, setIsEditing] = useState(false)
 	const inputRef = useRef<HTMLInputElement>(null)
-	const { mutate } = useDashboardMutator({
-		path: "channels/profile/creator-codes/upsert",
-		opts: {
-			onSuccess: () => {
-				setIsEditing(false)
-			},
-			onError: () => {
-				dispatch(setModal({ type: "Error Notification", data: {} }))
-			}
+
+	const { mutate } = trpc.channels.profile["creator-codes"].upsert.useMutation({
+		onSuccess: () => {
+			setIsEditing(false)
+			refetchDashboard()
+		},
+		onError: () => {
+			dispatch(setModal({ type: "Error Notification", data: {} }))
 		}
 	})
 
@@ -49,6 +50,7 @@ const CreatorCode = () => {
 					}}
 					onBlur={async () => {
 						mutate({
+							// eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
 							code: { id: affiliateCode?.id, code, channelId: data?.id!, gameId: activeGame }
 						})
 					}}

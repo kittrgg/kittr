@@ -1,8 +1,7 @@
 import { Spinner } from "@Components/shared"
+import { trpc } from "@Server/createTRPCNext"
 import { captureException } from "@Services/captureException"
-import { download } from "@Services/firebase/storage"
 import { useEffect } from "react"
-import { useQuery } from "react-query"
 
 interface FirebaseResolverProps {
 	path: string
@@ -13,12 +12,12 @@ interface FirebaseResolverProps {
 
 export const FirebaseStorageResolver = ({ path, noSpinner, render }: FirebaseResolverProps) => {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const { data, error, isLoading } = useQuery<any, any>(path, () => download(path))
+	const { data, error, isLoading } = trpc.firebase.resolver.useQuery({ path })
 	const spinner = noSpinner ? <></> : <Spinner width="20%" />
 
 	useEffect(() => {
 		if (error) {
-			captureException(error)
+			captureException({ name: "Firebase Resolver Error", ...error })
 		}
 	}, [error])
 

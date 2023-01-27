@@ -1,25 +1,25 @@
 import colors from "@Colors"
 import { Button, SVG, Toast } from "@Components/shared"
-import { useDashboardMutator } from "@Features/Dashboard/dashboardMutator"
+import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { setModal } from "@Redux/slices/dashboard"
 import { useAffiliates, useChannelData } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
+import { trpc } from "@Server/createTRPCNext"
 import { paragraph } from "@Styles/typography"
 import { useState } from "react"
 import styled from "styled-components"
 
 const Affiliate = () => {
 	const [copyNotification, setCopyNotification] = useState(false)
+	const { refetch: refetchDashboard } = useDashboardChannel()
 	const dispatch = useDispatch()
 	const affiliates = useAffiliates()
 	const { data: channelData } = useChannelData()
 
-	const { mutate } = useDashboardMutator({
-		path: "channels/profile/affiliates/delete",
-		opts: {
-			onSuccess: () => {
-				dispatch(setModal({ type: "", data: "" }))
-			}
+	const { mutate } = trpc.channels.profile.affiliates.delete.useMutation({
+		onSuccess: () => {
+			dispatch(setModal({ type: "", data: "" }))
+			refetchDashboard()
 		}
 	})
 
@@ -88,6 +88,7 @@ const Affiliate = () => {
 										<Icon>
 											<SVG.X
 												data-cy={`${company?.replace(/ /g, "-")}-delete-affiliate`}
+												// eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
 												onClick={() => mutate({ affiliateId: affiliate.id, channelId: channelData?.id! })}
 											/>
 										</Icon>

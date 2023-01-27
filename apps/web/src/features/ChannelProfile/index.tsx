@@ -9,7 +9,7 @@ import Schedule from "./Schedule"
 import SetupPhotos from "./SetupPhotos"
 import Specs from "./Specs"
 import colors from "@Colors"
-import { trpc } from "@Server/createHooks"
+import { trpc } from "@Server/createTRPCNext"
 import { download } from "@Services/firebase/storage"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
@@ -19,11 +19,11 @@ const ChannelProfile = () => {
 	const { query } = useRouter()
 	const { channel: urlChannel } = query as { channel: string }
 
-	const { data: channel } = trpc.useQuery(["channels/profile/get", urlChannel], {
+	const { data: channel } = trpc.channels.profile.get.useQuery(urlChannel, {
 		enabled: !!urlChannel
 	})
 	const twitchLink = channel?.links.find((channel) => channel.property === "TWITCH")?.value
-	const { data: twitchInfo } = trpc.useQuery(["twitch/profile-page", twitchLink as string], {
+	const { data: twitchInfo } = trpc.twitch["profile-page"].useQuery(twitchLink as string, {
 		enabled: !!twitchLink,
 		retry: false
 	})

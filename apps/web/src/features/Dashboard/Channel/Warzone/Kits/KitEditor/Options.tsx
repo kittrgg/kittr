@@ -5,6 +5,7 @@ import { useIsMounted } from "@Hooks/useIsMounted"
 import { updateOptions } from "@Redux/slices/dashboard"
 import { useActiveKit } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
+import { trpc } from "@Server/createTRPCNext"
 import { getArrayUniques } from "@Utils/helpers/getArrayUniques"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
 import { Loader } from "@kittr/ui"
@@ -16,8 +17,9 @@ const Options = () => {
 	const dispatch = useDispatch()
 	const { base, options: current } = useActiveKit()
 	const isMounted = useIsMounted()
-	const { data: availableOptions, isLoading } = useOptionsByKitBase(base?.id)
 	const [animationTrigger, setAnimationTrigger] = useState(false)
+
+	const { data: availableOptions, isLoading } = useOptionsByKitBase(base?.id)
 
 	useEffect(() => {
 		setTimeout(() => {

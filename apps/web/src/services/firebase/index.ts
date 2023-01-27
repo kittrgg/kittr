@@ -1,8 +1,8 @@
-import { initializeApp, getApp } from "firebase/app"
+import { initializeApp, getApp, FirebaseOptions } from "firebase/app"
 import { getAuth } from "firebase/auth"
 import { getStorage } from "firebase/storage"
 
-export const firebaseConfig = {
+export const firebaseConfig: FirebaseOptions = {
 	apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
 	authDomain: process.env.FIREBASE_AUTH_DOMAIN,
 	projectId: process.env.FIREBASE_PROJECT_ID,
@@ -13,7 +13,6 @@ export const firebaseConfig = {
 }
 
 // Must be called before any other Firebase APIs can be used
-// eslint-disable-next-line
 try {
 	getApp()
 } catch {

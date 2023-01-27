@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { trpc } from "@Server/createHooks"
+import { trpc } from "@Server/createTRPCNext"
 import { WarzoneTwoKitOption } from "@kittr/prisma"
 import { Button, NumberInput, SubSection, Text, TextInput } from "@kittr/ui"
 import { useState } from "react"
@@ -17,9 +17,9 @@ interface Props {
 }
 
 export const KitBaseOptionForm = ({ initialValues, onFinished }: Props) => {
-	const { mutate: updateOption } = trpc.useMutation("admin/warzone2/kit-bases/options/update")
-	const { mutate: createOption } = trpc.useMutation("admin/warzone2/kit-bases/options/create")
-	const { mutate: deleteOption } = trpc.useMutation("admin/warzone2/kit-bases/options/delete")
+	const { mutate: updateOption } = trpc.admin.warzone2.kitBases.options.update.useMutation()
+	const { mutate: createOption } = trpc.admin.warzone2.kitBases.options.create.useMutation()
+	const { mutate: deleteOption } = trpc.admin.warzone2.kitBases.options.delete.useMutation()
 
 	const [formValues, setFormValues] = useState<Partial<FormState>>(initialValues || {})
 

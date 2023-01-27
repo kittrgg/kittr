@@ -2,11 +2,12 @@ import LogoutButton from "./ProfileButtons"
 import CreateChannelModal from "./modals/CreateChannel"
 import colors from "@Colors"
 import { Button, ProfileImage, Spinner, SupportUs, SVG } from "@Components/shared"
-import { useManagedChannels } from "@Hooks/api/useManagedChannels"
+// import { useManagedChannels } from "@Hooks/api/useManagedChannels"
 import { useUser } from "@Hooks/useUser"
 import { setActiveView, setChannelView, setModal } from "@Redux/slices/dashboard"
 import { useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch, useSelector } from "@Redux/store"
+import { trpc } from "@Server/createTRPCNext"
 import { header1, header2, paragraph } from "@Styles/typography"
 import { capitalizeFirstCharacter } from "@Utils/helpers/capitalizeFirstCharacter"
 import { MutableRefObject, useEffect, useRef } from "react"
@@ -18,7 +19,7 @@ const ChannelList = () => {
 	const modalData = useModal().data
 	const ref = useRef() as MutableRefObject<HTMLButtonElement>
 	const divRef = useRef() as MutableRefObject<HTMLDivElement>
-	const { data: channels, isFetching: isFetchingChannels, refetch } = useManagedChannels()
+	const { data: channels, isFetching: isFetchingChannels, refetch } = trpc.managers.channels.list.useQuery()
 
 	const user = useUser()
 	const modal = useSelector((state) => state.dashboard.modal)
@@ -63,7 +64,7 @@ const ChannelList = () => {
 					!!user &&
 					channels &&
 					channels.map((elem) => (
-						<BorderWrapper isPremium={elem.plan?.type === "PREMIUM"}>
+						<BorderWrapper key={elem.id} isPremium={elem.plan?.type === "PREMIUM"}>
 							<ChannelContainer
 								key={elem.id}
 								ref={divRef}
@@ -105,7 +106,7 @@ const ChannelList = () => {
 								<Role>
 									Your role is{" "}
 									{capitalizeFirstCharacter(
-										elem.managers.find((manager) => manager.firebaseId === user?.uid)?.role! ?? ""
+										elem.managers.find((manager) => manager.firebaseId === user?.uid)?.role ?? ""
 									)}{" "}
 									for this channel.
 								</Role>

@@ -1,5 +1,5 @@
 import colors from "@Colors"
-import { trpc } from "@Server/createHooks"
+import { trpc } from "@Server/createTRPCNext"
 import { Button, MultiSelect, Section, Text, TextInput } from "@kittr/ui"
 import { Switch } from "@mantine/core"
 import { useState } from "react"
@@ -18,9 +18,9 @@ interface GameInputs {
 }
 
 const Page = () => {
-	const { mutate: addGame, isLoading } = trpc.useMutation("games/add")
-	const { data: genres, isLoading: isLoadingGenres } = trpc.useQuery(["games/list-genres"])
-	const { data: platforms, isLoading: isLoadingPlatforms } = trpc.useQuery(["games/list-platforms"])
+	const { mutate: addGame, isLoading } = trpc.games.add.useMutation()
+	const { data: platforms, isLoading: isLoadingPlatforms } = trpc.games["list-platforms"].useQuery()
+	const { data: genres, isLoading: isLoadingGenres } = trpc.games["list-platforms"].useQuery()
 
 	const [gameInputs, setGameInputs] = useState<GameInputs>({
 		active: false,

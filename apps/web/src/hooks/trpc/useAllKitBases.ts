@@ -1,14 +1,12 @@
-import { trpc } from "@Server/createHooks"
-import { InferQueryInput } from "@Server/index"
+import { trpc } from "@Server/createTRPCNext"
+import { RouterInput } from "@Server/index"
+// import { InferQueryInput } from "@Server/index"
 import { Prisma } from "@kittr/prisma"
 
-type TQueryInput = InferQueryInput<"kits/bases/list">
+// type TQueryInput = RouterInput["listBases"]
 
-export const useAllKitBases = <T extends TQueryInput>({ include }: { include: T }) => {
-	type KitBasesResponse = Prisma.WarzoneKitBaseGetPayload<{ include: typeof include }>[]
+// export const useAllKitBases = <T extends TQueryInput>({ include }: { include: T }) => {
+// 	const query = trpc.listBases.useQuery(include)
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const query = trpc.useQuery<"kits/bases/list", any, KitBasesResponse>(["kits/bases/list", include])
-
-	return query
-}
+// 	return query
+// }

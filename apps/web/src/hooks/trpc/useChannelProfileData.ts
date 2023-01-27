@@ -1,4 +1,4 @@
-import { trpc } from "@Server/createHooks"
+import { trpc } from "@Server/createTRPCNext"
 import { useRouter } from "next/router"
 
 /**
@@ -10,7 +10,7 @@ export const useChannelProfileData = () => {
 		query: { channel }
 	} = useRouter()
 	const urlChannel = channel as string
-	const query = trpc.useQuery(["channels/profile/get", urlChannel], {
+	const query = trpc.channels.profile.get.useQuery(urlChannel, {
 		enabled: !!urlChannel
 	})
 

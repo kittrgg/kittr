@@ -9,11 +9,10 @@ import Tutorial from "./modals/Tutorial"
 import colors from "@Colors"
 import FullScreen from "@Components/layouts/FullScreen"
 import Spinner from "@Components/shared/Spinner"
-import { useAllGames } from "@Hooks/trpc/useAllGames"
-import { useAllKitBases } from "@Hooks/trpc/useAllKitBases"
 import { useUser } from "@Hooks/useUser"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
 import { useDashboardView, useModal } from "@Redux/slices/dashboard/selectors"
+import { trpc } from "@Server/createTRPCNext"
 import { Routes } from "@Utils/lookups/routes"
 import { useRef } from "react"
 import styled from "styled-components"
@@ -25,8 +24,8 @@ const Dashboard = () => {
 	const { width } = useViewportDimensions()
 	const { view } = useDashboardView()
 	const containerRef = useRef(null)
-	const { isLoading: gamesLoading } = useAllGames({ include: { _count: true } })
-	const { isLoading: kitsLoading } = useAllKitBases({ include: { commandCodes: true } })
+	const { isLoading: gamesLoading } = trpc.games.list.useQuery()
+	const { isLoading: kitsLoading } = trpc.kits.bases.list.useQuery({ commandCodes: true })
 
 	if (width < 1075) {
 		return (

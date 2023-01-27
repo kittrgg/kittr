@@ -1,7 +1,7 @@
 import colors from "@Colors"
 import AuthLayout from "@Components/layouts/Authentication"
 import { Button, Spinner, TextInput } from "@Components/shared"
-import { trpc } from "@Server/createHooks"
+import { trpc } from "@Server/createTRPCNext"
 import { Routes } from "@Utils/lookups/routes"
 import Link from "next/link"
 import { useRouter } from "next/router"
@@ -19,7 +19,7 @@ const SignUp = () => {
 	const [confirmPassword, setConfirmPassword] = useState("")
 	const [error, setError] = useState("")
 
-	const { mutate, isLoading } = trpc.useMutation("users/create", {
+	const { mutate, isLoading } = trpc.users.create.useMutation({
 		onSuccess: () => router.push(Routes.DASHBOARD),
 		onError: () => setError("Our server just reported an issue. Please try again later.")
 	})

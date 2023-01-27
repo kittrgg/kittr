@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { KitBaseOptionForm } from "./KitBaseOptionForm"
-import { trpc } from "@Server/createHooks"
+import { trpc } from "@Server/createTRPCNext"
 import { WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
 import { Button, List, NumberInput, Section, Select, SubSection, Text, Textarea, TextInput } from "@kittr/ui"
 import SVG from "@kittr/ui/src/components/SVG"
@@ -31,14 +31,17 @@ interface Props {
 export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 	const [formValues, setFormValues] = useState<Partial<FormState>>({ gameId })
 
-	const { refetch } = trpc.useQuery(["admin/warzone/kit-bases/get", { kitBaseId: kitBaseId! }], {
-		enabled: !!kitBaseId,
-		onSuccess: (data) => {
-			setFormValues(data || {})
-		},
-		refetchOnMount: true
-	})
-	const { data: kitBaseCategories } = trpc.useQuery(["admin/warzone/kit-bases/categories/list"])
+	const { refetch } = trpc.admin.warzone.kitBases.get.useQuery(
+		{ kitBaseId: kitBaseId! },
+		{
+			enabled: !!kitBaseId,
+			onSuccess: (data) => {
+				setFormValues(data || {})
+			},
+			refetchOnMount: true
+		}
+	)
+	const { data: kitBaseCategories } = trpc.kits.bases.list.useQuery({ category: true })
 
 	const [isEditingOption, setIsEditingOption] = useState<WarzoneKitOption | null>(null)
 	const [isCreatingOption, setIsCreatingOption] = useState<{
@@ -46,9 +49,9 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 		kitBaseId?: string
 		gameId?: string
 	} | null>(null)
-	const { mutate: updateBase } = trpc.useMutation("admin/warzone/kit-bases/update")
-	const { mutate: createBase } = trpc.useMutation("admin/warzone/kit-bases/create")
-	const { mutate: deleteBase } = trpc.useMutation("admin/warzone/kit-bases/delete")
+	const { mutate: updateBase } = trpc.admin.warzone.kitBases.update.useMutation()
+	const { mutate: createBase } = trpc.admin.warzone.kitBases.create.useMutation()
+	const { mutate: deleteBase } = trpc.admin.warzone.kitBases.delete.useMutation()
 
 	const changeTextField = (key: keyof FormState) => (e: any) => {
 		setFormValues((formValues) => ({ ...formValues, [key]: e.target.value }))

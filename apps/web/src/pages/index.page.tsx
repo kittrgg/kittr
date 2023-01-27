@@ -1,18 +1,18 @@
 import Body from "./Home/Body"
 import Hero from "./Home/Hero"
 import PlatformInfo from "./Home/PlatformInfo"
+import { trpc } from "./_app.page"
 import PageWrapper from "@Components/layouts/PageWrapper"
-import { useAllGames } from "@Hooks/trpc/useAllGames"
-import { trpc } from "@Server/createHooks"
 import { createSSGHelper } from "@Server/createSSGHelper"
+// import { trpc } from "@Server/createTRPCNext"
 import ResponsiveAdBanner from "@Services/venatus/ResponsiveBanner"
 
 const Home = () => {
-	const { data: games } = useAllGames({ include: { _count: true } })
-	const { data: totalNumberOfKits } = trpc.useQuery(["kits/count"])
-	const { data: popularChannels } = trpc.useQuery(["channels/top", { take: 10 }])
-	const { data: risingChannels } = trpc.useQuery(["channels/rising"])
-	const { data: liveChannels } = trpc.useQuery(["channels/live"])
+	const { data: games } = trpc.games.count.useQuery()
+	const { data: totalNumberOfKits } = trpc.kits.count.useQuery()
+	const { data: popularChannels } = trpc.channels.top.useQuery({ take: 10 })
+	const { data: risingChannels } = trpc.channels.rising.useQuery()
+	const { data: liveChannels } = trpc.channels.live.useQuery()
 
 	if (!totalNumberOfKits) return null
 
@@ -39,11 +39,11 @@ export const getStaticProps = async () => {
 	const ssg = await createSSGHelper()
 
 	Promise.all([
-		await ssg.fetchQuery("kits/count"),
-		await ssg.fetchQuery("games/list", { _count: true }),
-		await ssg.fetchQuery("channels/top", { take: 10 }),
-		await ssg.fetchQuery("channels/rising"),
-		await ssg.fetchQuery("channels/live")
+		await ssg.kits.count.fetch(),
+		await ssg.games.list.fetch(),
+		await ssg.channels.top.fetch({ take: 10 }),
+		await ssg.channels.rising.fetch(),
+		await ssg.channels.live.fetch()
 	])
 
 	return {

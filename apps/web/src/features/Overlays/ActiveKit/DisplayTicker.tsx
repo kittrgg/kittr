@@ -1,4 +1,4 @@
-import { InferQueryOutput } from "@Server/index"
+import { RouterOutput } from "@Server/index"
 import colors from "@Styles/colors"
 import { header1, header2, montserrat, paragraph } from "@Styles/typography"
 import { asyncDelay } from "@Utils/helpers/asyncDelay"
@@ -11,7 +11,7 @@ import styled, { ThemeProvider } from "styled-components"
 interface Props {
 	_id: string
 	previewWidth?: number
-	data?: InferQueryOutput<"channels/overlay/get">
+	data?: RouterOutput["channels"]["overlay"]["get"]
 	activeKit: OverlayKit
 	setActiveKit: Dispatch<SetStateAction<OverlayKit>>
 }

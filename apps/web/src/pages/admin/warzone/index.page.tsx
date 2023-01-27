@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { KitBaseForm } from "./KitBaseForm"
-import { trpc } from "@Server/createHooks"
+import { trpc } from "@Server/createTRPCNext"
 import { WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
 import { Button, List, Section } from "@kittr/ui"
 import SVG from "@kittr/ui/src/components/SVG"
@@ -9,8 +9,7 @@ import Link from "next/link"
 import { useState } from "react"
 
 const Page = () => {
-	// TODO: Not sure how to handle this type error, need some backend knowledging here.
-	const { data: bases, refetch } = trpc.useQuery(["admin/warzone/kit-bases/list"])
+	const { data: bases, refetch } = trpc.admin.warzone.kitBases.list.useQuery()
 	const [isCreatingBase, setIsCreatingBase] = useState(false)
 	const [isEditingBase, setIsEditingBase] = useState<
 		| (WarzoneKitBase & {
@@ -18,8 +17,6 @@ const Page = () => {
 		  })
 		| null
 	>(null)
-
-	console.log(bases)
 
 	if (isCreatingBase) {
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion

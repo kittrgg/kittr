@@ -5,10 +5,10 @@ import MethodToggle from "./MethodToggle"
 import TwitchStrategyToggle from "./TwitchStrategyToggle"
 import colors from "@Colors"
 import { Button, Modal } from "@Components/shared"
-import { useAllKitBases } from "@Hooks/trpc/useAllKitBases"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useChannelView } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
+import { trpc } from "@Server/createTRPCNext"
 import { TCommandMethod } from "@kittr/types/types"
 import { useState } from "react"
 
@@ -27,9 +27,9 @@ const ExportBotCommands = () => {
 	const [method, setMethod] = useState<TCommandMethod>("nightbot")
 	const [commandStrategy, setCommandStrategy] = useState<"edit" | "add">("edit")
 	const [includeUser, setIncludeUser] = useState(true)
-	const { data: allKitBases } = useAllKitBases({ include: { category: true } })
-	const { gameId } = useChannelView()
+	const { gameId, view } = useChannelView()
 
+	const { data: allKitBases } = trpc.kits.bases.listByGameUrlSafeName.useQuery({ gameUrlSafeName: view })
 	const allKits = [...(data?.warzoneTwoKits ?? []), ...(data?.warzoneKits ?? [])]
 	const filterKits = allKits.filter((kit) => kit.base.gameId === gameId)
 

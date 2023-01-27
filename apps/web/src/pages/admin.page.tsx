@@ -1,12 +1,12 @@
 // import Admin from "@Features/Admin"
-import { trpc } from "@Server/createHooks"
+import { trpc } from "@Server/createTRPCNext"
 import { Button, Title } from "@kittr/ui"
 import Link from "next/link"
 import { useRouter } from "next/router"
 
 const Page = () => {
 	const router = useRouter()
-	const { data: games } = trpc.useQuery(["games/list", { _count: true }])
+	const { data: games } = trpc.games.list.useQuery()
 
 	return (
 		<div style={{ margin: "1rem" }}>
