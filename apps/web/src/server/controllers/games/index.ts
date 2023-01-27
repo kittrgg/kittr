@@ -1,5 +1,6 @@
 import { publicProcedure } from "@Server/initTRPC"
 import * as GamesService from "@Server/services/games"
+import { prisma } from "@kittr/prisma"
 import { z } from "zod"
 
 const listGames = publicProcedure.query(async () => {
