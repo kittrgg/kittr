@@ -3,8 +3,7 @@
 	"version": "0.0.0",
 	"private": true,
 	"scripts": {
-		"test:e2e": "cypress open --config-file ./config.dev.json",
-		"clean": "rm -rf .turbo && rm -rf .next &&  rm -rf coverage && rm -rf node_modules"
+		"test:e2e": "cypress open --config-file ./config.dev.json"
 	},
 	"dependencies": {
 		"@kittr/prisma": "workspace:*"

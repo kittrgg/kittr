@@ -6,12 +6,11 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint --fix .",
+		"lint": "next lint .",
 		"tsc": "tsc --noEmit --incremental false",
 		"test": "echo \"No tests specified\" && exit 0",
 		"test:watch": "echo \"No tests specified\" && exit 0",
-		"clean": "rm -rf .turbo && rm -rf .next &&  rm -rf coverage && rm -rf node_modules",
-		"typecheck": "tsc --pretty --noEmit"
+		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
 		"@emotion/react": "^11.10.5",

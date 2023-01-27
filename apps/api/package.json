@@ -5,9 +5,8 @@
 		"build": "tsup ./src/index.ts",
 		"start": "ts-node ./src/index.ts",
 		"dev": "nodemon src/index.ts",
-		"lint": "eslint --fix .",
-		"clean": "rm -rf .turbo && rm -rf coverage && rm -rf dist && rm -rf node_modules",
-		"typecheck": "tsc --pretty --noEmit"
+		"lint": "eslint .",
+		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
 		"@google-analytics/data": "3.0.0",
