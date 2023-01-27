@@ -23,7 +23,7 @@
 		"clean": "npx npkill",
 		"docker:up": "docker compose -f docker-compose.yml up --build -d",
 		"docker:down": "docker compose -f docker-compose.yml down",
-		"prettier-write": "prettier --write \"**/*.{ts,tsx,md}\"",
+		"format": "prettier \"**/*.{ts,tsx,md}\"",
 		"kill-ports": "kill-port 3000,3001,5555",
 		"build:api": "turbo run build --filter=api",
 		"start:api": "turbo run start --filter=api",
