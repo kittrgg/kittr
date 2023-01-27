@@ -59,9 +59,8 @@
       "cache": false
     },
     "lint": {
-      "dependsOn": ["^topo"],
-      "outputs": []
-    },
+      "dependsOn": ["^topo"]
+		},
     "db:push": {
       "cache": false
     },
