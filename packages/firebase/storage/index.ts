@@ -5,4 +5,6 @@ export * from "./download"
 export * from "./upload"
 export * from "./uploadWithHandlers"
 
-export const storage = getStorage()
+const isTest = process.env.NODE_ENV === "test"
+
+export const storage = !isTest ? getStorage() : null

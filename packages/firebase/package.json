@@ -16,6 +16,7 @@
 		"@kittr/config": "workspace:*",
 		"@kittr/tsconfig": "workspace:*",
 		"@kittr/types": "workspace:*",
+		"@kittr/utils": "workspace:*",
 		"typescript": "5.0.0-beta"
 	},
 	"dependencies": {

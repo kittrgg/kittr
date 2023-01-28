@@ -68,7 +68,7 @@
       "dependsOn": [ "db:generate", "^topo" ]
     },
     "test": {
-      "dependsOn": [ "^topo", "^build" ],
+      "dependsOn": [ "^topo" ],
       "outputs": [ "coverage/**" ]
     },
     "dev": {

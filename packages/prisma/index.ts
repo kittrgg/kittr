@@ -1,3 +1,4 @@
+import { prismaMock } from "./mock"
 import { PrismaClient } from "@prisma/client"
 
 declare global {
@@ -7,8 +8,9 @@ declare global {
 export let prisma: PrismaClient
 
 if (typeof window === "undefined") {
-	// This is here because Nextjs...something about the dev environment...
-	if (process.env.NODE_ENV === "production") {
+	if (process.env.NODE_ENV === "test") {
+		prisma = prismaMock
+	} else if (process.env.NODE_ENV === "production") {
 		prisma = new PrismaClient()
 	} else {
 		if (!global.prisma) {

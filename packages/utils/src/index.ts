@@ -241,3 +241,5 @@ export const badWordFilter = (string: string): boolean => {
 
 	return badWords.some((check) => string.includes(check))
 }
+
+export const isTest = process.env.NODE_ENV === "test"
