@@ -4,9 +4,9 @@
 	"version": "0.0.0",
 	"exports": {
 		".": "./index.ts",
-		"./admin": "./src/admin.ts",
-		"./auth": "./src/auth/index.ts",
-		"./storage": "./src/storage/index.ts"
+		"./admin": "./admin.ts",
+		"./auth": "./auth/index.ts",
+		"./storage": "./storage/index.ts"
 	},
 	"private": true,
 	"scripts": {

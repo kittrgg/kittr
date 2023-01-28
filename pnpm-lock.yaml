@@ -161,7 +161,7 @@ importers:
       stripe: 8.205.0
       styled-components: 5.3.3
       superjson: 1.9.1
-      typescript: 5.0.0-beta
+      typescript: ^4.9.4
       validator: 13.7.0
       zod: 3.17.3
     dependencies:
@@ -217,7 +217,7 @@ importers:
       '@types/styled-components': 5.1.23
       '@types/validator': 13.7.4
       babel-plugin-styled-components: 2.0.7_styled-components@5.3.3
-      typescript: 5.0.0-beta
+      typescript: 4.9.4
 
   packages/analytics:
     specifiers:
@@ -19677,6 +19677,12 @@ packages:
 
   /typedarray/0.0.6:
     resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
+    dev: true
+
+  /typescript/4.9.4:
+    resolution: {integrity: sha512-Uz+dTXYzxXXbsFpM86Wh3dKCxrQqUcVMxwU54orwlJjOpO3ao8L7j5lH+dWfTwgCwIuM9GQ2kvVotzYJMXTBZg==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
     dev: true
 
   /typescript/5.0.0-beta:

@@ -49,7 +49,7 @@ const Channel = ({ containerRef }: Props) => {
 		<>
 			<Head title={`Dashboard - ${data?.displayName} | kittr`} description="" />
 			<ChannelTopBar />
-			{view === "Channel Settings" && <ChannelSettings containerRef={containerRef} />}
+			{view === "Channel Settings" && <ChannelSettings />}
 			{view === "warzone" && <Warzone />}
 			{view === "wz2" && <Warzone2 />}
 			{view === "Deleted Game Notification" && <DeletedGameNotification />}

@@ -1,12 +1,11 @@
 import colors from "@Colors"
 import Button from "@Components/shared/Button"
 import TextInput from "@Components/shared/TextInput"
-import { logOut } from "@kittr/firebase/auth/logOut"
-import { updateUserPassword } from "@kittr/firebase/auth/updatePassword"
+import { updateUserPassword, logOut } from "@kittr/firebase/auth"
 import { useRouter } from "next/router"
 import { useState } from "react"
 
-const UpdateEmail = ({ ...props }) => {
+const UpdateEmail = () => {
 	const router = useRouter()
 	const [password, setPassword] = useState("")
 	const [confirmPassword, setConfirmPassword] = useState("")
