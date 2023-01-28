@@ -1,10 +1,6 @@
 import { prismaMock } from "./mock"
 import { PrismaClient } from "@prisma/client"
 
-declare global {
-	var prisma: PrismaClient
-}
-
 export let prisma: PrismaClient
 
 if (typeof window === "undefined") {
@@ -13,11 +9,12 @@ if (typeof window === "undefined") {
 	} else if (process.env.NODE_ENV === "production") {
 		prisma = new PrismaClient()
 	} else {
-		if (!global.prisma) {
-			global.prisma = new PrismaClient()
+		if (!(global as any).prisma) {
+			// eslint-disable-next-line @typescript-eslint/no-extra-semi
+			;(global as any).prisma = new PrismaClient()
 		}
 
-		prisma = global.prisma
+		prisma = (global as any).prisma
 	}
 }
 
