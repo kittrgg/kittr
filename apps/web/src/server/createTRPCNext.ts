@@ -1,6 +1,6 @@
 import { AppRouter } from "../pages/api/trpc/[[...trpc]].api"
-import { getToken } from "@Services/firebase/auth"
 import { getTrpcUrl } from "@Utils/helpers/getUrl"
+import { getToken } from "@kittr/firebase/auth"
 import { httpBatchLink } from "@trpc/client/links/httpBatchLink"
 import { loggerLink } from "@trpc/client/links/loggerLink"
 import { createTRPCNext } from "@trpc/next"

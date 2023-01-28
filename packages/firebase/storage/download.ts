@@ -1,9 +1,12 @@
-import { storage } from "@Services/firebase"
+import { storage } from "../"
 import { getDownloadURL, ref } from "firebase/storage"
 
 /** Return the path to the Firebase document. */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const download = async (fileName: string, handler?: (...args: any) => any) => {
+export const download = async (
+	fileName: string,
+	handler?: (...args: any) => any
+) => {
 	try {
 		const storageRef = ref(storage, fileName)
 		const path = await getDownloadURL(storageRef)

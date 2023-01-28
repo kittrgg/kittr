@@ -1,5 +1,5 @@
 import { Context } from "@Server/context"
-import admin from "@Services/firebase/admin"
+import admin from "@kittr/firebase/admin"
 import { captureMessage } from "@kittr/logger/node"
 import { prisma } from "@kittr/prisma"
 import { initTRPC, TRPCError } from "@trpc/server"

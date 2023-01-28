@@ -1,6 +1,6 @@
 import { useIsMounted } from "@Hooks/useIsMounted"
-import { download } from "@Services/firebase/storage"
 import { montserrat } from "@Styles/typography"
+import { download } from "@kittr/firebase/storage"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
 

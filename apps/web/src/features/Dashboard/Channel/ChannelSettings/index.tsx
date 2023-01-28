@@ -20,7 +20,7 @@ import { useManagerRole, useModal, usePremiumStatus } from "@Redux/slices/dashbo
 import { header1 } from "@Styles/typography"
 import styled from "styled-components"
 
-const ChannelSettings = ({ ...props }) => {
+const ChannelSettings = () => {
 	const { isLoading, data } = useDashboardChannel()
 	const role = useManagerRole()
 	const modal = useModal()

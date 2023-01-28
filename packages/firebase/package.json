@@ -1,0 +1,27 @@
+
+{
+	"name": "@kittr/firebase",
+	"version": "0.0.0",
+	"exports": {
+		".": "./index.ts",
+		"./admin": "./admin.ts",
+		"./auth": "./auth/index.ts",
+		"./storage": "./storage/index.ts"
+	},
+	"private": true,
+	"scripts": {
+		"typecheck": "tsc --noEmit"
+	},
+	"devDependencies": {
+		"@kittr/config": "workspace:*",
+		"@kittr/tsconfig": "workspace:*",
+		"@kittr/types": "workspace:*",
+		"typescript": "5.0.0-beta"
+	},
+	"dependencies": {
+		"browser-image-compression": "2.0.0",
+		"firebase": "^9.16.0",
+		"firebase-admin": "^11.5.0",
+		"firebase-tools": "^11.21.0"
+	}
+}

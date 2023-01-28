@@ -29,7 +29,7 @@
 		"@vitejs/plugin-react": "2.0.0",
 		"babel-loader": "8.2.5",
 		"@kittr/tsconfig": "workspace:*",
-		"typescript": "4.9.3",
+		"typescript": "5.0.0-beta",
 		"vite": "^4.0.4"
 	}
 }

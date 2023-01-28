@@ -1,7 +1,7 @@
 import colors from "@Colors"
 import Button from "@Components/shared/Button"
 import TextInput from "@Components/shared/TextInput"
-import { updateEmail } from "@Services/firebase/auth/updateEmail"
+import { updateEmail } from "@kittr/firebase/auth"
 import { Dispatch, SetStateAction, useState } from "react"
 
 interface Props {

@@ -56,11 +56,13 @@ const GamePresentation = () => {
 }
 
 export const getStaticPaths = async () => {
+	const take = process.env.VERCEL_ENV === "production" ? 30 : 0
+
 	const channels = await prisma.channel.findMany({
 		orderBy: {
 			viewCount: "desc"
 		},
-		take: 30,
+		take,
 		include: {
 			games: true
 		}

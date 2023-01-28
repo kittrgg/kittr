@@ -14,7 +14,7 @@ const FlexRow = styled.div`
 `
 
 /** Let a user change their password. They must first authenticate with their current password. */
-const PasswordEditor = ({ ...props }) => {
+const PasswordEditor = () => {
 	const [step, setStep] = useState(1)
 	const [currentPassword, setCurrentPassword] = useState("")
 	const [newPassword, setNewPassword] = useState("")
@@ -32,7 +32,7 @@ const PasswordEditor = ({ ...props }) => {
 		return (
 			<>
 				<Styled.Header>CHANGE PASSWORD</Styled.Header>
-				<NewPassword setStep={setStep} />
+				<NewPassword />
 			</>
 		)
 	if (step === 3)

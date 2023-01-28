@@ -49,21 +49,21 @@
 		"build#storybook": {
 			"outputs": ["storybook-static/**"]
 		},
+    "topo": {
+			"dependsOn": [ "db:generate", "^topo" ]
+    },
 		"db:deploy": {
 			"cache": false
 		},
-    "topo": {
-      "dependsOn": [ "db:generate", "^topo" ]
-    },
     "db:generate": {
       "cache": false
     },
+		"db:push": {
+			"cache": false
+		},
     "lint": {
       "dependsOn": ["^topo"]
 		},
-    "db:push": {
-      "cache": false
-    },
     "typecheck": {
       "dependsOn": [ "db:generate", "^topo" ]
     },

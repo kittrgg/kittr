@@ -27,7 +27,7 @@ import { ManagersChannelsController } from "@Server/controllers/managers/channel
 import { StripeController } from "@Server/controllers/stripe"
 import { TwitchController } from "@Server/controllers/twitch"
 import { UsersController } from "@Server/controllers/users"
-import { download } from "@Services/firebase/storage"
+import { download } from "@kittr/firebase/storage"
 import { prisma } from "@kittr/prisma"
 import { GameModel } from "@kittr/prisma/validator"
 import { inferRouterInputs, inferRouterOutputs, TRPCError } from "@trpc/server"
