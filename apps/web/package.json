@@ -7,7 +7,6 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint .",
-		"tsc": "tsc --noEmit --incremental false",
 		"test": "echo \"No tests specified\" && exit 0",
 		"test:watch": "echo \"No tests specified\" && exit 0",
 		"typecheck": "tsc --noEmit"
@@ -16,12 +15,14 @@
 		"@emotion/react": "^11.10.5",
 		"@emotion/server": "^11.10.0",
 		"@juggle/resize-observer": "3.3.1",
+		"@kittr/analytics": "workspace:*",
 		"@kittr/logger": "workspace:*",
 		"@kittr/firebase": "workspace:*",
 		"@kittr/money": "workspace:*",
 		"@kittr/prisma": "workspace:*",
+		"@kittr/trpc": "workspace:*",
+		"@kittr/twitch": "workspace:*",
 		"@kittr/ui": "workspace:*",
-		"@kittr/analytics": "workspace:*",
 		"@mantine/core": "^5.10.2",
 		"@mantine/hooks": "^5.10.2",
 		"@mantine/next": "^5.10.2",
@@ -29,11 +30,6 @@
 		"@sentry/nextjs": "7.3.0",
 		"@tanstack/react-query": "^4.23.0",
 		"@tanstack/react-query-devtools": "^4.23.0",
-		"@trpc/client": "^10.9.0",
-		"@trpc/next": "^10.9.0",
-		"@trpc/react": "^9.27.4",
-		"@trpc/react-query": "^10.9.0",
-		"@trpc/server": "^10.9.0",
 		"date-fns": "2.28.0",
 		"jsonwebtoken": "8.5.1",
 		"micro": "9.3.4",
@@ -56,6 +52,7 @@
 	"devDependencies": {
 		"@kittr/config": "workspace:*",
 		"@kittr/types": "workspace:*",
+		"@kittr/tsconfig": "workspace:*",
 		"@types/jsonwebtoken": "8.5.8",
 		"@types/micro": "7.3.7",
 		"@types/react": "^18.0.27",
@@ -63,7 +60,6 @@
 		"@types/styled-components": "5.1.23",
 		"@types/validator": "13.7.4",
 		"babel-plugin-styled-components": "2.0.7",
-		"@kittr/tsconfig": "workspace:*",
 		"typescript": "^4.9.4"
 	}
 }

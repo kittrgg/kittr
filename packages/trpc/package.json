@@ -1,0 +1,31 @@
+{
+	"name": "@kittr/trpc",
+	"private": true,
+	"version": "0.0.0",
+	"main": "./src/index.ts",
+	"license": "MIT",
+	"scripts": {
+		"lint": "eslint .",
+		"typecheck": "tsc --noEmit"
+	},
+	"dependencies": {
+		"@kittr/config": "workspace:*",
+		"@kittr/firebase": "workspace:*",
+		"@kittr/logger": "workspace:*",
+		"@kittr/money": "workspace:*",
+		"@kittr/prisma": "workspace:*",
+		"@kittr/twitch": "workspace:*",
+		"@kittr/utils": "workspace:*",
+		"@trpc/client": "^10.9.0",
+		"@trpc/next": "^10.9.0",
+		"@trpc/react": "^9.27.4",
+		"@trpc/react-query": "^10.9.0",
+		"@trpc/server": "^10.9.0"
+	},
+	"devDependencies": {
+		"@kittr/config": "workspace:*",
+		"eslint": "^8.32.0",
+		"@kittr/tsconfig": "workspace:*",
+		"typescript": "5.0.0-beta"
+	}
+}
