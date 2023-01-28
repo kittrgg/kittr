@@ -1,5 +1,4 @@
 # Welcome to kittr
-test
 
 # Getting Started
 
