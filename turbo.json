@@ -71,10 +71,6 @@
       "dependsOn": ["^topo" ],
       "outputs": [ "coverage/**" ]
     },
-    "test:run": {
-      "dependsOn": ["^topo" ],
-      "outputs": [ "coverage/**" ]
-    },
     "dev": {
       "dependsOn": [ "db:generate" ],
 			"persistent": true,

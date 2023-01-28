@@ -10,7 +10,6 @@
 	"scripts": {
 		"lint": "eslint .",
 		"test": "vitest",
-		"test:run": "vitest run",
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
