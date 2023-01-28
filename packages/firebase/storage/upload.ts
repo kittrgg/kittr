@@ -1,4 +1,4 @@
-import { storage } from "@Services/firebase"
+import { storage } from "../"
 import { ref, uploadBytes } from "firebase/storage"
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

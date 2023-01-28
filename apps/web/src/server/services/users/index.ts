@@ -1,4 +1,4 @@
-import { signUp, updateUserDisplayName } from "@Services/firebase/auth"
+import { signUp, updateUserDisplayName } from "@kittr/firebase/auth"
 import { prisma, ChannelManagerRoles } from "@kittr/prisma"
 import { TRPCError } from "@trpc/server"
 import admin from "firebase-admin"

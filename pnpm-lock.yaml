@@ -117,6 +117,7 @@ importers:
       '@juggle/resize-observer': 3.3.1
       '@kittr/analytics': workspace:*
       '@kittr/config': workspace:*
+      '@kittr/firebase': workspace:*
       '@kittr/logger': workspace:*
       '@kittr/prisma': workspace:*
       '@kittr/tsconfig': workspace:*
@@ -143,11 +144,7 @@ importers:
       '@types/styled-components': 5.1.23
       '@types/validator': 13.7.4
       babel-plugin-styled-components: 2.0.7
-      browser-image-compression: 2.0.0
       date-fns: 2.28.0
-      firebase: ^9.16.0
-      firebase-admin: ^11.5.0
-      firebase-tools: ^11.21.0
       jsonwebtoken: 8.5.1
       micro: 9.3.4
       next: ^13.1.5
@@ -172,6 +169,7 @@ importers:
       '@emotion/server': 11.10.0
       '@juggle/resize-observer': 3.3.1
       '@kittr/analytics': link:../../packages/analytics
+      '@kittr/firebase': link:../../packages/firebase
       '@kittr/logger': link:../../packages/logger
       '@kittr/prisma': link:../../packages/prisma
       '@kittr/ui': link:../../packages/ui
@@ -189,11 +187,7 @@ importers:
       '@trpc/react': 9.27.4_yq6opvmfxkazbqbz74ktcmnaju
       '@trpc/react-query': 10.9.0_22wgxldzdfxutowffn2dykkd3i
       '@trpc/server': 10.9.0
-      browser-image-compression: 2.0.0
       date-fns: 2.28.0
-      firebase: 9.16.0
-      firebase-admin: 11.5.0
-      firebase-tools: 11.21.0
       jsonwebtoken: 8.5.1
       micro: 9.3.4
       next: 13.1.5_qugu52izettqdqqm5qcjcltcia
@@ -265,6 +259,27 @@ importers:
       eslint-plugin-prettier: 4.2.1_i2cojdczqdiurzgttlwdgf764e
       prettier: 2.7.1
       typescript: 4.9.3
+
+  packages/firebase:
+    specifiers:
+      '@kittr/config': workspace:*
+      '@kittr/tsconfig': workspace:*
+      '@kittr/types': workspace:*
+      browser-image-compression: 2.0.0
+      firebase: ^9.16.0
+      firebase-admin: ^11.5.0
+      firebase-tools: ^11.21.0
+      typescript: 5.0.0-beta
+    dependencies:
+      browser-image-compression: 2.0.0
+      firebase: 9.16.0
+      firebase-admin: 11.5.0
+      firebase-tools: 11.21.0
+    devDependencies:
+      '@kittr/config': link:../eslint-config
+      '@kittr/tsconfig': link:../tsconfig
+      '@kittr/types': link:../types
+      typescript: 5.0.0-beta
 
   packages/logger:
     specifiers:
@@ -6891,7 +6906,7 @@ packages:
     resolution: {integrity: sha512-8bVUjXZvJacUFkJXHdyZ9iH1Eaj5V7I8c4NdH5sQJsdXkqT4CA5Dhb4yb4VE/3asyx4L9ayZr1NIhTsWHczmMw==}
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 16.18.11
+      '@types/node': 18.11.18
     dev: true
 
   /@types/graceful-fs/4.1.6:
@@ -7018,7 +7033,7 @@ packages:
   /@types/node-fetch/2.6.2:
     resolution: {integrity: sha512-DHqhlq5jeESLy19TYhLakJ07kNumXWjcDdxXsLUMJZ6ue8VZJj4kLPQVE/2mdHh3xZziNF1xppu5lwmS53HR+A==}
     dependencies:
-      '@types/node': 16.18.11
+      '@types/node': 18.11.18
       form-data: 3.0.1
     dev: true
 
@@ -7164,7 +7179,7 @@ packages:
   /@types/webpack-sources/3.2.0:
     resolution: {integrity: sha512-Ft7YH3lEVRQ6ls8k4Ff1oB4jN6oy/XmU6tQISKdhfh+1mR+viZFphS6WL0IrtDOzvefmJg5a0s7ZQoRXwqTEFg==}
     dependencies:
-      '@types/node': 16.18.11
+      '@types/node': 18.11.18
       '@types/source-list-map': 0.1.2
       source-map: 0.7.4
     dev: true
@@ -7172,7 +7187,7 @@ packages:
   /@types/webpack/4.41.33:
     resolution: {integrity: sha512-PPajH64Ft2vWevkerISMtnZ8rTs4YmRbs+23c402J0INmxDKCrhZNvwZYtzx96gY2wAtXdrK1BS2fiC8MlLr3g==}
     dependencies:
-      '@types/node': 16.18.11
+      '@types/node': 18.11.18
       '@types/tapable': 1.0.8
       '@types/uglify-js': 3.17.1
       '@types/webpack-sources': 3.2.0
@@ -14173,7 +14188,7 @@ packages:
     resolution: {integrity: sha512-7vuh85V5cdDofPyxn58nrPjBktZo0u9x1g8WtjQol+jZDaE+fhN+cIvTj11GndBnMnyfrUOG1sZQxCdjKh+DKg==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': 16.18.11
+      '@types/node': 18.11.18
       merge-stream: 2.0.0
       supports-color: 8.1.1
     dev: true
@@ -19666,6 +19681,12 @@ packages:
 
   /typescript/4.9.3:
     resolution: {integrity: sha512-CIfGzTelbKNEnLpLdGFgdyKhG23CKdKgQPOBc+OUNrkJ2vr+KSzsSV5kq5iWhEQbok+quxgGzrAtGWCyU7tHnA==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: true
+
+  /typescript/5.0.0-beta:
+    resolution: {integrity: sha512-+SSabbSXG5mtF+QGdV9uXXt9Saq1cSyI6hSG7znhaLoquleJpnmfkwSxFngK9c2fWWi1W/263TuzXQOsIcdjjA==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true

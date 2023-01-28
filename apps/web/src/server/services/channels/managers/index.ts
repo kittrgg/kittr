@@ -1,5 +1,5 @@
 import { getUserByEmail } from "@Server/services/users"
-import admin from "@Services/firebase/admin"
+import admin from "@kittr/firebase/admin"
 import { prisma, ChannelManager, ChannelManagerRoles } from "@kittr/prisma"
 
 export const listManagers = async ({ managers }: { managers: ChannelManager[] }) => {

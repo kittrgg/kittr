@@ -1,4 +1,4 @@
-import { auth } from "@Services/firebase"
+import { auth } from "@kittr/firebase"
 import type { User } from "firebase/auth"
 import { useEffect, useState } from "react"
 
