@@ -1,7 +1,7 @@
 import colors from "@Colors"
 import Button from "@Components/shared/Button"
 import TextInput from "@Components/shared/TextInput"
-import { reauthenticate } from "@Services/firebase/auth/reauthenticate"
+import { reauthenticate } from "@kittr/firebase/auth/reauthenticate"
 import { Dispatch, SetStateAction, useState } from "react"
 
 interface Props {

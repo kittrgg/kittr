@@ -1,7 +1,7 @@
 import AuthLayout from "@Components/layouts/Authentication"
 import Button from "@Components/shared/Button"
-import { requestEmailVerification } from "@Services/firebase/auth/requestEmailVerification"
 import { header4, montserrat } from "@Styles/typography"
+import { requestEmailVerification } from "@kittr/firebase/auth/requestEmailVerification"
 import { useRouter } from "next/router"
 import { useEffect } from "react"
 import styled from "styled-components"

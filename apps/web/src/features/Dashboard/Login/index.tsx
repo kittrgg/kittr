@@ -1,7 +1,7 @@
 import colors from "@Colors"
 import AuthLayout from "@Components/layouts/Authentication"
 import { Button, TextInput } from "@Components/shared"
-import { logIn } from "@Services/firebase/auth/logIn"
+import { logIn } from "@kittr/firebase/auth/logIn"
 import { Routes } from "@Utils/lookups/routes"
 import Link from "next/link"
 import { useRouter } from "next/router"

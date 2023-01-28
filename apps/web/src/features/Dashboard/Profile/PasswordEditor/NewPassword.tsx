@@ -1,8 +1,8 @@
 import colors from "@Colors"
 import Button from "@Components/shared/Button"
 import TextInput from "@Components/shared/TextInput"
-import { logOut } from "@Services/firebase/auth/logOut"
-import { updateUserPassword } from "@Services/firebase/auth/updatePassword"
+import { logOut } from "@kittr/firebase/auth/logOut"
+import { updateUserPassword } from "@kittr/firebase/auth/updatePassword"
 import { useRouter } from "next/router"
 import { useState } from "react"
 

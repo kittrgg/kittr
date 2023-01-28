@@ -4,10 +4,10 @@ import { useUser } from "@Hooks/useUser"
 import { setActiveView, setChannelView } from "@Redux/slices/dashboard"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-//@ts-ignore
-import { logOut } from "@Services/firebase/auth/logOut"
 import { header4 } from "@Styles/typography"
 import { Routes } from "@Utils/lookups/routes"
+//@ts-ignore
+import { logOut } from "@kittr/firebase/auth/logOut"
 import { useRouter } from "next/router"
 import { useState } from "react"
 import styled from "styled-components"

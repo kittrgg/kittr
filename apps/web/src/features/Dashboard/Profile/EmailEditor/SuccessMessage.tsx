@@ -1,5 +1,5 @@
 import { useDispatch } from "@Redux/store"
-import { logOut } from "@Services/firebase/auth/logOut"
+import { logOut } from "@kittr/firebase/auth/logOut"
 import { Routes } from "@Utils/lookups/routes"
 import { useRouter } from "next/router"
 import { useEffect } from "react"
