@@ -337,6 +337,7 @@ importers:
       '@kittr/prisma': workspace:*
       '@kittr/tsconfig': workspace:*
       '@kittr/twitch': workspace:*
+      '@kittr/types': workspace:*
       '@kittr/utils': workspace:*
       '@trpc/client': ^10.9.0
       '@trpc/next': ^10.9.0
@@ -352,6 +353,7 @@ importers:
       '@kittr/money': link:../money
       '@kittr/prisma': link:../prisma
       '@kittr/twitch': link:../twitch
+      '@kittr/types': link:../types
       '@kittr/utils': link:../utils
       '@trpc/client': 10.9.0_@trpc+server@10.9.0
       '@trpc/next': 10.9.0_zf4dmnjasp57goshgvidib2hkq
