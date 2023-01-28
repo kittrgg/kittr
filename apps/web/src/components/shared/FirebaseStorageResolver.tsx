@@ -1,5 +1,5 @@
 import { Spinner } from "@Components/shared"
-import { trpc } from "@Server/createTRPCNext"
+import { trpc } from "@/lib/trpc"
 import { captureException } from "@Services/captureException"
 import { useEffect } from "react"
 

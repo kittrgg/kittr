@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { trpc } from "@Server/createTRPCNext"
+import { trpc } from "@/lib/trpc"
 import { WarzoneKitOption } from "@kittr/prisma"
 import { Button, NumberInput, SubSection, Text, TextInput } from "@kittr/ui"
 import { useState } from "react"

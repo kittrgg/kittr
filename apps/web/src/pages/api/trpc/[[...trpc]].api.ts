@@ -1,5 +1,4 @@
-import { createContext } from "@Server/context"
-import { appRouter } from "@Server/index"
+import { appRouter, createContext } from "@kittr/trpc"
 import { withSentry } from "@sentry/nextjs"
 import * as trpcNext from "@trpc/server/adapters/next"
 

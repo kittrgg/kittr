@@ -1,3 +1,4 @@
+import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
 import { Button, Modal, Spinner } from "@Components/shared"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
@@ -6,7 +7,6 @@ import { useUser } from "@Hooks/useUser"
 import { setActiveView, setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import { trpc } from "@Server/createTRPCNext"
 import { paragraph } from "@Styles/typography"
 import styled from "styled-components"
 

@@ -1,23 +1,21 @@
-import { AppRouter } from "../"
+import { AppRouter } from ".."
 import { getToken } from "@kittr/firebase/auth"
 import { QueryClientConfig } from "@tanstack/react-query"
 import { httpBatchLink } from "@trpc/client/links/httpBatchLink"
 import { loggerLink } from "@trpc/client/links/loggerLink"
-import { createTRPCNext as trpcNext } from "@trpc/next"
+import { createTRPCNext } from "@trpc/next"
 import superjson from "superjson"
 
 interface Params {
 	url: string
-	fetch?: any
 	queryClientConfig?: QueryClientConfig
 }
 
-export const trpc = ({ url, fetch, queryClientConfig }: Params) =>
-	trpcNext<AppRouter>({
+export const trpc = ({ url, queryClientConfig }: Params) =>
+	createTRPCNext<AppRouter>({
 		config() {
 			return {
 				url,
-				fetch,
 				transformer: superjson,
 				links: [
 					// adds pretty logs to your console in development and logs errors in production

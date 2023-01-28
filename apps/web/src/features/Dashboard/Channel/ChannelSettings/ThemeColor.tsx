@@ -1,9 +1,9 @@
+import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
 import { ColorPicker, SVG } from "@Components/shared"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { setModal } from "@Redux/slices/dashboard"
 import { useDispatch } from "@Redux/store"
-import { trpc } from "@Server/createTRPCNext"
 import styled from "styled-components"
 
 const ThemeColor = () => {

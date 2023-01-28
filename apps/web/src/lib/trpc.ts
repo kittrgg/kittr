@@ -1,4 +1,4 @@
-import { createTRPCNext as trpcClient } from "@kittr/trpc"
+import { trpc as trpcClient } from "@kittr/trpc"
 
 const getBaseUrl = (): string => {
 	if (typeof window !== "undefined") {

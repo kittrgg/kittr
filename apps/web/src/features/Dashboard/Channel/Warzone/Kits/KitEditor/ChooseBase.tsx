@@ -1,9 +1,9 @@
 import * as Styled from "./style"
+import { trpc } from "@/lib/trpc"
 import { Selector } from "@Components/shared"
 import { updateBase, updateOptions } from "@Redux/slices/dashboard"
 import { useActiveKit, useChannelView } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import { trpc } from "@Server/createTRPCNext"
 import { sortAlphabetical } from "@Utils/helpers/sortAlphabetical"
 
 const ChooseBase = () => {

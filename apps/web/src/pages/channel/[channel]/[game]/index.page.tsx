@@ -1,9 +1,9 @@
+import { trpc } from "@/lib/trpc"
 import FallbackPage from "@Components/layouts/FallbackPage"
 import { Head, NoItemFound } from "@Components/shared"
 import WarzoneProfile from "@Features/WarzoneProfile"
-import { createSSGHelper } from "@Server/createSSGHelper"
-import { trpc } from "@Server/createTRPCNext"
 import { prisma } from "@kittr/prisma"
+import { createSSGHelper } from "@kittr/trpc"
 import { useRouter } from "next/router"
 
 const GamePresentation = () => {

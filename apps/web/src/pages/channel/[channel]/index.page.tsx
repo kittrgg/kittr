@@ -1,9 +1,9 @@
+import { trpc } from "@/lib/trpc"
 import PageWrapper from "@Components/layouts/PageWrapper"
 import { NoItemFound } from "@Components/shared"
 import ChannelProfile from "@Features/ChannelProfile"
-import { createSSGHelper } from "@Server/createSSGHelper"
-import { trpc } from "@Server/createTRPCNext"
 import { getTopChannelsQuery } from "@Services/orm"
+import { createSSGHelper } from "@kittr/trpc"
 import { useRouter } from "next/router"
 
 const ChannelProfilePage = () => {

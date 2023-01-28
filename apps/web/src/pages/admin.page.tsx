@@ -1,5 +1,5 @@
 // import Admin from "@Features/Admin"
-import { trpc } from "@Server/createTRPCNext"
+import { trpc } from "@/lib/trpc"
 import { Button, Title } from "@kittr/ui"
 import Link from "next/link"
 import { useRouter } from "next/router"

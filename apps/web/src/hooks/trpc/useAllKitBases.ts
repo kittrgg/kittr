@@ -1,4 +1,4 @@
-// import { trpc } from "@Server/createTRPCNext"
+// import { trpc } from "@/lib/trpc"
 // import { RouterInput } from "@Server/index"
 // import { InferQueryInput } from "@Server/index"
 // import { Prisma } from "@kittr/prisma"
