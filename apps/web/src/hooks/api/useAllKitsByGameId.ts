@@ -1,5 +1,5 @@
 // import fetch from "@Fetch"
-// import { trpc } from "@Server/createTRPCNext"
+// import { trpc } from "@/lib/trpc"
 // import { IKitBase } from "@kittr/types/kits"
 
 // import { useQuery } from "react-query"

@@ -1,10 +1,10 @@
 import H3 from "../../H3"
+import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
 import { MultiButton, Spinner } from "@Components/shared"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { setModal } from "@Redux/slices/dashboard"
 import { useDispatch } from "@Redux/store"
-import { trpc } from "@Server/createTRPCNext"
 import { paragraph } from "@Styles/typography"
 import styled from "styled-components"
 

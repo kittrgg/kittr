@@ -1,8 +1,8 @@
+import { trpc } from "@/lib/trpc"
 import { Button, Modal, Spinner } from "@Components/shared"
 import { clearKitEditor, setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useChannelView } from "@Redux/slices/dashboard/selectors"
 import { useDispatch, useSelector } from "@Redux/store"
-import { trpc } from "@Server/createTRPCNext"
 import { header2 } from "@Styles/typography"
 import styled from "styled-components"
 

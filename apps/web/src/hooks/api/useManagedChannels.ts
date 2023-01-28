@@ -1,5 +1,5 @@
 // import { useUser } from "@Hooks/useUser"
-// import { trpc } from "@Server/createTRPCNext"
+// import { trpc } from "@/lib/trpc"
 
 // export const useManagedChannels = () => {
 // 	const user = useUser()

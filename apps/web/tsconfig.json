@@ -5,6 +5,7 @@
     "declarationMap": false,
     "declaration": false,
     "paths": {
+      "@/*": ["./*"],
       "@Colors": [
         "styles/colors"
       ],

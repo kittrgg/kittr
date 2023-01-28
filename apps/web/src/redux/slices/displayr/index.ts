@@ -1,4 +1,3 @@
-import { RouterInput } from "@Server/index"
 import {
 	WarzoneKit,
 	WarzoneKitBase,
@@ -9,6 +8,7 @@ import {
 	WarzoneTwoKitOption,
 	WarzoneTwoKitOptionTuning
 } from "@kittr/prisma"
+import { RouterInput } from "@kittr/trpc"
 import { IPopularityRates } from "@kittr/types/popularity"
 import { createSlice } from "@reduxjs/toolkit"
 

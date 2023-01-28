@@ -1,9 +1,9 @@
+import { trpc } from "@/lib/trpc"
 import { Button, GameCard, Modal, Spinner } from "@Components/shared"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { handleTutorialAction, setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch, useSelector } from "@Redux/store"
-import { trpc } from "@Server/createTRPCNext"
 import styled from "styled-components"
 
 /** The modal that adds a game to a channel. */

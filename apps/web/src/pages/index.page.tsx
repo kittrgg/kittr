@@ -1,11 +1,11 @@
 import Body from "./Home/Body"
 import Hero from "./Home/Hero"
 import PlatformInfo from "./Home/PlatformInfo"
-import { trpc } from "./_app.page"
+import { trpc } from "@/lib/trpc"
 import PageWrapper from "@Components/layouts/PageWrapper"
-import { createSSGHelper } from "@Server/createSSGHelper"
-// import { trpc } from "@Server/createTRPCNext"
+// import { trpc } from "@/lib/trpc"
 import ResponsiveAdBanner from "@Services/venatus/ResponsiveBanner"
+import { createSSGHelper } from "@kittr/trpc"
 
 const Home = () => {
 	const { data: games } = trpc.games.count.useQuery()

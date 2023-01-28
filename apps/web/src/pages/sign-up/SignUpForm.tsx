@@ -1,7 +1,7 @@
+import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
 import AuthLayout from "@Components/layouts/Authentication"
 import { Button, Spinner, TextInput } from "@Components/shared"
-import { trpc } from "@Server/createTRPCNext"
 import { Routes } from "@Utils/lookups/routes"
 import Link from "next/link"
 import { useRouter } from "next/router"

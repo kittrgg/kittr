@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { KitBaseForm } from "./KitBaseForm"
-import { trpc } from "@Server/createTRPCNext"
+import { trpc } from "@/lib/trpc"
 import { WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
 import { Button, List, Section } from "@kittr/ui"
 import SVG from "@kittr/ui/src/components/SVG"

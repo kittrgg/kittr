@@ -1,0 +1,22 @@
+{
+	"name": "@kittr/twitch",
+	"private": true,
+	"version": "0.0.0",
+	"main": "./src/index.ts",
+	"scripts": {
+		"lint": "eslint .",
+		"typecheck": "tsc --noEmit"
+	},
+	"dependencies": {
+		"@kittr/logger": "workspace:*",
+		"@kittr/prisma": "workspace:*",
+		"@kittr/types": "workspace:*",
+		"@kittr/utils": "workspace:*"
+	},
+	"devDependencies": {
+		"@kittr/config": "workspace:*",
+		"eslint": "^8.32.0",
+		"@kittr/tsconfig": "workspace:*",
+		"typescript": "5.0.0-beta"
+	}
+}

@@ -10,7 +10,7 @@ import {
 	useModal
 } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import { trpc } from "@Server/createTRPCNext"
+import { trpc } from "@/lib/trpc"
 import { paragraph } from "@Styles/typography"
 import { isFetchError } from "@Utils/helpers/typeGuards"
 import { WarzoneKit, WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"

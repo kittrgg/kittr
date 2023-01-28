@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { upload } from "../storage/upload"
+import { upload } from "./upload"
 import compressor from "browser-image-compression"
 
 interface IFunc {

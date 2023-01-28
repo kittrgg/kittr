@@ -1,8 +1,8 @@
 import Title from "../../H3"
+import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
 import { Button, TextInputBox } from "@Components/shared"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
-import { trpc } from "@Server/createTRPCNext"
 import { useEffect, useState } from "react"
 
 /** Edit the name of the channel. */

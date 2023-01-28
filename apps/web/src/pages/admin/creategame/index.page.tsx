@@ -1,5 +1,5 @@
+import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
-import { trpc } from "@Server/createTRPCNext"
 import { Button, MultiSelect, Section, Text, TextInput } from "@kittr/ui"
 import { Switch } from "@mantine/core"
 import { useState } from "react"
