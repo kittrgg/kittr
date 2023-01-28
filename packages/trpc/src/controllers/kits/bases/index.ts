@@ -1,5 +1,5 @@
-import { publicProcedure } from "@Server/initTRPC"
-import * as KitsBasesService from "@Server/services/kits/bases"
+import { publicProcedure } from "../../../initTRPC"
+import * as KitsBasesService from "../../../services/kits/bases"
 import { z } from "zod"
 
 const listBases = publicProcedure

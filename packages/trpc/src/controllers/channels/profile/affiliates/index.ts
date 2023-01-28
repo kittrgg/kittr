@@ -1,6 +1,6 @@
-import { authedProcedure } from "@Server/initTRPC"
-import * as ChannelsService from "@Server/services/channels"
-import { checkRole } from "@Server/services/users"
+import { authedProcedure } from "../../../../initTRPC"
+import * as ChannelsService from "../../../../services/channels"
+import { checkRole } from "../../../../services/users"
 import { ChannelAffiliateModel } from "@kittr/prisma/validator"
 import { z } from "zod"
 
@@ -12,7 +12,11 @@ const createAffiliate = authedProcedure
 		})
 	)
 	.mutation(async ({ ctx, input }) => {
-		await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["OWNER", "ADMIN"] })
+		await checkRole({
+			firebaseUserId: ctx.user.uid,
+			channelId: input.channelId,
+			roles: ["OWNER", "ADMIN"]
+		})
 
 		const channel = await ChannelsService.createAffiliate({
 			channelId: input.channelId,
@@ -30,7 +34,11 @@ const updateAffiliate = authedProcedure
 		})
 	)
 	.mutation(async ({ ctx, input }) => {
-		await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["OWNER", "ADMIN"] })
+		await checkRole({
+			firebaseUserId: ctx.user.uid,
+			channelId: input.channelId,
+			roles: ["OWNER", "ADMIN"]
+		})
 
 		const channel = await ChannelsService.updateAffiliate({
 			data: input.data
@@ -46,7 +54,11 @@ const deleteAffiliate = authedProcedure
 		})
 	)
 	.mutation(async ({ ctx, input }) => {
-		await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["OWNER", "ADMIN"] })
+		await checkRole({
+			firebaseUserId: ctx.user.uid,
+			channelId: input.channelId,
+			roles: ["OWNER", "ADMIN"]
+		})
 
 		const channel = await ChannelsService.deleteAffiliate(input)
 		return channel

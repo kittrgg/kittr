@@ -1,5 +1,5 @@
-import { authedProcedure } from "@Server/initTRPC"
-import { getUrl } from "@Utils/helpers/getUrl"
+import { authedProcedure } from "../../initTRPC"
+import { getUrl } from "../../utils"
 import { stripe } from "@kittr/money"
 import { prisma } from "@kittr/prisma"
 import { TRPCError } from "@trpc/server"
@@ -34,9 +34,17 @@ export const buyPremium = authedProcedure
 				],
 				allow_promotion_codes: true,
 				subscription_data: {
-					metadata: { channelId: input.channelId, displayName: input.displayName, urlSafeName: input.urlSafeName }
+					metadata: {
+						channelId: input.channelId,
+						displayName: input.displayName,
+						urlSafeName: input.urlSafeName
+					}
 				},
-				metadata: { channelId: input.channelId, displayName: input.displayName, urlSafeName: input.urlSafeName },
+				metadata: {
+					channelId: input.channelId,
+					displayName: input.displayName,
+					urlSafeName: input.urlSafeName
+				},
 				success_url: `${getUrl}/premium-success?session_id={CHECKOUT_SESSION_ID}`,
 				cancel_url: `${getUrl}/back-to-dashboard`
 			})
@@ -82,7 +90,9 @@ export const managePremium = authedProcedure
 				})
 			}
 
-			const subscription = await stripe.subscriptions.retrieve(channel.plan?.stripeSubscriptionId)
+			const subscription = await stripe.subscriptions.retrieve(
+				channel.plan?.stripeSubscriptionId
+			)
 			const session = await stripe.billingPortal.sessions.create({
 				customer: subscription.customer as string,
 				return_url: `${getUrl}/back-to-dashboard`
@@ -106,8 +116,12 @@ export const getPaymentMethod = authedProcedure
 	)
 	.query(async ({ input }) => {
 		try {
-			const { default_payment_method } = await stripe.subscriptions.retrieve(input.subId)
-			const { card } = await stripe.paymentMethods.retrieve(default_payment_method as string)
+			const { default_payment_method } = await stripe.subscriptions.retrieve(
+				input.subId
+			)
+			const { card } = await stripe.paymentMethods.retrieve(
+				default_payment_method as string
+			)
 
 			return { last4: card?.last4 }
 		} catch (err) {

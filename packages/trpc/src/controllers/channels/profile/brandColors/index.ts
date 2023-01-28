@@ -1,6 +1,6 @@
-import { authedProcedure } from "@Server/initTRPC"
-import * as ChannelsBrandColorsService from "@Server/services/channels"
-import { checkRole } from "@Server/services/users"
+import { authedProcedure } from "../../../../initTRPC"
+import * as ChannelsBrandColorsService from "../../../../services/channels"
+import { checkRole } from "../../../../services/users"
 import { z } from "zod"
 
 const upsertBrandColor = authedProcedure
@@ -12,7 +12,11 @@ const upsertBrandColor = authedProcedure
 		})
 	)
 	.mutation(async ({ ctx, input }) => {
-		await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["OWNER", "ADMIN"] })
+		await checkRole({
+			firebaseUserId: ctx.user.uid,
+			channelId: input.channelId,
+			roles: ["OWNER", "ADMIN"]
+		})
 
 		const channel = await ChannelsBrandColorsService.upsertBrandColor({
 			channelId: input.channelId,

@@ -1,4 +1,4 @@
-import { authedProcedure } from "@Server/initTRPC"
+import { authedProcedure } from "../../../initTRPC"
 import { prisma } from "@kittr/prisma"
 
 const listChannels = authedProcedure.query(async ({ ctx }) => {

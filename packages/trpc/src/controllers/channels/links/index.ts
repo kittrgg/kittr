@@ -1,6 +1,6 @@
-import { authedProcedure } from "@Server/initTRPC"
-import * as ChannelsService from "@Server/services/channels"
-import { checkRole } from "@Server/services/users"
+import { authedProcedure } from "../../../initTRPC"
+import * as ChannelsService from "../../../services/channels"
+import { checkRole } from "../../../services/users"
 import { ChannelLinkModel } from "@kittr/prisma/validator"
 import { z } from "zod"
 
@@ -12,7 +12,11 @@ const upsertLinks = authedProcedure
 		})
 	)
 	.mutation(async ({ ctx, input: { channelId, links } }) => {
-		await checkRole({ firebaseUserId: ctx.user.uid, channelId, roles: ["OWNER", "ADMIN"] })
+		await checkRole({
+			firebaseUserId: ctx.user.uid,
+			channelId,
+			roles: ["OWNER", "ADMIN"]
+		})
 
 		const channel = await ChannelsService.updateLinks({
 			channelId,

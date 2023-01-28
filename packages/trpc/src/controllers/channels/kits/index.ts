@@ -1,6 +1,6 @@
-import { authedProcedure } from "@Server/initTRPC"
-import * as ChannelsService from "@Server/services/channels"
-import { checkRole } from "@Server/services/users"
+import { authedProcedure } from "../../../initTRPC"
+import * as ChannelsService from "../../../services/channels"
+import { checkRole } from "../../../services/users"
 import {
 	WarzoneKitModel,
 	WarzoneKitOptionModel,
@@ -21,7 +21,11 @@ const upsertKitToChannel = authedProcedure
 		})
 	)
 	.mutation(async ({ ctx, input }) => {
-		await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["ADMIN", "EDITOR", "OWNER"] })
+		await checkRole({
+			firebaseUserId: ctx.user.uid,
+			channelId: input.channelId,
+			roles: ["ADMIN", "EDITOR", "OWNER"]
+		})
 
 		const channel = await ChannelsService.upsertKit({
 			channelId: input.channelId,
@@ -38,7 +42,11 @@ const upsertWz2KitToChannel = authedProcedure
 			kit: WarzoneTwoKitModel.extend({
 				id: z.string().optional(),
 				options: WarzoneTwoKitOptionModel.array().default([]),
-				tuning: WarzoneTwoKitOptionTuningModel.partial({ id: true, horz: true, vert: true })
+				tuning: WarzoneTwoKitOptionTuningModel.partial({
+					id: true,
+					horz: true,
+					vert: true
+				})
 					.extend({ kitId: z.string().optional() })
 					.array()
 					.default([])
@@ -47,7 +55,11 @@ const upsertWz2KitToChannel = authedProcedure
 		})
 	)
 	.mutation(async ({ ctx, input }) => {
-		await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["ADMIN", "EDITOR", "OWNER"] })
+		await checkRole({
+			firebaseUserId: ctx.user.uid,
+			channelId: input.channelId,
+			roles: ["ADMIN", "EDITOR", "OWNER"]
+		})
 
 		const channel = await ChannelsService.upsertKit({
 			channelId: input.channelId,
@@ -75,7 +87,11 @@ const deleteKitFromChannel = authedProcedure
 		})
 	)
 	.mutation(async ({ ctx, input }) => {
-		await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["ADMIN", "EDITOR", "OWNER"] })
+		await checkRole({
+			firebaseUserId: ctx.user.uid,
+			channelId: input.channelId,
+			roles: ["ADMIN", "EDITOR", "OWNER"]
+		})
 
 		const channel = await ChannelsService.deleteKit({
 			channelId: input.channelId,

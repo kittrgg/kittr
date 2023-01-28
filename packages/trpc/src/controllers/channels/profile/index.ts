@@ -1,11 +1,13 @@
-import { publicProcedure } from "@Server/initTRPC"
-import * as ChannelsService from "@Server/services/channels"
+import { publicProcedure } from "../../../initTRPC"
+import * as ChannelsService from "../../../services/channels"
 import { z } from "zod"
 
-const getChannelProfile = publicProcedure.input(z.string()).query(async ({ input }) => {
-	const channel = await ChannelsService.getChannelProfileByUrlSafeName(input)
-	return channel
-})
+const getChannelProfile = publicProcedure
+	.input(z.string())
+	.query(async ({ input }) => {
+		const channel = await ChannelsService.getChannelProfileByUrlSafeName(input)
+		return channel
+	})
 
 export const ChannelsProfileController = {
 	getChannelProfile

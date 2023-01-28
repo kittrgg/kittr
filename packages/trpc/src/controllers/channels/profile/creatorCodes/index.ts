@@ -1,6 +1,6 @@
-import { authedProcedure } from "@Server/initTRPC"
-import * as ChannelsProfileCreatorCodesService from "@Server/services/channels/profile/creatorCodes"
-import { checkRole } from "@Server/services/users"
+import { authedProcedure } from "../../../../initTRPC"
+import * as ChannelsProfileCreatorCodesService from "../../../../services/channels/profile/creatorCodes"
+import { checkRole } from "../../../../services/users"
 import { ChannelCreatorCodeModel } from "@kittr/prisma/validator"
 import { z } from "zod"
 
@@ -11,7 +11,11 @@ const upsertCode = authedProcedure
 		})
 	)
 	.mutation(async ({ ctx, input }) => {
-		await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.code.channelId, roles: ["OWNER", "ADMIN"] })
+		await checkRole({
+			firebaseUserId: ctx.user.uid,
+			channelId: input.code.channelId,
+			roles: ["OWNER", "ADMIN"]
+		})
 
 		const channel = await ChannelsProfileCreatorCodesService.upsertCode({
 			codeUpdate: input.code

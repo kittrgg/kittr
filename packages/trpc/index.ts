@@ -244,4 +244,4 @@ export type RouterInput = inferRouterInputs<AppRouter>
 export type RouterOutput = inferRouterOutputs<AppRouter>
 
 export { createSSGHelper } from "./src/createSSGHelper"
-export { createTRPCNext } from "./src/createTRPCNext"
+export { trpc } from "./src/createTRPCNext"

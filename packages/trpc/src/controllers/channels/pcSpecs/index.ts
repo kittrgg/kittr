@@ -1,6 +1,6 @@
-import { authedProcedure, publicProcedure } from "@Server/initTRPC"
-import * as ChannelsPcSpecsService from "@Server/services/channels/pcSpecs"
-import { checkRole } from "@Server/services/users"
+import { authedProcedure, publicProcedure } from "../../../initTRPC"
+import * as ChannelsPcSpecsService from "../../../services/channels/pcSpecs"
+import { checkRole } from "../../../services/users"
 import { ChannelPcSpecModel } from "@kittr/prisma/validator"
 import { z } from "zod"
 
@@ -34,7 +34,11 @@ const createPcSpec = authedProcedure
 		})
 	)
 	.mutation(async ({ ctx, input }) => {
-		await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["OWNER", "ADMIN"] })
+		await checkRole({
+			firebaseUserId: ctx.user.uid,
+			channelId: input.channelId,
+			roles: ["OWNER", "ADMIN"]
+		})
 
 		const channel = await ChannelsPcSpecsService.createPcSpec({
 			channelId: input.channelId,
@@ -52,7 +56,11 @@ const updatePcSpec = authedProcedure
 		})
 	)
 	.mutation(async ({ ctx, input }) => {
-		await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["OWNER", "ADMIN"] })
+		await checkRole({
+			firebaseUserId: ctx.user.uid,
+			channelId: input.channelId,
+			roles: ["OWNER", "ADMIN"]
+		})
 
 		const channel = await ChannelsPcSpecsService.updatePcSpec({
 			pcSpecId: input.pcSpecId,
@@ -70,7 +78,11 @@ const deletePcSpec = authedProcedure
 		})
 	)
 	.mutation(async ({ ctx, input }) => {
-		await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["OWNER", "ADMIN"] })
+		await checkRole({
+			firebaseUserId: ctx.user.uid,
+			channelId: input.channelId,
+			roles: ["OWNER", "ADMIN"]
+		})
 
 		const channel = await ChannelsPcSpecsService.deletePcSpec({
 			channelId: input.channelId,

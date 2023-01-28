@@ -1,6 +1,6 @@
-import { authedProcedure } from "@Server/initTRPC"
-import * as ChannelsManagersOwnersService from "@Server/services/channels/managers/owners"
-import { checkRole } from "@Server/services/users"
+import { authedProcedure } from "../../../../initTRPC"
+import * as ChannelsManagersOwnersService from "../../../../services/channels/managers/owners"
+import { checkRole } from "../../../../services/users"
 import { z } from "zod"
 
 const editOwner = authedProcedure
@@ -11,7 +11,11 @@ const editOwner = authedProcedure
 		})
 	)
 	.mutation(async ({ ctx, input }) => {
-		const { id } = await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["OWNER"] })
+		const { id } = await checkRole({
+			firebaseUserId: ctx.user.uid,
+			channelId: input.channelId,
+			roles: ["OWNER"]
+		})
 
 		const channel = await ChannelsManagersOwnersService.editOwner({
 			channelId: input.channelId,

@@ -1,6 +1,6 @@
-import { authedProcedure } from "@Server/initTRPC"
-import * as ChannelsManagersService from "@Server/services/channels/managers"
-import { checkRole } from "@Server/services/users"
+import { authedProcedure } from "../../../initTRPC"
+import * as ChannelsManagersService from "../../../services/channels/managers"
+import { checkRole } from "../../../services/users"
 import { ChannelManagerModel } from "@kittr/prisma/validator"
 import { z } from "zod"
 
@@ -12,7 +12,11 @@ const listManagers = authedProcedure
 		})
 	)
 	.query(async ({ ctx, input: { channelId, managers } }) => {
-		await checkRole({ firebaseUserId: ctx.user.uid, channelId, roles: ["ADMIN", "OWNER", "EDITOR"] })
+		await checkRole({
+			firebaseUserId: ctx.user.uid,
+			channelId,
+			roles: ["ADMIN", "OWNER", "EDITOR"]
+		})
 		if (managers.length === 0) return []
 
 		const result = ChannelsManagersService.listManagers({ managers })
@@ -30,7 +34,11 @@ const createManager = authedProcedure
 		})
 	)
 	.mutation(async ({ ctx, input }) => {
-		await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["OWNER", "ADMIN"] })
+		await checkRole({
+			firebaseUserId: ctx.user.uid,
+			channelId: input.channelId,
+			roles: ["OWNER", "ADMIN"]
+		})
 
 		const manager = await ChannelsManagersService.createManager({
 			channelId: input.channelId,
@@ -49,7 +57,11 @@ const demoteManager = authedProcedure
 		})
 	)
 	.mutation(async ({ ctx, input: { channelId, managerIdToDemote } }) => {
-		await checkRole({ firebaseUserId: ctx.user.uid, channelId, roles: ["OWNER"] })
+		await checkRole({
+			firebaseUserId: ctx.user.uid,
+			channelId,
+			roles: ["OWNER"]
+		})
 
 		const channel = await ChannelsManagersService.demoteManager({
 			channelId,
@@ -67,7 +79,11 @@ const promoteManager = authedProcedure
 		})
 	)
 	.mutation(async ({ ctx, input }) => {
-		await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["OWNER", "ADMIN"] })
+		await checkRole({
+			firebaseUserId: ctx.user.uid,
+			channelId: input.channelId,
+			roles: ["OWNER", "ADMIN"]
+		})
 
 		const channel = await ChannelsManagersService.promoteManager({
 			channelId: input.channelId,
@@ -84,7 +100,11 @@ const deleteManager = authedProcedure
 		})
 	)
 	.mutation(async ({ ctx, input }) => {
-		await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["OWNER"] })
+		await checkRole({
+			firebaseUserId: ctx.user.uid,
+			channelId: input.channelId,
+			roles: ["OWNER"]
+		})
 
 		const channel = await ChannelsManagersService.deleteManager({
 			channelId: input.channelId,

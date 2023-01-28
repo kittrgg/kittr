@@ -1,15 +1,21 @@
-import { adminProcedure } from "@Server/initTRPC"
-import * as AdminWarzoneService from "@Server/services/admin/warzone"
-import { WarzoneCommandCodeModel, WarzoneKitBaseModel, WarzoneKitOptionModel } from "@kittr/prisma/validator"
+import { adminProcedure } from "../../../initTRPC"
+import * as AdminWarzoneService from "../../../services/admin/warzone"
+import {
+	WarzoneCommandCodeModel,
+	WarzoneKitBaseModel,
+	WarzoneKitOptionModel
+} from "@kittr/prisma/validator"
 import { z } from "zod"
 
 const listKitBases = adminProcedure.query(async () => {
 	return await AdminWarzoneService.listKitBases()
 })
 
-const getKitBase = adminProcedure.input(z.object({ kitBaseId: z.string() })).query(async ({ input }) => {
-	return await AdminWarzoneService.getKitBase(input)
-})
+const getKitBase = adminProcedure
+	.input(z.object({ kitBaseId: z.string() }))
+	.query(async ({ input }) => {
+		return await AdminWarzoneService.getKitBase(input)
+	})
 
 const listKitBaseCategories = adminProcedure.query(async () => {
 	return await AdminWarzoneService.listKitBaseCategories()
@@ -89,10 +95,12 @@ export const createOption = adminProcedure
 		return updatedBase
 	})
 
-export const updateOption = adminProcedure.input(WarzoneKitOptionModel).mutation(async ({ input }) => {
-	const updatedBase = await AdminWarzoneService.updateOption(input)
-	return updatedBase
-})
+export const updateOption = adminProcedure
+	.input(WarzoneKitOptionModel)
+	.mutation(async ({ input }) => {
+		const updatedBase = await AdminWarzoneService.updateOption(input)
+		return updatedBase
+	})
 
 export const deleteOption = adminProcedure
 	.input(

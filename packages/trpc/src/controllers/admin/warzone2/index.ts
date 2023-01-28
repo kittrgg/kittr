@@ -1,7 +1,10 @@
-import { adminProcedure } from "@Server/initTRPC"
-import * as AdminWarzone2Service from "@Server/services/admin/warzone2"
+import { adminProcedure } from "../../../initTRPC"
+import * as AdminWarzone2Service from "../../../services/admin/warzone2"
 import { prisma } from "@kittr/prisma"
-import { WarzoneTwoKitBaseModel, WarzoneTwoKitOptionModel } from "@kittr/prisma/validator"
+import {
+	WarzoneTwoKitBaseModel,
+	WarzoneTwoKitOptionModel
+} from "@kittr/prisma/validator"
 import { z } from "zod"
 
 const listKitBases = adminProcedure.query(async () => {
@@ -108,10 +111,12 @@ export const createOption = adminProcedure
 		return updatedBase
 	})
 
-export const updateOption = adminProcedure.input(WarzoneTwoKitOptionModel).mutation(async ({ input }) => {
-	const updatedBase = await AdminWarzone2Service.updateOption(input)
-	return updatedBase
-})
+export const updateOption = adminProcedure
+	.input(WarzoneTwoKitOptionModel)
+	.mutation(async ({ input }) => {
+		const updatedBase = await AdminWarzone2Service.updateOption(input)
+		return updatedBase
+	})
 
 export const deleteOption = adminProcedure
 	.input(
@@ -120,7 +125,9 @@ export const deleteOption = adminProcedure
 		})
 	)
 	.mutation(async ({ input }) => {
-		const deletedOption = await AdminWarzone2Service.deleteOption(input.optionId)
+		const deletedOption = await AdminWarzone2Service.deleteOption(
+			input.optionId
+		)
 
 		return deletedOption
 	})

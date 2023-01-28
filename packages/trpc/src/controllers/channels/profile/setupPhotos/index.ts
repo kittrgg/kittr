@@ -1,6 +1,6 @@
-import { authedProcedure } from "@Server/initTRPC"
-import * as ChannelsProfileSetupPhotosService from "@Server/services/channels/profile/setupPhotos"
-import { checkRole } from "@Server/services/users"
+import { authedProcedure } from "../../../../initTRPC"
+import * as ChannelsProfileSetupPhotosService from "../../../../services/channels/profile/setupPhotos"
+import { checkRole } from "../../../../services/users"
 import { z } from "zod"
 
 const updateSetupPhotos = authedProcedure
@@ -13,7 +13,11 @@ const updateSetupPhotos = authedProcedure
 		})
 	)
 	.mutation(async ({ input, ctx }) => {
-		await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["OWNER", "ADMIN"] })
+		await checkRole({
+			firebaseUserId: ctx.user.uid,
+			channelId: input.channelId,
+			roles: ["OWNER", "ADMIN"]
+		})
 		return await ChannelsProfileSetupPhotosService.updateSetupPhotos(input)
 	})
 

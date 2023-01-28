@@ -1,6 +1,6 @@
-import { authedProcedure, publicProcedure } from "@Server/initTRPC"
-import * as ChannelsCommandStringsService from "@Server/services/channels/commandStrings"
-import { checkRole } from "@Server/services/users"
+import { authedProcedure, publicProcedure } from "../../../initTRPC"
+import * as ChannelsCommandStringsService from "../../../services/channels/commandStrings"
+import { checkRole } from "../../../services/users"
 import { z } from "zod"
 
 const getCommandString = publicProcedure
@@ -24,7 +24,11 @@ const upsertCommandString = authedProcedure
 		})
 	)
 	.mutation(async ({ ctx, input }) => {
-		await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["OWNER", "ADMIN"] })
+		await checkRole({
+			firebaseUserId: ctx.user.uid,
+			channelId: input.channelId,
+			roles: ["OWNER", "ADMIN"]
+		})
 
 		const channel = await ChannelsCommandStringsService.upsertCommandString({
 			gameId: input.gameId,

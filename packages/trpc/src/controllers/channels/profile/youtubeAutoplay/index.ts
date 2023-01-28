@@ -1,6 +1,6 @@
-import { authedProcedure } from "@Server/initTRPC"
-import * as ChannelsProfileYoutubeAutoplayService from "@Server/services/channels/profile/youtubeAutoplay"
-import { checkRole } from "@Server/services/users"
+import { authedProcedure } from "../../../../initTRPC"
+import * as ChannelsProfileYoutubeAutoplayService from "../../../../services/channels/profile/youtubeAutoplay"
+import { checkRole } from "../../../../services/users"
 import { z } from "zod"
 
 const toggle = authedProcedure
@@ -11,12 +11,17 @@ const toggle = authedProcedure
 		})
 	)
 	.mutation(async ({ ctx, input }) => {
-		await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["OWNER", "ADMIN"] })
-
-		const channel = await ChannelsProfileYoutubeAutoplayService.toggleYoutubeAutoplay({
+		await checkRole({
+			firebaseUserId: ctx.user.uid,
 			channelId: input.channelId,
-			shouldYoutubeAutoplay: input.shouldYoutubeAutoplay
+			roles: ["OWNER", "ADMIN"]
 		})
+
+		const channel =
+			await ChannelsProfileYoutubeAutoplayService.toggleYoutubeAutoplay({
+				channelId: input.channelId,
+				shouldYoutubeAutoplay: input.shouldYoutubeAutoplay
+			})
 
 		return channel
 	})

@@ -1,11 +1,13 @@
-import { authedProcedure, publicProcedure } from "@Server/initTRPC"
-import * as ChannelsService from "@Server/services/channels"
-import { checkRole } from "@Server/services/users"
+import { authedProcedure, publicProcedure } from "../../initTRPC"
+import * as ChannelsService from "../../services/channels"
+import { checkRole } from "../../services/users"
 import { ChannelModel } from "@kittr/prisma/validator"
 import Stripe from "stripe"
 import { z } from "zod"
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, { apiVersion: "2020-08-27" })
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
+	apiVersion: "2020-08-27"
+})
 
 const listTopChannels = publicProcedure
 	.input(
@@ -26,10 +28,12 @@ const countAllChannels = publicProcedure.query(async () => {
 })
 
 // Counts channels per game
-const countChannels = publicProcedure.input(z.string().optional()).query(async ({ input: urlSafeName }) => {
-	const total = await ChannelsService.countChannels(urlSafeName)
-	return total
-})
+const countChannels = publicProcedure
+	.input(z.string().optional())
+	.query(async ({ input: urlSafeName }) => {
+		const total = await ChannelsService.countChannels(urlSafeName)
+		return total
+	})
 
 const listRisingChannels = publicProcedure.query(async () => {
 	const result = await ChannelsService.listRisingChannels()
@@ -41,17 +45,27 @@ const listLiveChannels = publicProcedure.query(async () => {
 	return result
 })
 
-const getDashboardChannel = authedProcedure.input(z.string()).query(async ({ ctx, input }) => {
-	await checkRole({ firebaseUserId: ctx.user.uid, channelId: input, roles: ["ADMIN", "EDITOR", "OWNER"] })
+const getDashboardChannel = authedProcedure
+	.input(z.string())
+	.query(async ({ ctx, input }) => {
+		await checkRole({
+			firebaseUserId: ctx.user.uid,
+			channelId: input,
+			roles: ["ADMIN", "EDITOR", "OWNER"]
+		})
 
-	const channel = await ChannelsService.getDashboardChannel({ id: input })
-	return channel
-})
+		const channel = await ChannelsService.getDashboardChannel({ id: input })
+		return channel
+	})
 
-const getChannelProfile = publicProcedure.input(z.string()).query(async ({ input: urlSafeName }) => {
-	const channel = await ChannelsService.getChannelProfileByUrlSafeName(urlSafeName)
-	return channel
-})
+const getChannelProfile = publicProcedure
+	.input(z.string())
+	.query(async ({ input: urlSafeName }) => {
+		const channel = await ChannelsService.getChannelProfileByUrlSafeName(
+			urlSafeName
+		)
+		return channel
+	})
 
 const createChannel = authedProcedure
 	.input(
@@ -61,7 +75,10 @@ const createChannel = authedProcedure
 			.max(25, "That channel name is too long. 25 characters or less.")
 	)
 	.mutation(async ({ ctx, input: displayName }) => {
-		const channel = await ChannelsService.createChannel({ displayName, ownerFirebaseId: ctx.user.uid })
+		const channel = await ChannelsService.createChannel({
+			displayName,
+			ownerFirebaseId: ctx.user.uid
+		})
 		return channel
 	})
 
@@ -73,7 +90,11 @@ const updateChannel = authedProcedure
 		})
 	)
 	.mutation(async ({ ctx, input }) => {
-		await checkRole({ firebaseUserId: ctx.user.uid, channelId: input.channelId, roles: ["OWNER", "ADMIN"] })
+		await checkRole({
+			firebaseUserId: ctx.user.uid,
+			channelId: input.channelId,
+			roles: ["OWNER", "ADMIN"]
+		})
 
 		const channel = await ChannelsService.updateChannel({
 			channelId: input.channelId,
@@ -89,7 +110,11 @@ const deleteChannel = authedProcedure
 		})
 	)
 	.mutation(async ({ ctx, input: { channelId } }) => {
-		await checkRole({ firebaseUserId: ctx.user.uid, channelId, roles: ["OWNER"] })
+		await checkRole({
+			firebaseUserId: ctx.user.uid,
+			channelId,
+			roles: ["OWNER"]
+		})
 
 		const channel = await ChannelsService.deleteChannel({ channelId })
 
