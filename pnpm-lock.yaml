@@ -374,12 +374,14 @@ importers:
       '@kittr/logger': workspace:*
       '@kittr/prisma': workspace:*
       '@kittr/tsconfig': workspace:*
+      '@kittr/types': workspace:*
       '@kittr/utils': workspace:*
       eslint: ^8.32.0
       typescript: 5.0.0-beta
     dependencies:
       '@kittr/logger': link:../logger
       '@kittr/prisma': link:../prisma
+      '@kittr/types': link:../types
       '@kittr/utils': link:../utils
     devDependencies:
       '@kittr/config': link:../eslint-config
