@@ -1,6 +1,6 @@
 import { authedProcedure } from "@Server/initTRPC"
-import { stripe } from "@Services/stripe"
 import { getUrl } from "@Utils/helpers/getUrl"
+import { stripe } from "@kittr/money"
 import { prisma } from "@kittr/prisma"
 import { TRPCError } from "@trpc/server"
 import { z } from "zod"
