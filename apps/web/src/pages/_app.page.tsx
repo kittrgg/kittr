@@ -1,5 +1,3 @@
-// import FallbackPage from "@Components/layouts/FallbackPage"
-// import { setFallbackLoader } from "@Redux/slices/global"
 import { trpc } from "@/lib/trpc"
 import { store } from "@Redux/store"
 import GlobalStyles from "@Styles/globals"
@@ -39,8 +37,6 @@ const MyApp = ({ Component, pageProps }: { Component: React.FC; pageProps: Recor
 				) : (
 					<GlobalStyles />
 				)}
-				{/* {isFallback && <FallbackPage />}
-			{!isFallback && <Component {...pageProps} />} */}
 				<Component {...pageProps} />
 				<ReactQueryDevtools />
 			</MantineProvider>

@@ -1,4 +1,4 @@
-import { storage } from "../"
+import { storage } from "."
 import { getDownloadURL, ref } from "firebase/storage"
 
 /** Return the path to the Firebase document. */

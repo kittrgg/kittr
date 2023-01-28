@@ -2,7 +2,10 @@
 	"name": "@kittr/trpc",
 	"private": true,
 	"version": "0.0.0",
-	"main": "./src/index.ts",
+	"exports": {
+		".": "./index.ts",
+		"./client": "./client.ts"
+	},
 	"license": "MIT",
 	"scripts": {
 		"lint": "eslint .",

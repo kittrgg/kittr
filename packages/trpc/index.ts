@@ -242,7 +242,5 @@ export const appRouter = router({
 export type AppRouter = typeof appRouter
 export type RouterInput = inferRouterInputs<AppRouter>
 export type RouterOutput = inferRouterOutputs<AppRouter>
-
-export { createSSGHelper } from "./src/createSSGHelper"
-export { trpc } from "./src/createTRPCNext"
 export { createContext } from "./src/context"
+export { createSSGHelper } from "./src/createSSGHelper"
