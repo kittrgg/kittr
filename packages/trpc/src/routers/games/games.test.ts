@@ -1,42 +1,77 @@
 import { appRouter } from "../../../"
-import { Game } from "@kittr/prisma"
+import { Prisma } from "@kittr/prisma"
 import { prismaMock } from "@kittr/prisma/mock"
 import {
 	randNumber,
 	randVehicle,
 	randBoolean,
+	randDirectoryPath,
 	randProductName,
 	randPastDate,
 	randUuid
 } from "@ngneat/falso"
 
-// Returns Warzone2 options if they're there
-// Returns Warzone ones if they're not
+type GameWithCount = Prisma.GameGetPayload<{
+	include: {
+		_count: true
+	}
+}>
 
+// Fun fact: This was kittr's first ever test suite :)
 describe("Kits router", () => {
 	test("List all games", async () => {
-		const id = randUuid()
-		const date = randPastDate()
-
-		const value: Game[] = [
+		const value: GameWithCount[] = [
 			{
 				active: randBoolean(),
-				backgroundImageUrl: "/123.png",
-				blurDataUrl: "/123.png",
+				backgroundImageUrl: randDirectoryPath(),
+				blurDataUrl: randDirectoryPath(),
 				developer: randVehicle(),
 				displayName: randProductName(),
-				id,
-				releaseDate: date,
-				titleImageUrl: "/123.png",
-				urlSafeName: randProductName()
+				id: randUuid(),
+				releaseDate: randPastDate(),
+				titleImageUrl: randDirectoryPath(),
+				urlSafeName: randProductName(),
+				_count: {
+					channelCreatorCodes: randNumber(),
+					channels: randNumber(),
+					customCommandStrings: randNumber(),
+					genres: randNumber(),
+					platforms: randNumber(),
+					warzoneKitBases: randNumber(),
+					warzoneKits: randNumber(),
+					warzoneTwoKitBases: randNumber(),
+					warzoneTwoKits: randNumber()
+				}
+			},
+			{
+				active: randBoolean(),
+				backgroundImageUrl: randDirectoryPath(),
+				blurDataUrl: randDirectoryPath(),
+				developer: randVehicle(),
+				displayName: randProductName(),
+				id: randUuid(),
+				releaseDate: randPastDate(),
+				titleImageUrl: randDirectoryPath(),
+				urlSafeName: randProductName(),
+				_count: {
+					channelCreatorCodes: randNumber(),
+					channels: randNumber(),
+					customCommandStrings: randNumber(),
+					genres: randNumber(),
+					platforms: randNumber(),
+					warzoneKitBases: randNumber(),
+					warzoneKits: randNumber(),
+					warzoneTwoKitBases: randNumber(),
+					warzoneTwoKits: randNumber()
+				}
 			}
 		]
 
 		prismaMock.game.findMany.mockResolvedValueOnce(value)
-		console.log(prismaMock)
+
 		const caller = appRouter.createCaller({ userToken: undefined })
 		const result = await caller.games.count()
-		console.log(result)
-		expect(result).toEqual({ count: 1 })
+
+		expect(result).toEqual(value)
 	})
 })

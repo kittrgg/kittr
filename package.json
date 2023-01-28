@@ -25,6 +25,7 @@
 		"lint": "turbo run lint --continue",
 		"lint:fix": "turbo run lint -- --fix",
 		"test": "turbo run test --continue",
+		"test:run": "turbo run test:run --continue",
 		"clean": "find . -name node_modules -o -name .turbo -o -name .next -o -name dist -type d -prune | xargs rm -rf",
 		"docker:up": "docker compose -f docker-compose.yml up --build -d",
 		"docker:down": "docker compose -f docker-compose.yml down",

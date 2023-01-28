@@ -27,6 +27,7 @@ import { StripeController } from "./src/controllers/stripe"
 import { TwitchController } from "./src/controllers/twitch"
 import { UsersController } from "./src/controllers/users"
 import { adminProcedure, publicProcedure, router } from "./src/initTRPC"
+import { gamesCount } from "./src/routers/games"
 import { download } from "@kittr/firebase/storage"
 import { prisma } from "@kittr/prisma"
 import { GameModel } from "@kittr/prisma/validator"
@@ -188,9 +189,7 @@ export const appRouter = router({
 	games: router({
 		"getByUrlSafeName": GamesController.getGameByUrlSafeName,
 		"getById": GamesController.getGameById,
-		"count": publicProcedure.query(async () =>
-			prisma.game.findMany({ include: { _count: true } })
-		),
+		"count": gamesCount,
 		"list": GamesController.listGames,
 		"list-genres": publicProcedure.query(
 			async () => await prisma.genre.findMany()

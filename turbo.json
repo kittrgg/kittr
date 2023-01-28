@@ -65,10 +65,14 @@
       "dependsOn": ["^topo"]
 		},
     "typecheck": {
-      "dependsOn": [ "db:generate", "^topo" ]
+      "dependsOn": [ "^topo" ]
     },
     "test": {
-      "dependsOn": [ "^topo" ],
+      "dependsOn": ["^topo" ],
+      "outputs": [ "coverage/**" ]
+    },
+    "test:run": {
+      "dependsOn": ["^topo" ],
       "outputs": [ "coverage/**" ]
     },
     "dev": {
