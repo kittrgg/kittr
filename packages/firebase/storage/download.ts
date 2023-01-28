@@ -8,6 +8,11 @@ export const download = async (
 	handler?: (...args: any) => any
 ) => {
 	try {
+		if (!storage) {
+			console.log("No storage is up. You're probably testing?")
+			return
+		}
+
 		const storageRef = ref(storage, fileName)
 		const path = await getDownloadURL(storageRef)
 

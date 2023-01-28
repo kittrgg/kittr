@@ -1,3 +1,4 @@
+import { isTest } from "@kittr/utils"
 import { initializeApp, getApp, FirebaseOptions } from "firebase/app"
 import { getAuth } from "firebase/auth"
 
@@ -13,9 +14,13 @@ export const firebaseConfig: FirebaseOptions = {
 
 // Must be called before any other Firebase APIs can be used
 try {
-	getApp()
+	if (!isTest) {
+		getApp()
+	}
 } catch {
-	initializeApp(firebaseConfig)
+	if (!isTest) {
+		initializeApp(firebaseConfig)
+	}
 }
 
-export const auth = getAuth()
+export const auth = !isTest ? getAuth() : null

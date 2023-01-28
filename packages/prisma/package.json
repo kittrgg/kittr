@@ -4,7 +4,8 @@
 	"private": true,
 	"exports": {
 		".": "./index.ts",
-		"./validator": "./validator/index.ts"
+		"./validator": "./validator/index.ts",
+		"./mock": "./mock.ts"
 	},
 	"scripts": {
 		"db:deploy": "prisma migrate deploy",
@@ -27,7 +28,8 @@
 		"@kittr/tsconfig": "workspace:*",
 		"typescript": "5.0.0-beta",
 		"zod": "3.17.3",
-		"zod-prisma": "0.5.4"
+		"zod-prisma": "0.5.4",
+		"vitest-mock-extended": "^1.0.8"
 	},
 	"dependencies": {
 		"@prisma/client": "4.0.0"

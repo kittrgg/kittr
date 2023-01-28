@@ -9,6 +9,7 @@
 	"license": "MIT",
 	"scripts": {
 		"lint": "eslint .",
+		"test": "vitest",
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
@@ -28,8 +29,10 @@
 	},
 	"devDependencies": {
 		"@kittr/config": "workspace:*",
-		"eslint": "^8.32.0",
 		"@kittr/tsconfig": "workspace:*",
-		"typescript": "5.0.0-beta"
+		"@ngneat/falso": "^6.4.0",
+		"eslint": "^8.32.0",
+		"typescript": "5.0.0-beta",
+		"vitest": "^0.28.3"
 	}
 }
