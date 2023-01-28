@@ -15,6 +15,6 @@
 		"@kittr/config": "workspace:*",
 		"eslint": "^8.32.0",
 		"@kittr/tsconfig": "workspace:*",
-		"typescript": "4.9.3"
+		"typescript": "5.0.0-beta"
 	}
 }
