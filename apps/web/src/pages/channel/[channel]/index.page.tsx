@@ -28,7 +28,9 @@ const ChannelProfilePage = () => {
 }
 
 export const getStaticPaths = async () => {
-	const channels = await getTopChannelsQuery({ limit: 30, skip: 0 })
+	const limit = process.env.VERCEL_ENV === "production" ? 30 : 0
+
+	const channels = await getTopChannelsQuery({ limit, skip: 0 })
 	const paths = channels.map((channel) => ({ params: { channel: channel.urlSafeName } }))
 
 	return {
