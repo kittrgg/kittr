@@ -3,9 +3,14 @@ import admin from "firebase-admin"
 if (!admin.apps.length) {
 	try {
 		admin.initializeApp({
-			storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-			databaseURL: process.env.FIREBASE_DATABASE_URL,
-			projectId: process.env.FIREBASE_PROJECT_ID
+			credential: admin.credential.cert({
+				privateKey: (process.env.FIREBASE_ADMIN_PRIVATE_KEY as string).replace(
+					/\\n/g,
+					"\n"
+				),
+				clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+				projectId: process.env.FIREBASE_PROJECT_ID
+			})
 		})
 	} catch (err) {
 		console.error(err)
