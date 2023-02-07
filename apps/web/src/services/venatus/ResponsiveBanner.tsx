@@ -28,7 +28,7 @@ const ResponsiveBanner = ({
 
 	return (
 		<div ref={observe}>
-			<Ad placementType={width >= 1200 ? largeWidthAdUnit : smallWidthAdUnit} containerStyles={containerStyles} />
+			{/* <Ad placementType={width >= 1200 ? largeWidthAdUnit : smallWidthAdUnit} containerStyles={containerStyles} /> */}
 		</div>
 	)
 }

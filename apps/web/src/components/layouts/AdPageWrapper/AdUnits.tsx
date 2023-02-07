@@ -48,8 +48,8 @@ const AdUnits = () => (
 	// console.log(adUnit)
 
 	<>
-		<Ad placementType="d300x250" />
-		<Ad placementType="s300x250" containerStyles={{ marginTop: "12px" }} />
+		{/* <Ad placementType="d300x250" />
+		<Ad placementType="s300x250" containerStyles={{ marginTop: "12px" }} /> */}
 	</>
 )
 

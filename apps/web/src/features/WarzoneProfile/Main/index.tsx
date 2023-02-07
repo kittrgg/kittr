@@ -118,11 +118,7 @@ const Main = () => {
 					{isMobile && channelData && (
 						<KitScroller availableKits={channelData.warzoneKits ?? channelData.warzoneTwoKits} />
 					)}
-					{isMobile && (
-						<div>
-							<Ad placementType="d300x50" updateTrigger={activeWeapon} />
-						</div>
-					)}
+					{isMobile && <div>{/* <Ad placementType="d300x50" updateTrigger={activeWeapon} /> */}</div>}
 					{isMobile ? (
 						<>
 							<Imagery />
@@ -137,21 +133,13 @@ const Main = () => {
 					<ChannelQuote />
 					<Marketing />
 					{/* <WeaponStats /> */}
-					{isMobile && (
-						<div>
-							<Ad placementType="d300x50" updateTrigger={activeWeapon} />
-						</div>
-					)}
+					{isMobile && <div>{/* <Ad placementType="d300x50" updateTrigger={activeWeapon} /> */}</div>}
 					<Popularity />
 					<div style={{ display: "grid", gap: "12px" }}>
 						<WeaponBlurb />
 						<FavoriteBlueprint />
 					</div>
-					{isMobile && (
-						<div>
-							<Ad placementType="s300x250" updateTrigger={activeWeapon} />
-						</div>
-					)}
+					{isMobile && <div>{/* <Ad placementType="s300x250" updateTrigger={activeWeapon} /> */}</div>}
 				</>
 			)}
 			{!activeWeapon && (

@@ -9,11 +9,11 @@ const AdTile = ({ ...props }) => {
 
 	return (
 		<Container>
-			<Ad updateTrigger={activeWeapon} placementType="s300x250" />
+			{/* <Ad updateTrigger={activeWeapon} placementType="s300x250" />
 			<Caption>
 				Ads are annoying but keep this site running. Thank you for understanding.
 				<br />- The Guy That Makes kittr
-			</Caption>
+			</Caption> */}
 		</Container>
 	)
 }
