@@ -47,9 +47,6 @@
 				"VERCEL_URL"
 			]
     },
-		"build#storybook": {
-			"outputs": ["storybook-static/**"]
-		},
     "topo": {
 			"dependsOn": [ "db:generate", "^topo" ]
     },

@@ -11,8 +11,8 @@
     "./more-styles.css": "./dist/index.css"
   },
 	"scripts": {
-		"dev_IGNORE": "tsup --watch",
-		"build_IGNORE": "tsup",
+		"dev": "tsup --watch",
+		"build": "tsup",
 		"lint": "eslint .",
 		"typecheck": "tsc --noEmit"
 	},

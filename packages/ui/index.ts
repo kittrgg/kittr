@@ -1,4 +1,4 @@
-import "../styles.css"
+import "./src/styles.css"
 
 export { useMantineTheme as useTheme, MultiSelect } from "@mantine/core"
 export * from "./src/components/Accordion"
