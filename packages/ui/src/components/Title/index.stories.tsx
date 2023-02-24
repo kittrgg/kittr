@@ -1,7 +1,7 @@
 import { Title, NewTitle } from "."
 
 export default {
-	title: "Title",
+	title: "Typography/Title",
 	component: NewTitle
 }
 

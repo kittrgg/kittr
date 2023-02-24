@@ -1,7 +1,7 @@
 import { Text } from "."
 
 export default {
-	title: "Text",
+	title: "Typography/Text",
 	component: Text
 }
 
