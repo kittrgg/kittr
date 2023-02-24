@@ -1,5 +1,5 @@
 // import { withThemes } from "@react-theming/storybook-addon"
-import { MantineProvider, Center } from "@kittr/ui/dist"
+import { MantineProvider, Center } from "@kittr/ui"
 import React from "react"
 import '../../../packages/ui/dist/index.css'
 

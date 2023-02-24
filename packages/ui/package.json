@@ -7,12 +7,12 @@
     "**/*.css"
   ],
   "exports": {
-    "./dist": "./dist",
-    "./styles.css": "./dist/index.css"
+    ".": "./dist",
+    "./more-styles.css": "./dist/index.css"
   },
 	"scripts": {
-		"dev": "tsup --watch",
-		"build": "tsup",
+		"dev_IGNORE": "tsup --watch",
+		"build_IGNORE": "tsup",
 		"lint": "eslint .",
 		"typecheck": "tsc --noEmit"
 	},

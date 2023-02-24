@@ -8,13 +8,6 @@ export default {
 export const Defaults = () => (
 	<div>
 		<NewTitle order={1}>This is a test.</NewTitle>
-		<Title preset="d2">This is a test.</Title>
-		<Title preset="h1">This is a test.</Title>
-		<Title preset="h2">This is a test.</Title>
-		<Title preset="h3">This is a test.</Title>
-		<Title preset="h4">This is a test.</Title>
-		<Title preset="h5">This is a test.</Title>
-		<Title preset="h6">This is a test.</Title>
 	</div>
 )
 

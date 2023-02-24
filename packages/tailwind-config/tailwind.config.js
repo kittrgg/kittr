@@ -5,7 +5,8 @@ module.exports = {
 	content: [`src/**/*.{js,ts,jsx,tsx}`],
 	theme: {
 		fontFamily: {
-			sans: ["'Barlow Condensed'", ...defaultTheme.fontFamily.sans]
+			sans: ["'Open Sans'", ...defaultTheme.fontFamily.sans],
+			serif: ["'Barlow Condensed'", ...defaultTheme.fontFamily.sans]
 		}
 	},
 	plugins: []

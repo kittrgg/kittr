@@ -87,7 +87,7 @@ export const NewTitle = ({ className, children, order }: NewTitleProps) => {
 		return (
 			<h1
 				className={cn(
-					"font-sans scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl",
+					"font-serif scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl",
 					className
 				)}
 			>
