@@ -1,3 +1,5 @@
+import "../styles.css"
+
 export { useMantineTheme as useTheme, MultiSelect } from "@mantine/core"
 export * from "./Accordion"
 export * from "./Button"

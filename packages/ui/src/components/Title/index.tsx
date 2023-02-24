@@ -1,4 +1,9 @@
-import { Text as MantineTitle, TitleProps } from "@mantine/core"
+import { cn } from "../../utils/cn"
+import {
+	Text as MantineTitle,
+	TitleProps as MantineTitleProps
+} from "@mantine/core"
+import { ReactNode } from "react"
 
 const fontFamily = "Barlow Condensed, serif"
 
@@ -53,12 +58,12 @@ export const TITLE_PRESETS = {
 	}
 }
 
-interface Props extends TitleProps {
+export interface TitleProps extends MantineTitleProps {
 	/** Use a preset defined styling property. */
 	preset?: keyof typeof TITLE_PRESETS
 }
 
-export const Title = ({ preset, children, sx, ...props }: Props) => {
+export const Title = ({ preset, children, sx, ...props }: TitleProps) => {
 	const styles = preset ? TITLE_PRESETS[preset] : {}
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -69,4 +74,40 @@ export const Title = ({ preset, children, sx, ...props }: Props) => {
 			{children}
 		</MantineTitle>
 	)
+}
+
+export interface NewTitleProps {
+	className?: string
+	order: 1 | 2 | 3 | 4 | 5 | 6
+	children: ReactNode
+}
+
+export const NewTitle = ({ className, children, order }: NewTitleProps) => {
+	if (order === 1) {
+		return (
+			<h1
+				className={cn(
+					"font-sans scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl",
+					className
+				)}
+			>
+				{children}
+			</h1>
+		)
+	}
+
+	if (order === 2) {
+		return (
+			<h2
+				className={cn(
+					"font-sans mt-10 scroll-m-20 border-b border-b-slate-200 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 dark:border-b-slate-700",
+					className
+				)}
+			>
+				{children}
+			</h2>
+		)
+	}
+
+	return null
 }

@@ -1,6 +1,7 @@
 // import { withThemes } from "@react-theming/storybook-addon"
-import { MantineProvider, Center } from "@kittr/ui"
+import { MantineProvider, Center } from "@kittr/ui/dist"
 import React from "react"
+import '../../../packages/ui/dist/index.css'
 
 export const parameters = {
 	options: {
@@ -45,13 +46,13 @@ export const parameters = {
 // 	)
 // }
 
-export const decorators = [
-	(Story) => (
-		<MantineProvider withNormalizeCSS withGlobalStyles>
-			<Center sx={{ minHeight: "calc( 100vh - 2rem )" }}>
-				<Story />
-			</Center>
-		</MantineProvider>
-	)
-	// withThemes(null as any, [dark, light], { providerFn, onThemeSwitch })
-]
+// export const decorators = [
+// 	(Story) => (
+// 		<MantineProvider withNormalizeCSS withGlobalStyles>
+// 			<Center sx={{ minHeight: "calc( 100vh - 2rem )" }}>
+// 				<Story />
+// 			</Center>
+// 		</MantineProvider>
+// 	)
+// 	// withThemes(null as any, [dark, light], { providerFn, onThemeSwitch })
+// ]

@@ -1,13 +1,13 @@
-import { Title } from "."
+import { Title, NewTitle } from "."
 
 export default {
 	title: "Title",
-	component: Title
+	component: NewTitle
 }
 
 export const Defaults = () => (
 	<div>
-		<Title preset="d1">This is a test.</Title>
+		<NewTitle order={1}>This is a test.</NewTitle>
 		<Title preset="d2">This is a test.</Title>
 		<Title preset="h1">This is a test.</Title>
 		<Title preset="h2">This is a test.</Title>

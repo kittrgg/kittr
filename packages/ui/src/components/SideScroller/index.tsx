@@ -5,13 +5,17 @@ import { useElementSize } from "@mantine/hooks"
 import React, { useMemo, useRef, useState } from "react"
 import { isMobile } from "react-device-detect"
 
-interface Props {
+export interface SideScrollerProps {
 	title?: string
 	action?: React.ReactNode
 	children?: React.ReactNode
 }
 
-export const SideScroller = ({ title, action, children }: Props) => {
+export const SideScroller = ({
+	title,
+	action,
+	children
+}: SideScrollerProps) => {
 	const viewport = useRef<any>()
 	const { ref, width } = useElementSize()
 	const [scrollPosition, onScrollPositionChange] = useState({ x: 0, y: 0 })
