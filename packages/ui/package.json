@@ -12,7 +12,7 @@
   },
 	"scripts": {
 		"dev": "tsup --watch",
-		"build": "tsup",
+		"build": "tsc --noEmit && tsup",
 		"lint": "eslint .",
 		"typecheck": "tsc --noEmit"
 	},
@@ -22,23 +22,25 @@
 		"@mantine/hooks": "^5.10.2",
 		"@mantine/next": "^5.10.2",
 		"@mantine/rte": "^5.10.2",
-		"react": "^18.2.0",
+		"clsx": "^1.2.1",
 		"react-device-detect": "2.2.2",
-		"react-dom": "^18.2.0"
+		"react-dom": "^18.2.0",
+		"react": "^18.2.0",
+		"tailwind-merge": "^1.10.0"
 	},
 	"devDependencies": {
 		"@babel/core": "7.18.9",
-		"@kittr/tailwind-config": "workspace:*",
 		"@kittr/config": "workspace:*",
+		"@kittr/tailwind-config": "workspace:*",
+		"@kittr/tsconfig": "workspace:*",
 		"@kittr/types": "workspace:*",
 		"@storybook/react": "6.5.9",
-		"@types/react": "^18.0.27",
 		"@types/react-dom": "^18.0.10",
+		"@types/react": "^18.0.27",
 		"eslint": "^8.32.0",
+		"typescript": "5.0.0-beta",
     "autoprefixer": "^10.4.13",
-		"@kittr/tsconfig": "workspace:*",
     "postcss": "^8.4.21",
-    "tsup": "^6.6.3",
-		"typescript": "5.0.0-beta"
+    "tsup": "^6.6.3"
 	}
 }
