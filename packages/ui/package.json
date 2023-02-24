@@ -3,18 +3,19 @@
 	"private": true,
 	"version": "0.0.0",
 	"license": "MIT",
-  "sideEffects": [
-    "**/*.css"
-  ],
-  "exports": {
-    ".": "./dist",
-    "./more-styles.css": "./dist/index.css"
-  },
+	"sideEffects": [
+		"**/*.css"
+	],
+	"exports": {
+		".": "./dist",
+		"./more-styles.css": "./dist/index.css"
+	},
 	"scripts": {
 		"dev": "tsup --watch",
 		"build": "tsc --noEmit && tsup",
 		"lint": "eslint .",
-		"typecheck": "tsc --noEmit"
+		"typecheck": "tsc --noEmit",
+		"test": "vitest"
 	},
 	"dependencies": {
 		"@mantine/core": "^5.10.2",
@@ -23,9 +24,9 @@
 		"@mantine/next": "^5.10.2",
 		"@mantine/rte": "^5.10.2",
 		"clsx": "^1.2.1",
+		"react": "^18.2.0",
 		"react-device-detect": "2.2.2",
 		"react-dom": "^18.2.0",
-		"react": "^18.2.0",
 		"tailwind-merge": "^1.10.0"
 	},
 	"devDependencies": {
@@ -35,12 +36,17 @@
 		"@kittr/tsconfig": "workspace:*",
 		"@kittr/types": "workspace:*",
 		"@storybook/react": "6.5.9",
-		"@types/react-dom": "^18.0.10",
+		"@testing-library/jest-dom": "^5.16.5",
+		"@testing-library/react": "^14.0.0",
 		"@types/react": "^18.0.27",
+		"@types/react-dom": "^18.0.10",
+		"autoprefixer": "^10.4.13",
 		"eslint": "^8.32.0",
+		"jsdom": "^21.1.0",
+		"postcss": "^8.4.21",
+		"tsup": "^6.6.3",
 		"typescript": "5.0.0-beta",
-    "autoprefixer": "^10.4.13",
-    "postcss": "^8.4.21",
-    "tsup": "^6.6.3"
+		"@vitejs/plugin-react": "2.0.0",
+		"vitest": "0.27.3"
 	}
 }

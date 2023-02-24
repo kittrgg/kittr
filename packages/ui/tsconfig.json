@@ -1,5 +1,8 @@
 {
 	"extends": "@kittr/tsconfig/react-library.json",
+	"compilerOptions": {
+    "types": ["vitest/globals"]
+	},
 	"include": ["."],
 	"exclude": ["node_modules"]
 }
