@@ -2,7 +2,7 @@
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
 		"build": {
-			"dependsOn": ["db:deploy", "db:generate", "^build" ],
+			"dependsOn": ["db:generate", "^build" ],
       "outputs": [ "dist/**", ".next/**", "build/**" ],
 			"env": [
 				"DATABASE_URL",
