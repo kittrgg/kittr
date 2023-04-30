@@ -3,6 +3,9 @@
 	"editor.codeActionsOnSave": {
 		"source.fixAll.eslint": true
 	},
+	"eslint.rules.customizations": [
+		{ "rule": "*", "severity": "warn" }
+ 	],
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"prettier.configPath": ".prettierrc.js",
 	"prettier.prettierPath": "node_modules/prettier",
