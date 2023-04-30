@@ -2,11 +2,20 @@
 	"name": "@kittr/ui",
 	"private": true,
 	"version": "0.0.0",
-	"main": "./src/components/index.ts",
 	"license": "MIT",
 	"scripts": {
 		"lint": "eslint .",
 		"typecheck": "tsc --noEmit"
+	},
+	"exports": {
+		".": "./src/components/index.tsx",
+		"./new": "./src/components/new/*"
+	},
+"typesVersions": {
+    "*": {
+			"*": ["./src/components/index.ts"],
+			"new": ["./src/new/index.ts"]
+		}
 	},
 	"dependencies": {
 		"@mantine/core": "^5.10.2",
