@@ -7,9 +7,10 @@
 		"prettier-preset.js"
 	],
 	"devDependencies": {
-		"@vercel/style-guide": "^4.0.2",
 		"eslint": "8.22.0",
+    "prettier-plugin-packagejson": "^2.3.0",
 		"eslint-config-turbo": "^0.0.7",
+		"eslint-plugin-import": "^2.27.5",
 		"prettier": "2.7.1",
 		"typescript": "^5.0.4"
 	}

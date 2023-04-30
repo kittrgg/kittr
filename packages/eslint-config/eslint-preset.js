@@ -1,14 +1,12 @@
+var project = require.resolve(process.cwd(), 'tsconfig.json');
+
 module.exports = {
 	root: true,
 	extends: [
-		require.resolve("@vercel/style-guide/eslint/node"),
-		require.resolve("@vercel/style-guide/eslint/typescript")
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
+  	'plugin:@typescript-eslint/strict',
 	],
-	ignorePatterns: ["**/dist/**", "**node_modules", "**/eslintrc.js"],
-	overrides: [
-		{
-			files: ["**/*.test.ts"],
-			extends: [require.resolve("@vercel/style-guide/eslint/jest")]
-		}
-	]
+	parserOptions: { project },
+	ignorePatterns: ["**/dist/**", "**/eslintrc.js"],
 }
