@@ -13,7 +13,7 @@
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
-		"@kittr/config": "workspace:*",
+		"@kittr/lint": "workspace:*",
 		"@kittr/firebase": "workspace:*",
 		"@kittr/logger": "workspace:*",
 		"@kittr/money": "workspace:*",
@@ -28,7 +28,7 @@
 		"@trpc/server": "^10.9.0"
 	},
 	"devDependencies": {
-		"@kittr/config": "workspace:*",
+		"@kittr/lint": "workspace:*",
 		"@kittr/tsconfig": "workspace:*",
 		"@ngneat/falso": "^6.4.0",
 		"eslint": "^8.32.0",

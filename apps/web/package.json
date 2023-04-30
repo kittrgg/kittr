@@ -50,7 +50,7 @@
 		"zod": "3.17.3"
 	},
 	"devDependencies": {
-		"@kittr/config": "workspace:*",
+		"@kittr/lint": "workspace:*",
 		"@kittr/types": "workspace:*",
 		"@kittr/tsconfig": "workspace:*",
 		"@types/jsonwebtoken": "8.5.8",

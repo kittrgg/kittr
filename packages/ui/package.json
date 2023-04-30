@@ -29,7 +29,7 @@
 	},
 	"devDependencies": {
 		"@babel/core": "7.18.9",
-		"@kittr/config": "workspace:*",
+		"@kittr/lint": "workspace:*",
 		"@kittr/types": "workspace:*",
 		"@storybook/react": "6.5.9",
 		"@types/react": "^18.0.27",

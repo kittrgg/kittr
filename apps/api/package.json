@@ -20,7 +20,7 @@
 		"socket.io": "4.5.1"
 	},
 	"devDependencies": {
-		"@kittr/config": "workspace:*",
+		"@kittr/lint": "workspace:*",
 		"@kittr/types": "workspace:*",
 		"@types/cors": "^2.8.13",
 		"@types/cron": "2.0.0",

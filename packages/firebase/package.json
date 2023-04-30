@@ -13,7 +13,7 @@
 		"typecheck": "tsc --noEmit"
 	},
 	"devDependencies": {
-		"@kittr/config": "workspace:*",
+		"@kittr/lint": "workspace:*",
 		"@kittr/tsconfig": "workspace:*",
 		"@kittr/types": "workspace:*",
 		"@kittr/utils": "workspace:*",

@@ -9,7 +9,7 @@
 	"private": true,
 	"scripts": {},
 	"devDependencies": {
-		"@kittr/config": "workspace:*",
+		"@kittr/lint": "workspace:*",
 		"@kittr/tsconfig": "workspace:*",
 		"@kittr/types": "workspace:*",
 		"@sentry/types": "^7.34.0",
