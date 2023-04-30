@@ -3,7 +3,7 @@
   "pipeline": {
 		"build": {
 			"dependsOn": ["db:deploy", "db:generate", "^build" ],
-      "outputs": [ "dist/**", ".next/**", "build/**" ],
+      "outputs": [ "dist/**", ".next/**", "!.next/cache/**", "build/**" ],
 			"env": [
 				"DATABASE_URL",
 				"ENVIRONMENT",
