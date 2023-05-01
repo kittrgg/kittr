@@ -13,6 +13,6 @@
 		"@kittr/lint": "workspace:*",
 		"eslint": "^8.32.0",
 		"@kittr/tsconfig": "workspace:*",
-		"typescript": "5.0.0-beta"
+		"typescript": "^5.0.4"
 	}
 }

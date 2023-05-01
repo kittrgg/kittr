@@ -1,5 +1,3 @@
-var project = require.resolve(process.cwd(), 'tsconfig.json');
-
 module.exports = {
 	root: true,
 	extends: [
@@ -7,6 +5,6 @@ module.exports = {
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
   	'plugin:@typescript-eslint/strict',
 	],
-	parserOptions: { project },
+	parserOptions: { project: 'tsconfig.json'},
 	ignorePatterns: ["**/dist/**", "**/eslintrc.js"],
 }
