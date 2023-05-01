@@ -1,17 +1,27 @@
 {
 	"name": "@kittr/lint",
 	"version": "0.0.0",
-	"license": "MIT",
+	"type": "commonjs",
 	"files": [
-		"eslint-preset.js",
-		"prettier-preset.js"
+		"base.js"
 	],
-	"devDependencies": {
+	"bin": {
+    "eslint": "./node_modules/eslint/bin/eslint.js",
+		"eslint-runner": "./runner/index.mjs"
+	},
+	"scripts": {
+    "lint": "node ./runner/index.mjs",
+    "eslint-fix": "node ./runner/index.mjs --fix",
+    "type-check": "tsc --noEmit"
+	},
+	"dependencies": {
+		"@typescript-eslint/eslint-plugin": "^5.59.1",
+		"@typescript-eslint/parser": "^5.59.1",
+		"@kittr/tsconfig": "workspace:*",
 		"eslint": "8.22.0",
-    "prettier-plugin-packagejson": "^2.3.0",
-		"eslint-config-turbo": "^0.0.7",
-		"eslint-plugin-import": "^2.27.5",
-		"prettier": "2.7.1",
+    "@next/eslint-plugin-next": "^13.1.5",
+		"eslint-config-turbo": "^1.9.3",
+		"globby": "^13.1.4",
 		"typescript": "^5.0.4"
 	}
 }

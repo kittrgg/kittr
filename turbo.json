@@ -80,6 +80,9 @@
     "seed": {
       "dependsOn": [ "db:generate" ],
       "cache": false
-    }
+    },
+		"lintrunner": {
+			"cache": false
+		}
   }
 }

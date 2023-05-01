@@ -6,6 +6,7 @@
 	"license": "MIT",
 	"scripts": {
 		"lint": "eslint .",
+		"lintrunner": "eslint-runner",
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
@@ -14,7 +15,6 @@
 	"devDependencies": {
 		"@kittr/lint": "workspace:*",
 		"@kittr/tsconfig": "workspace:*",
-		"eslint": "^8.32.0",
 		"typescript": "5.0.0-beta"
 	}
 }
