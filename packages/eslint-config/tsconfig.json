@@ -5,7 +5,7 @@
 		"module": "ESNext",
 		"target": "ESNext",
 		"checkJs": true,
-		"outDir": "placeholder"
+		"outDir": "no-warning-pls"
 	},
 	"exclude": ["node_modules"]
 }

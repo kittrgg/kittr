@@ -5,13 +5,12 @@
 	"main": "./src/index.ts",
 	"license": "MIT",
 	"scripts": {
-		"lint": "eslint .",
+		"lint": "eslint-runner",
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": { },
 	"devDependencies": {
 		"@kittr/lint": "workspace:*",
-		"eslint": "^8.32.0",
 		"@kittr/tsconfig": "workspace:*",
 		"typescript": "^5.0.4"
 	}

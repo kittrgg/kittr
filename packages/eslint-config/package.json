@@ -3,7 +3,8 @@
 	"version": "0.0.0",
 	"type": "commonjs",
 	"files": [
-		"base.js"
+		"base.js",
+		"next.js"
 	],
 	"bin": {
     "eslint": "./node_modules/eslint/bin/eslint.js",

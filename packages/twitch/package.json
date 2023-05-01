@@ -4,7 +4,7 @@
 	"version": "0.0.0",
 	"main": "./src/index.ts",
 	"scripts": {
-		"lint": "eslint .",
+		"lint": "eslint-runner",
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
@@ -15,7 +15,6 @@
 	},
 	"devDependencies": {
 		"@kittr/lint": "workspace:*",
-		"eslint": "^8.32.0",
 		"@kittr/tsconfig": "workspace:*",
 		"typescript": "5.0.0-beta"
 	}

@@ -4,7 +4,7 @@
 	"version": "0.0.0",
 	"license": "MIT",
 	"scripts": {
-		"lint": "eslint .",
+		"lint": "eslint-runner",
 		"typecheck": "tsc --noEmit"
 	},
 	"exports": {
@@ -34,7 +34,6 @@
 		"@storybook/react": "6.5.9",
 		"@types/react": "^18.0.27",
 		"@types/react-dom": "^18.0.10",
-		"eslint": "^8.32.0",
 		"@kittr/tsconfig": "workspace:*",
 		"typescript": "5.0.0-beta"
 	}

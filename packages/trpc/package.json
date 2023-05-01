@@ -8,7 +8,7 @@
 	},
 	"license": "MIT",
 	"scripts": {
-		"lint": "eslint .",
+		"lint": "eslint-runner",
 		"test": "vitest",
 		"typecheck": "tsc --noEmit"
 	},
@@ -31,7 +31,6 @@
 		"@kittr/lint": "workspace:*",
 		"@kittr/tsconfig": "workspace:*",
 		"@ngneat/falso": "^6.4.0",
-		"eslint": "^8.32.0",
 		"typescript": "5.0.0-beta",
 		"vitest": "^0.28.3"
 	}
