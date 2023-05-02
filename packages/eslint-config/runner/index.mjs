@@ -20,7 +20,6 @@ const main = async () => {
     const eslint = new ESLint({
       useEslintrc: true,
       fix: isFix,
-      resolvePluginsRelativeTo: "../../packages/eslint-config"
     });
 
   const { ignorePatterns } = await eslint.calculateConfigForFile('*');

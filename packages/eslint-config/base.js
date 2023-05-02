@@ -1,5 +1,7 @@
 const { resolve } = require('path');
 
+// See: https://github.com/eslint/eslint/issues/3458
+require('@rushstack/eslint-patch/modern-module-resolution');
 const project = resolve(process.cwd(), 'tsconfig.json');
 
 module.exports = {
@@ -13,6 +15,7 @@ module.exports = {
 	parserOptions: {
     tsconfigRootDir: __dirname,
 	},
+  reportUnusedDisableDirectives: true,
   settings: {
     'import/resolver': {
       typescript: {

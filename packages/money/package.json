@@ -5,8 +5,7 @@
 	"main": "./src/index.ts",
 	"license": "MIT",
 	"scripts": {
-		"lint": "eslint .",
-		"lintrunner": "eslint-runner",
+		"lint": "eslint-runner",
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
