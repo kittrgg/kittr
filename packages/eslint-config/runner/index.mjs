@@ -4,6 +4,7 @@ import { globby } from 'globby'
 
 const main = async () => {
   const args = process.argv.slice(2);
+  const isFix = args.includes('--fix');
   const dirsAndGlobs = args.filter((arg) => !arg.startsWith('-'));
   // Ensure all dirs are valid globs.
   const extensions = ['cjs', 'js', 'jsx', 'mjs', 'ts', 'tsx'];
@@ -16,7 +17,12 @@ const main = async () => {
       )
     : [defaultGlob];
 
-    const eslint = new ESLint({useEslintrc: true});
+    const eslint = new ESLint({
+      useEslintrc: true,
+      fix: isFix,
+      resolvePluginsRelativeTo: "../../packages/eslint-config"
+    });
+
   const { ignorePatterns } = await eslint.calculateConfigForFile('*');
 
   const files = await globby(globs, {
