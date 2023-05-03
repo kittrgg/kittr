@@ -11,8 +11,8 @@
 		"eslint-runner": "./runner/index.mjs"
 	},
 	"scripts": {
-    "lint": "node ./runner/index.mjs",
-    "lint:fix": "node ./runner/index.mjs --fix",
+    "eslint": "node ./runner/index.mjs",
+    "eslint:fix": "node ./runner/index.mjs --fix",
     "type-check": "tsc --noEmit"
 	},
 	"dependencies": {

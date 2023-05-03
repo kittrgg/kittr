@@ -62,9 +62,10 @@
 		"db:push": {
 			"cache": false
 		},
-    "lint": { },
-    "lint:fix": { },
-    "lintrunner": { },
+    "lint": {
+			"dependsOn": ["@kittr/lint#eslint"]
+		},
+    "lint:fix": {},
 		"typecheck": {
       "dependsOn": [ "^topo" ]
     },
