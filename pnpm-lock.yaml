@@ -510,6 +510,9 @@ importers:
       superjson:
         specifier: ^1.12.3
         version: 1.12.3
+      zod:
+        specifier: 3.17.3
+        version: 3.17.3
     devDependencies:
       '@kittr/tsconfig':
         specifier: workspace:*

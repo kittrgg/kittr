@@ -6,6 +6,7 @@
 		"build": "next build",
 		"dev": "next dev",
 		"lint": "eslint-runner && next lint",
+		"lint:fix": "eslint-runner --fix && next lint --fix",
 		"start": "next start",
 		"test": "echo \"No tests specified\" && exit 0",
 		"test:watch": "echo \"No tests specified\" && exit 0",
