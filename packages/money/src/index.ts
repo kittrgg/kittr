@@ -1,7 +1,9 @@
 import Stripe from "stripe"
 
-const thing = 'help'
+if (!process.env.STRIPE_SECRET_KEY) {
+	throw new Error("No STRIPE_SECRET_KEY")
+}
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
+export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
 	apiVersion: "2020-08-27"
 })

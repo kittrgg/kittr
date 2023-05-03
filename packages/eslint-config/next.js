@@ -1,3 +1,5 @@
+const {rules} = require('./utils/rules')
+
 // See: https://github.com/eslint/eslint/issues/3458
 // @ts-expect-error No types available
 require('@rushstack/eslint-patch/modern-module-resolution');
@@ -5,14 +7,15 @@ require('@rushstack/eslint-patch/modern-module-resolution');
 module.exports = {
 	root: true,
 	extends: [
-    'plugin:@typescript-eslint/recommended',
-    'plugin:@typescript-eslint/recommended-requiring-type-checking',
-  	'plugin:@typescript-eslint/strict',
-		'turbo',
-    'plugin:@next/next/recommended'
-	],
+    '@vercel/style-guide/eslint/browser',
+    '@vercel/style-guide/eslint/node',
+    '@vercel/style-guide/eslint/react',
+    '@vercel/style-guide/eslint/next',
+    '@vercel/style-guide/eslint/typescript',
+	].map((config) => require.resolve(config)),
 	parserOptions: {
-    tsconfigRootDir: __dirname
+        tsconfigRootDir: `${__dirname}/tsconfig.json`
 	},
+    rules,
 	ignorePatterns: ["**/dist/**", "**/.eslintrc.js"],
 }

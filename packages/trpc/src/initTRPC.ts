@@ -1,9 +1,10 @@
-import { Context } from "./context"
 import admin from "@kittr/firebase/admin"
 import { captureMessage } from "@kittr/logger/node"
 import { prisma } from "@kittr/prisma"
 import { initTRPC, TRPCError } from "@trpc/server"
 import superjson from "superjson"
+import type { Context } from "./context"
+
 
 export const t = initTRPC.context<Context>().create({
 	transformer: superjson,

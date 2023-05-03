@@ -1,6 +1,6 @@
 module.exports = {
   root: true,
-  extends: [require.resolve('./base.js')],
+  extends: [require.resolve('./node.js')],
 	parserOptions: {
       project: __dirname + "/tsconfig.json"
   }

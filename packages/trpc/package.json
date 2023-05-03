@@ -22,6 +22,7 @@
 		"@kittr/types": "workspace:*",
 		"@kittr/utils": "workspace:*",
 		"@trpc/client": "^10.9.0",
+		"superjson": "^1.12.3",
 		"@trpc/next": "^10.9.0",
 		"@trpc/react": "^9.27.4",
 		"@trpc/react-query": "^10.9.0",

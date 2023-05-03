@@ -1,5 +1,5 @@
 
 module.exports = {
   root: true,
-  extends: [require.resolve('@kittr/lint/base')],
+  extends: [require.resolve('@kittr/lint/node')],
 };

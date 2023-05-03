@@ -19,7 +19,7 @@ const main = async () => {
 
     const eslint = new ESLint({
       useEslintrc: true,
-      fix: isFix,
+      fix: isFix
     });
 
   const { ignorePatterns } = await eslint.calculateConfigForFile('*');
@@ -28,7 +28,6 @@ const main = async () => {
     dot: true,
     ignore: ignorePatterns,
   });
-
 
   for await (const file of files) {
     const [result] = await eslint.lintFiles(file);

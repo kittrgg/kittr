@@ -23,7 +23,7 @@
 		"build": "turbo run build",
 		"build:local": "dotenv -- turbo run build",
 		"lint": "turbo run lint --continue",
-		"lint:fix": "turbo run lint --continue -- --fix",
+		"lint:fix": "turbo run lint:fix",
 		"test": "turbo run test --continue",
 		"clean": "find . -name node_modules -o -name .turbo -o -name .next -o -name dist -type d -prune | xargs rm -rf",
 		"docker:up": "docker compose -f docker-compose.yml up --build -d",
@@ -37,6 +37,7 @@
 	"devDependencies": {
 		"dotenv-cli": "^6.0.0",
 		"envfile": "6.17.0",
+    "@vercel/style-guide": "4.0.2",
 		"kill-port": "2.0.1",
 		"npm-run-all": "4.1.5",
 		"prettier": "2.7.1",
