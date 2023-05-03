@@ -1,7 +1,8 @@
 import colors from "@Colors"
 import SVG from "@Components/shared/SVG"
 import { header2 } from "@Styles/typography"
-import { useState, createContext, ReactNode, Dispatch, SetStateAction } from "react"
+import type { ReactNode, Dispatch, SetStateAction } from "react";
+import { useState, createContext } from "react"
 import styled from "styled-components"
 
 interface IProvider {
@@ -23,7 +24,7 @@ interface Props {
 export const { Provider, Consumer } = createContext<IProvider>({ isOpen: false, setIsOpen: () => null })
 
 /** Accordion style "dropdown" component. */
-export const Accordion = ({ title, children }: Props) => {
+export function Accordion({ title, children }: Props) {
 	const [isOpen, setIsOpen] = useState<boolean>(false)
 	const [headerIsHovered, setHeaderIsHovered] = useState<boolean>(false)
 
@@ -37,13 +38,13 @@ export const Accordion = ({ title, children }: Props) => {
 				>
 					{title}
 					<SVG.Carat
-						width="20px"
 						style={{
 							marginLeft: "40px",
 							transform: isOpen ? "translateY(1px)" : "rotate(180deg) translateY(-2px)",
 							opacity: headerIsHovered || isOpen ? 1 : 0,
 							transition: ".2s"
 						}}
+						width="20px"
 					/>
 				</Header>
 				<Body isOpen={isOpen}>

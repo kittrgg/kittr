@@ -1,15 +1,15 @@
-import EmailInput from "./EmailInput"
-import Success from "./Success"
 import AuthLayout from "@Components/layouts/Authentication"
 import Head from "@Components/shared/Head"
 import { useState } from "react"
+import Success from "./Success"
+import EmailInput from "./EmailInput"
 
-const ForgotPassword = () => {
+function ForgotPassword() {
 	const [step, setStep] = useState(1)
 
 	return (
 		<AuthLayout title={step === 1 ? "FORGOT PASSWORD?" : "CHECK YOUR EMAIL"}>
-			<Head title="Forgot Password | kittr" description="Forgot your password? Let's fix that up." />
+			<Head description="Forgot your password? Let's fix that up." title="Forgot Password | kittr" />
 			{step === 1 && <EmailInput setStep={setStep} />}
 			{step === 2 && <Success />}
 		</AuthLayout>

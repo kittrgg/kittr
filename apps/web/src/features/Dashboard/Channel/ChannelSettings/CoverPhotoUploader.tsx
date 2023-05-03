@@ -1,4 +1,3 @@
-import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
 import { Button, Spinner, SVG } from "@Components/shared"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
@@ -8,8 +7,9 @@ import { useDispatch } from "@Redux/store"
 import { uploadWithHandlers, download, deleteFile } from "@kittr/firebase/storage"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
+import { trpc } from "@/lib/trpc"
 
-const CoverPhotoUploader = () => {
+function CoverPhotoUploader() {
 	const dispatch = useDispatch()
 	const { refetch: refetchDashboard } = useDashboardChannel()
 	const { data } = useChannelData()
@@ -21,8 +21,8 @@ const CoverPhotoUploader = () => {
 
 	const { mutate } = trpc.channels.profile["cover-photo"].update.useMutation({
 		onSuccess: (data) => {
-			if (data?.profile?.hasCoverPhoto) {
-				download(data?.id, (path) => {
+			if (data.profile?.hasCoverPhoto) {
+				download(data.id, (path) => {
 					setIsUploading(false)
 				})
 			}
@@ -47,8 +47,8 @@ const CoverPhotoUploader = () => {
 				fileName,
 				imageFile,
 				onSuccess: async () => {
-					// eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
-					mutate({ channelId: data?.id!, hasCoverPhoto: true })
+					 
+					mutate({ channelId: data.id, hasCoverPhoto: true })
 				},
 				onError: () => {
 					setIsUploading(false)
@@ -90,27 +90,27 @@ const CoverPhotoUploader = () => {
 		<div>
 			<Title>
 				Cover Photo
-				<SVG.PremiumWithCircle width="24px" style={{ position: "relative", top: "6px", marginLeft: "12px" }} />
+				<SVG.PremiumWithCircle style={{ position: "relative", top: "6px", marginLeft: "12px" }} width="24px" />
 			</Title>
 			<p style={{ marginBottom: "24px", color: colors.lighter }}>
 				For best results, use an image with dimensions of at least 1440px by 300px.
 			</p>
 
 			<Grid>
-				{hasCoverPhoto && <BackgroundImage backgroundImage={image + cacheBuster} />}
+				{hasCoverPhoto ? <BackgroundImage backgroundImage={image + cacheBuster} /> : null}
 
 				<ButtonsWrapper>
 					<Label htmlFor="coverPhotoUpload">
 						{hasCoverPhoto ? "CHANGE IMAGE" : "ADD COVER"}
 						<input
 							id="coverPhotoUpload"
-							type="file"
 							name="coverPhotoUpload"
 							onChange={(e: any) => handleUpload(e)}
 							style={{ display: "none" }}
+							type="file"
 						/>
 					</Label>
-					{hasCoverPhoto && <Button design="transparent" onClick={handleDelete} text="REMOVE IMAGE" />}
+					{hasCoverPhoto ? <Button design="transparent" onClick={handleDelete} text="REMOVE IMAGE" /> : null}
 				</ButtonsWrapper>
 			</Grid>
 		</div>

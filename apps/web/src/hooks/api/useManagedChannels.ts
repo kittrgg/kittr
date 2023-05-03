@@ -1,9 +1,9 @@
-// import { useUser } from "@Hooks/useUser"
-// import { trpc } from "@/lib/trpc"
+// Import { useUser } from "@Hooks/useUser"
+// Import { trpc } from "@/lib/trpc"
 
-// export const useManagedChannels = () => {
-// 	const user = useUser()
-// 	return trpc.listChannels.useQuery(undefined, { enabled: !!user })
+// Export const useManagedChannels = () => {
+// 	Const user = useUser()
+// 	Return trpc.listChannels.useQuery(undefined, { enabled: !!user })
 // }
 
 export {}

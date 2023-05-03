@@ -1,7 +1,6 @@
-import AddLink from "../../modals/AddLink"
-import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
-import { Button, Spinner, SVG, SvgByType, SVGType } from "@Components/shared"
+import type { SVGType } from "@Components/shared";
+import { Button, Spinner, SVG, SvgByType } from "@Components/shared"
 import TextInput from "@Components/shared/TextInput"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { setModal } from "@Redux/slices/dashboard"
@@ -12,9 +11,11 @@ import { trimPrefix } from "@Utils/helpers/trimPrefix"
 import { linkPrefixes } from "@Utils/lookups/linkPrefixes"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
+import AddLink from "../../modals/AddLink"
+import { trpc } from "@/lib/trpc"
 
 /** CRUD for editing the social links of a channel. */
-const LinkEditor = () => {
+function LinkEditor() {
 	const { data } = useDashboardChannel()
 	const { isPremium } = usePremiumStatus()
 	const modal = useModal()
@@ -42,7 +43,7 @@ const LinkEditor = () => {
 		// Loop through link edits, then compare the key-value array to see if every link is still the same
 		linkEdits.forEach((link) => {
 			if (
-				Object.entries(data?.links || {}).find((ogLink) => ogLink[0] === link?.value && ogLink[1].value === link.value)
+				Object.entries(data?.links || {}).find((ogLink) => ogLink[0] === link.value && ogLink[1].value === link.value)
 			) {
 				comparisons.push(false)
 			} else {
@@ -50,13 +51,13 @@ const LinkEditor = () => {
 			}
 		})
 
-		setActiveChanges(comparisons.some((elem) => elem === true))
+		setActiveChanges(comparisons.some((elem) => elem))
 	}, [linkEdits, data?.links])
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>, link: [string, string]) => {
 		const newEdit = linkEdits?.slice() ?? []
 		const editIndex =
-			newEdit?.findIndex((linkToEdit) => {
+			newEdit.findIndex((linkToEdit) => {
 				return link[0] === linkToEdit.property
 			}) ?? -1
 
@@ -86,18 +87,16 @@ const LinkEditor = () => {
 	}
 
 	if (isLoading) {
-		return <Spinner width="100%" height="50px" />
+		return <Spinner height="50px" width="100%" />
 	}
 
 	return (
 		<>
 			<Header>Social Media Links</Header>
-			{isPremium && (
-				<Paragraph style={{ marginBottom: "32px" }}>
+			{isPremium ? <Paragraph style={{ marginBottom: "32px" }}>
 					Note: A Twitch link is required to enable live badges on your avatar photo and popular clips, recent channels,
 					and channel schedule sections on your profile page.
-				</Paragraph>
-			)}
+				</Paragraph> : null}
 			<Paragraph>
 				Feel free to paste in the whole link. We will trim it up for you. Yes, we know, we love you, too.
 			</Paragraph>
@@ -114,16 +113,14 @@ const LinkEditor = () => {
 						}}
 					>
 						<SvgByType
-							type={(property.charAt(0).toUpperCase() + property.slice(1)) as SVGType}
 							alt={property}
-							width={50}
 							height={50}
+							type={(property.charAt(0).toUpperCase() + property.slice(1)) as SVGType}
+							width={50}
 						/>
 						<TextInput
-							type="text"
+							inputStyles={{ flex: "1", marginLeft: "0" }}
 							label={linkPrefixes[property]}
-							name={property}
-							value={trimPrefix(linkPrefixes[property], value) as string}
 							labelStyles={{
 								display: "flex",
 								flexDirection: "row",
@@ -131,20 +128,22 @@ const LinkEditor = () => {
 								marginLeft: "24px",
 								color: colors.lighter
 							}}
-							inputStyles={{ flex: "1", marginLeft: "0" }}
+							name={property}
 							onChange={(e) => handleChange(e, [property, value])}
+							type="text"
+							value={trimPrefix(linkPrefixes[property], value) }
 						/>
 						<Button
+							dataCy={`${property}-delete-button`}
 							design="transparent"
-							startIcon={<SVG.X />}
-							text=""
 							onClick={() => removeLink(property)}
+							startIcon={<SVG.X />}
 							style={{
 								marginLeft: "12px",
 								padding: "12px",
 								border: "none"
 							}}
-							dataCy={`${property}-delete-button`}
+							text=""
 						/>
 					</Container>
 				)
@@ -152,23 +151,23 @@ const LinkEditor = () => {
 			<ButtonFlex>
 				<div style={{ flex: 0.5 }}>
 					<Button
+						dataCy="add-link-button"
 						design="transparent"
-						text="Add link"
 						onClick={() => dispatch(setModal({ type: "Add Link", data: {} }))}
 						style={{ margin: "0 auto" }}
-						dataCy="add-link-button"
+						text="Add link"
 					/>
 				</div>
 				<div style={{ flex: 0.5, textAlign: "center" }}>
 					<Button
+						dataCy="save-link-changes"
 						design="white"
 						disabled={!areActiveChanges}
-						text="Save Changes"
 						onClick={async () => mutate({ channelId: data?.id!, links: linkEdits! })}
 						style={{
 							margin: "0 auto"
 						}}
-						dataCy="save-link-changes"
+						text="Save Changes"
 					/>
 				</div>
 			</ButtonFlex>

@@ -1,21 +1,21 @@
-import Item from "./Item"
-import * as Styled from "./style"
 import { useActiveWeapon } from "@Redux/slices/displayr/selectors"
-import { WarzoneKit, WarzoneKitBase } from "@kittr/prisma"
+import type { WarzoneKit, WarzoneKitBase } from "@kittr/prisma"
 import { useEffect, useRef, useState } from "react"
 import ScrollContainer from "react-indiana-drag-scroll"
+import * as Styled from "./style"
+import Item from "./Item"
 
 interface Props {
-	availableKits: Array<WarzoneKit & { base: WarzoneKitBase }>
+	availableKits: (WarzoneKit & { base: WarzoneKitBase })[]
 }
 
-const KitScroller = ({ availableKits }: Props) => {
+function KitScroller({ availableKits }: Props) {
 	const activeWeapon = useActiveWeapon()
 	const [mask, setMask] = useState<"left" | "right" | "both" | "none">("left")
 	const containerRef = useRef<HTMLDivElement>(null)
 
 	const matchedBase = availableKits
-		.filter((elem) => elem.base.displayName === activeWeapon?.base?.displayName)
+		.filter((elem) => elem.base.displayName === activeWeapon.base.displayName)
 		.sort((a, b) => {
 			if ((a.customTitle ?? "") < (b.customTitle ?? "")) return -1
 			if ((a.customTitle ?? "") > (b.customTitle ?? "")) return 1
@@ -37,6 +37,8 @@ const KitScroller = ({ availableKits }: Props) => {
 
 	return (
 		<ScrollContainer
+			hideScrollbars
+			horizontal
 			innerRef={containerRef}
 			onScroll={() => {
 				if (containerRef.current) {
@@ -55,9 +57,6 @@ const KitScroller = ({ availableKits }: Props) => {
 					setMask("both")
 				}
 			}}
-			horizontal
-			vertical={false}
-			hideScrollbars
 			style={{
 				height: "36px",
 				cursor: "grab",
@@ -78,12 +77,13 @@ const KitScroller = ({ availableKits }: Props) => {
 						? "linear-gradient(to left, transparent 0%, black 25%, black 75%, transparent 100%)"
 						: ""
 			}}
+			vertical={false}
 		>
 			<Styled.Wrapper>
 				{matchedBase
 					.sort((a, b) => Number(b.featured) - Number(a.featured))
 					.map((elem) => {
-						return <Item key={elem.id} elem={elem} />
+						return <Item elem={elem} key={elem.id} />
 					})}
 			</Styled.Wrapper>
 		</ScrollContainer>

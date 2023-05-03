@@ -1,7 +1,8 @@
-import { SvgByType, SVGType } from "@Components/shared"
+import type { SVGType } from "@Components/shared";
+import { SvgByType } from "@Components/shared"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
-import { ChannelLink, LinkProperty } from "@kittr/prisma"
-import { CSSProperties } from "react"
+import type { ChannelLink, LinkProperty } from "@kittr/prisma"
+import type { CSSProperties } from "react"
 import styled from "styled-components"
 
 const linkOrder: LinkProperty[] = ["TWITCH", "YOUTUBE", "FACEBOOK", "TWITTER", "TIKTOK", "INSTAGRAM", "DISCORD"]
@@ -18,7 +19,7 @@ interface Props {
 }
 
 /** List the social links of the channel with icons. */
-export const SocialIcons = ({ links, iconSize = 30, colorHover, style }: Props) => {
+export function SocialIcons({ links, iconSize = 30, colorHover, style }: Props) {
 	// LEGACY: Make sure that the link is converted to a hyperlink if it is incomplete from the database.
 	const sanitizeLink = (link: string) => {
 		if (!link.startsWith("https://")) return `https://${link}`
@@ -36,19 +37,19 @@ export const SocialIcons = ({ links, iconSize = 30, colorHover, style }: Props) 
 
 				return (
 					<a
-						key={link.id}
 						href={sanitizeLink(link.value)}
-						target="_blank"
-						rel="noopener noreferrer"
+						key={link.id}
 						onClick={(e) => e.stopPropagation()}
+						rel="noopener noreferrer"
+						target="_blank"
 					>
 						<div style={{ margin: "0 5px" }}>
 							<SvgByType
-								type={linkType as SVGType}
 								alt={`"Channel's ${linkType} Link"`}
-								width={iconSize}
-								height={iconSize}
 								colorHover={colorHover}
+								height={iconSize}
+								type={linkType as SVGType}
+								width={iconSize}
 							/>
 						</div>
 					</a>

@@ -5,8 +5,8 @@ import Link from "next/link"
 import styled from "styled-components"
 
 /** Information about the platform itself. */
-const PlatformInfo = () => (
-	<Container>
+function PlatformInfo() {
+  return <Container>
 		<Header>play bettr with kittr.</Header>
 		<Summary>
 			At kittr, we strive to create a <strong>better channeling experience</strong> for Twitch players, moderators, and
@@ -16,12 +16,12 @@ const PlatformInfo = () => (
 		<TilesContainer>
 			<Tile>
 				<h3>PICK A GAME</h3>
-				<Link href={Routes.GAMES.LIST} passHref legacyBehavior>
+				<Link href={Routes.GAMES.LIST} legacyBehavior passHref>
 					<StackLink data-cy="game-library-button">
 						<ImageContainer>
 							<img
-								src="/media/game-stack.png"
 								alt=""
+								src="/media/game-stack.png"
 								style={{ width: "100%", height: "250px", objectFit: "contain" }}
 							/>
 						</ImageContainer>
@@ -30,12 +30,12 @@ const PlatformInfo = () => (
 			</Tile>
 			<Tile>
 				<h3>PICK A CHANNEL</h3>
-				<Link href={Routes.CHANNEL.LIST} passHref legacyBehavior>
+				<Link href={Routes.CHANNEL.LIST} legacyBehavior passHref>
 					<StackLink data-cy="channels-link-button">
 						<ImageContainer>
 							<img
-								src="/media/channel-stack.png"
 								alt=""
+								src="/media/channel-stack.png"
 								style={{ width: "100%", height: "250px", objectFit: "contain" }}
 							/>
 						</ImageContainer>
@@ -47,14 +47,14 @@ const PlatformInfo = () => (
 				{/* <Link href="/kits">
                         <StackLink> */}
 				<ImageContainer>
-					<img src="/media/kit-stack.png" alt="" style={{ width: "100%", height: "250px", objectFit: "contain" }} />
+					<img alt="" src="/media/kit-stack.png" style={{ width: "100%", height: "250px", objectFit: "contain" }} />
 				</ImageContainer>
 				{/* </StackLink>
                     </Link> */}
 			</Tile>
 		</TilesContainer>
 	</Container>
-)
+}
 
 export default PlatformInfo
 

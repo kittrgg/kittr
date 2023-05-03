@@ -1,16 +1,16 @@
-import { trpc } from "@/lib/trpc"
 import PageWrapper from "@Components/layouts/PageWrapper"
 import { NoItemFound } from "@Components/shared"
 import ChannelProfile from "@Features/ChannelProfile"
 import { getTopChannelsQuery } from "@Services/orm"
 import { createSSGHelper } from "@kittr/trpc"
 import { useRouter } from "next/router"
+import { trpc } from "@/lib/trpc"
 
-const ChannelProfilePage = () => {
+function ChannelProfilePage() {
 	const { query } = useRouter()
 	const { channel: urlChannel } = query as { channel: string }
 	const { data: channel } = trpc.channels.profile.get.useQuery(urlChannel, {
-		enabled: !!urlChannel
+		enabled: Boolean(urlChannel)
 	})
 
 	if (!channel) {
@@ -19,8 +19,8 @@ const ChannelProfilePage = () => {
 
 	return (
 		<PageWrapper
-			title={`${query.channel}'s Profile | kittr`}
 			description={`${query.channel}'s wants to share their kits with you.`}
+			title={`${query.channel}'s Profile | kittr`}
 		>
 			<ChannelProfile />
 		</PageWrapper>

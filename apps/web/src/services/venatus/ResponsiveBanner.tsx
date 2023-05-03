@@ -18,11 +18,11 @@ interface Props {
  * By default, this component uses dynamic sizes. This can be adjusted for desktop but using the staticOnly prop.
  *
  * */
-const ResponsiveBanner = ({
+function ResponsiveBanner({
 	largeWidthAdUnit = "s728x90",
 	smallWidthAdUnit = "d300x50",
 	containerStyles = { margin: "18px 0" }
-}: Props) => {
+}: Props) {
 	const { observe } = useDimensions()
 	const { width } = useViewportSize()
 

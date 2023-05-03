@@ -1,5 +1,4 @@
-interface IFn {
-	/**
+/**
 	 * @params
 	 * minimum value, maximum value
 	 *
@@ -7,8 +6,7 @@ interface IFn {
 	 * Returned value within range
 	 *
 	 */
-	(min: number, max: number): string
-}
+type IFn = (min: number, max: number) => string
 
 /** Get a random number within the specified range. */
 export const getRandomNumFromRange: IFn = (min, max) => {

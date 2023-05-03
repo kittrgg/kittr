@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-// import { IPopularityRates } from "@kittr/types"
-import ChannelMain from "./Main"
-import Sidebar from "./Sidebar"
+ 
+// Import { IPopularityRates } from "@kittr/types"
 import colors from "@Colors"
 import NavMenu from "@Components/layouts/NavMenu"
 import { useDimensions } from "@Hooks/useDimensions"
@@ -10,11 +8,13 @@ import { useSidebarState } from "@Redux/slices/displayr/selectors"
 import { useDispatch } from "@Redux/store"
 import type { NonNullable } from "@Types/index"
 import { Routes } from "@Utils/lookups/routes"
-import { RouterOutput } from "@kittr/trpc"
+import type { RouterOutput } from "@kittr/trpc"
 import { Drawer } from "@mantine/core"
 import { useViewportSize } from "@mantine/hooks"
 import { useRouter } from "next/router"
 import styled from "styled-components"
+import Sidebar from "./Sidebar"
+import ChannelMain from "./Main"
 
 interface Props {
 	channel: NonNullable<RouterOutput["channels"]["profile"]["get"]>
@@ -22,39 +22,39 @@ interface Props {
 
 const MOBILE_WIDTH = 1050
 
-const WarzoneProfile = ({ channel }: Props) => {
+function WarzoneProfile({ channel }: Props) {
 	const { query, push } = useRouter()
 	const dispatch = useDispatch()
 	const isSidebarOpen = useSidebarState()
 	const { width } = useViewportSize()
-	// const activeWeapon = useActiveWeapon()
+	// Const activeWeapon = useActiveWeapon()
 	const { observe, height } = useDimensions()
-	const code = channel?.gameCreatorCodes.find((code) => code.game.urlSafeName === query.game)?.code
+	const code = channel.gameCreatorCodes.find((code) => code.game.urlSafeName === query.game)?.code
 
 	return (
 		<div>
 			<NavMenu
-				wrapperRef={observe}
-				breakpoint={1050}
 				backFunction={() =>
 					isSidebarOpen ? dispatch(setIsSidebarOpen(false)) : push(Routes.CHANNEL.createPath(query.channel as string))
 				}
+				breakpoint={1050}
 				middleComponent={
 					<>
 						<HeaderTitle>{`${query.channel || ("" as string)}`}</HeaderTitle>
-						{code && <CreatorCode>CODE: {code}</CreatorCode>}
+						{code ? <CreatorCode>CODE: {code}</CreatorCode> : null}
 					</>
 				}
+				wrapperRef={observe}
 			/>
 			<Drawer
-				opened={isSidebarOpen || width >= MOBILE_WIDTH}
 				onClose={() => dispatch(setIsSidebarOpen(false))}
-				withCloseButton={width <= MOBILE_WIDTH}
-				withOverlay={width <= MOBILE_WIDTH}
+				opened={isSidebarOpen || width >= MOBILE_WIDTH}
 				styles={{
 					closeButton: { marginTop: height },
 					drawer: { marginTop: width >= MOBILE_WIDTH ? height : 0 }
 				}}
+				withCloseButton={width <= MOBILE_WIDTH}
+				withOverlay={width <= MOBILE_WIDTH}
 			>
 				<Sidebar />
 			</Drawer>

@@ -12,7 +12,7 @@ interface Props {
 	designVariant: DesignVariants
 }
 
-export const ColorPicker = ({ onChangeComplete, defaultColor, designVariant }: Props) => {
+export function ColorPicker({ onChangeComplete, defaultColor, designVariant }: Props) {
 	const [color, setColor] = useState<string | null>(defaultColor)
 	const debouncedColor = useDebounce(color, 500)
 
@@ -20,12 +20,12 @@ export const ColorPicker = ({ onChangeComplete, defaultColor, designVariant }: P
 		if (debouncedColor && onChangeComplete) {
 			onChangeComplete(debouncedColor)
 		}
-		// eslint-disable-next-line
+		 
 	}, [debouncedColor])
 
 	return (
 		<ColorInputWrapper designVariant={designVariant}>
-			<ColorInput type="color" value={defaultColor} onChange={(e) => setColor(e.target.value)} />
+			<ColorInput onChange={(e) => setColor(e.target.value)} type="color" value={defaultColor} />
 		</ColorInputWrapper>
 	)
 }

@@ -1,16 +1,16 @@
-import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
 import { Button, Modal, Spinner, TextInput } from "@Components/shared"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
-// import { useManagedChannels } from "@Hooks/api/useManagedChannels"
+// Import { useManagedChannels } from "@Hooks/api/useManagedChannels"
 import { handleTutorialAction, setModal } from "@Redux/slices/dashboard"
 import { useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
 import { paragraph } from "@Styles/typography"
 import { useState } from "react"
 import styled from "styled-components"
+import { trpc } from "@/lib/trpc"
 
-const CreateChannelModal = () => {
+function CreateChannelModal() {
 	const dispatch = useDispatch()
 	const { data } = useModal()
 	const { refetch: refetchDashboard } = useDashboardChannel()
@@ -52,21 +52,21 @@ const CreateChannelModal = () => {
 	return (
 		<Modal backgroundClickToClose title="CREATE NEW CHANNEL">
 			<TextInput
-				type="text"
-				name="displayNameInput"
 				label="Display Name"
-				value={displayName}
+				name="displayNameInput"
 				onChange={(e) => setDisplayName(e.target.value)}
+				type="text"
+				value={displayName}
 			/>
 			<Error>{error?.message}</Error>
 			<FlexRow>
-				<Button design="transparent" text="CANCEL" onClick={() => dispatch(setModal({ type: "", data: "" }))} />
+				<Button design="transparent" onClick={() => dispatch(setModal({ type: "", data: "" }))} text="CANCEL" />
 				<Button
+					dataCy="create-channel-button"
 					design="white"
-					text={isLoading ? "..." : "CREATE"}
 					disabled={isLoading}
 					onClick={() => mutate(displayName)}
-					dataCy="create-channel-button"
+					text={isLoading ? "..." : "CREATE"}
 				/>
 			</FlexRow>
 		</Modal>

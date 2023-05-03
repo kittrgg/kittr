@@ -1,10 +1,10 @@
-import * as Styled from "./style"
 import TextInput from "@Components/shared/TextInput"
 import { updateBlueprint } from "@Redux/slices/dashboard"
 import { useActiveKit } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
+import * as Styled from "./style"
 
-const Blueprint = ({ ...props }) => {
+function Blueprint({ ...props }) {
 	const dispatch = useDispatch()
 	const { blueprint } = useActiveKit()
 
@@ -12,13 +12,13 @@ const Blueprint = ({ ...props }) => {
 		<Styled.Container>
 			<Styled.Header>FAVORITE BLUEPRINT</Styled.Header>
 			<TextInput
-				type="text"
-				name="blueprint"
-				label="Favorite Blueprint"
-				noTextLabel
-				value={blueprint ?? ""}
-				onChange={(e) => dispatch(updateBlueprint(e.target.value))}
 				inputStyles={{ marginTop: "12px" }}
+				label="Favorite Blueprint"
+				name="blueprint"
+				noTextLabel
+				onChange={(e) => dispatch(updateBlueprint(e.target.value))}
+				type="text"
+				value={blueprint ?? ""}
 			/>
 		</Styled.Container>
 	)

@@ -1,6 +1,4 @@
-interface IFunc {
-	(params: { width: number; height: number }): string
-}
+type IFunc = (params: { width: number; height: number }) => string
 
 /** An shimmering effect to show as a placeholder for Next.js images. Not quite sure how the parameters work, to be honest... */
 export const imageShimmer: IFunc = ({ width, height }) => {

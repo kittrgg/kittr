@@ -1,49 +1,44 @@
-import { H2, GridItem, SpecsGrid } from "./style"
 import colors from "@Colors"
 import { SVG } from "@Components/shared"
 import { paragraph } from "@Styles/typography"
-import { ChannelAffiliate } from "@kittr/prisma"
+import type { ChannelAffiliate } from "@kittr/prisma"
 import styled from "styled-components"
+import { H2, GridItem, SpecsGrid } from "./style"
 
 interface Props {
 	brandColor: string
 	affiliates: ChannelAffiliate[]
 }
 
-const Affiliates = ({ affiliates, brandColor }: Props) => {
+function Affiliates({ affiliates, brandColor }: Props) {
 	if (Object.values(affiliates || {}).length === 0) return null
 
 	return (
 		<section id="affiliates">
 			<H2>AFFILIATES</H2>
 			<SpecsGrid>
-				{affiliates &&
-					affiliates.map((affiliate) => {
+				{affiliates ? affiliates.map((affiliate) => {
 						return (
-							<GridItem key={affiliate.company} colorHover={brandColor}>
+							<GridItem colorHover={brandColor} key={affiliate.company}>
 								<Flex>
 									<Company>{affiliate.company}</Company>
-									{affiliate.description && <Description>{affiliate.description}</Description>}
+									{affiliate.description ? <Description>{affiliate.description}</Description> : null}
 								</Flex>
-								{affiliate.code && (
-									<Flex>
+								{affiliate.code ? <Flex>
 										<Code>CODE</Code>
 										<Code>{affiliate.code}</Code>
-									</Flex>
-								)}
-								{affiliate.url && (
-									<Link href={affiliate.url} target="_blank" rel="noopener noreferrer">
+									</Flex> : null}
+								{affiliate.url ? <Link href={affiliate.url} rel="noopener noreferrer" target="_blank">
 										<SVG.Link
-											width="24px"
 											stroke={colors.lighter}
 											style={{ position: "relative", top: "6px", marginRight: "12px" }}
+											width="24px"
 										/>
 										Visit Link
-									</Link>
-								)}
+									</Link> : null}
 							</GridItem>
 						)
-					})}
+					}) : null}
 			</SpecsGrid>
 		</section>
 	)

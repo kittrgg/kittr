@@ -3,19 +3,19 @@ import { useState } from "react"
 
 /** The Instagram logo. Use fill for color. */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const Instagram = (props: any) => {
+export function Instagram(props: any) {
 	const [isHovered, setIsHovered] = useState(false)
 
 	const { width = "100%", fill = colors.white, colorHover = colors.white, dataCy, ...rest } = props
 
 	return (
 		<svg
-			onMouseEnter={() => setIsHovered(true)}
-			onMouseLeave={() => setIsHovered(false)}
-			width={width}
-			viewBox="0 0 68 67"
 			data-cy={dataCy}
 			fill="none"
+			onMouseEnter={() => setIsHovered(true)}
+			onMouseLeave={() => setIsHovered(false)}
+			viewBox="0 0 68 67"
+			width={width}
 			xmlns="http://www.w3.org/2000/svg"
 			{...rest}
 		>

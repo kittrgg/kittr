@@ -1,4 +1,3 @@
-import LogoutButton from "./ProfileButtons"
 import colors from "@Colors"
 import ProfileImage from "@Components/shared/ProfileImage"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
@@ -6,9 +5,10 @@ import { useManagerRole } from "@Redux/slices/dashboard/selectors"
 import { caption } from "@Styles/typography"
 import { capitalizeFirstCharacter } from "@Utils/helpers/capitalizeFirstCharacter"
 import styled from "styled-components"
+import LogoutButton from "./ProfileButtons"
 
 /** Show the user their role within a channel as well as the logout button. */
-const UserIdentity = () => {
+function UserIdentity() {
 	const { data } = useDashboardChannel()
 	const role = useManagerRole()
 
@@ -16,10 +16,10 @@ const UserIdentity = () => {
 		<Wrapper>
 			<Child>
 				<ProfileImage
-					size="25px"
-					hasProfileImage={!!data?.profile?.hasProfileImage}
+					alwaysRefresh
+					hasProfileImage={Boolean(data?.profile?.hasProfileImage)}
 					imagePath={data?.id}
-					alwaysRefresh={true}
+					size="25px"
 				/>
 				<Role>You are an {capitalizeFirstCharacter(role)}</Role>
 			</Child>

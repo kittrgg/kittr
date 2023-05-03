@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 
-const isDomAvailable = !!(typeof window !== "undefined" && window.document && window.document.createElement)
+const isDomAvailable = Boolean(typeof window !== "undefined" && window.document && window.document.createElement)
 
 /** A hook to detect if React is currently being rendered on the browser. Returns a boolean. */
 export const useIsBrowser = (): boolean => {

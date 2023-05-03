@@ -1,17 +1,17 @@
-import { H2 } from "./style"
 import colors from "@Colors"
 import { SideScroller } from "@Components/shared"
 import { montserrat } from "@Styles/typography"
-import { ITwitchClip } from "@kittr/types"
+import type { ITwitchClip } from "@kittr/types"
 import { getDate, getMonth, getYear } from "date-fns"
 import styled from "styled-components"
+import { H2 } from "./style"
 
 interface Props {
 	clips?: ITwitchClip[]
 	brandColor: string
 }
 
-const PopularClips = ({ clips, brandColor }: Props) => {
+function PopularClips({ clips, brandColor }: Props) {
 	// If channel doesn't have any clips.
 	if (clips?.length === 0) return null
 
@@ -26,10 +26,10 @@ const PopularClips = ({ clips, brandColor }: Props) => {
 
 					return (
 						<ClipContainer
-							key={clip.id}
 							brandColor={brandColor}
-							image={clip.thumbnail_url}
 							href={clip.url}
+							image={clip.thumbnail_url}
+							key={clip.id}
 							rel="noopener noreferrer"
 							target="_blank"
 						>

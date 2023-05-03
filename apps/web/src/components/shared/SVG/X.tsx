@@ -2,17 +2,17 @@ import colors from "@Colors"
 
 /** An X to use for ...x-ing things. Use fill for color. */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const X = (props: any) => {
+export function X(props: any) {
 	const { width = "100%", fill = colors.white, dataCy, ...rest } = props
 
 	return (
 		<svg
-			width={width}
+			data-cy={dataCy}
+			fill="none"
 			height={11}
 			viewBox="0 0 13 11"
-			fill="none"
+			width={width}
 			xmlns="http://www.w3.org/2000/svg"
-			data-cy={dataCy}
 			{...rest}
 		>
 			<path

@@ -1,20 +1,20 @@
-import { trpc } from "@/lib/trpc"
 import FallbackPage from "@Components/layouts/FallbackPage"
 import { Head, NoItemFound } from "@Components/shared"
 import WarzoneProfile from "@Features/WarzoneProfile"
 import { prisma } from "@kittr/prisma"
 import { createSSGHelper } from "@kittr/trpc"
 import { useRouter } from "next/router"
+import { trpc } from "@/lib/trpc"
 
-const GamePresentation = () => {
+function GamePresentation() {
 	const { isFallback, query } = useRouter()
 	const { game: urlGame, channel: urlChannel } = query as { game: string; channel: string }
 
 	const { data: game } = trpc.games.getByUrlSafeName.useQuery(urlGame, {
-		enabled: !!urlGame
+		enabled: Boolean(urlGame)
 	})
 	const { data: channel } = trpc.channels.profile.get.useQuery(urlChannel, {
-		enabled: !!urlChannel
+		enabled: Boolean(urlChannel)
 	})
 
 	if (isFallback) return <FallbackPage />
@@ -22,7 +22,7 @@ const GamePresentation = () => {
 	if (!channel) {
 		return (
 			<>
-				<Head title="Game Not Found | kittr" description={`${urlChannel} doesn't seem to play that game! | kittr`} />
+				<Head description={`${urlChannel} doesn't seem to play that game! | kittr`} title="Game Not Found | kittr" />
 				<NoItemFound type="game" />
 			</>
 		)
@@ -32,15 +32,15 @@ const GamePresentation = () => {
 		return (
 			<>
 				<Head
-					title={`${channel.displayName}'s ${game.displayName} Profile | kittr`}
 					description={`${channel.displayName} wants to share their ${game.displayName} kits with you.`}
+					title={`${channel.displayName}'s ${game.displayName} Profile | kittr`}
 				/>
 				<WarzoneProfile
 					channel={channel}
-					// popularityRates={{
-					// 	ratioOfChannelsWithBase,
-					// 	ratioOfChannelsWithBaseFeatured,
-					// 	forSetupComparison
+					// PopularityRates={{
+					// 	RatioOfChannelsWithBase,
+					// 	RatioOfChannelsWithBaseFeatured,
+					// 	ForSetupComparison
 					// }}
 				/>
 			</>
@@ -49,7 +49,7 @@ const GamePresentation = () => {
 
 	return (
 		<>
-			<Head title="Game Not Found | kittr" description={`${urlChannel} doesn't seem to play that game! | kittr`} />
+			<Head description={`${urlChannel} doesn't seem to play that game! | kittr`} title="Game Not Found | kittr" />
 			<NoItemFound type="channel" />
 		</>
 	)
@@ -92,8 +92,8 @@ export const getStaticProps = async ({ params }: { params: { channel: string; ga
 	await ssg.channels.profile.get.fetch(urlChannel)
 
 	// TODO: Bring back kit stats!
-	// const kitStats = await KitStat.find()
-	// const { ratioOfChannelsWithBase, ratioOfChannelsWithBaseFeatured, forSetupComparison } = kitStats[0]
+	// Const kitStats = await KitStat.find()
+	// Const { ratioOfChannelsWithBase, ratioOfChannelsWithBaseFeatured, forSetupComparison } = kitStats[0]
 
 	return {
 		props: {

@@ -9,8 +9,8 @@ interface Props {
 	left: string
 }
 
-const Block = ({ size, top, left }: Props) => (
-	<div
+function Block({ size, top, left }: Props) {
+  return <div
 		key={size + top + left}
 		style={{
 			position: "absolute",
@@ -25,10 +25,10 @@ const Block = ({ size, top, left }: Props) => (
 			zIndex: 1
 		}}
 	/>
-)
+}
 
 /** Spawns squares for background art in randomly generated positions with randomly generated sizes. */
-const BlockArt = () => {
+function BlockArt() {
 	const isBrowser = useIsBrowser()
 	const blockCount = 15
 	const blockCoordinates = useRef(
@@ -50,7 +50,7 @@ const BlockArt = () => {
 			}}
 		>
 			{blockCoordinates.current.map((coords) => (
-				<Block key={getRandomNumFromRange(-10000, 10000)} size={coords.size} top={coords.top} left={coords.left} />
+				<Block key={getRandomNumFromRange(-10000, 10000)} left={coords.left} size={coords.size} top={coords.top} />
 			))}
 		</div>
 	)

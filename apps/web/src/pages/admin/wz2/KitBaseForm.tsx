@@ -8,11 +8,11 @@ import { ActionIcon } from "@mantine/core"
 import { useState } from "react"
 import styled from "styled-components"
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+ 
 const groupBy = (xs: any, key: string) =>
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	 
 	xs.reduce((rv: any, x: any) => {
-		// eslint-disable-next-line @typescript-eslint/no-extra-semi
+		 
 		;(rv[x[key]] = rv[x[key]] || []).push(x)
 		return rv
 	}, {})
@@ -35,7 +35,7 @@ interface Props {
 export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 	const [formValues, setFormValues] = useState<Partial<FormState>>({ gameId })
 
-	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+	 
 	const { refetch } = trpc.admin.warzone2.kitBases.get.useQuery(
 		{ kitBaseId: kitBaseId! },
 		{
@@ -58,17 +58,17 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 	const { mutate: createBase } = trpc.admin.warzone2.kitBases.create.useMutation()
 	const { mutate: deleteBase } = trpc.admin.warzone2.kitBases.delete.useMutation()
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	 
 	const changeTextField = (key: keyof FormState) => (e: any) => {
 		setFormValues((formValues) => ({ ...formValues, [key]: e.target.value }))
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	 
 	const changeNumberField = (key: keyof FormState) => (e: any) => {
 		setFormValues((formValues) => ({ ...formValues, [key]: e }))
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	 
 	const changeSelectField = (key: keyof FormState) => (e: any) => {
 		setFormValues((formValues) => ({ ...formValues, [key]: e }))
 	}
@@ -247,7 +247,7 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 								)
 							} else {
 								createBase(
-									// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+									 
 									// @ts-ignore
 									{ base: formValues as FormState, commandCodes: formValues.commandCodes },
 									{

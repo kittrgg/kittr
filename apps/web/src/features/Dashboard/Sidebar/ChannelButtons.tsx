@@ -1,7 +1,3 @@
-import Icon from "../Icon"
-import AddGameNotification from "./AddGameNotification"
-import GameButton from "./GameButton"
-import * as Styled from "./style"
 import colors from "@Colors"
 import ProfileImage from "@Components/shared/ProfileImage"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
@@ -9,10 +5,15 @@ import { handleTutorialAction, setChannelView, setModal } from "@Redux/slices/da
 import { useChannelView, useModal } from "@Redux/slices/dashboard/selectors"
 import { useManagerRole } from "@Redux/slices/dashboard/selectors/useManagerRole"
 import { useDispatch } from "@Redux/store"
-import { MutableRefObject, useEffect, useRef } from "react"
+import type { MutableRefObject} from "react";
+import { useEffect, useRef } from "react"
+import Icon from "../Icon"
+import * as Styled from "./style"
+import GameButton from "./GameButton"
+import AddGameNotification from "./AddGameNotification"
 
 /** Buttons that will appear when a channel is opened */
-const ChannelButtons = () => {
+function ChannelButtons() {
 	const dispatch = useDispatch()
 	const modal = useModal()
 	const ref = useRef() as MutableRefObject<HTMLButtonElement>
@@ -20,9 +21,9 @@ const ChannelButtons = () => {
 	const { data: channelData } = useDashboardChannel()
 	const role = useManagerRole()
 
-	/** tutorial ref data */
+	/** Tutorial ref data */
 	useEffect(() => {
-		if (modal.data?.page === 4 && ref?.current && role === "OWNER") {
+		if (modal.data?.page === 4 && ref.current && role === "OWNER") {
 			dispatch(
 				setModal({
 					type: "Tutorial",
@@ -34,7 +35,7 @@ const ChannelButtons = () => {
 			)
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [modal.data?.page, ref?.current, role])
+	}, [modal.data?.page, ref.current, role])
 
 	const isOwnerOrAdmin = role === "ADMIN" || role === "OWNER"
 
@@ -43,27 +44,25 @@ const ChannelButtons = () => {
 			<hr style={{ width: "60%", borderColor: colors.light }} />
 			<Styled.ButtonContainer isActive={view === "Channel Settings"}>
 				<Styled.Button
-					style={{ backgroundColor: "transparent" }}
 					onClick={() => dispatch(setChannelView({ gameId: "", view: "Channel Settings" }))}
+					style={{ backgroundColor: "transparent" }}
 				>
 					<ProfileImage
-						size="70px"
-						imagePath={channelData?.profile?.hasProfileImage ? channelData?.id : undefined}
-						hasProfileImage={!!channelData?.profile?.hasProfileImage}
 						alwaysRefresh
+						hasProfileImage={Boolean(channelData?.profile?.hasProfileImage)}
+						imagePath={channelData?.profile?.hasProfileImage ? channelData.id : undefined}
+						size="70px"
 					/>
 				</Styled.Button>
 			</Styled.ButtonContainer>
 
-			{channelData?.games?.map((game) => {
-				return <GameButton key={game.id} game={game} activeView={gameId === game.id} />
+			{channelData?.games.map((game) => {
+				return <GameButton activeView={gameId === game.id} game={game} key={game.id} />
 			})}
 
-			{isOwnerOrAdmin && (
-				<>
-					<Styled.ButtonContainer isActive={false} style={{ marginBottom: "32px" }}>
+			{isOwnerOrAdmin ? <Styled.ButtonContainer isActive={false} style={{ marginBottom: "32px" }}>
 						<Styled.Button
-							ref={ref}
+							data-cy="sidebar-add-game"
 							onClick={() => {
 								dispatch(
 									handleTutorialAction({
@@ -76,20 +75,18 @@ const ChannelButtons = () => {
 									})
 								)
 							}}
+							ref={ref}
 							style={{
 								marginBottom: "64px",
 								padding: "25px",
 								position: modal.data?.page === 4 ? "relative" : undefined,
 								zIndex: modal.data?.page === 4 ? 101 : undefined
 							}}
-							data-cy="sidebar-add-game"
 						>
-							<Icon src="/media/icons/plus.svg" alt="Add a Game" />
+							<Icon alt="Add a Game" src="/media/icons/plus.svg" />
 						</Styled.Button>
-						{channelData?.games?.length === 0 && <AddGameNotification />}
-					</Styled.ButtonContainer>
-				</>
-			)}
+						{channelData?.games.length === 0 && <AddGameNotification />}
+					</Styled.ButtonContainer> : null}
 		</>
 	)
 }

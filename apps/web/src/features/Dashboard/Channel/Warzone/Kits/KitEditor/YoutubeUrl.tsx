@@ -1,12 +1,12 @@
-import * as Styled from "./style"
 import colors from "@Colors"
 import TextInput from "@Components/shared/TextInput"
 import { updateYoutubeURL } from "@Redux/slices/dashboard"
 import { useActiveKit } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
 import { trimPrefix } from "@Utils/helpers/trimPrefix"
+import * as Styled from "./style"
 
-const YoutubeId = ({ ...props }) => {
+function YoutubeId({ ...props }) {
 	const dispatch = useDispatch()
 	const { youtubeUrl } = useActiveKit()
 
@@ -34,15 +34,15 @@ const YoutubeId = ({ ...props }) => {
 			</Styled.ParagraphHelper>
 			<Styled.ParagraphHelper>Tip: You can adjust autoplay in your account settings.</Styled.ParagraphHelper>
 			<TextInput
-				type="text"
-				name="youtubeUrl"
+				inputStyles={{ marginLeft: "0", marginTop: "0" }}
 				label="https://www.youtube.com/watch?v="
 				labelStyles={{ color: colors.lighter, display: "block", marginTop: "12px", textTransform: "initial" }}
-				value={youtubeUrl || ""}
-				subline="If you want to just copy-paste the whole YouTube link, we'll trim it for you. We know, we know, you're welcome."
+				name="youtubeUrl"
 				onChange={(e) => handleInput(e)}
-				inputStyles={{ marginLeft: "0", marginTop: "0" }}
+				subline="If you want to just copy-paste the whole YouTube link, we'll trim it for you. We know, we know, you're welcome."
 				sublineStyles={{ color: colors.lighter, fontWeight: "initial", letterSpacing: "1px" }}
+				type="text"
+				value={youtubeUrl || ""}
 			/>
 		</Styled.Container>
 	)

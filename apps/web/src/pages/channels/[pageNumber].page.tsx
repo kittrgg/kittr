@@ -1,4 +1,3 @@
-import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
 import AdPageWrapper from "@Components/layouts/AdPageWrapper"
 import FallbackPage from "@Components/layouts/FallbackPage"
@@ -10,10 +9,11 @@ import { createSSGHelper } from "@kittr/trpc"
 import { Text, Title } from "@kittr/ui"
 import Link from "next/link"
 import { useRouter } from "next/router"
+import { trpc } from "@/lib/trpc"
 
 const CHANNELS_PER_PAGE = 10
 
-const PageOfChannels = () => {
+function PageOfChannels() {
 	const { width } = useViewportDimensions()
 	const {
 		isFallback,
@@ -33,7 +33,7 @@ const PageOfChannels = () => {
 
 	if ((channels && channels.length === 0) || isNaN(page)) {
 		return (
-			<AdPageWrapper title={`Channels - Page ${page} | kittr`} description="Full channels of channels on kittr.">
+			<AdPageWrapper description="Full channels of channels on kittr." title={`Channels - Page ${page} | kittr`}>
 				<Title preset="h1" sx={{ margin: "12px 0", padding: "0 5%" }}>
 					CHANNELS
 				</Title>
@@ -57,7 +57,7 @@ const PageOfChannels = () => {
 	}
 
 	return (
-		<AdPageWrapper title={`Channels - Page ${page} | kittr`} description="Full channels of channels on kittr.">
+		<AdPageWrapper description="Full channels of channels on kittr." title={`Channels - Page ${page} | kittr`}>
 			{width < 1200 && <ResponsiveBanner />}
 			<Title preset="h1" sx={{ margin: "12px 0", padding: "0 5%" }}>
 				CHANNELS
@@ -69,13 +69,13 @@ const PageOfChannels = () => {
 			<div style={{ padding: "0 5%" }}>
 				<ChannelList data={channels || []} itemBackgroundColor={colors.darker} />
 				<Paginator
-					totalResults={totalChannels}
-					currentPageResultStart={(page - 1) * 10 + 1}
+					currentPage={page}
 					currentPageResultEnd={page * 10}
+					currentPageResultStart={(page - 1) * 10 + 1}
 					isFirstPage={page === 1}
 					isLastPage={page === numberOfPages}
-					currentPage={page}
 					pageRoot={Routes.CHANNEL.LIST}
+					totalResults={totalChannels}
 				/>
 			</div>
 			{width < 1200 && <ResponsiveBanner largeWidthAdUnit="d728x90" smallWidthAdUnit="s300x250" />}
@@ -101,8 +101,8 @@ export const getStaticProps = async ({ params }: { params: { pageNumber: string 
 
 	const skip = (Number(params.pageNumber) - 1) * CHANNELS_PER_PAGE
 
-	// await ssg.fetchQuery("channels/top", { take: CHANNELS_PER_PAGE, skip })
-	// await ssg.fetchQuery("channels/countAll")
+	// Await ssg.fetchQuery("channels/top", { take: CHANNELS_PER_PAGE, skip })
+	// Await ssg.fetchQuery("channels/countAll")
 	await ssg.channels.top.fetch({ take: CHANNELS_PER_PAGE, skip })
 	await ssg.channels.countAll.fetch()
 

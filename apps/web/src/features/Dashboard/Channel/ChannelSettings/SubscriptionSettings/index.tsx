@@ -1,5 +1,3 @@
-import PlanTile from "./PlanTile"
-import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
 import PremiumPlans from "@Features/Dashboard/modals/PremiumPlan"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
@@ -9,8 +7,10 @@ import { useDispatch } from "@Redux/store"
 import { paragraph } from "@Styles/typography"
 import { differenceInDays, fromUnixTime } from "date-fns"
 import styled from "styled-components"
+import PlanTile from "./PlanTile"
+import { trpc } from "@/lib/trpc"
 
-const SubscriptionSettings = () => {
+function SubscriptionSettings() {
 	const dispatch = useDispatch()
 	const modal = useModal()
 	const { isPremium } = usePremiumStatus()
@@ -18,18 +18,18 @@ const SubscriptionSettings = () => {
 
 	const { data: subscriptionEnd } = trpc.channels.plan["subscription-end"].useQuery(
 		{ stripeSubscriptionId: data?.plan?.stripeSubscriptionId ?? "", channelId: data?.id ?? "" },
-		{ enabled: !!data?.plan?.stripeSubscriptionId }
+		{ enabled: Boolean(data?.plan?.stripeSubscriptionId) }
 	)
 	const { data: cardLast4 } = trpc.channels.plan["card-last-4-digits"].useQuery(
 		{ stripeSubscriptionId: data?.plan?.stripeSubscriptionId ?? "", channelId: data?.id ?? "" },
 		{
-			enabled: !!data?.plan?.stripeSubscriptionId
+			enabled: Boolean(data?.plan?.stripeSubscriptionId)
 		}
 	)
 
 	const { mutate: buyPremium } = trpc.stripe["buy-premium"].useMutation({
 		onSuccess: (result) => {
-			window.open(result.url as string, "_blank")
+			window.open(result.url!, "_blank")
 		},
 		onError: () => {
 			dispatch(setModal({ type: "Error Notification", data: {} }))
@@ -37,7 +37,7 @@ const SubscriptionSettings = () => {
 	})
 	const { mutate: managePremium } = trpc.stripe["manage-premium"].useMutation({
 		onSuccess: (result) => {
-			window.open(result.url as string, "_blank")
+			window.open(result.url , "_blank")
 		},
 		onError: () => {
 			dispatch(setModal({ type: "Error Notification", data: {} }))
@@ -49,29 +49,20 @@ const SubscriptionSettings = () => {
 			{modal.type === "Premium Plans" && <PremiumPlans />}
 			<HorizFlex>
 				<Paragraph>Plan</Paragraph>
-				{subscriptionEnd && (
-					<>
-						<Paragraph style={{ color: colors.lighter, fontStyle: "italic" }}>
+				{subscriptionEnd ? <Paragraph style={{ color: colors.lighter, fontStyle: "italic" }}>
 							{differenceInDays(fromUnixTime(subscriptionEnd), Date.now())} days until renewal
-						</Paragraph>
-					</>
-				)}
+						</Paragraph> : null}
 			</HorizFlex>
 			<Grid>
 				<PlanTile
-					price="FREE"
-					title="BASIC"
+					buttonAction={() => dispatch(setModal({ type: "Premium Plans", data: {} }))}
 					buttonStyle="transparent"
 					buttonText="COMPARE PLANS"
 					description="Build kits, share with friends and viewers, managers, social links & content..."
-					buttonAction={() => dispatch(setModal({ type: "Premium Plans", data: {} }))}
+					price="FREE"
+					title="BASIC"
 				/>
 				<PlanTile
-					price={isPremium ? "ACTIVE" : "$5/MO (EARLY BIRD PRICE)"}
-					title="PREMIUM"
-					buttonStyle="white"
-					buttonText={isPremium ? "MANAGE" : "UPGRADE"}
-					description="Active Kit Overlay, AutoBot, profile customization, and more!"
 					buttonAction={() =>
 						isPremium
 							? managePremium({ channelId: data?.id ?? "" })
@@ -81,23 +72,26 @@ const SubscriptionSettings = () => {
 									urlSafeName: data?.urlSafeName ?? ""
 							  })
 					}
+					buttonStyle="white"
+					buttonText={isPremium ? "MANAGE" : "UPGRADE"}
+					description="Active Kit Overlay, AutoBot, profile customization, and more!"
 					planType="premium"
+					price={isPremium ? "ACTIVE" : "$5/MO (EARLY BIRD PRICE)"}
+					title="PREMIUM"
 				/>
 			</Grid>
 
-			{isPremium && (
-				<>
+			{isPremium ? <>
 					<HorizFlex>
 						<Paragraph>Payment Method</Paragraph>
-						{cardLast4 && <Paragraph style={{ color: colors.lighter }}>Card ending in {cardLast4}</Paragraph>}
+						{cardLast4 ? <Paragraph style={{ color: colors.lighter }}>Card ending in {cardLast4}</Paragraph> : null}
 					</HorizFlex>
 					<Paragraph style={{ marginTop: "54px", color: colors.lighter }}>
 						If you'd like to adjust your the tip on your Premium subscription, cancel your current subscription, then
 						reinstate it with your desired tip. You will be charged $5 for restarting the subscription, so we recommend
 						waiting until the end of your current subscription to make adjustments.
 					</Paragraph>
-				</>
-			)}
+				</> : null}
 		</div>
 	)
 }

@@ -6,7 +6,7 @@ import { header2, paragraph } from "@Styles/typography"
 import styled from "styled-components"
 
 /** Modal for confirming a change of owner on the channel. */
-const ConfirmChangingOwner = ({ ...props }) => {
+function ConfirmChangingOwner({ ...props }) {
 	const dispatch = useDispatch()
 
 	return (
@@ -18,16 +18,16 @@ const ConfirmChangingOwner = ({ ...props }) => {
 			<RowFlex>
 				<Button
 					design="transparent"
-					text="NO, KEEP OWNER STATUS"
 					onClick={() => dispatch(setModal({ type: "", data: {} }))}
 					style={{ margin: "0 auto" }}
+					text="NO, KEEP OWNER STATUS"
 				/>
 				<Button
+					dataCy="confirm-changing-owner"
 					design="white"
-					text="YES, PICK A NEW OWNER"
 					onClick={() => dispatch(setModal({ type: "Set New Owner", data: {} }))}
 					style={{ margin: "0 auto", marginLeft: "24px" }}
-					dataCy="confirm-changing-owner"
+					text="YES, PICK A NEW OWNER"
 				/>
 			</RowFlex>
 		</Modal>

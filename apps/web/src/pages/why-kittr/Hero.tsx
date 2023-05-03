@@ -7,19 +7,19 @@ interface Props {
 }
 
 /** The beautiful hero for the mod landing page. */
-const Hero = ({ totalNumberOfKits }: Props) => (
-	<Container>
+function Hero({ totalNumberOfKits }: Props) {
+  return <Container>
 		<ImageContainer>
-			<img src="/media/hero.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+			<img alt="" src="/media/hero.jpg" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
 		</ImageContainer>
 		<Copy>
-			<img src="/media/logo.svg" alt="" style={{ width: "100px", height: "100px" }} />
+			<img alt="" src="/media/logo.svg" style={{ width: "100px", height: "100px" }} />
 			<Headline>get kittd.</Headline>
 			<KitsTotal>{totalNumberOfKits}+ kits</KitsTotal>
 			<Subline>In 15 minutes, your !loadout command can look like this.</Subline>
 		</Copy>
 	</Container>
-)
+}
 
 export default Hero
 

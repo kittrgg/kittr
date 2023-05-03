@@ -4,23 +4,23 @@ import { Routes } from "@Utils/lookups/routes"
 import { createStyles, Title } from "@mantine/core"
 import Link from "next/link"
 
-const EmailChanged = () => {
+function EmailChanged() {
 	const { classes } = useStyles()
 
 	return (
 		<div className={classes.body}>
 			<Head
-				title="Email Change Started | kittr"
 				description={"You've started the process to change your email address. | kittr"}
+				title="Email Change Started | kittr"
 			/>
 			<div className={classes.errorBody}>
-				<Title order={1} className={classes.errorHeader}>
+				<Title className={classes.errorHeader} order={1}>
 					YOUR EMAIL HAS NOT CHANGED QUITE YET
 				</Title>
 				<p className={classes.errorParagraph}>Visit your new email address and click the link to confirm the change.</p>
 				<p className={classes.errorParagraph}>If you change your mind about this new email address...</p>
 				<p className={classes.errorParagraph}>Your previous email address still works.</p>
-				<Link href={Routes.DASHBOARD} passHref className={classes.errorLink}>
+				<Link className={classes.errorLink} href={Routes.DASHBOARD} passHref>
 					BACK TO LOGIN
 				</Link>
 			</div>
@@ -31,7 +31,7 @@ const EmailChanged = () => {
 export default EmailChanged
 
 const useStyles = createStyles((theme) =>
-	// add reusable styles like headers, links, to MantineProvider theme
+	// Add reusable styles like headers, links, to MantineProvider theme
 	({
 		body: {
 			display: "flex",

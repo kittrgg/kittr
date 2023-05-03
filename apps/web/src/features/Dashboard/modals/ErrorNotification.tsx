@@ -3,7 +3,7 @@ import { header2 } from "@Styles/typography"
 import styled from "styled-components"
 
 /** Notify of any errors that happen. */
-const ErrorNotification = () => {
+function ErrorNotification() {
 	return (
 		<Modal backgroundClickToClose title="UH OH. WE MESSED UP">
 			<Paragraph>This error has been logged into our systems and we will investigate it as soon as possible.</Paragraph>

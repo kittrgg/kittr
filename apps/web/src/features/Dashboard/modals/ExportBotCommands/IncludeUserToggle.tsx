@@ -1,7 +1,7 @@
-import * as Styled from "./style"
 import colors from "@Colors"
 import MultiButton from "@Components/shared/MultiButton"
-import { Dispatch, SetStateAction } from "react"
+import type { Dispatch, SetStateAction } from "react"
+import * as Styled from "./style"
 
 interface Props {
 	/** User option to include $(touser) in the command. */
@@ -11,16 +11,17 @@ interface Props {
 }
 
 /** In Twitch chat, a user can be notified if they call the command. Turning this option on allows for that. */
-const IncludeUserToggle = ({ includeUser, setIncludeUser }: Props) => {
+function IncludeUserToggle({ includeUser, setIncludeUser }: Props) {
 	return (
 		<Styled.HorizFlex>
 			<Styled.ToggleDescription>
 				Include username of command requester in Nightbot or Channel Elements response?
 			</Styled.ToggleDescription>
-			<Styled.ToggleContainer style={{ marginLeft: "300px" }} flexBasis={400}>
+			<Styled.ToggleContainer flexBasis={400} style={{ marginLeft: "300px" }}>
 				<MultiButton
-					wrapperBackgroundColor={colors.darker}
 					activeValue={includeUser ? "YUP" : "NOPE"}
+					dataCy="user-toggle"
+					onClick={() => setIncludeUser(!includeUser)}
 					values={[
 						{
 							text: "YUP"
@@ -29,8 +30,7 @@ const IncludeUserToggle = ({ includeUser, setIncludeUser }: Props) => {
 							text: "NOPE"
 						}
 					]}
-					onClick={() => setIncludeUser(!includeUser)}
-					dataCy="user-toggle"
+					wrapperBackgroundColor={colors.darker}
 				/>
 			</Styled.ToggleContainer>
 		</Styled.HorizFlex>

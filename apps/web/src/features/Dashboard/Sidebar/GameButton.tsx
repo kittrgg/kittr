@@ -1,12 +1,13 @@
-import * as Styled from "./style"
 import colors from "@Colors"
 import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
 import SVG from "@Components/shared/SVG"
 import { setChannelView, setModal, handleTutorialAction } from "@Redux/slices/dashboard"
 import { useManagerRole, useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import { Game } from "@kittr/prisma"
-import { useState, useRef, MutableRefObject, useEffect } from "react"
+import type { Game } from "@kittr/prisma"
+import type { MutableRefObject} from "react";
+import { useState, useRef, useEffect } from "react"
+import * as Styled from "./style"
 
 interface Props {
 	/** The game for this button. */
@@ -16,15 +17,15 @@ interface Props {
 }
 
 /** A button to open up a game that is on this channel's profile. */
-const GameButton = ({ game, activeView }: Props) => {
+function GameButton({ game, activeView }: Props) {
 	const dispatch = useDispatch()
 	const modal = useModal()
 	const ref = useRef() as MutableRefObject<HTMLButtonElement>
 	const role = useManagerRole()
 	const [isHovered, setIsHovered] = useState(false)
-	/** tutorial ref data */
+	/** Tutorial ref data */
 	useEffect(() => {
-		if (modal.data?.page === 5 && ref?.current) {
+		if (modal.data?.page === 5 && ref.current) {
 			dispatch(
 				setModal({
 					type: "Tutorial",
@@ -36,18 +37,18 @@ const GameButton = ({ game, activeView }: Props) => {
 			)
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [modal.data?.page, ref?.current])
+	}, [modal.data?.page, ref.current])
 
 	const isOwnerOrAdmin = role === "ADMIN" || role === "OWNER"
 
 	return (
 		<Styled.ButtonContainer
-			style={{ zIndex: modal.type === "Tutorial" ? 101 : 100 }}
-			key={game.id}
 			isActive={activeView}
+			key={game.id}
+			style={{ zIndex: modal.type === "Tutorial" ? 101 : 100 }}
 		>
 			<Styled.Button
-				ref={ref}
+				data-cy={`${game.urlSafeName}-sidebar-button`}
 				onClick={() => {
 					dispatch(
 						handleTutorialAction({
@@ -63,20 +64,19 @@ const GameButton = ({ game, activeView }: Props) => {
 				}}
 				onMouseEnter={() => setIsHovered(true)}
 				onMouseLeave={() => setIsHovered(false)}
-				data-cy={`${game.urlSafeName}-sidebar-button`}
+				ref={ref}
 			>
 				<FirebaseStorageResolver
 					noSpinner
 					path={game.titleImageUrl}
 					render={(img) => (
-						<img src={img} alt={game.displayName} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+						<img alt={game.displayName} src={img} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
 					)}
 				/>
 			</Styled.Button>
-			{isOwnerOrAdmin && (
-				<Styled.DeleteGameBubble
-					onMouseEnter={() => setIsHovered(true)}
-					onMouseLeave={() => setIsHovered(false)}
+			{isOwnerOrAdmin ? <Styled.DeleteGameBubble
+					data-cy={`${game.urlSafeName}-delete-sidebar-button`}
+					isHovered={isHovered}
 					onClick={() =>
 						dispatch(
 							setModal({
@@ -85,12 +85,11 @@ const GameButton = ({ game, activeView }: Props) => {
 							})
 						)
 					}
-					isHovered={isHovered}
-					data-cy={`${game.urlSafeName}-delete-sidebar-button`}
+					onMouseEnter={() => setIsHovered(true)}
+					onMouseLeave={() => setIsHovered(false)}
 				>
-					<SVG.X style={{ width: "100%", height: "100%" }} fill={colors.red} />
-				</Styled.DeleteGameBubble>
-			)}
+					<SVG.X fill={colors.red} style={{ width: "100%", height: "100%" }} />
+				</Styled.DeleteGameBubble> : null}
 		</Styled.ButtonContainer>
 	)
 }

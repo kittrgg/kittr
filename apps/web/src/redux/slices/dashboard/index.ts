@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
+import type {
 	WarzoneKit,
 	WarzoneKitBase,
 	WarzoneKitOption,
@@ -8,7 +8,7 @@ import {
 	WarzoneTwoKitOption,
 	WarzoneTwoKitOptionTuning
 } from "@kittr/prisma"
-import { DashboardModals, ReduxModalState } from "@kittr/types/types"
+import type { DashboardModals, ReduxModalState } from "@kittr/types/types"
 import { createSlice } from "@reduxjs/toolkit"
 
 interface KitUpdates extends WarzoneKit {

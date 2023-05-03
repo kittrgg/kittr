@@ -1,4 +1,3 @@
-import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
 import { Button, Modal } from "@Components/shared"
 import { setChannelView, setModal } from "@Redux/slices/dashboard"
@@ -7,9 +6,10 @@ import { useDispatch, useSelector } from "@Redux/store"
 import { header2 } from "@Styles/typography"
 import { useSocket } from "pages/dashboard.page"
 import styled from "styled-components"
+import { trpc } from "@/lib/trpc"
 
 /** Modal to delete a game from a channel. */
-const DeleteGameModal = () => {
+function DeleteGameModal() {
 	const dispatch = useDispatch()
 	const { data: channelData, refetch: refetchDashboard } = useChannelData()
 
@@ -32,13 +32,13 @@ const DeleteGameModal = () => {
 		<Modal backgroundClickToClose title="ARE YOU SURE YOU WANT TO DELETE THIS GAME?">
 			<Warning>THIS WILL PERMANENTLY REMOVE ALL OF THIS GAMES KITS AND ASSOCIATED DATA. </Warning>
 			<ButtonFlex>
-				<Button design="transparent" text="NO, KEEP IT" onClick={() => dispatch(setModal({ type: "", data: "" }))} />
+				<Button design="transparent" onClick={() => dispatch(setModal({ type: "", data: "" }))} text="NO, KEEP IT" />
 				<Button
+					dataCy="delete-game-button"
 					design="white"
-					text="DELETE FOREVER"
 					disabled={isLoading}
 					onClick={() => mutate({ gameId, channelId: channelData?.id! })}
-					dataCy="delete-game-button"
+					text="DELETE FOREVER"
 				/>
 			</ButtonFlex>
 		</Modal>

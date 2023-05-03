@@ -2,7 +2,7 @@ import colors from "@Colors"
 import { Button, SVG } from "@Components/shared"
 import { usePremiumStatus } from "@Redux/slices/dashboard/selectors"
 import { header2, paragraph } from "@Styles/typography"
-import { ReactNode } from "react"
+import type { ReactNode } from "react"
 import styled from "styled-components"
 
 interface Props {
@@ -15,22 +15,20 @@ interface Props {
 	buttonAction: (...args: any) => any
 }
 
-const PlanTile = ({ planType, title, price, description, buttonText, buttonStyle, buttonAction }: Props) => {
+function PlanTile({ planType, title, price, description, buttonText, buttonStyle, buttonAction }: Props) {
 	const { isPremium } = usePremiumStatus()
 
-	const isActive = !!planType ? !!isPremium : !planType && !isPremium
+	const isActive = planType ? Boolean(isPremium) : !planType && !isPremium
 
 	return (
-		<Container isPremium={!!planType} isActive={isActive}>
+		<Container isActive={isActive} isPremium={Boolean(planType)}>
 			<HorizFlex>
 				<Title>{title}</Title>
-				<Price isPremium={!!planType}>{price}</Price>
+				<Price isPremium={Boolean(planType)}>{price}</Price>
 			</HorizFlex>
-			<Description isPremium={!!planType}>{description}</Description>
+			<Description isPremium={Boolean(planType)}>{description}</Description>
 			<Button design={buttonStyle} onClick={buttonAction} text={buttonText} />
-			{isActive && (
-				<SVG.CheckMark
-					width="20px"
+			{isActive ? <SVG.CheckMark
 					stroke={colors.black}
 					style={{
 						position: "absolute",
@@ -41,8 +39,8 @@ const PlanTile = ({ planType, title, price, description, buttonText, buttonStyle
 						backgroundColor: colors.white,
 						borderRadius: "100%"
 					}}
-				/>
-			)}
+					width="20px"
+				/> : null}
 		</Container>
 	)
 }

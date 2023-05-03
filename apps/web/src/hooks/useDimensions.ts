@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useLatestRef } from "./useLatestRef"
 import { isClient } from "@Utils/helpers/isClient"
 import { ResizeObserver, ResizeObserverEntry } from "@juggle/resize-observer"
 import { useState, useRef, useEffect, useCallback } from "react"
+import { useLatestRef } from "./useLatestRef"
 
 export const observerErr =
 	"💡 react-cool-dimensions: the browser doesn't support Resize Observer, please use polyfill: https://github.com/wellyshen/react-cool-dimensions#resizeobserver-polyfill"
@@ -16,9 +16,7 @@ interface State {
 	readonly entry?: ResizeObserverEntry
 }
 
-interface Observe<T> {
-	(element?: T | null): void
-}
+type Observe<T> = (element?: T | null) => void
 
 interface Event<T> extends State {
 	readonly entry: ResizeObserverEntry
@@ -26,13 +24,9 @@ interface Event<T> extends State {
 	unobserve: () => void
 }
 
-interface OnResize<T> {
-	(event: Event<T>): void
-}
+type OnResize<T> = (event: Event<T>) => void
 
-interface ShouldUpdate {
-	(state: State): boolean
-}
+type ShouldUpdate = (state: State) => boolean
 
 type Breakpoints = Record<string, number>
 
@@ -110,14 +104,14 @@ export const useDimensions = <T extends HTMLElement | null>({
 				unobserve()
 				ref.current = element
 			}
-			if (observerRef.current && ref.current) observerRef.current.observe(ref.current as HTMLElement)
+			if (observerRef.current && ref.current) observerRef.current.observe(ref.current )
 		},
 		[unobserve]
 	)
 
 	useEffect(() => {
 		if (!("ResizeObserver" in window) && isClient()) {
-			// eslint-disable-next-line prettier/prettier, @typescript-eslint/no-extra-semi
+			// eslint-disable-next-line prettier/prettier
 			;(window as any).ResizeObserver = ResizeObserver
 			;(window as any).ResizeObserverEntry = ResizeObserverEntry
 		}

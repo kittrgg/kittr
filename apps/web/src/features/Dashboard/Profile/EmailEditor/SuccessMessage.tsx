@@ -5,7 +5,7 @@ import { useRouter } from "next/router"
 import { useEffect } from "react"
 
 /** Logs a user out so that they have to use their new email immediately. */
-const SucessMessage = ({ ...props }) => {
+function SucessMessage({ ...props }) {
 	const router = useRouter()
 	const dispatch = useDispatch()
 

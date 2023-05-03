@@ -1,3 +1,9 @@
+import ContactUs from "@Components/shared/ContactUs"
+import Head from "@Components/shared/Head"
+import { getTotalKitsQuery } from "@Services/orm/queries/kits/total"
+import { Routes } from "@Utils/lookups/routes"
+import type { GetStaticProps } from "next"
+import Link from "next/link"
 import CallToAction from "./CallToAction"
 import Features from "./Features"
 import Hero from "./Hero"
@@ -5,20 +11,14 @@ import HowItWorks from "./HowItWorks"
 import Testimonials from "./Testimonials"
 import Winners from "./Winners"
 import * as Styled from "./style"
-import ContactUs from "@Components/shared/ContactUs"
-import Head from "@Components/shared/Head"
-import { getTotalKitsQuery } from "@Services/orm/queries/kits/total"
-import { Routes } from "@Utils/lookups/routes"
-import { GetStaticProps } from "next"
-import Link from "next/link"
 
 interface Props {
 	totalNumberOfKits: number
 }
 
-const WhyKittr = ({ totalNumberOfKits }: Props) => (
-	<>
-		<Head title="Improve Your Channel in 15 Minutes | kittr" description="." />
+function WhyKittr({ totalNumberOfKits }: Props) {
+  return <>
+		<Head description="." title="Improve Your Channel in 15 Minutes | kittr" />
 		<Hero totalNumberOfKits={totalNumberOfKits} />
 		<div style={{ margin: "0 24px" }}>
 			<Features />
@@ -28,17 +28,17 @@ const WhyKittr = ({ totalNumberOfKits }: Props) => (
 			<Styled.H2>CONTACT US</Styled.H2>
 			<Styled.P>STILL HAVE QUESTIONS? WE'VE GOT YOUR BACK.</Styled.P>
 			<ContactUs />
-			<CallToAction marginTop="32px" header="get kittd." />
+			<CallToAction header="get kittd." marginTop="32px" />
 			<div style={{ marginBottom: "32px", textAlign: "center" }}>
-				<Link href={Routes.ROOT} passHref legacyBehavior>
-					<Styled.LinkButton design="transparent" target="_blank" rel="noopener no referrer" style={{ marginTop: "0" }}>
+				<Link href={Routes.ROOT} legacyBehavior passHref>
+					<Styled.LinkButton design="transparent" rel="noopener no referrer" style={{ marginTop: "0" }} target="_blank">
 						VISIT SITE
 					</Styled.LinkButton>
 				</Link>
 			</div>
 		</div>
 	</>
-)
+}
 
 export default WhyKittr
 

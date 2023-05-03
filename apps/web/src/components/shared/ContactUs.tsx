@@ -24,21 +24,21 @@ const PROPERTIES = [
 ]
 
 /** Features tiles on how to contact us with links if applicable. */
-export const ContactUs = () => {
+export function ContactUs() {
 	const { classes } = useStyles()
 
 	return (
-		<Grid columns={12} className={classes.grid}>
+		<Grid className={classes.grid} columns={12}>
 			{PROPERTIES.map((property) => (
-				<Grid.Col key={property.title} className={classes.gridColumn}>
-					<img src={property.image} alt={property.imageAlt} width={75} height={75} />
-					<Title order={2} className={classes.title}>
+				<Grid.Col className={classes.gridColumn} key={property.title}>
+					<img alt={property.imageAlt} height={75} src={property.image} width={75} />
+					<Title className={classes.title} order={2}>
 						{property.title}
 					</Title>
-					<Button component="a" href={property.primaryLink} target="_blank" rel="noopener noreferrer" mb="xl">
+					<Button component="a" href={property.primaryLink} mb="xl" rel="noopener noreferrer" target="_blank">
 						{property.primaryText}
 					</Button>
-					<Button component="a" href={property.secondaryLink} target="_blank" rel="noopener noreferrer">
+					<Button component="a" href={property.secondaryLink} rel="noopener noreferrer" target="_blank">
 						{property.secondaryText}
 					</Button>
 				</Grid.Col>
@@ -67,7 +67,7 @@ const useStyles = createStyles((theme) => {
 			margin: "0 auto",
 			color: theme.white,
 
-			["@media (max-width: 750px)"]: {
+			"@media (max-width: 750px)": {
 				gridTemplateColumns: "1fr"
 			}
 		},
@@ -96,7 +96,7 @@ const useStyles = createStyles((theme) => {
 			color: theme.white,
 			...fontStyles,
 
-			["&:hover"]: {
+			"&:hover": {
 				backgroundColor: theme.white,
 				color: colors.middle
 			}
@@ -110,7 +110,7 @@ const useStyles = createStyles((theme) => {
 			transition: "0.2s",
 			...fontStyles,
 
-			["&:hover"]: {
+			"&:hover": {
 				color: theme.white
 			}
 		}

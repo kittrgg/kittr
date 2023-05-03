@@ -1,3 +1,8 @@
+import SVG from "@Components/shared/SVG"
+import { setModal, resetToInitialKit, clearKitEditor } from "@Redux/slices/dashboard"
+import { useActiveKit , useModal } from "@Redux/slices/dashboard/selectors"
+import { useDispatch } from "@Redux/store"
+import { useEffect, useRef } from "react"
 import QuickCommandExport from "../../../../modals/ExportBotCommands/QuickCommandExport"
 import Blueprint from "./Blueprint"
 import ChannelQuote from "./ChannelQuote"
@@ -9,15 +14,9 @@ import Options from "./Options"
 import TiktokId from "./TiktokUrl"
 import YoutubeId from "./YoutubeUrl"
 import * as Styled from "./style"
-import SVG from "@Components/shared/SVG"
-import { setModal, resetToInitialKit, clearKitEditor } from "@Redux/slices/dashboard"
-import { useActiveKit } from "@Redux/slices/dashboard/selectors"
-import { useModal } from "@Redux/slices/dashboard/selectors"
-import { useDispatch } from "@Redux/store"
-import { useEffect, useRef } from "react"
 
 /** The Kit Editor. Where the magic happens. */
-const KitEditor = () => {
+function KitEditor() {
 	const dispatch = useDispatch()
 	const activeKit = useActiveKit()
 	const modal = useModal()
@@ -42,16 +41,14 @@ const KitEditor = () => {
 			<Styled.Wrapper ref={scrollRef}>
 				<Styled.HorizFlex>
 					<Styled.Header style={{ marginBottom: "12px" }}>KIT EDITOR</Styled.Header>
-					{activeKit.base?.id && (
-						<SVG.TrashCan
-							style={{ width: "20px", marginRight: "24px", cursor: "pointer" }}
+					{activeKit.base.id ? <SVG.TrashCan
+							dataCy="trash-can"
 							onClick={() => {
 								resetToInitialKit()
 								dispatch(setModal({ type: "Kit Delete Confirmation", data: activeKit }))
 							}}
-							dataCy="trash-can"
-						/>
-					)}
+							style={{ width: "20px", marginRight: "24px", cursor: "pointer" }}
+						/> : null}
 				</Styled.HorizFlex>
 				<Styled.Scroller>
 					<ChooseBase />

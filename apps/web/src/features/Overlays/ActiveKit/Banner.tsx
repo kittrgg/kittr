@@ -2,9 +2,10 @@ import colors from "@Styles/colors"
 import { header1, header2, montserrat, paragraph } from "@Styles/typography"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
-import { RouterOutput } from "@kittr/trpc"
-import { IKitOption, OverlayKit } from "@kittr/types"
-import { Dispatch, SetStateAction, useEffect, useState } from "react"
+import type { RouterOutput } from "@kittr/trpc"
+import type { IKitOption, OverlayKit } from "@kittr/types"
+import type { Dispatch, SetStateAction} from "react";
+import { useEffect, useState } from "react"
 import styled, { keyframes, ThemeProvider } from "styled-components"
 
 interface Props {
@@ -14,7 +15,7 @@ interface Props {
 	setActiveKit: Dispatch<SetStateAction<OverlayKit>>
 }
 
-const Banner = ({ previewWidth, data, activeKit, setActiveKit }: Props) => {
+function Banner({ previewWidth, data, activeKit, setActiveKit }: Props) {
 	const [isDataVisible, setIsDataVisible] = useState(true)
 
 	const SWAP_TIMER = (Object.keys(activeKit ?? {}) ?? []).length ? activeKit.options?.length * 3 : 0
@@ -57,7 +58,7 @@ const Banner = ({ previewWidth, data, activeKit, setActiveKit }: Props) => {
 
 		if (data) {
 			const kitCount = [data.primaryWzTwoKit, data.secondaryWzTwoKit].filter(
-				(kit) => !!kit && Object.keys(kit || {}).length > 0
+				(kit) => Boolean(kit) && Object.keys(kit || {}).length > 0
 			).length
 
 			if (kitCount > 1) {
@@ -74,7 +75,7 @@ const Banner = ({ previewWidth, data, activeKit, setActiveKit }: Props) => {
 	const hasAKitSelected =
 		Object.keys(data.primaryWzTwoKit || {}).length > 0 || Object.keys(data.secondaryWzTwoKit || {}).length > 0
 	const isRendered = data.isOverlayVisible && hasAKitSelected
-	const isOverlayVisible = !!previewWidth || isRendered
+	const isOverlayVisible = Boolean(previewWidth) || isRendered
 
 	return (
 		<ThemeProvider

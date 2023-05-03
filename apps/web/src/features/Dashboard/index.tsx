@@ -1,12 +1,3 @@
-import Channel from "./Channel"
-import ChannelList from "./ChannelList"
-import EmailVerification from "./EmailVerificationForm"
-import Login from "./Login"
-import Profile from "./Profile"
-import Sidebar from "./Sidebar"
-import ErrorNotification from "./modals/ErrorNotification"
-import Tutorial from "./modals/Tutorial"
-import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
 import FullScreen from "@Components/layouts/FullScreen"
 import Spinner from "@Components/shared/Spinner"
@@ -16,9 +7,18 @@ import { useDashboardView, useModal } from "@Redux/slices/dashboard/selectors"
 import { Routes } from "@Utils/lookups/routes"
 import { useRef } from "react"
 import styled from "styled-components"
+import Channel from "./Channel"
+import ChannelList from "./ChannelList"
+import EmailVerification from "./EmailVerificationForm"
+import Login from "./Login"
+import Profile from "./Profile"
+import Sidebar from "./Sidebar"
+import ErrorNotification from "./modals/ErrorNotification"
+import Tutorial from "./modals/Tutorial"
+import { trpc } from "@/lib/trpc"
 
 /** The kittr dashboard. */
-const Dashboard = () => {
+function Dashboard() {
 	const modal = useModal()
 	const user = useUser()
 	const { width } = useViewportDimensions()
@@ -39,7 +39,7 @@ const Dashboard = () => {
 					padding: "24px"
 				}}
 			>
-				<img style={{ margin: "0 auto 24px" }} src="/media/logo.svg" alt="kittr logo" />
+				<img alt="kittr logo" src="/media/logo.svg" style={{ margin: "0 auto 24px" }} />
 				<p>We do not currently support the dashboard on mobile.</p>
 				<p>Please revisit us with a larger screen!</p>
 				<a href={Routes.ROOT} style={{ color: "white", textDecoration: "underline" }}>
@@ -53,7 +53,7 @@ const Dashboard = () => {
 
 	if (user && !user.emailVerified) return <EmailVerification />
 
-	if (gamesLoading || kitsLoading) return <Spinner width="100%" height="50px" />
+	if (gamesLoading || kitsLoading) return <Spinner height="50px" width="100%" />
 
 	return (
 		<FullScreen

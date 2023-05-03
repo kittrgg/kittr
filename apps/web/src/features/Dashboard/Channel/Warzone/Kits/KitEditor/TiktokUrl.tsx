@@ -1,11 +1,11 @@
-import * as Styled from "./style"
 import colors from "@Colors"
 import TextInput from "@Components/shared/TextInput"
 import { updateTiktokId } from "@Redux/slices/dashboard"
 import { useActiveKit } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
+import * as Styled from "./style"
 
-const TiktokId = () => {
+function TiktokId() {
 	const dispatch = useDispatch()
 	const { tiktokUrl } = useActiveKit()
 
@@ -33,15 +33,15 @@ const TiktokId = () => {
 				a general "loadouts" video.
 			</Styled.ParagraphHelper>
 			<TextInput
-				type="text"
-				name="tiktokVideoId"
+				inputStyles={{ marginLeft: "0", marginTop: "0" }}
 				label="https://www.tiktok.com/"
 				labelStyles={{ color: colors.lighter, display: "block", marginTop: "12px", textTransform: "initial" }}
-				value={tiktokUrl ?? ""}
-				subline={`If you want to just copy-paste the whole Tiktok link, we'll trim it for you. We know, we know, you're welcome. (Note that we cannot accept links from the mobile app. If it starts with "vm.tiktok.com", it won't work!)`}
+				name="tiktokVideoId"
 				onChange={(e) => handleInput(e)}
-				inputStyles={{ marginLeft: "0", marginTop: "0" }}
+				subline={`If you want to just copy-paste the whole Tiktok link, we'll trim it for you. We know, we know, you're welcome. (Note that we cannot accept links from the mobile app. If it starts with "vm.tiktok.com", it won't work!)`}
 				sublineStyles={{ color: colors.lighter, fontWeight: "initial", letterSpacing: "1px" }}
+				type="text"
+				value={tiktokUrl ?? ""}
 			/>
 		</Styled.Container>
 	)

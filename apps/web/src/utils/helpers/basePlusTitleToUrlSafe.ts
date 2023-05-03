@@ -1,4 +1,4 @@
-import { WarzoneKit, WarzoneKitBase } from "@kittr/prisma"
+import type { WarzoneKit, WarzoneKitBase } from "@kittr/prisma"
 
 interface FullKit extends WarzoneKit {
 	base: WarzoneKitBase
@@ -12,5 +12,5 @@ export const basePlusTitleToUrlSafe = (kit: FullKit): string => {
 	const customTitle = kit.customTitle
 	const urlSafeTitle = customTitle?.replace(/ /g, "-").toLowerCase()
 
-	return `${urlSafeBase}${urlSafeTitle ? "-" + urlSafeTitle : ""}`
+	return `${urlSafeBase}${urlSafeTitle ? `-${  urlSafeTitle}` : ""}`
 }

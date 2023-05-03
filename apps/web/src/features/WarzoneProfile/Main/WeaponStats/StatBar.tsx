@@ -6,7 +6,7 @@ interface Props {
 	number: number
 }
 
-const StatBar = ({ label, number }: Props) => {
+function StatBar({ label, number }: Props) {
 	return (
 		<Container>
 			<FirstLine>

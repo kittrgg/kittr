@@ -1,9 +1,9 @@
-import FullScreen from "./FullScreen"
 import Spinner from "@Components/shared/Spinner"
+import FullScreen from "./FullScreen"
 
 /** Used when Next.js is creating an ISR page for the first time. */
-const FallbackPage = () => (
-	<FullScreen
+function FallbackPage() {
+  return <FullScreen
 		style={{
 			display: "flex",
 			justifyContent: "center",
@@ -12,6 +12,6 @@ const FallbackPage = () => (
 	>
 		<Spinner style={{ display: "flex", height: "100vh", alignItems: "center" }} />
 	</FullScreen>
-)
+}
 
 export default FallbackPage

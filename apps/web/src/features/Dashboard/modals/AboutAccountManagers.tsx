@@ -13,19 +13,19 @@ const CENTER_SVG = {
 	transform: 'translate("-50%, -50%")'
 }
 
-const CheckMark = () => (
-	<td>
-		<SVG.CheckMark width="20px" stroke={colors.green} style={CENTER_SVG} />
+function CheckMark() {
+  return <td>
+		<SVG.CheckMark stroke={colors.green} style={CENTER_SVG} width="20px" />
 	</td>
-)
-const X = () => (
-	<td>
-		<SVG.X width="20px" fill={colors.red} style={CENTER_SVG} />
+}
+function X() {
+  return <td>
+		<SVG.X fill={colors.red} style={CENTER_SVG} width="20px" />
 	</td>
-)
+}
 
 /** Information about which account managers have which abilities. */
-const AboutAccountManagers = () => {
+function AboutAccountManagers() {
 	const dispatch = useDispatch()
 	const role = useManagerRole()
 
@@ -75,7 +75,7 @@ const AboutAccountManagers = () => {
 						<CheckMark />
 						<CheckMark />
 						<td>
-							<SVG.X width="20px" fill={colors.red} style={CENTER_SVG} />
+							<SVG.X fill={colors.red} style={CENTER_SVG} width="20px" />
 						</td>
 					</tr>
 
@@ -96,9 +96,9 @@ const AboutAccountManagers = () => {
 
 			<Button
 				design="transparent"
-				text="Close"
 				onClick={() => dispatch(setModal({ type: "", data: {} }))}
 				style={{ margin: "32px auto 0" }}
+				text="Close"
 			/>
 		</Modal>
 	)

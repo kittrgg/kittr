@@ -1,8 +1,8 @@
-// import { trpc } from "@/lib/trpc"
+// Import { trpc } from "@/lib/trpc"
 
-// export const useAllKitsByGameId = (gameId: string) => {
-// 	const query = trpc.listGameBases.useQuery({ game: gameId })
-// 	return query
+// Export const useAllKitsByGameId = (gameId: string) => {
+// 	Const query = trpc.listGameBases.useQuery({ game: gameId })
+// 	Return query
 // }
 
 export {}

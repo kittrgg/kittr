@@ -1,18 +1,19 @@
-import BackToLogin from "./BackToLogin"
 import colors from "@Colors"
 import Button from "@Components/shared/Button"
 import TextInput from "@Components/shared/TextInput"
 import { requestForgotPassword } from "@kittr/firebase/auth"
-import { useState, Dispatch, SetStateAction, FormEvent } from "react"
+import type { Dispatch, SetStateAction, FormEvent } from "react";
+import { useState } from "react"
 import styled from "styled-components"
 import validator from "validator"
+import BackToLogin from "./BackToLogin"
 
 interface Props {
 	setStep: Dispatch<SetStateAction<number>>
 }
 
 /** Within the forgot password user flow, the step for submitting your email. */
-const EmailInput = ({ setStep }: Props) => {
+function EmailInput({ setStep }: Props) {
 	const [email, setEmail] = useState("")
 	const [error, setError] = useState("")
 
@@ -35,26 +36,26 @@ const EmailInput = ({ setStep }: Props) => {
 			<FormBody>
 				<div style={{ width: "60%" }}>
 					<TextInput
-						type="email"
-						name="email"
 						label="Email"
-						width="100%"
-						topLabel
-						value={email}
+						name="email"
 						onChange={(e) => {
 							setError("")
 							setEmail(e.target.value)
 						}}
 						subline={error}
 						sublineStyles={{ color: colors.red }}
+						topLabel
+						type="email"
+						value={email}
+						width="100%"
 					/>
 				</div>
 				<Button
 					design="white"
-					text="Send Email"
-					disabled={!!error}
-					style={{ marginTop: "24px", backgroundColor: error ? colors.red : "" }}
+					disabled={Boolean(error)}
 					onClick={handleClick}
+					style={{ marginTop: "24px", backgroundColor: error ? colors.red : "" }}
+					text="Send Email"
 				/>
 			</FormBody>
 			<BackToLogin />

@@ -1,17 +1,17 @@
 import AdPageWrapper from "@Components/layouts/AdPageWrapper"
-// import { ChannelSearch } from "@Components/shared"
+// Import { ChannelSearch } from "@Components/shared"
 import ResponsiveBanner from "@Services/venatus/ResponsiveBanner"
 import { Title } from "@kittr/ui"
 import styled from "styled-components"
 
-const ChannelsSearch = () => (
-	<AdPageWrapper title="Search | kittr" description="Who ya got? | kittr">
+function ChannelsSearch() {
+  return <AdPageWrapper description="Who ya got? | kittr" title="Search | kittr">
 		<ResponsiveBanner />
 		{/* <ChannelSearch /> */}
 		<Title preset="h1">CHANNELS</Title>
 		<Paragraph>Enter a search term.</Paragraph>
 	</AdPageWrapper>
-)
+}
 
 export default ChannelsSearch
 

@@ -2,17 +2,17 @@ import colors from "@Colors"
 
 /** Arrow without a tail. Defaults position is pointing up. Use fill for color. */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const Carat = (props: any) => {
+export function Carat(props: any) {
 	const { width = "100%", fill = colors.white, dataCy, ...rest } = props
 
 	return (
 		<svg
-			width={width}
+			data-cy={dataCy}
+			fill="none"
 			height={11}
 			viewBox="0 0 18 11"
-			fill="none"
+			width={width}
 			xmlns="http://www.w3.org/2000/svg"
-			data-cy={dataCy}
 			{...rest}
 		>
 			<path

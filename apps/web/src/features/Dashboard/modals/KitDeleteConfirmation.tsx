@@ -1,12 +1,12 @@
-import { trpc } from "@/lib/trpc"
 import { Button, Modal, Spinner } from "@Components/shared"
 import { clearKitEditor, setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useChannelView } from "@Redux/slices/dashboard/selectors"
 import { useDispatch, useSelector } from "@Redux/store"
 import { header2 } from "@Styles/typography"
 import styled from "styled-components"
+import { trpc } from "@/lib/trpc"
 
-const KitDeleteConfirmation = () => {
+function KitDeleteConfirmation() {
 	const { data: channelData, refetch: refetchDashboard } = useChannelData()
 	const data = useSelector((state) => state.dashboard.modal.data)
 	const { view } = useChannelView()
@@ -27,7 +27,7 @@ const KitDeleteConfirmation = () => {
 	if (isLoading) {
 		return (
 			<Modal backgroundClickToClose title="">
-				<Spinner width="50px" height="50px" />
+				<Spinner height="50px" width="50px" />
 			</Modal>
 		)
 	}
@@ -36,12 +36,12 @@ const KitDeleteConfirmation = () => {
 		<Modal backgroundClickToClose title="WAIT A MINUTE...">
 			<Warning>ARE YOU SURE YOU WANT TO DELETE YOUR {base.displayName} KIT?</Warning>
 			<Flex>
-				<Button design="transparent" text="NO, KEEP IT" onClick={() => dispatch(setModal({ type: "", data: null }))} />
+				<Button design="transparent" onClick={() => dispatch(setModal({ type: "", data: null }))} text="NO, KEEP IT" />
 				<Button
 					design="white"
-					text="YES, REMOVE FROM KITS"
-					onClick={() => mutate({ channelId: channelData?.id!, kitId: kitId, gameView: view })}
+					onClick={() => mutate({ channelId: channelData?.id!, kitId, gameView: view })}
 					style={{ marginLeft: "48px" }}
+					text="YES, REMOVE FROM KITS"
 				/>
 			</Flex>
 		</Modal>

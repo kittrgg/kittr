@@ -2,17 +2,17 @@ import colors from "@Colors"
 
 /** A pencil icon. Use fill for color. */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const Pencil = (props: any) => {
+export function Pencil(props: any) {
 	const { width = "100%", fill = colors.white, dataCy, ...rest } = props
 
 	return (
 		<svg
-			width={width}
+			data-cy={dataCy}
+			fill="none"
 			height={17}
 			viewBox="0 0 18 17"
-			fill="none"
+			width={width}
 			xmlns="http://www.w3.org/2000/svg"
-			data-cy={dataCy}
 			{...rest}
 		>
 			<path

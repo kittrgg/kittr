@@ -3,7 +3,7 @@ import { SVG } from "@Components/shared"
 import { setActiveKit, setModal } from "@Redux/slices/dashboard"
 import { useActiveKit } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import { WarzoneKit, WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
+import type { WarzoneKit, WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
 import styled from "styled-components"
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
 	kit: WarzoneKit & { base: WarzoneKitBase; options: WarzoneKitOption[] }
 }
 
-const KitButton = ({ favorite, kit }: Props) => {
+function KitButton({ favorite, kit }: Props) {
 	const dispatch = useDispatch()
 	const activeKit = useActiveKit()
 	const { customTitle, base } = kit
@@ -27,22 +27,29 @@ const KitButton = ({ favorite, kit }: Props) => {
 	return (
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-expect-error
-		<Button key={kit.id} active={activeKit.id == kit.id} onClick={() => dispatch(setActiveKit(kit))}>
+		<Button active={activeKit.id == kit.id} key={kit.id} onClick={() => dispatch(setActiveKit(kit))}>
 			<p style={{ maskImage: "linear-gradient(to right, black 65%, transparent 92%, transparent 100%)" }}>{title}</p>
-			{favorite && (
-				<SVG.Star
+			{favorite ? <SVG.Star
+					fill={colors.gold}
+					stroke={colors.gold}
 					style={{
 						position: "absolute",
 						top: "50%",
 						right: "8px",
 						transform: "translateY(-50%)"
 					}}
-					fill={colors.gold}
-					stroke={colors.gold}
 					width="12px"
-				/>
-			)}
+				/> : null}
 			<SVG.Export
+				dataCy={`${base.displayName}-quick-export`}
+				onClick={() => {
+					dispatch(
+						setModal({
+							type: "Quick Command Export",
+							data: [kit]
+						})
+					)
+				}}
 				stroke={activeKit.id === kit.id ? colors.darker : colors.light}
 				style={{
 					position: "absolute",
@@ -52,15 +59,6 @@ const KitButton = ({ favorite, kit }: Props) => {
 					width: "20px",
 					cursor: "pointer"
 				}}
-				onClick={() => {
-					dispatch(
-						setModal({
-							type: "Quick Command Export",
-							data: [kit]
-						})
-					)
-				}}
-				dataCy={`${base.displayName}-quick-export`}
 			/>
 		</Button>
 	)

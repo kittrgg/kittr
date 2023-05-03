@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-/* eslint-disable @typescript-eslint/no-extra-semi */
+ 
 import { ErrorBoundary } from "@Components/shared/ErrorBoundary"
 import { isClient } from "@Utils/helpers/isClient"
 import { useRouter } from "next/router"
@@ -27,7 +27,7 @@ const adDictionary = {
 }
 
 /** A Venatus ad unit. Use wisely. */
-const Ad = ({ placementType, updateTrigger, containerStyles }: Props) => {
+function Ad({ placementType, updateTrigger, containerStyles }: Props) {
 	const router = useRouter()
 	const adRef = useRef(null)
 
@@ -52,7 +52,7 @@ const Ad = ({ placementType, updateTrigger, containerStyles }: Props) => {
 	return (
 		<ErrorBoundary>
 			<div style={{ width: "100%", overflow: "hidden", ...containerStyles }}>
-				<div ref={adRef} className="vm-placement" data-id={adDictionary[placementType]} />
+				<div className="vm-placement" data-id={adDictionary[placementType]} ref={adRef} />
 			</div>
 		</ErrorBoundary>
 	)

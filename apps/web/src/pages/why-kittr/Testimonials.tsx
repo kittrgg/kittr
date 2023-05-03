@@ -1,6 +1,6 @@
-import * as Styled from "./style"
 import colors from "@Colors"
 import styled from "styled-components"
+import * as Styled from "./style"
 
 const TESTIMONIALS = [
 	{
@@ -50,8 +50,8 @@ const TESTIMONIALS = [
 	}
 ]
 
-const LastSection = () => (
-	<section>
+function LastSection() {
+  return <section>
 		<Styled.H2>TESTIMONIALS</Styled.H2>
 		<Styled.P>STILL DON'TBELIEVE US? HERE'S WHAT THE COMMUNITY SAYS.</Styled.P>
 		<Wrapper>
@@ -66,7 +66,7 @@ const LastSection = () => (
 			</Scrolltainer>
 		</Wrapper>
 	</section>
-)
+}
 
 export default LastSection
 

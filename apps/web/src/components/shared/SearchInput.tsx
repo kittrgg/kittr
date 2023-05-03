@@ -5,7 +5,7 @@ import styled from "styled-components"
 interface Props {
 	/** User's search term. */
 	value: string
-	/** onChange handler for the text input. */
+	/** OnChange handler for the text input. */
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	onChange: (ev: any) => any
 	/** Clear the user's search term. Does not submit the form action unless done so explicitly in the function. */
@@ -15,22 +15,22 @@ interface Props {
 	autoComplete?: "off" | "on"
 }
 
-export const SearchInput = ({ value, onChange, clearSearch, autoComplete = "off" }: Props) => (
-	<div style={{ position: "relative" }}>
+export function SearchInput({ value, onChange, clearSearch, autoComplete = "off" }: Props) {
+  return <div style={{ position: "relative" }}>
 		<Input
-			type="text"
-			name="channelSearch"
-			placeholder="Search..."
 			autoComplete={autoComplete}
-			value={value as string}
-			onChange={onChange}
 			data-cy="search-input"
+			name="channelSearch"
+			onChange={onChange}
+			placeholder="Search..."
+			type="text"
+			value={value }
 		/>
 		{value.length > 0 && (
 			<SVG.X
 				data-cy="clear-search"
-				width="12px"
 				fill={colors.red}
+				onClick={clearSearch}
 				style={{
 					padding: "12px",
 					height: "20px",
@@ -42,11 +42,11 @@ export const SearchInput = ({ value, onChange, clearSearch, autoComplete = "off"
 					borderBottomRightRadius: "12px",
 					cursor: "pointer"
 				}}
-				onClick={clearSearch}
+				width="12px"
 			/>
 		)}
 	</div>
-)
+}
 
 export default SearchInput
 

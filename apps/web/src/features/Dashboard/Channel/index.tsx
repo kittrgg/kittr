@@ -1,9 +1,3 @@
-import { useSocket } from "../../../pages/dashboard.page"
-import ChannelTopBar from "../UserIdentity"
-import ChannelSettings from "./ChannelSettings"
-import DeletedGameNotification from "./DeletedGameNotification"
-import Warzone from "./Warzone"
-import Warzone2 from "./Warzone2"
 import Head from "@Components/shared/Head"
 import Spinner from "@Components/shared/Spinner"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
@@ -12,13 +6,19 @@ import { setActiveView, setChannelView } from "@Redux/slices/dashboard"
 import { useChannelView } from "@Redux/slices/dashboard/selectors"
 import { useDispatch, useSelector } from "@Redux/store"
 import { useEffect } from "react"
+import ChannelTopBar from "../UserIdentity"
+import { useSocket } from "../../../pages/dashboard.page"
+import Warzone2 from "./Warzone2"
+import Warzone from "./Warzone"
+import DeletedGameNotification from "./DeletedGameNotification"
+import ChannelSettings from "./ChannelSettings"
 
 interface Props {
 	containerRef: any
 }
 
 /** Welcome to the channel. */
-const Channel = ({ containerRef }: Props) => {
+function Channel({ containerRef }: Props) {
 	const socket = useSocket()
 	const dispatch = useDispatch()
 	const id = useSelector((state) => state.dashboard.activeView.channelId)
@@ -42,12 +42,12 @@ const Channel = ({ containerRef }: Props) => {
 	}, [id, dispatch, user?.uid, socket])
 
 	if (isLoading) {
-		return <Spinner width="100%" height="100px" dataCy="loading-channel" />
+		return <Spinner dataCy="loading-channel" height="100px" width="100%" />
 	}
 
 	return (
 		<>
-			<Head title={`Dashboard - ${data?.displayName} | kittr`} description="" />
+			<Head description="" title={`Dashboard - ${data?.displayName} | kittr`} />
 			<ChannelTopBar />
 			{view === "Channel Settings" && <ChannelSettings />}
 			{view === "warzone" && <Warzone />}

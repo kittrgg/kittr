@@ -2,8 +2,9 @@ import colors from "@Colors"
 import { SearchInput, SVG } from "@Components/shared"
 import { useChannelProfileData } from "@Hooks/trpc/useChannelProfileData"
 import { Routes } from "@Utils/lookups/routes"
-import { WarzoneKit, WarzoneKitBase, WarzoneTwoKit, WarzoneTwoKitBase } from "@kittr/prisma"
-import { Button, Text, Title, ButtonProps } from "@kittr/ui"
+import type { WarzoneKit, WarzoneKitBase, WarzoneTwoKit, WarzoneTwoKitBase } from "@kittr/prisma"
+import type { ButtonProps } from "@kittr/ui";
+import { Button, Text, Title } from "@kittr/ui"
 import { Accordion, ScrollArea } from "@mantine/core"
 import { useViewportSize } from "@mantine/hooks"
 import { useRouter } from "next/router"
@@ -21,7 +22,7 @@ const SidebarButton: React.FC<SidebarButtonProps> = ({ kit, featured, subButton,
 		query: { k }
 	} = useRouter()
 	const kitNameQuery = k as string
-	const selected = matchDisplayQuery(kitNameQuery, kit, kit?.customTitle ? true : false)
+	const selected = matchDisplayQuery(kitNameQuery, kit, Boolean(kit.customTitle))
 	const defaultStyle = { backgroundColor: selected ? colors.dark20 : colors.light, margin: "0.5em 0" }
 	const subButtonStyle = {
 		width: "90%",
@@ -33,18 +34,18 @@ const SidebarButton: React.FC<SidebarButtonProps> = ({ kit, featured, subButton,
 	return (
 		<Button
 			fullWidth
-			rightIcon={featured && <SVG.Star stroke="none" fill={colors.gold} />}
+			rightIcon={featured ? <SVG.Star fill={colors.gold} stroke="none" /> : null}
 			style={subButton ? subButtonStyle : defaultStyle}
 			styles={{ label: { textAlign: "left", width: "100%" } }}
 			{...props}
 		>
 			{useBaseName
-				? kit?.base.displayName
-				: kit?.customTitle
-				? kit?.customTitle
+				? kit.base.displayName
+				: kit.customTitle
+				? kit.customTitle
 				: subButton
 				? "Default"
-				: kit?.base?.displayName}
+				: kit.base.displayName}
 		</Button>
 	)
 }
@@ -55,9 +56,9 @@ const matchDisplayQuery = (
 	customTitle?: boolean
 ) => {
 	if (customTitle) {
-		return kitNameQuery?.replace(" ", "-") === (kit?.base?.displayName + kit?.customTitle).replace(" ", "-")
+		return kitNameQuery.replace(" ", "-") === (kit.base.displayName + kit.customTitle).replace(" ", "-")
 	}
-	return kitNameQuery?.replace(" ", "-") === kit?.base?.displayName.replace(" ", "-")
+	return kitNameQuery.replace(" ", "-") === kit.base.displayName.replace(" ", "-")
 }
 
 const CATEGORIES = [
@@ -72,7 +73,7 @@ const CATEGORIES = [
 	"Handgun"
 ]
 
-const Sidebar = () => {
+function Sidebar() {
 	const { width } = useViewportSize()
 	const [filterQuery, setFilterQuery] = useState("")
 	const isMobile = width <= 1050
@@ -90,25 +91,24 @@ const Sidebar = () => {
 		<>
 			<div style={{ padding: "0 1em" }}>
 				<SearchInput
-					value={filterQuery}
-					onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterQuery(e.target.value)}
 					clearSearch={() => setFilterQuery("")}
+					onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterQuery(e.target.value)}
+					value={filterQuery}
 				/>
 			</div>
 			<hr style={{ width: "88%", borderColor: colors.lightest }} />
 			<ScrollArea style={{ height: isMobile ? "75vh" : "85vh", padding: "0 1em" }}>
-				{/* if there are favorited kits and no filterQuery - display them at the top of the scroller */}
+				{/* If there are favorited kits and no filterQuery - display them at the top of the scroller */}
 				{filteredByFavorite.length > 0 && !filterQuery && (
 					<>
-						<Title preset="h4" ml="0.75em">
+						<Title ml="0.75em" preset="h4">
 							Favorites
 						</Title>
 						{filteredByFavorite.map((favKit) => (
 							<SidebarButton
+								featured
 								key={favKit.id}
 								kit={favKit}
-								featured
-								useBaseName
 								onClick={() => {
 									router.push(
 										Routes.CHANNEL.GAME.createPath(
@@ -121,6 +121,7 @@ const Sidebar = () => {
 										{ shallow: true }
 									)
 								}}
+								useBaseName
 							/>
 						))}
 					</>
@@ -128,7 +129,7 @@ const Sidebar = () => {
 				{CATEGORIES.map((category) => {
 					return (
 						<>
-							<Title preset="h4" ml="0.75em">
+							<Title ml="0.75em" preset="h4">
 								{/*
 								If there is a filter query - filter allkits to the search query and find index of category - else find index on unfiltered kits
 								 *** If index is -1 that means there is no kit so it won't show category name ***
@@ -137,12 +138,12 @@ const Sidebar = () => {
 									? allKits
 											.filter((kit) => kit.base.displayName.toLowerCase().includes(filterQuery.toLowerCase()))
 											.findIndex((kit) => kit.base.category.displayName === category) !== -1
-									: allKits.findIndex((kit) => kit.base.category.displayName === category) !== -1) && category}
+									: allKits.findIndex((kit) => kit.base.category.displayName === category) !== -1) ? category : null}
 							</Title>
 							{/* Kits are filtered by categories and does not include featured kits. */}
 							{allKits
 								.filter((unsortedKit) =>
-									// if there is a filter query search - find kits that include query and similar categories   else - find kits that are in similar categories
+									// If there is a filter query search - find kits that include query and similar categories   else - find kits that are in similar categories
 									filterQuery
 										? unsortedKit.base.displayName.toLowerCase().includes(filterQuery.toLowerCase()) &&
 										  unsortedKit.base.category.displayName === category
@@ -150,16 +151,15 @@ const Sidebar = () => {
 								)
 								.map((kit) => {
 									// If the kit has a customTitle - display an accordion with the kits that have a customTitle and the base kit that has no customTitle
-									if (kit?.customTitle) {
+									if (kit.customTitle) {
 										return (
-											<>
-												<Accordion
-													chevronPosition="right"
+											<Accordion
 													chevron={
 														<Text>
 															({allKits.filter((subKit) => kit.base.displayName === subKit.base.displayName).length})
 														</Text>
 													}
+													chevronPosition="right"
 													disableChevronRotation
 													styles={{
 														control: {
@@ -184,9 +184,8 @@ const Sidebar = () => {
 															.map((sub) => (
 																<Accordion.Panel key={sub.id}>
 																	<SidebarButton
-																		kit={sub}
 																		featured={sub.featured}
-																		subButton={true}
+																		kit={sub}
 																		onClick={() => {
 																			router.push(
 																				Routes.CHANNEL.GAME.createPath(
@@ -199,22 +198,21 @@ const Sidebar = () => {
 																				{ shallow: true }
 																			)
 																		}}
+																		subButton
 																	/>
 																</Accordion.Panel>
 															))}
 													</Accordion.Item>
 												</Accordion>
-											</>
 										)
 									}
-									// if there is only one kit with this displayName then show only the button
+									// If there is only one kit with this displayName then show only the button
 									if (allKits.filter((subKit) => kit.base.displayName === subKit.base.displayName).length === 1) {
 										return (
-											<>
-												<SidebarButton
+											<SidebarButton
+													featured={kit.featured}
 													key={kit.id}
 													kit={kit}
-													featured={kit.featured}
 													onClick={() => {
 														router.push(
 															Routes.CHANNEL.GAME.createPath(
@@ -228,7 +226,6 @@ const Sidebar = () => {
 														)
 													}}
 												/>
-											</>
 										)
 									}
 								})}

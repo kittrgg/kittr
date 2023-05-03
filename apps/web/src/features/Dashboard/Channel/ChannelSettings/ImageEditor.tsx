@@ -1,4 +1,3 @@
-import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
 import { Spinner } from "@Components/shared"
 import ProfileImage from "@Components/shared/ProfileImage"
@@ -10,9 +9,10 @@ import { caption } from "@Styles/typography"
 import { download, uploadWithHandlers } from "@kittr/firebase/storage"
 import { useState } from "react"
 import styled from "styled-components"
+import { trpc } from "@/lib/trpc"
 
 /** Change the channel's profile image */
-const ImageEditor = () => {
+function ImageEditor() {
 	const dispatch = useDispatch()
 	const { refetch: refetchDashboard } = useDashboardChannel()
 	const { data } = useChannelData()
@@ -47,7 +47,7 @@ const ImageEditor = () => {
 				fileName,
 				imageFile,
 				onSuccess: async () => {
-					mutate({ channelId: data?.id! })
+					mutate({ channelId: data.id })
 				},
 				onError: () => {
 					setIsUploading(false)
@@ -62,10 +62,10 @@ const ImageEditor = () => {
 	return (
 		<>
 			<PhotoButtonFlex>
-				<ProfileImage imagePath={profileImage} hasProfileImage={!!data?.profile?.hasProfileImage} alwaysRefresh />
+				<ProfileImage alwaysRefresh hasProfileImage={Boolean(data?.profile?.hasProfileImage)} imagePath={profileImage} />
 				<Label htmlFor="file">
 					CHANGE IMAGE
-					<input id="file" type="file" name="file" onChange={(e: any) => handleUpload(e)} style={{ display: "none" }} />
+					<input id="file" name="file" onChange={(e: any) => handleUpload(e)} style={{ display: "none" }} type="file" />
 				</Label>
 			</PhotoButtonFlex>
 			<RefreshNote>Note: the dashboard will refresh when you change the image.</RefreshNote>

@@ -1,10 +1,11 @@
-import LogoImageLink from "./LogoImageLink"
-import Menu from "./MobilePane"
 import colors from "@Colors"
 import SVG from "@Components/shared/SVG"
 import { header2 } from "@Styles/typography"
-import { useState, ReactNode } from "react"
+import type { ReactNode } from "react";
+import { useState } from "react"
 import styled from "styled-components"
+import Menu from "./MobilePane"
+import LogoImageLink from "./LogoImageLink"
 
 interface Props {
 	/** Breakpoint as passed by down by navigation master component */
@@ -16,13 +17,13 @@ interface Props {
 }
 
 /** Mobile navigation menu. Only to be used as a child of the master <NavMenu /> component. */
-const MobileNav = ({ breakpoint, backFunction, middleComponent }: Props) => {
+function MobileNav({ breakpoint, backFunction, middleComponent }: Props) {
 	const [isOpen, setIsOpen] = useState(false)
 
 	return (
 		<>
 			<Menu isOpen={isOpen} setIsOpen={setIsOpen} />
-			<Container withBackground={!!backFunction} breakpoint={breakpoint}>
+			<Container breakpoint={breakpoint} withBackground={Boolean(backFunction)}>
 				{backFunction ? (
 					<div onClick={backFunction} style={{ cursor: "pointer" }}>
 						<SVG.Carat
@@ -36,12 +37,10 @@ const MobileNav = ({ breakpoint, backFunction, middleComponent }: Props) => {
 				) : (
 					<LogoImageLink />
 				)}
-				{middleComponent && (
-					<MidFlex>{typeof middleComponent === "string" ? <H2>{middleComponent}</H2> : middleComponent}</MidFlex>
-				)}
+				{middleComponent ? <MidFlex>{typeof middleComponent === "string" ? <H2>{middleComponent}</H2> : middleComponent}</MidFlex> : null}
 				<Button data-cy="mobile-hamburger-icon" onClick={() => setIsOpen(true)}>
 					<HamburgerImageContainer>
-						<img src="/media/icons/burger.svg" alt="Kittr Logo" width={40} height={40} />
+						<img alt="Kittr Logo" height={40} src="/media/icons/burger.svg" width={40} />
 					</HamburgerImageContainer>
 				</Button>
 			</Container>

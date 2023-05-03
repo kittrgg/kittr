@@ -6,7 +6,7 @@ import { useRouter } from "next/router"
 import { useEffect } from "react"
 import styled from "styled-components"
 
-const EmailVerificationForm = () => {
+function EmailVerificationForm() {
 	const router = useRouter()
 
 	useEffect(() => {
@@ -21,14 +21,14 @@ const EmailVerificationForm = () => {
 			</Emphasized>
 			<Button
 				design="white"
-				text="Step 2. Click here to be logged in!"
 				onClick={() => router.reload()}
 				style={{ margin: "0 auto" }}
+				text="Step 2. Click here to be logged in!"
 			/>
 
 			<Emphasized style={{ fontSize: "18px" }}>Not seeing a code? Check your spam first.</Emphasized>
 			<P>If you still don't see one, click here to request a fresh message.</P>
-			<Button text="REQUEST CODE" onClick={() => requestEmailVerification()} style={{ margin: "0 auto" }} />
+			<Button onClick={() => requestEmailVerification()} style={{ margin: "0 auto" }} text="REQUEST CODE" />
 		</AuthLayout>
 	)
 }

@@ -4,7 +4,7 @@ import styled from "styled-components"
 
 interface Props {
 	/** Possible values for the component. */
-	values: Array<{
+	values: {
 		/** Text for the button for this value. */
 		text: string
 		/** Optional value parameter. If omitted, the text field will be used. */
@@ -21,7 +21,7 @@ interface Props {
 		 * Optional. Defaults to white.
 		 * */
 		textActiveColor?: string
-	}>
+	}[]
 	/** The background body of the component's color.
 	 * Defaults to colors.lightest.
 	 */
@@ -34,19 +34,19 @@ interface Props {
 	/** Cypress data attribute. */
 	dataCy?: string
 	/** Optional information labels that show above the buttons */
-	infoLabels?: Array<JSX.Element | string>
+	infoLabels?: (JSX.Element | string)[]
 }
 
 /**  */
-export const MultiButton = ({
+export function MultiButton({
 	wrapperBackgroundColor = colors.lightest,
 	values,
 	activeValue,
 	onClick,
 	dataCy,
 	infoLabels
-}: Props) => (
-	<>
+}: Props) {
+  return <>
 		<InfoLabelWrapper>
 			{infoLabels?.map((infoLabel, index) => (
 				<InfoLabel key={index}>{infoLabel}</InfoLabel>
@@ -55,22 +55,22 @@ export const MultiButton = ({
 		<Wrapper backgroundColor={wrapperBackgroundColor} data-cy={dataCy}>
 			{values.map((elem, index: number) => (
 				<Button
-					key={elem.text}
 					active={elem.value ? activeValue === elem.value : activeValue === elem.text}
 					backgroundColor={elem.backgroundColor || colors.lighter}
-					textInactiveColor={elem.textInactiveColor || colors.white}
-					textActiveColor={elem.textActiveColor || colors.white}
+					data-active={elem.value ? activeValue === elem.value : activeValue === elem.text}
+					data-cy={`toggler-value-${index}`}
+					key={elem.text}
 					numberOfValues={values.length}
 					onClick={() => onClick(elem)}
-					data-cy={`toggler-value-${index}`}
-					data-active={elem.value ? activeValue === elem.value : activeValue === elem.text}
+					textActiveColor={elem.textActiveColor || colors.white}
+					textInactiveColor={elem.textInactiveColor || colors.white}
 				>
 					{elem.text}
 				</Button>
 			))}
 		</Wrapper>
 	</>
-)
+}
 
 export default MultiButton
 

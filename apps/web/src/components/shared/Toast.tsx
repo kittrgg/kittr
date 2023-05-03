@@ -1,6 +1,7 @@
 import colors from "@Colors"
 import { useIsMounted } from "@Hooks/useIsMounted"
-import { useEffect, Dispatch, SetStateAction, ReactNode } from "react"
+import type { Dispatch, SetStateAction, ReactNode } from "react";
+import { useEffect } from "react"
 import styled from "styled-components"
 
 interface Props {
@@ -9,7 +10,7 @@ interface Props {
 	children: string | ReactNode
 }
 
-export const Toast = ({ visible, setVisibility, children }: Props) => {
+export function Toast({ visible, setVisibility, children }: Props) {
 	const isMounted = useIsMounted()
 
 	useEffect(() => {

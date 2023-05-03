@@ -1,9 +1,7 @@
 import { isClient } from "@Utils/helpers/isClient"
 import { useState, useEffect } from "react"
 
-interface Interface {
-	(): boolean
-}
+type Interface = () => boolean
 
 /** Detect the client's adblocking settings if they have them. */
 export const useDetectAdBlock: Interface = () => {
@@ -28,7 +26,7 @@ export const useDetectAdBlock: Interface = () => {
 
 	if (!isClient()) {
 		return false
-	} else {
+	} 
 		return isBlocking
-	}
+	
 }

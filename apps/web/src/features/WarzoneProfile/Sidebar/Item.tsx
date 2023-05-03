@@ -5,27 +5,26 @@ import { useActiveWeapon } from "@Redux/slices/displayr/selectors"
 import { useDispatch } from "@Redux/store"
 import { sortAlphabetical } from "@Utils/helpers/sortAlphabetical"
 import { Routes } from "@Utils/lookups/routes"
-import { WarzoneKit, WarzoneKitBase, WarzoneKitBaseCategory, WarzoneKitOption } from "@kittr/prisma"
+import type { WarzoneKit, WarzoneKitBase, WarzoneKitBaseCategory, WarzoneKitOption } from "@kittr/prisma"
 import { useRouter } from "next/router"
-import { Dispatch, SetStateAction, useEffect, useRef } from "react"
+import type { Dispatch, SetStateAction} from "react";
+import { useEffect, useRef } from "react"
 import styled from "styled-components"
 
 interface Props {
 	baseName: string
-	kits: Array<
-		WarzoneKit & {
+	kits: (WarzoneKit & {
 			options: WarzoneKitOption[]
 			base: WarzoneKitBase & {
 				category: WarzoneKitBaseCategory
 			}
-		}
-	>
+		})[]
 	setFilterQuery: Dispatch<SetStateAction<string>>
 	featured?: true
 	noRef?: true
 }
 
-const Item = ({ baseName, featured, kits, setFilterQuery }: Props) => {
+function Item({ baseName, featured, kits, setFilterQuery }: Props) {
 	const dispatch = useDispatch()
 	const activeWeapon = useActiveWeapon()
 	const childRef = useRef<HTMLDivElement>(null)
@@ -40,7 +39,7 @@ const Item = ({ baseName, featured, kits, setFilterQuery }: Props) => {
 		.filter((elem) => elem.base.displayName === baseName)
 		.sort((a, b) => {
 			if (!a.customTitle || !b.customTitle) return 0
-			if (a?.customTitle < b.customTitle) return -1
+			if (a.customTitle < b.customTitle) return -1
 			if (a.customTitle > b.customTitle) return 1
 			return 0
 		})
@@ -48,7 +47,7 @@ const Item = ({ baseName, featured, kits, setFilterQuery }: Props) => {
 	const firstMatchedBaseUserTitle = ` (${matchedBase[0]?.customTitle})`
 
 	const onClick = () => {
-		// dispatch(setActiveWeapon(matchedBase[0]))
+		// Dispatch(setActiveWeapon(matchedBase[0]))
 		dispatch(setIsSidebarOpen(false))
 		setFilterQuery("")
 		router.push(
@@ -71,17 +70,15 @@ const Item = ({ baseName, featured, kits, setFilterQuery }: Props) => {
 		<>
 			<Container
 				data-cy={`${baseName.replace(/ /g, "-")}-button`}
-				ref={featured ? undefined : containerRef}
 				isActive={weaponQuery === baseNameCleanse}
 				onClick={onClick}
+				ref={featured ? undefined : containerRef}
 			>
-				{featured && (
-					<SVG.Star
+				{featured ? <SVG.Star
 						fill={colors.gold}
 						stroke="transparent"
 						style={{ position: "absolute", top: "12px", right: "12px", width: "14px" }}
-					/>
-				)}
+					/> : null}
 				<Title>{`${baseName}${
 					matchedBase.length === 1 && firstMatchedBaseUserTitle.length > 3 ? firstMatchedBaseUserTitle : ""
 				}`}</Title>
@@ -104,12 +101,15 @@ const Item = ({ baseName, featured, kits, setFilterQuery }: Props) => {
 								return (
 									<SubItem
 										active={
-											activeWeapon?.base?.displayName === elem.base.displayName &&
+											activeWeapon.base.displayName === elem.base.displayName &&
 											activeWeapon.customTitle === elem.customTitle
 										}
+										data-cy={`${elem.base.displayName.replace(/ /g, "-").replace("(", "-").replace(")", "-")}-${
+											elem.customTitle?.replace(/ /g, "-") || "Primary"
+										}`}
 										key={elem.id}
 										onClick={() => {
-											// dispatch(setActiveWeapon(elem))
+											// Dispatch(setActiveWeapon(elem))
 											dispatch(setIsSidebarOpen(false))
 											router.push(
 												Routes.CHANNEL.GAME.createPath(
@@ -121,19 +121,14 @@ const Item = ({ baseName, featured, kits, setFilterQuery }: Props) => {
 												{ shallow: true }
 											)
 										}}
-										data-cy={`${elem.base.displayName.replace(/ /g, "-").replace("(", "-").replace(")", "-")}-${
-											elem.customTitle?.replace(/ /g, "-") || "Primary"
-										}`}
 									>
 										<SubItemTitle>{elem.customTitle || elem.base.displayName}</SubItemTitle>
-										{elem.featured && (
-											<SVG.Star
+										{elem.featured ? <SVG.Star
+												fill={colors.gold}
+												stroke="transparent"
 												style={{ position: "absolute", top: "50%", transform: "translateY(-50%)", right: "0px" }}
 												width="14px"
-												stroke="transparent"
-												fill={colors.gold}
-											/>
-										)}
+											/> : null}
 									</SubItem>
 								)
 							})}

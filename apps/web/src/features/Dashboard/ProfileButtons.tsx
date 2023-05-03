@@ -15,7 +15,7 @@ import styled from "styled-components"
  * The "View Profile" and logging out buttons for the user in the dashboard.
  * "View Profile" will only apply if the user has a channel open.
  */
-const ProfileButtons = () => {
+function ProfileButtons() {
 	const router = useRouter()
 	const { data: channelData } = useChannelData()
 	const [isOpen, setIsOpen] = useState(false)
@@ -24,20 +24,17 @@ const ProfileButtons = () => {
 
 	return (
 		<Flex>
-			{channelData?.displayName && (
-				<LinkStyles
-					href={Routes.CHANNEL.createPath(channelData?.urlSafeName)}
-					target="_blank"
+			{channelData?.displayName ? <LinkStyles
+					href={Routes.CHANNEL.createPath(channelData.urlSafeName)}
 					rel="noopener noreferrer"
+					target="_blank"
 				>
 					VIEW PROFILE
-				</LinkStyles>
-			)}
+				</LinkStyles> : null}
 			<Container isOpen={isOpen}>
 				<Clickable data-cy="profile-container-button" onClick={() => setIsOpen(!isOpen)}>
 					{user?.email}
 					<SVG.Carat
-						width="24px"
 						style={{
 							position: "relative",
 							top: "4px",
@@ -45,11 +42,12 @@ const ProfileButtons = () => {
 							transform: isOpen ? "" : "rotate(180deg)",
 							transition: ".2s"
 						}}
+						width="24px"
 					/>
 				</Clickable>
 				<Button
+					dataCy="logout-button"
 					design="white"
-					text="LOG OUT"
 					onClick={(e) => {
 						e.stopPropagation()
 						logOut()
@@ -63,7 +61,7 @@ const ProfileButtons = () => {
 							})
 					}}
 					style={{ width: "95%", margin: "8px auto 0", padding: "12px", fontSize: "14px" }}
-					dataCy="logout-button"
+					text="LOG OUT"
 				/>
 			</Container>
 		</Flex>

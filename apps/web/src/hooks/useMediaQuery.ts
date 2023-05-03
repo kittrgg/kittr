@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
+// @ts-expect-error
 import { isClient } from "@Utils/helpers/isClient"
 import { isWebApiSupported } from "@Utils/helpers/isWebApiSupported"
 import { useEffect, useState } from "react"
@@ -9,11 +9,11 @@ const errorMessage =
 	" your current browser or you're using the useMediaQuery hook whilst server side rendering."
 
 export const useMediaQuery = (mediaQuery: string) => {
-	const [isVerified, setIsVerified] = useState(!!window.matchMedia(mediaQuery).matches)
+	const [isVerified, setIsVerified] = useState(Boolean(window.matchMedia(mediaQuery).matches))
 
 	useEffect(() => {
 		const mediaQueryList = window.matchMedia(mediaQuery)
-		const documentChangeHandler = () => setIsVerified(!!mediaQueryList.matches)
+		const documentChangeHandler = () => setIsVerified(Boolean(mediaQueryList.matches))
 
 		try {
 			mediaQueryList.addEventListener("change", documentChangeHandler)
@@ -38,7 +38,7 @@ export const useMediaQuery = (mediaQuery: string) => {
 	if (!isClient() || !isWebApiSupported("matchMedia")) {
 		console.warn(errorMessage)
 		return null
-	} else {
+	} 
 		return isVerified
-	}
+	
 }

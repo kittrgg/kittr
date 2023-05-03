@@ -1,8 +1,7 @@
-import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
 import { Button, Modal, TextInput } from "@Components/shared"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
-// import { useManagedChannels } from "@Hooks/api/useManagedChannels"
+// Import { useManagedChannels } from "@Hooks/api/useManagedChannels"
 import { setActiveView, setModal } from "@Redux/slices/dashboard"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
@@ -10,9 +9,10 @@ import { header2 } from "@Styles/typography"
 import { useSocket } from "pages/dashboard.page"
 import { useState } from "react"
 import styled from "styled-components"
+import { trpc } from "@/lib/trpc"
 
 /** Modal to allow the user to delete the channel. */
-const ChannelDeleteModal = () => {
+function ChannelDeleteModal() {
 	const socket = useSocket()
 	const dispatch = useDispatch()
 	const { data: channelData } = useChannelData()
@@ -36,22 +36,22 @@ const ChannelDeleteModal = () => {
 		<Modal backgroundClickToClose title="ARE YOU SURE YOU WANT TO DELETE YOUR CHANNEL ACCOUNT?">
 			<Warning>THIS WILL PERMANENTLY REMOVE ALL SETTINGS, GAMES, KITS, AND ASSOCIATED DATA.</Warning>
 			<TextInput
-				type="text"
-				name="displayNameDelete"
-				topLabel
-				label="Channel Name"
-				value={input}
-				onChange={(e) => setInput(e.target.value)}
 				inputStyles={{ width: "100%" }}
+				label="Channel Name"
+				name="displayNameDelete"
+				onChange={(e) => setInput(e.target.value)}
+				topLabel
+				type="text"
+				value={input}
 			/>
 			<FlexRow>
-				<Button design="transparent" text="NO, KEEP IT" onClick={() => dispatch(setModal({ type: "", data: {} }))} />
+				<Button design="transparent" onClick={() => dispatch(setModal({ type: "", data: {} }))} text="NO, KEEP IT" />
 				<Button
 					design="transparent"
-					text="DELETE FOREVER"
 					disabled={channelData?.displayName !== input}
 					onClick={async () => mutate({ channelId: channelData?.id ?? "" })}
 					style={{ backgroundColor: colors.red }}
+					text="DELETE FOREVER"
 				/>
 			</FlexRow>
 		</Modal>

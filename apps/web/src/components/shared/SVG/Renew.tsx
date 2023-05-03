@@ -2,17 +2,17 @@ import colors from "@Colors"
 
 /** Two curling arrows forming a circle. Use fill for color. */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const Renew = (props: any) => {
+export function Renew(props: any) {
 	const { width = "100%", fill = colors.white, dataCy, ...rest } = props
 
 	return (
 		<svg
-			width={width || "100%"}
+			data-cy={dataCy}
+			fill="none"
 			height={24}
 			viewBox="0 0 24 24"
-			fill="none"
+			width={width || "100%"}
 			xmlns="http://www.w3.org/2000/svg"
-			data-cy={dataCy}
 			{...rest}
 		>
 			<path

@@ -6,7 +6,7 @@ import { header4 } from "@Styles/typography"
 import { Routes } from "@Utils/lookups/routes"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { Dispatch, SetStateAction } from "react"
+import type { Dispatch, SetStateAction } from "react"
 import styled from "styled-components"
 
 interface Props {
@@ -14,11 +14,11 @@ interface Props {
 	setIsOpen: Dispatch<SetStateAction<boolean>>
 }
 
-const MobileNavPane = ({ isOpen, setIsOpen }: Props) => {
-	// useLockBodyScroll(isOpen)
+function MobileNavPane({ isOpen, setIsOpen }: Props) {
+	// UseLockBodyScroll(isOpen)
 	const { pathname } = useRouter()
 	const user = useUser()
-	const isLoggedIn = !!user?.uid
+	const isLoggedIn = Boolean(user?.uid)
 
 	return (
 		<FullScreen
@@ -35,22 +35,22 @@ const MobileNavPane = ({ isOpen, setIsOpen }: Props) => {
 			<Body isOpen={isOpen}>
 				<CloseButton onClick={() => setIsOpen(false)}>
 					<ImageContainer>
-						<img alt="Kittr Logo" src="/media/icons/burger.svg" width={40} height={40} />
+						<img alt="Kittr Logo" height={40} src="/media/icons/burger.svg" width={40} />
 					</ImageContainer>
 				</CloseButton>
 				<LinksList>
-					<Link href={Routes.ROOT} passHref legacyBehavior>
+					<Link href={Routes.ROOT} legacyBehavior passHref>
 						<StyledLink active={pathname === Routes.ROOT}>HOME</StyledLink>
 					</Link>
-					<Link href={Routes.GAMES.LIST} passHref legacyBehavior>
-						<StyledLink data-cy="mobile-games-link" active={pathname.startsWith(Routes.GAMES.LIST)}>
+					<Link href={Routes.GAMES.LIST} legacyBehavior passHref>
+						<StyledLink active={pathname.startsWith(Routes.GAMES.LIST)} data-cy="mobile-games-link">
 							GAMES
 						</StyledLink>
 					</Link>
-					<Link href={Routes.CHANNEL.LIST} passHref legacyBehavior>
+					<Link href={Routes.CHANNEL.LIST} legacyBehavior passHref>
 						<StyledLink
-							data-cy="mobile-channels-link"
 							active={pathname.startsWith(Routes.CHANNEL.LIST) || pathname.startsWith(Routes.CHANNEL.LIST)}
+							data-cy="mobile-channels-link"
 						>
 							CHANNELS
 						</StyledLink>
@@ -59,29 +59,27 @@ const MobileNavPane = ({ isOpen, setIsOpen }: Props) => {
 				<LinksList>
 					{!isLoggedIn && (
 						<>
-							<Link href={Routes.SIGN_UP} passHref legacyBehavior>
-								<StyledLink data-cy="mobile-sign-up-link" active={pathname.startsWith(Routes.SIGN_UP)}>
+							<Link href={Routes.SIGN_UP} legacyBehavior passHref>
+								<StyledLink active={pathname.startsWith(Routes.SIGN_UP)} data-cy="mobile-sign-up-link">
 									SIGN UP
 								</StyledLink>
 							</Link>
-							<Link href={Routes.DASHBOARD} passHref legacyBehavior>
-								<StyledLink data-cy="mobile-dashboard-link-no-auth" active={pathname.startsWith(Routes.DASHBOARD)}>
+							<Link href={Routes.DASHBOARD} legacyBehavior passHref>
+								<StyledLink active={pathname.startsWith(Routes.DASHBOARD)} data-cy="mobile-dashboard-link-no-auth">
 									LOG IN
 								</StyledLink>
 							</Link>
 						</>
 					)}
 				</LinksList>
-				{isLoggedIn && (
-					<Link href={Routes.DASHBOARD} passHref legacyBehavior>
+				{isLoggedIn ? <Link href={Routes.DASHBOARD} legacyBehavior passHref>
 						<StyledLink
-							data-cy="mobile-dashboard-link-authed"
 							active={pathname === Routes.DASHBOARD || pathname.startsWith(Routes.DASHBOARD)}
+							data-cy="mobile-dashboard-link-authed"
 						>
 							DASHBOARD
 						</StyledLink>
-					</Link>
-				)}
+					</Link> : null}
 			</Body>
 		</FullScreen>
 	)

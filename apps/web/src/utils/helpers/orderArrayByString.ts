@@ -30,8 +30,8 @@ export const customOrderArray = <T>({ sortingArray, keyToSort, indexToSort, arra
 				.slice()
 				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 				.sort((a: any, b: any) => {
-					if (sortingArray.indexOf(a[indexToSort]) === -1) return 1
-					if (sortingArray.indexOf(b[indexToSort]) === -1) return -1
+					if (!sortingArray.includes(a[indexToSort])) return 1
+					if (!sortingArray.includes(b[indexToSort])) return -1
 					return sortingArray.indexOf(a[indexToSort]) - sortingArray.indexOf(b[indexToSort])
 				})
 		)
@@ -43,8 +43,8 @@ export const customOrderArray = <T>({ sortingArray, keyToSort, indexToSort, arra
 			.slice()
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			.sort((a: any, b: any) => {
-				if (sortingArray.indexOf(a[keyToSort]) === -1) return 1
-				if (sortingArray.indexOf(b[keyToSort]) === -1) return -1
+				if (!sortingArray.includes(a[keyToSort])) return 1
+				if (!sortingArray.includes(b[keyToSort])) return -1
 				return sortingArray.indexOf(a[keyToSort]) - sortingArray.indexOf(b[keyToSort])
 			})
 		return arr

@@ -1,9 +1,9 @@
-import CallToAction from "./CallToAction"
-import * as Styled from "./style"
 import colors from "@Colors"
 import { header2 } from "@Styles/typography"
 import { Routes } from "@Utils/lookups/routes"
 import styled from "styled-components"
+import * as Styled from "./style"
+import CallToAction from "./CallToAction"
 
 const FEATURE_SET = [
 	{
@@ -45,12 +45,12 @@ const FEATURE_SET = [
 ]
 
 /** Features that are currently a part of the platform */
-const Features = () => (
-	<section style={{ zIndex: 1 }}>
+function Features() {
+  return <section style={{ zIndex: 1 }}>
 		<ImageContainer>
 			<img
-				src="/media/landing-page-screenie.png"
 				alt="An example kittr page."
+				src="/media/landing-page-screenie.png"
 				style={{ width: "100%", height: "100%", objectFit: "cover" }}
 			/>
 		</ImageContainer>
@@ -61,8 +61,8 @@ const Features = () => (
 				<GridItem key={feature.title}>
 					<IconContainer>
 						<img
-							src={feature.image}
 							alt={feature.imageAlt}
+							src={feature.image}
 							style={{ width: "100%", height: "100%", objectFit: "contain" }}
 						/>
 					</IconContainer>
@@ -71,9 +71,9 @@ const Features = () => (
 				</GridItem>
 			))}
 		</Grid>
-		<CallToAction marginBottom="60px" header="channel bettr with kittr." />
+		<CallToAction header="channel bettr with kittr." marginBottom="60px" />
 	</section>
-)
+}
 
 export default Features
 

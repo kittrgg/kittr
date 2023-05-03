@@ -2,11 +2,10 @@ import colors from "@Colors"
 import { SVG } from "@Components/shared"
 import styled from "styled-components"
 
-const PremiumCallout = ({ ...props }) => {
+function PremiumCallout({ ...props }) {
 	return (
 		<Container>
 			<SVG.Premium
-				width="100px"
 				style={{
 					position: "absolute",
 					transform: "translateY(-50%)",
@@ -15,6 +14,7 @@ const PremiumCallout = ({ ...props }) => {
 					height: "150px",
 					opacity: 0.3
 				}}
+				width="100px"
 			/>
 			<p>Looking for Recent Clips, Recent Channels, Schedule, Specs, and Affiliates for this channel?</p>
 			<p>

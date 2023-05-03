@@ -6,7 +6,7 @@ import { header2 } from "@Styles/typography"
 import styled from "styled-components"
 
 /** Support modal to allow users to find ways to contact us. */
-const SupportModal = ({ ...props }) => {
+function SupportModal({ ...props }) {
 	const dispatch = useDispatch()
 	const { data } = useModal()
 	const { isTutorial, page } = data
@@ -14,12 +14,12 @@ const SupportModal = ({ ...props }) => {
 	return (
 		<Modal
 			backgroundClickToClose={!isTutorial}
-			title="NEED SOME HELP?"
 			onUserClose={() => {
 				if (isTutorial && page === 7) {
 					dispatch(setModal({ type: "Tutorial", data: { page: 7 } }))
 				}
 			}}
+			title="NEED SOME HELP?"
 		>
 			<Subheader>GOOD COMMS. WE'VE GOT YOUR BACK.</Subheader>
 			<ContactHelper>

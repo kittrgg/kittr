@@ -2,7 +2,7 @@ import { useDispatch } from "@Redux/store"
 import { logOut } from "@kittr/firebase/auth"
 import { useEffect } from "react"
 
-const SucessMessage = () => {
+function SucessMessage() {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
@@ -10,9 +10,7 @@ const SucessMessage = () => {
 	}, [dispatch])
 
 	return (
-		<>
-			<p>Your password has been changed!</p>
-		</>
+		<p>Your password has been changed!</p>
 	)
 }
 

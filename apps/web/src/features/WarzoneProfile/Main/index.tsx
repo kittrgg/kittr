@@ -1,12 +1,3 @@
-import AdTile from "./AdTile"
-import Attachments from "./Attachments"
-import ChannelQuote from "./ChannelQuote"
-import FavoriteBlueprint from "./FavoriteBlueprint"
-import Imagery from "./Imagery"
-import KitScroller from "./KitScroller"
-import Popularity from "./Popularity"
-import TopBar from "./TopBar"
-import WeaponBlurb from "./WeaponBlurb"
 import colors from "@Colors"
 import { Button, SupportUs, SVG } from "@Components/shared"
 import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
@@ -18,12 +9,21 @@ import { setIsSidebarOpen } from "@Redux/slices/displayr"
 import { useSidebarState } from "@Redux/slices/displayr/selectors"
 import { useDispatch } from "@Redux/store"
 import Ad from "@Services/venatus/Ad"
-import { ChannelCreatorCode, Game } from "@kittr/prisma"
+import type { ChannelCreatorCode, Game } from "@kittr/prisma"
 import { Container, SimpleGrid } from "@mantine/core"
 import { useRouter } from "next/router"
 import styled from "styled-components"
+import WeaponBlurb from "./WeaponBlurb"
+import TopBar from "./TopBar"
+import Popularity from "./Popularity"
+import KitScroller from "./KitScroller"
+import Imagery from "./Imagery"
+import FavoriteBlueprint from "./FavoriteBlueprint"
+import ChannelQuote from "./ChannelQuote"
+import Attachments from "./Attachments"
+import AdTile from "./AdTile"
 
-const Marketing = () => {
+function Marketing() {
 	const areAdsBlocked = useDetectAdBlock()
 	const { width } = useViewportDimensions()
 	const isMobile = width <= 1050
@@ -39,34 +39,34 @@ const Marketing = () => {
 	return null
 }
 
-const Main = () => {
+function Main() {
 	const dispatch = useDispatch()
-	// const activeWeapon = useActiveWeapon()
-	// const channelData = useChannel()
+	// Const activeWeapon = useActiveWeapon()
+	// Const channelData = useChannel()
 	const { width } = useViewportDimensions()
 	const isMobile = width <= 1050
-	// const containerRef = useRef(null) as any
-	// const { query, isReady } = useRouter()
+	// Const containerRef = useRef(null) as any
+	// Const { query, isReady } = useRouter()
 	const { query } = useRouter()
 	const weaponTerm = Object.keys(query).length > 1 ? query.weapon || query.k : ""
 	const { data: channelData } = useChannelProfileData()
 	const activeWeapon = useActiveChannelKit()
-	// const isSidebarOpen = useSidebarState()
-	// const [scrollLocked, setScrollLocked] = useScrollLock()
+	// Const isSidebarOpen = useSidebarState()
+	// Const [scrollLocked, setScrollLocked] = useScrollLock()
 
-	// useEffect(() => {
-	// 	if (isSidebarOpen && isMobile) {
-	// 		setScrollLocked(true)
+	// UseEffect(() => {
+	// 	If (isSidebarOpen && isMobile) {
+	// 		SetScrollLocked(true)
 	// 	} else {
-	// 		setScrollLocked(false)
+	// 		SetScrollLocked(false)
 	// 	}
 	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	// }, [isSidebarOpen, isMobile])
 
 	return (
 		<SimpleGrid
-			cols={2}
 			breakpoints={[{ maxWidth: 1050, cols: 1 }]}
+			cols={2}
 			style={{
 				paddingLeft: !isMobile ? "325px" : 0,
 				paddingRight: "1em",
@@ -74,17 +74,15 @@ const Main = () => {
 			}}
 		>
 			<FirebaseStorageResolver
-				path="/warzone/background-image.png"
 				noSpinner
+				path="/warzone/background-image.png"
 				render={(imagePath) => <BackgroundImage imagePath={imagePath} />}
 			/>
-			{isMobile && (
-				<Button
+			{isMobile ? <Button
 					dataCy="kit-list-opener"
 					endIcon={
 						<SVG.Carat fill={colors.white} style={{ width: "24px", marginLeft: "4px", transform: "rotate(90deg)" }} />
 					}
-					text="Kits"
 					onClick={() => dispatch(setIsSidebarOpen(true))}
 					style={{
 						width: "100%",
@@ -94,16 +92,11 @@ const Main = () => {
 						justifySelf: "center",
 						alignSelf: "center"
 					}}
-				/>
-			)}
-			{activeWeapon && Object.keys(activeWeapon).length > 0 && weaponTerm && (
-				<>
-					{!isMobile && channelData && (
-						<TopBar
-							id={channelData.id}
+					text="Kits"
+				/> : null}
+			{activeWeapon && Object.keys(activeWeapon).length > 0 && weaponTerm ? <>
+					{!isMobile && channelData ? <TopBar
 							displayName={channelData.displayName}
-							hasProfileImage={channelData.profile?.hasProfileImage || false}
-							links={channelData.links}
 							gameCreatorCode={
 								channelData.gameCreatorCodes.find(
 									(
@@ -113,12 +106,12 @@ const Main = () => {
 									) => code.game.displayName === "Warzone"
 								)?.code || ""
 							}
-						/>
-					)}
-					{isMobile && channelData && (
-						<KitScroller availableKits={channelData.warzoneKits ?? channelData.warzoneTwoKits} />
-					)}
-					{isMobile && <div>{/* <Ad placementType="d300x50" updateTrigger={activeWeapon} /> */}</div>}
+							hasProfileImage={channelData.profile?.hasProfileImage || false}
+							id={channelData.id}
+							links={channelData.links}
+						/> : null}
+					{isMobile && channelData ? <KitScroller availableKits={channelData.warzoneKits ?? channelData.warzoneTwoKits} /> : null}
+					{isMobile ? <div>{/* <Ad placementType="d300x50" updateTrigger={activeWeapon} /> */}</div> : null}
 					{isMobile ? (
 						<>
 							<Imagery />
@@ -133,20 +126,19 @@ const Main = () => {
 					<ChannelQuote />
 					<Marketing />
 					{/* <WeaponStats /> */}
-					{isMobile && <div>{/* <Ad placementType="d300x50" updateTrigger={activeWeapon} /> */}</div>}
+					{isMobile ? <div>{/* <Ad placementType="d300x50" updateTrigger={activeWeapon} /> */}</div> : null}
 					<Popularity />
 					<div style={{ display: "grid", gap: "12px" }}>
 						<WeaponBlurb />
 						<FavoriteBlueprint />
 					</div>
-					{isMobile && <div>{/* <Ad placementType="s300x250" updateTrigger={activeWeapon} /> */}</div>}
-				</>
-			)}
+					{isMobile ? <div>{/* <Ad placementType="s300x250" updateTrigger={activeWeapon} /> */}</div> : null}
+				</> : null}
 			{!activeWeapon && (
 				<Container style={{ marginTop: isMobile ? "2em" : "10em" }}>
 					<SVG.Arrow
-						width="18px"
 						style={{ marginRight: "12px", transform: `rotate(${isMobile ? "0deg" : "-90deg"})` }}
+						width="18px"
 					/>
 					SELECT A KIT.
 				</Container>
@@ -159,38 +151,38 @@ export default Main
 
 // Styled Components
 
-// const Container = styled.div<{ hasWeapon: boolean }>`
-// 	flex: 1;
-// 	position: relative;
-// 	overflow-x: hidden;
-// 	overflow-y: auto;
-// 	display: ${(props) => (props.hasWeapon ? "grid" : "")};
-// 	grid-template-columns: ${(props) => (props.hasWeapon ? "1fr 1fr" : "1fr")};
-// 	gap: 12px;
+// Const Container = styled.div<{ hasWeapon: boolean }>`
+// 	Flex: 1;
+// 	Position: relative;
+// 	Overflow-x: hidden;
+// 	Overflow-y: auto;
+// 	Display: ${(props) => (props.hasWeapon ? "grid" : "")};
+// 	Grid-template-columns: ${(props) => (props.hasWeapon ? "1fr 1fr" : "1fr")};
+// 	Gap: 12px;
 
-// 	padding: 0 2% 36px;
+// 	Padding: 0 2% 36px;
 
 // 	@media (max-width: 1050px) {
-// 		flex: initial;
-// 		grid-template-columns: 1fr;
-// 		width: 100%;
-// 		margin-top: 0;
-// 		padding-top: 0;
-// 		overflow-y: auto;
+// 		Flex: initial;
+// 		Grid-template-columns: 1fr;
+// 		Width: 100%;
+// 		Margin-top: 0;
+// 		Padding-top: 0;
+// 		Overflow-y: auto;
 // 		-webkit-overflow-scrolling: touch;
 // 	}
 
 // 	&::-webkit-scrollbar {
-// 		width: 8px;
+// 		Width: 8px;
 // 	}
 
 // 	&::-webkit-scrollbar-track {
-// 		background: transparent;
+// 		Background: transparent;
 // 	}
 
 // 	&::-webkit-scrollbar-thumb {
-// 		background-color: ${colors.lightest};
-// 		border: 5px solid transparent;
+// 		Background-color: ${colors.lightest};
+// 		Border: 5px solid transparent;
 // 	}
 // `
 

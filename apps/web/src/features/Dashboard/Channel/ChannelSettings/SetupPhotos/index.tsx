@@ -1,12 +1,12 @@
-import ImageUploader from "./ImageUploader"
 import colors from "@Colors"
 import { Button, SVG } from "@Components/shared"
 import Toast from "@Components/shared/Toast"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { useState } from "react"
 import styled from "styled-components"
+import ImageUploader from "./ImageUploader"
 
-const SetupPhotos = () => {
+function SetupPhotos() {
 	const [copyNotification, setCopyNotification] = useState(false)
 	const { data } = useDashboardChannel()
 
@@ -24,15 +24,15 @@ const SetupPhotos = () => {
 			<Title>
 				<span>
 					Setup Photos
-					<SVG.PremiumWithCircle width="24px" style={{ position: "relative", top: "6px", marginLeft: "12px" }} />
+					<SVG.PremiumWithCircle style={{ position: "relative", top: "6px", marginLeft: "12px" }} width="24px" />
 				</span>
 				{Object.values(data?.profile?.setupPhotos || {}).filter((photo) => photo).length > 0 && (
 					<Button
 						design="transparent"
 						onClick={() => copyToClipboard(commandString)}
-						text="Setup Command"
-						startIcon={<SVG.Clipboard width="16px" style={{ marginRight: "16px" }} />}
+						startIcon={<SVG.Clipboard style={{ marginRight: "16px" }} width="16px" />}
 						style={{ fontSize: "14px", padding: "16px" }}
+						text="Setup Command"
 					/>
 				)}
 			</Title>
@@ -41,8 +41,8 @@ const SetupPhotos = () => {
 					<ImageUploader key={index} slot={index + 1} />
 				))}
 			</Grid>
-			<Toast visible={copyNotification} setVisibility={setCopyNotification}>
-				<img src="/media/icons/check-mark.svg" alt="Check Mark" width={16} height={11} />
+			<Toast setVisibility={setCopyNotification} visible={copyNotification}>
+				<img alt="Check Mark" height={11} src="/media/icons/check-mark.svg" width={16} />
 				<p style={{ marginLeft: "44px" }}>!setup copied to clipboard</p>
 			</Toast>
 		</div>

@@ -1,10 +1,10 @@
-import { H2 } from "./style"
 import colors from "@Colors"
 import { SideScroller, ProfileImage } from "@Components/shared"
 import { montserrat } from "@Styles/typography"
-import { ITwitchVideo } from "@kittr/types"
+import type { ITwitchVideo } from "@kittr/types"
 import { getDate, getMonth, getYear } from "date-fns"
 import styled from "styled-components"
+import { H2 } from "./style"
 
 interface Props {
 	videos?: ITwitchVideo[]
@@ -14,7 +14,7 @@ interface Props {
 	brandColor: string
 }
 
-const RecentVideos = ({ videos, coverPhotoPath, profileImagePath, hasProfileImage, brandColor }: Props) => {
+function RecentVideos({ videos, coverPhotoPath, profileImagePath, hasProfileImage, brandColor }: Props) {
 	// If channel doesn't have any videos.
 	if (videos?.length === 0) return null
 
@@ -29,15 +29,15 @@ const RecentVideos = ({ videos, coverPhotoPath, profileImagePath, hasProfileImag
 
 					return (
 						<ClipContainer
-							key={clip.id}
 							brandColor={brandColor}
-							image={coverPhotoPath}
 							href={clip.url}
+							image={coverPhotoPath}
+							key={clip.id}
 							rel="noopener noreferrer"
 							target="_blank"
 						>
 							<ProfileImageContainer>
-								<ProfileImage imagePath={profileImagePath} hasProfileImage={hasProfileImage} />
+								<ProfileImage hasProfileImage={hasProfileImage} imagePath={profileImagePath} />
 							</ProfileImageContainer>
 							<Duration>{clip.duration}</Duration>
 							<ViewCount>

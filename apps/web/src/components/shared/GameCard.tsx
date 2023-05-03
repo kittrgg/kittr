@@ -3,7 +3,7 @@ import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResol
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
 import { header2, paragraph } from "@Styles/typography"
 import { toHumanReadableDate } from "@Utils/helpers/toHumanReadableDate"
-import { Game, Genre, Platform } from "@kittr/prisma"
+import type { Game, Genre, Platform } from "@kittr/prisma"
 import { Fragment } from "react"
 import styled from "styled-components"
 
@@ -21,7 +21,7 @@ interface Props extends GameWithGenresAndPlatforms {
 }
 
 /** Display a game's cover art along with it's meta information. Meta info can be optionally disabled. */
-export const GameCard = ({
+export function GameCard({
 	noText,
 	active,
 	displayName,
@@ -32,18 +32,18 @@ export const GameCard = ({
 	platforms,
 	releaseDate,
 	onClick
-}: Props) => {
+}: Props) {
 	const { width } = useViewportDimensions()
 
 	return (
 		<FirebaseStorageResolver
-			path={titleImageUrl}
 			noSpinner
+			path={titleImageUrl}
 			render={(img) => (
-				<Container onClick={onClick} active={active} titleImage={img} data-cy={`${urlSafeName}-button`}>
-					{(width as number) > 550 && (
+				<Container active={active} data-cy={`${urlSafeName}-button`} onClick={onClick} titleImage={img}>
+					{(width ) > 550 && (
 						<ImageContainer>
-							<img src={img} alt={displayName} style={{ width: "100%" }} />
+							<img alt={displayName} src={img} style={{ width: "100%" }} />
 						</ImageContainer>
 					)}
 
@@ -72,12 +72,10 @@ export const GameCard = ({
 					)}
 
 					{!active && (
-						<>
-							<ComingSoon>
+						<ComingSoon>
 								<p style={{ cursor: "default" }}>COMING</p>
 								<p style={{ cursor: "default" }}>SOON</p>
 							</ComingSoon>
-						</>
 					)}
 				</Container>
 			)}
@@ -109,7 +107,7 @@ const Container = styled.div<{ active: boolean; titleImage: string }>`
 	transition: 0.2s;
 
 	&:hover {
-		transform: ${(props) => (!!props.onClick ? "scale(1.01)" : "initial")};
+		transform: ${(props) => (props.onClick ? "scale(1.01)" : "initial")};
 	}
 
 	@media (max-width: 550px) {

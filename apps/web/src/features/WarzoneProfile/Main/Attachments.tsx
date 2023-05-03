@@ -1,10 +1,9 @@
-import * as Styled from "./style"
 import colors from "@Colors"
 import { handleHorzTuneName } from "@Features/Dashboard/Channel/Warzone2/Kits/KitEditor/Options"
 import { useActiveChannelKit } from "@Hooks/useActiveChannelKit"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
-import {
+import type {
 	WarzoneKit,
 	WarzoneKitBase,
 	WarzoneKitBaseCategory,
@@ -19,6 +18,7 @@ import { Text } from "@kittr/ui"
 import { Box, Grid } from "@mantine/core"
 import { Fragment } from "react"
 import styled from "styled-components"
+import * as Styled from "./style"
 
 type ActiveWeapon = (WarzoneKit | WarzoneTwoKit) & {
 	base: (WarzoneKitBase | WarzoneTwoKitBase) & { category: WarzoneKitBaseCategory | WarzoneTwoKitBaseCategory }
@@ -26,21 +26,20 @@ type ActiveWeapon = (WarzoneKit | WarzoneTwoKit) & {
 	tuning?: WarzoneTwoKitOptionTuning[]
 }
 
-const Attachments = () => {
+function Attachments() {
 	const activeWeapon = useActiveChannelKit() as ActiveWeapon
-	const options = activeWeapon?.options
-	const tunes = activeWeapon?.tuning
+	const options = activeWeapon.options
+	const tunes = activeWeapon.tuning
 
 	return (
 		<Container
 			data-cy="kit-options"
 			numOfOptions={options !== undefined ? options.length : 0}
-			numOfTunes={tunes !== undefined ? tunes?.length : 0}
+			numOfTunes={tunes !== undefined ? tunes.length : 0}
 		>
-			{options?.length === 0 && <Styled.KitOptionLabel>No attachments assigned!</Styled.KitOptionLabel>}
+			{options.length === 0 && <Styled.KitOptionLabel>No attachments assigned!</Styled.KitOptionLabel>}
 
-			{options &&
-				customOrderArray<{ slotKey: string; displayName: string; id: string }>({
+			{options ? customOrderArray<{ slotKey: string; displayName: string; id: string }>({
 					sortingArray: warzoneSlotsOrder,
 					keyToSort: "slotKey",
 					array: options
@@ -73,7 +72,7 @@ const Attachments = () => {
 							)}
 						</Fragment>
 					)
-				})}
+				}) : null}
 		</Container>
 	)
 }

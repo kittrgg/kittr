@@ -1,4 +1,3 @@
-import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
 import { Button, Modal, Spinner, TextInputBox } from "@Components/shared"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
@@ -9,9 +8,10 @@ import { paragraph } from "@Styles/typography"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
 import validator from "validator"
+import { trpc } from "@/lib/trpc"
 
 /** Modal for adding a spec to the channel's PC setup. */
-const AddAffiliateModal = () => {
+function AddAffiliateModal() {
 	const dispatch = useDispatch()
 	const { data: channelData } = useChannelData()
 	const { refetch: refetchDashboard } = useDashboardChannel()
@@ -65,11 +65,11 @@ const AddAffiliateModal = () => {
 		<Modal backgroundClickToClose title="ADD AFFILIATE">
 			<InputLabel>Company</InputLabel>
 			<TextInputBox
-				value={company}
-				onChange={(e) => setCompany(e.target.value.replace(/[^\w\s-]/g, ""))}
-				name="company"
-				type="text"
 				inputStyles={{ marginLeft: "0", width: "100%", minWidth: "700px" }}
+				name="company"
+				onChange={(e) => setCompany(e.target.value.replace(/[^\w\s-]/g, ""))}
+				type="text"
+				value={company}
 			/>
 
 			<InputLabel>
@@ -77,11 +77,11 @@ const AddAffiliateModal = () => {
 				<Optional>Optional</Optional>
 			</InputLabel>
 			<TextInputBox
-				value={description}
-				onChange={(e) => setDescription(e.target.value)}
-				name="affiliate-description"
-				type="text"
 				inputStyles={{ marginLeft: "0", width: "100%", minWidth: "700px" }}
+				name="affiliate-description"
+				onChange={(e) => setDescription(e.target.value)}
+				type="text"
+				value={description}
 			/>
 
 			<InputLabel>
@@ -89,11 +89,11 @@ const AddAffiliateModal = () => {
 				<Optional>Optional</Optional>
 			</InputLabel>
 			<TextInputBox
-				value={code}
-				onChange={(e) => setCode(e.target.value)}
-				name="code"
-				type="text"
 				inputStyles={{ marginLeft: "0", width: "100%", minWidth: "700px" }}
+				name="code"
+				onChange={(e) => setCode(e.target.value)}
+				type="text"
+				value={code}
 			/>
 
 			<InputLabel>
@@ -101,20 +101,20 @@ const AddAffiliateModal = () => {
 				<Optional>Optional</Optional>
 			</InputLabel>
 			<TextInputBox
-				value={url}
-				onChange={(e) => setUrl(e.target.value)}
-				name="link"
-				type="text"
 				inputStyles={{ marginLeft: "0", width: "100%", minWidth: "700px" }}
+				name="link"
+				onChange={(e) => setUrl(e.target.value)}
+				type="text"
+				value={url}
 			/>
 
 			<Button
 				data-cy="confirm-add-affiliate"
 				design="white"
-				onClick={submit}
 				disabled={!company || ![description, code].some((elem) => elem.length) || (url ? !validator.isURL(url) : false)}
-				text="SAVE"
+				onClick={submit}
 				style={{ margin: "84px auto 0" }}
+				text="SAVE"
 			/>
 		</Modal>
 	)

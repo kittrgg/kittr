@@ -1,11 +1,11 @@
-// import { trpc } from "@/lib/trpc"
-// import { RouterInput } from "@Server/index"
-// import { Prisma } from "@kittr/prisma"
+// Import { trpc } from "@/lib/trpc"
+// Import { RouterInput } from "@Server/index"
+// Import { Prisma } from "@kittr/prisma"
 
-// type TQueryInput = RouterInput["listGames"]
+// Type TQueryInput = RouterInput["listGames"]
 
-// export const useAllGames = <T extends TQueryInput>({ include }: { include: T }) => {
-// 	return trpc.listGames.useQuery(include)
+// Export const useAllGames = <T extends TQueryInput>({ include }: { include: T }) => {
+// 	Return trpc.listGames.useQuery(include)
 // }
 
 export {}

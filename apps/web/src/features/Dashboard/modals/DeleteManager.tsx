@@ -1,16 +1,16 @@
-import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
 import { Button, Modal, Spinner } from "@Components/shared"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
-// import { useManagedChannels } from "@Hooks/api/useManagedChannels"
+// Import { useManagedChannels } from "@Hooks/api/useManagedChannels"
 import { useUser } from "@Hooks/useUser"
 import { setActiveView, setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
 import { paragraph } from "@Styles/typography"
 import styled from "styled-components"
+import { trpc } from "@/lib/trpc"
 
-const DeleteManager = () => {
+function DeleteManager() {
 	const dispatch = useDispatch()
 	const { data: channelData } = useChannelData()
 	const { data } = useModal()
@@ -36,7 +36,7 @@ const DeleteManager = () => {
 	if (isLoading) {
 		return (
 			<Modal title="WAIT A MINUTE...">
-				<Spinner width="100px" height="50px" />
+				<Spinner height="50px" width="100px" />
 			</Modal>
 		)
 	}
@@ -51,15 +51,15 @@ const DeleteManager = () => {
 			<RowFlex>
 				<Button
 					design="transparent"
-					text={"NO, KEEP " + (isSelf ? "MYSELF" : "THEM")}
 					onClick={() => dispatch(setModal({ type: "", data: {} }))}
+					text={`NO, KEEP ${  isSelf ? "MYSELF" : "THEM"}`}
 				/>
 				<Button
+					dataCy="confirm-manager-removal"
 					design="white"
-					text={"YES, REMOVE " + (isSelf ? "MYSELF" : "THIS MANAGER")}
 					onClick={() => mutate({ channelId: channelData?.id ?? "", managerIdToDelete: data.id })}
 					style={{ marginLeft: "32px" }}
-					dataCy="confirm-manager-removal"
+					text={`YES, REMOVE ${  isSelf ? "MYSELF" : "THIS MANAGER"}`}
 				/>
 			</RowFlex>
 		</Modal>

@@ -1,4 +1,3 @@
-import * as Styled from "./style"
 import colors from "@Colors"
 import { Selector } from "@Components/shared"
 import { useOptionsByKitBase } from "@Hooks/api/useOptionsbyKitBase"
@@ -8,10 +7,11 @@ import { useActiveKit, useChannelView } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
 import { getArrayUniques } from "@Utils/helpers/getArrayUniques"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
-import { WarzoneKitOption, WarzoneTwoKitOption, WarzoneTwoKitOptionTuning } from "@kittr/prisma"
+import type { WarzoneKitOption, WarzoneTwoKitOption, WarzoneTwoKitOptionTuning } from "@kittr/prisma"
 import { Loader, NumberInput } from "@kittr/ui"
 import { Grid } from "@mantine/core"
 import React, { useState, useEffect } from "react"
+import * as Styled from "./style"
 
 const animationDuration = 1000
 
@@ -30,11 +30,11 @@ export const handleHorzTuneName = (slotName: string) => {
 	}
 }
 
-const Options = () => {
+function Options() {
 	const dispatch = useDispatch()
 	const { base, options: current, tuning } = useActiveKit()
 	const isMounted = useIsMounted()
-	const { data: availableOptions, isLoading } = useOptionsByKitBase(base?.id)
+	const { data: availableOptions, isLoading } = useOptionsByKitBase(base.id)
 	const [animationTrigger, setAnimationTrigger] = useState(false)
 
 	useEffect(() => {
@@ -73,14 +73,14 @@ const Options = () => {
 		}
 
 		const copyTunes = Array.from(newCurrent, (option) => ({
-			// id: tuning[tuning.findIndex((tune) => tune.kitOptionId === option.id)]?.id ?? "",
+			// Id: tuning[tuning.findIndex((tune) => tune.kitOptionId === option.id)]?.id ?? "",
 			id: tuning.find((tune) => tune.kitOptionId === option.id)?.id ?? "",
 			kitId: option.kitBaseId,
 			kitOptionId: option.id,
 			horz: tuning.find((tune) => tune.kitOptionId === option.id)?.horz ?? 0,
 			vert: tuning.find((tune) => tune.kitOptionId === option.id)?.vert ?? 0
-			// horz: tuning[tuning.findIndex((tune) => tune.kitOptionId === option.id)]?.horz ?? 0,
-			// vert: tuning[tuning.findIndex((tune) => tune.kitOptionId === option.id)]?.vert ?? 0
+			// Horz: tuning[tuning.findIndex((tune) => tune.kitOptionId === option.id)]?.horz ?? 0,
+			// Vert: tuning[tuning.findIndex((tune) => tune.kitOptionId === option.id)]?.vert ?? 0
 		}))
 		dispatch(updateTunes(copyTunes))
 
@@ -101,24 +101,24 @@ const Options = () => {
 			}))
 			dispatch(updateTunes(copyTunes))
 		}
-		// if tune is being edited and tuning length is same as current options length
+		// If tune is being edited and tuning length is same as current options length
 		if (activeTune && tuning.length === newCurrent.length) {
-			// copy tuning array
+			// Copy tuning array
 			const copyTunes: Omit<WarzoneTwoKitOptionTuning, "id">[] = [...tuning]
 
-			// copy tune object to mutate
+			// Copy tune object to mutate
 			const copyTune = {
 				...copyTunes.find((tune) => tune.kitOptionId === newCurrent.find((option) => option.slotKey === slot)?.id),
 				kitOptionId: newCurrent.find((option) => option.slotKey === slot)?.id,
 				kitId: newCurrent.find((option) => option.slotKey === slot)?.kitBaseId
 			} as Omit<WarzoneTwoKitOptionTuning, "id">
 
-			// set correct tune to inputValue
-			copyTune[activeTune] = inputValue as number
+			// Set correct tune to inputValue
+			copyTune[activeTune] = inputValue!
 
-			// mutate the correctly indexed tune in tuning array
+			// Mutate the correctly indexed tune in tuning array
 			copyTunes[
-				copyTunes.findIndex((tune) => tune.kitOptionId === newCurrent?.find((opt) => opt.slotKey === slot)?.id)
+				copyTunes.findIndex((tune) => tune.kitOptionId === newCurrent.find((opt) => opt.slotKey === slot)?.id)
 			] = copyTune
 
 			return dispatch(updateTunes(copyTunes))
@@ -134,74 +134,71 @@ const Options = () => {
 				</Styled.HeaderHelper>
 			</Styled.HorizFlex>
 			<Styled.AttachmentsFlex>
-				{isLoading && <Loader />}
+				{isLoading ? <Loader /> : null}
 				{!isLoading &&
-					availableOptions &&
-					slots?.map((slot: string) => {
+					availableOptions ? slots?.map((slot: string) => {
 						return (
 							<div key={slot} style={{ marginBottom: "18px", flexBasis: "40%" }}>
 								<Styled.Header>{slot}</Styled.Header>
 								<Selector
 									className={`${slot.replace(/ /g, "-")}-selector`}
-									onChange={(e: any) => addToOptions(e.value, slot)}
 									isSearchable={false}
-									value={{
-										label: current?.find((opt) => opt.slotKey === slot)
-											? current.find((opt) => opt.slotKey === slot)?.displayName
-											: "-"
-									}}
+									onChange={(e: any) => addToOptions(e.value, slot)}
 									options={[
 										{
 											label: "-",
 											value: ""
 										},
 										...availableOptions
-											?.filter((opt) => opt.slotKey === slot)
+											.filter((opt) => opt.slotKey === slot)
 											.sort((a, b) => Number(a.orderPlacement) - Number(b.orderPlacement))
 											.map((option) => ({
 												label: option.displayName,
 												value: option.displayName
 											}))
 									]}
+									value={{
+										label: current.find((opt) => opt.slotKey === slot)
+											? current.find((opt) => opt.slotKey === slot)?.displayName
+											: "-"
+									}}
 								/>
 
-								{current.find((opt) => opt.slotKey === slot)?.displayName && (
-									<Grid>
+								{current.find((opt) => opt.slotKey === slot)?.displayName ? <Grid>
 										<Grid.Col span={6}>
 											<NumberInput
+												label={handleHorzTuneName(slot)}
 												onChange={(e) => addToTunes(e, slot, "horz")}
-												step={0.1}
 												precision={2}
+												radius="md"
+												size="sm"
+												step={0.1}
+												sx={{ input: { background: colors.light } }}
 												value={
-													tuning.find((tune) => tune.kitOptionId === current?.find((opt) => opt.slotKey === slot)?.id)
+													tuning.find((tune) => tune.kitOptionId === current.find((opt) => opt.slotKey === slot)?.id)
 														?.horz ?? 0
 												}
-												label={handleHorzTuneName(slot)}
-												radius="md"
-												size="sm"
-												sx={{ input: { background: colors.light } }}
 											/>
 										</Grid.Col>
 										<Grid.Col span={6}>
 											<NumberInput
-												onChange={(e) => addToTunes(e, slot, "vert")}
-												step={0.1}
-												precision={2}
-												value={
-													tuning.find((tune) => tune.kitOptionId === current?.find((opt) => opt.slotKey === slot)?.id)
-														?.vert ?? 0
-												}
 												label="Weight"
+												onChange={(e) => addToTunes(e, slot, "vert")}
+												precision={2}
 												radius="md"
 												size="sm"
+												step={0.1}
 												sx={{ input: { background: colors.light } }}
+												value={
+													tuning.find((tune) => tune.kitOptionId === current.find((opt) => opt.slotKey === slot)?.id)
+														?.vert ?? 0
+												}
 											/>
 										</Grid.Col>
-									</Grid>
-								)}
+									</Grid> : null}
 							</div>
 						)
-					})}
+					}) : null}
 			</Styled.AttachmentsFlex>
 		</Styled.Container>
 	)

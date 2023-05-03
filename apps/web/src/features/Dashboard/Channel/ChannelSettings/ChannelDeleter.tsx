@@ -1,10 +1,10 @@
-import ChannelDeleteModal from "../../modals/ChannelDelete"
 import colors from "@Colors"
 import Button from "@Components/shared/Button"
 import { setModal } from "@Redux/slices/dashboard"
 import { useDispatch, useSelector } from "@Redux/store"
 import { header2 } from "@Styles/typography"
 import styled from "styled-components"
+import ChannelDeleteModal from "../../modals/ChannelDelete"
 
 const Container = styled.div``
 
@@ -24,7 +24,7 @@ const Warning = styled.p`
 `
 
 /** Allows the user to delete the channel. Only available for owners. */
-const ChannelDeleter = ({ ...props }) => {
+function ChannelDeleter({ ...props }) {
 	const dispatch = useDispatch()
 	const modalType = useSelector((state) => state.dashboard.modal.type)
 
@@ -35,11 +35,11 @@ const ChannelDeleter = ({ ...props }) => {
 				<Header>DANGER ZONE</Header>
 				<Warning>You only want to use this button if you want to delete your channel. Serious stuff.</Warning>
 				<Button
+					dataCy="channel-delete"
 					design="white"
-					text="DELETE THIS CHANNEL"
 					onClick={() => dispatch(setModal({ type: "Channel Deleter", data: {} }))}
 					style={{ backgroundColor: colors.red }}
-					dataCy="channel-delete"
+					text="DELETE THIS CHANNEL"
 				/>
 			</Container>
 		</>

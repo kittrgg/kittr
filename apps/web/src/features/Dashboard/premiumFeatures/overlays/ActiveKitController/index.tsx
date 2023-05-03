@@ -1,6 +1,3 @@
-import H3 from "../../../H3"
-import Preview from "./Preview"
-import * as Styled from "./style"
 import colors from "@Colors"
 import { Button, ColorPicker, MultiButton, Spinner, SVG } from "@Components/shared"
 import PremiumCallout from "@Features/Dashboard/PremiumCallout"
@@ -8,14 +5,17 @@ import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { setModal } from "@Redux/slices/dashboard"
 import { useManagerRole, usePremiumStatus } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import { trpc } from "@/lib/trpc"
 import { caption, paragraph } from "@Styles/typography"
 import { sortAlphabetical } from "@Utils/helpers/sortAlphabetical"
 import { ActiveKitOverlay } from "@Utils/lookups/overlays"
 import { Routes } from "@Utils/lookups/routes"
 import styled from "styled-components"
+import H3 from "../../../H3"
+import * as Styled from "./style"
+import Preview from "./Preview"
+import { trpc } from "@/lib/trpc"
 
-const ActiveKit = () => {
+function ActiveKit() {
 	const dispatch = useDispatch()
 	const { data } = useDashboardChannel()
 	const role = useManagerRole()
@@ -42,7 +42,7 @@ const ActiveKit = () => {
 
 	const copyToClipboard = () => {
 		navigator.clipboard.writeText(
-			`${rootUrl}${Routes.CHANNEL.GAME.createOverlayPath(data?.urlSafeName as string, "warzone")}`
+			`${rootUrl}${Routes.CHANNEL.GAME.createOverlayPath(data?.urlSafeName!, "warzone")}`
 		)
 	}
 
@@ -72,7 +72,7 @@ const ActiveKit = () => {
 						<Styled.Paragraph>There are four overlay styles available:</Styled.Paragraph>
 						<ul style={{ marginLeft: "52px" }}>
 							{Object.values(ActiveKitOverlay).map((overlay, index) => (
-								<Styled.Paragraph key={overlay.style} as="li" style={{ marginTop: index === 0 ? "" : "24px" }}>
+								<Styled.Paragraph as="li" key={overlay.style} style={{ marginTop: index === 0 ? "" : "24px" }}>
 									{overlay.style}
 								</Styled.Paragraph>
 							))}
@@ -96,7 +96,6 @@ const ActiveKit = () => {
 									<MultiButton
 										activeValue={data?.overlay?.isOverlayVisible ? "on" : "off"}
 										onClick={() => mutateToggle({ channelId: data?.id!, newState: !data?.overlay?.isOverlayVisible })}
-										wrapperBackgroundColor={colors.dark20}
 										values={[
 											{
 												text: "YUP",
@@ -109,6 +108,7 @@ const ActiveKit = () => {
 												backgroundColor: colors.darker
 											}
 										]}
+										wrapperBackgroundColor={colors.dark20}
 									/>
 								)}
 							</div>
@@ -121,9 +121,9 @@ const ActiveKit = () => {
 							<Button
 								data-cy="copy-overlay-url"
 								design="white"
-								text="COPY URL"
 								onClick={copyToClipboard}
 								style={{ margin: "48px auto" }}
+								text="COPY URL"
 							/>
 							<Styled.Paragraph>
 								To get the overlay on your channel, paste this URL into OBS as a Browser Source.
@@ -197,8 +197,8 @@ const ActiveKit = () => {
 									<ColorPickWrapper>
 										Primary
 										<ColorPicker
-											designVariant="Small Circle"
 											defaultColor={data?.overlay?.backgroundColorPrimary || colors.lightest}
+											designVariant="Small Circle"
 											onChangeComplete={(e: any) =>
 												mutateColor({
 													channelId: data?.id!,
@@ -211,8 +211,8 @@ const ActiveKit = () => {
 									<ColorPickWrapper>
 										Secondary
 										<ColorPicker
-											designVariant="Small Circle"
 											defaultColor={data?.overlay?.backgroundColorSecondary || colors.darker}
+											designVariant="Small Circle"
 											onChangeComplete={(e: any) =>
 												mutateColor({
 													channelId: data?.id!,
@@ -228,8 +228,8 @@ const ActiveKit = () => {
 									<ColorPickWrapper>
 										Primary
 										<ColorPicker
-											designVariant="Small Circle"
 											defaultColor={data?.overlay?.textColorPrimary || colors.white}
+											designVariant="Small Circle"
 											onChangeComplete={(e: any) =>
 												mutateColor({
 													channelId: data?.id!,
@@ -242,8 +242,8 @@ const ActiveKit = () => {
 									<ColorPickWrapper>
 										Secondary
 										<ColorPicker
-											designVariant="Small Circle"
 											defaultColor={data?.overlay?.textColorSecondary || colors.darker}
+											designVariant="Small Circle"
 											onChangeComplete={(e: any) =>
 												mutateColor({
 													channelId: data?.id!,
@@ -256,8 +256,8 @@ const ActiveKit = () => {
 									<ColorPickWrapper>
 										Accent
 										<ColorPicker
-											designVariant="Small Circle"
 											defaultColor={data?.overlay?.textColorAccent || colors.lighter}
+											designVariant="Small Circle"
 											onChangeComplete={(e: any) =>
 												mutateColor({
 													channelId: data?.id!,
@@ -278,7 +278,7 @@ const ActiveKit = () => {
 							<Styled.Paragraph>Primary</Styled.Paragraph>
 							{data?.warzoneTwoKits
 								.slice()
-								.filter((kit) => data?.overlay?.secondaryWzTwoKit?.id !== kit.id)
+								.filter((kit) => data.overlay?.secondaryWzTwoKit?.id !== kit.id)
 								.sort((a, b) => sortAlphabetical(a.base!.displayName, b.base!.displayName))
 								.sort((kit) => {
 									if (kit.featured) {
@@ -287,20 +287,20 @@ const ActiveKit = () => {
 									return 1
 								})
 								.map((kit) => {
-									const name = kit?.base?.displayName
-									const isActive = data?.overlay?.primaryWzTwoKit?.id === kit.id
+									const name = kit.base.displayName
+									const isActive = data.overlay?.primaryWzTwoKit?.id === kit.id
 									const userTitle = kit.customTitle
 									const isFeatured = kit.featured
 
 									return (
 										<KitButton
-											key={`${name} ${userTitle}`}
 											isActive={isActive}
+											key={`${name} ${userTitle}`}
 											onClick={() => {
 												if (isActive) {
-													mutateKit({ channelId: data?.id!, kitId: null, kitToChange: "primaryWzTwoKit" })
+													mutateKit({ channelId: data.id, kitId: null, kitToChange: "primaryWzTwoKit" })
 												} else {
-													mutateKit({ channelId: data?.id!, kitId: kit.id, kitToChange: "primaryWzTwoKit" })
+													mutateKit({ channelId: data.id, kitId: kit.id, kitToChange: "primaryWzTwoKit" })
 												}
 											}}
 										>
@@ -308,9 +308,7 @@ const ActiveKit = () => {
 												{name}
 												{userTitle ? ` - ${userTitle}` : ""}
 											</ButtonMask>
-											{isFeatured && (
-												<SVG.Star
-													width="24px"
+											{isFeatured ? <SVG.Star
 													fill={colors.gold}
 													stroke={colors.gold}
 													style={{
@@ -319,8 +317,8 @@ const ActiveKit = () => {
 														top: "50%",
 														transform: "translateY(-50%)"
 													}}
-												/>
-											)}
+													width="24px"
+												/> : null}
 										</KitButton>
 									)
 								})}
@@ -331,7 +329,7 @@ const ActiveKit = () => {
 							</FlexRow>
 							{data?.warzoneTwoKits
 								.slice()
-								.filter((kit) => data?.overlay?.primaryWzTwoKit?.id !== kit.id)
+								.filter((kit) => data.overlay?.primaryWzTwoKit?.id !== kit.id)
 								.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
 								.sort((kit) => {
 									if (kit.featured) {
@@ -341,19 +339,19 @@ const ActiveKit = () => {
 								})
 								.map((kit) => {
 									const name = kit.base.displayName
-									const isActive = data?.overlay?.secondaryWzTwoKit?.id === kit.id
+									const isActive = data.overlay?.secondaryWzTwoKit?.id === kit.id
 									const userTitle = kit.customTitle
 									const isFeatured = kit.featured
 
 									return (
 										<KitButton
-											key={name + userTitle}
 											isActive={isActive}
+											key={name + userTitle}
 											onClick={() => {
 												if (isActive) {
-													mutateKit({ channelId: data?.id!, kitId: null, kitToChange: "secondaryWzTwoKit" })
+													mutateKit({ channelId: data.id, kitId: null, kitToChange: "secondaryWzTwoKit" })
 												} else {
-													mutateKit({ channelId: data?.id!, kitId: kit.id, kitToChange: "secondaryWzTwoKit" })
+													mutateKit({ channelId: data.id, kitId: kit.id, kitToChange: "secondaryWzTwoKit" })
 												}
 											}}
 										>
@@ -361,9 +359,7 @@ const ActiveKit = () => {
 												{name}
 												{userTitle ? ` - ${userTitle}` : ""}
 											</ButtonMask>
-											{isFeatured && (
-												<SVG.Star
-													width="24px"
+											{isFeatured ? <SVG.Star
 													fill={colors.gold}
 													stroke={colors.gold}
 													style={{
@@ -372,8 +368,8 @@ const ActiveKit = () => {
 														top: "50%",
 														transform: "translateY(-50%)"
 													}}
-												/>
-											)}
+													width="24px"
+												/> : null}
 										</KitButton>
 									)
 								})}

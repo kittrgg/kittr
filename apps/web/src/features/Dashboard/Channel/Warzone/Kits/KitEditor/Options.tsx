@@ -1,5 +1,3 @@
-import * as Styled from "./style"
-import { trpc } from "@/lib/trpc"
 import { Selector } from "@Components/shared"
 import { useOptionsByKitBase } from "@Hooks/api/useOptionsbyKitBase"
 import { useIsMounted } from "@Hooks/useIsMounted"
@@ -10,16 +8,18 @@ import { getArrayUniques } from "@Utils/helpers/getArrayUniques"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
 import { Loader } from "@kittr/ui"
 import React, { useState, useEffect } from "react"
+import * as Styled from "./style"
+import { trpc } from "@/lib/trpc"
 
 const animationDuration = 1000
 
-const Options = () => {
+function Options() {
 	const dispatch = useDispatch()
 	const { base, options: current } = useActiveKit()
 	const isMounted = useIsMounted()
 	const [animationTrigger, setAnimationTrigger] = useState(false)
 
-	const { data: availableOptions, isLoading } = useOptionsByKitBase(base?.id)
+	const { data: availableOptions, isLoading } = useOptionsByKitBase(base.id)
 
 	useEffect(() => {
 		setTimeout(() => {
@@ -69,39 +69,38 @@ const Options = () => {
 				</Styled.HeaderHelper>
 			</Styled.HorizFlex>
 			<Styled.AttachmentsFlex>
-				{isLoading && <Loader />}
+				{isLoading ? <Loader /> : null}
 				{!isLoading &&
-					availableOptions &&
-					slots?.map((slot: string) => {
+					availableOptions ? slots?.map((slot: string) => {
 						return (
 							<div key={slot} style={{ marginBottom: "18px", flexBasis: "40%" }}>
 								<Styled.Header>{slot}</Styled.Header>
 								<Selector
 									className={`${slot.replace(/ /g, "-")}-selector`}
-									onChange={(e: any) => addToOptions(e.value, slot)}
 									isSearchable={false}
-									value={{
-										label: current?.find((opt) => opt.slotKey === slot)
-											? current.find((opt) => opt.slotKey === slot)?.displayName
-											: "-"
-									}}
+									onChange={(e: any) => addToOptions(e.value, slot)}
 									options={[
 										{
 											label: "-",
 											value: ""
 										},
 										...availableOptions
-											?.filter((opt) => opt.slotKey === slot)
+											.filter((opt) => opt.slotKey === slot)
 											.sort((a, b) => Number(a.orderPlacement) - Number(b.orderPlacement))
 											.map((option) => ({
 												label: option.displayName,
 												value: option.displayName
 											}))
 									]}
+									value={{
+										label: current.find((opt) => opt.slotKey === slot)
+											? current.find((opt) => opt.slotKey === slot)?.displayName
+											: "-"
+									}}
 								/>
 							</div>
 						)
-					})}
+					}) : null}
 			</Styled.AttachmentsFlex>
 		</Styled.Container>
 	)

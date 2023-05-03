@@ -3,19 +3,19 @@ import { useState } from "react"
 
 /** The Tiktok logo. Use fill for color. */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const Tiktok = (props: any) => {
+export function Tiktok(props: any) {
 	const [isHovered, setIsHovered] = useState(false)
 
 	const { width = "100%", fill = colors.white, colorHover = colors.white, dataCy, ...rest } = props
 
 	return (
 		<svg
+			data-cy={dataCy}
+			fill="none"
 			onMouseEnter={() => setIsHovered(true)}
 			onMouseLeave={() => setIsHovered(false)}
-			width={width}
-			data-cy={dataCy}
 			viewBox="0 0 51 59"
-			fill="none"
+			width={width}
 			xmlns="http://www.w3.org/2000/svg"
 			{...rest}
 		>

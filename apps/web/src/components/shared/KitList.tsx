@@ -2,7 +2,7 @@ import colors from "@Colors"
 import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
 import SVG from "@Components/shared/SVG"
 import { header2 } from "@Styles/typography"
-import { WarzoneKit, WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
+import type { WarzoneKit, WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
 import styled from "styled-components"
 
 interface CompleteKit extends WarzoneKit {
@@ -13,7 +13,7 @@ interface CompleteKit extends WarzoneKit {
 interface Props {
 	/** Array of kits to render. */
 	data: CompleteKit[]
-	/** onClick handler for if user click's on a kit's card. */
+	/** OnClick handler for if user click's on a kit's card. */
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	onClick?: any
 }
@@ -22,15 +22,15 @@ interface Props {
  *
  * This component is currently only being used on the channel's profile page and may not have much more utility to it than that...
  */
-export const KitList = ({ data, onClick }: Props) => (
-	<>
+export function KitList({ data, onClick }: Props) {
+  return <>
 		{data.map((elem) => (
 			<Card key={elem.id} onClick={() => onClick(elem)}>
 				<SVG.Star
-					width="15px"
 					fill={colors.gold}
 					stroke={colors.gold}
 					style={{ position: "absolute", top: "12px", right: "12px" }}
+					width="15px"
 				/>
 				<div>
 					<KitTitle>
@@ -38,12 +38,12 @@ export const KitList = ({ data, onClick }: Props) => (
 					</KitTitle>
 					<ImageContainer>
 						<FirebaseStorageResolver
-							path={elem.base.imageUrl}
 							noSpinner
+							path={elem.base.imageUrl}
 							render={(data) => (
 								<img
-									src={data || "/media/logo.svg"}
 									alt={elem.base.displayName}
+									src={data || "/media/logo.svg"}
 									style={{ width: "100%", height: "100%", objectFit: "cover" }}
 								/>
 							)}
@@ -61,7 +61,7 @@ export const KitList = ({ data, onClick }: Props) => (
 			</Card>
 		))}
 	</>
-)
+}
 
 export default KitList
 

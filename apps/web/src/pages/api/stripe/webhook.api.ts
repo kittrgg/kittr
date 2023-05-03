@@ -6,7 +6,7 @@ import { buffer } from "micro"
 import type { NextApiRequest, NextApiResponse } from "next"
 import Stripe from "stripe"
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, { apiVersion: "2020-08-27" })
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: "2020-08-27" })
 
 export const config = {
 	api: {
@@ -47,7 +47,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 	}
 
 	try {
-		event = stripe.webhooks.constructEvent(buf, sig, process.env.STRIPE_WEBHOOK_SECRET as string)
+		event = stripe.webhooks.constructEvent(buf, sig, process.env.STRIPE_WEBHOOK_SECRET!)
 
 		// Handle the event
 		switch (event.type) {

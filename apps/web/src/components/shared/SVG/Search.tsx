@@ -2,17 +2,17 @@ import colors from "@Colors"
 
 /** Magnifying glass icon. Use fill for color. */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const Search = (props: any) => {
+export function Search(props: any) {
 	const { width = "100%", fill = colors.light, dataCy, ...rest } = props
 
 	return (
 		<svg
-			width={width}
+			data-cy={dataCy}
+			fill="none"
 			height={15}
 			viewBox="0 0 15 15"
-			fill="none"
+			width={width}
 			xmlns="http://www.w3.org/2000/svg"
-			data-cy={dataCy}
 			{...rest}
 		>
 			<path

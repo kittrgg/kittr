@@ -8,10 +8,10 @@ interface Props {
 }
 
 /** The beautiful opening of the kittr home page. */
-const Hero = ({ totalNumberOfKits }: Props) => (
-	<Container>
+function Hero({ totalNumberOfKits }: Props) {
+  return <Container>
 		<ImageContainer>
-			<img src="/media/hero.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+			<img alt="" src="/media/hero.jpg" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
 		</ImageContainer>
 		<Copy>
 			<Headline>get kittd.</Headline>
@@ -20,13 +20,13 @@ const Hero = ({ totalNumberOfKits }: Props) => (
 		</Copy>
 		<ScreenieContainer>
 			<img
-				src="/media/hero-screenie.jpg"
 				alt="An example kittr page."
+				src="/media/hero-screenie.jpg"
 				style={{ width: "100%", height: "100%", objectFit: "cover" }}
 			/>
 		</ScreenieContainer>
 	</Container>
-)
+}
 
 export default Hero
 

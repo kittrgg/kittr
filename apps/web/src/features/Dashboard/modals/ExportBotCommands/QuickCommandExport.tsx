@@ -1,14 +1,14 @@
-import * as Styled from "./style"
 import colors from "@Colors"
 import { Button, Modal, MultiButton } from "@Components/shared"
 import CommandsTable from "@Features/Dashboard/modals/ExportBotCommands/CommandsTable"
 import { setModal } from "@Redux/slices/dashboard"
 import { useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import { TCommandMethod } from "@kittr/types/types"
+import type { TCommandMethod } from "@kittr/types/types"
 import { useState } from "react"
+import * as Styled from "./style"
 
-const QuickCommandExport = ({ ...props }) => {
+function QuickCommandExport({ ...props }) {
 	const dispatch = useDispatch()
 	const { data } = useModal()
 	const [includeUser, setIncludeUser] = useState(true)
@@ -21,8 +21,8 @@ const QuickCommandExport = ({ ...props }) => {
 				<Styled.ToggleDescription>Include username of command requester in Nightbot response?</Styled.ToggleDescription>
 				<Styled.ToggleContainer flexBasis={600}>
 					<MultiButton
-						wrapperBackgroundColor={colors.darker}
 						activeValue={method}
+						onClick={(elem) => setMethod(elem.value)}
 						values={[
 							{
 								text: "NIGHTBOT",
@@ -35,7 +35,7 @@ const QuickCommandExport = ({ ...props }) => {
 								backgroundColor: colors.channelElementsBlue
 							}
 						]}
-						onClick={(elem) => setMethod(elem.value)}
+						wrapperBackgroundColor={colors.darker}
 					/>
 				</Styled.ToggleContainer>
 			</Styled.HorizFlex>
@@ -44,6 +44,8 @@ const QuickCommandExport = ({ ...props }) => {
 				<Styled.ToggleContainer flexBasis={250}>
 					<MultiButton
 						activeValue={includeUser ? "YUP" : "NOPE"}
+						dataCy="user-toggle"
+						onClick={() => setIncludeUser(!includeUser)}
 						values={[
 							{
 								text: "YUP"
@@ -52,14 +54,14 @@ const QuickCommandExport = ({ ...props }) => {
 								text: "NOPE"
 							}
 						]}
-						onClick={() => setIncludeUser(!includeUser)}
-						dataCy="user-toggle"
 					/>
 				</Styled.ToggleContainer>
 			</Styled.HorizFlex>
 			<div style={{ width: "50%", margin: "0 auto" }}>
 				<MultiButton
 					activeValue={commandStrategy}
+					dataCy="command-toggle"
+					onClick={(e) => setCommandStrategy(e.value)}
 					values={[
 						{
 							text: "EDIT COMMAND",
@@ -70,26 +72,24 @@ const QuickCommandExport = ({ ...props }) => {
 							value: "add"
 						}
 					]}
-					onClick={(e) => setCommandStrategy(e.value)}
-					dataCy="command-toggle"
 				/>
 			</div>
 			<CommandsTable
-				kits={data}
-				includeMasterCommands={false}
-				method={method}
 				commandStrategy={commandStrategy}
+				includeMasterCommands={false}
 				includeUser={includeUser}
+				kits={data}
+				method={method}
 			/>
 			<Button
 				design="transparent"
-				text="BACK"
 				onClick={() => dispatch(setModal({ type: "", data: "" }))}
 				style={{
 					margin: "24px auto",
 					marginBottom: "0",
 					backgroundColor: colors.middle
 				}}
+				text="BACK"
 			/>
 		</Modal>
 	)

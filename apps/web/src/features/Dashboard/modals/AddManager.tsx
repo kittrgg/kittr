@@ -1,4 +1,3 @@
-import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
 import { Button, Modal, SVG, TextInput } from "@Components/shared"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
@@ -6,12 +5,13 @@ import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
 import { paragraph } from "@Styles/typography"
-import { ChannelManagerRoles } from "@kittr/prisma"
+import type { ChannelManagerRoles } from "@kittr/prisma"
 import { useState } from "react"
 import styled from "styled-components"
+import { trpc } from "@/lib/trpc"
 
 /** Modal for adding a manager to a channel. */
-const AddManager = () => {
+function AddManager() {
 	const dispatch = useDispatch()
 	const { data } = useChannelData()
 	const [email, setEmail] = useState("")
@@ -36,9 +36,9 @@ const AddManager = () => {
 				<>
 					ADD A NEW MANAGER
 					<SVG.QuestionMark
-						width="24px"
-						style={{ position: "relative", top: "2px", left: "12px", cursor: "pointer" }}
 						onClick={() => dispatch(setModal({ type: "About Account Managers", data: {} }))}
+						style={{ position: "relative", top: "2px", left: "12px", cursor: "pointer" }}
+						width="24px"
 					/>
 				</>
 			}
@@ -56,30 +56,30 @@ const AddManager = () => {
 			<RowFlex>
 				<ColumnFlex>
 					<TextInput
-						type="text"
-						name="email"
-						label="Email Address"
-						topLabel
-						labelStyles={{ marginTop: "0", marginBottom: "24px" }}
-						sublineStyles={{ padding: "0" }}
 						inputStyles={{ position: "relative", top: "8px", width: "100%" }}
-						value={email}
+						label="Email Address"
+						labelStyles={{ marginTop: "0", marginBottom: "24px" }}
+						name="email"
 						onChange={(e) => {
 							setError("")
 							setEmail(e.target.value)
 						}}
+						sublineStyles={{ padding: "0" }}
+						topLabel
+						type="text"
+						value={email}
 					/>
 				</ColumnFlex>
 				<ColumnFlex>
 					<SelectHeader>SELECT ROLE</SelectHeader>
 					<Select
-						style={{ width: "100%" }}
-						value={role}
+						data-cy="role-selector"
 						onChange={(e) => {
 							setError("")
 							setRole(e.target.value as ChannelManagerRoles)
 						}}
-						data-cy="role-selector"
+						style={{ width: "100%" }}
+						value={role}
 					>
 						<option value="">-</option>
 						<option value="ADMIN">Administrator</option>
@@ -91,17 +91,17 @@ const AddManager = () => {
 			<RowFlex>
 				<Button
 					design="transparent"
-					text="Close"
 					onClick={() => dispatch(setModal({ type: "", data: {} }))}
 					style={{ margin: "0 auto" }}
+					text="Close"
 				/>
 				<Button
+					dataCy="confirm-manager-add"
 					design="white"
-					text={isLoading ? "..." : "Add"}
 					disabled={isLoading || !role || email.length === 0}
 					onClick={async () => mutate({ channelId: data?.id!, data: { email, role } })}
 					style={{ margin: "0 auto" }}
-					dataCy="confirm-manager-add"
+					text={isLoading ? "..." : "Add"}
 				/>
 			</RowFlex>
 		</Modal>

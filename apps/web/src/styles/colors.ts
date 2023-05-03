@@ -43,7 +43,7 @@ const colors = {
 	premiumDark: "#6F31CD",
 	/** #6F31CD80 */
 	premiumDarkOpacity50: "#6F31CD80",
-	/** background: linear-gradient(90deg, #8C45F7 0%, #B345F7 100%) */
+	/** Background: linear-gradient(90deg, #8C45F7 0%, #B345F7 100%) */
 	premiumGradient: "linear-gradient(90deg, #8C45F7 0%, #B345F7 100%)"
 }
 

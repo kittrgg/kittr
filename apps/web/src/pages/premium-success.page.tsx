@@ -7,7 +7,7 @@ import { useRouter } from "next/router"
 import { useEffect } from "react"
 import styled, { keyframes } from "styled-components"
 
-const PremiumSuccess = () => {
+function PremiumSuccess() {
 	const { push } = useRouter()
 
 	useEffect(() => {
@@ -27,13 +27,13 @@ const PremiumSuccess = () => {
 		>
 			<IconContainer>
 				<SVG.Premium
-					width="150px"
 					style={{
 						position: "absolute",
 						top: "50%",
 						left: "50%",
 						transform: "translate(-50%, -50%)"
 					}}
+					width="150px"
 				/>
 			</IconContainer>
 			<H1>WELCOME TO PREMIUM.</H1>

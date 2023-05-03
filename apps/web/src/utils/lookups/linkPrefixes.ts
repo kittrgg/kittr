@@ -1,4 +1,4 @@
-import { LinkProperty } from "@kittr/prisma"
+import type { LinkProperty } from "@kittr/prisma"
 
 export const linkPrefixes: Record<LinkProperty, string> = {
 	TWITCH: "https://www.twitch.tv/",

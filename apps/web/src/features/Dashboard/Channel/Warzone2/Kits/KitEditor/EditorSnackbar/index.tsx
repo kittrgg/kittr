@@ -1,4 +1,3 @@
-import NamingWarning from "./NamingWarning"
 import colors from "@Colors"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { clearKitEditor, resetToInitialKit, setModal } from "@Redux/slices/dashboard"
@@ -10,11 +9,12 @@ import {
 	useModal
 } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import { trpc } from "@/lib/trpc"
 import { paragraph } from "@Styles/typography"
 import { isFetchError } from "@Utils/helpers/typeGuards"
-import { WarzoneTwoKit, WarzoneTwoKitBase, WarzoneTwoKitOption, WarzoneTwoKitOptionTuning } from "@kittr/prisma"
+import type { WarzoneTwoKit, WarzoneTwoKitBase, WarzoneTwoKitOption, WarzoneTwoKitOptionTuning } from "@kittr/prisma"
 import styled from "styled-components"
+import NamingWarning from "./NamingWarning"
+import { trpc } from "@/lib/trpc"
 
 type WarzoneTwoKitOmitID = Omit<WarzoneTwoKit, "id"> & {
 	id?: string | undefined
@@ -23,7 +23,7 @@ type WarzoneTwoKitOmitID = Omit<WarzoneTwoKit, "id"> & {
 	tuning: WarzoneTwoKitOptionTuning[]
 }
 
-const EditorSnackbar = () => {
+function EditorSnackbar() {
 	const dispatch = useDispatch()
 	const initialKit = useInitialKit() as WarzoneTwoKitOmitID
 	const activeKit = useActiveKit() as WarzoneTwoKitOmitID
@@ -36,13 +36,11 @@ const EditorSnackbar = () => {
 	const { mutate, isLoading } = trpc.channels.kits.upsertWz2Kit.useMutation({
 		onMutate: () => {
 			// Grab the existing kit array and map them to just their titles
-			const kitArr = channelData?.warzoneTwoKits.slice() as Array<
-				Omit<WarzoneTwoKit, "id"> & {
+			const kitArr = channelData?.warzoneTwoKits.slice() as (Omit<WarzoneTwoKit, "id"> & {
 					id?: string
 					base: WarzoneTwoKitBase
 					options: WarzoneTwoKitOption[]
-				}
-			>
+				})[]
 
 			// Grab the new kit's name
 			const newKitName = activeKit.base.displayName + activeKit.customTitle
@@ -131,7 +129,7 @@ const EditorSnackbar = () => {
 			changes.push(false)
 		}
 
-		return changes.some((elem) => elem == true)
+		return changes.some((elem) => elem)
 	}
 
 	const reset = () => {
@@ -140,7 +138,7 @@ const EditorSnackbar = () => {
 
 	const upsertKit = () => {
 		// Grab the existing kit array and map them to just their titles
-		const kitArr = channelData?.warzoneTwoKits.slice() as Array<WarzoneTwoKitOmitID>
+		const kitArr = channelData?.warzoneTwoKits.slice() as WarzoneTwoKitOmitID[]
 
 		// Grab the new kit's name
 		const newKitName = activeKit.base.displayName + activeKit.customTitle
@@ -183,8 +181,8 @@ const EditorSnackbar = () => {
 				gameId: activeKit.base.gameId,
 				baseId: activeKit.base.id,
 				customTitle: activeKit.customTitle,
-				options: activeKit.options as WarzoneTwoKitOption[],
-				tuning: activeKit.tuning as WarzoneTwoKitOptionTuning[],
+				options: activeKit.options ,
+				tuning: activeKit.tuning ,
 				blueprint: activeKit.blueprint,
 				featured: activeKit.featured,
 				youtubeUrl: activeKit.youtubeUrl,
@@ -202,12 +200,12 @@ const EditorSnackbar = () => {
 			{modal.type == "Kit Naming Warning" && <NamingWarning />}
 			<Container active={isNewKit || hasChanges()}>
 				<HorizFlex>
-					<img src="/media/icons/alert-circle.svg" alt="" width={25} height={25} />
+					<img alt="" height={25} src="/media/icons/alert-circle.svg" width={25} />
 					<WarningText>{isNewKit ? "Kit created...but not saved yet." : "You have unsaved changes"}</WarningText>
 				</HorizFlex>
 				<HorizFlex>
 					{!isNewKit && <ResetButton onClick={reset}>Reset</ResetButton>}
-					<SaveButton onClick={upsertKit} disabled={Object.keys(activeKit.base).length === 0} data-cy="save-kit-button">
+					<SaveButton data-cy="save-kit-button" disabled={Object.keys(activeKit.base).length === 0} onClick={upsertKit}>
 						{isLoading ? "..." : "Save"}
 					</SaveButton>
 				</HorizFlex>

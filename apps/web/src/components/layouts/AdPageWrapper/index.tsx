@@ -1,13 +1,14 @@
-import Footer from "../Footer"
-import NavMenu from "../NavMenu"
-import AdUnits from "./AdUnits"
 import { Head, SupportUs } from "@Components/shared"
 import { ErrorBoundary } from "@Components/shared/ErrorBoundary"
 import { useDetectAdBlock } from "@Hooks/useDetectAdBlock"
 import { Grid, Image } from "@mantine/core"
 import { useViewportSize } from "@mantine/hooks"
 import { useRouter } from "next/router"
-import { useState, useEffect, ReactNode } from "react"
+import type { ReactNode } from "react";
+import { useState, useEffect } from "react"
+import NavMenu from "../NavMenu"
+import Footer from "../Footer"
+import AdUnits from "./AdUnits"
 
 interface Props {
 	/** If you'd like to remove the ads from this page, set this to false. Defaults to true. */
@@ -28,20 +29,20 @@ interface Props {
  *
  * Also detects for adblock and presents a "Support Us" message.
  */
-const AdPageWrapper = ({ withAds = true, title, description, children }: Props) => {
+function AdPageWrapper({ withAds = true, title, description, children }: Props) {
 	const [top, setTop] = useState("")
 	const { width } = useViewportSize()
 	const adBlock = useDetectAdBlock()
 	const { pathname } = useRouter()
 
 	useEffect(() => {
-		if (pathname?.includes("games")) {
+		if (pathname.includes("games")) {
 			setTop("13.5%")
 		}
-		if (pathname?.includes("channels")) {
+		if (pathname.includes("channels")) {
 			setTop("5.6%")
 		}
-		if (pathname?.includes("channels/search")) {
+		if (pathname.includes("channels/search")) {
 			setTop("2.6%")
 		}
 	}, [pathname])
@@ -56,22 +57,20 @@ const AdPageWrapper = ({ withAds = true, title, description, children }: Props) 
 				marginTop: "100px"
 			}}
 		>
-			<Head title={title} description={description} />
+			<Head description={description} title={title} />
 			<NavMenu />
 			<Grid grow>
 				<Grid.Col span={8}>
 					<ErrorBoundary>{children}</ErrorBoundary>
 				</Grid.Col>
-				{withAds && width > 1200 && (
-					<Grid.Col span={1}>
+				{withAds && width > 1200 ? <Grid.Col span={1}>
 						<Image
+							alt="sidebar-bg"
 							src="/media/sidebar-background.svg"
 							sx={{ position: "absolute", top: -0, right: "0%", zIndex: -1, width: "20%" }}
-							alt="sidebar-bg"
 						/>
 						{adBlock ? <SupportUs containerStyles={{ position: "relative", top, right: "12px" }} /> : <AdUnits />}
-					</Grid.Col>
-				)}
+					</Grid.Col> : null}
 			</Grid>
 			<Footer />
 		</div>

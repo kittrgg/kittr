@@ -8,7 +8,7 @@ import { useRouter } from "next/router"
 import { useState } from "react"
 import styled from "styled-components"
 
-const Login = () => {
+function Login() {
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
 	const [isFetching, setIsFetching] = useState(false)
@@ -35,38 +35,38 @@ const Login = () => {
 	}
 	return (
 		<AuthLayout title="LOG IN">
-			<form onSubmit={onSubmit} noValidate>
+			<form noValidate onSubmit={onSubmit}>
 				<TextInput
-					type="email"
-					name="email"
+					inputStyles={{ width: "80%", margin: "0" }}
 					label="Email"
-					width="80%"
-					topLabel
-					value={email}
+					name="email"
 					onChange={(e) => {
 						setError("")
 						setEmail(e.target.value)
 					}}
-					inputStyles={{ width: "80%", margin: "0" }}
+					topLabel
+					type="email"
+					value={email}
+					width="80%"
 				/>
 				<TextInput
-					type="password"
-					name="password"
+					inputStyles={{ width: "80%", margin: "0" }}
 					label="Password"
-					width="80%"
-					topLabel
-					value={password}
+					name="password"
 					onChange={(e) => {
 						setError("")
 						setPassword(e.target.value)
 					}}
-					inputStyles={{ width: "80%", margin: "0" }}
+					topLabel
+					type="password"
+					value={password}
+					width="80%"
 				/>
 				<CreateAccount>
 					Not registered yet?
 					<Link href={Routes.SIGN_UP}>Create an account.</Link>
 				</CreateAccount>
-				<Link href={Routes.FORGOT_PASSWORD} passHref legacyBehavior>
+				<Link href={Routes.FORGOT_PASSWORD} legacyBehavior passHref>
 					<LinkBox style={{ display: "inline-block" }}>Forgot password?</LinkBox>
 				</Link>
 
@@ -74,25 +74,25 @@ const Login = () => {
 
 				<ButtonFlex>
 					<Button
-						type="button"
 						design="transparent"
-						text="BACK"
 						onClick={(e) => {
 							e.preventDefault()
 							router.push(Routes.ROOT)
 						}}
 						style={{ marginTop: "24px" }}
+						text="BACK"
+						type="button"
 					/>
 					<Button
-						type="submit"
+						dataCy="login-button"
 						design="white"
-						text={isFetching ? "..." : "LOG IN"}
 						disabled={isFetching}
 						style={{
 							marginTop: "24px",
 							backgroundColor: error ? colors.red : ""
 						}}
-						dataCy="login-button"
+						text={isFetching ? "..." : "LOG IN"}
+						type="submit"
 					/>
 				</ButtonFlex>
 			</form>

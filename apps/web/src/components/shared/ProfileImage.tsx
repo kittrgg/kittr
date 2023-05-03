@@ -25,14 +25,14 @@ interface Props {
  *
  * If an image has not been provided, we will render a placeholder.
  */
-export const ProfileImage = ({
+export function ProfileImage({
 	imagePath,
 	hasProfileImage,
 	size = "50px",
 	border,
 	isLive = false,
 	alwaysRefresh
-}: Props) => {
+}: Props) {
 	const [path, setPath] = useState("")
 	const [isLoading, setIsLoading] = useState(true)
 	const [errored, setErrored] = useState(false)
@@ -81,12 +81,12 @@ export const ProfileImage = ({
 			<Wrapper imageSize={size}>
 				<ImageContainer data-cy="profile-image" imageSize={size}>
 					<img
-						src="/media/icons/empty-avatar.svg"
 						alt="Channel Profile Image"
+						src="/media/icons/empty-avatar.svg"
 						style={{ width: "100%", height: "100%", objectFit: "cover" }}
 					/>
 				</ImageContainer>
-				{isLive && <LiveBadge>LIVE</LiveBadge>}
+				{isLive ? <LiveBadge>LIVE</LiveBadge> : null}
 			</Wrapper>
 		)
 	}
@@ -97,12 +97,12 @@ export const ProfileImage = ({
 		<Wrapper imageSize={size}>
 			<ImageContainer data-cy="profile-image" imageSize={size}>
 				{isLoading ? (
-					<img src="/media/shimmer.svg" alt="" style={{ width: "100%" }} loading="lazy" />
+					<img alt="" loading="lazy" src="/media/shimmer.svg" style={{ width: "100%" }} />
 				) : (
-					<>
-						<img
-							src={`${path}${cacheBuster}`}
+					<img
 							alt="Profile image"
+							loading="lazy"
+							src={`${path}${cacheBuster}`}
 							style={{
 								width: "100%",
 								height: "100%",
@@ -110,12 +110,10 @@ export const ProfileImage = ({
 								borderRadius: "100%",
 								border: border ? `4px solid ${border}` : ""
 							}}
-							loading="lazy"
 						/>
-					</>
 				)}
 			</ImageContainer>
-			{isLive && <LiveBadge>LIVE</LiveBadge>}
+			{isLive ? <LiveBadge>LIVE</LiveBadge> : null}
 		</Wrapper>
 	)
 }
@@ -126,7 +124,7 @@ export default ProfileImage
 
 const Wrapper = styled.div<{ imageSize: string | undefined }>`
 	position: relative;
-	font-size: ${(props) => props.imageSize?.substring(0, props.imageSize?.length - 2)}px;
+	font-size: ${(props) => props.imageSize?.substring(0, props.imageSize.length - 2)}px;
 	display: flex;
 	justify-content: center;
 `

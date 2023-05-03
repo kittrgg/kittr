@@ -1,14 +1,14 @@
-import * as Styled from "./style"
-import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
 import Button from "@Components/shared/Button"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useChannelView, useManagerRole } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
 import { paragraph } from "@Styles/typography"
-import { TCommandMethod } from "@kittr/types/types"
+import type { TCommandMethod } from "@kittr/types/types"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
+import * as Styled from "./style"
+import { trpc } from "@/lib/trpc"
 
 interface Props {
 	/** Method which the user will be utilizing for adding their commands */
@@ -22,7 +22,7 @@ interface Props {
  *
  * Note: Editors should not be able to access this text box!
  */
-const CustomTextBuilder = ({ commandStrategy, method }: Props) => {
+function CustomTextBuilder({ commandStrategy, method }: Props) {
 	const dispatch = useDispatch()
 	const role = useManagerRole()
 	const { gameId: activeGame } = useChannelView()
@@ -78,10 +78,10 @@ const CustomTextBuilder = ({ commandStrategy, method }: Props) => {
 			) : (
 				<div style={{ position: "relative", width: "60%", marginBottom: "40px" }}>
 					<TextArea
-						method={method}
-						value={userString}
-						onChange={(e) => setUserString(e.target.value)}
 						data-cy="custom-text-builder"
+						method={method}
+						onChange={(e) => setUserString(e.target.value)}
+						value={userString}
 					/>
 					{method !== "dashboard" && (
 						<TextAreaLead>{`${
@@ -90,11 +90,11 @@ const CustomTextBuilder = ({ commandStrategy, method }: Props) => {
 					)}
 					<Styled.HorizFlex style={{ alignItems: "center", marginTop: "12px" }}>
 						{userString?.length
-							? !userString?.includes("{{link}}") && <ShortcodeWarning>Must include {"{{link}}"}</ShortcodeWarning>
+							? !userString.includes("{{link}}") && <ShortcodeWarning>Must include {"{{link}}"}</ShortcodeWarning>
 							: null}
 						<Button
+							dataCy="save-custom-string"
 							design="white"
-							text={isLoading ? "..." : "SAVE"}
 							disabled={
 								userString?.length === 0
 									? false
@@ -109,7 +109,7 @@ const CustomTextBuilder = ({ commandStrategy, method }: Props) => {
 								})
 							}
 							style={{ marginLeft: "auto", padding: "6px 32px", fontSize: "16px" }}
-							dataCy="save-custom-string"
+							text={isLoading ? "..." : "SAVE"}
 						/>
 					</Styled.HorizFlex>
 				</div>

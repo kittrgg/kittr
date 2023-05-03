@@ -1,6 +1,6 @@
 import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
 import { header2 } from "@Styles/typography"
-import { Game } from "@kittr/prisma"
+import type { Game } from "@kittr/prisma"
 import styled from "styled-components"
 
 interface Props {
@@ -16,25 +16,24 @@ interface Props {
 }
 
 /** List of all of the games on the platform. This component is only a fragment. Therefore, it needs a container or wrapper around it to be given proper alignment. */
-export const GameList = ({ data, hoverScale = true, onClick, withVisitText }: Props) => (
-	<>
-		{data &&
-			[...data]
+export function GameList({ data, hoverScale = true, onClick, withVisitText }: Props) {
+  return <>
+		{data ? [...data]
 				.sort((game) => (game.active ? -1 : 1))
 				.map((elem) => (
 					<ListItem
-						key={elem.displayName}
 						active={elem.active}
-						hoverScale={hoverScale}
-						onClick={() => elem.active && onClick && onClick(elem)}
 						data-cy={`${elem.urlSafeName}-button`}
+						hoverScale={hoverScale}
+						key={elem.displayName}
+						onClick={() => elem.active && onClick && onClick(elem)}
 						style={{ marginRight: "2rem" }}
 					>
 						<ImageContainer>
 							<FirebaseStorageResolver
 								noSpinner
 								path={elem.titleImageUrl}
-								render={(data) => <img src={data} alt={`${elem.displayName} Cover Art`} style={{ width: "100%" }} />}
+								render={(data) => <img alt={`${elem.displayName} Cover Art`} src={data} style={{ width: "100%" }} />}
 							/>
 							{!elem.active && (
 								<ComingSoon>
@@ -42,16 +41,14 @@ export const GameList = ({ data, hoverScale = true, onClick, withVisitText }: Pr
 									<p>SOON</p>
 								</ComingSoon>
 							)}
-							{withVisitText && (
-								<VisitTextContainer>
+							{withVisitText ? <VisitTextContainer>
 									<p>{"Visit >"}</p>
-								</VisitTextContainer>
-							)}
+								</VisitTextContainer> : null}
 						</ImageContainer>
 					</ListItem>
-				))}
+				)) : null}
 	</>
-)
+}
 
 export default GameList
 

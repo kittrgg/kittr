@@ -16,7 +16,7 @@ export const useWindowScroll = () => {
 
 	if (!isClient()) {
 		return null
-	} else {
+	} 
 		return scrollTop
-	}
+	
 }

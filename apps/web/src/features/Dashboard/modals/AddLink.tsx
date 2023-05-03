@@ -1,23 +1,25 @@
 import colors from "@Colors"
-import { Button, Modal, SvgByType, SVGType, TextInput } from "@Components/shared"
+import type { SVGType} from "@Components/shared";
+import { Button, Modal, SvgByType, TextInput } from "@Components/shared"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
 import { trimPrefix } from "@Utils/helpers/trimPrefix"
 import { linkLabelImages } from "@Utils/lookups/linkLabelImages"
 import { linkPrefixes } from "@Utils/lookups/linkPrefixes"
-import { ChannelLink, LinkProperty } from "@kittr/prisma"
-import { Dispatch, SetStateAction, useState } from "react"
+import type { ChannelLink, LinkProperty } from "@kittr/prisma"
+import type { Dispatch, SetStateAction} from "react";
+import { useState } from "react"
 import styled from "styled-components"
 
-type LinkEdits = Array<ChannelLink> | undefined
+type LinkEdits = ChannelLink[] | undefined
 type SetNewLink = Dispatch<SetStateAction<ChannelLink>>
 type Stage = 1 | 2
 type SetStage = Dispatch<SetStateAction<Stage>>
 
 interface Props {
 	linkEdits: LinkEdits
-	setLinkEdits: Dispatch<SetStateAction<Array<ChannelLink> | undefined>>
+	setLinkEdits: Dispatch<SetStateAction<ChannelLink[] | undefined>>
 }
 
 interface ISelectProperty {
@@ -32,7 +34,7 @@ interface ICreateNewProperty {
 }
 
 /** The modal that adds a social link to a user. */
-const AddLink = ({ linkEdits, setLinkEdits }: Props) => {
+function AddLink({ linkEdits, setLinkEdits }: Props) {
 	const dispatch = useDispatch()
 	const { data: channelData } = useChannelData()
 	const [stage, setStage] = useState<Stage>(1)
@@ -50,7 +52,6 @@ const AddLink = ({ linkEdits, setLinkEdits }: Props) => {
 			<ButtonFlex>
 				<Button
 					design="transparent"
-					text="Back"
 					onClick={
 						stage === 1
 							? () => dispatch(setModal({ type: "", data: {} }))
@@ -64,18 +65,19 @@ const AddLink = ({ linkEdits, setLinkEdits }: Props) => {
 									})
 							  }
 					}
+					text="Back"
 				/>
 				{stage === 2 && (
 					<Button
+						dataCy="add-link-modal-button"
 						design="white"
-						text="Add"
 						onClick={() => {
 							if (!linkEdits) return
 							setLinkEdits([...linkEdits, newLink])
 							dispatch(setModal({ type: "", data: {} }))
 						}}
 						style={{ marginLeft: "36px" }}
-						dataCy="add-link-modal-button"
+						text="Add"
 					/>
 				)}
 			</ButtonFlex>
@@ -85,7 +87,7 @@ const AddLink = ({ linkEdits, setLinkEdits }: Props) => {
 
 export default AddLink
 
-const SelectProperty = ({ linkEdits, setNewLink, setStage }: ISelectProperty) => {
+function SelectProperty({ linkEdits, setNewLink, setStage }: ISelectProperty) {
 	const { data: channelData } = useChannelData()
 
 	return (
@@ -95,8 +97,9 @@ const SelectProperty = ({ linkEdits, setNewLink, setStage }: ISelectProperty) =>
 
 				return (
 					<GridItemButton
-						key={property}
+						data-cy={`${property}-add-button`}
 						disabled={linkEdits?.some((link) => link.property === property)}
+						key={property}
 						onClick={() => {
 							setNewLink({
 								id: "",
@@ -106,14 +109,13 @@ const SelectProperty = ({ linkEdits, setNewLink, setStage }: ISelectProperty) =>
 							})
 							setStage(2)
 						}}
-						data-cy={`${property}-add-button`}
 					>
 						<div
 							style={
 								linkEdits?.find((link) => link.property === property) ? { filter: "grayscale(50%) blur(4px)" } : {}
 							}
 						>
-							<SvgByType type={property as SVGType} alt="Channel to Add" />
+							<SvgByType alt="Channel to Add" type={property as SVGType} />
 						</div>
 					</GridItemButton>
 				)
@@ -122,7 +124,7 @@ const SelectProperty = ({ linkEdits, setNewLink, setStage }: ISelectProperty) =>
 	)
 }
 
-const CreateNewProperty = ({ newLink, setNewLink }: ICreateNewProperty) => {
+function CreateNewProperty({ newLink, setNewLink }: ICreateNewProperty) {
 	const { data: channelData } = useChannelData()
 
 	return (
@@ -135,22 +137,22 @@ const CreateNewProperty = ({ newLink, setNewLink }: ICreateNewProperty) => {
 			}}
 		>
 			<TextInput
-				type="text"
-				label={linkPrefixes[newLink.property!]}
-				name={newLink.property}
-				value={trimPrefix(linkPrefixes[newLink.property!], newLink.value!)}
-				subline="Feel free to paste in the whole link. We'll trim it up for you."
-				sublineStyles={{ color: colors.lighter }}
 				inputStyles={{ marginLeft: "0" }}
+				label={linkPrefixes[newLink.property]}
+				name={newLink.property}
 				onChange={(e) => {
 					const newEdit = { ...newLink, value: newLink.value ?? "" }
-					newEdit.value = `${linkPrefixes[newLink.property!]}${trimPrefix(
-						linkPrefixes[newLink.property!],
+					newEdit.value = `${linkPrefixes[newLink.property]}${trimPrefix(
+						linkPrefixes[newLink.property],
 						e.target.value
 					)}`
 
 					setNewLink({ id: "", channelId: channelData?.id ?? "", property: newEdit.property, value: newEdit.value })
 				}}
+				subline="Feel free to paste in the whole link. We'll trim it up for you."
+				sublineStyles={{ color: colors.lighter }}
+				type="text"
+				value={trimPrefix(linkPrefixes[newLink.property], newLink.value)}
 			/>
 		</div>
 	)

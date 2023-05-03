@@ -1,26 +1,25 @@
-import H3 from "../../H3"
-import AboutAccountManagers from "../../modals/AboutAccountManagers"
-import AddManager from "../../modals/AddManager"
-import ConfirmChangingOwner from "../../modals/ConfirmChangingOwner"
-import DeleteManager from "../../modals/DeleteManager"
-import ManagerRoleChange from "../../modals/ManagerRoleChange"
-import SetNewOwner from "../../modals/SetNewOwner"
 import colors from "@Colors"
 import { Button, SVG, Spinner } from "@Components/shared"
 import { useChannelManagers } from "@Hooks/api/useChannelManagers"
 import { useUser } from "@Hooks/useUser"
 import { setModal } from "@Redux/slices/dashboard"
 import { useManagerRole } from "@Redux/slices/dashboard/selectors"
-import { useSelector } from "@Redux/store"
-import { useDispatch } from "@Redux/store"
+import { useSelector , useDispatch } from "@Redux/store"
 import { capitalizeFirstCharacter } from "@Utils/helpers/capitalizeFirstCharacter"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
-import { ChannelManagerRoles } from "@kittr/prisma"
+import type { ChannelManagerRoles } from "@kittr/prisma"
 import styled from "styled-components"
+import SetNewOwner from "../../modals/SetNewOwner"
+import ManagerRoleChange from "../../modals/ManagerRoleChange"
+import DeleteManager from "../../modals/DeleteManager"
+import ConfirmChangingOwner from "../../modals/ConfirmChangingOwner"
+import AddManager from "../../modals/AddManager"
+import AboutAccountManagers from "../../modals/AboutAccountManagers"
+import H3 from "../../H3"
 
 const managersOrder: ChannelManagerRoles[] = ["OWNER", "ADMIN", "EDITOR"]
 
-const AccountManagers = () => {
+function AccountManagers() {
 	const dispatch = useDispatch()
 	const role = useManagerRole()
 	const auth = useUser()
@@ -39,30 +38,29 @@ const AccountManagers = () => {
 			<H3>
 				ACCOUNT MANAGERS
 				<SVG.QuestionMark
-					width="20px"
-					style={{ position: "relative", top: "4px", left: "12px", cursor: "pointer" }}
-					onClick={() => dispatch(setModal({ type: "About Account Managers", data: {} }))}
 					dataCy="managers-info-question"
+					onClick={() => dispatch(setModal({ type: "About Account Managers", data: {} }))}
+					style={{ position: "relative", top: "4px", left: "12px", cursor: "pointer" }}
+					width="20px"
 				/>
 			</H3>
-			{error && <p>Uh oh, an error occurred. Let us know with the error code: 4397, please.</p>}
-			{isLoading && <Spinner />}
-			{data &&
-				customOrderArray<typeof data[0]>({
+			{error ? <p>Uh oh, an error occurred. Let us know with the error code: 4397, please.</p> : null}
+			{isLoading ? <Spinner /> : null}
+			{data ? customOrderArray<typeof data[0]>({
 					array: data,
 					sortingArray: managersOrder,
 					keyToSort: "role"
 				}).map((manager: typeof data[0]) => {
 					return (
-						<Manager key={manager.uid} data-cy="manager">
+						<Manager data-cy="manager" key={manager.uid}>
 							<Identity>
 								<Email>{manager.email}</Email>
 								{role === "OWNER" && manager.role === "OWNER" && (
 									<SVG.Pencil
-										width="20px"
-										style={{ marginRight: "8px", cursor: "pointer" }}
-										onClick={() => dispatch(setModal({ type: "Confirm Changing Owner", data: {} }))}
 										dataCy="change-owner-start"
+										onClick={() => dispatch(setModal({ type: "Confirm Changing Owner", data: {} }))}
+										style={{ marginRight: "8px", cursor: "pointer" }}
+										width="20px"
 									/>
 								)}
 								{
@@ -76,41 +74,41 @@ const AccountManagers = () => {
 										role !== manager.role && (
 											<>
 												<SVG.Pencil
-													width="20px"
-													style={{ marginRight: "8px", cursor: "pointer" }}
-													onClick={() => dispatch(setModal({ type: "Manager Role Change", data: manager }))}
 													dataCy={manager.role === "EDITOR" ? "promote" : "demote"}
+													onClick={() => dispatch(setModal({ type: "Manager Role Change", data: manager }))}
+													style={{ marginRight: "8px", cursor: "pointer" }}
+													width="20px"
 												/>
 												<SVG.X
-													width="24px"
-													style={{ cursor: "pointer" }}
-													onClick={() => dispatch(setModal({ type: "Delete Manager", data: manager }))}
 													dataCy="remove-manager"
+													onClick={() => dispatch(setModal({ type: "Delete Manager", data: manager }))}
+													style={{ cursor: "pointer" }}
+													width="24px"
 												/>
 											</>
 										)
 								}
 								{role !== "OWNER" && manager.email === auth?.email && (
 									<SVG.X
-										width="24px"
-										style={{ cursor: "pointer" }}
-										onClick={() => dispatch(setModal({ type: "Delete Manager", data: manager }))}
 										dataCy="remove-manager"
+										onClick={() => dispatch(setModal({ type: "Delete Manager", data: manager }))}
+										style={{ cursor: "pointer" }}
+										width="24px"
 									/>
 								)}
 							</Identity>
 							<Role>{capitalizeFirstCharacter(manager.role)}</Role>
 						</Manager>
 					)
-				})}
+				}) : null}
 
 			{role !== "EDITOR" && (
 				<Button
+					dataCy="add-manager-begin"
 					design="transparent"
-					text="ADD MANAGER"
 					onClick={() => dispatch(setModal({ type: "Add Manager", data: {} }))}
 					style={{ marginTop: "32px" }}
-					dataCy="add-manager-begin"
+					text="ADD MANAGER"
 				/>
 			)}
 		</>

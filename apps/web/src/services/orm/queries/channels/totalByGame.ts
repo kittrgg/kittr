@@ -1,7 +1,7 @@
-import { Prisma, prisma } from "@kittr/prisma"
+import type { Prisma} from "@kittr/prisma";
+import { prisma } from "@kittr/prisma"
 
-interface ChannelsByGameQuery {
-	/**
+/**
 	 * @params
 	 * gameId: ObjectId of the game
 	 *
@@ -9,8 +9,7 @@ interface ChannelsByGameQuery {
 	 * Promise containing number
 	 *
 	 */
-	(gameId: string): Promise<number | undefined>
-}
+type ChannelsByGameQuery = (gameId: string) => Promise<number | undefined>
 
 /**
  * SERVER SIDE ONLY!
