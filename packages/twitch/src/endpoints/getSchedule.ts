@@ -2,13 +2,13 @@ import type { ITwitchScheduleSegment } from '@kittr/types/twitch';
 import { getFromApi } from '../utils/getFromApi';
 
 /**
-   * @params
-   * broadcaster_id: Twitch broadcaster_id of the user.
-   *
-   * @returns
-   * Promise fulfilled with data.
-   *
-   */
+ * @params
+ * broadcaster_id: Twitch broadcaster_id of the user.
+ *
+ * @returns
+ * Promise fulfilled with data.
+ *
+ */
 type IFunc = (broadcaster_id: string) => Promise<ITwitchScheduleSegment[]>;
 
 /** Get the posted schedule for the user. */

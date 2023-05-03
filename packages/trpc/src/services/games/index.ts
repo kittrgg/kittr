@@ -1,4 +1,4 @@
-import type { Prisma} from '@kittr/prisma';
+import type { Prisma } from '@kittr/prisma';
 import { prisma } from '@kittr/prisma';
 
 export const getAllGames = async <T extends Prisma.GameInclude>(include: T) => {

@@ -1,13 +1,11 @@
- 
 import type {
   WarzoneTwoKit,
   WarzoneTwoKitOption,
   WarzoneKit,
   WarzoneKitOption,
-  WarzoneTwoKitOptionTuning} from '@kittr/prisma';
-import {
-  prisma
+  WarzoneTwoKitOptionTuning,
 } from '@kittr/prisma';
+import { prisma } from '@kittr/prisma';
 
 export const upsertKit = async ({
   channelId,

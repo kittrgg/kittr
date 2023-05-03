@@ -3,11 +3,9 @@ import { fetcher } from '@kittr/utils';
 
 /** Use OAuth to get a token for the Twitch API. */
 export const getAuthToken = async () => {
-  const tokenUrl = `https://id.twitch.tv/oauth2/token?client_id=${
-    process.env.TWITCH_CLIENT_ID!
-  }&client_secret=${
-    process.env.TWITCH_SECRET!
-  }&grant_type=client_credentials&scope=`;
+  const tokenUrl = `https://id.twitch.tv/oauth2/token?client_id=${process.env
+    .TWITCH_CLIENT_ID!}&client_secret=${process.env
+    .TWITCH_SECRET!}&grant_type=client_credentials&scope=`;
 
   try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -15,9 +13,8 @@ export const getAuthToken = async () => {
 
     if (data.access_token) {
       return data as IOAuthToken;
-    } 
-      throw data as IOAuthRejection;
-    
+    }
+    throw data as IOAuthRejection;
   } catch (error) {
     console.log({ twitchAuthError: error });
     throw { twitchAuthError: error };

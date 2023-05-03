@@ -8,7 +8,6 @@ export const updateLinks = async ({
   channelId: string;
   links: ChannelLink[];
 }) => {
-   
   const [_, newLinks] = await prisma.$transaction([
     prisma.channelLink.deleteMany({
       where: {

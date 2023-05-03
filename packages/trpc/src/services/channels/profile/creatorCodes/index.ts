@@ -1,4 +1,4 @@
-import type { ChannelCreatorCode} from '@kittr/prisma';
+import type { ChannelCreatorCode } from '@kittr/prisma';
 import { prisma } from '@kittr/prisma';
 
 export const upsertCode = async ({

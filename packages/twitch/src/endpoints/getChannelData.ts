@@ -3,13 +3,13 @@ import type { ITwitchChannelData } from '@kittr/types/twitch';
 import { getFromApi } from '../utils/getFromApi';
 
 /**
-   * @params
-   * login: Twitch login for the user.
-   *
-   * @returns
-   * Promise fulfilled with Twitch schedule segments.
-   *
-   */
+ * @params
+ * login: Twitch login for the user.
+ *
+ * @returns
+ * Promise fulfilled with Twitch schedule segments.
+ *
+ */
 type IFunc = (login: string) => Promise<ITwitchChannelData[]>;
 
 /** Get the posted schedule for the user. */
@@ -22,7 +22,7 @@ export const getChannelData: IFunc = async (login) => {
 
     return data;
   } catch (error) {
-    Logger.logError(error  as Error);
+    Logger.logError(error as Error);
     console.log({ twitchError: error });
     throw { twitchError: error };
   }

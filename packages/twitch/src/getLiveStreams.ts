@@ -1,5 +1,5 @@
 import type { Channel, ChannelLink } from '@kittr/prisma';
-import { prisma , LinkProperty  } from '@kittr/prisma';
+import { prisma, LinkProperty } from '@kittr/prisma';
 import type { ITwitchLiveChannels } from '@kittr/types/twitch';
 import { fetcher } from '@kittr/utils';
 import { grabLoginName } from './utils/grabLoginName';
@@ -88,7 +88,7 @@ export const liveChannelsQuery = async () => {
         .includes(
           getTwitchLink(channel).substring(
             getTwitchLink(channel).lastIndexOf('/') + 1,
-          ) ,
+          ),
         ),
     );
 

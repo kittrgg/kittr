@@ -8,7 +8,6 @@ export const updateUserDisplayName = async (displayName: string) => {
     return updateProfile(user, {
       displayName,
     });
-  } 
-    return null;
-  
+  }
+  return null;
 };

@@ -27,9 +27,8 @@ export const SideScroller = ({ title, action, children }: Props) => {
       return (
         !isMobile && !(currentScrollPosition >= viewport.current.scrollWidth)
       );
-    } 
-      return !isMobile;
-    
+    }
+    return !isMobile;
   }, [scrollPosition, viewport.current, width]);
 
   const scrollRight = () => {

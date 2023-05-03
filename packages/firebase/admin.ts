@@ -4,7 +4,7 @@ if (!admin.apps.length) {
   try {
     admin.initializeApp({
       credential: admin.credential.cert({
-        privateKey: (process.env.FIREBASE_ADMIN_PRIVATE_KEY!).replace(
+        privateKey: process.env.FIREBASE_ADMIN_PRIVATE_KEY!.replace(
           /\\n/g,
           '\n',
         ),

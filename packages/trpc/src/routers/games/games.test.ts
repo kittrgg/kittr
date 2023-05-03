@@ -9,7 +9,7 @@ import {
   randPastDate,
   randUuid,
 } from '@ngneat/falso';
-import { appRouter } from "../../..";
+import { appRouter } from '../../..';
 
 type GameWithCount = Prisma.GameGetPayload<{
   include: {

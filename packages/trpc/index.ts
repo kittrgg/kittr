@@ -1,7 +1,7 @@
 import { download } from '@kittr/firebase/storage';
 import { prisma } from '@kittr/prisma';
 import { GameModel } from '@kittr/prisma/validator';
-import type { inferRouterInputs, inferRouterOutputs} from '@trpc/server';
+import type { inferRouterInputs, inferRouterOutputs } from '@trpc/server';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 import { WarzoneAdminController } from './src/controllers/admin/warzone';

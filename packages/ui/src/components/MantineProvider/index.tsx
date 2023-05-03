@@ -1,8 +1,5 @@
-import type {
-  MantineProviderProps} from '@mantine/core';
-import {
-  MantineProvider as MantineLibProvider
-} from '@mantine/core';
+import type { MantineProviderProps } from '@mantine/core';
+import { MantineProvider as MantineLibProvider } from '@mantine/core';
 import React from 'react';
 import { theme } from './styles/theme';
 

@@ -5,7 +5,7 @@ import {
   randProductName,
   randUuid,
 } from '@ngneat/falso';
-import { appRouter } from "../../..";
+import { appRouter } from '../../..';
 
 // Returns Warzone2 options if they're there
 // Returns Warzone ones if they're not

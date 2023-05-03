@@ -1,4 +1,4 @@
-import type { TextProps} from '@mantine/core';
+import type { TextProps } from '@mantine/core';
 import { Text as MantineText, useMantineTheme } from '@mantine/core';
 import type { ReactNode } from 'react';
 

@@ -64,7 +64,9 @@
     "lint": {
       "dependsOn": ["@kittr/lint#eslint"]
     },
-    "lint:fix": {},
+    "lint:fix": {
+      "dependsOn": ["@kittr/lint#eslint:fix"]
+    },
     "typecheck": {
       "dependsOn": ["^topo"]
     },

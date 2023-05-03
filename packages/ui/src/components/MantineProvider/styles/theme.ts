@@ -1,4 +1,8 @@
-import type { CSSObject, MantineTheme, MantineThemeOverride } from '@mantine/core';
+import type {
+  CSSObject,
+  MantineTheme,
+  MantineThemeOverride,
+} from '@mantine/core';
 import { gray } from './colors/gray';
 import { red } from './colors/red';
 

@@ -3,13 +3,13 @@ import type { ITwitchVideo } from '@kittr/types/twitch';
 import { getFromApi } from '../utils/getFromApi';
 
 /**
-   * @params
-   * user_id: Twitch broadcaster_id of the user.
-   *
-   * @returns
-   * Promise fulfilled with Twitch videos for the user.
-   *
-   */
+ * @params
+ * user_id: Twitch broadcaster_id of the user.
+ *
+ * @returns
+ * Promise fulfilled with Twitch videos for the user.
+ *
+ */
 type IFunc = (user_id: string) => Promise<ITwitchVideo[]>;
 
 export const getRecentVideos: IFunc = async (user_id) => {
@@ -21,7 +21,7 @@ export const getRecentVideos: IFunc = async (user_id) => {
 
     return data;
   } catch (error) {
-    Logger.logError(error  as Error);
+    Logger.logError(error as Error);
     console.log({ twitchError: error });
     throw { twitchError: error };
   }
