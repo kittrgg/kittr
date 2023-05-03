@@ -6,7 +6,7 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "eslint-runner",
+		"lint": "eslint-runner && next lint",
 		"test": "echo \"No tests specified\" && exit 0",
 		"test:watch": "echo \"No tests specified\" && exit 0",
 		"typecheck": "tsc --noEmit"
