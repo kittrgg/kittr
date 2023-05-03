@@ -1,1 +1,1 @@
-module.exports = '@vercel/style-guide/prettier'
+module.exports = '@vercel/style-guide/prettier';

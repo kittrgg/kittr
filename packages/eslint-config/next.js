@@ -1,21 +1,30 @@
-const {rules} = require('./utils/rules')
+const { rules } = require('./utils/rules');
 
 // See: https://github.com/eslint/eslint/issues/3458
 // @ts-expect-error No types available
 require('@rushstack/eslint-patch/modern-module-resolution');
 
 module.exports = {
-	root: true,
-	extends: [
+  root: true,
+  extends: [
     '@vercel/style-guide/eslint/browser',
     '@vercel/style-guide/eslint/node',
     '@vercel/style-guide/eslint/react',
     '@vercel/style-guide/eslint/next',
     '@vercel/style-guide/eslint/typescript',
-	].map((config) => require.resolve(config)),
-	parserOptions: {
-        tsconfigRootDir: `${__dirname}/tsconfig.json`
-	},
-    rules,
-	ignorePatterns: ["**/dist/**", "**/.eslintrc.js"],
-}
+  ].map((config) => require.resolve(config)),
+  parserOptions: {
+    tsconfigRootDir: `${__dirname}/tsconfig.json`,
+  },
+  rules,
+  ignorePatterns: ['**/dist/**', '**/.eslintrc.js'],
+  overrides: [
+    {
+      rules: {
+        // This isn't supported in Next.js today.
+        // https://github.com/vercel/next.js/discussions/35725
+        'import/no-default-export': 'off',
+      },
+    },
+  ],
+};
