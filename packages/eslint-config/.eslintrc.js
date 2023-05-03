@@ -6,6 +6,6 @@ module.exports = {
   },
   rules: {
     "no-console": "off",
-    "capitalized-comments": "off" // need this for the hashbang bin
+    "capitalized-comments": "off" // Need this for the hashbang bin
   }
 };

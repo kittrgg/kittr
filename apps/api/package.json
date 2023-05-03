@@ -6,6 +6,7 @@
 		"start": "ts-node ./src/index.ts",
 		"dev": "nodemon src/index.ts",
 		"lint": "eslint-runner",
+		"lint:fix": "eslint-runner --fix",
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {

@@ -4,6 +4,8 @@
 	"version": "0.0.0",
 	"license": "MIT",
 	"scripts": {
+		"lint": "eslint-runner",
+		"lint:fix": "eslint-runner --fix",
 		"typecheck": "tsc --noEmit",
 		"dev": "start-storybook -p 3002 --no-manager-cache",
 		"build": "build-storybook"
