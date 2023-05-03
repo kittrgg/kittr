@@ -1,7 +1,6 @@
-
 module.exports = {
   root: true,
-  extends: [require.resolve('@kittr/lint/next.js')],
+  extends: [require.resolve('@kittr/lint/next')],
 	parserOptions: {
       project: __dirname + "/tsconfig.json"
   }

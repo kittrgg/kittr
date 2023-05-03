@@ -1,6 +1,7 @@
 const { resolve } = require('path');
 
 // See: https://github.com/eslint/eslint/issues/3458
+// @ts-expect-error No types available
 require('@rushstack/eslint-patch/modern-module-resolution');
 const project = resolve(process.cwd(), 'tsconfig.json');
 

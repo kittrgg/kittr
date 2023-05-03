@@ -1,4 +1,6 @@
-export const yellow: any = [
+type FixedLengthArray<T, Length extends number> = Length extends Length ? [T, ...T[]] & { length: Length } : never;
+
+export const yellow: FixedLengthArray<string, 10> = [
 	"#FFFDF2",
 	"#FFFAE6",
 	"#FDF6D9",

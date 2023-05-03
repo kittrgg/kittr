@@ -62,10 +62,9 @@
 		"db:push": {
 			"cache": false
 		},
-    "lint": {
-      "dependsOn": ["^topo"]
-		},
-    "typecheck": {
+    "lint": { },
+    "lintrunner": { },
+		"typecheck": {
       "dependsOn": [ "^topo" ]
     },
     "test": {
@@ -80,7 +79,6 @@
     "seed": {
       "dependsOn": [ "db:generate" ],
       "cache": false
-    },
-		"lintrunner": {}
+    }
 	 }
 }
