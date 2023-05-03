@@ -10,7 +10,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import { useRouter } from "next/router"
 import { Provider } from "react-redux"
 
-const thing = 'fart'
+const thing = "fart"
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const MyApp = ({ Component, pageProps }: { Component: React.FC; pageProps: Record<any, any> }) => {

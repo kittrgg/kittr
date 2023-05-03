@@ -1,21 +1,21 @@
-import { prisma } from "@kittr/prisma"
+import { prisma } from '@kittr/prisma';
 
 export const toggleYoutubeAutoplay = async ({
-	channelId,
-	shouldYoutubeAutoplay
+  channelId,
+  shouldYoutubeAutoplay,
 }: {
-	channelId: string
-	shouldYoutubeAutoplay: boolean
+  channelId: string;
+  shouldYoutubeAutoplay: boolean;
 }) => {
-	const result = await prisma.channelProfile.update({
-		where: {
-			channelId
-		},
+  const result = await prisma.channelProfile.update({
+    where: {
+      channelId,
+    },
 
-		data: {
-			youtubeAutoplay: shouldYoutubeAutoplay
-		}
-	})
+    data: {
+      youtubeAutoplay: shouldYoutubeAutoplay,
+    },
+  });
 
-	return result
-}
+  return result;
+};

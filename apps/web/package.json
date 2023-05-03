@@ -3,10 +3,10 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"dev": "next dev",
 		"build": "next build",
-		"start": "next start",
+		"dev": "next dev",
 		"lint": "eslint-runner && next lint",
+		"start": "next start",
 		"test": "echo \"No tests specified\" && exit 0",
 		"test:watch": "echo \"No tests specified\" && exit 0",
 		"typecheck": "tsc --noEmit"
@@ -16,8 +16,8 @@
 		"@emotion/server": "^11.10.0",
 		"@juggle/resize-observer": "3.3.1",
 		"@kittr/analytics": "workspace:*",
-		"@kittr/logger": "workspace:*",
 		"@kittr/firebase": "workspace:*",
+		"@kittr/logger": "workspace:*",
 		"@kittr/money": "workspace:*",
 		"@kittr/prisma": "workspace:*",
 		"@kittr/trpc": "workspace:*",
@@ -51,8 +51,8 @@
 	},
 	"devDependencies": {
 		"@kittr/lint": "workspace:*",
-		"@kittr/types": "workspace:*",
 		"@kittr/tsconfig": "workspace:*",
+		"@kittr/types": "workspace:*",
 		"@types/jsonwebtoken": "8.5.8",
 		"@types/micro": "7.3.7",
 		"@types/react": "^18.0.27",

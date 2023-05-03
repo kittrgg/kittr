@@ -1,14 +1,14 @@
 // import { withThemes } from "@react-theming/storybook-addon"
-import { MantineProvider, Center } from "@kittr/ui"
-import React from "react"
+import { MantineProvider, Center } from '@kittr/ui';
+import React from 'react';
 
 export const parameters = {
-	options: {
-		storySort: {
-			order: ["Inputs", "Typography", "Atoms", "Molecules", "Organisms"]
-		}
-	}
-}
+  options: {
+    storySort: {
+      order: ['Inputs', 'Typography', 'Atoms', 'Molecules', 'Organisms'],
+    },
+  },
+};
 
 // export const parameters = {
 // 	actions: { argTypesRegex: "^on[A-Z].*" },
@@ -46,12 +46,12 @@ export const parameters = {
 // }
 
 export const decorators = [
-	(Story) => (
-		<MantineProvider withNormalizeCSS withGlobalStyles>
-			<Center sx={{ minHeight: "calc( 100vh - 2rem )" }}>
-				<Story />
-			</Center>
-		</MantineProvider>
-	)
-	// withThemes(null as any, [dark, light], { providerFn, onThemeSwitch })
-]
+  (Story) => (
+    <MantineProvider withNormalizeCSS withGlobalStyles>
+      <Center sx={{ minHeight: 'calc( 100vh - 2rem )' }}>
+        <Story />
+      </Center>
+    </MantineProvider>
+  ),
+  // withThemes(null as any, [dark, light], { providerFn, onThemeSwitch })
+];

@@ -1,41 +1,45 @@
 {
-	"name": "@kittr/ui",
-	"private": true,
-	"version": "0.0.0",
-	"license": "MIT",
-	"scripts": {
-		"lint": "eslint-runner",
-		"lint:fix": "eslint-runner --fix",
-		"typecheck": "tsc --noEmit"
-	},
-	"exports": {
-		".": "./src/components/index.tsx",
-		"./new": "./src/components/new/*"
-	},
-"typesVersions": {
+  "name": "@kittr/ui",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "exports": {
+    ".": "./src/components/index.tsx",
+    "./new": "./src/components/new/*"
+  },
+  "typesVersions": {
     "*": {
-			"*": ["./src/components/index.ts"],
-			"new": ["./src/new/index.ts"]
-		}
-	},
-	"dependencies": {
-		"@mantine/core": "^5.10.2",
-		"@mantine/dates": "^5.10.2",
-		"@mantine/hooks": "^5.10.2",
-		"@mantine/next": "^5.10.2",
-		"@mantine/rte": "^5.10.2",
-		"react": "^18.2.0",
-		"react-device-detect": "2.2.2",
-		"react-dom": "^18.2.0"
-	},
-	"devDependencies": {
-		"@babel/core": "7.18.9",
-		"@kittr/lint": "workspace:*",
-		"@kittr/types": "workspace:*",
-		"@storybook/react": "6.5.9",
-		"@types/react": "^18.0.27",
-		"@types/react-dom": "^18.0.10",
-		"@kittr/tsconfig": "workspace:*",
-		"typescript": "5.0.0-beta"
-	}
+      "*": [
+        "./src/components/index.ts"
+      ],
+      "new": [
+        "./src/new/index.ts"
+      ]
+    }
+  },
+  "scripts": {
+    "lint": "eslint-runner",
+    "lint:fix": "eslint-runner --fix",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@mantine/core": "^5.10.2",
+    "@mantine/dates": "^5.10.2",
+    "@mantine/hooks": "^5.10.2",
+    "@mantine/next": "^5.10.2",
+    "@mantine/rte": "^5.10.2",
+    "react": "^18.2.0",
+    "react-device-detect": "2.2.2",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "7.18.9",
+    "@kittr/lint": "workspace:*",
+    "@kittr/tsconfig": "workspace:*",
+    "@kittr/types": "workspace:*",
+    "@storybook/react": "6.5.9",
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "typescript": "5.0.0-beta"
+  }
 }

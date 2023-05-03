@@ -1,40 +1,40 @@
 {
-	"name": "@kittr/trpc",
-	"private": true,
-	"version": "0.0.0",
-	"exports": {
-		".": "./index.ts",
-		"./client": "./client.ts"
-	},
-	"license": "MIT",
-	"scripts": {
-		"lint": "eslint-runner",
-		"lint:fix": "eslint-runner --fix",
-		"test": "vitest",
-		"typecheck": "tsc --noEmit"
-	},
-	"dependencies": {
-		"@kittr/lint": "workspace:*",
-		"@kittr/firebase": "workspace:*",
-		"@kittr/logger": "workspace:*",
-		"@kittr/money": "workspace:*",
-		"@kittr/prisma": "workspace:*",
-		"@kittr/twitch": "workspace:*",
-		"@kittr/types": "workspace:*",
-		"jest": "^29.5.0",
-		"@kittr/utils": "workspace:*",
-		"@trpc/client": "^10.9.0",
-		"superjson": "^1.12.3",
-		"@trpc/next": "^10.9.0",
-		"@trpc/react": "^9.27.4",
-		"@trpc/react-query": "^10.9.0",
-		"@trpc/server": "^10.9.0"
-	},
-	"devDependencies": {
-		"@kittr/lint": "workspace:*",
-		"@kittr/tsconfig": "workspace:*",
-		"@ngneat/falso": "^6.4.0",
-		"typescript": "5.0.0-beta",
-		"vitest": "^0.28.3"
-	}
+  "name": "@kittr/trpc",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "exports": {
+    ".": "./index.ts",
+    "./client": "./client.ts"
+  },
+  "scripts": {
+    "lint": "eslint-runner",
+    "lint:fix": "eslint-runner --fix",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@kittr/firebase": "workspace:*",
+    "@kittr/lint": "workspace:*",
+    "@kittr/logger": "workspace:*",
+    "@kittr/money": "workspace:*",
+    "@kittr/prisma": "workspace:*",
+    "@kittr/twitch": "workspace:*",
+    "@kittr/types": "workspace:*",
+    "@kittr/utils": "workspace:*",
+    "@trpc/client": "^10.9.0",
+    "@trpc/next": "^10.9.0",
+    "@trpc/react": "^9.27.4",
+    "@trpc/react-query": "^10.9.0",
+    "@trpc/server": "^10.9.0",
+    "jest": "^29.5.0",
+    "superjson": "^1.12.3"
+  },
+  "devDependencies": {
+    "@kittr/lint": "workspace:*",
+    "@kittr/tsconfig": "workspace:*",
+    "@ngneat/falso": "^6.4.0",
+    "typescript": "5.0.0-beta",
+    "vitest": "^0.28.3"
+  }
 }

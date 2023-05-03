@@ -1,4 +1,4 @@
-export {}
+export {};
 
 // import mongoose from "mongoose"
 // import KitStat from "../models/KitStat"

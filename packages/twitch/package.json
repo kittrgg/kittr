@@ -1,22 +1,22 @@
 {
-	"name": "@kittr/twitch",
-	"private": true,
-	"version": "0.0.0",
-	"main": "./src/index.ts",
-	"scripts": {
-		"lint": "eslint-runner",
-		"lint:fix": "eslint-runner --fix",
-		"typecheck": "tsc --noEmit"
-	},
-	"dependencies": {
-		"@kittr/logger": "workspace:*",
-		"@kittr/prisma": "workspace:*",
-		"@kittr/types": "workspace:*",
-		"@kittr/utils": "workspace:*"
-	},
-	"devDependencies": {
-		"@kittr/lint": "workspace:*",
-		"@kittr/tsconfig": "workspace:*",
-		"typescript": "5.0.0-beta"
-	}
+  "name": "@kittr/twitch",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "scripts": {
+    "lint": "eslint-runner",
+    "lint:fix": "eslint-runner --fix",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@kittr/logger": "workspace:*",
+    "@kittr/prisma": "workspace:*",
+    "@kittr/types": "workspace:*",
+    "@kittr/utils": "workspace:*"
+  },
+  "devDependencies": {
+    "@kittr/lint": "workspace:*",
+    "@kittr/tsconfig": "workspace:*",
+    "typescript": "5.0.0-beta"
+  }
 }

@@ -1,27 +1,27 @@
-import { Loader } from "."
-import { ComponentStory, ComponentMeta } from "@storybook/react"
+import { Loader } from '.';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 export default {
-	title: "Atom/Loader",
-	component: Loader,
-	argTypes: {
-		variant: { options: ["dots", "bars", "oval"], control: { type: "select" } }
-	}
-} as ComponentMeta<typeof Loader>
+  title: 'Atom/Loader',
+  component: Loader,
+  argTypes: {
+    variant: { options: ['dots', 'bars', 'oval'], control: { type: 'select' } },
+  },
+} as ComponentMeta<typeof Loader>;
 
-const Template: ComponentStory<typeof Loader> = (args) => <Loader {...args} />
+const Template: ComponentStory<typeof Loader> = (args) => <Loader {...args} />;
 
-export const Default = Template.bind({})
+export const Default = Template.bind({});
 Default.args = {
-	variant: "dots"
-}
+  variant: 'dots',
+};
 
-export const Bars = Template.bind({})
+export const Bars = Template.bind({});
 Bars.args = {
-	variant: "bars"
-}
+  variant: 'bars',
+};
 
-export const Oval = Template.bind({})
+export const Oval = Template.bind({});
 Oval.args = {
-	variant: "oval"
-}
+  variant: 'oval',
+};

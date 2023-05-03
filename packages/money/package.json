@@ -1,20 +1,20 @@
 {
-	"name": "@kittr/money",
-	"private": true,
-	"version": "0.0.0",
-	"main": "./src/index.ts",
-	"license": "MIT",
-	"scripts": {
-		"lint": "eslint-runner",
-		"lint:fix": "eslint-runner --fix",
-		"typecheck": "tsc --noEmit"
-	},
-	"dependencies": {
-		"stripe": "8.205.0"
-	},
-	"devDependencies": {
-		"@kittr/lint": "workspace:*",
-		"@kittr/tsconfig": "workspace:*",
-		"typescript": "5.0.0-beta"
-	}
+  "name": "@kittr/money",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "main": "./src/index.ts",
+  "scripts": {
+    "lint": "eslint-runner",
+    "lint:fix": "eslint-runner --fix",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "stripe": "8.205.0"
+  },
+  "devDependencies": {
+    "@kittr/lint": "workspace:*",
+    "@kittr/tsconfig": "workspace:*",
+    "typescript": "5.0.0-beta"
+  }
 }

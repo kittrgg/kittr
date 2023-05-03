@@ -1,1 +1,1 @@
-export * from ".prisma/client/index.d"
+export * from '.prisma/client/index.d';

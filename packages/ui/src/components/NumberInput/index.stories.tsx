@@ -1,32 +1,32 @@
-import { NumberInput } from "."
-import { ComponentStory, ComponentMeta } from "@storybook/react"
+import { NumberInput } from '.';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 export default {
-	title: "Atom/NumberInput",
-	component: NumberInput,
-	args: {
-		variant: "default"
-	}
-} as ComponentMeta<typeof NumberInput>
+  title: 'Atom/NumberInput',
+  component: NumberInput,
+  args: {
+    variant: 'default',
+  },
+} as ComponentMeta<typeof NumberInput>;
 
 const Template: ComponentStory<typeof NumberInput> = (args) => (
-	<NumberInput value={0} {...args} />
-)
+  <NumberInput value={0} {...args} />
+);
 
-export const Default = Template.bind({})
+export const Default = Template.bind({});
 
-export const Filled = Template.bind({})
+export const Filled = Template.bind({});
 Filled.args = {
-	variant: "filled"
-}
+  variant: 'filled',
+};
 
-export const Description = Template.bind({})
+export const Description = Template.bind({});
 Description.args = {
-	description: "Button Description/Title"
-}
+  description: 'Button Description/Title',
+};
 
-export const Step_and_Precision = Template.bind({})
+export const Step_and_Precision = Template.bind({});
 Step_and_Precision.args = {
-	step: 0.1,
-	precision: 1
-}
+  step: 0.1,
+  precision: 1,
+};

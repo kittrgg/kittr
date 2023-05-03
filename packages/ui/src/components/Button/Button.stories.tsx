@@ -1,53 +1,53 @@
-import { Button } from "../Button"
-import { ComponentStory, ComponentMeta } from "@storybook/react"
+import { Button } from '../Button';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 export default {
-	title: "Atom/Button",
-	component: Button,
-	argTypes: {
-		onClick: { action: "clicked" },
-		variant: {
-			options: ["default", "filled", "gradient", "light", "outline"],
-			control: { type: "select" }
-		}
-	}
-} as ComponentMeta<typeof Button>
+  title: 'Atom/Button',
+  component: Button,
+  argTypes: {
+    onClick: { action: 'clicked' },
+    variant: {
+      options: ['default', 'filled', 'gradient', 'light', 'outline'],
+      control: { type: 'select' },
+    },
+  },
+} as ComponentMeta<typeof Button>;
 
 const Template: ComponentStory<typeof Button> = (args) => (
-	<Button {...args}>Button</Button>
-)
+  <Button {...args}>Button</Button>
+);
 
-export const Default = Template.bind({})
+export const Default = Template.bind({});
 Default.args = {
-	variant: "default"
-}
+  variant: 'default',
+};
 
-export const Filled = Template.bind({})
+export const Filled = Template.bind({});
 Filled.args = {
-	variant: "filled"
-}
+  variant: 'filled',
+};
 
-export const Gradient = Template.bind({})
+export const Gradient = Template.bind({});
 Gradient.args = {
-	variant: "gradient"
-}
+  variant: 'gradient',
+};
 
-export const Light = Template.bind({})
+export const Light = Template.bind({});
 Light.args = {
-	variant: "light"
-}
+  variant: 'light',
+};
 
-export const Outline = Template.bind({})
+export const Outline = Template.bind({});
 Outline.args = {
-	variant: "outline"
-}
+  variant: 'outline',
+};
 
-export const Subtle = Template.bind({})
+export const Subtle = Template.bind({});
 Subtle.args = {
-	variant: "subtle"
-}
+  variant: 'subtle',
+};
 
-export const White = Template.bind({})
+export const White = Template.bind({});
 White.args = {
-	variant: "white"
-}
+  variant: 'white',
+};

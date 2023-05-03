@@ -1,8 +1,8 @@
 {
-	"extends": "@kittr/tsconfig/base.json",
+  "extends": "@kittr/tsconfig/base.json",
   "compilerOptions": {
     "types": ["vitest/globals"]
   },
-	"include": ["."],
-	"exclude": ["node_modules"]
+  "include": ["."],
+  "exclude": ["node_modules"]
 }

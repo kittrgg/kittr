@@ -1,50 +1,51 @@
 {
-	"name": "kittr",
-	"version": "0.0.0",
-	"private": true,
-	"workspaces": [
-		"apps/**",
-		"packages/**"
-	],
-	"packageManager": "pnpm@8.2.0",
-	"scripts": {
-		"dx": "dotenv -- run-s docker:up dev",
-		"dx:storybook": "cd packages/ui && pnpm storybook",
-		"dx:db-view": "dotenv -- run-s db:studio",
-		"dev": "dotenv -- turbo run dev --filter=!storybook",
-		"db:deploy": "dotenv -- turbo run db:deploy",
-		"db:studio": "cd packages/prisma && pnpm db:studio",
-		"dx:db-seed": "node ./scripts/createEnvironment/prisma.js && turbo run seed",
-		"dx:db-nuke": "cd packages && cd prisma && pnpm db:reset",
-		"dx:db-snapshot": "docker exec postgres pg_dump -U turboAf -Fc -f backup.sql prisma",
-		"dx:seed-snapshot": "docker exec -i postgres dropdb dev -U dev && echo DB dropped. && docker exec -i postgres pg_restore -U dev -d template1 -v \"backup.pgsql\" --create ",
-		"dx:sb": "turbo run dev --filter=storybook",
-		"typecheck": "turbo typecheck --continue --output-logs=errors-only",
-		"build": "turbo run build",
-		"build:local": "dotenv -- turbo run build",
-		"lint": "turbo run lint --continue",
-		"lint:fix": "turbo run lint:fix",
-		"test": "turbo run test --continue",
-		"clean": "find . -name node_modules -o -name .turbo -o -name .next -o -name dist -type d -prune | xargs rm -rf",
-		"docker:up": "docker compose -f docker-compose.yml up --build -d",
-		"docker:down": "docker compose -f docker-compose.yml down",
-		"format": "prettier \"**/*.{ts,tsx,md}\"",
-		"kill-ports": "kill-port 3000,3001,5555",
-		"build:api": "turbo run build --filter=api",
-		"start:api": "turbo run start --filter=api",
-		"test:e2e": "cd lib && cd e2e && npm run cypress:e2e"
-	},
-	"devDependencies": {
-		"dotenv-cli": "^6.0.0",
-		"envfile": "6.17.0",
+  "name": "kittr",
+  "version": "0.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/**",
+    "packages/**"
+  ],
+  "scripts": {
+    "dx": "dotenv -- run-s docker:up dev",
+    "dx:storybook": "cd packages/ui && pnpm storybook",
+    "dx:db-view": "dotenv -- run-s db:studio",
+    "dev": "dotenv -- turbo run dev --filter=!storybook",
+    "db:deploy": "dotenv -- turbo run db:deploy",
+    "db:studio": "cd packages/prisma && pnpm db:studio",
+    "dx:db-seed": "node ./scripts/createEnvironment/prisma.js && turbo run seed",
+    "dx:db-nuke": "cd packages && cd prisma && pnpm db:reset",
+    "dx:db-snapshot": "docker exec postgres pg_dump -U turboAf -Fc -f backup.sql prisma",
+    "dx:seed-snapshot": "docker exec -i postgres dropdb dev -U dev && echo DB dropped. && docker exec -i postgres pg_restore -U dev -d template1 -v \"backup.pgsql\" --create ",
+    "dx:sb": "turbo run dev --filter=storybook",
+    "typecheck": "turbo typecheck --continue --output-logs=errors-only",
+    "build": "turbo run build",
+    "build:local": "dotenv -- turbo run build",
+    "lint": "turbo run lint --continue",
+    "lint:fix": "turbo run lint:fix --continue",
+    "test": "turbo run test --continue",
+    "clean": "find . -name node_modules -o -name .turbo -o -name .next -o -name dist -type d -prune | xargs rm -rf",
+    "docker:up": "docker compose -f docker-compose.yml up --build -d",
+    "docker:down": "docker compose -f docker-compose.yml down",
+    "format": "prettier \"**/*.{ts,tsx,md,json}\" --loglevel=silent",
+    "format:fix": "prettier \"**/*.{ts,tsx,md,json}\" --write",
+    "kill-ports": "kill-port 3000,3001,5555",
+    "build:api": "turbo run build --filter=api",
+    "start:api": "turbo run start --filter=api",
+    "test:e2e": "cd lib && cd e2e && npm run cypress:e2e"
+  },
+  "devDependencies": {
     "@vercel/style-guide": "4.0.2",
-		"kill-port": "2.0.1",
-		"npm-run-all": "4.1.5",
-		"prettier": "2.7.1",
+    "dotenv-cli": "^6.0.0",
+    "envfile": "6.17.0",
+    "kill-port": "2.0.1",
+    "npm-run-all": "4.1.5",
+    "prettier": "2.7.1",
     "prettier-plugin-packagejson": "^2.3.0",
-		"turbo": "latest"
-	},
-	"prisma": {
-		"schema": "./packages/prisma/schema.prisma"
-	}
+    "turbo": "latest"
+  },
+  "packageManager": "pnpm@8.2.0",
+  "prisma": {
+    "schema": "./packages/prisma/schema.prisma"
+  }
 }

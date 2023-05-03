@@ -3,6 +3,6 @@
  * that don't specifically import React. This file is injected
  * into the build process.
  */
-import React from "react"
+import React from 'react';
 
-export { React }
+export { React };

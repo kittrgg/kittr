@@ -1,88 +1,88 @@
-import { signUp, updateUserDisplayName } from "@kittr/firebase/auth"
-import { prisma, ChannelManagerRoles } from "@kittr/prisma"
-import { TRPCError } from "@trpc/server"
-import admin from "firebase-admin"
+import { signUp, updateUserDisplayName } from '@kittr/firebase/auth';
+import { prisma, ChannelManagerRoles } from '@kittr/prisma';
+import { TRPCError } from '@trpc/server';
+import admin from 'firebase-admin';
 
 export const getUserByEmail = async (email: string) => {
-	const user = await admin.auth().getUserByEmail(email)
+  const user = await admin.auth().getUserByEmail(email);
 
-	if (!user) {
-		throw new TRPCError({
-			code: "INTERNAL_SERVER_ERROR",
-			message: "Couldn't find user with that email."
-		})
-	}
+  if (!user) {
+    throw new TRPCError({
+      code: 'INTERNAL_SERVER_ERROR',
+      message: "Couldn't find user with that email.",
+    });
+  }
 
-	return user
-}
+  return user;
+};
 
 export const verifyIdToken = async (token: string) => {
-	const user = await admin.auth().verifyIdToken(token)
+  const user = await admin.auth().verifyIdToken(token);
 
-	if (!user) {
-		throw new TRPCError({
-			code: "UNAUTHORIZED",
-			message: "Invalid token."
-		})
-	}
+  if (!user) {
+    throw new TRPCError({
+      code: 'UNAUTHORIZED',
+      message: 'Invalid token.',
+    });
+  }
 
-	return user
-}
+  return user;
+};
 
 export const checkRole = async ({
-	firebaseUserId,
-	channelId,
-	roles
+  firebaseUserId,
+  channelId,
+  roles,
 }: {
-	firebaseUserId: string
-	channelId: string
-	roles: ChannelManagerRoles[]
+  firebaseUserId: string;
+  channelId: string;
+  roles: ChannelManagerRoles[];
 }) => {
-	const manager = await prisma.channelManager.findFirst({
-		where: {
-			channelId,
-			firebaseId: firebaseUserId
-		}
-	})
+  const manager = await prisma.channelManager.findFirst({
+    where: {
+      channelId,
+      firebaseId: firebaseUserId,
+    },
+  });
 
-	if (!manager) {
-		throw new TRPCError({
-			code: "UNAUTHORIZED",
-			message: "You are not a manager of this channel."
-		})
-	}
+  if (!manager) {
+    throw new TRPCError({
+      code: 'UNAUTHORIZED',
+      message: 'You are not a manager of this channel.',
+    });
+  }
 
-	const hasPermission = roles.some((role) => manager.role === role)
+  const hasPermission = roles.some((role) => manager.role === role);
 
-	if (!hasPermission) {
-		throw new TRPCError({
-			code: "UNAUTHORIZED",
-			message: "You do not have permission to do that."
-		})
-	}
+  if (!hasPermission) {
+    throw new TRPCError({
+      code: 'UNAUTHORIZED',
+      message: 'You do not have permission to do that.',
+    });
+  }
 
-	return manager
-}
+  return manager;
+};
 
 export const create = async ({
-	displayName,
-	email,
-	password
+  displayName,
+  email,
+  password,
 }: {
-	displayName: string
-	email: string
-	password: string
+  displayName: string;
+  email: string;
+  password: string;
 }) => {
-	const user = await signUp(email, password)
+  const user = await signUp(email, password);
 
-	if (user?.user) {
-		const update = updateUserDisplayName(displayName)
+  if (user?.user) {
+    const update = updateUserDisplayName(displayName);
 
-		return update
-	}
+    return update;
+  }
 
-	throw new TRPCError({
-		code: "INTERNAL_SERVER_ERROR",
-		message: "Something went wrong."
-	})
-}
+  throw new TRPCError({
+    code: 'INTERNAL_SERVER_ERROR',
+    message: 'Something went wrong.',
+  });
+};
