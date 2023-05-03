@@ -1,12 +1,12 @@
-// import { generateKitStats } from "./jobs/createKitStatsAsInterval"
-import { writeViewCounts } from './jobs/writeViewCounts';
+// Import { generateKitStats } from "./jobs/createKitStatsAsInterval"
+import { createServer } from 'node:http';
 import * as Logger from '@kittr/logger/node';
 import cors from 'cors';
 import { CronJob } from 'cron';
 import dotenv from 'dotenv';
 import express from 'express';
-import { createServer } from 'http';
 import { Server } from 'socket.io';
+import { writeViewCounts } from './jobs/writeViewCounts';
 
 dotenv.config({
   path: process.env.NODE_ENV === 'production' ? '.env' : '.env.development',
@@ -43,10 +43,10 @@ app.get('/error', () => {
 });
 
 // // Triggers refetches for the Stripe subscription webhook
-// app.post("/stripe-webhook-reporter", (req, res) => {
-// 	const { _id } = req.body
-// 	io.emit(`dashboard=${_id}`, "Trigger refetch!")
-// 	return res.status(200).json({ success: true })
+// App.post("/stripe-webhook-reporter", (req, res) => {
+// 	Const { _id } = req.body
+// 	Io.emit(`dashboard=${_id}`, "Trigger refetch!")
+// 	Return res.status(200).json({ success: true })
 // })
 
 if (process.env.NODE_ENV === 'production') {
@@ -69,14 +69,14 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // Every night at 3 AM
-// const kitStats = new CronJob(
+// Const kitStats = new CronJob(
 // 	"0 3 * * *",
 // 	() => generateKitStats(),
-// 	null,
-// 	true,
+// 	Null,
+// 	True,
 // 	"America/Los_Angeles"
 // )
-// kitStats.start()
+// KitStats.start()
 
 let openSockets = 0;
 

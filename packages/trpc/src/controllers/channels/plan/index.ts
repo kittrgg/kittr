@@ -1,8 +1,8 @@
+import { TRPCError } from '@trpc/server';
+import { z } from 'zod';
 import { authedProcedure, publicProcedure } from '../../../initTRPC';
 import * as ChannelsPlanService from '../../../services/channels/plan';
 import { checkRole } from '../../../services/users';
-import { TRPCError } from '@trpc/server';
-import { z } from 'zod';
 
 const getPlan = publicProcedure
   .input(z.string())

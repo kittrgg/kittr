@@ -1,5 +1,5 @@
-import { SubSection } from '.';
 import { Text } from '../Text';
+import { SubSection } from '.';
 
 export default {
   title: 'SubSection',

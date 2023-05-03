@@ -1,6 +1,6 @@
 import Stripe from 'stripe';
 
-// halp
+// Halp
 
 if (!process.env.STRIPE_SECRET_KEY) {
   throw new Error('No STRIPE_SECRET_KEY');

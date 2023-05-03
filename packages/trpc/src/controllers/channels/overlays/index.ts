@@ -1,7 +1,7 @@
+import { z } from 'zod';
 import { authedProcedure, publicProcedure } from '../../../initTRPC';
 import * as ChannelsOverlaysService from '../../../services/channels/overlays';
 import { checkRole } from '../../../services/users';
-import { z } from 'zod';
 
 const toggle = authedProcedure
   .input(

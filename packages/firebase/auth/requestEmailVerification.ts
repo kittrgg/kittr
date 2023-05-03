@@ -1,5 +1,5 @@
-import { auth } from '../index';
 import { sendEmailVerification } from 'firebase/auth';
+import { auth } from '../index';
 
 export const requestEmailVerification = async () => {
   const user = auth?.currentUser;

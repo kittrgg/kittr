@@ -1,8 +1,7 @@
+import type { ITwitchScheduleSegment } from '@kittr/types/twitch';
 import { getFromApi } from './utils/getFromApi';
-import { ITwitchScheduleSegment } from '@kittr/types/twitch';
 
-interface IFunc {
-  /**
+/**
    * @params
    * broadcaster_id: Twitch broadcaster_id of the user.
    *
@@ -10,8 +9,7 @@ interface IFunc {
    * Promise fulfilled with data.
    *
    */
-  (broadcaster_id: string): Promise<ITwitchScheduleSegment[]>;
-}
+type IFunc = (broadcaster_id: string) => Promise<ITwitchScheduleSegment[]>;
 
 /** Get the posted schedule for the user. */
 export const getSchedule: IFunc = async (broadcaster_id) => {
@@ -21,7 +19,7 @@ export const getSchedule: IFunc = async (broadcaster_id) => {
       queryParams: { broadcaster_id },
     });
 
-    if (!data?.segments) return [];
+    if (!data.segments) return [];
     return data.segments.filter((segment) => segment.is_recurring);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {

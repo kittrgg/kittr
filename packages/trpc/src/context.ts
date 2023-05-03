@@ -1,9 +1,9 @@
-import * as trpc from '@trpc/server';
-import * as trpcNext from '@trpc/server/adapters/next';
+import type * as trpc from '@trpc/server';
+import type * as trpcNext from '@trpc/server/adapters/next';
 
-type CreateContextOptions = {
+interface CreateContextOptions {
   userToken: string | undefined;
-};
+}
 
 /**
  * Inner function for `createContext` where we create the context.
@@ -22,7 +22,7 @@ export type Context = trpc.inferAsyncReturnType<typeof createContextInner>;
 export async function createContext(
   opts?: trpcNext.CreateNextContextOptions,
 ): Promise<Context> {
-  // for API-response caching see https://trpc.io/docs/caching
+  // For API-response caching see https://trpc.io/docs/caching
   const userToken = opts?.req.headers.authorization;
 
   return await createContextInner({ userToken });

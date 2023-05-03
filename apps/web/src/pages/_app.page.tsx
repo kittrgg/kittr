@@ -1,4 +1,3 @@
-import { trpc } from "@/lib/trpc"
 import { store } from "@Redux/store"
 import GlobalStyles from "@Styles/globals"
 import OverlayStyles from "@Styles/overlay"
@@ -9,11 +8,10 @@ import { Global } from "@mantine/core"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import { useRouter } from "next/router"
 import { Provider } from "react-redux"
-
-const thing = "fart"
+import { trpc } from "@/lib/trpc"
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const MyApp = ({ Component, pageProps }: { Component: React.FC; pageProps: Record<any, any> }) => {
+function MyApp({ Component, pageProps }: { Component: React.FC; pageProps: Record<any, any> }) {
 	const router = useRouter()
 
 	return (

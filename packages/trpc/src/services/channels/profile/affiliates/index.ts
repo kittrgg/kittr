@@ -1,4 +1,5 @@
-import { ChannelAffiliate, prisma } from '@kittr/prisma';
+import type { ChannelAffiliate} from '@kittr/prisma';
+import { prisma } from '@kittr/prisma';
 import { TRPCError } from '@trpc/server';
 import validator from 'validator';
 

@@ -1,6 +1,7 @@
+import type {
+  AccordionProps as MantineAccordionProps} from '@mantine/core';
 import {
-  Accordion as MantineAccordion,
-  AccordionProps as MantineAccordionProps,
+  Accordion as MantineAccordion
 } from '@mantine/core';
 
 export type AccordionProps = MantineAccordionProps;

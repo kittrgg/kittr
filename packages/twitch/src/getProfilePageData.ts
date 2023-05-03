@@ -1,15 +1,15 @@
-import { getChannelData } from './endpoints/getChannelData';
-import { getClips } from './endpoints/getClips';
-import { getRecentVideos } from './endpoints/getRecentVideos';
-import { getSchedule } from './endpoints/getSchedule';
-import { grabLoginName } from './utils/grabLoginName';
-import { UnwrapPromise } from '@kittr/prisma';
-import {
+import type { UnwrapPromise } from '@kittr/prisma';
+import type {
   ITwitchScheduleSegment,
   ITwitchClip,
   ITwitchChannelData,
   ITwitchVideo,
 } from '@kittr/types';
+import { getChannelData } from './endpoints/getChannelData';
+import { getClips } from './endpoints/getClips';
+import { getRecentVideos } from './endpoints/getRecentVideos';
+import { getSchedule } from './endpoints/getSchedule';
+import { grabLoginName } from './utils/grabLoginName';
 
 interface ProfilePageData {
   channelData: ITwitchChannelData;
@@ -26,7 +26,7 @@ export const profilePageQuery = async (twitchLink: string) => {
 
   const [channelData] = await getChannelData(channelTwitchLogin);
 
-  const broadcaster_id = channelData?.id;
+  const broadcaster_id = channelData.id;
 
   const [schedule, clips, recentVideos] = await Promise.all([
     getSchedule(broadcaster_id),

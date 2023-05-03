@@ -1,6 +1,6 @@
 import { prisma } from '@kittr/prisma';
 import { ChannelKitOverlayModel } from '@kittr/prisma/validator';
-import { z } from 'zod';
+import type { z } from 'zod';
 
 export const toggle = async ({
   channelId,

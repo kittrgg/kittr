@@ -1,6 +1,6 @@
-import { getFromApi } from './utils/getFromApi';
 import * as Logger from '@kittr/logger/node';
-import { ITwitchChannelData } from '@kittr/types/twitch';
+import type { ITwitchChannelData } from '@kittr/types/twitch';
+import { getFromApi } from './utils/getFromApi';
 
 /**
  * @params

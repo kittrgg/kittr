@@ -1,8 +1,8 @@
+import { ChannelPcSpecModel } from '@kittr/prisma/validator';
+import { z } from 'zod';
 import { authedProcedure, publicProcedure } from '../../../initTRPC';
 import * as ChannelsPcSpecsService from '../../../services/channels/pcSpecs';
 import { checkRole } from '../../../services/users';
-import { ChannelPcSpecModel } from '@kittr/prisma/validator';
-import { z } from 'zod';
 
 const listPcSpec = publicProcedure
   .input(

@@ -1,4 +1,5 @@
-import { Text as MantineTitle, TitleProps } from '@mantine/core';
+import type { TitleProps } from '@mantine/core';
+import { Text as MantineTitle } from '@mantine/core';
 
 const fontFamily = 'Barlow Condensed, serif';
 

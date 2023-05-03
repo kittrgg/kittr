@@ -1,5 +1,5 @@
-import { Accordion } from '../Accordion';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import type { ComponentStory, ComponentMeta } from '@storybook/react';
+import { Accordion } from ".";
 
 export default {
   title: 'Molecule/Accordion',

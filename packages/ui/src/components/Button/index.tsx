@@ -1,6 +1,7 @@
+import type {
+  ButtonProps as MantineButtonProps} from '@mantine/core';
 import {
-  Button as MantineButton,
-  ButtonProps as MantineButtonProps,
+  Button as MantineButton
 } from '@mantine/core';
 import React from 'react';
 

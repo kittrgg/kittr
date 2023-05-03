@@ -1,6 +1,6 @@
-// eslint-disable-next-line
 import { createStylesServer, ServerStyles } from "@mantine/next"
-import Document, { Html, Head, Main, NextScript, DocumentContext } from "next/document"
+import type { DocumentContext } from "next/document";
+import Document, { Html, Head, Main, NextScript } from "next/document"
 import { ServerStyleSheet } from "styled-components"
 
 const stylesServer = createStylesServer()
@@ -13,7 +13,7 @@ class MyDocument extends Document {
 		try {
 			ctx.renderPage = () =>
 				originalRenderPage({
-					// eslint-disable-next-line
+					 
 					enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />)
 				})
 
@@ -25,7 +25,7 @@ class MyDocument extends Document {
 					<>
 						{initialProps.styles}
 						{sheet.getStyleElement()}
-						<ServerStyles html={initialProps.html} server={stylesServer} key="styles" />
+						<ServerStyles html={initialProps.html} key="styles" server={stylesServer} />
 					</>
 				)
 			}
@@ -43,11 +43,11 @@ class MyDocument extends Document {
 							<></>
 						) : (
 							<script
+								async
+								data-mode="scan"
+								data-site-id="6124b025a3fb50273241cb6a"
 								src="https://hb.vntsm.com/v3/live/ad-manager.min.js"
 								type="text/javascript"
-								data-site-id="6124b025a3fb50273241cb6a"
-								data-mode="scan"
-								async
 							/>
 						)}
 						<script
@@ -68,8 +68,8 @@ class MyDocument extends Document {
           `
 						}}
 					/>
-					{/* google fonts */}
-					<link rel="preconnect" href="https://fonts.gstatic.com" />
+					{/* Google fonts */}
+					<link href="https://fonts.gstatic.com" rel="preconnect" />
 					<link
 						href="https://fonts.googleapis.com/css2?family=Barlow+Condensed&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
 						rel="stylesheet"

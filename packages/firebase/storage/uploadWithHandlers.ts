@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { upload } from './upload';
 import compressor from 'browser-image-compression';
+import { upload } from './upload';
 
-interface IFunc {
-  /**
+/**
    * @params
    * imageFile: The image file to be uploaded.
    *
@@ -16,15 +15,14 @@ interface IFunc {
    * @returns
    * Promise with array of channels.
    */
-  (params: {
+type IFunc = (params: {
     imageFile: File;
     fileName: string;
     maxWidthOrHeight?: number;
     compressorIterations?: number;
     onSuccess: (...args: any) => any;
     onError: (...args: any) => any;
-  }): void;
-}
+  }) => void;
 
 /** Utility for uploading an image and handling various states in UI */
 export const uploadWithHandlers: IFunc = async ({

@@ -1,5 +1,6 @@
 import { signUp, updateUserDisplayName } from '@kittr/firebase/auth';
-import { prisma, ChannelManagerRoles } from '@kittr/prisma';
+import type { ChannelManagerRoles } from '@kittr/prisma';
+import { prisma } from '@kittr/prisma';
 import { TRPCError } from '@trpc/server';
 import admin from 'firebase-admin';
 

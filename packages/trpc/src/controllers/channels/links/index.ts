@@ -1,8 +1,8 @@
+import { ChannelLinkModel } from '@kittr/prisma/validator';
+import { z } from 'zod';
 import { authedProcedure } from '../../../initTRPC';
 import * as ChannelsService from '../../../services/channels';
 import { checkRole } from '../../../services/users';
-import { ChannelLinkModel } from '@kittr/prisma/validator';
-import { z } from 'zod';
 
 const upsertLinks = authedProcedure
   .input(

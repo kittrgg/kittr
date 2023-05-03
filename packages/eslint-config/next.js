@@ -18,13 +18,4 @@ module.exports = {
   },
   rules,
   ignorePatterns: ['**/dist/**', '**/.eslintrc.js'],
-  overrides: [
-    {
-      rules: {
-        // This isn't supported in Next.js today.
-        // https://github.com/vercel/next.js/discussions/35725
-        'import/no-default-export': 'off',
-      },
-    },
-  ],
 };

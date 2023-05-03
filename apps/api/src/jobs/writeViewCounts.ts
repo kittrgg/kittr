@@ -1,6 +1,6 @@
 import { BetaAnalyticsDataClient } from '@google-analytics/data/build/src/v1beta';
 import { prisma } from '@kittr/prisma';
-import { StreamerViewCounts } from '@kittr/types';
+import type { StreamerViewCounts } from '@kittr/types';
 
 const analyticsDataClient = new BetaAnalyticsDataClient({
   credentials: JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS || '{}'),
@@ -47,7 +47,7 @@ const getChannelViewCounts = async (
     });
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    return response.rows!.reduce((acc, row) => {
+    return response.rows!.reduce<Record<string, number>>((acc, row) => {
       /**
        * This splits the string coming in as the example below:
        *
@@ -68,7 +68,7 @@ const getChannelViewCounts = async (
         acc[streamer] = parseFloat(row.metricValues?.[0].value ?? '');
       }
       return acc;
-    }, {} as Record<string, number>);
+    }, {});
   } catch (error) {
     console.log({ error });
     throw error;

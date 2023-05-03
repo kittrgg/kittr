@@ -1,12 +1,13 @@
-import {
+import type {
   Channel,
   ChannelLink,
-  ChannelProfile,
+  ChannelProfile} from '@kittr/prisma';
+import {
   LinkProperty,
   prisma,
 } from '@kittr/prisma';
 import { headers, grabLoginName } from '@kittr/twitch';
-import { ITwitchLiveChannels } from '@kittr/types';
+import type { ITwitchLiveChannels } from '@kittr/types';
 import { fetcher, toURL, badWordFilter } from '@kittr/utils';
 import { TRPCError } from '@trpc/server';
 
@@ -437,7 +438,7 @@ export const listLiveChannels = async () => {
       return url;
     } catch (error) {
       console.error(error);
-      // logReport.error("Twitch Live Channels API ", error as any)
+      // LogReport.error("Twitch Live Channels API ", error as any)
       return '';
     }
   };
@@ -476,7 +477,7 @@ export const listLiveChannels = async () => {
         .includes(
           getTwitchLink(channel).substring(
             getTwitchLink(channel).lastIndexOf('/') + 1,
-          ) as string,
+          ) ,
         ),
     );
 

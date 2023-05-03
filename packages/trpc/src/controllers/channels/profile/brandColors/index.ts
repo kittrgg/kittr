@@ -1,7 +1,7 @@
+import { z } from 'zod';
 import { authedProcedure } from '../../../../initTRPC';
 import * as ChannelsBrandColorsService from '../../../../services/channels';
 import { checkRole } from '../../../../services/users';
-import { z } from 'zod';
 
 const upsertBrandColor = authedProcedure
   .input(

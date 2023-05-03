@@ -1,7 +1,7 @@
-import { publicProcedure } from '../../initTRPC';
-import * as GamesService from '../../services/games';
 import { prisma } from '@kittr/prisma';
 import { z } from 'zod';
+import { publicProcedure } from '../../initTRPC';
+import * as GamesService from '../../services/games';
 
 const listGames = publicProcedure.query(async () => {
   const game = await prisma.game.findMany({

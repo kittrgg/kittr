@@ -1,7 +1,7 @@
+import { z } from 'zod';
 import { authedProcedure, publicProcedure } from '../../../initTRPC';
 import * as ChannelsService from '../../../services/channels';
 import { checkRole } from '../../../services/users';
-import { z } from 'zod';
 
 const addGameToChannel = authedProcedure
   .input(

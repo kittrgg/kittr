@@ -1,5 +1,6 @@
-import { TextProps, Text as MantineText, useMantineTheme } from '@mantine/core';
-import { ReactNode } from 'react';
+import type { TextProps} from '@mantine/core';
+import { Text as MantineText, useMantineTheme } from '@mantine/core';
+import type { ReactNode } from 'react';
 
 const fontFamily = 'Montserrat, sans-serif';
 
@@ -149,7 +150,7 @@ export const Text = ({ preset, children, ...props }: Props) => {
 
   return (
     // <MantineText
-    // 	sx={{ color: props.color || colors.navy[9], ...styles, ...props.sx }}
+    // 	Sx={{ color: props.color || colors.navy[9], ...styles, ...props.sx }}
     // 	{...props}
     // >
     <MantineText sx={{ ...styles, ...props.sx }} {...props}>

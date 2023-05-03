@@ -1,6 +1,6 @@
+import type { CSSObject, MantineTheme, MantineThemeOverride } from '@mantine/core';
 import { gray } from './colors/gray';
 import { red } from './colors/red';
-import { CSSObject, MantineTheme, MantineThemeOverride } from '@mantine/core';
 
 export const other = {
   colors: {
@@ -21,7 +21,7 @@ export const theme: MantineThemeOverride = {
   other,
   colors: {
     brand: gray,
-    red: red,
+    red,
   },
   primaryColor: 'brand',
 };

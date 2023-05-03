@@ -1,9 +1,9 @@
-import { authedProcedure } from '../../initTRPC';
-import { getUrl } from '../../utils';
 import { stripe } from '@kittr/money';
 import { prisma } from '@kittr/prisma';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
+import { getUrl } from '../../utils';
+import { authedProcedure } from '../../initTRPC';
 
 export const buyPremium = authedProcedure
   .input(
@@ -91,7 +91,7 @@ export const managePremium = authedProcedure
       }
 
       const subscription = await stripe.subscriptions.retrieve(
-        channel.plan?.stripeSubscriptionId,
+        channel.plan.stripeSubscriptionId,
       );
       const session = await stripe.billingPortal.sessions.create({
         customer: subscription.customer as string,

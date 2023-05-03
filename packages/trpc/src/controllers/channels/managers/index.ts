@@ -1,8 +1,8 @@
+import { ChannelManagerModel } from '@kittr/prisma/validator';
+import { z } from 'zod';
 import { authedProcedure } from '../../../initTRPC';
 import * as ChannelsManagersService from '../../../services/channels/managers';
 import { checkRole } from '../../../services/users';
-import { ChannelManagerModel } from '@kittr/prisma/validator';
-import { z } from 'zod';
 
 const listManagers = authedProcedure
   .input(

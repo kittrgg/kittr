@@ -1,6 +1,6 @@
+import { z } from 'zod';
 import { publicProcedure } from '../../initTRPC';
 import * as TwitchService from '../../services/twitch';
-import { z } from 'zod';
 
 const getProfile = publicProcedure
   .input(z.string())

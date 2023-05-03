@@ -1,5 +1,5 @@
 import * as Sentry from '@sentry/node';
-import { Severity } from '@sentry/types';
+import type { Severity } from '@sentry/types';
 
 /** Send exception to the error logger from node. */
 export const logError = (message: string | Error, withConsole?: boolean) => {

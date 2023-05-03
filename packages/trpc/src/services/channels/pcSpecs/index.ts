@@ -1,4 +1,5 @@
-import { ChannelPcSpec, prisma, Prisma } from '@kittr/prisma';
+import type { ChannelPcSpec, Prisma } from '@kittr/prisma';
+import { prisma } from '@kittr/prisma';
 
 export const listPcSpecs = async (channelId: string) => {
   const channel = await prisma.channel.findFirst({

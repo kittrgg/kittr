@@ -1,7 +1,7 @@
+import { z } from 'zod';
 import { authedProcedure } from '../../../../initTRPC';
 import * as ChannelsProfileCoverPhotoService from '../../../../services/channels/profile/coverPhoto';
 import { checkRole } from '../../../../services/users';
-import { z } from 'zod';
 
 const update = authedProcedure
   .input(

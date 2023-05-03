@@ -1,11 +1,11 @@
-import { authedProcedure, publicProcedure } from '../../initTRPC';
-import * as ChannelsService from '../../services/channels';
-import { checkRole } from '../../services/users';
 import { ChannelModel } from '@kittr/prisma/validator';
 import Stripe from 'stripe';
 import { z } from 'zod';
+import { authedProcedure, publicProcedure } from '../../initTRPC';
+import * as ChannelsService from '../../services/channels';
+import { checkRole } from '../../services/users';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2020-08-27',
 });
 
@@ -119,7 +119,7 @@ const deleteChannel = authedProcedure
     const channel = await ChannelsService.deleteChannel({ channelId });
 
     if (channel.plan?.stripeSubscriptionId) {
-      await stripe.subscriptions.del(channel.plan?.stripeSubscriptionId);
+      await stripe.subscriptions.del(channel.plan.stripeSubscriptionId);
     }
 
     return channel;

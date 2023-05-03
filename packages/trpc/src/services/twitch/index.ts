@@ -1,14 +1,14 @@
-import { getChannelData } from './getChannelData';
-import { getClips } from './getClips';
-import { getRecentVideos } from './getRecentVideos';
-import { getSchedule } from './getSchedule';
 import { grabLoginName } from '@kittr/twitch';
-import {
+import type {
   ITwitchChannelData,
   ITwitchClip,
   ITwitchScheduleSegment,
   ITwitchVideo,
 } from '@kittr/types';
+import { getChannelData } from './getChannelData';
+import { getClips } from './getClips';
+import { getRecentVideos } from './getRecentVideos';
+import { getSchedule } from './getSchedule';
 
 export interface ProfilePageData {
   channelData: ITwitchChannelData;
@@ -24,7 +24,7 @@ export const getProfile = async (
 
   const [channelData] = await getChannelData(channelTwitchLogin);
 
-  const broadcaster_id = channelData?.id;
+  const broadcaster_id = channelData.id;
 
   if (!broadcaster_id) {
     return {

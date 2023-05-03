@@ -1,6 +1,6 @@
-import { Title } from '../Title';
 import { Box } from '@mantine/core';
 import React from 'react';
+import { Title } from '../Title';
 
 export interface SectionProps {
   title?: string;

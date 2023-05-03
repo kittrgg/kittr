@@ -1,5 +1,5 @@
-import { Button } from '../Button';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import type { ComponentStory, ComponentMeta } from '@storybook/react';
+import { Button } from ".";
 
 export default {
   title: 'Atom/Button',

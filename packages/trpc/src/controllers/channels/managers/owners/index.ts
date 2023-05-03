@@ -1,7 +1,7 @@
+import { z } from 'zod';
 import { authedProcedure } from '../../../../initTRPC';
 import * as ChannelsManagersOwnersService from '../../../../services/channels/managers/owners';
 import { checkRole } from '../../../../services/users';
-import { z } from 'zod';
 
 const editOwner = authedProcedure
   .input(

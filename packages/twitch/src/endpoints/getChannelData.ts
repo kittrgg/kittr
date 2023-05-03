@@ -1,9 +1,8 @@
-import { getFromApi } from '../utils/getFromApi';
 import * as Logger from '@kittr/logger/node';
-import { ITwitchChannelData } from '@kittr/types/twitch';
+import type { ITwitchChannelData } from '@kittr/types/twitch';
+import { getFromApi } from '../utils/getFromApi';
 
-interface IFunc {
-  /**
+/**
    * @params
    * login: Twitch login for the user.
    *
@@ -11,8 +10,7 @@ interface IFunc {
    * Promise fulfilled with Twitch schedule segments.
    *
    */
-  (login: string): Promise<ITwitchChannelData[]>;
-}
+type IFunc = (login: string) => Promise<ITwitchChannelData[]>;
 
 /** Get the posted schedule for the user. */
 export const getChannelData: IFunc = async (login) => {
@@ -24,7 +22,7 @@ export const getChannelData: IFunc = async (login) => {
 
     return data;
   } catch (error) {
-    Logger.logError(error as unknown as Error);
+    Logger.logError(error  as Error);
     console.log({ twitchError: error });
     throw { twitchError: error };
   }

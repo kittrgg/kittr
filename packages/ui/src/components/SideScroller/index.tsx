@@ -1,9 +1,9 @@
-import SVG from '../SVG';
-import { Section } from '../Section';
 import { ActionIcon, Box, ScrollArea } from '@mantine/core';
 import { useElementSize } from '@mantine/hooks';
 import React, { useMemo, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
+import { Section } from '../Section';
+import SVG from '../SVG';
 
 interface Props {
   title?: string;
@@ -27,9 +27,9 @@ export const SideScroller = ({ title, action, children }: Props) => {
       return (
         !isMobile && !(currentScrollPosition >= viewport.current.scrollWidth)
       );
-    } else {
+    } 
       return !isMobile;
-    }
+    
   }, [scrollPosition, viewport.current, width]);
 
   const scrollRight = () => {

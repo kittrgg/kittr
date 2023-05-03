@@ -1,14 +1,13 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import { flush } from "@sentry/nextjs"
-import { captureException } from "@sentry/nextjs"
+import { flush, captureException } from "@sentry/nextjs"
 import NextErrorComponent from "next/error"
 
-const MyError = ({ statusCode, hasGetInitialPropsRun, err }) => {
+function MyError({ statusCode, hasGetInitialPropsRun, err }) {
 	if (!hasGetInitialPropsRun && err) {
-		// getInitialProps is not called in case of
+		// GetInitialProps is not called in case of
 		// https://github.com/vercel/next.js/issues/8592. As a workaround, we pass
-		// err via _app.js so it can be captured
+		// Err via _app.js so it can be captured
 		captureException(err, { tags: { isKittr: true } })
 		// Flushing is not required in this case as it only happens on the client
 	}
@@ -22,7 +21,7 @@ MyError.getInitialProps = async (context) => {
 	const { res, err } = context
 
 	// Workaround for https://github.com/vercel/next.js/issues/8592, mark when
-	// getInitialProps has run
+	// GetInitialProps has run
 	errorInitialProps.hasGetInitialPropsRun = true
 
 	// Returning early because we don't want to log 404 errors to Logger.
@@ -33,13 +32,13 @@ MyError.getInitialProps = async (context) => {
 	// Running on the server, the response object (`res`) is available.
 	//
 	// Next.js will pass an err on the server if a page's data fetching methods
-	// threw or returned a Promise that rejected
+	// Threw or returned a Promise that rejected
 	//
 	// Running on the client (browser), Next.js will provide an err if:
 	//
 	//  - a page's `getInitialProps` threw or returned a Promise that rejected
 	//  - an exception was thrown somewhere in the React lifecycle (render,
-	//    componentDidMount, etc) that was caught by Next.js's React Error
+	//    ComponentDidMount, etc) that was caught by Next.js's React Error
 	//    Boundary. Read more about what types of exceptions are caught by Error
 	//    Boundaries: https://reactjs.org/docs/error-boundaries.html
 
@@ -54,8 +53,8 @@ MyError.getInitialProps = async (context) => {
 	}
 
 	// If this point is reached, getInitialProps was called without any
-	// information about what the error might be. This is unexpected and may
-	// indicate a bug introduced in Next.js, so record it in Logger
+	// Information about what the error might be. This is unexpected and may
+	// Indicate a bug introduced in Next.js, so record it in Logger
 
 	captureException(error, { tags: { isKittr: true } })
 	await flush(2000)

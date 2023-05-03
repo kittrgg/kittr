@@ -1,4 +1,5 @@
-import { prisma, WarzoneTwoKitBase, WarzoneTwoKitOption } from '@kittr/prisma';
+import type { WarzoneTwoKitBase, WarzoneTwoKitOption } from '@kittr/prisma';
+import { prisma } from '@kittr/prisma';
 
 export const listKitBases = async () => {
   const result = await prisma.warzoneTwoKitBase.findMany({
@@ -58,14 +59,14 @@ export const updateKitBase = async ({
   commandCodes,
 }: {
   base: WarzoneTwoKitBase;
-  // categoryId: string,
+  // CategoryId: string,
   commandCodes: string[] | null;
-  // options: WarzoneKitOption[]
+  // Options: WarzoneKitOption[]
 }) => {
   const {
     id,
-    // categoryId: removeCatId,
-    //  gameId: removeGameId,
+    // CategoryId: removeCatId,
+    //  GameId: removeGameId,
     ...data
   } = base;
 
@@ -81,16 +82,16 @@ export const updateKitBase = async ({
     },
     data: {
       ...data,
-      // category: {
-      // 	connect: {
-      // 		id: categoryId
+      // Category: {
+      // 	Connect: {
+      // 		Id: categoryId
       // 	}
       // },
       commandCodes: {
         create: commandCodes?.map((el) => ({ code: el })),
       },
-      // availableOptions: {
-      // 	connectOrCreate: options.map(option => ({ create: option, where: option }))
+      // AvailableOptions: {
+      // 	ConnectOrCreate: options.map(option => ({ create: option, where: option }))
       // },
     },
   });

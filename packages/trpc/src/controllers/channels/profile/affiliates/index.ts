@@ -1,8 +1,8 @@
+import { ChannelAffiliateModel } from '@kittr/prisma/validator';
+import { z } from 'zod';
 import { authedProcedure } from '../../../../initTRPC';
 import * as ChannelsService from '../../../../services/channels';
 import { checkRole } from '../../../../services/users';
-import { ChannelAffiliateModel } from '@kittr/prisma/validator';
-import { z } from 'zod';
 
 const createAffiliate = authedProcedure
   .input(

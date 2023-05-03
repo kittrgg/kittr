@@ -1,9 +1,9 @@
-import { auth } from '../index';
 import {
   EmailAuthProvider,
   reauthenticateWithCredential,
   signInWithCredential,
 } from 'firebase/auth';
+import { auth } from '../index';
 
 export const reauthenticate = async (password: string) => {
   const user = auth?.currentUser;
@@ -13,7 +13,7 @@ export const reauthenticate = async (password: string) => {
 
     // We are forcing the type string here because we only use the email auth provider
     // If in the future we used other auth providers, this may break!
-    const authCred = EmailAuthProvider.credential(email as string, password);
+    const authCred = EmailAuthProvider.credential(email!, password);
 
     if (!auth) {
       console.log("No auth is up. You're probably testing?");

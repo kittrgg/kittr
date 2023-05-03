@@ -1,10 +1,9 @@
-import { headers } from './utils/auth';
-import { grabLoginName } from './utils/grabLoginName';
-import { prisma } from '@kittr/prisma';
-import { LinkProperty } from '@kittr/prisma';
-import { Channel, ChannelLink } from '@kittr/prisma';
-import { ITwitchLiveChannels } from '@kittr/types/twitch';
+import type { Channel, ChannelLink } from '@kittr/prisma';
+import { prisma , LinkProperty  } from '@kittr/prisma';
+import type { ITwitchLiveChannels } from '@kittr/types/twitch';
 import { fetcher } from '@kittr/utils';
+import { grabLoginName } from './utils/grabLoginName';
+import { headers } from './utils/auth';
 
 export interface ChannelWithLinks extends Channel {
   links: ChannelLink[];
@@ -50,7 +49,7 @@ export const liveChannelsQuery = async () => {
       return url;
     } catch (error) {
       console.error(error);
-      // logReport.error("Twitch Live Channels API ", error as any)
+      // LogReport.error("Twitch Live Channels API ", error as any)
       return '';
     }
   };
@@ -89,7 +88,7 @@ export const liveChannelsQuery = async () => {
         .includes(
           getTwitchLink(channel).substring(
             getTwitchLink(channel).lastIndexOf('/') + 1,
-          ) as string,
+          ) ,
         ),
     );
 

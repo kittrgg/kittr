@@ -1,7 +1,7 @@
+import { z } from 'zod';
 import { authedProcedure } from '../../../../initTRPC';
 import * as ChannelsProfileYoutubeAutoplayService from '../../../../services/channels/profile/youtubeAutoplay';
 import { checkRole } from '../../../../services/users';
-import { z } from 'zod';
 
 const toggle = authedProcedure
   .input(

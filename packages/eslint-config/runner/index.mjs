@@ -33,7 +33,7 @@ const main = async () => {
 
   for await (const file of files) {
     const [result] = await eslint.lintFiles(file);
-    // await ESLint.outputFixes([result])
+    await ESLint.outputFixes([result])
 
     if (result.filePath.includes("node_modules")) return
 

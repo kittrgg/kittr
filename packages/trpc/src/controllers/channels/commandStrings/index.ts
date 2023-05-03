@@ -1,7 +1,7 @@
+import { z } from 'zod';
 import { authedProcedure, publicProcedure } from '../../../initTRPC';
 import * as ChannelsCommandStringsService from '../../../services/channels/commandStrings';
 import { checkRole } from '../../../services/users';
-import { z } from 'zod';
 
 const getCommandString = publicProcedure
   .input(

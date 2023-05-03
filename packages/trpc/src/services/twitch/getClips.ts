@@ -1,9 +1,8 @@
-import { getFromApi } from './utils/getFromApi';
 import * as Logger from '@kittr/logger/node';
-import { ITwitchClip } from '@kittr/types/twitch';
+import type { ITwitchClip } from '@kittr/types/twitch';
+import { getFromApi } from './utils/getFromApi';
 
-interface IFunc {
-  /**
+/**
    * @params
    * broadcaster_id: Twitch broadcaster_id of the user.
    *
@@ -11,8 +10,7 @@ interface IFunc {
    * Promise fulfilled with Twitch clips for the user.
    *
    */
-  (broadcaster_id: string): Promise<ITwitchClip[]>;
-}
+type IFunc = (broadcaster_id: string) => Promise<ITwitchClip[]>;
 
 export const getClips: IFunc = async (
   broadcaster_id,
@@ -25,7 +23,7 @@ export const getClips: IFunc = async (
 
     return data || [];
   } catch (error) {
-    Logger.logError(error as unknown as Error);
+    Logger.logError(error  as Error);
     console.log({ twitchError: error });
     throw { twitchError: error };
   }

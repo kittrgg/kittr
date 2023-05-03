@@ -1,5 +1,5 @@
+import type { ComponentStory, ComponentMeta } from '@storybook/react';
 import { NumberInput } from '.';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 export default {
   title: 'Atom/NumberInput',

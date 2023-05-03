@@ -1,8 +1,7 @@
-import { headers } from './auth';
 import { fetcher } from '@kittr/utils';
+import { headers } from './auth';
 
-interface IFunc {
-  /**
+/**
    * @params
    * endpointBaseUrl: Twitch api endpoint to use as the base for the request.
    *
@@ -10,11 +9,10 @@ interface IFunc {
    * Promise fulfilled with data.
    *
    */
-  <T>(params: {
+type IFunc = <T>(params: {
     endpointBaseUrl: string;
     queryParams: Record<string, string>;
-  }): Promise<{ data: T }>;
-}
+  }) => Promise<{ data: T }>;
 
 /** Pretty naive implementation for getting data from the Twitch API. */
 export const getFromApi: IFunc = async ({ endpointBaseUrl, queryParams }) => {

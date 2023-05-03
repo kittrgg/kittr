@@ -1,11 +1,12 @@
-/* eslint-disable max-len */
-import {
-  prisma,
+ 
+import type {
   WarzoneTwoKit,
   WarzoneTwoKitOption,
   WarzoneKit,
   WarzoneKitOption,
-  WarzoneTwoKitOptionTuning,
+  WarzoneTwoKitOptionTuning} from '@kittr/prisma';
+import {
+  prisma
 } from '@kittr/prisma';
 
 export const upsertKit = async ({
@@ -43,7 +44,7 @@ export const upsertKit = async ({
       },
     },
     options: {
-      connect: kit?.options?.map((opt) => ({
+      connect: kit.options?.map((opt) => ({
         id: opt.id,
       })),
     },

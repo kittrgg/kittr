@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { prisma, WarzoneKitBase, WarzoneKitOption } from '@kittr/prisma';
+import type { WarzoneKitBase, WarzoneKitOption } from '@kittr/prisma';
+import { prisma } from '@kittr/prisma';
 
 export const listKitBases = async () => {
   const result = await prisma.warzoneKitBase.findMany({
@@ -51,19 +52,19 @@ export const createKitBase = async ({
 
 export const updateKitBase = async ({
   base,
-}: // categoryId,
-// commandCodes,
-//  options
+}: // CategoryId,
+// CommandCodes,
+//  Options
 {
   base: WarzoneKitBase;
-  // categoryId: string,
-  // commandCodes: WarzoneCommandCode[]
-  // options: WarzoneKitOption[]
+  // CategoryId: string,
+  // CommandCodes: WarzoneCommandCode[]
+  // Options: WarzoneKitOption[]
 }) => {
   const {
     id,
-    // categoryId: removeCatId,
-    //  gameId: removeGameId,
+    // CategoryId: removeCatId,
+    //  GameId: removeGameId,
     ...data
   } = base;
 
@@ -73,16 +74,16 @@ export const updateKitBase = async ({
     },
     data: {
       ...data,
-      // category: {
-      // 	connect: {
-      // 		id: categoryId
+      // Category: {
+      // 	Connect: {
+      // 		Id: categoryId
       // 	}
       // },
-      // commandCodes: {
-      // 	connectOrCreate: commandCodes.map(code => ({ create: code, where: code }))
+      // CommandCodes: {
+      // 	ConnectOrCreate: commandCodes.map(code => ({ create: code, where: code }))
       // },
-      // availableOptions: {
-      // 	connectOrCreate: options.map(option => ({ create: option, where: option }))
+      // AvailableOptions: {
+      // 	ConnectOrCreate: options.map(option => ({ create: option, where: option }))
       // },
     },
   });

@@ -1,6 +1,3 @@
-import { authedProcedure } from '../../../initTRPC';
-import * as ChannelsService from '../../../services/channels';
-import { checkRole } from '../../../services/users';
 import {
   WarzoneKitModel,
   WarzoneKitOptionModel,
@@ -9,6 +6,9 @@ import {
   WarzoneTwoKitOptionTuningModel,
 } from '@kittr/prisma/validator';
 import { z } from 'zod';
+import { authedProcedure } from '../../../initTRPC';
+import * as ChannelsService from '../../../services/channels';
+import { checkRole } from '../../../services/users';
 
 const upsertKitToChannel = authedProcedure
   .input(

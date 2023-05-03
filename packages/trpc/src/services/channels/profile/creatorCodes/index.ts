@@ -1,4 +1,5 @@
-import { ChannelCreatorCode, prisma } from '@kittr/prisma';
+import type { ChannelCreatorCode} from '@kittr/prisma';
+import { prisma } from '@kittr/prisma';
 
 export const upsertCode = async ({
   codeUpdate,
@@ -25,7 +26,7 @@ export const upsertCode = async ({
     where: {
       id: codeUpdate.id ?? '',
     },
-    update: update,
+    update,
     create: update,
   });
 

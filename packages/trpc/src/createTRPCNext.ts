@@ -1,10 +1,10 @@
-import { AppRouter } from '..';
 import { getToken } from '@kittr/firebase/auth';
-import { QueryClientConfig } from '@tanstack/react-query';
+import type { QueryClientConfig } from '@tanstack/react-query';
 import { httpBatchLink } from '@trpc/client/links/httpBatchLink';
 import { loggerLink } from '@trpc/client/links/loggerLink';
 import { createTRPCNext } from '@trpc/next';
 import superjson from 'superjson';
+import type { AppRouter } from '..';
 
 interface Params {
   url: string;
@@ -18,7 +18,7 @@ export const trpc = ({ url, queryClientConfig }: Params) =>
         url,
         transformer: superjson,
         links: [
-          // adds pretty logs to your console in development and logs errors in production
+          // Adds pretty logs to your console in development and logs errors in production
           loggerLink({
             enabled: (opts) =>
               process.env.NODE_ENV === 'development' ||
@@ -34,5 +34,5 @@ export const trpc = ({ url, queryClientConfig }: Params) =>
         queryClientConfig,
       };
     },
-    // ssr: true,
+    // Ssr: true,
   });

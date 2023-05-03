@@ -18,7 +18,7 @@ export const updateSetupPhotos = async ({
         upsert: {
           where: {
             channelProfileId_slot: {
-              channelProfileId: channelProfileId,
+              channelProfileId,
               slot,
             },
           },

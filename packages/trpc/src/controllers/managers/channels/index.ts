@@ -1,5 +1,5 @@
-import { authedProcedure } from '../../../initTRPC';
 import { prisma } from '@kittr/prisma';
+import { authedProcedure } from '../../../initTRPC';
 
 const listChannels = authedProcedure.query(async ({ ctx }) => {
   const channels = prisma.channel.findMany({

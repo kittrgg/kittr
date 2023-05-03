@@ -1,6 +1,7 @@
-import { getUserByEmail } from '../../users';
 import admin from '@kittr/firebase/admin';
-import { prisma, ChannelManager, ChannelManagerRoles } from '@kittr/prisma';
+import type { ChannelManager, ChannelManagerRoles } from '@kittr/prisma';
+import { prisma } from '@kittr/prisma';
+import { getUserByEmail } from '../../users';
 
 export const listManagers = async ({
   managers,

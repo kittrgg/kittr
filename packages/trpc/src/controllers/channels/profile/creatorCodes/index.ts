@@ -1,8 +1,8 @@
+import { ChannelCreatorCodeModel } from '@kittr/prisma/validator';
+import { z } from 'zod';
 import { authedProcedure } from '../../../../initTRPC';
 import * as ChannelsProfileCreatorCodesService from '../../../../services/channels/profile/creatorCodes';
 import { checkRole } from '../../../../services/users';
-import { ChannelCreatorCodeModel } from '@kittr/prisma/validator';
-import { z } from 'zod';
 
 const upsertCode = authedProcedure
   .input(
