@@ -12,7 +12,7 @@
 	},
 	"scripts": {
     "lint": "node ./runner/index.mjs",
-    "eslint-fix": "node ./runner/index.mjs --fix",
+    "lint:fix": "node ./runner/index.mjs --fix",
     "type-check": "tsc --noEmit"
 	},
 	"dependencies": {

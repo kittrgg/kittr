@@ -10,6 +10,8 @@
 	},
 	"private": true,
 	"scripts": {
+		"lint": "eslint-runner",
+		"lint:fix": "eslint-runner --fix",
 		"typecheck": "tsc --noEmit"
 	},
 	"devDependencies": {

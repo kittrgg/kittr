@@ -8,6 +8,8 @@
 		"./mock": "./mock.ts"
 	},
 	"scripts": {
+		"lint": "eslint-runner",
+		"lint:fix": "eslint-runner --fix",
 		"db:deploy": "prisma migrate deploy",
 		"db:create-migrations": "prisma migrate dev",
 		"db:migrate": "prisma db push --force-reset",

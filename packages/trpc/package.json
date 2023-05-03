@@ -9,6 +9,7 @@
 	"license": "MIT",
 	"scripts": {
 		"lint": "eslint-runner",
+		"lint:fix": "eslint-runner --fix",
 		"test": "vitest",
 		"typecheck": "tsc --noEmit"
 	},
@@ -20,6 +21,7 @@
 		"@kittr/prisma": "workspace:*",
 		"@kittr/twitch": "workspace:*",
 		"@kittr/types": "workspace:*",
+		"jest": "^29.5.0",
 		"@kittr/utils": "workspace:*",
 		"@trpc/client": "^10.9.0",
 		"superjson": "^1.12.3",
