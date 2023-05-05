@@ -2,10 +2,6 @@
   "name": "kittr",
   "version": "0.0.0",
   "private": true,
-  "workspaces": [
-    "apps/**",
-    "packages/**"
-  ],
   "scripts": {
     "dx": "dotenv -- run-s docker:up dev",
     "dx:storybook": "cd packages/ui && pnpm storybook",
