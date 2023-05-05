@@ -19,7 +19,7 @@ const main = async () => {
 
     const eslint = new ESLint({
       useEslintrc: true,
-      fix: isFix
+      fix: isFix,
     });
 
   const { ignorePatterns } = await eslint.calculateConfigForFile('*');
@@ -47,6 +47,12 @@ const main = async () => {
   }
 }
 console.log(`Total issues: ${totalIssues}`)
+// TODO: Once we have the lints back under control,
+// we can introduce this to fail whenever there are lint problems.
+// if(totalIssues) {
+//   process.exitCode = 1;
+//   console.error(`ESLint found ${totalIssues}. We thank you for cleaning those up. :)`);
+// }
 }
 
  await main()
