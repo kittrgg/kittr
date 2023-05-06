@@ -68,7 +68,7 @@ function BannerTicker({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 			if (hasAnActiveKit) {
 				if (cursor === 0) {
 					const kitCount = [data?.primaryWzTwoKit, data?.secondaryWzTwoKit].filter(
-						(kit) => Boolean(kit) && Object.keys(kit).length > 0
+						(kit) => Boolean(kit) && kit && Object.keys(kit).length > 0
 					).length
 
 					if (kitCount > 1) {

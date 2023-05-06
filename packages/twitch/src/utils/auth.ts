@@ -28,9 +28,9 @@ export const getAuthToken = async () => {
 };
 
 export const headers = async (): Promise<{
-  'Client-ID': string | undefined;
+  'Client-ID': string;
   Authorization: string;
 }> => ({
-  'Client-ID': process.env.TWITCH_CLIENT_ID,
+  'Client-ID': process.env.TWITCH_CLIENT_ID!,
   Authorization: `Bearer ${(await getAuthToken()).access_token}`,
 });
