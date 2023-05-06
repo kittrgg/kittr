@@ -5,7 +5,8 @@
   "license": "MIT",
   "exports": {
     ".": "./src/components/index.tsx",
-    "./new": "./src/components/new/*"
+    "./new": "./src/new/index.ts",
+    "./styles.css": "./dist/compiled.css"
   },
   "typesVersions": {
     "*": {
@@ -18,8 +19,12 @@
     }
   },
   "scripts": {
+    "build": "tailwindcss -o dist/compiled.css --minify",
+    "dev": "concurrently \"tailwindcss -o dist/compiled.css --minify --watch\"",
     "lint": "eslint-runner",
     "lint:fix": "eslint-runner --fix",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -28,7 +33,6 @@
     "@mantine/hooks": "^5.10.2",
     "@mantine/next": "^5.10.2",
     "@mantine/rte": "^5.10.2",
-      "jest": "^29.5.0",
     "react": "^18.2.0",
     "react-device-detect": "2.2.2",
     "react-dom": "^18.2.0"
@@ -36,11 +40,17 @@
   "devDependencies": {
     "@babel/core": "7.18.9",
     "@kittr/lint": "workspace:*",
+    "@kittr/tailwind": "workspace:*",
     "@kittr/tsconfig": "workspace:*",
     "@kittr/types": "workspace:*",
-    "@storybook/react": "6.5.9",
+    "@testing-library/react": "^14.0.0",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
-    "typescript": "5.0.0-beta"
+    "@vitejs/plugin-react": "2.0.0",
+    "concurrently": "^8.0.1",
+    "happy-dom": "^9.10.9",
+    "typescript": "^5.0.4",
+    "vite": "^4.3.5",
+    "vitest": "^0.31.0"
   }
 }

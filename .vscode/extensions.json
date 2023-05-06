@@ -4,6 +4,7 @@
     "dbaeumer.vscode-eslint", // eslint plugin
     "stripe.vscode-stripe", // stripe VSCode extension
     "Prisma.prisma", // syntax|format|completion for prisma
-    "ms-playwright.playwright" // E2E testing GUI
+    "ms-playwright.playwright", // E2E testing GUI
+    "bradlc.vscode-tailwindcss" // Tailwind Intellisense
   ]
 }

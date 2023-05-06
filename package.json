@@ -4,9 +4,8 @@
   "private": true,
   "scripts": {
     "dx": "dotenv -- run-s docker:up dev",
-    "dx:storybook": "cd packages/ui && pnpm storybook",
+    "dx:ui": "turbo dev --filter={react-design-system,ui}",
     "dx:db-view": "dotenv -- run-s db:studio",
-    "dev": "dotenv -- turbo dev --filter=!storybook",
     "db:deploy": "dotenv -- turbo db:deploy",
     "db:studio": "cd packages/prisma && pnpm db:studio",
     "dx:db-seed": "node ./scripts/createEnvironment/prisma.js && turbo seed",
