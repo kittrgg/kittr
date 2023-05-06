@@ -1,7 +1,8 @@
 import colors from "@Colors"
 import SVG from "@Components/shared/SVG"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
-import { ReactNode, RefObject, useEffect, useMemo, useRef, useState } from "react"
+import type { ReactNode, RefObject } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { isMobile } from "react-device-detect"
 import ScrollContainer from "react-indiana-drag-scroll"
 import styled from "styled-components"
@@ -16,7 +17,7 @@ interface Props {
 }
 
 /** Utility side scrolling component. */
-export const SideScroller = ({ wrapperStyles, childMargin, children }: Props) => {
+export function SideScroller({ wrapperStyles, childMargin, children }: Props) {
 	const ref = useRef() as RefObject<HTMLElement>
 	const viewport = useViewportDimensions()
 	const [endOfScroll, setEndOfScroll] = useState(false)
@@ -30,8 +31,8 @@ export const SideScroller = ({ wrapperStyles, childMargin, children }: Props) =>
 		const onScrollChange = () => {
 			const handleScroll = () => {
 				if (ref.current) {
-					setEndOfScroll(ref.current?.offsetWidth + ref.current?.scrollLeft === ref.current?.scrollWidth)
-					setStartOfScroll(ref.current?.scrollLeft > 0)
+					setEndOfScroll(ref.current.offsetWidth + ref.current.scrollLeft === ref.current.scrollWidth)
+					setStartOfScroll(ref.current.scrollLeft > 0)
 				}
 			}
 
@@ -47,7 +48,7 @@ export const SideScroller = ({ wrapperStyles, childMargin, children }: Props) =>
 			observerRefValue = ref.current
 
 			/** Handle viewport to scroll ratio to show buttons */
-			if (viewport.width < ref.current?.scrollWidth) {
+			if (viewport.width < ref.current.scrollWidth) {
 				setViewportScrollRatio(true)
 			} else {
 				setViewportScrollRatio(false)
@@ -62,17 +63,18 @@ export const SideScroller = ({ wrapperStyles, childMargin, children }: Props) =>
 	return (
 		<div style={{ display: "flex", alignItems: "center" }}>
 			<ScrollContainer
+				horizontal={isMobile}
+				innerRef={ref}
 				style={{
 					width: "100%",
 					userSelect: "none",
 					scrollBehavior: "smooth",
 					WebkitOverflowScrolling: "touch",
-					WebkitMaskImage:
-						"linear-gradient(to right, transparent, white 20px, white " + (isMobile ? "50%" : "90%") + ", transparent)"
+					WebkitMaskImage: `linear-gradient(to right, transparent, white 20px, white ${
+						isMobile ? "50%" : "90%"
+					}, transparent)`
 				}}
 				vertical={false}
-				horizontal={isMobile}
-				innerRef={ref}
 			>
 				<Wrapper childMargin={childMargin} style={wrapperStyles}>
 					{children}
@@ -82,13 +84,14 @@ export const SideScroller = ({ wrapperStyles, childMargin, children }: Props) =>
 				</Wrapper>
 			</ScrollContainer>
 
-			{showLeftButton && viewportScrollRatio && (
+			{showLeftButton && viewportScrollRatio ? (
 				<CaratWrapper
 					onClick={() => {
 						if (ref.current) ref.current.scrollLeft -= viewport.width *= 1 - 0.05
 					}}
 				>
 					<SVG.Carat
+						fill={colors.dark}
 						style={{
 							transform: "rotate(-90deg)",
 							height: "30px",
@@ -96,19 +99,19 @@ export const SideScroller = ({ wrapperStyles, childMargin, children }: Props) =>
 							position: "relative",
 							right: 3.5
 						}}
-						fill={colors.dark}
 					/>
 				</CaratWrapper>
-			)}
+			) : null}
 
-			{showRightButton && viewportScrollRatio && (
+			{showRightButton && viewportScrollRatio ? (
 				<CaratWrapper
-					right
 					onClick={() => {
 						if (ref.current) ref.current.scrollLeft += viewport.width *= 1 - 0.05
 					}}
+					right
 				>
 					<SVG.Carat
+						fill={colors.dark}
 						style={{
 							transform: "rotate(90deg)",
 							height: "30px",
@@ -116,10 +119,9 @@ export const SideScroller = ({ wrapperStyles, childMargin, children }: Props) =>
 							position: "relative",
 							left: 1
 						}}
-						fill={colors.dark}
 					/>
 				</CaratWrapper>
-			)}
+			) : null}
 		</div>
 	)
 }

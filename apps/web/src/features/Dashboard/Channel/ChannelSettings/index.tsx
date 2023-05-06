@@ -1,3 +1,10 @@
+import colors from "@Colors"
+import SubscriptionSettings from "@Features/Dashboard/Channel/ChannelSettings/SubscriptionSettings"
+import PremiumCallout from "@Features/Dashboard/PremiumCallout"
+import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
+import { useManagerRole, useModal, usePremiumStatus } from "@Redux/slices/dashboard/selectors"
+import { header1 } from "@Styles/typography"
+import styled from "styled-components"
 import AddAffiliate from "../../modals/AddAffiliate"
 import AddSpec from "../../modals/AddSpec"
 import Overlays from "../../premiumFeatures/overlays"
@@ -12,15 +19,8 @@ import SetupPhotos from "./SetupPhotos"
 import Specs from "./Specs"
 import ThemeColor from "./ThemeColor"
 import YouTubeAutoplayEditor from "./YouTubeAutoplayEditor"
-import colors from "@Colors"
-import SubscriptionSettings from "@Features/Dashboard/Channel/ChannelSettings/SubscriptionSettings"
-import PremiumCallout from "@Features/Dashboard/PremiumCallout"
-import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
-import { useManagerRole, useModal, usePremiumStatus } from "@Redux/slices/dashboard/selectors"
-import { header1 } from "@Styles/typography"
-import styled from "styled-components"
 
-const ChannelSettings = () => {
+function ChannelSettings() {
 	const { isLoading, data } = useDashboardChannel()
 	const role = useManagerRole()
 	const modal = useModal()
@@ -65,9 +65,7 @@ const ChannelSettings = () => {
 									<Affiliate />
 								</>
 							) : (
-								<>
-									<PremiumCallout text="Upgrade to Premium to customize your profile page a banner, custom color, channel setup photos, PC specs, and affiliate links!" />
-								</>
+								<PremiumCallout text="Upgrade to Premium to customize your profile page a banner, custom color, channel setup photos, PC specs, and affiliate links!" />
 							)}
 						</Grid>
 					)}
@@ -78,12 +76,12 @@ const ChannelSettings = () => {
 					<GridTitle>OVERLAY CONTROLLER</GridTitle>
 					<Overlays />
 				</GridItem>
-				{isPremium && role !== "EDITOR" && (
+				{isPremium && role !== "EDITOR" ? (
 					<GridItem>
 						<GridTitle>SUBSCRIPTION SETTINGS</GridTitle>
 						<SubscriptionSettings />
 					</GridItem>
-				)}
+				) : null}
 				{role === "OWNER" && <ChannelDeleter />}
 			</Grid>
 		</>

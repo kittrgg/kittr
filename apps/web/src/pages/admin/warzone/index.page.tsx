@@ -1,14 +1,13 @@
-/* eslint-disable */
-import { KitBaseForm } from "./KitBaseForm"
-import { trpc } from "@/lib/trpc"
-import { WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
+import type { WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
 import { Button, List, Section } from "@kittr/ui"
-import SVG from "@kittr/ui/src/components/SVG"
+import { SVG } from "@kittr/ui/src/components"
 import { ActionIcon } from "@mantine/core"
 import Link from "next/link"
 import { useState } from "react"
+import { KitBaseForm } from "./KitBaseForm"
+import { trpc } from "@/lib/trpc"
 
-const Page = () => {
+function Page() {
 	const { data: bases, refetch } = trpc.admin.warzone.kitBases.list.useQuery()
 	const [isCreatingBase, setIsCreatingBase] = useState(false)
 	const [isEditingBase, setIsEditingBase] = useState<
@@ -52,7 +51,7 @@ const Page = () => {
 			<Link href="/admin" legacyBehavior>
 				<Button onClick={() => ({})}>Back to Admin Home</Button>
 			</Link>
-			<Section title="KIT BASES" action={<Button onClick={() => setIsCreatingBase(true)}>Create</Button>}>
+			<Section action={<Button onClick={() => setIsCreatingBase(true)}>Create</Button>} title="KIT BASES">
 				<List>
 					{(bases || []).map((base) => (
 						<List.Item
@@ -65,7 +64,7 @@ const Page = () => {
 							})}
 						>
 							{base.displayName}
-							<ActionIcon radius="lg" size="lg" style={{ float: "right" }} onClick={() => setIsEditingBase(base)}>
+							<ActionIcon onClick={() => setIsEditingBase(base)} radius="lg" size="lg" style={{ float: "right" }}>
 								<SVG.Pencil />
 							</ActionIcon>
 						</List.Item>

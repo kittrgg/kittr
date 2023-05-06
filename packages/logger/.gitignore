@@ -1,6 +1,0 @@
-# Omitting build outputs
-# No, these cannot be moved into a folder or something.
-# We want the package to get exposed top level like this.
-# See the nextjs package in node_modules to see what I am mimicking.
-/nextjs
-/node

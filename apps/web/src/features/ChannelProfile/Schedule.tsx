@@ -1,10 +1,8 @@
-import MobileSchedule from "./MobileSchedule"
-import { H2 } from "./style"
 import colors from "@Colors"
 import useDimensions from "@Hooks/useDimensions"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
 import { caption, paragraph } from "@Styles/typography"
-import { ITwitchScheduleSegment } from "@kittr/types"
+import type { ITwitchScheduleSegment } from "@kittr/types"
 import {
 	getMonth,
 	getDate,
@@ -20,6 +18,8 @@ import {
 } from "date-fns"
 import { Fragment } from "react"
 import styled from "styled-components"
+import { H2 } from "./style"
+import MobileSchedule from "./MobileSchedule"
 
 interface Props {
 	schedule?: ITwitchScheduleSegment[]
@@ -29,7 +29,7 @@ interface Props {
 const DAYS_OF_THE_WEEK = ["Su", "M", "Tu", "W", "Th", "F", "Sa"]
 const SECONDS_IN_A_DAY = 86399
 
-const Schedule = ({ schedule, brandColor }: Props) => {
+function Schedule({ schedule, brandColor }: Props) {
 	const { observe, width } = useDimensions()
 	const { width: viewportWidth } = useViewportDimensions()
 
@@ -81,7 +81,7 @@ const Schedule = ({ schedule, brandColor }: Props) => {
 						<TimeZone>{new Date().toLocaleTimeString(undefined, { timeZoneName: "short" }).split(" ")[2]}</TimeZone>
 						{[...Array(12)].map((_: any, index: number) => {
 							return (
-								<TimeOfDay key={index} index={index}>
+								<TimeOfDay index={index} key={index}>
 									<span>
 										{(index * 2) % 12 || 12}
 										{index === 0 ? "a" : ""}
@@ -115,10 +115,10 @@ const Schedule = ({ schedule, brandColor }: Props) => {
 											.map((channel: any) => {
 												return (
 													<ScheduledChannel
-														key={channel.id}
 														brandColor={brandColor}
-														startPosition={convertToCalendarPosition(channel, "start_time", weekIndex)}
 														endPosition={convertToCalendarPosition(channel, "end_time", weekIndex, true)}
+														key={channel.id}
+														startPosition={convertToCalendarPosition(channel, "start_time", weekIndex)}
 													>
 														<ChannelTitle>{channel.title || "Untitled Channel"}</ChannelTitle>
 														<ChannelCategory>{channel.category?.name || "No Category"}</ChannelCategory>

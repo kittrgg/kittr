@@ -2,14 +2,15 @@ import colors from "@Colors"
 import Button from "@Components/shared/Button"
 import TextInput from "@Components/shared/TextInput"
 import { updateEmail } from "@kittr/firebase/auth"
-import { Dispatch, SetStateAction, useState } from "react"
+import type { Dispatch, SetStateAction } from "react"
+import { useState } from "react"
 
 interface Props {
 	setStep: Dispatch<SetStateAction<number>>
 }
 
 /** A user can update their email address here. */
-const UpdateEmail = ({ setStep }: Props) => {
+function UpdateEmail({ setStep }: Props) {
 	const [email, setEmail] = useState("")
 	const [error, setError] = useState("")
 
@@ -22,29 +23,27 @@ const UpdateEmail = ({ setStep }: Props) => {
 	}
 
 	return (
-		<>
-			<form onSubmit={handleSubmit}>
-				<p>Tell us your new email.</p>
-				<TextInput
-					type="email"
-					name="newEmail"
-					label="New Email"
-					topLabel
-					value={email}
-					onChange={(e) => setEmail(e.target.value)}
-					labelStyles={{ marginTop: "12px" }}
-					inputStyles={{ width: "350px" }}
-				/>
-				<Button
-					design="white"
-					text="Submit Change"
-					type="submit"
-					style={{ margin: "24px 0", backgroundColor: error ? colors.red : "" }}
-				/>
+		<form onSubmit={handleSubmit}>
+			<p>Tell us your new email.</p>
+			<TextInput
+				inputStyles={{ width: "350px" }}
+				label="New Email"
+				labelStyles={{ marginTop: "12px" }}
+				name="newEmail"
+				onChange={(e) => setEmail(e.target.value)}
+				topLabel
+				type="email"
+				value={email}
+			/>
+			<Button
+				design="white"
+				style={{ margin: "24px 0", backgroundColor: error ? colors.red : "" }}
+				text="Submit Change"
+				type="submit"
+			/>
 
-				<p style={{ color: colors.red }}>{error}</p>
-			</form>
-		</>
+			<p style={{ color: colors.red }}>{error}</p>
+		</form>
 	)
 }
 

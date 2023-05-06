@@ -1,25 +1,25 @@
-import { Carat } from "./Carat"
-import { Pencil } from "./Pencil"
-import { createElement } from "react"
+import { createElement } from 'react';
+import { Carat } from './Carat';
+import { Pencil } from './Pencil';
 
-export type SVGType = keyof typeof SVG
+export type SVGType = keyof typeof SVG;
 
 export const SVG = {
-	Carat,
-	Pencil
-}
+  Carat,
+  Pencil,
+};
 
-export default SVG
+export default SVG;
 
 interface SVGByTypeProps {
-	type: SVGType
-	colorHover?: string
+  type: SVGType;
+  colorHover?: string;
 }
 
 /** Use an SVG by specifying which one you want. You must pass a "type" prop! */
 export const SvgByType = ({
-	type,
-	...props
+  type,
+  ...props
 }: SVGByTypeProps & React.AllHTMLAttributes<any>) => {
-	return createElement(SVG[type], props)
-}
+  return createElement(SVG[type], props);
+};

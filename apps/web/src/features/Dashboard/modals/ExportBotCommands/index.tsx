@@ -1,16 +1,16 @@
-import CommandsTable from "./CommandsTable"
-import CustomTextBuilder from "./CustomTextBuilder"
-import UserIncludeToggle from "./IncludeUserToggle"
-import MethodToggle from "./MethodToggle"
-import TwitchStrategyToggle from "./TwitchStrategyToggle"
-import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
 import { Button, Modal } from "@Components/shared"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useChannelView } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import { TCommandMethod } from "@kittr/types/types"
+import type { TCommandMethod } from "@kittr/types/types"
 import { useState } from "react"
+import TwitchStrategyToggle from "./TwitchStrategyToggle"
+import MethodToggle from "./MethodToggle"
+import UserIncludeToggle from "./IncludeUserToggle"
+import CustomTextBuilder from "./CustomTextBuilder"
+import CommandsTable from "./CommandsTable"
+import { trpc } from "@/lib/trpc"
 
 /**
  * Modal for exporting bot commands to the user's desired channel.
@@ -21,7 +21,7 @@ import { useState } from "react"
  * and using different platforms for inputting the commands to their chat.
  *
  * */
-const ExportBotCommands = () => {
+function ExportBotCommands() {
 	const dispatch = useDispatch()
 	const { data } = useChannelData()
 	const [method, setMethod] = useState<TCommandMethod>("nightbot")
@@ -44,11 +44,10 @@ const ExportBotCommands = () => {
 				<TwitchStrategyToggle commandStrategy={commandStrategy} setCommandStrategy={setCommandStrategy} />
 			)}
 
-			<CommandsTable kits={filterKits} method={method} commandStrategy={commandStrategy} includeUser={includeUser} />
+			<CommandsTable commandStrategy={commandStrategy} includeUser={includeUser} kits={filterKits} method={method} />
 
 			<Button
 				design="transparent"
-				text="BACK"
 				onClick={() => dispatch(setModal({ type: "", data: "" }))}
 				style={{
 					position: "absolute",
@@ -57,6 +56,7 @@ const ExportBotCommands = () => {
 					transform: "translate(-50%)",
 					backgroundColor: colors.middle
 				}}
+				text="BACK"
 			/>
 		</Modal>
 	)

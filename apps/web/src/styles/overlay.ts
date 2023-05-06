@@ -1,5 +1,5 @@
-import colors from "./colors"
 import { createGlobalStyle } from "styled-components"
+import colors from "./colors"
 
 export default createGlobalStyle`
 html, body, div, span, applet, object, iframe,

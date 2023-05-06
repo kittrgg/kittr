@@ -1,8 +1,8 @@
-import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
 import { Button, MultiSelect, Section, Text, TextInput } from "@kittr/ui"
 import { Switch } from "@mantine/core"
 import { useState } from "react"
+import { trpc } from "@/lib/trpc"
 
 interface GameInputs {
 	urlSafeName: string
@@ -17,7 +17,7 @@ interface GameInputs {
 	platforms: string[]
 }
 
-const Page = () => {
+function Page() {
 	const { mutate: addGame, isLoading } = trpc.games.add.useMutation()
 	const { data: platforms, isLoading: isLoadingPlatforms } = trpc.games["list-platforms"].useQuery()
 	const { data: genres, isLoading: isLoadingGenres } = trpc.games["list-platforms"].useQuery()
@@ -40,11 +40,11 @@ const Page = () => {
 
 		if (inputKey === "genres" || inputKey === "platforms") return
 
-		// is game active toggle
+		// Is game active toggle
 		if (inputKey === "active") gameInputsCopy.active = !gameInputsCopy.active
-		// handle date change TODO: Do we want the date formatted this way?
+		// Handle date change TODO: Do we want the date formatted this way?
 		else if (inputKey === "releaseDate") gameInputsCopy.releaseDate = new Date(e.value)
-		// gameinput strings
+		// Gameinput strings
 		else gameInputsCopy[inputKey] = e.value
 
 		setGameInputs(gameInputsCopy)
@@ -66,28 +66,25 @@ const Page = () => {
 				{Object.keys(gameInputs).map((input) => {
 					if (input === "active") {
 						return (
-							<>
-								<Switch
-									size="lg"
-									label="Active"
-									checked={gameInputs.active}
-									onChange={({ currentTarget }) => {
-										handleInputChange(currentTarget, "active")
-									}}
-									sx={{ input: { backgroundColor: colors.light, border: "none" }, label: { color: colors.white } }}
-								/>
-							</>
+							<Switch
+								checked={gameInputs.active}
+								label="Active"
+								onChange={({ currentTarget }) => {
+									handleInputChange(currentTarget, "active")
+								}}
+								size="lg"
+								sx={{ input: { backgroundColor: colors.light, border: "none" }, label: { color: colors.white } }}
+							/>
 						)
 					}
 
 					if (input === "releaseDate") {
 						return (
 							<>
-								<Text variant="text" size="lg" color={colors.white}>
+								<Text color={colors.white} size="lg" variant="text">
 									Release Date
 								</Text>
 								<input
-									type="date"
 									onChange={({ target }) => handleInputChange(target, "releaseDate")}
 									style={{
 										backgroundColor: colors.light,
@@ -95,6 +92,7 @@ const Page = () => {
 										borderRadius: "10px",
 										color: colors.white
 									}}
+									type="date"
 								/>
 							</>
 						)
@@ -107,24 +105,24 @@ const Page = () => {
 				})}
 
 				<MultiSelect
-					label="Genres"
 					data={genres.map((el) => ({ label: el.displayName, value: el.id }))}
+					label="Genres"
 					onChange={(val) => setGameInputs((prev) => ({ ...prev, genres: val }))}
 				/>
 				<MultiSelect
-					label="Platforms"
 					data={platforms.map((el) => ({ label: el.displayName, value: el.id }))}
+					label="Platforms"
 					onChange={(val) => setGameInputs((prev) => ({ ...prev, platforms: val }))}
 				/>
 				{!isFormComplete() && <Text color={colors.red}>Fill out form fully before submitting...</Text>}
 
 				<Button
-					mt="0.75rem"
+					disabled={!isFormComplete()}
 					loading={isLoading}
+					mt="0.75rem"
 					onClick={() => {
 						addGame({ ...gameInputs }, { onSuccess: () => console.log("Okay to clear...") })
 					}}
-					disabled={!isFormComplete()}
 				>
 					Add Game
 				</Button>

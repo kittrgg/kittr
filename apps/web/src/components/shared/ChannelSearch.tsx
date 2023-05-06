@@ -6,7 +6,7 @@ import { useRef, useState } from "react"
 import styled from "styled-components"
 
 /** A search input built specfically for searching channels. Will automatically handle redirection to page for channels search results. */
-export const ChannelSearch = () => {
+export function ChannelSearch() {
 	const router = useRouter()
 	const [searchTerm, setSearchTerm] = useState(router.query.searchTerm || "")
 	const inputRef = useRef<HTMLInputElement>(null)
@@ -24,20 +24,20 @@ export const ChannelSearch = () => {
 	return (
 		<Form onSubmit={handleSubmit}>
 			<SearchInput
-				data-cy="channel-search-input"
-				ref={inputRef}
-				type="text"
-				name="channelSearch"
-				placeholder="Search"
 				autoComplete="off"
-				value={searchTerm as string}
+				data-cy="channel-search-input"
+				name="channelSearch"
 				onChange={(e) => {
 					setSearchTerm(e.target.value)
 				}}
+				placeholder="Search"
+				ref={inputRef}
+				type="text"
+				value={searchTerm as string}
 			/>
 			<SVG.Search
-				width="20px"
 				fill={hasSearchTerm ? colors.white : ""}
+				onClick={handleSubmit}
 				style={{
 					padding: "12px",
 					height: "50%",
@@ -51,7 +51,7 @@ export const ChannelSearch = () => {
 					cursor: hasSearchTerm ? "pointer" : "initial",
 					pointerEvents: hasSearchTerm ? "initial" : "none"
 				}}
-				onClick={handleSubmit}
+				width="20px"
 			/>
 		</Form>
 	)

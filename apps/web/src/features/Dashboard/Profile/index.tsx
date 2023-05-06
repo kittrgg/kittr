@@ -1,10 +1,10 @@
+import styled from "styled-components"
 import LogoutButton from "../ProfileButtons"
 import EmailEditor from "./EmailEditor"
 import PasswordEditor from "./PasswordEditor"
-import styled from "styled-components"
 
 /** The user's profile settings. */
-const Profile = () => {
+function Profile() {
 	return (
 		<>
 			<H1>MY ACCOUNT SETTINGS</H1>

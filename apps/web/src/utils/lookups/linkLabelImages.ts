@@ -1,4 +1,4 @@
-import { LinkProperty } from "@kittr/prisma"
+import type { LinkProperty } from "@kittr/prisma"
 
 export const linkLabelImages: Record<LinkProperty, string> = {
 	TWITCH: "/media/icons/twitch.svg",

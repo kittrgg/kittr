@@ -5,7 +5,7 @@ import { updateUserPassword, logOut } from "@kittr/firebase/auth"
 import { useRouter } from "next/router"
 import { useState } from "react"
 
-const UpdateEmail = () => {
+function UpdateEmail() {
 	const router = useRouter()
 	const [password, setPassword] = useState("")
 	const [confirmPassword, setConfirmPassword] = useState("")
@@ -27,40 +27,38 @@ const UpdateEmail = () => {
 	}
 
 	return (
-		<>
-			<form onSubmit={handleSubmit}>
-				<p>Tell us your new password.</p>
-				<TextInput
-					type="password"
-					name="new-password"
-					label="New Password"
-					topLabel
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
-					labelStyles={{ marginTop: "12px" }}
-					inputStyles={{ width: "350px" }}
-				/>
-				<TextInput
-					type="password"
-					name="confirm-password"
-					label="Confirm Password"
-					topLabel
-					value={confirmPassword}
-					onChange={(e) => setConfirmPassword(e.target.value)}
-					labelStyles={{ marginTop: "12px" }}
-					inputStyles={{ width: "350px" }}
-				/>
-				<Button
-					design="white"
-					text="Submit Change"
-					type="submit"
-					style={{ margin: "24px 0", backgroundColor: error ? colors.red : "" }}
-					dataCy="submit-password-change"
-				/>
+		<form onSubmit={handleSubmit}>
+			<p>Tell us your new password.</p>
+			<TextInput
+				inputStyles={{ width: "350px" }}
+				label="New Password"
+				labelStyles={{ marginTop: "12px" }}
+				name="new-password"
+				onChange={(e) => setPassword(e.target.value)}
+				topLabel
+				type="password"
+				value={password}
+			/>
+			<TextInput
+				inputStyles={{ width: "350px" }}
+				label="Confirm Password"
+				labelStyles={{ marginTop: "12px" }}
+				name="confirm-password"
+				onChange={(e) => setConfirmPassword(e.target.value)}
+				topLabel
+				type="password"
+				value={confirmPassword}
+			/>
+			<Button
+				dataCy="submit-password-change"
+				design="white"
+				style={{ margin: "24px 0", backgroundColor: error ? colors.red : "" }}
+				text="Submit Change"
+				type="submit"
+			/>
 
-				<p style={{ color: colors.red }}>{error}</p>
-			</form>
-		</>
+			<p style={{ color: colors.red }}>{error}</p>
+		</form>
 	)
 }
 

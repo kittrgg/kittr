@@ -1,4 +1,3 @@
-import KitButton from "./KitButton"
 import colors from "@Colors"
 import { Button } from "@Components/shared"
 import { createNewKit } from "@Redux/slices/dashboard"
@@ -7,8 +6,9 @@ import { useDispatch } from "@Redux/store"
 import { filterKitsByFeature } from "@Utils/helpers/filterKitsByFeature"
 import { sortAlphabetical } from "@Utils/helpers/sortAlphabetical"
 import styled from "styled-components"
+import KitButton from "./KitButton"
 
-const KitList = () => {
+function KitList() {
 	const dispatch = useDispatch()
 	const { data } = useChannelData()
 	const noKits = data?.warzoneKits.length === 0
@@ -27,24 +27,26 @@ const KitList = () => {
 	return (
 		<Wrapper>
 			<Container>
-				{data?.warzoneKits &&
-					filterKitsByFeature(data?.warzoneKits)
-						.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
-						.map((kit) => <KitButton key={kit.id} favorite kit={kit} />)}
-				{data?.warzoneKits && filterKitsByFeature(data?.warzoneKits).length > 0 && (
+				{data?.warzoneKits
+					? filterKitsByFeature(data.warzoneKits)
+							.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
+							.map((kit) => <KitButton favorite key={kit.id} kit={kit} />)
+					: null}
+				{data?.warzoneKits && filterKitsByFeature(data.warzoneKits).length > 0 ? (
 					<hr style={{ width: "88%", borderColor: colors.lightest }} />
-				)}
-				{data?.warzoneKits &&
-					filterKitsByFeature(data?.warzoneKits, false)
-						.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
-						.map((kit) => <KitButton key={kit.id} kit={kit} />)}
+				) : null}
+				{data?.warzoneKits
+					? filterKitsByFeature(data.warzoneKits, false)
+							.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
+							.map((kit) => <KitButton key={kit.id} kit={kit} />)
+					: null}
 			</Container>
 			<ButtonWrapper>
 				<Button
 					design="transparent"
-					text="Create New"
 					onClick={() => dispatch(createNewKit())}
 					style={{ margin: "0 auto" }}
+					text="Create New"
 				/>
 			</ButtonWrapper>
 		</Wrapper>

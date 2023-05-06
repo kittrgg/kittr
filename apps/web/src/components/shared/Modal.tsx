@@ -4,7 +4,7 @@ import SVG from "@Components/shared/SVG"
 import { setModal } from "@Redux/slices/dashboard"
 import { useDispatch } from "@Redux/store"
 import { header1 } from "@Styles/typography"
-import { CSSProperties, ReactNode } from "react"
+import type { CSSProperties, ReactNode } from "react"
 import styled from "styled-components"
 
 interface Props {
@@ -22,11 +22,16 @@ interface Props {
 }
 
 /** Modal utility to be used throughout the app. Comes with a built-in background dimmer to automatically give the view depth. */
-export const Modal = ({ title, backgroundClickToClose, onUserClose, children, style }: Props) => {
+export function Modal({ title, backgroundClickToClose, onUserClose, children, style }: Props) {
 	const dispatch = useDispatch()
 
 	return (
 		<FullScreen
+			onClick={() => {
+				if (backgroundClickToClose) {
+					onUserClose ? onUserClose() : dispatch(setModal({ type: "", data: {} }))
+				}
+			}}
 			style={{
 				zIndex: 100,
 				display: "flex",
@@ -36,15 +41,10 @@ export const Modal = ({ title, backgroundClickToClose, onUserClose, children, st
 				backgroundColor: "rgba(29,29,31,.8)",
 				cursor: backgroundClickToClose ? "pointer" : "default"
 			}}
-			onClick={() => {
-				if (backgroundClickToClose) {
-					onUserClose ? onUserClose() : dispatch(setModal({ type: "", data: {} }))
-				}
-			}}
 		>
 			<Body onClick={(e) => e.stopPropagation()} style={style}>
 				<Xtainer data-cy="modal-x-close" onClick={onUserClose || (() => dispatch(setModal({ type: "", data: {} })))}>
-					<SVG.X width="24px" fill={colors.light} />
+					<SVG.X fill={colors.light} width="24px" />
 				</Xtainer>
 				<PositionHelper>
 					<Title>{title}</Title>

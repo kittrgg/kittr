@@ -2,41 +2,39 @@ import colors from "@Colors"
 import { Button, SVG } from "@Components/shared"
 import useDimensions from "@Hooks/useDimensions"
 import { header1 } from "@Styles/typography"
-import { CSSProperties } from "react"
+import type { CSSProperties } from "react"
 import styled from "styled-components"
 
 interface Props {
 	containerStyles?: CSSProperties
 }
 
-export const SupportUs = ({ containerStyles }: Props) => {
+export function SupportUs({ containerStyles }: Props) {
 	const { width, observe } = useDimensions()
 	const numOfColumns = width > 400 ? 2 : 0
 
 	return (
-		<Container ref={observe} numOfColumns={numOfColumns} containerStyles={containerStyles as string}>
+		<Container containerStyles={containerStyles as string} numOfColumns={numOfColumns} ref={observe}>
 			<H6>SUPPORT KITTR'S CREATOR</H6>
 			<Paragraph numOfColumns={numOfColumns}>
 				kittr is made by one guy and supported by the community. For as little as $1, you can help make kittr continue
 				to be possible. Thank you all.
 			</Paragraph>
 			<Button
-				design="white"
 				as="a"
+				design="white"
 				href="https://streamelements.com/anthonyfromkittr/tip"
-				target="_blank"
 				rel="noopener noreferrer"
-				style={{ width: "100%", marginBottom: "10px" }}
 				startIcon={<strong style={{ fontWeight: 900, fontSize: "24px", marginRight: "24px" }}>$</strong>}
+				style={{ width: "100%", marginBottom: "10px" }}
+				target="_blank"
 				text="TIP"
 			/>
 			<Button
-				design="white"
 				as="a"
+				design="white"
 				href="https://www.patreon.com/kittrgg"
-				target="_blank"
 				rel="noopener noreferrer"
-				style={{ width: "100%", marginBottom: "10px" }}
 				startIcon={
 					<SVG.Patreon
 						alt="Patreon Icon"
@@ -48,15 +46,15 @@ export const SupportUs = ({ containerStyles }: Props) => {
 						}}
 					/>
 				}
+				style={{ width: "100%", marginBottom: "10px" }}
+				target="_blank"
 				text="PATREON"
 			/>
 			<Button
-				design="transparent"
 				as="a"
+				design="transparent"
 				href="https://www.twitter.com/kittrgg"
-				target="_blank"
 				rel="noopener noreferrer"
-				style={{ width: "100%", marginBottom: "10px" }}
 				startIcon={
 					<SVG.Twitter
 						alt="Twitter Icon"
@@ -67,15 +65,15 @@ export const SupportUs = ({ containerStyles }: Props) => {
 						}}
 					/>
 				}
+				style={{ width: "100%", marginBottom: "10px" }}
+				target="_blank"
 				text="FOLLOW"
 			/>
 			<Button
-				design="transparent"
 				as="a"
+				design="transparent"
 				href="https://www.twitch.com/anthonyfromkittr"
-				target="_blank"
 				rel="noopener noreferrer"
-				style={{ width: "100%", marginBottom: "10px" }}
 				startIcon={
 					<SVG.Twitch
 						alt="Twitch Icon"
@@ -86,6 +84,8 @@ export const SupportUs = ({ containerStyles }: Props) => {
 						}}
 					/>
 				}
+				style={{ width: "100%", marginBottom: "10px" }}
+				target="_blank"
 				text="FOLLOW"
 			/>
 		</Container>

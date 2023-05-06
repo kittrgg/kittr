@@ -1,14 +1,14 @@
+import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
+import { useActiveKit, useModal } from "@Redux/slices/dashboard/selectors"
+import styled from "styled-components"
 import KitDeleteConfirmation from "../../../modals/KitDeleteConfirmation"
 import KitEditor from "./KitEditor"
 import KitList from "./KitList"
 import KitsPlaceholder from "./KitsPlaceholder"
-import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
-import { useActiveKit, useModal } from "@Redux/slices/dashboard/selectors"
-import styled from "styled-components"
 
-// import EditNotification from "./EditNotification"
+// Import EditNotification from "./EditNotification"
 
-const Kits = () => {
+function Kits() {
 	const { data: channel } = useDashboardChannel()
 	const activeKit = useActiveKit()
 	const modal = useModal()

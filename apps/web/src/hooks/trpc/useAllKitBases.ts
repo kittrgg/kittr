@@ -1,14 +1,14 @@
-// import { trpc } from "@/lib/trpc"
-// import { RouterInput } from "@Server/index"
-// import { InferQueryInput } from "@Server/index"
-// import { Prisma } from "@kittr/prisma"
+// Import { trpc } from "@/lib/trpc"
+// Import { RouterInput } from "@Server/index"
+// Import { InferQueryInput } from "@Server/index"
+// Import { Prisma } from "@kittr/prisma"
 
-// type TQueryInput = RouterInput["listBases"]
+// Type TQueryInput = RouterInput["listBases"]
 
-// export const useAllKitBases = <T extends TQueryInput>({ include }: { include: T }) => {
-// 	const query = trpc.listBases.useQuery(include)
+// Export const useAllKitBases = <T extends TQueryInput>({ include }: { include: T }) => {
+// 	Const query = trpc.listBases.useQuery(include)
 
-// 	return query
+// 	Return query
 // }
 
 export {}

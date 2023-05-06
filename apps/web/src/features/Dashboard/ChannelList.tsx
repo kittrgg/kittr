@@ -1,20 +1,21 @@
-import LogoutButton from "./ProfileButtons"
-import CreateChannelModal from "./modals/CreateChannel"
-import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
 import { Button, ProfileImage, Spinner, SupportUs, SVG } from "@Components/shared"
-// import { useManagedChannels } from "@Hooks/api/useManagedChannels"
+// Import { useManagedChannels } from "@Hooks/api/useManagedChannels"
 import { useUser } from "@Hooks/useUser"
 import { setActiveView, setChannelView, setModal } from "@Redux/slices/dashboard"
 import { useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch, useSelector } from "@Redux/store"
 import { header1, header2, paragraph } from "@Styles/typography"
 import { capitalizeFirstCharacter } from "@Utils/helpers/capitalizeFirstCharacter"
-import { MutableRefObject, useEffect, useRef } from "react"
+import type { MutableRefObject } from "react"
+import { useEffect, useRef } from "react"
 import styled from "styled-components"
+import CreateChannelModal from "./modals/CreateChannel"
+import LogoutButton from "./ProfileButtons"
+import { trpc } from "@/lib/trpc"
 
 /** List the channels for a user */
-const ChannelList = () => {
+function ChannelList() {
 	const dispatch = useDispatch()
 	const modalData = useModal().data
 	const ref = useRef() as MutableRefObject<HTMLButtonElement>
@@ -24,7 +25,7 @@ const ChannelList = () => {
 	const user = useUser()
 	const modal = useSelector((state) => state.dashboard.modal)
 
-	/** set tutorial ref data */
+	/** Set tutorial ref data */
 	useEffect(() => {
 		if (modal.data?.page === 2 && ref) {
 			dispatch(
@@ -32,7 +33,7 @@ const ChannelList = () => {
 					type: "Tutorial",
 					data: {
 						page: modal.data.page,
-						ref: ref.current?.getBoundingClientRect().top * 0.4
+						ref: ref.current.getBoundingClientRect().top * 0.4
 					}
 				})
 			)
@@ -43,7 +44,7 @@ const ChannelList = () => {
 					type: "Tutorial",
 					data: {
 						page: modal.data.page,
-						ref: divRef.current?.getBoundingClientRect().top * 0.4
+						ref: divRef.current.getBoundingClientRect().top * 0.4
 					}
 				})
 			)
@@ -57,88 +58,85 @@ const ChannelList = () => {
 				<SupportUs containerStyles={{ width: "100%", margin: "32px 0" }} />
 				<Header data-cy="your-channels-title">
 					YOUR CHANNELS{" "}
-					<SVG.Renew width="24px" style={{ cursor: "pointer" }} onClick={() => refetch()} dataCy="renew-svg" />
+					<SVG.Renew dataCy="renew-svg" onClick={() => refetch()} style={{ cursor: "pointer" }} width="24px" />
 				</Header>
-				{isFetchingChannels && <Spinner width="100%" height="100px" />}
-				{!isFetchingChannels &&
-					!!user &&
-					channels &&
-					channels.map((elem) => (
-						<BorderWrapper key={elem.id} isPremium={elem.plan?.type === "PREMIUM"}>
-							<ChannelContainer
-								key={elem.id}
-								ref={divRef}
-								style={modalData?.page === 3 ? { position: "relative", zIndex: 101 } : undefined}
-								onClick={() => {
-									dispatch(
-										setChannelView({
-											gameId: "",
-											view: "Channel Settings"
-										})
-									)
-									dispatch(
-										setActiveView({
-											channelId: elem.id,
-											view: "Channel"
-										})
-									)
-									modal.type === "Tutorial" &&
+				{isFetchingChannels ? <Spinner height="100px" width="100%" /> : null}
+				{!isFetchingChannels && Boolean(user) && channels
+					? channels.map((elem) => (
+							<BorderWrapper isPremium={elem.plan?.type === "PREMIUM"} key={elem.id}>
+								<ChannelContainer
+									data-cy={`${elem.displayName}-channel-button`}
+									key={elem.id}
+									onClick={() => {
 										dispatch(
-											setModal({
-												type: modal.type,
-												data: {
-													page: modal.data?.page + 1
-												}
+											setChannelView({
+												gameId: "",
+												view: "Channel Settings"
 											})
 										)
-								}}
-								data-cy={`${elem.displayName}-channel-button`}
-							>
-								<FlexRow>
-									<ProfileImage
-										size="50px"
-										alwaysRefresh={true}
-										hasProfileImage={!!elem.profile?.hasProfileImage}
-										imagePath={elem.id}
-									/>
-									<ChannelTitle>{elem.displayName}</ChannelTitle>
-								</FlexRow>
-								<Role>
-									Your role is{" "}
-									{capitalizeFirstCharacter(
-										elem.managers.find((manager) => manager.firebaseId === user?.uid)?.role ?? ""
-									)}{" "}
-									for this channel.
-								</Role>
-							</ChannelContainer>
-						</BorderWrapper>
-					))}
+										dispatch(
+											setActiveView({
+												channelId: elem.id,
+												view: "Channel"
+											})
+										)
+										modal.type === "Tutorial" &&
+											dispatch(
+												setModal({
+													type: modal.type,
+													data: {
+														page: modal.data?.page + 1
+													}
+												})
+											)
+									}}
+									ref={divRef}
+									style={modalData?.page === 3 ? { position: "relative", zIndex: 101 } : undefined}
+								>
+									<FlexRow>
+										<ProfileImage
+											alwaysRefresh
+											hasProfileImage={Boolean(elem.profile?.hasProfileImage)}
+											imagePath={elem.id}
+											size="50px"
+										/>
+										<ChannelTitle>{elem.displayName}</ChannelTitle>
+									</FlexRow>
+									<Role>
+										Your role is{" "}
+										{capitalizeFirstCharacter(
+											elem.managers.find((manager) => manager.firebaseId === user.uid)?.role ?? ""
+										)}{" "}
+										for this channel.
+									</Role>
+								</ChannelContainer>
+							</BorderWrapper>
+					  ))
+					: null}
 
 				{!isFetchingChannels && channels?.length === 0 && (
-					<>
-						<Container
-							style={{
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "center",
-								columnGap: "20px"
+					<Container
+						style={{
+							display: "flex",
+							alignItems: "center",
+							justifyContent: "center",
+							columnGap: "20px"
+						}}
+					>
+						<Button
+							dataCy="start-tutorial-button"
+							design="default"
+							onClick={() => {
+								dispatch(setModal({ type: "Tutorial", data: { page: 1 } }))
 							}}
-						>
-							<Button
-								design="default"
-								text="Need some guidance? Click here for tutorial!"
-								onClick={() => {
-									dispatch(setModal({ type: "Tutorial", data: { page: 1 } }))
-								}}
-								dataCy="start-tutorial-button"
-							/>
-						</Container>
-					</>
+							text="Need some guidance? Click here for tutorial!"
+						/>
+					</Container>
 				)}
 				<Button
 					buttonRef={ref}
+					dataCy="create-new-channel"
 					design="transparent"
-					text="Create A New Channel"
 					onClick={() =>
 						modal.data?.page === 2
 							? dispatch(
@@ -156,7 +154,7 @@ const ChannelList = () => {
 						zIndex: modal.type === "Tutorial" && modalData?.page === 2 ? 101 : undefined,
 						backgroundColor: colors.light
 					}}
-					dataCy="create-new-channel"
+					text="Create A New Channel"
 				/>
 				<LogoutButton />
 			</Container>

@@ -1,35 +1,35 @@
-//import { useState,  } from "react"
-// import styled from "styled-components"
+//Import { useState,  } from "react"
+// Import styled from "styled-components"
 
-// import colors from "@Colors"
-// import { header2 } from "@Styles/typography"
-// import { useSelector } from "@Redux/store"
-//import { useIsMounted } from "@Hooks/useIsMounted"
-// import { usePreviousValue } from "@Hooks/usePreviousValue"
+// Import colors from "@Colors"
+// Import { header2 } from "@Styles/typography"
+// Import { useSelector } from "@Redux/store"
+//Import { useIsMounted } from "@Hooks/useIsMounted"
+// Import { usePreviousValue } from "@Hooks/usePreviousValue"
 
-const EditNotification = ({ ...props }) => {
-	//	const isMounted = useIsMounted()
-	//	const [active, setActive] = useState(false)
-	//	const [initialRender, setInitialRender] = useState(true)
-	// const channelData = useSelector((state) => state.dashboard.channelData)
-	// const previousEditor = usePreviousValue(channelData.previousUpdater)
+function EditNotification({ ...props }) {
+	//	Const isMounted = useIsMounted()
+	//	Const [active, setActive] = useState(false)
+	//	Const [initialRender, setInitialRender] = useState(true)
+	// Const channelData = useSelector((state) => state.dashboard.channelData)
+	// Const previousEditor = usePreviousValue(channelData.previousUpdater)
 
 	return null
 
-	// useEffect(() => {
-	// 	if (previousEditor === channelData.previousUpdater) return
+	// UseEffect(() => {
+	// 	If (previousEditor === channelData.previousUpdater) return
 
-	// 	setActive(true)
+	// 	SetActive(true)
 
-	// 	setTimeout(() => {
-	// 		if (isMounted()) {
-	// 			setActive(false)
-	// 			setInitialRender(false)
+	// 	SetTimeout(() => {
+	// 		If (isMounted()) {
+	// 			SetActive(false)
+	// 			SetInitialRender(false)
 	// 		}
 	// 	}, 1500)
 	// }, [channelData, isMounted])
 
-	// return (
+	// Return (
 	// 	<Container active={active && !initialRender}>
 	// 		<p>{channelData.previousUpdater} just made an edit!</p>
 	// 	</Container>
@@ -40,17 +40,17 @@ export default EditNotification
 
 // Styled Component
 //
-// const Container = styled.div<{ active: boolean }>`
-//	position: fixed;
-//	left: 50%;
-//	transform: translateX(-50%);
-//	padding: 20px;
-//	border-radius: 20px;
-//	background-color: ${colors.darker};
+// Const Container = styled.div<{ active: boolean }>`
+//	Position: fixed;
+//	Left: 50%;
+//	Transform: translateX(-50%);
+//	Padding: 20px;
+//	Border-radius: 20px;
+//	Background-color: ${colors.darker};
 //	${header2};
-//	font-size: 14px;
-//	text-align: center;
-//	transition: 0.2s;
-//	top: ${(props) => (props.active ? "20px" : "-65px")};
-//	opacity: ${(props) => (props.active ? 1 : 0)};
+//	Font-size: 14px;
+//	Text-align: center;
+//	Transition: 0.2s;
+//	Top: ${(props) => (props.active ? "20px" : "-65px")};
+//	Opacity: ${(props) => (props.active ? 1 : 0)};
 //`

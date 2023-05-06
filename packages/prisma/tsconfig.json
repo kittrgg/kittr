@@ -1,5 +1,5 @@
 {
-	"extends": "@kittr/tsconfig/base.json",
-	"include": ["."],
-	"exclude": ["node_modules", "seed", "validator"]
+  "extends": "@kittr/tsconfig/base.json",
+  "include": ["index.ts", "mock.ts", "seed/**.ts"],
+  "exclude": ["node_modules"]
 }

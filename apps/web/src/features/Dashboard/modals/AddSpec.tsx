@@ -1,5 +1,3 @@
-import ErrorNotification from "./ErrorNotification"
-import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
 import { Button, Modal, Selector, Spinner, TextInputBox } from "@Components/shared"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
@@ -9,9 +7,11 @@ import { useDispatch } from "@Redux/store"
 import { paragraph } from "@Styles/typography"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
+import ErrorNotification from "./ErrorNotification"
+import { trpc } from "@/lib/trpc"
 
 /** Modal for adding or editing a spec to the channel's PC setup. */
-const AddSpecModal = () => {
+function AddSpecModal() {
 	const dispatch = useDispatch()
 	const { refetch: refetchDashboard } = useDashboardChannel()
 	const { data: channelData } = useChannelData()
@@ -70,8 +70,23 @@ const AddSpecModal = () => {
 				className="spec-select"
 				isCreatable
 				onChange={(option: any) => setPartType(option.label.replace(/[^\w\s-]/g, ""))}
+				options={[
+					"Case",
+					"CPU",
+					"CPU Cooler",
+					"Motherboard",
+					"RAM",
+					"Storage",
+					"GPU",
+					"PSU",
+					"Monitor",
+					"Keyboard",
+					"Mouse"
+				].map((elem) => ({
+					value: elem,
+					label: elem
+				}))}
 				placeholder="Select from list or type here to create your own"
-				value={partType ? { label: partType, value: partType } : null}
 				styles={{
 					container: (base, state) => ({
 						...base,
@@ -91,39 +106,24 @@ const AddSpecModal = () => {
 						borderRadius: "20px"
 					})
 				}}
-				options={[
-					"Case",
-					"CPU",
-					"CPU Cooler",
-					"Motherboard",
-					"RAM",
-					"Storage",
-					"GPU",
-					"PSU",
-					"Monitor",
-					"Keyboard",
-					"Mouse"
-				].map((elem) => ({
-					value: elem,
-					label: elem
-				}))}
+				value={partType ? { label: partType, value: partType } : null}
 			/>
 			<InputLabel>Description</InputLabel>
 			<TextInputBox
 				data-cy="input-spec-name"
-				value={partName}
-				onChange={(e) => setPartName(e.target.value)}
-				name="specDescription"
-				type="text"
 				inputStyles={{ marginLeft: "0", width: "100%" }}
+				name="specDescription"
+				onChange={(e) => setPartName(e.target.value)}
+				type="text"
+				value={partName}
 			/>
 			<Button
 				data-cy="confirm-add-spec"
 				design="white"
-				onClick={submit}
 				disabled={!partType || !partName}
-				text="SAVE"
+				onClick={submit}
 				style={{ margin: "84px auto 0" }}
+				text="SAVE"
 			/>
 		</Modal>
 	)

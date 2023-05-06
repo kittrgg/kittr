@@ -1,12 +1,12 @@
-import Banner from "./Banner"
-import { trpc } from "@/lib/trpc"
 import BannerTicker from "@Features/Overlays/ActiveKit/BannerTicker"
 import Display from "@Features/Overlays/ActiveKit/Display"
 import DisplayTicker from "@Features/Overlays/ActiveKit/DisplayTicker"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
-import { OverlayKit } from "@kittr/types"
+import type { OverlayKit } from "@kittr/types"
 import { useEffect, useMemo, useState } from "react"
 import { io } from "socket.io-client"
+import Banner from "./Banner"
+import { trpc } from "@/lib/trpc"
 
 interface Props {
 	id: string
@@ -14,7 +14,7 @@ interface Props {
 	overlayStyle?: "Banner" | "Banner Ticker" | "Display Ticker" | "Display"
 }
 
-const ActiveKitOverlay = ({ id, previewWidth, overlayStyle }: Props) => {
+function ActiveKitOverlay({ id, previewWidth, overlayStyle }: Props) {
 	const { data, refetch } = trpc.channels.overlay.get.useQuery(id)
 	const [activeKit, setActiveKit] = useState<OverlayKit>({} as OverlayKit)
 	const { width, height } = useViewportDimensions()
@@ -23,8 +23,7 @@ const ActiveKitOverlay = ({ id, previewWidth, overlayStyle }: Props) => {
 
 	useEffect(() => {
 		if (data) {
-			const update =
-				Object.keys(data?.primaryWzTwoKit || {}).length > 0 ? data?.primaryWzTwoKit : data?.secondaryWzTwoKit
+			const update = Object.keys(data.primaryWzTwoKit || {}).length > 0 ? data.primaryWzTwoKit : data.secondaryWzTwoKit
 
 			if (activeKit?.id !== update?.id) {
 				setActiveKit(update || ({} as OverlayKit))
@@ -34,7 +33,7 @@ const ActiveKitOverlay = ({ id, previewWidth, overlayStyle }: Props) => {
 	}, [data])
 
 	useEffect((): any => {
-		const socket = io(process.env.NEXT_PUBLIC_SOCKET_HOST as string)
+		const socket = io(process.env.NEXT_PUBLIC_SOCKET_HOST!)
 
 		socket.on(`dashboard=${id}`, () => {
 			refetch()

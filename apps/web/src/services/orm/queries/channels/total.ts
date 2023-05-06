@@ -1,13 +1,11 @@
 import { prisma } from "@kittr/prisma"
 
-interface ChannelQuery {
-	/**
-	 * @returns
-	 * Promise for count of all channels on platform
-	 *
-	 */
-	(): Promise<number>
-}
+/**
+ * @returns
+ * Promise for count of all channels on platform
+ *
+ */
+type ChannelQuery = () => Promise<number>
 
 /**
  * SERVER SIDE ONLY!

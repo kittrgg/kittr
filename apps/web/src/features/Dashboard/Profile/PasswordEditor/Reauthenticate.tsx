@@ -2,13 +2,14 @@ import colors from "@Colors"
 import Button from "@Components/shared/Button"
 import TextInput from "@Components/shared/TextInput"
 import { reauthenticate } from "@kittr/firebase/auth"
-import { Dispatch, SetStateAction, useState } from "react"
+import type { Dispatch, SetStateAction } from "react"
+import { useState } from "react"
 
 interface Props {
 	setStep: Dispatch<SetStateAction<number>>
 }
 
-const Reauthenticate = ({ setStep }: Props) => {
+function Reauthenticate({ setStep }: Props) {
 	const [password, setPassword] = useState("")
 	const [error, setError] = useState("")
 
@@ -24,21 +25,21 @@ const Reauthenticate = ({ setStep }: Props) => {
 		<form onSubmit={handleSubmit}>
 			<p>First, we'll need your current password.</p>
 			<TextInput
-				type="password"
-				name="password-reauthenticate"
-				label="Password"
-				topLabel
-				value={password}
-				onChange={(e) => setPassword(e.target.value)}
-				labelStyles={{ marginTop: "12px" }}
 				inputStyles={{ width: "350px" }}
+				label="Password"
+				labelStyles={{ marginTop: "12px" }}
+				name="password-reauthenticate"
+				onChange={(e) => setPassword(e.target.value)}
+				topLabel
+				type="password"
+				value={password}
 			/>
 			<Button
+				dataCy="reauthenticate-button"
 				design="white"
+				style={{ margin: "24px 0", backgroundColor: error ? colors.red : "" }}
 				text="Submit"
 				type="submit"
-				style={{ margin: "24px 0", backgroundColor: error ? colors.red : "" }}
-				dataCy="reauthenticate-button"
 			/>
 
 			<p style={{ color: colors.red }}>{error}</p>

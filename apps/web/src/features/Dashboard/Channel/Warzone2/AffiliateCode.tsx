@@ -2,16 +2,16 @@ import colors from "@Colors"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData, useChannelView } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import { trpc } from "@/lib/trpc"
 import { header2 } from "@Styles/typography"
 import { useEffect, useRef, useState } from "react"
 import styled from "styled-components"
+import { trpc } from "@/lib/trpc"
 
-const CreatorCode = () => {
+function CreatorCode() {
 	const dispatch = useDispatch()
 	const { gameId: activeGame } = useChannelView()
 	const { data, refetch: refetchDashboard } = useChannelData()
-	const affiliateCode = data?.gameCreatorCodes?.find((code) => code.gameId === activeGame)
+	const affiliateCode = data?.gameCreatorCodes.find((code) => code.gameId === activeGame)
 	const [code, setCode] = useState(affiliateCode?.code || "")
 	const [isEditing, setIsEditing] = useState(false)
 	const inputRef = useRef<HTMLInputElement>(null)
@@ -35,26 +35,26 @@ const CreatorCode = () => {
 		<Code>
 			<span>CREATOR CODE - </span>
 			{!isEditing && <span>{code} </span>}
-			{isEditing && (
+			{isEditing ? (
 				<Input
-					ref={inputRef}
-					value={code}
+					data-cy="creator-code-input"
+					onBlur={async () => {
+						mutate({
+							code: { id: affiliateCode?.id, code, channelId: data?.id!, gameId: activeGame }
+						})
+					}}
 					onChange={(e) => setCode(e.target.value)}
 					onKeyDown={(e) => {
 						if (e.key == "Enter" && inputRef.current) {
 							return inputRef.current.blur()
 						}
 					}}
-					onBlur={async () => {
-						mutate({
-							code: { id: affiliateCode?.id, code, channelId: data?.id!, gameId: activeGame }
-						})
-					}}
-					data-cy="creator-code-input"
+					ref={inputRef}
+					value={code}
 				/>
-			)}
-			<EditButton onClick={() => setIsEditing(true)} data-cy="edit-creator-code">
-				<img src="/media/icons/pencil.svg" alt="Edit creator code." width="20px" height="20px" />
+			) : null}
+			<EditButton data-cy="edit-creator-code" onClick={() => setIsEditing(true)}>
+				<img alt="Edit creator code." height="20px" src="/media/icons/pencil.svg" width="20px" />
 			</EditButton>
 		</Code>
 	)

@@ -1,4 +1,3 @@
-import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
 import { Button, Modal, Spinner } from "@Components/shared"
 import { setModal } from "@Redux/slices/dashboard"
@@ -6,8 +5,9 @@ import { useChannelData, useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
 import { paragraph } from "@Styles/typography"
 import styled from "styled-components"
+import { trpc } from "@/lib/trpc"
 
-const DeleteManager = () => {
+function DeleteManager() {
 	const dispatch = useDispatch()
 	const { data: channelData, refetch: refetchDashboard } = useChannelData()
 	const { data } = useModal()
@@ -35,7 +35,7 @@ const DeleteManager = () => {
 	if (isPromoting || isDemoting)
 		return (
 			<Modal backgroundClickToClose title="MAKING THE SWITCH...">
-				<Spinner width="100%" height="50px" />
+				<Spinner height="50px" width="100%" />
 			</Modal>
 		)
 
@@ -50,14 +50,14 @@ const DeleteManager = () => {
 				<RowFlex>
 					<Button
 						design="transparent"
-						text="NO, KEEP THE SAME"
 						onClick={() => dispatch(setModal({ type: "", data: {} }))}
+						text="NO, KEEP THE SAME"
 					/>
 					<Button
 						design="white"
-						text="YES, DEMOTE THEM"
 						onClick={async () => demote({ managerIdToDemote: data.id, channelId: channelData?.id! })}
 						style={{ marginLeft: "32px" }}
+						text="YES, DEMOTE THEM"
 					/>
 				</RowFlex>
 			</Modal>
@@ -76,14 +76,14 @@ const DeleteManager = () => {
 			<RowFlex>
 				<Button
 					design="transparent"
-					text="NO, KEEP THE SAME"
 					onClick={() => dispatch(setModal({ type: "", data: {} }))}
+					text="NO, KEEP THE SAME"
 				/>
 				<Button
 					design="white"
-					text="YES, PROMOTE THEM"
 					onClick={async () => promote({ managerIdToPromote: data.id, channelId: channelData?.id! })}
 					style={{ marginLeft: "32px" }}
+					text="YES, PROMOTE THEM"
 				/>
 			</RowFlex>
 		</Modal>

@@ -4,7 +4,7 @@ import Ad from "@Services/venatus/Ad"
 import { caption } from "@Styles/typography"
 import styled from "styled-components"
 
-const AdTile = ({ ...props }) => {
+function AdTile({ ...props }) {
 	const activeWeapon = useActiveWeapon()
 
 	return (

@@ -1,7 +1,7 @@
 import colors from "@Colors"
 import { ChannelAvatarList, GameList } from "@Components/shared"
 import { Routes } from "@Utils/lookups/routes"
-import { Channel, ChannelLink, ChannelProfile, Game } from "@kittr/prisma"
+import type { Channel, ChannelLink, ChannelProfile, Game } from "@kittr/prisma"
 import { Section, SideScroller } from "@kittr/ui"
 import Link from "next/link"
 import { useRouter } from "next/router"
@@ -28,7 +28,7 @@ interface Props {
 }
 
 /** Main content section of the home page. Games, channels, etc. */
-const Body = ({ games, popularChannels, risingStars, liveChannels }: Props) => {
+function Body({ games, popularChannels, risingStars, liveChannels }: Props) {
 	const router = useRouter()
 
 	const routeChannel = (elem: Channel) => router.push(Routes.CHANNEL.createPath(elem.urlSafeName))
@@ -36,52 +36,52 @@ const Body = ({ games, popularChannels, risingStars, liveChannels }: Props) => {
 	return (
 		<Container>
 			<Section
-				title="GAMES"
-				transparent
 				action={
-					<Link href={Routes.GAMES.LIST} passHref legacyBehavior>
+					<Link href={Routes.GAMES.LIST} legacyBehavior passHref>
 						<StyledLink>SEE ALL</StyledLink>
 					</Link>
 				}
+				title="GAMES"
+				transparent
 			>
 				<SideScroller>
-					{games && (
+					{games ? (
 						<GameList data={games} onClick={(elem) => router.push(Routes.GAMES.createPath(elem.urlSafeName))} />
-					)}
+					) : null}
 				</SideScroller>
 			</Section>
 
 			<SideScroller
+				action={
+					<Link href={Routes.CHANNEL.LIST} legacyBehavior passHref>
+						<StyledLink>SEE ALL</StyledLink>
+					</Link>
+				}
 				title="LIVE NOW"
-				action={
-					<Link href={Routes.CHANNEL.LIST} passHref legacyBehavior>
-						<StyledLink>SEE ALL</StyledLink>
-					</Link>
-				}
 			>
-				{liveChannels && <ChannelAvatarList channels={liveChannels} onClick={routeChannel} isLive />}
+				{liveChannels ? <ChannelAvatarList channels={liveChannels} isLive onClick={routeChannel} /> : null}
 			</SideScroller>
 
 			<SideScroller
+				action={
+					<Link href={Routes.CHANNEL.LIST} legacyBehavior passHref>
+						<StyledLink>SEE ALL</StyledLink>
+					</Link>
+				}
 				title="TRENDING CHANNELS"
-				action={
-					<Link href={Routes.CHANNEL.LIST} passHref legacyBehavior>
-						<StyledLink>SEE ALL</StyledLink>
-					</Link>
-				}
 			>
-				{popularChannels && <ChannelAvatarList channels={popularChannels} onClick={routeChannel} />}
+				{popularChannels ? <ChannelAvatarList channels={popularChannels} onClick={routeChannel} /> : null}
 			</SideScroller>
 
 			<SideScroller
-				title="RISING STARS"
 				action={
-					<Link href={Routes.CHANNEL.LIST} passHref legacyBehavior>
+					<Link href={Routes.CHANNEL.LIST} legacyBehavior passHref>
 						<StyledLink>SEE ALL</StyledLink>
 					</Link>
 				}
+				title="RISING STARS"
 			>
-				{risingStars && <ChannelAvatarList channels={risingStars} onClick={routeChannel} />}
+				{risingStars ? <ChannelAvatarList channels={risingStars} onClick={routeChannel} /> : null}
 			</SideScroller>
 		</Container>
 	)

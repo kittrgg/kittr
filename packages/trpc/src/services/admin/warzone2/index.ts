@@ -1,168 +1,184 @@
-import { prisma, WarzoneTwoKitBase, WarzoneTwoKitOption } from "@kittr/prisma"
+import type { WarzoneTwoKitBase, WarzoneTwoKitOption } from '@kittr/prisma';
+import { prisma } from '@kittr/prisma';
 
 export const listKitBases = async () => {
-	const result = await prisma.warzoneTwoKitBase.findMany({
-		include: {
-			availableOptions: true,
-			commandCodes: true
-		}
-	})
+  const result = await prisma.warzoneTwoKitBase.findMany({
+    include: {
+      availableOptions: true,
+      commandCodes: true,
+    },
+  });
 
-	return result
-}
+  return result;
+};
 
 export const getKitBase = async ({ kitBaseId }: { kitBaseId: string }) => {
-	const result = await prisma.warzoneTwoKitBase.findFirst({
-		where: {
-			id: kitBaseId
-		},
-		include: {
-			availableOptions: true,
-			commandCodes: true
-		}
-	})
+  const result = await prisma.warzoneTwoKitBase.findFirst({
+    where: {
+      id: kitBaseId,
+    },
+    include: {
+      availableOptions: true,
+      commandCodes: true,
+    },
+  });
 
-	return { ...result, commandCodes: result?.commandCodes.map((el) => el.code).join(",") }
-}
+  return {
+    ...result,
+    commandCodes: result?.commandCodes.map((el) => el.code).join(','),
+  };
+};
 
 export const listKitBaseCategories = async () => {
-	const result = await prisma.warzoneTwoKitBaseCategory.findMany({})
+  const result = await prisma.warzoneTwoKitBaseCategory.findMany({});
 
-	return result
-}
+  return result;
+};
 
 export const createKitBase = async ({
-	base,
-	commandCodes
+  base,
+  commandCodes,
 }: {
-	base: Omit<WarzoneTwoKitBase, "id">
-	commandCodes: string[]
+  base: Omit<WarzoneTwoKitBase, 'id'>;
+  commandCodes: string[];
 }) => {
-	const result = await prisma.warzoneTwoKitBase.create({
-		data: {
-			...base,
-			commandCodes: {
-				create: commandCodes.map((code) => ({ code }))
-			}
-		}
-	})
+  const result = await prisma.warzoneTwoKitBase.create({
+    data: {
+      ...base,
+      commandCodes: {
+        create: commandCodes.map((code) => ({ code })),
+      },
+    },
+  });
 
-	return result
-}
+  return result;
+};
 
 export const updateKitBase = async ({
-	base,
-	commandCodes
+  base,
+  commandCodes,
 }: {
-	base: WarzoneTwoKitBase
-	// categoryId: string,
-	commandCodes: string[] | null
-	// options: WarzoneKitOption[]
+  base: WarzoneTwoKitBase;
+  // CategoryId: string,
+  commandCodes: string[] | null;
+  // Options: WarzoneKitOption[]
 }) => {
-	const {
-		id,
-		// categoryId: removeCatId,
-		//  gameId: removeGameId,
-		...data
-	} = base
+  const {
+    id,
+    // CategoryId: removeCatId,
+    //  GameId: removeGameId,
+    ...data
+  } = base;
 
-	await prisma.warzoneTwoCommandCode.deleteMany({
-		where: {
-			AND: [{ kitBaseId: base.id }]
-		}
-	})
+  await prisma.warzoneTwoCommandCode.deleteMany({
+    where: {
+      AND: [{ kitBaseId: base.id }],
+    },
+  });
 
-	const result = await prisma.warzoneTwoKitBase.update({
-		where: {
-			id
-		},
-		data: {
-			...data,
-			// category: {
-			// 	connect: {
-			// 		id: categoryId
-			// 	}
-			// },
-			commandCodes: {
-				create: commandCodes?.map((el) => ({ code: el }))
-			}
-			// availableOptions: {
-			// 	connectOrCreate: options.map(option => ({ create: option, where: option }))
-			// },
-		}
-	})
+  const result = await prisma.warzoneTwoKitBase.update({
+    where: {
+      id,
+    },
+    data: {
+      ...data,
+      // Category: {
+      // 	Connect: {
+      // 		Id: categoryId
+      // 	}
+      // },
+      commandCodes: {
+        create: commandCodes?.map((el) => ({ code: el })),
+      },
+      // AvailableOptions: {
+      // 	ConnectOrCreate: options.map(option => ({ create: option, where: option }))
+      // },
+    },
+  });
 
-	return result
-}
+  return result;
+};
 
 export const deleteKitBase = async ({ kitBaseId }: { kitBaseId: string }) => {
-	const result = prisma.warzoneTwoKitBase.delete({
-		where: {
-			id: kitBaseId
-		}
-	})
+  const result = prisma.warzoneTwoKitBase.delete({
+    where: {
+      id: kitBaseId,
+    },
+  });
 
-	return result
-}
+  return result;
+};
 
-export const updateOptionsForBase = async ({ baseId, options }: { baseId: string; options: WarzoneTwoKitOption[] }) => {
-	const result = await prisma.warzoneTwoKitBase.update({
-		where: {
-			id: baseId
-		},
-		data: {
-			availableOptions: {
-				connectOrCreate: options.map((opt) => ({
-					where: {
-						id: opt.id
-					},
-					create: opt
-				}))
-			}
-		}
-	})
+export const updateOptionsForBase = async ({
+  baseId,
+  options,
+}: {
+  baseId: string;
+  options: WarzoneTwoKitOption[];
+}) => {
+  const result = await prisma.warzoneTwoKitBase.update({
+    where: {
+      id: baseId,
+    },
+    data: {
+      availableOptions: {
+        connectOrCreate: options.map((opt) => ({
+          where: {
+            id: opt.id,
+          },
+          create: opt,
+        })),
+      },
+    },
+  });
 
-	return result
-}
+  return result;
+};
 
-export const createOption = async ({ baseId, option }: { baseId: string; option: Omit<WarzoneTwoKitOption, "id"> }) => {
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const { kitBaseId, ...rest } = option
+export const createOption = async ({
+  baseId,
+  option,
+}: {
+  baseId: string;
+  option: Omit<WarzoneTwoKitOption, 'id'>;
+}) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { kitBaseId, ...rest } = option;
 
-	const result = await prisma.warzoneTwoKitOption.create({
-		data: {
-			...rest,
-			kitBase: {
-				connect: {
-					id: baseId
-				}
-			}
-		}
-	})
+  const result = await prisma.warzoneTwoKitOption.create({
+    data: {
+      ...rest,
+      kitBase: {
+        connect: {
+          id: baseId,
+        },
+      },
+    },
+  });
 
-	return result
-}
+  return result;
+};
 
 export const updateOption = async (option: WarzoneTwoKitOption) => {
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const { id, ...rest } = option
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { id, ...rest } = option;
 
-	const result = await prisma.warzoneTwoKitOption.update({
-		where: {
-			id: option.id
-		},
-		data: rest
-	})
+  const result = await prisma.warzoneTwoKitOption.update({
+    where: {
+      id: option.id,
+    },
+    data: rest,
+  });
 
-	return result
-}
+  return result;
+};
 
 export const deleteOption = async (optionId: string) => {
-	const result = await prisma.warzoneTwoKitOption.delete({
-		where: {
-			id: optionId
-		}
-	})
+  const result = await prisma.warzoneTwoKitOption.delete({
+    where: {
+      id: optionId,
+    },
+  });
 
-	return result
-}
+  return result;
+};

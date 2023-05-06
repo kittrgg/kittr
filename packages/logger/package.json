@@ -1,22 +1,25 @@
 {
-	"name": "@kittr/logger",
-	"version": "0.0.0",
-	"main": "index.ts",
-	"exports": {
-		"./node": "./src/node/index.ts",
-		"./nextjs": "./src/nextjs/index.ts"
-	},
-	"private": true,
-	"scripts": {},
-	"devDependencies": {
-		"@kittr/config": "workspace:*",
-		"@kittr/tsconfig": "workspace:*",
-		"@kittr/types": "workspace:*",
-		"@sentry/types": "^7.34.0",
-		"typescript": "5.0.0-beta"
-	},
-	"dependencies": {
-		"@sentry/nextjs": "7.7.0",
-		"@sentry/node": "7.7.0"
-	}
+  "name": "@kittr/logger",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    "./node": "./src/node/index.ts",
+    "./nextjs": "./src/nextjs/index.ts"
+  },
+  "main": "index.ts",
+  "scripts": {
+    "lint": "eslint-runner",
+    "lint:fix": "eslint-runner --fix"
+  },
+  "dependencies": {
+    "@sentry/nextjs": "7.7.0",
+    "@sentry/node": "7.7.0"
+  },
+  "devDependencies": {
+    "@kittr/lint": "workspace:*",
+    "@kittr/tsconfig": "workspace:*",
+    "@kittr/types": "workspace:*",
+    "@sentry/types": "^7.34.0",
+    "typescript": "5.0.0-beta"
+  }
 }

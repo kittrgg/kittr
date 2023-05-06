@@ -1,19 +1,19 @@
-export {}
+export {};
 
-// import mongoose from "mongoose"
-// import KitStat from "../models/KitStat"
-// import Player from "../models/Player"
+// Import mongoose from "mongoose"
+// Import KitStat from "../models/KitStat"
+// Import Player from "../models/Player"
 
-// const allKitBaseFeaturedRateQuery = async () => {
-// 	const result = await Player.aggregate([
+// Const allKitBaseFeaturedRateQuery = async () => {
+// 	Const result = await Player.aggregate([
 // 		{
 // 			$facet: {
-// 				count: [
+// 				Count: [
 // 					{
 // 						$count: "channelCount"
 // 					}
 // 				],
-// 				kitCounts: [
+// 				KitCounts: [
 // 					{
 // 						$unwind: "$kits"
 // 					},
@@ -25,10 +25,10 @@ export {}
 // 					{
 // 						$group: {
 // 							_id: "$kits.baseId",
-// 							matches: {
+// 							Matches: {
 // 								$addToSet: {
-// 									base: "$kits.baseId",
-// 									channelId: "$_id"
+// 									Base: "$kits.baseId",
+// 									ChannelId: "$_id"
 // 								}
 // 							}
 // 						}
@@ -36,7 +36,7 @@ export {}
 // 					{
 // 						$project: {
 // 							_id: "$_id",
-// 							baseCount: {
+// 							BaseCount: {
 // 								$size: "$matches"
 // 							}
 // 						}
@@ -46,23 +46,23 @@ export {}
 // 		},
 // 		{
 // 			$addFields: {
-// 				count: {
+// 				Count: {
 // 					$arrayElemAt: ["$count.channelCount", 0]
 // 				}
 // 			}
 // 		},
 // 		{
 // 			$project: {
-// 				kitCounts: {
+// 				KitCounts: {
 // 					$map: {
-// 						input: "$kitCounts",
-// 						as: "item",
-// 						in: {
+// 						Input: "$kitCounts",
+// 						As: "item",
+// 						In: {
 // 							$mergeObjects: [
 // 								"$$item",
 // 								{
-// 									channelCount: "$count",
-// 									ratio: {
+// 									ChannelCount: "$count",
+// 									Ratio: {
 // 										$divide: ["$$item.baseCount", "$count"]
 // 									}
 // 								}
@@ -74,29 +74,29 @@ export {}
 // 		}
 // 	])
 
-// 	return result[0].kitCounts
+// 	Return result[0].kitCounts
 // }
 
-// const allKitBaseUsageQuery = async () => {
-// 	const result = await Player.aggregate([
+// Const allKitBaseUsageQuery = async () => {
+// 	Const result = await Player.aggregate([
 // 		{
 // 			$facet: {
-// 				count: [
+// 				Count: [
 // 					{
 // 						$count: "channelCount"
 // 					}
 // 				],
-// 				kitCounts: [
+// 				KitCounts: [
 // 					{
 // 						$unwind: "$kits"
 // 					},
 // 					{
 // 						$group: {
 // 							_id: "$kits.baseId",
-// 							matches: {
+// 							Matches: {
 // 								$addToSet: {
-// 									base: "$kits.baseId",
-// 									channelId: "$_id"
+// 									Base: "$kits.baseId",
+// 									ChannelId: "$_id"
 // 								}
 // 							}
 // 						}
@@ -104,7 +104,7 @@ export {}
 // 					{
 // 						$project: {
 // 							_id: "$_id",
-// 							baseCount: {
+// 							BaseCount: {
 // 								$size: "$matches"
 // 							}
 // 						}
@@ -114,23 +114,23 @@ export {}
 // 		},
 // 		{
 // 			$addFields: {
-// 				count: {
+// 				Count: {
 // 					$arrayElemAt: ["$count.channelCount", 0]
 // 				}
 // 			}
 // 		},
 // 		{
 // 			$project: {
-// 				kitCounts: {
+// 				KitCounts: {
 // 					$map: {
-// 						input: "$kitCounts",
-// 						as: "item",
-// 						in: {
+// 						Input: "$kitCounts",
+// 						As: "item",
+// 						In: {
 // 							$mergeObjects: [
 // 								"$$item",
 // 								{
-// 									channelCount: "$count",
-// 									ratio: {
+// 									ChannelCount: "$count",
+// 									Ratio: {
 // 										$divide: ["$$item.baseCount", "$count"]
 // 									}
 // 								}
@@ -142,67 +142,67 @@ export {}
 // 		}
 // 	])
 
-// 	return result[0].kitCounts
+// 	Return result[0].kitCounts
 // }
 
-// const allSetupsForComparisonQuery = async () => {
-// 	const result = await Player.aggregate([
+// Const allSetupsForComparisonQuery = async () => {
+// 	Const result = await Player.aggregate([
 // 		{
 // 			$unwind: {
-// 				path: "$kits"
+// 				Path: "$kits"
 // 			}
 // 		},
 // 		{
 // 			$group: {
 // 				_id: null,
-// 				kits: {
+// 				Kits: {
 // 					$push: "$kits"
 // 				}
 // 			}
 // 		},
 // 		{
 // 			$unwind: {
-// 				path: "$kits"
+// 				Path: "$kits"
 // 			}
 // 		},
 // 		{
 // 			$group: {
 // 				_id: "$kits.baseId",
-// 				matches: {
+// 				Matches: {
 // 					$push: "$kits.options"
 // 				}
 // 			}
 // 		}
 // 	])
 
-// 	const serialized = result.map((channel: { _id: string; matches: Array<Array<mongoose.Types.ObjectId>> }) => ({
+// 	Const serialized = result.map((channel: { _id: string; matches: Array<Array<mongoose.Types.ObjectId>> }) => ({
 // 		...channel,
-// 		matches: channel.matches.map((match) => match.map((option) => option.toString()))
+// 		Matches: channel.matches.map((match) => match.map((option) => option.toString()))
 // 	}))
 
-// 	return serialized
+// 	Return serialized
 // }
 
-// export const generateKitStats = async () => {
-// 	console.log("Creating new kit usage stats...")
+// Export const generateKitStats = async () => {
+// 	Console.log("Creating new kit usage stats...")
 
-// 	const ratioOfChannelsWithBaseFeatured = await allKitBaseFeaturedRateQuery()
-// 	const ratioOfChannelsWithBase = await allKitBaseUsageQuery()
-// 	const forSetupComparison = await allSetupsForComparisonQuery()
+// 	Const ratioOfChannelsWithBaseFeatured = await allKitBaseFeaturedRateQuery()
+// 	Const ratioOfChannelsWithBase = await allKitBaseUsageQuery()
+// 	Const forSetupComparison = await allSetupsForComparisonQuery()
 
-// 	try {
-// 		await KitStat.updateOne(
+// 	Try {
+// 		Await KitStat.updateOne(
 // 			{},
 // 			{
-// 				ratioOfChannelsWithBaseFeatured,
-// 				ratioOfChannelsWithBase,
-// 				forSetupComparison
+// 				RatioOfChannelsWithBaseFeatured,
+// 				RatioOfChannelsWithBase,
+// 				ForSetupComparison
 // 			},
 // 			{ upsert: true }
 // 		)
 // 	} catch (error) {
-// 		console.log(error)
+// 		Console.log(error)
 // 	}
 
-// 	console.log("Finished creating new kit usage stats.")
+// 	Console.log("Finished creating new kit usage stats.")
 // }

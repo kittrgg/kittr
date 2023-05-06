@@ -56,7 +56,7 @@ interface DeleteParams {
 	headers?: HeadersInit
 }
 
-// prefixed with underscored because delete is a reserved word in javascript
+// Prefixed with underscored because delete is a reserved word in javascript
 const _delete = async <T>({ url, body, headers = {} }: DeleteParams): Promise<T> => {
 	const requestOptions = {
 		method: "DELETE",
@@ -66,7 +66,7 @@ const _delete = async <T>({ url, body, headers = {} }: DeleteParams): Promise<T>
 	return await fetch(url, requestOptions).then(handleResponse)
 }
 
-// helper functions
+// Helper functions
 
 const handleResponse = (response: any) => {
 	// Uses .text() so that there is no error for an empty response

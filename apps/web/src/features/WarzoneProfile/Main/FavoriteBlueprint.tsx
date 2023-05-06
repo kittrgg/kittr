@@ -1,12 +1,12 @@
-import * as Styled from "./style"
 import colors from "@Colors"
 import { useActiveWeapon } from "@Redux/slices/displayr/selectors"
 import { paragraph } from "@Styles/typography"
 import styled from "styled-components"
+import * as Styled from "./style"
 
-const FavoriteBlueprint = () => {
+function FavoriteBlueprint() {
 	const activeWeapon = useActiveWeapon()
-	const favorite = activeWeapon?.blueprint
+	const favorite = activeWeapon.blueprint
 
 	if (favorite) {
 		return (

@@ -1,4 +1,3 @@
-import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
 import { Button, Modal, SVG } from "@Components/shared"
 import { setModal } from "@Redux/slices/dashboard"
@@ -6,6 +5,7 @@ import { usePremiumStatus, useChannelData } from "@Redux/slices/dashboard/select
 import { useDispatch } from "@Redux/store"
 import { header2, paragraph } from "@Styles/typography"
 import styled from "styled-components"
+import { trpc } from "@/lib/trpc"
 
 const CENTER_SVG = {
 	position: "absolute",
@@ -14,25 +14,29 @@ const CENTER_SVG = {
 	transform: 'translate("-50%, -50%")'
 }
 
-const CheckMark = () => (
-	<td>
-		<SVG.CheckMark width="20px" stroke={colors.lighter} style={CENTER_SVG} />
-	</td>
-)
-const X = () => (
-	<td>
-		<SVG.X width="20px" fill={colors.darkRed} style={CENTER_SVG} />
-	</td>
-)
+function CheckMark() {
+	return (
+		<td>
+			<SVG.CheckMark stroke={colors.lighter} style={CENTER_SVG} width="20px" />
+		</td>
+	)
+}
+function X() {
+	return (
+		<td>
+			<SVG.X fill={colors.darkRed} style={CENTER_SVG} width="20px" />
+		</td>
+	)
+}
 
-const PremiumPlans = () => {
+function PremiumPlans() {
 	const dispatch = useDispatch()
 	const { data: channelData } = useChannelData()
 	const { isPremium } = usePremiumStatus()
 
 	const { mutate: buyPremium } = trpc.stripe["buy-premium"].useMutation({
 		onSuccess: (result) => {
-			window.open(result.url as string, "_blank")
+			window.open(result.url!, "_blank")
 		},
 		onError: () => {
 			dispatch(setModal({ type: "Error Notification", data: {} }))
@@ -40,7 +44,7 @@ const PremiumPlans = () => {
 	})
 	const { mutate: managePremium } = trpc.stripe["manage-premium"].useMutation({
 		onSuccess: (result) => {
-			window.open(result.url as string, "_blank")
+			window.open(result.url, "_blank")
 		},
 		onError: () => {
 			dispatch(setModal({ type: "Error Notification", data: {} }))
@@ -48,7 +52,7 @@ const PremiumPlans = () => {
 	})
 
 	return (
-		<Modal title="COMPARE PLANS" style={{ position: "relative" }}>
+		<Modal style={{ position: "relative" }} title="COMPARE PLANS">
 			<Paragraph>Choose the plan that's right for you.</Paragraph>
 			<Table>
 				<colgroup style={{ zIndex: 2 }}>
@@ -104,15 +108,13 @@ const PremiumPlans = () => {
 			</Table>
 			<ButtonsContainer>
 				<Button
-					type="button"
 					design="transparent"
-					text="CLOSE"
 					onClick={() => dispatch(setModal({ type: "", data: "" }))}
+					text="CLOSE"
+					type="button"
 				/>
 				<Button
-					type="button"
 					design="premium"
-					text={isPremium ? "MANAGE" : "UPGRADE"}
 					onClick={() =>
 						isPremium
 							? managePremium({ channelId: channelData?.id ?? "" })
@@ -122,6 +124,8 @@ const PremiumPlans = () => {
 									urlSafeName: channelData?.urlSafeName ?? ""
 							  })
 					}
+					text={isPremium ? "MANAGE" : "UPGRADE"}
+					type="button"
 				/>
 			</ButtonsContainer>
 		</Modal>

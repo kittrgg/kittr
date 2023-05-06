@@ -1,44 +1,44 @@
 import * as Styled from "./style"
 
-// import { useActiveWeapon, usePopularityRates } from "@Redux/slices/displayr/selectors"
-// import {
+// Import { useActiveWeapon, usePopularityRates } from "@Redux/slices/displayr/selectors"
+// Import {
 // 	IRatioOfChannelsWithBase,
 // 	IRatioOfChannelsWithBaseFeatured,
 // 	IForSetupComparison,
 // 	IKitOption
 // } from "@kittr/types"
-// import { useState, useEffect } from "react"
+// Import { useState, useEffect } from "react"
 
-const Popularity = () => {
-	// const [setupsWithSameAttachmentsRatio, setSetupsWithSameAttachmentsRatio] = useState(0)
-	// const activeWeapon = useActiveWeapon()
-	// const rates = usePopularityRates()
-	// const { ratioOfChannelsWithBase, ratioOfChannelsWithBaseFeatured, forSetupComparison } = rates
+function Popularity() {
+	// Const [setupsWithSameAttachmentsRatio, setSetupsWithSameAttachmentsRatio] = useState(0)
+	// Const activeWeapon = useActiveWeapon()
+	// Const rates = usePopularityRates()
+	// Const { ratioOfChannelsWithBase, ratioOfChannelsWithBaseFeatured, forSetupComparison } = rates
 
-	// const channelsWithBase = ratioOfChannelsWithBase.find(
+	// Const channelsWithBase = ratioOfChannelsWithBase.find(
 	// 	(elem: IRatioOfChannelsWithBase) => elem._id === activeWeapon.baseId
 	// ) as IRatioOfChannelsWithBase
-	// const channelsWithFeatured = ratioOfChannelsWithBaseFeatured.find(
+	// Const channelsWithFeatured = ratioOfChannelsWithBaseFeatured.find(
 	// 	(elem: IRatioOfChannelsWithBaseFeatured) => elem._id === activeWeapon.baseId
 	// ) as IRatioOfChannelsWithBaseFeatured
 
-	// useEffect(() => {
-	// 	const activeOptions = activeWeapon?.options?.map((elem: IKitOption) => elem._id)
-	// 	const matchedBase = forSetupComparison.find(
+	// UseEffect(() => {
+	// 	Const activeOptions = activeWeapon?.options?.map((elem: IKitOption) => elem._id)
+	// 	Const matchedBase = forSetupComparison.find(
 	// 		(elem: IForSetupComparison) => elem._id === activeWeapon.baseId
 	// 	) as IForSetupComparison
-	// 	const matchedBasesAmount = matchedBase?.matches.length
-	// 	let matchedAttachmentsCount = 0
+	// 	Const matchedBasesAmount = matchedBase?.matches.length
+	// 	Let matchedAttachmentsCount = 0
 
-	// 	const containsAll = (arr1: string[], arr2: string[]) => arr2.every((arr2Item) => arr1.includes(arr2Item))
+	// 	Const containsAll = (arr1: string[], arr2: string[]) => arr2.every((arr2Item) => arr1.includes(arr2Item))
 
-	// 	matchedBase?.matches.forEach((elem) => {
-	// 		if (elem.length === activeOptions.length && containsAll(elem, activeOptions)) {
-	// 			matchedAttachmentsCount = matchedAttachmentsCount + 1
+	// 	MatchedBase?.matches.forEach((elem) => {
+	// 		If (elem.length === activeOptions.length && containsAll(elem, activeOptions)) {
+	// 			MatchedAttachmentsCount = matchedAttachmentsCount + 1
 	// 		}
 	// 	})
 
-	// 	setSetupsWithSameAttachmentsRatio(matchedAttachmentsCount / matchedBasesAmount)
+	// 	SetSetupsWithSameAttachmentsRatio(matchedAttachmentsCount / matchedBasesAmount)
 
 	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	// }, [activeWeapon])

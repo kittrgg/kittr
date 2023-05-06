@@ -1,9 +1,9 @@
-import CallToAction from "./CallToAction"
-import * as Styled from "./style"
 import colors from "@Colors"
 import { header2 } from "@Styles/typography"
 import { Routes } from "@Utils/lookups/routes"
 import styled from "styled-components"
+import * as Styled from "./style"
+import CallToAction from "./CallToAction"
 
 const FEATURE_SET = [
 	{
@@ -45,35 +45,37 @@ const FEATURE_SET = [
 ]
 
 /** Features that are currently a part of the platform */
-const Features = () => (
-	<section style={{ zIndex: 1 }}>
-		<ImageContainer>
-			<img
-				src="/media/landing-page-screenie.png"
-				alt="An example kittr page."
-				style={{ width: "100%", height: "100%", objectFit: "cover" }}
-			/>
-		</ImageContainer>
-		<Styled.P>Quite a bit better than a Google Sheet, huh?</Styled.P>
-		<Styled.H2>FEATURES</Styled.H2>
-		<Grid>
-			{FEATURE_SET.map((feature) => (
-				<GridItem key={feature.title}>
-					<IconContainer>
-						<img
-							src={feature.image}
-							alt={feature.imageAlt}
-							style={{ width: "100%", height: "100%", objectFit: "contain" }}
-						/>
-					</IconContainer>
-					<CardTitle>{feature.title}</CardTitle>
-					<CardParagraph dangerouslySetInnerHTML={{ __html: feature.paragraph }} />
-				</GridItem>
-			))}
-		</Grid>
-		<CallToAction marginBottom="60px" header="channel bettr with kittr." />
-	</section>
-)
+function Features() {
+	return (
+		<section style={{ zIndex: 1 }}>
+			<ImageContainer>
+				<img
+					alt="An example kittr page."
+					src="/media/landing-page-screenie.png"
+					style={{ width: "100%", height: "100%", objectFit: "cover" }}
+				/>
+			</ImageContainer>
+			<Styled.P>Quite a bit better than a Google Sheet, huh?</Styled.P>
+			<Styled.H2>FEATURES</Styled.H2>
+			<Grid>
+				{FEATURE_SET.map((feature) => (
+					<GridItem key={feature.title}>
+						<IconContainer>
+							<img
+								alt={feature.imageAlt}
+								src={feature.image}
+								style={{ width: "100%", height: "100%", objectFit: "contain" }}
+							/>
+						</IconContainer>
+						<CardTitle>{feature.title}</CardTitle>
+						<CardParagraph dangerouslySetInnerHTML={{ __html: feature.paragraph }} />
+					</GridItem>
+				))}
+			</Grid>
+			<CallToAction header="channel bettr with kittr." marginBottom="60px" />
+		</section>
+	)
+}
 
 export default Features
 

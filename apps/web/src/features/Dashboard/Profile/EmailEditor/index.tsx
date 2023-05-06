@@ -1,10 +1,10 @@
+import { useState } from "react"
 import * as Styled from "../style"
 import Reauthenticate from "./Reauthenticate"
 import SuccessMessage from "./SuccessMessage"
 import UpdateEmail from "./UpdateEmail"
-import { useState } from "react"
 
-const EmailEditor = ({ ...props }) => {
+function EmailEditor({ ...props }) {
 	const [step, setStep] = useState(1)
 
 	if (step === 1) {

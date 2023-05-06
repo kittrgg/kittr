@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import colors from "@Colors"
-import Select, { Props } from "react-select"
+import type { Props } from "react-select"
+import Select from "react-select"
 import CreatableSelect from "react-select/creatable"
 
-export const Selector = ({ ...props }: Props & { isCreatable?: boolean }) => {
+export function Selector({ ...props }: Props & { isCreatable?: boolean }) {
 	const { styles, ...restOfProps } = props
 
 	const style = {

@@ -3,9 +3,10 @@ import { header1, header2, montserrat, paragraph } from "@Styles/typography"
 import { asyncDelay } from "@Utils/helpers/asyncDelay"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
-import { RouterOutput } from "@kittr/trpc"
-import { OverlayKit } from "@kittr/types"
-import { Dispatch, SetStateAction, useEffect, useState } from "react"
+import type { RouterOutput } from "@kittr/trpc"
+import type { OverlayKit } from "@kittr/types"
+import type { Dispatch, SetStateAction } from "react"
+import { useEffect, useState } from "react"
 import styled, { ThemeProvider } from "styled-components"
 
 interface Props {
@@ -20,7 +21,7 @@ const DATA_SWITCH_TIMER = 5000
 const OPTION_SWAP_INTERVAL = 500
 const OPACITY_DURATION = 0.2
 
-const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Props) => {
+function BannerTicker({ _id, previewWidth, data, activeKit, setActiveKit }: Props) {
 	const [isOptionVisible, setIsOptionVisible] = useState(true)
 	const [isBaseVisible, setIsBaseVisible] = useState(true)
 	const [cursor, setCursor] = useState(0)
@@ -67,7 +68,7 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 			if (hasAnActiveKit) {
 				if (cursor === 0) {
 					const kitCount = [data?.primaryWzTwoKit, data?.secondaryWzTwoKit].filter(
-						(kit) => !!kit && Object.keys(kit).length > 0
+						(kit) => Boolean(kit) && kit && Object.keys(kit).length > 0
 					).length
 
 					if (kitCount > 1) {
@@ -107,7 +108,7 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 	const hasAKitSelected =
 		Object.keys(data.primaryWzTwoKit || {}).length > 0 || Object.keys(data.secondaryWzTwoKit || {}).length > 0
 	const isRendered = data.isOverlayVisible && hasAKitSelected
-	const isOverlayVisible = !!previewWidth || isRendered
+	const isOverlayVisible = Boolean(previewWidth) || isRendered
 
 	return (
 		<ThemeProvider
@@ -119,22 +120,20 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 		>
 			<Wrapper>
 				<Meta fadeDuration={OPACITY_DURATION}>
-					<BaseName isVisible={isBaseVisible} fadeDuration={OPACITY_DURATION}>
+					<BaseName fadeDuration={OPACITY_DURATION} isVisible={isBaseVisible}>
 						{activeKit?.base?.displayName}
 					</BaseName>
-					<CommandInfo isVisible={isBaseVisible} fadeDuration={OPACITY_DURATION}>
+					<CommandInfo fadeDuration={OPACITY_DURATION} isVisible={isBaseVisible}>
 						!{activeKit?.base?.commandCodes[0].code}
 					</CommandInfo>
 				</Meta>
-				<OptionWrapper isVisible={isOptionVisible} fadeDuration={OPACITY_DURATION}>
-					{activeKit && (
-						<>
-							<Option key={activeKitOptions[cursor]?.displayName}>
-								<Slot>{activeKitOptions[cursor]?.slotKey}</Slot>
-								<Selection>{activeKitOptions[cursor]?.displayName.toUpperCase()}</Selection>
-							</Option>
-						</>
-					)}
+				<OptionWrapper fadeDuration={OPACITY_DURATION} isVisible={isOptionVisible}>
+					{activeKit ? (
+						<Option key={activeKitOptions[cursor]?.displayName}>
+							<Slot>{activeKitOptions[cursor]?.slotKey}</Slot>
+							<Selection>{activeKitOptions[cursor]?.displayName.toUpperCase()}</Selection>
+						</Option>
+					) : null}
 				</OptionWrapper>
 			</Wrapper>
 		</ThemeProvider>

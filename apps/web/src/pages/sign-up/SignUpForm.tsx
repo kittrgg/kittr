@@ -1,16 +1,17 @@
-import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
 import AuthLayout from "@Components/layouts/Authentication"
 import { Button, Spinner, TextInput } from "@Components/shared"
 import { Routes } from "@Utils/lookups/routes"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { FormEvent, useState } from "react"
+import type { FormEvent } from "react"
+import { useState } from "react"
 import styled from "styled-components"
 import validator from "validator"
+import { trpc } from "@/lib/trpc"
 
 /** Form to create a user account */
-const SignUp = () => {
+function SignUp() {
 	const router = useRouter()
 	const [gamertag, setGamertag] = useState("")
 	const [email, setEmail] = useState("")
@@ -58,7 +59,7 @@ const SignUp = () => {
 	if (isLoading) {
 		return (
 			<AuthLayout title="SIGN UP">
-				<Spinner width="100%" height="100px" />
+				<Spinner height="100px" width="100%" />
 			</AuthLayout>
 		)
 	}
@@ -70,64 +71,64 @@ const SignUp = () => {
 			</Paragraph>
 			<form>
 				<TextInput
-					type="text"
-					name="gamertag"
 					label="Gamertag"
-					width="80%"
-					topLabel
-					value={gamertag}
+					name="gamertag"
 					onChange={(e) => {
 						setError("")
 						setGamertag(e.target.value)
 					}}
+					topLabel
+					type="text"
+					value={gamertag}
+					width="80%"
 				/>
 				<TextInput
-					type="email"
-					name="email"
 					label="Email"
-					width="80%"
-					topLabel
-					value={email}
+					name="email"
 					onChange={(e) => {
 						setError("")
 						setEmail(e.target.value)
 					}}
+					topLabel
+					type="email"
+					value={email}
+					width="80%"
 				/>
 				<TextInput
-					type="email"
-					name="confirmemail"
 					label="Confirm Email"
-					width="80%"
-					topLabel
-					value={confirmEmail}
+					name="confirmemail"
 					onChange={(e) => {
 						setError("")
 						setConfirmEmail(e.target.value)
 					}}
+					topLabel
+					type="email"
+					value={confirmEmail}
+					width="80%"
 				/>
 				<TextInput
-					type="password"
-					name="password"
 					label="Password"
-					width="80%"
-					topLabel
-					value={password}
+					name="password"
 					onChange={(e) => {
 						setError("")
 						setPassword(e.target.value)
 					}}
+					topLabel
+					type="password"
+					value={password}
+					width="80%"
 				/>
 				<TextInput
-					type="password"
-					name="confirmPassword"
 					label="Confirm Password"
-					width="80%"
-					topLabel
-					value={confirmPassword}
+					name="confirmPassword"
 					onChange={(e) => {
 						setError("")
 						setConfirmPassword(e.target.value)
 					}}
+					topLabel
+					type="password"
+					value={confirmPassword}
+					width="80%"
 				/>
 				<Paragraph>
 					Already registered?
@@ -136,7 +137,7 @@ const SignUp = () => {
 					</Link>
 				</Paragraph>
 				<Error>{error}</Error>
-				<Button design="white" text="CREATE ACCOUNT" onClick={onSubmit} />
+				<Button design="white" onClick={onSubmit} text="CREATE ACCOUNT" />
 			</form>
 		</AuthLayout>
 	)

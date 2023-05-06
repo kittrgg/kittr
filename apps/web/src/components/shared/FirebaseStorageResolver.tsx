@@ -1,7 +1,7 @@
 import { Spinner } from "@Components/shared"
-import { trpc } from "@/lib/trpc"
 import { captureException } from "@Services/captureException"
 import { useEffect } from "react"
+import { trpc } from "@/lib/trpc"
 
 interface FirebaseResolverProps {
 	path: string
@@ -11,7 +11,6 @@ interface FirebaseResolverProps {
 }
 
 export const FirebaseStorageResolver = ({ path, noSpinner, render }: FirebaseResolverProps) => {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const { data, error, isLoading } = trpc.firebase.resolver.useQuery({ path })
 	const spinner = noSpinner ? <></> : <Spinner width="20%" />
 

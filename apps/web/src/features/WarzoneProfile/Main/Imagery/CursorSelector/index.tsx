@@ -1,20 +1,20 @@
 import colors from "@Colors"
 import SVG from "@Components/shared/SVG"
-import { Dispatch, SetStateAction } from "react"
+import type { Dispatch, SetStateAction } from "react"
 
 interface Props {
 	cursor: number
 	setCursor: Dispatch<SetStateAction<number>>
-	items: Array<any>
+	items: any[]
 }
 
-const CursorSelector = ({ cursor, setCursor, items }: Props) => {
+function CursorSelector({ cursor, setCursor, items }: Props) {
 	return (
 		<div style={{ margin: "24px 0 12px", textAlign: "center" }}>
 			<SVG.Carat
-				width="16px"
-				style={{ marginRight: "5px", transform: "rotate(-90deg)", cursor: "pointer" }}
 				onClick={() => setCursor(Math.max(cursor - 1, 0))}
+				style={{ marginRight: "5px", transform: "rotate(-90deg)", cursor: "pointer" }}
+				width="16px"
 			/>
 			{items.map((item, index) => {
 				return (
@@ -32,9 +32,9 @@ const CursorSelector = ({ cursor, setCursor, items }: Props) => {
 				)
 			})}
 			<SVG.Carat
-				width="16px"
-				style={{ marginLeft: "5px", transform: "rotate(90deg)", cursor: "pointer" }}
 				onClick={() => setCursor(Math.min(cursor + 1, items.length - 1))}
+				style={{ marginLeft: "5px", transform: "rotate(90deg)", cursor: "pointer" }}
+				width="16px"
 			/>
 		</div>
 	)

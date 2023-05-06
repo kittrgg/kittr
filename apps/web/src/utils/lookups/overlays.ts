@@ -1,20 +1,20 @@
 export const ActiveKitOverlay = {
-	["Banner"]: {
+	"Banner": {
 		style: "Banner",
 		width: 1500,
 		height: 90
 	},
-	["Banner Ticker"]: {
+	"Banner Ticker": {
 		style: "Banner Ticker",
 		width: 1920,
 		height: 32
 	},
-	["Display"]: {
+	"Display": {
 		style: "Display",
 		width: 480,
 		height: 640
 	},
-	["Display Ticker"]: {
+	"Display Ticker": {
 		style: "Display Ticker",
 		width: 500,
 		height: 90

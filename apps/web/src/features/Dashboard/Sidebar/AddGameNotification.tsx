@@ -6,10 +6,10 @@ import styled, { keyframes } from "styled-components"
  * they are probably a new account and
  * we want to show them where to add their first game.
  * */
-const AddGameNotification = ({ ...props }) => {
+function AddGameNotification({ ...props }) {
 	return (
 		<Wrapper>
-			<SVG.Carat width="24px" fill={colors.white} />
+			<SVG.Carat fill={colors.white} width="24px" />
 			<TextContainer>
 				<p>ADD A</p>
 				<p>GAME</p>

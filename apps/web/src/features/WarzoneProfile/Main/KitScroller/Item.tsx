@@ -1,20 +1,20 @@
-import * as Styled from "./style"
 import colors from "@Colors"
 import SVG from "@Components/shared/SVG"
 import { useActiveWeapon } from "@Redux/slices/displayr/selectors"
-import { WarzoneKit, WarzoneKitBase } from "@kittr/prisma"
+import type { WarzoneKit, WarzoneKitBase } from "@kittr/prisma"
 import { useEffect, useRef } from "react"
+import * as Styled from "./style"
 
 interface Props {
 	elem: WarzoneKit & { base: WarzoneKitBase }
 }
 
-const Item = ({ elem }: Props) => {
+function Item({ elem }: Props) {
 	const activeWeapon = useActiveWeapon()
 	const itemRef = useRef<HTMLButtonElement>(null)
 
 	useEffect(() => {
-		if (activeWeapon?.customTitle === elem.customTitle && itemRef.current) {
+		if (activeWeapon.customTitle === elem.customTitle && itemRef.current) {
 			itemRef.current.scrollIntoView({
 				inline: "center",
 				block: "nearest"
@@ -33,7 +33,7 @@ const Item = ({ elem }: Props) => {
 			}`}
 		>
 			{elem.customTitle || elem.base.displayName}{" "}
-			{elem.featured && <SVG.Star style={{ marginLeft: "4px" }} width="20px" fill={colors.gold} stroke="none" />}
+			{elem.featured ? <SVG.Star fill={colors.gold} stroke="none" style={{ marginLeft: "4px" }} width="20px" /> : null}
 		</Styled.Item>
 	)
 }

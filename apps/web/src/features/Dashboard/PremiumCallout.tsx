@@ -10,14 +10,14 @@ interface Props {
 	text: string
 }
 
-const PremiumCallout = ({ text }: Props) => {
+function PremiumCallout({ text }: Props) {
 	const dispatch = useDispatch()
 	const role = useManagerRole()
 
 	return (
 		<LearnMore data-cy="premium-learn-more" onClick={() => dispatch(setModal({ type: "Premium Plans", data: {} }))}>
 			<span>
-				<SVG.Premium width="24px" style={{ position: "relative", top: "3px" }} />
+				<SVG.Premium style={{ position: "relative", top: "3px" }} width="24px" />
 				<Text>{text}</Text>
 			</span>
 			{role !== "EDITOR" && <span>LEARN MORE</span>}

@@ -1,9 +1,9 @@
-// import { trpc } from "@/lib/trpc"
+// Import { trpc } from "@/lib/trpc"
 
-// export const useAllKitOptions = () => {
-// 	const query = trpc.listBases.useQuery({ availableOptions: true })
+// Export const useAllKitOptions = () => {
+// 	Const query = trpc.listBases.useQuery({ availableOptions: true })
 
-// 	return query
+// 	Return query
 // }
 
 export {}

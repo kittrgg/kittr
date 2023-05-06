@@ -3,7 +3,8 @@ import Button from "@Components/shared/Button"
 import { createNewKit, setModal } from "@Redux/slices/dashboard"
 import { useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import { useRef, MutableRefObject, useEffect } from "react"
+import type { MutableRefObject } from "react"
+import { useRef, useEffect } from "react"
 import styled from "styled-components"
 
 const Container = styled.div`
@@ -19,7 +20,7 @@ const P = styled.p`
 	text-align: center;
 `
 
-const KitsPlaceholder = () => {
+function KitsPlaceholder() {
 	const dispatch = useDispatch()
 	const buttonRef = useRef() as MutableRefObject<HTMLButtonElement>
 	const modal = useModal()
@@ -41,13 +42,12 @@ const KitsPlaceholder = () => {
 
 	return (
 		<Container>
-			<img src="/media/logo-no-text-square.svg" alt="" width={200} height={200} />
+			<img alt="" height={200} src="/media/logo-no-text-square.svg" width={200} />
 			<P>No kits added yet...</P>
 			<Button
 				buttonRef={buttonRef}
+				dataCy="create-first-kit"
 				design="white"
-				text="+ Create New"
-				style={modal.data?.page === 6 ? { position: "relative", zIndex: 101 } : undefined}
 				onClick={() => {
 					if (modal.type === "Tutorial") {
 						dispatch(
@@ -61,7 +61,8 @@ const KitsPlaceholder = () => {
 						dispatch(createNewKit())
 					}
 				}}
-				dataCy="create-first-kit"
+				style={modal.data?.page === 6 ? { position: "relative", zIndex: 101 } : undefined}
+				text="+ Create New"
 			/>
 		</Container>
 	)

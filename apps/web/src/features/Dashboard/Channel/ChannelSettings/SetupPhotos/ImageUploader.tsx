@@ -1,4 +1,3 @@
-import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
 import { Spinner, SVG } from "@Components/shared"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
@@ -8,12 +7,13 @@ import { paragraph } from "@Styles/typography"
 import { deleteFile, download, uploadWithHandlers } from "@kittr/firebase/storage"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
+import { trpc } from "@/lib/trpc"
 
 interface Props {
 	slot: number
 }
 
-const ImageUploader = ({ slot }: Props) => {
+function ImageUploader({ slot }: Props) {
 	const dispatch = useDispatch()
 	const { data, refetch: refetchDashboard } = useDashboardChannel()
 	const [image, setImage] = useState("")
@@ -83,7 +83,7 @@ const ImageUploader = ({ slot }: Props) => {
 	}
 
 	useEffect(() => {
-		const photo = data?.profile?.setupPhotos?.find((photo) => photo.slot === slot)
+		const photo = data?.profile?.setupPhotos.find((photo) => photo.slot === slot)
 
 		if (photo?.exists) {
 			download(fileName, (path) => setImage(path))
@@ -101,9 +101,9 @@ const ImageUploader = ({ slot }: Props) => {
 	return (
 		<div>
 			<Label
+				htmlFor={fileName}
 				onMouseEnter={() => setIsHovered(true)}
 				onMouseLeave={() => setIsHovered(false)}
-				htmlFor={fileName}
 				style={{
 					backgroundImage: `url("${image}")` || "transparent",
 					backgroundSize: image ? "contain" : "",
@@ -114,25 +114,25 @@ const ImageUploader = ({ slot }: Props) => {
 			>
 				{!image && (
 					<>
-						<SVG.Export width="24px" stroke={colors.lighter} style={{ marginRight: "24px" }} />
+						<SVG.Export stroke={colors.lighter} style={{ marginRight: "24px" }} width="24px" />
 						UPLOAD
 					</>
 				)}
 				<input
 					id={fileName}
-					type="file"
 					name={fileName}
 					onChange={(e: any) => {
 						e.preventDefault()
 						handleUpload(e)
 					}}
 					style={{ display: "none" }}
+					type="file"
 				/>
-				{isHovered && image && (
-					<DeleteBubble onMouseEnter={() => setIsHovered(true)} onClick={handleDelete} isHovered={isHovered}>
-						<SVG.X style={{ position: "absolute", top: 4, left: 0 }} fill={colors.red} />
+				{isHovered && image ? (
+					<DeleteBubble isHovered={isHovered} onClick={handleDelete} onMouseEnter={() => setIsHovered(true)}>
+						<SVG.X fill={colors.red} style={{ position: "absolute", top: 4, left: 0 }} />
 					</DeleteBubble>
-				)}
+				) : null}
 			</Label>
 			<Caption>Slot #{slot}</Caption>
 		</div>

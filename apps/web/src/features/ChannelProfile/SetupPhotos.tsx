@@ -1,23 +1,22 @@
-import { H2 } from "./style"
-import { Spinner } from "@Components/shared"
-import { SideScroller } from "@Components/shared"
+import { Spinner, SideScroller } from "@Components/shared"
 import { download } from "@kittr/firebase/storage"
-import { SetupPhoto } from "@kittr/prisma"
+import type { SetupPhoto } from "@kittr/prisma"
 import { useState, useEffect } from "react"
 import styled from "styled-components"
+import { H2 } from "./style"
 
 interface Props {
 	id: string
 	setupPhotos: SetupPhoto[]
 }
 
-const SetupPhotos = ({ id, setupPhotos }: Props) => {
+function SetupPhotos({ id, setupPhotos }: Props) {
 	const [isLoading, setIsLoading] = useState(true)
-	const [photoPathsArray, setPhotoPathsArray] = useState<Array<string>>([])
+	const [photoPathsArray, setPhotoPathsArray] = useState<string[]>([])
 
 	useEffect(() => {
 		// Turn the setupPhotos from the DB into an array of only the ones that exist
-		const setupEntries = Object.entries(setupPhotos || {}).filter((elem) => !!elem[1])
+		const setupEntries = Object.entries(setupPhotos || {}).filter((elem) => Boolean(elem[1]))
 
 		const fetchImages = async () => {
 			// Fetch only the images that exist
@@ -28,7 +27,7 @@ const SetupPhotos = ({ id, setupPhotos }: Props) => {
 			)
 
 			if (result) {
-				setPhotoPathsArray(result.filter((elem) => !!elem))
+				setPhotoPathsArray(result.filter((elem) => Boolean(elem)))
 				setIsLoading(false)
 			}
 		}
@@ -51,7 +50,7 @@ const SetupPhotos = ({ id, setupPhotos }: Props) => {
 			<H2>SETUP</H2>
 			<SideScroller childMargin="20px" wrapperStyles={{ width: "100vw" }}>
 				{photoPathsArray.map((photo, index) => {
-					return <Image key={photo} src={photo} alt={`Setup Photo ${index + 1}`} />
+					return <Image alt={`Setup Photo ${index + 1}`} key={photo} src={photo} />
 				})}
 			</SideScroller>
 		</section>

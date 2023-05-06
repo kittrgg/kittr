@@ -1,4 +1,3 @@
-import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { setModal } from "@Redux/slices/dashboard"
@@ -7,13 +6,14 @@ import { useDispatch } from "@Redux/store"
 import { header2 } from "@Styles/typography"
 import { useEffect, useRef, useState } from "react"
 import styled from "styled-components"
+import { trpc } from "@/lib/trpc"
 
-const CreatorCode = () => {
+function CreatorCode() {
 	const dispatch = useDispatch()
 	const { gameId: activeGame } = useChannelView()
 	const { refetch: refetchDashboard } = useDashboardChannel()
 	const { data } = useChannelData()
-	const affiliateCode = data?.gameCreatorCodes?.find((code) => code.gameId === activeGame)
+	const affiliateCode = data?.gameCreatorCodes.find((code) => code.gameId === activeGame)
 	const [code, setCode] = useState(affiliateCode?.code || "")
 	const [isEditing, setIsEditing] = useState(false)
 	const inputRef = useRef<HTMLInputElement>(null)
@@ -38,27 +38,27 @@ const CreatorCode = () => {
 		<Code>
 			<span>CREATOR CODE - </span>
 			{!isEditing && <span>{code} </span>}
-			{isEditing && (
+			{isEditing ? (
 				<Input
-					ref={inputRef}
-					value={code}
-					onChange={(e) => setCode(e.target.value)}
-					onKeyDown={(e) => {
-						if (e.key == "Enter" && inputRef.current) {
-							return inputRef.current.blur()
-						}
-					}}
+					data-cy="creator-code-input"
 					onBlur={async () => {
 						mutate({
 							// eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
 							code: { id: affiliateCode?.id, code, channelId: data?.id!, gameId: activeGame }
 						})
 					}}
-					data-cy="creator-code-input"
+					onChange={(e) => setCode(e.target.value)}
+					onKeyDown={(e) => {
+						if (e.key == "Enter" && inputRef.current) {
+							return inputRef.current.blur()
+						}
+					}}
+					ref={inputRef}
+					value={code}
 				/>
-			)}
-			<EditButton onClick={() => setIsEditing(true)} data-cy="edit-creator-code">
-				<img src="/media/icons/pencil.svg" alt="Edit creator code." width="20px" height="20px" />
+			) : null}
+			<EditButton data-cy="edit-creator-code" onClick={() => setIsEditing(true)}>
+				<img alt="Edit creator code." height="20px" src="/media/icons/pencil.svg" width="20px" />
 			</EditButton>
 		</Code>
 	)

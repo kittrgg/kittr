@@ -6,10 +6,14 @@ const myErrorHandler = (error: Error) => {
 	captureException(error, { tags: { isKittr: true } })
 }
 
-const Fallback = () => <p>Something went wrong. Please reload the page.</p>
+function Fallback() {
+	return <p>Something went wrong. Please reload the page.</p>
+}
 
-export const ErrorBoundary = ({ children }: { children: React.ReactNode }) => (
-	<ReactErrorBoundary FallbackComponent={Fallback} onError={myErrorHandler}>
-		{children}
-	</ReactErrorBoundary>
-)
+export function ErrorBoundary({ children }: { children: React.ReactNode }) {
+	return (
+		<ReactErrorBoundary FallbackComponent={Fallback} onError={myErrorHandler}>
+			{children}
+		</ReactErrorBoundary>
+	)
+}

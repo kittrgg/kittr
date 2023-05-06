@@ -1,5 +1,5 @@
 import colors from "@Colors"
-import { CSSProperties, MutableRefObject } from "react"
+import type { CSSProperties, MutableRefObject } from "react"
 import styled from "styled-components"
 
 interface Props {
@@ -34,7 +34,7 @@ interface Props {
 }
 
 /** Button to be used as the default choice for buttons in the application. */
-export const Button = ({ text, dataCy, design = "default", as = "button", buttonRef, ...props }: Props) => {
+export function Button({ text, dataCy, design = "default", as = "button", buttonRef, ...props }: Props) {
 	const StyledButton =
 		design === "premium"
 			? PremiumButton
@@ -45,7 +45,7 @@ export const Button = ({ text, dataCy, design = "default", as = "button", button
 			: ButtonBase
 
 	return (
-		<StyledButton data-cy={dataCy} design={design} as={as} ref={buttonRef} {...props}>
+		<StyledButton as={as} data-cy={dataCy} design={design} ref={buttonRef} {...props}>
 			<ButtonLabelContainer>
 				{props.startIcon}
 				{typeof text === "string" ? text.toUpperCase() : text}

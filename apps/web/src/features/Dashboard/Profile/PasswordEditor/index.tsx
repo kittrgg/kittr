@@ -1,11 +1,11 @@
-import * as Styled from "../style"
-import NewPassword from "./NewPassword"
-import Reauthenticate from "./Reauthenticate"
-import SuccessMessage from "./SuccessMessage"
 import Button from "@Components/shared/Button"
 import TextInput from "@Components/shared/TextInput"
 import { useState } from "react"
 import styled from "styled-components"
+import * as Styled from "../style"
+import NewPassword from "./NewPassword"
+import Reauthenticate from "./Reauthenticate"
+import SuccessMessage from "./SuccessMessage"
 
 const FlexRow = styled.div`
 	display: flex;
@@ -14,7 +14,7 @@ const FlexRow = styled.div`
 `
 
 /** Let a user change their password. They must first authenticate with their current password. */
-const PasswordEditor = () => {
+function PasswordEditor() {
 	const [step, setStep] = useState(1)
 	const [currentPassword, setCurrentPassword] = useState("")
 	const [newPassword, setNewPassword] = useState("")
@@ -51,34 +51,33 @@ const PasswordEditor = () => {
 			<FlexRow>
 				<div>
 					<TextInput
-						type="password"
-						name="emailCode"
-						label="Current Password"
-						value={currentPassword}
-						onChange={(e) => setCurrentPassword(e.target.value)}
 						inputStyles={{ marginTop: "12px" }}
+						label="Current Password"
+						name="emailCode"
+						onChange={(e) => setCurrentPassword(e.target.value)}
+						type="password"
+						value={currentPassword}
 					/>
 					<TextInput
-						type="password"
-						name="newPassword"
-						label="New Password"
-						value={newPassword}
-						onChange={(e) => setNewPassword(e.target.value)}
 						inputStyles={{ marginTop: "12px" }}
+						label="New Password"
+						name="newPassword"
+						onChange={(e) => setNewPassword(e.target.value)}
+						type="password"
+						value={newPassword}
 					/>
 
 					<TextInput
-						type="password"
-						name="confirmNewPassword"
-						label="Confirm New Password"
-						value={confirmNewPassword}
-						onChange={(e) => setConfirmNewPassword(e.target.value)}
 						inputStyles={{ marginTop: "12px" }}
+						label="Confirm New Password"
+						name="confirmNewPassword"
+						onChange={(e) => setConfirmNewPassword(e.target.value)}
+						type="password"
+						value={confirmNewPassword}
 					/>
 				</div>
 				<Button
 					design="white"
-					text="Change"
 					disabled={!newPassword || !currentPassword || newPassword !== confirmNewPassword}
 					onClick={() => {
 						setIsWorking(true)
@@ -87,6 +86,7 @@ const PasswordEditor = () => {
 						marginLeft: "10%",
 						opacity: !newPassword || !currentPassword || newPassword !== confirmNewPassword ? 0.3 : 1
 					}}
+					text="Change"
 				/>
 			</FlexRow>
 		</>

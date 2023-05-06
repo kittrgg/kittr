@@ -1,8 +1,3 @@
-import AddGameModal from "../modals/AddGame"
-import DeleteGameModal from "../modals/DeleteGame"
-import SupportModal from "../modals/Support"
-import ChannelButtons from "./ChannelButtons"
-import * as Styled from "./style"
 import SVG from "@Components/shared/SVG"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
 import { handleTutorialAction, setActiveView } from "@Redux/slices/dashboard"
@@ -11,9 +6,14 @@ import { useDispatch, useSelector } from "@Redux/store"
 import colors from "@Styles/colors"
 import { Routes } from "@Utils/lookups/routes"
 import Link from "next/link"
+import SupportModal from "../modals/Support"
+import DeleteGameModal from "../modals/DeleteGame"
+import AddGameModal from "../modals/AddGame"
+import * as Styled from "./style"
+import ChannelButtons from "./ChannelButtons"
 
 /** Dashboard sidebar */
-const Sidebar = ({ ...props }) => {
+function Sidebar({ ...props }) {
 	const { height } = useViewportDimensions()
 	const modal = useModal()
 	const { data } = useChannelData()
@@ -25,7 +25,7 @@ const Sidebar = ({ ...props }) => {
 			{modal.type === "Add Game" && <AddGameModal />}
 			{modal.type === "Delete Game" && <DeleteGameModal />}
 			{modal.type === "Help" && <SupportModal />}
-			<Styled.Container height={height as number}>
+			<Styled.Container height={height}>
 				<div style={{ marginBottom: "10px" }}>
 					<Styled.ButtonContainer isActive={activeView === "not applicable"}>
 						<Link
@@ -36,16 +36,16 @@ const Sidebar = ({ ...props }) => {
 								cursor: "pointer"
 							}}
 						>
-							<img src="/media/logo-no-text-square-beta.svg" alt="kittr logo" style={{ width: "60%" }} />
+							<img alt="kittr logo" src="/media/logo-no-text-square-beta.svg" style={{ width: "60%" }} />
 						</Link>
 					</Styled.ButtonContainer>
 				</div>
 
 				<Styled.ButtonContainer isActive={activeView === "Channel List"}>
 					<Styled.Button
+						data-cy="channel-list-button"
 						onClick={() => dispatch(setActiveView({ channelId: "", view: "Channel List" }))}
 						style={{ padding: "20px" }}
-						data-cy="channel-list-button"
 					>
 						<SVG.List />
 					</Styled.Button>
@@ -53,6 +53,7 @@ const Sidebar = ({ ...props }) => {
 
 				<Styled.ButtonContainer isActive={activeView === "Profile Settings"}>
 					<Styled.Button
+						data-cy="user-settings-button"
 						onClick={() =>
 							dispatch(
 								setActiveView({
@@ -62,15 +63,23 @@ const Sidebar = ({ ...props }) => {
 							)
 						}
 						style={{ padding: "20px" }}
-						data-cy="user-settings-button"
 					>
 						<SVG.CogWheel />
 					</Styled.Button>
 				</Styled.ButtonContainer>
 
-				{data?.id && <ChannelButtons />}
+				{data?.id ? <ChannelButtons /> : null}
 
 				<Styled.SupportButton
+					onClick={() => {
+						dispatch(
+							handleTutorialAction({
+								condition: modal.type === "Tutorial",
+								trueState: { type: "Help", data: { isTutorial: true, page: 7 } },
+								falseState: { type: "Help", data: {} }
+							})
+						)
+					}}
 					style={
 						modal.data?.page === 7
 							? {
@@ -81,17 +90,8 @@ const Sidebar = ({ ...props }) => {
 							  }
 							: undefined
 					}
-					onClick={() => {
-						dispatch(
-							handleTutorialAction({
-								condition: modal.type === "Tutorial",
-								trueState: { type: "Help", data: { isTutorial: true, page: 7 } },
-								falseState: { type: "Help", data: {} }
-							})
-						)
-					}}
 				>
-					<SVG.QuestionMark width="24px" style={{ marginRight: "12px" }} /> Help
+					<SVG.QuestionMark style={{ marginRight: "12px" }} width="24px" /> Help
 				</Styled.SupportButton>
 			</Styled.Container>
 		</>

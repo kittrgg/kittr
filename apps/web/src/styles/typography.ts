@@ -2,7 +2,7 @@
 // Most of the fonts on kittr should closely resemble one of these.
 // Need something that is slightly different?
 // Use one of these utilities to style your text...
-// and then overwrite any of the properties after.
+// And then overwrite any of the properties after.
 
 /** Use the Montserrat font. */
 export const montserrat = `

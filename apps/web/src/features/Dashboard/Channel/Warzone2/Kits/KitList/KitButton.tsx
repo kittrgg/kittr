@@ -3,7 +3,7 @@ import { SVG } from "@Components/shared"
 import { setActiveKit, setModal } from "@Redux/slices/dashboard"
 import { useActiveKit, useChannelData } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import { WarzoneKit, WarzoneKitBase, WarzoneKitOption, WarzoneTwoKitOptionTuning } from "@kittr/prisma"
+import type { WarzoneKit, WarzoneKitBase, WarzoneKitOption, WarzoneTwoKitOptionTuning } from "@kittr/prisma"
 import { Button } from "@kittr/ui"
 import styled from "styled-components"
 
@@ -12,7 +12,7 @@ interface Props {
 	kit: WarzoneKit & { base: WarzoneKitBase; options: WarzoneKitOption[]; tuning: WarzoneTwoKitOptionTuning[] }
 }
 
-const KitButton = ({ favorite, kit }: Props) => {
+function KitButton({ favorite, kit }: Props) {
 	const { isFetching: isFetchingChannelData } = useChannelData()
 	const dispatch = useDispatch()
 	const activeKit = useActiveKit()
@@ -28,23 +28,24 @@ const KitButton = ({ favorite, kit }: Props) => {
 
 	return (
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-ignore
+		// @ts-expect-error
 		<Button
-			loading={isFetchingChannelData}
 			fullWidth
-			variant="subtle"
-			styles={{
-				root: { backgroundColor: activeKit.id == kit.id ? colors.darker : "transparent" },
-				label: {
-					width: "100%",
-					display: "flex",
-					textAlign: "left",
-					color: colors.white
-				}
-			}}
-			leftIcon={favorite && <SVG.Star fill={colors.gold} stroke={colors.gold} width="12px" />}
+			key={kit.id}
+			leftIcon={favorite ? <SVG.Star fill={colors.gold} stroke={colors.gold} width="12px" /> : null}
+			loading={isFetchingChannelData}
+			onClick={() => dispatch(setActiveKit(kit))}
 			rightIcon={
 				<SVG.Export
+					dataCy={`${base.displayName}-quick-export`}
+					onClick={() => {
+						dispatch(
+							setModal({
+								type: "Quick Command Export",
+								data: [kit]
+							})
+						)
+					}}
 					stroke={activeKit.id === kit.id ? colors.darker : colors.light}
 					style={{
 						position: "absolute",
@@ -54,19 +55,18 @@ const KitButton = ({ favorite, kit }: Props) => {
 						width: "20px",
 						cursor: "pointer"
 					}}
-					onClick={() => {
-						dispatch(
-							setModal({
-								type: "Quick Command Export",
-								data: [kit]
-							})
-						)
-					}}
-					dataCy={`${base.displayName}-quick-export`}
 				/>
 			}
-			key={kit.id}
-			onClick={() => dispatch(setActiveKit(kit))}
+			styles={{
+				root: { backgroundColor: activeKit.id == kit.id ? colors.darker : "transparent" },
+				label: {
+					width: "100%",
+					display: "flex",
+					textAlign: "left",
+					color: colors.white
+				}
+			}}
+			variant="subtle"
 		>
 			<p style={{ maskImage: "linear-gradient(to right, black 65%, transparent 92%, transparent 100%)" }}>{title}</p>
 		</Button>
@@ -77,27 +77,27 @@ export default KitButton
 
 // Styled Components
 
-// const Button = styled.button<{ active: boolean }>`
-// 	position: relative;
-// 	appearance: none;
-// 	border: none;
-// 	background-color: ${(props) => (props.active ? colors.darker : "transparent")};
-// 	display: block;
-// 	width: 100%;
-// 	padding: 12px 24px;
-// 	padding-right: 52px;
-// 	border-radius: 12px;
-// 	color: ${colors.white};
-// 	font-family: "Montserrat", sans-serif;
-// 	font-size: 18px;
-// 	font-weight: 500;
-// 	letter-spacing: 2px;
-// 	text-align: left;
-// 	cursor: pointer;
-// 	overflow: hidden;
+// Const Button = styled.button<{ active: boolean }>`
+// 	Position: relative;
+// 	Appearance: none;
+// 	Border: none;
+// 	Background-color: ${(props) => (props.active ? colors.darker : "transparent")};
+// 	Display: block;
+// 	Width: 100%;
+// 	Padding: 12px 24px;
+// 	Padding-right: 52px;
+// 	Border-radius: 12px;
+// 	Color: ${colors.white};
+// 	Font-family: "Montserrat", sans-serif;
+// 	Font-size: 18px;
+// 	Font-weight: 500;
+// 	Letter-spacing: 2px;
+// 	Text-align: left;
+// 	Cursor: pointer;
+// 	Overflow: hidden;
 
 // 	&:hover {
-// 		background-color: ${colors.white};
-// 		color: ${colors.middle};
+// 		Background-color: ${colors.white};
+// 		Color: ${colors.middle};
 // 	}
 // `

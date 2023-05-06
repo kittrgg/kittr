@@ -1,6 +1,6 @@
 import ActiveKitController from "./ActiveKitController"
 
-const Overlays = ({ ...props }) => {
+function Overlays({ ...props }) {
 	return <ActiveKitController />
 }
 

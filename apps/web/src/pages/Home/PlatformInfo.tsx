@@ -5,56 +5,58 @@ import Link from "next/link"
 import styled from "styled-components"
 
 /** Information about the platform itself. */
-const PlatformInfo = () => (
-	<Container>
-		<Header>play bettr with kittr.</Header>
-		<Summary>
-			At kittr, we strive to create a <strong>better channeling experience</strong> for Twitch players, moderators, and
-			viewers alike. kittr is the place for players to <strong>easily share kits with their communities</strong> in a
-			sick-looking way. Everything about kittr is nice and simple - there’s not much more to it!
-		</Summary>
-		<TilesContainer>
-			<Tile>
-				<h3>PICK A GAME</h3>
-				<Link href={Routes.GAMES.LIST} passHref legacyBehavior>
-					<StackLink data-cy="game-library-button">
-						<ImageContainer>
-							<img
-								src="/media/game-stack.png"
-								alt=""
-								style={{ width: "100%", height: "250px", objectFit: "contain" }}
-							/>
-						</ImageContainer>
-					</StackLink>
-				</Link>
-			</Tile>
-			<Tile>
-				<h3>PICK A CHANNEL</h3>
-				<Link href={Routes.CHANNEL.LIST} passHref legacyBehavior>
-					<StackLink data-cy="channels-link-button">
-						<ImageContainer>
-							<img
-								src="/media/channel-stack.png"
-								alt=""
-								style={{ width: "100%", height: "250px", objectFit: "contain" }}
-							/>
-						</ImageContainer>
-					</StackLink>
-				</Link>
-			</Tile>
-			<Tile>
-				<h3>GET KITTD</h3>
-				{/* <Link href="/kits">
+function PlatformInfo() {
+	return (
+		<Container>
+			<Header>play bettr with kittr.</Header>
+			<Summary>
+				At kittr, we strive to create a <strong>better channeling experience</strong> for Twitch players, moderators,
+				and viewers alike. kittr is the place for players to <strong>easily share kits with their communities</strong>{" "}
+				in a sick-looking way. Everything about kittr is nice and simple - there’s not much more to it!
+			</Summary>
+			<TilesContainer>
+				<Tile>
+					<h3>PICK A GAME</h3>
+					<Link href={Routes.GAMES.LIST} legacyBehavior passHref>
+						<StackLink data-cy="game-library-button">
+							<ImageContainer>
+								<img
+									alt=""
+									src="/media/game-stack.png"
+									style={{ width: "100%", height: "250px", objectFit: "contain" }}
+								/>
+							</ImageContainer>
+						</StackLink>
+					</Link>
+				</Tile>
+				<Tile>
+					<h3>PICK A CHANNEL</h3>
+					<Link href={Routes.CHANNEL.LIST} legacyBehavior passHref>
+						<StackLink data-cy="channels-link-button">
+							<ImageContainer>
+								<img
+									alt=""
+									src="/media/channel-stack.png"
+									style={{ width: "100%", height: "250px", objectFit: "contain" }}
+								/>
+							</ImageContainer>
+						</StackLink>
+					</Link>
+				</Tile>
+				<Tile>
+					<h3>GET KITTD</h3>
+					{/* <Link href="/kits">
                         <StackLink> */}
-				<ImageContainer>
-					<img src="/media/kit-stack.png" alt="" style={{ width: "100%", height: "250px", objectFit: "contain" }} />
-				</ImageContainer>
-				{/* </StackLink>
+					<ImageContainer>
+						<img alt="" src="/media/kit-stack.png" style={{ width: "100%", height: "250px", objectFit: "contain" }} />
+					</ImageContainer>
+					{/* </StackLink>
                     </Link> */}
-			</Tile>
-		</TilesContainer>
-	</Container>
-)
+				</Tile>
+			</TilesContainer>
+		</Container>
+	)
+}
 
 export default PlatformInfo
 

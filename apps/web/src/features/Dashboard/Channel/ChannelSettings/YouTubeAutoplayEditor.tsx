@@ -1,5 +1,3 @@
-import H3 from "../../H3"
-import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
 import { MultiButton, Spinner } from "@Components/shared"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
@@ -7,8 +5,10 @@ import { setModal } from "@Redux/slices/dashboard"
 import { useDispatch } from "@Redux/store"
 import { paragraph } from "@Styles/typography"
 import styled from "styled-components"
+import H3 from "../../H3"
+import { trpc } from "@/lib/trpc"
 
-const YouTubeAutoplayEditor = () => {
+function YouTubeAutoplayEditor() {
 	const dispatch = useDispatch()
 	const { data } = useDashboardChannel()
 
@@ -22,7 +22,7 @@ const YouTubeAutoplayEditor = () => {
 		<>
 			<H3>YouTube Autoplay</H3>
 			<HorizFlex>
-				{isLoading && <Spinner width="100%" height="50px" />}
+				{isLoading ? <Spinner height="50px" width="100%" /> : null}
 				{!isLoading && (
 					<Paragraph>
 						Did you know you can embed YouTube videos into your kits pages? Let us know if you'd like us to autoplay
@@ -31,7 +31,13 @@ const YouTubeAutoplayEditor = () => {
 				)}
 				<div style={{ flex: 1 }}>
 					<MultiButton
-						wrapperBackgroundColor={colors.lightest}
+						activeValue={data?.profile?.youtubeAutoplay ? "YUP" : "NOPE"}
+						onClick={async () =>
+							mutate({
+								channelId: data?.id!,
+								shouldYoutubeAutoplay: !data?.profile?.youtubeAutoplay
+							})
+						}
 						values={[
 							{
 								text: "YUP"
@@ -40,13 +46,7 @@ const YouTubeAutoplayEditor = () => {
 								text: "NOPE"
 							}
 						]}
-						activeValue={data?.profile?.youtubeAutoplay ? "YUP" : "NOPE"}
-						onClick={async () =>
-							mutate({
-								channelId: data?.id!,
-								shouldYoutubeAutoplay: !data?.profile?.youtubeAutoplay
-							})
-						}
+						wrapperBackgroundColor={colors.lightest}
 					/>
 				</div>
 			</HorizFlex>

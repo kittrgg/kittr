@@ -8,29 +8,31 @@ interface Props {
 }
 
 /** Provide meta for this view using next/head. */
-export const Head = ({ description, title }: Props) => (
-	<NextHead>
-		<title>{title}</title>
-		<meta name="description" content={description} />
-		<meta itemProp="description" content={description} />
-		<meta itemProp="name" content="kittr" />
+export function Head({ description, title }: Props) {
+	return (
+		<NextHead>
+			<title>{title}</title>
+			<meta content={description} name="description" />
+			<meta content={description} itemProp="description" />
+			<meta content="kittr" itemProp="name" />
 
-		<meta name="image" content="https://kittr.gg/media/logo-square-with-pad.png" />
-		<meta itemProp="image" content="https://kittr.gg/media/logo-square-with-pad.png" />
+			<meta content="https://kittr.gg/media/logo-square-with-pad.png" name="image" />
+			<meta content="https://kittr.gg/media/logo-square-with-pad.png" itemProp="image" />
 
-		<meta property="twitter:card" content="summary" />
-		<meta property="twitter:title" content={title} />
-		<meta property="twitter:description" content={description} />
-		<meta property="twitter:site" content="https://kittr.gg" />
-		<meta property="twitter:image" content="https://kittr.gg/media/logo-square-with-pad.png" />
+			<meta content="summary" property="twitter:card" />
+			<meta content={title} property="twitter:title" />
+			<meta content={description} property="twitter:description" />
+			<meta content="https://kittr.gg" property="twitter:site" />
+			<meta content="https://kittr.gg/media/logo-square-with-pad.png" property="twitter:image" />
 
-		<meta property="og:title" content={title} />
-		<meta property="og:description" content={description} />
-		<meta property="og:image" content="https://kittr.gg/media/logo-square-with-pad.png" />
-		<meta property="og:url" content="https://kittr.gg" />
-		<meta property="og:site_name" content="kittr" />
-		<meta property="og:type" content="website" />
-	</NextHead>
-)
+			<meta content={title} property="og:title" />
+			<meta content={description} property="og:description" />
+			<meta content="https://kittr.gg/media/logo-square-with-pad.png" property="og:image" />
+			<meta content="https://kittr.gg" property="og:url" />
+			<meta content="kittr" property="og:site_name" />
+			<meta content="website" property="og:type" />
+		</NextHead>
+	)
+}
 
 export default Head

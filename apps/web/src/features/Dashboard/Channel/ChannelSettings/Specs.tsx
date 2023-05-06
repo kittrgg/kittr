@@ -1,4 +1,3 @@
-import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
 import { Button, SVG, Toast } from "@Components/shared"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
@@ -8,8 +7,9 @@ import { useDispatch } from "@Redux/store"
 import { paragraph } from "@Styles/typography"
 import { useState } from "react"
 import styled from "styled-components"
+import { trpc } from "@/lib/trpc"
 
-const Specs = () => {
+function Specs() {
 	const [copyNotification, setCopyNotification] = useState(false)
 	const dispatch = useDispatch()
 	const specs = useSpecs()
@@ -40,48 +40,49 @@ const Specs = () => {
 			<Title>
 				<span>
 					PC Specs
-					<SVG.PremiumWithCircle width="24px" style={{ position: "relative", top: "6px", marginLeft: "12px" }} />
+					<SVG.PremiumWithCircle style={{ position: "relative", top: "6px", marginLeft: "12px" }} width="24px" />
 				</span>
 				{Object.keys(specs || {}).length > 0 && (
 					<Button
 						design="transparent"
 						onClick={() => copyToClipboard(commandString)}
-						text="Specs Command"
-						startIcon={<SVG.Clipboard width="16px" style={{ marginRight: "16px" }} />}
+						startIcon={<SVG.Clipboard style={{ marginRight: "16px" }} width="16px" />}
 						style={{ fontSize: "14px", padding: "16px" }}
+						text="Specs Command"
 					/>
 				)}
 			</Title>
-			{specs &&
-				Object.values(data?.profile?.channelPcSpecs || {}).map((spec, index) => {
-					return (
-						<Spec key={`${spec.id}-${index}`}>
-							<SpecInfo>
-								<Label>{spec.partType}</Label>
-								<span>{spec.partName}</span>
-							</SpecInfo>
-							<IconButtons>
-								<SVG.Pencil
-									data-cy={`${spec.partType.replace(/ /g, "-")}-update-spec`}
-									onClick={() => dispatch(setModal({ type: "Add Spec", data: spec }))}
-								/>
-								<SVG.X
-									data-cy={`${spec.partType}-delete-spec`}
-									onClick={async () => mutate({ channelId: data?.id!, pcSpecId: spec.id })}
-								/>
-							</IconButtons>
-						</Spec>
-					)
-				})}
+			{specs
+				? Object.values(data?.profile?.channelPcSpecs || {}).map((spec, index) => {
+						return (
+							<Spec key={`${spec.id}-${index}`}>
+								<SpecInfo>
+									<Label>{spec.partType}</Label>
+									<span>{spec.partName}</span>
+								</SpecInfo>
+								<IconButtons>
+									<SVG.Pencil
+										data-cy={`${spec.partType.replace(/ /g, "-")}-update-spec`}
+										onClick={() => dispatch(setModal({ type: "Add Spec", data: spec }))}
+									/>
+									<SVG.X
+										data-cy={`${spec.partType}-delete-spec`}
+										onClick={async () => mutate({ channelId: data?.id!, pcSpecId: spec.id })}
+									/>
+								</IconButtons>
+							</Spec>
+						)
+				  })
+				: null}
 			<Button
 				data-cy="add-a-spec"
 				design="default"
 				onClick={() => dispatch(setModal({ type: "Add Spec", data: "" }))}
-				text="Spec"
 				startIcon={<span style={{ fontWeight: 600, fontSize: "24px", marginRight: "24px", height: "100%" }}>+</span>}
+				text="Spec"
 			/>
-			<Toast visible={copyNotification} setVisibility={setCopyNotification}>
-				<img src="/media/icons/check-mark.svg" alt="Check Mark" width={16} height={11} />
+			<Toast setVisibility={setCopyNotification} visible={copyNotification}>
+				<img alt="Check Mark" height={11} src="/media/icons/check-mark.svg" width={16} />
 				<p style={{ marginLeft: "44px" }}>!specs copied to clipboard</p>
 			</Toast>
 		</div>

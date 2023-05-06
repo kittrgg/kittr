@@ -1,84 +1,84 @@
 {
-  "$schema": "https://turbo.build/schema.json",
   "pipeline": {
-		"build": {
-			"dependsOn": ["db:deploy", "db:generate", "^build" ],
-      "outputs": [ "dist/**", ".next/**", "build/**" ],
-			"env": [
-				"DATABASE_URL",
-				"ENVIRONMENT",
-				"FIREBASE_ADMIN_PRIVATE_KEY",
-				"FIREBASE_APP_ID",
-				"FIREBASE_AUTH_DOMAIN",
-				"FIREBASE_CLIENT_EMAIL",
-				"FIREBASE_COOKIE_SECRET_CURRENT",
-				"FIREBASE_COOKIE_SECRET_PREVIOUS",
-				"FIREBASE_DATABASE_URL",
-				"FIREBASE_MEASUREMENT_ID",
-				"FIREBASE_MESSAGING_SENDER_ID",
-				"FIREBASE_PROJECT_ID",
-				"GOOGLE_APPLICATION_CREDENTIALS",
-				"IS_DEV",
-				"IS_PREVIEW",
-				"MONTHLY_TIP_PRICE_ID",
-				"NEXT_PUBLIC_ADS_DISABLED",
-				"NEXT_PUBLIC_FIREBASE_API_KEY",
-				"NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET",
-				"NEXT_PUBLIC_GOOGLE_ANALYTICS",
-				"NEXT_PUBLIC_IS_DEV",
-				"NEXT_PUBLIC_SENTRY_DSN",
-				"NEXT_PUBLIC_SOCKET_HOST",
-				"NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
-				"NEXT_PUBLIC_VERCEL_ENV",
-				"NEXT_PUBLIC_VERCEL_URL",
-				"NODE_ENV",
-				"PORT",
-				"SENTRY_AUTH_TOKEN",
-				"SENTRY_DSN",
-				"SENTRY_ORG",
-				"SENTRY_PROJECT",
-				"STRIPE_SECRET_KEY",
-				"STRIPE_WEBHOOK_SECRET",
-				"SUBSCRIPTION_PRICE_ID",
-				"TWITCH_CLIENT_ID",
-				"TWITCH_CLIENT_SECRET",
-				"TWITCH_SECRET",
-				"VERCEL_ENV",
-				"VERCEL_URL"
-			]
+    "build": {
+      "dependsOn": ["db:deploy", "db:generate", "^build"],
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**", "build/**"],
+      "env": [
+        "DATABASE_URL",
+        "ENVIRONMENT",
+        "FIREBASE_ADMIN_PRIVATE_KEY",
+        "FIREBASE_APP_ID",
+        "FIREBASE_AUTH_DOMAIN",
+        "FIREBASE_CLIENT_EMAIL",
+        "FIREBASE_COOKIE_SECRET_CURRENT",
+        "FIREBASE_COOKIE_SECRET_PREVIOUS",
+        "FIREBASE_DATABASE_URL",
+        "FIREBASE_MEASUREMENT_ID",
+        "FIREBASE_MESSAGING_SENDER_ID",
+        "FIREBASE_PROJECT_ID",
+        "GOOGLE_APPLICATION_CREDENTIALS",
+        "IS_DEV",
+        "IS_PREVIEW",
+        "MONTHLY_TIP_PRICE_ID",
+        "NEXT_PUBLIC_ADS_DISABLED",
+        "NEXT_PUBLIC_FIREBASE_API_KEY",
+        "NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET",
+        "NEXT_PUBLIC_GOOGLE_ANALYTICS",
+        "NEXT_PUBLIC_IS_DEV",
+        "NEXT_PUBLIC_SENTRY_DSN",
+        "NEXT_PUBLIC_SOCKET_HOST",
+        "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
+        "NEXT_PUBLIC_VERCEL_ENV",
+        "NEXT_PUBLIC_VERCEL_URL",
+        "NODE_ENV",
+        "PORT",
+        "SENTRY_AUTH_TOKEN",
+        "SENTRY_DSN",
+        "SENTRY_ORG",
+        "SENTRY_PROJECT",
+        "STRIPE_SECRET_KEY",
+        "STRIPE_WEBHOOK_SECRET",
+        "SUBSCRIPTION_PRICE_ID",
+        "TWITCH_CLIENT_ID",
+        "TWITCH_CLIENT_SECRET",
+        "TWITCH_SECRET",
+        "VERCEL_ENV",
+        "VERCEL_URL"
+      ]
     },
-		"build#storybook": {
-			"outputs": ["storybook-static/**"]
-		},
     "topo": {
-			"dependsOn": [ "db:generate", "^topo" ]
+      "dependsOn": ["db:generate", "^topo"]
     },
-		"db:deploy": {
-			"cache": false
-		},
+    "db:deploy": {
+      "cache": false
+    },
     "db:generate": {
       "cache": false
     },
-		"db:push": {
-			"cache": false
-		},
+    "db:push": {
+      "cache": false
+    },
     "lint": {
-      "dependsOn": ["^topo"]
-		},
+      "dependsOn": ["@kittr/lint#eslint"]
+    },
+    "lint:fix": {
+      "dependsOn": ["@kittr/lint#eslint:fix"]
+    },
     "typecheck": {
-      "dependsOn": [ "^topo" ]
+      "dependsOn": ["^topo"],
+      "outputMode": "errors-only"
     },
     "test": {
-      "dependsOn": ["^topo" ],
-      "outputs": [ "coverage/**" ]
+      "dependsOn": ["^topo"],
+      "outputs": ["coverage/**"]
     },
     "dev": {
-      "dependsOn": [ "db:generate" ],
-			"persistent": true,
+      "dependsOn": ["db:generate"],
+      "persistent": true,
       "cache": false
     },
     "seed": {
-      "dependsOn": [ "db:generate" ],
+      "dependsOn": ["db:generate"],
       "cache": false
     }
   }

@@ -7,7 +7,7 @@ import { useDispatch } from "@Redux/store"
 import { header2 } from "@Styles/typography"
 import styled from "styled-components"
 
-const NamingWarning = ({ ...props }) => {
+function NamingWarning({ ...props }) {
 	const dispatch = useDispatch()
 
 	return (
@@ -15,10 +15,10 @@ const NamingWarning = ({ ...props }) => {
 			<Text>YOU CAN'T MAKE TWO KITS WITH THE SAME NAME + DESCRIPTION.</Text>
 			<Grid>
 				<div>
-					<SVG.X width="24px" fill={colors.red} />
+					<SVG.X fill={colors.red} width="24px" />
 				</div>
 				<div>
-					<SVG.CheckMark width="32px" stroke={colors.green} />
+					<SVG.CheckMark stroke={colors.green} width="32px" />
 				</div>
 				<div>M16 & M16</div>
 				<div>M16 & M16 (Alt)</div>
@@ -30,9 +30,9 @@ const NamingWarning = ({ ...props }) => {
 
 			<Button
 				design="transparent"
-				text="BACK"
 				onClick={() => dispatch(setModal({ type: "", data: {} }))}
 				style={{ margin: "0 auto" }}
+				text="BACK"
 			/>
 		</Modal>
 	)

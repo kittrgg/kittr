@@ -16,7 +16,7 @@ interface Props {
 	handleChange?: (...args: any) => any
 }
 
-const BackgroundImageUploader = ({ fileName, label, imageWidth, imageHeight, handleChange }: Props) => {
+function BackgroundImageUploader({ fileName, label, imageWidth, imageHeight, handleChange }: Props) {
 	const dispatch = useDispatch()
 	const [image, setImage] = useState("")
 	const [isUploading, setIsUploading] = useState(false)
@@ -75,9 +75,9 @@ const BackgroundImageUploader = ({ fileName, label, imageWidth, imageHeight, han
 	return (
 		<div>
 			<Label
+				htmlFor={fileName}
 				onMouseEnter={() => setIsHovered(true)}
 				onMouseLeave={() => setIsHovered(false)}
-				htmlFor={fileName}
 				style={{
 					backgroundImage: `url("${image}")` || "transparent",
 					backgroundSize: image ? "contain" : "",
@@ -88,25 +88,25 @@ const BackgroundImageUploader = ({ fileName, label, imageWidth, imageHeight, han
 			>
 				{!image && (
 					<>
-						<SVG.Export width="24px" stroke={colors.lighter} style={{ marginRight: "24px" }} />
+						<SVG.Export stroke={colors.lighter} style={{ marginRight: "24px" }} width="24px" />
 						UPLOAD
 					</>
 				)}
 				<input
 					id={fileName}
-					type="file"
 					name={fileName}
 					onChange={(e: any) => {
 						e.preventDefault()
 						handleUpload(e)
 					}}
 					style={{ display: "none" }}
+					type="file"
 				/>
-				{isHovered && image && (
-					<DeleteGameBubble onMouseEnter={() => setIsHovered(true)} onClick={handleDelete} isHovered={isHovered}>
-						<SVG.X style={{ width: "100%", height: "100%" }} fill={colors.red} />
+				{isHovered && image ? (
+					<DeleteGameBubble isHovered={isHovered} onClick={handleDelete} onMouseEnter={() => setIsHovered(true)}>
+						<SVG.X fill={colors.red} style={{ width: "100%", height: "100%" }} />
 					</DeleteGameBubble>
-				)}
+				) : null}
 			</Label>
 			<Caption>{label}</Caption>
 			<Caption>

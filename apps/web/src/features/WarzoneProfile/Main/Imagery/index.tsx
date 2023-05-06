@@ -1,17 +1,17 @@
-import CursorSelector from "./CursorSelector"
-import * as Styled from "./style"
 import { FirebaseStorageResolver } from "@Components/shared/FirebaseStorageResolver"
 import { useChannelProfileData } from "@Hooks/trpc/useChannelProfileData"
 import { useActiveChannelKit } from "@Hooks/useActiveChannelKit"
 import { useState, useEffect } from "react"
+import * as Styled from "./style"
+import CursorSelector from "./CursorSelector"
 
-const WeaponPicture = () => {
+function WeaponPicture() {
 	const { data: channelData } = useChannelProfileData()
 	const activeWeapon = useActiveChannelKit()
 
-	// const channel = useChannel()
+	// Const channel = useChannel()
 	const youtubeAutoplay = channelData?.profile?.youtubeAutoplay
-	// const activeWeapon = useActiveWeapon()
+	// Const activeWeapon = useActiveWeapon()
 	const { base, youtubeUrl, tiktokUrl } = activeWeapon!
 	const { displayName, imageUrl } = base
 
@@ -20,14 +20,14 @@ const WeaponPicture = () => {
 
 	const youtubeString = new URL(`https://youtube.com/embed/${youtubeId}`)
 	youtubeString.searchParams.append("autoplay", youtubeAutoplay ? "1" : "0")
-	youtubeString.searchParams.append("start", split[1]?.slice(0, -1) || "0")
+	youtubeString.searchParams.append("start", split[1].slice(0, -1) || "0")
 	youtubeString.searchParams.append("rel", "0")
 
 	const imageryArray = [
 		["youtube", youtubeUrl],
 		["tiktok", tiktokUrl],
 		["image", imageUrl]
-	].filter((elem) => !!elem[1])
+	].filter((elem) => Boolean(elem[1]))
 	const [cursor, setCursor] = useState(0)
 
 	useEffect(() => {
@@ -47,29 +47,29 @@ const WeaponPicture = () => {
 				{imageryArray[cursor]?.[0] === "youtube" && (
 					<Styled.YoutubeWrapper>
 						<iframe
-							src={youtubeString.href}
-							frameBorder="0"
 							allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 							allowFullScreen
+							frameBorder="0"
+							src={youtubeString.href}
 						/>
 					</Styled.YoutubeWrapper>
 				)}
 
 				{imageryArray[cursor]?.[0] === "tiktok" && (
 					<Styled.TiktokWrapper>
-						<iframe src={`https://www.tiktok.com/embed/${tiktokUrl}`} allowFullScreen />
+						<iframe allowFullScreen src={`https://www.tiktok.com/embed/${tiktokUrl}`} />
 					</Styled.TiktokWrapper>
 				)}
 
 				{imageryArray[cursor]?.[0] === "image" && (
 					<Styled.ImageWrapper>
 						<FirebaseStorageResolver
-							path={imageUrl}
 							noSpinner
+							path={imageUrl}
 							render={(data) => (
 								<img
-									src={data || "/media/logo.svg"}
 									alt="Weapon Image"
+									src={data || "/media/logo.svg"}
 									style={{ width: "90%", height: "100%", objectFit: "cover" }}
 								/>
 							)}
@@ -77,7 +77,7 @@ const WeaponPicture = () => {
 					</Styled.ImageWrapper>
 				)}
 			</Styled.ImageryContainer>
-			{imageryArray.length > 1 && <CursorSelector cursor={cursor} setCursor={setCursor} items={imageryArray} />}
+			{imageryArray.length > 1 && <CursorSelector cursor={cursor} items={imageryArray} setCursor={setCursor} />}
 		</div>
 	)
 }

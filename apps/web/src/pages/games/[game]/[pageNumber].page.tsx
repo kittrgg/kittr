@@ -1,4 +1,3 @@
-import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
 import AdPageWrapper from "@Components/layouts/AdPageWrapper"
 import FallbackPage from "@Components/layouts/FallbackPage"
@@ -12,16 +11,17 @@ import { createSSGHelper } from "@kittr/trpc"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import styled from "styled-components"
+import { trpc } from "@/lib/trpc"
 
 const CHANNELS_PER_PAGE = 10
 
-const GameProfile = ({ redirect }: { redirect: boolean }) => {
+function GameProfile({ redirect }: { redirect: boolean }) {
 	const { width } = useViewportDimensions()
 	const { query, isFallback, push } = useRouter()
 	const { pageNumber, game } = query as { pageNumber: string; game: string }
 
-	const { data: gameData } = trpc.games.getByUrlSafeName.useQuery(game, { enabled: !!game })
-	const { data: channelCount = 0 } = trpc.channels.count.useQuery(game, { enabled: !!game })
+	const { data: gameData } = trpc.games.getByUrlSafeName.useQuery(game, { enabled: Boolean(game) })
+	const { data: channelCount = 0 } = trpc.channels.count.useQuery(game, { enabled: Boolean(game) })
 	const numberOfPages = Math.ceil(channelCount / CHANNELS_PER_PAGE)
 
 	const { data: channels } = trpc.channels.games.list.useQuery(
@@ -30,7 +30,7 @@ const GameProfile = ({ redirect }: { redirect: boolean }) => {
 			take: CHANNELS_PER_PAGE,
 			skip: Number(Number(pageNumber) - 1) * CHANNELS_PER_PAGE
 		},
-		{ enabled: !!game }
+		{ enabled: Boolean(game) }
 	)
 
 	if (redirect) {
@@ -44,21 +44,21 @@ const GameProfile = ({ redirect }: { redirect: boolean }) => {
 
 	return (
 		<AdPageWrapper
-			title={`${gameData.displayName} | kittr`}
 			description={`Check out who is playing ${gameData.displayName} on kittr.`}
+			title={`${gameData.displayName} | kittr`}
 		>
 			{width < 1200 && <ResponsiveBanner />}
 			<FlexRow>
 				<FirebaseStorageResolver
-					path={gameData.backgroundImageUrl}
 					noSpinner
+					path={gameData.backgroundImageUrl}
 					render={(img) => <BackgroundImage backgroundImage={img} />}
 				/>
 				<ImageContainer>
 					<FirebaseStorageResolver
-						path={gameData.titleImageUrl}
 						noSpinner
-						render={(img) => <Image src={img} alt={gameData.displayName} />}
+						path={gameData.titleImageUrl}
+						render={(img) => <Image alt={gameData.displayName} src={img} />}
 					/>
 				</ImageContainer>
 				<GameTitle>{gameData.displayName.toUpperCase()}</GameTitle>
@@ -84,20 +84,20 @@ const GameProfile = ({ redirect }: { redirect: boolean }) => {
 						</Link>
 					</>
 				)}
-				{channels && channels.length > 0 && (
+				{channels && channels.length > 0 ? (
 					<>
-						<ChannelList data={channels} itemBackgroundColor="#2F2F31" gameLink={game} />
+						<ChannelList data={channels} gameLink={game} itemBackgroundColor="#2F2F31" />
 						<Paginator
-							totalResults={channelCount ?? 0}
-							currentPageResultStart={(page - 1) * 10 + 1}
+							currentPage={page}
 							currentPageResultEnd={page * 10 + 1}
+							currentPageResultStart={(page - 1) * 10 + 1}
 							isFirstPage={page === 1}
 							isLastPage={page === numberOfPages}
-							currentPage={page}
 							pageRoot={Routes.GAMES.createPath(game)}
+							totalResults={channelCount ?? 0}
 						/>
 					</>
-				)}
+				) : null}
 				{width < 1200 && <ResponsiveBanner largeWidthAdUnit="d728x90" smallWidthAdUnit="s300x250" />}
 			</ChannelsContainer>
 		</AdPageWrapper>

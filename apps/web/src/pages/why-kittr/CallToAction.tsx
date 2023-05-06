@@ -12,16 +12,18 @@ interface Props {
 }
 
 /** Call to action for the mod landing page. */
-const CallToAction = ({ marginTop, marginBottom, header }: Props) => (
-	<Container marginTop={marginTop} marginBottom={marginBottom}>
-		<Header>{header}</Header>
-		<Link href={Routes.SIGN_UP} passHref legacyBehavior>
-			<LinkButton target="_blank" rel="noopener noreferrer">
-				SIGN UP
-			</LinkButton>
-		</Link>
-	</Container>
-)
+function CallToAction({ marginTop, marginBottom, header }: Props) {
+	return (
+		<Container marginBottom={marginBottom} marginTop={marginTop}>
+			<Header>{header}</Header>
+			<Link href={Routes.SIGN_UP} legacyBehavior passHref>
+				<LinkButton rel="noopener noreferrer" target="_blank">
+					SIGN UP
+				</LinkButton>
+			</Link>
+		</Container>
+	)
+}
 
 export default CallToAction
 

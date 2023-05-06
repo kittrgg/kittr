@@ -1,6 +1,6 @@
 import colors from "@Colors"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
-import { ReactNode } from "react"
+import type { ReactNode } from "react"
 
 interface Props {
 	/** Optional onClick function. Most often used when this component is being used as a background for a modal. */
@@ -12,11 +12,17 @@ interface Props {
 }
 
 /** Full screen takeover component. */
-const FullScreen = ({ onClick, style, children }: Props) => {
+function FullScreen({ onClick, style, children }: Props) {
 	const { width, height } = useViewportDimensions()
 
 	return (
 		<div
+			onClick={(e) => {
+				if (onClick) {
+					e.stopPropagation()
+					onClick(e)
+				}
+			}}
 			style={{
 				position: "fixed",
 				top: 0,
@@ -28,12 +34,6 @@ const FullScreen = ({ onClick, style, children }: Props) => {
 				width,
 				height,
 				...style
-			}}
-			onClick={(e) => {
-				if (onClick) {
-					e.stopPropagation()
-					onClick(e)
-				}
 			}}
 		>
 			{children}

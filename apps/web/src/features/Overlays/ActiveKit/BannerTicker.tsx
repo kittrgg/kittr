@@ -2,9 +2,10 @@ import colors from "@Styles/colors"
 import { header1, header2, montserrat, paragraph } from "@Styles/typography"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
-import { RouterOutput } from "@kittr/trpc"
-import { OverlayKit } from "@kittr/types"
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react"
+import type { RouterOutput } from "@kittr/trpc"
+import type { OverlayKit } from "@kittr/types"
+import type { Dispatch, SetStateAction } from "react"
+import { useEffect, useRef, useState } from "react"
 import styled, { keyframes, ThemeProvider } from "styled-components"
 
 interface Props {
@@ -15,7 +16,7 @@ interface Props {
 	setActiveKit: Dispatch<SetStateAction<OverlayKit>>
 }
 
-const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Props) => {
+function BannerTicker({ _id, previewWidth, data, activeKit, setActiveKit }: Props) {
 	const [isDataVisible, setIsDataVisible] = useState(true)
 	const optionsRef = useRef<any>(null)
 
@@ -54,7 +55,7 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 
 		if (data) {
 			const kitCount = [data.primaryWzTwoKit, data.secondaryWzTwoKit].filter(
-				(kit) => !!kit && Object.keys(kit || {}).length > 0
+				(kit) => Boolean(kit) && Object.keys(kit || {}).length > 0
 			).length
 
 			if (kitCount > 1) {
@@ -71,7 +72,7 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 	const hasAKitSelected =
 		Object.keys(data.primaryWzTwoKit || {}).length > 0 || Object.keys(data.secondaryWzTwoKit || {}).length > 0
 	const isRendered = data.isOverlayVisible && hasAKitSelected
-	const isOverlayVisible = !!previewWidth || isRendered
+	const isOverlayVisible = Boolean(previewWidth) || isRendered
 
 	return (
 		<ThemeProvider
@@ -83,32 +84,33 @@ const BannerTicker = ({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 		>
 			<Wrapper>
 				<Meta>
-					<BaseName isDataVisible={isDataVisible} fadeDuration={FADE_DURATION}>
+					<BaseName fadeDuration={FADE_DURATION} isDataVisible={isDataVisible}>
 						{activeKit?.base?.displayName}
 					</BaseName>
-					<CommandInfo isDataVisible={isDataVisible} fadeDuration={FADE_DURATION}>
+					<CommandInfo fadeDuration={FADE_DURATION} isDataVisible={isDataVisible}>
 						kittr.gg | !{activeKit?.base?.commandCodes[0].code}
 					</CommandInfo>
 				</Meta>
 				<OptionsWrapper>
 					<Options
-						isDataVisible={isDataVisible}
 						duration={SCROLL_DURATION}
+						fadeDuration={FADE_DURATION}
+						isDataVisible={isDataVisible}
 						ref={optionsRef}
 						scrollValue={optionsRef.current ? optionsRef.current.scrollWidth - optionsRef.current.clientWidth : 0}
-						fadeDuration={FADE_DURATION}
 					>
-						{activeKit &&
-							customOrderArray<{ slotKey: string; displayName: string }>({
-								sortingArray: warzoneSlotsOrder,
-								keyToSort: "slotKey",
-								array: activeKit.options || []
-							}).map((elem: any, _: any) => (
-								<Option key={elem.displayName}>
-									<Slot>{elem.slotKey}</Slot>
-									<Selection>{elem.displayName.toUpperCase()}</Selection>
-								</Option>
-							))}
+						{activeKit
+							? customOrderArray<{ slotKey: string; displayName: string }>({
+									sortingArray: warzoneSlotsOrder,
+									keyToSort: "slotKey",
+									array: activeKit.options || []
+							  }).map((elem: any, _: any) => (
+									<Option key={elem.displayName}>
+										<Slot>{elem.slotKey}</Slot>
+										<Selection>{elem.displayName.toUpperCase()}</Selection>
+									</Option>
+							  ))
+							: null}
 					</Options>
 				</OptionsWrapper>
 			</Wrapper>

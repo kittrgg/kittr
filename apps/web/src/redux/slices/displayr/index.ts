@@ -1,4 +1,4 @@
-import {
+import type {
 	WarzoneKit,
 	WarzoneKitBase,
 	WarzoneKitBaseCategory,
@@ -8,8 +8,8 @@ import {
 	WarzoneTwoKitOption,
 	WarzoneTwoKitOptionTuning
 } from "@kittr/prisma"
-import { RouterInput } from "@kittr/trpc"
-import { IPopularityRates } from "@kittr/types/popularity"
+import type { RouterInput } from "@kittr/trpc"
+import type { IPopularityRates } from "@kittr/types/popularity"
 import { createSlice } from "@reduxjs/toolkit"
 
 type ActiveWeaponKit = WarzoneKit & {

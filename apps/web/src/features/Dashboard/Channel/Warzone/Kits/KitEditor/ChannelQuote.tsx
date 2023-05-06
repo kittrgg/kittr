@@ -1,12 +1,12 @@
-import * as Styled from "./style"
 import colors from "@Colors"
 import { updateChannelQuote } from "@Redux/slices/dashboard"
 import { useActiveKit } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
 import { paragraph } from "@Styles/typography"
 import styled from "styled-components"
+import * as Styled from "./style"
 
-const ChannelQuote = () => {
+function ChannelQuote() {
 	const dispatch = useDispatch()
 	const { quote } = useActiveKit()
 
@@ -19,14 +19,13 @@ const ChannelQuote = () => {
 			<Styled.ParagraphHelper>Add your tips or comments about this kit.</Styled.ParagraphHelper>
 			<TextArea
 				name="channelQuote"
-				value={quote ?? ""}
 				onChange={(e) => {
 					if (e.target.value.length > 350) {
-						return
 					} else {
 						dispatch(updateChannelQuote(e.target.value))
 					}
 				}}
+				value={quote ?? ""}
 			/>
 		</Styled.Container>
 	)

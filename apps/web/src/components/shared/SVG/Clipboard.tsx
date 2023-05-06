@@ -2,11 +2,11 @@ import colors from "@Colors"
 
 /** A clipboard. Use stroke for color. Defaults to white. */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const Clipboard = (props: any) => {
+export function Clipboard(props: any) {
 	const { width = "100%", stroke = colors.white, dataCy, ...rest } = props
 
 	return (
-		<svg width={width} data-cy={dataCy} viewBox="0 0 15 19" fill="none" {...rest} xmlns="http://www.w3.org/2000/svg">
+		<svg data-cy={dataCy} fill="none" viewBox="0 0 15 19" width={width} {...rest} xmlns="http://www.w3.org/2000/svg">
 			<path
 				d="M10.6666 2.9585H12.25C12.6699 2.9585 13.0726 3.13409 13.3695 3.44665C13.6665 3.75921 13.8333 4.18314 13.8333 4.62516V16.2918C13.8333 16.7339 13.6665 17.1578 13.3695 17.4703C13.0726 17.7829 12.6699 17.9585 12.25 17.9585H2.74996C2.33003 17.9585 1.92731 17.7829 1.63037 17.4703C1.33344 17.1578 1.16663 16.7339 1.16663 16.2918V4.62516C1.16663 4.18314 1.33344 3.75921 1.63037 3.44665C1.92731 3.13409 2.33003 2.9585 2.74996 2.9585H4.33329"
 				stroke={stroke}

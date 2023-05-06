@@ -1,9 +1,9 @@
-import * as Styled from "./style"
 import { useActiveChannelKit } from "@Hooks/useActiveChannelKit"
+import * as Styled from "./style"
 
-const BottomBlurb = () => {
+function BottomBlurb() {
 	const activeWeapon = useActiveChannelKit()
-	const blurb = activeWeapon?.base?.blurb
+	const blurb = activeWeapon?.base.blurb
 
 	return (
 		<Styled.Container data-cy="kit-blurb">

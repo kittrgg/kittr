@@ -1,12 +1,12 @@
-import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
 import { ColorPicker, SVG } from "@Components/shared"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
 import { setModal } from "@Redux/slices/dashboard"
 import { useDispatch } from "@Redux/store"
 import styled from "styled-components"
+import { trpc } from "@/lib/trpc"
 
-const ThemeColor = () => {
+function ThemeColor() {
 	const { data } = useDashboardChannel()
 	const dispatch = useDispatch()
 
@@ -20,7 +20,7 @@ const ThemeColor = () => {
 		mutate({
 			newColor: color || colors.white,
 			channelId: data?.id!,
-			colorId: data?.profile?.brandColors?.find((color) => color.type === "PRIMARY")?.id!
+			colorId: data?.profile?.brandColors.find((color) => color.type === "PRIMARY")?.id!
 		})
 	}
 
@@ -28,12 +28,12 @@ const ThemeColor = () => {
 		<div>
 			<Title>
 				Theme Color
-				<SVG.PremiumWithCircle width="24px" style={{ position: "relative", top: "6px", marginLeft: "12px" }} />
+				<SVG.PremiumWithCircle style={{ position: "relative", top: "6px", marginLeft: "12px" }} width="24px" />
 			</Title>
 			<ColorPicker
-				onChangeComplete={onChangeColor}
 				defaultColor={data?.profile?.brandColors.find((color) => color.type === "PRIMARY")?.value || colors.white}
 				designVariant="Big Square"
+				onChangeComplete={onChangeColor}
 			/>
 		</div>
 	)

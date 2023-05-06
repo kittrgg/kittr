@@ -1,8 +1,8 @@
-import * as Styled from "./style"
 import colors from "@Colors"
 import MultiButton from "@Components/shared/MultiButton"
-import { TCommandMethod } from "@kittr/types"
-import { Dispatch, SetStateAction } from "react"
+import type { TCommandMethod } from "@kittr/types"
+import type { Dispatch, SetStateAction } from "react"
+import * as Styled from "./style"
 
 interface Props {
 	/** Workflows that users can utilize to add their commands to their channel */
@@ -12,7 +12,7 @@ interface Props {
 }
 
 /** Allows the user to select the manner in which they will be adding their commands to their channel. */
-const MethodSelector = ({ method, setMethod }: Props) => {
+function MethodSelector({ method, setMethod }: Props) {
 	return (
 		<Styled.HorizFlex>
 			<div>
@@ -24,9 +24,9 @@ const MethodSelector = ({ method, setMethod }: Props) => {
 			</div>
 			<Styled.ToggleContainer flexBasis={1000}>
 				<MultiButton
-					wrapperBackgroundColor={colors.darker}
 					activeValue={method}
 					infoLabels={["< 2 min", "< 2 min", "8 min"]}
+					onClick={(elem) => setMethod(elem.value)}
 					values={[
 						{
 							text: "NIGHTBOT",
@@ -44,7 +44,7 @@ const MethodSelector = ({ method, setMethod }: Props) => {
 							backgroundColor: colors.twitchPurple
 						}
 					]}
-					onClick={(elem) => setMethod(elem.value)}
+					wrapperBackgroundColor={colors.darker}
 				/>
 			</Styled.ToggleContainer>
 		</Styled.HorizFlex>

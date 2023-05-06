@@ -1,4 +1,4 @@
-import { WarzoneKit, WarzoneKitBase, WarzoneKitBaseCategory } from "@kittr/prisma"
+import type { WarzoneKit, WarzoneKitBase, WarzoneKitBaseCategory } from "@kittr/prisma"
 
 interface KitBaseWithCategory extends WarzoneKitBase {
 	category: WarzoneKitBaseCategory

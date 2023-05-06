@@ -1,4 +1,3 @@
-import { trpc } from "@/lib/trpc"
 import colors from "@Colors"
 import { Modal, Button, Spinner } from "@Components/shared"
 import { useChannelManagers } from "@Hooks/api/useChannelManagers"
@@ -8,9 +7,10 @@ import { useDispatch } from "@Redux/store"
 import { header2, montserrat } from "@Styles/typography"
 import { useState } from "react"
 import styled from "styled-components"
+import { trpc } from "@/lib/trpc"
 
 /** Modal to allow a user to set a new owner for the channel. */
-const SetNewOwner = () => {
+function SetNewOwner() {
 	const dispatch = useDispatch()
 	const [newOwner, setNewOwner] = useState("-")
 	const { data: channelData, refetch: refetchDashboard } = useChannelData()
@@ -23,16 +23,16 @@ const SetNewOwner = () => {
 	return (
 		<Modal backgroundClickToClose title="CHOOSE NEW OWNER">
 			<Paragraph>CHOOSE A NEW OWNER FOR THIS CHANNEL'S ACCOUNT BELOW.</Paragraph>
-			{isLoading && <Spinner />}
-			{data && (
+			{isLoading ? <Spinner /> : null}
+			{data ? (
 				<>
 					<RowFlex>
 						<ColumnFlex>
 							<Select
+								data-cy="selector-new-manager"
+								onChange={(e) => setNewOwner(e.target.value)}
 								style={{ width: "100%" }}
 								value={newOwner}
-								onChange={(e) => setNewOwner(e.target.value)}
-								data-cy="selector-new-manager"
 							>
 								<option value="">-</option>
 								{data
@@ -48,21 +48,21 @@ const SetNewOwner = () => {
 					<RowFlex>
 						<Button
 							design="transparent"
-							text="CANCEL"
 							onClick={() => dispatch(setModal({ type: "", data: {} }))}
 							style={{ margin: "0 auto" }}
+							text="CANCEL"
 						/>
 						<Button
+							dataCy="final-change-owner"
 							design="white"
-							text={isMutatingOwner ? "..." : "CONFIRM NEW OWNER"}
 							disabled={isMutatingOwner || newOwner === "-"}
 							onClick={async () => mutateOwner({ channelId: channelData?.id!, newOwnerEmail: newOwner })}
 							style={{ margin: "0 auto" }}
-							dataCy="final-change-owner"
+							text={isMutatingOwner ? "..." : "CONFIRM NEW OWNER"}
 						/>
 					</RowFlex>
 				</>
-			)}
+			) : null}
 		</Modal>
 	)
 }

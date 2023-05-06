@@ -1,0 +1,29 @@
+{
+  "name": "design-react",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "lint": "eslint-runner && next lint",
+    "lint:fix": "eslint-runner --fix && next lint --fix",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@kittr/lint": "workspace:*",
+    "@kittr/tailwind": "workspace:*",
+    "@kittr/tsconfig": "workspace:*",
+    "@kittr/ui": "workspace:*",
+    "@types/node": "20.1.0",
+    "@types/react": "18.2.6",
+    "@types/react-dom": "18.2.4",
+    "autoprefixer": "10.4.14",
+    "next": "13.4.1",
+    "postcss": "8.4.23",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "tailwindcss": "3.3.2",
+    "typescript": "5.0.4"
+  }
+}

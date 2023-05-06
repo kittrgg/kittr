@@ -1,13 +1,13 @@
+import PageWrapper from "@Components/layouts/PageWrapper"
+import ResponsiveAdBanner from "@Services/venatus/ResponsiveBanner"
+import { createSSGHelper } from "@kittr/trpc"
 import Body from "./Home/Body"
 import Hero from "./Home/Hero"
 import PlatformInfo from "./Home/PlatformInfo"
 import { trpc } from "@/lib/trpc"
-import PageWrapper from "@Components/layouts/PageWrapper"
-// import { trpc } from "@/lib/trpc"
-import ResponsiveAdBanner from "@Services/venatus/ResponsiveBanner"
-import { createSSGHelper } from "@kittr/trpc"
+// Import { trpc } from "@/lib/trpc"
 
-const Home = () => {
+function Home() {
 	const { data: games } = trpc.games.count.useQuery()
 	const { data: totalNumberOfKits } = trpc.kits.count.useQuery()
 	const { data: popularChannels } = trpc.channels.top.useQuery({ take: 10 })
@@ -17,14 +17,14 @@ const Home = () => {
 	if (!totalNumberOfKits) return null
 
 	return (
-		<PageWrapper title="Home | kittr" description="Where the pros post their kits. Get kitted.">
+		<PageWrapper description="Where the pros post their kits. Get kitted." title="Home | kittr">
 			<Hero totalNumberOfKits={Math.floor(totalNumberOfKits / 1000) * 1000} />
 			<ResponsiveAdBanner />
 			<Body
 				games={games}
+				liveChannels={liveChannels?.slice(0, 15)}
 				popularChannels={popularChannels}
 				risingStars={risingChannels}
-				liveChannels={liveChannels?.slice(0, 15)}
 			/>
 			<ResponsiveAdBanner />
 			<PlatformInfo />
@@ -38,7 +38,7 @@ export default Home
 export const getStaticProps = async () => {
 	const ssg = await createSSGHelper()
 
-	Promise.all([
+	await Promise.all([
 		await ssg.kits.count.fetch(),
 		await ssg.games.list.fetch(),
 		await ssg.channels.top.fetch({ take: 10 }),

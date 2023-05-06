@@ -2,12 +2,12 @@ import PageWrapper from "@Components/layouts/PageWrapper"
 import ContactTiles from "@Components/shared/ContactUs"
 import { createStyles, Title } from "@mantine/core"
 
-const ContactUs = () => {
+function ContactUs() {
 	const { classes } = useStyles()
 
 	return (
-		<PageWrapper title="Contact Us | kittr" description="Get in touch with the awesome people at kittr.">
-			<Title order={1} className={classes.title}>
+		<PageWrapper description="Get in touch with the awesome people at kittr." title="Contact Us | kittr">
+			<Title className={classes.title} order={1}>
 				CONTACT US
 			</Title>
 			<ContactTiles />

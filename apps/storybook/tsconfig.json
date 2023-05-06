@@ -1,5 +1,0 @@
-{
-  "extends": "@kittr/tsconfig/react-library.json",
-  "exclude": ["dist", "build", "node_modules", "src/**/*.test.tsx"],
-  "references": [{ "path": "./tsconfig.node.json" }],
-}

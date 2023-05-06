@@ -1,40 +1,42 @@
 {
-	"name": "@kittr/prisma",
-	"version": "0.1.1",
-	"private": true,
-	"exports": {
-		".": "./index.ts",
-		"./validator": "./validator/index.ts",
-		"./mock": "./mock.ts"
-	},
-	"scripts": {
-		"db:deploy": "prisma migrate deploy",
-		"db:create-migrations": "prisma migrate dev",
-		"db:migrate": "prisma db push --force-reset",
-		"db:generate": "prisma generate",
-		"db:push": "prisma db push --skip-generate",
-		"db:studio": "prisma studio",
-		"db:format": "prisma format",
-		"seed": "prisma db push --force-reset && ts-node ./migration-scripts/index.ts",
-		"typecheck": "tsc --noEmit",
-		"seed-from-file": "docker exec -i postgres pg_restore -U turboAf -v -d dev < ./seed/dbdumpfromprisma.pgsql"
-	},
-	"devDependencies": {
-		"@kittr/config": "workspace:*",
-		"@types/node": "^16.18.11",
-		"prisma": "4.0.0",
-		"ts-node": "10.9.1",
-		"tsup": "5.12.0",
-		"@kittr/tsconfig": "workspace:*",
-		"typescript": "5.0.0-beta",
-		"zod": "3.17.3",
-		"zod-prisma": "0.5.4",
-		"vitest-mock-extended": "^1.0.8"
-	},
-	"dependencies": {
-		"@prisma/client": "4.0.0"
-	},
-	"prisma": {
-		"seed": "ts-node ./seed.ts"
-	}
+  "name": "@kittr/prisma",
+  "version": "0.1.1",
+  "private": true,
+  "exports": {
+    ".": "./index.ts",
+    "./validator": "./validator/index.ts",
+    "./mock": "./mock.ts"
+  },
+  "scripts": {
+    "db:create-migrations": "prisma migrate dev",
+    "db:deploy": "prisma migrate deploy",
+    "db:format": "prisma format",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma db push --force-reset",
+    "db:push": "prisma db push --skip-generate",
+    "db:studio": "prisma studio",
+    "lint": "eslint-runner",
+    "lint:fix": "eslint-runner --fix",
+    "seed": "prisma db push --force-reset && ts-node ./migration-scripts/index.ts",
+    "seed-from-file": "docker exec -i postgres pg_restore -U turboAf -v -d dev < ./seed/dbdumpfromprisma.pgsql",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@prisma/client": "4.0.0"
+  },
+  "devDependencies": {
+    "@kittr/lint": "workspace:*",
+    "@kittr/tsconfig": "workspace:*",
+    "@types/node": "^16.18.11",
+    "prisma": "4.0.0",
+    "ts-node": "10.9.1",
+    "tsup": "5.12.0",
+    "typescript": "5.0.0-beta",
+    "vitest-mock-extended": "^1.0.8",
+    "zod": "3.17.3",
+    "zod-prisma": "0.5.4"
+  },
+  "prisma": {
+    "seed": "ts-node ./seed.ts"
+  }
 }

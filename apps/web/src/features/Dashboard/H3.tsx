@@ -1,6 +1,6 @@
 import colors from "@Colors"
 import { paragraph } from "@Styles/typography"
-import { CSSProperties, ReactNode } from "react"
+import type { CSSProperties, ReactNode } from "react"
 import styled from "styled-components"
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 	style?: CSSProperties
 }
 
-const H3Comp = ({ children, style }: Props) => {
+function H3Comp({ children, style }: Props) {
 	return <H3 style={style}>{children}</H3>
 }
 

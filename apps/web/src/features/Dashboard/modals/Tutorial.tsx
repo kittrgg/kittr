@@ -34,7 +34,7 @@ const PAGE_CONTENT = [
 	}
 ]
 
-const Tutorial = () => {
+function Tutorial() {
 	const dispatch = useDispatch()
 	const { data } = useModal()
 	const { page, ref } = data
@@ -79,11 +79,11 @@ const Tutorial = () => {
 	return (
 		<Modal
 			backgroundClickToClose={false}
-			title={eachPage.title}
 			style={{
 				border: "1px solid white",
 				...tutorialModalStyle()
 			}}
+			title={eachPage.title}
 		>
 			<Pages>
 				{page}/{PAGE_CONTENT.length}
@@ -93,8 +93,8 @@ const Tutorial = () => {
 			<HStack>
 				{isStep(1) && (
 					<Button
+						dataCy="skip-tour"
 						design="transparent"
-						text={!isStep(1) ? "BACK" : "SKIP TOUR"}
 						onClick={() => {
 							dispatch(
 								handleTutorialAction({
@@ -108,14 +108,14 @@ const Tutorial = () => {
 							)
 						}}
 						style={{ width: "250px", borderColor: "transparent" }}
-						dataCy="skip-tour"
+						text={!isStep(1) ? "BACK" : "SKIP TOUR"}
 					/>
 				)}
 
 				{isStep(1) || isStep(7) ? (
 					<Button
+						dataCy="next"
 						design="white"
-						text={!isStep(7) ? "NEXT" : "LET'S GET KITTD"}
 						onClick={() => {
 							dispatch(
 								handleTutorialAction({
@@ -129,7 +129,7 @@ const Tutorial = () => {
 							)
 						}}
 						style={{ minWidth: "250px" }}
-						dataCy="next"
+						text={!isStep(7) ? "NEXT" : "LET'S GET KITTD"}
 					/>
 				) : null}
 			</HStack>

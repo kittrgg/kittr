@@ -1,11 +1,11 @@
-import { H2 } from "./style"
 import { KitList } from "@Components/shared"
 import SideScroller from "@Components/shared/SideScroller"
 import { basePlusTitleToUrlSafe } from "@Utils/helpers/basePlusTitleToUrlSafe"
 import { filterKitsByFeature } from "@Utils/helpers/filterKitsByFeature"
 import { Routes } from "@Utils/lookups/routes"
-import { WarzoneKit, WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
+import type { WarzoneKit, WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
 import { useRouter } from "next/router"
+import { H2 } from "./style"
 
 interface CompleteKit extends WarzoneKit {
 	base: WarzoneKitBase
@@ -16,7 +16,7 @@ interface Props {
 	kits: CompleteKit[]
 }
 
-const FeaturedKits = ({ kits }: Props) => {
+function FeaturedKits({ kits }: Props) {
 	const router = useRouter()
 
 	if (filterKitsByFeature(kits).length === 0) return null

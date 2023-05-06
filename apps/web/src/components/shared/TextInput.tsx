@@ -1,5 +1,5 @@
 import colors from "@Colors"
-import { ReactNode } from "react"
+import type { ReactNode } from "react"
 import styled from "styled-components"
 
 interface Props {
@@ -27,7 +27,7 @@ interface Props {
 	labelStyles?: React.CSSProperties
 	/** React CSS Properties for the subline. */
 	sublineStyles?: React.CSSProperties
-	/** onChange handler for the input. */
+	/** OnChange handler for the input. */
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	onChange: (...args: any) => any
 	/** Optional onFocus handler for the input. */
@@ -39,7 +39,7 @@ interface Props {
 }
 
 /** Utility text input component. */
-export const TextInput = ({
+export function TextInput({
 	type,
 	name,
 	label,
@@ -55,46 +55,46 @@ export const TextInput = ({
 	onChange,
 	onFocus,
 	onBlur
-}: Props) => {
+}: Props) {
 	if (topLabel) {
 		return (
 			<>
-				<Label htmlFor={name} width={width} style={{ display: "block", marginTop: "48px", ...labelStyles }}>
+				<Label htmlFor={name} style={{ display: "block", marginTop: "48px", ...labelStyles }} width={width}>
 					{!noTextLabel && typeof label === "string" ? label.toUpperCase() : label}
 				</Label>
 				<Input
-					width={width}
-					type={type}
+					autoComplete="off"
 					name={name}
-					placeholder={placeholder}
-					value={value}
+					onBlur={onBlur}
 					onChange={onChange}
 					onFocus={onFocus}
-					onBlur={onBlur}
+					placeholder={placeholder}
 					style={{ marginLeft: "0", ...inputStyles }}
-					autoComplete="off"
+					type={type}
+					value={value}
+					width={width}
 				/>
-				{subline && <Subline style={sublineStyles}>{subline}</Subline>}
+				{subline ? <Subline style={sublineStyles}>{subline}</Subline> : null}
 			</>
 		)
 	}
 
 	return (
-		<Label htmlFor={name} width={width} style={labelStyles}>
+		<Label htmlFor={name} style={labelStyles} width={width}>
 			{!noTextLabel && label}
 			<Input
-				width={width}
-				type={type}
+				autoComplete="off"
 				name={name}
-				placeholder={placeholder}
-				value={value}
+				onBlur={onBlur}
 				onChange={onChange}
 				onFocus={onFocus}
-				onBlur={onBlur}
+				placeholder={placeholder}
 				style={inputStyles}
-				autoComplete="off"
+				type={type}
+				value={value}
+				width={width}
 			/>
-			{subline && <Subline style={sublineStyles}>{subline}</Subline>}
+			{subline ? <Subline style={sublineStyles}>{subline}</Subline> : null}
 		</Label>
 	)
 }

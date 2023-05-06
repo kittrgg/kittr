@@ -17,7 +17,7 @@ const Paragraph = styled.p`
 `
 
 /** Comes into view when someone deletes a game. */
-const DeletedGameNotification = ({ ...props }) => {
+function DeletedGameNotification({ ...props }) {
 	return (
 		<Wrapper>
 			<Paragraph>Game deleted.</Paragraph>

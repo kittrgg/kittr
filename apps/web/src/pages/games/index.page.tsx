@@ -1,4 +1,3 @@
-import { trpc } from "@/lib/trpc"
 import AdPageWrapper from "@Components/layouts/AdPageWrapper"
 import GameCard from "@Components/shared/GameCard"
 import ResponsiveBanner from "@Services/venatus/ResponsiveBanner"
@@ -8,17 +7,18 @@ import { Text, Title } from "@kittr/ui"
 import { Grid } from "@mantine/core"
 import { useViewportSize } from "@mantine/hooks"
 import { useRouter } from "next/router"
+import { trpc } from "@/lib/trpc"
 
-const GamesIndex = () => {
+function GamesIndex() {
 	const { width } = useViewportSize()
 	const router = useRouter()
 
 	const { data: games } = trpc.games.list.useQuery()
 
 	return (
-		<AdPageWrapper title="Games | kittr" description="Library of games on kittr. Get kitted.">
+		<AdPageWrapper description="Library of games on kittr. Get kitted." title="Games | kittr">
 			{width < 1200 && <ResponsiveBanner />}
-			<Title preset="h1" ml="5%">
+			<Title ml="5%" preset="h1">
 				GAMES
 			</Title>
 			<Text ml="5%" mt="lg" style={{ width: "75%", lineHeight: "1.25em" }}>
@@ -26,17 +26,18 @@ const GamesIndex = () => {
 			</Text>
 			{/* <GamesWrapper> */}
 			<Grid>
-				{games &&
-					[...games]
-						.sort((game) => (game.active ? -1 : 1))
-						.map((elem) => (
-							<Grid.Col md={6} key={elem.id}>
-								<GameCard
-									{...elem}
-									onClick={() => elem.active && router.push(Routes.GAMES.createPath(elem.urlSafeName))}
-								/>
-							</Grid.Col>
-						))}
+				{games
+					? [...games]
+							.sort((game) => (game.active ? -1 : 1))
+							.map((elem) => (
+								<Grid.Col key={elem.id} md={6}>
+									<GameCard
+										{...elem}
+										onClick={() => elem.active && router.push(Routes.GAMES.createPath(elem.urlSafeName))}
+									/>
+								</Grid.Col>
+							))
+					: null}
 			</Grid>
 			{/* </GamesWrapper> */}
 			{width < 1200 && <ResponsiveBanner largeWidthAdUnit="d728x90" smallWidthAdUnit="s300x250" />}

@@ -3,7 +3,7 @@ import ProfileImage from "@Components/shared/ProfileImage"
 import SocialIcons from "@Components/shared/SocialIcons"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
 import { header1, header2 } from "@Styles/typography"
-import {
+import type {
 	Channel,
 	ChannelBrandColor,
 	ChannelLink,
@@ -33,21 +33,21 @@ interface Props extends Channel {
 	warzoneKits: WarzoneKit[]
 }
 
-const Header = ({ id, games, displayName, profile, links, plan, warzoneKits: kits, isLive, imagePath }: Props) => {
+function Header({ id, games, displayName, profile, links, plan, warzoneKits: kits, isLive, imagePath }: Props) {
 	const isPremium = plan?.type === "PREMIUM"
 	const hasCoverPhoto = profile?.hasCoverPhoto
 	const userColor = profile?.brandColors.find((color) => color.type === "PRIMARY")?.value || colors.white
 	const { width } = useViewportDimensions()
 
 	return (
-		<Wrapper hasCoverPhoto={isPremium && !!hasCoverPhoto} imagePath={imagePath}>
+		<Wrapper hasCoverPhoto={isPremium ? Boolean(hasCoverPhoto) : null} imagePath={imagePath}>
 			<Avatar>
 				<ProfileImage
-					size="150px"
-					hasProfileImage={!!profile?.hasProfileImage}
-					imagePath={id}
 					border={isPremium ? userColor : ""}
+					hasProfileImage={Boolean(profile?.hasProfileImage)}
+					imagePath={id}
 					isLive={isLive}
+					size="150px"
 				/>
 				<AvatarInfo>
 					<H1>{displayName}</H1>
@@ -55,9 +55,9 @@ const Header = ({ id, games, displayName, profile, links, plan, warzoneKits: kit
 						{games.length} {games.length === 1 ? "game" : "games"}, {kits.length} kits
 					</Counts>
 					<SocialIcons
-						links={links}
-						iconSize={30}
 						colorHover={userColor}
+						iconSize={30}
+						links={links}
 						style={{ flexWrap: width > 750 ? "nowrap" : "wrap", rowGap: "10px" }}
 					/>
 				</AvatarInfo>

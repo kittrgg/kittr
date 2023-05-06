@@ -1,5 +1,3 @@
-import LogoImageLink from "./LogoImageLink"
-import MobileNav from "./Mobile"
 import colors from "@Colors"
 import { useUser } from "@Hooks/useUser"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
@@ -8,8 +6,10 @@ import { header4 } from "@Styles/typography"
 import { Routes } from "@Utils/lookups/routes"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { ReactNode, Ref } from "react"
+import type { ReactNode, Ref } from "react"
 import styled from "styled-components"
+import MobileNav from "./Mobile"
+import LogoImageLink from "./LogoImageLink"
 
 interface Props {
 	/** A React reference object to forward to the header's container. */
@@ -27,33 +27,33 @@ interface Props {
 }
 
 /** Page header for the site. Can express itself as banner style when given a middleComponent prop. */
-const NavMenu = ({ wrapperRef, breakpoint = 769, backFunction, middleComponent }: Props) => {
+function NavMenu({ wrapperRef, breakpoint = 769, backFunction, middleComponent }: Props) {
 	const { width } = useViewportDimensions()
 	const windowScroll = useWindowScroll()
 	const { pathname } = useRouter()
 	const user = useUser()
-	const isLoggedIn = !!user?.uid
+	const isLoggedIn = Boolean(user?.uid)
 
 	if (width <= breakpoint) {
 		return (
-			<Wrapper ref={wrapperRef} shadow={(windowScroll as number) > 0}>
-				<MobileNav breakpoint={breakpoint} backFunction={backFunction} middleComponent={middleComponent} />
+			<Wrapper ref={wrapperRef} shadow={windowScroll! > 0}>
+				<MobileNav backFunction={backFunction} breakpoint={breakpoint} middleComponent={middleComponent} />
 			</Wrapper>
 		)
 	}
 	return (
-		<Wrapper ref={wrapperRef} shadow={(windowScroll as number) > 0}>
+		<Wrapper ref={wrapperRef} shadow={windowScroll! > 0}>
 			<Container breakpoint={breakpoint}>
 				<LogoImageLink />
-				<Link href={Routes.GAMES.LIST} passHref legacyBehavior>
-					<StyledLink data-cy="desktop-games-link" active={pathname.startsWith(Routes.GAMES.LIST)}>
+				<Link href={Routes.GAMES.LIST} legacyBehavior passHref>
+					<StyledLink active={pathname.startsWith(Routes.GAMES.LIST)} data-cy="desktop-games-link">
 						GAMES
 					</StyledLink>
 				</Link>
-				<Link href={Routes.CHANNEL.LIST} passHref legacyBehavior>
+				<Link href={Routes.CHANNEL.LIST} legacyBehavior passHref>
 					<StyledLink
-						data-cy="desktop-channels-link"
 						active={pathname.startsWith(Routes.CHANNEL.LIST) || pathname.startsWith(Routes.CHANNEL.LIST)}
+						data-cy="desktop-channels-link"
 					>
 						CHANNELS
 					</StyledLink>
@@ -66,11 +66,11 @@ const NavMenu = ({ wrapperRef, breakpoint = 769, backFunction, middleComponent }
 
 export default NavMenu
 
-const AuthenticationLinks = ({ isLoggedIn, pathname }: { isLoggedIn: boolean; pathname: string }) => {
+function AuthenticationLinks({ isLoggedIn, pathname }: { isLoggedIn: boolean; pathname: string }) {
 	if (isLoggedIn) {
 		return (
-			<Link href={Routes.DASHBOARD} passHref legacyBehavior>
-				<StyledLink data-cy="desktop-dashboard-link-authed" active={pathname.startsWith(Routes.DASHBOARD)}>
+			<Link href={Routes.DASHBOARD} legacyBehavior passHref>
+				<StyledLink active={pathname.startsWith(Routes.DASHBOARD)} data-cy="desktop-dashboard-link-authed">
 					DASHBOARD
 				</StyledLink>
 			</Link>
@@ -78,19 +78,19 @@ const AuthenticationLinks = ({ isLoggedIn, pathname }: { isLoggedIn: boolean; pa
 	}
 	return (
 		<div>
-			<Link href={Routes.SIGN_UP} passHref legacyBehavior>
+			<Link href={Routes.SIGN_UP} legacyBehavior passHref>
 				<StyledLink
-					data-cy="desktop-sign-up-link"
 					active={pathname.startsWith(Routes.SIGN_UP)}
+					data-cy="desktop-sign-up-link"
 					style={{ paddingRight: "20px", borderRight: `2px solid ${colors.light}` }}
 				>
 					SIGN UP
 				</StyledLink>
 			</Link>
-			<Link href={Routes.DASHBOARD} passHref legacyBehavior>
+			<Link href={Routes.DASHBOARD} legacyBehavior passHref>
 				<StyledLink
-					data-cy="desktop-dashboard-link-no-auth"
 					active={pathname.startsWith(Routes.DASHBOARD)}
+					data-cy="desktop-dashboard-link-no-auth"
 					style={{ paddingLeft: "20px" }}
 				>
 					LOG IN
@@ -121,7 +121,7 @@ const Container = styled.div<{ breakpoint: number }>`
 	top: 0;
 	z-index: 1;
 
-	@media (max-width: ${(props) => props.breakpoint + "px"}) {
+	@media (max-width: ${(props) => `${props.breakpoint}px`}) {
 		display: none;
 	}
 `

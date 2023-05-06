@@ -1,11 +1,11 @@
-import * as Styled from "./style"
 import colors from "@Colors"
 import MultiButton from "@Components/shared/MultiButton"
 import { updateFeatured } from "@Redux/slices/dashboard"
 import { useActiveKit } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
+import * as Styled from "./style"
 
-const Featured = ({ ...props }) => {
+function Featured({ ...props }) {
 	const dispatch = useDispatch()
 	const { featured } = useActiveKit()
 
@@ -15,7 +15,8 @@ const Featured = ({ ...props }) => {
 				<Styled.Header>FEATURED</Styled.Header>
 				<div style={{ flexBasis: "200px" }}>
 					<MultiButton
-						wrapperBackgroundColor={colors.lightest}
+						activeValue={featured ? "YUP" : "NOPE"}
+						onClick={() => dispatch(updateFeatured(!featured))}
 						values={[
 							{
 								text: "YUP",
@@ -25,8 +26,7 @@ const Featured = ({ ...props }) => {
 								text: "NOPE"
 							}
 						]}
-						activeValue={featured ? "YUP" : "NOPE"}
-						onClick={() => dispatch(updateFeatured(!featured))}
+						wrapperBackgroundColor={colors.lightest}
 					/>
 				</div>
 			</Styled.HorizFlex>

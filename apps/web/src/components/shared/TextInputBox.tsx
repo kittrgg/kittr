@@ -18,7 +18,7 @@ interface Props {
 	inputStyles?: React.CSSProperties
 	/** React CSS Properties for the subline. */
 	sublineStyles?: React.CSSProperties
-	/** onChange handler for the input. */
+	/** OnChange handler for the input. */
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	onChange: (...args: any) => any
 	/** Optional onFocus handler for the input. */
@@ -30,7 +30,7 @@ interface Props {
 }
 
 /** Utility text input component. */
-export const TextInputBox = ({
+export function TextInputBox({
 	type,
 	name,
 	placeholder,
@@ -42,23 +42,25 @@ export const TextInputBox = ({
 	onChange,
 	onFocus,
 	onBlur
-}: Props) => (
-	<>
-		<Input
-			width={width}
-			type={type}
-			name={name}
-			placeholder={placeholder}
-			value={value}
-			onChange={onChange}
-			onFocus={onFocus}
-			onBlur={onBlur}
-			style={inputStyles}
-			autoComplete="off"
-		/>
-		{subline && <Subline style={sublineStyles}>{subline}</Subline>}
-	</>
-)
+}: Props) {
+	return (
+		<>
+			<Input
+				autoComplete="off"
+				name={name}
+				onBlur={onBlur}
+				onChange={onChange}
+				onFocus={onFocus}
+				placeholder={placeholder}
+				style={inputStyles}
+				type={type}
+				value={value}
+				width={width}
+			/>
+			{subline ? <Subline style={sublineStyles}>{subline}</Subline> : null}
+		</>
+	)
+}
 
 export default TextInputBox
 

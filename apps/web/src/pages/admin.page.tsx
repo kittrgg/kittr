@@ -1,10 +1,10 @@
-// import Admin from "@Features/Admin"
-import { trpc } from "@/lib/trpc"
+// Import Admin from "@Features/Admin"
 import { Button, Title } from "@kittr/ui"
 import Link from "next/link"
 import { useRouter } from "next/router"
+import { trpc } from "@/lib/trpc"
 
-const Page = () => {
+function Page() {
 	const router = useRouter()
 	const { data: games } = trpc.games.list.useQuery()
 
@@ -25,8 +25,8 @@ const Page = () => {
 			</div>
 
 			{games?.map((game) => (
-				<Link key={game.id} href={"/admin/" + game?.urlSafeName} passHref legacyBehavior>
-					<Button onClick={() => ({})}>{game?.urlSafeName.toUpperCase()}</Button>
+				<Link href={`/admin/${game.urlSafeName}`} key={game.id} legacyBehavior passHref>
+					<Button onClick={() => ({})}>{game.urlSafeName.toUpperCase()}</Button>
 				</Link>
 			))}
 		</div>

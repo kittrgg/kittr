@@ -1,13 +1,13 @@
-// import fetch from "@Fetch"
-// import { trpc } from "@/lib/trpc"
-// import { IKitBase } from "@kittr/types/kits"
+// Import fetch from "@Fetch"
+// Import { trpc } from "@/lib/trpc"
+// Import { IKitBase } from "@kittr/types/kits"
 
-// import { useQuery } from "react-query"
+// Import { useQuery } from "react-query"
 
-// export const useAllKitsByGameId = (gameId: string) => {
+// Export const useAllKitsByGameId = (gameId: string) => {
 // 	// const result = useQuery<IKitBase[]>(url, async () => fetch.get({ url }), { staleTime: 600000 })
-// 	const result = trpc.kits.bases["game-list"].useQuery({ game: gameId })
-// 	return result
+// 	Const result = trpc.kits.bases["game-list"].useQuery({ game: gameId })
+// 	Return result
 // }
 
 export {}

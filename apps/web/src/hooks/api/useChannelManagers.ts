@@ -1,5 +1,5 @@
-import { trpc } from "@/lib/trpc"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
+import { trpc } from "@/lib/trpc"
 
 export const useChannelManagers = () => {
 	const { data: channel } = useDashboardChannel()
@@ -9,7 +9,7 @@ export const useChannelManagers = () => {
 			channelId: channel?.id ?? "",
 			managers: managers?.map((manager) => manager) ?? []
 		},
-		{ enabled: !!managers && !!channel?.id }
+		{ enabled: Boolean(managers) && Boolean(channel?.id) }
 	)
 
 	return query
