@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dx": "dotenv -- run-s docker:up dev",
-    "dx:ui": "turbo dev --filter={react-design-system,ui}",
+    "dx:ui": "turbo dev --filter={design-react,ui}",
     "dx:db-view": "dotenv -- run-s db:studio",
     "db:deploy": "dotenv -- turbo db:deploy",
     "db:studio": "cd packages/prisma && pnpm db:studio",
@@ -36,6 +36,7 @@
     "kill-port": "2.0.1",
     "npm-run-all": "4.1.5",
     "prettier": "2.7.1",
+    "prettier-plugin-tailwindcss": "^0.2.8",
     "turbo": "latest"
   },
   "packageManager": "pnpm@8.2.0",

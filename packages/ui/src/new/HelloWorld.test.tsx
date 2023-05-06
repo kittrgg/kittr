@@ -4,8 +4,8 @@ import { HelloWorld } from './HelloWorld';
 
 describe('<HelloWorld />', () => {
   test('Mounts', () => {
-    const wrapper = render(<HelloWorld />);
-    expect(wrapper).toBeTruthy();
+    const view = render(<HelloWorld />);
+    expect(view).toBeTruthy();
 
     screen.getByText('hello world');
   });

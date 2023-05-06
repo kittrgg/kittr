@@ -4,7 +4,7 @@
   "type": "commonjs",
   "bin": {
     "eslint": "../node_modules/eslint/bin/eslint.js",
-    "eslint-runner": "ESLINT_MAX_WARNINGS=0 ./runner/index.mjs"
+    "eslint-runner": "./runner/index.mjs"
   },
   "files": [
     "node.js",
