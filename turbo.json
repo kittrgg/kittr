@@ -46,9 +46,6 @@
         "VERCEL_URL"
       ]
     },
-    "build#storybook": {
-      "outputs": ["storybook-static/**"]
-    },
     "topo": {
       "dependsOn": ["db:generate", "^topo"]
     },
@@ -68,7 +65,8 @@
       "dependsOn": ["@kittr/lint#eslint:fix"]
     },
     "typecheck": {
-      "dependsOn": ["^topo"]
+      "dependsOn": ["^topo"],
+      "outputMode": "errors-only"
     },
     "test": {
       "dependsOn": ["^topo"],
