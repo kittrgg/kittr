@@ -23,8 +23,7 @@ function ActiveKitOverlay({ id, previewWidth, overlayStyle }: Props) {
 
 	useEffect(() => {
 		if (data) {
-			const update =
-				Object.keys(data.primaryWzTwoKit || {}).length > 0 ? data.primaryWzTwoKit : data.secondaryWzTwoKit
+			const update = Object.keys(data.primaryWzTwoKit || {}).length > 0 ? data.primaryWzTwoKit : data.secondaryWzTwoKit
 
 			if (activeKit?.id !== update?.id) {
 				setActiveKit(update || ({} as OverlayKit))

@@ -1,4 +1,4 @@
-import type { Prisma} from "@kittr/prisma";
+import type { Prisma } from "@kittr/prisma"
 import { prisma } from "@kittr/prisma"
 
 interface Params {

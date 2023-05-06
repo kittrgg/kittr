@@ -102,9 +102,11 @@ function BackgroundImageUploader({ fileName, label, imageWidth, imageHeight, han
 					style={{ display: "none" }}
 					type="file"
 				/>
-				{isHovered && image ? <DeleteGameBubble isHovered={isHovered} onClick={handleDelete} onMouseEnter={() => setIsHovered(true)}>
+				{isHovered && image ? (
+					<DeleteGameBubble isHovered={isHovered} onClick={handleDelete} onMouseEnter={() => setIsHovered(true)}>
 						<SVG.X fill={colors.red} style={{ width: "100%", height: "100%" }} />
-					</DeleteGameBubble> : null}
+					</DeleteGameBubble>
+				) : null}
 			</Label>
 			<Caption>{label}</Caption>
 			<Caption>

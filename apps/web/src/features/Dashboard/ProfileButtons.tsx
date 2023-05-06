@@ -24,13 +24,11 @@ function ProfileButtons() {
 
 	return (
 		<Flex>
-			{channelData?.displayName ? <LinkStyles
-					href={Routes.CHANNEL.createPath(channelData.urlSafeName)}
-					rel="noopener noreferrer"
-					target="_blank"
-				>
+			{channelData?.displayName ? (
+				<LinkStyles href={Routes.CHANNEL.createPath(channelData.urlSafeName)} rel="noopener noreferrer" target="_blank">
 					VIEW PROFILE
-				</LinkStyles> : null}
+				</LinkStyles>
+			) : null}
 			<Container isOpen={isOpen}>
 				<Clickable data-cy="profile-container-button" onClick={() => setIsOpen(!isOpen)}>
 					{user?.email}

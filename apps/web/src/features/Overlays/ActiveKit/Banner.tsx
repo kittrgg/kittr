@@ -4,7 +4,7 @@ import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
 import type { RouterOutput } from "@kittr/trpc"
 import type { IKitOption, OverlayKit } from "@kittr/types"
-import type { Dispatch, SetStateAction} from "react";
+import type { Dispatch, SetStateAction } from "react"
 import { useEffect, useState } from "react"
 import styled, { keyframes, ThemeProvider } from "styled-components"
 

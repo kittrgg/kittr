@@ -1,5 +1,5 @@
 import colors from "@Colors"
-import type { SVGType } from "@Components/shared";
+import type { SVGType } from "@Components/shared"
 import { Button, Spinner, SVG, SvgByType } from "@Components/shared"
 import TextInput from "@Components/shared/TextInput"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
@@ -93,10 +93,12 @@ function LinkEditor() {
 	return (
 		<>
 			<Header>Social Media Links</Header>
-			{isPremium ? <Paragraph style={{ marginBottom: "32px" }}>
+			{isPremium ? (
+				<Paragraph style={{ marginBottom: "32px" }}>
 					Note: A Twitch link is required to enable live badges on your avatar photo and popular clips, recent channels,
 					and channel schedule sections on your profile page.
-				</Paragraph> : null}
+				</Paragraph>
+			) : null}
 			<Paragraph>
 				Feel free to paste in the whole link. We will trim it up for you. Yes, we know, we love you, too.
 			</Paragraph>
@@ -131,7 +133,7 @@ function LinkEditor() {
 							name={property}
 							onChange={(e) => handleChange(e, [property, value])}
 							type="text"
-							value={trimPrefix(linkPrefixes[property], value) }
+							value={trimPrefix(linkPrefixes[property], value)}
 						/>
 						<Button
 							dataCy={`${property}-delete-button`}

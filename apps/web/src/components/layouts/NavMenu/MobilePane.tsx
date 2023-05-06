@@ -72,14 +72,16 @@ function MobileNavPane({ isOpen, setIsOpen }: Props) {
 						</>
 					)}
 				</LinksList>
-				{isLoggedIn ? <Link href={Routes.DASHBOARD} legacyBehavior passHref>
+				{isLoggedIn ? (
+					<Link href={Routes.DASHBOARD} legacyBehavior passHref>
 						<StyledLink
 							active={pathname === Routes.DASHBOARD || pathname.startsWith(Routes.DASHBOARD)}
 							data-cy="mobile-dashboard-link-authed"
 						>
 							DASHBOARD
 						</StyledLink>
-					</Link> : null}
+					</Link>
+				) : null}
 			</Body>
 		</FullScreen>
 	)

@@ -15,14 +15,18 @@ const CENTER_SVG = {
 }
 
 function CheckMark() {
-  return <td>
-		<SVG.CheckMark stroke={colors.lighter} style={CENTER_SVG} width="20px" />
-	</td>
+	return (
+		<td>
+			<SVG.CheckMark stroke={colors.lighter} style={CENTER_SVG} width="20px" />
+		</td>
+	)
 }
 function X() {
-  return <td>
-		<SVG.X fill={colors.darkRed} style={CENTER_SVG} width="20px" />
-	</td>
+	return (
+		<td>
+			<SVG.X fill={colors.darkRed} style={CENTER_SVG} width="20px" />
+		</td>
+	)
 }
 
 function PremiumPlans() {
@@ -40,7 +44,7 @@ function PremiumPlans() {
 	})
 	const { mutate: managePremium } = trpc.stripe["manage-premium"].useMutation({
 		onSuccess: (result) => {
-			window.open(result.url , "_blank")
+			window.open(result.url, "_blank")
 		},
 		onError: () => {
 			dispatch(setModal({ type: "Error Notification", data: {} }))

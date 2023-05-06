@@ -35,7 +35,8 @@ function CreatorCode() {
 		<Code>
 			<span>CREATOR CODE - </span>
 			{!isEditing && <span>{code} </span>}
-			{isEditing ? <Input
+			{isEditing ? (
+				<Input
 					data-cy="creator-code-input"
 					onBlur={async () => {
 						mutate({
@@ -50,7 +51,8 @@ function CreatorCode() {
 					}}
 					ref={inputRef}
 					value={code}
-				/> : null}
+				/>
+			) : null}
 			<EditButton data-cy="edit-creator-code" onClick={() => setIsEditing(true)}>
 				<img alt="Edit creator code." height="20px" src="/media/icons/pencil.svg" width="20px" />
 			</EditButton>

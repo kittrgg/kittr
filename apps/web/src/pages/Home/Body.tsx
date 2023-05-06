@@ -45,7 +45,9 @@ function Body({ games, popularChannels, risingStars, liveChannels }: Props) {
 				transparent
 			>
 				<SideScroller>
-					{games ? <GameList data={games} onClick={(elem) => router.push(Routes.GAMES.createPath(elem.urlSafeName))} /> : null}
+					{games ? (
+						<GameList data={games} onClick={(elem) => router.push(Routes.GAMES.createPath(elem.urlSafeName))} />
+					) : null}
 				</SideScroller>
 			</Section>
 

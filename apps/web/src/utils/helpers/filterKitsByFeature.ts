@@ -8,7 +8,6 @@ import type { WarzoneKit } from "@kittr/prisma"
 export const filterKitsByFeature = <T extends WarzoneKit>(kits: T[], bool = true): T[] => {
 	if (bool) {
 		return kits.filter((kit) => kit.featured)
-	} 
-		return kits.filter((kit) => !kit.featured)
-	
+	}
+	return kits.filter((kit) => !kit.featured)
 }

@@ -1,7 +1,7 @@
 import colors from "@Colors"
 import SVG from "@Components/shared/SVG"
 import { header2 } from "@Styles/typography"
-import type { ReactNode, Dispatch, SetStateAction } from "react";
+import type { ReactNode, Dispatch, SetStateAction } from "react"
 import { useState, createContext } from "react"
 import styled from "styled-components"
 

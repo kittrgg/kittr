@@ -76,10 +76,12 @@ function ChannelSettings() {
 					<GridTitle>OVERLAY CONTROLLER</GridTitle>
 					<Overlays />
 				</GridItem>
-				{isPremium && role !== "EDITOR" ? <GridItem>
+				{isPremium && role !== "EDITOR" ? (
+					<GridItem>
 						<GridTitle>SUBSCRIPTION SETTINGS</GridTitle>
 						<SubscriptionSettings />
-					</GridItem> : null}
+					</GridItem>
+				) : null}
 				{role === "OWNER" && <ChannelDeleter />}
 			</Grid>
 		</>

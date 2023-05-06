@@ -1,4 +1,4 @@
-import { createElement } from "react";
+import { createElement } from "react"
 import type React from "react"
 import { Arrow } from "./Arrow"
 import { Carat } from "./Carat"
@@ -29,7 +29,6 @@ import { Twitch as TWITCH } from "./Twitch"
 import { Twitter as TWITTER } from "./Twitter"
 import { X } from "./X"
 import { Youtube as YOUTUBE } from "./Youtube"
-
 
 export type SVGType = keyof typeof SVG
 
@@ -81,5 +80,5 @@ interface SVGByTypeProps {
 }
 
 export function SvgByType({ type, ...props }: SVGByTypeProps & React.AllHTMLAttributes<any>) {
-  return createElement(SVG[type], props)
+	return createElement(SVG[type], props)
 }

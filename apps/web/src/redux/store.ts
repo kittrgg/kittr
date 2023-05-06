@@ -1,6 +1,6 @@
 import { globalSlice } from "@Redux/slices/global"
 import { configureStore } from "@reduxjs/toolkit"
-import type { TypedUseSelectorHook} from "react-redux";
+import type { TypedUseSelectorHook } from "react-redux"
 import { useDispatch as useAppDispatch, useSelector as useAppSelector } from "react-redux"
 import { displayrSlice } from "./slices/displayr"
 import { dashboardSlice } from "./slices/dashboard"

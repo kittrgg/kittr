@@ -1,4 +1,4 @@
-import type { SVGType } from "@Components/shared";
+import type { SVGType } from "@Components/shared"
 import { SvgByType } from "@Components/shared"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import type { ChannelLink, LinkProperty } from "@kittr/prisma"

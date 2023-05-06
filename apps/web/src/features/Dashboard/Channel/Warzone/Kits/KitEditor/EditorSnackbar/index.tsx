@@ -29,7 +29,11 @@ function EditorSnackbar() {
 	const { mutate, isLoading } = trpc.channels.kits.upsert.useMutation({
 		onMutate: () => {
 			// Grab the existing kit array and map them to just their titles
-			const kitArr = channelData?.warzoneKits.slice() as (Omit<WarzoneKit, "id"> & { id?: string; base: WarzoneKitBase; options: WarzoneKitOption[] })[]
+			const kitArr = channelData?.warzoneKits.slice() as (Omit<WarzoneKit, "id"> & {
+				id?: string
+				base: WarzoneKitBase
+				options: WarzoneKitOption[]
+			})[]
 
 			// Grab the new kit's name
 			const newKitName = activeKit.base.displayName + activeKit.customTitle
@@ -118,7 +122,11 @@ function EditorSnackbar() {
 
 	const upsertKit = () => {
 		// Grab the existing kit array and map them to just their titles
-		const kitArr = channelData?.warzoneKits.slice() as (Omit<WarzoneKit, "id"> & { id?: string; base: WarzoneKitBase; options: WarzoneKitOption[] })[]
+		const kitArr = channelData?.warzoneKits.slice() as (Omit<WarzoneKit, "id"> & {
+			id?: string
+			base: WarzoneKitBase
+			options: WarzoneKitOption[]
+		})[]
 
 		// Grab the new kit's name
 		const newKitName = activeKit.base.displayName + activeKit.customTitle

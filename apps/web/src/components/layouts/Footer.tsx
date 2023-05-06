@@ -1,4 +1,3 @@
- 
 import colors from "@Colors"
 import { useUser } from "@Hooks/useUser"
 import { Routes } from "@Utils/lookups/routes"
@@ -7,11 +6,13 @@ import { Center, Grid } from "@mantine/core"
 import Link from "next/link"
 
 function StyledLink({ href, children }: { href: string; children: string }) {
-  return <Link href={href} legacyBehavior passHref>
-		<Text color={colors.white} m="18px" sx={{ textDecoration: "none", textAlign: "center", cursor: "pointer" }}>
-			{children}
-		</Text>
-	</Link>
+	return (
+		<Link href={href} legacyBehavior passHref>
+			<Text color={colors.white} m="18px" sx={{ textDecoration: "none", textAlign: "center", cursor: "pointer" }}>
+				{children}
+			</Text>
+		</Link>
+	)
 }
 
 function Footer() {

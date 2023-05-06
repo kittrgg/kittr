@@ -4,7 +4,7 @@ import { Button, Spinner, TextInput } from "@Components/shared"
 import { Routes } from "@Utils/lookups/routes"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import type { FormEvent} from "react";
+import type { FormEvent } from "react"
 import { useState } from "react"
 import styled from "styled-components"
 import validator from "validator"

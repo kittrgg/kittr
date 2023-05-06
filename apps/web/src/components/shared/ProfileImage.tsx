@@ -100,17 +100,17 @@ export function ProfileImage({
 					<img alt="" loading="lazy" src="/media/shimmer.svg" style={{ width: "100%" }} />
 				) : (
 					<img
-							alt="Profile image"
-							loading="lazy"
-							src={`${path}${cacheBuster}`}
-							style={{
-								width: "100%",
-								height: "100%",
-								objectFit: "cover",
-								borderRadius: "100%",
-								border: border ? `4px solid ${border}` : ""
-							}}
-						/>
+						alt="Profile image"
+						loading="lazy"
+						src={`${path}${cacheBuster}`}
+						style={{
+							width: "100%",
+							height: "100%",
+							objectFit: "cover",
+							borderRadius: "100%",
+							border: border ? `4px solid ${border}` : ""
+						}}
+					/>
 				)}
 			</ImageContainer>
 			{isLive ? <LiveBadge>LIVE</LiveBadge> : null}

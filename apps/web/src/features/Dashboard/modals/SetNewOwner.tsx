@@ -24,7 +24,8 @@ function SetNewOwner() {
 		<Modal backgroundClickToClose title="CHOOSE NEW OWNER">
 			<Paragraph>CHOOSE A NEW OWNER FOR THIS CHANNEL'S ACCOUNT BELOW.</Paragraph>
 			{isLoading ? <Spinner /> : null}
-			{data ? <>
+			{data ? (
+				<>
 					<RowFlex>
 						<ColumnFlex>
 							<Select
@@ -60,7 +61,8 @@ function SetNewOwner() {
 							text={isMutatingOwner ? "..." : "CONFIRM NEW OWNER"}
 						/>
 					</RowFlex>
-				</> : null}
+				</>
+			) : null}
 		</Modal>
 	)
 }

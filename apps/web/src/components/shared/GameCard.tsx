@@ -41,7 +41,7 @@ export function GameCard({
 			path={titleImageUrl}
 			render={(img) => (
 				<Container active={active} data-cy={`${urlSafeName}-button`} onClick={onClick} titleImage={img}>
-					{(width ) > 550 && (
+					{width > 550 && (
 						<ImageContainer>
 							<img alt={displayName} src={img} style={{ width: "100%" }} />
 						</ImageContainer>
@@ -73,9 +73,9 @@ export function GameCard({
 
 					{!active && (
 						<ComingSoon>
-								<p style={{ cursor: "default" }}>COMING</p>
-								<p style={{ cursor: "default" }}>SOON</p>
-							</ComingSoon>
+							<p style={{ cursor: "default" }}>COMING</p>
+							<p style={{ cursor: "default" }}>SOON</p>
+						</ComingSoon>
 					)}
 				</Container>
 			)}

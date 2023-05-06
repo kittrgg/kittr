@@ -19,14 +19,14 @@ interface Props {
 /** Layout used for authentication related pages. Signups, logins, etc. */
 function Authentication({ title, children }: Props) {
 	return (
-	<Wrapper>
-		<BlockArt />
-		<NavMenu />
-		<Container>
-			<FormTitle>{title}</FormTitle>
-			{children}
-		</Container>
-	</Wrapper>
+		<Wrapper>
+			<BlockArt />
+			<NavMenu />
+			<Container>
+				<FormTitle>{title}</FormTitle>
+				{children}
+			</Container>
+		</Wrapper>
 	)
 }
 

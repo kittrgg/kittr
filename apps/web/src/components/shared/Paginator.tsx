@@ -34,44 +34,46 @@ export function Paginator({
 	isLastPage,
 	pageRoot
 }: Props) {
-  return <Container>
-		<p style={{ margin: "24px 0" }}>
-			Viewing {currentPageResultStart} - {Math.min(currentPageResultEnd, totalResults)} of {totalResults} results.
-		</p>
-		<Navigation>
-			{!isFirstPage && (
-				<Link href={`${pageRoot}/${currentPage - 1}`} legacyBehavior passHref>
-					<PageLink data-cy="decrement-page">
-						<SVG.Carat
-							style={{
-								height: "14px",
-								marginRight: "8px",
-								transform: "rotate(-90deg)"
-							}}
-							width="14px"
-						/>
-						Prev
-					</PageLink>
-				</Link>
-			)}
-			{!isFirstPage && !isLastPage && <CurrentPageIndicator>{currentPage}</CurrentPageIndicator>}
-			{!isLastPage && (
-				<Link href={`${pageRoot}/${currentPage + 1}`} legacyBehavior passHref>
-					<PageLink data-cy="increment-page">
-						Next
-						<SVG.Carat
-							style={{
-								height: "14px",
-								marginLeft: "8px",
-								transform: "rotate(90deg)"
-							}}
-							width="14px"
-						/>
-					</PageLink>
-				</Link>
-			)}
-		</Navigation>
-	</Container>
+	return (
+		<Container>
+			<p style={{ margin: "24px 0" }}>
+				Viewing {currentPageResultStart} - {Math.min(currentPageResultEnd, totalResults)} of {totalResults} results.
+			</p>
+			<Navigation>
+				{!isFirstPage && (
+					<Link href={`${pageRoot}/${currentPage - 1}`} legacyBehavior passHref>
+						<PageLink data-cy="decrement-page">
+							<SVG.Carat
+								style={{
+									height: "14px",
+									marginRight: "8px",
+									transform: "rotate(-90deg)"
+								}}
+								width="14px"
+							/>
+							Prev
+						</PageLink>
+					</Link>
+				)}
+				{!isFirstPage && !isLastPage && <CurrentPageIndicator>{currentPage}</CurrentPageIndicator>}
+				{!isLastPage && (
+					<Link href={`${pageRoot}/${currentPage + 1}`} legacyBehavior passHref>
+						<PageLink data-cy="increment-page">
+							Next
+							<SVG.Carat
+								style={{
+									height: "14px",
+									marginLeft: "8px",
+									transform: "rotate(90deg)"
+								}}
+								width="14px"
+							/>
+						</PageLink>
+					</Link>
+				)}
+			</Navigation>
+		</Container>
+	)
 }
 
 export default Paginator

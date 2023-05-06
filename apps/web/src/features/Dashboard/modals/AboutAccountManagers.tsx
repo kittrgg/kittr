@@ -14,14 +14,18 @@ const CENTER_SVG = {
 }
 
 function CheckMark() {
-  return <td>
-		<SVG.CheckMark stroke={colors.green} style={CENTER_SVG} width="20px" />
-	</td>
+	return (
+		<td>
+			<SVG.CheckMark stroke={colors.green} style={CENTER_SVG} width="20px" />
+		</td>
+	)
 }
 function X() {
-  return <td>
-		<SVG.X fill={colors.red} style={CENTER_SVG} width="20px" />
-	</td>
+	return (
+		<td>
+			<SVG.X fill={colors.red} style={CENTER_SVG} width="20px" />
+		</td>
+	)
 }
 
 /** Information about which account managers have which abilities. */

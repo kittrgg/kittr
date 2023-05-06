@@ -7,7 +7,7 @@ import { useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch, useSelector } from "@Redux/store"
 import { header1, header2, paragraph } from "@Styles/typography"
 import { capitalizeFirstCharacter } from "@Utils/helpers/capitalizeFirstCharacter"
-import type { MutableRefObject} from "react";
+import type { MutableRefObject } from "react"
 import { useEffect, useRef } from "react"
 import styled from "styled-components"
 import CreateChannelModal from "./modals/CreateChannel"
@@ -61,77 +61,77 @@ function ChannelList() {
 					<SVG.Renew dataCy="renew-svg" onClick={() => refetch()} style={{ cursor: "pointer" }} width="24px" />
 				</Header>
 				{isFetchingChannels ? <Spinner height="100px" width="100%" /> : null}
-				{!isFetchingChannels &&
-					Boolean(user) &&
-					channels ? channels.map((elem) => (
-						<BorderWrapper isPremium={elem.plan?.type === "PREMIUM"} key={elem.id}>
-							<ChannelContainer
-								data-cy={`${elem.displayName}-channel-button`}
-								key={elem.id}
-								onClick={() => {
-									dispatch(
-										setChannelView({
-											gameId: "",
-											view: "Channel Settings"
-										})
-									)
-									dispatch(
-										setActiveView({
-											channelId: elem.id,
-											view: "Channel"
-										})
-									)
-									modal.type === "Tutorial" &&
+				{!isFetchingChannels && Boolean(user) && channels
+					? channels.map((elem) => (
+							<BorderWrapper isPremium={elem.plan?.type === "PREMIUM"} key={elem.id}>
+								<ChannelContainer
+									data-cy={`${elem.displayName}-channel-button`}
+									key={elem.id}
+									onClick={() => {
 										dispatch(
-											setModal({
-												type: modal.type,
-												data: {
-													page: modal.data?.page + 1
-												}
+											setChannelView({
+												gameId: "",
+												view: "Channel Settings"
 											})
 										)
-								}}
-								ref={divRef}
-								style={modalData?.page === 3 ? { position: "relative", zIndex: 101 } : undefined}
-							>
-								<FlexRow>
-									<ProfileImage
-										alwaysRefresh
-										hasProfileImage={Boolean(elem.profile?.hasProfileImage)}
-										imagePath={elem.id}
-										size="50px"
-									/>
-									<ChannelTitle>{elem.displayName}</ChannelTitle>
-								</FlexRow>
-								<Role>
-									Your role is{" "}
-									{capitalizeFirstCharacter(
-										elem.managers.find((manager) => manager.firebaseId === user.uid)?.role ?? ""
-									)}{" "}
-									for this channel.
-								</Role>
-							</ChannelContainer>
-						</BorderWrapper>
-					)) : null}
+										dispatch(
+											setActiveView({
+												channelId: elem.id,
+												view: "Channel"
+											})
+										)
+										modal.type === "Tutorial" &&
+											dispatch(
+												setModal({
+													type: modal.type,
+													data: {
+														page: modal.data?.page + 1
+													}
+												})
+											)
+									}}
+									ref={divRef}
+									style={modalData?.page === 3 ? { position: "relative", zIndex: 101 } : undefined}
+								>
+									<FlexRow>
+										<ProfileImage
+											alwaysRefresh
+											hasProfileImage={Boolean(elem.profile?.hasProfileImage)}
+											imagePath={elem.id}
+											size="50px"
+										/>
+										<ChannelTitle>{elem.displayName}</ChannelTitle>
+									</FlexRow>
+									<Role>
+										Your role is{" "}
+										{capitalizeFirstCharacter(
+											elem.managers.find((manager) => manager.firebaseId === user.uid)?.role ?? ""
+										)}{" "}
+										for this channel.
+									</Role>
+								</ChannelContainer>
+							</BorderWrapper>
+					  ))
+					: null}
 
 				{!isFetchingChannels && channels?.length === 0 && (
 					<Container
-							style={{
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "center",
-								columnGap: "20px"
+						style={{
+							display: "flex",
+							alignItems: "center",
+							justifyContent: "center",
+							columnGap: "20px"
+						}}
+					>
+						<Button
+							dataCy="start-tutorial-button"
+							design="default"
+							onClick={() => {
+								dispatch(setModal({ type: "Tutorial", data: { page: 1 } }))
 							}}
-						>
-							<Button
-								dataCy="start-tutorial-button"
-								design="default"
-								onClick={() => {
-									dispatch(setModal({ type: "Tutorial", data: { page: 1 } }))
-								}}
-								text="Need some guidance? Click here for tutorial!"
-							/>
-						</Container>
+							text="Need some guidance? Click here for tutorial!"
+						/>
+					</Container>
 				)}
 				<Button
 					buttonRef={ref}

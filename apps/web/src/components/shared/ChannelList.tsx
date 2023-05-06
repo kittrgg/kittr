@@ -52,9 +52,11 @@ export function ChannelList({ data, itemBackgroundColor = colors.darker, gameLin
 								<ProfileImage hasProfileImage={elem.profile.hasProfileImage} imagePath={elem.id} size="52px" />
 								<DisplayName>{elem.displayName}</DisplayName>
 							</Identity>
-							{withSocialLinks && elem.links ? <SocialIconsContainer>
+							{withSocialLinks && elem.links ? (
+								<SocialIconsContainer>
 									<SocialIcons iconSize={20} links={elem.links} />
-								</SocialIconsContainer> : null}
+								</SocialIconsContainer>
+							) : null}
 							<ArrowContainer>
 								<SVG.Carat style={{ width: "24px", transform: "rotate(90deg)" }} />
 							</ArrowContainer>

@@ -4,7 +4,7 @@ import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
 import type { RouterOutput } from "@kittr/trpc"
 import type { OverlayKit } from "@kittr/types"
-import type { Dispatch, SetStateAction} from "react";
+import type { Dispatch, SetStateAction } from "react"
 import { useEffect, useRef, useState } from "react"
 import styled, { keyframes, ThemeProvider } from "styled-components"
 
@@ -99,16 +99,18 @@ function BannerTicker({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 						ref={optionsRef}
 						scrollValue={optionsRef.current ? optionsRef.current.scrollWidth - optionsRef.current.clientWidth : 0}
 					>
-						{activeKit ? customOrderArray<{ slotKey: string; displayName: string }>({
-								sortingArray: warzoneSlotsOrder,
-								keyToSort: "slotKey",
-								array: activeKit.options || []
-							}).map((elem: any, _: any) => (
-								<Option key={elem.displayName}>
-									<Slot>{elem.slotKey}</Slot>
-									<Selection>{elem.displayName.toUpperCase()}</Selection>
-								</Option>
-							)) : null}
+						{activeKit
+							? customOrderArray<{ slotKey: string; displayName: string }>({
+									sortingArray: warzoneSlotsOrder,
+									keyToSort: "slotKey",
+									array: activeKit.options || []
+							  }).map((elem: any, _: any) => (
+									<Option key={elem.displayName}>
+										<Slot>{elem.slotKey}</Slot>
+										<Selection>{elem.displayName.toUpperCase()}</Selection>
+									</Option>
+							  ))
+							: null}
 					</Options>
 				</OptionsWrapper>
 			</Wrapper>

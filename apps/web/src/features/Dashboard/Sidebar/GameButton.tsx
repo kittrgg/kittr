@@ -5,7 +5,7 @@ import { setChannelView, setModal, handleTutorialAction } from "@Redux/slices/da
 import { useManagerRole, useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
 import type { Game } from "@kittr/prisma"
-import type { MutableRefObject} from "react";
+import type { MutableRefObject } from "react"
 import { useState, useRef, useEffect } from "react"
 import * as Styled from "./style"
 
@@ -74,7 +74,8 @@ function GameButton({ game, activeView }: Props) {
 					)}
 				/>
 			</Styled.Button>
-			{isOwnerOrAdmin ? <Styled.DeleteGameBubble
+			{isOwnerOrAdmin ? (
+				<Styled.DeleteGameBubble
 					data-cy={`${game.urlSafeName}-delete-sidebar-button`}
 					isHovered={isHovered}
 					onClick={() =>
@@ -89,7 +90,8 @@ function GameButton({ game, activeView }: Props) {
 					onMouseLeave={() => setIsHovered(false)}
 				>
 					<SVG.X fill={colors.red} style={{ width: "100%", height: "100%" }} />
-				</Styled.DeleteGameBubble> : null}
+				</Styled.DeleteGameBubble>
+			) : null}
 		</Styled.ButtonContainer>
 	)
 }

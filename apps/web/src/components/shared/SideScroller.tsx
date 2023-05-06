@@ -1,7 +1,7 @@
 import colors from "@Colors"
 import SVG from "@Components/shared/SVG"
 import { useViewportDimensions } from "@Hooks/useViewportDimensions"
-import type { ReactNode, RefObject} from "react";
+import type { ReactNode, RefObject } from "react"
 import { useEffect, useMemo, useRef, useState } from "react"
 import { isMobile } from "react-device-detect"
 import ScrollContainer from "react-indiana-drag-scroll"
@@ -70,8 +70,9 @@ export function SideScroller({ wrapperStyles, childMargin, children }: Props) {
 					userSelect: "none",
 					scrollBehavior: "smooth",
 					WebkitOverflowScrolling: "touch",
-					WebkitMaskImage:
-						`linear-gradient(to right, transparent, white 20px, white ${  isMobile ? "50%" : "90%"  }, transparent)`
+					WebkitMaskImage: `linear-gradient(to right, transparent, white 20px, white ${
+						isMobile ? "50%" : "90%"
+					}, transparent)`
 				}}
 				vertical={false}
 			>
@@ -83,7 +84,8 @@ export function SideScroller({ wrapperStyles, childMargin, children }: Props) {
 				</Wrapper>
 			</ScrollContainer>
 
-			{showLeftButton && viewportScrollRatio ? <CaratWrapper
+			{showLeftButton && viewportScrollRatio ? (
+				<CaratWrapper
 					onClick={() => {
 						if (ref.current) ref.current.scrollLeft -= viewport.width *= 1 - 0.05
 					}}
@@ -98,9 +100,11 @@ export function SideScroller({ wrapperStyles, childMargin, children }: Props) {
 							right: 3.5
 						}}
 					/>
-				</CaratWrapper> : null}
+				</CaratWrapper>
+			) : null}
 
-			{showRightButton && viewportScrollRatio ? <CaratWrapper
+			{showRightButton && viewportScrollRatio ? (
+				<CaratWrapper
 					onClick={() => {
 						if (ref.current) ref.current.scrollLeft += viewport.width *= 1 - 0.05
 					}}
@@ -116,7 +120,8 @@ export function SideScroller({ wrapperStyles, childMargin, children }: Props) {
 							left: 1
 						}}
 					/>
-				</CaratWrapper> : null}
+				</CaratWrapper>
+			) : null}
 		</div>
 	)
 }

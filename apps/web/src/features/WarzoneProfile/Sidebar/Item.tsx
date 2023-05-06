@@ -7,18 +7,18 @@ import { sortAlphabetical } from "@Utils/helpers/sortAlphabetical"
 import { Routes } from "@Utils/lookups/routes"
 import type { WarzoneKit, WarzoneKitBase, WarzoneKitBaseCategory, WarzoneKitOption } from "@kittr/prisma"
 import { useRouter } from "next/router"
-import type { Dispatch, SetStateAction} from "react";
+import type { Dispatch, SetStateAction } from "react"
 import { useEffect, useRef } from "react"
 import styled from "styled-components"
 
 interface Props {
 	baseName: string
 	kits: (WarzoneKit & {
-			options: WarzoneKitOption[]
-			base: WarzoneKitBase & {
-				category: WarzoneKitBaseCategory
-			}
-		})[]
+		options: WarzoneKitOption[]
+		base: WarzoneKitBase & {
+			category: WarzoneKitBaseCategory
+		}
+	})[]
 	setFilterQuery: Dispatch<SetStateAction<string>>
 	featured?: true
 	noRef?: true
@@ -74,11 +74,13 @@ function Item({ baseName, featured, kits, setFilterQuery }: Props) {
 				onClick={onClick}
 				ref={featured ? undefined : containerRef}
 			>
-				{featured ? <SVG.Star
+				{featured ? (
+					<SVG.Star
 						fill={colors.gold}
 						stroke="transparent"
 						style={{ position: "absolute", top: "12px", right: "12px", width: "14px" }}
-					/> : null}
+					/>
+				) : null}
 				<Title>{`${baseName}${
 					matchedBase.length === 1 && firstMatchedBaseUserTitle.length > 3 ? firstMatchedBaseUserTitle : ""
 				}`}</Title>
@@ -123,12 +125,14 @@ function Item({ baseName, featured, kits, setFilterQuery }: Props) {
 										}}
 									>
 										<SubItemTitle>{elem.customTitle || elem.base.displayName}</SubItemTitle>
-										{elem.featured ? <SVG.Star
+										{elem.featured ? (
+											<SVG.Star
 												fill={colors.gold}
 												stroke="transparent"
 												style={{ position: "absolute", top: "50%", transform: "translateY(-50%)", right: "0px" }}
 												width="14px"
-											/> : null}
+											/>
+										) : null}
 									</SubItem>
 								)
 							})}

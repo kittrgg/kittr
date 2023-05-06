@@ -67,14 +67,14 @@ function Page() {
 					if (input === "active") {
 						return (
 							<Switch
-									checked={gameInputs.active}
-									label="Active"
-									onChange={({ currentTarget }) => {
-										handleInputChange(currentTarget, "active")
-									}}
-									size="lg"
-									sx={{ input: { backgroundColor: colors.light, border: "none" }, label: { color: colors.white } }}
-								/>
+								checked={gameInputs.active}
+								label="Active"
+								onChange={({ currentTarget }) => {
+									handleInputChange(currentTarget, "active")
+								}}
+								size="lg"
+								sx={{ input: { backgroundColor: colors.light, border: "none" }, label: { color: colors.white } }}
+							/>
 						)
 					}
 

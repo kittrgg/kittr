@@ -52,14 +52,14 @@ function DeleteManager() {
 				<Button
 					design="transparent"
 					onClick={() => dispatch(setModal({ type: "", data: {} }))}
-					text={`NO, KEEP ${  isSelf ? "MYSELF" : "THEM"}`}
+					text={`NO, KEEP ${isSelf ? "MYSELF" : "THEM"}`}
 				/>
 				<Button
 					dataCy="confirm-manager-removal"
 					design="white"
 					onClick={() => mutate({ channelId: channelData?.id ?? "", managerIdToDelete: data.id })}
 					style={{ marginLeft: "32px" }}
-					text={`YES, REMOVE ${  isSelf ? "MYSELF" : "THIS MANAGER"}`}
+					text={`YES, REMOVE ${isSelf ? "MYSELF" : "THIS MANAGER"}`}
 				/>
 			</RowFlex>
 		</Modal>

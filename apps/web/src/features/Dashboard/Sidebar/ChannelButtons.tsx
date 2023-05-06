@@ -5,7 +5,7 @@ import { handleTutorialAction, setChannelView, setModal } from "@Redux/slices/da
 import { useChannelView, useModal } from "@Redux/slices/dashboard/selectors"
 import { useManagerRole } from "@Redux/slices/dashboard/selectors/useManagerRole"
 import { useDispatch } from "@Redux/store"
-import type { MutableRefObject} from "react";
+import type { MutableRefObject } from "react"
 import { useEffect, useRef } from "react"
 import Icon from "../Icon"
 import * as Styled from "./style"
@@ -60,33 +60,35 @@ function ChannelButtons() {
 				return <GameButton activeView={gameId === game.id} game={game} key={game.id} />
 			})}
 
-			{isOwnerOrAdmin ? <Styled.ButtonContainer isActive={false} style={{ marginBottom: "32px" }}>
-						<Styled.Button
-							data-cy="sidebar-add-game"
-							onClick={() => {
-								dispatch(
-									handleTutorialAction({
-										condition: modal.type === "Tutorial",
-										trueState: {
-											type: "Add Game",
-											data: { isTutorial: true, page: 4, ref: modal.data?.ref }
-										},
-										falseState: { type: "Add Game", data: "" }
-									})
-								)
-							}}
-							ref={ref}
-							style={{
-								marginBottom: "64px",
-								padding: "25px",
-								position: modal.data?.page === 4 ? "relative" : undefined,
-								zIndex: modal.data?.page === 4 ? 101 : undefined
-							}}
-						>
-							<Icon alt="Add a Game" src="/media/icons/plus.svg" />
-						</Styled.Button>
-						{channelData?.games.length === 0 && <AddGameNotification />}
-					</Styled.ButtonContainer> : null}
+			{isOwnerOrAdmin ? (
+				<Styled.ButtonContainer isActive={false} style={{ marginBottom: "32px" }}>
+					<Styled.Button
+						data-cy="sidebar-add-game"
+						onClick={() => {
+							dispatch(
+								handleTutorialAction({
+									condition: modal.type === "Tutorial",
+									trueState: {
+										type: "Add Game",
+										data: { isTutorial: true, page: 4, ref: modal.data?.ref }
+									},
+									falseState: { type: "Add Game", data: "" }
+								})
+							)
+						}}
+						ref={ref}
+						style={{
+							marginBottom: "64px",
+							padding: "25px",
+							position: modal.data?.page === 4 ? "relative" : undefined,
+							zIndex: modal.data?.page === 4 ? 101 : undefined
+						}}
+					>
+						<Icon alt="Add a Game" src="/media/icons/plus.svg" />
+					</Styled.Button>
+					{channelData?.games.length === 0 && <AddGameNotification />}
+				</Styled.ButtonContainer>
+			) : null}
 		</>
 	)
 }

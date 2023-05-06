@@ -9,9 +9,7 @@ function SucessMessage() {
 		logOut()
 	}, [dispatch])
 
-	return (
-		<p>Your password has been changed!</p>
-	)
+	return <p>Your password has been changed!</p>
 }
 
 export default SucessMessage

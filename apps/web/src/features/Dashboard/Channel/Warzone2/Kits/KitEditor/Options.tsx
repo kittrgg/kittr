@@ -135,70 +135,73 @@ function Options() {
 			</Styled.HorizFlex>
 			<Styled.AttachmentsFlex>
 				{isLoading ? <Loader /> : null}
-				{!isLoading &&
-					availableOptions ? slots?.map((slot: string) => {
-						return (
-							<div key={slot} style={{ marginBottom: "18px", flexBasis: "40%" }}>
-								<Styled.Header>{slot}</Styled.Header>
-								<Selector
-									className={`${slot.replace(/ /g, "-")}-selector`}
-									isSearchable={false}
-									onChange={(e: any) => addToOptions(e.value, slot)}
-									options={[
-										{
-											label: "-",
-											value: ""
-										},
-										...availableOptions
-											.filter((opt) => opt.slotKey === slot)
-											.sort((a, b) => Number(a.orderPlacement) - Number(b.orderPlacement))
-											.map((option) => ({
-												label: option.displayName,
-												value: option.displayName
-											}))
-									]}
-									value={{
-										label: current.find((opt) => opt.slotKey === slot)
-											? current.find((opt) => opt.slotKey === slot)?.displayName
-											: "-"
-									}}
-								/>
+				{!isLoading && availableOptions
+					? slots?.map((slot: string) => {
+							return (
+								<div key={slot} style={{ marginBottom: "18px", flexBasis: "40%" }}>
+									<Styled.Header>{slot}</Styled.Header>
+									<Selector
+										className={`${slot.replace(/ /g, "-")}-selector`}
+										isSearchable={false}
+										onChange={(e: any) => addToOptions(e.value, slot)}
+										options={[
+											{
+												label: "-",
+												value: ""
+											},
+											...availableOptions
+												.filter((opt) => opt.slotKey === slot)
+												.sort((a, b) => Number(a.orderPlacement) - Number(b.orderPlacement))
+												.map((option) => ({
+													label: option.displayName,
+													value: option.displayName
+												}))
+										]}
+										value={{
+											label: current.find((opt) => opt.slotKey === slot)
+												? current.find((opt) => opt.slotKey === slot)?.displayName
+												: "-"
+										}}
+									/>
 
-								{current.find((opt) => opt.slotKey === slot)?.displayName ? <Grid>
-										<Grid.Col span={6}>
-											<NumberInput
-												label={handleHorzTuneName(slot)}
-												onChange={(e) => addToTunes(e, slot, "horz")}
-												precision={2}
-												radius="md"
-												size="sm"
-												step={0.1}
-												sx={{ input: { background: colors.light } }}
-												value={
-													tuning.find((tune) => tune.kitOptionId === current.find((opt) => opt.slotKey === slot)?.id)
-														?.horz ?? 0
-												}
-											/>
-										</Grid.Col>
-										<Grid.Col span={6}>
-											<NumberInput
-												label="Weight"
-												onChange={(e) => addToTunes(e, slot, "vert")}
-												precision={2}
-												radius="md"
-												size="sm"
-												step={0.1}
-												sx={{ input: { background: colors.light } }}
-												value={
-													tuning.find((tune) => tune.kitOptionId === current.find((opt) => opt.slotKey === slot)?.id)
-														?.vert ?? 0
-												}
-											/>
-										</Grid.Col>
-									</Grid> : null}
-							</div>
-						)
-					}) : null}
+									{current.find((opt) => opt.slotKey === slot)?.displayName ? (
+										<Grid>
+											<Grid.Col span={6}>
+												<NumberInput
+													label={handleHorzTuneName(slot)}
+													onChange={(e) => addToTunes(e, slot, "horz")}
+													precision={2}
+													radius="md"
+													size="sm"
+													step={0.1}
+													sx={{ input: { background: colors.light } }}
+													value={
+														tuning.find((tune) => tune.kitOptionId === current.find((opt) => opt.slotKey === slot)?.id)
+															?.horz ?? 0
+													}
+												/>
+											</Grid.Col>
+											<Grid.Col span={6}>
+												<NumberInput
+													label="Weight"
+													onChange={(e) => addToTunes(e, slot, "vert")}
+													precision={2}
+													radius="md"
+													size="sm"
+													step={0.1}
+													sx={{ input: { background: colors.light } }}
+													value={
+														tuning.find((tune) => tune.kitOptionId === current.find((opt) => opt.slotKey === slot)?.id)
+															?.vert ?? 0
+													}
+												/>
+											</Grid.Col>
+										</Grid>
+									) : null}
+								</div>
+							)
+					  })
+					: null}
 			</Styled.AttachmentsFlex>
 		</Styled.Container>
 	)

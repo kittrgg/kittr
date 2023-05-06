@@ -19,20 +19,22 @@ function Specs({ specs, brandColor }: Props) {
 		<section id="specs">
 			<H2>SPECS</H2>
 			<SpecsGrid>
-				{specs ? customOrderArray<ChannelPcSpec>({
-						sortingArray: SORT_ORDER,
-						indexToSort: 0,
-						array: specs
-					}).map((spec) => {
-						const { partName, partType } = spec
+				{specs
+					? customOrderArray<ChannelPcSpec>({
+							sortingArray: SORT_ORDER,
+							indexToSort: 0,
+							array: specs
+					  }).map((spec) => {
+							const { partName, partType } = spec
 
-						return (
-							<GridItem colorHover={brandColor} key={partName}>
-								<PartName>{partName}</PartName>
-								<Part>{partType}</Part>
-							</GridItem>
-						)
-					}) : null}
+							return (
+								<GridItem colorHover={brandColor} key={partName}>
+									<PartName>{partName}</PartName>
+									<Part>{partType}</Part>
+								</GridItem>
+							)
+					  })
+					: null}
 			</SpecsGrid>
 		</section>
 	)

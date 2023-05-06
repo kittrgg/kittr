@@ -3,7 +3,7 @@ import { SearchInput, SVG } from "@Components/shared"
 import { useChannelProfileData } from "@Hooks/trpc/useChannelProfileData"
 import { Routes } from "@Utils/lookups/routes"
 import type { WarzoneKit, WarzoneKitBase, WarzoneTwoKit, WarzoneTwoKitBase } from "@kittr/prisma"
-import type { ButtonProps } from "@kittr/ui";
+import type { ButtonProps } from "@kittr/ui"
 import { Button, Text, Title } from "@kittr/ui"
 import { Accordion, ScrollArea } from "@mantine/core"
 import { useViewportSize } from "@mantine/hooks"
@@ -134,11 +134,15 @@ function Sidebar() {
 								If there is a filter query - filter allkits to the search query and find index of category - else find index on unfiltered kits
 								 *** If index is -1 that means there is no kit so it won't show category name ***
 								 */}
-								{(filterQuery
-									? allKits
-											.filter((kit) => kit.base.displayName.toLowerCase().includes(filterQuery.toLowerCase()))
-											.findIndex((kit) => kit.base.category.displayName === category) !== -1
-									: allKits.findIndex((kit) => kit.base.category.displayName === category) !== -1) ? category : null}
+								{(
+									filterQuery
+										? allKits
+												.filter((kit) => kit.base.displayName.toLowerCase().includes(filterQuery.toLowerCase()))
+												.findIndex((kit) => kit.base.category.displayName === category) !== -1
+										: allKits.findIndex((kit) => kit.base.category.displayName === category) !== -1
+								)
+									? category
+									: null}
 							</Title>
 							{/* Kits are filtered by categories and does not include featured kits. */}
 							{allKits
@@ -154,78 +158,78 @@ function Sidebar() {
 									if (kit.customTitle) {
 										return (
 											<Accordion
-													chevron={
-														<Text>
-															({allKits.filter((subKit) => kit.base.displayName === subKit.base.displayName).length})
-														</Text>
-													}
-													chevronPosition="right"
-													disableChevronRotation
-													styles={{
-														control: {
-															backgroundColor: colors.light,
-															padding: "0.5em",
-															borderRadius: "16px",
-															fontSize: "1.2em",
-															color: colors.white,
-															paddingLeft: "1.35em"
-														},
-														label: { fontWeight: 600 },
-														content: { padding: 0 },
-														itemTitle: { fontWeight: "bold" },
-														item: { border: "transparent" }
-													}}
-												>
-													<Accordion.Item value={kit.base.displayName}>
-														{/* Finds similar kits by matching the filtered kit base displayname with the kit that has a customTitle */}
-														<Accordion.Control>{kit.base.displayName}</Accordion.Control>
-														{allKits
-															.filter((subKit) => kit.base.displayName === subKit.base.displayName)
-															.map((sub) => (
-																<Accordion.Panel key={sub.id}>
-																	<SidebarButton
-																		featured={sub.featured}
-																		kit={sub}
-																		onClick={() => {
-																			router.push(
-																				Routes.CHANNEL.GAME.createPath(
-																					channel as string,
-																					game as string,
-																					`?k=${sub.base.displayName.replace(/ /g, "-")}
+												chevron={
+													<Text>
+														({allKits.filter((subKit) => kit.base.displayName === subKit.base.displayName).length})
+													</Text>
+												}
+												chevronPosition="right"
+												disableChevronRotation
+												styles={{
+													control: {
+														backgroundColor: colors.light,
+														padding: "0.5em",
+														borderRadius: "16px",
+														fontSize: "1.2em",
+														color: colors.white,
+														paddingLeft: "1.35em"
+													},
+													label: { fontWeight: 600 },
+													content: { padding: 0 },
+													itemTitle: { fontWeight: "bold" },
+													item: { border: "transparent" }
+												}}
+											>
+												<Accordion.Item value={kit.base.displayName}>
+													{/* Finds similar kits by matching the filtered kit base displayname with the kit that has a customTitle */}
+													<Accordion.Control>{kit.base.displayName}</Accordion.Control>
+													{allKits
+														.filter((subKit) => kit.base.displayName === subKit.base.displayName)
+														.map((sub) => (
+															<Accordion.Panel key={sub.id}>
+																<SidebarButton
+																	featured={sub.featured}
+																	kit={sub}
+																	onClick={() => {
+																		router.push(
+																			Routes.CHANNEL.GAME.createPath(
+																				channel as string,
+																				game as string,
+																				`?k=${sub.base.displayName.replace(/ /g, "-")}
 																				${sub.customTitle && sub.customTitle.replace(/ /g, "-")}`
-																				),
-																				undefined,
-																				{ shallow: true }
-																			)
-																		}}
-																		subButton
-																	/>
-																</Accordion.Panel>
-															))}
-													</Accordion.Item>
-												</Accordion>
+																			),
+																			undefined,
+																			{ shallow: true }
+																		)
+																	}}
+																	subButton
+																/>
+															</Accordion.Panel>
+														))}
+												</Accordion.Item>
+											</Accordion>
 										)
 									}
 									// If there is only one kit with this displayName then show only the button
 									if (allKits.filter((subKit) => kit.base.displayName === subKit.base.displayName).length === 1) {
 										return (
 											<SidebarButton
-													featured={kit.featured}
-													key={kit.id}
-													kit={kit}
-													onClick={() => {
-														router.push(
-															Routes.CHANNEL.GAME.createPath(
-																channel as string,
-																game as string,
-																`?k=${kit.base.displayName.replace(/ /g, "-")}
+												featured={kit.featured}
+												key={kit.id}
+												kit={kit}
+												onClick={() => {
+													router.push(
+														Routes.CHANNEL.GAME.createPath(
+															channel as string,
+															game as string,
+															`?k=${kit.base.displayName.replace(/ /g, "-")}
 										${kit.customTitle && kit.customTitle.replace(/ /g, "-")}`
-															),
-															undefined,
-															{ shallow: true }
-														)
-													}}
-												/>
+														),
+														undefined,
+														{ shallow: true }
+													)
+												}}
+											/>
 										)
 									}
 								})}

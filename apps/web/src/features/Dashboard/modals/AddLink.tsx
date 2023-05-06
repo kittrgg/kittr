@@ -1,5 +1,5 @@
 import colors from "@Colors"
-import type { SVGType} from "@Components/shared";
+import type { SVGType } from "@Components/shared"
 import { Button, Modal, SvgByType, TextInput } from "@Components/shared"
 import { setModal } from "@Redux/slices/dashboard"
 import { useChannelData } from "@Redux/slices/dashboard/selectors"
@@ -8,7 +8,7 @@ import { trimPrefix } from "@Utils/helpers/trimPrefix"
 import { linkLabelImages } from "@Utils/lookups/linkLabelImages"
 import { linkPrefixes } from "@Utils/lookups/linkPrefixes"
 import type { ChannelLink, LinkProperty } from "@kittr/prisma"
-import type { Dispatch, SetStateAction} from "react";
+import type { Dispatch, SetStateAction } from "react"
 import { useState } from "react"
 import styled from "styled-components"
 

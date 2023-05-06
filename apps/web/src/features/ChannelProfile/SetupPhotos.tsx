@@ -1,4 +1,4 @@
-import { Spinner , SideScroller } from "@Components/shared"
+import { Spinner, SideScroller } from "@Components/shared"
 import { download } from "@kittr/firebase/storage"
 import type { SetupPhoto } from "@kittr/prisma"
 import { useState, useEffect } from "react"

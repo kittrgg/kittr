@@ -46,33 +46,35 @@ const FEATURE_SET = [
 
 /** Features that are currently a part of the platform */
 function Features() {
-  return <section style={{ zIndex: 1 }}>
-		<ImageContainer>
-			<img
-				alt="An example kittr page."
-				src="/media/landing-page-screenie.png"
-				style={{ width: "100%", height: "100%", objectFit: "cover" }}
-			/>
-		</ImageContainer>
-		<Styled.P>Quite a bit better than a Google Sheet, huh?</Styled.P>
-		<Styled.H2>FEATURES</Styled.H2>
-		<Grid>
-			{FEATURE_SET.map((feature) => (
-				<GridItem key={feature.title}>
-					<IconContainer>
-						<img
-							alt={feature.imageAlt}
-							src={feature.image}
-							style={{ width: "100%", height: "100%", objectFit: "contain" }}
-						/>
-					</IconContainer>
-					<CardTitle>{feature.title}</CardTitle>
-					<CardParagraph dangerouslySetInnerHTML={{ __html: feature.paragraph }} />
-				</GridItem>
-			))}
-		</Grid>
-		<CallToAction header="channel bettr with kittr." marginBottom="60px" />
-	</section>
+	return (
+		<section style={{ zIndex: 1 }}>
+			<ImageContainer>
+				<img
+					alt="An example kittr page."
+					src="/media/landing-page-screenie.png"
+					style={{ width: "100%", height: "100%", objectFit: "cover" }}
+				/>
+			</ImageContainer>
+			<Styled.P>Quite a bit better than a Google Sheet, huh?</Styled.P>
+			<Styled.H2>FEATURES</Styled.H2>
+			<Grid>
+				{FEATURE_SET.map((feature) => (
+					<GridItem key={feature.title}>
+						<IconContainer>
+							<img
+								alt={feature.imageAlt}
+								src={feature.image}
+								style={{ width: "100%", height: "100%", objectFit: "contain" }}
+							/>
+						</IconContainer>
+						<CardTitle>{feature.title}</CardTitle>
+						<CardParagraph dangerouslySetInnerHTML={{ __html: feature.paragraph }} />
+					</GridItem>
+				))}
+			</Grid>
+			<CallToAction header="channel bettr with kittr." marginBottom="60px" />
+		</section>
+	)
 }
 
 export default Features

@@ -28,7 +28,8 @@ function PlanTile({ planType, title, price, description, buttonText, buttonStyle
 			</HorizFlex>
 			<Description isPremium={Boolean(planType)}>{description}</Description>
 			<Button design={buttonStyle} onClick={buttonAction} text={buttonText} />
-			{isActive ? <SVG.CheckMark
+			{isActive ? (
+				<SVG.CheckMark
 					stroke={colors.black}
 					style={{
 						position: "absolute",
@@ -40,7 +41,8 @@ function PlanTile({ planType, title, price, description, buttonText, buttonStyle
 						borderRadius: "100%"
 					}}
 					width="20px"
-				/> : null}
+				/>
+			) : null}
 		</Container>
 	)
 }

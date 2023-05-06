@@ -104,7 +104,7 @@ export const useDimensions = <T extends HTMLElement | null>({
 				unobserve()
 				ref.current = element
 			}
-			if (observerRef.current && ref.current) observerRef.current.observe(ref.current )
+			if (observerRef.current && ref.current) observerRef.current.observe(ref.current)
 		},
 		[unobserve]
 	)

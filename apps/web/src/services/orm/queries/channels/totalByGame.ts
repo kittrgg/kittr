@@ -1,14 +1,14 @@
-import type { Prisma} from "@kittr/prisma";
+import type { Prisma } from "@kittr/prisma"
 import { prisma } from "@kittr/prisma"
 
 /**
-	 * @params
-	 * gameId: ObjectId of the game
-	 *
-	 * @returns
-	 * Promise containing number
-	 *
-	 */
+ * @params
+ * gameId: ObjectId of the game
+ *
+ * @returns
+ * Promise containing number
+ *
+ */
 type ChannelsByGameQuery = (gameId: string) => Promise<number | undefined>
 
 /**

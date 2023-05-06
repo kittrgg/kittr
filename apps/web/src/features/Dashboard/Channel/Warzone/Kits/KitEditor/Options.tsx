@@ -70,37 +70,38 @@ function Options() {
 			</Styled.HorizFlex>
 			<Styled.AttachmentsFlex>
 				{isLoading ? <Loader /> : null}
-				{!isLoading &&
-					availableOptions ? slots?.map((slot: string) => {
-						return (
-							<div key={slot} style={{ marginBottom: "18px", flexBasis: "40%" }}>
-								<Styled.Header>{slot}</Styled.Header>
-								<Selector
-									className={`${slot.replace(/ /g, "-")}-selector`}
-									isSearchable={false}
-									onChange={(e: any) => addToOptions(e.value, slot)}
-									options={[
-										{
-											label: "-",
-											value: ""
-										},
-										...availableOptions
-											.filter((opt) => opt.slotKey === slot)
-											.sort((a, b) => Number(a.orderPlacement) - Number(b.orderPlacement))
-											.map((option) => ({
-												label: option.displayName,
-												value: option.displayName
-											}))
-									]}
-									value={{
-										label: current.find((opt) => opt.slotKey === slot)
-											? current.find((opt) => opt.slotKey === slot)?.displayName
-											: "-"
-									}}
-								/>
-							</div>
-						)
-					}) : null}
+				{!isLoading && availableOptions
+					? slots?.map((slot: string) => {
+							return (
+								<div key={slot} style={{ marginBottom: "18px", flexBasis: "40%" }}>
+									<Styled.Header>{slot}</Styled.Header>
+									<Selector
+										className={`${slot.replace(/ /g, "-")}-selector`}
+										isSearchable={false}
+										onChange={(e: any) => addToOptions(e.value, slot)}
+										options={[
+											{
+												label: "-",
+												value: ""
+											},
+											...availableOptions
+												.filter((opt) => opt.slotKey === slot)
+												.sort((a, b) => Number(a.orderPlacement) - Number(b.orderPlacement))
+												.map((option) => ({
+													label: option.displayName,
+													value: option.displayName
+												}))
+										]}
+										value={{
+											label: current.find((opt) => opt.slotKey === slot)
+												? current.find((opt) => opt.slotKey === slot)?.displayName
+												: "-"
+										}}
+									/>
+								</div>
+							)
+					  })
+					: null}
 			</Styled.AttachmentsFlex>
 		</Styled.Container>
 	)

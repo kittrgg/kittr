@@ -52,26 +52,28 @@ function Specs() {
 					/>
 				)}
 			</Title>
-			{specs ? Object.values(data?.profile?.channelPcSpecs || {}).map((spec, index) => {
-					return (
-						<Spec key={`${spec.id}-${index}`}>
-							<SpecInfo>
-								<Label>{spec.partType}</Label>
-								<span>{spec.partName}</span>
-							</SpecInfo>
-							<IconButtons>
-								<SVG.Pencil
-									data-cy={`${spec.partType.replace(/ /g, "-")}-update-spec`}
-									onClick={() => dispatch(setModal({ type: "Add Spec", data: spec }))}
-								/>
-								<SVG.X
-									data-cy={`${spec.partType}-delete-spec`}
-									onClick={async () => mutate({ channelId: data?.id!, pcSpecId: spec.id })}
-								/>
-							</IconButtons>
-						</Spec>
-					)
-				}) : null}
+			{specs
+				? Object.values(data?.profile?.channelPcSpecs || {}).map((spec, index) => {
+						return (
+							<Spec key={`${spec.id}-${index}`}>
+								<SpecInfo>
+									<Label>{spec.partType}</Label>
+									<span>{spec.partName}</span>
+								</SpecInfo>
+								<IconButtons>
+									<SVG.Pencil
+										data-cy={`${spec.partType.replace(/ /g, "-")}-update-spec`}
+										onClick={() => dispatch(setModal({ type: "Add Spec", data: spec }))}
+									/>
+									<SVG.X
+										data-cy={`${spec.partType}-delete-spec`}
+										onClick={async () => mutate({ channelId: data?.id!, pcSpecId: spec.id })}
+									/>
+								</IconButtons>
+							</Spec>
+						)
+				  })
+				: null}
 			<Button
 				data-cy="add-a-spec"
 				design="default"

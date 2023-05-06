@@ -21,26 +21,28 @@ interface Props {
 
 /** Standardized page wrapper for general use. Does not contain ad units. */
 function PageWrapper({ title, description, children, pageTitle }: Props) {
-  return <>
-		<Head description={description} title={title} />
-		<AppShell header={<Header />} padding={0}>
-			<Container
-				fluid
-				sx={{
-					paddingTop: "100px",
-					flex: 1,
-					margin: "2rem auto",
-					maxWidth: "2500px"
-				}}
-			>
-				<Title order={1} preset="h1" sx={{ marginBottom: "1rem" }}>
-					{pageTitle}
-				</Title>
-				<ErrorBoundary>{children}</ErrorBoundary>
-			</Container>
-			<Footer />
-		</AppShell>
-	</>
+	return (
+		<>
+			<Head description={description} title={title} />
+			<AppShell header={<Header />} padding={0}>
+				<Container
+					fluid
+					sx={{
+						paddingTop: "100px",
+						flex: 1,
+						margin: "2rem auto",
+						maxWidth: "2500px"
+					}}
+				>
+					<Title order={1} preset="h1" sx={{ marginBottom: "1rem" }}>
+						{pageTitle}
+					</Title>
+					<ErrorBoundary>{children}</ErrorBoundary>
+				</Container>
+				<Footer />
+			</AppShell>
+		</>
+	)
 }
 
 export default PageWrapper

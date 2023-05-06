@@ -37,10 +37,10 @@ function EditorSnackbar() {
 		onMutate: () => {
 			// Grab the existing kit array and map them to just their titles
 			const kitArr = channelData?.warzoneTwoKits.slice() as (Omit<WarzoneTwoKit, "id"> & {
-					id?: string
-					base: WarzoneTwoKitBase
-					options: WarzoneTwoKitOption[]
-				})[]
+				id?: string
+				base: WarzoneTwoKitBase
+				options: WarzoneTwoKitOption[]
+			})[]
 
 			// Grab the new kit's name
 			const newKitName = activeKit.base.displayName + activeKit.customTitle
@@ -181,8 +181,8 @@ function EditorSnackbar() {
 				gameId: activeKit.base.gameId,
 				baseId: activeKit.base.id,
 				customTitle: activeKit.customTitle,
-				options: activeKit.options ,
-				tuning: activeKit.tuning ,
+				options: activeKit.options,
+				tuning: activeKit.tuning,
 				blueprint: activeKit.blueprint,
 				featured: activeKit.featured,
 				youtubeUrl: activeKit.youtubeUrl,

@@ -3,7 +3,7 @@ import Button from "@Components/shared/Button"
 import { createNewKit, setModal } from "@Redux/slices/dashboard"
 import { useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
-import type { MutableRefObject} from "react";
+import type { MutableRefObject } from "react"
 import { useRef, useEffect } from "react"
 import styled from "styled-components"
 

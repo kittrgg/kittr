@@ -17,28 +17,34 @@ function Affiliates({ affiliates, brandColor }: Props) {
 		<section id="affiliates">
 			<H2>AFFILIATES</H2>
 			<SpecsGrid>
-				{affiliates ? affiliates.map((affiliate) => {
-						return (
-							<GridItem colorHover={brandColor} key={affiliate.company}>
-								<Flex>
-									<Company>{affiliate.company}</Company>
-									{affiliate.description ? <Description>{affiliate.description}</Description> : null}
-								</Flex>
-								{affiliate.code ? <Flex>
-										<Code>CODE</Code>
-										<Code>{affiliate.code}</Code>
-									</Flex> : null}
-								{affiliate.url ? <Link href={affiliate.url} rel="noopener noreferrer" target="_blank">
-										<SVG.Link
-											stroke={colors.lighter}
-											style={{ position: "relative", top: "6px", marginRight: "12px" }}
-											width="24px"
-										/>
-										Visit Link
-									</Link> : null}
-							</GridItem>
-						)
-					}) : null}
+				{affiliates
+					? affiliates.map((affiliate) => {
+							return (
+								<GridItem colorHover={brandColor} key={affiliate.company}>
+									<Flex>
+										<Company>{affiliate.company}</Company>
+										{affiliate.description ? <Description>{affiliate.description}</Description> : null}
+									</Flex>
+									{affiliate.code ? (
+										<Flex>
+											<Code>CODE</Code>
+											<Code>{affiliate.code}</Code>
+										</Flex>
+									) : null}
+									{affiliate.url ? (
+										<Link href={affiliate.url} rel="noopener noreferrer" target="_blank">
+											<SVG.Link
+												stroke={colors.lighter}
+												style={{ position: "relative", top: "6px", marginRight: "12px" }}
+												width="24px"
+											/>
+											Visit Link
+										</Link>
+									) : null}
+								</GridItem>
+							)
+					  })
+					: null}
 			</SpecsGrid>
 		</section>
 	)

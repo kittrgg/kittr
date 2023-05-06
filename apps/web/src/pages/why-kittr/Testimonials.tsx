@@ -51,21 +51,23 @@ const TESTIMONIALS = [
 ]
 
 function LastSection() {
-  return <section>
-		<Styled.H2>TESTIMONIALS</Styled.H2>
-		<Styled.P>STILL DON'TBELIEVE US? HERE'S WHAT THE COMMUNITY SAYS.</Styled.P>
-		<Wrapper>
-			<Scrolltainer>
-				{TESTIMONIALS.map(({ name, role, quote }) => (
-					<Item key={name}>
-						<Name>{name}</Name>
-						<Role>{role}</Role>
-						<Quote>{quote}</Quote>
-					</Item>
-				))}
-			</Scrolltainer>
-		</Wrapper>
-	</section>
+	return (
+		<section>
+			<Styled.H2>TESTIMONIALS</Styled.H2>
+			<Styled.P>STILL DON'TBELIEVE US? HERE'S WHAT THE COMMUNITY SAYS.</Styled.P>
+			<Wrapper>
+				<Scrolltainer>
+					{TESTIMONIALS.map(({ name, role, quote }) => (
+						<Item key={name}>
+							<Name>{name}</Name>
+							<Role>{role}</Role>
+							<Quote>{quote}</Quote>
+						</Item>
+					))}
+				</Scrolltainer>
+			</Wrapper>
+		</section>
+	)
 }
 
 export default LastSection

@@ -26,7 +26,6 @@ export const useDetectAdBlock: Interface = () => {
 
 	if (!isClient()) {
 		return false
-	} 
-		return isBlocking
-	
+	}
+	return isBlocking
 }

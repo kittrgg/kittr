@@ -4,7 +4,7 @@ import { useDetectAdBlock } from "@Hooks/useDetectAdBlock"
 import { Grid, Image } from "@mantine/core"
 import { useViewportSize } from "@mantine/hooks"
 import { useRouter } from "next/router"
-import type { ReactNode } from "react";
+import type { ReactNode } from "react"
 import { useState, useEffect } from "react"
 import NavMenu from "../NavMenu"
 import Footer from "../Footer"
@@ -63,14 +63,16 @@ function AdPageWrapper({ withAds = true, title, description, children }: Props) 
 				<Grid.Col span={8}>
 					<ErrorBoundary>{children}</ErrorBoundary>
 				</Grid.Col>
-				{withAds && width > 1200 ? <Grid.Col span={1}>
+				{withAds && width > 1200 ? (
+					<Grid.Col span={1}>
 						<Image
 							alt="sidebar-bg"
 							src="/media/sidebar-background.svg"
 							sx={{ position: "absolute", top: -0, right: "0%", zIndex: -1, width: "20%" }}
 						/>
 						{adBlock ? <SupportUs containerStyles={{ position: "relative", top, right: "12px" }} /> : <AdUnits />}
-					</Grid.Col> : null}
+					</Grid.Col>
+				) : null}
 			</Grid>
 			<Footer />
 		</div>

@@ -78,7 +78,8 @@ function Main() {
 				path="/warzone/background-image.png"
 				render={(imagePath) => <BackgroundImage imagePath={imagePath} />}
 			/>
-			{isMobile ? <Button
+			{isMobile ? (
+				<Button
 					dataCy="kit-list-opener"
 					endIcon={
 						<SVG.Carat fill={colors.white} style={{ width: "24px", marginLeft: "4px", transform: "rotate(90deg)" }} />
@@ -93,9 +94,12 @@ function Main() {
 						alignSelf: "center"
 					}}
 					text="Kits"
-				/> : null}
-			{activeWeapon && Object.keys(activeWeapon).length > 0 && weaponTerm ? <>
-					{!isMobile && channelData ? <TopBar
+				/>
+			) : null}
+			{activeWeapon && Object.keys(activeWeapon).length > 0 && weaponTerm ? (
+				<>
+					{!isMobile && channelData ? (
+						<TopBar
 							displayName={channelData.displayName}
 							gameCreatorCode={
 								channelData.gameCreatorCodes.find(
@@ -109,8 +113,11 @@ function Main() {
 							hasProfileImage={channelData.profile?.hasProfileImage || false}
 							id={channelData.id}
 							links={channelData.links}
-						/> : null}
-					{isMobile && channelData ? <KitScroller availableKits={channelData.warzoneKits ?? channelData.warzoneTwoKits} /> : null}
+						/>
+					) : null}
+					{isMobile && channelData ? (
+						<KitScroller availableKits={channelData.warzoneKits ?? channelData.warzoneTwoKits} />
+					) : null}
 					{isMobile ? <div>{/* <Ad placementType="d300x50" updateTrigger={activeWeapon} /> */}</div> : null}
 					{isMobile ? (
 						<>
@@ -133,7 +140,8 @@ function Main() {
 						<FavoriteBlueprint />
 					</div>
 					{isMobile ? <div>{/* <Ad placementType="s300x250" updateTrigger={activeWeapon} /> */}</div> : null}
-				</> : null}
+				</>
+			) : null}
 			{!activeWeapon && (
 				<Container style={{ marginTop: isMobile ? "2em" : "10em" }}>
 					<SVG.Arrow

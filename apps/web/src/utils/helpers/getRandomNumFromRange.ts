@@ -1,11 +1,11 @@
 /**
-	 * @params
-	 * minimum value, maximum value
-	 *
-	 * @returns
-	 * Returned value within range
-	 *
-	 */
+ * @params
+ * minimum value, maximum value
+ *
+ * @returns
+ * Returned value within range
+ *
+ */
 type IFn = (min: number, max: number) => string
 
 /** Get a random number within the specified range. */

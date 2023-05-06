@@ -1,4 +1,4 @@
-import type { RefObject} from "react";
+import type { RefObject } from "react"
 import { useRef } from "react"
 
 export const useLatestRef = <T>(val: T): RefObject<T> => {

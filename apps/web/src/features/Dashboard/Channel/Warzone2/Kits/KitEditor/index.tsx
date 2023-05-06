@@ -1,6 +1,6 @@
 import SVG from "@Components/shared/SVG"
 import { setModal, resetToInitialKit, clearKitEditor } from "@Redux/slices/dashboard"
-import { useActiveKit , useModal } from "@Redux/slices/dashboard/selectors"
+import { useActiveKit, useModal } from "@Redux/slices/dashboard/selectors"
 import { useDispatch } from "@Redux/store"
 import { useEffect, useRef } from "react"
 import QuickCommandExport from "../../../../modals/ExportBotCommands/QuickCommandExport"
@@ -41,14 +41,16 @@ function KitEditor() {
 			<Styled.Wrapper ref={scrollRef}>
 				<Styled.HorizFlex>
 					<Styled.Header style={{ marginBottom: "12px" }}>KIT EDITOR</Styled.Header>
-					{activeKit.base.id ? <SVG.TrashCan
+					{activeKit.base.id ? (
+						<SVG.TrashCan
 							dataCy="trash-can"
 							onClick={() => {
 								resetToInitialKit()
 								dispatch(setModal({ type: "Kit Delete Confirmation", data: activeKit }))
 							}}
 							style={{ width: "20px", marginRight: "24px", cursor: "pointer" }}
-						/> : null}
+						/>
+					) : null}
 				</Styled.HorizFlex>
 				<Styled.Scroller>
 					<ChooseBase />

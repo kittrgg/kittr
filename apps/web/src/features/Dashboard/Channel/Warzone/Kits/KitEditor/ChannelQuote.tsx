@@ -21,7 +21,6 @@ function ChannelQuote() {
 				name="channelQuote"
 				onChange={(e) => {
 					if (e.target.value.length > 350) {
-						
 					} else {
 						dispatch(updateChannelQuote(e.target.value))
 					}

@@ -30,16 +30,16 @@ function Preview({ overlay }: Props) {
 			<PreviewContainer ref={observe}>
 				{cursor !== 0 && (
 					<SVG.Arrow
-							onClick={() => setCursor((cursor) => (cursor === 0 ? cursor : cursor - 1))}
-							style={{
-								transform: "rotate(-90deg)",
-								position: "absolute",
-								top: "24px",
-								left: "24px",
-								cursor: "pointer"
-							}}
-							width="24px"
-						/>
+						onClick={() => setCursor((cursor) => (cursor === 0 ? cursor : cursor - 1))}
+						style={{
+							transform: "rotate(-90deg)",
+							position: "absolute",
+							top: "24px",
+							left: "24px",
+							cursor: "pointer"
+						}}
+						width="24px"
+					/>
 				)}
 				<H3 style={{ marginTop: 0, marginBottom: "24px" }}>{overlayOptions[cursor].style.toUpperCase()}</H3>
 				{hasAKitSelected && data?.id ? (
@@ -52,16 +52,16 @@ function Preview({ overlay }: Props) {
 				</Styled.Paragraph>
 				{cursor < overlayOptions.length - 1 && (
 					<SVG.Arrow
-							onClick={() => setCursor((cursor) => (cursor < overlayOptions.length - 1 ? cursor + 1 : cursor))}
-							style={{
-								transform: "rotate(90deg)",
-								position: "absolute",
-								top: "24px",
-								right: "24px",
-								cursor: "pointer"
-							}}
-							width="24px"
-						/>
+						onClick={() => setCursor((cursor) => (cursor < overlayOptions.length - 1 ? cursor + 1 : cursor))}
+						style={{
+							transform: "rotate(90deg)",
+							position: "absolute",
+							top: "24px",
+							right: "24px",
+							cursor: "pointer"
+						}}
+						width="24px"
+					/>
 				)}
 			</PreviewContainer>
 		</>

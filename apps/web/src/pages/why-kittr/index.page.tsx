@@ -17,27 +17,34 @@ interface Props {
 }
 
 function WhyKittr({ totalNumberOfKits }: Props) {
-  return <>
-		<Head description="." title="Improve Your Channel in 15 Minutes | kittr" />
-		<Hero totalNumberOfKits={totalNumberOfKits} />
-		<div style={{ margin: "0 24px" }}>
-			<Features />
-			<HowItWorks />
-			<Winners />
-			<Testimonials />
-			<Styled.H2>CONTACT US</Styled.H2>
-			<Styled.P>STILL HAVE QUESTIONS? WE'VE GOT YOUR BACK.</Styled.P>
-			<ContactUs />
-			<CallToAction header="get kittd." marginTop="32px" />
-			<div style={{ marginBottom: "32px", textAlign: "center" }}>
-				<Link href={Routes.ROOT} legacyBehavior passHref>
-					<Styled.LinkButton design="transparent" rel="noopener no referrer" style={{ marginTop: "0" }} target="_blank">
-						VISIT SITE
-					</Styled.LinkButton>
-				</Link>
+	return (
+		<>
+			<Head description="." title="Improve Your Channel in 15 Minutes | kittr" />
+			<Hero totalNumberOfKits={totalNumberOfKits} />
+			<div style={{ margin: "0 24px" }}>
+				<Features />
+				<HowItWorks />
+				<Winners />
+				<Testimonials />
+				<Styled.H2>CONTACT US</Styled.H2>
+				<Styled.P>STILL HAVE QUESTIONS? WE'VE GOT YOUR BACK.</Styled.P>
+				<ContactUs />
+				<CallToAction header="get kittd." marginTop="32px" />
+				<div style={{ marginBottom: "32px", textAlign: "center" }}>
+					<Link href={Routes.ROOT} legacyBehavior passHref>
+						<Styled.LinkButton
+							design="transparent"
+							rel="noopener no referrer"
+							style={{ marginTop: "0" }}
+							target="_blank"
+						>
+							VISIT SITE
+						</Styled.LinkButton>
+					</Link>
+				</div>
 			</div>
-		</div>
-	</>
+		</>
+	)
 }
 
 export default WhyKittr

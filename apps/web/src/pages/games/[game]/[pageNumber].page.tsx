@@ -84,7 +84,8 @@ function GameProfile({ redirect }: { redirect: boolean }) {
 						</Link>
 					</>
 				)}
-				{channels && channels.length > 0 ? <>
+				{channels && channels.length > 0 ? (
+					<>
 						<ChannelList data={channels} gameLink={game} itemBackgroundColor="#2F2F31" />
 						<Paginator
 							currentPage={page}
@@ -95,7 +96,8 @@ function GameProfile({ redirect }: { redirect: boolean }) {
 							pageRoot={Routes.GAMES.createPath(game)}
 							totalResults={channelCount ?? 0}
 						/>
-					</> : null}
+					</>
+				) : null}
 				{width < 1200 && <ResponsiveBanner largeWidthAdUnit="d728x90" smallWidthAdUnit="s300x250" />}
 			</ChannelsContainer>
 		</AdPageWrapper>

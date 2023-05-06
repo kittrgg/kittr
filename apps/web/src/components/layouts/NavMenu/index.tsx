@@ -36,13 +36,13 @@ function NavMenu({ wrapperRef, breakpoint = 769, backFunction, middleComponent }
 
 	if (width <= breakpoint) {
 		return (
-			<Wrapper ref={wrapperRef} shadow={(windowScroll!) > 0}>
+			<Wrapper ref={wrapperRef} shadow={windowScroll! > 0}>
 				<MobileNav backFunction={backFunction} breakpoint={breakpoint} middleComponent={middleComponent} />
 			</Wrapper>
 		)
 	}
 	return (
-		<Wrapper ref={wrapperRef} shadow={(windowScroll!) > 0}>
+		<Wrapper ref={wrapperRef} shadow={windowScroll! > 0}>
 			<Container breakpoint={breakpoint}>
 				<LogoImageLink />
 				<Link href={Routes.GAMES.LIST} legacyBehavior passHref>
@@ -121,7 +121,7 @@ const Container = styled.div<{ breakpoint: number }>`
 	top: 0;
 	z-index: 1;
 
-	@media (max-width: ${(props) => `${props.breakpoint  }px`}) {
+	@media (max-width: ${(props) => `${props.breakpoint}px`}) {
 		display: none;
 	}
 `

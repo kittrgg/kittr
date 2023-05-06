@@ -41,9 +41,7 @@ function ActiveKit() {
 	const rootUrl = new URL(window.location.origin.toString()).host.replace("www.", "")
 
 	const copyToClipboard = () => {
-		navigator.clipboard.writeText(
-			`${rootUrl}${Routes.CHANNEL.GAME.createOverlayPath(data?.urlSafeName!, "warzone")}`
-		)
+		navigator.clipboard.writeText(`${rootUrl}${Routes.CHANNEL.GAME.createOverlayPath(data?.urlSafeName!, "warzone")}`)
 	}
 
 	if (role === "EDITOR") {
@@ -308,7 +306,8 @@ function ActiveKit() {
 												{name}
 												{userTitle ? ` - ${userTitle}` : ""}
 											</ButtonMask>
-											{isFeatured ? <SVG.Star
+											{isFeatured ? (
+												<SVG.Star
 													fill={colors.gold}
 													stroke={colors.gold}
 													style={{
@@ -318,7 +317,8 @@ function ActiveKit() {
 														transform: "translateY(-50%)"
 													}}
 													width="24px"
-												/> : null}
+												/>
+											) : null}
 										</KitButton>
 									)
 								})}
@@ -359,7 +359,8 @@ function ActiveKit() {
 												{name}
 												{userTitle ? ` - ${userTitle}` : ""}
 											</ButtonMask>
-											{isFeatured ? <SVG.Star
+											{isFeatured ? (
+												<SVG.Star
 													fill={colors.gold}
 													stroke={colors.gold}
 													style={{
@@ -369,7 +370,8 @@ function ActiveKit() {
 														transform: "translateY(-50%)"
 													}}
 													width="24px"
-												/> : null}
+												/>
+											) : null}
 										</KitButton>
 									)
 								})}

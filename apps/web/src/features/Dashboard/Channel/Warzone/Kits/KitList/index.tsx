@@ -27,13 +27,19 @@ function KitList() {
 	return (
 		<Wrapper>
 			<Container>
-				{data?.warzoneKits ? filterKitsByFeature(data.warzoneKits)
-						.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
-						.map((kit) => <KitButton favorite key={kit.id} kit={kit} />) : null}
-				{data?.warzoneKits && filterKitsByFeature(data.warzoneKits).length > 0 ? <hr style={{ width: "88%", borderColor: colors.lightest }} /> : null}
-				{data?.warzoneKits ? filterKitsByFeature(data.warzoneKits, false)
-						.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
-						.map((kit) => <KitButton key={kit.id} kit={kit} />) : null}
+				{data?.warzoneKits
+					? filterKitsByFeature(data.warzoneKits)
+							.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
+							.map((kit) => <KitButton favorite key={kit.id} kit={kit} />)
+					: null}
+				{data?.warzoneKits && filterKitsByFeature(data.warzoneKits).length > 0 ? (
+					<hr style={{ width: "88%", borderColor: colors.lightest }} />
+				) : null}
+				{data?.warzoneKits
+					? filterKitsByFeature(data.warzoneKits, false)
+							.sort((a, b) => sortAlphabetical(a.base.displayName, b.base.displayName))
+							.map((kit) => <KitButton key={kit.id} kit={kit} />)
+					: null}
 			</Container>
 			<ButtonWrapper>
 				<Button

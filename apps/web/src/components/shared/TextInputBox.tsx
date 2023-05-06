@@ -43,21 +43,23 @@ export function TextInputBox({
 	onFocus,
 	onBlur
 }: Props) {
-  return <>
-		<Input
-			autoComplete="off"
-			name={name}
-			onBlur={onBlur}
-			onChange={onChange}
-			onFocus={onFocus}
-			placeholder={placeholder}
-			style={inputStyles}
-			type={type}
-			value={value}
-			width={width}
-		/>
-		{subline ? <Subline style={sublineStyles}>{subline}</Subline> : null}
-	</>
+	return (
+		<>
+			<Input
+				autoComplete="off"
+				name={name}
+				onBlur={onBlur}
+				onChange={onChange}
+				onFocus={onFocus}
+				placeholder={placeholder}
+				style={inputStyles}
+				type={type}
+				value={value}
+				width={width}
+			/>
+			{subline ? <Subline style={sublineStyles}>{subline}</Subline> : null}
+		</>
+	)
 }
 
 export default TextInputBox

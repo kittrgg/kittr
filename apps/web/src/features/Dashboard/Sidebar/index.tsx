@@ -25,7 +25,7 @@ function Sidebar({ ...props }) {
 			{modal.type === "Add Game" && <AddGameModal />}
 			{modal.type === "Delete Game" && <DeleteGameModal />}
 			{modal.type === "Help" && <SupportModal />}
-			<Styled.Container height={height }>
+			<Styled.Container height={height}>
 				<div style={{ marginBottom: "10px" }}>
 					<Styled.ButtonContainer isActive={activeView === "not applicable"}>
 						<Link

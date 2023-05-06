@@ -2,7 +2,7 @@ import colors from "@Colors"
 import Button from "@Components/shared/Button"
 import TextInput from "@Components/shared/TextInput"
 import { requestForgotPassword } from "@kittr/firebase/auth"
-import type { Dispatch, SetStateAction, FormEvent } from "react";
+import type { Dispatch, SetStateAction, FormEvent } from "react"
 import { useState } from "react"
 import styled from "styled-components"
 import validator from "validator"

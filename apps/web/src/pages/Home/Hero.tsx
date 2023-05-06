@@ -9,23 +9,25 @@ interface Props {
 
 /** The beautiful opening of the kittr home page. */
 function Hero({ totalNumberOfKits }: Props) {
-  return <Container>
-		<ImageContainer>
-			<img alt="" src="/media/hero.jpg" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-		</ImageContainer>
-		<Copy>
-			<Headline>get kittd.</Headline>
-			<KitsTotal>{totalNumberOfKits || 0}+ kits</KitsTotal>
-			<Subline>The place for streamers to share kits - and for you to use them.</Subline>
-		</Copy>
-		<ScreenieContainer>
-			<img
-				alt="An example kittr page."
-				src="/media/hero-screenie.jpg"
-				style={{ width: "100%", height: "100%", objectFit: "cover" }}
-			/>
-		</ScreenieContainer>
-	</Container>
+	return (
+		<Container>
+			<ImageContainer>
+				<img alt="" src="/media/hero.jpg" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+			</ImageContainer>
+			<Copy>
+				<Headline>get kittd.</Headline>
+				<KitsTotal>{totalNumberOfKits || 0}+ kits</KitsTotal>
+				<Subline>The place for streamers to share kits - and for you to use them.</Subline>
+			</Copy>
+			<ScreenieContainer>
+				<img
+					alt="An example kittr page."
+					src="/media/hero-screenie.jpg"
+					style={{ width: "100%", height: "100%", objectFit: "cover" }}
+				/>
+			</ScreenieContainer>
+		</Container>
+	)
 }
 
 export default Hero

@@ -1,4 +1,3 @@
- 
 // Import { IPopularityRates } from "@kittr/types"
 import colors from "@Colors"
 import NavMenu from "@Components/layouts/NavMenu"

@@ -11,7 +11,6 @@ interface FirebaseResolverProps {
 }
 
 export const FirebaseStorageResolver = ({ path, noSpinner, render }: FirebaseResolverProps) => {
-	 
 	const { data, error, isLoading } = trpc.firebase.resolver.useQuery({ path })
 	const spinner = noSpinner ? <></> : <Spinner width="20%" />
 

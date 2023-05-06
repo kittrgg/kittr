@@ -47,7 +47,6 @@ function CoverPhotoUploader() {
 				fileName,
 				imageFile,
 				onSuccess: async () => {
-					 
 					mutate({ channelId: data.id, hasCoverPhoto: true })
 				},
 				onError: () => {

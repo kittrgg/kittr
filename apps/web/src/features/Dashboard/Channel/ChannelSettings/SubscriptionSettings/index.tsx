@@ -37,7 +37,7 @@ function SubscriptionSettings() {
 	})
 	const { mutate: managePremium } = trpc.stripe["manage-premium"].useMutation({
 		onSuccess: (result) => {
-			window.open(result.url , "_blank")
+			window.open(result.url, "_blank")
 		},
 		onError: () => {
 			dispatch(setModal({ type: "Error Notification", data: {} }))
@@ -49,9 +49,11 @@ function SubscriptionSettings() {
 			{modal.type === "Premium Plans" && <PremiumPlans />}
 			<HorizFlex>
 				<Paragraph>Plan</Paragraph>
-				{subscriptionEnd ? <Paragraph style={{ color: colors.lighter, fontStyle: "italic" }}>
-							{differenceInDays(fromUnixTime(subscriptionEnd), Date.now())} days until renewal
-						</Paragraph> : null}
+				{subscriptionEnd ? (
+					<Paragraph style={{ color: colors.lighter, fontStyle: "italic" }}>
+						{differenceInDays(fromUnixTime(subscriptionEnd), Date.now())} days until renewal
+					</Paragraph>
+				) : null}
 			</HorizFlex>
 			<Grid>
 				<PlanTile
@@ -81,7 +83,8 @@ function SubscriptionSettings() {
 				/>
 			</Grid>
 
-			{isPremium ? <>
+			{isPremium ? (
+				<>
 					<HorizFlex>
 						<Paragraph>Payment Method</Paragraph>
 						{cardLast4 ? <Paragraph style={{ color: colors.lighter }}>Card ending in {cardLast4}</Paragraph> : null}
@@ -91,7 +94,8 @@ function SubscriptionSettings() {
 						reinstate it with your desired tip. You will be charged $5 for restarting the subscription, so we recommend
 						waiting until the end of your current subscription to make adjustments.
 					</Paragraph>
-				</> : null}
+				</>
+			) : null}
 		</div>
 	)
 }

@@ -38,7 +38,6 @@ export const useMediaQuery = (mediaQuery: string) => {
 	if (!isClient() || !isWebApiSupported("matchMedia")) {
 		console.warn(errorMessage)
 		return null
-	} 
-		return isVerified
-	
+	}
+	return isVerified
 }

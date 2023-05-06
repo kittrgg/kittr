@@ -59,13 +59,13 @@ const useStyles = createStyles((theme) => {
 
 	return {
 		grid: {
-			display: "grid",
-			gridTemplateColumns: "1fr 1fr",
-			gridGap: "40px",
-			width: "80%",
-			minWidth: "260px",
-			margin: "0 auto",
-			color: theme.white,
+			"display": "grid",
+			"gridTemplateColumns": "1fr 1fr",
+			"gridGap": "40px",
+			"width": "80%",
+			"minWidth": "260px",
+			"margin": "0 auto",
+			"color": theme.white,
 
 			"@media (max-width: 750px)": {
 				gridTemplateColumns: "1fr"
@@ -87,13 +87,13 @@ const useStyles = createStyles((theme) => {
 		},
 
 		linkButton: {
-			padding: "20px 50px",
-			border: `2px solid ${theme.white}`,
-			borderRadius: "20px",
-			textDecoration: "none",
-			textAlign: "center",
-			transition: "0.2s",
-			color: theme.white,
+			"padding": "20px 50px",
+			"border": `2px solid ${theme.white}`,
+			"borderRadius": "20px",
+			"textDecoration": "none",
+			"textAlign": "center",
+			"transition": "0.2s",
+			"color": theme.white,
 			...fontStyles,
 
 			"&:hover": {
@@ -103,11 +103,11 @@ const useStyles = createStyles((theme) => {
 		},
 
 		secondaryLinkButton: {
-			marginTop: "60px",
-			color: colors.lighter,
-			textDecoration: "none",
-			textAlign: "center",
-			transition: "0.2s",
+			"marginTop": "60px",
+			"color": colors.lighter,
+			"textDecoration": "none",
+			"textAlign": "center",
+			"transition": "0.2s",
 			...fontStyles,
 
 			"&:hover": {

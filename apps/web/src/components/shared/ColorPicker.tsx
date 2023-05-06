@@ -20,7 +20,6 @@ export function ColorPicker({ onChangeComplete, defaultColor, designVariant }: P
 		if (debouncedColor && onChangeComplete) {
 			onChangeComplete(debouncedColor)
 		}
-		 
 	}, [debouncedColor])
 
 	return (

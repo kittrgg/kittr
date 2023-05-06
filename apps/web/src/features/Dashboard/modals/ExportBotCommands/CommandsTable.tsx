@@ -1,4 +1,3 @@
- 
 import colors from "@Colors"
 import Toast from "@Components/shared/Toast"
 import { useDashboardChannel } from "@Hooks/api/useDashboardChannel"
@@ -87,7 +86,8 @@ function CommandsTable({ kits, includeMasterCommands = true, method, commandStra
 					{isDashboard ? "MESSAGE" : "JUST PASTE THIS IN CHAT"}
 				</Styled.ListingHeader>
 			</Styled.HorizFlex>
-			{includeMasterCommands ? <>
+			{includeMasterCommands ? (
+				<>
 					<Styled.HorizFlex style={{ marginTop: "28px", borderBottom: `1px solid ${colors.lightest}` }}>
 						<Styled.CommandTitle
 							onClick={() => isDashboard && copyToClipboard(`!loadout`)}
@@ -99,9 +99,11 @@ function CommandsTable({ kits, includeMasterCommands = true, method, commandStra
 							}}
 						>
 							!loadout
-							{isDashboard ? <Styled.ImageContainer onClick={() => !isDashboard && copyToClipboard(`!loadout`)} style={{ top: 0 }}>
+							{isDashboard ? (
+								<Styled.ImageContainer onClick={() => !isDashboard && copyToClipboard(`!loadout`)} style={{ top: 0 }}>
 									<img alt="Click to Copy" height={17} src="/media/icons/clipboard.svg" width={13} />
-								</Styled.ImageContainer> : null}
+								</Styled.ImageContainer>
+							) : null}
 						</Styled.CommandTitle>
 						<Styled.CommandContent
 							onClick={() => copyToClipboard(createCommandString("loadout", "", "loadout"))}
@@ -124,9 +126,11 @@ function CommandsTable({ kits, includeMasterCommands = true, method, commandStra
 							}}
 						>
 							!loadouts
-							{isDashboard ? <Styled.ImageContainer onClick={() => !isDashboard && copyToClipboard(`!loadouts`)} style={{ top: 0 }}>
+							{isDashboard ? (
+								<Styled.ImageContainer onClick={() => !isDashboard && copyToClipboard(`!loadouts`)} style={{ top: 0 }}>
 									<img alt="Click to Copy" height={17} src="/media/icons/clipboard.svg" width={13} />
-								</Styled.ImageContainer> : null}
+								</Styled.ImageContainer>
+							) : null}
 						</Styled.CommandTitle>
 						<Styled.CommandContent
 							onClick={() => copyToClipboard(createCommandString("loadouts", "", "loadouts"))}
@@ -138,48 +142,53 @@ function CommandsTable({ kits, includeMasterCommands = true, method, commandStra
 							<img alt="Click to Copy" height={17} src="/media/icons/clipboard.svg" width={13} />
 						</Styled.ImageContainer>
 					</Styled.HorizFlex>
-				</> : null}
-			{kits ? kits
-					// Only uniques
-					.filter((v, i, a) => a.findIndex((t) => t.base.displayName === v.base.displayName) === i)
-					.map((elem) => {
-						const baseTitle = `${elem.base.displayName.replace(/ /g, "-")}`
+				</>
+			) : null}
+			{kits
+				? kits
+						// Only uniques
+						.filter((v, i, a) => a.findIndex((t) => t.base.displayName === v.base.displayName) === i)
+						.map((elem) => {
+							const baseTitle = `${elem.base.displayName.replace(/ /g, "-")}`
 
-						return elem.base.commandCodes.map((code) => {
-							return (
-								<Styled.HorizFlex
-									key={code.id}
-									style={{ marginTop: "28px", borderBottom: `1px solid ${colors.lightest}` }}
-								>
-									<Styled.CommandTitle
-										onClick={() => isDashboard && copyToClipboard(`!${code.code}`)}
-										style={{
-											marginBottom: "20px",
-											width: "200px",
-											cursor: isDashboard ? "pointer" : "initial",
-											color: isDashboard ? colors.lighter : ""
-										}}
+							return elem.base.commandCodes.map((code) => {
+								return (
+									<Styled.HorizFlex
+										key={code.id}
+										style={{ marginTop: "28px", borderBottom: `1px solid ${colors.lightest}` }}
 									>
-										!{code.code}
-										{isDashboard ? <Styled.ImageContainer onClick={() => copyToClipboard(`!${code.code}`)} style={{ top: 0 }}>
-												<img alt="Click to Copy" height={17} src="/media/icons/clipboard.svg" width={13} />
-											</Styled.ImageContainer> : null}
-									</Styled.CommandTitle>
-									<Styled.CommandContent
-										onClick={() => copyToClipboard(createCommandString(elem.base.displayName, baseTitle, code.code))}
-										style={{ marginBottom: "20px", flex: "1" }}
-									>
-										{createCommandString(elem.base.displayName, baseTitle, code.code)}
-									</Styled.CommandContent>
-									<Styled.ImageContainer
-										onClick={() => copyToClipboard(createCommandString(elem.base.displayName, baseTitle, code.code))}
-									>
-										<img alt="Click to Copy" height={17} src="/media/icons/clipboard.svg" width={13} />
-									</Styled.ImageContainer>
-								</Styled.HorizFlex>
-							)
+										<Styled.CommandTitle
+											onClick={() => isDashboard && copyToClipboard(`!${code.code}`)}
+											style={{
+												marginBottom: "20px",
+												width: "200px",
+												cursor: isDashboard ? "pointer" : "initial",
+												color: isDashboard ? colors.lighter : ""
+											}}
+										>
+											!{code.code}
+											{isDashboard ? (
+												<Styled.ImageContainer onClick={() => copyToClipboard(`!${code.code}`)} style={{ top: 0 }}>
+													<img alt="Click to Copy" height={17} src="/media/icons/clipboard.svg" width={13} />
+												</Styled.ImageContainer>
+											) : null}
+										</Styled.CommandTitle>
+										<Styled.CommandContent
+											onClick={() => copyToClipboard(createCommandString(elem.base.displayName, baseTitle, code.code))}
+											style={{ marginBottom: "20px", flex: "1" }}
+										>
+											{createCommandString(elem.base.displayName, baseTitle, code.code)}
+										</Styled.CommandContent>
+										<Styled.ImageContainer
+											onClick={() => copyToClipboard(createCommandString(elem.base.displayName, baseTitle, code.code))}
+										>
+											<img alt="Click to Copy" height={17} src="/media/icons/clipboard.svg" width={13} />
+										</Styled.ImageContainer>
+									</Styled.HorizFlex>
+								)
+							})
 						})
-					}) : null}
+				: null}
 			<Toast setVisibility={setCopyNotification} visible={copyNotification}>
 				<img alt="Check Mark" height={11} src="/media/icons/check-mark.svg" width={16} />
 				<p style={{ marginLeft: "44px" }}>Link copied to clipboard</p>

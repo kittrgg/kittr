@@ -62,7 +62,11 @@ function ImageEditor() {
 	return (
 		<>
 			<PhotoButtonFlex>
-				<ProfileImage alwaysRefresh hasProfileImage={Boolean(data?.profile?.hasProfileImage)} imagePath={profileImage} />
+				<ProfileImage
+					alwaysRefresh
+					hasProfileImage={Boolean(data?.profile?.hasProfileImage)}
+					imagePath={profileImage}
+				/>
 				<Label htmlFor="file">
 					CHANGE IMAGE
 					<input id="file" name="file" onChange={(e: any) => handleUpload(e)} style={{ display: "none" }} type="file" />

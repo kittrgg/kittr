@@ -8,11 +8,8 @@ import { ActionIcon } from "@mantine/core"
 import { useState } from "react"
 import styled from "styled-components"
 
- 
 const groupBy = (xs: any, key: string) =>
-	 
 	xs.reduce((rv: any, x: any) => {
-		 
 		;(rv[x[key]] = rv[x[key]] || []).push(x)
 		return rv
 	}, {})
@@ -35,7 +32,6 @@ interface Props {
 export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 	const [formValues, setFormValues] = useState<Partial<FormState>>({ gameId })
 
-	 
 	const { refetch } = trpc.admin.warzone2.kitBases.get.useQuery(
 		{ kitBaseId: kitBaseId! },
 		{
@@ -58,17 +54,14 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 	const { mutate: createBase } = trpc.admin.warzone2.kitBases.create.useMutation()
 	const { mutate: deleteBase } = trpc.admin.warzone2.kitBases.delete.useMutation()
 
-	 
 	const changeTextField = (key: keyof FormState) => (e: any) => {
 		setFormValues((formValues) => ({ ...formValues, [key]: e.target.value }))
 	}
 
-	 
 	const changeNumberField = (key: keyof FormState) => (e: any) => {
 		setFormValues((formValues) => ({ ...formValues, [key]: e }))
 	}
 
-	 
 	const changeSelectField = (key: keyof FormState) => (e: any) => {
 		setFormValues((formValues) => ({ ...formValues, [key]: e }))
 	}
@@ -247,7 +240,6 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 								)
 							} else {
 								createBase(
-									 
 									// @ts-ignore
 									{ base: formValues as FormState, commandCodes: formValues.commandCodes },
 									{

@@ -1,7 +1,7 @@
 import colors from "@Colors"
 import SVG from "@Components/shared/SVG"
 import { header2 } from "@Styles/typography"
-import type { ReactNode } from "react";
+import type { ReactNode } from "react"
 import { useState } from "react"
 import styled from "styled-components"
 import Menu from "./MobilePane"
@@ -37,7 +37,9 @@ function MobileNav({ breakpoint, backFunction, middleComponent }: Props) {
 				) : (
 					<LogoImageLink />
 				)}
-				{middleComponent ? <MidFlex>{typeof middleComponent === "string" ? <H2>{middleComponent}</H2> : middleComponent}</MidFlex> : null}
+				{middleComponent ? (
+					<MidFlex>{typeof middleComponent === "string" ? <H2>{middleComponent}</H2> : middleComponent}</MidFlex>
+				) : null}
 				<Button data-cy="mobile-hamburger-icon" onClick={() => setIsOpen(true)}>
 					<HamburgerImageContainer>
 						<img alt="Kittr Logo" height={40} src="/media/icons/burger.svg" width={40} />

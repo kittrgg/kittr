@@ -6,7 +6,6 @@
 export const trimPrefix = (prefix: string, string: string) => {
 	if (string.startsWith(prefix)) {
 		return string.split(prefix)[1]
-	} 
-		return string
-	
+	}
+	return string
 }

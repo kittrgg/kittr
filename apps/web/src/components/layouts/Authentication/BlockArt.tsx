@@ -10,21 +10,23 @@ interface Props {
 }
 
 function Block({ size, top, left }: Props) {
-  return <div
-		key={size + top + left}
-		style={{
-			position: "absolute",
-			width: `${size}%`,
-			height: 0,
-			paddingTop: `${size}%`,
-			top: `${top}%`,
-			left: `${left}%`,
-			borderRadius: "20px",
-			backgroundColor: colors.white,
-			opacity: 0.1,
-			zIndex: 1
-		}}
-	/>
+	return (
+		<div
+			key={size + top + left}
+			style={{
+				position: "absolute",
+				width: `${size}%`,
+				height: 0,
+				paddingTop: `${size}%`,
+				top: `${top}%`,
+				left: `${left}%`,
+				borderRadius: "20px",
+				backgroundColor: colors.white,
+				opacity: 0.1,
+				zIndex: 1
+			}}
+		/>
+	)
 }
 
 /** Spawns squares for background art in randomly generated positions with randomly generated sizes. */

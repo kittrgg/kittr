@@ -29,7 +29,8 @@ function KitButton({ favorite, kit }: Props) {
 		// @ts-expect-error
 		<Button active={activeKit.id == kit.id} key={kit.id} onClick={() => dispatch(setActiveKit(kit))}>
 			<p style={{ maskImage: "linear-gradient(to right, black 65%, transparent 92%, transparent 100%)" }}>{title}</p>
-			{favorite ? <SVG.Star
+			{favorite ? (
+				<SVG.Star
 					fill={colors.gold}
 					stroke={colors.gold}
 					style={{
@@ -39,7 +40,8 @@ function KitButton({ favorite, kit }: Props) {
 						transform: "translateY(-50%)"
 					}}
 					width="12px"
-				/> : null}
+				/>
+			) : null}
 			<SVG.Export
 				dataCy={`${base.displayName}-quick-export`}
 				onClick={() => {

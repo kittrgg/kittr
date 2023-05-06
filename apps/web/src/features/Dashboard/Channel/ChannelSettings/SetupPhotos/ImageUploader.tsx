@@ -128,9 +128,11 @@ function ImageUploader({ slot }: Props) {
 					style={{ display: "none" }}
 					type="file"
 				/>
-				{isHovered && image ? <DeleteBubble isHovered={isHovered} onClick={handleDelete} onMouseEnter={() => setIsHovered(true)}>
+				{isHovered && image ? (
+					<DeleteBubble isHovered={isHovered} onClick={handleDelete} onMouseEnter={() => setIsHovered(true)}>
 						<SVG.X fill={colors.red} style={{ position: "absolute", top: 4, left: 0 }} />
-					</DeleteBubble> : null}
+					</DeleteBubble>
+				) : null}
 			</Label>
 			<Caption>Slot #{slot}</Caption>
 		</div>

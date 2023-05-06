@@ -58,22 +58,23 @@ function AddGameModal() {
 				/>
 			</ButtonFlex>
 			<Grid>
-				{data &&
-					!isMutating ? [...data]
-						.filter((game) => !gamesToExclude.includes(game.id))
-						.sort((game) => (game.active ? -1 : 1))
-						.map((game) => {
-							return (
-								<GameCard
-									key={game.id}
-									{...game}
-									noText
-									onClick={() => {
-										if (game.active) mutate({ gameId: game.id, channelId })
-									}}
-								/>
-							)
-						}) : null}
+				{data && !isMutating
+					? [...data]
+							.filter((game) => !gamesToExclude.includes(game.id))
+							.sort((game) => (game.active ? -1 : 1))
+							.map((game) => {
+								return (
+									<GameCard
+										key={game.id}
+										{...game}
+										noText
+										onClick={() => {
+											if (game.active) mutate({ gameId: game.id, channelId })
+										}}
+									/>
+								)
+							})
+					: null}
 			</Grid>
 			<ButtonFlex>
 				<Button

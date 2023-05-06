@@ -2,7 +2,7 @@ import colors from "@Colors"
 import Button from "@Components/shared/Button"
 import TextInput from "@Components/shared/TextInput"
 import { reauthenticate } from "@kittr/firebase/auth"
-import type { Dispatch, SetStateAction} from "react";
+import type { Dispatch, SetStateAction } from "react"
 import { useState } from "react"
 
 interface Props {

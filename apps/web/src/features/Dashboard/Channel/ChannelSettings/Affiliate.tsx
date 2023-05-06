@@ -62,38 +62,40 @@ function Affiliate() {
 						</tr>
 					</THead>
 					<TBody>
-						{affiliates ? Object.values(affiliates).map((affiliate) => {
-								const { description, company, code, url, id } = affiliate
+						{affiliates
+							? Object.values(affiliates).map((affiliate) => {
+									const { description, company, code, url, id } = affiliate
 
-								return (
-									<Spec key={company + id}>
-										<Label>{company}</Label>
-										<td>{description}</td>
-										<td>{code}</td>
-										<td>{url}</td>
-										<Icon>
-											<SVG.Pencil
-												data-cy={`${company?.replace(/ /g, "-")}-edit-affiliate`}
-												onClick={() =>
-													dispatch(
-														setModal({
-															type: "Add Affiliate",
-															data: { id: affiliate.id, company, description, code, url }
-														})
-													)
-												}
-											/>
-										</Icon>
-										<Icon>
-											<SVG.X
-												data-cy={`${company?.replace(/ /g, "-")}-delete-affiliate`}
-												// eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
-												onClick={() => mutate({ affiliateId: affiliate.id, channelId: channelData?.id! })}
-											/>
-										</Icon>
-									</Spec>
-								)
-							}) : null}
+									return (
+										<Spec key={company + id}>
+											<Label>{company}</Label>
+											<td>{description}</td>
+											<td>{code}</td>
+											<td>{url}</td>
+											<Icon>
+												<SVG.Pencil
+													data-cy={`${company?.replace(/ /g, "-")}-edit-affiliate`}
+													onClick={() =>
+														dispatch(
+															setModal({
+																type: "Add Affiliate",
+																data: { id: affiliate.id, company, description, code, url }
+															})
+														)
+													}
+												/>
+											</Icon>
+											<Icon>
+												<SVG.X
+													data-cy={`${company?.replace(/ /g, "-")}-delete-affiliate`}
+													// eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
+													onClick={() => mutate({ affiliateId: affiliate.id, channelId: channelData?.id! })}
+												/>
+											</Icon>
+										</Spec>
+									)
+							  })
+							: null}
 					</TBody>
 				</Table>
 			)}

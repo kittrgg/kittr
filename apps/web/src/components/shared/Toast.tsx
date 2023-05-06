@@ -1,6 +1,6 @@
 import colors from "@Colors"
 import { useIsMounted } from "@Hooks/useIsMounted"
-import type { Dispatch, SetStateAction, ReactNode } from "react";
+import type { Dispatch, SetStateAction, ReactNode } from "react"
 import { useEffect } from "react"
 import styled from "styled-components"
 

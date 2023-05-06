@@ -5,7 +5,7 @@ import { customOrderArray } from "@Utils/helpers/orderArrayByString"
 import { warzoneSlotsOrder } from "@Utils/lookups/warzoneSlotsOrder"
 import type { RouterOutput } from "@kittr/trpc"
 import type { OverlayKit } from "@kittr/types"
-import type { Dispatch, SetStateAction} from "react";
+import type { Dispatch, SetStateAction } from "react"
 import { useEffect, useState } from "react"
 import styled, { ThemeProvider } from "styled-components"
 
@@ -128,10 +128,12 @@ function BannerTicker({ _id, previewWidth, data, activeKit, setActiveKit }: Prop
 					</CommandInfo>
 				</Meta>
 				<OptionWrapper fadeDuration={OPACITY_DURATION} isVisible={isOptionVisible}>
-					{activeKit ? <Option key={activeKitOptions[cursor]?.displayName}>
-								<Slot>{activeKitOptions[cursor]?.slotKey}</Slot>
-								<Selection>{activeKitOptions[cursor]?.displayName.toUpperCase()}</Selection>
-							</Option> : null}
+					{activeKit ? (
+						<Option key={activeKitOptions[cursor]?.displayName}>
+							<Slot>{activeKitOptions[cursor]?.slotKey}</Slot>
+							<Selection>{activeKitOptions[cursor]?.displayName.toUpperCase()}</Selection>
+						</Option>
+					) : null}
 				</OptionWrapper>
 			</Wrapper>
 		</ThemeProvider>

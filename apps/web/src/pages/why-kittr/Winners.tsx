@@ -32,23 +32,25 @@ const WINNERS = [
 ]
 
 function Winners() {
-  return <>
-		<Styled.H2>WHO LOVES KITTR?</Styled.H2>
-		<Grid>
-			{WINNERS.map(({ title, text, icon, iconAlt }) => (
-				<GridItem key={title}>
-					<GridItemTopRow>
-						<GridIconContainer>
-							<img alt={iconAlt} height="40px" src={icon} width="40px" />
-						</GridIconContainer>
-						<GridTitle>{title}</GridTitle>
-					</GridItemTopRow>
-					<GridText>{text}</GridText>
-				</GridItem>
-			))}
-		</Grid>
-		<CallToAction header="get started with kittr." marginBottom="48px" marginTop="48px" />
-	</>
+	return (
+		<>
+			<Styled.H2>WHO LOVES KITTR?</Styled.H2>
+			<Grid>
+				{WINNERS.map(({ title, text, icon, iconAlt }) => (
+					<GridItem key={title}>
+						<GridItemTopRow>
+							<GridIconContainer>
+								<img alt={iconAlt} height="40px" src={icon} width="40px" />
+							</GridIconContainer>
+							<GridTitle>{title}</GridTitle>
+						</GridItemTopRow>
+						<GridText>{text}</GridText>
+					</GridItem>
+				))}
+			</Grid>
+			<CallToAction header="get started with kittr." marginBottom="48px" marginTop="48px" />
+		</>
+	)
 }
 
 export default Winners
