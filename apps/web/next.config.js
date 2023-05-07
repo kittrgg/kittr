@@ -17,6 +17,9 @@ const moduleExports = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  typescript: {
+    ignoreBuildErrors: process.env.VERCEL_ENV !== 'production',
+  },
   compiler: {
     styledComponents: true,
   },
