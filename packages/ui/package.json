@@ -34,6 +34,7 @@
     "@mantine/next": "^5.10.2",
     "@mantine/rte": "^5.10.2",
     "clsx": "^1.2.1",
+    "class-variance-authority": "^0.6.0",
     "react": "^18.2.0",
     "react-device-detect": "2.2.2",
     "react-dom": "^18.2.0",
