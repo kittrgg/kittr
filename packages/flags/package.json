@@ -1,0 +1,13 @@
+{
+  "name": "@kittr/flags",
+  "version": "0.0.0",
+  "private": true,
+  "main": "index.ts",
+  "dependencies": {
+    "@vercel/edge-config": "^0.1.9"
+  },
+  "devDependencies": {
+    "@kittr/lint": "workspace:*",
+    "@kittr/tsconfig": "workspace:*"
+  }
+}

@@ -4,7 +4,7 @@
   "private": true,
   "license": "MIT",
   "exports": {
-    ".": "./src/components/index.tsx",
+    ".": "./src/components/index.ts",
     "./new": "./src/new/index.ts",
     "./styles.css": "./dist/compiled.css"
   },

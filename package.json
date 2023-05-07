@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dx": "dotenv -- run-s docker:up dev",
+    "dev": "turbo dev --concurrency 1000",
     "dx:ui": "turbo dev --filter={design-react,ui}",
     "dx:db-view": "dotenv -- run-s db:studio",
     "db:deploy": "dotenv -- turbo db:deploy",

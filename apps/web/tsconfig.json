@@ -1,6 +1,7 @@
 {
   "extends": "@kittr/tsconfig/nextjs.json",
   "compilerOptions": {
+    "plugins": [{ "name": "next" }],
     "baseUrl": "./src",
     "declarationMap": false,
     "declaration": false,
@@ -21,8 +22,15 @@
       "@Types/*": ["types/*"],
       "@Server/*": ["server/*"]
     },
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "strictNullChecks": true
   },
-  "include": ["next-env.d.ts", "**/*.js", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.js",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
   "exclude": ["node_modules", "./src/features/**"]
 }
