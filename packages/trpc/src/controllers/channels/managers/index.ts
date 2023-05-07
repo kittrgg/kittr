@@ -1,8 +1,8 @@
-import { ChannelManagerModel } from '@kittr/prisma/validator';
-import { z } from 'zod';
-import { authedProcedure } from '../../../initTRPC';
-import * as ChannelsManagersService from '../../../services/channels/managers';
-import { checkRole } from '../../../services/users';
+import { ChannelManagerModel } from "@kittr/prisma/validator";
+import { z } from "zod";
+import { authedProcedure } from "../../../initTRPC";
+import * as ChannelsManagersService from "../../../services/channels/managers";
+import { checkRole } from "../../../services/users";
 
 const listManagers = authedProcedure
   .input(
@@ -15,7 +15,7 @@ const listManagers = authedProcedure
     await checkRole({
       firebaseUserId: ctx.user.uid,
       channelId,
-      roles: ['ADMIN', 'OWNER', 'EDITOR'],
+      roles: ["ADMIN", "OWNER", "EDITOR"],
     });
     if (managers.length === 0) return [];
 
@@ -29,7 +29,7 @@ const createManager = authedProcedure
       channelId: z.string(),
       data: z.object({
         email: z.string(),
-        role: z.enum(['OWNER', 'ADMIN', 'EDITOR']),
+        role: z.enum(["OWNER", "ADMIN", "EDITOR"]),
       }),
     }),
   )
@@ -37,7 +37,7 @@ const createManager = authedProcedure
     await checkRole({
       firebaseUserId: ctx.user.uid,
       channelId: input.channelId,
-      roles: ['OWNER', 'ADMIN'],
+      roles: ["OWNER", "ADMIN"],
     });
 
     const manager = await ChannelsManagersService.createManager({
@@ -60,7 +60,7 @@ const demoteManager = authedProcedure
     await checkRole({
       firebaseUserId: ctx.user.uid,
       channelId,
-      roles: ['OWNER'],
+      roles: ["OWNER"],
     });
 
     const channel = await ChannelsManagersService.demoteManager({
@@ -82,7 +82,7 @@ const promoteManager = authedProcedure
     await checkRole({
       firebaseUserId: ctx.user.uid,
       channelId: input.channelId,
-      roles: ['OWNER', 'ADMIN'],
+      roles: ["OWNER", "ADMIN"],
     });
 
     const channel = await ChannelsManagersService.promoteManager({
@@ -103,7 +103,7 @@ const deleteManager = authedProcedure
     await checkRole({
       firebaseUserId: ctx.user.uid,
       channelId: input.channelId,
-      roles: ['OWNER'],
+      roles: ["OWNER"],
     });
 
     const channel = await ChannelsManagersService.deleteManager({

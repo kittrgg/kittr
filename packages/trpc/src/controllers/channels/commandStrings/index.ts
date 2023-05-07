@@ -1,7 +1,7 @@
-import { z } from 'zod';
-import { authedProcedure, publicProcedure } from '../../../initTRPC';
-import * as ChannelsCommandStringsService from '../../../services/channels/commandStrings';
-import { checkRole } from '../../../services/users';
+import { z } from "zod";
+import { authedProcedure, publicProcedure } from "../../../initTRPC";
+import * as ChannelsCommandStringsService from "../../../services/channels/commandStrings";
+import { checkRole } from "../../../services/users";
 
 const getCommandString = publicProcedure
   .input(
@@ -27,7 +27,7 @@ const upsertCommandString = authedProcedure
     await checkRole({
       firebaseUserId: ctx.user.uid,
       channelId: input.channelId,
-      roles: ['OWNER', 'ADMIN'],
+      roles: ["OWNER", "ADMIN"],
     });
 
     const channel = await ChannelsCommandStringsService.upsertCommandString({

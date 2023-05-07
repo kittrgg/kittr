@@ -1,14 +1,14 @@
-import { grabLoginName } from '@kittr/twitch';
+import { grabLoginName } from "@kittr/twitch";
 import type {
   ITwitchChannelData,
   ITwitchClip,
   ITwitchScheduleSegment,
   ITwitchVideo,
-} from '@kittr/types';
-import { getChannelData } from './getChannelData';
-import { getClips } from './getClips';
-import { getRecentVideos } from './getRecentVideos';
-import { getSchedule } from './getSchedule';
+} from "@kittr/types";
+import { getChannelData } from "./getChannelData";
+import { getClips } from "./getClips";
+import { getRecentVideos } from "./getRecentVideos";
+import { getSchedule } from "./getSchedule";
 
 export interface ProfilePageData {
   channelData: ITwitchChannelData;
@@ -20,7 +20,7 @@ export interface ProfilePageData {
 export const getProfile = async (
   twitchLink: string,
 ): Promise<ProfilePageData> => {
-  const channelTwitchLogin = grabLoginName(twitchLink || '');
+  const channelTwitchLogin = grabLoginName(twitchLink || "");
 
   const [channelData] = await getChannelData(channelTwitchLogin);
 

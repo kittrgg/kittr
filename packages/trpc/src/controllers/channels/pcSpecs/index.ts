@@ -1,8 +1,8 @@
-import { ChannelPcSpecModel } from '@kittr/prisma/validator';
-import { z } from 'zod';
-import { authedProcedure, publicProcedure } from '../../../initTRPC';
-import * as ChannelsPcSpecsService from '../../../services/channels/pcSpecs';
-import { checkRole } from '../../../services/users';
+import { ChannelPcSpecModel } from "@kittr/prisma/validator";
+import { z } from "zod";
+import { authedProcedure, publicProcedure } from "../../../initTRPC";
+import * as ChannelsPcSpecsService from "../../../services/channels/pcSpecs";
+import { checkRole } from "../../../services/users";
 
 const listPcSpec = publicProcedure
   .input(
@@ -37,7 +37,7 @@ const createPcSpec = authedProcedure
     await checkRole({
       firebaseUserId: ctx.user.uid,
       channelId: input.channelId,
-      roles: ['OWNER', 'ADMIN'],
+      roles: ["OWNER", "ADMIN"],
     });
 
     const channel = await ChannelsPcSpecsService.createPcSpec({
@@ -59,7 +59,7 @@ const updatePcSpec = authedProcedure
     await checkRole({
       firebaseUserId: ctx.user.uid,
       channelId: input.channelId,
-      roles: ['OWNER', 'ADMIN'],
+      roles: ["OWNER", "ADMIN"],
     });
 
     const channel = await ChannelsPcSpecsService.updatePcSpec({
@@ -81,7 +81,7 @@ const deletePcSpec = authedProcedure
     await checkRole({
       firebaseUserId: ctx.user.uid,
       channelId: input.channelId,
-      roles: ['OWNER', 'ADMIN'],
+      roles: ["OWNER", "ADMIN"],
     });
 
     const channel = await ChannelsPcSpecsService.deletePcSpec({

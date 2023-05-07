@@ -4,8 +4,8 @@ import type {
   WarzoneKit,
   WarzoneKitOption,
   WarzoneTwoKitOptionTuning,
-} from '@kittr/prisma';
-import { prisma } from '@kittr/prisma';
+} from "@kittr/prisma";
+import { prisma } from "@kittr/prisma";
 
 export const upsertKit = async ({
   channelId,
@@ -16,7 +16,7 @@ export const upsertKit = async ({
     options?: WarzoneKitOption[] | WarzoneTwoKitOption[] | null;
   } & {
     tuning?:
-      | (Omit<WarzoneTwoKitOptionTuning, 'id' | 'kitId'> & {
+      | (Omit<WarzoneTwoKitOptionTuning, "id" | "kitId"> & {
           id?: string;
           kitId?: string;
         })[]
@@ -55,9 +55,9 @@ export const upsertKit = async ({
   };
 
   // Remove options from kit when updating so upsert can work correctly
-  if (kit.id && gameView === 'wz2') {
+  if (kit.id && gameView === "wz2") {
     await prisma.warzoneTwoKit.update({
-      where: { id: kit.id ?? '' },
+      where: { id: kit.id ?? "" },
       data: {
         options: {
           set: [],
@@ -66,7 +66,7 @@ export const upsertKit = async ({
     });
   } else if (kit.id) {
     await prisma.warzoneKit.update({
-      where: { id: kit.id ?? '' },
+      where: { id: kit.id ?? "" },
       data: {
         options: {
           set: [],
@@ -75,14 +75,14 @@ export const upsertKit = async ({
     });
   }
 
-  if (gameView === 'wz2') {
+  if (gameView === "wz2") {
     const channel = await prisma.warzoneTwoKit.upsert({
-      where: { id: kit.id ?? '' },
+      where: { id: kit.id ?? "" },
       create: {
         ...update,
         tuning: {
           connectOrCreate: kit.tuning?.map((tune) => ({
-            where: { id: tune.id ?? '' },
+            where: { id: tune.id ?? "" },
             create: {
               horz: tune.horz,
               vert: tune.vert,
@@ -96,7 +96,7 @@ export const upsertKit = async ({
         tuning: {
           upsert: kit.tuning?.map((tune) => {
             return {
-              where: { id: tune.id ?? '' },
+              where: { id: tune.id ?? "" },
               create: {
                 horz: tune.horz,
                 vert: tune.vert,
@@ -118,7 +118,7 @@ export const upsertKit = async ({
 
   // Updates wz1 if gameView is not warzone2
   const channel = await prisma.warzoneKit.upsert({
-    where: { id: kit.id ?? '' },
+    where: { id: kit.id ?? "" },
     create: update,
     update,
   });
@@ -135,7 +135,7 @@ export const deleteKit = async ({
   channelId: string;
   gameView: string;
 }) => {
-  if (gameView === 'wz2') {
+  if (gameView === "wz2") {
     const deletedKit = await prisma.channel.update({
       where: { id: channelId },
       data: {

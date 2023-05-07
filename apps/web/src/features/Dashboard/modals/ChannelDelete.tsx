@@ -21,7 +21,7 @@ function ChannelDeleteModal() {
 	const { refetch } = trpc.managers.channels.list.useQuery()
 	const { mutate } = trpc.channels.delete.useMutation({
 		onSuccess: () => {
-			socket?.emit(`channelDelete`, channelData?.id)
+			socket?.emit("channelDelete", channelData?.id)
 			dispatch(setActiveView({ channelId: "", view: "Channel List" }))
 			dispatch(setModal({ type: "", data: {} }))
 			refetch()

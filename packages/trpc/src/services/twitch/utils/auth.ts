@@ -1,5 +1,5 @@
-import type { IOAuthToken, IOAuthRejection } from '@kittr/types/twitch';
-import { fetcher } from '@kittr/utils';
+import type { IOAuthToken, IOAuthRejection } from "@kittr/types/twitch";
+import { fetcher } from "@kittr/utils";
 
 /** Use OAuth to get a token for the Twitch API. */
 export const getAuthToken = async () => {
@@ -9,7 +9,7 @@ export const getAuthToken = async () => {
 
   try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const data = await fetcher.post<any>({ url: tokenUrl, redirect: 'follow' });
+    const data = await fetcher.post<any>({ url: tokenUrl, redirect: "follow" });
 
     if (data.access_token) {
       return data as IOAuthToken;
@@ -22,6 +22,6 @@ export const getAuthToken = async () => {
 };
 
 export const headers = async () => ({
-  'Client-ID': process.env.TWITCH_CLIENT_ID!,
+  "Client-ID": process.env.TWITCH_CLIENT_ID!,
   Authorization: `Bearer ${(await getAuthToken()).access_token}`,
 });

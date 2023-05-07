@@ -1,5 +1,5 @@
-import type { ITwitchScheduleSegment } from '@kittr/types/twitch';
-import { getFromApi } from '../utils/getFromApi';
+import type { ITwitchScheduleSegment } from "@kittr/types/twitch";
+import { getFromApi } from "../utils/getFromApi";
 
 /**
  * @params
@@ -15,7 +15,7 @@ type IFunc = (broadcaster_id: string) => Promise<ITwitchScheduleSegment[]>;
 export const getSchedule: IFunc = async (broadcaster_id) => {
   try {
     const { data } = await getFromApi<{ segments: ITwitchScheduleSegment[] }>({
-      endpointBaseUrl: 'https://api.twitch.tv/helix/schedule',
+      endpointBaseUrl: "https://api.twitch.tv/helix/schedule",
       queryParams: { broadcaster_id },
     });
 
@@ -27,7 +27,7 @@ export const getSchedule: IFunc = async (broadcaster_id) => {
     // Because of that, we need to provide an empty array so nothing breaks.
     // TODO: Don't throw an error if someone doesn't have a schedule posted.
     console.log({
-      warning: { message: 'This user does not have a posted schedule.', error },
+      warning: { message: "This user does not have a posted schedule.", error },
     });
     return [];
   }

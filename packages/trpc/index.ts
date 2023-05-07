@@ -1,39 +1,39 @@
-import { download } from '@kittr/firebase/storage';
-import { prisma } from '@kittr/prisma';
-import { GameModel } from '@kittr/prisma/validator';
-import type { inferRouterInputs, inferRouterOutputs } from '@trpc/server';
-import { TRPCError } from '@trpc/server';
-import { z } from 'zod';
-import { WarzoneAdminController } from './src/controllers/admin/warzone';
-import { Warzone2AdminController } from './src/controllers/admin/warzone2';
-import { ChannelsController } from './src/controllers/channels';
-import { ChannelsCommandStringsController } from './src/controllers/channels/commandStrings';
-import { ChannelsGamesController } from './src/controllers/channels/games';
-import { ChannelsKitsController } from './src/controllers/channels/kits';
-import { ChannelsLinksController } from './src/controllers/channels/links';
-import { ChannelsManagersController } from './src/controllers/channels/managers';
-import { ChannelsManagersOwnersController } from './src/controllers/channels/managers/owners';
-import { ChannelsOverlaysController } from './src/controllers/channels/overlays';
-import { ChannelsPcSpecsController } from './src/controllers/channels/pcSpecs';
-import { ChannelsPlanController } from './src/controllers/channels/plan';
-import { ChannelsProfileController } from './src/controllers/channels/profile';
-import { ChannelsProfileAffiliatesController } from './src/controllers/channels/profile/affiliates';
-import { ChannelsProfileBrandColorsController } from './src/controllers/channels/profile/brandColors';
-import { ChannelsProfileCoverPhotoController } from './src/controllers/channels/profile/coverPhoto';
-import { ChannelsProfileCreatorCodesController } from './src/controllers/channels/profile/creatorCodes';
-import { ChannelsProfileImageController } from './src/controllers/channels/profile/image';
-import { ChannelsProfileSetupPhotosController } from './src/controllers/channels/profile/setupPhotos';
-import { ChannelsProfileYouTubeAutoplayController } from './src/controllers/channels/profile/youtubeAutoplay';
-import { GamesController } from './src/controllers/games';
-import { KitsController } from './src/controllers/kits';
-import { KitsBasesController } from './src/controllers/kits/bases';
-import { KitsBasesOptionsController } from './src/controllers/kits/bases/options';
-import { ManagersChannelsController } from './src/controllers/managers/channels';
-import { StripeController } from './src/controllers/stripe';
-import { TwitchController } from './src/controllers/twitch';
-import { UsersController } from './src/controllers/users';
-import { adminProcedure, publicProcedure, router } from './src/initTRPC';
-import { gamesCount } from './src/routers/games';
+import { download } from "@kittr/firebase/storage";
+import { prisma } from "@kittr/prisma";
+import { GameModel } from "@kittr/prisma/validator";
+import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
+import { TRPCError } from "@trpc/server";
+import { z } from "zod";
+import { WarzoneAdminController } from "./src/controllers/admin/warzone";
+import { Warzone2AdminController } from "./src/controllers/admin/warzone2";
+import { ChannelsController } from "./src/controllers/channels";
+import { ChannelsCommandStringsController } from "./src/controllers/channels/commandStrings";
+import { ChannelsGamesController } from "./src/controllers/channels/games";
+import { ChannelsKitsController } from "./src/controllers/channels/kits";
+import { ChannelsLinksController } from "./src/controllers/channels/links";
+import { ChannelsManagersController } from "./src/controllers/channels/managers";
+import { ChannelsManagersOwnersController } from "./src/controllers/channels/managers/owners";
+import { ChannelsOverlaysController } from "./src/controllers/channels/overlays";
+import { ChannelsPcSpecsController } from "./src/controllers/channels/pcSpecs";
+import { ChannelsPlanController } from "./src/controllers/channels/plan";
+import { ChannelsProfileController } from "./src/controllers/channels/profile";
+import { ChannelsProfileAffiliatesController } from "./src/controllers/channels/profile/affiliates";
+import { ChannelsProfileBrandColorsController } from "./src/controllers/channels/profile/brandColors";
+import { ChannelsProfileCoverPhotoController } from "./src/controllers/channels/profile/coverPhoto";
+import { ChannelsProfileCreatorCodesController } from "./src/controllers/channels/profile/creatorCodes";
+import { ChannelsProfileImageController } from "./src/controllers/channels/profile/image";
+import { ChannelsProfileSetupPhotosController } from "./src/controllers/channels/profile/setupPhotos";
+import { ChannelsProfileYouTubeAutoplayController } from "./src/controllers/channels/profile/youtubeAutoplay";
+import { GamesController } from "./src/controllers/games";
+import { KitsController } from "./src/controllers/kits";
+import { KitsBasesController } from "./src/controllers/kits/bases";
+import { KitsBasesOptionsController } from "./src/controllers/kits/bases/options";
+import { ManagersChannelsController } from "./src/controllers/managers/channels";
+import { StripeController } from "./src/controllers/stripe";
+import { TwitchController } from "./src/controllers/twitch";
+import { UsersController } from "./src/controllers/users";
+import { adminProcedure, publicProcedure, router } from "./src/initTRPC";
+import { gamesCount } from "./src/routers/games";
 
 export const appRouter = router({
   kits: router({
@@ -44,21 +44,21 @@ export const appRouter = router({
       listByGameUrlSafeName: publicProcedure
         .input(z.object({ gameUrlSafeName: z.string() }))
         .query(async ({ input }) => {
-          if (input.gameUrlSafeName === 'wz2') {
+          if (input.gameUrlSafeName === "wz2") {
             return await prisma.warzoneTwoKitBase.findMany();
           }
 
-          if (input.gameUrlSafeName === 'warzone') {
+          if (input.gameUrlSafeName === "warzone") {
             return await prisma.warzoneKitBase.findMany();
           }
 
           throw new TRPCError({
-            code: 'BAD_REQUEST',
-            message: 'Not a valid urlSafeName.',
+            code: "BAD_REQUEST",
+            message: "Not a valid urlSafeName.",
           });
         }),
       list: KitsBasesController.listBases,
-      'game-list': KitsBasesController.listGameBases,
+      "game-list": KitsBasesController.listGameBases,
     }),
     count: KitsController.countKits,
   }),
@@ -79,29 +79,29 @@ export const appRouter = router({
         update: ChannelsProfileAffiliatesController.updateAffiliate,
         delete: ChannelsProfileAffiliatesController.deleteAffiliate,
       }),
-      'pc-specs': router({
+      "pc-specs": router({
         list: ChannelsPcSpecsController.listPcSpec,
         get: ChannelsPcSpecsController.getPcSpec,
         create: ChannelsPcSpecsController.createPcSpec,
         update: ChannelsPcSpecsController.updatePcSpec,
         delete: ChannelsPcSpecsController.deletePcSpec,
       }),
-      'creator-codes': router({
+      "creator-codes": router({
         upsert: ChannelsProfileCreatorCodesController.upsertCode,
       }),
-      'youtube-autoplay': router({
+      "youtube-autoplay": router({
         upsert: ChannelsProfileYouTubeAutoplayController.toggle,
       }),
-      'brand-color': router({
+      "brand-color": router({
         upsert: ChannelsProfileBrandColorsController.upsertBrandColor,
       }),
-      'setup-photos': router({
+      "setup-photos": router({
         update: ChannelsProfileSetupPhotosController.updateSetupPhotos,
       }),
       image: router({
         update: ChannelsProfileImageController.updateProfileImage,
       }),
-      'cover-photo': router({
+      "cover-photo": router({
         update: ChannelsProfileCoverPhotoController.update,
       }),
       get: ChannelsProfileController.getChannelProfile,
@@ -126,7 +126,7 @@ export const appRouter = router({
       promote: ChannelsManagersController.promoteManager,
       delete: ChannelsManagersController.deleteManager,
     }),
-    'command-strings': router({
+    "command-strings": router({
       get: ChannelsCommandStringsController.getCommandString,
       upsert: ChannelsCommandStringsController.upsertCommandString,
     }),
@@ -135,8 +135,8 @@ export const appRouter = router({
     }),
     plan: router({
       get: ChannelsPlanController.getPlan,
-      'subscription-end': ChannelsPlanController.getSubscriptionEnd,
-      'card-last-4-digits': ChannelsPlanController.getCardLast4Digits,
+      "subscription-end": ChannelsPlanController.getSubscriptionEnd,
+      "card-last-4-digits": ChannelsPlanController.getCardLast4Digits,
     }),
     top: ChannelsController.listTopChannels,
     rising: ChannelsController.listRisingChannels,
@@ -185,17 +185,17 @@ export const appRouter = router({
     create: UsersController.create,
   }),
   twitch: router({
-    'profile-page': TwitchController.getProfile,
+    "profile-page": TwitchController.getProfile,
   }),
   games: router({
     getByUrlSafeName: GamesController.getGameByUrlSafeName,
     getById: GamesController.getGameById,
     count: gamesCount,
     list: GamesController.listGames,
-    'list-genres': publicProcedure.query(
+    "list-genres": publicProcedure.query(
       async () => await prisma.genre.findMany(),
     ),
-    'list-platforms': publicProcedure.query(
+    "list-platforms": publicProcedure.query(
       async () => await prisma.platform.findMany(),
     ),
     add: adminProcedure
@@ -220,8 +220,8 @@ export const appRouter = router({
       }),
   }),
   stripe: router({
-    'buy-premium': StripeController.buyPremium,
-    'manage-premium': StripeController.managePremium,
+    "buy-premium": StripeController.buyPremium,
+    "manage-premium": StripeController.managePremium,
   }),
   managers: router({
     channels: router({
@@ -242,5 +242,5 @@ export const appRouter = router({
 export type AppRouter = typeof appRouter;
 export type RouterInput = inferRouterInputs<AppRouter>;
 export type RouterOutput = inferRouterOutputs<AppRouter>;
-export { createContext } from './src/context';
-export { createSSGHelper } from './src/createSSGHelper';
+export { createContext } from "./src/context";
+export { createSSGHelper } from "./src/createSSGHelper";

@@ -1,7 +1,7 @@
-import type { ChannelAffiliate } from '@kittr/prisma';
-import { prisma } from '@kittr/prisma';
-import { TRPCError } from '@trpc/server';
-import validator from 'validator';
+import type { ChannelAffiliate } from "@kittr/prisma";
+import { prisma } from "@kittr/prisma";
+import { TRPCError } from "@trpc/server";
+import validator from "validator";
 
 export const createAffiliate = async ({
   channelId,
@@ -12,7 +12,7 @@ export const createAffiliate = async ({
 }) => {
   if (data.url) {
     if (!validator.isURL(data.url)) {
-      throw new TRPCError({ code: 'BAD_REQUEST', message: 'Invalid URL' });
+      throw new TRPCError({ code: "BAD_REQUEST", message: "Invalid URL" });
     }
   }
 

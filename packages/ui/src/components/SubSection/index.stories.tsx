@@ -1,8 +1,8 @@
-import { Text } from '../Text';
-import { SubSection } from '.';
+import { Text } from "../Text";
+import { SubSection } from ".";
 
 export default {
-  title: 'SubSection',
+  title: "SubSection",
   component: SubSection,
 };
 
@@ -18,18 +18,18 @@ export const Default = () => (
       learn about this AMAX, all he could think to himself was "Is there not a
       better way to do this?" The idea for kittr was born.
     </Text>
-    <Text sx={{ marginTop: '1rem' }}>
+    <Text sx={{ marginTop: "1rem" }}>
       Anthony quickly enlisted the help of his sister, a then-budding web
       designer. She was just learning the craft at the time - but Anthony
       promoted her to the big leagues right then and there. As it turns out
       Ashley is a complete all-star designer so she made all of the beautiful
       design for the website that you see.
     </Text>
-    <Text sx={{ marginTop: '1rem' }}>
-      Today, kittr is the{' '}
-      <Text weight={500} sx={{ display: 'inline-block' }}>
+    <Text sx={{ marginTop: "1rem" }}>
+      Today, kittr is the{" "}
+      <Text weight={500} sx={{ display: "inline-block" }}>
         kit sharing solution
-      </Text>{' '}
+      </Text>{" "}
       that video game channelers have been waiting for. We hope you like it as
       much as we do.
     </Text>

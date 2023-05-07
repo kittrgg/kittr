@@ -1,7 +1,7 @@
-import admin from '@kittr/firebase/admin';
-import type { ChannelManager, ChannelManagerRoles } from '@kittr/prisma';
-import { prisma } from '@kittr/prisma';
-import { getUserByEmail } from '../../users';
+import admin from "@kittr/firebase/admin";
+import type { ChannelManager, ChannelManagerRoles } from "@kittr/prisma";
+import { prisma } from "@kittr/prisma";
+import { getUserByEmail } from "../../users";
 
 export const listManagers = async ({
   managers,
@@ -78,7 +78,7 @@ export const promoteManager = async ({
             id: managerIdToPromote,
           },
           data: {
-            role: 'ADMIN',
+            role: "ADMIN",
           },
         },
       },
@@ -106,7 +106,7 @@ export const demoteManager = async ({
             id: managerIdToDemote,
           },
           data: {
-            role: 'EDITOR',
+            role: "EDITOR",
           },
         },
       },

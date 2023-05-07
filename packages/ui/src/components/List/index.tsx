@@ -1,5 +1,5 @@
-import type { ListProps } from '@mantine/core';
-import { List as MantineList } from '@mantine/core';
+import type { ListProps } from "@mantine/core";
+import { List as MantineList } from "@mantine/core";
 
 export type ListItemProps = ListProps;
 

@@ -1,7 +1,7 @@
-import { Title } from '.';
+import { Title } from ".";
 
 export default {
-  title: 'Title',
+  title: "Title",
   component: Title,
 };
 

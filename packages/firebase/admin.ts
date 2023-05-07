@@ -1,4 +1,4 @@
-import admin from 'firebase-admin';
+import admin from "firebase-admin";
 
 if (!admin.apps.length) {
   try {
@@ -6,7 +6,7 @@ if (!admin.apps.length) {
       credential: admin.credential.cert({
         privateKey: process.env.FIREBASE_ADMIN_PRIVATE_KEY!.replace(
           /\\n/g,
-          '\n',
+          "\n",
         ),
         clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
         projectId: process.env.FIREBASE_PROJECT_ID,
@@ -14,7 +14,7 @@ if (!admin.apps.length) {
     });
   } catch (err) {
     console.error(err);
-    console.error('Something is wrong with your Firebase key.');
+    console.error("Something is wrong with your Firebase key.");
   }
 }
 

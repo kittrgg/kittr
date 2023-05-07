@@ -12,14 +12,14 @@ function Admin({ ...props }) {
 	const [activeOptions, setActiveOptions] = useState([])
 	const [saving, setSaving] = useState(false)
 
-	useQuery(`/api/kits/allBases`, async () =>
-		fetch(`/api/kits/allBases`)
+	useQuery("/api/kits/allBases", async () =>
+		fetch("/api/kits/allBases")
 			.then((res) => res.json())
 			.then((res) => setAllBases(res))
 	)
 
-	useQuery(`/api/kits/allOptions`, async () =>
-		fetch(`/api/kits/allOptions`)
+	useQuery("/api/kits/allOptions", async () =>
+		fetch("/api/kits/allOptions")
 			.then((res) => res.json())
 			.then((res) => setAllOptions(res))
 	)
@@ -28,7 +28,7 @@ function Admin({ ...props }) {
 		activeOptions.forEach((elem) => {
 			setSaving(true)
 
-			fetch(`/api/admin/kits/addOption`, {
+			fetch("/api/admin/kits/addOption", {
 				method: "POST",
 				body: JSON.stringify({
 					baseId: activeBase._id,

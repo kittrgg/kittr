@@ -1,6 +1,6 @@
-import type { ButtonProps as MantineButtonProps } from '@mantine/core';
-import { Button as MantineButton } from '@mantine/core';
-import React from 'react';
+import type { ButtonProps as MantineButtonProps } from "@mantine/core";
+import { Button as MantineButton } from "@mantine/core";
+import React from "react";
 
 export interface ButtonProps extends MantineButtonProps {
   children?: React.ReactNode;

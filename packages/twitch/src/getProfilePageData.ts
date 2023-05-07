@@ -1,15 +1,15 @@
-import type { UnwrapPromise } from '@kittr/prisma';
+import type { UnwrapPromise } from "@kittr/prisma";
 import type {
   ITwitchScheduleSegment,
   ITwitchClip,
   ITwitchChannelData,
   ITwitchVideo,
-} from '@kittr/types';
-import { getChannelData } from './endpoints/getChannelData';
-import { getClips } from './endpoints/getClips';
-import { getRecentVideos } from './endpoints/getRecentVideos';
-import { getSchedule } from './endpoints/getSchedule';
-import { grabLoginName } from './utils/grabLoginName';
+} from "@kittr/types";
+import { getChannelData } from "./endpoints/getChannelData";
+import { getClips } from "./endpoints/getClips";
+import { getRecentVideos } from "./endpoints/getRecentVideos";
+import { getSchedule } from "./endpoints/getSchedule";
+import { grabLoginName } from "./utils/grabLoginName";
 
 interface ProfilePageData {
   channelData: ITwitchChannelData;
@@ -22,7 +22,7 @@ interface ProfilePageData {
 export const profilePageQuery = async (twitchLink: string) => {
   const response = {} as ProfilePageData;
 
-  const channelTwitchLogin = grabLoginName(twitchLink || '');
+  const channelTwitchLogin = grabLoginName(twitchLink || "");
 
   const [channelData] = await getChannelData(channelTwitchLogin);
 

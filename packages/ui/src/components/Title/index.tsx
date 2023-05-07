@@ -1,56 +1,56 @@
-import type { TitleProps } from '@mantine/core';
-import { Text as MantineTitle } from '@mantine/core';
+import type { TitleProps } from "@mantine/core";
+import { Text as MantineTitle } from "@mantine/core";
 
-const fontFamily = 'Barlow Condensed, serif';
+const fontFamily = "Barlow Condensed, serif";
 
 export const TITLE_PRESETS = {
   d1: {
-    fontSize: '4.5rem',
+    fontSize: "4.5rem",
     fontWeight: 900,
     fontFamily,
-    letterSpacing: '.375rem',
+    letterSpacing: ".375rem",
   },
   d2: {
-    fontSize: '3.5rem',
+    fontSize: "3.5rem",
     fontWeight: 600,
     fontFamily,
-    letterSpacing: '.3rem',
+    letterSpacing: ".3rem",
   },
   h1: {
     fontFamily,
-    fontSize: '2.25rem',
+    fontSize: "2.25rem",
     fontWeight: 900,
-    letterSpacing: '.1875rem',
+    letterSpacing: ".1875rem",
   },
   h2: {
     fontFamily,
-    fontSize: '2rem',
+    fontSize: "2rem",
     fontWeight: 700,
-    letterSpacing: '.166666666667rem',
+    letterSpacing: ".166666666667rem",
   },
   h3: {
-    fontSize: '1.75rem',
+    fontSize: "1.75rem",
     fontWeight: 700,
     fontFamily,
-    letterSpacing: '.145rem',
+    letterSpacing: ".145rem",
   },
   h4: {
-    fontSize: '1.5rem',
+    fontSize: "1.5rem",
     fontWeight: 600,
     fontFamily,
-    letterSpacing: '.125rem',
+    letterSpacing: ".125rem",
   },
   h5: {
-    fontSize: '1.25rem',
+    fontSize: "1.25rem",
     fontWeight: 600,
     fontFamily,
-    letterSpacing: '.105rem',
+    letterSpacing: ".105rem",
   },
   h6: {
-    fontSize: '1rem',
+    fontSize: "1rem",
     fontWeight: 600,
     fontFamily,
-    letterSpacing: '.08333333rem',
+    letterSpacing: ".08333333rem",
   },
 };
 

@@ -1,4 +1,4 @@
-import { prisma } from '@kittr/prisma';
+import { prisma } from "@kittr/prisma";
 
 export const listChannels = (managerFirebaseUid: string) => {
   const result = prisma.channel.findMany({

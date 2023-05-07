@@ -1,9 +1,9 @@
-import type { Channel, ChannelLink } from '@kittr/prisma';
-import { prisma, LinkProperty } from '@kittr/prisma';
-import type { ITwitchLiveChannels } from '@kittr/types/twitch';
-import { fetcher } from '@kittr/utils';
-import { grabLoginName } from './utils/grabLoginName';
-import { headers } from './utils/auth';
+import type { Channel, ChannelLink } from "@kittr/prisma";
+import { prisma, LinkProperty } from "@kittr/prisma";
+import type { ITwitchLiveChannels } from "@kittr/types/twitch";
+import { fetcher } from "@kittr/utils";
+import { grabLoginName } from "./utils/grabLoginName";
+import { headers } from "./utils/auth";
 
 export interface ChannelWithLinks extends Channel {
   links: ChannelLink[];
@@ -11,7 +11,7 @@ export interface ChannelWithLinks extends Channel {
 
 const getTwitchLink = (channel: ChannelWithLinks) =>
   channel.links.find((link) => link.property === LinkProperty.TWITCH)?.value ??
-  '';
+  "";
 
 export const liveChannelsQuery = async () => {
   const popularChannels = await prisma.channel.findMany({
@@ -21,7 +21,7 @@ export const liveChannelsQuery = async () => {
       },
     },
     orderBy: {
-      viewCount: 'desc',
+      viewCount: "desc",
     },
     take: 100,
     include: {
@@ -37,7 +37,7 @@ export const liveChannelsQuery = async () => {
   // Create the url for the Twitch API fetch
   const buildLiveStreamRequest = (channels: ChannelWithLinks[]): string => {
     try {
-      const requestBase = 'https://api.twitch.tv/helix/streams/?user_login=';
+      const requestBase = "https://api.twitch.tv/helix/streams/?user_login=";
 
       // Grab the login names from the channels
       const channelNames = channels
@@ -45,12 +45,12 @@ export const liveChannelsQuery = async () => {
         .filter((str: string | undefined) => str !== undefined);
 
       // Put together the base and the channel names
-      const url = requestBase.concat(channelNames.join('&user_login='));
+      const url = requestBase.concat(channelNames.join("&user_login="));
       return url;
     } catch (error) {
       console.error(error);
       // LogReport.error("Twitch Live Channels API ", error as any)
-      return '';
+      return "";
     }
   };
 
@@ -64,11 +64,11 @@ export const liveChannelsQuery = async () => {
       const data = await fetcher.get<{ data: any }>({
         url,
         headers: await headers(),
-        redirect: 'follow',
+        redirect: "follow",
       });
 
       if (!data.data) {
-        console.log('The Twitch API fetch did not work.', { data });
+        console.log("The Twitch API fetch did not work.", { data });
         return [];
       }
 
@@ -87,7 +87,7 @@ export const liveChannelsQuery = async () => {
         .map((channel) => channel.user_login)
         .includes(
           getTwitchLink(channel).substring(
-            getTwitchLink(channel).lastIndexOf('/') + 1,
+            getTwitchLink(channel).lastIndexOf("/") + 1,
           ),
         ),
     );

@@ -1,5 +1,5 @@
-import { fetcher } from '@kittr/utils';
-import { headers } from './auth';
+import { fetcher } from "@kittr/utils";
+import { headers } from "./auth";
 
 /**
  * @params
@@ -22,7 +22,7 @@ export const getFromApi: IFunc = async ({ endpointBaseUrl, queryParams }) => {
   const result = await fetcher.get<any>({
     url: `${endpointBaseUrl}?${params}`,
     headers: await headers(),
-    redirect: 'follow',
+    redirect: "follow",
   });
 
   return result;

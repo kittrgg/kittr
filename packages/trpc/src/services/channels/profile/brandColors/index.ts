@@ -1,4 +1,4 @@
-import { prisma } from '@kittr/prisma';
+import { prisma } from "@kittr/prisma";
 
 export const upsertBrandColor = async ({
   channelId,
@@ -17,10 +17,10 @@ export const upsertBrandColor = async ({
       brandColors: {
         upsert: {
           where: {
-            id: colorId ?? '',
+            id: colorId ?? "",
           },
-          create: { type: 'PRIMARY', value: newColor },
-          update: { type: 'PRIMARY', value: newColor },
+          create: { type: "PRIMARY", value: newColor },
+          update: { type: "PRIMARY", value: newColor },
         },
       },
     },

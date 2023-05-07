@@ -1,6 +1,6 @@
-import { z } from 'zod';
-import { publicProcedure } from '../../initTRPC';
-import * as UsersService from '../../services/users';
+import { z } from "zod";
+import { publicProcedure } from "../../initTRPC";
+import * as UsersService from "../../services/users";
 
 const create = publicProcedure
   .input(

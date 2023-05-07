@@ -1,8 +1,8 @@
-import { ChannelAffiliateModel } from '@kittr/prisma/validator';
-import { z } from 'zod';
-import { authedProcedure } from '../../../../initTRPC';
-import * as ChannelsService from '../../../../services/channels';
-import { checkRole } from '../../../../services/users';
+import { ChannelAffiliateModel } from "@kittr/prisma/validator";
+import { z } from "zod";
+import { authedProcedure } from "../../../../initTRPC";
+import * as ChannelsService from "../../../../services/channels";
+import { checkRole } from "../../../../services/users";
 
 const createAffiliate = authedProcedure
   .input(
@@ -15,7 +15,7 @@ const createAffiliate = authedProcedure
     await checkRole({
       firebaseUserId: ctx.user.uid,
       channelId: input.channelId,
-      roles: ['OWNER', 'ADMIN'],
+      roles: ["OWNER", "ADMIN"],
     });
 
     const channel = await ChannelsService.createAffiliate({
@@ -37,7 +37,7 @@ const updateAffiliate = authedProcedure
     await checkRole({
       firebaseUserId: ctx.user.uid,
       channelId: input.channelId,
-      roles: ['OWNER', 'ADMIN'],
+      roles: ["OWNER", "ADMIN"],
     });
 
     const channel = await ChannelsService.updateAffiliate({
@@ -57,7 +57,7 @@ const deleteAffiliate = authedProcedure
     await checkRole({
       firebaseUserId: ctx.user.uid,
       channelId: input.channelId,
-      roles: ['OWNER', 'ADMIN'],
+      roles: ["OWNER", "ADMIN"],
     });
 
     const channel = await ChannelsService.deleteAffiliate(input);

@@ -1,8 +1,9 @@
 module.exports = {
   rules: {
-    'no-floating-decimal': 'warn',
-    'capitalized-comments': 'warn',
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    'unicorn/filename-case': "off"
+    "no-floating-decimal": "warn",
+    "capitalized-comments": "warn",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "unicorn/filename-case": "off",
+    quotes: [2, "double", { avoidEscape: true }],
   },
 };
