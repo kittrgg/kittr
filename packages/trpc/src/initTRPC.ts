@@ -1,15 +1,15 @@
-import admin from '@kittr/firebase/admin';
-import { captureMessage } from '@kittr/logger/node';
-import { prisma } from '@kittr/prisma';
-import { initTRPC, TRPCError } from '@trpc/server';
-import superjson from 'superjson';
-import type { Context } from './context';
+import admin from "@kittr/firebase/admin";
+import { captureMessage } from "@kittr/logger/node";
+import { prisma } from "@kittr/prisma";
+import { initTRPC, TRPCError } from "@trpc/server";
+import superjson from "superjson";
+import type { Context } from "./context";
 
 export const t = initTRPC.context<Context>().create({
   transformer: superjson,
   errorFormatter({ shape, error, path, type, input, ctx }) {
-    captureMessage(`${error.code}: ${path}` ?? 'Unknown tRPC path', {
-      level: 'error',
+    captureMessage(`${error.code}: ${path}` ?? "Unknown tRPC path", {
+      level: "error",
       tags: { isKittr: true },
       extra: { type },
       contexts: {
@@ -26,7 +26,7 @@ export const middleware = t.middleware;
 export const authenticateAdmin = middleware(async ({ ctx, next }) => {
   if (!ctx.userToken) {
     throw new TRPCError({
-      code: 'UNAUTHORIZED',
+      code: "UNAUTHORIZED",
     });
   }
 
@@ -40,7 +40,7 @@ export const authenticateAdmin = middleware(async ({ ctx, next }) => {
 
   if (!administrator) {
     throw new TRPCError({
-      code: 'UNAUTHORIZED',
+      code: "UNAUTHORIZED",
       message: "It doesn't look like you're a site administrator.",
     });
   }
@@ -56,7 +56,7 @@ export const authenticateAdmin = middleware(async ({ ctx, next }) => {
 export const authenticateUser = middleware(async ({ ctx, next }) => {
   if (!ctx.userToken) {
     throw new TRPCError({
-      code: 'UNAUTHORIZED',
+      code: "UNAUTHORIZED",
     });
   }
 

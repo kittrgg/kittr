@@ -18,7 +18,7 @@ function DeleteGameModal() {
 
 	const { mutate, isLoading } = trpc.channels.games.delete.useMutation({
 		onSuccess: () => {
-			socket?.emit(`gameDelete`, channelData?.id)
+			socket?.emit("gameDelete", channelData?.id)
 			dispatch(setModal({ type: "", data: "" }))
 			dispatch(setChannelView({ gameId: "", view: "Deleted Game Notification" }))
 			refetchDashboard()

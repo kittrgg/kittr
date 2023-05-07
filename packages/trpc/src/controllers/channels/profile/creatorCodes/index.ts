@@ -1,8 +1,8 @@
-import { ChannelCreatorCodeModel } from '@kittr/prisma/validator';
-import { z } from 'zod';
-import { authedProcedure } from '../../../../initTRPC';
-import * as ChannelsProfileCreatorCodesService from '../../../../services/channels/profile/creatorCodes';
-import { checkRole } from '../../../../services/users';
+import { ChannelCreatorCodeModel } from "@kittr/prisma/validator";
+import { z } from "zod";
+import { authedProcedure } from "../../../../initTRPC";
+import * as ChannelsProfileCreatorCodesService from "../../../../services/channels/profile/creatorCodes";
+import { checkRole } from "../../../../services/users";
 
 const upsertCode = authedProcedure
   .input(
@@ -14,7 +14,7 @@ const upsertCode = authedProcedure
     await checkRole({
       firebaseUserId: ctx.user.uid,
       channelId: input.code.channelId,
-      roles: ['OWNER', 'ADMIN'],
+      roles: ["OWNER", "ADMIN"],
     });
 
     const channel = await ChannelsProfileCreatorCodesService.upsertCode({

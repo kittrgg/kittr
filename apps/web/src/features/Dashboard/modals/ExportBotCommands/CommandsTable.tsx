@@ -90,7 +90,7 @@ function CommandsTable({ kits, includeMasterCommands = true, method, commandStra
 				<>
 					<Styled.HorizFlex style={{ marginTop: "28px", borderBottom: `1px solid ${colors.lightest}` }}>
 						<Styled.CommandTitle
-							onClick={() => isDashboard && copyToClipboard(`!loadout`)}
+							onClick={() => isDashboard && copyToClipboard("!loadout")}
 							style={{
 								marginBottom: "20px",
 								width: "200px",
@@ -100,7 +100,7 @@ function CommandsTable({ kits, includeMasterCommands = true, method, commandStra
 						>
 							!loadout
 							{isDashboard ? (
-								<Styled.ImageContainer onClick={() => !isDashboard && copyToClipboard(`!loadout`)} style={{ top: 0 }}>
+								<Styled.ImageContainer onClick={() => !isDashboard && copyToClipboard("!loadout")} style={{ top: 0 }}>
 									<img alt="Click to Copy" height={17} src="/media/icons/clipboard.svg" width={13} />
 								</Styled.ImageContainer>
 							) : null}
@@ -117,7 +117,7 @@ function CommandsTable({ kits, includeMasterCommands = true, method, commandStra
 					</Styled.HorizFlex>
 					<Styled.HorizFlex style={{ marginTop: "28px", borderBottom: `1px solid ${colors.lightest}` }}>
 						<Styled.CommandTitle
-							onClick={() => isDashboard && copyToClipboard(`!loadouts`)}
+							onClick={() => isDashboard && copyToClipboard("!loadouts")}
 							style={{
 								marginBottom: "20px",
 								width: "200px",
@@ -127,7 +127,7 @@ function CommandsTable({ kits, includeMasterCommands = true, method, commandStra
 						>
 							!loadouts
 							{isDashboard ? (
-								<Styled.ImageContainer onClick={() => !isDashboard && copyToClipboard(`!loadouts`)} style={{ top: 0 }}>
+								<Styled.ImageContainer onClick={() => !isDashboard && copyToClipboard("!loadouts")} style={{ top: 0 }}>
 									<img alt="Click to Copy" height={17} src="/media/icons/clipboard.svg" width={13} />
 								</Styled.ImageContainer>
 							) : null}

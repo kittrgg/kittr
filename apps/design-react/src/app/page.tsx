@@ -7,14 +7,14 @@ export default function Home() {
       {/* <HelloWorld /> */}
 
       <PlayerCard
-        name="JoeWo"
-        isLive={true}
         imageProps={{ src: "https://placehold.co/128x128" }}
+        isLive
+        name="JoeWo"
       />
       <PlayerCard
-        name="JoeWo"
-        isLive={true}
         imageProps={{ src: "https://placehold.co/128x128" }}
+        isLive
+        name="JoeWo"
       />
 
       <Typography.H1>H1. Heading</Typography.H1>

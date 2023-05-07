@@ -1,3 +1,3 @@
-import { Center } from '@mantine/core';
+import { Center } from "@mantine/core";
 
 export { Center };

@@ -1,7 +1,7 @@
-import { z } from 'zod';
-import { authedProcedure } from '../../../../initTRPC';
-import * as ChannelsManagersOwnersService from '../../../../services/channels/managers/owners';
-import { checkRole } from '../../../../services/users';
+import { z } from "zod";
+import { authedProcedure } from "../../../../initTRPC";
+import * as ChannelsManagersOwnersService from "../../../../services/channels/managers/owners";
+import { checkRole } from "../../../../services/users";
 
 const editOwner = authedProcedure
   .input(
@@ -14,7 +14,7 @@ const editOwner = authedProcedure
     const { id } = await checkRole({
       firebaseUserId: ctx.user.uid,
       channelId: input.channelId,
-      roles: ['OWNER'],
+      roles: ["OWNER"],
     });
 
     const channel = await ChannelsManagersOwnersService.editOwner({

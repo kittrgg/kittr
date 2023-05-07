@@ -1,7 +1,7 @@
-import { z } from 'zod';
-import { authedProcedure } from '../../../../initTRPC';
-import * as ChannelsBrandColorsService from '../../../../services/channels';
-import { checkRole } from '../../../../services/users';
+import { z } from "zod";
+import { authedProcedure } from "../../../../initTRPC";
+import * as ChannelsBrandColorsService from "../../../../services/channels";
+import { checkRole } from "../../../../services/users";
 
 const upsertBrandColor = authedProcedure
   .input(
@@ -15,7 +15,7 @@ const upsertBrandColor = authedProcedure
     await checkRole({
       firebaseUserId: ctx.user.uid,
       channelId: input.channelId,
-      roles: ['OWNER', 'ADMIN'],
+      roles: ["OWNER", "ADMIN"],
     });
 
     const channel = await ChannelsBrandColorsService.upsertBrandColor({

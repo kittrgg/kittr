@@ -38,7 +38,7 @@ function TiktokId() {
 				labelStyles={{ color: colors.lighter, display: "block", marginTop: "12px", textTransform: "initial" }}
 				name="tiktokVideoId"
 				onChange={(e) => handleInput(e)}
-				subline={`If you want to just copy-paste the whole Tiktok link, we'll trim it for you. We know, we know, you're welcome. (Note that we cannot accept links from the mobile app. If it starts with "vm.tiktok.com", it won't work!)`}
+				subline={"If you want to just copy-paste the whole Tiktok link, we'll trim it for you. We know, we know, you're welcome. (Note that we cannot accept links from the mobile app. If it starts with \"vm.tiktok.com\", it won't work!)"}
 				sublineStyles={{ color: colors.lighter, fontWeight: "initial", letterSpacing: "1px" }}
 				type="text"
 				value={tiktokUrl ?? ""}

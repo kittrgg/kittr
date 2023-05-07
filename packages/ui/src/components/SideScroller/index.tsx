@@ -1,9 +1,9 @@
-import { ActionIcon, Box, ScrollArea } from '@mantine/core';
-import { useElementSize } from '@mantine/hooks';
-import React, { useMemo, useRef, useState } from 'react';
-import { isMobile } from 'react-device-detect';
-import { Section } from '../Section';
-import SVG from '../SVG';
+import { ActionIcon, Box, ScrollArea } from "@mantine/core";
+import { useElementSize } from "@mantine/hooks";
+import React, { useMemo, useRef, useState } from "react";
+import { isMobile } from "react-device-detect";
+import { Section } from "../Section";
+import SVG from "../SVG";
 
 interface Props {
   title?: string;
@@ -34,33 +34,33 @@ export const SideScroller = ({ title, action, children }: Props) => {
   const scrollRight = () => {
     viewport.current.scrollTo({
       left: (viewport.current.scrollLeft += width),
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   };
 
   const scrollLeft = () => {
     viewport.current.scrollTo({
       left: (viewport.current.scrollLeft -= width),
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   };
 
   return (
     <Section title={title} action={action} transparent>
       <ScrollArea
-        style={{ width: '100%' }}
+        style={{ width: "100%" }}
         onScrollPositionChange={onScrollPositionChange}
         viewportRef={viewport as any}
         ref={ref}
         sx={{
-          '-webkit-mask-image':
-            'linear-gradient(to right, transparent, white 20px, white 90%, transparent)',
+          "-webkit-mask-image":
+            "linear-gradient(to right, transparent, white 20px, white 90%, transparent)",
         }}
       >
         <Box
           style={{
-            display: 'flex',
-            margin: '1rem 0.5rem',
+            display: "flex",
+            margin: "1rem 0.5rem",
           }}
         >
           {children}
@@ -69,8 +69,8 @@ export const SideScroller = ({ title, action, children }: Props) => {
       {showLeftButton && (
         <Box
           sx={{
-            position: 'absolute',
-            top: '50%',
+            position: "absolute",
+            top: "50%",
           }}
         >
           <ActionIcon
@@ -79,7 +79,7 @@ export const SideScroller = ({ title, action, children }: Props) => {
             size="xl"
             variant="light"
           >
-            <SVG.Carat style={{ transform: 'rotate(-90deg)' }} />
+            <SVG.Carat style={{ transform: "rotate(-90deg)" }} />
           </ActionIcon>
         </Box>
       )}
@@ -87,8 +87,8 @@ export const SideScroller = ({ title, action, children }: Props) => {
       {showRightButton && (
         <Box
           sx={{
-            position: 'absolute',
-            top: '50%',
+            position: "absolute",
+            top: "50%",
             right: 0,
           }}
         >
@@ -98,7 +98,7 @@ export const SideScroller = ({ title, action, children }: Props) => {
             variant="light"
             onClick={scrollRight}
           >
-            <SVG.Carat style={{ transform: 'rotate(90deg)' }} />
+            <SVG.Carat style={{ transform: "rotate(90deg)" }} />
           </ActionIcon>
         </Box>
       )}

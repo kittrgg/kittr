@@ -1,1 +1,1 @@
-export { trpc } from './src/createTRPCNext';
+export { trpc } from "./src/createTRPCNext";

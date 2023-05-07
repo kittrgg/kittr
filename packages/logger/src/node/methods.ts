@@ -1,5 +1,5 @@
-import * as Sentry from '@sentry/node';
-import type { Severity } from '@sentry/types';
+import * as Sentry from "@sentry/node";
+import type { Severity } from "@sentry/types";
 
 /** Send exception to the error logger from node. */
 export const logError = (message: string | Error, withConsole?: boolean) => {
@@ -11,7 +11,7 @@ export const logError = (message: string | Error, withConsole?: boolean) => {
 
 /** Send warning to the error logger from node. */
 export const logWarning = (warning: string, withConsole?: boolean) => {
-  Sentry.captureMessage(warning, 'warning' as Severity);
+  Sentry.captureMessage(warning, "warning" as Severity);
   if (withConsole) {
     console.warn(warning);
   }
@@ -19,7 +19,7 @@ export const logWarning = (warning: string, withConsole?: boolean) => {
 
 /** Send an info log to the error logger from node. */
 export const logInfo = (info: string, withConsole?: boolean) => {
-  Sentry.captureMessage(info, 'info' as Severity);
+  Sentry.captureMessage(info, "info" as Severity);
   if (withConsole) {
     console.info(info);
   }
@@ -27,7 +27,7 @@ export const logInfo = (info: string, withConsole?: boolean) => {
 
 /** Send a debug log to the error logger from node. */
 export const logDebug = (debugMessage: string, withConsole?: boolean) => {
-  Sentry.captureMessage(debugMessage, 'debug' as Severity);
+  Sentry.captureMessage(debugMessage, "debug" as Severity);
   if (withConsole) {
     console.warn(debugMessage);
   }

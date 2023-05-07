@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 import { ESLint } from "eslint"
-import { globby } from 'globby'
+import { globby } from "globby"
 
 const main = async () => {
   const args = process.argv.slice(2);
-  const isFix = args.includes('--fix');
-  const dirsAndGlobs = args.filter((arg) => !arg.startsWith('-'));
+  const isFix = args.includes("--fix");
+  const dirsAndGlobs = args.filter((arg) => !arg.startsWith("-"));
   // Ensure all dirs are valid globs.
-  const extensions = ['cjs', 'js', 'jsx', 'mjs', 'ts', 'tsx'];
-  const defaultGlob = `**/*.{${extensions.join(',')}}`;
+  const extensions = ["cjs", "js", "jsx", "mjs", "ts", "tsx"];
+  const defaultGlob = `**/*.{${extensions.join(",")}}`;
   const globs = dirsAndGlobs.length
     ? dirsAndGlobs.map((dirOrGlob) =>
         extensions.some((ext) => dirOrGlob.endsWith(`.${ext}`))
@@ -22,7 +22,7 @@ const main = async () => {
       fix: isFix,
     });
 
-  const { ignorePatterns } = await eslint.calculateConfigForFile('*');
+  const { ignorePatterns } = await eslint.calculateConfigForFile("*");
 
   const files = await globby(globs, {
     dot: true,

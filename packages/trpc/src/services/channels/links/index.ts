@@ -1,5 +1,5 @@
-import type { ChannelLink } from '@kittr/prisma';
-import { prisma } from '@kittr/prisma';
+import type { ChannelLink } from "@kittr/prisma";
+import { prisma } from "@kittr/prisma";
 
 export const updateLinks = async ({
   channelId,

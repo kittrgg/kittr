@@ -1,12 +1,12 @@
-import { ChannelModel } from '@kittr/prisma/validator';
-import Stripe from 'stripe';
-import { z } from 'zod';
-import { authedProcedure, publicProcedure } from '../../initTRPC';
-import * as ChannelsService from '../../services/channels';
-import { checkRole } from '../../services/users';
+import { ChannelModel } from "@kittr/prisma/validator";
+import Stripe from "stripe";
+import { z } from "zod";
+import { authedProcedure, publicProcedure } from "../../initTRPC";
+import * as ChannelsService from "../../services/channels";
+import { checkRole } from "../../services/users";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2020-08-27',
+  apiVersion: "2020-08-27",
 });
 
 const listTopChannels = publicProcedure
@@ -51,7 +51,7 @@ const getDashboardChannel = authedProcedure
     await checkRole({
       firebaseUserId: ctx.user.uid,
       channelId: input,
-      roles: ['ADMIN', 'EDITOR', 'OWNER'],
+      roles: ["ADMIN", "EDITOR", "OWNER"],
     });
 
     const channel = await ChannelsService.getDashboardChannel({ id: input });
@@ -71,8 +71,8 @@ const createChannel = authedProcedure
   .input(
     z
       .string()
-      .min(1, 'You must provide a display name.')
-      .max(25, 'That channel name is too long. 25 characters or less.'),
+      .min(1, "You must provide a display name.")
+      .max(25, "That channel name is too long. 25 characters or less."),
   )
   .mutation(async ({ ctx, input: displayName }) => {
     const channel = await ChannelsService.createChannel({
@@ -93,7 +93,7 @@ const updateChannel = authedProcedure
     await checkRole({
       firebaseUserId: ctx.user.uid,
       channelId: input.channelId,
-      roles: ['OWNER', 'ADMIN'],
+      roles: ["OWNER", "ADMIN"],
     });
 
     const channel = await ChannelsService.updateChannel({
@@ -113,7 +113,7 @@ const deleteChannel = authedProcedure
     await checkRole({
       firebaseUserId: ctx.user.uid,
       channelId,
-      roles: ['OWNER'],
+      roles: ["OWNER"],
     });
 
     const channel = await ChannelsService.deleteChannel({ channelId });

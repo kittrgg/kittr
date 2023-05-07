@@ -1,5 +1,5 @@
-import { getDownloadURL, ref } from 'firebase/storage';
-import { storage } from '.';
+import { getDownloadURL, ref } from "firebase/storage";
+import { storage } from ".";
 
 /** Return the path to the Firebase document. */
 

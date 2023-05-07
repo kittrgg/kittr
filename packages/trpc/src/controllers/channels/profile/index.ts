@@ -1,6 +1,6 @@
-import { z } from 'zod';
-import { publicProcedure } from '../../../initTRPC';
-import * as ChannelsService from '../../../services/channels';
+import { z } from "zod";
+import { publicProcedure } from "../../../initTRPC";
+import * as ChannelsService from "../../../services/channels";
 
 const getChannelProfile = publicProcedure
   .input(z.string())

@@ -1,15 +1,15 @@
-import { signUp, updateUserDisplayName } from '@kittr/firebase/auth';
-import type { ChannelManagerRoles } from '@kittr/prisma';
-import { prisma } from '@kittr/prisma';
-import { TRPCError } from '@trpc/server';
-import admin from 'firebase-admin';
+import { signUp, updateUserDisplayName } from "@kittr/firebase/auth";
+import type { ChannelManagerRoles } from "@kittr/prisma";
+import { prisma } from "@kittr/prisma";
+import { TRPCError } from "@trpc/server";
+import admin from "firebase-admin";
 
 export const getUserByEmail = async (email: string) => {
   const user = await admin.auth().getUserByEmail(email);
 
   if (!user) {
     throw new TRPCError({
-      code: 'INTERNAL_SERVER_ERROR',
+      code: "INTERNAL_SERVER_ERROR",
       message: "Couldn't find user with that email.",
     });
   }
@@ -22,8 +22,8 @@ export const verifyIdToken = async (token: string) => {
 
   if (!user) {
     throw new TRPCError({
-      code: 'UNAUTHORIZED',
-      message: 'Invalid token.',
+      code: "UNAUTHORIZED",
+      message: "Invalid token.",
     });
   }
 
@@ -48,8 +48,8 @@ export const checkRole = async ({
 
   if (!manager) {
     throw new TRPCError({
-      code: 'UNAUTHORIZED',
-      message: 'You are not a manager of this channel.',
+      code: "UNAUTHORIZED",
+      message: "You are not a manager of this channel.",
     });
   }
 
@@ -57,8 +57,8 @@ export const checkRole = async ({
 
   if (!hasPermission) {
     throw new TRPCError({
-      code: 'UNAUTHORIZED',
-      message: 'You do not have permission to do that.',
+      code: "UNAUTHORIZED",
+      message: "You do not have permission to do that.",
     });
   }
 
@@ -83,7 +83,7 @@ export const create = async ({
   }
 
   throw new TRPCError({
-    code: 'INTERNAL_SERVER_ERROR',
-    message: 'Something went wrong.',
+    code: "INTERNAL_SERVER_ERROR",
+    message: "Something went wrong.",
   });
 };

@@ -1,7 +1,7 @@
 export const Routes = {
 	CHANNEL: {
 		/** Output result: `/channels`  */
-		LIST: `/channels`,
+		LIST: "/channels",
 		/** Output result: `/channel/:channel` */
 		createPath: (channel: string) => `/channel/${channel}`,
 		/** Output result: Output result: `/channels/search/:search-term`  */
@@ -15,7 +15,7 @@ export const Routes = {
 	},
 	GAMES: {
 		/** Output result: `/games` */
-		LIST: `/games`,
+		LIST: "/games",
 		/** Output result: `/games/:channel` */
 		createPath: (channel: string) => `/games/${channel}`
 	},

@@ -1,11 +1,11 @@
-import { Textarea } from '.';
+import { Textarea } from ".";
 
 export default {
-  title: 'Textarea',
+  title: "Textarea",
   component: Textarea,
   argTypes: {
     placeholder: {
-      control: 'text',
+      control: "text",
     },
   },
 };

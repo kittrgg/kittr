@@ -1,11 +1,11 @@
-import { TextInput } from '.';
+import { TextInput } from ".";
 
 export default {
-  title: 'TextInput',
+  title: "TextInput",
   component: TextInput,
   argTypes: {
     placeholder: {
-      control: 'text',
+      control: "text",
     },
   },
 };

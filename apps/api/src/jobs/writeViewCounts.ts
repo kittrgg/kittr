@@ -1,21 +1,21 @@
-import { BetaAnalyticsDataClient } from '@google-analytics/data/build/src/v1beta';
-import { prisma } from '@kittr/prisma';
-import type { StreamerViewCounts } from '@kittr/types';
+import { BetaAnalyticsDataClient } from "@google-analytics/data/build/src/v1beta";
+import { prisma } from "@kittr/prisma";
+import type { StreamerViewCounts } from "@kittr/types";
 
 const analyticsDataClient = new BetaAnalyticsDataClient({
-  credentials: JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS || '{}'),
+  credentials: JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS || "{}"),
 });
 
 const analyticsReportSchemas = {
-  property: 'properties/276805067',
+  property: "properties/276805067",
   metrics: [
     {
-      name: 'screenPageViews',
+      name: "screenPageViews",
     },
   ],
   dimensions: [
     {
-      name: 'pagePath',
+      name: "pagePath",
     },
   ],
 };
@@ -23,7 +23,7 @@ const analyticsReportSchemas = {
 const getChannelViewCounts = async (
   dateRange: StreamerViewCounts,
 ): Promise<Record<string, number>> => {
-  console.log('Trying to streamer view counts...');
+  console.log("Trying to streamer view counts...");
 
   try {
     const [response] = await analyticsDataClient.runReport({
@@ -34,10 +34,10 @@ const getChannelViewCounts = async (
           expressions: [
             {
               filter: {
-                fieldName: 'pagePath',
+                fieldName: "pagePath",
                 stringFilter: {
-                  matchType: 'BEGINS_WITH',
-                  value: '/channel/',
+                  matchType: "BEGINS_WITH",
+                  value: "/channel/",
                 },
               },
             },
@@ -58,14 +58,14 @@ const getChannelViewCounts = async (
        * returns HusKerrs
        */
       const streamer =
-        row.dimensionValues?.[0].value?.split('/').slice(0, 3)[2] ?? '';
+        row.dimensionValues?.[0].value?.split("/").slice(0, 3)[2] ?? "";
 
       // If streamer counts already exist in object, add new counts to existing
       if (acc[streamer]) {
         const count = acc[streamer];
-        acc[streamer] = count + parseFloat(row.metricValues?.[0].value ?? '');
+        acc[streamer] = count + parseFloat(row.metricValues?.[0].value ?? "");
       } else {
-        acc[streamer] = parseFloat(row.metricValues?.[0].value ?? '');
+        acc[streamer] = parseFloat(row.metricValues?.[0].value ?? "");
       }
       return acc;
     }, {});
@@ -90,7 +90,7 @@ export const writeViewCounts = async () => {
   });
 
   const bulkWrites = Object.entries(channelData);
-  console.log('Starting bulk write...');
+  console.log("Starting bulk write...");
   await prisma.$transaction(
     bulkWrites.map(([channelUrlSafeName, viewCount]) =>
       prisma.channel.update({
@@ -104,5 +104,5 @@ export const writeViewCounts = async () => {
     ),
   );
 
-  console.log('Bulk write for view counts finished!');
+  console.log("Bulk write for view counts finished!");
 };

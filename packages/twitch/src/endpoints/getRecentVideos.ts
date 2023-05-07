@@ -1,6 +1,6 @@
-import * as Logger from '@kittr/logger/node';
-import type { ITwitchVideo } from '@kittr/types/twitch';
-import { getFromApi } from '../utils/getFromApi';
+import * as Logger from "@kittr/logger/node";
+import type { ITwitchVideo } from "@kittr/types/twitch";
+import { getFromApi } from "../utils/getFromApi";
 
 /**
  * @params
@@ -15,7 +15,7 @@ type IFunc = (user_id: string) => Promise<ITwitchVideo[]>;
 export const getRecentVideos: IFunc = async (user_id) => {
   try {
     const { data } = await getFromApi<ITwitchVideo[]>({
-      endpointBaseUrl: 'https://api.twitch.tv/helix/videos',
+      endpointBaseUrl: "https://api.twitch.tv/helix/videos",
       queryParams: { user_id },
     });
 

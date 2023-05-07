@@ -1,7 +1,7 @@
-import { Text } from '.';
+import { Text } from ".";
 
 export default {
-  title: 'Text',
+  title: "Text",
   component: Text,
 };
 
