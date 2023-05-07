@@ -4,10 +4,9 @@ description: "Sets up Node.js and runs install"
 runs:
   using: composite
   steps:
-
-    - uses: actions/setup-node@v2
+    - uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 18
 
     - name: Install pnpm
       shell: bash
