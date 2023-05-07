@@ -1,14 +1,16 @@
-import { get } from "@kittr/flags"
-import type { Metadata } from "next"
+import { get } from '@kittr/flags';
+import type { Metadata } from 'next';
+
+export const runtime = 'edge';
 
 export const metadata: Metadata = {
-	robots: "noindex"
-}
+  robots: 'noindex',
+};
 
 const DeveloperTestingSandbox = async () => {
-	const greeting = await get("greeting")
+  const greeting = await get('greeting');
 
-	return <div>{JSON.stringify(greeting, null, 2)}</div>
-}
+  return <div>{JSON.stringify(greeting, null, 2)}</div>;
+};
 
-export default DeveloperTestingSandbox
+export default DeveloperTestingSandbox;
