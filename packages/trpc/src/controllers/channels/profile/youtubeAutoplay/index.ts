@@ -1,7 +1,7 @@
-import { z } from "zod";
-import { authedProcedure } from "../../../../initTRPC";
-import * as ChannelsProfileYoutubeAutoplayService from "../../../../services/channels/profile/youtubeAutoplay";
-import { checkRole } from "../../../../services/users";
+import { z } from 'zod';
+import { authedProcedure } from '../../../../initTRPC';
+import * as ChannelsProfileYoutubeAutoplayService from '../../../../services/channels/profile/youtubeAutoplay';
+import { checkRole } from '../../../../services/users';
 
 const toggle = authedProcedure
   .input(
@@ -14,7 +14,7 @@ const toggle = authedProcedure
     await checkRole({
       firebaseUserId: ctx.user.uid,
       channelId: input.channelId,
-      roles: ["OWNER", "ADMIN"],
+      roles: ['OWNER', 'ADMIN'],
     });
 
     const channel =

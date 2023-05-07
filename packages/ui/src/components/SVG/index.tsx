@@ -1,6 +1,6 @@
-import { createElement } from "react";
-import { Carat } from "./Carat";
-import { Pencil } from "./Pencil";
+import { createElement } from 'react';
+import { Carat } from './Carat';
+import { Pencil } from './Pencil';
 
 export type SVGType = keyof typeof SVG;
 

@@ -1,11 +1,11 @@
-import { prisma } from "@kittr/prisma";
+import { prisma } from '@kittr/prisma';
 import {
   WarzoneTwoKitBaseModel,
   WarzoneTwoKitOptionModel,
-} from "@kittr/prisma/validator";
-import { z } from "zod";
-import * as AdminWarzone2Service from "../../../services/admin/warzone2";
-import { adminProcedure } from "../../../initTRPC";
+} from '@kittr/prisma/validator';
+import { z } from 'zod';
+import * as AdminWarzone2Service from '../../../services/admin/warzone2';
+import { adminProcedure } from '../../../initTRPC';
 
 const listKitBases = adminProcedure.query(async () => {
   const result = await AdminWarzone2Service.listKitBases();
@@ -38,7 +38,7 @@ export const createBase = adminProcedure
   )
   .mutation(async ({ input }) => {
     const commandCodesArr = input.commandCodes
-      .split(",")
+      .split(',')
       .map((el) => el.trim());
 
     const updatedBase = await AdminWarzone2Service.createKitBase({
@@ -65,7 +65,7 @@ export const updateBase = adminProcedure
 
     const updatedBase = await AdminWarzone2Service.updateKitBase({
       base: input.base,
-      commandCodes: input.commandCodes?.split(",") ?? null,
+      commandCodes: input.commandCodes?.split(',') ?? null,
     });
 
     return updatedBase;

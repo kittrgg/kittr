@@ -1,4 +1,4 @@
-import { auth } from "../index";
+import { auth } from '../index';
 
 export const getToken = async () => {
   const token = await auth?.currentUser?.getIdToken();

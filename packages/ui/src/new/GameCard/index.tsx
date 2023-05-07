@@ -1,7 +1,7 @@
-import * as React from "react";
-import { Badge } from "../Badge";
-import { Typography } from "../Typography";
-import { cn } from "../utils";
+import * as React from 'react';
+import { Badge } from '../Badge';
+import { Typography } from '../Typography';
+import { cn } from '../utils';
 
 interface GameCardProps {
   title: string;
@@ -29,31 +29,31 @@ export const GameCard: React.FC<GameCardProps> = ({
   return (
     <button
       className={cn(
-        "relative m-4 rounded-xl bg-zinc-900 p-8 text-center shadow-md outline-none",
+        'relative m-4 rounded-xl bg-zinc-900 p-8 text-center shadow-md outline-none',
         {
-          "hover:cursor-pointer hover:bg-zinc-800 focus:shadow-slate-600 active:bg-zinc-700":
+          'hover:cursor-pointer hover:bg-zinc-800 focus:shadow-slate-600 active:bg-zinc-700':
             !disabled,
-          "bg-zinc-900/60": disabled,
-        }
+          'bg-zinc-900/60': disabled,
+        },
       )}
       disabled={disabled}
     >
       {disabled && (
         <Typography.H4
-          className={cn("absolute bottom-8 right-8 tracking-wide")}
+          className={cn('absolute bottom-8 right-8 tracking-wide')}
         >
           COMING SOON
         </Typography.H4>
       )}
-      <div className={cn("flex", { "opacity-40": disabled })}>
+      <div className={cn('flex', { 'opacity-40': disabled })}>
         <img
           {...imageProps}
-          className={cn("flex rounded-md", imageProps?.className)}
+          className={cn('flex rounded-md', imageProps?.className)}
         />
 
-        <div className={cn("mx-8 my-4 flex min-w-[14rem] flex-col text-left")}>
+        <div className={cn('mx-8 my-4 flex min-w-[14rem] flex-col text-left')}>
           <Typography.H3>{title}</Typography.H3>
-          <Typography.H5 className={cn("text-gray-400")}>
+          <Typography.H5 className={cn('text-gray-400')}>
             {developer}
           </Typography.H5>
 

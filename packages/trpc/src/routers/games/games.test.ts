@@ -1,5 +1,5 @@
-import type { Prisma } from "@kittr/prisma";
-import { prismaMock } from "@kittr/prisma/mock";
+import type { Prisma } from '@kittr/prisma';
+import { prismaMock } from '@kittr/prisma/mock';
 import {
   randNumber,
   randVehicle,
@@ -8,8 +8,8 @@ import {
   randProductName,
   randPastDate,
   randUuid,
-} from "@ngneat/falso";
-import { appRouter } from "../../..";
+} from '@ngneat/falso';
+import { appRouter } from '../../..';
 
 type GameWithCount = Prisma.GameGetPayload<{
   include: {
@@ -18,8 +18,8 @@ type GameWithCount = Prisma.GameGetPayload<{
 }>;
 
 // Fun fact: This was kittr's first ever test suite :)
-describe("kits router", () => {
-  test("list all games", async () => {
+describe('kits router', () => {
+  test('list all games', async () => {
     const value: GameWithCount[] = [
       {
         active: randBoolean(),

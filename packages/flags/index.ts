@@ -1,1 +1,1 @@
-export * from "@vercel/edge-config"
+export * from '@vercel/edge-config';

@@ -1,7 +1,7 @@
-import { isTest } from "@kittr/utils";
-import type { FirebaseOptions } from "firebase/app";
-import { initializeApp, getApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { isTest } from '@kittr/utils';
+import type { FirebaseOptions } from 'firebase/app';
+import { initializeApp, getApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
 
 export const firebaseConfig: FirebaseOptions = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,

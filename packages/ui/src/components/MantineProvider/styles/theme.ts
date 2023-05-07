@@ -2,32 +2,32 @@ import type {
   CSSObject,
   MantineTheme,
   MantineThemeOverride,
-} from "@mantine/core";
-import { gray } from "./colors/gray";
-import { red } from "./colors/red";
+} from '@mantine/core';
+import { gray } from './colors/gray';
+import { red } from './colors/red';
 
 export const other = {
   colors: {
-    white: "#ffffff",
+    white: '#ffffff',
   },
   spacing: {
-    xxl: "3rem",
-    xxxl: "4.5rem",
-    xxxxl: "5.5rem",
+    xxl: '3rem',
+    xxxl: '4.5rem',
+    xxxxl: '5.5rem',
   },
 };
 
 export const theme: MantineThemeOverride = {
-  colorScheme: "dark",
-  fontFamilyMonospace: "Monaco, Courier, monospace",
-  fontFamily: "Montserrat",
-  headings: { fontFamily: "Barlow Condensed, serif" },
+  colorScheme: 'dark',
+  fontFamilyMonospace: 'Monaco, Courier, monospace',
+  fontFamily: 'Montserrat',
+  headings: { fontFamily: 'Barlow Condensed, serif' },
   other,
   colors: {
     brand: gray,
     red,
   },
-  primaryColor: "brand",
+  primaryColor: 'brand',
 };
 
 export const themeStyles: Record<
@@ -40,21 +40,21 @@ export const themeStyles: Record<
       borderRadius: theme.radius.lg,
     },
     item: {
-      borderBottom: "none",
+      borderBottom: 'none',
     },
   }),
   Text: {
     root: {
-      lineHeight: "2rem",
-      "& > a": {
-        color: "white",
+      lineHeight: '2rem',
+      '& > a': {
+        color: 'white',
       },
     },
   },
   Button: (theme: MantineTheme) => ({
     outline: {
-      color: "white",
-      borderColor: "white",
+      color: 'white',
+      borderColor: 'white',
     },
   }),
   TextInput: (theme: MantineTheme) => ({

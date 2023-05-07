@@ -2,10 +2,10 @@ import {
   WarzoneCommandCodeModel,
   WarzoneKitBaseModel,
   WarzoneKitOptionModel,
-} from "@kittr/prisma/validator";
-import { z } from "zod";
-import { adminProcedure } from "../../../initTRPC";
-import * as AdminWarzoneService from "../../../services/admin/warzone";
+} from '@kittr/prisma/validator';
+import { z } from 'zod';
+import { adminProcedure } from '../../../initTRPC';
+import * as AdminWarzoneService from '../../../services/admin/warzone';
 
 const listKitBases = adminProcedure.query(async () => {
   return await AdminWarzoneService.listKitBases();

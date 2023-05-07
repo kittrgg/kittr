@@ -1,6 +1,6 @@
-import { prisma } from "@kittr/prisma";
-import { ChannelKitOverlayModel } from "@kittr/prisma/validator";
-import type { z } from "zod";
+import { prisma } from '@kittr/prisma';
+import { ChannelKitOverlayModel } from '@kittr/prisma/validator';
+import type { z } from 'zod';
 
 export const toggle = async ({
   channelId,
@@ -97,12 +97,12 @@ export const editKit = async ({
 }: {
   channelId: string;
   kitId: string | null;
-  kitToChange: "primaryWzTwoKit" | "secondaryWzTwoKit";
+  kitToChange: 'primaryWzTwoKit' | 'secondaryWzTwoKit';
 }) => {
   const kitIdToChange =
-    kitToChange === "primaryWzTwoKit"
-      ? "primaryWzTwoKitId"
-      : "secondaryWzTwoKitId";
+    kitToChange === 'primaryWzTwoKit'
+      ? 'primaryWzTwoKitId'
+      : 'secondaryWzTwoKitId';
 
   console.log({ kitId, kitToChange });
 

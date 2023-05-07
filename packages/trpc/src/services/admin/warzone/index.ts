@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type { WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma";
-import { prisma } from "@kittr/prisma";
+import type { WarzoneKitBase, WarzoneKitOption } from '@kittr/prisma';
+import { prisma } from '@kittr/prisma';
 
 export const listKitBases = async () => {
   const result = await prisma.warzoneKitBase.findMany({
@@ -35,7 +35,7 @@ export const createKitBase = async ({
   base,
   commandCodes,
 }: {
-  base: Omit<WarzoneKitBase, "id">;
+  base: Omit<WarzoneKitBase, 'id'>;
   commandCodes: string[];
 }) => {
   const result = await prisma.warzoneKitBase.create({
@@ -132,7 +132,7 @@ export const createOption = async ({
   option,
 }: {
   baseId: string;
-  option: Omit<WarzoneKitOption, "id">;
+  option: Omit<WarzoneKitOption, 'id'>;
 }) => {
   const { kitBaseId, ...rest } = option;
 

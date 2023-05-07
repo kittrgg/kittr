@@ -1,7 +1,7 @@
-import { z } from "zod";
-import { authedProcedure, publicProcedure } from "../../../initTRPC";
-import * as ChannelsOverlaysService from "../../../services/channels/overlays";
-import { checkRole } from "../../../services/users";
+import { z } from 'zod';
+import { authedProcedure, publicProcedure } from '../../../initTRPC';
+import * as ChannelsOverlaysService from '../../../services/channels/overlays';
+import { checkRole } from '../../../services/users';
 
 const toggle = authedProcedure
   .input(
@@ -14,7 +14,7 @@ const toggle = authedProcedure
     await checkRole({
       firebaseUserId: ctx.user.uid,
       channelId: input.channelId,
-      roles: ["ADMIN", "OWNER"],
+      roles: ['ADMIN', 'OWNER'],
     });
 
     const channel = await ChannelsOverlaysService.toggle({
@@ -37,11 +37,11 @@ const editColor = authedProcedure
       channelId: z.string(),
       color: z.string(),
       colorKeyToChange: z.enum([
-        "backgroundColorPrimary",
-        "backgroundColorSecondary",
-        "textColorPrimary",
-        "textColorSecondary",
-        "textColorAccent",
+        'backgroundColorPrimary',
+        'backgroundColorSecondary',
+        'textColorPrimary',
+        'textColorSecondary',
+        'textColorAccent',
       ]),
     }),
   )
@@ -49,7 +49,7 @@ const editColor = authedProcedure
     await checkRole({
       firebaseUserId: ctx.user.uid,
       channelId: input.channelId,
-      roles: ["ADMIN", "OWNER"],
+      roles: ['ADMIN', 'OWNER'],
     });
 
     const channel = await ChannelsOverlaysService.editColor({
@@ -66,14 +66,14 @@ const editKit = authedProcedure
     z.object({
       channelId: z.string(),
       kitId: z.string().nullable(),
-      kitToChange: z.enum(["primaryWzTwoKit", "secondaryWzTwoKit"]),
+      kitToChange: z.enum(['primaryWzTwoKit', 'secondaryWzTwoKit']),
     }),
   )
   .mutation(async ({ ctx, input }) => {
     await checkRole({
       firebaseUserId: ctx.user.uid,
       channelId: input.channelId,
-      roles: ["ADMIN", "EDITOR", "OWNER"],
+      roles: ['ADMIN', 'EDITOR', 'OWNER'],
     });
 
     const channel = await ChannelsOverlaysService.editKit(input);

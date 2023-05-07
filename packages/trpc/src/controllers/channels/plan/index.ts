@@ -1,8 +1,8 @@
-import { TRPCError } from "@trpc/server";
-import { z } from "zod";
-import { authedProcedure, publicProcedure } from "../../../initTRPC";
-import * as ChannelsPlanService from "../../../services/channels/plan";
-import { checkRole } from "../../../services/users";
+import { TRPCError } from '@trpc/server';
+import { z } from 'zod';
+import { authedProcedure, publicProcedure } from '../../../initTRPC';
+import * as ChannelsPlanService from '../../../services/channels/plan';
+import { checkRole } from '../../../services/users';
 
 const getPlan = publicProcedure
   .input(z.string())
@@ -22,12 +22,12 @@ const getSubscriptionEnd = authedProcedure
     await checkRole({
       firebaseUserId: ctx.user.uid,
       channelId: input.channelId,
-      roles: ["ADMIN", "EDITOR", "OWNER"],
+      roles: ['ADMIN', 'EDITOR', 'OWNER'],
     });
 
     if (!input.stripeSubscriptionId) {
       throw new TRPCError({
-        code: "BAD_REQUEST",
+        code: 'BAD_REQUEST',
         message: "Couldn't find subscription id.",
       });
     }
@@ -49,12 +49,12 @@ const getCardLast4Digits = authedProcedure
     await checkRole({
       firebaseUserId: ctx.user.uid,
       channelId: input.channelId,
-      roles: ["ADMIN", "EDITOR", "OWNER"],
+      roles: ['ADMIN', 'EDITOR', 'OWNER'],
     });
 
     if (!input.stripeSubscriptionId) {
       throw new TRPCError({
-        code: "BAD_REQUEST",
+        code: 'BAD_REQUEST',
         message: "Couldn't find subscription id.",
       });
     }

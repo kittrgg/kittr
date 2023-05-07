@@ -58,11 +58,12 @@
     "db:push": {
       "cache": false
     },
+    "//#format": {},
     "lint": {
-      "dependsOn": ["@kittr/lint#eslint"]
+      "dependsOn": ["^topo"]
     },
     "lint:fix": {
-      "dependsOn": ["@kittr/lint#eslint:fix"]
+      "dependsOn": ["^topo"]
     },
     "typecheck": {
       "dependsOn": ["^topo"],

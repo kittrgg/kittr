@@ -1,14 +1,14 @@
-import type { Channel, ChannelLink, ChannelProfile } from "@kittr/prisma";
-import { LinkProperty, prisma } from "@kittr/prisma";
-import { headers, grabLoginName } from "@kittr/twitch";
-import type { ITwitchLiveChannels } from "@kittr/types";
-import { fetcher, toURL, badWordFilter } from "@kittr/utils";
-import { TRPCError } from "@trpc/server";
+import type { Channel, ChannelLink, ChannelProfile } from '@kittr/prisma';
+import { LinkProperty, prisma } from '@kittr/prisma';
+import { headers, grabLoginName } from '@kittr/twitch';
+import type { ITwitchLiveChannels } from '@kittr/types';
+import { fetcher, toURL, badWordFilter } from '@kittr/utils';
+import { TRPCError } from '@trpc/server';
 
-export * from "./games";
-export * from "./kits";
-export * from "./links";
-export * from "./profile";
+export * from './games';
+export * from './kits';
+export * from './links';
+export * from './profile';
 
 export interface ChannelWithProfile extends Channel {
   profile: ChannelProfile;
@@ -25,7 +25,7 @@ interface ListParams {
 
 const getTwitchLink = (channel: ChannelWithLinks) =>
   channel.links.find((link) => link.property === LinkProperty.TWITCH)?.value ??
-  "";
+  '';
 
 export const createChannel = async ({
   displayName,
@@ -36,14 +36,14 @@ export const createChannel = async ({
 }) => {
   if (displayName.length > 26)
     throw new TRPCError({
-      code: "BAD_REQUEST",
-      message: "That name is too long. 25 characters or less",
+      code: 'BAD_REQUEST',
+      message: 'That name is too long. 25 characters or less',
     });
 
   if (badWordFilter(displayName)) {
     throw new TRPCError({
-      code: "FORBIDDEN",
-      message: "Hey, no bad words!",
+      code: 'FORBIDDEN',
+      message: 'Hey, no bad words!',
     });
   }
 
@@ -53,7 +53,7 @@ export const createChannel = async ({
 
   if (existingChannel) {
     throw new TRPCError({
-      code: "CONFLICT",
+      code: 'CONFLICT',
       message:
         "That name is too similar to another channel. We don't want to confuse our system...Please choose another.",
     });
@@ -68,7 +68,7 @@ export const createChannel = async ({
           // TODO: Use the authentication of the user in the request.
           firebaseId: ownerFirebaseId,
           // NO TOUCHY! We need to make sure that the person who creates this channel is the owner of it.
-          role: "OWNER",
+          role: 'OWNER',
         },
       },
       profile: {
@@ -106,8 +106,8 @@ export const updateChannel = async ({
     return result;
   } catch (err) {
     throw new TRPCError({
-      code: "BAD_REQUEST",
-      message: "That name is already taken. Please try another.",
+      code: 'BAD_REQUEST',
+      message: 'That name is already taken. Please try another.',
     });
   }
 };
@@ -144,7 +144,7 @@ export const getDashboardChannel = async ({ id }: { id: string }) => {
       warzoneKits: {
         orderBy: {
           base: {
-            displayName: "asc",
+            displayName: 'asc',
           },
         },
         include: {
@@ -160,7 +160,7 @@ export const getDashboardChannel = async ({ id }: { id: string }) => {
       warzoneTwoKits: {
         orderBy: {
           base: {
-            displayName: "asc",
+            displayName: 'asc',
           },
         },
         include: {
@@ -202,8 +202,8 @@ export const getFullChannelProfileQuery = async ({
 }) => {
   if (!id && !urlSafeName) {
     throw new TRPCError({
-      code: "NOT_FOUND",
-      message: "Need either id or urlSafeName",
+      code: 'NOT_FOUND',
+      message: 'Need either id or urlSafeName',
     });
   }
 
@@ -224,7 +224,7 @@ export const getFullChannelProfileQuery = async ({
       warzoneKits: {
         orderBy: {
           base: {
-            displayName: "asc",
+            displayName: 'asc',
           },
         },
         include: {
@@ -251,8 +251,8 @@ export const getFullChannelProfileQuery = async ({
 export const getChannelProfileByUrlSafeName = async (urlSafeName: string) => {
   if (!urlSafeName) {
     throw new TRPCError({
-      code: "BAD_REQUEST",
-      message: "Need either id or urlSafeName",
+      code: 'BAD_REQUEST',
+      message: 'Need either id or urlSafeName',
     });
   }
 
@@ -272,7 +272,7 @@ export const getChannelProfileByUrlSafeName = async (urlSafeName: string) => {
       warzoneKits: {
         orderBy: {
           base: {
-            displayName: "asc",
+            displayName: 'asc',
           },
         },
         include: {
@@ -287,7 +287,7 @@ export const getChannelProfileByUrlSafeName = async (urlSafeName: string) => {
       warzoneTwoKits: {
         orderBy: {
           base: {
-            displayName: "asc",
+            displayName: 'asc',
           },
         },
         include: {
@@ -322,7 +322,7 @@ export const listTopChannels = async ({ skip = 0, take = 10 }: ListParams) => {
       },
     },
     orderBy: {
-      viewCount: "desc",
+      viewCount: 'desc',
     },
     skip,
     take,
@@ -383,7 +383,7 @@ export const listRisingChannels = async () => {
 
   const result = await prisma.channel.findMany({
     orderBy: {
-      viewCount: "desc",
+      viewCount: 'desc',
     },
     where,
     skip: Math.max(0, randomSkip),
@@ -404,7 +404,7 @@ export const listLiveChannels = async () => {
       },
     },
     orderBy: {
-      viewCount: "desc",
+      viewCount: 'desc',
     },
     take: 100,
     include: {
@@ -420,7 +420,7 @@ export const listLiveChannels = async () => {
   // Create the url for the Twitch API fetch
   const buildLiveStreamRequest = (channels: ChannelWithLinks[]): string => {
     try {
-      const requestBase = "https://api.twitch.tv/helix/streams/?user_login=";
+      const requestBase = 'https://api.twitch.tv/helix/streams/?user_login=';
 
       // Grab the login names from the channels
       const channelNames = channels
@@ -428,12 +428,12 @@ export const listLiveChannels = async () => {
         .filter((str: string | undefined) => str !== undefined);
 
       // Put together the base and the channel names
-      const url = requestBase.concat(channelNames.join("&user_login="));
+      const url = requestBase.concat(channelNames.join('&user_login='));
       return url;
     } catch (error) {
       console.error(error);
       // LogReport.error("Twitch Live Channels API ", error as any)
-      return "";
+      return '';
     }
   };
 
@@ -447,11 +447,11 @@ export const listLiveChannels = async () => {
       const data = await fetcher.get<{ data: any }>({
         url,
         headers: await headers(),
-        redirect: "follow",
+        redirect: 'follow',
       });
 
       if (!data.data) {
-        console.log("The Twitch API fetch did not work.", { data });
+        console.log('The Twitch API fetch did not work.', { data });
         return [];
       }
 
@@ -470,7 +470,7 @@ export const listLiveChannels = async () => {
         .map((channel) => channel.user_login)
         .includes(
           getTwitchLink(channel).substring(
-            getTwitchLink(channel).lastIndexOf("/") + 1,
+            getTwitchLink(channel).lastIndexOf('/') + 1,
           ),
         ),
     );

@@ -1,4 +1,4 @@
-import { prisma } from "@kittr/prisma";
+import { prisma } from '@kittr/prisma';
 
 export const toggleYoutubeAutoplay = async ({
   channelId,

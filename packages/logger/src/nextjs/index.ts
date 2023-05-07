@@ -1,2 +1,2 @@
-export * from "./methods";
-export * from "@sentry/nextjs";
+export * from './methods';
+export * from '@sentry/nextjs';

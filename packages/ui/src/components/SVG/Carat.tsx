@@ -1,10 +1,10 @@
-import { useMantineTheme } from "@mantine/core";
+import { useMantineTheme } from '@mantine/core';
 
 /** Arrow without a tail. Defaults position is pointing up. Use fill for color. */
 export const Carat = (props: any) => {
   const theme = useMantineTheme();
   const {
-    width = "100%",
+    width = '100%',
     fill = theme.colors.gray[0],
     dataCy,
     ...rest

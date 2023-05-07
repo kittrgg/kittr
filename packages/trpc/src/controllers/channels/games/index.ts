@@ -1,7 +1,7 @@
-import { z } from "zod";
-import { authedProcedure, publicProcedure } from "../../../initTRPC";
-import * as ChannelsService from "../../../services/channels";
-import { checkRole } from "../../../services/users";
+import { z } from 'zod';
+import { authedProcedure, publicProcedure } from '../../../initTRPC';
+import * as ChannelsService from '../../../services/channels';
+import { checkRole } from '../../../services/users';
 
 const addGameToChannel = authedProcedure
   .input(
@@ -14,7 +14,7 @@ const addGameToChannel = authedProcedure
     await checkRole({
       firebaseUserId: ctx.user.uid,
       channelId,
-      roles: ["ADMIN", "OWNER"],
+      roles: ['ADMIN', 'OWNER'],
     });
 
     const channel = await ChannelsService.addGame({ channelId, gameId });
@@ -32,7 +32,7 @@ const deleteGameFromChannel = authedProcedure
     await checkRole({
       firebaseUserId: ctx.user.uid,
       channelId,
-      roles: ["ADMIN", "OWNER"],
+      roles: ['ADMIN', 'OWNER'],
     });
 
     const channel = await ChannelsService.deleteGame({ channelId, gameId });

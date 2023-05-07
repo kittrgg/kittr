@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import compressor from "browser-image-compression";
-import { upload } from "./upload";
+import compressor from 'browser-image-compression';
+import { upload } from './upload';
 
 /**
  * @params
