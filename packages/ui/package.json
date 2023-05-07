@@ -23,7 +23,7 @@
     "dev": "concurrently \"tailwindcss -o dist/compiled.css --minify --watch\"",
     "lint": "eslint-runner",
     "lint:fix": "eslint-runner --fix",
-    "test": "vitest",
+    "test": "vitest run",
     "test:coverage": "vitest --coverage",
     "typecheck": "tsc --noEmit"
   },
@@ -33,8 +33,8 @@
     "@mantine/hooks": "^5.10.2",
     "@mantine/next": "^5.10.2",
     "@mantine/rte": "^5.10.2",
-    "clsx": "^1.2.1",
     "class-variance-authority": "^0.6.0",
+    "clsx": "^1.2.1",
     "react": "^18.2.0",
     "react-device-detect": "2.2.2",
     "react-dom": "^18.2.0",
