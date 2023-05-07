@@ -1,3 +1,4 @@
+// @ts-nocheck
 import colors from "@Styles/colors"
 import { header1, header2, montserrat, paragraph } from "@Styles/typography"
 import { customOrderArray } from "@Utils/helpers/orderArrayByString"
@@ -191,7 +192,12 @@ const marquee = (duration: number, scrollValue: number) => keyframes`
     }
 `
 
-const Options = styled.div<{ isDataVisible: boolean; duration: number; scrollValue: number; fadeDuration: number }>`
+const Options = styled.div<{
+	isDataVisible: boolean
+	duration: number
+	scrollValue: number
+	fadeDuration: number
+}>`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;

@@ -1,4 +1,4 @@
-import { prisma } from "@kittr/prisma";
+import { prisma } from '@kittr/prisma';
 
 export const getCommandString = async ({
   channelId,
@@ -30,7 +30,7 @@ export const upsertCommandString = async ({
 }) => {
   const commandString = await prisma.channelCustomGameCommand.upsert({
     where: {
-      id: commandStringId ?? "",
+      id: commandStringId ?? '',
     },
     create: {
       command: newString,

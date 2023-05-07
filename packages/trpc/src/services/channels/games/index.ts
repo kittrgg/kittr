@@ -1,4 +1,4 @@
-import { prisma } from "@kittr/prisma";
+import { prisma } from '@kittr/prisma';
 
 export const addGame = async ({
   channelId,
@@ -73,7 +73,7 @@ export const getChannelsByGame = async ({
       profile: true,
     },
     orderBy: {
-      viewCount: "desc",
+      viewCount: 'desc',
     },
   });
   return channels;

@@ -25,6 +25,7 @@ module.exports = {
         "next.config.js",
         "app/**/{head,layout,page,error,not-found}.tsx",
         "src/app/**/{head,layout,page,error,not-found}.tsx",
+        "src/app/**/*.page.tsx",
       ],
       rules: {
         "import/no-default-export": "off",

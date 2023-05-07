@@ -1,14 +1,12 @@
-/* eslint-disable  */
-import { KitBaseForm } from "./KitBaseForm"
-import { trpc } from "@/lib/trpc"
-import { WarzoneTwoKitBase, WarzoneTwoKitOption } from "@kittr/prisma"
-import { Button, List, Section } from "@kittr/ui"
-import { SVG } from "@kittr/ui/src/components"
+import type { WarzoneTwoKitBase, WarzoneTwoKitOption } from "@kittr/prisma"
+import { Button, List, Section, SVG } from "@kittr/ui"
 import { ActionIcon } from "@mantine/core"
 import Link from "next/link"
 import { useState } from "react"
+import { KitBaseForm } from "./KitBaseForm"
+import { trpc } from "@/lib/trpc"
 
-const Page = () => {
+function Page() {
 	const { data: bases, refetch } = trpc.admin.warzone2.kitBases.list.useQuery()
 	const { data: game } = trpc.games.getByUrlSafeName.useQuery("wz2")
 	const { mutate, isLoading } = trpc.admin.warzone2.kitBases.update.useMutation({
@@ -53,9 +51,9 @@ const Page = () => {
 			<Link href="/admin" legacyBehavior>
 				<Button onClick={() => {}}>Back to Admin Home</Button>
 			</Link>
-			<Section title="KIT BASES" action={<Button onClick={() => setIsCreatingBase(true)}>Create</Button>}>
+			<Section action={<Button onClick={() => setIsCreatingBase(true)}>Create</Button>} title="KIT BASES">
 				<List>
-					{(bases || [])?.map((base) => (
+					{(bases || []).map((base) => (
 						<List.Item
 							style={{ borderBottom: "1px solid white", padding: "1rem" }}
 							sx={(theme) => ({
@@ -66,16 +64,21 @@ const Page = () => {
 						>
 							{base.displayName}
 							<Button
-								size="sm"
-								ml="xl"
 								loading={isLoading}
+								ml="xl"
+								size="sm"
 								color="orange"
 								// TODO: Needs review
-								onClick={() => mutate({ base: base, commandCodes: base.commandCodes.join(",") })}
+								onClick={() =>
+									mutate({
+										base: base,
+										commandCodes: base.commandCodes.join(",")
+									})
+								}
 							>
 								Copy
 							</Button>
-							<ActionIcon radius="lg" size="lg" style={{ float: "right" }} onClick={() => setIsEditingBase(base)}>
+							<ActionIcon onClick={() => setIsEditingBase(base)} radius="lg" size="lg" style={{ float: "right" }}>
 								<SVG.Pencil />
 							</ActionIcon>
 						</List.Item>

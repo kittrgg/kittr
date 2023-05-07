@@ -105,7 +105,7 @@ function ChannelList() {
 									<Role>
 										Your role is{" "}
 										{capitalizeFirstCharacter(
-											elem.managers.find((manager) => manager.firebaseId === user.uid)?.role ?? ""
+											elem.managers.find((manager) => manager.firebaseId === user?.uid)?.role ?? ""
 										)}{" "}
 										for this channel.
 									</Role>

@@ -1,9 +1,9 @@
-import { stripe } from "@kittr/money";
-import { prisma } from "@kittr/prisma";
-import { TRPCError } from "@trpc/server";
-import { z } from "zod";
-import { getUrl } from "../../utils";
-import { authedProcedure } from "../../initTRPC";
+import { stripe } from '@kittr/money';
+import { prisma } from '@kittr/prisma';
+import { TRPCError } from '@trpc/server';
+import { z } from 'zod';
+import { getUrl } from '../../utils';
+import { authedProcedure } from '../../initTRPC';
 
 export const buyPremium = authedProcedure
   .input(
@@ -16,8 +16,8 @@ export const buyPremium = authedProcedure
   .mutation(async ({ input }) => {
     try {
       const session = await stripe.checkout.sessions.create({
-        mode: "subscription",
-        payment_method_types: ["card"],
+        mode: 'subscription',
+        payment_method_types: ['card'],
         line_items: [
           {
             price: process.env.SUBSCRIPTION_PRICE_ID,
@@ -53,8 +53,8 @@ export const buyPremium = authedProcedure
     } catch (error) {
       console.log(error);
       throw new TRPCError({
-        code: "INTERNAL_SERVER_ERROR",
-        message: "Error #: 97334",
+        code: 'INTERNAL_SERVER_ERROR',
+        message: 'Error #: 97334',
       });
     }
   });
@@ -78,15 +78,15 @@ export const managePremium = authedProcedure
 
       if (!channel) {
         throw new TRPCError({
-          code: "INTERNAL_SERVER_ERROR",
-          message: "Error #: 991726",
+          code: 'INTERNAL_SERVER_ERROR',
+          message: 'Error #: 991726',
         });
       }
 
       if (!channel.plan || !channel.plan.stripeSubscriptionId) {
         throw new TRPCError({
-          code: "INTERNAL_SERVER_ERROR",
-          message: "Error #: 991727",
+          code: 'INTERNAL_SERVER_ERROR',
+          message: 'Error #: 991727',
         });
       }
 
@@ -102,8 +102,8 @@ export const managePremium = authedProcedure
     } catch (error) {
       console.error(error);
       throw new TRPCError({
-        code: "INTERNAL_SERVER_ERROR",
-        message: "Error #: 991722",
+        code: 'INTERNAL_SERVER_ERROR',
+        message: 'Error #: 991722',
       });
     }
   });
@@ -126,8 +126,8 @@ export const getPaymentMethod = authedProcedure
       return { last4: card?.last4 };
     } catch (err) {
       throw new TRPCError({
-        code: "BAD_REQUEST",
-        message: "Error #: 18910",
+        code: 'BAD_REQUEST',
+        message: 'Error #: 18910',
       });
     }
   });

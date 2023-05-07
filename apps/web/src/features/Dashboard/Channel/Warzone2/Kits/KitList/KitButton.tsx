@@ -9,7 +9,11 @@ import styled from "styled-components"
 
 interface Props {
 	favorite?: true
-	kit: WarzoneKit & { base: WarzoneKitBase; options: WarzoneKitOption[]; tuning: WarzoneTwoKitOptionTuning[] }
+	kit: WarzoneKit & {
+		base: WarzoneKitBase
+		options: WarzoneKitOption[]
+		tuning: WarzoneTwoKitOptionTuning[]
+	}
 }
 
 function KitButton({ favorite, kit }: Props) {
@@ -27,8 +31,6 @@ function KitButton({ favorite, kit }: Props) {
 	}
 
 	return (
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-expect-error
 		<Button
 			fullWidth
 			key={kit.id}
@@ -58,7 +60,9 @@ function KitButton({ favorite, kit }: Props) {
 				/>
 			}
 			styles={{
-				root: { backgroundColor: activeKit.id == kit.id ? colors.darker : "transparent" },
+				root: {
+					backgroundColor: activeKit.id == kit.id ? colors.darker : "transparent"
+				},
 				label: {
 					width: "100%",
 					display: "flex",
@@ -68,7 +72,13 @@ function KitButton({ favorite, kit }: Props) {
 			}}
 			variant="subtle"
 		>
-			<p style={{ maskImage: "linear-gradient(to right, black 65%, transparent 92%, transparent 100%)" }}>{title}</p>
+			<p
+				style={{
+					maskImage: "linear-gradient(to right, black 65%, transparent 92%, transparent 100%)"
+				}}
+			>
+				{title}
+			</p>
 		</Button>
 	)
 }

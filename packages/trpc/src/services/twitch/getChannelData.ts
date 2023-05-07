@@ -1,6 +1,6 @@
-import * as Logger from "@kittr/logger/node";
-import type { ITwitchChannelData } from "@kittr/types/twitch";
-import { getFromApi } from "./utils/getFromApi";
+import * as Logger from '@kittr/logger/node';
+import type { ITwitchChannelData } from '@kittr/types/twitch';
+import { getFromApi } from './utils/getFromApi';
 
 /**
  * @params
@@ -16,7 +16,7 @@ type IFunc = (login: string) => Promise<ITwitchChannelData[]>;
 export const getChannelData: IFunc = async (login) => {
   try {
     const { data } = await getFromApi<ITwitchChannelData[]>({
-      endpointBaseUrl: "https://api.twitch.tv/helix/users",
+      endpointBaseUrl: 'https://api.twitch.tv/helix/users',
       queryParams: { login },
     });
 

@@ -4,11 +4,11 @@ import {
   WarzoneTwoKitModel,
   WarzoneTwoKitOptionModel,
   WarzoneTwoKitOptionTuningModel,
-} from "@kittr/prisma/validator";
-import { z } from "zod";
-import { authedProcedure } from "../../../initTRPC";
-import * as ChannelsService from "../../../services/channels";
-import { checkRole } from "../../../services/users";
+} from '@kittr/prisma/validator';
+import { z } from 'zod';
+import { authedProcedure } from '../../../initTRPC';
+import * as ChannelsService from '../../../services/channels';
+import { checkRole } from '../../../services/users';
 
 const upsertKitToChannel = authedProcedure
   .input(
@@ -24,7 +24,7 @@ const upsertKitToChannel = authedProcedure
     await checkRole({
       firebaseUserId: ctx.user.uid,
       channelId: input.channelId,
-      roles: ["ADMIN", "EDITOR", "OWNER"],
+      roles: ['ADMIN', 'EDITOR', 'OWNER'],
     });
 
     const channel = await ChannelsService.upsertKit({
@@ -58,7 +58,7 @@ const upsertWz2KitToChannel = authedProcedure
     await checkRole({
       firebaseUserId: ctx.user.uid,
       channelId: input.channelId,
-      roles: ["ADMIN", "EDITOR", "OWNER"],
+      roles: ['ADMIN', 'EDITOR', 'OWNER'],
     });
 
     const channel = await ChannelsService.upsertKit({
@@ -90,7 +90,7 @@ const deleteKitFromChannel = authedProcedure
     await checkRole({
       firebaseUserId: ctx.user.uid,
       channelId: input.channelId,
-      roles: ["ADMIN", "EDITOR", "OWNER"],
+      roles: ['ADMIN', 'EDITOR', 'OWNER'],
     });
 
     const channel = await ChannelsService.deleteKit({

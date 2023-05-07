@@ -110,8 +110,8 @@ export const useDimensions = <T extends HTMLElement | null>({
 
 	useEffect(() => {
 		if (!("ResizeObserver" in window) && isClient()) {
-			; (window as any).ResizeObserver = ResizeObserver
-				; (window as any).ResizeObserverEntry = ResizeObserverEntry
+			;(window as any).ResizeObserver = ResizeObserver
+			;(window as any).ResizeObserverEntry = ResizeObserverEntry
 		}
 
 		let raf: number | null = null

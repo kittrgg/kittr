@@ -1,8 +1,8 @@
-import { prisma } from "@kittr/prisma";
-import { TRPCError } from "@trpc/server";
+import { prisma } from '@kittr/prisma';
+import { TRPCError } from '@trpc/server';
 
-export * from "./affiliates";
-export * from "./brandColors";
+export * from './affiliates';
+export * from './brandColors';
 
 export const getFullChannelProfileQuery = async ({
   id,
@@ -13,8 +13,8 @@ export const getFullChannelProfileQuery = async ({
 }) => {
   if (!id && !urlSafeName) {
     throw new TRPCError({
-      code: "NOT_FOUND",
-      message: "Need either id or urlSafeName",
+      code: 'NOT_FOUND',
+      message: 'Need either id or urlSafeName',
     });
   }
 
@@ -35,7 +35,7 @@ export const getFullChannelProfileQuery = async ({
       warzoneKits: {
         orderBy: {
           base: {
-            displayName: "asc",
+            displayName: 'asc',
           },
         },
         include: {
@@ -68,8 +68,8 @@ export const getChannelProfile = async ({
 }) => {
   if (!id && !urlSafeName) {
     throw new TRPCError({
-      code: "BAD_REQUEST",
-      message: "Need either id or urlSafeName",
+      code: 'BAD_REQUEST',
+      message: 'Need either id or urlSafeName',
     });
   }
 
@@ -90,7 +90,7 @@ export const getChannelProfile = async ({
       warzoneKits: {
         orderBy: {
           base: {
-            displayName: "asc",
+            displayName: 'asc',
           },
         },
         include: {

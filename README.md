@@ -11,6 +11,8 @@
 
 ## Installation
 
+### Shwarning: This info is probably outdated. We doing some pretty major rewriting.
+
 1. Clone the repo
 
 ```
@@ -47,6 +49,7 @@ When working locally, these ports are available:
 
 - Web front-end: [http://localhost:3000](http://localhost:3000)
 - API: [http://localhost:3001](http://localhost:3001)
+- React UI Kit: [http://localhost:3001](http://localhost:3001)
 
 - Firebase Emulator UI: [http://localhost:4000](http://localhost:4000)
 - Firebase Auth Emulator: http://localhost:4001 (You shouldn't need to interact with this port directly.)
@@ -67,12 +70,6 @@ PLEASE make sure that before you attempt to make any major changes to kittr that
 
    [You can find an instructional video on this process here](https://www.youtube.com/watch?v=T9VylI5C0G8&t=32s)
 
-## Notes
+## Found something that says "Shwarning"?
 
-- Existing login credentials to get into the dashboard:
-  - Username: anthony@dev.com
-  - Password: 123123
-- A few channels that you may find useful:
-  - ALLKITS - Features every kit in the database (well, almost) (may no longer be in the seed...)
-  - brandnewchannel - A fresh, empty channel that was just created
-  - anthonyshew - A channel that features multiple managers so you can see how the dashboard changes based on the user's role in that channel
+This is Anthony's marker for himself that there's a dragon that needs to be slayed. A personal TODO marker, if you will.

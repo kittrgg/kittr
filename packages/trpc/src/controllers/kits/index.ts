@@ -1,5 +1,5 @@
-import { publicProcedure } from "../../initTRPC";
-import * as KitsService from "../../services/kits";
+import { publicProcedure } from '../../initTRPC';
+import * as KitsService from '../../services/kits';
 
 const countKits = publicProcedure.query(async () => {
   const result = await KitsService.countKits();

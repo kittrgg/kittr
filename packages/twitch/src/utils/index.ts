@@ -1,3 +1,3 @@
-export * from "./auth";
-export * from "./getFromApi";
-export * from "./grabLoginName";
+export * from './auth';
+export * from './getFromApi';
+export * from './grabLoginName';

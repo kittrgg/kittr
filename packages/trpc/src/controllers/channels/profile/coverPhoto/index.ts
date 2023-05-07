@@ -1,7 +1,7 @@
-import { z } from "zod";
-import { authedProcedure } from "../../../../initTRPC";
-import * as ChannelsProfileCoverPhotoService from "../../../../services/channels/profile/coverPhoto";
-import { checkRole } from "../../../../services/users";
+import { z } from 'zod';
+import { authedProcedure } from '../../../../initTRPC';
+import * as ChannelsProfileCoverPhotoService from '../../../../services/channels/profile/coverPhoto';
+import { checkRole } from '../../../../services/users';
 
 const update = authedProcedure
   .input(
@@ -14,7 +14,7 @@ const update = authedProcedure
     await checkRole({
       firebaseUserId: ctx.user.uid,
       channelId: input.channelId,
-      roles: ["ADMIN", "OWNER"],
+      roles: ['ADMIN', 'OWNER'],
     });
 
     const channel = await ChannelsProfileCoverPhotoService.update({

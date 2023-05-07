@@ -40,7 +40,7 @@ function Header({ id, games, displayName, profile, links, plan, warzoneKits: kit
 	const { width } = useViewportDimensions()
 
 	return (
-		<Wrapper hasCoverPhoto={isPremium ? Boolean(hasCoverPhoto) : null} imagePath={imagePath}>
+		<Wrapper hasCoverPhoto={isPremium ? Boolean(hasCoverPhoto) : false} imagePath={imagePath}>
 			<Avatar>
 				<ProfileImage
 					border={isPremium ? userColor : ""}
@@ -58,7 +58,10 @@ function Header({ id, games, displayName, profile, links, plan, warzoneKits: kit
 						colorHover={userColor}
 						iconSize={30}
 						links={links}
-						style={{ flexWrap: width > 750 ? "nowrap" : "wrap", rowGap: "10px" }}
+						style={{
+							flexWrap: width > 750 ? "nowrap" : "wrap",
+							rowGap: "10px"
+						}}
 					/>
 				</AvatarInfo>
 			</Avatar>

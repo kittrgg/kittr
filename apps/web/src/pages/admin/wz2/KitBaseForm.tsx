@@ -1,12 +1,10 @@
-/* eslint-disable */
-import { KitBaseOptionForm } from "./KitBaseOptionForm"
-import { trpc } from "@/lib/trpc"
-import { WarzoneTwoKitBase, WarzoneTwoKitOption } from "@kittr/prisma"
-import { Button, List, NumberInput, Section, Select, SubSection, Text, Textarea, TextInput } from "@kittr/ui"
-import { SVG } from "@kittr/ui/src/components"
+import type { WarzoneTwoKitBase, WarzoneTwoKitOption } from "@kittr/prisma"
+import { Button, List, NumberInput, Section, Select, SubSection, Text, Textarea, TextInput, SVG } from "@kittr/ui"
 import { ActionIcon } from "@mantine/core"
 import { useState } from "react"
 import styled from "styled-components"
+import { KitBaseOptionForm } from "./KitBaseOptionForm"
+import { trpc } from "@/lib/trpc"
 
 const groupBy = (xs: any, key: string) =>
 	xs.reduce((rv: any, x: any) => {
@@ -29,13 +27,13 @@ interface Props {
 	onFinished: () => void
 }
 
-export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
+export function KitBaseForm({ kitBaseId, gameId, onFinished }: Props) {
 	const [formValues, setFormValues] = useState<Partial<FormState>>({ gameId })
 
 	const { refetch } = trpc.admin.warzone2.kitBases.get.useQuery(
 		{ kitBaseId: kitBaseId! },
 		{
-			enabled: !!kitBaseId,
+			enabled: Boolean(kitBaseId),
 			onSuccess: (data) => {
 				setFormValues(data || {})
 			},
@@ -103,61 +101,64 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 	return (
 		<div style={{ margin: "1rem" }}>
 			<Section
-				title={kitBaseId ? "Editing Kit Base" : "Creating Kit Base"}
 				action={
 					<>
-						{formValues.id && <Text color="gray">Base ID: {formValues.id}</Text>}
-						{formValues.gameId && <Text color="gray">Game ID: {formValues.gameId}</Text>}
+						{formValues.id ? <Text color="gray">Base ID: {formValues.id}</Text> : null}
+						{formValues.gameId ? <Text color="gray">Game ID: {formValues.gameId}</Text> : null}
 					</>
 				}
+				title={kitBaseId ? "Editing Kit Base" : "Creating Kit Base"}
 			>
 				<Container>
 					<TextInput
 						label="Display Name"
+						onChange={changeTextField("displayName")}
 						placeholder="Display Name"
 						value={formValues.displayName}
-						onChange={changeTextField("displayName")}
 					/>
 				</Container>
 
 				<Container>
 					<Select
-						data={(kitBaseCategories || []).map((category) => ({ value: category.id, label: category.displayName }))}
+						data={(kitBaseCategories || []).map((category) => ({
+							value: category.id,
+							label: category.displayName
+						}))}
 						label="Category"
+						onChange={changeSelectField("categoryId")}
 						placeholder="Category"
 						value={formValues.categoryId}
-						onChange={changeSelectField("categoryId")}
 					/>
 				</Container>
 
 				<Container>
 					<TextInput
 						label="Image URL"
+						onChange={changeTextField("imageUrl")}
 						placeholder="Image URL"
 						value={formValues.imageUrl}
-						onChange={changeTextField("imageUrl")}
 					/>
 				</Container>
 
 				<Container>
-					<Textarea label="Blurb" placeholder="Blurb" value={formValues.blurb} onChange={changeTextField("blurb")} />
+					<Textarea label="Blurb" onChange={changeTextField("blurb")} placeholder="Blurb" value={formValues.blurb} />
 				</Container>
 
 				<Container>
 					<NumberInput
 						label="Max Options"
+						onChange={changeNumberField("maxOptions")}
 						placeholder="Max Options"
 						type="number"
 						value={formValues.maxOptions}
-						onChange={changeNumberField("maxOptions")}
 					/>
 				</Container>
 
 				<TextInput
-					label="Command Codes"
 					description="Comma separated list of command codes. Will be coerced to array of values for DB for you."
-					value={formValues.commandCodes}
+					label="Command Codes"
 					onChange={changeTextField("commandCodes")}
+					value={formValues.commandCodes}
 				/>
 
 				{isCreatingOption ? (
@@ -179,90 +180,103 @@ export const KitBaseForm = ({ kitBaseId, gameId, onFinished }: Props) => {
 				) : (
 					<>
 						{/* Using formValues.id here to know if we are editing the kit base */}
-						{formValues.id &&
-							Object.entries<WarzoneTwoKitOption[]>(getOptions()).map(([slotKey, options]) => (
-								<SubSection
-									key={slotKey}
-									title={slotKey}
-									action={
-										<Button
-											onClick={() =>
-												setIsCreatingOption({ slotKey, kitBaseId: formValues?.id, gameId: formValues?.gameId })
-											}
-										>
-											Add {slotKey}
-										</Button>
-									}
-								>
-									<List>
-										{options
-											?.sort((a, b) => Number(a.orderPlacement) - Number(b.orderPlacement))
-											.map((option) => (
-												<List.Item
-													key={option.id}
-													style={{ borderBottom: "1px solid white", padding: "1rem" }}
-													sx={(theme) => ({
-														"&:hover": {
-															backgroundColor: theme.colors.gray[8]
-														}
-													})}
-												>
-													{option.displayName}
-													<ActionIcon
-														radius="lg"
-														size="lg"
-														style={{ float: "right" }}
-														onClick={() => setIsEditingOption(option)}
+						{formValues.id
+							? Object.entries<WarzoneTwoKitOption[]>(getOptions()).map(([slotKey, options]) => (
+									<SubSection
+										action={
+											<Button
+												onClick={() =>
+													setIsCreatingOption({
+														slotKey,
+														kitBaseId: formValues.id,
+														gameId: formValues.gameId
+													})
+												}
+											>
+												Add {slotKey}
+											</Button>
+										}
+										key={slotKey}
+										title={slotKey}
+									>
+										<List>
+											{options
+												.sort((a, b) => Number(a.orderPlacement) - Number(b.orderPlacement))
+												.map((option) => (
+													<List.Item
+														key={option.id}
+														style={{
+															borderBottom: "1px solid white",
+															padding: "1rem"
+														}}
+														sx={(theme) => ({
+															"&:hover": {
+																backgroundColor: theme.colors.gray[8]
+															}
+														})}
 													>
-														<SVG.Pencil />
-													</ActionIcon>
-												</List.Item>
-											))}
-									</List>
-								</SubSection>
-							))}
+														{option.displayName}
+														<ActionIcon
+															onClick={() => setIsEditingOption(option)}
+															radius="lg"
+															size="lg"
+															style={{ float: "right" }}
+														>
+															<SVG.Pencil />
+														</ActionIcon>
+													</List.Item>
+												))}
+										</List>
+									</SubSection>
+							  ))
+							: null}
 					</>
 				)}
 
 				<div>
-					<Button variant="outline" onClick={onFinished} style={{ margin: "1rem 1rem 1rem 0rem" }}>
+					<Button onClick={onFinished} style={{ margin: "1rem 1rem 1rem 0rem" }} variant="outline">
 						Cancel
 					</Button>
 					<Button
-						variant="filled"
 						onClick={() => {
 							if (formValues.id) {
 								updateBase(
-									{ base: formValues as FormState, commandCodes: formValues.commandCodes ?? null },
+									{
+										base: formValues as FormState,
+										commandCodes: formValues.commandCodes ?? null
+									},
 									{
 										onSuccess: onFinished
 									}
 								)
 							} else {
 								createBase(
-									// @ts-ignore
-									{ base: formValues as FormState, commandCodes: formValues.commandCodes },
+									{
+										base: formValues as FormState,
+										commandCodes: formValues.commandCodes || ""
+									},
 									{
 										onSuccess: onFinished
 									}
 								)
 							}
 						}}
+						variant="filled"
 					>
 						Save
 					</Button>
 					<Button
-						variant="filled"
 						color="red"
 						onClick={() =>
 							deleteBase(
-								{ kitBaseId: formValues.id as string },
+								{ kitBaseId: formValues.id! },
 								{
 									onSuccess: onFinished
 								}
 							)
 						}
 						style={{ margin: "1rem 0rem 0rem 0rem", float: "right" }}
+						variant="filled"
 					>
 						Delete
 					</Button>

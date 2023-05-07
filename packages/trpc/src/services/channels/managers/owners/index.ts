@@ -1,5 +1,5 @@
-import { prisma } from "@kittr/prisma";
-import { getUserByEmail } from "../../../users";
+import { prisma } from '@kittr/prisma';
+import { getUserByEmail } from '../../../users';
 
 export const editOwner = async ({
   channelId,
@@ -32,7 +32,7 @@ export const editOwner = async ({
               id: previousOwnerId,
             },
             data: {
-              role: "ADMIN",
+              role: 'ADMIN',
             },
           },
           {
@@ -40,7 +40,7 @@ export const editOwner = async ({
               id: newOwnerId?.id,
             },
             data: {
-              role: "OWNER",
+              role: 'OWNER',
             },
           },
         ],

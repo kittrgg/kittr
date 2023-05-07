@@ -1,5 +1,5 @@
-import type { WarzoneTwoKitBase, WarzoneTwoKitOption } from "@kittr/prisma";
-import { prisma } from "@kittr/prisma";
+import type { WarzoneTwoKitBase, WarzoneTwoKitOption } from '@kittr/prisma';
+import { prisma } from '@kittr/prisma';
 
 export const listKitBases = async () => {
   const result = await prisma.warzoneTwoKitBase.findMany({
@@ -25,7 +25,7 @@ export const getKitBase = async ({ kitBaseId }: { kitBaseId: string }) => {
 
   return {
     ...result,
-    commandCodes: result?.commandCodes.map((el) => el.code).join(","),
+    commandCodes: result?.commandCodes.map((el) => el.code).join(','),
   };
 };
 
@@ -39,7 +39,7 @@ export const createKitBase = async ({
   base,
   commandCodes,
 }: {
-  base: Omit<WarzoneTwoKitBase, "id">;
+  base: Omit<WarzoneTwoKitBase, 'id'>;
   commandCodes: string[];
 }) => {
   const result = await prisma.warzoneTwoKitBase.create({
@@ -140,7 +140,7 @@ export const createOption = async ({
   option,
 }: {
   baseId: string;
-  option: Omit<WarzoneTwoKitOption, "id">;
+  option: Omit<WarzoneTwoKitOption, 'id'>;
 }) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { kitBaseId, ...rest } = option;

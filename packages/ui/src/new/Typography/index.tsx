@@ -1,4 +1,4 @@
-import { cn } from "../utils";
+import { cn } from '../utils';
 
 type HeadingProps = React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLHeadingElement>,
@@ -10,8 +10,8 @@ const H1 = (props: HeadingProps) => {
     <h1
       {...props}
       className={cn(
-        "scroll-m-20 text-4xl font-extrabold tracking-tight text-white lg:text-5xl",
-        props.className
+        'scroll-m-20 text-4xl font-extrabold tracking-tight text-white lg:text-5xl',
+        props.className,
       )}
     />
   );
@@ -21,8 +21,8 @@ const H2 = (props: HeadingProps) => {
     <h2
       {...props}
       className={cn(
-        "scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight text-white transition-colors first:mt-0",
-        props.className
+        'scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight text-white transition-colors first:mt-0',
+        props.className,
       )}
     />
   );
@@ -32,8 +32,8 @@ const H3 = (props: HeadingProps) => {
     <h3
       {...props}
       className={cn(
-        "scroll-m-20 text-2xl font-semibold tracking-tight text-white",
-        props.className
+        'scroll-m-20 text-2xl font-semibold tracking-tight text-white',
+        props.className,
       )}
     />
   );
@@ -43,8 +43,8 @@ const H4 = (props: HeadingProps) => {
     <h4
       {...props}
       className={cn(
-        "scroll-m-20 text-xl font-semibold tracking-tight text-white",
-        props.className
+        'scroll-m-20 text-xl font-semibold tracking-tight text-white',
+        props.className,
       )}
     />
   );
@@ -54,8 +54,8 @@ const H5 = (props: HeadingProps) => {
     <h5
       {...props}
       className={cn(
-        "scroll-m-20 text-lg font-semibold tracking-tight text-white",
-        props.className
+        'scroll-m-20 text-lg font-semibold tracking-tight text-white',
+        props.className,
       )}
     />
   );
@@ -71,8 +71,8 @@ const P = (props: PProps) => {
     <p
       {...props}
       className={cn(
-        "leading-7 text-white [&:not(:first-child)]:mt-6",
-        props.className
+        'leading-7 text-white [&:not(:first-child)]:mt-6',
+        props.className,
       )}
     />
   );
@@ -81,10 +81,10 @@ const Span = (
   props: React.DetailedHTMLProps<
     React.HTMLAttributes<HTMLSpanElement>,
     HTMLSpanElement
-  >
+  >,
 ) => {
   return (
-    <span {...props} className={cn("leading-7 text-white", props.className)} />
+    <span {...props} className={cn('leading-7 text-white', props.className)} />
   );
 };
 
@@ -92,12 +92,12 @@ const BlockQuote = (
   props: React.DetailedHTMLProps<
     React.BlockquoteHTMLAttributes<HTMLQuoteElement>,
     HTMLQuoteElement
-  >
+  >,
 ) => {
   return (
     <blockquote
       {...props}
-      className={cn("mt-6 border-l-2 pl-6 italic text-white", props.className)}
+      className={cn('mt-6 border-l-2 pl-6 italic text-white', props.className)}
     />
   );
 };

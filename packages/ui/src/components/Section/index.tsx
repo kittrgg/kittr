@@ -1,6 +1,6 @@
-import { Box } from "@mantine/core";
-import React from "react";
-import { Title } from "../Title";
+import { Box } from '@mantine/core';
+import React from 'react';
+import { Title } from '../Title';
 
 export interface SectionProps {
   title?: string;
@@ -20,23 +20,23 @@ export const Section = ({
   return (
     <Box
       sx={(theme) => ({
-        padding: "2rem",
+        padding: '2rem',
         borderRadius: theme.radius.lg,
         backgroundColor: transparent
-          ? "none"
-          : theme.colorScheme === "dark"
+          ? 'none'
+          : theme.colorScheme === 'dark'
           ? theme.colors.brand[9]
           : theme.colors.brand[2],
-        height: "100%",
-        position: "relative",
+        height: '100%',
+        position: 'relative',
       })}
     >
-      {action && <Box sx={{ float: "right" }}>{action}</Box>}
+      {action && <Box sx={{ float: 'right' }}>{action}</Box>}
       {title && (
         <Title
           preset="h3"
           sx={{
-            marginBottom: "1rem",
+            marginBottom: '1rem',
           }}
         >
           {title}

@@ -1,6 +1,6 @@
-import * as Logger from "@kittr/logger/node";
-import type { ITwitchClip } from "@kittr/types/twitch";
-import { getFromApi } from "../utils/getFromApi";
+import * as Logger from '@kittr/logger/node';
+import type { ITwitchClip } from '@kittr/types/twitch';
+import { getFromApi } from '../utils/getFromApi';
 
 /**
  * @params
@@ -17,7 +17,7 @@ export const getClips: IFunc = async (
 ): Promise<ITwitchClip[]> => {
   try {
     const { data } = await getFromApi<ITwitchClip[]>({
-      endpointBaseUrl: "https://api.twitch.tv/helix/clips",
+      endpointBaseUrl: 'https://api.twitch.tv/helix/clips',
       queryParams: { broadcaster_id },
     });
 

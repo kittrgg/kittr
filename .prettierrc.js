@@ -1,7 +1,7 @@
 module.exports = {
-  ...'@vercel/style-guide/prettier',
+  ...require("@vercel/style-guide/prettier"),
   plugins: [
-    'prettier-plugin-packagejson',
-    require('prettier-plugin-tailwindcss'),
+    "prettier-plugin-packagejson",
+    require("prettier-plugin-tailwindcss"),
   ],
 };

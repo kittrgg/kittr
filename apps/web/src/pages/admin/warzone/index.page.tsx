@@ -1,6 +1,5 @@
 import type { WarzoneKitBase, WarzoneKitOption } from "@kittr/prisma"
-import { Button, List, Section } from "@kittr/ui"
-import { SVG } from "@kittr/ui/src/components"
+import { Button, List, Section, SVG } from "@kittr/ui"
 import { ActionIcon } from "@mantine/core"
 import Link from "next/link"
 import { useState } from "react"
