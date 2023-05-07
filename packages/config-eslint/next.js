@@ -1,7 +1,7 @@
 const { rules } = require("./utils/rules");
 
 // See: https://github.com/eslint/eslint/issues/3458
-// @ts-expect-error No types available
+// @ts-expect-error No types package available
 require("@rushstack/eslint-patch/modern-module-resolution");
 
 module.exports = {
@@ -17,5 +17,19 @@ module.exports = {
     tsconfigRootDir: `${__dirname}/tsconfig.json`,
   },
   rules,
-  ignorePatterns: ["**/dist/**", "**/.eslintrc.js"],
+  overrides: [
+    {
+      files: [
+        "pages/**",
+        "src/pages/**",
+        "next.config.js",
+        "app/**/{head,layout,page,error,not-found}.tsx",
+        "src/app/**/{head,layout,page,error,not-found}.tsx",
+      ],
+      rules: {
+        "import/no-default-export": "off",
+      },
+    },
+  ],
+  ignorePatterns: ["**/.next/**", "**/.eslintrc.js"],
 };

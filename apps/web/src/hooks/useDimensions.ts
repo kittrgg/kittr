@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { isClient } from "@Utils/helpers/isClient"
 import { ResizeObserver, ResizeObserverEntry } from "@juggle/resize-observer"
 import { useState, useRef, useEffect, useCallback } from "react"
@@ -111,9 +110,8 @@ export const useDimensions = <T extends HTMLElement | null>({
 
 	useEffect(() => {
 		if (!("ResizeObserver" in window) && isClient()) {
-			// eslint-disable-next-line prettier/prettier
-			;(window as any).ResizeObserver = ResizeObserver
-			;(window as any).ResizeObserverEntry = ResizeObserverEntry
+			; (window as any).ResizeObserver = ResizeObserver
+				; (window as any).ResizeObserverEntry = ResizeObserverEntry
 		}
 
 		let raf: number | null = null

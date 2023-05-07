@@ -36,20 +36,17 @@ jobs:
       # - name: Run Prettier
       #   run: yarn format
 
-  # eslint:
-  #   name: "ESLint"
-  #   timeout-minutes: 15
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v3
-  #     - name: Setup and install
-  #       uses: ./tooling/github-actions/install
-  #     - name: Lint
-  #       # TODO: Once we're done cleaning,
-  #       # it will feel so good to turn this back on.
-  #       # run: npx turbo run lint -- --max-warnings 0
-  #       run: npx turbo run lint
+  eslint:
+    name: "ESLint"
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup and install
+        uses: ./tooling/github-actions/install
+      - name: Lint
+        run: npx turbo run lint
 
   types:
     name: "TypeScript"

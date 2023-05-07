@@ -1,12 +1,10 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
 import { isClient } from "@Utils/helpers/isClient"
 import { isWebApiSupported } from "@Utils/helpers/isWebApiSupported"
 import { useEffect, useState } from "react"
 
-const errorMessage =
-	"matchMedia is not supported, this could happen both because window.matchMedia is not supported by" +
-	" your current browser or you're using the useMediaQuery hook whilst server side rendering."
+// Const errorMessage =
+// 	"matchMedia is not supported, this could happen both because window.matchMedia is not supported by" +
+// 	" your current browser or you're using the useMediaQuery hook whilst server side rendering."
 
 export const useMediaQuery = (mediaQuery: string) => {
 	const [isVerified, setIsVerified] = useState(Boolean(window.matchMedia(mediaQuery).matches))
@@ -19,7 +17,7 @@ export const useMediaQuery = (mediaQuery: string) => {
 			mediaQueryList.addEventListener("change", documentChangeHandler)
 		} catch (e) {
 			//Safari isn't supporting mediaQueryList.addEventListener
-			console.error(e)
+			// Console.error(e)
 			mediaQueryList.addListener(documentChangeHandler)
 		}
 
@@ -29,14 +27,14 @@ export const useMediaQuery = (mediaQuery: string) => {
 				mediaQueryList.removeEventListener("change", documentChangeHandler)
 			} catch (e) {
 				//Safari isn't supporting mediaQueryList.removeEventListener
-				console.error(e)
+				// Console.error(e)
 				mediaQueryList.removeListener(documentChangeHandler)
 			}
 		}
 	}, [mediaQuery])
 
 	if (!isClient() || !isWebApiSupported("matchMedia")) {
-		console.warn(errorMessage)
+		// Console.warn(errorMessage)
 		return null
 	}
 	return isVerified
