@@ -24,12 +24,12 @@ export const trpc = ({ url, queryClientConfig }: Params) =>
               process.env.NODE_ENV === 'development' ||
               (opts.direction === 'down' && opts.result instanceof Error),
           }),
-          // httpBatchLink({
-          //   url,
-          //   headers: async () => ({
-          //     authorization: await getToken(),
-          //   }),
-          // }),
+          httpBatchLink({
+            url,
+            headers: async () => ({
+              authorization: await getToken(),
+            }),
+          }),
         ],
         queryClientConfig,
       };
