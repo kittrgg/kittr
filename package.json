@@ -11,8 +11,6 @@
     "db:studio": "cd packages/prisma && pnpm db:studio",
     "dx:db-seed": "node ./scripts/createEnvironment/prisma.js && turbo seed",
     "dx:db-nuke": "cd packages && cd prisma && pnpm db:reset",
-    "dx:db-snapshot": "docker exec postgres pg_dump -U turboAf -Fc -f backup.sql prisma",
-    "dx:seed-snapshot": "docker exec -i postgres dropdb dev -U dev && echo DB dropped. && docker exec -i postgres pg_restore -U dev -d template1 -v \"backup.pgsql\" --create ",
     "typecheck": "turbo typecheck --continue",
     "build": "turbo build",
     "build:local": "dotenv -- turbo build",
