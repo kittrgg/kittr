@@ -9,9 +9,14 @@ const { withSentryConfig } = require('@sentry/nextjs');
 /** @type {import('next').NextConfig} */
 const moduleExports = {
   transpilePackages: [
+    '@kittr/analytics',
+    '@kittr/firebase',
+    '@kittr/flags',
     '@kittr/logger',
+    '@kittr/money',
     '@kittr/prisma',
-    '@kittr/types',
+    '@kittr/trpc',
+    '@kittr/twitch',
     '@kittr/ui',
   ],
   eslint: {

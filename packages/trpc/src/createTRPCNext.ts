@@ -34,5 +34,5 @@ export const trpc = ({ url, queryClientConfig }: Params) =>
         queryClientConfig,
       };
     },
-    // Ssr: true,
+    // ssr: true,
   });

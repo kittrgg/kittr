@@ -1,7 +1,7 @@
 import type * as trpc from '@trpc/server';
 import type * as trpcNext from '@trpc/server/adapters/next';
 
-interface CreateContextOptions {
+export interface CreateContextOptions {
   userToken: string | undefined;
 }
 

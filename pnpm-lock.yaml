@@ -200,6 +200,9 @@ importers:
       '@tanstack/react-query-devtools':
         specifier: ^4.23.0
         version: 4.23.0(@tanstack/react-query@4.23.0)(react-dom@18.2.0)(react@18.2.0)
+      '@trpc/server':
+        specifier: ^10.9.0
+        version: 10.9.0
       date-fns:
         specifier: 2.28.0
         version: 2.28.0
