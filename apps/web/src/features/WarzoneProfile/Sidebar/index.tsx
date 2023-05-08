@@ -147,8 +147,7 @@ function Sidebar() {
                     Routes.CHANNEL.GAME.createPath(
                       channel as string,
                       game as string,
-                      `?k=${favKit.base.displayName.replace(/ /g, '-')}
-			${favKit.customTitle && favKit.customTitle.replace(/ /g, '-')}`,
+                      `?k=${favKit.base.displayName.replace(/ /g, '-')}`,
                     ),
                     undefined,
                     { shallow: true },
