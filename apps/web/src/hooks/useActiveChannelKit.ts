@@ -9,22 +9,22 @@ export const useActiveChannelKit = () => {
 	const { data: channelData } = useChannelProfileData()
 	const { query } = useRouter()
 
-	const kitName = query.k as string
+	const kitName = query.k as string | undefined
 	// Warzone 2 Kits
 	const activeWz2Weapon =
 		channelData?.warzoneTwoKits.find(
 			(kit) =>
 				(kit.base.displayName.replace(" ", "-") + kit.customTitle?.replace(" ", "-")).replace(" ", "-") ===
-				kitName.replace(" ", "-")
+				kitName?.replace(" ", "-")
 		) ??
-		channelData?.warzoneTwoKits.find((kit) => kit.base.displayName.replace(" ", "-") === kitName.replace(" ", "-")) ??
+		channelData?.warzoneTwoKits.find((kit) => kit.base.displayName.replace(" ", "-") === kitName?.replace(" ", "-")) ??
 		channelData?.warzoneTwoKits.find((kit) => kit.base.displayName === kitName)
 
 	// Warzone Kits
 	const activeWzWeapon =
 		channelData?.warzoneKits.find(
-			(kit) => (kit.base.displayName + kit.customTitle).replace(" ", "-") === kitName.replace(" ", "-")
-		) ?? channelData?.warzoneKits.find((kit) => kit.base.displayName.replace(" ", "-") === kitName.replace(" ", "-"))
+			(kit) => (kit.base.displayName + kit.customTitle).replace(" ", "-") === kitName?.replace(" ", "-")
+		) ?? channelData?.warzoneKits.find((kit) => kit.base.displayName.replace(" ", "-") === kitName?.replace(" ", "-"))
 
 	if (query.game === "wz2") {
 		return activeWz2Weapon
