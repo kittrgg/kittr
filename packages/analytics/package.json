@@ -7,6 +7,8 @@
   "scripts": {
     "lint": "eslint-runner",
     "lint:fix": "eslint-runner --fix",
+    "format": "prettier \"**/*.{js,jsx,ts,tsx,md,mdx,json}\" --write --check",
+    "format:check": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

@@ -8,8 +8,11 @@
   },
   "main": "index.ts",
   "scripts": {
+    "format": "prettier \"**/*.{js,jsx,ts,tsx,md,mdx,json}\" --write --check",
+    "format:check": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
     "lint": "eslint-runner",
-    "lint:fix": "eslint-runner --fix"
+    "lint:fix": "eslint-runner --fix",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@sentry/nextjs": "7.7.0",

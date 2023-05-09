@@ -5,6 +5,8 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev -p 3001",
+    "format": "prettier \"**/*.{js,jsx,ts,tsx,md,mdx,json}\" --write --check",
+    "format:check": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
     "lint": "eslint-runner && next lint",
     "lint:fix": "eslint-runner --fix && next lint --fix",
     "start": "next start",

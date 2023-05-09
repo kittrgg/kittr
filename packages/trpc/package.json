@@ -8,6 +8,8 @@
     "./client": "./client.ts"
   },
   "scripts": {
+    "format": "prettier \"**/*.{js,jsx,ts,tsx,md,mdx,json}\" --write --check",
+    "format:check": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
     "lint": "eslint-runner",
     "lint:fix": "eslint-runner --fix",
     "test": "vitest",
