@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "@kittr/lint": "workspace:*",
+    "@kittr/prettier": "workspace:*",
     "@kittr/tsconfig": "workspace:*"
   }
 }

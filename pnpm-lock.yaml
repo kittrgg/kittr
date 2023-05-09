@@ -4,6 +4,9 @@ importers:
 
   .:
     devDependencies:
+      '@kittr/prettier':
+        specifier: workspace:*
+        version: link:packages/config-prettier
       '@vercel/style-guide':
         specifier: 4.0.2
         version: 4.0.2(eslint@8.22.0)(prettier@2.7.1)(typescript@5.0.4)
@@ -62,6 +65,9 @@ importers:
       '@kittr/lint':
         specifier: workspace:*
         version: link:../../packages/config-eslint
+      '@kittr/prettier':
+        specifier: workspace:*
+        version: link:../../packages/config-prettier
       '@kittr/tsconfig':
         specifier: workspace:*
         version: link:../../packages/config-typescript
@@ -140,6 +146,10 @@ importers:
       typescript:
         specifier: 5.0.4
         version: 5.0.4
+    devDependencies:
+      '@kittr/prettier':
+        specifier: workspace:*
+        version: link:../../packages/config-prettier
 
   apps/web:
     dependencies:
@@ -261,6 +271,9 @@ importers:
       '@kittr/lint':
         specifier: workspace:*
         version: link:../../packages/config-eslint
+      '@kittr/prettier':
+        specifier: workspace:*
+        version: link:../../packages/config-prettier
       '@kittr/tsconfig':
         specifier: workspace:*
         version: link:../../packages/config-typescript
@@ -301,6 +314,9 @@ importers:
       '@kittr/lint':
         specifier: workspace:*
         version: link:../config-eslint
+      '@kittr/prettier':
+        specifier: workspace:*
+        version: link:../config-prettier
       '@kittr/tsconfig':
         specifier: workspace:*
         version: link:../config-typescript
@@ -340,14 +356,40 @@ importers:
       typescript:
         specifier: ^5.0.4
         version: 5.0.4
+    devDependencies:
+      '@kittr/prettier':
+        specifier: workspace:*
+        version: link:../config-prettier
+
+  packages/config-prettier:
+    devDependencies:
+      '@types/prettier':
+        specifier: ^2.7.2
+        version: 2.7.2
+      '@vercel/style-guide':
+        specifier: 4.0.2
+        version: 4.0.2(eslint@8.22.0)(prettier@2.7.1)(typescript@5.0.4)
+      prettier:
+        specifier: 2.7.1
+        version: 2.7.1
+      prettier-plugin-tailwindcss:
+        specifier: ^0.2.8
+        version: 0.2.8(prettier@2.7.1)
 
   packages/config-tailwind:
     devDependencies:
+      '@kittr/prettier':
+        specifier: workspace:*
+        version: link:../config-prettier
       tailwindcss:
         specifier: ^3.2.4
         version: 3.2.4(postcss@8.4.23)
 
-  packages/config-typescript: {}
+  packages/config-typescript:
+    devDependencies:
+      '@kittr/prettier':
+        specifier: workspace:*
+        version: link:../config-prettier
 
   packages/firebase:
     dependencies:
@@ -364,6 +406,9 @@ importers:
       '@kittr/lint':
         specifier: workspace:*
         version: link:../config-eslint
+      '@kittr/prettier':
+        specifier: workspace:*
+        version: link:../config-prettier
       '@kittr/tsconfig':
         specifier: workspace:*
         version: link:../config-typescript
@@ -386,6 +431,9 @@ importers:
       '@kittr/lint':
         specifier: workspace:*
         version: link:../config-eslint
+      '@kittr/prettier':
+        specifier: workspace:*
+        version: link:../config-prettier
       '@kittr/tsconfig':
         specifier: workspace:*
         version: link:../config-typescript
@@ -402,6 +450,9 @@ importers:
       '@kittr/lint':
         specifier: workspace:*
         version: link:../config-eslint
+      '@kittr/prettier':
+        specifier: workspace:*
+        version: link:../config-prettier
       '@kittr/tsconfig':
         specifier: workspace:*
         version: link:../config-typescript
@@ -424,6 +475,9 @@ importers:
       '@kittr/lint':
         specifier: workspace:*
         version: link:../config-eslint
+      '@kittr/prettier':
+        specifier: workspace:*
+        version: link:../config-prettier
       '@kittr/tsconfig':
         specifier: workspace:*
         version: link:../config-typescript
@@ -440,6 +494,9 @@ importers:
       '@kittr/lint':
         specifier: workspace:*
         version: link:../config-eslint
+      '@kittr/prettier':
+        specifier: workspace:*
+        version: link:../config-prettier
       '@kittr/tsconfig':
         specifier: workspace:*
         version: link:../config-typescript
@@ -519,6 +576,9 @@ importers:
         specifier: 3.17.3
         version: 3.17.3
     devDependencies:
+      '@kittr/prettier':
+        specifier: workspace:*
+        version: link:../config-prettier
       '@kittr/tsconfig':
         specifier: workspace:*
         version: link:../config-typescript
@@ -550,6 +610,9 @@ importers:
       '@kittr/lint':
         specifier: workspace:*
         version: link:../config-eslint
+      '@kittr/prettier':
+        specifier: workspace:*
+        version: link:../config-prettier
       '@kittr/tsconfig':
         specifier: workspace:*
         version: link:../config-typescript
@@ -601,6 +664,9 @@ importers:
       '@kittr/lint':
         specifier: workspace:*
         version: link:../config-eslint
+      '@kittr/prettier':
+        specifier: workspace:*
+        version: link:../config-prettier
       '@kittr/tailwind':
         specifier: workspace:*
         version: link:../config-tailwind
@@ -643,6 +709,9 @@ importers:
       '@kittr/lint':
         specifier: workspace:*
         version: link:../config-eslint
+      '@kittr/prettier':
+        specifier: workspace:*
+        version: link:../config-prettier
       '@kittr/tsconfig':
         specifier: workspace:*
         version: link:../config-typescript
@@ -4095,7 +4164,6 @@ packages:
 
   /@types/prettier@2.7.2:
     resolution: {integrity: sha512-KufADq8uQqo1pYKVIYzfKbJfBAc0sOeXqGbFaSpv8MRmC/zXgowNZmFcbngndGk922QDmOASEXUZCaY48gs4cg==}
-    dev: false
 
   /@types/prop-types@15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
@@ -6584,7 +6652,7 @@ packages:
       is-glob: 4.0.3
       minimatch: 3.1.2
       object.values: 1.1.6
-      resolve: 1.22.1
+      resolve: 1.22.2
       semver: 6.3.0
       tsconfig-paths: 3.14.2
     transitivePeerDependencies:
@@ -10345,6 +10413,7 @@ packages:
       is-core-module: 2.11.0
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
+    dev: true
 
   /resolve@1.22.2:
     resolution: {integrity: sha512-Sb+mjNHOULsBv818T40qSPeRiuWLyaGMa5ewydRLFimneixmVy2zdivRl+AF6jaYPC8ERxGDmFSiqui6SfPd+g==}

@@ -30,6 +30,7 @@
     "test:e2e": "cd lib && cd e2e && npm run cypress:e2e"
   },
   "devDependencies": {
+    "@kittr/prettier": "workspace:*",
     "@vercel/style-guide": "4.0.2",
     "dotenv-cli": "^6.0.0",
     "envfile": "6.17.0",

@@ -28,5 +28,8 @@
     "eslint-config-turbo": "^1.9.3",
     "globby": "^13.1.4",
     "typescript": "^5.0.4"
+  },
+  "devDependencies": {
+    "@kittr/prettier": "workspace:*"
   }
 }

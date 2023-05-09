@@ -56,6 +56,7 @@
   },
   "devDependencies": {
     "@kittr/lint": "workspace:*",
+    "@kittr/prettier": "workspace:*",
     "@kittr/tsconfig": "workspace:*",
     "@kittr/types": "workspace:*",
     "@types/jsonwebtoken": "8.5.8",
