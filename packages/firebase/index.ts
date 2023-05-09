@@ -15,13 +15,9 @@ export const firebaseConfig: FirebaseOptions = {
 
 // Must be called before any other Firebase APIs can be used
 try {
-  if (!isTest) {
-    getApp();
-  }
+  getApp();
 } catch {
-  if (!isTest) {
-    initializeApp(firebaseConfig);
-  }
+  initializeApp(firebaseConfig);
 }
 
-export const auth = !isTest ? getAuth() : null;
+export const auth = getAuth()
