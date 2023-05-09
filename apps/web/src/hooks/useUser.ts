@@ -7,9 +7,9 @@ export const useUser = () => {
 	const [user, setUser] = useState<User | null>(null)
 
 	useEffect(() => {
-		const unsubscribe = auth?.onAuthStateChanged((user) => {
+		const unsubscribe = auth.onAuthStateChanged((user) => {
 			if (user) {
-				setUser(auth?.currentUser ?? null)
+				setUser(auth.currentUser ?? null)
 			}
 		})
 

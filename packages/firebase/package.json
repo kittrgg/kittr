@@ -15,9 +15,8 @@
   },
   "dependencies": {
     "browser-image-compression": "2.0.0",
-    "firebase": "^9.16.0",
-    "firebase-admin": "^11.5.0",
-    "firebase-tools": "^11.21.0"
+    "firebase": "^9.21.0",
+    "firebase-admin": "^11.5.0"
   },
   "devDependencies": {
     "@kittr/lint": "workspace:*",
