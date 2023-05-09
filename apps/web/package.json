@@ -43,7 +43,7 @@
     "react-dom": "^18.2.0",
     "react-error-boundary": "^3.1.4",
     "react-indiana-drag-scroll": "2.2.0",
-    "react-redux": "^7.2.6",
+    "react-redux": "^8.0.5",
     "react-select": "5.2.2",
     "redux": "4.1.2",
     "socket.io-client": "4.4.1",
