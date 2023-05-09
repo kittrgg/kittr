@@ -1,9 +1,10 @@
-import * as Sentry from '@sentry/node';
-import type { Severity } from '@sentry/types';
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable no-console */
+import { captureException, captureMessage } from '@sentry/node';
 
 /** Send exception to the error logger from node. */
 export const logError = (message: string | Error, withConsole?: boolean) => {
-  Sentry.captureException(message);
+  captureException(message);
   if (withConsole) {
     console.error(message);
   }
@@ -11,7 +12,7 @@ export const logError = (message: string | Error, withConsole?: boolean) => {
 
 /** Send warning to the error logger from node. */
 export const logWarning = (warning: string, withConsole?: boolean) => {
-  Sentry.captureMessage(warning, 'warning' as Severity);
+  captureMessage(warning, 'warning');
   if (withConsole) {
     console.warn(warning);
   }
@@ -19,7 +20,7 @@ export const logWarning = (warning: string, withConsole?: boolean) => {
 
 /** Send an info log to the error logger from node. */
 export const logInfo = (info: string, withConsole?: boolean) => {
-  Sentry.captureMessage(info, 'info' as Severity);
+  captureMessage(info, 'info');
   if (withConsole) {
     console.info(info);
   }
@@ -27,7 +28,7 @@ export const logInfo = (info: string, withConsole?: boolean) => {
 
 /** Send a debug log to the error logger from node. */
 export const logDebug = (debugMessage: string, withConsole?: boolean) => {
-  Sentry.captureMessage(debugMessage, 'debug' as Severity);
+  captureMessage(debugMessage, 'debug');
   if (withConsole) {
     console.warn(debugMessage);
   }

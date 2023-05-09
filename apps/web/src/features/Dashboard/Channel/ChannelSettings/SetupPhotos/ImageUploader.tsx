@@ -30,7 +30,7 @@ function ImageUploader({ slot }: Props) {
     'setup-photos'
   ].update.useMutation({
     onSuccess: () => {
-      download(fileName, (path) => {
+      download(fileName, (path: string) => {
         setIsUploading(false);
         setImage(path);
       });
@@ -106,7 +106,7 @@ function ImageUploader({ slot }: Props) {
     );
 
     if (photo?.exists) {
-      download(fileName, (path) => setImage(path));
+      download(fileName, (path: string) => setImage(path));
     }
   }, [fileName, data?.profile?.setupPhotos, slot]);
 

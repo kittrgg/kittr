@@ -42,7 +42,7 @@ function ChannelProfile() {
 
   useEffect(() => {
     if (isPremium && hasCoverPhoto)
-      download(`${channel.id}-profile-cover-photo`, (path) =>
+      download(`${channel.id}-profile-cover-photo`, (path: string) =>
         setCoverPhotoPath(path),
       );
   }, [channel?.id, hasCoverPhoto, isPremium]);

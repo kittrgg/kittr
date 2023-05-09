@@ -1,4 +1,4 @@
-import admin from '@kittr/firebase/admin';
+import { auth } from '@kittr/firebase/admin';
 import { captureMessage } from '@kittr/logger/node';
 import { prisma } from '@kittr/prisma';
 import { initTRPC, TRPCError } from '@trpc/server';
@@ -30,7 +30,7 @@ export const authenticateAdmin = middleware(async ({ ctx, next }) => {
     });
   }
 
-  const firebaseUser = await admin.verifyIdToken(ctx.userToken);
+  const firebaseUser = await auth.verifyIdToken(ctx.userToken);
 
   const administrator = await prisma.administrator.findFirst({
     where: {
@@ -60,7 +60,7 @@ export const authenticateUser = middleware(async ({ ctx, next }) => {
     });
   }
 
-  const firebaseUser = await admin.verifyIdToken(ctx.userToken);
+  const firebaseUser = await auth.verifyIdToken(ctx.userToken);
 
   return next({
     ctx: {

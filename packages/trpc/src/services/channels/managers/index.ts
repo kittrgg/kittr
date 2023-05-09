@@ -1,4 +1,4 @@
-import admin from '@kittr/firebase/admin';
+import { auth } from '@kittr/firebase/admin';
 import type { ChannelManager, ChannelManagerRoles } from '@kittr/prisma';
 import { prisma } from '@kittr/prisma';
 import { getUserByEmail } from '../../users';
@@ -10,7 +10,7 @@ export const listManagers = async ({
 }) => {
   // Get details from Firebase
   const managerDetails = managers.map(async (manager) => {
-    return await admin.getUser(manager.firebaseId);
+    return await auth.getUser(manager.firebaseId);
   });
 
   // Run fetches concurrently

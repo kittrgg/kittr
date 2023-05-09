@@ -1,49 +1,35 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import compressor from 'browser-image-compression';
 import { upload } from './upload';
 
-/**
- * @params
- * imageFile: The image file to be uploaded.
- *
- * fileName: Name of file to use in Firebase.
- *
- * onSuccess: Callback to use on successful upload.
- *
- * onError: Callback to use on unsuccessful upload.
- *
- * @returns
- * Promise with array of channels.
- */
-type IFunc = (params: {
+/* Utility for uploading an image and handling various states in UI */
+export const uploadWithHandlers = async ({
+  /* imageFile: The image file to be uploaded. */
+  imageFile,
+  /* fileName: Name of file to use in Firebase. */
+  fileName,
+  compressorIterations = 2,
+  maxWidthOrHeight = 250,
+  /* onSuccess: Callback to use on successful upload. */
+  onSuccess,
+  /* onError: Callback to use on unsuccessful upload. */
+  onError,
+}: {
   imageFile: File;
   fileName: string;
   maxWidthOrHeight?: number;
   compressorIterations?: number;
-  onSuccess: (...args: any) => any;
-  onError: (...args: any) => any;
-}) => void;
-
-/** Utility for uploading an image and handling various states in UI */
-export const uploadWithHandlers: IFunc = async ({
-  imageFile,
-  fileName,
-  compressorIterations = 2,
-  maxWidthOrHeight = 250,
-  onSuccess,
-  onError,
-}) => {
+  onSuccess: Function;
+  onError: Function;
+}): Promise<void> => {
   try {
     const compressedImage = await compressor(imageFile, {
       maxWidthOrHeight,
       maxIteration: compressorIterations,
     });
 
-    const result = await upload(fileName, compressedImage);
+    await upload(fileName, compressedImage);
 
-    if (result) {
-      onSuccess();
-    }
+    onSuccess();
   } catch (error) {
     onError();
   }
