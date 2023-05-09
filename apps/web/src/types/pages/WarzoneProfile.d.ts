@@ -1,9 +1,9 @@
-import type { Game, KitBase, Kit, ChannelAffiliateCode } from "@kittr/prisma"
+import type { Game, KitBase, Kit, ChannelAffiliateCode } from '@kittr/prisma';
 
 interface CompleteChannelAffiliateCode extends ChannelAffiliateCode {
-	game: Game
+  game: Game;
 }
 
 interface CompleteKit extends Kit {
-	kitBase: KitBase
+  kitBase: KitBase;
 }

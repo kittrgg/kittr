@@ -1,1 +1,1 @@
-export * from "./queries/channels"
+export * from './queries/channels';

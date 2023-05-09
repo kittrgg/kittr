@@ -8,8 +8,11 @@
   },
   "main": "index.ts",
   "scripts": {
+    "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
+    "format:fix": "prettier \"**/*.{js,jsx,ts,tsx,md,mdx,json}\" --write --check",
     "lint": "eslint-runner",
-    "lint:fix": "eslint-runner --fix"
+    "lint:fix": "eslint-runner --fix",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@sentry/nextjs": "7.7.0",
@@ -17,6 +20,7 @@
   },
   "devDependencies": {
     "@kittr/lint": "workspace:*",
+    "@kittr/prettier": "workspace:*",
     "@kittr/tsconfig": "workspace:*",
     "@kittr/types": "workspace:*",
     "@sentry/types": "^7.34.0",

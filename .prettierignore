@@ -6,6 +6,8 @@ Dockerfile.*
 **/node_modules
 *.log
 public
+**/.next
+.turbo
 
 # Codegen
 packages/prisma/validator/**

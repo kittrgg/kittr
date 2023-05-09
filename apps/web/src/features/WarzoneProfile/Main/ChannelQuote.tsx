@@ -1,55 +1,66 @@
-import colors from "@Colors"
-import { SVG } from "@Components/shared"
-import { useActiveWeapon } from "@Redux/slices/displayr/selectors"
-import { paragraph } from "@Styles/typography"
-import styled from "styled-components"
+import colors from '@Colors';
+import { SVG } from '@Components/shared';
+import { useActiveWeapon } from '@Redux/slices/displayr/selectors';
+import { paragraph } from '@Styles/typography';
+import styled from 'styled-components';
 
 function FavoriteBlueprint() {
-	const activeWeapon = useActiveWeapon()
-	const quote = activeWeapon.quote
+  const activeWeapon = useActiveWeapon();
+  const quote = activeWeapon.quote;
 
-	if (quote) {
-		return (
-			<Container>
-				<SVG.QuotationMark
-					fill={colors.darker}
-					style={{ position: "absolute", zIndex: "-1", top: "12px", left: "36px" }}
-					width="50px"
-				/>
-				<SVG.QuotationMark
-					fill={colors.darker}
-					style={{ position: "absolute", zIndex: "-1", bottom: "12px", right: "36px", transform: "rotate(180deg)" }}
-					width="50px"
-				/>
-				<Quote>{quote}</Quote>
-			</Container>
-		)
-	}
+  if (quote) {
+    return (
+      <Container>
+        <SVG.QuotationMark
+          fill={colors.darker}
+          style={{
+            position: 'absolute',
+            zIndex: '-1',
+            top: '12px',
+            left: '36px',
+          }}
+          width="50px"
+        />
+        <SVG.QuotationMark
+          fill={colors.darker}
+          style={{
+            position: 'absolute',
+            zIndex: '-1',
+            bottom: '12px',
+            right: '36px',
+            transform: 'rotate(180deg)',
+          }}
+          width="50px"
+        />
+        <Quote>{quote}</Quote>
+      </Container>
+    );
+  }
 
-	return null
+  return null;
 }
 
-export default FavoriteBlueprint
+export default FavoriteBlueprint;
 
 // Styled Components
 
 const Container = styled.div`
-	position: relative;
-	padding: 38px 48px;
-	background-color: ${colors.light};
-	border-radius: 25px;
-	color: ${colors.white};
-	z-index: 0;
-`
+  position: relative;
+  padding: 38px 48px;
+  background-color: ${colors.light};
+  border-radius: 25px;
+  color: ${colors.white};
+  z-index: 0;
+`;
 
 const Quote = styled.p`
-	color: ${colors.white};
-	${paragraph};
-	font-size: 18px;
-	text-align: center;
-	word-break: break-word;
+  color: ${colors.white};
+  ${paragraph};
+  font-size: 18px;
+  text-align: center;
+  word-break: break-word;
 
-	@media (max-width: 650px) {
-		font-size: 18px;
-	}
-`
+  @media (max-width: 650px) {
+    font-size: 18px;
+  }
+`;

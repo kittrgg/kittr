@@ -1,6 +1,6 @@
-import { useSelector } from "@Redux/store"
+import { useSelector } from '@Redux/store';
 
 /** Use the dashboard's current view */
 export const useChannelView = () => {
-	return useSelector((state) => state.dashboard.channelView)
-}
+  return useSelector((state) => state.dashboard.channelView);
+};

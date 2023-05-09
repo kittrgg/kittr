@@ -1,89 +1,103 @@
-import colors from "@Colors"
-import { SVG } from "@Components/shared"
-import { setActiveKit, setModal } from "@Redux/slices/dashboard"
-import { useActiveKit, useChannelData } from "@Redux/slices/dashboard/selectors"
-import { useDispatch } from "@Redux/store"
-import type { WarzoneKit, WarzoneKitBase, WarzoneKitOption, WarzoneTwoKitOptionTuning } from "@kittr/prisma"
-import { Button } from "@kittr/ui"
-import styled from "styled-components"
+import colors from '@Colors';
+import { SVG } from '@Components/shared';
+import { setActiveKit, setModal } from '@Redux/slices/dashboard';
+import {
+  useActiveKit,
+  useChannelData,
+} from '@Redux/slices/dashboard/selectors';
+import { useDispatch } from '@Redux/store';
+import type {
+  WarzoneKit,
+  WarzoneKitBase,
+  WarzoneKitOption,
+  WarzoneTwoKitOptionTuning,
+} from '@kittr/prisma';
+import { Button } from '@kittr/ui';
+import styled from 'styled-components';
 
 interface Props {
-	favorite?: true
-	kit: WarzoneKit & {
-		base: WarzoneKitBase
-		options: WarzoneKitOption[]
-		tuning: WarzoneTwoKitOptionTuning[]
-	}
+  favorite?: true;
+  kit: WarzoneKit & {
+    base: WarzoneKitBase;
+    options: WarzoneKitOption[];
+    tuning: WarzoneTwoKitOptionTuning[];
+  };
 }
 
 function KitButton({ favorite, kit }: Props) {
-	const { isFetching: isFetchingChannelData } = useChannelData()
-	const dispatch = useDispatch()
-	const activeKit = useActiveKit()
-	const { customTitle, base } = kit
+  const { isFetching: isFetchingChannelData } = useChannelData();
+  const dispatch = useDispatch();
+  const activeKit = useActiveKit();
+  const { customTitle, base } = kit;
 
-	let title = ""
+  let title = '';
 
-	if (customTitle) {
-		title = `${base.displayName} (${customTitle})`
-	} else {
-		title = `${base.displayName}`
-	}
+  if (customTitle) {
+    title = `${base.displayName} (${customTitle})`;
+  } else {
+    title = `${base.displayName}`;
+  }
 
-	return (
-		<Button
-			fullWidth
-			key={kit.id}
-			leftIcon={favorite ? <SVG.Star fill={colors.gold} stroke={colors.gold} width="12px" /> : null}
-			loading={isFetchingChannelData}
-			onClick={() => dispatch(setActiveKit(kit))}
-			rightIcon={
-				<SVG.Export
-					dataCy={`${base.displayName}-quick-export`}
-					onClick={() => {
-						dispatch(
-							setModal({
-								type: "Quick Command Export",
-								data: [kit]
-							})
-						)
-					}}
-					stroke={activeKit.id === kit.id ? colors.darker : colors.light}
-					style={{
-						position: "absolute",
-						top: "50%",
-						right: favorite ? "28px" : "8px",
-						transform: "translateY(-50%)",
-						width: "20px",
-						cursor: "pointer"
-					}}
-				/>
-			}
-			styles={{
-				root: {
-					backgroundColor: activeKit.id == kit.id ? colors.darker : "transparent"
-				},
-				label: {
-					width: "100%",
-					display: "flex",
-					textAlign: "left",
-					color: colors.white
-				}
-			}}
-			variant="subtle"
-		>
-			<p
-				style={{
-					maskImage: "linear-gradient(to right, black 65%, transparent 92%, transparent 100%)"
-				}}
-			>
-				{title}
-			</p>
-		</Button>
-	)
+  return (
+    <Button
+      fullWidth
+      key={kit.id}
+      leftIcon={
+        favorite ? (
+          <SVG.Star fill={colors.gold} stroke={colors.gold} width="12px" />
+        ) : null
+      }
+      loading={isFetchingChannelData}
+      onClick={() => dispatch(setActiveKit(kit))}
+      rightIcon={
+        <SVG.Export
+          dataCy={`${base.displayName}-quick-export`}
+          onClick={() => {
+            dispatch(
+              setModal({
+                type: 'Quick Command Export',
+                data: [kit],
+              }),
+            );
+          }}
+          stroke={activeKit.id === kit.id ? colors.darker : colors.light}
+          style={{
+            position: 'absolute',
+            top: '50%',
+            right: favorite ? '28px' : '8px',
+            transform: 'translateY(-50%)',
+            width: '20px',
+            cursor: 'pointer',
+          }}
+        />
+      }
+      styles={{
+        root: {
+          backgroundColor:
+            activeKit.id == kit.id ? colors.darker : 'transparent',
+        },
+        label: {
+          width: '100%',
+          display: 'flex',
+          textAlign: 'left',
+          color: colors.white,
+        },
+      }}
+      variant="subtle"
+    >
+      <p
+        style={{
+          maskImage:
+            'linear-gradient(to right, black 65%, transparent 92%, transparent 100%)',
+        }}
+      >
+        {title}
+      </p>
+    </Button>
+  );
 }
 
-export default KitButton
+export default KitButton;
 
 // Styled Components
 

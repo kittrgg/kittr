@@ -47,3 +47,5 @@ dev.env.local.json
 .vercel
 
 dump.sql
+
+packages/prisma/validator/**

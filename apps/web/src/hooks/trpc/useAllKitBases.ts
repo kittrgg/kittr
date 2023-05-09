@@ -11,4 +11,4 @@
 // 	Return query
 // }
 
-export {}
+export {};

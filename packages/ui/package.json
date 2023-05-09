@@ -21,6 +21,8 @@
   "scripts": {
     "build": "tailwindcss -o dist/compiled.css --minify",
     "dev": "concurrently \"tailwindcss -o dist/compiled.css --minify --watch\"",
+    "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
+    "format:fix": "prettier \"**/*.{js,jsx,ts,tsx,md,mdx,json}\" --write --check",
     "lint": "eslint-runner",
     "lint:fix": "eslint-runner --fix",
     "test": "vitest run",
@@ -43,6 +45,7 @@
   "devDependencies": {
     "@babel/core": "7.18.9",
     "@kittr/lint": "workspace:*",
+    "@kittr/prettier": "workspace:*",
     "@kittr/tailwind": "workspace:*",
     "@kittr/tsconfig": "workspace:*",
     "@kittr/types": "workspace:*",

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { deleteObject, ref } from 'firebase/storage';
-import { storage } from "..";
+import { storage } from '..';
 
 export const deleteFile = async ({
   id,

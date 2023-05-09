@@ -9,6 +9,8 @@
     "./storage": "./storage/index.ts"
   },
   "scripts": {
+    "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
+    "format:fix": "prettier \"**/*.{js,jsx,ts,tsx,md,mdx,json}\" --write --check",
     "lint": "eslint-runner",
     "lint:fix": "eslint-runner --fix",
     "typecheck": "tsc --noEmit"
@@ -20,6 +22,7 @@
   },
   "devDependencies": {
     "@kittr/lint": "workspace:*",
+    "@kittr/prettier": "workspace:*",
     "@kittr/tsconfig": "workspace:*",
     "@kittr/types": "workspace:*",
     "@kittr/utils": "workspace:*",

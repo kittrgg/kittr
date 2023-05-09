@@ -15,6 +15,8 @@
     "db:migrate": "prisma db push --force-reset",
     "db:push": "prisma db push --skip-generate",
     "db:studio": "prisma studio",
+    "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
+    "format:fix": "prettier \"**/*.{js,jsx,ts,tsx,md,mdx,json}\" --write --check",
     "lint": "eslint-runner",
     "lint:fix": "eslint-runner --fix",
     "seed": "prisma db push --force-reset && ts-node ./migration-scripts/index.ts",
@@ -26,6 +28,7 @@
   },
   "devDependencies": {
     "@kittr/lint": "workspace:*",
+    "@kittr/prettier": "workspace:*",
     "@kittr/tsconfig": "workspace:*",
     "@types/node": "^16.18.11",
     "prisma": "^4.13.0",

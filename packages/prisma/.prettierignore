@@ -1,0 +1,5 @@
+.env
+.github
+**/node_modules
+*.log
+validator/**

@@ -2,7 +2,7 @@ import FallbackPage from '@Components/layouts/FallbackPage';
 import { Head, NoItemFound } from '@Components/shared';
 import WarzoneProfile from '@Features/WarzoneProfile';
 import { prisma } from '@kittr/prisma';
-import { createSSGHelper } from '@kittr/trpc';
+import { createSSGHelper } from '@kittr/trpc/server';
 import { useRouter } from 'next/router';
 import { trpc } from '@/lib/trpc';
 

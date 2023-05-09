@@ -36,7 +36,7 @@ import { adminProcedure, publicProcedure, router } from './src/initTRPC';
 import { gamesCount } from './src/routers/games';
 
 export const appRouter = router({
-  healthCheck: publicProcedure.query(() => "hi"),
+  healthCheck: publicProcedure.query(() => 'hi'),
   kits: router({
     bases: router({
       options: router({
@@ -244,4 +244,3 @@ export type AppRouter = typeof appRouter;
 export type RouterInput = inferRouterInputs<AppRouter>;
 export type RouterOutput = inferRouterOutputs<AppRouter>;
 export { createContext } from './src/context';
-export { createSSGHelper } from './src/createSSGHelper';
