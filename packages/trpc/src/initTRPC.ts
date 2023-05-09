@@ -8,7 +8,7 @@ import type { Context } from './context';
 export const t = initTRPC.context<Context>().create({
   transformer: superjson,
   errorFormatter({ shape, error, path, type, input, ctx }) {
-    captureMessage(`${error.code}: ${path}` ?? 'Unknown tRPC path', {
+    captureMessage(path ? `${error.code}: ${path}` : 'Unknown tRPC path', {
       level: 'error',
       tags: { isKittr: true },
       extra: { type },
