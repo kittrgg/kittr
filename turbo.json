@@ -58,7 +58,7 @@
     "db:push": {
       "cache": false
     },
-    "//format-root:fix": {
+    "//#format-root:fix": {
       "dependsOn": ["^topo"],
       "cache": false
     },
