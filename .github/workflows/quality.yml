@@ -34,7 +34,7 @@ jobs:
         uses: ./tooling/github-actions/install
 
       - name: Run Prettier
-        run: pnpm format:check
+        run: pnpm format
 
   eslint:
     name: "ESLint"
