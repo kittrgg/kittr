@@ -1,6 +1,6 @@
 import PageWrapper from '@Components/layouts/PageWrapper';
 import ResponsiveAdBanner from '@Services/venatus/ResponsiveBanner';
-import { createSSGHelper } from '@kittr/trpc';
+import { createSSGHelper } from '@kittr/trpc/client';
 import Body from '@Features/Home/Body';
 import Hero from '@Features/Home/Hero';
 import PlatformInfo from '@Features/Home/PlatformInfo';

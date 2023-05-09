@@ -1,5 +1,5 @@
 import KitOverlay from '@Features/Overlays/ActiveKit';
-import { createSSGHelper } from '@kittr/trpc';
+import { createSSGHelper } from '@kittr/trpc/client';
 import type { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { trpc } from '@/lib/trpc';

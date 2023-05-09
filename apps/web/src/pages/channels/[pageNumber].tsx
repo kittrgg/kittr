@@ -5,7 +5,7 @@ import { ChannelList, Paginator } from '@Components/shared';
 import { useViewportDimensions } from '@Hooks/useViewportDimensions';
 import ResponsiveBanner from '@Services/venatus/ResponsiveBanner';
 import { Routes } from '@Utils/lookups/routes';
-import { createSSGHelper } from '@kittr/trpc';
+import { createSSGHelper } from '@kittr/trpc/client';
 import { Text, Title } from '@kittr/ui';
 import Link from 'next/link';
 import { useRouter } from 'next/router';

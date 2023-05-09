@@ -2,7 +2,7 @@ import PageWrapper from '@Components/layouts/PageWrapper';
 import { NoItemFound } from '@Components/shared';
 import ChannelProfile from '@Features/ChannelProfile';
 import { getTopChannelsQuery } from '@Services/orm';
-import { createSSGHelper } from '@kittr/trpc';
+import { createSSGHelper } from '@kittr/trpc/client';
 import { useRouter } from 'next/router';
 import { trpc } from '@/lib/trpc';
 
