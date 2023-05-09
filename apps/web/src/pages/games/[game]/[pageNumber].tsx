@@ -7,7 +7,7 @@ import { useViewportDimensions } from '@Hooks/useViewportDimensions';
 import ResponsiveBanner from '@Services/venatus/ResponsiveBanner';
 import { Routes } from '@Utils/lookups/routes';
 import { prisma } from '@kittr/prisma';
-import { createSSGHelper } from '@kittr/trpc/client';
+import { createSSGHelper } from '@kittr/trpc/server';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';

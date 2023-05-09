@@ -5,7 +5,8 @@
   "license": "MIT",
   "exports": {
     ".": "./index.ts",
-    "./client": "./client.ts"
+    "./client": "./client.ts",
+    "./server": "./server.ts"
   },
   "scripts": {
     "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
