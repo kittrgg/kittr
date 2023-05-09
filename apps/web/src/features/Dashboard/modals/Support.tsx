@@ -1,43 +1,43 @@
-import { Modal, ContactUs } from "@Components/shared"
-import { setModal } from "@Redux/slices/dashboard"
-import { useModal } from "@Redux/slices/dashboard/selectors"
-import { useDispatch } from "@Redux/store"
-import { header2 } from "@Styles/typography"
-import styled from "styled-components"
+import { Modal, ContactUs } from '@Components/shared';
+import { setModal } from '@Redux/slices/dashboard';
+import { useModal } from '@Redux/slices/dashboard/selectors';
+import { useDispatch } from '@Redux/store';
+import { header2 } from '@Styles/typography';
+import styled from 'styled-components';
 
 /** Support modal to allow users to find ways to contact us. */
 function SupportModal({ ...props }) {
-	const dispatch = useDispatch()
-	const { data } = useModal()
-	const { isTutorial, page } = data
+  const dispatch = useDispatch();
+  const { data } = useModal();
+  const { isTutorial, page } = data;
 
-	return (
-		<Modal
-			backgroundClickToClose={!isTutorial}
-			onUserClose={() => {
-				if (isTutorial && page === 7) {
-					dispatch(setModal({ type: "Tutorial", data: { page: 7 } }))
-				}
-			}}
-			title="NEED SOME HELP?"
-		>
-			<Subheader>GOOD COMMS. WE'VE GOT YOUR BACK.</Subheader>
-			<ContactHelper>
-				<ContactUs />
-			</ContactHelper>
-		</Modal>
-	)
+  return (
+    <Modal
+      backgroundClickToClose={!isTutorial}
+      onUserClose={() => {
+        if (isTutorial && page === 7) {
+          dispatch(setModal({ type: 'Tutorial', data: { page: 7 } }));
+        }
+      }}
+      title="NEED SOME HELP?"
+    >
+      <Subheader>GOOD COMMS. WE'VE GOT YOUR BACK.</Subheader>
+      <ContactHelper>
+        <ContactUs />
+      </ContactHelper>
+    </Modal>
+  );
 }
 
-export default SupportModal
+export default SupportModal;
 
 // Styled Components
 
 const Subheader = styled.p`
-	${header2};
-`
+  ${header2};
+`;
 
 const ContactHelper = styled.div`
-	width: 80vw;
-	margin-top: 32px;
-`
+  width: 80vw;
+  margin-top: 32px;
+`;

@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect } from 'react';
 
 /**
  * Locks the scrolling of an element.
@@ -12,18 +12,22 @@ import { useEffect } from "react"
  * initialValue: Optional css overflow value to set on the element when releasing the lock. Defaults to auto.
  * */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const useLockElementScroll = (ref: any, active = true, initialValue = "auto") => {
-	useEffect(() => {
-		const currentRef = ref.current
+export const useLockElementScroll = (
+  ref: any,
+  active = true,
+  initialValue = 'auto',
+) => {
+  useEffect(() => {
+    const currentRef = ref.current;
 
-		if (active && ref.current) {
-			ref.current.style.overflowY = "hidden"
-		}
+    if (active && ref.current) {
+      ref.current.style.overflowY = 'hidden';
+    }
 
-		return () => {
-			if (currentRef?.style) {
-				currentRef.style.overflowY = initialValue
-			}
-		}
-	}, [active, initialValue, ref])
-}
+    return () => {
+      if (currentRef?.style) {
+        currentRef.style.overflowY = initialValue;
+      }
+    };
+  }, [active, initialValue, ref]);
+};

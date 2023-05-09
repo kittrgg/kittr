@@ -8,4 +8,4 @@
 // 	Return trpc.listGames.useQuery(include)
 // }
 
-export {}
+export {};

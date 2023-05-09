@@ -10,4 +10,4 @@
 // Return result
 // }
 
-export {}
+export {};

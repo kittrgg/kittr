@@ -1,30 +1,36 @@
 {
-	"extends": "@kittr/tsconfig/nextjs.json",
-	"compilerOptions": {
-		"plugins": [{ "name": "next" }],
-		"baseUrl": "./src",
-		"declarationMap": false,
-		"declaration": false,
-		"paths": {
-			"@/*": ["./*"],
-			"@Colors": ["styles/colors"],
-			"@Components/*": ["components/*"],
-			"@Features/*": ["features/*"],
-			"@Hooks/*": ["hooks/*"],
-			"@Models/*": ["services/mongodb/models/*"],
-			"@Middlewares/*": ["utils/middlewares/*"],
-			"@Routes/*": ["utils/routes/*"],
-			"@Redux/*": ["redux/*"],
-			"@Services/*": ["services/*"],
-			"@Styles/*": ["styles/*"],
-			"@Utils/*": ["utils/*"],
-			"@Fetch": ["utils/helpers/fetch"],
-			"@Types/*": ["types/*"],
-			"@Server/*": ["server/*"]
-		},
-		"moduleResolution": "node",
-		"strictNullChecks": true
-	},
-	"include": ["next-env.d.ts", "**/*.js", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-	"exclude": ["node_modules", ".next", "./src/features/**"]
+  "extends": "@kittr/tsconfig/nextjs.json",
+  "compilerOptions": {
+    "plugins": [{ "name": "next" }],
+    "baseUrl": "./src",
+    "declarationMap": false,
+    "declaration": false,
+    "paths": {
+      "@/*": ["./*"],
+      "@Colors": ["styles/colors"],
+      "@Components/*": ["components/*"],
+      "@Features/*": ["features/*"],
+      "@Hooks/*": ["hooks/*"],
+      "@Models/*": ["services/mongodb/models/*"],
+      "@Middlewares/*": ["utils/middlewares/*"],
+      "@Routes/*": ["utils/routes/*"],
+      "@Redux/*": ["redux/*"],
+      "@Services/*": ["services/*"],
+      "@Styles/*": ["styles/*"],
+      "@Utils/*": ["utils/*"],
+      "@Fetch": ["utils/helpers/fetch"],
+      "@Types/*": ["types/*"],
+      "@Server/*": ["server/*"]
+    },
+    "moduleResolution": "node",
+    "strictNullChecks": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.js",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": ["node_modules", ".next", "./src/features/**"]
 }

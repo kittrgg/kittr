@@ -1,15 +1,14 @@
-import { appRouter, createContext } from "@kittr/trpc"
-import * as trpcNext from "@trpc/server/adapters/next"
+import { appRouter, createContext } from '@kittr/trpc';
+import * as trpcNext from '@trpc/server/adapters/next';
 
 // Export type definition of API
-export type AppRouter = typeof appRouter
+export type AppRouter = typeof appRouter;
 
 // Export API handler
-export default
-	trpcNext.createNextApiHandler({
-		router: appRouter,
-		createContext,
-		batching: {
-			enabled: true
-		}
-	})
+export default trpcNext.createNextApiHandler({
+  router: appRouter,
+  createContext,
+  batching: {
+    enabled: true,
+  },
+});

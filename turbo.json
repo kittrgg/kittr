@@ -61,10 +61,10 @@
     "//#root-format": {
       "cache": false
     },
-    "//#root-format:check": {},
     "format": {
       "cache": false
     },
+    "//#root-format:check": {},
     "format:check": {},
     "lint": {
       "dependsOn": ["^topo"]

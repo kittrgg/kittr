@@ -5,4 +5,4 @@
 // 	Return query
 // }
 
-export {}
+export {};

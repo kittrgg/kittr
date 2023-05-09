@@ -1,1 +1,1 @@
-module.exports = "@kittr/prettier";
+module.exports = '@kittr/prettier';

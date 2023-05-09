@@ -7,12 +7,12 @@
 /** Use the Montserrat font. */
 export const montserrat = `
     font-family: "Montserrat", sans-serif;
-`
+`;
 
 /** Use the Barlow Condensed font. Most commonly used for headers. */
 export const barlow = `
     font-family: "Barlow Condensed", serif;
-`
+`;
 
 /**
  * Included Properties:
@@ -30,7 +30,7 @@ export const header1 = `
     font-weight: 900;
     ${barlow};
     letter-spacing: 3px;
-`
+`;
 
 /**
  * Included Properties:
@@ -48,7 +48,7 @@ export const header2 = `
     font-weight: 600;
     ${montserrat};
     letter-spacing: 2px;
-`
+`;
 
 /**
  * Included Properties:
@@ -66,7 +66,7 @@ export const header4 = `
     font-weight: 700;
     ${barlow};
     letter-spacing: 2px;
-`
+`;
 
 /**
  * Included Properties:
@@ -78,7 +78,7 @@ export const header4 = `
 export const caption = `
     font-size: 14px;
     letter-spacing: 1px;
-`
+`;
 
 /**
  * Included Properties:
@@ -93,14 +93,14 @@ export const paragraph = `
     font-size: 18px;
     ${montserrat};
     letter-spacing: 2px;
-`
+`;
 const styles = {
-	montserrat,
-	barlow,
-	header1,
-	header2,
-	header4,
-	caption
-}
+  montserrat,
+  barlow,
+  header1,
+  header2,
+  header4,
+  caption,
+};
 
-export default styles
+export default styles;

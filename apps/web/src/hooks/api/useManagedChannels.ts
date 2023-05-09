@@ -6,4 +6,4 @@
 // 	Return trpc.listChannels.useQuery(undefined, { enabled: !!user })
 // }
 
-export {}
+export {};

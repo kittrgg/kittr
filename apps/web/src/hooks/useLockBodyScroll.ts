@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect } from 'react';
 
 /**
  * This hook locks the scrolling of the body element.
@@ -7,15 +7,15 @@ import { useEffect } from "react"
  * This is good for modals and layouts that take over the whole screen.
  */
 export const useLockBodyScroll = (active = true) => {
-	useEffect(() => {
-		const originalStyle = window.getComputedStyle(document.body).position
-		if (active) {
-			document.body.style.position = "fixed"
-			document.body.style.width = "100vw"
-		}
-		return () => {
-			document.body.style.position = originalStyle
-			document.body.style.width = "initial"
-		}
-	}, [active])
-}
+  useEffect(() => {
+    const originalStyle = window.getComputedStyle(document.body).position;
+    if (active) {
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100vw';
+    }
+    return () => {
+      document.body.style.position = originalStyle;
+      document.body.style.width = 'initial';
+    };
+  }, [active]);
+};

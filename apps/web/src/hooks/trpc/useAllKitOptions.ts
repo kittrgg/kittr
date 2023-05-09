@@ -6,4 +6,4 @@
 // 	Return query
 // }
 
-export {}
+export {};
