@@ -7,7 +7,7 @@ import { auth } from '../index';
 
 export const reauthenticate = async (password: string) => {
   if (!auth.currentUser) {
-    throw new Error("No current user.")
+    throw new Error('No current user.');
   }
 
   const { email } = auth.currentUser;
@@ -19,5 +19,5 @@ export const reauthenticate = async (password: string) => {
 
   const authUser = (await signInWithCredential(auth, authCred)).user;
   await reauthenticateWithCredential(authUser, authCred);
-  return null
-}
+  return null;
+};

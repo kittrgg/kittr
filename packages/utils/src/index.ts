@@ -1,5 +1,5 @@
 interface Json {
-  [key: string]: string | number | boolean | null | Json | Json[]
+  [key: string]: string | number | boolean | null | Json | Json[];
 }
 
 interface GetParams {
@@ -55,7 +55,7 @@ const put = async <T>({ url, body, headers = {} }: PutParams): Promise<T> => {
     body: JSON.stringify(body),
   };
 
-  return await fetch(url, requestOptions).then(handleResponse) as Promise<T>;
+  return (await fetch(url, requestOptions).then(handleResponse)) as Promise<T>;
 };
 
 interface DeleteParams {

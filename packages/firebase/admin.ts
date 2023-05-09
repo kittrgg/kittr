@@ -3,7 +3,7 @@ import admin from 'firebase-admin';
 if (!admin.apps.length) {
   try {
     if (!process.env.FIREBASE_ADMIN_PRIVATE_KEY) {
-      throw new Error("No Firebase key proided.")
+      throw new Error('No Firebase key proided.');
     }
 
     admin.initializeApp({
@@ -23,4 +23,4 @@ if (!admin.apps.length) {
   }
 }
 
-export const auth = admin.auth()
+export const auth = admin.auth();
