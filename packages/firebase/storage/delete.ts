@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { deleteObject, ref } from 'firebase/storage';
 import { storage } from '..';
 
@@ -8,8 +7,8 @@ export const deleteFile = async ({
   onError,
 }: {
   id: string;
-  onSuccess?: (...args: any) => any;
-  onError?: (...args: any) => any;
+  onSuccess?: Function;
+  onError?: Function;
 }) => {
   try {
     const storageRef = ref(storage, id);

@@ -2,9 +2,13 @@ import admin from 'firebase-admin';
 
 if (!admin.apps.length) {
   try {
+    if (!process.env.FIREBASE_ADMIN_PRIVATE_KEY) {
+      throw new Error('No Firebase key proided.');
+    }
+
     admin.initializeApp({
       credential: admin.credential.cert({
-        privateKey: process.env.FIREBASE_ADMIN_PRIVATE_KEY!.replace(
+        privateKey: process.env.FIREBASE_ADMIN_PRIVATE_KEY.replace(
           /\\n/g,
           '\n',
         ),
@@ -13,9 +17,10 @@ if (!admin.apps.length) {
       }),
     });
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error(err);
     throw new Error('Something is wrong with Firebase.');
   }
 }
 
-export default admin.auth();
+export const auth = admin.auth();

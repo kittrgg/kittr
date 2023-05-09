@@ -1,3 +1,3 @@
 import { auth } from '../index';
 
-export const logOut = async () => await auth?.signOut();
+export const logOut = async () => auth.signOut();

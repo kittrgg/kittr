@@ -1,8 +1,10 @@
-import * as Sentry from '@sentry/nextjs';
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable no-console */
+import { captureException, captureMessage } from '@sentry/nextjs';
 
 /** Send exception to the error logger from Nextjs. */
 export const logError = (message: string | Error, withConsole?: boolean) => {
-  Sentry.captureException(message);
+  captureException(message);
   if (withConsole) {
     console.error(message);
   }
@@ -10,7 +12,7 @@ export const logError = (message: string | Error, withConsole?: boolean) => {
 
 /** Send warning to the error logger from Nextjs. */
 export const logWarning = (warning: string, withConsole?: boolean) => {
-  Sentry.captureMessage(warning, 'warning' as any);
+  captureMessage(warning, 'warning');
   if (withConsole) {
     console.warn(warning);
   }
@@ -18,7 +20,7 @@ export const logWarning = (warning: string, withConsole?: boolean) => {
 
 /** Send an info log to the error logger from Nextjs. */
 export const logInfo = (info: string, withConsole?: boolean) => {
-  Sentry.captureMessage(info, 'info' as any);
+  captureMessage(info, 'info');
   if (withConsole) {
     console.info(info);
   }
@@ -26,7 +28,7 @@ export const logInfo = (info: string, withConsole?: boolean) => {
 
 /** Send a debug log to the error logger from Nextjs. */
 export const logDebug = (debugMessage: string, withConsole?: boolean) => {
-  Sentry.captureMessage(debugMessage, 'debug' as any);
+  captureMessage(debugMessage, 'debug');
   if (withConsole) {
     console.info(debugMessage);
   }

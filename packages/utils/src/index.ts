@@ -1,3 +1,7 @@
+interface Json {
+  [key: string]: string | number | boolean | null | Json | Json[];
+}
+
 interface GetParams {
   url: string;
   headers?: HeadersInit;
@@ -18,12 +22,12 @@ const get = async <T>({
     redirect,
   };
 
-  return await fetch(url, requestOptions).then(handleResponse);
+  return fetch(url, requestOptions).then(handleResponse) as Promise<T>;
 };
 
 interface PostParams {
   url: string;
-  body?: any;
+  body?: Json;
   headers?: HeadersInit;
   redirect?: 'follow';
 }
@@ -35,12 +39,12 @@ const post = async <T>({ url, body, headers = {} }: PostParams): Promise<T> => {
     body: JSON.stringify(body),
   };
 
-  return await fetch(url, requestOptions).then(handleResponse);
+  return fetch(url, requestOptions).then(handleResponse) as Promise<T>;
 };
 
 interface PutParams {
   url: string;
-  body: any;
+  body: Json;
   headers?: HeadersInit;
 }
 
@@ -51,12 +55,12 @@ const put = async <T>({ url, body, headers = {} }: PutParams): Promise<T> => {
     body: JSON.stringify(body),
   };
 
-  return await fetch(url, requestOptions).then(handleResponse);
+  return (await fetch(url, requestOptions).then(handleResponse)) as Promise<T>;
 };
 
 interface DeleteParams {
   url: string;
-  body?: any;
+  body?: Json;
   headers?: HeadersInit;
 }
 
@@ -71,21 +75,25 @@ const _delete = async <T>({
     headers,
     body: JSON.stringify(body),
   };
-  return await fetch(url, requestOptions).then(handleResponse);
+  return fetch(url, requestOptions).then(handleResponse) as Promise<T>;
 };
 
 // Helper functions
 
-const handleResponse = (response: any) => {
+const handleResponse = (response: Response) => {
   // Uses .text() so that there is no error for an empty response
-  return response.text().then((text: any) => {
+  return response.text().then((text) => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const data = text && JSON.parse(text);
 
-    if (response.error || !response.ok) {
+    if (!response.ok) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const error = data || response.statusText;
+      // eslint-disable-next-line prefer-promise-reject-errors, @typescript-eslint/no-unsafe-assignment
       return Promise.reject({ requestedUrl: response.url, error });
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return data;
   });
 };
@@ -240,5 +248,3 @@ export const badWordFilter = (string: string): boolean => {
 
   return badWords.some((check) => string.includes(check));
 };
-
-export const isTest = process.env.NODE_ENV === 'test';

@@ -29,7 +29,7 @@ function CoverPhotoUploader() {
   const { mutate } = trpc.channels.profile['cover-photo'].update.useMutation({
     onSuccess: (data) => {
       if (data.profile?.hasCoverPhoto) {
-        download(data.id, (path) => {
+        download(data.id, (path: string) => {
           setIsUploading(false);
         });
       }
@@ -66,14 +66,14 @@ function CoverPhotoUploader() {
 
   useEffect(() => {
     if (hasCoverPhoto) {
-      download(fileName, (path) => {
+      download(fileName, (path: string) => {
         setIsUploading(false);
         setImage(path);
       });
     }
   }, [isUploading, hasCoverPhoto, fileName]);
 
-  const handleDelete = async (e: any) => {
+  const handleDelete = async () => {
     setIsUploading(true);
     setImage('');
     await deleteFile({
@@ -82,7 +82,7 @@ function CoverPhotoUploader() {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
         mutate({ channelId: data?.id!, hasCoverPhoto: false });
       },
-      onError: (error) => {
+      onError: () => {
         dispatch(setModal({ type: 'Error Notification', data: {} }));
       },
     });
