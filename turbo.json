@@ -58,14 +58,20 @@
     "db:push": {
       "cache": false
     },
-    "//#root-format": {
+    "//#root-format:fix": {
+      "dependsOn": ["^topo"],
       "cache": false
+    },
+    "format:fix": {
+      "dependsOn": ["^topo"],
+      "cache": false
+    },
+    "//#root-format": {
+      "dependsOn": ["^topo"]
     },
     "format": {
-      "cache": false
+      "dependsOn": ["^topo"]
     },
-    "//#root-format:check": {},
-    "format:check": {},
     "lint": {
       "dependsOn": ["^topo"]
     },

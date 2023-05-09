@@ -29,11 +29,10 @@ function KitButton({ favorite, kit }: Props) {
   }
 
   return (
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
     <Button
-      active={activeKit.id == kit.id}
+      active={activeKit.id === kit.id}
       key={kit.id}
+      // @ts-expect-error My code is so bad. This will get written out in time.
       onClick={() => dispatch(setActiveKit(kit))}
     >
       <p

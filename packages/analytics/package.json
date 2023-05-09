@@ -5,8 +5,8 @@
   "license": "MIT",
   "main": "./src/index.ts",
   "scripts": {
-    "format": "prettier \"**/*.{js,jsx,ts,tsx,md,mdx,json}\" --write --check",
-    "format:check": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
+    "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
+    "format:fix": "prettier \"**/*.{js,jsx,ts,tsx,md,mdx,json}\" --write --check",
     "lint": "eslint-runner",
     "lint:fix": "eslint-runner --fix",
     "typecheck": "tsc --noEmit"
