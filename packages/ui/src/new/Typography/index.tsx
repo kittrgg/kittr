@@ -5,7 +5,7 @@ type HeadingProps = React.DetailedHTMLProps<
   HTMLHeadingElement
 >;
 
-const H1 = (props: HeadingProps) => {
+export const H1 = (props: HeadingProps) => {
   return (
     <h1
       {...props}
@@ -16,7 +16,7 @@ const H1 = (props: HeadingProps) => {
     />
   );
 };
-const H2 = (props: HeadingProps) => {
+export const H2 = (props: HeadingProps) => {
   return (
     <h2
       {...props}
@@ -27,7 +27,7 @@ const H2 = (props: HeadingProps) => {
     />
   );
 };
-const H3 = (props: HeadingProps) => {
+export const H3 = (props: HeadingProps) => {
   return (
     <h3
       {...props}
@@ -38,7 +38,7 @@ const H3 = (props: HeadingProps) => {
     />
   );
 };
-const H4 = (props: HeadingProps) => {
+export const H4 = (props: HeadingProps) => {
   return (
     <h4
       {...props}
@@ -49,7 +49,7 @@ const H4 = (props: HeadingProps) => {
     />
   );
 };
-const H5 = (props: HeadingProps) => {
+export const H5 = (props: HeadingProps) => {
   return (
     <h5
       {...props}
@@ -66,7 +66,7 @@ type PProps = React.DetailedHTMLProps<
   HTMLParagraphElement
 >;
 
-const P = (props: PProps) => {
+export const P = (props: PProps) => {
   return (
     <p
       {...props}
@@ -77,7 +77,7 @@ const P = (props: PProps) => {
     />
   );
 };
-const Span = (
+export const Span = (
   props: React.DetailedHTMLProps<
     React.HTMLAttributes<HTMLSpanElement>,
     HTMLSpanElement
@@ -88,7 +88,7 @@ const Span = (
   );
 };
 
-const BlockQuote = (
+export const BlockQuote = (
   props: React.DetailedHTMLProps<
     React.BlockquoteHTMLAttributes<HTMLQuoteElement>,
     HTMLQuoteElement
@@ -100,15 +100,4 @@ const BlockQuote = (
       className={cn('mt-6 border-l-2 pl-6 italic text-white', props.className)}
     />
   );
-};
-
-export const Typography = {
-  H1,
-  H2,
-  H3,
-  H4,
-  H5,
-  P,
-  Span,
-  BlockQuote,
 };

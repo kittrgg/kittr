@@ -1,4 +1,4 @@
-import { Typography } from '../Typography';
+import { Span, P } from '../Typography';
 import { cn } from '../utils';
 
 interface PlayerCardProps {
@@ -28,19 +28,17 @@ export const PlayerCard = ({ name, isLive, imageProps }: PlayerCardProps) => {
             'absolute bottom-16 left-1/2 -translate-x-1/2 rounded-md bg-red-600',
           )}
         >
-          <Typography.Span className={cn('px-2 py-0.5 tracking-widest')}>
-            LIVE
-          </Typography.Span>
+          <Span className={cn('px-2 py-0.5 tracking-widest')}>LIVE</Span>
         </div>
       )}
 
-      <Typography.P
+      <P
         className={cn(
           'w-40 overflow-hidden truncate whitespace-nowrap text-xl font-bold tracking-widest',
         )}
       >
         {name}
-      </Typography.P>
+      </P>
     </button>
   );
 };
