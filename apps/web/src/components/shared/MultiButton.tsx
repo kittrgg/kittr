@@ -8,7 +8,7 @@ interface Props {
     /** Text for the button for this value. */
     text: string;
     /** Optional value parameter. If omitted, the text field will be used. */
-    value?: string | boolean;
+    value?: boolean | string;
     /** When active, the background color for the given value. Optional.
      * Defaults to colors.lighter.
      */
@@ -27,7 +27,7 @@ interface Props {
    */
   wrapperBackgroundColor?: string;
   /** Current user selection. */
-  activeValue: string | boolean;
+  activeValue: boolean | string;
   /** Optional onClick handler to run on user's selection. */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onClick: (...args: any) => any;

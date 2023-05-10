@@ -7,7 +7,7 @@ import styled from 'styled-components';
 interface Props {
   visible: boolean;
   setVisibility: Dispatch<SetStateAction<boolean>>;
-  children: string | ReactNode;
+  children: ReactNode | string;
 }
 
 export function Toast({ visible, setVisibility, children }: Props) {

@@ -8,14 +8,14 @@ import { useEffect, useRef } from 'react';
 interface Props {
   /** Venatus ad unit type. */
   placementType:
-    | 'd300x250'
-    | 's300x250'
-    | 'd728x90'
-    | 's728x90'
     | 'd300x50'
+    | 'd300x250'
+    | 'd728x90'
     | 'rmFooter'
+    | 'rmStickyRight'
     | 'rmVideo'
-    | 'rmStickyRight';
+    | 's300x250'
+    | 's728x90';
   /** A value that, if changed, fetches a new ad. Useful for covering cases like shallow routing and browser resizes. */
   updateTrigger?: any;
   /** CSS compatible string to set margin for the ad element  */

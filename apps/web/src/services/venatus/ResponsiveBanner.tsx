@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 
 interface Props {
   /** What placement type should we show for a large screen? Defaults to s728x90. */
-  largeWidthAdUnit?: 's728x90' | 'd728x90';
+  largeWidthAdUnit?: 'd728x90' | 's728x90';
   /** What placement type should we show for a small screen? Defaults to d300x50. */
   smallWidthAdUnit?: 'd300x50' | 's300x250';
   /** CSS properties to apply to the container of the ad. Defaults to "margin: 18px 0;". */

@@ -1,7 +1,7 @@
 import type { NextClientEndpointError } from '@kittr/types/types';
 
 export const isFetchError = <T>(
-  result: T | NextClientEndpointError,
+  result: NextClientEndpointError | T,
 ): result is NextClientEndpointError => {
   return (result as NextClientEndpointError).error !== undefined;
 };

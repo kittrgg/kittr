@@ -4,8 +4,8 @@ import { setChannelView, setModal } from '@Redux/slices/dashboard';
 import { useChannelData } from '@Redux/slices/dashboard/selectors';
 import { useDispatch, useSelector } from '@Redux/store';
 import { header2 } from '@Styles/typography';
-import { useSocket } from '@/pages/dashboard';
 import styled from 'styled-components';
+import { useSocket } from '@/pages/dashboard';
 import { trpc } from '@/lib/trpc';
 
 /** Modal to delete a game from a channel. */

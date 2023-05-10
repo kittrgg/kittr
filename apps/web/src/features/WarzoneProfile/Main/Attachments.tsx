@@ -20,13 +20,13 @@ import { Fragment } from 'react';
 import styled from 'styled-components';
 import * as Styled from './style';
 
-type ActiveWeapon = (WarzoneKit | WarzoneTwoKit) & {
-  base: (WarzoneKitBase | WarzoneTwoKitBase) & {
+type ActiveWeapon = {
+  base: {
     category: WarzoneKitBaseCategory | WarzoneTwoKitBaseCategory;
-  };
+  } & (WarzoneKitBase | WarzoneTwoKitBase);
   options: WarzoneKitOption[] | WarzoneTwoKitOption[];
   tuning?: WarzoneTwoKitOptionTuning[];
-};
+} & (WarzoneKit | WarzoneTwoKit);
 
 function Attachments() {
   const activeWeapon = useActiveChannelKit() as ActiveWeapon;

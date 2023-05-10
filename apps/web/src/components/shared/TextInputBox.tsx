@@ -3,13 +3,13 @@ import styled from 'styled-components';
 
 interface Props {
   /** Input types for "text" based inputs */
-  type: 'text' | 'password' | 'email' | 'number';
+  type: 'email' | 'number' | 'password' | 'text';
   /** HTML5 name for the input. */
   name: string;
   /** Placeholder for the input field. Optional. */
   placeholder?: string;
   /** User's input. */
-  value: string | number;
+  value: number | string;
   /** A subtext beneath the input field. */
   subline?: string;
   /** A width for the element. Important for keeping the label at the same size as the input in certain situations. */

@@ -4,9 +4,9 @@ import styled from 'styled-components';
 
 interface Props {
   /** HTML5 types for the button. */
-  type?: 'submit' | 'button' | 'reset';
+  type?: 'button' | 'reset' | 'submit';
   /** Button's base design. */
-  design?: 'transparent' | 'white' | 'default' | 'premium';
+  design?: 'default' | 'premium' | 'transparent' | 'white';
   /** Text content of the button. Can also be a React component (use wisely and be careful of resizing issues). */
   text: string;
   /** HTML5 disabled attribute. Can this button be disabled by certain application behavior? Use this flag. */
@@ -72,7 +72,7 @@ export default Button;
 
 // Styled Components
 
-const ButtonBase = styled.button<Pick<Props, 'disabled' | 'design'>>`
+const ButtonBase = styled.button<Pick<Props, 'design' | 'disabled'>>`
   display: block;
   appearance: none;
   padding: 20px 46px;

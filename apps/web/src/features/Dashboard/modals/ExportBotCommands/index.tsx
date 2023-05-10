@@ -28,7 +28,7 @@ function ExportBotCommands() {
   const dispatch = useDispatch();
   const { data } = useChannelData();
   const [method, setMethod] = useState<TCommandMethod>('nightbot');
-  const [commandStrategy, setCommandStrategy] = useState<'edit' | 'add'>(
+  const [commandStrategy, setCommandStrategy] = useState<'add' | 'edit'>(
     'edit',
   );
   const [includeUser, setIncludeUser] = useState(true);

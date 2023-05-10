@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 interface Props {
   /** The type of item that couldn't be found. On kittr, these are the two main distinctions that people would be searching through. */
-  type: 'game' | 'channel';
+  type: 'channel' | 'game';
 }
 
 /** If a game or channel can't be found, render this component. It is a full-screen so there is no need for any layout with it. */

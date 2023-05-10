@@ -25,5 +25,8 @@
     "**/.turbo": true,
     "**/.vercel": true,
     "**/dist": true
-  }
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+  ]
 }

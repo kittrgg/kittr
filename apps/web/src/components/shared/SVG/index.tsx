@@ -82,6 +82,6 @@ interface SVGByTypeProps {
 export function SvgByType({
   type,
   ...props
-}: SVGByTypeProps & React.AllHTMLAttributes<any>) {
+}: React.AllHTMLAttributes<any> & SVGByTypeProps) {
   return createElement(SVG[type], props);
 }

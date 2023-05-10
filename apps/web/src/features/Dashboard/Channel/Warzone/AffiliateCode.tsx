@@ -48,7 +48,6 @@ function CreatorCode() {
           data-cy="creator-code-input"
           onBlur={async () => {
             mutate({
-              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
               code: {
                 id: affiliateCode?.id,
                 code,

@@ -40,7 +40,7 @@ function Schedule({ schedule, brandColor }: Props) {
 
   const convertToCalendarPosition = (
     channel: any,
-    startOrEnd: 'start_time' | 'end_time',
+    startOrEnd: 'end_time' | 'start_time',
     weekIndex: number,
     right?: boolean,
   ) => {

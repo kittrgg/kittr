@@ -3,7 +3,7 @@
 import { captureException, captureMessage } from '@sentry/node';
 
 /** Send exception to the error logger from node. */
-export const logError = (message: string | Error, withConsole?: boolean) => {
+export const logError = (message: Error | string, withConsole?: boolean) => {
   captureException(message);
   if (withConsole) {
     console.error(message);

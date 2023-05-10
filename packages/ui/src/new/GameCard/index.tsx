@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Badge } from '../Badge';
-import { Typography } from '../Typography';
+import { H4, H3, H5, Span } from '../Typography';
 import { cn } from '../utils';
 
 interface GameCardProps {
@@ -31,19 +31,17 @@ export const GameCard: React.FC<GameCardProps> = ({
       className={cn(
         'relative m-4 rounded-xl bg-zinc-900 p-8 text-center shadow-md outline-none',
         {
+          'bg-zinc-900/60': disabled,
           'hover:cursor-pointer hover:bg-zinc-800 focus:shadow-slate-600 active:bg-zinc-700':
             !disabled,
-          'bg-zinc-900/60': disabled,
         },
       )}
       disabled={disabled}
     >
       {disabled && (
-        <Typography.H4
-          className={cn('absolute bottom-8 right-8 tracking-wide')}
-        >
+        <H4 className={cn('absolute bottom-8 right-8 tracking-wide')}>
           COMING SOON
-        </Typography.H4>
+        </H4>
       )}
       <div className={cn('flex', { 'opacity-40': disabled })}>
         <img
@@ -52,18 +50,16 @@ export const GameCard: React.FC<GameCardProps> = ({
         />
 
         <div className={cn('mx-8 my-4 flex min-w-[14rem] flex-col text-left')}>
-          <Typography.H3>{title}</Typography.H3>
-          <Typography.H5 className={cn('text-gray-400')}>
-            {developer}
-          </Typography.H5>
+          <H3>{title}</H3>
+          <H5 className={cn('text-gray-400')}>{developer}</H5>
 
-          <Typography.Span className="mt-4 block">Genres</Typography.Span>
+          <Span className="mt-4 block">Genres</Span>
           <div>
             {genres.map((genre) => (
               <Badge>{genre}</Badge>
             ))}
           </div>
-          <Typography.Span className="mt-2 block">Platforms</Typography.Span>
+          <Span className="mt-2 block">Platforms</Span>
           <div>
             {platforms.map((platform) => (
               <Badge variant="outline">{platform}</Badge>

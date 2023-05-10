@@ -17,7 +17,7 @@ interface Props {
   /** The game for this button. */
   game: Game;
   /** If the game is currently in view. */
-  activeView: string | boolean;
+  activeView: boolean | string;
 }
 
 /** A button to open up a game that is on this channel's profile. */

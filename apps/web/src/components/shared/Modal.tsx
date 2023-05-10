@@ -9,7 +9,7 @@ import styled from 'styled-components';
 
 interface Props {
   /** Title to show at the top of the modal. */
-  title?: string | ReactNode;
+  title?: ReactNode | string;
   /** Should the modal close if you click on the background dimmer? */
   backgroundClickToClose?: boolean;
   /** An optional function to call when the user clicks the X or clicks the background to close it.  */

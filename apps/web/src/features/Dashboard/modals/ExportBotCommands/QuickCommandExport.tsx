@@ -13,7 +13,7 @@ function QuickCommandExport({ ...props }) {
   const { data } = useModal();
   const [includeUser, setIncludeUser] = useState(true);
   const [method, setMethod] = useState<TCommandMethod>('nightbot');
-  const [commandStrategy, setCommandStrategy] = useState<'edit' | 'add'>(
+  const [commandStrategy, setCommandStrategy] = useState<'add' | 'edit'>(
     'edit',
   );
 

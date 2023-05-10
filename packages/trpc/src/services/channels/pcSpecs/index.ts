@@ -33,7 +33,7 @@ export const createPcSpec = async ({
   data,
 }: {
   channelId: string;
-  data: Omit<ChannelPcSpec, 'id' | 'channelProfileId'>;
+  data: Omit<ChannelPcSpec, 'channelProfileId' | 'id'>;
 }) => {
   const pcSpec = await prisma.channelProfile.update({
     where: {

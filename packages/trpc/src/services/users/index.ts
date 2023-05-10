@@ -76,7 +76,7 @@ export const create = async ({
 }) => {
   const user = await signUp(email, password);
 
-  if (user?.user) {
+  if (user.user) {
     const update = updateUserDisplayName(displayName);
 
     return update;
