@@ -31,9 +31,9 @@ export const GameCard: React.FC<GameCardProps> = ({
       className={cn(
         'relative m-4 rounded-xl bg-zinc-900 p-8 text-center shadow-md outline-none',
         {
+          'bg-zinc-900/60': disabled,
           'hover:cursor-pointer hover:bg-zinc-800 focus:shadow-slate-600 active:bg-zinc-700':
             !disabled,
-          'bg-zinc-900/60': disabled,
         },
       )}
       disabled={disabled}
@@ -53,13 +53,13 @@ export const GameCard: React.FC<GameCardProps> = ({
           <H3>{title}</H3>
           <H5 className={cn('text-gray-400')}>{developer}</H5>
 
-          <Span className="block mt-4">Genres</Span>
+          <Span className="mt-4 block">Genres</Span>
           <div>
             {genres.map((genre) => (
               <Badge>{genre}</Badge>
             ))}
           </div>
-          <Span className="block mt-2">Platforms</Span>
+          <Span className="mt-2 block">Platforms</Span>
           <div>
             {platforms.map((platform) => (
               <Badge variant="outline">{platform}</Badge>

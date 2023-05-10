@@ -1,5 +1,5 @@
 type FixedLengthArray<T, Length extends number> = Length extends Length
-  ? [T, ...T[]] & { length: Length }
+  ? { length: Length } & [T, ...T[]]
   : never;
 
 export const yellow: FixedLengthArray<string, 10> = [

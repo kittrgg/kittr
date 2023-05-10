@@ -3,7 +3,7 @@ import { storage } from '..';
 
 export const upload = async (
   id: string,
-  file: Blob | Uint8Array | ArrayBuffer,
+  file: ArrayBuffer | Blob | Uint8Array,
 ) => {
   const storageRef = ref(storage, id);
   const bytes = await uploadBytes(storageRef, file);

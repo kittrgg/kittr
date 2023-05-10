@@ -16,8 +16,10 @@ function Page({ params }: { params: { component: string } }) {
 
   return (
     <>
-      <H1>{components[params.component].name}</H1>
-      {components[params.component].components.map((comp) => comp)}
+      <H1 className="border-b pb-4">{components[params.component].name}</H1>
+      <div className="mt-8 flex flex-col gap-6">
+        {components[params.component].components.map((comp) => comp)}
+      </div>
     </>
   );
 }

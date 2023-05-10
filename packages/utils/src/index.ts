@@ -1,5 +1,5 @@
 interface Json {
-  [key: string]: string | number | boolean | null | Json | Json[];
+  [key: string]: Json | Json[] | boolean | number | string | null;
 }
 
 interface GetParams {
