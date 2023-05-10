@@ -3,7 +3,7 @@ import { componentEntries } from '#/componentMap';
 
 export function Sidebar() {
   return (
-    <div className="flex flex-col flex-none gap-4 p-4 border-r">
+    <div className="flex flex-none flex-col gap-4 border-r p-4">
       <Link href="/">Home</Link>
       {componentEntries.map(([slug, component]) => {
         return (

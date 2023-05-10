@@ -11,7 +11,7 @@ import { useEffect } from 'react';
  *
  * initialValue: Optional css overflow value to set on the element when releasing the lock. Defaults to auto.
  * */
- 
+
 export const useLockElementScroll = (
   ref: any,
   active = true,

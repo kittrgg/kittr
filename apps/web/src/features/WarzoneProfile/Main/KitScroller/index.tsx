@@ -11,7 +11,7 @@ interface Props {
 
 function KitScroller({ availableKits }: Props) {
   const activeWeapon = useActiveWeapon();
-  const [mask, setMask] = useState<'left' | 'right' | 'both' | 'none'>('left');
+  const [mask, setMask] = useState<'both' | 'left' | 'none' | 'right'>('left');
   const containerRef = useRef<HTMLDivElement>(null);
 
   const matchedBase = availableKits

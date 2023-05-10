@@ -11,7 +11,7 @@ import { trpc } from '@/lib/trpc';
 interface Props {
   id: string;
   previewWidth?: number;
-  overlayStyle?: 'Banner' | 'Banner Ticker' | 'Display Ticker' | 'Display';
+  overlayStyle?: 'Banner Ticker' | 'Banner' | 'Display Ticker' | 'Display';
 }
 
 function ActiveKitOverlay({ id, previewWidth, overlayStyle }: Props) {

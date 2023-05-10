@@ -4,11 +4,11 @@ import styled from 'styled-components';
 
 interface Props {
   /** Input types for "text" based inputs */
-  type: 'text' | 'password' | 'email';
+  type: 'email' | 'password' | 'text';
   /** HTMl5 name for the input. */
   name: string;
   /** Text label for the input. */
-  label: string | ReactNode;
+  label: ReactNode | string;
   /** Optionally move the label above the text input. */
   topLabel?: boolean;
   /** Optionally remove the label from the text input. */

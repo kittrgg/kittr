@@ -8,10 +8,10 @@ import styled from 'styled-components';
 interface Props {
   planType?: 'premium';
   title: string;
-  price: string | ReactNode;
+  price: ReactNode | string;
   description: string;
   buttonText: string;
-  buttonStyle: 'transparent' | 'white' | 'default';
+  buttonStyle: 'default' | 'transparent' | 'white';
   buttonAction: (...args: any) => any;
 }
 

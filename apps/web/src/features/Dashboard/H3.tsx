@@ -4,7 +4,7 @@ import type { CSSProperties, ReactNode } from 'react';
 import styled from 'styled-components';
 
 interface Props {
-  children: string | ReactNode;
+  children: ReactNode | string;
   style?: CSSProperties;
 }
 

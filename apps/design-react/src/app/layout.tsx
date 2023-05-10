@@ -24,10 +24,10 @@ export default function RootLayout({
           inter.className,
         )}
       >
-        <div className="p-4 border-b">
+        <div className="border-b p-4">
           Welcome to kittr&apos;s React UI library.
         </div>
-        <div className="flex flex-row flex-grow">
+        <div className="flex flex-grow flex-row">
           <Sidebar />
           <main className="flex-auto p-8">{children}</main>
         </div>

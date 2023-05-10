@@ -10,7 +10,6 @@ import { useRouter } from 'next/router';
 import { Provider } from 'react-redux';
 import { trpc } from '@/lib/trpc';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function MyApp({
   Component,
   pageProps,

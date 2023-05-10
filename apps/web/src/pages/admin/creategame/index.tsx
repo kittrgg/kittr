@@ -110,7 +110,6 @@ function Page() {
           }
 
           return (
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             <TextInput
               key={input}
               label={input}

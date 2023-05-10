@@ -14,9 +14,9 @@ import { createSlice } from '@reduxjs/toolkit';
 
 type ActiveWeaponKit = WarzoneKit & {
   options: WarzoneKitOption[] | WarzoneTwoKitOption[];
-  base: (WarzoneKitBase | WarzoneTwoKitBase) & {
+  base: {
     category: WarzoneKitBaseCategory | WarzoneTwoKitBaseCategory;
-  };
+  } & (WarzoneKitBase | WarzoneTwoKitBase);
   tuning?: WarzoneTwoKitOptionTuning[];
 };
 

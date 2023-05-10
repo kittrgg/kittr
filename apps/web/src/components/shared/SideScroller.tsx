@@ -90,8 +90,8 @@ export function SideScroller({ wrapperStyles, childMargin, children }: Props) {
           {/* Spacer to hint to user that this is the end of scrolling */}
           {/* eslint-disable-next-line */}
           <img
-            src="/media/clear.svg"
             alt=""
+            src="/media/clear.svg"
             style={{ opacity: '0', width: '8%' }}
           />
         </Wrapper>

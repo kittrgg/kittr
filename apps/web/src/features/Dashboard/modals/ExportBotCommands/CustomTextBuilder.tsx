@@ -18,7 +18,7 @@ interface Props {
   /** Method which the user will be utilizing for adding their commands */
   method: TCommandMethod;
   /** Strategy for Twitch being employed by the user. */
-  commandStrategy: 'edit' | 'add';
+  commandStrategy: 'add' | 'edit';
 }
 
 /**

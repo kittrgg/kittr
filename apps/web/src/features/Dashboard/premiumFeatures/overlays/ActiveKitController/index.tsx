@@ -327,7 +327,7 @@ function ActiveKit() {
                 .slice()
                 .filter((kit) => data.overlay?.secondaryWzTwoKit?.id !== kit.id)
                 .sort((a, b) =>
-                  sortAlphabetical(a.base!.displayName, b.base!.displayName),
+                  sortAlphabetical(a.base.displayName, b.base.displayName),
                 )
                 .sort((kit) => {
                   if (kit.featured) {

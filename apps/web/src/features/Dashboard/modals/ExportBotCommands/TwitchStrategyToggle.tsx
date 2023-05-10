@@ -4,9 +4,9 @@ import type { Dispatch, SetStateAction } from 'react';
 
 interface Props {
   /** Twitch command strategies to add kittr commands to chat */
-  commandStrategy: 'edit' | 'add';
+  commandStrategy: 'add' | 'edit';
   /** Set the user's Twitch strategy */
-  setCommandStrategy: Dispatch<SetStateAction<'edit' | 'add'>>;
+  setCommandStrategy: Dispatch<SetStateAction<'add' | 'edit'>>;
 }
 
 function TwitchStrategyToggle({ commandStrategy, setCommandStrategy }: Props) {

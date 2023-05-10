@@ -27,7 +27,7 @@ interface Props {
   /** Method which the user will be utilizing for adding their commands. */
   method: TCommandMethod;
   /** If the user is using updating commands using chat, this is the bot command that they are going to use to perform the action. */
-  commandStrategy: 'edit' | 'add';
+  commandStrategy: 'add' | 'edit';
   /** If the user wants to use include an "$(touser)" in their commands. */
   includeUser: boolean;
 }

@@ -6,9 +6,9 @@ import { setActiveView, setModal } from '@Redux/slices/dashboard';
 import { useChannelData } from '@Redux/slices/dashboard/selectors';
 import { useDispatch } from '@Redux/store';
 import { header2 } from '@Styles/typography';
-import { useSocket } from '@/pages/dashboard';
 import { useState } from 'react';
 import styled from 'styled-components';
+import { useSocket } from '@/pages/dashboard';
 import { trpc } from '@/lib/trpc';
 
 /** Modal to allow the user to delete the channel. */
