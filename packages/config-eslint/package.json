@@ -24,13 +24,13 @@
     "@typescript-eslint/eslint-plugin": "^5.59.1",
     "@typescript-eslint/parser": "^5.59.1",
     "@vercel/style-guide": "^4.0.2",
-    "eslint": "8.22.0",
+    "eslint": "^8.40.0",
     "eslint-config-turbo": "^1.9.3",
     "globby": "^13.1.4",
     "typescript": "^5.0.4"
   },
   "devDependencies": {
     "@kittr/prettier": "workspace:*",
-    "eslint-plugin-sort-keys-fix": "^1.1.2"
+    "@types/eslint": "^8.37.0"
   }
 }

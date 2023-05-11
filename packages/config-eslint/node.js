@@ -28,7 +28,6 @@ module.exports = {
   parserOptions: {
     project: `${__dirname}/tsconfig.json`,
   },
-  plugins: ['sort-keys-fix'],
   root: true,
   rules,
   settings: {
