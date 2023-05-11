@@ -18,8 +18,8 @@ const main = async () => {
     : [defaultGlob];
 
     const eslint = new ESLint({
-      useEslintrc: true,
       fix: isFix,
+      useEslintrc: true,
     });
 
   const { ignorePatterns } = await eslint.calculateConfigForFile("*");

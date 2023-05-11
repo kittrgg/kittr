@@ -5,7 +5,6 @@ const { rules } = require('./utils/rules');
 require('@rushstack/eslint-patch/modern-module-resolution');
 
 module.exports = {
-  root: true,
   extends: [
     '@vercel/style-guide/eslint/browser',
     '@vercel/style-guide/eslint/node',
@@ -13,10 +12,7 @@ module.exports = {
     '@vercel/style-guide/eslint/next',
     '@vercel/style-guide/eslint/typescript',
   ].map((config) => require.resolve(config)),
-  parserOptions: {
-    tsconfigRootDir: `${__dirname}/tsconfig.json`,
-  },
-  rules,
+  ignorePatterns: ['**/.next/**', '**/.eslintrc.js'],
   overrides: [
     {
       files: [
@@ -32,5 +28,9 @@ module.exports = {
       },
     },
   ],
-  ignorePatterns: ['**/.next/**', '**/.eslintrc.js'],
+  parserOptions: {
+    tsconfigRootDir: `${__dirname}/tsconfig.json`,
+  },
+  root: true,
+  rules,
 };

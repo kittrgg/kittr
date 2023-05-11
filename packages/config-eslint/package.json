@@ -30,6 +30,7 @@
     "typescript": "^5.0.4"
   },
   "devDependencies": {
-    "@kittr/prettier": "workspace:*"
+    "@kittr/prettier": "workspace:*",
+    "eslint-plugin-sort-keys-fix": "^1.1.2"
   }
 }
