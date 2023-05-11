@@ -19,7 +19,7 @@ module.exports = {
       files: ['**/*.test.*'],
     },
     {
-      files: ['jest.config.*'],
+      files: ['jest.config.*', 'vite.config.*', 'tsup.config.*'],
       rules: {
         'import/no-default-export': 'off',
       },
