@@ -2,7 +2,16 @@
   "name": "@kittr/flags",
   "version": "0.0.0",
   "private": true,
-  "main": "index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./src/index.ts"
+      ]
+    }
+  },
   "scripts": {
     "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
     "format:fix": "prettier \"**/*.{js,jsx,ts,tsx,md,mdx,json}\" --write --check",
@@ -11,7 +20,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@vercel/edge-config": "^0.1.9"
+    "@vercel/edge-config": "^0.1.9",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@kittr/lint": "workspace:*",
