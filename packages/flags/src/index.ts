@@ -12,11 +12,12 @@ const edgeConfigShape = z.object({
 export type EdgeConfig = z.infer<typeof edgeConfigShape>;
 
 export const getAllFlags = async (): Promise<EdgeConfig> => {
-  return edgeConfigShape.parse(await getAll())
-}
+  return edgeConfigShape.parse(await getAll());
+};
 export const getFlag = async <T extends keyof EdgeConfig>(
   key: T,
 ): Promise<EdgeConfig[T]> => {
-
-  return edgeConfigShape.pick({ [key]: true }).parse({ [key]: await get(key) })[key]
+  return edgeConfigShape.pick({ [key]: true }).parse({ [key]: await get(key) })[
+    key
+  ];
 };
