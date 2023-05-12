@@ -1,5 +1,5 @@
 {
   "extends": "@kittr/tsconfig/base.json",
-  "include": ["index.ts"],
+  "include": ["src/index.ts"],
   "exclude": ["node_modules"]
 }
