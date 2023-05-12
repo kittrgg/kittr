@@ -16,4 +16,7 @@ export const getAllFlags = async (): Promise<EdgeConfig> => {
 }
 export const getFlag = async <T extends keyof EdgeConfig>(
   key: T,
-): Promise<EdgeConfig[T]> => edgeConfigShape.parse(await get(key))[key];
+): Promise<EdgeConfig[T]> => {
+
+  return edgeConfigShape.pick({ [key]: true }).parse({ [key]: await get(key) })[key]
+};
