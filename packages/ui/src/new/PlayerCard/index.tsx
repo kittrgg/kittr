@@ -1,26 +1,31 @@
 import { Span, P } from '../Typography';
 import { cn } from '../utils';
+import { Avatar, AvatarFallback, AvatarImage } from '../Avatar';
 
 interface PlayerCardProps {
   name: string;
-  imageProps: React.DetailedHTMLProps<
-    React.ImgHTMLAttributes<HTMLImageElement>,
-    HTMLImageElement
-  >;
+  imageSrc: string;
   isLive?: boolean;
+  className?: string;
 }
 
-export const PlayerCard = ({ name, isLive, imageProps }: PlayerCardProps) => {
+export const PlayerCard = ({
+  name,
+  isLive,
+  imageSrc,
+  className,
+}: PlayerCardProps) => {
   return (
     <button
       className={cn(
-        'relative m-4 rounded-xl bg-zinc-900 p-4 px-8 text-center shadow-md outline-none hover:cursor-pointer hover:bg-zinc-800 focus:shadow-slate-600 active:bg-zinc-700',
+        'relative m-4 w-[200px] rounded-xl bg-zinc-900 p-4 px-8 text-center shadow-md outline-none hover:cursor-pointer hover:bg-zinc-800 focus:shadow-slate-600 active:bg-zinc-700',
+        className,
       )}
     >
-      <img
-        {...imageProps}
-        className={cn('m-4 flex rounded-full', imageProps.className)}
-      />
+      <Avatar className="m-auto h-[100px] w-[100px]">
+        <AvatarFallback>...</AvatarFallback>
+        <AvatarImage alt={name} src={imageSrc} />
+      </Avatar>
 
       {isLive && (
         <div
