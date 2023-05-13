@@ -8,8 +8,8 @@ import type { StreamerViewCounts } from '@kittr/types';
 const analyticsDataClient = new BetaAnalyticsDataClient({
   credentials: {
     client_email: process.env.FIREBASE_CLIENT_EMAIL,
-    private_key: process.env.FIREBASE_ADMIN_PRIVATE_KEY
-  }
+    private_key: process.env.FIREBASE_ADMIN_PRIVATE_KEY,
+  },
 });
 
 export default async function handler(
@@ -95,10 +95,12 @@ export default async function handler(
     monthAgo.setMonth(now.getMonth() - 1);
 
     const channelData = await getChannelViewCounts({
-      startDate: `${monthAgo.getUTCFullYear()}-${monthAgo.getUTCMonth() + 1
-        }-${monthAgo.getUTCDate()}`,
-      endDate: `${now.getUTCFullYear()}-${now.getUTCMonth() + 1
-        }-${now.getUTCDate()}`,
+      startDate: `${monthAgo.getUTCFullYear()}-${
+        monthAgo.getUTCMonth() + 1
+      }-${monthAgo.getUTCDate()}`,
+      endDate: `${now.getUTCFullYear()}-${
+        now.getUTCMonth() + 1
+      }-${now.getUTCDate()}`,
     });
 
     const bulkWrites = Object.entries(channelData);
@@ -117,7 +119,7 @@ export default async function handler(
     );
 
     console.log('Bulk write for view counts finished!');
-  }
-  await writeViewCounts()
-  return response.status(200).json({ success: true })
+  };
+  await writeViewCounts();
+  return response.status(200).json({ success: true });
 }
