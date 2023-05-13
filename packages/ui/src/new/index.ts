@@ -1,12 +1,12 @@
 import '../styles.css';
 
 // Styling utility
-export { cn } from './utils';
-
+export * from './AppShell';
+export * from './Avatar';
 export * from './Badge';
 export * from './GameCard';
 export * from './HelloWorld';
 export * from './PlayerCard';
-export * from './Typography';
 export * from './Select';
-export * from './Avatar';
+export * from './Typography';
+export { cn } from './utils';

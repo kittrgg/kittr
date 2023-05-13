@@ -1,27 +1,28 @@
+import * as Icons from '@kittr/ui/icons';
 import {
+  AppShell,
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
   Badge,
+  BlockQuote,
+  GameCard,
   H1,
   H2,
   H3,
   H4,
   H5,
   P,
-  BlockQuote,
+  PlayerCard,
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
   SelectLabel,
+  SelectSeparator,
   SelectTrigger,
   SelectValue,
-  SelectSeparator,
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-  PlayerCard,
-  GameCard,
 } from '@kittr/ui/new';
-import * as Icons from '@kittr/ui/icons';
 
 export const components = {
   avatar: {
@@ -51,6 +52,14 @@ export const components = {
         </div>
       );
     }),
+  },
+  appshell: {
+    components: [
+      <div className="relative">
+        <AppShell nav={null} />
+      </div>,
+    ],
+    name: 'AppShell',
   },
   select: {
     name: 'Select',
