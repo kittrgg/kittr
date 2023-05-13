@@ -8,3 +8,4 @@ export * from './GameCard';
 export * from './HelloWorld';
 export * from './PlayerCard';
 export * from './Typography';
+export * from './Select'

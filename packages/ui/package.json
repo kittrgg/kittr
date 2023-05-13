@@ -39,6 +39,7 @@
     "@mantine/hooks": "^5.10.2",
     "@mantine/next": "^5.10.2",
     "@mantine/rte": "^5.10.2",
+    "@radix-ui/react-select": "^1.2.1",
     "class-variance-authority": "^0.6.0",
     "clsx": "^1.2.1",
     "lucide-icons-react": "^1.0.2",
