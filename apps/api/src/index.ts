@@ -6,7 +6,6 @@ import { CronJob } from 'cron';
 import dotenv from 'dotenv';
 import express from 'express';
 import { Server } from 'socket.io';
-import { writeViewCounts } from './jobs/writeViewCounts';
 
 dotenv.config({
   path: process.env.NODE_ENV === 'production' ? '.env' : '.env.development',
@@ -48,25 +47,6 @@ app.get('/error', () => {
 // 	Io.emit(`dashboard=${_id}`, "Trigger refetch!")
 // 	Return res.status(200).json({ success: true })
 // })
-
-if (process.env.NODE_ENV === 'production') {
-  const viewCounts = new CronJob(
-    // Every night at 3 AM
-    '0 3 * * *',
-    () => {
-      try {
-        writeViewCounts();
-      } catch (error) {
-        Logger.captureException(error);
-        console.error(error);
-      }
-    },
-    null,
-    true,
-    'America/Los_Angeles',
-  );
-  viewCounts.start();
-}
 
 // Every night at 3 AM
 // Const kitStats = new CronJob(
