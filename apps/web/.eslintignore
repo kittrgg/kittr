@@ -1,2 +1,5 @@
 src/features
 src/pages
+src/redux
+src/hooks
+src/components/shared/SVG

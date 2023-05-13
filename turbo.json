@@ -60,23 +60,27 @@
     },
     "//#format-root:fix": {
       "dependsOn": ["^topo"],
-      "cache": false
+      "outputMode": "new-only"
     },
     "format:fix": {
       "dependsOn": ["^topo"],
-      "cache": false
+      "outputMode": "new-only"
     },
     "//#format-root": {
-      "dependsOn": ["^topo"]
+      "dependsOn": ["^topo"],
+      "outputMode": "new-only"
     },
     "format": {
-      "dependsOn": ["^topo"]
+      "dependsOn": ["^topo"],
+      "outputMode": "new-only"
     },
     "lint": {
-      "dependsOn": ["^topo"]
+      "dependsOn": ["^topo"],
+      "outputMode": "new-only"
     },
     "lint:fix": {
-      "dependsOn": ["^topo"]
+      "dependsOn": ["^topo"],
+      "outputMode": "new-only"
     },
     "typecheck": {
       "dependsOn": ["^topo"],
