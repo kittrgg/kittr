@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import '@kittr/ui/styles.css';
 import './globals.css';
 import { Inter } from 'next/font/google';
 import { Sidebar } from './Sidebar';
@@ -21,11 +22,11 @@ export default function RootLayout({
 }) {
   return (
     <html className={`${inter.variable}`} lang="en">
-      <body className="bg-background flex min-h-screen flex-col font-sans antialiased">
-        <div className="border-b p-4">
+      <body className="flex flex-col min-h-screen font-sans antialiased bg-background">
+        <div className="p-4 border-b">
           Welcome to kittr&apos;s React UI library.
         </div>
-        <div className="flex flex-grow flex-row">
+        <div className="flex flex-row flex-grow">
           <Sidebar />
           <main className="flex-auto p-8">{children}</main>
         </div>
