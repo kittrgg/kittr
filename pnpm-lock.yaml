@@ -162,6 +162,9 @@ importers:
       '@emotion/server':
         specifier: ^11.10.0
         version: 11.10.0
+      '@google-analytics/data':
+        specifier: 3.0.0
+        version: 3.0.0
       '@juggle/resize-observer':
         specifier: 3.3.1
         version: 3.3.1
@@ -2478,7 +2481,7 @@ packages:
       '@types/long': 4.0.2
       lodash.camelcase: 4.3.0
       long: 4.0.0
-      protobufjs: 7.1.2
+      protobufjs: 7.2.0
       yargs: 16.2.0
     dev: false
 
@@ -10369,7 +10372,7 @@ packages:
     resolution: {integrity: sha512-SjXwUWe/vANGs/mJJTbw5++7U67nwsymg7qsoPtw6GiXqw3kUy8ByojrlEdVE2efxAdKreX8WkDafxvYW95ZQg==}
     engines: {node: '>=12.0.0'}
     dependencies:
-      protobufjs: 7.1.2
+      protobufjs: 7.2.0
     dev: false
 
   /protobufjs-cli@1.0.2(protobufjs@7.1.2):
@@ -10449,7 +10452,6 @@ packages:
       '@types/node': 18.11.18
       long: 5.2.1
     dev: false
-    optional: true
 
   /proxy-addr@2.0.7:
     resolution: {integrity: sha512-llQsMLSUDUPT44jdrU/O37qlnifitDP+ZwrmmZcoSKyLKvtZxpyV0n2/bD/N4tBAAZ/gJEdZU7KMraoK1+XYAg==}
