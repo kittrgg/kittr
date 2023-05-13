@@ -1,10 +1,13 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Inter } from 'next/font/google';
-import { cn } from '@kittr/ui/new';
 import { Sidebar } from './Sidebar';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+});
 
 export const metadata: Metadata = {
   description: "kittr's React UI Kit",
@@ -17,13 +20,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body
-        className={cn(
-          'bg-background flex min-h-screen flex-col font-sans antialiased',
-          inter.className,
-        )}
-      >
+    <html className={`${inter.variable}`} lang="en">
+      <body className="bg-background flex min-h-screen flex-col font-sans antialiased">
         <div className="border-b p-4">
           Welcome to kittr&apos;s React UI library.
         </div>

@@ -1,17 +1,69 @@
-import { Badge, H1, H2, H3, H4, H5, P, BlockQuote } from '@kittr/ui/new';
+import {
+  Badge,
+  H1,
+  H2,
+  H3,
+  H4,
+  H5,
+  P,
+  BlockQuote,
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+  SelectSeparator,
+} from '@kittr/ui/new';
+import * as Icons from '@kittr/ui/icons';
 
-type ComponentsMap = Record<
-  string,
-  {
-    components: React.ReactNode[];
-    name: string;
-  }
->;
-
-export const components: ComponentsMap = {
+export const components = {
   badge: {
     components: [<Badge key="1">ayayay</Badge>],
     name: 'Badge',
+  },
+  icons: {
+    name: 'Icons',
+    components: Object.entries(Icons).map(([name, Icon]) => {
+      return (
+        <div className="flex flex-col justify-center gap-3" key={name}>
+          <Icon className="mx-auto" />
+          <H2 className="text-center text-lg">
+            {'<'}
+            {name}
+            {' />'}
+          </H2>
+        </div>
+      );
+    }),
+  },
+  select: {
+    name: 'Select',
+    components: [
+      <Select key="select">
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="Select a fruit" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectLabel>Fruits</SelectLabel>
+            <SelectItem value="apple">Apple</SelectItem>
+            <SelectItem value="banana">Banana</SelectItem>
+            <SelectItem value="blueberry">Blueberry</SelectItem>
+            <SelectItem value="grapes">Grapes</SelectItem>
+            <SelectItem value="pineapple">Pineapple</SelectItem>
+          </SelectGroup>
+          <SelectSeparator />
+          <SelectGroup>
+            <SelectLabel>Veggies</SelectLabel>
+            <SelectItem value="celery">Celery</SelectItem>
+            <SelectItem value="lettuce">Lettuce</SelectItem>
+            <SelectItem value="potato">Potato</SelectItem>
+          </SelectGroup>
+        </SelectContent>
+      </Select>,
+    ],
   },
   typography: {
     components: [
@@ -42,7 +94,7 @@ export const components: ComponentsMap = {
     ],
     name: 'Typography',
   },
-};
+} as const;
 
 export const componentEntries = Object.entries(components).sort((a, b) => {
   const [keyA] = a;

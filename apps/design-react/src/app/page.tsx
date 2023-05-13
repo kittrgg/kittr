@@ -1,5 +1,6 @@
 import { GameCard, PlayerCard } from '@kittr/ui/new';
 import '@kittr/ui/styles.css';
+import './globals.css';
 
 export default function Home() {
   return (
