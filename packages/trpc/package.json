@@ -9,10 +9,6 @@
     "./server": "./server.ts"
   },
   "scripts": {
-    "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
-    "format:fix": "prettier \"**/*.{js,jsx,ts,tsx,md,mdx,json}\" --write --check",
-    "lint": "eslint-runner",
-    "lint:fix": "eslint-runner --fix",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
