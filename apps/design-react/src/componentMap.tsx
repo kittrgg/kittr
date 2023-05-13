@@ -15,10 +15,24 @@ import {
   SelectTrigger,
   SelectValue,
   SelectSeparator,
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+  PlayerCard,
+  GameCard,
 } from '@kittr/ui/new';
 import * as Icons from '@kittr/ui/icons';
 
 export const components = {
+  avatar: {
+    name: 'Avatar',
+    components: [
+      <Avatar key="avatar">
+        <AvatarImage alt="@shadcn" src="https://github.com/shadcn.png" />
+        <AvatarFallback>CN</AvatarFallback>
+      </Avatar>,
+    ],
+  },
   badge: {
     components: [<Badge key="1">ayayay</Badge>],
     name: 'Badge',
@@ -63,6 +77,30 @@ export const components = {
           </SelectGroup>
         </SelectContent>
       </Select>,
+    ],
+  },
+  gameCard: {
+    name: 'GameCard',
+    components: [
+      <GameCard
+        developer="Activision"
+        genres={['Battle Royale', 'FPS']}
+        imageProps={{ src: 'https://placehold.co/160x256' }}
+        key="gameCard"
+        platforms={['PC', 'PS4', 'XBOX']}
+        title="Warzone"
+      />,
+    ],
+  },
+  playerCard: {
+    name: 'PlayerCard',
+    components: [
+      <PlayerCard
+        imageSrc="https://pbs.twimg.com/profile_images/1640821224178589696/EPAD62bS_400x400.jpg"
+        isLive
+        key="JoeWo"
+        name="JoeWo"
+      />,
     ],
   },
   typography: {

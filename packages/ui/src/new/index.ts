@@ -9,3 +9,4 @@ export * from './HelloWorld';
 export * from './PlayerCard';
 export * from './Typography';
 export * from './Select';
+export * from './Avatar';
