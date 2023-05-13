@@ -29,7 +29,7 @@ export const components = {
       return (
         <div className="flex flex-col justify-center gap-3" key={name}>
           <Icon className="mx-auto" />
-          <H2 className="text-lg text-center">
+          <H2 className="text-center text-lg">
             {'<'}
             {name}
             {' />'}
