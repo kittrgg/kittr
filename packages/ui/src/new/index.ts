@@ -1,5 +1,6 @@
 import '../styles.css';
 
+// Styling utility
 export { cn } from './utils';
 
 export * from './Badge';

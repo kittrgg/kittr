@@ -1,17 +1,25 @@
 import { Badge, H1, H2, H3, H4, H5, P, BlockQuote } from '@kittr/ui/new';
+import * as Icons from '@kittr/ui/icons';
 
-type ComponentsMap = Record<
-  string,
-  {
-    components: React.ReactNode[];
-    name: string;
-  }
->;
-
-export const components: ComponentsMap = {
+export const components = {
   badge: {
     components: [<Badge key="1">ayayay</Badge>],
     name: 'Badge',
+  },
+  icons: {
+    name: 'Icons',
+    components: Object.entries(Icons).map(([name, Icon]) => {
+      return (
+        <div className="flex flex-col justify-center gap-3" key={name}>
+          <Icon className="mx-auto" />
+          <H2 className="text-lg text-center">
+            {'<'}
+            {name}
+            {' />'}
+          </H2>
+        </div>
+      );
+    }),
   },
   typography: {
     components: [
@@ -42,7 +50,7 @@ export const components: ComponentsMap = {
     ],
     name: 'Typography',
   },
-};
+} as const;
 
 export const componentEntries = Object.entries(components).sort((a, b) => {
   const [keyA] = a;
