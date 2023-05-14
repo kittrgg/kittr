@@ -129,6 +129,26 @@ export const components = {
         rutrum sem, sit amet luctus enim justo non velit. Vestibulum varius arcu
         eu felis condimentum dignissim. Quisque sit amet urna mauris.
       </BlockQuote>,
+      <BlockQuote key="blockquote">
+        BlockQuote. Proin euismod nisl porttitor dui tristique condimentum. Cras
+        commodo sem eget iaculis lobortis. Suspendisse congue tincidunt ligula,
+        vel tristique diam dignissim non. Suspendisse elementum dolor a
+        dignissim dapibus. Ut ornare eros sit amet vehicula tincidunt. Vivamus
+        non diam sed ipsum euismod viverra quis eget lectus. In hac habitasse
+        platea dictumst. Donec sodales, leo euismod mollis fringilla, ante dui
+        rutrum sem, sit amet luctus enim justo non velit. Vestibulum varius arcu
+        eu felis condimentum dignissim. Quisque sit amet urna mauris.
+      </BlockQuote>,
+      <BlockQuote key="blockquote">
+        BlockQuote. Proin euismod nisl porttitor dui tristique condimentum. Cras
+        commodo sem eget iaculis lobortis. Suspendisse congue tincidunt ligula,
+        vel tristique diam dignissim non. Suspendisse elementum dolor a
+        dignissim dapibus. Ut ornare eros sit amet vehicula tincidunt. Vivamus
+        non diam sed ipsum euismod viverra quis eget lectus. In hac habitasse
+        platea dictumst. Donec sodales, leo euismod mollis fringilla, ante dui
+        rutrum sem, sit amet luctus enim justo non velit. Vestibulum varius arcu
+        eu felis condimentum dignissim. Quisque sit amet urna mauris.
+      </BlockQuote>,
     ],
     name: 'Typography',
   },
