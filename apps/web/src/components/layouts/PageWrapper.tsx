@@ -1,6 +1,5 @@
 // <PageWrapper /> and <AdPageWrapper /> should end up getting molded into one component probably.
 // It should probably be that <AdPageWrapper /> has a "noAds" option on it.
-import { useUser } from '@/hooks/useUser';
 import Head from '@Components/shared/Head';
 import {
   Avatar,
@@ -9,15 +8,13 @@ import {
   AppShell as KittrAppShell,
 } from '@kittr/ui/new';
 import type { ReactNode } from 'react';
-import LogoImage from './NavMenu/LogoImageLink';
-
 import { ErrorBoundary } from '@Components/shared/ErrorBoundary';
-
 import { Title } from '@kittr/ui';
-
-import { Routes } from '@/utils/lookups/routes';
 import Link from 'next/link';
+import LogoImage from './NavMenu/LogoImageLink';
 import Footer from './Footer';
+import { Routes } from '@/utils/lookups/routes';
+import { useUser } from '@/hooks/useUser';
 
 interface Props {
   /** Head title for meta information */
@@ -45,30 +42,30 @@ function PageWrapper({ title, description, children, pageTitle }: Props) {
             <ul className="space-y-2 font-medium">
               <li>
                 <Link
-                  href={Routes.DASHBOARD}
                   className="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-700"
+                  href={Routes.DASHBOARD}
                 >
                   <span className="ml-3">Dashboard</span>
                 </Link>
               </li>
               <li>
                 <Link
-                  href={Routes.GAMES.LIST}
                   className="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-700"
+                  href={Routes.GAMES.LIST}
                 >
                   <span className="ml-3">Games</span>
                 </Link>
               </li>
               <li>
                 <Link
-                  href={Routes.CHANNEL.LIST}
                   className="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-700"
+                  href={Routes.CHANNEL.LIST}
                 >
                   <span className="ml-3">Channels</span>
                 </Link>
               </li>
             </ul>
-            {user && (
+            {user ? (
               <div className="absolute bottom-0 left-4 right-4">
                 <div className="flex w-full flex-row border-t-2 py-4">
                   <Avatar key="avatar">
@@ -78,7 +75,7 @@ function PageWrapper({ title, description, children, pageTitle }: Props) {
                   <div className="m-2 ml-4 flex-1">{user.displayName}</div>
                 </div>
               </div>
-            )}
+            ) : null}
           </>
         }
       >

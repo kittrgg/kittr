@@ -15,8 +15,12 @@ module.exports = {
   ignorePatterns: ['node_modules/', 'dist/'],
   overrides: [
     {
-      extends: [require.resolve('@vercel/style-guide/eslint/jest')],
       files: ['**/*.test.*'],
+      extends: [require.resolve('@vercel/style-guide/eslint/jest')],
+      rules: {
+        '@typescript-eslint/no-floating-promises': 'off',
+        'testing-library/await-async-utils': 'off',
+      },
     },
     {
       files: ['jest.config.*', 'vite.config.*', 'tsup.config.*'],
