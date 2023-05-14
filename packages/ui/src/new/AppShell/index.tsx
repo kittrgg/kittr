@@ -12,7 +12,7 @@ export const AppShell: React.FC<AppShellProps> = ({ nav, children }) => {
       <aside
         id="default-sidebar"
         className={cn(
-          'dark fixed left-0 top-0 z-40 h-screen w-64 -translate-x-full transition-transform sm:translate-x-0',
+          'min-w-64 dark left-0 top-0 z-40 h-screen -translate-x-full transition-transform sm:min-w-full sm:translate-x-0',
         )}
         aria-label="Sidebar"
       >

@@ -1,6 +1,5 @@
 import * as Icons from '@kittr/ui/icons';
 import {
-  AppShell,
   Avatar,
   AvatarFallback,
   AvatarImage,
@@ -52,14 +51,6 @@ export const components = {
         </div>
       );
     }),
-  },
-  appshell: {
-    components: [
-      <div className="relative">
-        <AppShell nav={null} />
-      </div>,
-    ],
-    name: 'AppShell',
   },
   select: {
     name: 'Select',
