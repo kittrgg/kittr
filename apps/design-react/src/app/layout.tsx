@@ -29,10 +29,10 @@ export default function RootLayout({
 }) {
   return (
     <html className={`${inter.variable}`} lang="en">
-      <body className="m-auto flex h-screen w-full flex-grow flex-row font-sans antialiased">
+      <body className="flex flex-row flex-grow w-full h-screen m-auto font-sans antialiased">
         <AppShell
           nav={
-            <div className="flex h-full w-60 flex-none flex-col gap-4 overflow-y-auto bg-gray-50 p-4 dark:bg-zinc-800">
+            <div className="flex flex-col flex-none h-full gap-4 p-4 overflow-y-auto w-60 bg-gray-50 dark:bg-zinc-800">
               <AppShellLinkItem component={<Link href="/">Home</Link>} />
               <SidebarSeparator />
               <SidebarHeader>Utilities</SidebarHeader>
