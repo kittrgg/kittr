@@ -1,10 +1,15 @@
 'use client';
+import { Slot } from '@radix-ui/react-slot';
 
-export function AppShellLinkItem({
-  component,
+export const AppShellLinkItem = ({
+  children,
 }: {
-  component: React.ReactElement<{ className: string }>;
-}) {
-  component.props.className = 'text-white transition hover:text-zinc-300';
-  return component;
-}
+  children: React.ReactNode;
+}) => {
+  const Comp = Slot;
+  return (
+    <Comp className="text-white transition hover:text-zinc-300">
+      {children}
+    </Comp>
+  );
+};

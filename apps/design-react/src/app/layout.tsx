@@ -32,15 +32,21 @@ export default function RootLayout({
       <body className="m-auto flex h-screen w-full flex-grow flex-row font-sans antialiased">
         <AppShell
           nav={
-            <div className="flex h-full w-60 flex-none flex-col gap-4 overflow-y-auto bg-gray-50 p-4 dark:bg-zinc-800">
-              <AppShellLinkItem component={<Link href="/">Home</Link>} />
+            <>
+              <AppShellLinkItem>
+                <Link href="/">Home</Link>
+              </AppShellLinkItem>
               <SidebarSeparator />
+
               <SidebarHeader>Utilities</SidebarHeader>
-              <AppShellLinkItem component={<Link href="/icons">Icons</Link>} />
-              <AppShellLinkItem
-                component={<Link href="/typography">Typography</Link>}
-              />
+              <AppShellLinkItem>
+                <Link href="/icons">Icons</Link>
+              </AppShellLinkItem>
+              <AppShellLinkItem>
+                <Link href="/typography">Typography</Link>
+              </AppShellLinkItem>
               <SidebarSeparator />
+
               <SidebarHeader>Components</SidebarHeader>
               {componentEntries
                 .filter(
@@ -49,19 +55,16 @@ export default function RootLayout({
                 )
                 .map(([slug, component]) => {
                   return (
-                    <AppShellLinkItem
-                      component={
-                        <Link href={`/${slug}`}>
-                          {'<'}
-                          {component.name}
-                          {' />'}
-                        </Link>
-                      }
-                      key={component.name}
-                    />
+                    <AppShellLinkItem key={slug}>
+                      <Link href={`/${slug}`}>
+                        {'<'}
+                        {component.name}
+                        {' />'}
+                      </Link>
+                    </AppShellLinkItem>
                   );
                 })}
-            </div>
+            </>
           }
         >
           <>{children}</>

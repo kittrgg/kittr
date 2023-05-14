@@ -3,6 +3,7 @@ import '../styles.css';
 // Styling utility
 export * from './AppShell';
 export * from './Avatar';
+export * from './Prose';
 export * from './Badge';
 export * from './GameCard';
 export * from './PlayerCard';
