@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { AppShellLinkItem } from './LinkItem';
 import { componentEntries } from '#/componentMap';
 import { SidebarSeparator } from '#/app/Separator';
+import { SidebarHeader } from '#/app/Header';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -30,20 +31,32 @@ export default function RootLayout({
           <div className="flex h-full w-60 flex-none flex-col gap-4 overflow-y-auto bg-gray-50 p-4 dark:bg-zinc-800">
             <AppShellLinkItem component={<Link href="/">Home</Link>} />
             <SidebarSeparator />
-            {componentEntries.map(([slug, component]) => {
-              return (
-                <AppShellLinkItem
-                  component={
-                    <Link href={`/${slug}`}>
-                      {'<'}
-                      {component.name}
-                      {' />'}
-                    </Link>
-                  }
-                  key={component.name}
-                />
-              );
-            })}
+            <SidebarHeader>Utilities</SidebarHeader>
+            <AppShellLinkItem component={<Link href="/icons">Icons</Link>} />
+            <AppShellLinkItem
+              component={<Link href="/typography">Typography</Link>}
+            />
+            <SidebarSeparator />
+            <SidebarHeader>Components</SidebarHeader>
+            {componentEntries
+              .filter(
+                ([_, component]) =>
+                  !['Icons', 'Typography'].includes(component.name),
+              )
+              .map(([slug, component]) => {
+                return (
+                  <AppShellLinkItem
+                    component={
+                      <Link href={`/${slug}`}>
+                        {'<'}
+                        {component.name}
+                        {' />'}
+                      </Link>
+                    }
+                    key={component.name}
+                  />
+                );
+              })}
           </div>
         </aside>
         <main className="container flex-auto p-8">{children}</main>

@@ -16,7 +16,7 @@ export const AppShell: React.FC<AppShellProps> = ({ nav, children }) => {
         )}
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-zinc-800">
+        <div className="h-full overflow-y-auto bg-gray-50 px-3 py-4 dark:bg-zinc-800">
           {nav}
         </div>
       </aside>
