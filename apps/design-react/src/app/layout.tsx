@@ -29,24 +29,33 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html className={`${inter.variable}`} lang="en">
+    <html className={`${inter.variable} bg-zinc-900`} lang="en">
       <body className="m-auto flex h-screen w-full flex-grow flex-row font-sans antialiased">
         <AppShell
           logoImageAlt="kittr logo"
           logoImagePath="/logo.svg"
           nav={
             <>
-              <AppShellLinkItem icon={<Home />}>
-                <Link href="/">Home</Link>
+              <AppShellLinkItem>
+                <Link href="/">
+                  <Home />
+                  Home
+                </Link>
               </AppShellLinkItem>
               <SidebarSeparator />
 
               <SidebarHeader>Utilities</SidebarHeader>
-              <AppShellLinkItem icon={<Library />}>
-                <Link href="/icons">Icons</Link>
+              <AppShellLinkItem>
+                <Link href="/icons">
+                  <Library />
+                  Icons
+                </Link>
               </AppShellLinkItem>
-              <AppShellLinkItem icon={<Type />}>
-                <Link href="/typography">Typography</Link>
+              <AppShellLinkItem>
+                <Link href="/typography">
+                  <Type />
+                  Typography
+                </Link>
               </AppShellLinkItem>
               <SidebarSeparator />
 
@@ -58,8 +67,11 @@ export default function RootLayout({
                 )
                 .map(([slug, component]) => {
                   return (
-                    <AppShellLinkItem icon={<Code2 />} key={slug}>
-                      <Link href={`/${slug}`}>{component.name}</Link>
+                    <AppShellLinkItem key={slug}>
+                      <Link href={`/${slug}`}>
+                        <Code2 />
+                        {component.name}
+                      </Link>
                     </AppShellLinkItem>
                   );
                 })}

@@ -19,11 +19,11 @@ export const AppShell: React.FC<AppShellProps> = ({
 }) => {
   return (
     <>
-      <aside className="dark top-0 left-0 z-40 h-screen -translate-x-full transition-transform sm:translate-x-0">
+      <aside className="fixed top-0 left-0 z-40 h-screen w-64 -translate-x-full bg-zinc-800 transition-transform sm:translate-x-0">
         <div
           className={cn(
             typographyVariants({ presets: 'h5' }),
-            'flex h-full w-60 flex-none flex-col gap-2 overflow-y-auto bg-gray-50 p-4  dark:bg-zinc-800',
+            'flex h-full w-60 flex-none flex-col gap-2 overflow-y-auto p-4',
           )}
         >
           <img
@@ -34,7 +34,7 @@ export const AppShell: React.FC<AppShellProps> = ({
           {nav}
         </div>
       </aside>
-      <main className="container h-screen flex-auto overflow-auto bg-zinc-900 p-8">
+      <main className="container h-screen flex-auto overflow-auto bg-zinc-900 p-8 sm:ml-64">
         {children}
       </main>
     </>
