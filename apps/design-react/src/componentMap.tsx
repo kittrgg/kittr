@@ -43,7 +43,7 @@ export const components = {
       return (
         <div className="flex flex-col justify-center gap-3" key={name}>
           <Icon className="mx-auto" />
-          <H2 className="text-center text-lg">
+          <H2 className="text-lg text-center">
             {'<'}
             {name}
             {' />'}
@@ -129,7 +129,7 @@ export const components = {
         rutrum sem, sit amet luctus enim justo non velit. Vestibulum varius arcu
         eu felis condimentum dignissim. Quisque sit amet urna mauris.
       </BlockQuote>,
-      <BlockQuote key="blockquote">
+      <BlockQuote key="blockquote1">
         BlockQuote. Proin euismod nisl porttitor dui tristique condimentum. Cras
         commodo sem eget iaculis lobortis. Suspendisse congue tincidunt ligula,
         vel tristique diam dignissim non. Suspendisse elementum dolor a
@@ -139,7 +139,7 @@ export const components = {
         rutrum sem, sit amet luctus enim justo non velit. Vestibulum varius arcu
         eu felis condimentum dignissim. Quisque sit amet urna mauris.
       </BlockQuote>,
-      <BlockQuote key="blockquote">
+      <BlockQuote key="blockquote2">
         BlockQuote. Proin euismod nisl porttitor dui tristique condimentum. Cras
         commodo sem eget iaculis lobortis. Suspendisse congue tincidunt ligula,
         vel tristique diam dignissim non. Suspendisse elementum dolor a

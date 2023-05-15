@@ -31,6 +31,8 @@ export default function RootLayout({
     <html className={`${inter.variable}`} lang="en">
       <body className="m-auto flex h-screen w-full flex-grow flex-row font-sans antialiased">
         <AppShell
+          logoImageAlt="kittr logo"
+          logoImagePath="/logo.svg"
           nav={
             <>
               <AppShellLinkItem>

@@ -7,5 +7,9 @@ export const Prose = ({
   className?: string;
   children: React.ReactNode;
 }) => {
-  return <div className={cn('prose lg:prose-xl', className)}>{children}</div>;
+  return (
+    <div className={cn('prose prose-invert lg:prose-xl', className)}>
+      {children}
+    </div>
+  );
 };
