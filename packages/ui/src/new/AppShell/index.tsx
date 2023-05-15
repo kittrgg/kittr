@@ -20,7 +20,12 @@ export const AppShell: React.FC<AppShellProps> = ({
   return (
     <>
       <aside className="dark top-0 left-0 z-40 h-screen -translate-x-full transition-transform sm:translate-x-0">
-        <div className="flex h-full w-60 flex-none flex-col gap-2 overflow-y-auto bg-gray-50 p-4 dark:bg-zinc-800">
+        <div
+          className={cn(
+            typographyVariants({ presets: 'h5' }),
+            'flex h-full w-60 flex-none flex-col gap-2 overflow-y-auto bg-gray-50 p-4  dark:bg-zinc-800',
+          )}
+        >
           <img
             src={logoImagePath}
             alt={logoImageAlt}
@@ -29,7 +34,7 @@ export const AppShell: React.FC<AppShellProps> = ({
           {nav}
         </div>
       </aside>
-      <main className="container h-screen flex-auto overflow-scroll p-8">
+      <main className="container h-screen flex-auto overflow-auto bg-zinc-900 p-8">
         {children}
       </main>
     </>
@@ -38,7 +43,7 @@ export const AppShell: React.FC<AppShellProps> = ({
 
 export function SidebarHeader({ children }: { children: React.ReactNode }) {
   return (
-    <P className={cn(typographyVariants({ presets: 'h4' }), 'py-2')}>
+    <P className={cn(typographyVariants({ presets: 'h3' }), 'py-2')}>
       {children}
     </P>
   );

@@ -9,6 +9,7 @@ import {
   SidebarHeader,
   SidebarSeparator,
 } from '@kittr/ui/new';
+import { Code2, Library, Type, Home } from '@kittr/ui/icons';
 import { componentEntries } from '#/componentMap';
 
 const inter = Inter({
@@ -35,16 +36,16 @@ export default function RootLayout({
           logoImagePath="/logo.svg"
           nav={
             <>
-              <AppShellLinkItem>
+              <AppShellLinkItem icon={<Home />}>
                 <Link href="/">Home</Link>
               </AppShellLinkItem>
               <SidebarSeparator />
 
               <SidebarHeader>Utilities</SidebarHeader>
-              <AppShellLinkItem>
+              <AppShellLinkItem icon={<Library />}>
                 <Link href="/icons">Icons</Link>
               </AppShellLinkItem>
-              <AppShellLinkItem>
+              <AppShellLinkItem icon={<Type />}>
                 <Link href="/typography">Typography</Link>
               </AppShellLinkItem>
               <SidebarSeparator />
@@ -57,12 +58,8 @@ export default function RootLayout({
                 )
                 .map(([slug, component]) => {
                   return (
-                    <AppShellLinkItem key={slug}>
-                      <Link href={`/${slug}`}>
-                        {'<'}
-                        {component.name}
-                        {' />'}
-                      </Link>
+                    <AppShellLinkItem icon={<Code2 />} key={slug}>
+                      <Link href={`/${slug}`}>{component.name}</Link>
                     </AppShellLinkItem>
                   );
                 })}

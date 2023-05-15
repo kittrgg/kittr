@@ -2,7 +2,7 @@ import { Prose } from '@kittr/ui/new';
 
 export default function Home() {
   return (
-    <Prose>
+    <Prose className="prose-invert">
       <h1>Welcome to the component showcase.</h1>
       <p>
         The page you are looking at uses our <code>{'<AppShell />'}</code>{' '}
