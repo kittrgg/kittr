@@ -16,7 +16,7 @@
     "kill-ports": "kill-port 3000,3001,5555",
     "lint:fix": "turbo lint:fix --continue",
     "lint": "turbo lint --continue",
-    "precommit-hook": "turbo format:fix lint:fix",
+    "precommit-hook": "node lint-staged.js",
     "start:api": "turbo start --filter=api",
     "test:e2e": "cd lib && cd e2e && npm run cypress:e2e",
     "test": "turbo test --continue --filter=ui",
