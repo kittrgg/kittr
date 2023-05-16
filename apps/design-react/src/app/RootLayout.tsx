@@ -9,7 +9,8 @@ import {
   SidebarHeader,
   SidebarSeparator,
 } from '@kittr/ui/new';
-import { Code2, Library, Type, Home } from '@kittr/ui/icons';
+import { Code2, Library, Type } from '@kittr/ui/icons';
+import Image from 'next/image';
 import { componentEntries } from '#/componentMap';
 
 const inter = Inter({
@@ -34,16 +35,19 @@ export function RootLayout({
     <html className={`${inter.variable} bg-zinc-900`} lang="en">
       <body className="m-auto flex h-screen w-full flex-grow flex-row font-sans antialiased">
         <AppShell
-          logoImageAlt="kittr logo"
-          logoImagePath="/logo.svg"
           nav={
             <>
-              <AppShellLinkItem>
-                <Link href="/">
-                  <Home />
-                  Home
-                </Link>
-              </AppShellLinkItem>
+              <Link
+                className="flex flex-row items-center justify-center"
+                href="/"
+              >
+                <Image
+                  alt="kittr logo"
+                  height={48}
+                  src="/logo.svg"
+                  width={89}
+                />
+              </Link>
               <SidebarSeparator />
 
               <SidebarHeader>Utilities</SidebarHeader>

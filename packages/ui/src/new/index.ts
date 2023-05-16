@@ -1,9 +1,9 @@
 import '../styles.css';
 
 export * from './AppShell';
-export { Floaty } from "./AppShell/Floaty"
-export { SidebarHeader } from "./AppShell/Header"
-export { SidebarSeparator } from "./AppShell/Separator"
+export { Floaty } from './AppShell/Floaty';
+export { SidebarHeader } from './AppShell/Header';
+export { SidebarSeparator } from './AppShell/Separator';
 export { Avatar, AvatarFallback, AvatarImage } from './Avatar';
 export * from './Prose';
 export * from './Badge';

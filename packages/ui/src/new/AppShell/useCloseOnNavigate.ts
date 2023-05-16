@@ -1,10 +1,13 @@
-'use client'
-import type { Dispatch, SetStateAction } from "react";
-import { useEffect } from "react"
+'use client';
+import type { Dispatch, SetStateAction } from 'react';
+import { useEffect } from 'react';
 
-export const useCloseOnNavigate = (func: Dispatch<SetStateAction<boolean>>, pathname: string) => {
+export const useCloseOnNavigate = (
+  func: Dispatch<SetStateAction<boolean>>,
+  pathname: string,
+) => {
   useEffect(() => {
-    func(false)
-  }, [pathname])
-
-}
+    document.getElementById('floaty-burger')?.focus();
+    func(false);
+  }, [pathname]);
+};

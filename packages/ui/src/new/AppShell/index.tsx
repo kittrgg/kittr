@@ -1,7 +1,8 @@
 'use client';
 import * as React from 'react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { cva } from 'class-variance-authority';
+import FocusTrap from 'focus-trap-react';
 import { typographyVariants } from '../Typography';
 import { cn } from '../utils';
 import { Floaty } from './Floaty';
@@ -10,8 +11,6 @@ import { useCloseOnNavigate } from './useCloseOnNavigate';
 interface AppShellProps {
   children?: React.ReactNode;
   nav: React.ReactNode;
-  logoImagePath: string;
-  logoImageAlt: string;
   pathnameForCloseEffect: string;
 }
 
@@ -49,36 +48,37 @@ export const frostedGlassVariants = cva(
 export const AppShell: React.FC<AppShellProps> = ({
   nav,
   children,
-  logoImagePath,
-  logoImageAlt,
   pathnameForCloseEffect,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const navRef = useRef<HTMLDivElement>(null);
   useCloseOnNavigate(setIsOpen, pathnameForCloseEffect);
 
   return (
     <>
-      <Floaty isOpen={isOpen} setIsOpen={setIsOpen} />
       <div
         className={frostedGlassVariants({
           variant: isOpen ? 'visible' : 'hidden',
         })}
       />
-      <aside className={asideVariants({ variant: isOpen ? 'open' : 'closed' })}>
-        <div
-          className={cn(
-            typographyVariants({ presets: 'h5' }),
-            'flex h-full w-60 flex-none flex-col gap-2 overflow-y-auto p-4',
-          )}
-        >
-          <img
-            src={logoImagePath}
-            alt={logoImageAlt}
-            className="max-h-[50px] max-w-[200px]"
-          />
-          {nav}
+      <FocusTrap>
+        <div>
+          <Floaty isOpen={isOpen} setIsOpen={setIsOpen} />
+          <nav
+            ref={navRef}
+            className={asideVariants({ variant: isOpen ? 'open' : 'closed' })}
+          >
+            <div
+              className={cn(
+                typographyVariants({ presets: 'h5' }),
+                'flex h-full w-60 flex-none flex-col gap-2 overflow-y-auto p-4',
+              )}
+            >
+              {nav}
+            </div>
+          </nav>
         </div>
-      </aside>
+      </FocusTrap>
       <main className="container h-screen flex-auto overflow-auto bg-zinc-900 p-8 sm:ml-64">
         {children}
       </main>

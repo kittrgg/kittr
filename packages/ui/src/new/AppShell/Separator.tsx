@@ -1,3 +1,3 @@
 export function SidebarSeparator() {
-  return <hr className="w-full min-w-full my-2 border-zinc-600" />;
+  return <hr className="my-2 w-full min-w-full border-zinc-600" />;
 }

@@ -2,4 +2,5 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 pnpm precommit-hook
+git add .
 git commit --amend --allow-empty-message --no-verify -m ''
