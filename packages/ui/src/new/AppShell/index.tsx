@@ -1,6 +1,10 @@
+'use client';
 import * as React from 'react';
+import { useState } from 'react';
+import { cva } from 'class-variance-authority';
 import { P, typographyVariants } from '../Typography';
 import { cn } from '../utils';
+import { Floaty } from './Floaty';
 
 interface AppShellProps {
   children?: React.ReactNode;
@@ -11,15 +15,52 @@ interface AppShellProps {
 
 export { AppShellLinkItem } from './LinkItem';
 
+export const asideVariants = cva(
+  'fixed top-0 left-0 z-40 w-64 h-screen transition-transform bg-zinc-800 sm:translate-x-0',
+  {
+    defaultVariants: {
+      variant: 'closed',
+    },
+    variants: {
+      variant: {
+        closed: '-translate-x-full',
+        open: 'translate-x-0',
+      },
+    },
+  },
+);
+export const frostedGlassVariants = cva(
+  'fixed w-full h-full backdrop-blur z-40 transition-all sm:opacity-0',
+  {
+    defaultVariants: {
+      variant: 'hidden',
+    },
+    variants: {
+      variant: {
+        hidden: 'pointer-events-none opacity-0',
+        visible: 'opacity-100',
+      },
+    },
+  },
+);
+
 export const AppShell: React.FC<AppShellProps> = ({
   nav,
   children,
   logoImagePath,
   logoImageAlt,
 }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <>
-      <aside className="fixed top-0 left-0 z-40 h-screen w-64 -translate-x-full bg-zinc-800 transition-transform sm:translate-x-0">
+      <Floaty isOpen={isOpen} setIsOpen={setIsOpen} />
+      <div
+        className={frostedGlassVariants({
+          variant: isOpen ? 'visible' : 'hidden',
+        })}
+      />
+      <aside className={asideVariants({ variant: isOpen ? 'open' : 'closed' })}>
         <div
           className={cn(
             typographyVariants({ presets: 'h5' }),
