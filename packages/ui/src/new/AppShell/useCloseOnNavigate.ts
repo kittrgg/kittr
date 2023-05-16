@@ -7,7 +7,6 @@ export const useCloseOnNavigate = (
   pathname: string,
 ) => {
   useEffect(() => {
-    document.getElementById('floaty-burger')?.focus();
     func(false);
   }, [pathname]);
 };
