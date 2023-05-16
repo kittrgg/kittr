@@ -3,4 +3,4 @@
 
 pnpm precommit-hook
 git add .
-git commit --amend --allow-empty-message --no-verify -m ''
+git commit --amend --no-verify

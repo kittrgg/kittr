@@ -60,10 +60,10 @@ export const AppShell: React.FC<AppShellProps> = ({
         className={frostedGlassVariants({
           variant: isOpen ? 'visible' : 'hidden',
         })}
+        onClick={() => setIsOpen(false)}
       />
       <FocusTrap>
         <div>
-          <Floaty isOpen={isOpen} setIsOpen={setIsOpen} />
           <nav
             ref={navRef}
             className={asideVariants({ variant: isOpen ? 'open' : 'closed' })}
@@ -77,9 +77,10 @@ export const AppShell: React.FC<AppShellProps> = ({
               {nav}
             </div>
           </nav>
+          <Floaty isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>
       </FocusTrap>
-      <main className="container h-screen flex-auto overflow-auto bg-zinc-900 p-8 sm:ml-64">
+      <main className="container flex-auto bg-zinc-900 p-8 sm:ml-64">
         {children}
       </main>
     </>
