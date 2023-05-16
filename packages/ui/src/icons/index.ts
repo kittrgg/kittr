@@ -12,9 +12,10 @@ export {
   ChevronRight,
   ChevronUp,
   Code2,
-  Library,
-  Type,
   Home,
+  Library,
   Menu,
+  Type,
+  X,
 } from 'lucide-icons-react';
 export { Google, Twitch, Youtube, Twitter, Tiktok } from './brands';

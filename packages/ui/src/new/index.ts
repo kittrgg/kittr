@@ -1,8 +1,10 @@
 import '../styles.css';
 
-// Styling utility
 export * from './AppShell';
-export * from './Avatar';
+export { Floaty } from "./AppShell/Floaty"
+export { SidebarHeader } from "./AppShell/Header"
+export { SidebarSeparator } from "./AppShell/Separator"
+export { Avatar, AvatarFallback, AvatarImage } from './Avatar';
 export * from './Prose';
 export * from './Badge';
 export * from './GameCard';

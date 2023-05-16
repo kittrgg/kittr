@@ -2,15 +2,17 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { cva } from 'class-variance-authority';
-import { P, typographyVariants } from '../Typography';
+import { typographyVariants } from '../Typography';
 import { cn } from '../utils';
 import { Floaty } from './Floaty';
+import { useCloseOnNavigate } from './useCloseOnNavigate';
 
 interface AppShellProps {
   children?: React.ReactNode;
   nav: React.ReactNode;
   logoImagePath: string;
   logoImageAlt: string;
+  pathnameForCloseEffect: string;
 }
 
 export { AppShellLinkItem } from './LinkItem';
@@ -49,8 +51,10 @@ export const AppShell: React.FC<AppShellProps> = ({
   children,
   logoImagePath,
   logoImageAlt,
+  pathnameForCloseEffect,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  useCloseOnNavigate(setIsOpen, pathnameForCloseEffect);
 
   return (
     <>
@@ -81,15 +85,3 @@ export const AppShell: React.FC<AppShellProps> = ({
     </>
   );
 };
-
-export function SidebarHeader({ children }: { children: React.ReactNode }) {
-  return (
-    <P className={cn(typographyVariants({ presets: 'h3' }), 'py-2')}>
-      {children}
-    </P>
-  );
-}
-
-export function SidebarSeparator() {
-  return <hr className="my-2 w-full min-w-full border-zinc-600" />;
-}

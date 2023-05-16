@@ -1,4 +1,10 @@
 import { Prose } from '@kittr/ui/new';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  description: "kittr's React UI Kit",
+  title: 'React Kit - kittr',
+};
 
 export default function Home() {
   return (
