@@ -6,6 +6,7 @@
   "exports": {
     ".": "./src/components/index.ts",
     "./new": "./src/new/index.ts",
+    "./hooks": "./src/hooks/index.ts",
     "./icons": "./src/icons/index.ts",
     "./styles.css": "./dist/compiled.css"
   },
@@ -16,6 +17,9 @@
       ],
       "new": [
         "./src/new/index.ts"
+      ],
+      "hooks": [
+        "./src/hooks/index.ts"
       ],
       "icons": [
         "./src/icons/index.ts"

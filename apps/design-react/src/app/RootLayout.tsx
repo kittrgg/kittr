@@ -37,17 +37,19 @@ export function RootLayout({
         <AppShell
           nav={
             <>
-              <Link
-                className="flex flex-row items-center justify-center"
-                href="/"
-              >
-                <Image
-                  alt="kittr logo"
-                  height={48}
-                  src="/logo.svg"
-                  width={89}
-                />
-              </Link>
+              <AppShellLinkItem className="m-0 flex flex-row items-center justify-center">
+                <Link
+                  className="flex flex-row items-center justify-center"
+                  href="/"
+                >
+                  <Image
+                    alt="kittr logo"
+                    height={48}
+                    src="/logo.svg"
+                    width={89}
+                  />
+                </Link>
+              </AppShellLinkItem>
               <SidebarSeparator />
 
               <SidebarHeader>Utilities</SidebarHeader>
@@ -83,7 +85,7 @@ export function RootLayout({
                 })}
             </>
           }
-          pathnameForCloseEffect={pathname}
+          pathnameForCloseHook={pathname}
         >
           <>{children}</>
         </AppShell>

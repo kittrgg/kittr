@@ -1,17 +1,18 @@
 'use client';
-import * as React from 'react';
+import type { ReactNode } from 'react';
 import { useRef, useState } from 'react';
 import { cva } from 'class-variance-authority';
 import FocusTrap from 'focus-trap-react';
 import { typographyVariants } from '../Typography';
 import { cn } from '../utils';
+import { useBodyScrollLock } from '../../hooks';
 import { Floaty } from './Floaty';
 import { useCloseOnNavigate } from './useCloseOnNavigate';
 
 interface AppShellProps {
-  children?: React.ReactNode;
-  nav: React.ReactNode;
-  pathnameForCloseEffect: string;
+  children?: ReactNode;
+  nav: ReactNode;
+  pathnameForCloseHook: string;
 }
 
 export { AppShellLinkItem } from './LinkItem';
@@ -30,6 +31,7 @@ export const asideVariants = cva(
     },
   },
 );
+
 export const frostedGlassVariants = cva(
   'fixed w-full h-full backdrop-blur z-40 transition-all sm:opacity-0',
   {
@@ -48,36 +50,43 @@ export const frostedGlassVariants = cva(
 export const AppShell: React.FC<AppShellProps> = ({
   nav,
   children,
-  pathnameForCloseEffect,
+  pathnameForCloseHook,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
-  useCloseOnNavigate(setIsOpen, pathnameForCloseEffect);
+  useCloseOnNavigate(setIsOpen, pathnameForCloseHook);
+  useBodyScrollLock(isOpen);
 
   return (
     <>
-      <div
-        className={frostedGlassVariants({
-          variant: isOpen ? 'visible' : 'hidden',
-        })}
-        onClick={() => setIsOpen(false)}
-      />
-      <FocusTrap>
+      <FocusTrap
+        active={isOpen}
+        paused={!isOpen}
+        focusTrapOptions={{ preventScroll: true }}
+      >
         <div>
-          <nav
-            ref={navRef}
-            className={asideVariants({ variant: isOpen ? 'open' : 'closed' })}
-          >
-            <div
-              className={cn(
-                typographyVariants({ presets: 'h5' }),
-                'flex h-full w-60 flex-none flex-col gap-2 overflow-y-auto p-4',
-              )}
+          <div
+            className={frostedGlassVariants({
+              variant: isOpen ? 'visible' : 'hidden',
+            })}
+            onClick={() => setIsOpen(false)}
+          />
+          <div>
+            <nav
+              ref={navRef}
+              className={asideVariants({ variant: isOpen ? 'open' : 'closed' })}
             >
-              {nav}
-            </div>
-          </nav>
-          <Floaty isOpen={isOpen} setIsOpen={setIsOpen} />
+              <div
+                className={cn(
+                  typographyVariants({ presets: 'h5' }),
+                  'flex h-full w-60 flex-none flex-col gap-2 overflow-y-auto p-4',
+                )}
+              >
+                {nav}
+              </div>
+            </nav>
+            <Floaty isOpen={isOpen} setIsOpen={setIsOpen} />
+          </div>
         </div>
       </FocusTrap>
       <main className="container flex-auto bg-zinc-900 p-8 sm:ml-64">
