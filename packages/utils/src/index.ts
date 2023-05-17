@@ -1,3 +1,5 @@
+export * from './capitalizeFirst';
+
 interface Json {
   [key: string]: Json | Json[] | boolean | number | string | null;
 }
