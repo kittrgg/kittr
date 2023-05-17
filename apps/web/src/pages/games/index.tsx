@@ -1,5 +1,4 @@
-import { trpc } from '@/lib/trpc';
-import PageWrapper from '@Components/layouts/PageWrapper';
+import AdPageWrapper from '@Components/layouts/AdPageWrapper';
 import GameCard from '@Components/shared/GameCard';
 import ResponsiveBanner from '@Services/venatus/ResponsiveBanner';
 import { Routes } from '@Utils/lookups/routes';
@@ -8,6 +7,7 @@ import { Text, Title } from '@kittr/ui';
 import { Grid } from '@mantine/core';
 import { useViewportSize } from '@mantine/hooks';
 import { useRouter } from 'next/router';
+import { trpc } from '@/lib/trpc';
 
 function GamesIndex() {
   const { width } = useViewportSize();
@@ -16,7 +16,7 @@ function GamesIndex() {
   const { data: games } = trpc.games.list.useQuery();
 
   return (
-    <PageWrapper
+    <AdPageWrapper
       description="Library of games on kittr. Get kitted."
       title="Games | kittr"
     >
@@ -53,7 +53,7 @@ function GamesIndex() {
           smallWidthAdUnit="s300x250"
         />
       )}
-    </PageWrapper>
+    </AdPageWrapper>
   );
 }
 

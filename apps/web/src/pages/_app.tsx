@@ -1,15 +1,14 @@
-import { trpc } from '@/lib/trpc';
 import { store } from '@Redux/store';
 import GlobalStyles from '@Styles/globals';
 import OverlayStyles from '@Styles/overlay';
 import { Routes } from '@Utils/lookups/routes';
 import { Analytics } from '@kittr/analytics';
 import { MantineProvider } from '@kittr/ui';
-import '@kittr/ui/styles.css';
 import { Global } from '@mantine/core';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { useRouter } from 'next/router';
 import { Provider } from 'react-redux';
+import { trpc } from '@/lib/trpc';
 
 function MyApp({
   Component,
@@ -40,12 +39,14 @@ function MyApp({
 
         {router.route ===
         Routes.CHANNEL.GAME.createOverlayPath('[channel]', '[game]') ? (
+          // @ts-expect-error Old library, pain.
           <OverlayStyles />
         ) : (
+          // @ts-expect-error Old library, pain.
           <GlobalStyles />
         )}
         <Component {...pageProps} />
-        <ReactQueryDevtools position="top-left" />
+        <ReactQueryDevtools />
       </MantineProvider>
     </Provider>
   );

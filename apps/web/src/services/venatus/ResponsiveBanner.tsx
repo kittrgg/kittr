@@ -33,4 +33,6 @@ function ResponsiveBanner({
   );
 }
 
-export default dynamic(() => Promise.resolve(ResponsiveBanner), { ssr: false });
+export default dynamic(() => Promise.resolve(ResponsiveBanner), {
+  ssr: false,
+}) as any;

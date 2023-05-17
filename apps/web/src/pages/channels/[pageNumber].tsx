@@ -1,7 +1,6 @@
-import { trpc } from '@/lib/trpc';
 import colors from '@Colors';
+import AdPageWrapper from '@Components/layouts/AdPageWrapper';
 import FallbackPage from '@Components/layouts/FallbackPage';
-import PageWrapper from '@Components/layouts/PageWrapper';
 import { ChannelList, Paginator } from '@Components/shared';
 import { useViewportDimensions } from '@Hooks/useViewportDimensions';
 import ResponsiveBanner from '@Services/venatus/ResponsiveBanner';
@@ -10,6 +9,7 @@ import { createSSGHelper } from '@kittr/trpc/server';
 import { Text, Title } from '@kittr/ui';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { trpc } from '@/lib/trpc';
 
 const CHANNELS_PER_PAGE = 10;
 
@@ -33,7 +33,7 @@ function PageOfChannels() {
 
   if ((channels && channels.length === 0) || isNaN(page)) {
     return (
-      <PageWrapper
+      <AdPageWrapper
         description="Full channels of channels on kittr."
         title={`Channels - Page ${page} | kittr`}
       >
@@ -55,12 +55,12 @@ function PageOfChannels() {
         >
           Back to Earth
         </Link>
-      </PageWrapper>
+      </AdPageWrapper>
     );
   }
 
   return (
-    <PageWrapper
+    <AdPageWrapper
       description="Full channels of channels on kittr."
       title={`Channels - Page ${page} | kittr`}
     >
@@ -93,7 +93,7 @@ function PageOfChannels() {
           smallWidthAdUnit="s300x250"
         />
       )}
-    </PageWrapper>
+    </AdPageWrapper>
   );
 }
 

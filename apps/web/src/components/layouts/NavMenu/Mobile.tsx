@@ -4,8 +4,8 @@ import { header2 } from '@Styles/typography';
 import type { ReactNode } from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
-import LogoImageLink from './LogoImageLink';
 import Menu from './MobilePane';
+import LogoImageLink from './LogoImageLink';
 
 interface Props {
   /** Breakpoint as passed by down by navigation master component */
@@ -23,7 +23,6 @@ function MobileNav({ breakpoint, backFunction, middleComponent }: Props) {
   return (
     <>
       <Menu isOpen={isOpen} setIsOpen={setIsOpen} />
-
       <Container breakpoint={breakpoint} withBackground={Boolean(backFunction)}>
         {backFunction ? (
           <div onClick={backFunction} style={{ cursor: 'pointer' }}>

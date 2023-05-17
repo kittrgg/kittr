@@ -71,6 +71,7 @@ export function SideScroller({ wrapperStyles, childMargin, children }: Props) {
 
   return (
     <div style={{ display: 'flex', alignItems: 'center' }}>
+      {/* @ts-expect-error Super old library, pain. */}
       <ScrollContainer
         horizontal={isMobile}
         innerRef={ref}
