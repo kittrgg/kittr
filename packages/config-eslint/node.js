@@ -15,8 +15,8 @@ module.exports = {
   ignorePatterns: ['node_modules/', 'dist/'],
   overrides: [
     {
-      extends: [require.resolve('@vercel/style-guide/eslint/jest')],
       files: ['**/*.test.*'],
+      extends: [require.resolve('@vercel/style-guide/eslint/jest')],
     },
     {
       files: ['jest.config.*', 'vite.config.*', 'tsup.config.*'],

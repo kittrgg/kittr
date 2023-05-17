@@ -121,6 +121,7 @@ function BannerTicker({
   const isOverlayVisible = Boolean(previewWidth) || isRendered;
 
   return (
+    // @ts-expect-error Old library, pain.
     <ThemeProvider
       theme={{
         ...data,

@@ -101,7 +101,7 @@ function Options() {
   };
 
   const addToTunes = (
-    inputValue: number | undefined,
+    inputValue: number | '',
     slot: string,
     activeTune?: 'horz' | 'vert',
   ) => {
@@ -141,7 +141,7 @@ function Options() {
       } as Omit<WarzoneTwoKitOptionTuning, 'id'>;
 
       // Set correct tune to inputValue
-      copyTune[activeTune] = inputValue!;
+      copyTune[activeTune] = inputValue as number;
 
       // Mutate the correctly indexed tune in tuning array
       copyTunes[

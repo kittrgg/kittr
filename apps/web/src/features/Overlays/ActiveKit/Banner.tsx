@@ -81,6 +81,7 @@ function Banner({ previewWidth, data, activeKit, setActiveKit }: Props) {
   const isOverlayVisible = Boolean(previewWidth) || isRendered;
 
   return (
+    // @ts-expect-error Super old library, pain.
     <ThemeProvider
       theme={{
         ...data,

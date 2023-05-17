@@ -35,6 +35,7 @@ function KitScroller({ availableKits }: Props) {
   // This is needed because dismounting the ref can cause problems...Can this be resolved?
   if (matchedBase.length === 1)
     return (
+      // @ts-expect-error Old library, pain.
       <ScrollContainer
         innerRef={containerRef}
         style={{ display: 'none', width: '0', height: '0' }}
@@ -42,6 +43,7 @@ function KitScroller({ availableKits }: Props) {
     );
 
   return (
+    // @ts-expect-error Old library, pain.
     <ScrollContainer
       hideScrollbars
       horizontal

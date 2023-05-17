@@ -1,5 +1,5 @@
-name: "Install"
-description: "Sets up Node.js and runs install"
+name: 'Install'
+description: 'Sets up Node.js and runs install'
 
 runs:
   using: composite
@@ -22,6 +22,7 @@ runs:
         key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
         restore-keys: |
           ${{ runner.os }}-pnpm
+
     - name: pnpm
       shell: bash
       if: steps.pnpm-cache.outputs.cache-hit != 'true'

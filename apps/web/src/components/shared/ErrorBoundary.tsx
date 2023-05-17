@@ -12,6 +12,7 @@ function Fallback() {
 
 export function ErrorBoundary({ children }: { children: React.ReactNode }) {
   return (
+    // @ts-expect-error Super old library, pain.
     <ReactErrorBoundary FallbackComponent={Fallback} onError={myErrorHandler}>
       {children}
     </ReactErrorBoundary>

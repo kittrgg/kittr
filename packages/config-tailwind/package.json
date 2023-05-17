@@ -4,7 +4,8 @@
   "private": true,
   "main": "index.js",
   "devDependencies": {
-    "tailwindcss": "^3.2.4",
-    "@kittr/prettier": "workspace:*"
+    "@kittr/prettier": "workspace:*",
+    "@tailwindcss/typography": "^0.5.9",
+    "tailwindcss": "^3.2.4"
   }
 }
