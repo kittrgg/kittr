@@ -1,12 +1,11 @@
-import { describe, test, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { playerData } from '@kittr/fixtures';
 import { ChannelList, ChannelListItem } from '.';
 
 describe('<ChannelListItem />', () => {
   const fixture = playerData[0];
 
-  test('Mounts', () => {
+  test('mounts', () => {
     const view = render(
       <ChannelListItem
         name={fixture.name}
@@ -19,7 +18,7 @@ describe('<ChannelListItem />', () => {
     expect(view);
   });
 
-  test('Shows channel name', () => {
+  test('shows channel name', () => {
     render(
       <ChannelListItem
         name={fixture.name}
@@ -29,10 +28,10 @@ describe('<ChannelListItem />', () => {
       />,
     );
 
-    screen.getByText(fixture.name);
+    expect(screen.getByText(fixture.name));
   });
 
-  test('Social SVGs have title', () => {
+  test('social SVGs have title', () => {
     render(
       <ChannelListItem
         name={fixture.name}
@@ -42,10 +41,10 @@ describe('<ChannelListItem />', () => {
       />,
     );
 
-    screen.getByTitle('Twitch');
+    expect(screen.getByTitle('Twitch'));
   });
 
-  test('Has image alt', () => {
+  test('has image alt', async () => {
     render(
       <ChannelListItem
         name={fixture.name}
@@ -55,6 +54,6 @@ describe('<ChannelListItem />', () => {
       />,
     );
 
-    expect(screen.findByAltText(fixture.name)).resolves;
+    await waitFor(() => expect(screen.findByAltText(fixture.name)).resolves);
   });
 });
