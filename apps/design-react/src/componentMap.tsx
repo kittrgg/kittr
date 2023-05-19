@@ -12,6 +12,7 @@ import {
   H4,
   H5,
   P,
+  ChannelList,
   PlayerCard,
   Select,
   SelectContent,
@@ -22,6 +23,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@kittr/ui/new';
+import { playerData } from '@kittr/fixtures';
+import Link from 'next/link';
 
 export const components = {
   avatar: {
@@ -100,6 +103,17 @@ export const components = {
         isLive
         key="JoeWo"
         name="JoeWo"
+      />,
+    ],
+  },
+  channelList: {
+    name: 'ChannelList',
+    components: [
+      <ChannelList
+        channelList={playerData}
+        key="1"
+        linkBasePath="/channel"
+        linkComponent={Link}
       />,
     ],
   },

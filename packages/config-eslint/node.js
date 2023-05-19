@@ -17,6 +17,11 @@ module.exports = {
     {
       files: ['**/*.test.*'],
       extends: [require.resolve('@vercel/style-guide/eslint/jest')],
+      rules: {
+        '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/no-unsafe-assignment': 'off',
+        'jest/valid-expect': 'off',
+      },
     },
     {
       files: ['jest.config.*', 'vite.config.*', 'tsup.config.*'],

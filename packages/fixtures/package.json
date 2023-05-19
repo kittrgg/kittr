@@ -1,0 +1,21 @@
+{
+  "name": "@kittr/fixtures",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./src/index.ts"
+      ]
+    }
+  },
+  "devDependencies": {
+    "@kittr/lint": "workspace:*",
+    "@kittr/prettier": "workspace:*",
+    "@kittr/tsconfig": "workspace:*",
+    "@kittr/types": "workspace:*"
+  }
+}

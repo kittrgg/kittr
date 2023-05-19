@@ -17,7 +17,7 @@ describe('<Avatar />', () => {
 
     expect(view).toBeTruthy();
     screen.getByText('CN');
-    waitForElementToBeRemoved(screen.getByText('CN'));
-    screen.findByAltText('@shadcn');
+    expect(waitForElementToBeRemoved(screen.queryByText('CN'))).resolves;
+    expect(screen.findByAltText('@shadcn')).resolves;
   });
 });

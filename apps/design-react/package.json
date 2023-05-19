@@ -13,9 +13,11 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@kittr/fixtures": "workspace:*",
     "@kittr/lint": "workspace:*",
     "@kittr/tailwind": "workspace:*",
     "@kittr/tsconfig": "workspace:*",
+    "@kittr/types": "workspace:*",
     "@kittr/ui": "workspace:*",
     "@types/node": "20.1.0",
     "@types/react": "18.2.6",
