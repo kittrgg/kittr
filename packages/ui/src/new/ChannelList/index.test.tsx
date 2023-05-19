@@ -1,58 +1,29 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { playerData } from '@kittr/fixtures';
-import { ChannelList, ChannelListItem } from '.';
+import { ChannelList } from '.';
 
-describe('<ChannelListItem />', () => {
+describe('<ChannelList />', () => {
   const fixture = playerData[0];
 
   test('mounts', () => {
-    const view = render(
-      <ChannelListItem
-        name={fixture.name}
-        imagePath={fixture.imagePath}
-        urlSafeName={fixture.urlSafeName}
-        socials={fixture.socials}
-      />,
-    );
-
+    const view = render(<ChannelList channelList={playerData} />);
     expect(view);
   });
 
   test('shows channel name', () => {
-    render(
-      <ChannelListItem
-        name={fixture.name}
-        imagePath={fixture.imagePath}
-        urlSafeName={fixture.urlSafeName}
-        socials={fixture.socials}
-      />,
-    );
+    render(<ChannelList channelList={playerData} />);
 
     expect(screen.getByText(fixture.name));
   });
 
   test('social SVGs have title', () => {
-    render(
-      <ChannelListItem
-        name={fixture.name}
-        imagePath={fixture.imagePath}
-        urlSafeName={fixture.urlSafeName}
-        socials={fixture.socials}
-      />,
-    );
+    render(<ChannelList channelList={playerData} />);
 
-    expect(screen.getByTitle('Twitch'));
+    expect(screen.getAllByTitle('Twitch')).toHaveLength(playerData.length);
   });
 
   test('has image alt', async () => {
-    render(
-      <ChannelListItem
-        name={fixture.name}
-        imagePath={fixture.imagePath}
-        urlSafeName={fixture.urlSafeName}
-        socials={fixture.socials}
-      />,
-    );
+    render(<ChannelList channelList={playerData} />);
 
     await waitFor(() => expect(screen.findByAltText(fixture.name)).resolves);
   });
