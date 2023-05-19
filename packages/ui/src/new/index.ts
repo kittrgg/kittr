@@ -6,7 +6,7 @@ export { SidebarHeader } from './AppShell/Header';
 export { SidebarSeparator } from './AppShell/Separator';
 export { Avatar, AvatarFallback, AvatarImage } from './Avatar';
 export * from './Prose';
-export { ChannelList, ChannelListItem } from './ChannelList';
+export { ChannelList } from './ChannelList';
 export * from './Badge';
 export * from './GameCard';
 export * from './PlayerCard';

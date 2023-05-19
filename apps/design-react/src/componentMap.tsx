@@ -24,6 +24,7 @@ import {
   SelectValue,
 } from '@kittr/ui/new';
 import { playerData } from '@kittr/fixtures';
+import Link from 'next/link';
 
 export const components = {
   avatar: {
@@ -107,7 +108,14 @@ export const components = {
   },
   channelList: {
     name: 'ChannelList',
-    components: [<ChannelList channelList={playerData} key="1" />],
+    components: [
+      <ChannelList
+        channelList={playerData}
+        key="1"
+        linkBasePath="/channel"
+        linkComponent={Link}
+      />,
+    ],
   },
   typography: {
     components: [

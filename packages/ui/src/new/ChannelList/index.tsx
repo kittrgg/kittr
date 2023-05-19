@@ -1,34 +1,41 @@
-'use client';
-
 import { ChannelListItem } from './Item';
 
 export interface ChannelListItemProps {
   imagePath: string;
   name: string;
   urlSafeName: string;
-  socials: {
-    twitch?: string;
-    youtube?: string;
-    twitter?: string;
-    tiktok?: string;
-    instagram?: string;
-    discord?: string;
-  };
 }
 
 export interface ChannelListProps {
+  // Typed copied from next/link internals
+  linkComponent: React.ForwardRefExoticComponent<
+    Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> &
+      React.RefAttributes<HTMLAnchorElement> & {
+        children?: React.ReactNode;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } & { href: any }
+  >;
+  linkBasePath: string;
   channelList: ChannelListItemProps[];
-  withSocialIcons?: boolean;
 }
 
-export type SocialProperties = keyof ChannelListItemProps['socials'];
-
-export const ChannelList = ({ channelList }: ChannelListProps) => {
+export const ChannelList = ({
+  channelList,
+  linkBasePath,
+  linkComponent,
+}: ChannelListProps) => {
   return (
-    <ul>
+    <div className="flex flex-col gap-6">
       {channelList.map((channel) => {
-        return <ChannelListItem key={channel.name} {...channel} />;
+        return (
+          <ChannelListItem
+            linkComponent={linkComponent}
+            linkBasePath={linkBasePath}
+            key={channel.name}
+            {...channel}
+          />
+        );
       })}
-    </ul>
+    </div>
   );
 };
