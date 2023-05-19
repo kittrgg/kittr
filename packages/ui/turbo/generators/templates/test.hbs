@@ -1,0 +1,15 @@
+import {
+  render,
+  screen,
+} from '@testing-library/react';
+import { {{ component}} } from '.';
+
+describe('<{{ component }} />', () => {
+  test('mounts', () => {
+    const view = render(
+      <{{ component }} />,
+    );
+
+    expect(view);
+  });
+});
