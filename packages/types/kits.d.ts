@@ -1,5 +1,5 @@
-import { IWarzoneGameInfo } from './game';
-import { CommandCode, Kit, KitBase, KitOption } from '@kittr/prisma';
+import type { CommandCode, Kit, KitBase, KitOption } from '@kittr/prisma';
+import type { IWarzoneGameInfo } from './game';
 
 interface IKitBase {
   /** ObjectId from database */
@@ -24,14 +24,14 @@ interface IKitBase {
       control: number;
     };
     /** Kit Options that are applicable to the Base */
-    availableOptions: Array<{ orderPlacement: number; optionId: string }>;
+    availableOptions: { orderPlacement: number; optionId: string }[];
     /** Maximum allowed Kit Options because of how the base gets used in game */
     maxOptions: number;
   };
   /** String to use in urls to refer to this Base */
   gameUrlSafeName: string;
   /** Twitch chat commands that refer to this Base */
-  commandCodes: Array<string>;
+  commandCodes: string[];
   /** Type within the game that the Base belongs to.
    * TODO: This should get moved into the gameInfo object.
    */
@@ -51,7 +51,7 @@ interface IKitOption {
 
 interface IKitOptionRaw {
   /** Options within the game are shown with some particular order. Use this field to mimic that order. */
-  orderPlacement: string | number;
+  orderPlacement: number | string;
   /** ObjectId for the Kit Option from database */
   optionId: string;
 }
@@ -84,7 +84,7 @@ interface IKitRaw {
   /** Stringified ObjectId of the Base for this Kit */
   baseId: string;
   /** User selected Kit Options to apply to the Kit base */
-  options: Array<IKitOptionRaw>;
+  options: IKitOptionRaw[];
   /** User provided values */
   userData: IKitUserData;
 }
@@ -95,7 +95,7 @@ export interface IKit {
   /** Stringified ObjectId of the Base for this Kit */
   baseId: string;
   /** User selected Kit Options to apply to the Kit base */
-  options: Array<IKitOption>;
+  options: IKitOption[];
   /** The urlSafeName for the game that the Base of this Kit is for */
   gameUrlSafeName?: string;
   /** User provided values */

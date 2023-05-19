@@ -1,6 +1,6 @@
-import { IGame } from './game';
-import { IKit, IKitRaw } from './kits';
-import { IManager } from './manager';
+import type { IGame } from './game';
+import type { IKit, IKitRaw } from './kits';
+import type { IManager } from './manager';
 
 interface ChannelLinks {
   twitch?: string;
@@ -22,16 +22,15 @@ interface ChannelMeta {
     '3'?: boolean;
     '4'?: boolean;
   };
-  specs?: {
-    [key: string]: string;
-  };
-  affiliates?: {
-    [key: string]: {
+  specs?: Record<string, string>;
+  affiliates?: Record<
+    string,
+    {
       code?: string;
       description?: string;
       link?: string;
-    };
-  };
+    }
+  >;
   hasCoverPhoto?: boolean;
   stripeId?: string;
   premiumType?: string;
@@ -65,9 +64,9 @@ export interface Channel {
   /** ObjectId from database */
   _id: string;
   /** Managers who are allowed to interact with this channel */
-  managers: Array<IManager>;
+  managers: IManager[];
   /** Games that this channel has listed for their kittr profile */
-  games: Array<IGame & { code?: string; commandString?: string }>;
+  games: (IGame & { code?: string; commandString?: string })[];
   /** ISO date that this channel was created on */
   createdDate: string;
   /** Name of channel to present on front-end/client */
@@ -77,7 +76,7 @@ export interface Channel {
   /** Meta information for the channel */
   meta: ChannelMeta;
   /** The kits created for this channel */
-  kits: Array<IKit>;
+  kits: IKit[];
   /** Manager who was the most recent to update some piece of information for this channel */
   previousUpdater: string;
   /** Amount of time that a kit has been visited for this channel */
@@ -92,9 +91,9 @@ interface IRawChannel {
   /** ObjectId from database */
   _id: string;
   /** Managers who are allowed to interact with this channel */
-  managers: Array<IManager>;
+  managers: IManager[];
   /** Games that this channel has listed for their kittr profile */
-  games: Array<{ id: string; code?: string; commandString?: string }>;
+  games: { id: string; code?: string; commandString?: string }[];
   /** ISO date that this channel was created on */
   createdDate: string;
   /** Name of channel to present on front-end/client */
@@ -104,7 +103,7 @@ interface IRawChannel {
   /** Meta information for the channel */
   meta: ChannelMeta;
   /** The kits created for this channel */
-  kits: Array<IKitRaw>;
+  kits: IKitRaw[];
   /** Manager who was the most recent to update some piece of information for this channel */
   previousUpdater: string;
   /** Amount of time that a kit has been visited for this channel */

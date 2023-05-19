@@ -8,60 +8,63 @@ export interface NextClientEndpointError {
   errorMessage: string;
 }
 
-export type NextClientPayload<T> = T | NextClientEndpointError;
+export type NextClientPayload<T> = NextClientEndpointError | T;
 
 export interface NextServerError {
   error: boolean;
   errorMessage: string;
 }
 
-export type NextServerPayload<T> = T | NextServerError;
+export type NextServerPayload<T> = NextServerError | T;
 
-export type ReduxModalState = { type: DashboardModals; data: any };
+export interface ReduxModalState {
+  type: DashboardModals;
+  data: any;
+}
 
 /** Workflows that users can utilize to add their commands to their channel */
-export type TCommandMethod = 'dashboard' | 'nightbot' | 'channel-elements';
+export type TCommandMethod = 'channel-elements' | 'dashboard' | 'nightbot';
 
 /** Twitch command strategies to add kittr commands to chat */
-export type TTwitchStrategy = '!editcom' | '!addcom' | '!commands add';
+export type TTwitchStrategy = '!addcom' | '!commands add' | '!editcom';
 
 export type SocialPlatform =
+  | 'discord'
+  | 'facebook'
+  | 'instagram'
+  | 'tiktok'
   | 'twitch'
   | 'twitter'
-  | 'youtube'
-  | 'instagram'
-  | 'facebook'
-  | 'discord'
-  | 'tiktok';
+  | 'youtube';
 
 /** Dasbhoard Modal Options */
 export type DashboardModals =
   | ''
-  | 'Error Notification'
-  | 'Create New Channel'
-  | 'Add Manager'
   | 'About Account Managers'
-  | 'Delete Manager'
-  | 'Set New Owner'
-  | 'Confirm Changing Owner'
-  | 'Manager Role Change'
-  | 'Help'
+  | 'Add Affiliate'
   | 'Add Game'
-  | 'Delete Game'
-  | 'Export Bot Commands'
+  | 'Add Link'
+  | 'Add Manager'
+  | 'Add Spec'
   | 'Channel Deleter'
+  | 'Confirm Changing Owner'
+  | 'Create New Channel'
+  | 'Delete Game'
+  | 'Delete Manager'
+  | 'Error Notification'
+  | 'Export Bot Commands'
+  | 'Help'
   | 'Kit Delete Confirmation'
   | 'Kit Naming Warning'
-  | 'Quick Command Export'
-  | 'Add Link'
-  | 'Premium Sign Up'
+  | 'Manager Role Change'
   | 'Premium Plans'
-  | 'Add Spec'
-  | 'Add Affiliate'
+  | 'Premium Sign Up'
+  | 'Quick Command Export'
+  | 'Set New Owner'
   | 'Tutorial';
 
 export type ActiveKitOverlays =
-  | 'Banner'
   | 'Banner Ticker'
+  | 'Banner'
   | 'Display Ticker'
   | 'Display';

@@ -2,7 +2,7 @@ export interface IForSetupComparison {
   /** Stringified ObjectId of the Kit Base for comparison */
   _id: string;
   /** All of the user Kits for this Base to show to the front-end for comparison */
-  matches: Array<string[]>;
+  matches: string[][];
 }
 
 interface IRatioOfChannelsWithBase {
@@ -28,7 +28,7 @@ interface IRatioOfChannelsWithBaseFeatured {
 }
 
 export interface IPopularityRates {
-  forSetupComparison: Array<IForSetupComparison>;
-  ratioOfChannelsWithBase: Array<IRatioOfChannelsWithBase>;
-  ratioOfChannelsWithBaseFeatured: Array<IRatioOfChannelsWithBaseFeatured>;
+  forSetupComparison: IForSetupComparison[];
+  ratioOfChannelsWithBase: IRatioOfChannelsWithBase[];
+  ratioOfChannelsWithBaseFeatured: IRatioOfChannelsWithBaseFeatured[];
 }
