@@ -1,4 +1,4 @@
-interface IWarzoneWeaponStats {
+export interface IWarzoneWeaponStats {
   accuracy: number;
   range: number;
   mobility: number;
@@ -14,7 +14,7 @@ export interface IWarzoneGameInfo {
   stats: IWarzoneWeaponStats;
 }
 
-interface IWarzoneAttachmentSlots {
+export interface IWarzoneAttachmentSlots {
   Muzzle?: string;
   Barrel?: string;
   Laser?: string;

@@ -26,14 +26,14 @@ export interface ITwitchLiveChannels {
   is_mature: boolean;
 }
 
-interface ITwitchDataForProfilePage {
+export interface ITwitchDataForProfilePage {
   channelData: ITwitchChannelData;
   clips: ITwitchClip[];
   recentVideos: ITwitchVideo[];
   schedule: ITwitchScheduleSegment[];
 }
 
-interface ITwitchClip {
+export interface ITwitchClip {
   id: string;
   url: string;
   embed_url: string;
@@ -51,7 +51,7 @@ interface ITwitchClip {
   duration: number;
 }
 
-interface ITwitchVideo {
+export interface ITwitchVideo {
   id: string;
   channel_id: string;
   user_id: string;
@@ -84,7 +84,7 @@ export interface ITwitchScheduleSegment {
   is_recurring: true;
 }
 
-interface ITwitchChannelData {
+export interface ITwitchChannelData {
   id: string;
   login: string;
   display_name: string;

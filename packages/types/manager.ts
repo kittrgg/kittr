@@ -7,7 +7,7 @@ export interface IManager {
   role: 'Administrator' | 'Editor' | 'Owner';
 }
 
-interface IManagerData {
+export interface IManagerData {
   /** UID of the user from Firebase */
   uid: string;
   /** User's display name */

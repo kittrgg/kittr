@@ -3,7 +3,8 @@ import { header1, header2, montserrat, paragraph } from '@Styles/typography';
 import { customOrderArray } from '@Utils/helpers/orderArrayByString';
 import { warzoneSlotsOrder } from '@Utils/lookups/warzoneSlotsOrder';
 import type { RouterOutput } from '@kittr/trpc';
-import type { IKitOption, OverlayKit } from '@kittr/types';
+import type { OverlayKit } from '@kittr/types';
+import type { WarzoneKitOption, WarzoneTwoKitOption } from '@kittr/prisma';
 import type { Dispatch, SetStateAction } from 'react';
 import { useEffect, useState } from 'react';
 import styled, { keyframes, ThemeProvider } from 'styled-components';
@@ -108,7 +109,7 @@ function Banner({ previewWidth, data, activeKit, setActiveKit }: Props) {
               numOfItems={activeKit?.options?.length || 0}
             >
               {(Object.keys(activeKit ?? {}) ?? []).length > 0 &&
-                customOrderArray<IKitOption>({
+                customOrderArray<WarzoneKitOption | WarzoneTwoKitOption>({
                   sortingArray: warzoneSlotsOrder,
                   keyToSort: 'slotKey',
                   array: activeKit.options || [],
