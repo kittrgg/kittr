@@ -29,6 +29,12 @@ module.exports = {
         'import/no-default-export': 'off',
       },
     },
+    {
+      files: ['**/turbo/generators/config.*'],
+      rules: {
+        'import/no-default-export': 'off',
+      },
+    },
   ],
   parserOptions: {
     project: `${__dirname}/tsconfig.json`,
