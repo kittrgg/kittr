@@ -9,7 +9,6 @@ import type {
   WarzoneTwoKitOptionTuning,
 } from '@kittr/prisma';
 import type { RouterInput } from '@kittr/trpc';
-import type { IPopularityRates } from '@kittr/types/popularity';
 import { createSlice } from '@reduxjs/toolkit';
 
 type ActiveWeaponKit = WarzoneKit & {
@@ -26,7 +25,6 @@ export const displayrSlice = createSlice({
     activeWeapon: {} as ActiveWeaponKit,
     channel: {} as NonNullable<RouterInput['channels']['profile']['get']>,
     isSidebarOpen: false,
-    popularityRates: {} as IPopularityRates,
   },
   reducers: {
     setActiveWeapon: (state, action: { payload: ActiveWeaponKit }) => {
@@ -43,15 +41,8 @@ export const displayrSlice = createSlice({
     setIsSidebarOpen: (state, action: { payload: boolean }) => {
       state.isSidebarOpen = action.payload;
     },
-    setPopularityRates: (state, action: { payload: IPopularityRates }) => {
-      state.popularityRates = action.payload;
-    },
   },
 });
 
-export const {
-  setActiveWeapon,
-  setChannel,
-  setIsSidebarOpen,
-  setPopularityRates,
-} = displayrSlice.actions;
+export const { setActiveWeapon, setChannel, setIsSidebarOpen } =
+  displayrSlice.actions;

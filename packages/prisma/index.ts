@@ -16,6 +16,8 @@ if (typeof window === 'undefined') {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment
+// @ts-ignore
 export default prisma;
 
 export * from '@prisma/client';

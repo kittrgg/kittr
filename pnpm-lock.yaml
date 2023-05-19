@@ -664,7 +664,20 @@ importers:
         specifier: 5.0.0-beta
         version: 5.0.0-beta
 
-  packages/types: {}
+  packages/types:
+    devDependencies:
+      '@kittr/lint':
+        specifier: workspace:*
+        version: link:../config-eslint
+      '@kittr/prettier':
+        specifier: workspace:*
+        version: link:../config-prettier
+      '@kittr/prisma':
+        specifier: workspace:*
+        version: link:../prisma
+      '@kittr/tsconfig':
+        specifier: workspace:*
+        version: link:../config-typescript
 
   packages/ui:
     dependencies:

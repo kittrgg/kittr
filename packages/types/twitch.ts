@@ -10,30 +10,30 @@ export interface IOAuthRejection {
 }
 
 export interface ITwitchLiveChannels {
-  id: String;
-  user_id: String;
-  user_login: String;
-  user_name: String;
-  game_id: String;
-  game_name: String;
-  type: String;
-  title: String;
-  viewer_count: Number;
-  started_at: String;
-  language: String;
-  thumbnail_url: String;
-  tag_ids: [String];
-  is_mature: Boolean;
+  id: string;
+  user_id: string;
+  user_login: string;
+  user_name: string;
+  game_id: string;
+  game_name: string;
+  type: string;
+  title: string;
+  viewer_count: number;
+  started_at: string;
+  language: string;
+  thumbnail_url: string;
+  tag_ids: [string];
+  is_mature: boolean;
 }
 
-interface ITwitchDataForProfilePage {
+export interface ITwitchDataForProfilePage {
   channelData: ITwitchChannelData;
   clips: ITwitchClip[];
   recentVideos: ITwitchVideo[];
   schedule: ITwitchScheduleSegment[];
 }
 
-interface ITwitchClip {
+export interface ITwitchClip {
   id: string;
   url: string;
   embed_url: string;
@@ -51,7 +51,7 @@ interface ITwitchClip {
   duration: number;
 }
 
-interface ITwitchVideo {
+export interface ITwitchVideo {
   id: string;
   channel_id: string;
   user_id: string;
@@ -68,7 +68,7 @@ interface ITwitchVideo {
   language: string;
   type: string;
   duration: string;
-  muted_segments: null | {};
+  muted_segments: {} | null;
 }
 
 export interface ITwitchScheduleSegment {
@@ -77,14 +77,14 @@ export interface ITwitchScheduleSegment {
   end_time: Date;
   title: string;
   canceled_until: Date | null;
-  category: null | {
+  category: {
     id: string;
     name: string;
-  };
+  } | null;
   is_recurring: true;
 }
 
-interface ITwitchChannelData {
+export interface ITwitchChannelData {
   id: string;
   login: string;
   display_name: string;
