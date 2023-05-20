@@ -99,6 +99,9 @@
       "dependsOn": ["db:generate"],
       "cache": false
     },
+    "start": {
+      "dependsOn": ["^build", "build"]
+    },
     "e2e": {}
   }
 }
