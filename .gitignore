@@ -47,5 +47,10 @@ dev.env.local.json
 .vercel
 
 dump.sql
-
 packages/prisma/validator/**
+node_modules/
+
+# Playwright
+**/test-results/**
+**/playwright-report/**
+**/playwright/.cache/**

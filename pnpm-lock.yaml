@@ -809,17 +809,17 @@ importers:
         specifier: ^5.0.4
         version: 5.0.4
 
-  playwright:
+  playwright/web:
     devDependencies:
       '@kittr/lint':
         specifier: workspace:*
-        version: link:../packages/config-eslint
+        version: link:../../packages/config-eslint
       '@kittr/prettier':
         specifier: workspace:*
-        version: link:../packages/config-prettier
+        version: link:../../packages/config-prettier
       '@kittr/tsconfig':
         specifier: workspace:*
-        version: link:../packages/config-typescript
+        version: link:../../packages/config-typescript
       '@playwright/test':
         specifier: ^1.33.0
         version: 1.33.0
