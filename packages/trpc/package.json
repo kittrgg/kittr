@@ -2,7 +2,7 @@
   "name": "@kittr/trpc",
   "version": "0.0.0",
   "private": true,
-  "license": "MIT",
+  "license": "GNU",
   "exports": {
     ".": "./index.ts",
     "./client": "./client.ts",

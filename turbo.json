@@ -98,6 +98,7 @@
     "seed": {
       "dependsOn": ["db:generate"],
       "cache": false
-    }
+    },
+    "e2e": {}
   }
 }

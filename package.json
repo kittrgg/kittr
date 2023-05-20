@@ -18,7 +18,7 @@
     "lint:fix": "turbo lint:fix --continue",
     "lint": "turbo lint --continue",
     "start:api": "turbo start --filter=api",
-    "test:e2e": "cd lib && cd e2e && npm run cypress:e2e",
+    "test:e2e": "turbo test --filter=playwright",
     "test": "turbo test --continue --filter=ui",
     "typecheck": "turbo typecheck --continue",
     "prepare": "husky install"

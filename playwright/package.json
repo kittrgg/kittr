@@ -1,23 +1,21 @@
 {
-  "name": "@kittr/analytics",
+  "name": "playwright",
   "version": "0.0.0",
-  "private": true,
+  "description": "Integration, E2E, and smoke tests",
   "license": "GNU",
-  "main": "./src/index.ts",
+  "author": "",
   "scripts": {
     "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
     "format:fix": "prettier \"**/*.{js,jsx,ts,tsx,md,mdx,json}\" --write --check",
     "lint": "eslint-runner",
     "lint:fix": "eslint-runner --fix",
+    "test": "playwright test",
     "typecheck": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@vercel/analytics": "^0.1.8"
   },
   "devDependencies": {
     "@kittr/lint": "workspace:*",
     "@kittr/prettier": "workspace:*",
     "@kittr/tsconfig": "workspace:*",
-    "typescript": "5.0.4"
+    "@playwright/test": "^1.33.0"
   }
 }
