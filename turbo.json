@@ -99,6 +99,9 @@
     },
     "start": {
       "dependsOn": ["^build", "build"]
+    },
+    "e2e": {
+      "cache": false
     }
   }
 }
