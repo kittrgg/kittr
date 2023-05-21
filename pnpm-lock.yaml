@@ -823,6 +823,9 @@ importers:
       '@playwright/test':
         specifier: ^1.33.0
         version: 1.33.0
+      web:
+        specifier: workspace:*
+        version: link:../../apps/web
 
 packages:
   /@adobe/css-tools@4.2.0:
