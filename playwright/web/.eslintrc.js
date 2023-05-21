@@ -11,5 +11,17 @@ module.exports = {
         'import/no-default-export': 'off',
       },
     },
+    {
+      files: ['**/*.test.*'],
+      rules: {
+        'testing-library/prefer-screen-queries': 'off',
+      },
+    },
+    {
+      files: ['playwright.config.ts'],
+      rules: {
+        'import/no-default-export': 'off',
+      },
+    },
   ],
 };
