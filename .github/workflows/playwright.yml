@@ -1,9 +1,6 @@
 name: Playwright Tests
 on:
-  push:
-    branches:
-      - master
-  pull_request:
+  deployment_status:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -15,7 +12,8 @@ env:
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
 jobs:
-  test:
+  e2e:
+    if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -29,4 +27,6 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
-        run: cd playwright && pnpm test
+        run: turbo e2e
+        env:
+          PLAYWRIGHT_BASE_URL: ${{ github.event.deployment_status.target_url }}
