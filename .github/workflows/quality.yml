@@ -17,18 +17,12 @@ env:
 
 jobs:
   prettier:
-    name: "Prettier"
+    name: Prettier
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          # Commits made with the default `GITHUB_TOKEN` won't trigger workflows.
-          # See: https://docs.github.com/en/actions/security-guides/automatic-token-authentication#using-the-github_token-in-a-workflow
-          # token: ${{ secrets.GH_TOKEN_REPO_SCOPE }}
-          # We need to use the branch ref or we can't push fixes.
-          ref: ${{ github.event.pull_request.head.ref || '' }}
 
       - name: Install
         uses: ./tooling/github-actions/install
@@ -37,19 +31,21 @@ jobs:
         run: pnpm format
 
   eslint:
-    name: "ESLint"
+    name: ESLint
     timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
       - name: Setup and install
         uses: ./tooling/github-actions/install
+
       - name: Lint
         run: pnpm lint
 
   typecheck:
-    name: "TypeScript"
+    name: TypeScript
     timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:

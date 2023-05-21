@@ -2,7 +2,7 @@
   "name": "@kittr/ui",
   "version": "0.0.0",
   "private": true,
-  "license": "MIT",
+  "license": "GNU",
   "exports": {
     ".": "./src/components/index.ts",
     "./new": "./src/new/index.ts",

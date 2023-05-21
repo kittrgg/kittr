@@ -17,8 +17,8 @@
     "kill-ports": "kill-port 3000,3001,5555",
     "lint:fix": "turbo lint:fix --continue",
     "lint": "turbo lint --continue",
-    "start:api": "turbo start --filter=api",
-    "test:e2e": "cd lib && cd e2e && npm run cypress:e2e",
+    "start": "turbo start",
+    "e2e": "turbo e2e --filter=playwright-web",
     "test": "turbo test --continue --filter=ui",
     "typecheck": "turbo typecheck --continue",
     "prepare": "husky install"

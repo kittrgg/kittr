@@ -1,7 +1,0 @@
-node_modules
-/dist
-**/.env
-**/.env.development
-**/.env.production
-**/.env.local.development
-**/.env.local.production

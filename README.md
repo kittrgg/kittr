@@ -4,8 +4,6 @@
 
 ## Prerequisites
 
-- [Docker Desktop](https://www.docker.com/products/docker-desktop)
-- If you are on Windows, make sure that you switch your Docker Desktop to Linux containers. You won't be able to spin up the docker compose containers without it!
 - [Node.js](https://nodejs.org/en/download/)
 - pnpm
 

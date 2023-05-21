@@ -9,7 +9,7 @@
     "format:fix": "prettier \"**/*.{js,jsx,ts,tsx,md,mdx,json}\" --write --check",
     "lint": "eslint-runner && next lint",
     "lint:fix": "eslint-runner --fix && next lint --fix",
-    "start": "next start",
+    "start": "next start -p 3001",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
