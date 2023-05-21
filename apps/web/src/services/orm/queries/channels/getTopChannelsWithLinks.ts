@@ -9,7 +9,8 @@ export const getTopChannelsWithLinksQuery = async ({ take }: Params) => {
   const result = await prisma.channel.findMany({
     where: {
       profile: {
-        hasProfileImage: process.env.IS_DEV ? undefined : true,
+        hasProfileImage:
+          process.env.VERCEL_ENV === 'development' ? undefined : true,
       },
     },
     orderBy: {

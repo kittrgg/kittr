@@ -11,10 +11,10 @@
     "next.js"
   ],
   "scripts": {
-    "eslint": "node ./runner/index.mjs",
-    "eslint:fix": "node ./runner/index.mjs --fix",
     "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
     "format:fix": "prettier \"**/*.{js,jsx,ts,tsx,md,mdx,json}\" --write --check",
+    "lint": "node ./runner/index.mjs",
+    "lint:fix": "node ./runner/index.mjs --fix",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {

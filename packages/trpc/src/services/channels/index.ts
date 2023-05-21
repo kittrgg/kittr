@@ -318,7 +318,8 @@ export const listTopChannels = async ({ skip = 0, take = 10 }: ListParams) => {
   const result = await prisma.channel.findMany({
     where: {
       profile: {
-        hasProfileImage: process.env.IS_DEV ? undefined : true,
+        hasProfileImage:
+          process.env.VERCEL_ENV === 'development' ? undefined : true,
       },
     },
     orderBy: {
@@ -365,7 +366,8 @@ export const listRisingChannels = async () => {
   const take = 10;
   const where = {
     profile: {
-      hasProfileImage: process.env.IS_DEV ? undefined : true,
+      hasProfileImage:
+        process.env.VERCEL_ENV === 'development' ? undefined : true,
     },
     viewCount: {
       gte: 400,
@@ -400,7 +402,8 @@ export const listLiveChannels = async () => {
   const popularChannels = await prisma.channel.findMany({
     where: {
       profile: {
-        hasProfileImage: process.env.IS_DEV ? undefined : true,
+        hasProfileImage:
+          process.env.VERCEL_ENV === 'development' ? undefined : true,
       },
     },
     orderBy: {

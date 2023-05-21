@@ -6,12 +6,15 @@ require('@rushstack/eslint-patch/modern-module-resolution');
 
 module.exports = {
   extends: [
-    '@vercel/style-guide/eslint/browser',
-    '@vercel/style-guide/eslint/node',
-    '@vercel/style-guide/eslint/react',
-    '@vercel/style-guide/eslint/next',
-    '@vercel/style-guide/eslint/typescript',
-  ].map((config) => require.resolve(config)),
+    'turbo',
+    ...[
+      '@vercel/style-guide/eslint/browser',
+      '@vercel/style-guide/eslint/node',
+      '@vercel/style-guide/eslint/react',
+      '@vercel/style-guide/eslint/next',
+      '@vercel/style-guide/eslint/typescript',
+    ].map((config) => require.resolve(config)),
+  ],
   ignorePatterns: ['**/.next/**', '**/.eslintrc.js'],
   overrides: [
     {

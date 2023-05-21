@@ -18,7 +18,8 @@ export const getRisingStarsQuery = async ({
 }) => {
   const where = {
     profile: {
-      hasProfileImage: process.env.IS_DEV ? undefined : true,
+      hasProfileImage:
+        process.env.VERCEL_ENV === 'development' ? undefined : true,
     },
     viewCount: {
       gte: viewsGreaterThan,
