@@ -17,20 +17,16 @@
         "FIREBASE_MESSAGING_SENDER_ID",
         "FIREBASE_PROJECT_ID",
         "GOOGLE_APPLICATION_CREDENTIALS",
-        "IS_DEV",
-        "IS_PREVIEW",
         "MONTHLY_TIP_PRICE_ID",
         "NEXT_PUBLIC_ADS_DISABLED",
         "NEXT_PUBLIC_FIREBASE_API_KEY",
         "NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET",
         "NEXT_PUBLIC_GOOGLE_ANALYTICS",
-        "NEXT_PUBLIC_IS_DEV",
         "NEXT_PUBLIC_SENTRY_DSN",
         "NEXT_PUBLIC_SOCKET_HOST",
         "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
         "NEXT_PUBLIC_VERCEL_ENV",
         "NODE_ENV",
-        "PORT",
         "SENTRY_AUTH_TOKEN",
         "SENTRY_DSN",
         "SENTRY_ORG",
@@ -101,6 +97,7 @@
       "dependsOn": ["^build", "build"]
     },
     "e2e": {
+      "env": ["PLAYWRIGHT_USER_PASSWORD"],
       "cache": false
     }
   }

@@ -32,5 +32,8 @@
   },
   "devDependencies": {
     "@kittr/prettier": "workspace:*"
+  },
+  "engines": {
+    "node": "18"
   }
 }

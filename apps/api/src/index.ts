@@ -2,7 +2,7 @@
 import { createServer } from 'node:http';
 import * as Logger from '@kittr/logger/node';
 import cors from 'cors';
-import { CronJob } from 'cron';
+// import { CronJob } from 'cron';
 import dotenv from 'dotenv';
 import express from 'express';
 import { Server } from 'socket.io';
@@ -22,7 +22,8 @@ const io = new Server(httpServer, {
 
 Logger.init({
   dsn: process.env.SENTRY_DSN,
-  environment: process.env.IS_PREVIEW ? 'Preview' : process.env.NODE_ENV,
+  environment:
+    process.env.VERCEL_ENV === 'preview' ? 'Preview' : process.env.NODE_ENV,
 });
 
 app.use(Logger.Handlers.requestHandler());
