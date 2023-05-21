@@ -18,7 +18,7 @@
     "lint:fix": "turbo lint:fix --continue",
     "lint": "turbo lint --continue",
     "start": "turbo start",
-    "e2e:web": "turbo e2e --filter=playwright-web",
+    "e2e": "turbo e2e --filter=playwright-web",
     "test": "turbo test --continue --filter=ui",
     "typecheck": "turbo typecheck --continue",
     "prepare": "husky install"
