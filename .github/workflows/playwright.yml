@@ -3,8 +3,8 @@ on:
   deployment_status:
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
+  group: ${{ github.workflow }}-${{ github.ref || github.event.deployment.ref }}
+  cancel-in-progress: ${{ (github.ref || github.event.deployment.ref) != 'refs/heads/main' }}
 
 env:
   FORCE_COLOR: 3
@@ -22,9 +22,6 @@ jobs:
 
       - name: Install
         uses: ./tooling/github-actions/install
-
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
 
       - name: Run Playwright tests
         run: turbo e2e
