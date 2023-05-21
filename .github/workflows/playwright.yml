@@ -24,6 +24,6 @@ jobs:
         uses: ./tooling/github-actions/install
 
       - name: Run Playwright tests
-        run: turbo e2e
+        run: pnpm e2e
         env:
           PLAYWRIGHT_BASE_URL: ${{ github.event.deployment_status.target_url }}
