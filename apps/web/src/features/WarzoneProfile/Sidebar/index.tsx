@@ -43,6 +43,9 @@ const SidebarButton: React.FC<SidebarButtonProps> = ({
   const defaultStyle = {
     backgroundColor: selected ? colors.dark20 : colors.light,
     margin: '0.5em 0',
+    ':&hover': {
+      backgroundColor: 'green',
+    },
   };
   const subButtonStyle = {
     width: '90%',
@@ -161,7 +164,7 @@ function Sidebar() {
         {CATEGORIES.map((category) => {
           return (
             <>
-              <Title ml="0.75em" preset="h4">
+              <Title ml="0.75em" preset="h4" style={{ color: 'white' }}>
                 {/*
 								If there is a filter query - filter allkits to the search query and find index of category - else find index on unfiltered kits
 								 *** If index is -1 that means there is no kit so it won't show category name ***
@@ -223,6 +226,9 @@ function Sidebar() {
                             fontSize: '1.2em',
                             color: colors.white,
                             paddingLeft: '1.35em',
+                            ':hover': {
+                              background: colors.lighter,
+                            },
                           },
                           label: { fontWeight: 600 },
                           content: { padding: 0 },

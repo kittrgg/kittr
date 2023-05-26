@@ -12,6 +12,7 @@ import { Drawer } from '@mantine/core';
 import { useViewportSize } from '@mantine/hooks';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
+import { MantineProvider } from '@kittr/ui';
 import Sidebar from './Sidebar';
 import ChannelMain from './Main';
 
@@ -33,36 +34,41 @@ function WarzoneProfile({ channel }: Props) {
   )?.code;
 
   return (
-    <div>
-      <NavMenu
-        backFunction={() =>
-          isSidebarOpen
-            ? dispatch(setIsSidebarOpen(false))
-            : push(Routes.CHANNEL.createPath(query.channel as string))
-        }
-        breakpoint={1050}
-        middleComponent={
-          <>
-            <HeaderTitle>{`${query.channel || ('' as string)}`}</HeaderTitle>
-            {code ? <CreatorCode>CODE: {code}</CreatorCode> : null}
-          </>
-        }
-        wrapperRef={observe}
-      />
-      <Drawer
-        onClose={() => dispatch(setIsSidebarOpen(false))}
-        opened={isSidebarOpen || width >= MOBILE_WIDTH}
-        styles={{
-          closeButton: { marginTop: height },
-          drawer: { marginTop: width >= MOBILE_WIDTH ? height : 0 },
-        }}
-        withCloseButton={width <= MOBILE_WIDTH}
-        withOverlay={width <= MOBILE_WIDTH}
-      >
-        <Sidebar />
-      </Drawer>
-      <ChannelMain />
-    </div>
+    <MantineProvider>
+      <div>
+        <NavMenu
+          backFunction={() =>
+            isSidebarOpen
+              ? dispatch(setIsSidebarOpen(false))
+              : push(Routes.CHANNEL.createPath(query.channel as string))
+          }
+          breakpoint={1050}
+          middleComponent={
+            <>
+              <HeaderTitle>{`${query.channel || ('' as string)}`}</HeaderTitle>
+              {code ? <CreatorCode>CODE: {code}</CreatorCode> : null}
+            </>
+          }
+          wrapperRef={observe}
+        />
+        <Drawer
+          onClose={() => dispatch(setIsSidebarOpen(false))}
+          opened={isSidebarOpen || width >= MOBILE_WIDTH}
+          styles={{
+            closeButton: { marginTop: height },
+            drawer: {
+              backgroundColor: '#121212',
+              marginTop: width >= MOBILE_WIDTH ? height : 0,
+            },
+          }}
+          withCloseButton={width <= MOBILE_WIDTH}
+          withOverlay={width <= MOBILE_WIDTH}
+        >
+          <Sidebar />
+        </Drawer>
+        <ChannelMain />
+      </div>
+    </MantineProvider>
   );
 }
 
