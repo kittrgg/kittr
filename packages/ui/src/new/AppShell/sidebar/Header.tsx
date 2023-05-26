@@ -1,5 +1,5 @@
-import { P, typographyVariants } from '../Typography';
-import { cn } from '../utils';
+import { P, typographyVariants } from '../../Typography';
+import { cn } from '../../utils';
 
 export function SidebarHeader({ children }: { children: React.ReactNode }) {
   return (

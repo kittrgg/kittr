@@ -2,16 +2,8 @@ import type { Metadata } from 'next';
 import '@kittr/ui/styles.css';
 import './globals.css';
 import { Inter } from 'next/font/google';
-import Link from 'next/link';
-import {
-  AppShell,
-  AppShellLinkItem,
-  SidebarHeader,
-  SidebarSeparator,
-} from '@kittr/ui/new';
-import { Code2, Library, Type } from '@kittr/ui/icons';
-import Image from 'next/image';
-import { componentEntries } from '#/componentMap';
+import { AppShell } from '@kittr/ui/new';
+import { Nav } from '#/app/components/Nav';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -34,59 +26,7 @@ export function RootLayout({
   return (
     <html className={`${inter.variable} bg-zinc-900`} lang="en">
       <body className="m-auto flex w-full flex-grow flex-row font-sans antialiased">
-        <AppShell
-          nav={
-            <>
-              <AppShellLinkItem className="m-0 flex flex-row items-center justify-center">
-                <Link
-                  className="flex flex-row items-center justify-center"
-                  href="/"
-                >
-                  <Image
-                    alt="kittr logo"
-                    height={48}
-                    src="/logo.svg"
-                    width={89}
-                  />
-                </Link>
-              </AppShellLinkItem>
-              <SidebarSeparator />
-
-              <SidebarHeader>Utilities</SidebarHeader>
-              <AppShellLinkItem>
-                <Link href="/icons">
-                  <Library />
-                  Icons
-                </Link>
-              </AppShellLinkItem>
-              <AppShellLinkItem>
-                <Link href="/typography">
-                  <Type />
-                  Typography
-                </Link>
-              </AppShellLinkItem>
-              <SidebarSeparator />
-
-              <SidebarHeader>Components</SidebarHeader>
-              {componentEntries
-                .filter(
-                  ([_, component]) =>
-                    !['Icons', 'Typography'].includes(component.name),
-                )
-                .map(([slug, component]) => {
-                  return (
-                    <AppShellLinkItem key={slug}>
-                      <Link href={`/${slug}`}>
-                        <Code2 />
-                        {component.name}
-                      </Link>
-                    </AppShellLinkItem>
-                  );
-                })}
-            </>
-          }
-          pathnameForCloseHook={pathname}
-        >
+        <AppShell nav={<Nav />} pathnameForCloseHook={pathname}>
           <>{children}</>
         </AppShell>
       </body>

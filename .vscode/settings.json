@@ -28,5 +28,8 @@
   },
   "tailwindCSS.experimental.classRegex": [
     ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
-  ]
+  ],
+  "editor.quickSuggestions": {
+    "strings": true
+  }
 }

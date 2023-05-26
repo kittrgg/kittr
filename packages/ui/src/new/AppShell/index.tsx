@@ -16,7 +16,7 @@ interface AppShellProps {
   pathnameForCloseHook: string;
 }
 
-export { AppShellLinkItem } from './LinkItem';
+export { AppShellLinkItem } from './sidebar/LinkItem';
 
 export const asideVariants = cva(
   'fixed top-0 left-0 z-40 w-64 h-screen transition-transform bg-zinc-800 sm:translate-x-0',
@@ -75,25 +75,22 @@ export const AppShell: React.FC<AppShellProps> = ({
           <div>
             <nav
               ref={navRef}
-              className={asideVariants({ variant: isOpen ? 'open' : 'closed' })}
+              className={cn(
+                typographyVariants({ presets: 'h5' }),
+                asideVariants({ variant: isOpen ? 'open' : 'closed' }),
+                'flex h-full w-60 flex-none flex-col gap-2 overflow-y-auto p-4',
+              )}
             >
-              <div
-                className={cn(
-                  typographyVariants({ presets: 'h5' }),
-                  'flex h-full w-60 flex-none flex-col gap-2 overflow-y-auto p-4',
-                )}
-              >
-                {nav}
-              </div>
+              {nav}
             </nav>
             <Floaty isOpen={isOpen} setIsOpen={setIsOpen} />
           </div>
         </div>
       </FocusTrap>
-      <main className="container flex-auto bg-zinc-900 p-8 sm:ml-64">
-        {children}
-      </main>
-      <div>I am the footer.</div>
+      <div className="container flex-auto bg-zinc-900 sm:ml-60">
+        <main className="min-h-screen bg-zinc-900 p-8">{children}</main>
+        <footer className="bg-green-500 p-8">yayya</footer>
+      </div>
     </>
   );
 };

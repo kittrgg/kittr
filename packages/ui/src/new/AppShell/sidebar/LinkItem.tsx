@@ -1,9 +1,9 @@
 'use client';
 import { Slot } from '@radix-ui/react-slot';
 import { useRef } from 'react';
-import { ChevronRight } from '../../icons';
-import { useOnScreen } from '../../hooks';
-import { cn } from '../utils';
+import { ChevronRight } from '../../../icons';
+import { useOnScreen } from '../../../hooks';
+import { cn } from '../../utils';
 
 export const AppShellLinkItem = ({
   children,
