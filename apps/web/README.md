@@ -6,4 +6,4 @@ Shwarnings:
 
 - 5/7/2023: The `src/features` directory is ignored in `tsconfig.json`. This is because we're going to end up deleting this code so I don't care about fixing it.
 
-test
+both now
