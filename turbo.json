@@ -37,7 +37,8 @@
         "TWITCH_CLIENT_ID",
         "TWITCH_CLIENT_SECRET",
         "TWITCH_SECRET",
-        "VERCEL_ENV"
+        "VERCEL_ENV",
+        "VERCEL_URL"
       ]
     },
     "topo": {
