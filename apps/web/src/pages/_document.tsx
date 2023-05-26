@@ -14,7 +14,6 @@ class MyDocument extends Document {
       ctx.renderPage = () =>
         originalRenderPage({
           enhanceApp: (App) => (props) =>
-            // @ts-expect-error Can't wait to deprecate.
             sheet.collectStyles(<App {...props} />),
         });
 

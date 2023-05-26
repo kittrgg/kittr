@@ -18,6 +18,6 @@
     "@kittr/lint": "workspace:*",
     "@kittr/prettier": "workspace:*",
     "@kittr/tsconfig": "workspace:*",
-    "typescript": "5.0.0-beta"
+    "typescript": "^5.0.4"
   }
 }

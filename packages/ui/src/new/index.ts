@@ -2,8 +2,8 @@ import '../styles.css';
 
 export * from './AppShell';
 export { Floaty } from './AppShell/Floaty';
-export { SidebarHeader } from './AppShell/Header';
-export { SidebarSeparator } from './AppShell/Separator';
+export { SidebarHeader } from './AppShell/sidebar/Header';
+export { SidebarSeparator } from './AppShell/sidebar/Separator';
 export { Avatar, AvatarFallback, AvatarImage } from './Avatar';
 export * from './Prose';
 export { ChannelList } from './ChannelList';

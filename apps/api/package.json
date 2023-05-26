@@ -35,6 +35,6 @@
     "nodemon": "2.0.19",
     "ts-node": "10.9.1",
     "tsup": "^6.5.0",
-    "typescript": "5.0.0-beta"
+    "typescript": "^5.0.4"
   }
 }
