@@ -1,4 +1,5 @@
 'use client';
+
 import type { ReactNode } from 'react';
 import { useRef, useState } from 'react';
 import { cva } from 'class-variance-authority';
@@ -92,6 +93,7 @@ export const AppShell: React.FC<AppShellProps> = ({
       <main className="container flex-auto bg-zinc-900 p-8 sm:ml-64">
         {children}
       </main>
+      <div>I am the footer.</div>
     </>
   );
 };
