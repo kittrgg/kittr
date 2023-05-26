@@ -39,10 +39,8 @@ function MyApp({
 
         {router.route ===
         Routes.CHANNEL.GAME.createOverlayPath('[channel]', '[game]') ? (
-          // @ts-expect-error Old library, pain.
           <OverlayStyles />
         ) : (
-          // @ts-expect-error Old library, pain.
           <GlobalStyles />
         )}
         <Component {...pageProps} />
