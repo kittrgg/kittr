@@ -1,0 +1,13 @@
+name: Playwright Tests
+on:
+  deployment_status:
+
+jobs:
+  echo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo this
+        run: echo ${{github.event}}
+
+      - name: Echo that
+        run: echo ${{github.event_name}}
