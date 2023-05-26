@@ -59,3 +59,6 @@ jobs:
     needs: ['design-react-e2e', 'web-e2e']
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    steps:
+      - name: Pass
+        run: echo "hi"
