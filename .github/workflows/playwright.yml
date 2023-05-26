@@ -2,13 +2,17 @@ name: Playwright Tests
 on:
   deployment_status:
 
+concurrency:
+  group: ${{ github.workflow }}-${{github.event.deployment_status.environment}}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
+
 env:
   FORCE_COLOR: 3
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
 jobs:
-  e2e:
+  web-e2e:
     if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success' && contains(github.event.deployment_status.environment, 'kittr')
     timeout-minutes: 60
     runs-on: ubuntu-latest
