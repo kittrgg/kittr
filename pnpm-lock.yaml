@@ -173,6 +173,9 @@ importers:
       '@kittr/analytics':
         specifier: workspace:*
         version: link:../../packages/analytics
+      '@kittr/db':
+        specifier: workspace:*
+        version: link:../../packages/db
       '@kittr/firebase':
         specifier: workspace:*
         version: link:../../packages/firebase

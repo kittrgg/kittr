@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "exports": {
-    ".": "./index.ts"
+    ".": "./src/index.ts"
   },
   "typesVersions": {
     "*": {
