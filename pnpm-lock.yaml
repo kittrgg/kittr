@@ -191,6 +191,9 @@ importers:
       '@kittr/prisma':
         specifier: workspace:*
         version: link:../../packages/prisma
+      '@kittr/tailwind':
+        specifier: workspace:*
+        version: link:../../packages/config-tailwind
       '@kittr/trpc':
         specifier: workspace:*
         version: link:../../packages/trpc
