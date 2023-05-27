@@ -19,11 +19,6 @@ jobs:
       - name: Install
         uses: ./tooling/github-actions/install
 
-      - name: Use deployment-status.environment as output
+      - name: Create tests for deployment
         id: deploy-handler
-        run: pnpm --filter @kittr/github-actions exec vite-node scripts/getDeploymentOutputs.ts
-
-  e2e-caller:
-    uses: './.github/workflows/playwright-${{github.workflow.steps.deploy-handler.outputs.environment}}.yml'
-    with:
-      deployment_url: ${{github.workflow.steps.deploy-handler.outputs.deployment_url}}
+        run: pnpm --filter @kittr/github-actions exec vite-node scripts/create-test-runs.ts

@@ -1,4 +1,4 @@
-name: Playwright Testing
+name: Playwright - kittr
 on:
   workflow_call:
     inputs:
