@@ -33,7 +33,7 @@ const getEnvironment = () => getContext().payload.deployment_status.environment;
 
 console.log({
   environment: getEnvironment(),
-  ref: getRef(),
+  context: getContext(),
   targeturl: getTargetUrl(),
 });
 
@@ -48,6 +48,6 @@ getOctokitClient()
     },
   })
   // eslint-disable-next-line no-console
-  .then((res) => console.log(res))
+  .then((res) => console.log({ res }))
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
   .catch((err) => setFailed(err.message));
