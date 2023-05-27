@@ -36,14 +36,7 @@ const getTargetUrl = () => getContext().payload.deployment_status.target_url;
 const getRef = () => getContext().payload.deployment.ref;
 const getEnvironment = () => getContext().payload.deployment_status.environment;
 
-console.log({
-  environment: getEnvironment().split(' ').slice(-1)[0],
-  context: getContext(),
-  moar: getContext().payload.deployment,
-  evenmoar: getContext().payload.deployment_status,
-  repo: getContext().payload.repository,
-  targeturl: getTargetUrl(),
-});
+console.log(getContext().payload.deployment.ref);
 
 getOctokitClient()
   .rest.actions.createWorkflowDispatch({
