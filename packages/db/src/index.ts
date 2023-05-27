@@ -7,7 +7,6 @@ if (!process.env.POSTGRES_URL) {
 }
 
 const dbClient = createPool({
-  ssl: true,
   connectionString: process.env.POSTGRES_URL,
 });
 
