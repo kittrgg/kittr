@@ -1,4 +1,4 @@
-# Welcome to kittr test
+# Welcome to kittr
 
 # Getting Started
 
