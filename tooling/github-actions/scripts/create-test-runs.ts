@@ -3,8 +3,13 @@ import { context, getOctokit } from '@actions/github';
 
 interface Context {
   eventName: 'deployment_status' | 'deployment';
+  ref: string;
   payload: {
-    ref: string;
+    repository: any;
+    deployment: {
+      sha: string;
+      ref: string;
+    };
     deployment_status: {
       state: 'error' | 'failure' | 'success';
       target_url: string;
@@ -28,12 +33,15 @@ export function getOctokitClient(): ReturnType<typeof getOctokit> {
 
 const getContext = () => context as unknown as Context;
 const getTargetUrl = () => getContext().payload.deployment_status.target_url;
-const getRef = () => getContext().payload.ref;
+const getRef = () => getContext().payload.deployment.ref;
 const getEnvironment = () => getContext().payload.deployment_status.environment;
 
 console.log({
   environment: getEnvironment().split(' ').slice(-1)[0],
   context: getContext(),
+  moar: getContext().payload.deployment,
+  evenmoar: getContext().payload.deployment_status,
+  repo: getContext().payload.repository,
   targeturl: getTargetUrl(),
 });
 
