@@ -1,0 +1,26 @@
+name: Playwright Testing
+on:
+  deployment_status:
+
+env:
+  FORCE_COLOR: 3
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+
+jobs:
+  deploy-status-handler:
+    name: 'Deploy Status Handler'
+    if: github.event.deployment_status.state == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use deployment-status.environment as output
+        id: environment-handler
+        run: echo "environment=$(github.event.deployment_status.environment)" >> $GITHUB_OUTPUT
+
+  call-web-workflow:
+    if: ${{ contains(github.event.deployment_status.environment, 'kittr') }}
+    uses: ./.github/workflows/playwright-web.yml
+
+  call-design-react-workflow:
+    if: ${{ contains(github.event.deployment_status.environment, 'design-react') }}
+    uses: ./.github/workflows/playwright-design-react.yml
