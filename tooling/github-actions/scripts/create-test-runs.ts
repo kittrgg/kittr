@@ -3,8 +3,8 @@ import { context, getOctokit } from '@actions/github';
 
 interface Context {
   eventName: 'deployment_status' | 'deployment';
-  ref: string;
   payload: {
+    ref: string;
     deployment_status: {
       state: 'error' | 'failure' | 'success';
       target_url: string;
@@ -28,7 +28,7 @@ export function getOctokitClient(): ReturnType<typeof getOctokit> {
 
 const getContext = () => context as unknown as Context;
 const getTargetUrl = () => getContext().payload.deployment_status.target_url;
-const getRef = () => getContext().ref;
+const getRef = () => getContext().payload.ref;
 const getEnvironment = () => getContext().payload.deployment_status.environment;
 
 console.log({
@@ -39,7 +39,7 @@ console.log({
 
 getOctokitClient()
   .rest.actions.createWorkflowDispatch({
-    workflow_id: `Playwright - ${getEnvironment().split(' ').slice(-1)[0]}`,
+    workflow_id: `playwright-${getEnvironment().split(' ').slice(-1)[0]}`,
     ref: getRef(),
     owner: 'kittrgg',
     repo: 'kittr',
