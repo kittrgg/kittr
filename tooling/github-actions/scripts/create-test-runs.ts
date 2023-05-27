@@ -32,14 +32,14 @@ const getRef = () => getContext().payload.ref;
 const getEnvironment = () => getContext().payload.deployment_status.environment;
 
 console.log({
-  environment: getEnvironment(),
+  environment: getEnvironment().split(' ').slice(-1)[0],
   context: getContext(),
   targeturl: getTargetUrl(),
 });
 
 getOctokitClient()
   .rest.actions.createWorkflowDispatch({
-    workflow_id: `playwright-${getEnvironment().split(' ').slice(-1)[0]}`,
+    workflow_id: `playwright-${getEnvironment().split(' ').slice(-1)[0]}.yml`,
     ref: getRef(),
     owner: 'kittrgg',
     repo: 'kittr',
