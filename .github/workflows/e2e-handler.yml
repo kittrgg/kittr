@@ -15,9 +15,9 @@ jobs:
     steps:
       - name: Use deployment-status.environment as output
         id: deploy-handler
-        run: echo "deployment_url=$(github.event.deployment_status.target_url)" >> $GITHUB_OUTPUT
+        run: pnpm --filter @kittr/github-actions exec vite-node scripts/getPreviewName.ts
 
-  e2e-caller:
-    uses: './.github/workflows/playwright-${{github.workflow.steps.deploy-handler.outputs.deployment_url}}.yml'
-    with:
-      deployment_url: ${{github.workflow.steps.deploy-handler.outputs.deployment_url}}
+  # e2e-caller:
+  #   uses: './.github/workflows/playwright-${{github.workflow.steps.deploy-handler.outputs.deployment_url}}.yml'
+  #   with:
+  #     deployment_url: ${{github.workflow.steps.deploy-handler.outputs.deployment_url}}
