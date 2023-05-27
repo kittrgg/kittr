@@ -29,12 +29,17 @@ export function getOctokitClient(): ReturnType<typeof getOctokit> {
 const getContext = () => context as unknown as Context;
 const getTargetUrl = () => getContext().payload.deployment_status.target_url;
 const getRef = () => getContext().ref;
-const getEnvironment = () =>
-  getContext().payload.deployment_status.environment.split(' ').slice(-1)[0];
+const getEnvironment = () => getContext().payload.deployment_status.environment;
+
+console.log({
+  environment: getEnvironment(),
+  ref: getRef(),
+  targeturl: getTargetUrl(),
+});
 
 getOctokitClient()
   .rest.actions.createWorkflowDispatch({
-    workflow_id: `Playwright - ${getEnvironment()}`,
+    workflow_id: `Playwright - ${getEnvironment().split(' ').slice(-1)[0]}`,
     ref: getRef(),
     owner: 'kittrgg',
     repo: 'kittr',
