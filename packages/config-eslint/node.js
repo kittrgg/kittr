@@ -27,7 +27,12 @@ module.exports = {
       },
     },
     {
-      files: ['jest.config.*', 'vite.config.*', 'tsup.config.*'],
+      files: [
+        'jest.config.*',
+        'vite.config.*',
+        'tsup.config.*',
+        'drizzle.config.ts',
+      ],
       rules: {
         'import/no-default-export': 'off',
       },

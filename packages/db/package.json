@@ -1,0 +1,37 @@
+{
+  "name": "@kittr/db",
+  "version": "0.0.1",
+  "private": true,
+  "exports": {
+    ".": "./index.ts"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./src/index.ts"
+      ]
+    }
+  },
+  "scripts": {
+    "db:format": "prisma format",
+    "db:generate": "drizzle-kit introspect:pg",
+    "db:studio": "prisma studio",
+    "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
+    "format:fix": "prettier \"**/*.{js,jsx,ts,tsx,md,mdx,json}\" --write --check",
+    "lint": "eslint-runner",
+    "lint:fix": "eslint-runner --fix",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@vercel/postgres": "^0.3.0",
+    "drizzle-orm": "^0.26.1",
+    "postgres": "^3.3.4"
+  },
+  "devDependencies": {
+    "@kittr/lint": "workspace:*",
+    "@kittr/prettier": "workspace:*",
+    "@kittr/tsconfig": "workspace:*",
+    "drizzle-kit": "^0.18.1",
+    "typescript": "^5.0.4"
+  }
+}
