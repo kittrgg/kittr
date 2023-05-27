@@ -13,6 +13,12 @@ jobs:
     if: github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install
+        uses: ./tooling/github-actions/install
+
       - name: Use deployment-status.environment as output
         id: deploy-handler
         run: pnpm --filter @kittr/github-actions exec vite-node scripts/getPreviewName.ts
