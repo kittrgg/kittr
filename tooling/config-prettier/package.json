@@ -9,6 +9,7 @@
     "@types/prettier": "^2.7.2",
     "@vercel/style-guide": "4.0.2",
     "prettier": "2.8.8",
+    "prettier-plugin-packagejson": "^2.4.3",
     "prettier-plugin-tailwindcss": "^0.2.8"
   }
 }
