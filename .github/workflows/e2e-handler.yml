@@ -17,14 +17,7 @@ jobs:
         id: deploy-handler
         run: echo "deployment_url=$(github.event.deployment_status.target_url)" >> $GITHUB_OUTPUT
 
-  web:
-    if: ${{ contains(github.event.deployment_status.environment, 'kittr') }}
-    uses: ./.github/workflows/playwright-web.yml
-    with:
-      deployment_url: ${{github.workflow.steps.deploy-handler.outputs.deployment_url}}
-
-  design-react:
-    if: ${{ contains(github.event.deployment_status.environment, 'design-react') }}
-    uses: ./.github/workflows/playwright-design-react.yml
+  e2e-caller:
+    uses: './.github/workflows/playwright-${{github.workflow.steps.deploy-handler.outputs.deployment_url}}.yml'
     with:
       deployment_url: ${{github.workflow.steps.deploy-handler.outputs.deployment_url}}
