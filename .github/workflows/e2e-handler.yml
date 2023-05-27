@@ -21,4 +21,6 @@ jobs:
 
       - name: Create tests for deployment
         id: deploy-handler
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: pnpm --filter @kittr/github-actions exec vite-node scripts/create-test-runs.ts
