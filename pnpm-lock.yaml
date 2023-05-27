@@ -412,10 +412,7 @@ importers:
         version: 0.3.0
       drizzle-orm:
         specifier: ^0.26.1
-        version: 0.26.1(@vercel/postgres@0.3.0)(postgres@3.3.4)
-      postgres:
-        specifier: ^3.3.4
-        version: 3.3.4
+        version: 0.26.1(@vercel/postgres@0.3.0)
     devDependencies:
       '@kittr/lint':
         specifier: workspace:*
@@ -8415,7 +8412,7 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.26.1(@vercel/postgres@0.3.0)(postgres@3.3.4):
+  /drizzle-orm@0.26.1(@vercel/postgres@0.3.0):
     resolution:
       {
         integrity: sha512-PgHPBJ4BUi/xWEjBbaYo4eiVC7hIwPtSEAVO3QuGMzLV+YwD2jPyV2Y7nvP1jHZlA4IV9wLmkcpicBO/255XFg==,
@@ -8478,7 +8475,6 @@ packages:
         optional: true
     dependencies:
       '@vercel/postgres': 0.3.0
-      postgres: 3.3.4
     dev: false
 
   /duplexer2@0.1.4:
@@ -14497,13 +14493,6 @@ packages:
     resolution:
       {
         integrity: sha512-VdlZoocy5lCP0c/t66xAfclglEapXPCIVhqqJRncYpvbCgImF0w67aPKfbqUMr72tO2k5q0TdTZwCLjPTI6C9g==,
-      }
-    dev: false
-
-  /postgres@3.3.4:
-    resolution:
-      {
-        integrity: sha512-XVu0+d/Y56pl2lSaf0c7V19AhAEfpVrhID1IENWN8nf0xch6hFq6dAov5dtUX6ZD46wfr1TxvLhxLtV8WnNsOg==,
       }
     dev: false
 
