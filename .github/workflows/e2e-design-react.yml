@@ -12,8 +12,8 @@ env:
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
 jobs:
-  web-e2e:
-    name: 'Web E2E'
+  design-react-e2e:
+    name: 'E2E - Design React'
     if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success' && contains(github.event.deployment_status.environment, 'design-react')
     timeout-minutes: 60
     runs-on: ubuntu-latest
