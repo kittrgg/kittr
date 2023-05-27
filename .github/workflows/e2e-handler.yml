@@ -14,13 +14,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Use deployment-status.environment as output
-        id: environment-handler
-        run: echo "environment=$(github.event.deployment_status.environment)" >> $GITHUB_OUTPUT
+        id: deploy-handler
+        run: echo "deployment_url=$(github.event.deployment_status.target_url)" >> $GITHUB_OUTPUT
 
-  call-web-workflow:
+  web:
     if: ${{ contains(github.event.deployment_status.environment, 'kittr') }}
     uses: ./.github/workflows/playwright-web.yml
+    with:
+      deployment_url: ${{github.workflow.steps.deploy-handler.outputs.deployment_url}}
 
-  call-design-react-workflow:
+  design-react:
     if: ${{ contains(github.event.deployment_status.environment, 'design-react') }}
     uses: ./.github/workflows/playwright-design-react.yml
+    with:
+      deployment_url: ${{github.workflow.steps.deploy-handler.outputs.deployment_url}}

@@ -1,6 +1,10 @@
 name: Playwright Testing
 on:
   workflow_call:
+    inputs:
+      deployment_url:
+        required: true
+        type: string
 
 env:
   FORCE_COLOR: 3
