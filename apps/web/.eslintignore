@@ -2,4 +2,7 @@ src/features
 src/pages
 src/redux
 src/hooks
-src/components/shared/SVG
+src/components
+src/utils
+src/styles
+src/services

@@ -27,6 +27,7 @@
         "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
         "NEXT_PUBLIC_VERCEL_ENV",
         "NODE_ENV",
+        "POSTGRES_URL",
         "SENTRY_AUTH_TOKEN",
         "SENTRY_DSN",
         "SENTRY_ORG",

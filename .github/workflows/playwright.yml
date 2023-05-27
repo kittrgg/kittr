@@ -3,8 +3,8 @@ on:
   deployment_status:
 
 concurrency:
-  group: ${{ github.workflow }}-${{github.event.deployment_status.environment}}-${{ github.ref || github.event.deployment.ref }}
-  cancel-in-progress: ${{ (github.ref || github.event.deployment.ref) != 'refs/heads/main' }}
+  group: ${{ github.workflow }}-${{ github.event.deployment_status.environment }}-${{ github.ref }}
+  cancel-in-progress: true
 
 env:
   FORCE_COLOR: 3

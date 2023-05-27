@@ -1,0 +1,5 @@
+{
+  "extends": "@kittr/tsconfig/base.json",
+  "include": ["src", "drizzle.config.ts", "drizzle"],
+  "exclude": ["node_modules"]
+}
