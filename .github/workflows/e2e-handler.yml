@@ -20,7 +20,7 @@ jobs:
         uses: ./tooling/github-actions/install
 
       - name: Logging
-        run: echo '${{fromJSON(github)}}'
+        run: echo '${{toJSON(github)}}'
 
       - name: Create tests for deployment
         env:
