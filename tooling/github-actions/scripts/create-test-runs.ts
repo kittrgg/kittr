@@ -60,9 +60,7 @@ const main = async () => {
       repo,
       inputs: {
         deployment_url: getTargetUrl(),
-        // @ts-expect-error Incomplete types from library.
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        check_run_id: check.id,
+        check_run_id: String(check.data.id),
       },
     },
   );
