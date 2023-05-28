@@ -1,6 +1,11 @@
 import { setFailed, info } from '@actions/core';
-import { context, getOctokit } from '@actions/github';
+import { context } from '@actions/github';
+import { repo, owner, getOctokitClient } from './common';
 
+/** There is more on the context than this
+ *  but this is all I needed
+ *  to get done with what I'm doing today.
+ */
 interface Context {
   eventName: 'deployment_status' | 'deployment';
   sha: string;
@@ -18,24 +23,10 @@ interface Context {
   };
 }
 
-const owner = 'kittrgg';
-const repo = 'kittr';
-
 const SHA = process.env.SHA;
 if (!SHA) {
   setFailed('No SHA was provided.');
   throw new Error('No SHA was provided.');
-}
-
-export function getOctokitClient(): ReturnType<typeof getOctokit> {
-  const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-  if (!GITHUB_TOKEN) {
-    const errorMessage = 'GITHUB_TOKEN is not defined';
-    setFailed(errorMessage);
-    throw new Error(errorMessage);
-  }
-
-  return getOctokit(GITHUB_TOKEN);
 }
 
 const getContext = () => context as unknown as Context;

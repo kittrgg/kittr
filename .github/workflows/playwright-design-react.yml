@@ -1,3 +1,7 @@
+# If you're debugging E2Es, note that the workflow being ran is NOT the one in your PR.
+# Due to limitations in GitHub Actions, the one on main is the one that is referenced for E2Es.
+# You can find this codified in "./tooling/scripts/create-test-runs" in the `createWorkflowDispatch` call.
+
 name: Playwright - design-react
 on:
   workflow_dispatch:
@@ -8,6 +12,10 @@ on:
       check_run_id:
         required: true
         type: string
+
+concurrency:
+  group: ${{ github.workflow }}-${{ inputs.deployment_url }}
+  cancel-in-progress: true
 
 env:
   FORCE_COLOR: 3
