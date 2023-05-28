@@ -31,7 +31,7 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v${{inputs.playwright_version}}
+      image: mcr.microsoft.com/playwright:v${{inputs.playwright_version}}-focal
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -45,8 +45,17 @@ jobs:
           PLAYWRIGHT_USER_PASSWORD: ${{ secrets.PLAYWRIGHT_USER_PASSWORD }}
           PLAYWRIGHT_BASE_URL: ${{ inputs.deployment_url }}
 
+      - name: Mark check failure
+        if: failure()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CHECK_RUN_ID: ${{inputs.check_run_id}}
+          CONCLUSION: failure
+        run: pnpm --filter @kittr/github-actions exec vite-node scripts/mark-check-complete.ts
+
       - name: Mark check complete
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CHECK_RUN_ID: ${{inputs.check_run_id}}
+          CONCLUSION: success
         run: pnpm --filter @kittr/github-actions exec vite-node scripts/mark-check-complete.ts

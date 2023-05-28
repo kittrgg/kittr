@@ -1,6 +1,13 @@
 import { setFailed } from '@actions/core';
 import { repo, owner, getOctokitClient } from './common';
 
+const conclusion = process.env.CONCLUSION;
+if (!conclusion) {
+  setFailed(
+    'Please provide one of "success" or "failure" for process.env.CONCLUSION.',
+  );
+}
+
 const CHECK_RUN_ID = process.env.CHECK_RUN_ID;
 
 if (!CHECK_RUN_ID) {
@@ -13,7 +20,7 @@ const main = async () => {
     owner,
     repo,
     status: 'completed',
-    conclusion: 'success',
+    conclusion,
   });
 
   return check;
