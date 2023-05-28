@@ -1,11 +1,19 @@
-import { setFailed } from '@actions/core';
-import { context, getOctokit } from '@actions/github';
+import { join } from 'node:path';
+import { readFile } from 'node:fs/promises';
+import { cwd } from 'node:process';
+import { setFailed, info } from '@actions/core';
+import { context } from '@actions/github';
+import { repo, owner, getOctokitClient } from './common';
 
+/** There is more on the context than this
+ *  but this is all I needed
+ *  to get done with what I'm doing today.
+ */
 interface Context {
   eventName: 'deployment_status' | 'deployment';
+  sha: string;
   ref: string;
   payload: {
-    repository: any;
     deployment: {
       sha: string;
       ref: string;
@@ -18,37 +26,76 @@ interface Context {
   };
 }
 
-// eslint-disable-next-line turbo/no-undeclared-env-vars
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-
-export function getOctokitClient(): ReturnType<typeof getOctokit> {
-  if (!GITHUB_TOKEN) {
-    const errorMessage = 'GITHUB_TOKEN is not defined';
-    setFailed(errorMessage);
-    throw new Error(errorMessage);
-  }
-
-  return getOctokit(GITHUB_TOKEN);
+const SHA = process.env.SHA;
+if (!SHA) {
+  setFailed('No SHA was provided.');
+  throw new Error('No SHA was provided.');
 }
 
 const getContext = () => context as unknown as Context;
 const getTargetUrl = () => getContext().payload.deployment_status.target_url;
-const getRef = () => getContext().payload.deployment.ref;
-const getEnvironment = () => getContext().payload.deployment_status.environment;
+const getEnvironment = () =>
+  getContext().payload.deployment_status.environment.split(' ').slice(-1)[0];
 
-console.log(getContext().payload.deployment.ref);
+let checkId: string | null = null;
 
-getOctokitClient()
-  .rest.actions.createWorkflowDispatch({
-    workflow_id: `playwright-${getEnvironment().split(' ').slice(-1)[0]}.yml`,
-    ref: getRef(),
-    owner: 'kittrgg',
-    repo: 'kittr',
-    inputs: {
-      deployment_url: getTargetUrl(),
+const main = async () => {
+  const check = await getOctokitClient().rest.checks.create({
+    owner,
+    repo,
+    name: `Playwright - ${getEnvironment()}`,
+    head_sha: SHA,
+    status: 'in_progress',
+  });
+
+  checkId = String(check.data.id);
+
+  const packageJson = JSON.parse(
+    await readFile(
+      join(cwd(), `../../playwright/${getEnvironment()}/package.json`),
+      'utf-8',
+    ),
+  ) as {
+    devDependencies?: Record<string, string>;
+  };
+
+  const playwrightVersion = packageJson.devDependencies?.['@playwright/test'];
+  if (!playwrightVersion?.length) {
+    throw new Error("Couldn't get Playwright version from package.json.");
+  }
+
+  const dispatch = await getOctokitClient().rest.actions.createWorkflowDispatch(
+    {
+      workflow_id: `playwright-${getEnvironment()}.yml`,
+      // Yes, this is hard-coded.
+      // Limitations on GitHub actions for my use case.
+      ref: 'main',
+      owner,
+      repo,
+      inputs: {
+        deployment_url: getTargetUrl(),
+        check_run_id: String(check.data.id),
+        playwright_version: playwrightVersion,
+      },
     },
+  );
+
+  return { dispatch, check };
+};
+
+main()
+  .then(({ check }) => {
+    info(`Check created on PR: ${check.data.details_url ?? check.data.url}`);
+    info(`Tests running...`);
   })
-  // eslint-disable-next-line no-console
-  .then((res) => console.log({ res }))
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-  .catch((err) => setFailed(err.message));
+  .catch(async (err) => {
+    await getOctokitClient().rest.checks.update({
+      check_run_id: checkId,
+      owner,
+      repo,
+      status: 'completed',
+      conclusion: 'failure',
+    });
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+    setFailed(err.message);
+  });

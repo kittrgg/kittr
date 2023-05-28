@@ -1,5 +1,5 @@
 {
-  "name": "@kittr/playwright-web",
+  "name": "@kittr/playwright-design-react",
   "version": "0.0.0",
   "description": "Integration, E2E, and smoke tests",
   "scripts": {
