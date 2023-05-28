@@ -46,9 +46,11 @@ const main = async () => {
     status: 'in_progress',
   });
 
+  info(`cwd: ${cwd()}`);
+
   const packageJson = JSON.parse(
     await readFile(
-      join(cwd(), `../../../playwright/${getEnvironment()}/package.json`),
+      join(cwd(), `../../playwright/${getEnvironment()}/package.json`),
       'utf-8',
     ),
   ) as {
