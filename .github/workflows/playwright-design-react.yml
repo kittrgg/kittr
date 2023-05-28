@@ -27,7 +27,7 @@ env:
 
 jobs:
   design-react:
-    name: 'Design (React)'
+    name: 'E2E - design-react'
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:

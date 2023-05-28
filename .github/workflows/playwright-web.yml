@@ -27,7 +27,7 @@ env:
 
 jobs:
   web:
-    name: 'Web'
+    name: 'E2E - web'
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:

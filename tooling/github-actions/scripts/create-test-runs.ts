@@ -67,7 +67,9 @@ const main = async () => {
   const dispatch = await getOctokitClient().rest.actions.createWorkflowDispatch(
     {
       workflow_id: `playwright-${getEnvironment()}.yml`,
-      ref: 'e2e-keep',
+      // Yes, this is hard-coded.
+      // Limitations on GitHub actions for my use case.
+      ref: 'main',
       owner,
       repo,
       inputs: {

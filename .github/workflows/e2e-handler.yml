@@ -21,9 +21,6 @@ jobs:
           npm i -g pnpm
           pnpm i --filter=github-actions
 
-      - name: Logging
-        run: echo '${{toJSON(github)}}'
-
       - name: Create tests for deployment
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
