@@ -30,16 +30,17 @@ jobs:
     name: 'Web'
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/playwright:v${{inputs.playwright_version}}-focal
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
       - name: Install
         uses: ./tooling/github-actions/install
-      - name: Run tests
 
+      - name: Install browsers
+        run: npx playwright install --with-deps
+
+      - name: Run tests
         run: turbo e2e --filter=playwright-web
         env:
           PLAYWRIGHT_USER_PASSWORD: ${{ secrets.PLAYWRIGHT_USER_PASSWORD }}

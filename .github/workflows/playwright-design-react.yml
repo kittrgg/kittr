@@ -30,14 +30,15 @@ jobs:
     name: 'Design (React)'
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/playwright:v${{inputs.playwright_version}}-focal
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
       - name: Install
         uses: ./tooling/github-actions/install
+
+      - name: Install browsers
+        run: npx playwright install --with-deps
 
       - name: Run Playwright tests
         run: turbo e2e --filter=IGNORED
