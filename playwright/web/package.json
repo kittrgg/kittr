@@ -14,6 +14,6 @@
     "@kittr/lint": "workspace:*",
     "@kittr/prettier": "workspace:*",
     "@kittr/tsconfig": "workspace:*",
-    "@playwright/test": "^1.33.0"
+    "@playwright/test": "1.33.0"
   }
 }
