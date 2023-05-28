@@ -51,6 +51,7 @@ const getEnvironment = () =>
 
 info('Hello, I am here to help you.');
 info(`Your ref is: ${ref}`);
+info(`playwright-${getEnvironment()}`);
 
 const main = async () => {
   const check = await getOctokitClient().rest.checks.create({
@@ -63,7 +64,7 @@ const main = async () => {
 
   const dispatch = await getOctokitClient().rest.actions.createWorkflowDispatch(
     {
-      workflow_id: `playwright-${getEnvironment()}`,
+      workflow_id: `playwright-${getEnvironment()}.yml`,
       ref,
       owner,
       repo,
