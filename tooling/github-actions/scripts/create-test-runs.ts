@@ -1,3 +1,6 @@
+import { join } from 'node:path';
+import { readFile } from 'node:fs/promises';
+import { cwd } from 'node:process';
 import { setFailed, info } from '@actions/core';
 import { context } from '@actions/github';
 import { repo, owner, getOctokitClient } from './common';
@@ -43,6 +46,20 @@ const main = async () => {
     status: 'in_progress',
   });
 
+  const packageJson = JSON.parse(
+    await readFile(
+      join(cwd(), `../../playwright/${getEnvironment()}/package.json`),
+      'utf-8',
+    ),
+  ) as {
+    dependencies?: Record<string, string>;
+  };
+
+  const playwrightVersion = packageJson.dependencies?.['@playwright/test'];
+  if (!playwrightVersion?.length) {
+    throw Error("Couldn't get Playwright version from package.json.");
+  }
+
   const dispatch = await getOctokitClient().rest.actions.createWorkflowDispatch(
     {
       workflow_id: `playwright-${getEnvironment()}.yml`,
@@ -52,6 +69,7 @@ const main = async () => {
       inputs: {
         deployment_url: getTargetUrl(),
         check_run_id: String(check.data.id),
+        'playwright-version': playwrightVersion,
       },
     },
   );

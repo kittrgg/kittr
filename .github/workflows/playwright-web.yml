@@ -1,8 +1,8 @@
 # If you're debugging E2Es, note that the workflow being ran is NOT the one in your PR.
-# Due to limitations in GitHub Actions, the one on main is the one that is referenced for E2Es.
+# Due to limitations in GitHub Actions, the one on `main` is the one that is referenced for E2Es.
 # You can find this codified in "./tooling/scripts/create-test-runs" in the `createWorkflowDispatch` call.
 
-name: Playwright - kittr
+name: Playwright - web
 on:
   workflow_dispatch:
     inputs:
@@ -10,6 +10,9 @@ on:
         required: true
         type: string
       check_run_id:
+        required: true
+        type: string
+      playwright_version:
         required: true
         type: string
 
@@ -27,17 +30,16 @@ jobs:
     name: 'Web'
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v${{inputs.playwright_version}}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
       - name: Install
         uses: ./tooling/github-actions/install
-
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
-
       - name: Run tests
+
         run: turbo e2e --filter=playwright-web
         env:
           PLAYWRIGHT_USER_PASSWORD: ${{ secrets.PLAYWRIGHT_USER_PASSWORD }}
