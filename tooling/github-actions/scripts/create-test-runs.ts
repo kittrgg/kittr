@@ -5,9 +5,7 @@ interface Context {
   eventName: 'deployment_status' | 'deployment';
   ref: string;
   payload: {
-    repository: any;
     deployment: {
-      sha: string;
       ref: string;
     };
     deployment_status: {
@@ -36,19 +34,19 @@ const getTargetUrl = () => getContext().payload.deployment_status.target_url;
 const getRef = () => getContext().payload.deployment.ref;
 const getEnvironment = () => getContext().payload.deployment_status.environment;
 
-console.log(getContext().payload.deployment.ref);
-
-getOctokitClient()
-  .rest.actions.createWorkflowDispatch({
-    workflow_id: `playwright-${getEnvironment().split(' ').slice(-1)[0]}.yml`,
-    ref: getRef(),
-    owner: 'kittrgg',
-    repo: 'kittr',
-    inputs: {
-      deployment_url: getTargetUrl(),
-    },
-  })
-  // eslint-disable-next-line no-console
-  .then((res) => console.log({ res }))
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-  .catch((err) => setFailed(err.message));
+if (getContext().payload.deployment_status.state === 'success') {
+  getOctokitClient()
+    .rest.actions.createWorkflowDispatch({
+      workflow_id: `playwright-${getEnvironment().split(' ').slice(-1)[0]}.yml`,
+      ref: getRef(),
+      owner: 'kittrgg',
+      repo: 'kittr',
+      inputs: {
+        deployment_url: getTargetUrl(),
+      },
+    })
+    // eslint-disable-next-line no-console
+    .then((res) => console.log({ res }))
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+    .catch((err) => setFailed(err.message));
+}
