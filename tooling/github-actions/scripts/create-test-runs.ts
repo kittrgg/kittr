@@ -3,6 +3,7 @@ import { context, getOctokit } from '@actions/github';
 
 interface Context {
   eventName: 'deployment_status' | 'deployment';
+  sha: string;
   ref: string;
   payload: {
     deployment: {
@@ -17,10 +18,19 @@ interface Context {
   };
 }
 
+const owner = 'kittrgg';
+const repo = 'kittr';
+
 // eslint-disable-next-line turbo/no-undeclared-env-vars
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const SHA = process.env.SHA;
+
+if (!SHA) {
+  setFailed('No SHA was provided.');
+}
 
 export function getOctokitClient(): ReturnType<typeof getOctokit> {
+  // eslint-disable-next-line turbo/no-undeclared-env-vars
+  const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
   if (!GITHUB_TOKEN) {
     const errorMessage = 'GITHUB_TOKEN is not defined';
     setFailed(errorMessage);
@@ -33,21 +43,45 @@ export function getOctokitClient(): ReturnType<typeof getOctokit> {
 const getContext = () => context as unknown as Context;
 const getTargetUrl = () => getContext().payload.deployment_status.target_url;
 const getRef = () => getContext().payload.deployment.ref;
-const getEnvironment = () => getContext().payload.deployment_status.environment;
+const getEnvironment = () =>
+  getContext().payload.deployment_status.environment.split(' ').slice(-1)[0];
 
-console.log(getContext().payload.deployment.ref);
+console.log({ SHA });
+console.log(getContext());
 
-getOctokitClient()
-  .rest.actions.createWorkflowDispatch({
-    workflow_id: `playwright-${getEnvironment().split(' ').slice(-1)[0]}.yml`,
-    ref: getRef(),
-    owner: 'kittrgg',
-    repo: 'kittr',
-    inputs: {
-      deployment_url: getTargetUrl(),
+const main = async () => {
+  const check = await getOctokitClient().rest.checks.create({
+    owner,
+    repo,
+    name: `Playwright - ${getEnvironment()}`,
+    head_sha: SHA,
+    status: 'in_progress',
+  });
+
+  const dispatch = await getOctokitClient().rest.actions.createWorkflowDispatch(
+    {
+      workflow_id: `playwright-${getEnvironment()}`,
+      ref: getRef(),
+      owner,
+      repo,
+      inputs: {
+        deployment_url: getTargetUrl(),
+        // @ts-expect-error Incomplete types from library.
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        check_run_id: check.id,
+      },
     },
+  );
+
+  return { dispatch, check };
+};
+
+main()
+  .then(({ dispatch, check }) => {
+    console.log(`Check created on PR: ${check.url}`);
+    console.log(`Tests running: ${dispatch.url}`);
   })
-  // eslint-disable-next-line no-console
-  .then((res) => console.log({ res }))
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-  .catch((err) => setFailed(err.message));
+  .catch((err) => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+    setFailed(err.message);
+  });
