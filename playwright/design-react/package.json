@@ -1,0 +1,19 @@
+{
+  "name": "@kittr/playwright-design-react",
+  "version": "0.0.0",
+  "description": "Integration, E2E, and smoke tests",
+  "scripts": {
+    "e2e": "playwright test",
+    "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
+    "format:fix": "prettier \"**/*.{js,jsx,ts,tsx,md,mdx,json}\" --write --check",
+    "lint": "eslint-runner",
+    "lint:fix": "eslint-runner --fix",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@kittr/lint": "workspace:*",
+    "@kittr/prettier": "workspace:*",
+    "@kittr/tsconfig": "workspace:*",
+    "@playwright/test": "^1.33.0"
+  }
+}

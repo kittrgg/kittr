@@ -755,6 +755,21 @@ importers:
         specifier: ^5.0.4
         version: 5.0.4
 
+  playwright/design-react:
+    devDependencies:
+      '@kittr/lint':
+        specifier: workspace:*
+        version: link:../../tooling/config-eslint
+      '@kittr/prettier':
+        specifier: workspace:*
+        version: link:../../tooling/config-prettier
+      '@kittr/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/config-typescript
+      '@playwright/test':
+        specifier: ^1.33.0
+        version: 1.34.3
+
   playwright/web:
     devDependencies:
       '@kittr/lint':
