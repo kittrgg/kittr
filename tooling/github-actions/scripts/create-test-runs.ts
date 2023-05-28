@@ -49,10 +49,6 @@ const getTargetUrl = () => getContext().payload.deployment_status.target_url;
 const getEnvironment = () =>
   getContext().payload.deployment_status.environment.split(' ').slice(-1)[0];
 
-info('Hello, I am here to help you.');
-info(`Your ref is: ${ref}`);
-info(`playwright-${getEnvironment()}`);
-
 const main = async () => {
   const check = await getOctokitClient().rest.checks.create({
     owner,
