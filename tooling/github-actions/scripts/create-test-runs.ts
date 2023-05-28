@@ -71,7 +71,7 @@ const main = async () => {
       inputs: {
         deployment_url: getTargetUrl(),
         check_run_id: String(check.data.id),
-        'playwright-version': playwrightVersion,
+        playwright_version: playwrightVersion,
       },
     },
   );
