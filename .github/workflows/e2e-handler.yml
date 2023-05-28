@@ -19,6 +19,9 @@ jobs:
       - name: Install
         uses: ./tooling/github-actions/install
 
+      - name: Logging
+        run: echo '${{fromJSON(github)}}'
+
       - name: Create tests for deployment
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
