@@ -27,12 +27,6 @@ if (!SHA) {
   throw new Error('No SHA was provided.');
 }
 
-const ref = process.env.REF;
-if (!ref) {
-  setFailed('No HEAD_REF was provided.');
-  throw new Error('No HEAD_REF was provided.');
-}
-
 export function getOctokitClient(): ReturnType<typeof getOctokit> {
   const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
   if (!GITHUB_TOKEN) {
@@ -61,7 +55,7 @@ const main = async () => {
   const dispatch = await getOctokitClient().rest.actions.createWorkflowDispatch(
     {
       workflow_id: `playwright-${getEnvironment()}.yml`,
-      ref,
+      ref: 'e2e-keep',
       owner,
       repo,
       inputs: {

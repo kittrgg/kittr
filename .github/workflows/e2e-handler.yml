@@ -26,5 +26,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SHA: ${{ github.sha }}
-          REF: ${{ github.event.deployment.ref }}
         run: pnpm --filter @kittr/github-actions exec vite-node scripts/create-test-runs.ts
