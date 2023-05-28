@@ -767,8 +767,8 @@ importers:
         specifier: workspace:*
         version: link:../../tooling/config-typescript
       '@playwright/test':
-        specifier: ^1.33.0
-        version: 1.34.3
+        specifier: 1.33.0
+        version: 1.33.0
 
   playwright/web:
     devDependencies:
@@ -782,8 +782,8 @@ importers:
         specifier: workspace:*
         version: link:../../tooling/config-typescript
       '@playwright/test':
-        specifier: ^1.33.0
-        version: 1.34.3
+        specifier: 1.33.0
+        version: 1.33.0
 
   tooling/config-eslint:
     dependencies:
@@ -4090,16 +4090,16 @@ packages:
       picocolors: 1.0.0
       tslib: 2.5.2
 
-  /@playwright/test@1.34.3:
+  /@playwright/test@1.33.0:
     resolution:
       {
-        integrity: sha512-zPLef6w9P6T/iT6XDYG3mvGOqOyb6eHaV9XtkunYs0+OzxBtrPAAaHotc0X+PJ00WPPnLfFBTl7mf45Mn8DBmw==,
+        integrity: sha512-YunBa2mE7Hq4CfPkGzQRK916a4tuZoVx/EpLjeWlTVOnD4S2+fdaQZE0LJkbfhN5FTSKNLdcl7MoT5XB37bTkg==,
       }
     engines: { node: '>=14' }
     hasBin: true
     dependencies:
       '@types/node': 18.16.15
-      playwright-core: 1.34.3
+      playwright-core: 1.33.0
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
@@ -14556,10 +14556,10 @@ packages:
       pathe: 1.1.0
     dev: true
 
-  /playwright-core@1.34.3:
+  /playwright-core@1.33.0:
     resolution:
       {
-        integrity: sha512-2pWd6G7OHKemc5x1r1rp8aQcpvDh7goMBZlJv6Co5vCNLVcQJdhxRL09SGaY6HcyHH9aT4tiynZabMofVasBYw==,
+        integrity: sha512-aizyPE1Cj62vAECdph1iaMILpT0WUDCq3E6rW6I+dleSbBoGbktvJtzS6VHkZ4DKNEOG9qJpiom/ZxO+S15LAw==,
       }
     engines: { node: '>=14' }
     hasBin: true
