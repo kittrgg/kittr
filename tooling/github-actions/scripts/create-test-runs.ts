@@ -21,15 +21,18 @@ interface Context {
 const owner = 'kittrgg';
 const repo = 'kittr';
 
-// eslint-disable-next-line turbo/no-undeclared-env-vars
 const SHA = process.env.SHA;
-
 if (!SHA) {
   setFailed('No SHA was provided.');
 }
 
+const HEAD_REF = process.env.HEAD_REF;
+console.log({ HEAD_REF });
+if (!HEAD_REF) {
+  setFailed('No HEAD_REF was provided.');
+}
+
 export function getOctokitClient(): ReturnType<typeof getOctokit> {
-  // eslint-disable-next-line turbo/no-undeclared-env-vars
   const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
   if (!GITHUB_TOKEN) {
     const errorMessage = 'GITHUB_TOKEN is not defined';
@@ -46,7 +49,6 @@ const getRef = () => getContext().payload.deployment.ref;
 const getEnvironment = () =>
   getContext().payload.deployment_status.environment.split(' ').slice(-1)[0];
 
-console.log({ SHA });
 console.log(getContext());
 
 const main = async () => {

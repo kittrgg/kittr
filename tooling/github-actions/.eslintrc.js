@@ -6,5 +6,6 @@ module.exports = {
   },
   rules: {
     'no-console': 'off',
+    'turbo/no-undeclared-env-vars': 'off',
   },
 };

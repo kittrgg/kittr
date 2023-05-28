@@ -2,7 +2,6 @@ import { setFailed } from '@actions/core';
 import { getOctokit } from '@actions/github';
 
 export function getOctokitClient(): ReturnType<typeof getOctokit> {
-  // eslint-disable-next-line turbo/no-undeclared-env-vars
   const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
   if (!GITHUB_TOKEN) {
     const errorMessage = 'GITHUB_TOKEN is not defined';
@@ -13,7 +12,6 @@ export function getOctokitClient(): ReturnType<typeof getOctokit> {
   return getOctokit(GITHUB_TOKEN);
 }
 
-// eslint-disable-next-line turbo/no-undeclared-env-vars
 const CHECK_RUN_ID = process.env.CHECK_RUN_ID;
 
 if (!CHECK_RUN_ID) {
