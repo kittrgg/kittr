@@ -1,6 +1,6 @@
 name: Playwright - kittr
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       deployment_url:
         required: true
