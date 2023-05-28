@@ -24,12 +24,13 @@ const repo = 'kittr';
 const SHA = process.env.SHA;
 if (!SHA) {
   setFailed('No SHA was provided.');
+  throw new Error('No SHA was provided.');
 }
 
 const HEAD_REF = process.env.HEAD_REF;
-console.log({ HEAD_REF });
 if (!HEAD_REF) {
   setFailed('No HEAD_REF was provided.');
+  throw new Error('No HEAD_REF was provided.');
 }
 
 export function getOctokitClient(): ReturnType<typeof getOctokit> {
@@ -45,7 +46,6 @@ export function getOctokitClient(): ReturnType<typeof getOctokit> {
 
 const getContext = () => context as unknown as Context;
 const getTargetUrl = () => getContext().payload.deployment_status.target_url;
-const getRef = () => getContext().payload.deployment.ref;
 const getEnvironment = () =>
   getContext().payload.deployment_status.environment.split(' ').slice(-1)[0];
 
@@ -63,7 +63,7 @@ const main = async () => {
   const dispatch = await getOctokitClient().rest.actions.createWorkflowDispatch(
     {
       workflow_id: `playwright-${getEnvironment()}`,
-      ref: getRef(),
+      ref: HEAD_REF,
       owner,
       repo,
       inputs: {
