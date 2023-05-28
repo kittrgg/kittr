@@ -24,6 +24,7 @@
     "@kittr/logger": "workspace:*",
     "@kittr/money": "workspace:*",
     "@kittr/prisma": "workspace:*",
+    "@kittr/tailwind": "workspace:*",
     "@kittr/trpc": "workspace:*",
     "@kittr/twitch": "workspace:*",
     "@kittr/ui": "workspace:*",

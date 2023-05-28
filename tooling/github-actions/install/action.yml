@@ -10,7 +10,7 @@ runs:
 
     - name: Install pnpm
       shell: bash
-      run: npm i -g pnpm
+      run: npm i -g pnpm turbo
 
     - uses: actions/cache@v3
       name: pnpm-cache

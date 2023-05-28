@@ -1,0 +1,24 @@
+{
+  "name": "@kittr/github-actions",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
+    "format:fix": "prettier \"**/*.{js,jsx,ts,tsx,md,mdx,json}\" --write --check",
+    "lint": "eslint-runner",
+    "lint:fix": "eslint-runner --fix",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@actions/core": "^1.10.0",
+    "@actions/exec": "^1.1.1",
+    "@actions/github": "^5.1.1"
+  },
+  "devDependencies": {
+    "@kittr/lint": "workspace:*",
+    "@kittr/prettier": "workspace:*",
+    "@kittr/tsconfig": "workspace:*",
+    "typescript": "^5.0.4",
+    "vite-node": "0.30.0"
+  }
+}
