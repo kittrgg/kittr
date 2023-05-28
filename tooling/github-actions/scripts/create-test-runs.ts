@@ -1,4 +1,4 @@
-import { setFailed } from '@actions/core';
+import { setFailed, info } from '@actions/core';
 import { context, getOctokit } from '@actions/github';
 
 interface Context {
@@ -27,8 +27,8 @@ if (!SHA) {
   throw new Error('No SHA was provided.');
 }
 
-const HEAD_REF = process.env.HEAD_REF;
-if (!HEAD_REF) {
+const ref = process.env.REF;
+if (!ref) {
   setFailed('No HEAD_REF was provided.');
   throw new Error('No HEAD_REF was provided.');
 }
@@ -49,7 +49,8 @@ const getTargetUrl = () => getContext().payload.deployment_status.target_url;
 const getEnvironment = () =>
   getContext().payload.deployment_status.environment.split(' ').slice(-1)[0];
 
-console.log(getContext());
+info('Hello, I am here to help you.');
+info(`Your ref is: ${ref}`);
 
 const main = async () => {
   const check = await getOctokitClient().rest.checks.create({
@@ -63,7 +64,7 @@ const main = async () => {
   const dispatch = await getOctokitClient().rest.actions.createWorkflowDispatch(
     {
       workflow_id: `playwright-${getEnvironment()}`,
-      ref: HEAD_REF,
+      ref,
       owner,
       repo,
       inputs: {
@@ -80,8 +81,8 @@ const main = async () => {
 
 main()
   .then(({ dispatch, check }) => {
-    console.log(`Check created on PR: ${check.url}`);
-    console.log(`Tests running: ${dispatch.url}`);
+    info(`Check created on PR: ${check.url}`);
+    info(`Tests running: ${dispatch.url}`);
   })
   .catch((err) => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
