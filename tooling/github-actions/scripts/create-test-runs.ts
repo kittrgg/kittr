@@ -5,7 +5,6 @@ interface Context {
   eventName: 'deployment_status' | 'deployment';
   ref: string;
   payload: {
-    repository: any;
     deployment: {
       sha: string;
       ref: string;
