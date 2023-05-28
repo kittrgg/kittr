@@ -52,10 +52,10 @@ const main = async () => {
       'utf-8',
     ),
   ) as {
-    dependencies?: Record<string, string>;
+    devDependencies?: Record<string, string>;
   };
 
-  const playwrightVersion = packageJson.dependencies?.['@playwright/test'];
+  const playwrightVersion = packageJson.devDependencies?.['@playwright/test'];
   if (!playwrightVersion?.length) {
     throw Error("Couldn't get Playwright version from package.json.");
   }
