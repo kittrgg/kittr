@@ -1,19 +1,11 @@
-import { Inter } from 'next/font/google';
+'use client';
 
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter',
-});
+import '@kittr/ui/styles.css';
+import './globals.css';
+import { usePathname } from 'next/navigation';
+import { RootLayout } from '@/app/RootLayout';
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html className={`${inter.className}`} lang="en">
-      <body>{children}</body>
-    </html>
-  );
+export default function Root({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  return <RootLayout pathname={pathname ?? ''}>{children}</RootLayout>;
 }

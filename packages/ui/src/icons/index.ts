@@ -12,9 +12,12 @@ export {
   ChevronRight,
   ChevronUp,
   Code2,
+  Gamepad,
   Home,
   Library,
   Menu,
+  LayoutGrid,
+  Users,
   Type,
   X,
 } from 'lucide-icons-react';

@@ -3,7 +3,13 @@ import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
 export const config = {
-  matcher: ['/developers', '/app-future(.*)'],
+  matcher: [
+    // Protect from directly accessing /app-future routes
+    '/app-future(.*)',
+    // Feature-flagged App Router pages
+    '/developers',
+    '/games',
+  ],
 };
 
 export async function middleware(request: NextRequest) {
