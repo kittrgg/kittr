@@ -11,7 +11,6 @@ interface GameCardProps {
     HTMLImageElement
   >;
   subtitle?: string;
-
   /** Use this to indicate if the game is active, also disables the button */
   disabled?: boolean;
   genres: string[];

@@ -106,7 +106,9 @@ export const AppShell: React.FC<AppShellProps> = ({
         </div>
       </FocusTrap>
       <div className="container flex-auto bg-zinc-900 sm:ml-60">
-        <main className="min-h-screen bg-zinc-900 p-8">{children}</main>
+        <main className="flex min-h-screen flex-col gap-8 bg-zinc-900 p-8">
+          {children}
+        </main>
         <footer className="flex flex-col gap-8 bg-neutral-900 p-8">
           <div className="m-auto">{footerImage}</div>
           {/* Sorry about the !important for the breakopint but Tailwind isn't playing nice. */}
