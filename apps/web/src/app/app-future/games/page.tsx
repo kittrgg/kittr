@@ -19,20 +19,32 @@ export async function Page() {
 
   return (
     <>
-      <pre>{JSON.stringify(gamesData, null, 2)}</pre>
       <H1>Games</H1>
-      {/* {gamesData.map(({ gameToGenres, developer, active, displayName, id }) => {
-        return (
-          <GameCard
-            developer={developer}
-            disabled={!active}
-            genres={gameToGenres.map((genre) => genre.genres.displayName)}
-            key={id}
-            platforms={[]}
-            title={displayName}
-          />
-        );
-      })} */}
+      {gamesData
+        .sort((x, y) => Number(y.active) - Number(x.active))
+        .map(
+          ({
+            gameToGenres,
+            gamesToPlatforms,
+            developer,
+            active,
+            displayName,
+            id,
+          }) => {
+            return (
+              <GameCard
+                developer={developer}
+                disabled={!active}
+                genres={gameToGenres.map((genre) => genre.genres.displayName)}
+                key={id}
+                platforms={gamesToPlatforms.map(
+                  (platform) => platform.platforms.displayName,
+                )}
+                title={displayName}
+              />
+            );
+          },
+        )}
     </>
   );
 }
