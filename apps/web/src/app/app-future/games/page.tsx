@@ -1,32 +1,40 @@
-import { db, games, genres, eq, platforms } from '@kittr/db';
+import { db } from '@kittr/db';
 import { GameCard, H1 } from '@kittr/ui/new';
 
 export async function Page() {
-  const gamesData = await db.select().from(games);
-  // .innerJoin(genres, eq(games.id, genres.id))
-  // .innerJoin(platforms, eq(games.id, platforms.id));
+  const gamesData = await db.query.games.findMany({
+    with: {
+      gamesToPlatforms: {
+        with: {
+          platforms: true,
+        },
+      },
+      gameToGenres: {
+        with: {
+          genres: true,
+        },
+      },
+    },
+  });
 
-  return <pre>{JSON.stringify(gamesData, null, 2)}</pre>;
-  // return (
-  //   <>
-  //     <H1>Games</H1>
-  //     {gamesData.map(({ Game: game, Genre: genre }) => {
-  //       return (
-  //         <>
-  //           <p>test</p>
-  //           <GameCard
-  //             developer={game.developer}
-  //             disabled={!game.active}
-  //             genres={[genre.displayName]}
-  //             key={game.id}
-  //             platforms={[]}
-  //             title={game.displayName}
-  //           />
-  //         </>
-  //       );
-  //     })}
-  //   </>
-  // );
+  return (
+    <>
+      <pre>{JSON.stringify(gamesData, null, 2)}</pre>
+      <H1>Games</H1>
+      {/* {gamesData.map(({ gameToGenres, developer, active, displayName, id }) => {
+        return (
+          <GameCard
+            developer={developer}
+            disabled={!active}
+            genres={gameToGenres.map((genre) => genre.genres.displayName)}
+            key={id}
+            platforms={[]}
+            title={displayName}
+          />
+        );
+      })} */}
+    </>
+  );
 }
 
 export default Page;

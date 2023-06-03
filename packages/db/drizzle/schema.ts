@@ -10,6 +10,21 @@ import {
   varchar,
   index,
 } from 'drizzle-orm/pg-core';
+import { games } from './tables/games';
+import {
+  gamesToGenres,
+  gameGenresRelation,
+  gamesToGenresRelations,
+  genreGamesRelation,
+  genres,
+} from './tables/games/genres';
+import {
+  gamePlatformsRelation,
+  gamesToPlatforms,
+  gamesToPlatformsRelations,
+  platformGamesRelation,
+  platforms,
+} from './tables/games/platforms';
 
 export const adminRole = pgEnum('AdminRole', ['SUPER', 'DEFAULT']);
 export const linkProperty = pgEnum('LinkProperty', [
@@ -214,7 +229,7 @@ export const warzoneTwoKit = pgTable('WarzoneTwoKit', {
   quote: text('quote'),
   gameId: text('gameId')
     .notNull()
-    .references(() => game.id, { onDelete: 'restrict', onUpdate: 'cascade' }),
+    .references(() => games.id, { onDelete: 'restrict', onUpdate: 'cascade' }),
   baseId: text('baseId')
     .notNull()
     .references(() => warzoneTwoKitBase.id, {
@@ -301,7 +316,7 @@ export const warzoneTwoKitBase = pgTable('WarzoneTwoKitBase', {
   displayName: text('displayName').notNull(),
   gameId: text('gameId')
     .notNull()
-    .references(() => game.id, { onDelete: 'restrict', onUpdate: 'cascade' }),
+    .references(() => games.id, { onDelete: 'restrict', onUpdate: 'cascade' }),
   imageUrl: text('imageUrl').notNull(),
   blurb: text('blurb').notNull(),
   maxOptions: integer('maxOptions').notNull(),
@@ -332,7 +347,7 @@ export const warzoneKit = pgTable('WarzoneKit', {
   quote: text('quote'),
   gameId: text('gameId')
     .notNull()
-    .references(() => game.id, { onDelete: 'restrict', onUpdate: 'cascade' }),
+    .references(() => games.id, { onDelete: 'restrict', onUpdate: 'cascade' }),
   baseId: text('baseId')
     .notNull()
     .references(() => warzoneKitBase.id, {
@@ -349,7 +364,7 @@ export const warzoneKitBase = pgTable('WarzoneKitBase', {
   displayName: text('displayName').notNull(),
   gameId: text('gameId')
     .notNull()
-    .references(() => game.id, { onDelete: 'restrict', onUpdate: 'cascade' }),
+    .references(() => games.id, { onDelete: 'restrict', onUpdate: 'cascade' }),
   imageUrl: text('imageUrl').notNull(),
   blurb: text('blurb').notNull(),
   maxOptions: integer('maxOptions').notNull(),
@@ -359,21 +374,6 @@ export const warzoneKitBase = pgTable('WarzoneKitBase', {
       onDelete: 'restrict',
       onUpdate: 'cascade',
     }),
-});
-
-export const game = pgTable('Game', {
-  id: text('id').primaryKey().notNull(),
-  displayName: text('displayName').notNull(),
-  urlSafeName: text('urlSafeName').notNull(),
-  backgroundImageUrl: text('backgroundImageUrl').notNull(),
-  titleImageUrl: text('titleImageUrl').notNull(),
-  active: boolean('active').notNull(),
-  blurDataUrl: text('blurDataUrl').notNull(),
-  developer: text('developer').notNull(),
-  releaseDate: timestamp('releaseDate', {
-    precision: 3,
-    mode: 'string',
-  }).notNull(),
 });
 
 export const warzoneKitOption = pgTable('WarzoneKitOption', {
@@ -395,7 +395,7 @@ export const channelCustomGameCommand = pgTable('ChannelCustomGameCommand', {
   command: text('command').notNull(),
   gameId: text('gameId')
     .notNull()
-    .references(() => game.id, { onDelete: 'restrict', onUpdate: 'cascade' }),
+    .references(() => games.id, { onDelete: 'restrict', onUpdate: 'cascade' }),
   channelId: text('channelId')
     .notNull()
     .references(() => channel.id, { onDelete: 'cascade', onUpdate: 'cascade' }),
@@ -412,7 +412,7 @@ export const channelToGame = pgTable(
       }),
     b: text('B')
       .notNull()
-      .references(() => game.id, { onDelete: 'cascade', onUpdate: 'cascade' }),
+      .references(() => games.id, { onDelete: 'cascade', onUpdate: 'cascade' }),
   },
   (table) => {
     return {
@@ -429,27 +429,9 @@ export const channelCreatorCode = pgTable('ChannelCreatorCode', {
     .references(() => channel.id, { onDelete: 'cascade', onUpdate: 'cascade' }),
   gameId: text('gameId')
     .notNull()
-    .references(() => game.id, { onDelete: 'restrict', onUpdate: 'cascade' }),
+    .references(() => games.id, { onDelete: 'restrict', onUpdate: 'cascade' }),
   code: text('code').notNull(),
 });
-
-export const gameToGenre = pgTable(
-  '_GameToGenre',
-  {
-    a: text('A')
-      .notNull()
-      .references(() => game.id, { onDelete: 'cascade', onUpdate: 'cascade' }),
-    b: text('B')
-      .notNull()
-      .references(() => genre.id, { onDelete: 'cascade', onUpdate: 'cascade' }),
-  },
-  (table) => {
-    return {
-      abUnique: uniqueIndex('_GameToGenre_AB_unique').on(table.a, table.b),
-      bIdx: index().on(table.b),
-    };
-  },
-);
 
 export const warzoneKitBaseCategory = pgTable(
   'WarzoneKitBaseCategory',
@@ -504,42 +486,6 @@ export const warzoneCommandCode = pgTable('WarzoneCommandCode', {
     }),
 });
 
-export const genre = pgTable(
-  'Genre',
-  {
-    id: text('id').primaryKey().notNull(),
-    displayName: text('displayName').notNull(),
-  },
-  (table) => {
-    return {
-      displayNameKey: uniqueIndex('Genre_displayName_key').on(
-        table.displayName,
-      ),
-    };
-  },
-);
-
-export const gameToPlatform = pgTable(
-  '_GameToPlatform',
-  {
-    a: text('A')
-      .notNull()
-      .references(() => game.id, { onDelete: 'cascade', onUpdate: 'cascade' }),
-    b: text('B')
-      .notNull()
-      .references(() => platform.id, {
-        onDelete: 'cascade',
-        onUpdate: 'cascade',
-      }),
-  },
-  (table) => {
-    return {
-      abUnique: uniqueIndex('_GameToPlatform_AB_unique').on(table.a, table.b),
-      bIdx: index().on(table.b),
-    };
-  },
-);
-
 export const channelKitOverlay = pgTable(
   'ChannelKitOverlay',
   {
@@ -580,52 +526,43 @@ export const channelKitOverlay = pgTable(
   },
 );
 
-export const platform = pgTable(
-  'Platform',
-  {
-    id: text('id').primaryKey().notNull(),
-    displayName: text('displayName').notNull(),
-  },
-  (table) => {
-    return {
-      displayNameKey: uniqueIndex('Platform_displayName_key').on(
-        table.displayName,
-      ),
-    };
-  },
-);
+export { games };
 
 export const schema = {
-  channelProfile,
-  setupPhoto,
-  channelLink,
-  warzoneTwoKitOptionTuning,
-  channelPlan,
-  channelPcSpec,
-  warzoneTwoKitOption,
+  administrator,
   channel,
   channelAffiliate,
-  warzoneTwoKitBaseCategory,
-  warzoneTwoKit,
-  administrator,
-  warzoneTwoCommandCode,
-  warzoneTwoKitToWarzoneTwoKitOption,
   channelBrandColor,
-  warzoneTwoKitBase,
-  channelManager,
-  warzoneKit,
-  warzoneKitBase,
-  game,
-  warzoneKitOption,
-  channelCustomGameCommand,
-  channelToGame,
   channelCreatorCode,
-  gameToGenre,
-  warzoneKitBaseCategory,
-  warzoneKitToWarzoneKitOption,
-  warzoneCommandCode,
-  genre,
-  gameToPlatform,
+  channelCustomGameCommand,
   channelKitOverlay,
-  platform,
+  channelLink,
+  channelManager,
+  channelPcSpec,
+  channelPlan,
+  channelProfile,
+  channelToGame,
+  gameGenresRelation,
+  genreGamesRelation,
+  gamePlatformsRelation,
+  games,
+  gamesToGenres,
+  gamesToGenresRelations,
+  gamesToPlatforms,
+  gamesToPlatformsRelations,
+  genres,
+  platformGamesRelation,
+  platforms,
+  setupPhoto,
+  warzoneCommandCode,
+  warzoneKitBaseCategory,
+  warzoneKitOption,
+  warzoneKitToWarzoneKitOption,
+  warzoneTwoCommandCode,
+  warzoneTwoKit,
+  warzoneTwoKitBase,
+  warzoneTwoKitBaseCategory,
+  warzoneTwoKitOption,
+  warzoneTwoKitOptionTuning,
+  warzoneTwoKitToWarzoneTwoKitOption,
 };
