@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
-    "format:fix": "prettier \"**/*.{js,jsx,ts,tsx,md,mdx,json}\" --write --check",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit"
   },
