@@ -2,10 +2,6 @@
   "name": "@kittr/lint",
   "version": "0.0.0",
   "type": "commonjs",
-  "bin": {
-    "eslint": "../node_modules/eslint/bin/eslint.js",
-    "eslint-runner": "./runner/index.mjs"
-  },
   "files": [
     "node.js",
     "next.js"
@@ -13,8 +9,7 @@
   "scripts": {
     "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
     "format:fix": "prettier \"**/*.{js,jsx,ts,tsx,md,mdx,json}\" --write --check",
-    "lint": "node ./runner/index.mjs",
-    "lint:fix": "node ./runner/index.mjs --fix",
+    "lint": "eslint .",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {

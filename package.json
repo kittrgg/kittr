@@ -16,7 +16,7 @@
     "format:fix": "turbo format:fix format-root:fix --continue",
     "lint": "turbo lint --continue",
     "lint-staged": "lint-staged",
-    "lint:fix": "turbo lint:fix --continue",
+    "lint:fix": "turbo lint --continue -- --fix",
     "prepare": "husky install",
     "start": "turbo start",
     "test": "turbo test --continue --filter=ui",

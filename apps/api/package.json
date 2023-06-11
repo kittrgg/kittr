@@ -6,8 +6,7 @@
     "dev": "nodemon src/index.ts",
     "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
     "format:fix": "prettier \"**/*.{js,jsx,ts,tsx,md,mdx,json}\" --write --check",
-    "lint": "eslint-runner",
-    "lint:fix": "eslint-runner --fix",
+    "lint": "eslint .",
     "start": "ts-node ./src/index.ts",
     "typecheck": "tsc --noEmit"
   },
@@ -31,6 +30,7 @@
     "@types/cron": "2.0.0",
     "@types/express": "4.17.13",
     "@types/node": "^18.11.18",
+    "eslint": "^8.42.0",
     "kill-port": "2.0.1",
     "nodemon": "2.0.19",
     "ts-node": "10.9.1",

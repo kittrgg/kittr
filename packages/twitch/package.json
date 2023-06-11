@@ -6,8 +6,7 @@
   "scripts": {
     "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
     "format:fix": "prettier \"**/*.{js,jsx,ts,tsx,md,mdx,json}\" --write --check",
-    "lint": "eslint-runner",
-    "lint:fix": "eslint-runner --fix",
+    "lint": "eslint .",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -20,6 +19,7 @@
     "@kittr/lint": "workspace:*",
     "@kittr/prettier": "workspace:*",
     "@kittr/tsconfig": "workspace:*",
+    "eslint": "^8.42.0",
     "typescript": "^5.0.4"
   }
 }

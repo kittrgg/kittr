@@ -13,8 +13,7 @@
     "db:studio": "prisma studio",
     "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
     "format:fix": "prettier \"**/*.{js,jsx,ts,tsx,md,mdx,json}\" --write --check",
-    "lint": "eslint-runner",
-    "lint:fix": "eslint-runner --fix",
+    "lint": "eslint .",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -25,6 +24,7 @@
     "@kittr/prettier": "workspace:*",
     "@kittr/tsconfig": "workspace:*",
     "@types/node": "^16.18.11",
+    "eslint": "^8.42.0",
     "prisma": "^4.13.0",
     "ts-node": "10.9.1",
     "tsup": "5.12.0",

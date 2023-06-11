@@ -31,8 +31,7 @@
     "dev": "concurrently \"tailwindcss -o dist/compiled.css --minify --watch\"",
     "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
     "format:fix": "prettier \"**/*.{js,jsx,ts,tsx,md,mdx,json}\" --write --check",
-    "lint": "eslint-runner",
-    "lint:fix": "eslint-runner --fix",
+    "lint": "eslint .",
     "test": "vitest",
     "typecheck": "tsc --noEmit"
   },
@@ -71,6 +70,7 @@
     "@types/react-dom": "^18.2.4",
     "@vitejs/plugin-react": "2.0.0",
     "concurrently": "^8.0.1",
+    "eslint": "^8.42.0",
     "happy-dom": "^9.10.9",
     "typescript": "^5.0.4",
     "vite": "^4.3.5",
