@@ -7,7 +7,12 @@ import { db } from '@kittr/db';
 import type { Genre, Platform } from '@kittr/db';
 import { download } from '@kittr/firebase/storage';
 import { GameCard, H1 } from '@kittr/ui/new';
+import type { Metadata } from 'next';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'Games | kittr',
+};
 
 export async function Page() {
   const gamesData = await db.query.games.findMany({
