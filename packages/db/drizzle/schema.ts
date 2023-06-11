@@ -10,6 +10,7 @@ import {
   varchar,
   index,
 } from 'drizzle-orm/pg-core';
+import type { InferModel } from 'drizzle-orm';
 import { games } from './tables/games';
 import {
   gamesToGenres,
@@ -526,7 +527,10 @@ export const channelKitOverlay = pgTable(
   },
 );
 
-export { games };
+export type Game = InferModel<typeof games>; // insert type
+export type Genre = InferModel<typeof genres>; // insert type
+export type Platform = InferModel<typeof platforms>; // insert type
+export { games, genres };
 
 export const schema = {
   administrator,

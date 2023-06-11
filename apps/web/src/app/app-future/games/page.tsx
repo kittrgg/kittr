@@ -1,4 +1,6 @@
 import { db } from '@kittr/db';
+import type { Genre, Platform } from '@kittr/db';
+import { download } from '@kittr/firebase/storage';
 import { GameCard, H1 } from '@kittr/ui/new';
 
 export async function Page() {
@@ -20,31 +22,43 @@ export async function Page() {
   return (
     <>
       <H1>Games</H1>
-      {gamesData
-        .sort((x, y) => Number(y.active) - Number(x.active))
-        .map(
-          ({
-            gameToGenres,
-            gamesToPlatforms,
-            developer,
-            active,
-            displayName,
-            id,
-          }) => {
-            return (
-              <GameCard
-                developer={developer}
-                disabled={!active}
-                genres={gameToGenres.map((genre) => genre.genres.displayName)}
-                key={id}
-                platforms={gamesToPlatforms.map(
-                  (platform) => platform.platforms.displayName,
-                )}
-                title={displayName}
-              />
-            );
-          },
-        )}
+      <div className="flex flex-row flex-wrap justify-center">
+        {gamesData
+          .sort((x, y) => Number(y.active) - Number(x.active))
+          .map(
+            async ({
+              // @ts-expect-error Drizzle is being wonky.
+              gameToGenres,
+              // @ts-expect-error Drizzle is being wonky.
+              gamesToPlatforms,
+              developer,
+              active,
+              titleImageUrl,
+              displayName,
+              id,
+            }) => {
+              return (
+                <GameCard
+                  developer={developer}
+                  disabled={!active}
+                  genres={gameToGenres.map(
+                    (genre: { genres: Genre }) => genre.genres.displayName,
+                  )}
+                  imageProps={{
+                    src: await download(titleImageUrl),
+                    alt: `${displayName} cover art`,
+                  }}
+                  key={id}
+                  platforms={gamesToPlatforms.map(
+                    (platform: { platforms: Platform }) =>
+                      platform.platforms.displayName,
+                  )}
+                  title={displayName}
+                />
+              );
+            },
+          )}
+      </div>
     </>
   );
 }
