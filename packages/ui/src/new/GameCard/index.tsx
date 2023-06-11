@@ -2,10 +2,14 @@ import * as React from 'react';
 import { Badge } from '../Badge';
 import { H4, H3, H5, Span } from '../Typography';
 import { cn } from '../utils';
+import type { NextLinkType } from '../../../utils';
 
 interface GameCardProps {
   title: string;
   developer: string;
+  as: 'button' | 'Link';
+  linkComponent?: NextLinkType;
+  href?: string;
   imageProps?: React.DetailedHTMLProps<
     React.ImgHTMLAttributes<HTMLImageElement>,
     HTMLImageElement
@@ -20,12 +24,26 @@ export const GameCard: React.FC<GameCardProps> = ({
   title,
   imageProps,
   developer,
+  as = 'button',
+  linkComponent,
+  href,
   genres,
   platforms,
   disabled,
 }) => {
+  if (as === 'Link' && !linkComponent) {
+    throw new Error('You need to provide a linkComponent to this GameCard.');
+  }
+
+  if (linkComponent && !href) {
+    throw new Error('You need to provide an href to this GameCard.');
+  }
+
+  const Component = as === 'Link' ? linkComponent! : 'button';
+
   return (
-    <button
+    <Component
+      href={href}
       className={cn(
         'relative m-4 rounded-xl bg-zinc-800 text-center shadow-md outline-none',
         {
@@ -72,6 +90,6 @@ export const GameCard: React.FC<GameCardProps> = ({
           ))}
         </div>
       </div>
-    </button>
+    </Component>
   );
 };

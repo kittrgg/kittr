@@ -8,23 +8,14 @@ import { typographyVariants } from '../Typography';
 import { cn } from '../utils';
 import { useBodyScrollLock } from '../../hooks';
 import { Twitter, Discord } from '../../icons';
+import type { NextLinkType } from '../../../utils';
 import { Floaty } from './Floaty';
 import { useCloseOnNavigate } from './useCloseOnNavigate';
 
 interface AppShellProps {
   children?: ReactNode;
   nav: ReactNode;
-  linkComponent: React.ForwardRefExoticComponent<
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/sort-type-constituents
-    Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, any> &
-      React.RefAttributes<HTMLAnchorElement> & {
-        children?: React.ReactNode;
-      } & {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        href: any;
-        className?: string;
-      }
-  >;
+  linkComponent: NextLinkType;
   links: { children: ReactNode; href: string }[];
   footerImage: ReactNode;
   pathnameForCloseHook: string;
