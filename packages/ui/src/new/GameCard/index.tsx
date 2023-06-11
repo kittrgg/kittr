@@ -7,7 +7,6 @@ import type { NextLinkType } from '../../../utils';
 interface GameCardProps {
   title: string;
   developer: string;
-  as: 'button' | 'Link';
   linkComponent?: NextLinkType;
   href?: string;
   imageProps?: React.DetailedHTMLProps<
@@ -24,22 +23,17 @@ export const GameCard: React.FC<GameCardProps> = ({
   title,
   imageProps,
   developer,
-  as = 'button',
   linkComponent,
   href,
   genres,
   platforms,
   disabled,
 }) => {
-  if (as === 'Link' && !linkComponent) {
-    throw new Error('You need to provide a linkComponent to this GameCard.');
-  }
-
   if (linkComponent && !href) {
     throw new Error('You need to provide an href to this GameCard.');
   }
 
-  const Component = as === 'Link' ? linkComponent! : 'button';
+  const Component = linkComponent ? linkComponent : 'button';
 
   return (
     <Component

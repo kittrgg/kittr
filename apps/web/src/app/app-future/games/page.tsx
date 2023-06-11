@@ -46,7 +46,6 @@ export async function Page() {
             }) => {
               return (
                 <GameCard
-                  as="Link"
                   developer={developer}
                   disabled={!active}
                   genres={gameToGenres.map(
