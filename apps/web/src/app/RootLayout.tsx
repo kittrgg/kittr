@@ -1,8 +1,10 @@
-import type { Metadata } from 'next';
+'use client';
+
 import Image from 'next/image';
 import { Inter } from 'next/font/google';
 import { AppShell } from '@kittr/ui/new';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Nav } from '@/app/Nav';
 
 const inter = Inter({
@@ -11,18 +13,9 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
-export const metadata: Metadata = {
-  description: 'Get kittd.',
-  title: 'kittr',
-};
+export function RootLayout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
 
-export function RootLayout({
-  children,
-  pathname,
-}: {
-  pathname: string;
-  children: React.ReactNode;
-}) {
   return (
     <html className={`${inter.variable} bg-zinc-900`} lang="en">
       <body className="m-auto flex w-full flex-grow flex-row font-sans antialiased">
@@ -52,7 +45,7 @@ export function RootLayout({
             { href: '/test', children: 'Privacy' },
           ]}
           nav={<Nav />}
-          pathnameForCloseHook={pathname}
+          pathnameForCloseHook={pathname ?? ''}
         >
           {children}
         </AppShell>
