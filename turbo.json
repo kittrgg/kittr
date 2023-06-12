@@ -54,14 +54,6 @@
     "db:push": {
       "cache": false
     },
-    "//#format-root:fix": {
-      "dependsOn": ["^topo"],
-      "outputMode": "new-only"
-    },
-    "format:fix": {
-      "dependsOn": ["^topo"],
-      "outputMode": "new-only"
-    },
     "//#format-root": {
       "dependsOn": ["^topo"],
       "outputMode": "new-only"
@@ -71,10 +63,6 @@
       "outputMode": "new-only"
     },
     "lint": {
-      "dependsOn": ["^topo"],
-      "outputMode": "new-only"
-    },
-    "lint:fix": {
       "dependsOn": ["^topo"],
       "outputMode": "new-only"
     },
