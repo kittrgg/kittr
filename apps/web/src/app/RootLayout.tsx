@@ -36,13 +36,13 @@ export function RootLayout({ children }: { children: React.ReactNode }) {
           linkComponent={Link}
           links={[
             { href: '/', children: 'Home' },
-            { href: '/test', children: 'About' },
-            { href: '/test', children: 'Games' },
-            { href: '/test', children: 'Channels' },
-            { href: '/test', children: 'FAQ' },
-            { href: '/test', children: 'Contact' },
-            { href: '/test', children: 'Terms' },
-            { href: '/test', children: 'Privacy' },
+            { href: '/about', children: 'About' },
+            { href: '/games', children: 'Games' },
+            { href: '/channels', children: 'Channels' },
+            { href: '/faq', children: 'FAQ' },
+            { href: '/contact', children: 'Contact' },
+            { href: '/terms-of-use', children: 'Terms' },
+            { href: '/privacy-policy', children: 'Privacy' },
           ]}
           nav={<Nav />}
           pathnameForCloseHook={pathname ?? ''}
