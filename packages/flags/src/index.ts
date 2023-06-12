@@ -2,7 +2,6 @@ import { getAll, get } from '@vercel/edge-config';
 import { z } from 'zod';
 
 const edgeConfigShape = z.object({
-  developerTestPage: z.boolean().default(false),
   homeAppPage: z.boolean().default(false),
   gamesAppPage: z.boolean().default(false),
   playersAppPage: z.boolean().default(false),
