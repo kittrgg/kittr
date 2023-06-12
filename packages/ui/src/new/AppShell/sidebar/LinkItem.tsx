@@ -24,7 +24,7 @@ export const AppShellLinkItem = ({
       <Slot
         ref={ref}
         tabIndex={isIntersecting ? 1 : -1}
-        className="flex flex-row gap-2 py-2 pr-8"
+        className="flex flex-row gap-2 py-2 pr-8 [&>svg]:relative [&>svg]:top-0.5"
       >
         {children}
       </Slot>

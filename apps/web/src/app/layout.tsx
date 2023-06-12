@@ -1,19 +1,16 @@
-import { Inter } from 'next/font/google';
+import '@kittr/ui/styles.css';
+import './globals.css';
+import type { Metadata } from 'next';
+import { RootLayout } from '@/app/RootLayout';
 
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter',
-});
+export const metadata: Metadata = {
+  title: 'kittr',
+  description: 'Where streamers to share kits - and you use them.',
+  openGraph: {
+    images: ['/img/logo-lockup-padded.png'],
+  },
+};
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html className={`${inter.className}`} lang="en">
-      <body>{children}</body>
-    </html>
-  );
+export default function Root({ children }: { children: React.ReactNode }) {
+  return <RootLayout>{children}</RootLayout>;
 }

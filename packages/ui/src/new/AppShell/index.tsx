@@ -8,23 +8,14 @@ import { typographyVariants } from '../Typography';
 import { cn } from '../utils';
 import { useBodyScrollLock } from '../../hooks';
 import { Twitter, Discord } from '../../icons';
+import type { NextLinkType } from '../../../utils';
 import { Floaty } from './Floaty';
 import { useCloseOnNavigate } from './useCloseOnNavigate';
 
 interface AppShellProps {
   children?: ReactNode;
   nav: ReactNode;
-  linkComponent: React.ForwardRefExoticComponent<
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/sort-type-constituents
-    Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, any> &
-      React.RefAttributes<HTMLAnchorElement> & {
-        children?: React.ReactNode;
-      } & {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        href: any;
-        className?: string;
-      }
-  >;
+  linkComponent: NextLinkType;
   links: { children: ReactNode; href: string }[];
   footerImage: ReactNode;
   pathnameForCloseHook: string;
@@ -106,7 +97,9 @@ export const AppShell: React.FC<AppShellProps> = ({
         </div>
       </FocusTrap>
       <div className="container flex-auto bg-zinc-900 sm:ml-60">
-        <main className="min-h-screen bg-zinc-900 p-8">{children}</main>
+        <main className="flex min-h-screen flex-col gap-8 bg-zinc-900 p-8">
+          {children}
+        </main>
         <footer className="flex flex-col gap-8 bg-neutral-900 p-8">
           <div className="m-auto">{footerImage}</div>
           {/* Sorry about the !important for the breakopint but Tailwind isn't playing nice. */}

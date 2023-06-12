@@ -363,8 +363,8 @@ importers:
         specifier: ^0.3.0
         version: 0.3.0
       drizzle-orm:
-        specifier: ^0.26.1
-        version: 0.26.1(@vercel/postgres@0.3.0)
+        specifier: ^0.26.3
+        version: 0.26.3(@vercel/postgres@0.3.0)
     devDependencies:
       '@kittr/lint':
         specifier: workspace:*
@@ -894,9 +894,6 @@ importers:
       prettier-plugin-packagejson:
         specifier: ^2.4.3
         version: 2.4.3(prettier@2.8.8)
-      prettier-plugin-tailwindcss:
-        specifier: ^0.2.8
-        version: 0.2.8(prettier@2.8.8)
 
   tooling/config-tailwind:
     devDependencies:
@@ -8858,16 +8855,17 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.26.1(@vercel/postgres@0.3.0):
+  /drizzle-orm@0.26.3(@vercel/postgres@0.3.0):
     resolution:
       {
-        integrity: sha512-PgHPBJ4BUi/xWEjBbaYo4eiVC7hIwPtSEAVO3QuGMzLV+YwD2jPyV2Y7nvP1jHZlA4IV9wLmkcpicBO/255XFg==,
+        integrity: sha512-KefTFAXxFtBmDRZWgM71ucxUuDvNEiPgv0lg7qAPEfrQVfyzSz0ukUfNz2Ck4Pro6PEmYFJmA6oNQwwgENkk7g==,
       }
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
       '@cloudflare/workers-types': '>=3'
       '@libsql/client': '*'
       '@neondatabase/serverless': '>=0.1'
+      '@opentelemetry/api': ^1.4.1
       '@planetscale/database': '>=1'
       '@types/better-sqlite3': '*'
       '@types/pg': '*'
@@ -8890,6 +8888,8 @@ packages:
       '@libsql/client':
         optional: true
       '@neondatabase/serverless':
+        optional: true
+      '@opentelemetry/api':
         optional: true
       '@planetscale/database':
         optional: true
@@ -15439,61 +15439,6 @@ packages:
         optional: true
     dependencies:
       prettier: 2.7.1
-    dev: true
-
-  /prettier-plugin-tailwindcss@0.2.8(prettier@2.8.8):
-    resolution:
-      {
-        integrity: sha512-KgPcEnJeIijlMjsA6WwYgRs5rh3/q76oInqtMXBA/EMcamrcYJpyhtRhyX1ayT9hnHlHTuO8sIifHF10WuSDKg==,
-      }
-    engines: { node: '>=12.17.0' }
-    peerDependencies:
-      '@ianvs/prettier-plugin-sort-imports': '*'
-      '@prettier/plugin-pug': '*'
-      '@shopify/prettier-plugin-liquid': '*'
-      '@shufo/prettier-plugin-blade': '*'
-      '@trivago/prettier-plugin-sort-imports': '*'
-      prettier: '>=2.2.0'
-      prettier-plugin-astro: '*'
-      prettier-plugin-css-order: '*'
-      prettier-plugin-import-sort: '*'
-      prettier-plugin-jsdoc: '*'
-      prettier-plugin-organize-attributes: '*'
-      prettier-plugin-organize-imports: '*'
-      prettier-plugin-style-order: '*'
-      prettier-plugin-svelte: '*'
-      prettier-plugin-twig-melody: '*'
-    peerDependenciesMeta:
-      '@ianvs/prettier-plugin-sort-imports':
-        optional: true
-      '@prettier/plugin-pug':
-        optional: true
-      '@shopify/prettier-plugin-liquid':
-        optional: true
-      '@shufo/prettier-plugin-blade':
-        optional: true
-      '@trivago/prettier-plugin-sort-imports':
-        optional: true
-      prettier-plugin-astro:
-        optional: true
-      prettier-plugin-css-order:
-        optional: true
-      prettier-plugin-import-sort:
-        optional: true
-      prettier-plugin-jsdoc:
-        optional: true
-      prettier-plugin-organize-attributes:
-        optional: true
-      prettier-plugin-organize-imports:
-        optional: true
-      prettier-plugin-style-order:
-        optional: true
-      prettier-plugin-svelte:
-        optional: true
-      prettier-plugin-twig-melody:
-        optional: true
-    dependencies:
-      prettier: 2.8.8
     dev: true
 
   /prettier@2.7.1:

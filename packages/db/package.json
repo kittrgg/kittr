@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@vercel/postgres": "^0.3.0",
-    "drizzle-orm": "^0.26.1"
+    "drizzle-orm": "^0.26.3"
   },
   "devDependencies": {
     "@kittr/lint": "workspace:*",
