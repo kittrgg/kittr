@@ -30,6 +30,6 @@
     "@kittr/tsconfig": "workspace:*",
     "drizzle-kit": "^0.18.1",
     "eslint": "^8.42.0",
-    "typescript": "^5.0.4"
+    "typescript": "^5.1.3"
   }
 }

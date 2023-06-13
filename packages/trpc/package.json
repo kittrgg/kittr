@@ -34,7 +34,7 @@
     "@kittr/prettier": "workspace:*",
     "@kittr/tsconfig": "workspace:*",
     "@ngneat/falso": "^6.4.0",
-    "typescript": "^5.0.4",
+    "typescript": "^5.1.3",
     "vitest": "^0.28.3"
   }
 }
