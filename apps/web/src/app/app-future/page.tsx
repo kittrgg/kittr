@@ -6,8 +6,6 @@ function Page() {
   return (
     <div>
       <Hero />
-      <h1>Hello, page.</h1>
-      <p>How we doing?</p>
     </div>
   );
 }
