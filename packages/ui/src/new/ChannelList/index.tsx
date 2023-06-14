@@ -1,7 +1,7 @@
 import { ChannelListItem } from './Item';
 
 export interface ChannelListItemProps {
-  imagePath: string;
+  id: string;
   name: string;
   urlSafeName: string;
 }
@@ -16,18 +16,19 @@ export interface ChannelListProps {
       } & { href: any }
   >;
   linkBasePath: string;
-  channelList: ChannelListItemProps[];
+  channels: ChannelListItemProps[];
 }
 
 export const ChannelList = ({
-  channelList,
+  channels,
   linkBasePath,
   linkComponent,
 }: ChannelListProps) => {
   return (
     <div className="flex flex-col gap-6">
-      {channelList.map((channel) => {
+      {channels.map((channel) => {
         return (
+          // @ts-expect-error Async component is not happy
           <ChannelListItem
             linkComponent={linkComponent}
             linkBasePath={linkBasePath}

@@ -26,6 +26,7 @@
     "@kittr/trpc": "workspace:*",
     "@kittr/twitch": "workspace:*",
     "@kittr/ui": "workspace:*",
+    "@kittr/utils": "workspace:*",
     "@mantine/core": "^5.10.2",
     "@mantine/hooks": "^5.10.2",
     "@mantine/next": "^5.10.2",

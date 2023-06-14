@@ -17,8 +17,7 @@ export const liveChannelsQuery = async () => {
   const popularChannels = await prisma.channel.findMany({
     where: {
       profile: {
-        hasProfileImage:
-          process.env.VERCEL_ENV === 'development' ? undefined : true,
+        hasProfileImage: true,
       },
     },
     orderBy: {

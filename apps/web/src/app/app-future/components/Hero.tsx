@@ -21,7 +21,7 @@ export async function Hero() {
         {Math.floor(totalNumberOfKits / 1000) * 1000}+ kits
       </p>
       <p className="text-wrap-balance mx-auto text-center text-lg font-semibold">
-        Where streamers to share kits - and you use them.
+        Where streamers share kits - and you use them.
       </p>
       <div className="relative aspect-[5/3] w-full">
         <Image

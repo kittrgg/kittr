@@ -1,7 +1,6 @@
-'use client';
-
 import { Slot } from '@radix-ui/react-slot';
 import { ChevronRight } from 'lucide-icons-react';
+import { download } from '@kittr/firebase/storage';
 import { AvatarFallback, Avatar, AvatarImage } from '../Avatar';
 import { P, typographyVariants } from '../Typography';
 import { cn } from '../utils';
@@ -16,7 +15,7 @@ export interface ChannelListItemProps {
       } & { href: any }
   >;
   linkBasePath: string;
-  imagePath: string;
+  id: string;
   name: string;
   urlSafeName: string;
 }
@@ -59,8 +58,12 @@ export interface ChannelListItemProps {
 //   return arrToBuild;
 // };
 
-export const ChannelListItem = ({
-  imagePath,
+const ShineLoader = () => {
+  return <div className="h-full w-full animate-pulse bg-zinc-700" />;
+};
+
+export const ChannelListItem = async ({
+  id,
   name,
   linkComponent,
   linkBasePath,
@@ -75,8 +78,15 @@ export const ChannelListItem = ({
       <LinkComponent href={`${formattedLinkBase}${urlSafeName}`}>
         <div className="m-w-0 flex w-4/5 flex-shrink flex-row items-center gap-6">
           <Avatar>
-            <AvatarFallback>...</AvatarFallback>
-            <AvatarImage src={imagePath} alt={name} />
+            <AvatarFallback>
+              <ShineLoader />
+            </AvatarFallback>
+            {/* <ShineLoader /> */}
+            <AvatarImage
+              className="animation-fadeIn"
+              src={await download(id)}
+              alt={name}
+            />
           </Avatar>
           <P
             className={cn(
