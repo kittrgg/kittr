@@ -12,7 +12,6 @@ import {
   H4,
   H5,
   P,
-  ChannelList,
   PlayerCard,
   Select,
   SelectContent,
@@ -23,8 +22,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@kittr/ui/new';
-import { playerData } from '@kittr/fixtures';
-import Link from 'next/link';
 
 export const components = {
   avatar: {
