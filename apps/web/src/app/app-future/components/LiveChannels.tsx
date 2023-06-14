@@ -5,6 +5,8 @@ import Link from 'next/link';
 export const LiveChannels = async () => {
   const channels = await liveChannelsQuery();
 
+  if (channels.length === 0) return null;
+
   return (
     <section className="flex flex-col gap-4">
       <H2>Live now</H2>

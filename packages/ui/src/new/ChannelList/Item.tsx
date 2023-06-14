@@ -76,17 +76,12 @@ export const ChannelListItem = async ({
   return (
     <Slot className="flex flex-row items-center justify-between gap-4 p-4 transition-all rounded-xl bg-zinc-800 hover:bg-zinc-700">
       <LinkComponent href={`${formattedLinkBase}${urlSafeName}`}>
-        <div className="relative flex flex-row items-center flex-shrink w-4/5 gap-6  m-w-0">
+        <div className="relative flex flex-row items-center flex-shrink w-4/5 gap-6 m-w-0">
           <Avatar>
             <AvatarFallback>
               <ShineLoader />
             </AvatarFallback>
-            <AvatarImage
-              className="animation-fadeIn"
-              src={await download(id)}
-              alt={name}
-            />
-            <span className="absolute z-50">live</span>
+            <AvatarImage src={await download(id)} alt={name} />
           </Avatar>
           <P
             className={cn(
