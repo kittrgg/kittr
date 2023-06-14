@@ -28,7 +28,6 @@ export const ChannelList = ({
     <div className="flex flex-col gap-6">
       {channels.map((channel) => {
         return (
-          // @ts-expect-error Async component is not happy
           <ChannelListItem
             linkComponent={linkComponent}
             linkBasePath={linkBasePath}

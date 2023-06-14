@@ -67,7 +67,6 @@
     "@testing-library/user-event": "^14.4.3",
     "@turbo/gen": "^1.9.8",
     "@types/react": "^18.2.12",
-    "@types/react-dom": "^18.2.5",
     "@vitejs/plugin-react": "2.0.0",
     "concurrently": "^8.0.1",
     "eslint": "^8.42.0",
