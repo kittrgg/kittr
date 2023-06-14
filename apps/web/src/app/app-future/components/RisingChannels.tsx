@@ -7,7 +7,7 @@ export const RisingChannels = async () => {
 
   return (
     <section className="flex flex-col gap-4">
-      <H2>Rising Channels</H2>
+      <H2>Rising channels</H2>
       <ChannelList
         channels={channels.map((channel) => {
           return {
