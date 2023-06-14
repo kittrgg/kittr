@@ -59,7 +59,7 @@ export interface ChannelListItemProps {
 // };
 
 const ShineLoader = () => {
-  return <div className="h-full w-full animate-pulse bg-zinc-700" />;
+  return <div className="w-full h-full animate-pulse bg-zinc-700" />;
 };
 
 export const ChannelListItem = async ({
@@ -74,19 +74,19 @@ export const ChannelListItem = async ({
     ? linkBasePath
     : `${linkBasePath}/`;
   return (
-    <Slot className="flex flex-row items-center justify-between gap-4 rounded-xl bg-zinc-800 p-4 transition-all hover:bg-zinc-700">
+    <Slot className="flex flex-row items-center justify-between gap-4 p-4 transition-all rounded-xl bg-zinc-800 hover:bg-zinc-700">
       <LinkComponent href={`${formattedLinkBase}${urlSafeName}`}>
-        <div className="m-w-0 flex w-4/5 flex-shrink flex-row items-center gap-6">
+        <div className="relative flex flex-row items-center flex-shrink w-4/5 gap-6  m-w-0">
           <Avatar>
             <AvatarFallback>
               <ShineLoader />
             </AvatarFallback>
-            {/* <ShineLoader /> */}
             <AvatarImage
               className="animation-fadeIn"
               src={await download(id)}
               alt={name}
             />
+            <span className="absolute z-50">live</span>
           </Avatar>
           <P
             className={cn(
@@ -97,7 +97,7 @@ export const ChannelListItem = async ({
             {name}
           </P>
         </div>
-        <ChevronRight className="z-10 flex-shrink-0 flex-grow-0" />
+        <ChevronRight className="z-10 flex-grow-0 flex-shrink-0" />
       </LinkComponent>
     </Slot>
   );

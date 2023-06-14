@@ -10,7 +10,6 @@ importers:
       lint-staged: ^13.2.2
       prettier: 2.7.1
       prettier-plugin-packagejson: ^2.4.3
-      prettier-plugin-tailwindcss: ^0.2.8
       shell-quote: ^1.8.1
       turbo: latest
     devDependencies:
@@ -21,7 +20,6 @@ importers:
       lint-staged: 13.2.2
       prettier: 2.7.1
       prettier-plugin-packagejson: 2.4.3_prettier@2.7.1
-      prettier-plugin-tailwindcss: 0.2.8_prettier@2.7.1
       shell-quote: 1.8.1
       turbo: 1.10.3
 
@@ -107,7 +105,7 @@ importers:
       '@types/react': 18.2.12
       '@types/react-dom': 18.2.5
       autoprefixer: 10.4.14_postcss@8.4.23
-      next: 13.4.6-canary.2_biqbaboplfbrettd7655fr4n2y
+      next: 13.4.6-canary.3_biqbaboplfbrettd7655fr4n2y
       postcss: 8.4.23
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -193,16 +191,16 @@ importers:
       '@kittr/utils': link:../../packages/utils
       '@mantine/core': 5.10.5_cp7x4yywqzmp7wyx5nevc2t7ga
       '@mantine/hooks': 5.10.5_react@18.2.0
-      '@mantine/next': 5.10.5_hwqmujfk2bgor3wnpcthtr6bbe
+      '@mantine/next': 5.10.5_jlclc5vfpnb4kc2ydyvhuxgn7e
       '@reduxjs/toolkit': 1.7.2_f3gfxqpqfo3vym2a7k67mfkzam
-      '@sentry/nextjs': 7.3.0_xdddxe76rmt5sxlw6bwrqarogi
+      '@sentry/nextjs': 7.3.0_64f3ft2u7ycbbatnrerbjncaci
       '@tanstack/react-query': 4.29.13_biqbaboplfbrettd7655fr4n2y
       '@tanstack/react-query-devtools': 4.29.13_fvrgtobyng5mvpjfmsti3xhj7e
       '@trpc/server': 10.30.0
       date-fns: 2.28.0
       jsonwebtoken: 8.5.1
       micro: 9.3.4
-      next: 13.4.6-canary.2_biqbaboplfbrettd7655fr4n2y
+      next: 13.4.6-canary.3_biqbaboplfbrettd7655fr4n2y
       next-connect: 0.12.2
       react: 18.2.0
       react-device-detect: 2.1.2_biqbaboplfbrettd7655fr4n2y
@@ -620,11 +618,11 @@ importers:
       typescript: ^5.1.3
     dependencies:
       '@kittr/tsconfig': link:../config-typescript
-      '@next/eslint-plugin-next': 13.4.6-canary.2
+      '@next/eslint-plugin-next': 13.4.6-canary.3
       '@rushstack/eslint-patch': 1.2.0
       '@typescript-eslint/eslint-plugin': 5.59.11_sqfi766b7p7jf53aqxvjxvblnq
       '@typescript-eslint/parser': 5.59.11_tizxnkcvjrb4cldxgwq5h3lj5u
-      '@vercel/style-guide': 4.0.2_z6kq54tleesm4lv64bcqdhixj4
+      '@vercel/style-guide': 4.0.2_lvzn7pcz7apa6ir4evj226vlye
       eslint: 8.42.0
       eslint-config-turbo: 1.10.3_eslint@8.42.0
       globby: 13.1.4
@@ -3107,7 +3105,7 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@mantine/next/5.10.5_hwqmujfk2bgor3wnpcthtr6bbe:
+  /@mantine/next/5.10.5_jlclc5vfpnb4kc2ydyvhuxgn7e:
     resolution:
       {
         integrity: sha512-sFQ4RbRPHzrBfEkSyg+6mb08MqFY4nrNkJh/PCe71U67GGy/djidSgW5++glPxISKQk/Zftay0s6Gm4IlYMO4g==,
@@ -3119,7 +3117,7 @@ packages:
     dependencies:
       '@mantine/ssr': 5.10.5_cvn44t664qknyqcemkzlarhdby
       '@mantine/styles': 5.10.5_nszyvgl4h3pepfjfj5l4beb4my
-      next: 13.4.6-canary.2_biqbaboplfbrettd7655fr4n2y
+      next: 13.4.6-canary.3_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     transitivePeerDependencies:
@@ -3301,17 +3299,17 @@ packages:
       }
     dev: false
 
-  /@next/env/13.4.6-canary.2:
+  /@next/env/13.4.6-canary.3:
     resolution:
       {
-        integrity: sha512-1E8CcT30v5pKNQGqfxTJ9exHdXgDZ+w9Vxm2P+OGlaUplQCyC0KldPujXZuUEuFX7/rPBpdd06XYPZcvlMsyJA==,
+        integrity: sha512-8PRVzAqKNcGb/+gPisS3zAH6LeHjyg+FtHdAygu0pYwrP9M81rObljIK4OBNpExLLYSuRdHUv9IgfnxwU4GrxA==,
       }
     dev: false
 
-  /@next/eslint-plugin-next/13.4.6-canary.2:
+  /@next/eslint-plugin-next/13.4.6-canary.3:
     resolution:
       {
-        integrity: sha512-oTjKWRG/KeMFxisH9ajutDA9VrBs+0ysdSLqTAnVe4PAuEqu2tryGP4pKqzhLazSnNhP+vzSR2IQAab//sgjag==,
+        integrity: sha512-kNhU6L2dzeZie7olXbNKYqWEfveXSOdnOC6aXgn9TT/8WeYqE0FMDTlSHVnqJ2mSSTtHEs4+rrOl7r6HM1yV/Q==,
       }
     dependencies:
       glob: 7.1.7
@@ -3365,10 +3363,10 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-darwin-arm64/13.4.6-canary.2:
+  /@next/swc-darwin-arm64/13.4.6-canary.3:
     resolution:
       {
-        integrity: sha512-W6aQZaL2U1GtYsSZhqWQ81SNRAIFNAsAk0rS9bmMHbx+Gcim3QbjEztZVAMGhAsVKOWslXzMNt4RSRIzpCC9NA==,
+        integrity: sha512-6534djofGUSHCWIujx/UVssgaivMHm6cIJtoTMEqxjCok4WJu8aQvdjYxvsBVO3f0mRbji9knky8WmwNmeRqkA==,
       }
     engines: { node: '>= 10' }
     cpu: [arm64]
@@ -3401,10 +3399,10 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-darwin-x64/13.4.6-canary.2:
+  /@next/swc-darwin-x64/13.4.6-canary.3:
     resolution:
       {
-        integrity: sha512-7NP2dsDGPxcSLJ19Co0NFtWidU7uJ0cfIL4Nnr5TfWpGZ0rV2UBw1KbZnR6UOfCq+Q/ypHDK+WWufLNXdubYpA==,
+        integrity: sha512-sSm17BODdlQX7WCuyPqCqUOSv9LowFAIVRxMIfwo7OnV7ijlmSBGB23DcmlXdfrdzSP9O85CosdgnwPmxMEBFw==,
       }
     engines: { node: '>= 10' }
     cpu: [x64]
@@ -3461,10 +3459,10 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-linux-arm64-gnu/13.4.6-canary.2:
+  /@next/swc-linux-arm64-gnu/13.4.6-canary.3:
     resolution:
       {
-        integrity: sha512-vSe3iHcfjjHyzs9n1M5KRJoXOVJ3kKbRihy+essM77M4Me/JCoy+EaQQgldxgpto4OiJsdWmMATnE/jbDTV7MQ==,
+        integrity: sha512-fuYj7+8EdgmfQ4GDvg7c+OsgUH+Ciq37/Orluoy2heCYQIxYEwBITY6ZcGxfSA0t7kE0FAnEvNZVjKKWU6rNkA==,
       }
     engines: { node: '>= 10' }
     cpu: [arm64]
@@ -3497,10 +3495,10 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-linux-arm64-musl/13.4.6-canary.2:
+  /@next/swc-linux-arm64-musl/13.4.6-canary.3:
     resolution:
       {
-        integrity: sha512-PQ1TFUaPVDgZfIKy77SqLooZafjSJ2yHSW9QPB111+/ZJJfmf1pNBaQplmATBANXahAyV4LHJna+jrVUt/Y9xg==,
+        integrity: sha512-2oQMGB7TPkENVWSFk2lD+88gwDBP7eg35wWsOK6aQVKu6+1ArwMrb2H9qSewqjvrPrLxd4k+uavAS8+MKlIJsQ==,
       }
     engines: { node: '>= 10' }
     cpu: [arm64]
@@ -3533,10 +3531,10 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-linux-x64-gnu/13.4.6-canary.2:
+  /@next/swc-linux-x64-gnu/13.4.6-canary.3:
     resolution:
       {
-        integrity: sha512-IvqPoVO3Zt/4tZMLMZlJEx+kXOx/VTa1iQJxAKcd0dm882KV46BVbFgcAvz/Jok73QWROl2ukiE9YyY4ALP7ag==,
+        integrity: sha512-3wAko9xqw54tlZ2fLRM3TwQsdCQCYN6VwiKhV/A8W0JpRdlwF5UdrXy8S77YZmVT4XO5h5oSagNcHxRe444ueQ==,
       }
     engines: { node: '>= 10' }
     cpu: [x64]
@@ -3569,10 +3567,10 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-linux-x64-musl/13.4.6-canary.2:
+  /@next/swc-linux-x64-musl/13.4.6-canary.3:
     resolution:
       {
-        integrity: sha512-HBamx2wLHlSyBG4as3KOIVk/9D95eGl0YR8ab2xgE55NfpUMbT22vRK2gcEFkdgkXCrp9ha1JA+VZcxxNQt49A==,
+        integrity: sha512-9XtwQ2WSfx98i1nJzJEgLzJt2ZS2d9z/P2TbDoo2zRJgy8P3ZuqsnnzzW9kjJSZomWxnVf30ATVsj5sPDWO0ew==,
       }
     engines: { node: '>= 10' }
     cpu: [x64]
@@ -3605,10 +3603,10 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-win32-arm64-msvc/13.4.6-canary.2:
+  /@next/swc-win32-arm64-msvc/13.4.6-canary.3:
     resolution:
       {
-        integrity: sha512-+pDNyZ7/1bDIo0WQsy530rBxZAd3B5cvbCZYER43qUEdtWiMktBdJfK+1evICPrtNDUqqCVnxNJbCx1ZOtEhJQ==,
+        integrity: sha512-6jr1YAAIwi//38hXl4YlQxcPS7wj/UEjiGGbge/9XzQSqk8vOFFo7U5UpAf0kyn4YfL9S54o0teywZihxJuRdw==,
       }
     engines: { node: '>= 10' }
     cpu: [arm64]
@@ -3641,10 +3639,10 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-win32-ia32-msvc/13.4.6-canary.2:
+  /@next/swc-win32-ia32-msvc/13.4.6-canary.3:
     resolution:
       {
-        integrity: sha512-0ogHIJmxV8+s7w8INTzQoHJG36wI0J805TnPDeT5irtMisDOY3dwWQ5QV9Xs3FO1WKYkadEDRaQlTkUx8m+t0Q==,
+        integrity: sha512-2Um2RcmyaQMIQQ2sN1Adl6Rx2e5PNpHXvcwT6WP89svuvC9H+rLI9TVuUPlk7b7i01g0VfD3ExhDw4KBsjU6PA==,
       }
     engines: { node: '>= 10' }
     cpu: [ia32]
@@ -3677,10 +3675,10 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-win32-x64-msvc/13.4.6-canary.2:
+  /@next/swc-win32-x64-msvc/13.4.6-canary.3:
     resolution:
       {
-        integrity: sha512-eApIa1yerclvCM3eAqGFNs3qhMVQYQnJmYIOtbWZEgZ1GnKeDrpIMXTasjSWKfTKCSZkHvx3lODj1efGmj9ceg==,
+        integrity: sha512-CJ41IfJwzkZYdktjPt91H+IHRQ2sTRs4v6ZW1hpF+B9ZXyPN6X15pfyahQ6EoaXQ7SJvtKLeNHq8QOjUwpwxrQ==,
       }
     engines: { node: '>= 10' }
     cpu: [x64]
@@ -4837,7 +4835,7 @@ packages:
       tslib: 1.14.1
     dev: false
 
-  /@sentry/nextjs/7.3.0_xdddxe76rmt5sxlw6bwrqarogi:
+  /@sentry/nextjs/7.3.0_64f3ft2u7ycbbatnrerbjncaci:
     resolution:
       {
         integrity: sha512-DXoMODQrD0FHpa6sjrPxTFMuPd374IefvDszkCv2eWzO5MxebR8WrgFIwlMN33Tv72nmfogfHwdVDHoIFHQYuw==,
@@ -4860,7 +4858,7 @@ packages:
       '@sentry/types': 7.3.0
       '@sentry/utils': 7.3.0
       '@sentry/webpack-plugin': 1.18.9
-      next: 13.4.6-canary.2_biqbaboplfbrettd7655fr4n2y
+      next: 13.4.6-canary.3_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       tslib: 1.14.1
     transitivePeerDependencies:
@@ -6428,7 +6426,7 @@ packages:
       - supports-color
     dev: true
 
-  /@vercel/style-guide/4.0.2_z6kq54tleesm4lv64bcqdhixj4:
+  /@vercel/style-guide/4.0.2_lvzn7pcz7apa6ir4evj226vlye:
     resolution:
       {
         integrity: sha512-FroL+oOePzhw7n/I+f7zr4WNroGHT/+2TlW6WH9+CVSjMNsEyu7Qstj2mI5gWIBjT1Y2ZImKPppCzI2cIYmNZw==,
@@ -6451,7 +6449,7 @@ packages:
     dependencies:
       '@babel/core': 7.22.5
       '@babel/eslint-parser': 7.22.5_x2nqc5cansj73pf43kd5o2aydq
-      '@next/eslint-plugin-next': 13.4.6-canary.2
+      '@next/eslint-plugin-next': 13.4.6-canary.3
       '@rushstack/eslint-patch': 1.2.0
       '@typescript-eslint/eslint-plugin': 5.59.11_sqfi766b7p7jf53aqxvjxvblnq
       '@typescript-eslint/parser': 5.59.11_tizxnkcvjrb4cldxgwq5h3lj5u
@@ -13775,10 +13773,10 @@ packages:
       - babel-plugin-macros
     dev: false
 
-  /next/13.4.6-canary.2_biqbaboplfbrettd7655fr4n2y:
+  /next/13.4.6-canary.3_biqbaboplfbrettd7655fr4n2y:
     resolution:
       {
-        integrity: sha512-UtPXpIIrMu1NANg/DxW19rctgo2/BQ/pSZNhJETaHkHJKRO3ZvGyuANhy0p/+QJek5OyNa0AmNXmycMMP11fvA==,
+        integrity: sha512-GkPgIex4sL5KY7ZLnN68SFZGoEfh7Hob3g+iieW4WBulJ0RwntNMxzo0XQTSFIpJQpECanHGm0HZk/87nzHRjA==,
       }
     engines: { node: '>=16.8.0' }
     hasBin: true
@@ -13796,7 +13794,7 @@ packages:
       sass:
         optional: true
     dependencies:
-      '@next/env': 13.4.6-canary.2
+      '@next/env': 13.4.6-canary.3
       '@swc/helpers': 0.5.1
       busboy: 1.6.0
       caniuse-lite: 1.0.30001502
@@ -13807,15 +13805,15 @@ packages:
       watchpack: 2.4.0
       zod: 3.21.4
     optionalDependencies:
-      '@next/swc-darwin-arm64': 13.4.6-canary.2
-      '@next/swc-darwin-x64': 13.4.6-canary.2
-      '@next/swc-linux-arm64-gnu': 13.4.6-canary.2
-      '@next/swc-linux-arm64-musl': 13.4.6-canary.2
-      '@next/swc-linux-x64-gnu': 13.4.6-canary.2
-      '@next/swc-linux-x64-musl': 13.4.6-canary.2
-      '@next/swc-win32-arm64-msvc': 13.4.6-canary.2
-      '@next/swc-win32-ia32-msvc': 13.4.6-canary.2
-      '@next/swc-win32-x64-msvc': 13.4.6-canary.2
+      '@next/swc-darwin-arm64': 13.4.6-canary.3
+      '@next/swc-darwin-x64': 13.4.6-canary.3
+      '@next/swc-linux-arm64-gnu': 13.4.6-canary.3
+      '@next/swc-linux-arm64-musl': 13.4.6-canary.3
+      '@next/swc-linux-x64-gnu': 13.4.6-canary.3
+      '@next/swc-linux-x64-musl': 13.4.6-canary.3
+      '@next/swc-win32-arm64-msvc': 13.4.6-canary.3
+      '@next/swc-win32-ia32-msvc': 13.4.6-canary.3
+      '@next/swc-win32-x64-msvc': 13.4.6-canary.3
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
@@ -14743,61 +14741,6 @@ packages:
       prettier: 2.8.8
       sort-package-json: 2.4.1
       synckit: 0.8.5
-    dev: true
-
-  /prettier-plugin-tailwindcss/0.2.8_prettier@2.7.1:
-    resolution:
-      {
-        integrity: sha512-KgPcEnJeIijlMjsA6WwYgRs5rh3/q76oInqtMXBA/EMcamrcYJpyhtRhyX1ayT9hnHlHTuO8sIifHF10WuSDKg==,
-      }
-    engines: { node: '>=12.17.0' }
-    peerDependencies:
-      '@ianvs/prettier-plugin-sort-imports': '*'
-      '@prettier/plugin-pug': '*'
-      '@shopify/prettier-plugin-liquid': '*'
-      '@shufo/prettier-plugin-blade': '*'
-      '@trivago/prettier-plugin-sort-imports': '*'
-      prettier: '>=2.2.0'
-      prettier-plugin-astro: '*'
-      prettier-plugin-css-order: '*'
-      prettier-plugin-import-sort: '*'
-      prettier-plugin-jsdoc: '*'
-      prettier-plugin-organize-attributes: '*'
-      prettier-plugin-organize-imports: '*'
-      prettier-plugin-style-order: '*'
-      prettier-plugin-svelte: '*'
-      prettier-plugin-twig-melody: '*'
-    peerDependenciesMeta:
-      '@ianvs/prettier-plugin-sort-imports':
-        optional: true
-      '@prettier/plugin-pug':
-        optional: true
-      '@shopify/prettier-plugin-liquid':
-        optional: true
-      '@shufo/prettier-plugin-blade':
-        optional: true
-      '@trivago/prettier-plugin-sort-imports':
-        optional: true
-      prettier-plugin-astro:
-        optional: true
-      prettier-plugin-css-order:
-        optional: true
-      prettier-plugin-import-sort:
-        optional: true
-      prettier-plugin-jsdoc:
-        optional: true
-      prettier-plugin-organize-attributes:
-        optional: true
-      prettier-plugin-organize-imports:
-        optional: true
-      prettier-plugin-style-order:
-        optional: true
-      prettier-plugin-svelte:
-        optional: true
-      prettier-plugin-twig-melody:
-        optional: true
-    dependencies:
-      prettier: 2.7.1
     dev: true
 
   /prettier/2.7.1:
