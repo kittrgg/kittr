@@ -1,6 +1,5 @@
 export * from './Accordion';
 export * from './Button';
-export * from './ContactUs';
 export * from './ColorPicker';
 export * from './GameCard';
 export * from './GameList';
