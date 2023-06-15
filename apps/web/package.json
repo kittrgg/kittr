@@ -36,6 +36,7 @@
     "@tanstack/react-query-devtools": "^4.29.6",
     "@trpc/server": "^10.25.0",
     "date-fns": "2.28.0",
+    "encoding": "^0.1.13",
     "jsonwebtoken": "8.5.1",
     "micro": "9.3.4",
     "next": "canary",
