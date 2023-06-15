@@ -50,6 +50,8 @@ const main = async () => {
 
   checkId = String(check.data.id);
 
+  console.log({ environmenttttt: getEnvironment() });
+
   const packageJson = JSON.parse(
     await readFile(
       join(cwd(), `../../playwright/${getEnvironment()}/package.json`),
