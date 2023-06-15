@@ -5,3 +5,7 @@
 .fit-content {
   width: fit-content;
 }
+
+.text-wrap-balance {
+  text-wrap: balance;
+}

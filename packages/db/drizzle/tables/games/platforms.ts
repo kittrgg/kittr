@@ -46,7 +46,7 @@ export const gamesToPlatforms = pgTable(
 // Putting multiple many-to-manys in breaks it D:
 
 export const gamePlatformsRelation = relations(games, ({ many }) => ({
-  gamesToPlatforms: many(gamesToPlatforms),
+  gameToPlatforms: many(gamesToPlatforms),
 }));
 
 export const platformGamesRelation = relations(platforms, ({ many }) => ({

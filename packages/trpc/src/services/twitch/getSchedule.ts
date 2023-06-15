@@ -25,7 +25,7 @@ export const getSchedule: IFunc = async (broadcaster_id) => {
   } catch (error: any) {
     // This user does not have a schedule.
     // Because of that, we need to provide an empty array so nothing breaks.
-    console.log({ twitchError: error });
+    // console.log({ twitchError: error });
     return [];
   }
 };

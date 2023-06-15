@@ -26,7 +26,6 @@
     "lint-staged": "^13.2.2",
     "prettier": "2.7.1",
     "prettier-plugin-packagejson": "^2.4.3",
-    "prettier-plugin-tailwindcss": "^0.2.8",
     "shell-quote": "^1.8.1",
     "turbo": "latest"
   },

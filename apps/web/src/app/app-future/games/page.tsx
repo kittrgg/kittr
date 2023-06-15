@@ -1,14 +1,9 @@
-// Need these while Drizzle sorts themselves out.
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-import { db } from '@kittr/db';
 import type { Genre, Platform } from '@kittr/db';
 import { download } from '@kittr/firebase/storage';
 import { GameCard, H1 } from '@kittr/ui/new';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { listGames } from '@/fetches/games';
 
 export const metadata: Metadata = {
   title: 'Games | kittr',
@@ -16,20 +11,7 @@ export const metadata: Metadata = {
 };
 
 export async function Page() {
-  const gamesData = await db.query.games.findMany({
-    with: {
-      gamesToPlatforms: {
-        with: {
-          platforms: true,
-        },
-      },
-      gameToGenres: {
-        with: {
-          genres: true,
-        },
-      },
-    },
-  });
+  const gamesData = await listGames();
 
   return (
     <>
@@ -39,10 +21,8 @@ export async function Page() {
           .sort((x, y) => Number(y.active) - Number(x.active))
           .map(
             async ({
-              // @ts-expect-error Drizzle is being wonky.
               gameToGenres,
-              // @ts-expect-error Drizzle is being wonky.
-              gamesToPlatforms,
+              gameToPlatforms,
               developer,
               active,
               titleImageUrl,
@@ -64,7 +44,7 @@ export async function Page() {
                   }}
                   key={id}
                   linkComponent={Link}
-                  platforms={gamesToPlatforms.map(
+                  platforms={gameToPlatforms.map(
                     (platform: { platforms: Platform }) =>
                       platform.platforms.displayName,
                   )}

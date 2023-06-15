@@ -18,8 +18,8 @@
     "@kittr/types": "workspace:*",
     "@kittr/ui": "workspace:*",
     "@types/node": "20.1.0",
-    "@types/react": "18.2.6",
-    "@types/react-dom": "18.2.4",
+    "@types/react": "^18.2.12",
+    "@types/react-dom": "^18.2.5",
     "autoprefixer": "10.4.14",
     "next": "canary",
     "postcss": "8.4.23",
@@ -30,7 +30,7 @@
   "devDependencies": {
     "@kittr/prettier": "workspace:*",
     "eslint": "^8.42.0",
-    "typescript": "^5.0.4"
+    "typescript": "^5.1.3"
   },
   "engines": {
     "node": "18"

@@ -12,4 +12,4 @@ const dbClient = createPool({
 
 export const db = drizzle(dbClient, { schema });
 export * from '../drizzle/schema';
-export { eq, and } from 'drizzle-orm';
+export { eq, and, sql } from 'drizzle-orm';

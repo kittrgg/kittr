@@ -5,7 +5,6 @@ import Body from '@Features/Home/Body';
 import Hero from '@Features/Home/Hero';
 import PlatformInfo from '@Features/Home/PlatformInfo';
 import { trpc } from '@/lib/trpc';
-// import { trpc } from "@/lib/trpc"
 
 function Home() {
   const { data: games } = trpc.games.count.useQuery();

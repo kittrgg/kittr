@@ -9,7 +9,7 @@ interface GameCardProps {
   developer: string;
   linkComponent?: NextLinkType;
   href?: string;
-  imageProps?: React.DetailedHTMLProps<
+  imageProps: React.DetailedHTMLProps<
     React.ImgHTMLAttributes<HTMLImageElement>,
     HTMLImageElement
   >;
@@ -63,7 +63,7 @@ export const GameCard: React.FC<GameCardProps> = ({
         {...imageProps}
         className={cn(
           'flex h-40 w-full rounded-t-xl object-cover',
-          imageProps?.className,
+          imageProps.className,
         )}
       />
 

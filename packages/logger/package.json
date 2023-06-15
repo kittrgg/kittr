@@ -23,6 +23,6 @@
     "@kittr/types": "workspace:*",
     "@sentry/types": "^7.34.0",
     "eslint": "^8.42.0",
-    "typescript": "^5.0.4"
+    "typescript": "^5.1.3"
   }
 }
