@@ -2,7 +2,7 @@
 # Due to limitations in GitHub Actions, the one on `main` is the one that is referenced for E2Es.
 # You can find this codified in "./tooling/scripts/create-test-runs" in the `createWorkflowDispatch` call.
 
-name: Playwright - web
+name: Playwright - kittr-site
 on:
   workflow_dispatch:
     inputs:
@@ -26,8 +26,8 @@ env:
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
 jobs:
-  web:
-    name: 'E2E - web'
+  kittr-site:
+    name: 'E2E - kittr-site'
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -41,7 +41,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run tests
-        run: turbo e2e --filter=playwright-web
+        run: turbo e2e --filter=playwright-kittr-site
         env:
           PLAYWRIGHT_USER_PASSWORD: ${{ secrets.PLAYWRIGHT_USER_PASSWORD }}
           PLAYWRIGHT_BASE_URL: ${{ inputs.deployment_url }}
