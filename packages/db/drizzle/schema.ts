@@ -527,10 +527,10 @@ export const channelKitOverlay = pgTable(
   },
 );
 
-export type Game = InferModel<typeof games>; // insert type
-export type Genre = InferModel<typeof genres>; // insert type
-export type Platform = InferModel<typeof platforms>; // insert type
-export { games, genres };
+export type Game = InferModel<typeof games>;
+export type Genre = InferModel<typeof genres>;
+export type Platform = InferModel<typeof platforms>;
+export { games, genres, platforms };
 
 export const schema = {
   administrator,

@@ -142,7 +142,7 @@ importers:
         version: 10.4.14(postcss@8.4.23)
       next:
         specifier: canary
-        version: 13.4.6-canary.4(@babel/core@7.22.5)(react-dom@18.2.0)(react@18.2.0)
+        version: 13.4.6-canary.6(@babel/core@7.22.5)(react-dom@18.2.0)(react@18.2.0)
       postcss:
         specifier: 8.4.23
         version: 8.4.23
@@ -224,13 +224,13 @@ importers:
         version: 5.10.2(react@18.2.0)
       '@mantine/next':
         specifier: ^5.10.2
-        version: 5.10.2(@emotion/react@11.10.5)(@emotion/server@11.10.0)(next@13.4.6-canary.4)(react-dom@18.2.0)(react@18.2.0)
+        version: 5.10.2(@emotion/react@11.10.5)(@emotion/server@11.10.0)(next@13.4.6-canary.6)(react-dom@18.2.0)(react@18.2.0)
       '@reduxjs/toolkit':
         specifier: 1.7.2
         version: 1.7.2(react-redux@8.0.5)(react@18.2.0)
       '@sentry/nextjs':
         specifier: 7.3.0
-        version: 7.3.0(next@13.4.6-canary.4)(react@18.2.0)
+        version: 7.3.0(next@13.4.6-canary.6)(react@18.2.0)
       '@tanstack/react-query':
         specifier: ^4.29.5
         version: 4.29.5(react-dom@18.2.0)(react@18.2.0)
@@ -251,7 +251,7 @@ importers:
         version: 9.3.4
       next:
         specifier: canary
-        version: 13.4.6-canary.4(@babel/core@7.22.5)(react-dom@18.2.0)(react@18.2.0)
+        version: 13.4.6-canary.6(@babel/core@7.22.5)(react-dom@18.2.0)(react@18.2.0)
       next-connect:
         specifier: 0.12.2
         version: 0.12.2
@@ -391,11 +391,11 @@ importers:
         specifier: 2.0.0
         version: 2.0.0
       firebase:
-        specifier: ^9.21.0
-        version: 9.21.0
+        specifier: ^9.22.2
+        version: 9.22.2
       firebase-admin:
-        specifier: ^11.5.0
-        version: 11.5.0
+        specifier: ^11.9.0
+        version: 11.9.0
     devDependencies:
       '@kittr/lint':
         specifier: workspace:*
@@ -822,7 +822,7 @@ importers:
         specifier: ^8.42.0
         version: 8.42.0
 
-  playwright/web:
+  playwright/kittr-site:
     devDependencies:
       '@kittr/lint':
         specifier: workspace:*
@@ -2132,7 +2132,7 @@ packages:
       text-decoding: 1.0.0
     dev: false
 
-  /@firebase/analytics-compat@0.2.6(@firebase/app-compat@0.2.9)(@firebase/app@0.9.9):
+  /@firebase/analytics-compat@0.2.6(@firebase/app-compat@0.2.12)(@firebase/app@0.9.12):
     resolution:
       {
         integrity: sha512-4MqpVLFkGK7NJf/5wPEEP7ePBJatwYpyjgJ+wQHQGHfzaCDgntOnl9rL2vbVGGKCnRqWtZDIWhctB86UWXaX2Q==,
@@ -2140,9 +2140,9 @@ packages:
     peerDependencies:
       '@firebase/app-compat': 0.x
     dependencies:
-      '@firebase/analytics': 0.10.0(@firebase/app@0.9.9)
+      '@firebase/analytics': 0.10.0(@firebase/app@0.9.12)
       '@firebase/analytics-types': 0.8.0
-      '@firebase/app-compat': 0.2.9
+      '@firebase/app-compat': 0.2.12
       '@firebase/component': 0.6.4
       '@firebase/util': 1.9.3
       tslib: 2.5.3
@@ -2157,7 +2157,7 @@ packages:
       }
     dev: false
 
-  /@firebase/analytics@0.10.0(@firebase/app@0.9.9):
+  /@firebase/analytics@0.10.0(@firebase/app@0.9.12):
     resolution:
       {
         integrity: sha512-Locv8gAqx0e+GX/0SI3dzmBY5e9kjVDtD+3zCFLJ0tH2hJwuCAiL+5WkHuxKj92rqQj/rvkBUCfA1ewlX2hehg==,
@@ -2165,25 +2165,25 @@ packages:
     peerDependencies:
       '@firebase/app': 0.x
     dependencies:
-      '@firebase/app': 0.9.9
+      '@firebase/app': 0.9.12
       '@firebase/component': 0.6.4
-      '@firebase/installations': 0.6.4(@firebase/app@0.9.9)
+      '@firebase/installations': 0.6.4(@firebase/app@0.9.12)
       '@firebase/logger': 0.4.0
       '@firebase/util': 1.9.3
       tslib: 2.5.3
     dev: false
 
-  /@firebase/app-check-compat@0.3.6(@firebase/app-compat@0.2.9)(@firebase/app@0.9.9):
+  /@firebase/app-check-compat@0.3.7(@firebase/app-compat@0.2.12)(@firebase/app@0.9.12):
     resolution:
       {
-        integrity: sha512-azHAeHi9igoaIo04E6Yfuc7aIbWoWuBXuqjyYyWbeCc8Zz/NfJvIAgmXugN4LdxsHJ7XGlZTvwJ6YaYROdSa7A==,
+        integrity: sha512-cW682AxsyP1G+Z0/P7pO/WT2CzYlNxoNe5QejVarW2o5ZxeWSSPAiVEwpEpQR/bUlUmdeWThYTMvBWaopdBsqw==,
       }
     peerDependencies:
       '@firebase/app-compat': 0.x
     dependencies:
-      '@firebase/app-check': 0.7.0(@firebase/app@0.9.9)
+      '@firebase/app-check': 0.8.0(@firebase/app@0.9.12)
       '@firebase/app-check-types': 0.5.0
-      '@firebase/app-compat': 0.2.9
+      '@firebase/app-compat': 0.2.12
       '@firebase/component': 0.6.4
       '@firebase/logger': 0.4.0
       '@firebase/util': 1.9.3
@@ -2192,10 +2192,10 @@ packages:
       - '@firebase/app'
     dev: false
 
-  /@firebase/app-check-interop-types@0.2.0:
+  /@firebase/app-check-interop-types@0.3.0:
     resolution:
       {
-        integrity: sha512-+3PQIeX6/eiVK+x/yg8r6xTNR97fN7MahFDm+jiQmDjcyvSefoGuTTNQuuMScGyx3vYUBeZn+Cp9kC0yY/9uxQ==,
+        integrity: sha512-xAxHPZPIgFXnI+vb4sbBjZcde7ZluzPPaSK7Lx3/nmuVk4TjZvnL8ONnkd4ERQKL8WePQySU+pRcWkh8rDf5Sg==,
       }
     dev: false
 
@@ -2206,28 +2206,28 @@ packages:
       }
     dev: false
 
-  /@firebase/app-check@0.7.0(@firebase/app@0.9.9):
+  /@firebase/app-check@0.8.0(@firebase/app@0.9.12):
     resolution:
       {
-        integrity: sha512-y0raLJpEtiL+wonfInFMaSfBV/EDvr356ZHMWbpr5F7fR0/I3cC0h7U6SKpKhrbSHJ0fOYIe0xbih20KTlpcnA==,
+        integrity: sha512-dRDnhkcaC2FspMiRK/Vbp+PfsOAEP6ZElGm9iGFJ9fDqHoPs0HOPn7dwpJ51lCFi1+2/7n5pRPGhqF/F03I97g==,
       }
     peerDependencies:
       '@firebase/app': 0.x
     dependencies:
-      '@firebase/app': 0.9.9
+      '@firebase/app': 0.9.12
       '@firebase/component': 0.6.4
       '@firebase/logger': 0.4.0
       '@firebase/util': 1.9.3
       tslib: 2.5.3
     dev: false
 
-  /@firebase/app-compat@0.2.9:
+  /@firebase/app-compat@0.2.12:
     resolution:
       {
-        integrity: sha512-XdnkHNK3XdPrwChmuSJHDA6eYmo2KLAtaAG1SJLGMQ+n+S5/UcufmDkw9GvPh93H1xhPRAwd/vKdjHmE7xp3Zw==,
+        integrity: sha512-3EfputoACcXvgi2uN9RUQVDYSmRSR4R4TWJW9Wvs4hTib2I26ldvVhDHaheQq90IwGYrRa+TTWuzr4a5dCRkVQ==,
       }
     dependencies:
-      '@firebase/app': 0.9.9
+      '@firebase/app': 0.9.12
       '@firebase/component': 0.6.4
       '@firebase/logger': 0.4.0
       '@firebase/util': 1.9.3
@@ -2241,10 +2241,10 @@ packages:
       }
     dev: false
 
-  /@firebase/app@0.9.9:
+  /@firebase/app@0.9.12:
     resolution:
       {
-        integrity: sha512-8jzuHtQ/t9XqK+0IAQ/lpylVYzXGKIUKm6U3v7LWor+MGIm+9Ucn+hbrd2iBjH8qfmNrjnQnmf7sWBbdSa54oA==,
+        integrity: sha512-VsE/WHZU8M9BCnHMbOi3FqIVIsoG4FlEehjp+XCDNE0zxn4BGgnpLdBu6/r9Bg565b1ND7dm6LSVRtewmeRb3w==,
       }
     dependencies:
       '@firebase/component': 0.6.4
@@ -2254,16 +2254,16 @@ packages:
       tslib: 2.5.3
     dev: false
 
-  /@firebase/auth-compat@0.4.1(@firebase/app-compat@0.2.9)(@firebase/app-types@0.9.0)(@firebase/app@0.9.9):
+  /@firebase/auth-compat@0.4.2(@firebase/app-compat@0.2.12)(@firebase/app-types@0.9.0)(@firebase/app@0.9.12):
     resolution:
       {
-        integrity: sha512-wCw+6Jz7zCWzMA2bN8vphqEUmxuIFxHfBJiF3rKFTCEFPPXG4ulIcmMT98uuZVVq4xDPk/hxm105xwHBFAwBng==,
+        integrity: sha512-Q30e77DWXFmXEt5dg5JbqEDpjw9y3/PcP9LslDPR7fARmAOTIY9MM6HXzm9KC+dlrKH/+p6l8g9ifJiam9mc4A==,
       }
     peerDependencies:
       '@firebase/app-compat': 0.x
     dependencies:
-      '@firebase/app-compat': 0.2.9
-      '@firebase/auth': 0.23.1(@firebase/app@0.9.9)
+      '@firebase/app-compat': 0.2.12
+      '@firebase/auth': 0.23.2(@firebase/app@0.9.12)
       '@firebase/auth-types': 0.12.0(@firebase/app-types@0.9.0)(@firebase/util@1.9.3)
       '@firebase/component': 0.6.4
       '@firebase/util': 1.9.3
@@ -2295,15 +2295,15 @@ packages:
       '@firebase/util': 1.9.3
     dev: false
 
-  /@firebase/auth@0.23.1(@firebase/app@0.9.9):
+  /@firebase/auth@0.23.2(@firebase/app@0.9.12):
     resolution:
       {
-        integrity: sha512-QubckPA5Ad92HiY20szjdH7EnFxL8gsZzRLyNCmO2oqebVAVuh9pJp6Zb8EA+P/AuMQYMBo6rQ3oIHi9gUCstg==,
+        integrity: sha512-dM9iJ0R6tI1JczuGSxXmQbXAgtYie0K4WvKcuyuSTCu9V8eEDiz4tfa1sO3txsfvwg7nOY3AjoCyMYEdqZ8hdg==,
       }
     peerDependencies:
       '@firebase/app': 0.x
     dependencies:
-      '@firebase/app': 0.9.9
+      '@firebase/app': 0.9.12
       '@firebase/component': 0.6.4
       '@firebase/logger': 0.4.0
       '@firebase/util': 1.9.3
@@ -2361,17 +2361,17 @@ packages:
       tslib: 2.5.3
     dev: false
 
-  /@firebase/firestore-compat@0.3.8(@firebase/app-compat@0.2.9)(@firebase/app-types@0.9.0)(@firebase/app@0.9.9):
+  /@firebase/firestore-compat@0.3.11(@firebase/app-compat@0.2.12)(@firebase/app-types@0.9.0)(@firebase/app@0.9.12):
     resolution:
       {
-        integrity: sha512-VrTckDEVBqFWFsHGVdQgCb0Tht/Rrg/nKFp2aat0FaIjr8A9t4Pfcuu32Py25SbiCnr98pyh3RmVYs0kbF/lCA==,
+        integrity: sha512-jPhySBBp6+Vt750WmeCK4it/NV9YHQEX+jJ7Va8wHOhVejy0zUhL5TsLF6Bz3hCjb4Dxn6XVgvuSqiuqY16yWw==,
       }
     peerDependencies:
       '@firebase/app-compat': 0.x
     dependencies:
-      '@firebase/app-compat': 0.2.9
+      '@firebase/app-compat': 0.2.12
       '@firebase/component': 0.6.4
-      '@firebase/firestore': 3.11.0(@firebase/app@0.9.9)
+      '@firebase/firestore': 3.12.2(@firebase/app@0.9.12)
       '@firebase/firestore-types': 2.5.1(@firebase/app-types@0.9.0)(@firebase/util@1.9.3)
       '@firebase/util': 1.9.3
       tslib: 2.5.3
@@ -2394,20 +2394,20 @@ packages:
       '@firebase/util': 1.9.3
     dev: false
 
-  /@firebase/firestore@3.11.0(@firebase/app@0.9.9):
+  /@firebase/firestore@3.12.2(@firebase/app@0.9.12):
     resolution:
       {
-        integrity: sha512-r9qUbjuIKOXAVYwqZaamgXuUJBuV8I2X0Kao5PUxQAPueV2mRapdIlby6awYgjknE8kq1Tlys5Nf5/TV6WtnAg==,
+        integrity: sha512-6EDIJ2V4hlUkPvAb1uH5DAz65ZvhStIM1oYGSUx6mt2UdEDu/0CAVS7xYBY6niTyM/+2r6XBW3hYG/1x1V27vg==,
       }
     engines: { node: '>=10.10.0' }
     peerDependencies:
       '@firebase/app': 0.x
     dependencies:
-      '@firebase/app': 0.9.9
+      '@firebase/app': 0.9.12
       '@firebase/component': 0.6.4
       '@firebase/logger': 0.4.0
       '@firebase/util': 1.9.3
-      '@firebase/webchannel-wrapper': 0.10.0
+      '@firebase/webchannel-wrapper': 0.10.1
       '@grpc/grpc-js': 1.7.3
       '@grpc/proto-loader': 0.6.13
       node-fetch: 2.6.7
@@ -2416,17 +2416,17 @@ packages:
       - encoding
     dev: false
 
-  /@firebase/functions-compat@0.3.4(@firebase/app-compat@0.2.9)(@firebase/app@0.9.9):
+  /@firebase/functions-compat@0.3.5(@firebase/app-compat@0.2.12)(@firebase/app@0.9.12):
     resolution:
       {
-        integrity: sha512-kxVxTGyLV1MBR3sp3mI+eQ6JBqz0G5bk310F8eX4HzDFk4xjk5xY0KdHktMH+edM2xs1BOg0vwvvsAHczIjB+w==,
+        integrity: sha512-uD4jwgwVqdWf6uc3NRKF8cSZ0JwGqSlyhPgackyUPe+GAtnERpS4+Vr66g0b3Gge0ezG4iyHo/EXW/Hjx7QhHw==,
       }
     peerDependencies:
       '@firebase/app-compat': 0.x
     dependencies:
-      '@firebase/app-compat': 0.2.9
+      '@firebase/app-compat': 0.2.12
       '@firebase/component': 0.6.4
-      '@firebase/functions': 0.9.4(@firebase/app@0.9.9)
+      '@firebase/functions': 0.10.0(@firebase/app@0.9.12)
       '@firebase/functions-types': 0.6.0
       '@firebase/util': 1.9.3
       tslib: 2.5.3
@@ -2442,16 +2442,16 @@ packages:
       }
     dev: false
 
-  /@firebase/functions@0.9.4(@firebase/app@0.9.9):
+  /@firebase/functions@0.10.0(@firebase/app@0.9.12):
     resolution:
       {
-        integrity: sha512-3H2qh6U+q+nepO5Hds+Ddl6J0pS+zisuBLqqQMRBHv9XpWfu0PnDHklNmE8rZ+ccTEXvBj6zjkPfdxt6NisvlQ==,
+        integrity: sha512-2U+fMNxTYhtwSpkkR6WbBcuNMOVaI7MaH3cZ6UAeNfj7AgEwHwMIFLPpC13YNZhno219F0lfxzTAA0N62ndWzA==,
       }
     peerDependencies:
       '@firebase/app': 0.x
     dependencies:
-      '@firebase/app': 0.9.9
-      '@firebase/app-check-interop-types': 0.2.0
+      '@firebase/app': 0.9.12
+      '@firebase/app-check-interop-types': 0.3.0
       '@firebase/auth-interop-types': 0.2.1
       '@firebase/component': 0.6.4
       '@firebase/messaging-interop-types': 0.2.0
@@ -2462,7 +2462,7 @@ packages:
       - encoding
     dev: false
 
-  /@firebase/installations-compat@0.2.4(@firebase/app-compat@0.2.9)(@firebase/app-types@0.9.0)(@firebase/app@0.9.9):
+  /@firebase/installations-compat@0.2.4(@firebase/app-compat@0.2.12)(@firebase/app-types@0.9.0)(@firebase/app@0.9.12):
     resolution:
       {
         integrity: sha512-LI9dYjp0aT9Njkn9U4JRrDqQ6KXeAmFbRC0E7jI7+hxl5YmRWysq5qgQl22hcWpTk+cm3es66d/apoDU/A9n6Q==,
@@ -2470,9 +2470,9 @@ packages:
     peerDependencies:
       '@firebase/app-compat': 0.x
     dependencies:
-      '@firebase/app-compat': 0.2.9
+      '@firebase/app-compat': 0.2.12
       '@firebase/component': 0.6.4
-      '@firebase/installations': 0.6.4(@firebase/app@0.9.9)
+      '@firebase/installations': 0.6.4(@firebase/app@0.9.12)
       '@firebase/installations-types': 0.5.0(@firebase/app-types@0.9.0)
       '@firebase/util': 1.9.3
       tslib: 2.5.3
@@ -2492,7 +2492,7 @@ packages:
       '@firebase/app-types': 0.9.0
     dev: false
 
-  /@firebase/installations@0.6.4(@firebase/app@0.9.9):
+  /@firebase/installations@0.6.4(@firebase/app@0.9.12):
     resolution:
       {
         integrity: sha512-u5y88rtsp7NYkCHC3ElbFBrPtieUybZluXyzl7+4BsIz4sqb4vSAuwHEUgCgCeaQhvsnxDEU6icly8U9zsJigA==,
@@ -2500,7 +2500,7 @@ packages:
     peerDependencies:
       '@firebase/app': 0.x
     dependencies:
-      '@firebase/app': 0.9.9
+      '@firebase/app': 0.9.12
       '@firebase/component': 0.6.4
       '@firebase/util': 1.9.3
       idb: 7.0.1
@@ -2516,7 +2516,7 @@ packages:
       tslib: 2.5.3
     dev: false
 
-  /@firebase/messaging-compat@0.2.4(@firebase/app-compat@0.2.9)(@firebase/app@0.9.9):
+  /@firebase/messaging-compat@0.2.4(@firebase/app-compat@0.2.12)(@firebase/app@0.9.12):
     resolution:
       {
         integrity: sha512-lyFjeUhIsPRYDPNIkYX1LcZMpoVbBWXX4rPl7c/rqc7G+EUea7IEtSt4MxTvh6fDfPuzLn7+FZADfscC+tNMfg==,
@@ -2524,9 +2524,9 @@ packages:
     peerDependencies:
       '@firebase/app-compat': 0.x
     dependencies:
-      '@firebase/app-compat': 0.2.9
+      '@firebase/app-compat': 0.2.12
       '@firebase/component': 0.6.4
-      '@firebase/messaging': 0.12.4(@firebase/app@0.9.9)
+      '@firebase/messaging': 0.12.4(@firebase/app@0.9.12)
       '@firebase/util': 1.9.3
       tslib: 2.5.3
     transitivePeerDependencies:
@@ -2540,7 +2540,7 @@ packages:
       }
     dev: false
 
-  /@firebase/messaging@0.12.4(@firebase/app@0.9.9):
+  /@firebase/messaging@0.12.4(@firebase/app@0.9.12):
     resolution:
       {
         integrity: sha512-6JLZct6zUaex4g7HI3QbzeUrg9xcnmDAPTWpkoMpd/GoSVWH98zDoWXMGrcvHeCAIsLpFMe4MPoZkJbrPhaASw==,
@@ -2548,16 +2548,16 @@ packages:
     peerDependencies:
       '@firebase/app': 0.x
     dependencies:
-      '@firebase/app': 0.9.9
+      '@firebase/app': 0.9.12
       '@firebase/component': 0.6.4
-      '@firebase/installations': 0.6.4(@firebase/app@0.9.9)
+      '@firebase/installations': 0.6.4(@firebase/app@0.9.12)
       '@firebase/messaging-interop-types': 0.2.0
       '@firebase/util': 1.9.3
       idb: 7.0.1
       tslib: 2.5.3
     dev: false
 
-  /@firebase/performance-compat@0.2.4(@firebase/app-compat@0.2.9)(@firebase/app@0.9.9):
+  /@firebase/performance-compat@0.2.4(@firebase/app-compat@0.2.12)(@firebase/app@0.9.12):
     resolution:
       {
         integrity: sha512-nnHUb8uP9G8islzcld/k6Bg5RhX62VpbAb/Anj7IXs/hp32Eb2LqFPZK4sy3pKkBUO5wcrlRWQa6wKOxqlUqsg==,
@@ -2565,10 +2565,10 @@ packages:
     peerDependencies:
       '@firebase/app-compat': 0.x
     dependencies:
-      '@firebase/app-compat': 0.2.9
+      '@firebase/app-compat': 0.2.12
       '@firebase/component': 0.6.4
       '@firebase/logger': 0.4.0
-      '@firebase/performance': 0.6.4(@firebase/app@0.9.9)
+      '@firebase/performance': 0.6.4(@firebase/app@0.9.12)
       '@firebase/performance-types': 0.2.0
       '@firebase/util': 1.9.3
       tslib: 2.5.3
@@ -2583,7 +2583,7 @@ packages:
       }
     dev: false
 
-  /@firebase/performance@0.6.4(@firebase/app@0.9.9):
+  /@firebase/performance@0.6.4(@firebase/app@0.9.12):
     resolution:
       {
         integrity: sha512-HfTn/bd8mfy/61vEqaBelNiNnvAbUtME2S25A67Nb34zVuCSCRIX4SseXY6zBnOFj3oLisaEqhVcJmVPAej67g==,
@@ -2591,15 +2591,15 @@ packages:
     peerDependencies:
       '@firebase/app': 0.x
     dependencies:
-      '@firebase/app': 0.9.9
+      '@firebase/app': 0.9.12
       '@firebase/component': 0.6.4
-      '@firebase/installations': 0.6.4(@firebase/app@0.9.9)
+      '@firebase/installations': 0.6.4(@firebase/app@0.9.12)
       '@firebase/logger': 0.4.0
       '@firebase/util': 1.9.3
       tslib: 2.5.3
     dev: false
 
-  /@firebase/remote-config-compat@0.2.4(@firebase/app-compat@0.2.9)(@firebase/app@0.9.9):
+  /@firebase/remote-config-compat@0.2.4(@firebase/app-compat@0.2.12)(@firebase/app@0.9.12):
     resolution:
       {
         integrity: sha512-FKiki53jZirrDFkBHglB3C07j5wBpitAaj8kLME6g8Mx+aq7u9P7qfmuSRytiOItADhWUj7O1JIv7n9q87SuwA==,
@@ -2607,10 +2607,10 @@ packages:
     peerDependencies:
       '@firebase/app-compat': 0.x
     dependencies:
-      '@firebase/app-compat': 0.2.9
+      '@firebase/app-compat': 0.2.12
       '@firebase/component': 0.6.4
       '@firebase/logger': 0.4.0
-      '@firebase/remote-config': 0.4.4(@firebase/app@0.9.9)
+      '@firebase/remote-config': 0.4.4(@firebase/app@0.9.12)
       '@firebase/remote-config-types': 0.3.0
       '@firebase/util': 1.9.3
       tslib: 2.5.3
@@ -2625,7 +2625,7 @@ packages:
       }
     dev: false
 
-  /@firebase/remote-config@0.4.4(@firebase/app@0.9.9):
+  /@firebase/remote-config@0.4.4(@firebase/app@0.9.12):
     resolution:
       {
         integrity: sha512-x1ioTHGX8ZwDSTOVp8PBLv2/wfwKzb4pxi0gFezS5GCJwbLlloUH4YYZHHS83IPxnua8b6l0IXUaWd0RgbWwzQ==,
@@ -2633,15 +2633,15 @@ packages:
     peerDependencies:
       '@firebase/app': 0.x
     dependencies:
-      '@firebase/app': 0.9.9
+      '@firebase/app': 0.9.12
       '@firebase/component': 0.6.4
-      '@firebase/installations': 0.6.4(@firebase/app@0.9.9)
+      '@firebase/installations': 0.6.4(@firebase/app@0.9.12)
       '@firebase/logger': 0.4.0
       '@firebase/util': 1.9.3
       tslib: 2.5.3
     dev: false
 
-  /@firebase/storage-compat@0.3.2(@firebase/app-compat@0.2.9)(@firebase/app-types@0.9.0)(@firebase/app@0.9.9):
+  /@firebase/storage-compat@0.3.2(@firebase/app-compat@0.2.12)(@firebase/app-types@0.9.0)(@firebase/app@0.9.12):
     resolution:
       {
         integrity: sha512-wvsXlLa9DVOMQJckbDNhXKKxRNNewyUhhbXev3t8kSgoCotd1v3MmqhKKz93ePhDnhHnDs7bYHy+Qa8dRY6BXw==,
@@ -2649,9 +2649,9 @@ packages:
     peerDependencies:
       '@firebase/app-compat': 0.x
     dependencies:
-      '@firebase/app-compat': 0.2.9
+      '@firebase/app-compat': 0.2.12
       '@firebase/component': 0.6.4
-      '@firebase/storage': 0.11.2(@firebase/app@0.9.9)
+      '@firebase/storage': 0.11.2(@firebase/app@0.9.12)
       '@firebase/storage-types': 0.8.0(@firebase/app-types@0.9.0)(@firebase/util@1.9.3)
       '@firebase/util': 1.9.3
       tslib: 2.5.3
@@ -2674,7 +2674,7 @@ packages:
       '@firebase/util': 1.9.3
     dev: false
 
-  /@firebase/storage@0.11.2(@firebase/app@0.9.9):
+  /@firebase/storage@0.11.2(@firebase/app@0.9.12):
     resolution:
       {
         integrity: sha512-CtvoFaBI4hGXlXbaCHf8humajkbXhs39Nbh6MbNxtwJiCqxPy9iH3D3CCfXAvP0QvAAwmJUTK3+z9a++Kc4nkA==,
@@ -2682,7 +2682,7 @@ packages:
     peerDependencies:
       '@firebase/app': 0.x
     dependencies:
-      '@firebase/app': 0.9.9
+      '@firebase/app': 0.9.12
       '@firebase/component': 0.6.4
       '@firebase/util': 1.9.3
       node-fetch: 2.6.7
@@ -2700,10 +2700,10 @@ packages:
       tslib: 2.5.3
     dev: false
 
-  /@firebase/webchannel-wrapper@0.10.0:
+  /@firebase/webchannel-wrapper@0.10.1:
     resolution:
       {
-        integrity: sha512-2I8y+vJVrPfPFJrnRGpao1Qc2Gu7wmYoo5ed2s5zK/DUGgcyY1Yr/xC0YdnKM4pi7rG3HqwW9ehAKUXoTMLdoA==,
+        integrity: sha512-Dq5rYfEpdeel0bLVN+nfD1VWmzCkK+pJbSjIawGE+RY4+NIJqhbUDDQjvV0NUK84fMfwxvtFoCtEe70HfZjFcw==,
       }
     dev: false
 
@@ -3414,7 +3414,7 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@mantine/next@5.10.2(@emotion/react@11.10.5)(@emotion/server@11.10.0)(next@13.4.6-canary.4)(react-dom@18.2.0)(react@18.2.0):
+  /@mantine/next@5.10.2(@emotion/react@11.10.5)(@emotion/server@11.10.0)(next@13.4.6-canary.6)(react-dom@18.2.0)(react@18.2.0):
     resolution:
       {
         integrity: sha512-iuq2JwfY6EGVMVqO6qepX08Kwm1xZhofH3Y9h5+6Y50I4suqcUEFqNZYQyyQwqe4Y24YE2aPnN5k1v9aSzp+lQ==,
@@ -3426,7 +3426,7 @@ packages:
     dependencies:
       '@mantine/ssr': 5.10.2(@emotion/react@11.10.5)(@emotion/server@11.10.0)(react-dom@18.2.0)(react@18.2.0)
       '@mantine/styles': 5.10.2(@emotion/react@11.10.5)(react-dom@18.2.0)(react@18.2.0)
-      next: 13.4.6-canary.4(@babel/core@7.22.5)(react-dom@18.2.0)(react@18.2.0)
+      next: 13.4.6-canary.6(@babel/core@7.22.5)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     transitivePeerDependencies:
@@ -3608,10 +3608,10 @@ packages:
       }
     dev: false
 
-  /@next/env@13.4.6-canary.4:
+  /@next/env@13.4.6-canary.6:
     resolution:
       {
-        integrity: sha512-lu3gkXDqu5Clya1y2jSHXCGEKXeNmJJaHrp3lCgcuZVN9l6AJMhkBxRC125GGhH7wkNw7/jmlFnNWAA0+p8ZBQ==,
+        integrity: sha512-cgqV+OZ7FmnrVO+QSvMZkJhd5qPehRUuPZLzGCCs6tYLbfkTFEmKMJO7gFc0o8HX//qSFIheVHop0hEaQ9ibWA==,
       }
     dev: false
 
@@ -3671,10 +3671,10 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-darwin-arm64@13.4.6-canary.4:
+  /@next/swc-darwin-arm64@13.4.6-canary.6:
     resolution:
       {
-        integrity: sha512-xekRTVEQEw0kQk532TwS3UX9JW1lzD2HrtuhmrPgy/dKQSygPy+viDV5NuAfL1SkJ+wAk+Eojev3tAdXMQnHSw==,
+        integrity: sha512-EvDAolY5bT4+2MDnIfG2droxidgqq8qDtIiXagXDUE+h2NuOs/yyc5NhC94Ilp1hMBCuq9tNYxImOoPL7jWohw==,
       }
     engines: { node: '>= 10' }
     cpu: [arm64]
@@ -3707,10 +3707,10 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-darwin-x64@13.4.6-canary.4:
+  /@next/swc-darwin-x64@13.4.6-canary.6:
     resolution:
       {
-        integrity: sha512-CwmSckghBIjxJMsQTKU/bOmihiL++tag2bXT4SW3yiPxp0+H1UNtGgp9auAhzyTY1Er6nLezvLxEQEi4ZOxCPw==,
+        integrity: sha512-IOsbkut3md3bLw4uPNEnuKu1Os/OGBr43foynhyOFsPFir1MS+YFQSl0X53aBjHvXrbiZrZ1NFCbV7qsQhej7g==,
       }
     engines: { node: '>= 10' }
     cpu: [x64]
@@ -3767,10 +3767,10 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-linux-arm64-gnu@13.4.6-canary.4:
+  /@next/swc-linux-arm64-gnu@13.4.6-canary.6:
     resolution:
       {
-        integrity: sha512-UUxUdeFnMtR5MkD6zc7a9dfRWfhLX7szKe3f5/1JYdU2GPtEAky1mHQIpywyAY63gCwcsC6IM1BaDN8oGoO37Q==,
+        integrity: sha512-WQjH0vfxFoGR6GKqUgV+lLGMvT6gOcqqVHDNXwbtLtWNvCGNLj2+8Cj87DA1qRwO8+7+ETdzrRX2cD27pkHQRw==,
       }
     engines: { node: '>= 10' }
     cpu: [arm64]
@@ -3803,10 +3803,10 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-linux-arm64-musl@13.4.6-canary.4:
+  /@next/swc-linux-arm64-musl@13.4.6-canary.6:
     resolution:
       {
-        integrity: sha512-llweGCZ5j1y51gZb3K3gEM64ie1E8HXGKw1b4QMw+LxwMmAEv0wXjBAKkUAz/31kiYZDnp4v3uQnLdCrkoXweA==,
+        integrity: sha512-XaMp8zSlHZCLxv2MgRgoo4eMoQkkGX7UTEq5VDRHewA/18CK3oL4x9NKDT7gvuS5MOy2a9iZXjiM8Sdbc65TMg==,
       }
     engines: { node: '>= 10' }
     cpu: [arm64]
@@ -3839,10 +3839,10 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-linux-x64-gnu@13.4.6-canary.4:
+  /@next/swc-linux-x64-gnu@13.4.6-canary.6:
     resolution:
       {
-        integrity: sha512-Uf9iUpjQshm8btf09X0fUBqjfa/WPJt1tPQs7UVvrl1IKkJwGMHhmxCm/Bb63gaCqxg3cHahrQkbXMLXWj1j+g==,
+        integrity: sha512-Buwy4i1BWMbE8YvGkbcpbzRkDJ1rbeK7/fJ41kwvpiXy/smrlqjor48eK1qjZhSFMcjrVoRSyrMEw42aiYRojA==,
       }
     engines: { node: '>= 10' }
     cpu: [x64]
@@ -3875,10 +3875,10 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-linux-x64-musl@13.4.6-canary.4:
+  /@next/swc-linux-x64-musl@13.4.6-canary.6:
     resolution:
       {
-        integrity: sha512-m5MF1IJx1E6QTi6FXLQQPofGRZkx0RY7ZJuXJxLYScVEwyNd35t+mnPR/oSxSMES+sMaNmflIA4BBIlY6HuVPw==,
+        integrity: sha512-R3Gtm/4u8ZtNkjttk7NRk5/Qv0STlV+Iz+KtJ6puGs6L9hji14bB7FFyzX4Uet0qQA1sHyt+x8Lutd+JXAVSXg==,
       }
     engines: { node: '>= 10' }
     cpu: [x64]
@@ -3911,10 +3911,10 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-win32-arm64-msvc@13.4.6-canary.4:
+  /@next/swc-win32-arm64-msvc@13.4.6-canary.6:
     resolution:
       {
-        integrity: sha512-VGEOw8zyIj/mNFuQJutUhRfOAR2gDCoNbM2SVQ+3uugBz+4tbmDUF17J1n2RLR/qo/axUZj8yGteDNv0n2vpUQ==,
+        integrity: sha512-+tvmi5Z1s8isVYrkYsK09Djuwx4Jy2BvCELYqKSH+TB+BNQye1fTDW2uF9ASw7nDR4BabcWyF75MdTJmjGco2g==,
       }
     engines: { node: '>= 10' }
     cpu: [arm64]
@@ -3947,10 +3947,10 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-win32-ia32-msvc@13.4.6-canary.4:
+  /@next/swc-win32-ia32-msvc@13.4.6-canary.6:
     resolution:
       {
-        integrity: sha512-+VxgkMMU/5cDu72hgnJOvqQBBFPwdLPx+6dVmTm/tOUONnG2smO4Nc7rp2pvxUmB4aEsAyYiU3Ir28Ab7uVb1w==,
+        integrity: sha512-MTxkjItpZNPh+fpZuFYI4cbPsprgoRFrCB2bwNppU87LEuoHzYMb7WkO8dm8BAKaYaZR3YZhZOzUHkLN0O9UmA==,
       }
     engines: { node: '>= 10' }
     cpu: [ia32]
@@ -3983,10 +3983,10 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-win32-x64-msvc@13.4.6-canary.4:
+  /@next/swc-win32-x64-msvc@13.4.6-canary.6:
     resolution:
       {
-        integrity: sha512-oGSyViby2kraV0rfEwIp6oEhILxd2znszjzIvAxET5yt0lYXK1SiWd+qVDE3J6Q/7UVIVEWMrGW8b+hq64Pd0w==,
+        integrity: sha512-rPlO8Yat9hKM2cgNtuefWrJGMDrAsMMFxgbjFjD7nviQQU4DYvC+QLKWLn8/scvdsX5a4n6WWCL7UDbMS7PHKg==,
       }
     engines: { node: '>= 10' }
     cpu: [x64]
@@ -4901,7 +4901,7 @@ packages:
       tslib: 1.14.1
     dev: false
 
-  /@sentry/nextjs@7.3.0(next@13.4.6-canary.4)(react@18.2.0):
+  /@sentry/nextjs@7.3.0(next@13.4.6-canary.6)(react@18.2.0):
     resolution:
       {
         integrity: sha512-DXoMODQrD0FHpa6sjrPxTFMuPd374IefvDszkCv2eWzO5MxebR8WrgFIwlMN33Tv72nmfogfHwdVDHoIFHQYuw==,
@@ -4924,7 +4924,7 @@ packages:
       '@sentry/types': 7.3.0
       '@sentry/utils': 7.3.0
       '@sentry/webpack-plugin': 1.18.9
-      next: 13.4.6-canary.4(@babel/core@7.22.5)(react-dom@18.2.0)(react@18.2.0)
+      next: 13.4.6-canary.6(@babel/core@7.22.5)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       tslib: 1.14.1
     transitivePeerDependencies:
@@ -10551,10 +10551,10 @@ packages:
       locate-path: 6.0.0
       path-exists: 4.0.0
 
-  /firebase-admin@11.5.0:
+  /firebase-admin@11.9.0:
     resolution:
       {
-        integrity: sha512-bBdlYtNvXx8yZGdCd00NrfZl1o1A0aXOw5h8q5PwC8RXikOLNXq8vYtSKW44dj8zIaafVP6jFdcUXZem/LMsHA==,
+        integrity: sha512-My7qrInVZFmImX8aTulrp9kgY6d88Wn+ie8UIXKzZ3SJqQQhDwFT7Q3pgQXK9RfdsUtcxJJ3rCK7MWBm4GGtuw==,
       }
     engines: { node: '>=14' }
     dependencies:
@@ -10574,37 +10574,37 @@ packages:
       - supports-color
     dev: false
 
-  /firebase@9.21.0:
+  /firebase@9.22.2:
     resolution:
       {
-        integrity: sha512-kQpT+YjusVhqj8feSmb+9Fpmyfy7ayGSd6GVk2k0qJjt+AwYgHZ9tuHuIgFdEHGsvqxYRZJpu067ck9ZQwbqQw==,
+        integrity: sha512-eBXsaTzXPx3Y0QhuuluG/qR58tlOx2X/W0GKNoF004FcG9L2gHuvGu5/bIczvrPyfNOCqDF+I5I/kOQi8l9m0A==,
       }
     dependencies:
-      '@firebase/analytics': 0.10.0(@firebase/app@0.9.9)
-      '@firebase/analytics-compat': 0.2.6(@firebase/app-compat@0.2.9)(@firebase/app@0.9.9)
-      '@firebase/app': 0.9.9
-      '@firebase/app-check': 0.7.0(@firebase/app@0.9.9)
-      '@firebase/app-check-compat': 0.3.6(@firebase/app-compat@0.2.9)(@firebase/app@0.9.9)
-      '@firebase/app-compat': 0.2.9
+      '@firebase/analytics': 0.10.0(@firebase/app@0.9.12)
+      '@firebase/analytics-compat': 0.2.6(@firebase/app-compat@0.2.12)(@firebase/app@0.9.12)
+      '@firebase/app': 0.9.12
+      '@firebase/app-check': 0.8.0(@firebase/app@0.9.12)
+      '@firebase/app-check-compat': 0.3.7(@firebase/app-compat@0.2.12)(@firebase/app@0.9.12)
+      '@firebase/app-compat': 0.2.12
       '@firebase/app-types': 0.9.0
-      '@firebase/auth': 0.23.1(@firebase/app@0.9.9)
-      '@firebase/auth-compat': 0.4.1(@firebase/app-compat@0.2.9)(@firebase/app-types@0.9.0)(@firebase/app@0.9.9)
+      '@firebase/auth': 0.23.2(@firebase/app@0.9.12)
+      '@firebase/auth-compat': 0.4.2(@firebase/app-compat@0.2.12)(@firebase/app-types@0.9.0)(@firebase/app@0.9.12)
       '@firebase/database': 0.14.4
       '@firebase/database-compat': 0.3.4
-      '@firebase/firestore': 3.11.0(@firebase/app@0.9.9)
-      '@firebase/firestore-compat': 0.3.8(@firebase/app-compat@0.2.9)(@firebase/app-types@0.9.0)(@firebase/app@0.9.9)
-      '@firebase/functions': 0.9.4(@firebase/app@0.9.9)
-      '@firebase/functions-compat': 0.3.4(@firebase/app-compat@0.2.9)(@firebase/app@0.9.9)
-      '@firebase/installations': 0.6.4(@firebase/app@0.9.9)
-      '@firebase/installations-compat': 0.2.4(@firebase/app-compat@0.2.9)(@firebase/app-types@0.9.0)(@firebase/app@0.9.9)
-      '@firebase/messaging': 0.12.4(@firebase/app@0.9.9)
-      '@firebase/messaging-compat': 0.2.4(@firebase/app-compat@0.2.9)(@firebase/app@0.9.9)
-      '@firebase/performance': 0.6.4(@firebase/app@0.9.9)
-      '@firebase/performance-compat': 0.2.4(@firebase/app-compat@0.2.9)(@firebase/app@0.9.9)
-      '@firebase/remote-config': 0.4.4(@firebase/app@0.9.9)
-      '@firebase/remote-config-compat': 0.2.4(@firebase/app-compat@0.2.9)(@firebase/app@0.9.9)
-      '@firebase/storage': 0.11.2(@firebase/app@0.9.9)
-      '@firebase/storage-compat': 0.3.2(@firebase/app-compat@0.2.9)(@firebase/app-types@0.9.0)(@firebase/app@0.9.9)
+      '@firebase/firestore': 3.12.2(@firebase/app@0.9.12)
+      '@firebase/firestore-compat': 0.3.11(@firebase/app-compat@0.2.12)(@firebase/app-types@0.9.0)(@firebase/app@0.9.12)
+      '@firebase/functions': 0.10.0(@firebase/app@0.9.12)
+      '@firebase/functions-compat': 0.3.5(@firebase/app-compat@0.2.12)(@firebase/app@0.9.12)
+      '@firebase/installations': 0.6.4(@firebase/app@0.9.12)
+      '@firebase/installations-compat': 0.2.4(@firebase/app-compat@0.2.12)(@firebase/app-types@0.9.0)(@firebase/app@0.9.12)
+      '@firebase/messaging': 0.12.4(@firebase/app@0.9.12)
+      '@firebase/messaging-compat': 0.2.4(@firebase/app-compat@0.2.12)(@firebase/app@0.9.12)
+      '@firebase/performance': 0.6.4(@firebase/app@0.9.12)
+      '@firebase/performance-compat': 0.2.4(@firebase/app-compat@0.2.12)(@firebase/app@0.9.12)
+      '@firebase/remote-config': 0.4.4(@firebase/app@0.9.12)
+      '@firebase/remote-config-compat': 0.2.4(@firebase/app-compat@0.2.12)(@firebase/app@0.9.12)
+      '@firebase/storage': 0.11.2(@firebase/app@0.9.12)
+      '@firebase/storage-compat': 0.3.2(@firebase/app-compat@0.2.12)(@firebase/app-types@0.9.0)(@firebase/app@0.9.12)
       '@firebase/util': 1.9.3
     transitivePeerDependencies:
       - encoding
@@ -13842,10 +13842,10 @@ packages:
       - babel-plugin-macros
     dev: false
 
-  /next@13.4.6-canary.4(@babel/core@7.22.5)(react-dom@18.2.0)(react@18.2.0):
+  /next@13.4.6-canary.6(@babel/core@7.22.5)(react-dom@18.2.0)(react@18.2.0):
     resolution:
       {
-        integrity: sha512-QXEEF9AYtAcgO0VdkaBFaJ7d1upCbpempeETK0OtBTiAWW03Qpddp4nVb+aSFR6My4tX/ZbfYuYgCV5Zb8kixQ==,
+        integrity: sha512-WK9TPmhN+W2FNQD/6VXoo5bbxQHqevMt2kaVa6w1ML/xliNHX9bGNdNGIqaQtTdXHBsRoZUwXj0ZlA/f93nQIg==,
       }
     engines: { node: '>=16.8.0' }
     hasBin: true
@@ -13863,7 +13863,7 @@ packages:
       sass:
         optional: true
     dependencies:
-      '@next/env': 13.4.6-canary.4
+      '@next/env': 13.4.6-canary.6
       '@swc/helpers': 0.5.1
       busboy: 1.6.0
       caniuse-lite: 1.0.30001503
@@ -13874,15 +13874,15 @@ packages:
       watchpack: 2.4.0
       zod: 3.21.4
     optionalDependencies:
-      '@next/swc-darwin-arm64': 13.4.6-canary.4
-      '@next/swc-darwin-x64': 13.4.6-canary.4
-      '@next/swc-linux-arm64-gnu': 13.4.6-canary.4
-      '@next/swc-linux-arm64-musl': 13.4.6-canary.4
-      '@next/swc-linux-x64-gnu': 13.4.6-canary.4
-      '@next/swc-linux-x64-musl': 13.4.6-canary.4
-      '@next/swc-win32-arm64-msvc': 13.4.6-canary.4
-      '@next/swc-win32-ia32-msvc': 13.4.6-canary.4
-      '@next/swc-win32-x64-msvc': 13.4.6-canary.4
+      '@next/swc-darwin-arm64': 13.4.6-canary.6
+      '@next/swc-darwin-x64': 13.4.6-canary.6
+      '@next/swc-linux-arm64-gnu': 13.4.6-canary.6
+      '@next/swc-linux-arm64-musl': 13.4.6-canary.6
+      '@next/swc-linux-x64-gnu': 13.4.6-canary.6
+      '@next/swc-linux-x64-musl': 13.4.6-canary.6
+      '@next/swc-win32-arm64-msvc': 13.4.6-canary.6
+      '@next/swc-win32-ia32-msvc': 13.4.6-canary.6
+      '@next/swc-win32-x64-msvc': 13.4.6-canary.6
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
