@@ -9,6 +9,7 @@ export const config = {
     // Feature-flagged App Router pages
     '/',
     '/games',
+    '/channels(.*)',
   ],
 };
 
@@ -33,6 +34,14 @@ export async function middleware(request: NextRequest) {
   }
 
   if (flags.homeAppPage && pathname === '/') {
+    const newUrl = new URL(
+      `/app-future${request.nextUrl.pathname}`,
+      request.nextUrl,
+    );
+    return NextResponse.rewrite(newUrl);
+  }
+
+  if (flags.playersAppPage && pathname.startsWith('/channels')) {
     const newUrl = new URL(
       `/app-future${request.nextUrl.pathname}`,
       request.nextUrl,

@@ -17,6 +17,7 @@ export {
   Library,
   Menu,
   LayoutGrid,
+  User,
   Users,
   Type,
   X,

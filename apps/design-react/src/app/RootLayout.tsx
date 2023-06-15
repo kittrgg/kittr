@@ -27,7 +27,7 @@ export function RootLayout({
 }) {
   return (
     <html className={`${inter.variable} bg-zinc-900`} lang="en">
-      <body className="m-auto flex w-full flex-grow flex-row font-sans antialiased">
+      <body className="flex flex-row flex-grow w-full m-auto font-sans antialiased">
         <AppShell
           footerImage={
             <Link
