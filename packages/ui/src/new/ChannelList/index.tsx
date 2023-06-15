@@ -6,6 +6,7 @@ export interface ChannelListItemProps {
   id: string;
   name: string;
   urlSafeName: string;
+  imageSrc: string;
 }
 
 export interface ChannelListProps {

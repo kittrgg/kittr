@@ -2,7 +2,6 @@
 
 import { Slot } from '@radix-ui/react-slot';
 import { ChevronRight } from 'lucide-icons-react';
-import { download } from '@kittr/firebase/storage';
 import { AvatarFallback, Avatar, AvatarImage } from '../Avatar';
 import { P, typographyVariants } from '../Typography';
 import { cn } from '../utils';
@@ -17,7 +16,7 @@ export interface ChannelListItemProps {
       } & { href: any }
   >;
   linkBasePath: string;
-  id: string;
+  imageSrc: string;
   name: string;
   urlSafeName: string;
 }
@@ -64,8 +63,8 @@ const ShineLoader = () => {
   return <div className="w-full h-full animate-pulse bg-zinc-700" />;
 };
 
-export const ChannelListItem = async ({
-  id,
+export const ChannelListItem = ({
+  imageSrc,
   name,
   linkComponent,
   linkBasePath,
@@ -83,7 +82,7 @@ export const ChannelListItem = async ({
             <AvatarFallback>
               <ShineLoader />
             </AvatarFallback>
-            <AvatarImage src={await download(id)} alt={name} />
+            <AvatarImage src={imageSrc} alt={name} />
           </Avatar>
           <P
             className={cn(
