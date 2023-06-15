@@ -10,7 +10,7 @@ export async function Games() {
   return (
     <section>
       <H2>Games</H2>
-      <div className="flex flex-row gap-6">
+      <div className="flex flex-row flex-wrap items-center justify-center gap-6">
         {activeGames.map(async (game) => {
           return (
             <GameCard

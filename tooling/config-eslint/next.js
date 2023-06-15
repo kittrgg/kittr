@@ -23,7 +23,7 @@ module.exports = {
         'src/pages/**',
         'next.config.js',
         'app/**/{head,layout,page,error,not-found}.tsx',
-        'src/app/**/{head,layout,page,error,not-found}.tsx',
+        'src/app/**/{head,layout,loading,page,error,not-found}.tsx',
         'src/app/**/*.page.tsx',
       ],
       rules: {
