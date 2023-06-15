@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { download } from '@kittr/firebase/storage';
 import Link from 'next/link';
 import { Suspense } from 'react';
+import { ChevronLeft, ChevronRight } from '@kittr/ui/icons';
 import { countChannels } from '@/fetches/countChannels';
 import { getPaginatedChannels } from '@/fetches/getPaginatedChannels';
 
@@ -64,12 +65,24 @@ async function Page({ params }: { params: { pageNumber: string } }) {
         {pageNumber * CHANNELS_PER_PAGE - CHANNELS_PER_PAGE + 10} of {count}{' '}
         channels
       </p>
-      {pageNumber > 1 ? (
-        <Link href={`/channels/${pageNumber - 1}`}>Back</Link>
-      ) : null}
-      {pageNumber < totalPages ? (
-        <Link href={`/channels/${pageNumber + 1}`}>Next</Link>
-      ) : null}
+      <div className="flex flex-row justify-center gap-6">
+        {pageNumber > 1 ? (
+          <Link
+            className="flex flex-row hover:underline"
+            href={`/channels/${pageNumber - 1}`}
+          >
+            <ChevronLeft /> Back
+          </Link>
+        ) : null}
+        {pageNumber < totalPages ? (
+          <Link
+            className="flex flex-row hover:underline"
+            href={`/channels/${pageNumber + 1}`}
+          >
+            Next <ChevronRight />
+          </Link>
+        ) : null}
+      </div>
     </div>
   );
 }

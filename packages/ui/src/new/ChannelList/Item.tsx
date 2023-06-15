@@ -2,19 +2,14 @@
 
 import { Slot } from '@radix-ui/react-slot';
 import { ChevronRight } from 'lucide-icons-react';
+import { User } from '../../icons';
 import { AvatarFallback, Avatar, AvatarImage } from '../Avatar';
 import { P, typographyVariants } from '../Typography';
 import { cn } from '../utils';
+import type { NextLinkType } from '../../../utils';
 
 export interface ChannelListItemProps {
-  // Typed copied from next/link internals
-  linkComponent: React.ForwardRefExoticComponent<
-    Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> &
-      React.RefAttributes<HTMLAnchorElement> & {
-        children?: React.ReactNode;
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } & { href: any }
-  >;
+  linkComponent: NextLinkType;
   linkBasePath: string;
   imageSrc: string;
   name: string;
@@ -74,16 +69,26 @@ export const ChannelListItem = ({
   const formattedLinkBase = linkBasePath.endsWith('/')
     ? linkBasePath
     : `${linkBasePath}/`;
+
   return (
     <Slot className="flex flex-row items-center justify-between gap-4 p-4 transition-all rounded-xl bg-zinc-800 hover:bg-zinc-700">
-      <LinkComponent href={`${formattedLinkBase}${urlSafeName}`}>
+      <LinkComponent
+        href={`${formattedLinkBase}${urlSafeName}`}
+        prefetch={false}
+      >
         <div className="relative flex flex-row items-center flex-shrink w-4/5 gap-6 m-w-0">
-          <Avatar>
-            <AvatarFallback>
-              <ShineLoader />
-            </AvatarFallback>
-            <AvatarImage src={imageSrc} alt={name} />
-          </Avatar>
+          {imageSrc ? (
+            <Avatar>
+              <AvatarFallback>
+                <ShineLoader />
+              </AvatarFallback>
+              <AvatarImage src={imageSrc} alt={name} />
+            </Avatar>
+          ) : (
+            <div className="text-gray-500 flex justify-center items-center overflow-hidden border w-[40px] h-[40px] border-gray-500 rounded-full">
+              <User strokeWidth={0.75} width={30} height={30} />
+            </div>
+          )}
           <P
             className={cn(
               'm-w-0 w-4/5 flex-shrink truncate',
