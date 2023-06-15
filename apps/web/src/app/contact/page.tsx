@@ -1,6 +1,6 @@
 'use client';
 
-import { H1, H2, typographyVariants, Button } from '@kittr/ui/new';
+import { H1, H2, P, typographyVariants, Button } from '@kittr/ui/new';
 import Image from 'next/image';
 
 const PROPERTIES = [
@@ -29,6 +29,10 @@ function Page() {
   return (
     <div className="flex flex-col gap-10">
       <H1>Contact us</H1>
+      <P className="text-center">
+        Having some trouble? Want to see a new feature? Just want to tell us you
+        love us?
+      </P>
       <div className="grid grid-cols-1 gap-12 mx-auto lg:grid-cols-2">
         {PROPERTIES.map((property) => {
           return (
