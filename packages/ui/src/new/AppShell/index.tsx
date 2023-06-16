@@ -24,7 +24,7 @@ interface AppShellProps {
 export { AppShellLinkItem } from './sidebar/LinkItem';
 
 export const asideVariants = cva(
-  'fixed top-0 left-0 z-40 w-64 h-screen transition-transform bg-zinc-800 sm:translate-x-0',
+  'fixed top-0 left-0 z-40 w-64 h-screen transition-transform bg-zinc-800 sm:translate-x-0 xl:left-[initial]',
   {
     defaultVariants: {
       variant: 'closed',
@@ -74,7 +74,7 @@ export const AppShell: React.FC<AppShellProps> = ({
         paused={!isOpen}
         focusTrapOptions={{ preventScroll: true }}
       >
-        <div>
+        <div className="me">
           <div
             className={frostedGlassVariants({
               variant: isOpen ? 'visible' : 'hidden',
@@ -82,7 +82,7 @@ export const AppShell: React.FC<AppShellProps> = ({
             onClick={() => setIsOpen(false)}
           />
 
-          <div>
+          <div className="me-too">
             <div
               className={cn(
                 typographyVariants({ presets: 'h5' }),
