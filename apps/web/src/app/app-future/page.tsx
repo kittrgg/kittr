@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 function Page() {
   return (
-    <div className="flex flex-col gap-16">
+    <div className="relative flex flex-col gap-16">
       <Hero />
       <Games />
       <LiveChannels />
