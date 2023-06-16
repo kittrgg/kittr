@@ -4,18 +4,28 @@ import { download } from '@kittr/firebase/storage';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import { ChevronLeft, ChevronRight } from '@kittr/ui/icons';
+import type { Metadata } from 'next';
 import { countChannels } from '@/fetches/countChannels';
 import { getPaginatedChannels } from '@/fetches/getPaginatedChannels';
 
-export const revalidate = 60;
+const CHANNELS_PER_PAGE = 10;
+interface Params {
+  params: { pageNumber: string };
+}
 
+export const revalidate = 60;
 export function generateStaticParams() {
   return Array.from({ length: 10 }, (_, i) => ({ pageNumber: String(i + 1) }));
 }
 
-const CHANNELS_PER_PAGE = 10;
+export function generateMetadata({ params }: Params): Metadata {
+  return {
+    title: `Channels - Page ${params.pageNumber} | kittr`,
+    description: 'Find your next favorite creator on kittr.',
+  };
+}
 
-async function Page({ params }: { params: { pageNumber: string } }) {
+async function Page({ params }: Params) {
   const pageNumber = Number(params.pageNumber);
 
   if (isNaN(pageNumber) || pageNumber < 1) {
