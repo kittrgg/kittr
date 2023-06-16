@@ -5,7 +5,7 @@ const sharedConfig = require('@kittr/tailwind/index.js');
 module.exports = {
   content: [
     './src/**/*.{js,ts,jsx,tsx,mdx}',
-    '../../packages/ui/src/**/**.{js,ts,jsx,tsx,mdx}',
+    '../../packages/ui/src/new/**/**.{js,ts,jsx,tsx,mdx}',
   ],
   presets: [sharedConfig],
 };

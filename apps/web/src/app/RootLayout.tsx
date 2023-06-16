@@ -17,8 +17,8 @@ export function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   return (
-    <html className={`${inter.variable} bg-zinc-900`} lang="en">
-      <body className="m-auto flex w-full flex-grow flex-row font-sans antialiased">
+    <html className={`${inter.variable}`} lang="en">
+      <body className="flex flex-row justify-center flex-grow w-full m-auto font-sans antialiased bg-zinc-800 ">
         <AppShell
           footerImage={
             <Link
