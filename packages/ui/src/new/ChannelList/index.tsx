@@ -1,13 +1,7 @@
 'use client';
 
+import type { ChannelListItemProps } from './Item';
 import { ChannelListItem } from './Item';
-
-export interface ChannelListItemProps {
-  id: string;
-  name: string;
-  urlSafeName: string;
-  imageSrc: string;
-}
 
 export interface ChannelListProps {
   // Typed copied from next/link internals
@@ -19,16 +13,22 @@ export interface ChannelListProps {
       } & { href: any }
   >;
   linkBasePath: string;
-  channels: ChannelListItemProps[];
+  channels: Omit<ChannelListItemProps, 'linkBasePath' | 'linkComponent'>[];
+  disableResponsive?: boolean;
 }
 
 export const ChannelList = ({
   channels,
   linkBasePath,
   linkComponent,
+  disableResponsive,
 }: ChannelListProps) => {
   return (
-    <div className="flex flex-col gap-6">
+    <div
+      className={`grid grid-cols-1 gap-4 ${
+        disableResponsive ? '' : 'lg:grid-cols-3 xl:grid-cols-4'
+      }`}
+    >
       {channels.map((channel) => {
         return (
           // I'm having to use ignore here because we're bleeding edge.
@@ -38,7 +38,9 @@ export const ChannelList = ({
             linkComponent={linkComponent}
             linkBasePath={linkBasePath}
             key={channel.name}
-            {...channel}
+            imageSrc={channel.imageSrc}
+            name={channel.name}
+            urlSafeName={channel.urlSafeName}
           />
         );
       })}

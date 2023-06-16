@@ -1,5 +1,4 @@
 'use client';
-import '@kittr/ui/styles.css';
 import './globals.css';
 import { usePathname } from 'next/navigation';
 import { RootLayout } from '#/app/RootLayout';

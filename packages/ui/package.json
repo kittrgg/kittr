@@ -27,8 +27,6 @@
     }
   },
   "scripts": {
-    "build": "tailwindcss -o dist/compiled.css --minify",
-    "dev": "concurrently \"tailwindcss -o dist/compiled.css --minify --watch\"",
     "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
     "lint": "eslint .",
     "test": "vitest",
