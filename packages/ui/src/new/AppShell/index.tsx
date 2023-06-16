@@ -81,26 +81,31 @@ export const AppShell: React.FC<AppShellProps> = ({
             })}
             onClick={() => setIsOpen(false)}
           />
+
           <div>
-            <nav
-              ref={navRef}
+            <div
               className={cn(
                 typographyVariants({ presets: 'h5' }),
                 asideVariants({ variant: isOpen ? 'open' : 'closed' }),
-                'flex h-full w-60 flex-none flex-col gap-2 overflow-y-auto p-4',
+                'flex h-full w-60 flex-none flex-col gap-2 bg-gradient-to-b from-zinc-400 to-zinc-800 overflow-y-auto pr-0.5',
               )}
             >
-              {nav}
-            </nav>
+              <nav
+                ref={navRef}
+                className="flex flex-col flex-none w-full h-full gap-2 p-4 overflow-y-auto bg-zinc-800"
+              >
+                {nav}
+              </nav>
+            </div>
             <Floaty isOpen={isOpen} setIsOpen={setIsOpen} />
           </div>
         </div>
       </FocusTrap>
       <div className="container flex-auto bg-zinc-900 sm:ml-60">
-        <main className="flex min-h-screen flex-col gap-8 bg-zinc-900 p-8">
+        <main className="flex flex-col min-h-screen gap-8 p-8 bg-zinc-900">
           {children}
         </main>
-        <footer className="flex flex-col gap-8 bg-neutral-900 p-8">
+        <footer className="flex flex-col gap-8 p-8 bg-neutral-900">
           <div className="m-auto">{footerImage}</div>
           {/* Sorry about the !important for the breakopint but Tailwind isn't playing nice. */}
           <div className="m-auto grid max-w-lg grid-cols-3 gap-10 md:!grid-cols-6 md:gap-6">
@@ -109,7 +114,7 @@ export const AppShell: React.FC<AppShellProps> = ({
                 <LinkComponent
                   key={ind}
                   {...link}
-                  className="self-center justify-self-center font-bold text-white hover:underline"
+                  className="self-center font-bold text-white justify-self-center hover:underline"
                 />
               );
             })}
