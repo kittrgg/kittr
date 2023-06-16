@@ -1,6 +1,12 @@
 import { H1, P, H2 } from '@kittr/ui/new';
 import type { ReactNode } from 'react';
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'About',
+  description: 'Want to know why kittr is so awesome?',
+};
 
 function Section({
   header,

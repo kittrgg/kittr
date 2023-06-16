@@ -1,7 +1,13 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy',
+};
+
 function Page() {
   return (
-    <div className="prose lg:prose-lg prose-invert">
-      <h2>Privacy Policy</h2>
+    <div className="prose lg:prose-lg !prose-invert">
+      <h1>Privacy Policy</h1>
       <p>
         Your privacy is important to us. It is kittr&apos;s policy to respect
         your privacy and comply with any applicable law and regulation regarding
@@ -13,14 +19,14 @@ function Page() {
         This policy is effective as of 11 July 2021 and was last updated on 11
         July 2021.
       </p>
-      <h3>Information We Collect</h3>
+      <h2>Information We Collect</h2>
       <p>
         Information we collect includes both information you knowingly and
         actively provide us when using or participating in any of our services
         and promotions, and any information automatically sent by your devices
         in the course of accessing our products and services.
       </p>
-      <h4>Log Data</h4>
+      <h3>Log Data</h3>
       <p>
         When you visit our website, our servers may automatically log the
         standard data provided by your web browser. It may include your
@@ -34,7 +40,7 @@ function Page() {
         identifying by itself, it may be possible to combine it with other data
         to personally identify individual persons.
       </p>
-      <h4>Collection and Use of Information</h4>
+      <h3>Collection and Use of Information</h3>
       <p>
         We may collect personal information from you when you do any of the
         following on our website:
@@ -56,7 +62,7 @@ function Page() {
         with general information or research data we receive from other trusted
         sources.
       </p>
-      <h4>Security of Your Personal Information</h4>
+      <h3>Security of Your Personal Information</h3>
       <p>
         When we collect and process personal information, and while we retain
         this information, we will protect it within commercially acceptable
@@ -88,13 +94,13 @@ function Page() {
         archiving purposes in the public interest, scientific, or historical
         research purposes or statistical purposes.
       </p>
-      <h3>Children&apos;s Privacy</h3>
+      <h2>Children&apos;s Privacy</h2>
       <p>
         We do not aim any of our products or services directly at children under
         the age of 13, and we do not knowingly collect personal information
         about children under 13.
       </p>
-      <h3>Disclosure of Personal Information to Third Parties</h3>
+      <h2>Disclosure of Personal Information to Third Parties</h2>
       <p>We may disclose personal information to: </p>
       <ul>
         <li>a parent, subsidiary, or affiliate of our company</li>
@@ -122,7 +128,7 @@ function Page() {
           third parties to collect and process data
         </li>
       </ul>
-      <h3>International Transfers of Personal Information</h3>
+      <h2>International Transfers of Personal Information</h2>
       <p>
         The personal information we collect is stored and/or processed where we
         or our partners, affiliates, and third-party providers maintain
@@ -134,7 +140,7 @@ function Page() {
         with the requirements of applicable law; and (ii) we will protect the
         transferred personal information in accordance with this privacy policy.
       </p>
-      <h3>Your Rights and Controlling Your Personal Information</h3>
+      <h2>Your Rights and Controlling Your Personal Information</h2>
       <p>
         You always retain the right to withhold personal information from us,
         with the understanding that your experience of our website may be
@@ -174,7 +180,7 @@ function Page() {
         your complaint. You also have the right to contact a regulatory body or
         data protection authority in relation to your complaint.
       </p>
-      <h3>Use of Cookies</h3>
+      <h2>Use of Cookies</h2>
       <p>
         We use cookies to collect information about you and your activity across
         our site. A cookie is a small piece of data that our website stores on
@@ -182,7 +188,7 @@ function Page() {
         how you use our site. This helps us serve you content based on
         preferences you have specified.
       </p>
-      <h3>Limits of Our Policy</h3>
+      <h2>Limits of Our Policy</h2>
       <p>
         Our website may link to external sites that are not operated by us.
         Please be aware that we have no control over the content and policies of
@@ -202,7 +208,7 @@ function Page() {
         opportunity to opt in to or opt out of, as applicable, any new uses of
         your personal information.
       </p>
-      <h3>Contact Us</h3>
+      <h2>Contact Us</h2>
       <p>
         For any questions or concerns regarding your privacy, you may contact us
         using the following details:

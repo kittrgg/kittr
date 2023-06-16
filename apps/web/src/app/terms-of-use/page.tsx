@@ -1,6 +1,12 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Terms of Use',
+};
+
 function Page() {
   return (
-    <div className="prose lg:prose-lg prose-invert">
+    <div className="prose lg:prose-lg !prose-invert">
       <h1>Website Terms of Use</h1>
 
       <p>Version 1.5</p>

@@ -1,7 +1,12 @@
-'use client';
-
-import { H1, H2, P, typographyVariants, Button } from '@kittr/ui/new';
+import { H1, H2, P, typographyVariants } from '@kittr/ui/new';
 import Image from 'next/image';
+import type { Metadata } from 'next';
+import { ContactButton } from '@/app/contact/ContactButton';
+
+export const metadata: Metadata = {
+  title: 'Contact Us',
+  description: 'Want to get in touch?',
+};
 
 const PROPERTIES = [
   {
@@ -49,24 +54,14 @@ function Page() {
               <H2 className={typographyVariants({ presets: 'h3' })}>
                 {property.title}
               </H2>
-              <Button asChild variant="outline">
-                <a
-                  href={property.primaryLink}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  {property.primaryText}
-                </a>
-              </Button>
-              <Button asChild variant="outline">
-                <a
-                  href={property.secondaryLink}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  {property.secondaryText}
-                </a>
-              </Button>
+              <ContactButton
+                link={property.primaryLink}
+                text={property.primaryText}
+              />
+              <ContactButton
+                link={property.secondaryLink}
+                text={property.secondaryText}
+              />
             </div>
           );
         })}

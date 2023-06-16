@@ -5,6 +5,12 @@ import {
   AccordionTrigger,
   H1,
 } from '@kittr/ui/new';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Frequently Asked Questions',
+  description: 'Answer to frequently asked questions about kittr?',
+};
 
 function Page() {
   return (
