@@ -8,7 +8,7 @@ import type { Metadata } from 'next';
 import { countChannels } from '@/fetches/countChannels';
 import { getPaginatedChannels } from '@/fetches/getPaginatedChannels';
 
-const CHANNELS_PER_PAGE = 10;
+const CHANNELS_PER_PAGE = 12;
 interface Params {
   params: { pageNumber: string };
 }
@@ -65,6 +65,7 @@ async function Page({ params }: Params) {
             name: channel.displayName,
             urlSafeName: channel.urlSafeName,
           }))}
+          disableResponsive
           linkBasePath="/channel"
           linkComponent={Link}
         />
@@ -72,8 +73,8 @@ async function Page({ params }: Params) {
 
       <p className="font-semibold text-center">
         {pageNumber * CHANNELS_PER_PAGE - CHANNELS_PER_PAGE + 1} -{' '}
-        {pageNumber * CHANNELS_PER_PAGE - CHANNELS_PER_PAGE + 10} of {count}{' '}
-        channels
+        {pageNumber * CHANNELS_PER_PAGE - CHANNELS_PER_PAGE + CHANNELS_PER_PAGE}{' '}
+        of {count} channels
       </p>
       <div className="flex flex-row justify-center gap-6">
         {pageNumber > 1 ? (
