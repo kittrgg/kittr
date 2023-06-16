@@ -6,9 +6,11 @@ import { useEffect, useRef } from 'react';
 // https://github.com/shuding/cobe
 
 export function Cobe() {
-  const canvasRef = useRef();
+  const canvasRef = useRef(null);
 
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    if (!canvasRef.current) return;
     let phi = 0;
 
     const globe = createGlobe(canvasRef.current, {
@@ -38,7 +40,7 @@ export function Cobe() {
   }, []);
 
   return (
-    <div className="absolute right-0">
+    <div className="absolute lg:relative">
       <canvas
         ref={canvasRef}
         style={{ width: 600, height: 600, maxWidth: '100%', aspectRatio: 1 }}
