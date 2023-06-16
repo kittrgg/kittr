@@ -6,7 +6,7 @@ export const risingChannels = async () => {
       hasProfileImage: true,
     },
     viewCount: {
-      gte: 400,
+      gte: 200,
     },
   };
 

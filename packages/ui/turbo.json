@@ -2,7 +2,7 @@
   "extends": ["//"],
   "pipeline": {
     "dev": {
-      "outputMode": "full"
+      "outputMode": "new-only"
     }
   }
 }
