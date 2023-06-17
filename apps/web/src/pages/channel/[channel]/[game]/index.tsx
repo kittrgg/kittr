@@ -14,7 +14,11 @@ function GamePresentation() {
     channel: string;
   };
 
-  log.info(`Creator hit: ${urlChannel} game page`);
+  log.info(`Profile page for creator ${urlChannel}`, {
+    urlChannel,
+    page: 'kit',
+    game: urlGame,
+  });
 
   const { data: game } = trpc.games.getByUrlSafeName.useQuery(urlGame, {
     enabled: Boolean(urlGame),

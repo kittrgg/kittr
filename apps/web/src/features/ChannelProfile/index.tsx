@@ -20,7 +20,10 @@ function ChannelProfile() {
   const { query } = useRouter();
   const { channel: urlChannel } = query as { channel: string };
 
-  log.info(`Creator hit: ${urlChannel} profile page`);
+  log.info(`Profile page for creator ${urlChannel}`, {
+    urlChannel,
+    page: 'profile',
+  });
 
   const { data: channel } = trpc.channels.profile.get.useQuery(urlChannel, {
     enabled: Boolean(urlChannel),
