@@ -14,12 +14,6 @@ function GamePresentation() {
     channel: string;
   };
 
-  log.info(`Profile page for creator ${urlChannel}`, {
-    urlChannel,
-    page: 'kit',
-    game: urlGame,
-  });
-
   const { data: game } = trpc.games.getByUrlSafeName.useQuery(urlGame, {
     enabled: Boolean(urlGame),
   });
@@ -42,7 +36,7 @@ function GamePresentation() {
   }
 
   log.info(`Game page for creator ${channel.displayName}`, {
-    metric: 'Channel popularity',
+    metric: 'Creator popularity',
     channelId: channel.id,
     page: 'kit',
     displayName: channel.displayName,

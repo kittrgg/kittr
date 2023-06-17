@@ -57,7 +57,7 @@ function ChannelProfile() {
   if (!channel) return null;
 
   log.info(`Profile page for creator ${channel.displayName}`, {
-    metric: 'Channel popularity',
+    metric: 'Creator popularity',
     channelId: channel.id,
     page: 'profile',
     displayName: channel.displayName,
