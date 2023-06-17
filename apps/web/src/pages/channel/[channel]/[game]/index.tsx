@@ -4,6 +4,7 @@ import WarzoneProfile from '@Features/WarzoneProfile';
 import { prisma } from '@kittr/prisma';
 import { createSSGHelper } from '@kittr/trpc/server';
 import { useRouter } from 'next/router';
+import { log } from 'next-axiom';
 import { trpc } from '@/lib/trpc';
 
 function GamePresentation() {
@@ -12,6 +13,8 @@ function GamePresentation() {
     game: string;
     channel: string;
   };
+
+  log.info(`Creator hit: ${urlChannel} game page`);
 
   const { data: game } = trpc.games.getByUrlSafeName.useQuery(urlGame, {
     enabled: Boolean(urlGame),

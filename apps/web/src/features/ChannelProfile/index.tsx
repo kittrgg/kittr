@@ -3,6 +3,7 @@ import { download } from '@kittr/firebase/storage';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { log } from 'next-axiom';
 import Affiliates from './Affiliates';
 import FeaturedKits from './FeaturedKits';
 import Games from './Games';
@@ -18,6 +19,8 @@ import { trpc } from '@/lib/trpc';
 function ChannelProfile() {
   const { query } = useRouter();
   const { channel: urlChannel } = query as { channel: string };
+
+  log.info(`Creator hit: ${urlChannel} profile page`);
 
   const { data: channel } = trpc.channels.profile.get.useQuery(urlChannel, {
     enabled: Boolean(urlChannel),
