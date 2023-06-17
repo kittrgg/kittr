@@ -28,6 +28,7 @@ function ChannelProfile() {
   const { data: channel } = trpc.channels.profile.get.useQuery(urlChannel, {
     enabled: Boolean(urlChannel),
   });
+
   const twitchLink = channel?.links.find(
     (channel) => channel.property === 'TWITCH',
   )?.value;
@@ -54,6 +55,13 @@ function ChannelProfile() {
   }, [channel?.id, hasCoverPhoto, isPremium]);
 
   if (!channel) return null;
+
+  log.info(`Profile page for creator ${channel.displayName}`, {
+    metric: 'Channel popularity',
+    channelId: channel.id,
+    page: 'profile',
+    displayName: channel.displayName,
+  });
 
   return (
     <Container>

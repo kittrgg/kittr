@@ -41,6 +41,14 @@ function GamePresentation() {
     );
   }
 
+  log.info(`Game page for creator ${channel.displayName}`, {
+    metric: 'Channel popularity',
+    channelId: channel.id,
+    page: 'kit',
+    displayName: channel.displayName,
+    game: urlGame,
+  });
+
   if (game?.urlSafeName === 'warzone' || game?.urlSafeName === 'wz2') {
     return (
       <>
