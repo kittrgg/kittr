@@ -1,4 +1,3 @@
-// import '@kittr/ui/styles.css';
 import './globals.css';
 import type { Metadata } from 'next';
 import { RootLayout } from '@/app/RootLayout';
