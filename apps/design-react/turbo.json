@@ -2,7 +2,8 @@
   "extends": ["//"],
   "pipeline": {
     "build": {
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build"],
+      "env": []
     }
   }
 }
