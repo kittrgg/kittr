@@ -34,7 +34,7 @@ export async function GET(request: Request) {
         <img
           height={196}
           src={`${baseURL}/img/logo-no-text.svg`}
-          tw="absolute bottom-12 right-12"
+          tw="absolute bottom-12 right-20"
           width={192}
         />
       </div>

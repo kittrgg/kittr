@@ -21,8 +21,9 @@ export function generateStaticParams() {
 
 export const generateMetadata = ({ params }: Params): Metadata => {
   return generateKittrMetadata({
-    title: `Channels - Page ${params.pageNumber} | kittr`,
+    title: `Channels - Page ${params.pageNumber}`,
     description: 'Find your next favorite creator on kittr.',
+    canonicalURL: `/channels/${params.pageNumber}`,
   });
 };
 

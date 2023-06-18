@@ -4,6 +4,7 @@ export const generateMetadata = () =>
   generateKittrMetadata({
     title: 'Privacy Policy',
     description: 'Privacy Policy',
+    canonicalURL: '/privacy-policy',
   });
 
 function Page() {

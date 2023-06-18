@@ -7,6 +7,7 @@ export const generateMetadata = () =>
   generateKittrMetadata({
     title: 'Contact Us',
     description: 'Want to get in touch?',
+    canonicalURL: '/contact',
   });
 
 const PROPERTIES = [

@@ -4,6 +4,7 @@ export const generateMetadata = () =>
   generateKittrMetadata({
     title: 'Terms of Use',
     description: 'Terms of Use',
+    canonicalURL: '/terms-of-use',
   });
 
 function Page() {

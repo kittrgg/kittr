@@ -10,8 +10,9 @@ export const revalidate = 60;
 
 export const generateMetadata = () =>
   generateKittrMetadata({
-    title: 'Home | kittr',
+    title: 'Home',
     description: 'get kittd.',
+    canonicalURL: '/',
   });
 
 function Page() {

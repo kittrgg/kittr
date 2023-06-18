@@ -7,6 +7,7 @@ export const generateMetadata = () =>
   generateKittrMetadata({
     title: 'About',
     description: 'Want to know why kittr is so awesome?',
+    canonicalURL: '/about',
   });
 
 function Section({

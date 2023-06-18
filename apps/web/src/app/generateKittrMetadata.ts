@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 
-interface GenerateMetadata {
+export interface GenerateKittrMetadataArgs {
   title: string;
   description: string;
+  canonicalURL: string;
   shallowOverwrites?: Metadata;
 }
 
@@ -10,7 +11,8 @@ export const generateKittrMetadata = ({
   title,
   description,
   shallowOverwrites,
-}: GenerateMetadata): Metadata => {
+  canonicalURL,
+}: GenerateKittrMetadataArgs): Metadata => {
   const ogImages = [encodeURI(`/api/og?title=${title}`)];
   const ogTitle = `${title} | kittr`;
 
@@ -18,6 +20,7 @@ export const generateKittrMetadata = ({
     twitter: {
       images: ogImages,
       title: ogTitle,
+      description,
     },
     title: ogTitle,
     applicationName: 'kittr',
@@ -25,6 +28,9 @@ export const generateKittrMetadata = ({
     openGraph: {
       type: 'website',
       images: ogImages,
+      title: ogTitle,
+      description,
+      url: canonicalURL,
     },
     ...shallowOverwrites,
   };

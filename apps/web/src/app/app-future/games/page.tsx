@@ -7,8 +7,9 @@ import { listGames } from '@/fetches/games';
 
 export const generateMetadata = () =>
   generateKittrMetadata({
-    title: 'Games | kittr',
+    title: 'Games',
     description: 'Find your favorite game on kittr.',
+    canonicalURL: '/games',
   });
 
 export async function Page() {

@@ -11,6 +11,7 @@ export const generateMetadata = () =>
   generateKittrMetadata({
     title: 'Frequently Asked Questions',
     description: 'Answer to frequently asked questions about kittr?',
+    canonicalURL: '/faq',
   });
 
 function Page() {
