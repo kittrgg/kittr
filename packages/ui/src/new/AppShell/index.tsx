@@ -74,7 +74,7 @@ export const AppShell: React.FC<AppShellProps> = ({
         paused={!isOpen}
         focusTrapOptions={{ preventScroll: true }}
       >
-        <div className="me">
+        <div>
           <div
             className={frostedGlassVariants({
               variant: isOpen ? 'visible' : 'hidden',
@@ -82,7 +82,7 @@ export const AppShell: React.FC<AppShellProps> = ({
             onClick={() => setIsOpen(false)}
           />
 
-          <div className="me-too">
+          <div>
             <div
               className={cn(
                 typographyVariants({ presets: 'h5' }),
