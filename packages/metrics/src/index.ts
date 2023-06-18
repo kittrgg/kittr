@@ -1,4 +1,4 @@
-import { logError } from '@kittr/logger/node';
+import { logError } from '@kittr/logger/nextjs';
 import { getErrorMessage } from '@kittr/utils';
 import { client } from './client';
 
