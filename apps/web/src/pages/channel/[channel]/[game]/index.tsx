@@ -4,7 +4,7 @@ import WarzoneProfile from '@Features/WarzoneProfile';
 import { prisma } from '@kittr/prisma';
 import { createSSGHelper } from '@kittr/trpc/server';
 import { useRouter } from 'next/router';
-import { log } from 'next-axiom';
+import { log } from '@kittr/metrics';
 import { trpc } from '@/lib/trpc';
 
 function GamePresentation() {

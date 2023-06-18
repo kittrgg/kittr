@@ -3,7 +3,7 @@ import { download } from '@kittr/firebase/storage';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { log } from 'next-axiom';
+import { log } from '@kittr/metrics';
 import Affiliates from './Affiliates';
 import FeaturedKits from './FeaturedKits';
 import Games from './Games';

@@ -4,6 +4,8 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**", "!.next/cache/**", "build/**"],
       "env": [
+        "AXIOM_PERSONAL_TOKEN",
+        "AXIOM_ORG_ID",
         "DATABASE_URL",
         "ENVIRONMENT",
         "FIREBASE_ADMIN_PRIVATE_KEY",

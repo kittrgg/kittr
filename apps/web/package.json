@@ -11,7 +11,6 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@axiomhq/axiom-node": "^0.12.0",
     "@emotion/react": "^11.10.5",
     "@emotion/server": "^11.10.0",
     "@google-analytics/data": "3.0.0",
@@ -21,6 +20,7 @@
     "@kittr/firebase": "workspace:*",
     "@kittr/flags": "workspace:*",
     "@kittr/logger": "workspace:*",
+    "@kittr/metrics": "workspace:*",
     "@kittr/money": "workspace:*",
     "@kittr/prisma": "workspace:*",
     "@kittr/tailwind": "workspace:*",
@@ -42,7 +42,6 @@
     "jsonwebtoken": "8.5.1",
     "micro": "9.3.4",
     "next": "canary",
-    "next-axiom": "^0.17.0",
     "next-connect": "0.12.2",
     "react": "^18.2.0",
     "react-device-detect": "2.1.2",
