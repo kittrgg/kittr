@@ -1,8 +1,11 @@
-import type { Metadata } from 'next';
+import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 
-export const metadata: Metadata = {
-  title: 'Privacy Policy',
-};
+export const generateMetadata = () =>
+  generateKittrMetadata({
+    title: 'Privacy Policy',
+    description: 'Privacy Policy',
+    canonicalURL: '/privacy-policy',
+  });
 
 function Page() {
   return (

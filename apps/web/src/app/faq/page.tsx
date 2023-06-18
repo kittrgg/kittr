@@ -5,12 +5,14 @@ import {
   AccordionTrigger,
   H1,
 } from '@kittr/ui/new';
-import type { Metadata } from 'next';
+import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 
-export const metadata: Metadata = {
-  title: 'Frequently Asked Questions',
-  description: 'Answer to frequently asked questions about kittr?',
-};
+export const generateMetadata = () =>
+  generateKittrMetadata({
+    title: 'Frequently Asked Questions',
+    description: 'Answer to frequently asked questions about kittr?',
+    canonicalURL: '/faq',
+  });
 
 function Page() {
   return (

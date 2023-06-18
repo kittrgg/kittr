@@ -1,8 +1,11 @@
-import type { Metadata } from 'next';
+import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 
-export const metadata: Metadata = {
-  title: 'Terms of Use',
-};
+export const generateMetadata = () =>
+  generateKittrMetadata({
+    title: 'Terms of Use',
+    description: 'Terms of Use',
+    canonicalURL: '/terms-of-use',
+  });
 
 function Page() {
   return (
