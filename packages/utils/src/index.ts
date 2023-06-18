@@ -1,4 +1,5 @@
 export * from './capitalizeFirst';
+export * from './getErrorMessage';
 
 interface Json {
   [key: string]: Json | Json[] | boolean | number | string | null;

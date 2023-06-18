@@ -1,0 +1,25 @@
+{
+  "name": "@kittr/metrics",
+  "version": "0.0.0",
+  "private": true,
+  "license": "GNU",
+  "main": "./src/index.ts",
+  "scripts": {
+    "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@axiomhq/axiom-node": "^0.12.0",
+    "@kittr/logger": "workspace:*",
+    "@kittr/utils": "workspace:*",
+    "next-axiom": "^0.17.0"
+  },
+  "devDependencies": {
+    "@kittr/lint": "workspace:*",
+    "@kittr/prettier": "workspace:*",
+    "@kittr/tsconfig": "workspace:*",
+    "eslint": "^8.42.0",
+    "typescript": "^5.1.3"
+  }
+}

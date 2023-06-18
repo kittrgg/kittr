@@ -195,6 +195,9 @@ importers:
       '@kittr/logger':
         specifier: workspace:*
         version: link:../../packages/logger
+      '@kittr/metrics':
+        specifier: workspace:*
+        version: link:../../packages/metrics
       '@kittr/money':
         specifier: workspace:*
         version: link:../../packages/money
@@ -258,9 +261,6 @@ importers:
       next:
         specifier: canary
         version: 13.4.7-canary.1(@babel/core@7.22.5)(react-dom@18.2.0)(react@18.2.0)
-      next-axiom:
-        specifier: ^0.17.0
-        version: 0.17.0(next@13.4.7-canary.1)
       next-connect:
         specifier: 0.12.2
         version: 0.12.2
@@ -492,6 +492,37 @@ importers:
       '@sentry/types':
         specifier: ^7.34.0
         version: 7.34.0
+      eslint:
+        specifier: ^8.42.0
+        version: 8.42.0
+      typescript:
+        specifier: ^5.1.3
+        version: 5.1.3
+
+  packages/metrics:
+    dependencies:
+      '@axiomhq/axiom-node':
+        specifier: ^0.12.0
+        version: 0.12.0
+      '@kittr/logger':
+        specifier: workspace:*
+        version: link:../logger
+      '@kittr/utils':
+        specifier: workspace:*
+        version: link:../utils
+      next-axiom:
+        specifier: ^0.17.0
+        version: 0.17.0(next@13.4.6)
+    devDependencies:
+      '@kittr/lint':
+        specifier: workspace:*
+        version: link:../../tooling/config-eslint
+      '@kittr/prettier':
+        specifier: workspace:*
+        version: link:../../tooling/config-prettier
+      '@kittr/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/config-typescript
       eslint:
         specifier: ^8.42.0
         version: 8.42.0
@@ -1029,6 +1060,21 @@ packages:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.3
       '@jridgewell/trace-mapping': 0.3.18
+
+  /@axiomhq/axiom-node@0.12.0:
+    resolution:
+      {
+        integrity: sha512-998jnkwSCzKk4oTqiWfHIeW18yj7LZu5+srTq72nLXaEZ5rrGMqKPx5W96hs8u9TeOjFxGBsfJCStEIVnrru1g==,
+      }
+    engines: { node: '>=14' }
+    dependencies:
+      axios: 1.4.0
+      axios-retry: 3.5.0
+      to-time: 1.0.2
+      winston-transport: 4.5.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
 
   /@babel/code-frame@7.22.5:
     resolution:
@@ -1591,6 +1637,14 @@ packages:
       {
         integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==,
       }
+    dev: false
+
+  /@colors/colors@1.5.0:
+    resolution:
+      {
+        integrity: sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==,
+      }
+    engines: { node: '>=0.1.90' }
     dev: false
 
   /@cspotcode/source-map-support@0.8.1:
@@ -6522,6 +6576,13 @@ packages:
       '@types/node': 18.11.18
     dev: true
 
+  /@types/triple-beam@1.3.2:
+    resolution:
+      {
+        integrity: sha512-txGIh+0eDFzKGC25zORnswy+br1Ha7hj5cMVwKIU7+s0U2AxxJru/jZSMU6OC9MJWP6+pc/hc6ZjyZShpsyY2g==,
+      }
+    dev: false
+
   /@types/use-sync-external-store@0.0.3:
     resolution:
       {
@@ -7353,6 +7414,13 @@ packages:
     dev: false
     optional: true
 
+  /asynckit@0.4.0:
+    resolution:
+      {
+        integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==,
+      }
+    dev: false
+
   /autoprefixer@10.4.14(postcss@8.4.23):
     resolution:
       {
@@ -7385,6 +7453,29 @@ packages:
         integrity: sha512-zIURGIS1E1Q4pcrMjp+nnEh+16G56eG/MUllJH8yEvw7asDo7Ac9uhC9KIH5jzpITueEZolfYglnCGIuSBz39g==,
       }
     engines: { node: '>=4' }
+
+  /axios-retry@3.5.0:
+    resolution:
+      {
+        integrity: sha512-g48qNrLX30VU6ECWltpFCPegKK6dWzMDYv2o83W2zUL/Zh/SLXbT6ksGoKqYZHtghzqeeXhZBcSXJkO1fPbCcw==,
+      }
+    dependencies:
+      '@babel/runtime': 7.22.5
+      is-retry-allowed: 2.2.0
+    dev: false
+
+  /axios@1.4.0:
+    resolution:
+      {
+        integrity: sha512-S4XCWMEmzvo64T9GfvQDOXgYRDJ/wsSZc7Jvdgx5u1sd0JwsuPLqb3SYmusag+edF6ziyMensPVqLTSc1PiSEA==,
+      }
+    dependencies:
+      follow-redirects: 1.15.2
+      form-data: 4.0.0
+      proxy-from-env: 1.1.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
 
   /axobject-query@3.2.1:
     resolution:
@@ -7553,6 +7644,13 @@ packages:
         integrity: sha512-GPEid2Y9QU1Exl1rpO9B2IPJGHPSupF5GnVIP0blYvNOMer2bTvSWs1jGOUg04hTmu67nmLsQ9TBo1puaotBHg==,
       }
     engines: { node: '>=0.6' }
+
+  /bignumber.js@2.4.0:
+    resolution:
+      {
+        integrity: sha512-uw4ra6Cv483Op/ebM0GBKKfxZlSmn6NgFRby5L3yGTlunLj53KQgndDlqy2WVFOwgvurocApYkSud0aO+mvrpQ==,
+      }
+    dev: false
 
   /bignumber.js@9.1.1:
     resolution:
@@ -8267,6 +8365,16 @@ packages:
       }
     dev: true
 
+  /combined-stream@1.0.8:
+    resolution:
+      {
+        integrity: sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==,
+      }
+    engines: { node: '>= 0.8' }
+    dependencies:
+      delayed-stream: 1.0.0
+    dev: false
+
   /commander@10.0.1:
     resolution:
       {
@@ -8787,6 +8895,14 @@ packages:
       rimraf: 3.0.2
       slash: 3.0.0
     dev: true
+
+  /delayed-stream@1.0.0:
+    resolution:
+      {
+        integrity: sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==,
+      }
+    engines: { node: '>=0.4.0' }
+    dev: false
 
   /depd@1.1.1:
     resolution:
@@ -10791,6 +10907,13 @@ packages:
       bser: 2.1.1
     dev: false
 
+  /fecha@4.2.3:
+    resolution:
+      {
+        integrity: sha512-OP2IUU6HeYKJi3i0z4A19kHMQoLVs4Hc+DPqqxI2h/DPZHTm/vjsfC6P0b4jCMy14XizLBqvndQ+UilD7707Jw==,
+      }
+    dev: false
+
   /figures@3.2.0:
     resolution:
       {
@@ -10964,6 +11087,19 @@ packages:
       tabbable: 6.1.2
     dev: false
 
+  /follow-redirects@1.15.2:
+    resolution:
+      {
+        integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==,
+      }
+    engines: { node: '>=4.0' }
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
+    dev: false
+
   /for-each@0.3.3:
     resolution:
       {
@@ -10971,6 +11107,18 @@ packages:
       }
     dependencies:
       is-callable: 1.2.7
+
+  /form-data@4.0.0:
+    resolution:
+      {
+        integrity: sha512-ETEklSGi5t0QMZuiXoA/Q6vcnxcLQP5vdugSpuAyi6SVGi2clPPp+xgEhuMaHC+zGgn31Kd235W35f7Hykkaww==,
+      }
+    engines: { node: '>= 6' }
+    dependencies:
+      asynckit: 0.4.0
+      combined-stream: 1.0.8
+      mime-types: 2.1.35
+    dev: false
 
   /forwarded@0.2.0:
     resolution:
@@ -12172,6 +12320,14 @@ packages:
     dependencies:
       call-bind: 1.0.2
       has-tostringtag: 1.0.0
+
+  /is-retry-allowed@2.2.0:
+    resolution:
+      {
+        integrity: sha512-XVm7LOeLpTW4jV19QSH38vkswxoLud8sQ57YwJVTPWdiaI9I8keEhGFpBlslyVsgdQy4Opg8QOLb8YRgsyZiQg==,
+      }
+    engines: { node: '>=10' }
+    dev: false
 
   /is-set@2.0.2:
     resolution:
@@ -13497,6 +13653,20 @@ packages:
       wrap-ansi: 6.2.0
     dev: true
 
+  /logform@2.5.1:
+    resolution:
+      {
+        integrity: sha512-9FyqAm9o9NKKfiAKfZoYo9bGXXuwMkxQiQttkT4YjjVtQVIQtK6LmVtlxmCaFswo6N4AfEkHqZTV0taDtPotNg==,
+      }
+    dependencies:
+      '@colors/colors': 1.5.0
+      '@types/triple-beam': 1.3.2
+      fecha: 4.2.3
+      ms: 2.1.3
+      safe-stable-stringify: 2.4.3
+      triple-beam: 1.3.0
+    dev: false
+
   /long@4.0.0:
     resolution:
       {
@@ -14043,7 +14213,7 @@ packages:
       }
     dev: true
 
-  /next-axiom@0.17.0(next@13.4.7-canary.1):
+  /next-axiom@0.17.0(next@13.4.6):
     resolution:
       {
         integrity: sha512-qFdnH50SvRjJUAmNjGIYLcRc4tO/U4R1h9WUuniiwaucXAH5KhL06m7TT3WWD2U1HbulwSfC0R+NlPASOx1XlQ==,
@@ -14052,7 +14222,7 @@ packages:
     peerDependencies:
       next: ^12.1.4 || ^13
     dependencies:
-      next: 13.4.7-canary.1(@babel/core@7.22.5)(react-dom@18.2.0)(react@18.2.0)
+      next: 13.4.6(@babel/core@7.22.5)(react-dom@18.2.0)(react@18.2.0)
       whatwg-fetch: 3.6.2
     dev: false
 
@@ -14149,6 +14319,52 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       styled-jsx: 5.1.1(@babel/core@7.18.9)(react@18.2.0)
+      watchpack: 2.4.0
+      zod: 3.21.4
+    optionalDependencies:
+      '@next/swc-darwin-arm64': 13.4.6
+      '@next/swc-darwin-x64': 13.4.6
+      '@next/swc-linux-arm64-gnu': 13.4.6
+      '@next/swc-linux-arm64-musl': 13.4.6
+      '@next/swc-linux-x64-gnu': 13.4.6
+      '@next/swc-linux-x64-musl': 13.4.6
+      '@next/swc-win32-arm64-msvc': 13.4.6
+      '@next/swc-win32-ia32-msvc': 13.4.6
+      '@next/swc-win32-x64-msvc': 13.4.6
+    transitivePeerDependencies:
+      - '@babel/core'
+      - babel-plugin-macros
+    dev: false
+
+  /next@13.4.6(@babel/core@7.22.5)(react-dom@18.2.0)(react@18.2.0):
+    resolution:
+      {
+        integrity: sha512-sjVqjxU+U2aXZnYt4Ud6CTLNNwWjdSfMgemGpIQJcN3Z7Jni9xRWbR0ie5fQzCg87aLqQVhKA2ud2gPoqJ9lGw==,
+      }
+    engines: { node: '>=16.8.0' }
+    hasBin: true
+    peerDependencies:
+      '@opentelemetry/api': ^1.1.0
+      fibers: '>= 3.1.0'
+      react: ^18.2.0
+      react-dom: ^18.2.0
+      sass: ^1.3.0
+    peerDependenciesMeta:
+      '@opentelemetry/api':
+        optional: true
+      fibers:
+        optional: true
+      sass:
+        optional: true
+    dependencies:
+      '@next/env': 13.4.6
+      '@swc/helpers': 0.5.1
+      busboy: 1.6.0
+      caniuse-lite: 1.0.30001503
+      postcss: 8.4.14
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      styled-jsx: 5.1.1(@babel/core@7.22.5)(react@18.2.0)
       watchpack: 2.4.0
       zod: 3.21.4
     optionalDependencies:
@@ -16219,6 +16435,14 @@ packages:
     dependencies:
       regexp-tree: 0.1.27
 
+  /safe-stable-stringify@2.4.3:
+    resolution:
+      {
+        integrity: sha512-e2bDA2WJT0wxseVd4lsDP4+3ONX6HpMXQa1ZhFQ7SU+GjvORCmShbCMltrtIDfkYhVHrOcPtj+KhmDBdPdZD1g==,
+      }
+    engines: { node: '>=10' }
+    dev: false
+
   /safer-buffer@2.1.2:
     resolution:
       {
@@ -17406,6 +17630,15 @@ packages:
     dependencies:
       is-number: 7.0.0
 
+  /to-time@1.0.2:
+    resolution:
+      {
+        integrity: sha512-+wqaiQvnido2DI1bpiQ/Zv1LiOE9Fd0v35ySnNeqFmKNYJTJY/+ENI+3sHXCMzbAAOR/43aNyLM0XTpi0/zSQg==,
+      }
+    dependencies:
+      bignumber.js: 2.4.0
+    dev: false
+
   /toidentifier@1.0.1:
     resolution:
       {
@@ -17447,6 +17680,13 @@ packages:
       }
     hasBin: true
     dev: true
+
+  /triple-beam@1.3.0:
+    resolution:
+      {
+        integrity: sha512-XrHUvV5HpdLmIj4uVMxHggLbFSZYIn7HEWsqePZcI50pco+MPqJ50wMGY794X7AOOhxOBAjbkqfAbEe/QMp2Lw==,
+      }
+    dev: false
 
   /trouter@3.2.1:
     resolution:
@@ -18625,6 +18865,18 @@ packages:
       siginfo: 2.0.0
       stackback: 0.0.2
     dev: true
+
+  /winston-transport@4.5.0:
+    resolution:
+      {
+        integrity: sha512-YpZzcUzBedhlTAfJg6vJDlyEai/IFMIVcaEZZyl3UXIl4gmqRpU7AE89AHLkbzLUsv0NVmw7ts+iztqKxxPW1Q==,
+      }
+    engines: { node: '>= 6.4.0' }
+    dependencies:
+      logform: 2.5.1
+      readable-stream: 3.6.2
+      triple-beam: 1.3.0
+    dev: false
 
   /word-wrap@1.2.3:
     resolution:
