@@ -95,13 +95,6 @@ main()
       repo,
       status: 'completed',
       conclusion: 'failure',
-      outputs: {
-        title: 'You got a report! #2',
-        summary: `
-## Hello, Anthony!
-You should put this link in the summary: 2
-        `,
-      },
     });
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
     setFailed(err.message);
