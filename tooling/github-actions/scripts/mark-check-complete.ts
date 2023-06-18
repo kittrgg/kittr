@@ -21,6 +21,13 @@ const main = async () => {
     repo,
     status: 'completed',
     conclusion,
+    outputs: {
+      title: 'You got a report! #3',
+      summary: `
+## Hello, Anthony!
+You should put this link in the summary: 3
+        `,
+    },
   });
 
   return check;
