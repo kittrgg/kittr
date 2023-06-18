@@ -18,6 +18,13 @@ module.exports = {
   ignorePatterns: ['**/.next/**', '**/.eslintrc.js'],
   overrides: [
     {
+      files: ['**/route.tsx'],
+      rules: {
+        '@next/next/no-img-element': 'off',
+        'jsx-a11y/alt-text': 'off',
+      },
+    },
+    {
       files: [
         'pages/**',
         'src/pages/**',
