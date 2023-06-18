@@ -1,4 +1,4 @@
-import { captureException } from '@sentry/nextjs';
+import { captureException } from '@kittr/logger/nextjs';
 import React from 'react';
 import { ErrorBoundary as ReactErrorBoundary } from 'react-error-boundary';
 

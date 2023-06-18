@@ -3,18 +3,29 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    "./node": "./src/node/index.ts",
-    "./nextjs": "./src/nextjs/index.ts"
+    "./node": "./dist/node/index.js",
+    "./nextjs": "./dist/nextjs/index.js"
   },
-  "main": "index.ts",
+  "typesVersions": {
+    "*": {
+      "nextjs": [
+        "./src/nextjs/index.ts"
+      ],
+      "node": [
+        "./src/node/index.ts"
+      ]
+    }
+  },
   "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
     "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@sentry/nextjs": "7.7.0",
-    "@sentry/node": "7.7.0"
+    "@sentry/nextjs": "^7.55.2",
+    "@sentry/node": "^7.55.2"
   },
   "devDependencies": {
     "@kittr/lint": "workspace:*",
@@ -23,6 +34,7 @@
     "@kittr/types": "workspace:*",
     "@sentry/types": "^7.34.0",
     "eslint": "^8.42.0",
+    "tsup": "^7.0.0",
     "typescript": "^5.1.3"
   }
 }

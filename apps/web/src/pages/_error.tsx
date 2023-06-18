@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import { flush, captureException } from '@sentry/nextjs';
+import { flush, captureException } from '@kittr/logger/nextjs';
 import NextErrorComponent from 'next/error';
 
 function MyError({ statusCode, hasGetInitialPropsRun, err }) {

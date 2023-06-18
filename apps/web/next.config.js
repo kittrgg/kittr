@@ -4,7 +4,7 @@
 
 const isDeployment = Boolean(process.env.VERCEL_URL);
 
-const { withSentryConfig } = require('@sentry/nextjs');
+const { withSentryConfig } = require('@kittr/logger/nextjs');
 
 /** @type {import('next').NextConfig} */
 const moduleExports = {
@@ -12,7 +12,6 @@ const moduleExports = {
     '@kittr/analytics',
     '@kittr/firebase',
     '@kittr/flags',
-    '@kittr/logger',
     '@kittr/db',
     '@kittr/money',
     '@kittr/prisma',

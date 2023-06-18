@@ -1,7 +1,7 @@
 import fetch from '@Fetch';
 import { createHandler } from '@Middlewares/createHandler';
 import { prisma } from '@kittr/prisma';
-import { withSentry } from '@sentry/nextjs';
+import { withSentry } from '@kittr/logger/nextjs';
 import { buffer } from 'micro';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import Stripe from 'stripe';
