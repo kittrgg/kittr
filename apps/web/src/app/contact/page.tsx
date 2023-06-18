@@ -1,12 +1,13 @@
 import { H1, H2, P, typographyVariants } from '@kittr/ui/new';
 import Image from 'next/image';
-import type { Metadata } from 'next';
+import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 import { ContactButton } from '@/app/contact/ContactButton';
 
-export const metadata: Metadata = {
-  title: 'Contact Us',
-  description: 'Want to get in touch?',
-};
+export const generateMetadata = () =>
+  generateKittrMetadata({
+    title: 'Contact Us',
+    description: 'Want to get in touch?',
+  });
 
 const PROPERTIES = [
   {

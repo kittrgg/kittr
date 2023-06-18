@@ -5,7 +5,10 @@ const baseURL = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : `http://localhost:${process.env.PORT || 3000}`;
 
-export function GET() {
+// Now make it dynamic
+export function GET(request: Request) {
+  const title = new URL(request.url).searchParams.get('title') ?? 'get kittd.';
+
   return new ImageResponse(
     (
       <div tw="flex flex-row items-center justify-between w-full h-full text-6xl bg-zinc-900 text-white text-center">
@@ -16,7 +19,7 @@ export function GET() {
           width={192}
         />
         <div tw="flex flex-col ml-40">
-          <div tw="pb-16">Home</div>
+          <div tw="pb-16">{title}</div>
           <div tw="text-4xl text-zinc-400">kittr</div>
         </div>
 

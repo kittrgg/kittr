@@ -1,14 +1,15 @@
 import type { Genre, Platform } from '@kittr/db';
 import { download } from '@kittr/firebase/storage';
 import { GameCard, H1 } from '@kittr/ui/new';
-import type { Metadata } from 'next';
 import Link from 'next/link';
+import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 import { listGames } from '@/fetches/games';
 
-export const metadata: Metadata = {
-  title: 'Games | kittr',
-  description: 'Find your favorite game on kittr.',
-};
+export const generateMetadata = () =>
+  generateKittrMetadata({
+    title: 'Games | kittr',
+    description: 'Find your favorite game on kittr.',
+  });
 
 export async function Page() {
   const gamesData = await listGames();

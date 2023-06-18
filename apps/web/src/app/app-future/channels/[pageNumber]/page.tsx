@@ -7,6 +7,7 @@ import { ChevronLeft, ChevronRight } from '@kittr/ui/icons';
 import type { Metadata } from 'next';
 import { countChannels } from '@/fetches/countChannels';
 import { getPaginatedChannels } from '@/fetches/getPaginatedChannels';
+import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 
 const CHANNELS_PER_PAGE = 12;
 interface Params {
@@ -18,12 +19,12 @@ export function generateStaticParams() {
   return Array.from({ length: 10 }, (_, i) => ({ pageNumber: String(i + 1) }));
 }
 
-export function generateMetadata({ params }: Params): Metadata {
-  return {
+export const generateMetadata = ({ params }: Params): Metadata => {
+  return generateKittrMetadata({
     title: `Channels - Page ${params.pageNumber} | kittr`,
     description: 'Find your next favorite creator on kittr.',
-  };
-}
+  });
+};
 
 async function Page({ params }: Params) {
   const pageNumber = Number(params.pageNumber);
