@@ -77,13 +77,6 @@ const main = async () => {
         check_run_id: String(check.data.id),
         playwright_version: playwrightVersion,
       },
-      outputs: {
-        title: 'You got a report! #1',
-        summary: `
-## Hello, Anthony!
-You should put this link in the summary: 1
-        `,
-      },
     },
   );
 
