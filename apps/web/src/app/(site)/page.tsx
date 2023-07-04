@@ -1,9 +1,9 @@
-import { Hero } from '@/app/components/Hero';
-import { Games } from '@/app/components/Games';
-import { LiveChannels } from '@/app/components/LiveChannels';
-import { RisingChannels } from '@/app/components/RisingChannels';
-import { TopChannels } from '@/app/components/TopChannels';
-import { Blurb } from '@/app/components/Blurb';
+import { Hero } from '@/app/(site)/components/Hero';
+import { Games } from '@/app/(site)/components/Games';
+import { LiveChannels } from '@/app/(site)/components/LiveChannels';
+import { RisingChannels } from '@/app/(site)/components/RisingChannels';
+import { TopChannels } from '@/app/(site)/components/TopChannels';
+import { Blurb } from '@/app/(site)/components/Blurb';
 import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 
 export const revalidate = 60;

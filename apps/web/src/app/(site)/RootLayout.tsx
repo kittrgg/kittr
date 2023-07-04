@@ -1,17 +1,11 @@
 'use client';
 
 import Image from 'next/image';
-import { Inter } from 'next/font/google';
 import { AppShell } from '@kittr/ui/new';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Nav } from '@/app/Nav';
-
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter',
-});
+import { inter } from '../fonts';
+import { Nav } from '@/app/(site)/Nav';
 
 export function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
