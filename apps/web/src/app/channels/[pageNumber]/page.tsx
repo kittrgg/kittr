@@ -11,7 +11,7 @@ import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 
 const CHANNELS_PER_PAGE = 12;
 interface Params {
-  params: { pageNumber: string };
+  pageNumber: string;
 }
 
 export const revalidate = 60;
@@ -19,7 +19,7 @@ export function generateStaticParams() {
   return Array.from({ length: 10 }, (_, i) => ({ pageNumber: String(i + 1) }));
 }
 
-export const generateMetadata = ({ params }: Params): Metadata => {
+export const generateMetadata = ({ params }: { params: Params }): Metadata => {
   return generateKittrMetadata({
     title: `Channels - Page ${params.pageNumber}`,
     description: 'Find your next favorite creator on kittr.',
@@ -27,7 +27,7 @@ export const generateMetadata = ({ params }: Params): Metadata => {
   });
 };
 
-async function Page({ params }: Params) {
+async function Page({ params }: { params: Params }) {
   const pageNumber = Number(params.pageNumber);
 
   if (isNaN(pageNumber) || pageNumber < 1) {
