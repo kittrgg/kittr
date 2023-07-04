@@ -21,3 +21,7 @@ export const Loader = () => {
     </div>
   );
 };
+
+export const AvatarShineLoader = () => {
+  return <div className="w-full h-full animate-pulse bg-zinc-700" />;
+};

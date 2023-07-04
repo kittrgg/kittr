@@ -1,49 +1,27 @@
-'use client';
+import { AvatarShineLoader } from '../Loader';
+import { User } from '../../icons';
+import {
+  Avatar as AvatarPrimitive,
+  AvatarFallback,
+  AvatarImage,
+} from './Primitive';
 
-import * as React from 'react';
-import * as AvatarPrimitive from '@radix-ui/react-avatar';
-import { cn } from '../utils';
+interface AvatarProps {
+  imageSrc: string;
+  username: string;
+}
 
-const Avatar = React.forwardRef<
-  React.ElementRef<typeof AvatarPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>
->(({ className, ...props }, ref) => (
-  <AvatarPrimitive.Root
-    ref={ref}
-    className={cn(
-      'relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full',
-      className,
-    )}
-    {...props}
-  />
-));
-Avatar.displayName = AvatarPrimitive.Root.displayName;
-
-const AvatarImage = React.forwardRef<
-  React.ElementRef<typeof AvatarPrimitive.Image>,
-  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>
->(({ className, ...props }, ref) => (
-  <AvatarPrimitive.Image
-    ref={ref}
-    className={cn('aspect-square h-full w-full', className)}
-    {...props}
-  />
-));
-AvatarImage.displayName = AvatarPrimitive.Image.displayName;
-
-const AvatarFallback = React.forwardRef<
-  React.ElementRef<typeof AvatarPrimitive.Fallback>,
-  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>
->(({ className, ...props }, ref) => (
-  <AvatarPrimitive.Fallback
-    ref={ref}
-    className={cn(
-      'bg-muted flex h-full w-full items-center justify-center rounded-full',
-      className,
-    )}
-    {...props}
-  />
-));
-AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName;
-
-export { Avatar, AvatarImage, AvatarFallback };
+export const Avatar = ({ imageSrc, username }: AvatarProps) => {
+  return imageSrc ? (
+    <AvatarPrimitive>
+      <AvatarFallback>
+        <AvatarShineLoader />
+      </AvatarFallback>
+      <AvatarImage src={imageSrc} alt={username} />
+    </AvatarPrimitive>
+  ) : (
+    <div className="text-gray-500 flex justify-center items-center overflow-hidden border w-[40px] h-[40px] border-gray-500 rounded-full">
+      <User strokeWidth={0.75} width={30} height={30} />
+    </div>
+  );
+};
