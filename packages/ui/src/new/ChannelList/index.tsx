@@ -31,9 +31,6 @@ export const ChannelList = ({
     >
       {channels.map((channel) => {
         return (
-          // I'm having to use ignore here because we're bleeding edge.
-          // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment
-          // @ts-ignore Async components working in Next.js but not in here yet
           <ChannelListItem
             linkComponent={linkComponent}
             linkBasePath={linkBasePath}
@@ -41,6 +38,7 @@ export const ChannelList = ({
             imageSrc={channel.imageSrc}
             name={channel.name}
             urlSafeName={channel.urlSafeName}
+            isLive={channel.isLive}
           />
         );
       })}
