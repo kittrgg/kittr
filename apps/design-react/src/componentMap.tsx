@@ -26,8 +26,8 @@ export const components = {
     name: 'Avatar',
     components: [
       <Avatar
-        key="avatar"
         imageSrc="https://github.com/shadcn.png"
+        key="avatar"
         username="@shadcn"
       />,
     ],
