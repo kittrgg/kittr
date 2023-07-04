@@ -1,5 +1,5 @@
 import type { Game, Genre, Platform } from '@kittr/db';
-import { db } from '@kittr/db';
+import { db, eq, games } from '@kittr/db';
 
 // I'm having to make this type myself
 // because Drizzle isn't inferring correctly
@@ -29,3 +29,10 @@ export const listGames = async (): Promise<GamesWithPlatformsAndGenres[]> => {
 
   return gamesData;
 };
+
+export const getGameDisplayNameFromUrlSafeName = (urlSafeName: string) =>
+  db
+    .select()
+    .from(games)
+    .where(eq(games.urlSafeName, urlSafeName))
+    .then((res) => res[0]);

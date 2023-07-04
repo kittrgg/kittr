@@ -7,9 +7,6 @@ export const config = {
     // Protect from directly accessing /app-future routes
     '/app-future(.*)',
     // Feature-flagged App Router pages
-    '/',
-    '/games',
-    '/channels(.*)',
   ],
 };
 
@@ -22,32 +19,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.rewrite(newUrl, { status: 404 });
   }
 
-  const flags = await getAllFlags();
-
-  // Check flags, send to `app` version if on
-  if (flags.gamesAppPage && pathname === '/games') {
-    const newUrl = new URL(
-      `/app-future${request.nextUrl.pathname}`,
-      request.nextUrl,
-    );
-    return NextResponse.rewrite(newUrl);
-  }
-
-  if (flags.homeAppPage && pathname === '/') {
-    const newUrl = new URL(
-      `/app-future${request.nextUrl.pathname}`,
-      request.nextUrl,
-    );
-    return NextResponse.rewrite(newUrl);
-  }
-
-  if (flags.playersAppPage && pathname.startsWith('/channels')) {
-    const newUrl = new URL(
-      `/app-future${request.nextUrl.pathname}`,
-      request.nextUrl,
-    );
-    return NextResponse.rewrite(newUrl);
-  }
+  // const flags = await getAllFlags();
 
   // Send user to `pages` version
   return NextResponse.next();
