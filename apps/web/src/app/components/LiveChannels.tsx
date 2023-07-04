@@ -28,6 +28,7 @@ export const LiveChannels = async () => {
               urlSafeName: channel.urlSafeName,
               id: channel.id,
               imageSrc: channel.image,
+              isLive: true,
             };
           })}
           linkBasePath="/channel"
