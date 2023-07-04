@@ -3,7 +3,7 @@
 import { Slot } from '@radix-ui/react-slot';
 import { ChevronRight } from 'lucide-icons-react';
 import { User } from '../../icons';
-import { AvatarFallback, Avatar, AvatarImage } from '../Avatar';
+import { Avatar } from '../Avatar';
 import { P, typographyVariants } from '../Typography';
 import { cn } from '../utils';
 import type { NextLinkType } from '../../../utils';
@@ -14,6 +14,7 @@ export interface ChannelListItemProps {
   imageSrc: string;
   name: string;
   urlSafeName: string;
+  isLive?: boolean;
 }
 
 // LEGACY: Make sure that the link is converted to a hyperlink if it is incomplete from the database.
@@ -54,16 +55,13 @@ export interface ChannelListItemProps {
 //   return arrToBuild;
 // };
 
-const ShineLoader = () => {
-  return <div className="w-full h-full animate-pulse bg-zinc-700" />;
-};
-
 export const ChannelListItem = ({
   imageSrc,
   name,
   linkComponent,
   linkBasePath,
   urlSafeName,
+  isLive,
 }: ChannelListItemProps) => {
   const LinkComponent = linkComponent;
   const formattedLinkBase = linkBasePath.endsWith('/')
@@ -78,12 +76,7 @@ export const ChannelListItem = ({
       >
         <div className="relative flex flex-row items-center flex-shrink w-4/5 gap-6 m-w-0">
           {imageSrc ? (
-            <Avatar>
-              <AvatarFallback>
-                <ShineLoader />
-              </AvatarFallback>
-              <AvatarImage src={imageSrc} alt={name} />
-            </Avatar>
+            <Avatar imageSrc={imageSrc} username={name} isLive={isLive} />
           ) : (
             <div className="text-gray-500 flex justify-center items-center overflow-hidden border w-[40px] h-[40px] border-gray-500 rounded-full">
               <User strokeWidth={0.75} width={30} height={30} />

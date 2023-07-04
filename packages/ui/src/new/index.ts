@@ -12,7 +12,7 @@ export {
 } from './Accordion';
 export { SidebarSeparator } from './AppShell/sidebar/Separator';
 export { Loader } from './Loader';
-export { Avatar, AvatarFallback, AvatarImage } from './Avatar';
+export { Avatar } from './Avatar';
 export * from './Prose';
 export { ChannelList } from './ChannelList';
 export * from './Badge';

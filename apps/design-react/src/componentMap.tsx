@@ -1,8 +1,6 @@
 import * as Icons from '@kittr/ui/icons';
 import {
   Avatar,
-  AvatarFallback,
-  AvatarImage,
   Badge,
   BlockQuote,
   GameCard,
@@ -27,10 +25,11 @@ export const components = {
   avatar: {
     name: 'Avatar',
     components: [
-      <Avatar key="avatar">
-        <AvatarImage alt="@shadcn" src="https://github.com/shadcn.png" />
-        <AvatarFallback>CN</AvatarFallback>
-      </Avatar>,
+      <Avatar
+        imageSrc="https://github.com/shadcn.png"
+        key="avatar"
+        username="@shadcn"
+      />,
     ],
   },
   badge: {

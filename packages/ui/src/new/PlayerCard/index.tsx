@@ -1,6 +1,6 @@
 import { Span, P } from '../Typography';
 import { cn } from '../utils';
-import { Avatar, AvatarFallback, AvatarImage } from '../Avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '../Avatar/Primitive';
 
 interface PlayerCardProps {
   name: string;

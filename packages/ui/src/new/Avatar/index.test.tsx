@@ -4,7 +4,7 @@ import {
   screen,
   waitForElementToBeRemoved,
 } from '@testing-library/react';
-import { Avatar, AvatarFallback, AvatarImage } from '.';
+import { Avatar, AvatarFallback, AvatarImage } from './Primitive';
 
 describe('<Avatar />', () => {
   test('Mounts', () => {
