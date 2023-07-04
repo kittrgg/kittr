@@ -1,4 +1,4 @@
-import { getAllFlags } from '@kittr/flags';
+// import { getAllFlags } from '@kittr/flags';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
@@ -10,7 +10,7 @@ export const config = {
   ],
 };
 
-export async function middleware(request: NextRequest) {
+export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   // Protect from directly accessing /app-future routes

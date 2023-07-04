@@ -1,15 +1,14 @@
-import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 import { prisma } from '@kittr/prisma';
-import { Metadata } from 'next';
-import { getGameDisplayNameFromUrlSafeName } from '@/fetches/games';
-import { db, eq, games } from '@kittr/db';
+import type { Metadata } from 'next';
 import { ChannelList, H1 } from '@kittr/ui/new';
 import { Suspense } from 'react';
-import { countChannels } from '@/fetches/countChannels';
 import { download } from '@kittr/firebase/storage';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight } from '@kittr/ui/icons';
 import { notFound } from 'next/navigation';
+import { countChannels } from '@/fetches/countChannels';
+import { getGameDisplayNameFromUrlSafeName } from '@/fetches/games';
+import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 
 const CHANNELS_PER_PAGE = 12;
 interface Params {
@@ -22,10 +21,10 @@ export const generateMetadata = async ({
 }: {
   params: Params;
 }): Promise<Metadata> => {
-  const gameName = getGameDisplayNameFromUrlSafeName(params.game);
+  const game = await getGameDisplayNameFromUrlSafeName(params.game);
 
   return generateKittrMetadata({
-    title: `${gameName} - Page ${params.pageNumber}`,
+    title: `${game.displayName} - Page ${params.pageNumber}`,
     description: 'Find your favorite creators on kittr.',
     canonicalURL: `/games/${params.game}/${params.pageNumber}`,
   });
@@ -66,12 +65,12 @@ const Page = async ({ params }: { params: Params }) => {
     })),
   );
 
-  const gameName = await getGameDisplayNameFromUrlSafeName(params.game);
+  const game = await getGameDisplayNameFromUrlSafeName(params.game);
 
   return (
     <div className="flex flex-col gap-6">
       <H1>Channels</H1>
-      <p>Find your favorite creators playing {gameName.displayName}.</p>
+      <p>Find your favorite creators playing {game.displayName}.</p>
       <Suspense>
         <ChannelList
           channels={channelsWithImages.map((channel) => ({
