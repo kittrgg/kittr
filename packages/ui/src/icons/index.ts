@@ -23,3 +23,4 @@ export {
   X,
 } from 'lucide-icons-react';
 export { Google, Twitch, Youtube, Twitter, Tiktok, Discord } from './brands';
+export { Gem } from './customs';

@@ -4,6 +4,7 @@ export interface GenerateKittrMetadataArgs {
   title: string;
   description: string;
   canonicalURL: string;
+  noIndex?: boolean;
   shallowOverwrites?: Metadata;
 }
 
@@ -11,6 +12,7 @@ export const generateKittrMetadata = ({
   title,
   description,
   shallowOverwrites,
+  noIndex,
   canonicalURL,
 }: GenerateKittrMetadataArgs): Metadata => {
   const ogImages = [encodeURI(`/api/og?title=${title}`)];
@@ -25,6 +27,7 @@ export const generateKittrMetadata = ({
     title: ogTitle,
     applicationName: 'kittr',
     description,
+    robots: noIndex ? 'noindex' : undefined,
     openGraph: {
       type: 'website',
       images: ogImages,

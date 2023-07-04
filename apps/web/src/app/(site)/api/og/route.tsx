@@ -1,5 +1,5 @@
 import { ImageResponse } from 'next/server';
-import { interBold, interRegular } from '@/app/api/og/fonts';
+import { interBold, interRegular } from '@/app/(site)/api/og/fonts';
 
 const baseURL = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
