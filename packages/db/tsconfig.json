@@ -1,5 +1,8 @@
 {
   "extends": "@kittr/tsconfig/base.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json"
+  },
   "include": ["src", "drizzle.config.ts", "drizzle"],
   "exclude": ["node_modules"]
 }
