@@ -10,7 +10,7 @@
     "format": "turbo format format-root --continue",
     "format-root": "prettier \"**/*.{ts,tsx,md,mdx,json}\" \"!apps/**\" \"!packages/**\" --check",
     "format:fix": "turbo format format-root --continue -- --write",
-    "lint": "turbo lint --continue",
+    "lint": "turbo lint --continue -- --cache --cache-location 'node_modules/.cache/.eslintcache'",
     "lint-staged": "lint-staged",
     "lint:fix": "turbo lint --continue -- --fix",
     "prepare": "husky install",

@@ -65,6 +65,7 @@
       "outputMode": "new-only"
     },
     "lint": {
+      "outputs": ["node_modules/.cache/.eslintcache"],
       "dependsOn": ["^topo"],
       "outputMode": "new-only"
     },
