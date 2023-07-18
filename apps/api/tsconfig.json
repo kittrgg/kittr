@@ -1,6 +1,7 @@
 {
   "extends": "@kittr/tsconfig/base.json",
   "compilerOptions": {
+    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json",
     "baseUrl": "./src",
     "outDir": "dist",
     "paths": {
