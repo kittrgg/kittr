@@ -2,7 +2,7 @@
   "extends": ["//"],
   "pipeline": {
     "db:generate": {
-      "outputs": ["../../node_modules/.prisma/**"],
+      "outputs": ["../../node_modules/.prisma/**", "validator/**"],
       "outputMode": "new-only"
     },
     "db:deploy": {
