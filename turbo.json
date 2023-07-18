@@ -45,16 +45,7 @@
       ]
     },
     "topo": {
-      "dependsOn": ["db:generate", "^topo"]
-    },
-    "db:deploy": {
-      "cache": false
-    },
-    "db:generate": {
-      "cache": false
-    },
-    "db:push": {
-      "cache": false
+      "dependsOn": ["@kittr/prisma#db:generate", "^topo"]
     },
     "//#format-root": {
       "dependsOn": ["^topo"],
