@@ -15,7 +15,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@prisma/client": "^4.13.0"
+    "@prisma/client": "^5.0.0"
   },
   "devDependencies": {
     "@kittr/lint": "workspace:*",
@@ -23,7 +23,7 @@
     "@kittr/tsconfig": "workspace:*",
     "@types/node": "^16.18.11",
     "eslint": "^8.42.0",
-    "prisma": "^4.13.0",
+    "prisma": "^5.0.0",
     "ts-node": "10.9.1",
     "tsup": "5.12.0",
     "typescript": "^5.1.3",
