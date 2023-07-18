@@ -1,18 +1,25 @@
-import { H2, ChannelList } from '@kittr/ui/new';
+import { H2, CreatorList } from '@kittr/ui/new';
 import { prisma } from '@kittr/prisma';
 import Link from 'next/link';
 import { download } from '@kittr/firebase/storage';
 import { Suspense } from 'react';
+import { getTopCreatorPopularities } from '@kittr/metrics';
 
 export const TopChannels = async () => {
-  const channels = await prisma.channel.findMany({
+  const popularities = await getTopCreatorPopularities({ limit: 10 });
+
+  if (!popularities) {
+    throw new Error('Issue querying Axiom for home page.');
+  }
+
+  const channelsRaw = await prisma.channel.findMany({
     where: {
+      id: {
+        in: popularities.map((p) => p.id),
+      },
       profile: {
         hasProfileImage: true,
       },
-    },
-    orderBy: {
-      viewCount: 'desc',
     },
     take: 10,
     include: {
@@ -21,19 +28,27 @@ export const TopChannels = async () => {
     },
   });
 
-  const channelsWithImages = await Promise.all(
-    channels.map(async (channel) => ({
+  const channelsWithImagesAndPopularity = await Promise.all(
+    channelsRaw.map(async (channel) => ({
       ...channel,
       image: await download(channel.id),
+      // We know these channels will be found because the Prisma query uses `in`
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      viewCount: popularities.find((pop) => pop.id === channel.id)!
+        .pageViewCount,
     })),
   );
 
+  const channels = channelsWithImagesAndPopularity.sort((a, b) => {
+    return b.viewCount - a.viewCount;
+  });
+
   return (
     <section className="flex flex-col gap-4">
-      <H2>Top channels</H2>
+      <H2>Top creators</H2>
       <Suspense>
-        <ChannelList
-          channels={channelsWithImages.map((channel) => {
+        <CreatorList
+          creators={channels.map((channel) => {
             return {
               imageSrc: channel.image,
               name: channel.displayName,

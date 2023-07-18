@@ -25,7 +25,7 @@ interface Props {
 }
 
 /** List of channels shown in a vertical list design. */
-export function ChannelList({
+export function CreatorList({
   data,
   itemBackgroundColor = colors.darker,
   gameLink,
@@ -78,7 +78,7 @@ export function ChannelList({
   );
 }
 
-export default ChannelList;
+export default CreatorList;
 
 // Styled Components
 

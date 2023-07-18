@@ -1,6 +1,6 @@
 import { prisma } from '@kittr/prisma';
 import type { Metadata } from 'next';
-import { ChannelList, H1 } from '@kittr/ui/new';
+import { CreatorList, H1 } from '@kittr/ui/new';
 import { Suspense } from 'react';
 import { download } from '@kittr/firebase/storage';
 import Link from 'next/link';
@@ -72,8 +72,8 @@ const Page = async ({ params }: { params: Params }) => {
       <H1>Channels</H1>
       <p>Find your favorite creators playing {game.displayName}.</p>
       <Suspense>
-        <ChannelList
-          channels={channelsWithImages.map((channel) => ({
+        <CreatorList
+          creators={channelsWithImages.map((channel) => ({
             id: channel.id,
             imageSrc: channel.imageSrc,
             name: channel.displayName,
