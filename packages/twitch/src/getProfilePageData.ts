@@ -1,4 +1,3 @@
-import type { UnwrapPromise } from '@kittr/prisma';
 import type {
   ITwitchScheduleSegment,
   ITwitchClip,
@@ -42,6 +41,6 @@ export const profilePageQuery = async (twitchLink: string) => {
   return response;
 };
 
-export type ProfilePageQueryReturnType = UnwrapPromise<
+export type ProfilePageQueryReturnType = Awaited<
   ReturnType<typeof profilePageQuery>
 >;
