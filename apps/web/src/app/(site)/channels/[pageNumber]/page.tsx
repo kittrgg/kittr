@@ -1,4 +1,4 @@
-import { ChannelList, H1 } from '@kittr/ui/new';
+import { CreatorList, H1 } from '@kittr/ui/new';
 import { notFound } from 'next/navigation';
 import { download } from '@kittr/firebase/storage';
 import Link from 'next/link';
@@ -60,8 +60,8 @@ async function Page({ params }: { params: Params }) {
         Select a channel to view their page with their games and featured kits.
       </p>
       <Suspense>
-        <ChannelList
-          channels={channelsWithImages.map((channel) => ({
+        <CreatorList
+          creators={channelsWithImages.map((channel) => ({
             id: channel.id,
             imageSrc: channel.imageSrc,
             name: channel.displayName,

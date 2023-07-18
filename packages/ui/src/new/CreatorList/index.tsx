@@ -1,9 +1,9 @@
 'use client';
 
-import type { ChannelListItemProps } from './Item';
-import { ChannelListItem } from './Item';
+import type { CreatorListItemProps } from './Item';
+import { CreatorListItem } from './Item';
 
-export interface ChannelListProps {
+export interface CreatorListProps {
   // Typed copied from next/link internals
   linkComponent: React.ForwardRefExoticComponent<
     Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> &
@@ -13,32 +13,32 @@ export interface ChannelListProps {
       } & { href: any }
   >;
   linkBasePath: string;
-  channels: Omit<ChannelListItemProps, 'linkBasePath' | 'linkComponent'>[];
+  creators: Omit<CreatorListItemProps, 'linkBasePath' | 'linkComponent'>[];
   disableResponsive?: boolean;
 }
 
-export const ChannelList = ({
-  channels,
+export const CreatorList = ({
+  creators,
   linkBasePath,
   linkComponent,
   disableResponsive,
-}: ChannelListProps) => {
+}: CreatorListProps) => {
   return (
     <div
       className={`grid grid-cols-1 gap-4 ${
         disableResponsive ? '' : 'lg:grid-cols-3 xl:grid-cols-4'
       }`}
     >
-      {channels.map((channel) => {
+      {creators.map((creator) => {
         return (
-          <ChannelListItem
+          <CreatorListItem
             linkComponent={linkComponent}
             linkBasePath={linkBasePath}
-            key={channel.name}
-            imageSrc={channel.imageSrc}
-            name={channel.name}
-            urlSafeName={channel.urlSafeName}
-            isLive={channel.isLive}
+            key={creator.name}
+            imageSrc={creator.imageSrc}
+            name={creator.name}
+            urlSafeName={creator.urlSafeName}
+            isLive={creator.isLive}
           />
         );
       })}

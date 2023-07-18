@@ -1,14 +1,31 @@
-import { H2, ChannelList } from '@kittr/ui/new';
+import { H2, CreatorList } from '@kittr/ui/new';
 import Link from 'next/link';
+import { getRisingCreators } from '@kittr/metrics';
 import { download } from '@kittr/firebase/storage';
 import { Suspense } from 'react';
-import { risingChannels } from '@/fetches/risingChannels';
+import { prisma } from '@kittr/prisma';
 
 export const RisingChannels = async () => {
-  const channels = await risingChannels();
+  // const channels = await risingChannels();
+  const risingCreators = await getRisingCreators({ limit: 20 });
 
-  const channelsWithImages = await Promise.all(
-    channels.map(async (channel) => ({
+  if (!risingCreators) {
+    throw new Error('Errored fetching new rising creators.');
+  }
+
+  const creators = await prisma.channel.findMany({
+    where: {
+      id: {
+        in: risingCreators.map((creator) => creator.id),
+      },
+      profile: {
+        hasProfileImage: true,
+      },
+    },
+  });
+
+  const creatorsWithImages = await Promise.all(
+    creators.slice(10).map(async (channel) => ({
       ...channel,
       image: await download(channel.id),
     })),
@@ -16,11 +33,11 @@ export const RisingChannels = async () => {
 
   return (
     <section className="flex flex-col gap-4">
-      <H2>Rising channels</H2>
+      <H2>Rising creators</H2>
 
       <Suspense>
-        <ChannelList
-          channels={channelsWithImages.map((channel) => {
+        <CreatorList
+          creators={creatorsWithImages.map((channel) => {
             return {
               imageSrc: channel.image,
               name: channel.displayName,

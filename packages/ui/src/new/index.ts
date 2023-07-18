@@ -14,7 +14,7 @@ export { SidebarSeparator } from './AppShell/sidebar/Separator';
 export { Loader } from './Loader';
 export { Avatar } from './Avatar';
 export * from './Prose';
-export { ChannelList } from './ChannelList';
+export { CreatorList } from './CreatorList';
 export * from './Badge';
 export * from './GameCard';
 export * from './PlayerCard';

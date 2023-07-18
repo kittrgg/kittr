@@ -1,4 +1,4 @@
-import { H2, ChannelList } from '@kittr/ui/new';
+import { H2, CreatorList } from '@kittr/ui/new';
 import { liveChannelsQuery } from '@kittr/twitch';
 import Link from 'next/link';
 import { download } from '@kittr/firebase/storage';
@@ -21,8 +21,8 @@ export const LiveChannels = async () => {
       <H2>Live now</H2>
 
       <Suspense>
-        <ChannelList
-          channels={channelsWithImages.map((channel) => {
+        <CreatorList
+          creators={channelsWithImages.map((channel) => {
             return {
               name: channel.displayName,
               urlSafeName: channel.urlSafeName,

@@ -8,7 +8,7 @@ import { P, typographyVariants } from '../Typography';
 import { cn } from '../utils';
 import type { NextLinkType } from '../../../utils';
 
-export interface ChannelListItemProps {
+export interface CreatorListItemProps {
   linkComponent: NextLinkType;
   linkBasePath: string;
   imageSrc: string;
@@ -35,9 +35,9 @@ export interface ChannelListItemProps {
 // const socialSort = ({
 //   socials,
 // }: {
-//   socials: ChannelListItemProps['socials'];
+//   socials: CreatorListItemProps['socials'];
 // }): {
-//   property: keyof ChannelListItemProps['socials'];
+//   property: keyof CreatorListItemProps['socials'];
 //   url: string;
 // }[] => {
 //   const arrToBuild: ReturnType<typeof socialSort> = [];
@@ -46,7 +46,7 @@ export interface ChannelListItemProps {
 //     const found = entries.find((entry) => entry[0] === social);
 //     if (found) {
 //       arrToBuild.push({
-//         property: found[0] as keyof ChannelListItemProps['socials'],
+//         property: found[0] as keyof CreatorListItemProps['socials'],
 //         url: formatLink(found[1]),
 //       });
 //     }
@@ -55,14 +55,14 @@ export interface ChannelListItemProps {
 //   return arrToBuild;
 // };
 
-export const ChannelListItem = ({
+export const CreatorListItem = ({
   imageSrc,
   name,
   linkComponent,
   linkBasePath,
   urlSafeName,
   isLive,
-}: ChannelListItemProps) => {
+}: CreatorListItemProps) => {
   const LinkComponent = linkComponent;
   const formattedLinkBase = linkBasePath.endsWith('/')
     ? linkBasePath

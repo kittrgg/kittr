@@ -8,7 +8,7 @@ import { Routes } from '@Utils/lookups/routes';
 import { useRef } from 'react';
 import styled from 'styled-components';
 import Channel from './Channel';
-import ChannelList from './ChannelList';
+import CreatorList from './CreatorList';
 import EmailVerification from './EmailVerificationForm';
 import Login from './Login';
 import Profile from './Profile';
@@ -77,7 +77,7 @@ function Dashboard() {
       <Container ref={containerRef}>
         {modal.type === 'Error Notification' && <ErrorNotification />}
         {modal.type === 'Tutorial' && <Tutorial />}
-        {view === 'Channel List' && <ChannelList />}
+        {view === 'Channel List' && <CreatorList />}
         {view === 'Profile Settings' && <Profile />}
         {view === 'Channel' && <Channel containerRef={containerRef} />}
       </Container>

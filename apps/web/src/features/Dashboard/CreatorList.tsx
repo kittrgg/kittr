@@ -25,7 +25,7 @@ import LogoutButton from './ProfileButtons';
 import { trpc } from '@/lib/trpc';
 
 /** List the channels for a user */
-function ChannelList() {
+function CreatorList() {
   const dispatch = useDispatch();
   const modalData = useModal().data;
   const ref = useRef() as MutableRefObject<HTMLButtonElement>;
@@ -193,7 +193,7 @@ function ChannelList() {
   );
 }
 
-export default ChannelList;
+export default CreatorList;
 
 // Styled Components
 
