@@ -4,6 +4,7 @@ export { log } from 'next-axiom';
 
 interface GetCreatorPopularities {
   limit: number;
+  field: 'channelId' | 'displayName';
 }
 
 export const getTopCreatorPopularities = async (
@@ -11,6 +12,7 @@ export const getTopCreatorPopularities = async (
 ) => {
   const defaultOptions: GetCreatorPopularities = {
     limit: 10,
+    field: 'channelId',
   };
   const options = { ...defaultOptions, ...opts };
   const { limit } = options;
