@@ -27,10 +27,7 @@
     "prettier": "2.7.1",
     "prettier-plugin-packagejson": "^2.4.3",
     "shell-quote": "^1.8.1",
-    "turbo": "latest"
+    "turbo": "canary"
   },
-  "packageManager": "pnpm@8.2.0",
-  "prisma": {
-    "schema": "./packages/prisma/schema.prisma"
-  }
+  "packageManager": "pnpm@8.2.0"
 }
