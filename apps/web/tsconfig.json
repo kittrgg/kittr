@@ -1,6 +1,7 @@
 {
   "extends": "@kittr/tsconfig/nextjs.json",
   "compilerOptions": {
+    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json",
     "plugins": [{ "name": "next" }],
     "baseUrl": "./src",
     "declarationMap": false,

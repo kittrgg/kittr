@@ -56,11 +56,14 @@
       "outputMode": "new-only"
     },
     "lint": {
+      "outputs": ["node_modules/.cache/.eslintcache"],
       "dependsOn": ["^topo"],
       "outputMode": "new-only"
     },
     "typecheck": {
-      "dependsOn": ["^topo"]
+      "dependsOn": ["^topo"],
+      "outputs": ["node_modules/.cache/tsbuildinfo.json"],
+      "outputMode": "errors-only"
     },
     "test": {
       "dependsOn": ["^topo"],

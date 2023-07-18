@@ -1,7 +1,7 @@
 import { H1, H2, P, typographyVariants } from '@kittr/ui/new';
 import Image from 'next/image';
 import { generateKittrMetadata } from '@/app/generateKittrMetadata';
-import { ContactButton } from '@/app/contact/ContactButton';
+import { ContactButton } from '@/app/(site)/contact/ContactButton';
 
 export const generateMetadata = () =>
   generateKittrMetadata({
