@@ -6,7 +6,6 @@ import { Suspense } from 'react';
 import { prisma } from '@kittr/prisma';
 
 export const RisingChannels = async () => {
-  // const channels = await risingChannels();
   const risingCreators = await getRisingCreators({ limit: 20 });
 
   if (!risingCreators) {
@@ -25,7 +24,7 @@ export const RisingChannels = async () => {
   });
 
   const creatorsWithImages = await Promise.all(
-    creators.slice(10).map(async (channel) => ({
+    creators.map(async (channel) => ({
       ...channel,
       image: await download(channel.id),
     })),
