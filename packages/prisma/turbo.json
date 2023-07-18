@@ -1,0 +1,15 @@
+{
+  "extends": ["//"],
+  "pipeline": {
+    "db:generate": {
+      "outputs": ["../../node_modules/.prisma/**", "validator/**"],
+      "outputMode": "new-only"
+    },
+    "db:deploy": {
+      "cache": false
+    },
+    "db:push": {
+      "cache": false
+    }
+  }
+}
