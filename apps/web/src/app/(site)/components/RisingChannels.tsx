@@ -7,7 +7,7 @@ import { prisma } from '@kittr/prisma';
 
 export const RisingChannels = async () => {
   // const channels = await risingChannels();
-  const risingCreators = await getRisingCreators();
+  const risingCreators = await getRisingCreators({ limit: 20 });
 
   if (!risingCreators) {
     throw new Error('Errored fetching new rising creators.');
@@ -18,11 +18,14 @@ export const RisingChannels = async () => {
       id: {
         in: risingCreators.map((creator) => creator.id),
       },
+      profile: {
+        hasProfileImage: true,
+      },
     },
   });
 
   const creatorsWithImages = await Promise.all(
-    creators.map(async (channel) => ({
+    creators.slice(10).map(async (channel) => ({
       ...channel,
       image: await download(channel.id),
     })),
