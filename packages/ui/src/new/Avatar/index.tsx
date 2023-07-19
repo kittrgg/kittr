@@ -1,3 +1,4 @@
+import { download } from '@kittr/firebase/storage';
 import { AvatarShineLoader } from '../Loader';
 import { User } from '../../icons';
 import {
@@ -7,19 +8,25 @@ import {
 } from './Primitive';
 
 interface AvatarProps {
-  imageSrc: string;
+  id: string;
+  hasProfileImg?: boolean;
   username: string;
   isLive?: boolean;
 }
 
-export const Avatar = ({ imageSrc, username, isLive }: AvatarProps) => {
-  return imageSrc ? (
+export const Avatar = async ({
+  id,
+  hasProfileImg,
+  username,
+  isLive,
+}: AvatarProps) => {
+  return hasProfileImg ? (
     <div className="relative">
       <AvatarPrimitive>
         <AvatarFallback>
           <AvatarShineLoader />
         </AvatarFallback>
-        <AvatarImage src={imageSrc} alt={username} />
+        <AvatarImage src={await download(id)} alt={username} />
       </AvatarPrimitive>
       {isLive ? (
         <span className="absolute top-0 z-10 block w-2.5 h-2.5 animate-pulse text-white bg-red-600 rounded-full" />

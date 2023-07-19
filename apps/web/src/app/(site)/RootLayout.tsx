@@ -1,14 +1,17 @@
 'use client';
 
 import Image from 'next/image';
-import { AppShell } from '@kittr/ui/new';
 import Link from 'next/link';
+import { AppShell } from '@kittr/ui/new';
 import { usePathname } from 'next/navigation';
 import { inter } from '../fonts';
-import { Nav } from '@/app/(site)/Nav';
+import { MainSiteNav } from '@/app/(site)/MainSiteNav';
+import { CreatorProfileNav } from '@/app/(site)/CreatorProfileNav';
 
 export function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+
+  const isCreatorProfile = pathname?.startsWith('/channel');
 
   return (
     <html className={`${inter.variable}`} lang="en">
@@ -38,7 +41,7 @@ export function RootLayout({ children }: { children: React.ReactNode }) {
             { href: '/terms-of-use', children: 'Terms' },
             { href: '/privacy-policy', children: 'Privacy' },
           ]}
-          nav={<Nav />}
+          nav={isCreatorProfile ? <CreatorProfileNav /> : <MainSiteNav />}
           pathnameForCloseHook={pathname ?? ''}
         >
           {children}

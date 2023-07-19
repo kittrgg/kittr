@@ -22,5 +22,13 @@ export {
   Type,
   X,
 } from 'lucide-icons-react';
-export { Google, Twitch, Youtube, Twitter, Tiktok, Discord } from './brands';
+export {
+  Google,
+  Twitch,
+  Youtube,
+  Twitter,
+  Tiktok,
+  Discord,
+  ChannelSocials,
+} from './brands';
 export { Gem } from './customs';

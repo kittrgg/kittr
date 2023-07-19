@@ -1,7 +1,16 @@
+import type { LinkProperty } from '@kittr/prisma';
 import { prisma } from '@kittr/prisma';
+import {
+  getTwitchLink,
+  grabLoginName,
+  getStreamLiveStatus,
+} from '@kittr/twitch';
 import { getTopCreatorPopularities } from '@kittr/metrics';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+import { Avatar, Button, H1, typographyVariants } from '@kittr/ui/new';
+import { ChannelSocials } from '@kittr/ui/icons';
+import { capitalizeFirst } from '@kittr/utils';
 import { getChannel } from './getChannel';
 import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 
@@ -62,8 +71,45 @@ async function ChannelProfilePage({ params }: PageParams) {
     return notFound();
   }
 
-  return <pre>{JSON.stringify(channel, null, 2)}</pre>;
-  // return <ChannelProfile />;
+  const twitchLink = grabLoginName(getTwitchLink(channel));
+  const liveStatus = await getStreamLiveStatus(twitchLink);
+
+  // List of socials
+
+  return (
+    <>
+      <div className="flex flex-row gap-4">
+        <Avatar
+          hasProfileImg={channel.profile?.hasProfileImage}
+          id={channel.id}
+          isLive={liveStatus}
+          username={channel.displayName}
+        />
+        <H1 preset="h3">{channel.displayName}</H1>
+      </div>
+
+      <div className="flex flex-col gap-4">
+        {channel.links.map((link) => {
+          return (
+            <Button key={link.property} variant="outline">
+              <a
+                className="flex flex-row items-center justify-center gap-4"
+                href={link.value}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                {ChannelSocials({
+                  property:
+                    link.property.toLowerCase() as Lowercase<LinkProperty>,
+                })}
+                <p>{capitalizeFirst(link.property)}</p>
+              </a>
+            </Button>
+          );
+        })}
+      </div>
+    </>
+  );
 }
 
 export default ChannelProfilePage;

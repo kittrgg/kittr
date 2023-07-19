@@ -7,10 +7,10 @@ import { LayoutGrid, Users, Gamepad } from '@kittr/ui/icons';
 import Link from 'next/link';
 import Image from 'next/image';
 
-export function Nav() {
+export function MainSiteNav() {
   return (
     <>
-      <AppShellLinkItem className="m-0 flex flex-row items-center justify-center">
+      <AppShellLinkItem className="flex flex-row items-center justify-center m-0">
         <Link className="flex flex-row items-center justify-center" href="/">
           <Image
             alt="kittr logo"
