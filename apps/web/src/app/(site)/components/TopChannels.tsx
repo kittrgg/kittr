@@ -39,7 +39,7 @@ export const TopChannels = async () => {
     })),
   );
 
-  const channels = channelsWithImagesAndPopularity.sort((a, b) => {
+  const creators = channelsWithImagesAndPopularity.sort((a, b) => {
     return b.viewCount - a.viewCount;
   });
 
@@ -48,10 +48,11 @@ export const TopChannels = async () => {
       <H2>Top creators</H2>
       <Suspense>
         <CreatorList
-          creators={channels.map((channel) => {
+          creators={creators.map((channel) => {
             return {
               imageSrc: channel.image,
               name: channel.displayName,
+              hasAvatar: channel.profile?.hasProfileImage ?? false,
               urlSafeName: channel.urlSafeName,
               id: channel.id,
             };

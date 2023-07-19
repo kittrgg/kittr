@@ -23,25 +23,18 @@ export const RisingChannels = async () => {
     },
   });
 
-  const creatorsWithImages = await Promise.all(
-    creators.map(async (channel) => ({
-      ...channel,
-      image: await download(channel.id),
-    })),
-  );
-
   return (
     <section className="flex flex-col gap-4">
       <H2>Rising creators</H2>
 
       <Suspense>
         <CreatorList
-          creators={creatorsWithImages.map((channel) => {
+          creators={creators.map((creator) => {
             return {
-              imageSrc: channel.image,
-              name: channel.displayName,
-              urlSafeName: channel.urlSafeName,
-              id: channel.id,
+              name: creator.displayName,
+              hasAvatar: true,
+              urlSafeName: creator.urlSafeName,
+              id: creator.id,
             };
           })}
           linkBasePath="/channel"

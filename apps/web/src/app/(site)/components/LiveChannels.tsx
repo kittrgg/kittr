@@ -26,6 +26,7 @@ export const LiveChannels = async () => {
             return {
               name: channel.displayName,
               urlSafeName: channel.urlSafeName,
+              hasAvatar: channel.profile?.hasProfileImage ?? false,
               id: channel.id,
               imageSrc: channel.image,
               isLive: true,

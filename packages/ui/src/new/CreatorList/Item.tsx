@@ -9,9 +9,10 @@ import { cn } from '../utils';
 import type { NextLinkType } from '../../../utils';
 
 export interface CreatorListItemProps {
+  id: string;
+  hasAvatar: boolean;
   linkComponent: NextLinkType;
   linkBasePath: string;
-  imageSrc: string;
   name: string;
   urlSafeName: string;
   isLive?: boolean;
@@ -56,9 +57,10 @@ export interface CreatorListItemProps {
 // };
 
 export const CreatorListItem = ({
-  imageSrc,
   name,
   linkComponent,
+  id,
+  hasAvatar,
   linkBasePath,
   urlSafeName,
   isLive,
@@ -75,8 +77,15 @@ export const CreatorListItem = ({
         prefetch={false}
       >
         <div className="relative flex flex-row items-center flex-shrink w-4/5 gap-6 m-w-0">
-          {imageSrc ? (
-            <Avatar imageSrc={imageSrc} username={name} isLive={isLive} />
+          {hasAvatar ? (
+            // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment
+            // @ts-ignore Async component outside of Next.js context
+            <Avatar
+              id={id}
+              hasProfileImg={hasAvatar}
+              username={name}
+              isLive={isLive}
+            />
           ) : (
             <div className="text-gray-500 flex justify-center items-center overflow-hidden border w-[40px] h-[40px] border-gray-500 rounded-full">
               <User strokeWidth={0.75} width={30} height={30} />

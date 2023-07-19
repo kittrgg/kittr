@@ -8,6 +8,7 @@
     "./new": "./src/new/index.ts",
     "./hooks": "./src/hooks/index.ts",
     "./icons": "./src/icons/index.ts",
+    "./social-icons": "./src/icons/socials.tsx",
     "./styles.css": "./dist/compiled.css"
   },
   "typesVersions": {
@@ -23,6 +24,9 @@
       ],
       "icons": [
         "./src/icons/index.ts"
+      ],
+      "social-icons": [
+        "./src/icons/socials.tsx"
       ]
     }
   },

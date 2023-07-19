@@ -8,8 +8,8 @@ import {
 import { getTopCreatorPopularities } from '@kittr/metrics';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { Avatar, Button, H1, typographyVariants } from '@kittr/ui/new';
-import { ChannelSocials } from '@kittr/ui/icons';
+import { Avatar, Button, H1 } from '@kittr/ui/new';
+import { ChannelSocials } from '@kittr/ui/social-icons';
 import { capitalizeFirst } from '@kittr/utils';
 import { getChannel } from './getChannel';
 import { generateKittrMetadata } from '@/app/generateKittrMetadata';

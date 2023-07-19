@@ -76,6 +76,7 @@ const Page = async ({ params }: { params: Params }) => {
           creators={channelsWithImages.map((channel) => ({
             id: channel.id,
             imageSrc: channel.imageSrc,
+            hasAvatar: channel.profile?.hasProfileImage ?? false,
             name: channel.displayName,
             urlSafeName: channel.urlSafeName,
           }))}
