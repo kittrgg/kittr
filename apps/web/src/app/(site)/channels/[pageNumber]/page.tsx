@@ -1,6 +1,5 @@
 import { CreatorList, H1 } from '@kittr/ui/new';
 import { notFound } from 'next/navigation';
-import { download } from '@kittr/firebase/storage';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import { ChevronLeft, ChevronRight } from '@kittr/ui/icons';

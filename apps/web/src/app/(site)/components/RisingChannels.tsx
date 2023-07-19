@@ -1,7 +1,6 @@
 import { H2, CreatorList } from '@kittr/ui/new';
 import Link from 'next/link';
 import { getRisingCreators } from '@kittr/metrics';
-import { download } from '@kittr/firebase/storage';
 import { Suspense } from 'react';
 import { prisma } from '@kittr/prisma';
 
