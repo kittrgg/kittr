@@ -1,7 +1,7 @@
 import '../globals.css';
 import type { GenerateKittrMetadataArgs } from '@/app/generateKittrMetadata';
 import { generateKittrMetadata } from '@/app/generateKittrMetadata';
-import { RootLayout } from '@/app/(site)/RootLayout';
+import { RootLayout } from '@/app/(site)/components/RootLayout';
 
 export const generateMetadata = () => {
   return {

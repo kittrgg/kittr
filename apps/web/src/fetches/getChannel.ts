@@ -1,4 +1,3 @@
-import 'server-only';
 import { cache } from 'react';
 import { prisma } from '@kittr/prisma';
 

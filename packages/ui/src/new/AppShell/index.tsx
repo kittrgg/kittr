@@ -16,7 +16,7 @@ interface AppShellProps {
   children?: ReactNode;
   nav: ReactNode;
   linkComponent: NextLinkType;
-  links: { children: ReactNode; href: string }[];
+  footerLinks: { children: ReactNode; href: string }[];
   footerImage: ReactNode;
   pathnameForCloseHook: string;
 }
@@ -57,7 +57,7 @@ export const AppShell: React.FC<AppShellProps> = ({
   nav,
   footerImage,
   linkComponent,
-  links,
+  footerLinks: links,
   children,
   pathnameForCloseHook,
 }) => {
@@ -102,13 +102,12 @@ export const AppShell: React.FC<AppShellProps> = ({
         </div>
       </FocusTrap>
       <div className="container flex-auto bg-zinc-900 sm:ml-60">
-        <main className="flex flex-col min-h-screen gap-8 p-8 bg-zinc-900">
+        <main className="flex flex-col min-h-[calc(100vh-280px)] gap-8 p-8 bg-zinc-900">
           {children}
         </main>
         <footer className="flex flex-col gap-8 p-8 bg-neutral-900">
           <div className="m-auto">{footerImage}</div>
-          {/* Sorry about the !important for the breakopint but Tailwind isn't playing nice. */}
-          <div className="m-auto grid max-w-lg grid-cols-3 gap-10 md:!grid-cols-6 md:gap-6">
+          <div className="grid max-w-lg grid-cols-3 gap-10 m-auto md:grid-cols-6 md:gap-6">
             {links.slice(0, -2).map((link, ind) => {
               return (
                 <LinkComponent

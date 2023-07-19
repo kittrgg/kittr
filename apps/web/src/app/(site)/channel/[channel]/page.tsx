@@ -11,7 +11,7 @@ import type { Metadata } from 'next';
 import { Avatar, Button, H1 } from '@kittr/ui/new';
 import { ChannelSocials } from '@kittr/ui/social-icons';
 import { capitalizeFirst } from '@kittr/utils';
-import { getChannel } from './getChannel';
+import { getChannel } from '@/fetches/getChannel';
 import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 
 interface PageParams {
@@ -73,8 +73,6 @@ async function ChannelProfilePage({ params }: PageParams) {
 
   const twitchLink = grabLoginName(getTwitchLink(channel));
   const liveStatus = await getStreamLiveStatus(twitchLink);
-
-  // List of socials
 
   return (
     <>

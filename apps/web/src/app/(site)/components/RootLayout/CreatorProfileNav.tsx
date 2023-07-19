@@ -1,13 +1,17 @@
-import {
-  AppShellLinkItem,
-  SidebarSeparator,
-  SidebarHeader,
-} from '@kittr/ui/new';
 import { LayoutGrid, Users, Gamepad } from '@kittr/ui/icons';
+import { AppShellLinkItem, Button, SidebarSeparator } from '@kittr/ui/new';
 import Link from 'next/link';
 import Image from 'next/image';
+import { getChannel } from '@/fetches/getChannel';
 
-export function MainSiteNav() {
+export async function CreatorProfileNav({
+  creatorUrlSafeName,
+}: {
+  creatorUrlSafeName: string;
+}) {
+  // const channel = await getChannel(creatorUrlSafeName);
+  // console.log(channel);
+
   return (
     <>
       <AppShellLinkItem className="flex flex-row items-center justify-center m-0">
@@ -21,18 +25,13 @@ export function MainSiteNav() {
           />
         </Link>
       </AppShellLinkItem>
-      <SidebarSeparator />
 
-      <SidebarHeader>Profile</SidebarHeader>
       <AppShellLinkItem>
         <Link href="/dashboard">
           <LayoutGrid />
           Dashboard
         </Link>
       </AppShellLinkItem>
-      <SidebarSeparator />
-
-      {/* <SidebarHeader>Components</SidebarHeader> */}
 
       <AppShellLinkItem>
         <Link href="/games">
@@ -46,6 +45,18 @@ export function MainSiteNav() {
           Channels
         </Link>
       </AppShellLinkItem>
+
+      <SidebarSeparator />
+
+      {/* {channel?.games.map((game) => {
+        return (
+          <Button asChild key={game.urlSafeName}>
+            <Link href={`/channel/${creatorUrlSafeName}/${game.urlSafeName}`}>
+              {game.displayName}
+            </Link>
+          </Button>
+        );
+      })} */}
     </>
   );
 }
