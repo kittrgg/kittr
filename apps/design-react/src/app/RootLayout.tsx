@@ -36,8 +36,7 @@ export function RootLayout({
               <Image alt="kittr logo" height={48} src="/logo.svg" width={89} />
             </Link>
           }
-          linkComponent={Link}
-          links={[
+          footerLinks={[
             { href: '/', children: 'Home' },
             { href: '/test', children: 'About' },
             { href: '/test', children: 'Games' },
@@ -47,6 +46,7 @@ export function RootLayout({
             { href: '/test', children: 'Terms' },
             { href: '/test', children: 'Privacy' },
           ]}
+          linkComponent={Link}
           nav={<Nav />}
           pathnameForCloseHook={pathname}
         >

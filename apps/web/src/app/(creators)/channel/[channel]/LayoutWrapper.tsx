@@ -4,14 +4,13 @@ import { AppShell } from '@kittr/ui/new';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { ReactNode } from 'react';
-import { usePathname, useSelectedLayoutSegments } from 'next/navigation';
-import { CreatorProfileNav } from '@/app/(site)/components/RootLayout/CreatorProfileNav';
-import { MainSiteNav } from '@/app/(site)/components/RootLayout/MainSiteNav';
+import { usePathname } from 'next/navigation';
+import { CreatorProfileNav } from './CreatorProfileNav';
+import { getChannel } from '@/fetches/getChannel';
 
-export function AppShellWrapper({ children }: { children: ReactNode }) {
+export async function LayoutWrapper({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const segments = useSelectedLayoutSegments();
-  const isCreatorProfile = pathname?.startsWith('/channel');
+  // const creator = await getChannel(params.channel);
 
   return (
     <AppShell
@@ -36,13 +35,8 @@ export function AppShellWrapper({ children }: { children: ReactNode }) {
         { href: '/privacy-policy', children: 'Privacy' },
       ]}
       linkComponent={Link}
-      nav={
-        isCreatorProfile ? (
-          <CreatorProfileNav creatorUrlSafeName={segments[1]} />
-        ) : (
-          <MainSiteNav />
-        )
-      }
+      // nav={<CreatorProfileNav creator={creator} />}
+      nav={<></>}
       pathnameForCloseHook={pathname ?? ''}
     >
       {children}
