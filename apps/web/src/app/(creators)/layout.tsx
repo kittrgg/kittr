@@ -1,15 +1,8 @@
-import '../../../globals.css';
+import '../globals.css';
 
-import { AppShell } from '@kittr/ui/new';
-import Link from 'next/link';
-import Image from 'next/image';
 import type { ReactNode } from 'react';
-import { usePathname } from 'next/navigation';
-import { CreatorProfileNav } from './CreatorProfileNav';
 import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 import type { GenerateKittrMetadataArgs } from '@/app/generateKittrMetadata';
-import { getChannel } from '@/fetches/getChannel';
-import { LayoutWrapper } from '@/app/(creators)/channel/[channel]/LayoutWrapper';
 import { inter } from '@/app/fonts';
 
 export const generateMetadata = () => {
@@ -25,7 +18,13 @@ export const generateMetadata = () => {
 };
 
 export function Layout({ children }: { children: ReactNode }) {
-  return <LayoutWrapper>{children}</LayoutWrapper>;
+  return (
+    <html className={`${inter.variable}`} lang="en">
+      <body className="flex flex-row justify-center flex-grow w-full m-auto font-sans antialiased bg-zinc-800 ">
+        {children}
+      </body>
+    </html>
+  );
 }
 
 export default Layout;

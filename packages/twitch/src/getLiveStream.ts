@@ -10,5 +10,5 @@ export const getStreamLiveStatus = async (twitchUsername: string) => {
     redirect: 'follow',
   });
 
-  return data.data[0].type === 'live';
+  return Boolean(data.data[0]);
 };

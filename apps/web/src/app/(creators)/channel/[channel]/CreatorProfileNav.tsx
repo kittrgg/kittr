@@ -9,8 +9,8 @@ export async function CreatorProfileNav({
 }: {
   creatorUrlSafeName: string;
 }) {
-  // const channel = await getChannel(creatorUrlSafeName);
-  // console.log(channel);
+  const channel = await getChannel(creatorUrlSafeName);
+  console.log(channel);
 
   return (
     <>

@@ -6,11 +6,15 @@ import Image from 'next/image';
 import type { ReactNode } from 'react';
 import { usePathname } from 'next/navigation';
 import { CreatorProfileNav } from './CreatorProfileNav';
-import { getChannel } from '@/fetches/getChannel';
 
-export async function LayoutWrapper({ children }: { children: ReactNode }) {
+export async function LayoutWrapper({
+  children,
+  params,
+}: {
+  children: ReactNode;
+  params: { channel: string };
+}) {
   const pathname = usePathname();
-  // const creator = await getChannel(params.channel);
 
   return (
     <AppShell
@@ -35,8 +39,8 @@ export async function LayoutWrapper({ children }: { children: ReactNode }) {
         { href: '/privacy-policy', children: 'Privacy' },
       ]}
       linkComponent={Link}
-      // nav={<CreatorProfileNav creator={creator} />}
-      nav={<></>}
+      nav={<CreatorProfileNav creatorUrlSafeName={params.channel} />}
+      // nav={<></>}
       pathnameForCloseHook={pathname ?? ''}
     >
       {children}
