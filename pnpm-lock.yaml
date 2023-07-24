@@ -910,9 +910,6 @@ importers:
       '@kittr/prettier':
         specifier: workspace:*
         version: link:../config-prettier
-      '@types/eslint':
-        specifier: ^8.37.0
-        version: 8.37.0
 
   tooling/config-prettier:
     devDependencies:
@@ -6017,23 +6014,6 @@ packages:
       }
     dependencies:
       '@types/ms': 0.7.31
-    dev: true
-
-  /@types/eslint@8.37.0:
-    resolution:
-      {
-        integrity: sha512-Piet7dG2JBuDIfohBngQ3rCt7MgO9xCO4xIMKxBThCq5PNRB91IjlJ10eJVwfoNtvTErmxLzwBZ7rHZtbOMmFQ==,
-      }
-    dependencies:
-      '@types/estree': 1.0.1
-      '@types/json-schema': 7.0.12
-    dev: true
-
-  /@types/estree@1.0.1:
-    resolution:
-      {
-        integrity: sha512-LG4opVs2ANWZ1TJoKc937iMmNstM/d0ae1vNbnBvBhqCSezgVUOzcLCqbI5elV8Vy6WKwKjaqR+zO9VKirBBCA==,
-      }
     dev: true
 
   /@types/express-serve-static-core@4.17.35:

@@ -22,7 +22,6 @@
     "typescript": "^5.1.3"
   },
   "devDependencies": {
-    "@kittr/prettier": "workspace:*",
-    "@types/eslint": "^8.37.0"
+    "@kittr/prettier": "workspace:*"
   }
 }
