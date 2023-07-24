@@ -1,4 +1,3 @@
-import { cache } from 'react';
 import { prisma } from '@kittr/prisma';
 
 export const getChannel = async (urlSafeName: string) => {
