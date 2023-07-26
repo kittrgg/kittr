@@ -1,1 +1,0 @@
-# `@kittr/prettier`

@@ -5,8 +5,7 @@
     "module": "ESNext",
     "target": "ESNext",
     "checkJs": true,
-    "resolveJsonModule": true,
-    "outDir": "no-warning-pls"
+    "resolveJsonModule": true
   },
   "exclude": ["node_modules"]
 }

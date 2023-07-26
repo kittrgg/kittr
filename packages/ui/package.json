@@ -60,7 +60,6 @@
     "@babel/core": "7.18.9",
     "@kittr/fixtures": "workspace:*",
     "@kittr/lint": "workspace:*",
-    "@kittr/prettier": "workspace:*",
     "@kittr/tailwind": "workspace:*",
     "@kittr/tsconfig": "workspace:*",
     "@kittr/types": "workspace:*",
