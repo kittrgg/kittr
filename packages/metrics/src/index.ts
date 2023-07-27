@@ -28,11 +28,12 @@ export const getTopCreatorPopularities = async (
           | where level == "info" and['fields.metric'] contains "Creator popularity" and['vercel.environment'] == "production"
           | summarize count() by ['fields.channelId'] | limit(${limit})`,
       )
-      .then((res) =>
-        res.buckets.totals?.map((total) => ({
-          id: total.group['fields.channelId'] as string,
-          pageViewCount: total.aggregations?.[0].value as number,
-        })),
+      .then(
+        (res) =>
+          res.buckets.totals?.map((total) => ({
+            id: total.group['fields.channelId'] as string,
+            pageViewCount: total.aggregations?.[0].value as number,
+          })),
       );
   } catch (error) {
     if (error instanceof Error) {
@@ -68,11 +69,12 @@ export const getRisingCreators = async (opts?: GetRisingCreators) => {
           | where level == "info" and['fields.metric'] contains "Creator popularity" and['vercel.environment'] == "production"
           | summarize count() by ['fields.channelId'] | limit(${skipTopCreators})`,
       )
-      .then((res) =>
-        res.buckets.totals?.map((total) => ({
-          id: total.group['fields.channelId'] as string,
-          pageViewCount: total.aggregations?.[0].value as number,
-        })),
+      .then(
+        (res) =>
+          res.buckets.totals?.map((total) => ({
+            id: total.group['fields.channelId'] as string,
+            pageViewCount: total.aggregations?.[0].value as number,
+          })),
       );
 
     if (!topCreators) {
@@ -90,11 +92,12 @@ export const getRisingCreators = async (opts?: GetRisingCreators) => {
     | limit (10)
     `;
 
-    const result = await client.query(queryString).then((res) =>
-      res.buckets.totals?.map((total) => ({
-        id: total.group['fields.channelId'] as string,
-        pageViewCount: total.aggregations?.[0].value as number,
-      })),
+    const result = await client.query(queryString).then(
+      (res) =>
+        res.buckets.totals?.map((total) => ({
+          id: total.group['fields.channelId'] as string,
+          pageViewCount: total.aggregations?.[0].value as number,
+        })),
     );
 
     return result;

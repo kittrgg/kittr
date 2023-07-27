@@ -59,11 +59,11 @@ function AccountManagers() {
       ) : null}
       {isLoading ? <Spinner /> : null}
       {data
-        ? customOrderArray<typeof data[0]>({
+        ? customOrderArray<(typeof data)[0]>({
             array: data,
             sortingArray: managersOrder,
             keyToSort: 'role',
-          }).map((manager: typeof data[0]) => {
+          }).map((manager: (typeof data)[0]) => {
             return (
               <Manager data-cy="manager" key={manager.uid}>
                 <Identity>
