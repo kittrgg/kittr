@@ -39,7 +39,8 @@ export function LayoutWrapper({
         { href: '/privacy-policy', children: 'Privacy' },
       ]}
       linkComponent={Link}
-      nav={<SideNav creatorUrlSafeName={creatorUrlSafeName} />}
+      nav={<></>}
+      // nav={<SideNav creatorUrlSafeName={creatorUrlSafeName} />}
       pathnameForCloseHook={pathname ?? ''}
     >
       {children}

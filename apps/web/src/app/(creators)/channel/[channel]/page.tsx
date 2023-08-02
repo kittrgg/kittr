@@ -111,7 +111,7 @@ async function ChannelProfilePage({ params }: PageParams) {
         })}
       </section>
 
-      <section>
+      <div>
         <H2>Kits</H2>
         <div className="flex flex-row flex-wrap items-center justify-center gap-6">
           {channel.games.map(async (game) => {
@@ -125,7 +125,7 @@ async function ChannelProfilePage({ params }: PageParams) {
                     kits
                   </p>
                 }
-                href={`/games/${game.urlSafeName}`}
+                href={`/channel/${params.channel}/${game.urlSafeName}`}
                 imageProps={{
                   src: await download(game.titleImageUrl),
                   alt: `${game.displayName} cover art`,
@@ -137,7 +137,7 @@ async function ChannelProfilePage({ params }: PageParams) {
             );
           })}
         </div>
-      </section>
+      </div>
     </>
   );
 }

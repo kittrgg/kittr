@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Badge } from '../Badge';
 import { H4, H3, H5, Span } from '../Typography';
 import { cn } from '../utils';
@@ -80,7 +79,7 @@ export const GameCard: React.FC<GameCardProps> = ({
             <Span className="block mt-4">Genres</Span>
             <div>
               {genres.map((genre) => (
-                <Badge>{genre}</Badge>
+                <Badge key={genre}>{genre}</Badge>
               ))}
             </div>
           </>
@@ -90,7 +89,9 @@ export const GameCard: React.FC<GameCardProps> = ({
             <Span className="block mt-2">Platforms</Span>
             <div>
               {platforms.map((platform) => (
-                <Badge variant="outline">{platform}</Badge>
+                <Badge variant="outline" key={platform}>
+                  {platform}
+                </Badge>
               ))}
             </div>
           </>
