@@ -12,7 +12,7 @@
     "format:fix": "turbo format format-root --continue -- --write",
     "lint": "turbo lint --continue -- --cache --cache-location 'node_modules/.cache/.eslintcache'",
     "lint-staged": "lint-staged",
-    "lint:fix": "turbo lint --continue -- --fix",
+    "lint:fix": "turbo lint --continue -- --fix --cache --cache-location 'node_modules/.cache/.eslintcache'",
     "prepare": "husky install",
     "start": "turbo start",
     "test": "turbo test --continue --filter=ui",
