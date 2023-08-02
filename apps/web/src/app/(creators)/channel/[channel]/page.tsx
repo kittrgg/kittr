@@ -1,3 +1,6 @@
+import { GameCard, H2, Avatar, Button, H1 } from '@kittr/ui/new';
+import { download } from '@kittr/firebase/storage';
+import Link from 'next/link';
 import type { LinkProperty } from '@kittr/prisma';
 import { prisma } from '@kittr/prisma';
 import {
@@ -8,9 +11,9 @@ import {
 import { getTopCreatorPopularities } from '@kittr/metrics';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { Avatar, Button, H1 } from '@kittr/ui/new';
 import { ChannelSocials } from '@kittr/ui/social-icons';
 import { capitalizeFirst } from '@kittr/utils';
+import { listGames } from '@/fetches/games';
 import { getChannel } from '@/fetches/getChannel';
 import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 
@@ -85,6 +88,33 @@ async function ChannelProfilePage({ params }: PageParams) {
         />
         <H1 preset="h3">{channel.displayName}</H1>
       </div>
+
+      <section>
+        <H2>Games</H2>
+        <div className="flex flex-row flex-wrap items-center justify-center gap-6">
+          {channel.games.map(async (game) => {
+            return (
+              <GameCard
+                developer={game.developer}
+                genres={game.gameToGenres.map(
+                  (elem) => elem.genres.displayName,
+                )}
+                href={`/games/${game.urlSafeName}`}
+                imageProps={{
+                  src: await download(game.titleImageUrl),
+                  alt: `${game.displayName} cover art`,
+                }}
+                key={game.id}
+                linkComponent={Link}
+                platforms={game.gameToPlatforms.map(
+                  (elem) => elem.platforms.displayName,
+                )}
+                title={game.displayName}
+              />
+            );
+          })}
+        </div>
+      </section>
 
       <div className="flex flex-col gap-4">
         {channel.links.map((link) => {

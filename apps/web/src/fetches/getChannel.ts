@@ -22,8 +22,10 @@ export const getChannel = async (urlSafeName: string) => {
           titleImageUrl: true,
           displayName: true,
           urlSafeName: true,
+          developer: true,
         },
       },
+      _count: { select: { warzoneKits: true, warzoneTwoKits: true } },
     },
   });
 

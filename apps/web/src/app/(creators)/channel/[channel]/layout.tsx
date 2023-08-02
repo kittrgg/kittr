@@ -24,8 +24,14 @@ export const generateMetadata = () => {
   };
 };
 
-export function Layout({ children }: { children: ReactNode }) {
-  return <LayoutWrapper>{children}</LayoutWrapper>;
+export function Layout({
+  children,
+  params,
+}: {
+  params: { channel: string };
+  children: ReactNode;
+}) {
+  return <LayoutWrapper params={params}>{children}</LayoutWrapper>;
 }
 
 export default Layout;

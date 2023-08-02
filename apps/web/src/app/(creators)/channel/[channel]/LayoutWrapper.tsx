@@ -7,13 +7,7 @@ import type { ReactNode } from 'react';
 import { usePathname } from 'next/navigation';
 import { CreatorProfileNav } from './CreatorProfileNav';
 
-export async function LayoutWrapper({
-  children,
-  params,
-}: {
-  children: ReactNode;
-  params: { channel: string };
-}) {
+export function LayoutWrapper({ children }: { children: ReactNode }) {
   const pathname = usePathname();
 
   return (
@@ -39,8 +33,8 @@ export async function LayoutWrapper({
         { href: '/privacy-policy', children: 'Privacy' },
       ]}
       linkComponent={Link}
-      nav={<CreatorProfileNav creatorUrlSafeName={params.channel} />}
-      // nav={<></>}
+      // nav={<CreatorProfileNav creatorUrlSafeName={params.channel} />}
+      nav={<></>}
       pathnameForCloseHook={pathname ?? ''}
     >
       {children}

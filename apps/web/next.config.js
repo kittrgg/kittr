@@ -13,7 +13,6 @@ const moduleExports = {
     '@kittr/firebase',
     '@kittr/flags',
     '@kittr/logger',
-    '@kittr/db',
     '@kittr/money',
     '@kittr/prisma',
     '@kittr/trpc',
