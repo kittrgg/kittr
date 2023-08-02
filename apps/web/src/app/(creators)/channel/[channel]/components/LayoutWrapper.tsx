@@ -5,9 +5,15 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { ReactNode } from 'react';
 import { usePathname } from 'next/navigation';
-import { CreatorProfileNav } from './CreatorProfileNav';
+import { SideNav } from '@/app/(creators)/channel/[channel]/components/SideNav';
 
-export function LayoutWrapper({ children }: { children: ReactNode }) {
+export function LayoutWrapper({
+  children,
+  creatorUrlSafeName,
+}: {
+  children: ReactNode;
+  creatorUrlSafeName: string;
+}) {
   const pathname = usePathname();
 
   return (
@@ -33,8 +39,7 @@ export function LayoutWrapper({ children }: { children: ReactNode }) {
         { href: '/privacy-policy', children: 'Privacy' },
       ]}
       linkComponent={Link}
-      // nav={<CreatorProfileNav creatorUrlSafeName={params.channel} />}
-      nav={<></>}
+      nav={<SideNav creatorUrlSafeName={creatorUrlSafeName} />}
       pathnameForCloseHook={pathname ?? ''}
     >
       {children}

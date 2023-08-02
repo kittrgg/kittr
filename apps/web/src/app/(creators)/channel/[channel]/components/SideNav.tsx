@@ -1,17 +1,15 @@
 import { LayoutGrid, Users, Gamepad } from '@kittr/ui/icons';
-import { AppShellLinkItem, Button, SidebarSeparator } from '@kittr/ui/new';
+import { AppShellLinkItem, SidebarSeparator } from '@kittr/ui/new';
 import Link from 'next/link';
 import Image from 'next/image';
-import { getChannel } from '@/fetches/getChannel';
+import { Suspense } from 'react';
+import { SidebarContent } from '@/app/(creators)/channel/[channel]/components/SidebarContent';
 
-export async function CreatorProfileNav({
+export function SideNav({
   creatorUrlSafeName,
 }: {
   creatorUrlSafeName: string;
 }) {
-  const channel = await getChannel(creatorUrlSafeName);
-  console.log(channel);
-
   return (
     <>
       <AppShellLinkItem className="flex flex-row items-center justify-center m-0">
@@ -36,27 +34,21 @@ export async function CreatorProfileNav({
       <AppShellLinkItem>
         <Link href="/games">
           <Gamepad />
-          Games
+          All games
         </Link>
       </AppShellLinkItem>
       <AppShellLinkItem>
         <Link href="/channels">
           <Users />
-          Channels
+          All channels
         </Link>
       </AppShellLinkItem>
 
       <SidebarSeparator />
 
-      {/* {channel?.games.map((game) => {
-        return (
-          <Button asChild key={game.urlSafeName}>
-            <Link href={`/channel/${creatorUrlSafeName}/${game.urlSafeName}`}>
-              {game.displayName}
-            </Link>
-          </Button>
-        );
-      })} */}
+      <Suspense fallback="Loading...">
+        <SidebarContent creatorUrlSafeName={creatorUrlSafeName} />
+      </Suspense>
     </>
   );
 }
