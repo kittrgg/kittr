@@ -73,6 +73,12 @@ async function ChannelProfilePage({ params }: PageParams) {
 
   const twitchLink = grabLoginName(getTwitchLink(channel));
   const liveStatus = await getStreamLiveStatus(twitchLink);
+  const gamesWithImages = await Promise.all(
+    channel.games.map(async (game) => ({
+      ...game,
+      titleImageUrl: await download(game.titleImageUrl),
+    })),
+  );
 
   return (
     <>
@@ -114,7 +120,7 @@ async function ChannelProfilePage({ params }: PageParams) {
       <div>
         <H2>Kits</H2>
         <div className="flex flex-row flex-wrap items-center justify-center gap-6">
-          {channel.games.map(async (game) => {
+          {gamesWithImages.map((game) => {
             return (
               <GameCard
                 extraChildren={
@@ -127,7 +133,7 @@ async function ChannelProfilePage({ params }: PageParams) {
                 }
                 href={`/channel/${params.channel}/${game.urlSafeName}`}
                 imageProps={{
-                  src: await download(game.titleImageUrl),
+                  src: game.titleImageUrl,
                   alt: `${game.displayName} cover art`,
                 }}
                 key={game.urlSafeName}

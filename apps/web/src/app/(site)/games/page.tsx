@@ -14,14 +14,21 @@ export const generateMetadata = () =>
 export async function Page() {
   const gamesData = await listGames();
 
+  const gamesWithImages = await Promise.all(
+    gamesData.map(async (game) => ({
+      ...game,
+      titleImageUrl: await download(game.titleImageUrl),
+    })),
+  );
+
   return (
     <>
       <H1>Games</H1>
       <div className="flex flex-row flex-wrap justify-center">
-        {gamesData
+        {gamesWithImages
           .sort((x, y) => Number(y.active) - Number(x.active))
           .map(
-            async ({
+            ({
               developer,
               active,
               titleImageUrl,
@@ -38,7 +45,7 @@ export async function Page() {
                   genres={genres.map((genre) => genre.displayName)}
                   href={`/games/${urlSafeName}`}
                   imageProps={{
-                    src: await download(titleImageUrl),
+                    src: titleImageUrl,
                     alt: `${displayName} cover art`,
                   }}
                   key={id}
