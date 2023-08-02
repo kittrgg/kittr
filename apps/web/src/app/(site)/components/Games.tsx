@@ -6,19 +6,25 @@ import { listGames } from '@/fetches/games';
 export async function Games() {
   const allGames = await listGames();
   const activeGames = allGames.filter((game) => game.active);
+  const gamesWithImage = await Promise.all(
+    activeGames.map(async (game) => ({
+      ...game,
+      titleImageUrl: await download(game.titleImageUrl),
+    })),
+  );
 
   return (
     <section>
       <H2>Games</H2>
       <div className="flex flex-row flex-wrap items-center justify-center gap-6">
-        {activeGames.map(async (game) => {
+        {gamesWithImage.map((game) => {
           return (
             <GameCard
               developer={game.developer}
               genres={game.genres.map((genre) => genre.displayName)}
               href={`/games/${game.urlSafeName}`}
               imageProps={{
-                src: await download(game.titleImageUrl),
+                src: game.titleImageUrl,
                 alt: `${game.displayName} cover art`,
               }}
               key={game.id}
