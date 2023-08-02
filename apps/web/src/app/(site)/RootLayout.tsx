@@ -4,10 +4,15 @@ import { AppShell } from '@kittr/ui/new';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { MainSiteNav } from './MainSiteNav';
 import { inter } from '@/app/fonts';
 
-export function RootLayout({ children }: { children: React.ReactNode }) {
+export function RootLayout({
+  sideNav,
+  children,
+}: {
+  sideNav: React.ReactNode;
+  children: React.ReactNode;
+}) {
   const pathname = usePathname();
 
   return (
@@ -38,7 +43,7 @@ export function RootLayout({ children }: { children: React.ReactNode }) {
             { href: '/privacy-policy', children: 'Privacy' },
           ]}
           linkComponent={Link}
-          nav={<MainSiteNav />}
+          nav={sideNav}
           pathnameForCloseHook={pathname ?? ''}
         >
           {children}

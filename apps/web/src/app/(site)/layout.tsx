@@ -2,6 +2,7 @@ import '../globals.css';
 import type { GenerateKittrMetadataArgs } from '@/app/generateKittrMetadata';
 import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 import { RootLayout } from '@/app/(site)/RootLayout';
+import { MainSiteNav } from '@/app/(site)/MainSiteNav';
 
 export const generateMetadata = () => {
   return {
@@ -16,5 +17,5 @@ export const generateMetadata = () => {
 };
 
 export default function Root({ children }: { children: React.ReactNode }) {
-  return <RootLayout>{children}</RootLayout>;
+  return <RootLayout sideNav={<MainSiteNav />}>{children}</RootLayout>;
 }
