@@ -13,7 +13,6 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { ChannelSocials } from '@kittr/ui/social-icons';
 import { capitalizeFirst } from '@kittr/utils';
-import { listGames } from '@/fetches/games';
 import { getChannel } from '@/fetches/getChannel';
 import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 
@@ -96,18 +95,16 @@ async function ChannelProfilePage({ params }: PageParams) {
             return (
               <GameCard
                 developer={game.developer}
-                genres={game.gameToGenres.map(
-                  (elem) => elem.genres.displayName,
-                )}
+                genres={game.genres.map((genre) => genre.displayName)}
                 href={`/games/${game.urlSafeName}`}
                 imageProps={{
                   src: await download(game.titleImageUrl),
                   alt: `${game.displayName} cover art`,
                 }}
-                key={game.id}
+                key={game.urlSafeName}
                 linkComponent={Link}
-                platforms={game.gameToPlatforms.map(
-                  (elem) => elem.platforms.displayName,
+                platforms={game.platforms.map(
+                  (platform) => platform.displayName,
                 )}
                 title={game.displayName}
               />

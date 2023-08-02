@@ -31,6 +31,7 @@ export function Layout({
   params: { channel: string };
   children: ReactNode;
 }) {
+  // @ts-expect-error
   return <LayoutWrapper params={params}>{children}</LayoutWrapper>;
 }
 

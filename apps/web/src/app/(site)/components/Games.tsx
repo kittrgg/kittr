@@ -15,7 +15,7 @@ export async function Games() {
           return (
             <GameCard
               developer={game.developer}
-              genres={game.gameToGenres.map((elem) => elem.genres.displayName)}
+              genres={game.genres.map((genre) => genre.displayName)}
               href={`/games/${game.urlSafeName}`}
               imageProps={{
                 src: await download(game.titleImageUrl),
@@ -23,9 +23,7 @@ export async function Games() {
               }}
               key={game.id}
               linkComponent={Link}
-              platforms={game.gameToPlatforms.map(
-                (elem) => elem.platforms.displayName,
-              )}
+              platforms={game.platforms.map((platform) => platform.displayName)}
               title={game.displayName}
             />
           );

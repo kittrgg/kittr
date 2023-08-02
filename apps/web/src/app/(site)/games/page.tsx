@@ -1,4 +1,3 @@
-import type { Genre, Platform } from '@kittr/db';
 import { download } from '@kittr/firebase/storage';
 import { GameCard, H1 } from '@kittr/ui/new';
 import Link from 'next/link';
@@ -23,22 +22,20 @@ export async function Page() {
           .sort((x, y) => Number(y.active) - Number(x.active))
           .map(
             async ({
-              gameToGenres,
-              gameToPlatforms,
               developer,
               active,
               titleImageUrl,
               urlSafeName,
               displayName,
               id,
+              platforms,
+              genres,
             }) => {
               return (
                 <GameCard
                   developer={developer}
                   disabled={!active}
-                  genres={gameToGenres.map(
-                    (genre: { genres: Genre }) => genre.genres.displayName,
-                  )}
+                  genres={genres.map((genre) => genre.displayName)}
                   href={`/games/${urlSafeName}`}
                   imageProps={{
                     src: await download(titleImageUrl),
@@ -46,10 +43,7 @@ export async function Page() {
                   }}
                   key={id}
                   linkComponent={Link}
-                  platforms={gameToPlatforms.map(
-                    (platform: { platforms: Platform }) =>
-                      platform.platforms.displayName,
-                  )}
+                  platforms={platforms.map((platform) => platform.displayName)}
                   title={displayName}
                 />
               );

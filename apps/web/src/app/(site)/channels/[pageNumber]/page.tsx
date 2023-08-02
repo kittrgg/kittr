@@ -33,7 +33,7 @@ async function Page({ params }: { params: Params }) {
     return notFound();
   }
 
-  const { count } = await countChannels();
+  const count = await countChannels();
   const channels = await getPaginatedChannels({
     take: CHANNELS_PER_PAGE,
     skip: (Number(params.pageNumber) - 1) * CHANNELS_PER_PAGE,

@@ -36,7 +36,7 @@ const Page = async ({ params }: { params: Params }) => {
   if (isNaN(pageNumber) || pageNumber < 1) {
     return notFound();
   }
-  const { count } = await countChannels();
+  const count = await countChannels();
 
   const channels = await prisma.channel.findMany({
     where: {
