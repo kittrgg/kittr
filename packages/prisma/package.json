@@ -19,7 +19,6 @@
   },
   "devDependencies": {
     "@kittr/lint": "workspace:*",
-    "@kittr/prettier": "workspace:*",
     "@kittr/tsconfig": "workspace:*",
     "@types/node": "^16.18.11",
     "eslint": "^8.42.0",

@@ -27,7 +27,6 @@
     "tailwindcss": "3.3.2"
   },
   "devDependencies": {
-    "@kittr/prettier": "workspace:*",
     "eslint": "^8.42.0",
     "typescript": "^5.1.3"
   },

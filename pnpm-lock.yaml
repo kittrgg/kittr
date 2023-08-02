@@ -7,9 +7,6 @@ settings:
 importers:
   .:
     devDependencies:
-      '@kittr/prettier':
-        specifier: workspace:*
-        version: link:tooling/config-prettier
       '@vercel/style-guide':
         specifier: 4.0.2
         version: 4.0.2(eslint@8.42.0)(prettier@3.0.0)(typescript@5.1.6)
@@ -68,9 +65,6 @@ importers:
       '@kittr/lint':
         specifier: workspace:*
         version: link:../../tooling/config-eslint
-      '@kittr/prettier':
-        specifier: workspace:*
-        version: link:../../tooling/config-prettier
       '@kittr/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/config-typescript
@@ -153,9 +147,6 @@ importers:
         specifier: 3.3.2
         version: 3.3.2
     devDependencies:
-      '@kittr/prettier':
-        specifier: workspace:*
-        version: link:../../tooling/config-prettier
       eslint:
         specifier: ^8.42.0
         version: 8.42.0
@@ -301,9 +292,6 @@ importers:
       '@kittr/lint':
         specifier: workspace:*
         version: link:../../tooling/config-eslint
-      '@kittr/prettier':
-        specifier: workspace:*
-        version: link:../../tooling/config-prettier
       '@kittr/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/config-typescript
@@ -347,9 +335,6 @@ importers:
       '@kittr/lint':
         specifier: workspace:*
         version: link:../../tooling/config-eslint
-      '@kittr/prettier':
-        specifier: workspace:*
-        version: link:../../tooling/config-prettier
       '@kittr/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/config-typescript
@@ -375,9 +360,6 @@ importers:
       '@kittr/lint':
         specifier: workspace:*
         version: link:../../tooling/config-eslint
-      '@kittr/prettier':
-        specifier: workspace:*
-        version: link:../../tooling/config-prettier
       '@kittr/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/config-typescript
@@ -399,9 +381,6 @@ importers:
       '@kittr/lint':
         specifier: workspace:*
         version: link:../../tooling/config-eslint
-      '@kittr/prettier':
-        specifier: workspace:*
-        version: link:../../tooling/config-prettier
       '@kittr/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/config-typescript
@@ -424,9 +403,6 @@ importers:
       '@kittr/lint':
         specifier: workspace:*
         version: link:../../tooling/config-eslint
-      '@kittr/prettier':
-        specifier: workspace:*
-        version: link:../../tooling/config-prettier
       '@kittr/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/config-typescript
@@ -446,9 +422,6 @@ importers:
       '@kittr/lint':
         specifier: workspace:*
         version: link:../../tooling/config-eslint
-      '@kittr/prettier':
-        specifier: workspace:*
-        version: link:../../tooling/config-prettier
       '@kittr/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/config-typescript
@@ -483,9 +456,6 @@ importers:
       '@kittr/lint':
         specifier: workspace:*
         version: link:../../tooling/config-eslint
-      '@kittr/prettier':
-        specifier: workspace:*
-        version: link:../../tooling/config-prettier
       '@kittr/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/config-typescript
@@ -505,9 +475,6 @@ importers:
       '@kittr/lint':
         specifier: workspace:*
         version: link:../../tooling/config-eslint
-      '@kittr/prettier':
-        specifier: workspace:*
-        version: link:../../tooling/config-prettier
       '@kittr/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/config-typescript
@@ -527,9 +494,6 @@ importers:
       '@kittr/lint':
         specifier: workspace:*
         version: link:../../tooling/config-eslint
-      '@kittr/prettier':
-        specifier: workspace:*
-        version: link:../../tooling/config-prettier
       '@kittr/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/config-typescript
@@ -612,9 +576,6 @@ importers:
         specifier: 3.17.3
         version: 3.17.3
     devDependencies:
-      '@kittr/prettier':
-        specifier: workspace:*
-        version: link:../../tooling/config-prettier
       '@kittr/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/config-typescript
@@ -646,9 +607,6 @@ importers:
       '@kittr/lint':
         specifier: workspace:*
         version: link:../../tooling/config-eslint
-      '@kittr/prettier':
-        specifier: workspace:*
-        version: link:../../tooling/config-prettier
       '@kittr/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/config-typescript
@@ -664,9 +622,6 @@ importers:
       '@kittr/lint':
         specifier: workspace:*
         version: link:../../tooling/config-eslint
-      '@kittr/prettier':
-        specifier: workspace:*
-        version: link:../../tooling/config-prettier
       '@kittr/prisma':
         specifier: workspace:*
         version: link:../prisma
@@ -743,9 +698,6 @@ importers:
       '@kittr/lint':
         specifier: workspace:*
         version: link:../../tooling/config-eslint
-      '@kittr/prettier':
-        specifier: workspace:*
-        version: link:../../tooling/config-prettier
       '@kittr/tailwind':
         specifier: workspace:*
         version: link:../../tooling/config-tailwind
@@ -800,9 +752,6 @@ importers:
       '@kittr/lint':
         specifier: workspace:*
         version: link:../../tooling/config-eslint
-      '@kittr/prettier':
-        specifier: workspace:*
-        version: link:../../tooling/config-prettier
       '@kittr/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/config-typescript
@@ -818,9 +767,6 @@ importers:
       '@kittr/lint':
         specifier: workspace:*
         version: link:../../tooling/config-eslint
-      '@kittr/prettier':
-        specifier: workspace:*
-        version: link:../../tooling/config-prettier
       '@kittr/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/config-typescript
@@ -836,9 +782,6 @@ importers:
       '@kittr/lint':
         specifier: workspace:*
         version: link:../../tooling/config-eslint
-      '@kittr/prettier':
-        specifier: workspace:*
-        version: link:../../tooling/config-prettier
       '@kittr/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/config-typescript
@@ -875,10 +818,6 @@ importers:
       typescript:
         specifier: ^5.1.3
         version: 5.1.3
-    devDependencies:
-      '@kittr/prettier':
-        specifier: workspace:*
-        version: link:../config-prettier
 
   tooling/config-prettier:
     devDependencies:
@@ -897,9 +836,6 @@ importers:
 
   tooling/config-tailwind:
     devDependencies:
-      '@kittr/prettier':
-        specifier: workspace:*
-        version: link:../config-prettier
       '@tailwindcss/typography':
         specifier: ^0.5.9
         version: 0.5.9(tailwindcss@3.3.2)
@@ -907,11 +843,7 @@ importers:
         specifier: ^3.2.4
         version: 3.3.2
 
-  tooling/config-typescript:
-    devDependencies:
-      '@kittr/prettier':
-        specifier: workspace:*
-        version: link:../config-prettier
+  tooling/config-typescript: {}
 
   tooling/github-actions:
     dependencies:
@@ -928,9 +860,6 @@ importers:
       '@kittr/lint':
         specifier: workspace:*
         version: link:../config-eslint
-      '@kittr/prettier':
-        specifier: workspace:*
-        version: link:../config-prettier
       '@kittr/tsconfig':
         specifier: workspace:*
         version: link:../config-typescript
