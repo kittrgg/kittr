@@ -20,8 +20,6 @@ interface PageParams {
   params: { channel: string };
 }
 
-export const dynamicParams = true;
-
 export const generateMetadata = async ({
   params: { channel: urlSafeName },
 }: PageParams): Promise<Metadata> => {
@@ -78,7 +76,7 @@ async function ChannelProfilePage({ params }: PageParams) {
 
   return (
     <>
-      <div className="flex flex-row gap-4">
+      <div className="flex flex-row items-center gap-4">
         <Avatar
           hasProfileImg={channel.profile?.hasProfileImage}
           id={channel.id}
@@ -88,35 +86,14 @@ async function ChannelProfilePage({ params }: PageParams) {
         <H1 preset="h3">{channel.displayName}</H1>
       </div>
 
-      <section>
-        <H2>Games</H2>
-        <div className="flex flex-row flex-wrap items-center justify-center gap-6">
-          {channel.games.map(async (game) => {
-            return (
-              <GameCard
-                developer={game.developer}
-                genres={game.genres.map((genre) => genre.displayName)}
-                href={`/games/${game.urlSafeName}`}
-                imageProps={{
-                  src: await download(game.titleImageUrl),
-                  alt: `${game.displayName} cover art`,
-                }}
-                key={game.urlSafeName}
-                linkComponent={Link}
-                platforms={game.platforms.map(
-                  (platform) => platform.displayName,
-                )}
-                title={game.displayName}
-              />
-            );
-          })}
-        </div>
-      </section>
-
-      <div className="flex flex-col gap-4">
+      <section className="flex flex-row flex-wrap justify-center gap-4">
         {channel.links.map((link) => {
           return (
-            <Button key={link.property} variant="outline">
+            <Button
+              className="w-full md:w-1/3"
+              key={link.property}
+              variant="outline"
+            >
               <a
                 className="flex flex-row items-center justify-center gap-4"
                 href={link.value}
@@ -132,43 +109,37 @@ async function ChannelProfilePage({ params }: PageParams) {
             </Button>
           );
         })}
-      </div>
+      </section>
+
+      <section>
+        <H2>Kits</H2>
+        <div className="flex flex-row flex-wrap items-center justify-center gap-6">
+          {channel.games.map(async (game) => {
+            return (
+              <GameCard
+                extraChildren={
+                  <p>
+                    {game.urlSafeName === 'warzone'
+                      ? channel._count.warzoneKits
+                      : channel._count.warzoneTwoKits}{' '}
+                    kits
+                  </p>
+                }
+                href={`/games/${game.urlSafeName}`}
+                imageProps={{
+                  src: await download(game.titleImageUrl),
+                  alt: `${game.displayName} cover art`,
+                }}
+                key={game.urlSafeName}
+                linkComponent={Link}
+                title={game.displayName}
+              />
+            );
+          })}
+        </div>
+      </section>
     </>
   );
 }
 
 export default ChannelProfilePage;
-
-// export const getStaticProps = async ({
-//   params,
-// }: {
-//   params: { channel: string };
-// }) => {
-//   const { channel: urlSafeName } = params;
-//   const ssg = await createSSGHelper();
-
-//   const channel = await ssg.channels.profile.get.fetch(urlSafeName);
-
-//   const twitchLink = channel?.links.find(
-//     (channel) => channel.property === 'TWITCH',
-//   )?.value;
-
-//   try {
-//     if (twitchLink) {
-//       await ssg.twitch['profile-page'].fetch(twitchLink);
-//     }
-//   } catch (error) {
-//     console.log(
-//       `A Twitch profile was not found for user with urlSafeName ${urlSafeName}.`,
-//     );
-//   }
-
-//   return {
-//     props: {
-//       trpcState: ssg.dehydrate(),
-//     },
-//     revalidate: 60,
-//   };
-// };
-
-// export default ChannelProfilePage;
