@@ -7,16 +7,16 @@ export async function SidebarContent({
 }: {
   creatorUrlSafeName: string;
 }) {
-  return null;
-  // const channel = await getChannel(creatorUrlSafeName);
+  // return null;
+  const channel = await getChannel(creatorUrlSafeName);
 
-  // return channel?.games.map((game) => {
-  //       return (
-  //         <AppShellLinkItem key={game.urlSafeName}>
-  //           <Link href={`/channel/${creatorUrlSafeName}/${game.urlSafeName}`}>
-  //             {game.displayName}
-  //           </Link>
-  //         </AppShellLinkItem>
-  //       );
-  //     })
+  return channel?.games.map((game) => {
+    return (
+      <AppShellLinkItem key={game.urlSafeName}>
+        <Link href={`/channel/${creatorUrlSafeName}/${game.urlSafeName}`}>
+          {game.displayName}
+        </Link>
+      </AppShellLinkItem>
+    );
+  });
 }

@@ -12,7 +12,7 @@ import type { NextLinkType } from '../../../utils';
 import { Floaty } from './Floaty';
 import { useCloseOnNavigate } from './useCloseOnNavigate';
 
-interface AppShellProps {
+export interface AppShellProps {
   children?: ReactNode;
   nav: ReactNode;
   linkComponent: NextLinkType;
