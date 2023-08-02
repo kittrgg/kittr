@@ -1,3 +1,5 @@
+import 'server-only';
+
 import { prisma } from '@kittr/prisma';
 
 export const getChannel = async (urlSafeName: string) => {

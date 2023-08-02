@@ -57,7 +57,7 @@ export const AppShell: React.FC<AppShellProps> = ({
   nav,
   footerImage,
   linkComponent,
-  footerLinks: links,
+  footerLinks,
   children,
   pathnameForCloseHook,
 }) => {
@@ -108,7 +108,7 @@ export const AppShell: React.FC<AppShellProps> = ({
         <footer className="flex flex-col gap-8 p-8 bg-neutral-900">
           <div className="m-auto">{footerImage}</div>
           <div className="grid max-w-lg grid-cols-3 gap-10 m-auto md:grid-cols-6 md:gap-6">
-            {links.slice(0, -2).map((link, ind) => {
+            {footerLinks.slice(0, -2).map((link, ind) => {
               return (
                 <LinkComponent
                   key={ind}
@@ -119,7 +119,7 @@ export const AppShell: React.FC<AppShellProps> = ({
             })}
           </div>
           <div className="flex flex-row items-center justify-center gap-10 md:gap-10">
-            {links.slice(-2).map((link, ind) => {
+            {footerLinks.slice(-2).map((link, ind) => {
               return (
                 <LinkComponent
                   key={ind}

@@ -2,12 +2,15 @@ import { LayoutGrid, Users, Gamepad } from '@kittr/ui/icons';
 import { AppShellLinkItem, SidebarSeparator } from '@kittr/ui/new';
 import Link from 'next/link';
 import Image from 'next/image';
+import type { ReactNode } from 'react';
 import { Suspense } from 'react';
 import { SidebarContent } from '@/app/(creators)/channel/[channel]/components/SidebarContent';
 
 export function SideNav({
   creatorUrlSafeName,
+  children,
 }: {
+  children: ReactNode;
   creatorUrlSafeName: string;
 }) {
   return (
@@ -46,9 +49,7 @@ export function SideNav({
 
       <SidebarSeparator />
 
-      <Suspense fallback="Loading...">
-        <SidebarContent creatorUrlSafeName={creatorUrlSafeName} />
-      </Suspense>
+      {children}
     </>
   );
 }
