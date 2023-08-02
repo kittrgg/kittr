@@ -2,17 +2,12 @@ import { LayoutGrid, Users, Gamepad } from '@kittr/ui/icons';
 import { AppShellLinkItem, SidebarSeparator } from '@kittr/ui/new';
 import Link from 'next/link';
 import Image from 'next/image';
-import type { ReactNode } from 'react';
-import { Suspense } from 'react';
-import { SidebarContent } from '@/app/(creators)/channel/[channel]/components/SidebarContent';
+import type { Params } from '@/app/(creators)/channel/[channel]/params';
+import { getChannel } from '@/fetches/getChannel';
 
-export function SideNav({
-  creatorUrlSafeName,
-  children,
-}: {
-  children: ReactNode;
-  creatorUrlSafeName: string;
-}) {
+export async function Sidebar({ params }: { params: Params }) {
+  const channel = await getChannel(params.channel);
+
   return (
     <>
       <AppShellLinkItem className="flex flex-row items-center justify-center m-0">
@@ -49,7 +44,17 @@ export function SideNav({
 
       <SidebarSeparator />
 
-      {children}
+      {channel?.games.map((game) => {
+        return (
+          <AppShellLinkItem key={game.urlSafeName}>
+            <Link href={`/channel/${params.channel}/${game.urlSafeName}`}>
+              {game.displayName}
+            </Link>
+          </AppShellLinkItem>
+        );
+      })}
     </>
   );
 }
+
+export default Sidebar;

@@ -15,15 +15,14 @@ import { ChannelSocials } from '@kittr/ui/social-icons';
 import { capitalizeFirst } from '@kittr/utils';
 import { getChannel } from '@/fetches/getChannel';
 import { generateKittrMetadata } from '@/app/generateKittrMetadata';
-
-interface PageParams {
-  params: { channel: string };
-}
+import type { Params } from '@/app/(creators)/channel/[channel]/params';
 
 export const generateMetadata = async ({
-  params: { channel: urlSafeName },
-}: PageParams): Promise<Metadata> => {
-  const channel = await getChannel(urlSafeName);
+  params,
+}: {
+  params: Params;
+}): Promise<Metadata> => {
+  const channel = await getChannel(params.channel);
 
   if (!channel) {
     return {
@@ -64,7 +63,7 @@ export const generateStaticParams = async () => {
   return urlSafeNames.map((name) => ({ channel: name.urlSafeName }));
 };
 
-async function ChannelProfilePage({ params }: PageParams) {
+async function ChannelProfilePage({ params }: { params: Params }) {
   const channel = await getChannel(params.channel);
 
   if (!channel) {
