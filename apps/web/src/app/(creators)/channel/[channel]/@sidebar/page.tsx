@@ -5,6 +5,8 @@ import Image from 'next/image';
 import type { Params } from '@/app/(creators)/channel/[channel]/params';
 import { getChannel } from '@/fetches/getChannel';
 
+export const revalidate = 10;
+
 export async function Sidebar({ params }: { params: Params }) {
   const channel = await getChannel(params.channel);
 

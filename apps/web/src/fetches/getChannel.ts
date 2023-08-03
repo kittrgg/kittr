@@ -1,8 +1,9 @@
-// import 'server-only';
+import 'server-only';
 
+import { cache } from 'react';
 import { prisma } from '@kittr/prisma';
 
-export const getChannel = async (urlSafeName: string) => {
+export const getChannel = cache(async (urlSafeName: string) => {
   const channel = await prisma.channel.findUnique({
     where: {
       urlSafeName,
@@ -34,4 +35,4 @@ export const getChannel = async (urlSafeName: string) => {
   });
 
   return channel;
-};
+});
