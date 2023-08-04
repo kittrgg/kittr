@@ -17,7 +17,7 @@ export async function Page({
             },
           },
           include: {
-            base: true,
+            base: { select: { displayName: true } },
           },
         })
       : await prisma.warzoneTwoKit.findMany({
@@ -30,7 +30,7 @@ export async function Page({
             },
           },
           include: {
-            base: true,
+            base: { select: { displayName: true } },
           },
         });
 
