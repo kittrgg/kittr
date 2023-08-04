@@ -15,27 +15,27 @@ import { getChannel } from '@/fetches/getChannel';
 import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 import type { Params } from '@/app/(creators)/channel/[channel]/params';
 
-export const generateMetadata = async ({
-  params,
-}: {
-  params: Params;
-}): Promise<Metadata> => {
-  const channel = await getChannel(params.channel);
+// export const generateMetadata = async ({
+//   params,
+// }: {
+//   params: Params;
+// }): Promise<Metadata> => {
+//   const channel = await getChannel(params.channel);
 
-  if (!channel) {
-    return {
-      title: 'No creator found.',
-      description: "Doesn't look like anyone is here yet",
-      robots: 'noindex',
-    };
-  }
+//   if (!channel) {
+//     return {
+//       title: 'No creator found.',
+//       description: "Doesn't look like anyone is here yet",
+//       robots: 'noindex',
+//     };
+//   }
 
-  return generateKittrMetadata({
-    title: `${channel.displayName} - kittr`,
-    description: `${channel.displayName}'s kittr profile.`,
-    canonicalURL: `/channels/${channel.urlSafeName}`,
-  });
-};
+//   return generateKittrMetadata({
+//     title: `${channel.displayName} - kittr`,
+//     description: `${channel.displayName}'s kittr profile.`,
+//     canonicalURL: `/channels/${channel.urlSafeName}`,
+//   });
+// };
 
 async function ChannelProfilePage({ params }: { params: Params }) {
   const channel = await getChannel(params.channel);
