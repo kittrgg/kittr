@@ -5,9 +5,9 @@ import { useEffect, useState } from 'react';
 export const useBodyScrollLock = (condition: boolean) => {
   useEffect(() => {
     if (condition) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflowY = 'hidden';
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflowY = 'unset';
     }
   }, [condition]);
 };

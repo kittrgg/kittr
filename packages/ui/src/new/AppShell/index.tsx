@@ -103,7 +103,7 @@ export const AppShell: React.FC<AppShellProps> = ({
         </div>
       </FocusTrap>
       <div className="container flex-auto bg-zinc-900 sm:ml-60">
-        <main className="flex flex-col min-h-[calc(100vh-280px)] gap-8 p-8 bg-zinc-900">
+        <main className="flex flex-col min-h-[calc(100vh-280px)] gap-8 p-8 bg-zinc-900 relative overflow-x-hidden">
           {children}
         </main>
         <footer className="flex flex-col gap-8 p-8 bg-neutral-900">

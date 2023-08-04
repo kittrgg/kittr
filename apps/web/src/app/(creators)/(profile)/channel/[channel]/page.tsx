@@ -55,7 +55,7 @@ async function ChannelProfilePage({ params }: { params: Params }) {
 
   return (
     <>
-      <div className="flex flex-row items-center gap-4">
+      <div className="z-10 flex flex-row items-center gap-4 position">
         <Avatar
           hasProfileImg={channel.profile?.hasProfileImage}
           id={channel.id}
@@ -65,11 +65,21 @@ async function ChannelProfilePage({ params }: { params: Params }) {
         <H1 preset="h3">{channel.displayName}</H1>
       </div>
 
-      <section className="flex flex-row flex-wrap justify-center gap-4">
+      <div className="absolute -top-10 left-[15%] -rotate-12">
+        <div className="absolute inset-0 w-16 h-[30rem] bg-stone-600">
+          <div className="absolute z-0 overflow-visible text-black -inset-40 backdrop-blur-3xl rounded-3xl" />
+        </div>
+
+        <div className="absolute inset-0 w-16 h-[30rem] bg-zinc-600">
+          <div className="absolute z-0 overflow-visible text-black -inset-40 backdrop-blur-2xl rounded-3xl" />
+        </div>
+      </div>
+
+      <section className="relative z-10 flex flex-row flex-wrap justify-center gap-4">
         {channel.links.map((link) => {
           return (
             <Button
-              className="w-full md:w-1/3"
+              className="w-full md:w-1/3 bg-zinc-900 hover:bg-zinc-800"
               key={link.property}
               variant="outline"
             >
@@ -90,7 +100,7 @@ async function ChannelProfilePage({ params }: { params: Params }) {
         })}
       </section>
 
-      <div>
+      <div className="relative z-10">
         <H2>Games</H2>
         <div className="flex flex-row flex-wrap items-center justify-center gap-6">
           {gamesWithImages.map((game) => {

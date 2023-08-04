@@ -7,11 +7,7 @@ export async function Page({ params }: { params: Params }) {
     channelName: params.channel,
   });
 
-  return (
-    <div>
-      <pre>{JSON.stringify(kits, null, 2)}</pre>
-    </div>
-  );
+  return <div>{/* <pre>{JSON.stringify(kits, null, 2)}</pre> */}</div>;
 }
 
 export default Page;
