@@ -1,4 +1,4 @@
-import '../globals.css';
+import '@/app/globals.css';
 import type { GenerateKittrMetadataArgs } from '@/app/generateKittrMetadata';
 import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 import { RootLayout } from '@/app/(site)/RootLayout';

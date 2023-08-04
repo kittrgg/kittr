@@ -3,9 +3,7 @@ import { PrismaClient } from '@prisma/client';
 export let prisma: PrismaClient;
 
 if (typeof window === 'undefined') {
-  if (process.env.NODE_ENV === 'test') {
-    import(`${__dirname}/mock.ts`).then((mock) => (prisma = mock.prismaMock));
-  } else if (process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV === 'production') {
     prisma = new PrismaClient();
   } else {
     if (!(global as any).prisma) {

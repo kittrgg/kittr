@@ -1,4 +1,4 @@
-import '../../../globals.css';
+import '@/app/globals.css';
 
 import { type ReactNode } from 'react';
 import type { Metadata } from 'next';
@@ -6,7 +6,6 @@ import { getTopCreatorPopularities } from '@kittr/metrics';
 import { prisma } from '@kittr/prisma';
 import {
   AppShell,
-  Avatar,
   AppShellLinkItem,
   SidebarSeparator,
   SidebarHeader,
@@ -16,9 +15,10 @@ import { LayoutGrid, Users, Gamepad } from '@kittr/ui/icons';
 import Image from 'next/image';
 import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 import { inter } from '@/app/fonts';
-import type { Params } from '@/app/(creators)/channel/[channel]/params';
+import type { Params } from '@/app/(creators)/(game)/channel/[channel]/[game]/params';
 import { getChannel } from '@/fetches/getChannel';
 import { FooterImage, footerLinks } from '@/app/footer';
+import { getKitsByGame } from '@/app/(creators)/(game)/channel/[channel]/[game]/fetches';
 
 export const revalidate = 60;
 
@@ -45,7 +45,7 @@ export const generateMetadata = async ({
 };
 
 export const generateStaticParams = async () => {
-  const limit = process.env.VERCEL_ENV === 'production' ? 30 : 10;
+  const limit = process.env.VERCEL_ENV === 'production' ? 30 : 1;
 
   const topCreators = await getTopCreatorPopularities({
     limit,
@@ -73,12 +73,16 @@ export async function Layout({
   params,
 }: {
   children: ReactNode;
-  params: { channel: string };
+  params: Params;
 }) {
-  const channel = await getChannel(params.channel);
+  const kits = await getKitsByGame({
+    game: params.game,
+    channelName: params.channel,
+  });
+
   return (
     <html className={`${inter.variable}`} lang="en">
-      <body className="flex flex-row justify-center flex-grow w-full m-auto font-sans antialiased bg-zinc-800 ">
+      <body className="flex flex-row justify-center flex-grow w-full m-auto font-sans antialiased bg-zinc-800">
         <AppShell
           footerImage={<FooterImage />}
           footerLinks={footerLinks}
@@ -122,22 +126,17 @@ export async function Layout({
 
               <SidebarSeparator />
 
-              <SidebarHeader>Games</SidebarHeader>
-              {channel?.games.map((game) => {
+              <SidebarHeader>Kits</SidebarHeader>
+              {kits.map((kit) => {
                 return (
-                  <AppShellLinkItem key={game.urlSafeName}>
-                    <div className="flex flex-row items-center gap-4">
-                      <Avatar
-                        hasProfileImg
-                        id={`${game.urlSafeName}/title-image.png`}
-                        username={game.displayName}
-                      />
-                      <Link
-                        href={`/channel/${params.channel}/${game.urlSafeName}`}
-                      >
-                        {game.displayName}
-                      </Link>
-                    </div>
+                  <AppShellLinkItem key={kit.id}>
+                    <Link
+                      href={`/channel/${params.channel}/${
+                        params.game
+                      }/${encodeURI(kit.base.displayName)}`}
+                    >
+                      {kit.base.displayName}
+                    </Link>
                   </AppShellLinkItem>
                 );
               })}

@@ -13,7 +13,7 @@ import { ChannelSocials } from '@kittr/ui/social-icons';
 import { capitalizeFirst } from '@kittr/utils';
 import { getChannel } from '@/fetches/getChannel';
 import { generateKittrMetadata } from '@/app/generateKittrMetadata';
-import type { Params } from '@/app/(creators)/channel/[channel]/params';
+import type { Params } from '@/app/(creators)/(profile)/channel/[channel]/params';
 
 export const generateMetadata = async ({
   params,
