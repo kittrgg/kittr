@@ -16,6 +16,9 @@ export async function Page({
               displayName: decodeURI(params.kit),
             },
           },
+          include: {
+            base: true,
+          },
         })
       : await prisma.warzoneTwoKit.findMany({
           where: {
@@ -25,6 +28,9 @@ export async function Page({
             base: {
               displayName: decodeURI(params.kit),
             },
+          },
+          include: {
+            base: true,
           },
         });
 

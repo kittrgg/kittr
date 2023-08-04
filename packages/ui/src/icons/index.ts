@@ -18,6 +18,7 @@ export {
   Menu,
   LayoutGrid,
   User,
+  Star,
   Users,
   Type,
   X,

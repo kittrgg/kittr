@@ -11,7 +11,7 @@ import {
   SidebarHeader,
 } from '@kittr/ui/new';
 import Link from 'next/link';
-import { LayoutGrid, Users, Gamepad } from '@kittr/ui/icons';
+import { Star, LayoutGrid, Users, Gamepad } from '@kittr/ui/icons';
 import Image from 'next/image';
 import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 import { inter } from '@/app/fonts';
@@ -28,6 +28,9 @@ export const generateMetadata = async ({
   params: Params;
 }): Promise<Metadata> => {
   const channel = await getChannel(params.channel);
+  const game = await prisma.game.findFirst({
+    where: { urlSafeName: params.game },
+  });
 
   if (!channel) {
     return {
@@ -37,8 +40,16 @@ export const generateMetadata = async ({
     };
   }
 
+  if (!game) {
+    return {
+      title: 'No game found.',
+      description: "Doesn't look like a game is here yet",
+      robots: 'noindex',
+    };
+  }
+
   return generateKittrMetadata({
-    title: `${channel.displayName} - kittr`,
+    title: `${channel.displayName}'s ${game.displayName} - kittr`,
     description: `${channel.displayName}'s kittr profile.`,
     canonicalURL: `/channels/${channel.urlSafeName}`,
   });
@@ -78,6 +89,27 @@ export async function Layout({
   const kits = await getKitsByGame({
     game: params.game,
     channelName: params.channel,
+  });
+
+  const kitNames: { name: string; count: number; featured: boolean }[] = [];
+
+  kits.forEach((kit) => {
+    const foundInd = kitNames.findIndex(
+      (name) => name.name === kit.base.displayName,
+    );
+
+    if (foundInd === -1) {
+      return kitNames.push({
+        name: kit.base.displayName,
+        count: 1,
+        featured: kit.featured,
+      });
+    }
+
+    kitNames[foundInd].count++;
+    kitNames[foundInd].featured = kitNames[foundInd].featured
+      ? kitNames[foundInd].featured
+      : kit.featured;
   });
 
   return (
@@ -127,19 +159,28 @@ export async function Layout({
               <SidebarSeparator />
 
               <SidebarHeader>Kits</SidebarHeader>
-              {kits.map((kit) => {
-                return (
-                  <AppShellLinkItem key={kit.id}>
-                    <Link
-                      href={`/channel/${params.channel}/${
-                        params.game
-                      }/${encodeURI(kit.base.displayName)}`}
-                    >
-                      {kit.base.displayName}
-                    </Link>
-                  </AppShellLinkItem>
-                );
-              })}
+              {kitNames
+                .sort((a, b) => a.name.localeCompare(b.name))
+                .sort((a, b) => Number(b.featured) - Number(a.featured))
+                .map((kit) => {
+                  const showCount = kit.count > 1;
+
+                  return (
+                    <AppShellLinkItem key={kit.name}>
+                      <Link
+                        href={`/channel/${params.channel}/${
+                          params.game
+                        }/${encodeURI(kit.name)}`}
+                      >
+                        {kit.featured ? (
+                          <Star className="text-yellow-500 fill-yellow-500" />
+                        ) : null}
+                        {kit.name}
+                        {showCount ? <> ({kit.count})</> : null}
+                      </Link>
+                    </AppShellLinkItem>
+                  );
+                })}
             </>
           }
           pathnameForCloseHook={`/channel/${params.channel}`}
