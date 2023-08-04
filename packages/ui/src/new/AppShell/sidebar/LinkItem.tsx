@@ -28,7 +28,7 @@ export const AppShellLinkItem = ({
       >
         {children}
       </Slot>
-      <ChevronRight className="pointer-events-none absolute right-2 inline-block text-zinc-300 opacity-0 transition-all group-hover:right-0 group-hover:opacity-100" />
+      <ChevronRight className="absolute inline-block transition-all opacity-0 pointer-events-none right-2 text-zinc-300 group-hover:right-0 group-hover:opacity-100" />
     </div>
   );
 };
