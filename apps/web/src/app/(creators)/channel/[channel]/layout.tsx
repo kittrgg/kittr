@@ -1,6 +1,6 @@
 import '../../../globals.css';
 
-import { Suspense, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import type { Metadata } from 'next';
 import { getTopCreatorPopularities } from '@kittr/metrics';
 import { prisma } from '@kittr/prisma';
@@ -16,27 +16,27 @@ import { FooterImage, footerLinks } from '@/app/footer';
 
 export const revalidate = 60;
 
-// export const generateMetadata = async ({
-//   params,
-// }: {
-//   params: Params;
-// }): Promise<Metadata> => {
-//   const channel = await getChannel(params.channel);
+export const generateMetadata = async ({
+  params,
+}: {
+  params: Params;
+}): Promise<Metadata> => {
+  const channel = await getChannel(params.channel);
 
-//   if (!channel) {
-//     return {
-//       title: 'No creator found.',
-//       description: "Doesn't look like anyone is here yet",
-//       robots: 'noindex',
-//     };
-//   }
+  if (!channel) {
+    return {
+      title: 'No creator found.',
+      description: "Doesn't look like anyone is here yet",
+      robots: 'noindex',
+    };
+  }
 
-//   return generateKittrMetadata({
-//     title: `${channel.displayName} - kittr`,
-//     description: `${channel.displayName}'s kittr profile.`,
-//     canonicalURL: `/channels/${channel.urlSafeName}`,
-//   });
-// };
+  return generateKittrMetadata({
+    title: `${channel.displayName} - kittr`,
+    description: `${channel.displayName}'s kittr profile.`,
+    canonicalURL: `/channels/${channel.urlSafeName}`,
+  });
+};
 
 export const generateStaticParams = async () => {
   const limit = process.env.VERCEL_ENV === 'production' ? 30 : 10;
