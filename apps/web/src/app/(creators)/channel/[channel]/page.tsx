@@ -91,7 +91,7 @@ async function ChannelProfilePage({ params }: { params: Params }) {
       </section>
 
       <div>
-        <H2>Kits</H2>
+        <H2>Games</H2>
         <div className="flex flex-row flex-wrap items-center justify-center gap-6">
           {gamesWithImages.map((game) => {
             return (

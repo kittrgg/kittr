@@ -22,6 +22,7 @@ export interface AppShellProps {
 }
 
 export { AppShellLinkItem } from './sidebar/LinkItem';
+export { SidebarHeader } from './sidebar/Header';
 
 export const asideVariants = cva(
   'fixed top-0 left-0 z-40 w-64 h-screen transition-transform bg-zinc-800 sm:translate-x-0 xl:left-[initial]',

@@ -4,7 +4,13 @@ import { type ReactNode } from 'react';
 import type { Metadata } from 'next';
 import { getTopCreatorPopularities } from '@kittr/metrics';
 import { prisma } from '@kittr/prisma';
-import { AppShell, AppShellLinkItem, SidebarSeparator } from '@kittr/ui/new';
+import {
+  AppShell,
+  Avatar,
+  AppShellLinkItem,
+  SidebarSeparator,
+  SidebarHeader,
+} from '@kittr/ui/new';
 import Link from 'next/link';
 import { LayoutGrid, Users, Gamepad } from '@kittr/ui/icons';
 import Image from 'next/image';
@@ -116,14 +122,22 @@ export async function Layout({
 
               <SidebarSeparator />
 
+              <SidebarHeader>Games</SidebarHeader>
               {channel?.games.map((game) => {
                 return (
                   <AppShellLinkItem key={game.urlSafeName}>
-                    <Link
-                      href={`/channel/${params.channel}/${game.urlSafeName}`}
-                    >
-                      {game.displayName}
-                    </Link>
+                    <div className="flex flex-row items-center gap-4">
+                      <Avatar
+                        hasProfileImg
+                        id={`${game.urlSafeName}/title-image.png`}
+                        username={game.displayName}
+                      />
+                      <Link
+                        href={`/channel/${params.channel}/${game.urlSafeName}`}
+                      >
+                        {game.displayName}
+                      </Link>
+                    </div>
                   </AppShellLinkItem>
                 );
               })}
