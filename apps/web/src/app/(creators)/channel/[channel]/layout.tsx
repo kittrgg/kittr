@@ -1,6 +1,6 @@
 import '../../../globals.css';
 
-import type { ReactNode } from 'react';
+import { Suspense, type ReactNode } from 'react';
 import type { Metadata } from 'next';
 import { getTopCreatorPopularities } from '@kittr/metrics';
 import { prisma } from '@kittr/prisma';
@@ -69,7 +69,7 @@ export async function Layout({
   children: ReactNode;
   params: { channel: string };
 }) {
-  // const channel = await getChannel(params.channel);
+  const channel = await getChannel(params.channel);
   return (
     <html className={`${inter.variable}`} lang="en">
       <body className="flex flex-row justify-center flex-grow w-full m-auto font-sans antialiased bg-zinc-800 ">
@@ -116,15 +116,17 @@ export async function Layout({
 
               <SidebarSeparator />
 
-              {/* {channel?.games.map((game) => {
-        return (
-          <AppShellLinkItem key={game.urlSafeName}>
-            <Link href={`/channel/${params.channel}/${game.urlSafeName}`}>
-              {game.displayName}
-            </Link>
-          </AppShellLinkItem>
-        );
-      })} */}
+              {channel?.games.map((game) => {
+                return (
+                  <AppShellLinkItem key={game.urlSafeName}>
+                    <Link
+                      href={`/channel/${params.channel}/${game.urlSafeName}`}
+                    >
+                      {game.displayName}
+                    </Link>
+                  </AppShellLinkItem>
+                );
+              })}
             </>
           }
           pathnameForCloseHook=""

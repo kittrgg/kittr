@@ -7,6 +7,7 @@ import {
   grabLoginName,
   getStreamLiveStatus,
 } from '@kittr/twitch';
+import { Suspense } from 'react';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { ChannelSocials } from '@kittr/ui/social-icons';
