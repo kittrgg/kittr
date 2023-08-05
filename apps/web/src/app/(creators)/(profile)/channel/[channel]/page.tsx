@@ -1,12 +1,7 @@
-import { GameCard, H2, Avatar, Button, H1 } from '@kittr/ui/new';
+import { GameCard, H2, Button } from '@kittr/ui/new';
 import { download } from '@kittr/firebase/storage';
 import Link from 'next/link';
 import type { LinkProperty } from '@kittr/prisma';
-import {
-  getTwitchLink,
-  grabLoginName,
-  getStreamLiveStatus,
-} from '@kittr/twitch';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { ChannelSocials } from '@kittr/ui/social-icons';
@@ -14,6 +9,7 @@ import { capitalizeFirst } from '@kittr/utils';
 import { getChannel } from '@/fetches/getChannel';
 import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 import type { Params } from '@/app/(creators)/(profile)/channel/[channel]/params';
+import { Header } from '@/app/(creators)/Header';
 
 export const generateMetadata = async ({
   params,
@@ -44,8 +40,6 @@ async function ChannelProfilePage({ params }: { params: Params }) {
     return notFound();
   }
 
-  const twitchLink = grabLoginName(getTwitchLink(channel));
-  const liveStatus = await getStreamLiveStatus(twitchLink);
   const gamesWithImages = await Promise.all(
     channel.games.map(async (game) => ({
       ...game,
@@ -55,15 +49,7 @@ async function ChannelProfilePage({ params }: { params: Params }) {
 
   return (
     <>
-      <div className="z-10 flex flex-row items-center gap-4 position">
-        <Avatar
-          hasProfileImg={channel.profile?.hasProfileImage}
-          id={channel.id}
-          isLive={liveStatus}
-          username={channel.displayName}
-        />
-        <H1 preset="h3">{channel.displayName}</H1>
-      </div>
+      <Header channelUrlSafeName={channel.urlSafeName} />
 
       <div className="absolute -top-10 left-[15%] -rotate-12">
         <div className="absolute inset-0 w-16 h-[30rem] bg-stone-600">

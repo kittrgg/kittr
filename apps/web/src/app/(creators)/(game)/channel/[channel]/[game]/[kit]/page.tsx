@@ -1,4 +1,5 @@
 import { prisma } from '@kittr/prisma';
+import { Header } from '@/app/(creators)/Header';
 
 export async function Page({
   params,
@@ -36,6 +37,7 @@ export async function Page({
 
   return (
     <div>
+      <Header channelUrlSafeName={params.channel} />
       <pre>{JSON.stringify(kits, null, 2)}</pre>
     </div>
   );
