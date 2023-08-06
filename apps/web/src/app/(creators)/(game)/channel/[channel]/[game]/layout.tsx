@@ -9,10 +9,15 @@ import {
   AppShellLinkItem,
   SidebarSeparator,
   SidebarHeader,
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
 } from '@kittr/ui/new';
 import Link from 'next/link';
 import { Star, LayoutGrid, Users, Gamepad } from '@kittr/ui/icons';
 import Image from 'next/image';
+import { notFound } from 'next/navigation';
 import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 import { inter } from '@/app/fonts';
 import type { Params } from '@/app/(creators)/(game)/channel/[channel]/[game]/params';
@@ -86,6 +91,12 @@ export async function Layout({
   children: ReactNode;
   params: Params;
 }) {
+  const channel = await getChannel(params.channel);
+
+  if (!channel) {
+    return notFound();
+  }
+
   const kits = await getKitsByGame({
     game: params.game,
     channelName: params.channel,
@@ -157,6 +168,36 @@ export async function Layout({
               </AppShellLinkItem>
 
               <SidebarSeparator />
+
+              {channel.games.length > 1 ? (
+                <>
+                  <SidebarHeader>Games</SidebarHeader>
+                  <Select>
+                    <SelectTrigger className="w-[180px]">
+                      <SelectValue
+                        placeholder={
+                          channel.games.find(
+                            (game) => game.urlSafeName === params.game,
+                          )?.displayName
+                        }
+                      />
+                    </SelectTrigger>
+                    <SelectContent className="bg-zinc-800">
+                      {channel.games.map((game) => {
+                        return (
+                          <Link
+                            className="block p-2 hover:bg-zinc-700"
+                            href={`/channel/${params.channel}/${game.urlSafeName}`}
+                            key={game.urlSafeName}
+                          >
+                            {game.displayName}
+                          </Link>
+                        );
+                      })}
+                    </SelectContent>
+                  </Select>
+                </>
+              ) : null}
 
               <SidebarHeader>Kits</SidebarHeader>
               {kitNames

@@ -10,6 +10,7 @@ import { getChannel } from '@/fetches/getChannel';
 import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 import type { Params } from '@/app/(creators)/(profile)/channel/[channel]/params';
 import { Header } from '@/app/(creators)/Header';
+import { LightRay } from '@/app/(creators)/LightRay';
 
 export const generateMetadata = async ({
   params,
@@ -50,16 +51,7 @@ async function ChannelProfilePage({ params }: { params: Params }) {
   return (
     <>
       <Header channelUrlSafeName={channel.urlSafeName} />
-
-      <div className="absolute -top-10 left-[15%] -rotate-12">
-        <div className="absolute inset-0 w-16 h-[30rem] bg-stone-600">
-          <div className="absolute z-0 overflow-visible text-black -inset-40 backdrop-blur-3xl rounded-3xl" />
-        </div>
-
-        <div className="absolute inset-0 w-16 h-[30rem] bg-zinc-600">
-          <div className="absolute z-0 overflow-visible text-black -inset-40 backdrop-blur-2xl rounded-3xl" />
-        </div>
-      </div>
+      <LightRay />
 
       <section className="relative z-10 flex flex-row flex-wrap justify-center gap-4">
         {channel.links.map((link) => {

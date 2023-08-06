@@ -1,5 +1,8 @@
 import { prisma } from '@kittr/prisma';
+import { redirect } from 'next/navigation';
+import { PageBody } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/PageBody';
 import { Header } from '@/app/(creators)/Header';
+import { LightRay } from '@/app/(creators)/LightRay';
 
 export async function Page({
   params,
@@ -35,11 +38,16 @@ export async function Page({
           },
         });
 
+  if (!kits.length) {
+    redirect(`/channel/${params.channel}/${params.game}`);
+  }
+
   return (
-    <div>
+    <>
       <Header channelUrlSafeName={params.channel} />
-      <pre>{JSON.stringify(kits, null, 2)}</pre>
-    </div>
+      <LightRay />
+      <pre className="relative z-20">{JSON.stringify(kits, null, 2)}</pre>
+    </>
   );
 }
 
