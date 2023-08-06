@@ -1,5 +1,6 @@
 import { grabLoginName, getTwitchLink } from '@kittr/twitch';
 import { Avatar, H1 } from '@kittr/ui/new';
+import Link from 'next/link';
 import { getChannel } from '@/fetches/getChannel';
 import { getCreatorLiveStatus } from '@/fetches/getCreatorLiveStatus';
 
@@ -16,7 +17,10 @@ export async function Header({
   const liveStatus = await getCreatorLiveStatus({ twitchUsername: twitchLink });
 
   return (
-    <div className="z-10 flex flex-row items-center gap-4 position">
+    <Link
+      className="z-10 flex flex-row items-center gap-4 position"
+      href={`/channel/${channelUrlSafeName}`}
+    >
       <Avatar
         hasProfileImg={channel.profile?.hasProfileImage}
         id={channel.id}
@@ -24,6 +28,6 @@ export async function Header({
         username={channel.displayName}
       />
       <H1 preset="h3">{channel.displayName}</H1>
-    </div>
+    </Link>
   );
 }
