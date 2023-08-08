@@ -36,7 +36,7 @@ export async function Page({ params }: { params: Params }) {
                 className={cn(
                   ' border-white shadow-white',
                   kit.featured ? 'border-yellow-500 shadow-yellow-500' : '',
-                  'relative p-4 overflow-hidden border rounded-lg hover:shadow bg-zinc-900',
+                  'relative p-4 overflow-hidden border rounded-lg hover:shadow bg-zinc-900 group',
                 )}
                 href={`/channel/${params.channel}/${params.game}/${encodeURI(
                   kit.base.displayName,
