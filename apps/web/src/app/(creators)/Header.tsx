@@ -18,7 +18,7 @@ export async function Header({
 
   return (
     <Link
-      className="z-10 flex flex-row items-center gap-4 position"
+      className="z-10 flex flex-row items-center gap-4 position w-fit"
       href={`/channel/${channelUrlSafeName}`}
     >
       <Avatar
