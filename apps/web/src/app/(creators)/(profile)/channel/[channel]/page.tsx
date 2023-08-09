@@ -1,16 +1,14 @@
-import { GameCard, H2, Button } from '@kittr/ui/new';
+import { GameCard, H2 } from '@kittr/ui/new';
 import { download } from '@kittr/firebase/storage';
 import Link from 'next/link';
-import type { LinkProperty } from '@kittr/prisma';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { ChannelSocials } from '@kittr/ui/social-icons';
-import { capitalizeFirst } from '@kittr/utils';
 import { getChannel } from '@/fetches/getChannel';
 import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 import type { Params } from '@/app/(creators)/(profile)/channel/[channel]/params';
 import { Header } from '@/app/(creators)/Header';
 import { LightRay } from '@/app/(creators)/LightRay';
+import { SocialLinkButton } from '@/app/(creators)/(profile)/channel/[channel]/components/SocialLinkButton';
 
 export const generateMetadata = async ({
   params,
@@ -55,26 +53,7 @@ async function ChannelProfilePage({ params }: { params: Params }) {
 
       <section className="relative z-10 flex flex-row flex-wrap justify-center gap-4">
         {channel.links.map((link) => {
-          return (
-            <Button
-              className="w-full md:w-1/3 bg-zinc-900 hover:bg-zinc-800"
-              key={link.property}
-              variant="outline"
-            >
-              <a
-                className="flex flex-row items-center justify-center gap-4"
-                href={link.value}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                {ChannelSocials({
-                  property:
-                    link.property.toLowerCase() as Lowercase<LinkProperty>,
-                })}
-                <p>{capitalizeFirst(link.property)}</p>
-              </a>
-            </Button>
-          );
+          return <SocialLinkButton key={link.id} link={link} />;
         })}
       </section>
 

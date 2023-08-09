@@ -1,4 +1,4 @@
-import { CreatorList, H1 } from '@kittr/ui/new';
+import { CreatorList, H1, Loader } from '@kittr/ui/new';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Suspense } from 'react';
@@ -51,7 +51,7 @@ async function Page({ params }: { params: Params }) {
       <p>
         Select a channel to view their page with their games and featured kits.
       </p>
-      <Suspense>
+      <Suspense fallback={<Loader />}>
         <CreatorList
           creators={channels.map((channel) => ({
             id: channel.id,

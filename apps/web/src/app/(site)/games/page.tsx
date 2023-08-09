@@ -43,7 +43,7 @@ export async function Page() {
                   developer={developer}
                   disabled={!active}
                   genres={genres.map((genre) => genre.displayName)}
-                  href={`/games/${urlSafeName}`}
+                  href={!active ? '#' : `/games/${urlSafeName}`}
                   imageProps={{
                     src: titleImageUrl,
                     alt: `${displayName} cover art`,

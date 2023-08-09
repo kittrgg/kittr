@@ -1,6 +1,6 @@
 import { prisma } from '@kittr/prisma';
 import type { Metadata } from 'next';
-import { CreatorList, H1 } from '@kittr/ui/new';
+import { CreatorList, H1, Loader } from '@kittr/ui/new';
 import { Suspense } from 'react';
 import { download } from '@kittr/firebase/storage';
 import Link from 'next/link';
@@ -71,7 +71,7 @@ const Page = async ({ params }: { params: Params }) => {
     <div className="flex flex-col gap-6">
       <H1>Channels</H1>
       <p>Find your favorite creators playing {game.displayName}.</p>
-      <Suspense>
+      <Suspense fallback={<Loader />}>
         <CreatorList
           creators={channelsWithImages.map((channel) => ({
             id: channel.id,
