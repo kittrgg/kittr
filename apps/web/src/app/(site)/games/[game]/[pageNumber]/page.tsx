@@ -6,13 +6,23 @@ import Link from 'next/link';
 import { ChevronLeft, ChevronRight } from '@kittr/ui/icons';
 import { notFound } from 'next/navigation';
 import { countChannels } from '@/fetches/countChannels';
-import { getGameDisplayNameFromUrlSafeName } from '@/fetches/games';
+import { getGameDisplayNameFromUrlSafeName, listGames } from '@/fetches/games';
 import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 
 const CHANNELS_PER_PAGE = 12;
 interface Params {
   pageNumber: string;
   game: string;
+}
+
+export async function generateStaticParams() {
+  const games = await listGames();
+  return games.map((game) =>
+    Array.from({ length: 10 }, (_, i) => ({
+      game: game.urlSafeName,
+      pageNumber: String(i + 1),
+    })),
+  );
 }
 
 export const generateMetadata = async ({
@@ -92,7 +102,7 @@ const Page = async ({ params }: { params: Params }) => {
         {pageNumber > 1 ? (
           <Link
             className="flex flex-row hover:underline"
-            href={`/channels/${pageNumber - 1}`}
+            href={`/games/${game.urlSafeName}/${pageNumber - 1}`}
           >
             <ChevronLeft /> Back
           </Link>
@@ -100,7 +110,7 @@ const Page = async ({ params }: { params: Params }) => {
         {pageNumber < totalPages ? (
           <Link
             className="flex flex-row hover:underline"
-            href={`/channels/${pageNumber + 1}`}
+            href={`/games/${game.urlSafeName}/${pageNumber + 1}`}
           >
             Next <ChevronRight />
           </Link>
