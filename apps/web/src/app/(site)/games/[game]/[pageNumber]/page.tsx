@@ -1,7 +1,6 @@
 import { prisma } from '@kittr/prisma';
 import type { Metadata } from 'next';
-import { CreatorList, H1, Loader } from '@kittr/ui/new';
-import { Suspense } from 'react';
+import { CreatorList, H1 } from '@kittr/ui/new';
 import { download } from '@kittr/firebase/storage';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight } from '@kittr/ui/icons';
@@ -71,20 +70,18 @@ const Page = async ({ params }: { params: Params }) => {
     <div className="flex flex-col gap-6">
       <H1>Channels</H1>
       <p>Find your favorite creators playing {game.displayName}.</p>
-      <Suspense fallback={<Loader />}>
-        <CreatorList
-          creators={channelsWithImages.map((channel) => ({
-            id: channel.id,
-            imageSrc: channel.imageSrc,
-            hasAvatar: channel.profile?.hasProfileImage ?? false,
-            name: channel.displayName,
-            urlSafeName: channel.urlSafeName,
-          }))}
-          disableResponsive
-          linkBasePath="/channel"
-          linkComponent={Link}
-        />
-      </Suspense>
+      <CreatorList
+        creators={channelsWithImages.map((channel) => ({
+          id: channel.id,
+          imageSrc: channel.imageSrc,
+          hasAvatar: channel.profile?.hasProfileImage ?? false,
+          name: channel.displayName,
+          urlSafeName: channel.urlSafeName,
+        }))}
+        disableResponsive
+        linkBasePath="/channel"
+        linkComponent={Link}
+      />
 
       <p className="font-semibold text-center">
         {pageNumber * CHANNELS_PER_PAGE - CHANNELS_PER_PAGE + 1} -{' '}

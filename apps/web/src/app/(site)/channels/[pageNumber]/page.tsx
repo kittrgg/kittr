@@ -1,7 +1,6 @@
-import { CreatorList, H1, Loader } from '@kittr/ui/new';
+import { CreatorList, H1 } from '@kittr/ui/new';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { Suspense } from 'react';
 import { ChevronLeft, ChevronRight } from '@kittr/ui/icons';
 import type { Metadata } from 'next';
 import { countChannels } from '@/fetches/countChannels';
@@ -51,19 +50,17 @@ async function Page({ params }: { params: Params }) {
       <p>
         Select a channel to view their page with their games and featured kits.
       </p>
-      <Suspense fallback={<Loader />}>
-        <CreatorList
-          creators={channels.map((channel) => ({
-            id: channel.id,
-            hasAvatar: channel.profile?.hasProfileImage ?? false,
-            name: channel.displayName,
-            urlSafeName: channel.urlSafeName,
-          }))}
-          disableResponsive
-          linkBasePath="/channel"
-          linkComponent={Link}
-        />
-      </Suspense>
+      <CreatorList
+        creators={channels.map((channel) => ({
+          id: channel.id,
+          hasAvatar: channel.profile?.hasProfileImage ?? false,
+          name: channel.displayName,
+          urlSafeName: channel.urlSafeName,
+        }))}
+        disableResponsive
+        linkBasePath="/channel"
+        linkComponent={Link}
+      />
 
       <p className="font-semibold text-center">
         {pageNumber * CHANNELS_PER_PAGE - CHANNELS_PER_PAGE + 1} -{' '}
