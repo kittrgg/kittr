@@ -17,12 +17,15 @@ interface Params {
 
 export async function generateStaticParams() {
   const games = await listGames();
-  return games.map((game) =>
-    Array.from({ length: 10 }, (_, i) => ({
-      game: game.urlSafeName,
-      pageNumber: String(i + 1),
-    })),
-  );
+  return games
+    .filter((game) => game.active)
+    .map((game) =>
+      Array.from({ length: 10 }, (_, i) => ({
+        game: game.urlSafeName,
+        pageNumber: String(i + 1),
+      })),
+    )
+    .flat();
 }
 
 export const generateMetadata = async ({
