@@ -30,18 +30,22 @@ export async function Page({ params }: { params: Params }) {
         {kits
           .sort((a, b) => a.base.displayName.localeCompare(b.base.displayName))
           .sort((a, b) => Number(b.featured) - Number(a.featured))
-          .map((kit) => {
+          .map((kit, index) => {
             return (
               <Link
                 className={cn(
                   ' border-white shadow-white',
                   kit.featured ? 'border-yellow-500 shadow-yellow-500' : '',
-                  'relative p-4 overflow-hidden border rounded-lg hover:shadow bg-zinc-900 group',
+                  `relative p-4 overflow-hidden border rounded-lg hover:shadow bg-zinc-900 group animate-fade-in opacity-0`,
                 )}
                 href={`/channel/${params.channel}/${params.game}/${encodeURI(
                   kit.base.displayName,
                 )}`}
                 key={kit.id}
+                style={{
+                  animationDelay: `${index * 25}ms`,
+                  animationFillMode: 'forwards',
+                }}
               >
                 <Suspense>
                   <KitTileImage kit={kit} />
