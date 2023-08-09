@@ -2,8 +2,6 @@ import '@/app/globals.css';
 
 import { type ReactNode } from 'react';
 import type { Metadata } from 'next';
-import { getTopCreatorPopularities } from '@kittr/metrics';
-import { prisma } from '@kittr/prisma';
 import {
   AppShell,
   Avatar,
@@ -42,30 +40,6 @@ export const generateMetadata = async ({
     description: `${channel.displayName}'s kittr profile.`,
     canonicalURL: `/channels/${channel.urlSafeName}`,
   });
-};
-
-export const generateStaticParams = async () => {
-  const limit = process.env.VERCEL_ENV === 'production' ? 30 : 1;
-
-  const topCreators = await getTopCreatorPopularities({
-    limit,
-    field: 'channelId',
-  });
-
-  if (!topCreators) {
-    throw new Error('Failed fetching top creators.');
-  }
-
-  const urlSafeNames = await prisma.channel.findMany({
-    where: {
-      id: {
-        in: topCreators.map((creator) => creator.id),
-      },
-    },
-    select: { urlSafeName: true },
-  });
-
-  return urlSafeNames.map((name) => ({ channel: name.urlSafeName }));
 };
 
 export async function Layout({

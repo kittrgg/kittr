@@ -3,12 +3,38 @@ import { download } from '@kittr/firebase/storage';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+import { getTopCreatorPopularities } from '@kittr/metrics';
+import { prisma } from '@kittr/prisma';
 import { getChannel } from '@/fetches/getChannel';
 import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 import type { Params } from '@/app/(creators)/(profile)/channel/[channel]/params';
 import { Header } from '@/app/(creators)/Header';
 import { LightRay } from '@/app/(creators)/LightRay';
 import { SocialLinkButton } from '@/app/(creators)/(profile)/channel/[channel]/components/SocialLinkButton';
+
+export const generateStaticParams = async () => {
+  const limit = process.env.VERCEL_ENV === 'production' ? 30 : 1;
+
+  const topCreators = await getTopCreatorPopularities({
+    limit,
+    field: 'channelId',
+  });
+
+  if (!topCreators) {
+    throw new Error('Failed fetching top creators.');
+  }
+
+  const urlSafeNames = await prisma.channel.findMany({
+    where: {
+      id: {
+        in: topCreators.map((creator) => creator.id),
+      },
+    },
+    select: { urlSafeName: true },
+  });
+
+  return urlSafeNames.map((name) => ({ channel: name.urlSafeName }));
+};
 
 export const generateMetadata = async ({
   params,
