@@ -1,5 +1,4 @@
 import { download } from '@kittr/firebase/storage';
-import { Suspense } from 'react';
 import { AvatarShineLoader } from '../Loader';
 import { User } from '../../icons';
 import {
