@@ -5,21 +5,23 @@ import { getKits } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/
 
 export const revalidate = 60;
 
-// export async function generateStaticParams({
-//   params,
-// }: {
-//   params: { channel: string; game: string; kit: string };
-// }) {
-//   const kits = await getKits({
-//     channel: params.channel,
-//     game: params.game,
-//     kit: params.kit,
-//   });
+export async function generateStaticParams({
+  params,
+}: {
+  params: { channel: string; game: string; kit: string };
+}) {
+  const kits = await getKits({
+    channel: params.channel,
+    game: params.game,
+    kit: params.kit,
+  });
 
-//   const last = kits.map((kit) => encodeURI(kit.base.displayName));
-//   console.log({ anotherlast: last });
-//   return last;
-// }
+  console.log({ kits });
+
+  const last = kits.map((kit) => ({ kit: encodeURI(kit.base.displayName) }));
+  console.log({ anotherlast: last });
+  return last;
+}
 
 export async function Page({
   params,
