@@ -24,8 +24,8 @@ export const Loader = () => {
 
 export const AvatarShineLoader = () => {
   return (
-    <div className="relative w-10 h-10 rounded">
-      <div className="w-full h-full animate-pulse bg-zinc-700" />
+    <div className="relative w-10 h-10">
+      <div className="w-full h-full rounded animate-pulse bg-zinc-700" />
     </div>
   );
 };
