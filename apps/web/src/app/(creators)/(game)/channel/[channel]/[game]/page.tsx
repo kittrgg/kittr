@@ -36,10 +36,12 @@ export async function generateStaticParams() {
   });
 
   const last = channelNames
-    .map((channel) => ({
-      channel: channel.urlSafeName,
-      game: channel.games.map((game) => game.urlSafeName),
-    }))
+    .map((channel) =>
+      channel.games.map((game) => ({
+        game: game.urlSafeName,
+        channel: channel.urlSafeName,
+      })),
+    )
     .flat();
 
   console.log({ last });
