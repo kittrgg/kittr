@@ -16,7 +16,9 @@ export async function generateStaticParams({
     kit: params.kit,
   });
 
-  return kits.map((kit) => encodeURI(kit.base.displayName));
+  const last = kits.map((kit) => encodeURI(kit.base.displayName));
+  console.log({ anotherlast: last });
+  return last;
 }
 
 export async function Page({

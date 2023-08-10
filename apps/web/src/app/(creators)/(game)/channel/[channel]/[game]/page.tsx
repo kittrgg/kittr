@@ -11,9 +11,8 @@ import { getKitsByGame } from '@/app/(creators)/(game)/channel/[channel]/[game]/
 import { KitTileImage } from '@/app/(creators)/(game)/channel/[channel]/[game]/KitTileImage';
 import { getChannel } from '@/fetches/getChannel';
 import { LightRay } from '@/app/(creators)/LightRay';
-import { listGames } from '@/fetches/games';
 
-const revalidate = 60;
+export const revalidate = 60;
 
 export async function generateStaticParams() {
   const limit = process.env.VERCEL_ENV === 'production' ? 30 : 5;
@@ -27,7 +26,7 @@ export async function generateStaticParams() {
     throw new Error('Failed fetching top creators.');
   }
 
-  const urlSafeNames = await prisma.channel.findMany({
+  const channelNames = await prisma.channel.findMany({
     where: {
       id: {
         in: topCreators.map((creator) => creator.id),
@@ -36,12 +35,15 @@ export async function generateStaticParams() {
     select: { urlSafeName: true, games: { select: { urlSafeName: true } } },
   });
 
-  return urlSafeNames
+  const last = channelNames
     .map((channel) => ({
       channel: channel.urlSafeName,
       game: channel.games.map((game) => game.urlSafeName),
     }))
     .flat();
+
+  console.log({ last });
+  return last;
 }
 
 export async function Page({ params }: { params: Params }) {
