@@ -3,6 +3,8 @@ import { Header } from '@/app/(creators)/Header';
 import { LightRay } from '@/app/(creators)/LightRay';
 import { getKits } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/fetch';
 
+export const revalidate = 60;
+
 export async function generateStaticParams({
   params,
 }: {
