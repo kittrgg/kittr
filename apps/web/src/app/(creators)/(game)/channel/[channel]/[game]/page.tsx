@@ -35,7 +35,7 @@ export async function generateStaticParams() {
     select: { urlSafeName: true, games: { select: { urlSafeName: true } } },
   });
 
-  const last = channelNames
+  return channelNames
     .map((channel) =>
       channel.games.map((game) => ({
         game: game.urlSafeName,
@@ -43,9 +43,6 @@ export async function generateStaticParams() {
       })),
     )
     .flat();
-
-  console.log({ last });
-  return last;
 }
 
 export async function Page({ params }: { params: Params }) {
@@ -74,7 +71,7 @@ export async function Page({ params }: { params: Params }) {
                 className={cn(
                   ' border-white shadow-white',
                   kit.featured ? 'border-yellow-500 shadow-yellow-500' : '',
-                  `relative p-4 overflow-hidden border rounded-lg hover:shadow bg-zinc-900 group animate-fade-in opacity-0`,
+                  `relative p-4 overflow-hidden border rounded-lg hover:shadow focus:shadow bg-zinc-900 group animate-fade-in opacity-0`,
                 )}
                 href={`/channel/${params.channel}/${params.game}/${encodeURI(
                   kit.base.displayName,
