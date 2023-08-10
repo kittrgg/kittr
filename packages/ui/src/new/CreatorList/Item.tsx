@@ -1,12 +1,17 @@
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable tsdoc/syntax */
+
 'use client';
 
 import { Slot } from '@radix-ui/react-slot';
 import { ChevronRight } from 'lucide-icons-react';
+import { Suspense } from 'react';
 import { User } from '../../icons';
 import { Avatar } from '../Avatar';
 import { P, typographyVariants } from '../Typography';
 import { cn } from '../utils';
 import type { NextLinkType } from '../../../utils';
+import { AvatarShineLoader } from '../Loader';
 
 export interface CreatorListItemProps {
   id: string;
@@ -78,16 +83,16 @@ export const CreatorListItem = ({
       >
         <div className="relative flex flex-row items-center flex-shrink w-4/5 gap-6 m-w-0">
           {hasAvatar ? (
-            // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment
-            // @ts-ignore Async component outside of Next.js context
-            <p>An avatar goes here.</p>
+            <Suspense fallback={<AvatarShineLoader />}>
+              {/** @ts-expect-error Async comoponent outside of Next.js scope. */}
+              <Avatar
+                id={id}
+                hasProfileImg={hasAvatar}
+                username={name}
+                isLive={isLive}
+              />
+            </Suspense>
           ) : (
-            // <Avatar
-            //   id={id}
-            //   hasProfileImg={hasAvatar}
-            //   username={name}
-            //   isLive={isLive}
-            // />
             <div className="text-gray-500 flex justify-center items-center overflow-hidden border w-[40px] h-[40px] border-gray-500 rounded-full">
               <User strokeWidth={0.75} width={30} height={30} />
             </div>
