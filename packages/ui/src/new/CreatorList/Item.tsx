@@ -80,13 +80,14 @@ export const CreatorListItem = ({
           {hasAvatar ? (
             // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment
             // @ts-ignore Async component outside of Next.js context
-            <Avatar
-              id={id}
-              hasProfileImg={hasAvatar}
-              username={name}
-              isLive={isLive}
-            />
+            <p>An avatar goes here.</p>
           ) : (
+            // <Avatar
+            //   id={id}
+            //   hasProfileImg={hasAvatar}
+            //   username={name}
+            //   isLive={isLive}
+            // />
             <div className="text-gray-500 flex justify-center items-center overflow-hidden border w-[40px] h-[40px] border-gray-500 rounded-full">
               <User strokeWidth={0.75} width={30} height={30} />
             </div>
