@@ -1,8 +1,19 @@
 import { prisma } from '@kittr/prisma';
 import { redirect } from 'next/navigation';
-import { PageBody } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/PageBody';
 import { Header } from '@/app/(creators)/Header';
 import { LightRay } from '@/app/(creators)/LightRay';
+
+export function generateStaticParams({
+  params,
+}: {
+  params: { channel: string; game: string; kit: string };
+}) {
+  return {
+    channel: params.channel,
+    game: params.game,
+    kit: params.kit,
+  };
+}
 
 export async function Page({
   params,

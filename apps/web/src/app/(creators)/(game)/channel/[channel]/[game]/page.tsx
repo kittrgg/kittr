@@ -3,12 +3,46 @@ import { Suspense } from 'react';
 import { notFound } from 'next/navigation';
 import { cn } from '@kittr/ui/new';
 import Link from 'next/link';
+import { prisma } from '@kittr/prisma';
+import { getTopCreatorPopularities } from '@kittr/metrics';
 import type { Params } from './params';
 import { Header } from '@/app/(creators)/Header';
 import { getKitsByGame } from '@/app/(creators)/(game)/channel/[channel]/[game]/fetches';
 import { KitTileImage } from '@/app/(creators)/(game)/channel/[channel]/[game]/KitTileImage';
 import { getChannel } from '@/fetches/getChannel';
 import { LightRay } from '@/app/(creators)/LightRay';
+import { listGames } from '@/fetches/games';
+
+const revalidate = 60;
+
+export async function generateStaticParams() {
+  const limit = process.env.VERCEL_ENV === 'production' ? 30 : 5;
+
+  const topCreators = await getTopCreatorPopularities({
+    limit,
+    field: 'channelId',
+  });
+
+  if (!topCreators) {
+    throw new Error('Failed fetching top creators.');
+  }
+
+  const urlSafeNames = await prisma.channel.findMany({
+    where: {
+      id: {
+        in: topCreators.map((creator) => creator.id),
+      },
+    },
+    select: { urlSafeName: true, games: { select: { urlSafeName: true } } },
+  });
+
+  return urlSafeNames
+    .map((channel) => ({
+      channel: channel.urlSafeName,
+      game: channel.games.map((game) => game.urlSafeName),
+    }))
+    .flat();
+}
 
 export async function Page({ params }: { params: Params }) {
   const channel = await getChannel(params.channel);

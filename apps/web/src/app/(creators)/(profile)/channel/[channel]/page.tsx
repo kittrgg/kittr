@@ -13,7 +13,7 @@ import { LightRay } from '@/app/(creators)/LightRay';
 import { SocialLinkButton } from '@/app/(creators)/(profile)/channel/[channel]/components/SocialLinkButton';
 
 export const generateStaticParams = async () => {
-  const limit = process.env.VERCEL_ENV === 'production' ? 30 : 10;
+  const limit = process.env.VERCEL_ENV === 'production' ? 30 : 5;
 
   const topCreators = await getTopCreatorPopularities({
     limit,

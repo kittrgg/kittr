@@ -1,5 +1,10 @@
 // eslint-disable-next-line eslint-comments/disable-enable-pair
-/* eslint-disable tsdoc/syntax */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable tsdoc/syntax  */
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable @typescript-eslint/prefer-ts-expect-error */
+// ^^ This junk is here because of <Avatar />
 
 'use client';
 
@@ -84,7 +89,7 @@ export const CreatorListItem = ({
         <div className="relative flex flex-row items-center flex-shrink w-4/5 gap-6 m-w-0">
           {hasAvatar ? (
             <Suspense fallback={<AvatarShineLoader />}>
-              {/** @ts-expect-error Async comoponent outside of Next.js scope. */}
+              {/** @ts-ignore Async component outside of Next.js scope. */}
               <Avatar
                 id={id}
                 hasProfileImg={hasAvatar}
