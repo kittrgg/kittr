@@ -8,9 +8,7 @@
     "./client": "./client.ts",
     "./server": "./server.ts"
   },
-  "scripts": {
-    "typecheck": "tsc --noEmit"
-  },
+  "scripts": {},
   "dependencies": {
     "@kittr/firebase": "workspace:*",
     "@kittr/lint": "workspace:*",

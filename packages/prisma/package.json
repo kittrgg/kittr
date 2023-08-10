@@ -4,8 +4,7 @@
   "private": true,
   "exports": {
     ".": "./index.ts",
-    "./validator": "./validator/index.ts",
-    "./mock": "./mock.ts"
+    "./validator": "./validator/index.ts"
   },
   "scripts": {
     "db:format": "prisma format",
