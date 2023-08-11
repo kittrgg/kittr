@@ -23,7 +23,17 @@ export const getKits = cache(
               },
             },
             include: {
-              base: { select: { displayName: true } },
+              base: {
+                select: {
+                  displayName: true,
+                  blurb: true,
+                  imageUrl: true,
+                  category: true,
+                },
+              },
+              options: {
+                select: { slotKey: true, displayName: true, id: true },
+              },
             },
           })
         : await prisma.warzoneTwoKit.findMany({
@@ -36,7 +46,17 @@ export const getKits = cache(
               },
             },
             include: {
-              base: { select: { displayName: true } },
+              base: {
+                select: {
+                  displayName: true,
+                  blurb: true,
+                  imageUrl: true,
+                  category: true,
+                },
+              },
+              options: {
+                select: { slotKey: true, displayName: true, id: true },
+              },
             },
           });
 

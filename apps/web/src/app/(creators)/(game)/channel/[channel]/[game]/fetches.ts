@@ -1,3 +1,5 @@
+import 'server-only';
+
 import { cache } from 'react';
 import { prisma } from '@kittr/prisma';
 
@@ -24,5 +26,26 @@ export const getKitsByGame = cache(
             base: true,
           },
         });
+  },
+);
+
+export const getShopCode = cache(
+  async ({
+    channelUrlSafeName,
+    gameUrlSafeName,
+  }: {
+    channelUrlSafeName: string;
+    gameUrlSafeName: string;
+  }) => {
+    return prisma.channelCreatorCode.findFirst({
+      where: {
+        channel: {
+          urlSafeName: channelUrlSafeName,
+        },
+        game: {
+          urlSafeName: gameUrlSafeName,
+        },
+      },
+    });
   },
 );

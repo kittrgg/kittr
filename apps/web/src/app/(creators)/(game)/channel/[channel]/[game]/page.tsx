@@ -7,7 +7,10 @@ import { prisma } from '@kittr/prisma';
 import { getTopCreatorPopularities } from '@kittr/metrics';
 import type { Params } from './params';
 import { Header } from '@/app/(creators)/Header';
-import { getKitsByGame } from '@/app/(creators)/(game)/channel/[channel]/[game]/fetches';
+import {
+  getKitsByGame,
+  getShopCode,
+} from '@/app/(creators)/(game)/channel/[channel]/[game]/fetches';
 import { KitTileImage } from '@/app/(creators)/(game)/channel/[channel]/[game]/KitTileImage';
 import { getChannel } from '@/fetches/getChannel';
 import { LightRay } from '@/app/(creators)/LightRay';
@@ -48,6 +51,11 @@ export async function generateStaticParams() {
 export async function Page({ params }: { params: Params }) {
   const channel = await getChannel(params.channel);
 
+  const shopCode = await getShopCode({
+    channelUrlSafeName: params.channel,
+    gameUrlSafeName: params.game,
+  });
+
   if (!channel) {
     return notFound();
   }
@@ -59,7 +67,10 @@ export async function Page({ params }: { params: Params }) {
 
   return (
     <>
-      <Header channelUrlSafeName={channel.urlSafeName} />
+      <Header
+        channelUrlSafeName={channel.urlSafeName}
+        shopCode={shopCode?.code}
+      />
       <LightRay />
       <div className="relative z-10 grid grid-flow-row grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {kits

@@ -6,8 +6,10 @@ import { getCreatorLiveStatus } from '@/fetches/getCreatorLiveStatus';
 
 export async function Header({
   channelUrlSafeName,
+  shopCode,
 }: {
   channelUrlSafeName: string;
+  shopCode?: string;
 }) {
   const channel = await getChannel(channelUrlSafeName);
 
@@ -17,17 +19,20 @@ export async function Header({
   const liveStatus = await getCreatorLiveStatus({ twitchUsername: twitchLink });
 
   return (
-    <Link
-      className="z-10 flex flex-row items-center gap-4 position w-fit"
-      href={`/channel/${channelUrlSafeName}`}
-    >
-      <Avatar
-        hasProfileImg={channel.profile?.hasProfileImage}
-        id={channel.id}
-        isLive={liveStatus}
-        username={channel.displayName}
-      />
-      <H1 preset="h3">{channel.displayName}</H1>
-    </Link>
+    <div className="z-10 flex flex-col gap-1">
+      <Link
+        className="flex flex-row items-center gap-4 w-fit"
+        href={`/channel/${channelUrlSafeName}`}
+      >
+        <Avatar
+          hasProfileImg={channel.profile?.hasProfileImage}
+          id={channel.id}
+          isLive={liveStatus}
+          username={channel.displayName}
+        />
+        <H1 preset="h3">{channel.displayName}</H1>
+      </Link>
+      {shopCode ? <p className="text-zinc-400">Shop Code: {shopCode}</p> : null}
+    </div>
   );
 }
