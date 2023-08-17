@@ -5,9 +5,15 @@
   "license": "GNU",
   "exports": {
     ".": "./src/components/index.ts",
-    "./new": "./src/new/index.ts",
+    "./new": {
+      "development": "./src/new/index.ts",
+      "default": "./dist/new/index.js"
+    },
     "./hooks": "./src/hooks/index.ts",
-    "./icons": "./src/icons/index.ts",
+    "./icons": {
+      "development": "./src/icons/index.ts",
+      "default": "./src/icons/index.js"
+    },
     "./social-icons": "./src/icons/socials.tsx",
     "./styles.css": "./dist/compiled.css"
   },
@@ -31,6 +37,7 @@
     }
   },
   "scripts": {
+    "build": "tsc",
     "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
     "lint": "eslint .",
     "test": "vitest",

@@ -15,7 +15,7 @@ import { User } from '../../icons';
 import { Avatar } from '../Avatar';
 import { P, typographyVariants } from '../Typography';
 import { cn } from '../utils';
-import type { NextLinkType } from '../../../utils';
+import type { NextLinkType } from '../../utils';
 import { AvatarShineLoader } from '../Loader';
 
 export interface CreatorListItemProps {

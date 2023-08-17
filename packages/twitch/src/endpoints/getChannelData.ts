@@ -1,5 +1,5 @@
 import * as Logger from '@kittr/logger/node';
-import type { ITwitchChannelData } from '@kittr/types/twitch';
+import type { ITwitchChannelData } from '../types';
 import { getFromApi } from '../utils/getFromApi';
 
 /**

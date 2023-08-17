@@ -8,7 +8,7 @@ import { typographyVariants } from '../Typography';
 import { cn } from '../utils';
 import { useBodyScrollLock } from '../../hooks';
 import { Twitter, Discord } from '../../icons';
-import type { NextLinkType } from '../../../utils';
+import type { NextLinkType } from '../../utils';
 import { Floaty } from './Floaty';
 import { useCloseOnNavigate } from './useCloseOnNavigate';
 

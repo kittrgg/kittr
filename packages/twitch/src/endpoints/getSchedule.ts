@@ -1,4 +1,4 @@
-import type { ITwitchScheduleSegment } from '@kittr/types/twitch';
+import type { ITwitchScheduleSegment } from '../types';
 import { getFromApi } from '../utils/getFromApi';
 
 /**

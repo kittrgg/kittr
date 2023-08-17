@@ -3,7 +3,7 @@ import type {
   ITwitchClip,
   ITwitchChannelData,
   ITwitchVideo,
-} from '@kittr/types';
+} from './types';
 import { getChannelData } from './endpoints/getChannelData';
 import { getClips } from './endpoints/getClips';
 import { getRecentVideos } from './endpoints/getRecentVideos';

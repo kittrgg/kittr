@@ -30,7 +30,6 @@ import { KitsBasesController } from './src/controllers/kits/bases';
 import { KitsBasesOptionsController } from './src/controllers/kits/bases/options';
 import { ManagersChannelsController } from './src/controllers/managers/channels';
 import { StripeController } from './src/controllers/stripe';
-import { TwitchController } from './src/controllers/twitch';
 import { UsersController } from './src/controllers/users';
 import { adminProcedure, publicProcedure, router } from './src/initTRPC';
 import { gamesCount } from './src/routers/games';
@@ -184,9 +183,6 @@ export const appRouter = router({
   }),
   users: router({
     create: UsersController.create,
-  }),
-  twitch: router({
-    'profile-page': TwitchController.getProfile,
   }),
   games: router({
     getByUrlSafeName: GamesController.getGameByUrlSafeName,

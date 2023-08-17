@@ -1,7 +1,7 @@
 import { Badge } from '../Badge';
 import { H4, H3, H5, Span } from '../Typography';
 import { cn } from '../utils';
-import type { NextLinkType } from '../../../utils';
+import type { NextLinkType } from '../../utils';
 
 interface GameCardProps {
   title: string;
