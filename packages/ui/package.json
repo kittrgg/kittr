@@ -5,15 +5,9 @@
   "license": "GNU",
   "exports": {
     ".": "./src/components/index.ts",
-    "./new": {
-      "development": "./src/new/index.ts",
-      "default": "./dist/new/index.js"
-    },
+    "./new": "./src/new/index.ts",
     "./hooks": "./src/hooks/index.ts",
-    "./icons": {
-      "development": "./src/icons/index.ts",
-      "default": "./src/icons/index.js"
-    },
+    "./icons": "./src/icons/index.ts",
     "./social-icons": "./src/icons/socials.tsx",
     "./styles.css": "./dist/compiled.css"
   },
