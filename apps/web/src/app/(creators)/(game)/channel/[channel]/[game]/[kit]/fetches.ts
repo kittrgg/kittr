@@ -63,3 +63,5 @@ export const getKits = cache(
     return kits;
   },
 );
+
+export type Kits = Awaited<ReturnType<typeof getKits>>;
