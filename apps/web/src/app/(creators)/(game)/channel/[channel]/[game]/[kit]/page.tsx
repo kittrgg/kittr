@@ -1,8 +1,9 @@
 import { redirect } from 'next/navigation';
 import { prisma } from '@kittr/prisma';
 import { Header } from '@/app/(creators)/Header';
+import { KitSelector } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/components/KitSelector';
 import { LightRay } from '@/app/(creators)/LightRay';
-import { getKits } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/fetch';
+import { getKits } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/fetches';
 import { YouTubePlayer } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/components/YouTubePlayer';
 import { getShopCode } from '@/app/(creators)/(game)/channel/[channel]/[game]/fetches';
 import { getChannel } from '@/fetches/getChannel';
@@ -51,6 +52,7 @@ export async function Page({
     <>
       <Header channelUrlSafeName={params.channel} shopCode={shopCode?.code} />
       <LightRay />
+      <KitSelector kits={kits} />
       <div className="relative z-10 flex flex-col">
         <div className="flex flex-col gap-2">
           {kits[0].options.map((opt) => {
