@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Button } from '@kittr/ui/new';
+import { Button, cn } from '@kittr/ui/new';
 import type { Kits } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/fetches';
 import { Content } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/components/Content';
 
@@ -16,11 +16,21 @@ export function PageShell({
 
   return (
     <>
-      <div className="z-10">
+      <div className="z-10 flex flex-row gap-4">
         {kits.map((kit, index) => {
+          const text = kit.customTitle ? kit.customTitle : 'Default';
+
           return (
-            <Button key={kit.id} onClick={() => setKitIndex(index)}>
-              {kit.base.displayName} - {kit.customTitle}
+            <Button
+              className={
+                kitIndex === index
+                  ? 'bg-white text-black hover:bg-zinc-200'
+                  : 'text-zinc-100 hover:bg-zinc-700'
+              }
+              key={kit.id}
+              onClick={() => setKitIndex(index)}
+            >
+              {text}
             </Button>
           );
         })}

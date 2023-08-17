@@ -204,8 +204,6 @@ export async function Layout({
                 .sort((a, b) => a.name.localeCompare(b.name))
                 .sort((a, b) => Number(b.featured) - Number(a.featured))
                 .map((kit) => {
-                  const showCount = kit.count > 1;
-
                   return (
                     <AppShellLinkItem key={kit.name}>
                       <Link
@@ -217,7 +215,6 @@ export async function Layout({
                           <Star className="text-yellow-500 fill-yellow-500" />
                         ) : null}
                         {kit.name}
-                        {showCount ? <> ({kit.count})</> : null}
                       </Link>
                     </AppShellLinkItem>
                   );
