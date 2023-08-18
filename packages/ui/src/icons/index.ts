@@ -16,6 +16,8 @@ export {
   Home,
   Library,
   Menu,
+  MoveVertical,
+  MoveHorizontal,
   LayoutGrid,
   User,
   Star,
