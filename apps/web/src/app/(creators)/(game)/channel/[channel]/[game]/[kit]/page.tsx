@@ -1,10 +1,13 @@
 import { notFound, redirect } from 'next/navigation';
 import { Header } from '@/app/(creators)/Header';
 import { LightRay } from '@/app/(creators)/LightRay';
-import { getKits } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/fetches';
-import { getShopCode } from '@/app/(creators)/(game)/channel/[channel]/[game]/fetches';
+import { getKit } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/fetches';
+import {
+  getKitsByGame,
+  getShopCode,
+} from '@/app/(creators)/(game)/channel/[channel]/[game]/fetches';
 import { PageShell } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/components/PageShell';
-import type { Params } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/params';
+import type { Params } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/types';
 import { getChannel } from '@/fetches/getChannel';
 import { BackgroundImage } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/components/BackgroundImage';
 
@@ -13,10 +16,15 @@ export const revalidate = 60;
 async function Page({ params }: { params: Params }) {
   const channel = await getChannel(params.channel);
 
-  const kits = await getKits({
+  const kits = await getKit({
     channel: params.channel,
     game: params.game,
     kit: params.kit,
+  });
+
+  const allChannelGameKits = await getKitsByGame({
+    game: params.game,
+    channelName: params.channel,
   });
 
   const shopCode = await getShopCode({
@@ -37,6 +45,9 @@ async function Page({ params }: { params: Params }) {
       <Header channelUrlSafeName={params.channel} shopCode={shopCode?.code} />
       <LightRay />
       <PageShell
+        channel={params.channel}
+        game={params.game}
+        allChannelGameKits={allChannelGameKits}
         kits={kits}
         youTubeAutoplay={channel.profile?.youtubeAutoplay ?? false}
       />

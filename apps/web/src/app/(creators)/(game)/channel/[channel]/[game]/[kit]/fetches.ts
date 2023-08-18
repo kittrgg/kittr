@@ -1,7 +1,7 @@
 import { prisma } from '@kittr/prisma';
 import { cache } from 'react';
 
-export const getKits = cache(
+export const getKit = cache(
   async ({
     game,
     channel,
@@ -69,4 +69,4 @@ export const getKits = cache(
   },
 );
 
-export type Kits = Awaited<ReturnType<typeof getKits>>;
+export type Kits = Awaited<ReturnType<typeof getKit>>;

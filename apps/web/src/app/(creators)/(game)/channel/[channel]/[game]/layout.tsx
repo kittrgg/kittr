@@ -20,7 +20,7 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 import { inter } from '@/app/fonts';
-import type { Params } from '@/app/(creators)/(game)/channel/[channel]/[game]/params';
+import type { Params } from '@/app/(creators)/(game)/channel/[channel]/[game]/types';
 import { getChannel } from '@/fetches/getChannel';
 import { FooterImage, footerLinks } from '@/app/footer';
 import { getKitsByGame } from '@/app/(creators)/(game)/channel/[channel]/[game]/fetches';
