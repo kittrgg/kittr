@@ -55,7 +55,12 @@ export const getKits = cache(
                 },
               },
               options: {
-                select: { slotKey: true, displayName: true, id: true },
+                select: {
+                  slotKey: true,
+                  displayName: true,
+                  id: true,
+                  tuning: true,
+                },
               },
             },
           });

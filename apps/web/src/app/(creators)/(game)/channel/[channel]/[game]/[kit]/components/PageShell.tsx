@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Button, cn } from '@kittr/ui/new';
+import { Button } from '@kittr/ui/new';
 import type { Kits } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/fetches';
 import { Content } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/components/Content';
 

@@ -1,3 +1,4 @@
+import { Options } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/components/Options';
 import { TikTokPlayer } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/components/TikTokPlayer';
 import { YouTubePlayer } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/components/YouTubePlayer';
 import type { Kits } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/fetches';
@@ -10,17 +11,8 @@ export function Content({
   youTubeAutoplay: boolean;
 }) {
   return (
-    <div className="relative z-10 flex flex-col">
-      <div className="flex flex-col gap-2">
-        {kit.options.map((opt) => {
-          return (
-            <div key={opt.id}>
-              <p>{opt.slotKey}</p>
-              <p>{opt.displayName}</p>
-            </div>
-          );
-        })}
-      </div>
+    <div className="relative z-10 flex flex-col gap-10">
+      <Options options={kit.options} />
       <p>{kit.base.blurb}</p>
       <p>popularity</p>
       {kit.youtubeUrl ? (

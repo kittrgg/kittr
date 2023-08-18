@@ -6,6 +6,7 @@ import { getShopCode } from '@/app/(creators)/(game)/channel/[channel]/[game]/fe
 import { PageShell } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/components/PageShell';
 import type { Params } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/params';
 import { getChannel } from '@/fetches/getChannel';
+import { BackgroundImage } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/components/BackgroundImage';
 
 export const revalidate = 60;
 
@@ -38,6 +39,11 @@ async function Page({ params }: { params: Params }) {
       <PageShell
         kits={kits}
         youTubeAutoplay={channel.profile?.youtubeAutoplay ?? false}
+      />
+
+      <BackgroundImage
+        kitBaseDisplayName={kits[0].base.displayName}
+        kitBaseImageUrl={kits[0].base.imageUrl}
       />
     </>
   );
