@@ -15,7 +15,7 @@ export const ExternalContent = ({
   if (!kit.youtubeUrl && !kit.tiktokUrl) return null;
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-4">
       <h3
         className={cn(typographyVariants({ presets: 'h3' }), 'text-zinc-300')}
       >

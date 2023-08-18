@@ -1,6 +1,7 @@
 import { Kits } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/fetches';
 import { KitCard } from '@/app/(creators)/(game)/channel/[channel]/[game]/components/KitCard';
 import { AllChannelGamesKits } from '@/app/(creators)/(game)/channel/[channel]/[game]/types';
+import { cn, typographyVariants } from '@kittr/ui/new';
 
 // Thanks, ChatGPT.
 function generateRandomIndices(inputArray: any[]): number[] | null {
@@ -38,15 +39,27 @@ export const MoreKits = async ({
   const randomKits = indices.map((index) => kitsNotCurrentlyInView[index]);
 
   return (
-    <div className="relative z-10 grid grid-flow-row grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-      {randomKits
-        .sort((a, b) => a.base.displayName.localeCompare(b.base.displayName))
-        .sort((a, b) => Number(b.featured) - Number(a.featured))
-        .map((kit, index) => {
-          return (
-            <KitCard arrIndex={index} channel={channel} game={game} kit={kit} />
-          );
-        })}
-    </div>
+    <section className="flex flex-col gap-4">
+      <h3
+        className={cn(typographyVariants({ presets: 'h3' }), 'text-zinc-300')}
+      >
+        More kits
+      </h3>
+      <div className="relative z-10 grid grid-flow-row grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+        {randomKits
+          .sort((a, b) => a.base.displayName.localeCompare(b.base.displayName))
+          .sort((a, b) => Number(b.featured) - Number(a.featured))
+          .map((kit, index) => {
+            return (
+              <KitCard
+                arrIndex={index}
+                channel={channel}
+                game={game}
+                kit={kit}
+              />
+            );
+          })}
+      </div>
+    </section>
   );
 };

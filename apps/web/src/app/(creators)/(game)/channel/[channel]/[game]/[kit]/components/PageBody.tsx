@@ -23,8 +23,7 @@ export function PageBody({
       <Options options={kit.options} />
       <p>{kit.base.blurb}</p>
       <ExternalContent kit={kit} youTubeAutoplay={youTubeAutoplay} />
-      {/* <p>popularity</p> */}
-
+      <p>TODO: popularity</p>
       <Suspense>
         <MoreKits
           channel={channel}
