@@ -1,9 +1,6 @@
 {
   "extends": ["//"],
   "pipeline": {
-    "build": {
-      "env": []
-    },
     "dev": {
       "outputMode": "new-only"
     }

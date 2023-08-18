@@ -12,10 +12,12 @@
   },
   "dependencies": {
     "@kittr/lint": "workspace:*",
+    "@kittr/prisma": "workspace:*",
     "@kittr/tailwind": "workspace:*",
     "@kittr/tsconfig": "workspace:*",
     "@kittr/types": "workspace:*",
     "@kittr/ui": "workspace:*",
+    "@prisma/client": "^5.1.1",
     "@types/node": "20.1.0",
     "@types/react": "^18.2.12",
     "@types/react-dom": "^18.2.5",

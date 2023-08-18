@@ -52,6 +52,7 @@ export const MoreKits = async ({
           .map((kit, index) => {
             return (
               <KitCard
+                key={kit.id}
                 arrIndex={index}
                 channel={channel}
                 game={game}

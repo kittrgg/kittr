@@ -1,5 +1,6 @@
 import { H1 } from '@kittr/ui/new';
 import { notFound } from 'next/navigation';
+import { prisma } from '../prisma';
 import { components, componentEntries } from '#/componentMap';
 
 export function generateStaticParams() {
@@ -10,13 +11,20 @@ export function generateStaticParams() {
   });
 }
 
-function Page({ params }: { params: { component: keyof typeof components } }) {
+async function Page({
+  params,
+}: {
+  params: { component: keyof typeof components };
+}) {
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (!components[params.component]) return notFound();
 
+  const data = await prisma.game.findMany();
+  const data2 = await prisma.administrator.findMany();
+
   return (
     <>
-      <H1 className="border-b pb-4">{components[params.component].name}</H1>
+      <H1 className="pb-4 border-b">{components[params.component].name}</H1>
       <div
         className={
           params.component === 'icons'
@@ -27,7 +35,7 @@ function Page({ params }: { params: { component: keyof typeof components } }) {
         {components[params.component].components.map((icon) => {
           return (
             <div
-              className="align-center flex flex-col justify-center gap-2"
+              className="flex flex-col justify-center gap-2 align-center"
               key={icon.key}
             >
               {icon}
