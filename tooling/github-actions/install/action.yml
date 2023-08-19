@@ -23,14 +23,6 @@ runs:
         restore-keys: |
           ${{ runner.os }}-pnpm
 
-    - name: Cache TypeScript TSBuild Info Files
-      uses: actions/cache@v3
-      with:
-        path: '*/*/node_modules/.cache/tsbuildinfo.json'
-        # Commit hash is for working around this: https://github.com/actions/cache/issues/106
-        key: ${{ runner.os }}-cache-typescript-tsbuildinfo-${{ github.sha }}
-        restore-keys: ${{ runner.os }}-cache-typescript-tsbuildinfo-
-
     - name: pnpm
       shell: bash
       if: steps.pnpm-cache.outputs.cache-hit != 'true'
