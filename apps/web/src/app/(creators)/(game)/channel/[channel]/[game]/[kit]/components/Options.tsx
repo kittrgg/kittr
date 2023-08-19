@@ -7,7 +7,8 @@ import type { Kits } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit
 
 // Hacking in the types for showing tunings
 type Option = Kits[number]['options'][number] & {
-  tuning?: { horz: number; vert: number }[];
+  horz: number;
+  vert: number;
 };
 
 export function Options({ options }: { options: Option[] }) {
@@ -30,16 +31,16 @@ export function Options({ options }: { options: Option[] }) {
             <p className={typographyVariants({ presets: 'h4' })}>
               {opt.displayName}
             </p>
-            {opt.tuning?.[0].horz || opt.tuning?.[0].vert ? (
+            {opt.horz || opt.vert ? (
               <div className="flex flex-row justify-end gap-4">
-                {opt.tuning?.[0].horz ? (
+                {opt.horz ? (
                   <p className="flex flex-row gap-1 text-zinc-300">
-                    <MoveHorizontal /> {opt.tuning[0].horz}
+                    <MoveHorizontal /> {opt.horz}
                   </p>
                 ) : null}
-                {opt.tuning[0].vert ? (
+                {opt.vert ? (
                   <p className="flex flex-row gap-1 text-zinc-200">
-                    <MoveVertical /> {opt.tuning[0].vert}
+                    <MoveVertical /> {opt.vert}
                   </p>
                 ) : null}
               </div>
