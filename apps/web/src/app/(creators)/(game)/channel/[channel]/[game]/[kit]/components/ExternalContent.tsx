@@ -15,7 +15,10 @@ export function ExternalContent({
   if (!kit.youtubeUrl && !kit.tiktokUrl) return null;
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="relative flex flex-col gap-4">
+      <LeftLight />
+      <RightLight />
+
       <h3
         className={cn(typographyVariants({ presets: 'h3' }), 'text-zinc-300')}
       >
@@ -29,6 +32,32 @@ export function ExternalContent({
           />
         ) : null}
         {kit.tiktokUrl ? <TikTokPlayer /> : null}
+      </div>
+    </div>
+  );
+}
+
+function LeftLight() {
+  return (
+    <div className="absolute left-0 -translate-y-1/2 top-1/3">
+      <div className="absolute inset-0 w-16 h-[30rem] bg-stone-600">
+        <div className="absolute z-0 overflow-visible text-black -inset-40 backdrop-blur-3xl rounded-3xl" />
+      </div>
+      <div className="absolute inset-0 w-16 h-[30rem] bg-zinc-600">
+        <div className="absolute z-0 overflow-visible text-black -inset-40 backdrop-blur-2xl rounded-3xl" />
+      </div>
+    </div>
+  );
+}
+
+function RightLight() {
+  return (
+    <div className="absolute right-0 -translate-y-1/2 top-1/3">
+      <div className="absolute inset-0 w-16 h-[30rem] bg-stone-600">
+        <div className="absolute z-0 overflow-visible text-black -inset-40 backdrop-blur-3xl rounded-3xl" />
+      </div>
+      <div className="absolute inset-0 w-16 h-[30rem] bg-zinc-600">
+        <div className="absolute z-0 overflow-visible text-black -inset-40 backdrop-blur-2xl rounded-3xl" />
       </div>
     </div>
   );
