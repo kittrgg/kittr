@@ -21,7 +21,7 @@ export function LogKitMetrics({
   const logger = useLogger();
 
   logger.info('Creator popularity', {
-    type: 'game',
+    metric: 'game',
     channelDisplayName,
     channelId,
     channelUrlSafeName,

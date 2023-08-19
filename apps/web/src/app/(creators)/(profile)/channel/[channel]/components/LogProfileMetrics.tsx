@@ -19,7 +19,7 @@ export function LogProfileMetrics({
   const logger = useLogger();
 
   logger.info('Creator popularity', {
-    type: 'profile',
+    metric: 'profile',
     channelDisplayName,
     channelId,
     channelUrlSafeName,
