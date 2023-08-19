@@ -2,7 +2,6 @@
   "extends": "@kittr/tsconfig/base.json",
   "compilerOptions": {
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json",
-    "moduleResolution": "Bundler",
     "outDir": "dist"
   },
   "include": ["src"],

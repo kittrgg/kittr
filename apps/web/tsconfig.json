@@ -23,7 +23,7 @@
       "@Types/*": ["types/*"],
       "@Server/*": ["server/*"]
     },
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "strictNullChecks": true
   },
   "include": [

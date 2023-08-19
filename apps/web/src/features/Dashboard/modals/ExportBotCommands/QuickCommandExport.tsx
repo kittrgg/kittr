@@ -4,7 +4,7 @@ import CommandsTable from '@Features/Dashboard/modals/ExportBotCommands/Commands
 import { setModal } from '@Redux/slices/dashboard';
 import { useModal } from '@Redux/slices/dashboard/selectors';
 import { useDispatch } from '@Redux/store';
-import type { TCommandMethod } from '@kittr/types/types';
+import type { TCommandMethod } from '@kittr/types';
 import { useState } from 'react';
 import * as Styled from './style';
 

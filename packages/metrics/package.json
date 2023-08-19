@@ -5,17 +5,18 @@
   "license": "GNU",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
+      "types": "./src/index.ts",
+      "default": "./dist/index.mjs"
     }
   },
-  "main": "./dist/index.cjs",
-  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "unbuild --sourcemap --minify",
     "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
     "lint": "eslint .",
+    "tsc": "tsc",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
