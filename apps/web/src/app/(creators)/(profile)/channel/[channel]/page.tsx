@@ -81,7 +81,7 @@ async function ChannelProfilePage({ params }: { params: Params }) {
         channelUrlSafeName={channel.urlSafeName}
       />
       <Header channelUrlSafeName={channel.urlSafeName} />
-      <LightRay />
+      <LightRay className="absolute -top-[20rem] -left-0 -rotate-12 w-[20rem] h-[50rem] scale-y-150 opacity-50" />
 
       <section className="relative z-10 flex flex-row flex-wrap justify-center gap-4">
         {channel.links.map((link) => {

@@ -1,4 +1,5 @@
 import { cn, typographyVariants } from '@kittr/ui/new';
+import { LightRay } from '@/app/(creators)/LightRay';
 import { TikTokPlayer } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/components/TikTokPlayer';
 import { YouTubePlayer } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/components/YouTubePlayer';
 import type { Kits } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/fetches';
@@ -39,26 +40,12 @@ export function ExternalContent({
 
 function LeftLight() {
   return (
-    <div className="absolute left-0 -translate-y-1/2 top-1/3">
-      <div className="absolute inset-0 w-16 h-[30rem] bg-stone-600">
-        <div className="absolute z-0 overflow-visible text-black -inset-40 backdrop-blur-3xl rounded-3xl" />
-      </div>
-      <div className="absolute inset-0 w-16 h-[30rem] bg-zinc-600">
-        <div className="absolute z-0 overflow-visible text-black -inset-40 backdrop-blur-2xl rounded-3xl" />
-      </div>
-    </div>
+    <LightRay className="absolute -left-[225px] -translate-y-1/2 top-1/2 w-[400px] h-[105%]" />
   );
 }
 
 function RightLight() {
   return (
-    <div className="absolute right-0 -translate-y-1/2 top-1/3">
-      <div className="absolute inset-0 w-16 h-[30rem] bg-stone-600">
-        <div className="absolute z-0 overflow-visible text-black -inset-40 backdrop-blur-3xl rounded-3xl" />
-      </div>
-      <div className="absolute inset-0 w-16 h-[30rem] bg-zinc-600">
-        <div className="absolute z-0 overflow-visible text-black -inset-40 backdrop-blur-2xl rounded-3xl" />
-      </div>
-    </div>
+    <LightRay className="absolute -right-[225px] -translate-y-1/2 top-1/2 w-[400px] h-[105%]" />
   );
 }

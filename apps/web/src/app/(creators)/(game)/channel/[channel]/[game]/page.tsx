@@ -67,7 +67,7 @@ export async function Page({ params }: { params: Params }) {
         channelUrlSafeName={channel.urlSafeName}
         shopCode={shopCode?.code}
       />
-      <LightRay />
+      <LightRay className="absolute -top-[20rem] -left-0 -rotate-12 w-[20rem] h-[50rem] scale-y-150 opacity-50" />
       <div className="relative z-10 grid grid-flow-row grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {kits
           .sort((a, b) => a.base.displayName.localeCompare(b.base.displayName))

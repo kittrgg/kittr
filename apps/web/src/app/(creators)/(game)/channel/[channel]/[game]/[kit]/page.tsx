@@ -51,7 +51,7 @@ async function Page({ params }: { params: Params }) {
         kitBaseDisplayName={kits[0].base.displayName}
       />
       <Header channelUrlSafeName={params.channel} shopCode={shopCode?.code} />
-      <LightRay />
+      <LightRay className="absolute -top-[20rem] -left-0 -rotate-12 w-[20rem] h-[50rem] scale-y-150 opacity-50" />
       <PageShell
         allChannelGameKits={allChannelGameKits}
         channel={params.channel}
@@ -59,7 +59,6 @@ async function Page({ params }: { params: Params }) {
         kits={kits}
         youTubeAutoplay={channel.profile?.youtubeAutoplay ?? false}
       />
-
       <BackgroundImage
         kitBaseDisplayName={kits[0].base.displayName}
         kitBaseImageUrl={kits[0].base.imageUrl}
