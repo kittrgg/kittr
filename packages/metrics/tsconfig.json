@@ -3,9 +3,8 @@
   "compilerOptions": {
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json",
     "moduleResolution": "Bundler",
-    "rootDir": "src",
     "outDir": "dist"
   },
-  "include": ["."],
+  "include": ["src"],
   "exclude": ["node_modules", "dist"]
 }
