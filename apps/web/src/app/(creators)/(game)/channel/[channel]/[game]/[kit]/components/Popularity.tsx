@@ -6,13 +6,16 @@ export function Popularity() {
   const game = 'Warzone 2';
 
   return (
-    <section className="flex flex-col gap-4">
+    <section className="flex flex-col gap-4 ">
       <h3
         className={cn(typographyVariants({ presets: 'h3' }), 'text-zinc-300')}
       >
         Popularity
       </h3>
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+      <div className="relative grid grid-cols-1 gap-6 lg:grid-cols-3">
+        <p className="absolute z-10 text-2xl font-semibold -translate-x-1/2 -translate-y-1/2 grayscale top-1/2 left-1/2 text-zinc-200">
+          Coming soon
+        </p>
         <PopularityCard
           lineOne="Kit views"
           lineTwo="Creator only"
@@ -46,7 +49,7 @@ function PopularityCard({
   lineTwo: string;
 }) {
   return (
-    <div className="flex flex-col items-center gap-4 p-8 border rounded-md border-zinc-800 bg-gradient-to-t from-zinc-900 to-zinc-800">
+    <div className="flex flex-col items-center gap-4 p-8 border rounded-md blur-sm border-zinc-800 bg-gradient-to-t from-zinc-900 to-zinc-800 opacity-40">
       <div className="flex flex-row items-end gap-2">
         <p className="text-4xl font-semibold">{number}</p>
         {fractionDenominator ? (
