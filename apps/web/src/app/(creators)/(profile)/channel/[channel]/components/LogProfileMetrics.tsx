@@ -14,6 +14,8 @@ export function LogProfileMetrics({
 }) {
   const logger = useLogger();
 
+  if (typeof window === 'undefined') return null;
+
   logger.info('Creator popularity', {
     metric: 'profile',
     channelDisplayName,

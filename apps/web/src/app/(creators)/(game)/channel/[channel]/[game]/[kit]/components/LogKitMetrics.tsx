@@ -18,6 +18,8 @@ export function LogKitMetrics({
 }) {
   const logger = useLogger();
 
+  if (typeof window === 'undefined') return null;
+
   logger.info('Creator popularity', {
     metric: 'kit',
     channelDisplayName,
