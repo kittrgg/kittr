@@ -1,12 +1,14 @@
 import { useLogger } from 'next-axiom';
 import { client } from './client';
 
+export { useLogger };
+
 interface GetCreatorPopularities {
   limit: number;
   field: 'channelId' | 'displayName';
 }
 
-interface CompleteCreatorPopularityMetric<T> {
+export interface CompleteCreatorPopularityMetric<T> {
   type: T;
   channelId: string;
   channelUrlSafeName: string;

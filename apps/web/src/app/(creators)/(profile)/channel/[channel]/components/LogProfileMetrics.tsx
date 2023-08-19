@@ -1,7 +1,11 @@
+/* eslint-disable eslint-comments/disable-enable-pair */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 'use client';
 
-import { logCreatorPopularityMetric } from '@kittr/metrics';
-import { useEffect } from 'react';
+import type { CompleteCreatorPopularityMetric } from '@kittr/metrics';
+import { useLogger } from '@kittr/metrics';
 
 export function LogProfileMetrics({
   channelDisplayName,
@@ -12,14 +16,14 @@ export function LogProfileMetrics({
   channelUrlSafeName: string;
   channelId: string;
 }) {
-  useEffect(() => {
-    logCreatorPopularityMetric({
-      type: 'profile',
-      channelDisplayName,
-      channelId,
-      channelUrlSafeName,
-    });
-  }, [channelDisplayName, channelId, channelUrlSafeName]);
+  const logger = useLogger();
+
+  logger.info('Creator popularity', {
+    type: 'profile',
+    channelDisplayName,
+    channelId,
+    channelUrlSafeName,
+  } as CompleteCreatorPopularityMetric<'profile'>);
 
   return null;
 }

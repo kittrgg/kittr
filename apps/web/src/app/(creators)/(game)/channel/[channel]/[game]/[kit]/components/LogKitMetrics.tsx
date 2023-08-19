@@ -1,7 +1,11 @@
+/* eslint-disable eslint-comments/disable-enable-pair */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 'use client';
 
-import { logCreatorPopularityMetric } from '@kittr/metrics';
-import { useEffect } from 'react';
+import type { CompleteCreatorPopularityMetric } from '@kittr/metrics';
+import { useLogger } from '@kittr/metrics';
 
 export function LogKitMetrics({
   channelDisplayName,
@@ -16,22 +20,16 @@ export function LogKitMetrics({
   gameUrlSafeName: string;
   kitBaseDisplayName: string;
 }) {
-  useEffect(() => {
-    logCreatorPopularityMetric({
-      type: 'kit',
-      channelDisplayName,
-      channelId,
-      channelUrlSafeName,
-      gameUrlSafeName,
-      kitBaseDisplayName,
-    });
-  }, [
+  const logger = useLogger();
+
+  logger.info('Creator popularity', {
+    type: 'kit',
     channelDisplayName,
     channelId,
+    channelUrlSafeName,
     gameUrlSafeName,
     kitBaseDisplayName,
-    channelUrlSafeName,
-  ]);
+  } as CompleteCreatorPopularityMetric<'kit'>);
 
   return null;
 }

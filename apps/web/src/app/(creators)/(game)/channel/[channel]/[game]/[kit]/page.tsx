@@ -46,8 +46,8 @@ async function Page({ params }: { params: Params }) {
       <LogKitMetrics
         channelDisplayName={channel.displayName}
         channelId={channel.id}
-        gameUrlSafeName={params.game}
         channelUrlSafeName={channel.urlSafeName}
+        gameUrlSafeName={params.game}
         kitBaseDisplayName={kits[0].base.displayName}
       />
       <Header channelUrlSafeName={params.channel} shopCode={shopCode?.code} />
