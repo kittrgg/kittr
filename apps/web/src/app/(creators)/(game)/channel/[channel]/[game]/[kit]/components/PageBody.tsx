@@ -4,6 +4,7 @@ import { MoreKits } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]
 import { Options } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/components/Options';
 import type { Kits } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/types';
 import type { AllChannelGamesKits } from '@/app/(creators)/(game)/channel/[channel]/[game]/types';
+import { Popularity } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/components/Popularity';
 
 export function PageBody({
   kit,
@@ -23,7 +24,7 @@ export function PageBody({
       <Options options={kit.options} />
       <p>{kit.base.blurb}</p>
       <ExternalContent kit={kit} youTubeAutoplay={youTubeAutoplay} />
-      <p>TODO: popularity</p>
+      <Popularity />
       <Suspense>
         <MoreKits
           activeKit={kit}
