@@ -66,11 +66,11 @@
       "outputMode": "new-only"
     },
     "lint": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build", "^db:generate"],
       "outputs": ["node_modules/.cache/.eslintcache"]
     },
     "typecheck": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build", "^db:generate"],
       "outputs": ["node_modules/.cache/tsbuildinfo.json"]
     },
     "test": {
