@@ -1,4 +1,4 @@
-import { log } from 'next-axiom';
+import { useLogger } from 'next-axiom';
 import { client } from './client';
 
 interface GetCreatorPopularities {
@@ -30,7 +30,7 @@ export const logCreatorPopularityMetric = <
 >(
   logData: CreatorPopularityMetric<T>,
 ) => {
-  return log.info('Creator popularity', logData);
+  return useLogger().info('Creator popularity', logData);
 };
 
 export const getTopCreatorPopularities = async (
