@@ -14,7 +14,7 @@ import { KitCard } from '@/app/(creators)/(game)/channel/[channel]/[game]/compon
 export const revalidate = 60;
 
 export async function generateStaticParams() {
-  const limit = process.env.VERCEL_ENV === 'production' ? 30 : 5;
+  const limit = process.env.VERCEL_ENV === 'production' ? 30 : 1;
 
   const topCreators = await getTopCreatorPopularities({
     limit,

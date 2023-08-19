@@ -20,10 +20,13 @@ export async function generateStaticParams() {
   return games
     .filter((game) => game.active)
     .map((game) =>
-      Array.from({ length: 10 }, (_, i) => ({
-        game: game.urlSafeName,
-        pageNumber: String(i + 1),
-      })),
+      Array.from(
+        { length: process.env.VERCEL_ENV !== 'production' ? 1 : 10 },
+        (_, i) => ({
+          game: game.urlSafeName,
+          pageNumber: String(i + 1),
+        }),
+      ),
     )
     .flat();
 }
