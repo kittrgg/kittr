@@ -1,25 +1,25 @@
-import { Kits } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/fetches';
-import { KitCard } from '@/app/(creators)/(game)/channel/[channel]/[game]/components/KitCard';
-import { AllChannelGamesKits } from '@/app/(creators)/(game)/channel/[channel]/[game]/types';
 import { cn, typographyVariants } from '@kittr/ui/new';
+import type { Kits } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/fetches';
+import { KitCard } from '@/app/(creators)/(game)/channel/[channel]/[game]/components/KitCard';
+import type { AllChannelGamesKits } from '@/app/(creators)/(game)/channel/[channel]/[game]/types';
 
 // Thanks, ChatGPT.
-function generateRandomIndices(inputArray: any[]): number[] | null {
+function generateRandomIndices(inputArray: unknown[]): number[] | null {
   if (inputArray.length < 3) {
     return null;
   }
 
-  let indices = new Set<number>();
+  const indices = new Set<number>();
 
   while (indices.size < 3) {
-    let randomIndex = Math.floor(Math.random() * inputArray.length);
+    const randomIndex = Math.floor(Math.random() * inputArray.length);
     indices.add(randomIndex);
   }
 
   return Array.from(indices);
 }
 
-export const MoreKits = async ({
+export function MoreKits({
   allKits,
   activeKit,
   channel,
@@ -29,7 +29,7 @@ export const MoreKits = async ({
   game: string;
   allKits: AllChannelGamesKits;
   activeKit: Kits[number];
-}) => {
+}) {
   const kitsNotCurrentlyInView = allKits.filter(
     (kit) => kit.base.displayName !== activeKit.base.displayName,
   );
@@ -52,10 +52,10 @@ export const MoreKits = async ({
           .map((kit, index) => {
             return (
               <KitCard
-                key={kit.id}
                 arrIndex={index}
                 channel={channel}
                 game={game}
+                key={kit.id}
                 kit={kit}
               />
             );
@@ -63,4 +63,4 @@ export const MoreKits = async ({
       </div>
     </section>
   );
-};
+}

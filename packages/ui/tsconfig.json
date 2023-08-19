@@ -2,9 +2,9 @@
   "extends": "@kittr/tsconfig/react-library.json",
   "compilerOptions": {
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json",
-    "rootDir": "src",
+    "rootDir": ".",
     "outDir": "dist"
   },
-  "include": ["src"],
+  "include": ["src", "turbo", "vite.config.ts"],
   "exclude": ["node_modules", "dist"]
 }

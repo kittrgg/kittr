@@ -45,9 +45,9 @@ async function Page({ params }: { params: Params }) {
       <Header channelUrlSafeName={params.channel} shopCode={shopCode?.code} />
       <LightRay />
       <PageShell
+        allChannelGameKits={allChannelGameKits}
         channel={params.channel}
         game={params.game}
-        allChannelGameKits={allChannelGameKits}
         kits={kits}
         youTubeAutoplay={channel.profile?.youtubeAutoplay ?? false}
       />

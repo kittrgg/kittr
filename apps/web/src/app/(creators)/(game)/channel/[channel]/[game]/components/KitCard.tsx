@@ -1,11 +1,11 @@
-import { KitTileImage } from '@/app/(creators)/(game)/channel/[channel]/[game]/components/KitTileImage';
-import { AllChannelGamesKits } from '@/app/(creators)/(game)/channel/[channel]/[game]/types';
 import { Star } from '@kittr/ui/icons';
 import { cn } from '@kittr/ui/new';
 import Link from 'next/link';
 import { Suspense } from 'react';
+import type { AllChannelGamesKits } from '@/app/(creators)/(game)/channel/[channel]/[game]/types';
+import { KitTileImage } from '@/app/(creators)/(game)/channel/[channel]/[game]/components/KitTileImage';
 
-export const KitCard = ({
+export function KitCard({
   kit,
   game,
   channel,
@@ -15,7 +15,7 @@ export const KitCard = ({
   game: string;
   channel: string;
   arrIndex: number;
-}) => {
+}) {
   return (
     <Link
       className={cn(
@@ -44,4 +44,4 @@ export const KitCard = ({
       </div>
     </Link>
   );
-};
+}

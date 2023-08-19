@@ -1,17 +1,17 @@
+import { cn, typographyVariants } from '@kittr/ui/new';
 import { TikTokPlayer } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/components/TikTokPlayer';
 import { YouTubePlayer } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/components/YouTubePlayer';
 import type { Kits } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/fetches';
-import { cn, typographyVariants } from '@kittr/ui/new';
 
 type Kit = Kits[number];
 
-export const ExternalContent = ({
+export function ExternalContent({
   kit,
   youTubeAutoplay,
 }: {
   kit: Kit;
   youTubeAutoplay: boolean;
-}) => {
+}) {
   if (!kit.youtubeUrl && !kit.tiktokUrl) return null;
 
   return (
@@ -32,4 +32,4 @@ export const ExternalContent = ({
       </div>
     </div>
   );
-};
+}

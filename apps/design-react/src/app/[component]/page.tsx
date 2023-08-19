@@ -1,6 +1,5 @@
 import { H1 } from '@kittr/ui/new';
 import { notFound } from 'next/navigation';
-import { prisma } from '../prisma';
 import { components, componentEntries } from '#/componentMap';
 
 export function generateStaticParams() {
@@ -11,16 +10,9 @@ export function generateStaticParams() {
   });
 }
 
-async function Page({
-  params,
-}: {
-  params: { component: keyof typeof components };
-}) {
+function Page({ params }: { params: { component: keyof typeof components } }) {
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (!components[params.component]) return notFound();
-
-  const data = await prisma.game.findMany();
-  const data2 = await prisma.administrator.findMany();
 
   return (
     <>

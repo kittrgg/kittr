@@ -1,16 +1,12 @@
 import { Prose } from '@kittr/ui/new';
 import type { Metadata } from 'next';
-import { prisma } from './prisma';
 
 export const metadata: Metadata = {
   description: "kittr's React UI Kit",
   title: 'React Kit - kittr',
 };
 
-export default async function Home() {
-  const data = await prisma.game.findMany();
-  const data2 = await prisma.administrator.findMany();
-
+export default function Home() {
   return (
     <Prose className="prose-invert">
       <h1>Welcome to the component showcase.</h1>

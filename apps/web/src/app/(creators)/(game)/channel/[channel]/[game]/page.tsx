@@ -1,8 +1,4 @@
-import { Star } from '@kittr/ui/icons';
-import { Suspense } from 'react';
 import { notFound } from 'next/navigation';
-import { cn } from '@kittr/ui/new';
-import Link from 'next/link';
 import { prisma } from '@kittr/prisma';
 import { getTopCreatorPopularities } from '@kittr/metrics';
 import type { Params } from './types';
@@ -11,7 +7,6 @@ import {
   getKitsByGame,
   getShopCode,
 } from '@/app/(creators)/(game)/channel/[channel]/[game]/fetches';
-import { KitTileImage } from '@/app/(creators)/(game)/channel/[channel]/[game]/components/KitTileImage';
 import { getChannel } from '@/fetches/getChannel';
 import { LightRay } from '@/app/(creators)/LightRay';
 import { KitCard } from '@/app/(creators)/(game)/channel/[channel]/[game]/components/KitCard';
@@ -83,6 +78,7 @@ export async function Page({ params }: { params: Params }) {
                 arrIndex={index}
                 channel={params.channel}
                 game={params.game}
+                key={kit.id}
                 kit={kit}
               />
             );

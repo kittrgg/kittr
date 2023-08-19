@@ -1,9 +1,9 @@
+import { Suspense } from 'react';
 import { ExternalContent } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/components/ExternalContent';
 import { MoreKits } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/components/MoreKits';
 import { Options } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/components/Options';
-import { Kits } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/types';
-import { AllChannelGamesKits } from '@/app/(creators)/(game)/channel/[channel]/[game]/types';
-import { Suspense } from 'react';
+import type { Kits } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/types';
+import type { AllChannelGamesKits } from '@/app/(creators)/(game)/channel/[channel]/[game]/types';
 
 export function PageBody({
   kit,
@@ -26,10 +26,10 @@ export function PageBody({
       <p>TODO: popularity</p>
       <Suspense>
         <MoreKits
+          activeKit={kit}
+          allKits={allKits}
           channel={channel}
           game={game}
-          allKits={allKits}
-          activeKit={kit}
         />
       </Suspense>
     </div>
