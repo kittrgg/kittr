@@ -10,6 +10,7 @@ import { PageShell } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit
 import type { Params } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/types';
 import { getChannel } from '@/fetches/getChannel';
 import { BackgroundImage } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/components/BackgroundImage';
+import { MetricsReporter } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/components/MetricsReporter';
 
 export const revalidate = 60;
 
@@ -42,6 +43,11 @@ async function Page({ params }: { params: Params }) {
 
   return (
     <>
+      <MetricsReporter
+        channelDisplayName={params.channel}
+        gameDisplayName={params.game}
+        kitBaseDisplayName={params.kit}
+      />
       <Header channelUrlSafeName={params.channel} shopCode={shopCode?.code} />
       <LightRay />
       <PageShell
