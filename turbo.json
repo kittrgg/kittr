@@ -62,20 +62,19 @@
       "outputMode": "new-only"
     },
     "format": {
+      "dependsOn": ["^topo"],
       "outputMode": "new-only"
     },
     "lint": {
-      "outputs": ["node_modules/.cache/.eslintcache"],
-      "dependsOn": ["^topo"],
-      "outputMode": "new-only"
+      "dependsOn": ["^build"],
+      "outputs": ["node_modules/.cache/.eslintcache"]
     },
     "typecheck": {
-      "dependsOn": ["^topo"],
-      "outputs": ["node_modules/.cache/tsbuildinfo.json"],
-      "outputMode": "errors-only"
+      "dependsOn": ["^build"],
+      "outputs": ["node_modules/.cache/tsbuildinfo.json"]
     },
     "test": {
-      "dependsOn": ["^topo"],
+      "dependsOn": ["^build"],
       "outputs": ["coverage/**"]
     },
     "dev": {

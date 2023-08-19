@@ -5,8 +5,9 @@
   "license": "GNU",
   "exports": {
     ".": {
-      "types": "./src/index.ts",
-      "default": "./dist/index.mjs"
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
     }
   },
   "files": [
