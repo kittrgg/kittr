@@ -1,7 +1,7 @@
-import { useLogger } from 'next-axiom';
+import { useLogger, withAxiom } from 'next-axiom';
 import { client } from './client';
 
-export { useLogger };
+export { useLogger, withAxiom };
 
 interface GetCreatorPopularities {
   limit: number;
@@ -9,7 +9,7 @@ interface GetCreatorPopularities {
 }
 
 export interface CompleteCreatorPopularityMetric<T> {
-  type: T;
+  metric: T;
   channelId: string;
   channelUrlSafeName: string;
   channelDisplayName: string;

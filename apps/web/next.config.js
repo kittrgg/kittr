@@ -4,6 +4,7 @@
 
 const isDeployment = Boolean(process.env.VERCEL_URL);
 
+const { withAxiom } = require('@kittr/metrics');
 const { withSentryConfig } = require('@sentry/nextjs');
 
 /** @type {import('next').NextConfig} */
@@ -109,5 +110,5 @@ const sentryWebpackPluginOptions = {
 // to ensure that your source maps include changes from all other Webpack plugins
 module.exports = isDeployment
   ? // @ts-ignore
-    withSentryConfig(moduleExports, sentryWebpackPluginOptions)
+    withAxiom(withSentryConfig(moduleExports, sentryWebpackPluginOptions))
   : moduleExports;
