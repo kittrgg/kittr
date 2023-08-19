@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { getTopCreatorPopularities } from '@kittr/metrics';
 import { prisma } from '@kittr/prisma';
+import { LogProfileMetrics } from './components/LogProfileMetrics';
 import { getChannel } from '@/fetches/getChannel';
 import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 import type { Params } from '@/app/(creators)/(profile)/channel/[channel]/params';
@@ -74,6 +75,11 @@ async function ChannelProfilePage({ params }: { params: Params }) {
 
   return (
     <>
+      <LogProfileMetrics
+        channelDisplayName={channel.displayName}
+        channelId={channel.id}
+        channelUrlSafeName={channel.urlSafeName}
+      />
       <Header channelUrlSafeName={channel.urlSafeName} />
       <LightRay />
 

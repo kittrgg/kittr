@@ -1,14 +1,11 @@
-// Showing a bad lint for the tunings
-// eslint-disable-next-line eslint-comments/disable-enable-pair
-/* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import { typographyVariants, cn } from '@kittr/ui/new';
 import { MoveVertical, MoveHorizontal } from '@kittr/ui/icons';
 import type { Kits } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/fetches';
 
 // Hacking in the types for showing tunings
 type Option = Kits[number]['options'][number] & {
-  horz: number;
-  vert: number;
+  horz?: number;
+  vert?: number;
 };
 
 export function Options({ options }: { options: Option[] }) {

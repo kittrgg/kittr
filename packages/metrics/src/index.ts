@@ -1,11 +1,37 @@
+import { log } from 'next-axiom';
 import { client } from './client';
-
-export { log } from 'next-axiom';
 
 interface GetCreatorPopularities {
   limit: number;
   field: 'channelId' | 'displayName';
 }
+
+interface CompleteCreatorPopularityMetric<T> {
+  type: T;
+  channelId: string;
+  channelUrlSafeName: string;
+  channelDisplayName: string;
+  gameUrlSafeName: T extends 'game' | 'kit' ? string : unknown;
+  kitBaseDisplayName: T extends 'kit' ? string : unknown;
+}
+
+type CreatorPopularityMetric<T extends 'game' | 'kit' | 'profile'> =
+  T extends 'profile'
+    ? Omit<
+        CompleteCreatorPopularityMetric<T>,
+        'gameUrlSafeName' | 'kitBaseDisplayName'
+      >
+    : T extends 'game'
+    ? Omit<CompleteCreatorPopularityMetric<T>, 'kitBaseDisplayName'>
+    : CompleteCreatorPopularityMetric<T>;
+
+export const logCreatorPopularityMetric = <
+  T extends 'game' | 'kit' | 'profile',
+>(
+  logData: CreatorPopularityMetric<T>,
+) => {
+  return log.info('Creator popularity', logData);
+};
 
 export const getTopCreatorPopularities = async (
   opts?: Partial<GetCreatorPopularities>,
