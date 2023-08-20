@@ -36,3 +36,5 @@ export const getChannel = cache(async (urlSafeName: string) => {
 
   return channel;
 });
+
+export type GetChannel = Awaited<ReturnType<typeof getChannel>>;

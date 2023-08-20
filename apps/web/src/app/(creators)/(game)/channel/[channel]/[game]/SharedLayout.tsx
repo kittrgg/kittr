@@ -6,10 +6,8 @@ import {
   AppShellLinkItem,
   SidebarSeparator,
   SidebarHeader,
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
+  Avatar,
+  cn,
 } from '@kittr/ui/new';
 import Link from 'next/link';
 import { Star, LayoutGrid, Users, Gamepad } from '@kittr/ui/icons';
@@ -106,35 +104,20 @@ export async function SharedLayout({
 
               <SidebarSeparator />
 
-              {channel.games.length > 1 ? (
-                <>
-                  <SidebarHeader>Games</SidebarHeader>
-                  <Select>
-                    <SelectTrigger className="w-[180px]">
-                      <SelectValue
-                        placeholder={
-                          channel.games.find(
-                            (game) => game.urlSafeName === params.game,
-                          )?.displayName
-                        }
-                      />
-                    </SelectTrigger>
-                    <SelectContent className="bg-zinc-800">
-                      {channel.games.map((game) => {
-                        return (
-                          <Link
-                            className="block p-2 hover:bg-zinc-700"
-                            href={`/channel/${params.channel}/${game.urlSafeName}`}
-                            key={game.urlSafeName}
-                          >
-                            {game.displayName}
-                          </Link>
-                        );
-                      })}
-                    </SelectContent>
-                  </Select>
-                </>
-              ) : null}
+              <AppShellLinkItem>
+                <Link
+                  className="flex flex-row items-center"
+                  href={`/channel/${params.channel}`}
+                >
+                  <Avatar
+                    className="w-8 h-8"
+                    hasProfileImg={channel.profile?.hasProfileImage}
+                    id={channel.id}
+                    username={channel.displayName}
+                  />
+                  Back to profile
+                </Link>
+              </AppShellLinkItem>
 
               <SidebarHeader>Kits</SidebarHeader>
               {kitNames
@@ -144,14 +127,20 @@ export async function SharedLayout({
                   return (
                     <AppShellLinkItem key={kit.name}>
                       <Link
+                        className={cn(
+                          'pl-2 font-medium ',
+                          kit.featured
+                            ? 'from-white from-[20px] to-yellow-500 text-transparent bg-clip-text bg-gradient-to-r'
+                            : '',
+                        )}
                         href={`/channel/${params.channel}/${
                           params.game
                         }/${encodeURI(kit.name)}`}
                       >
+                        {kit.name}
                         {kit.featured ? (
                           <Star className="text-yellow-500 fill-yellow-500" />
                         ) : null}
-                        {kit.name}
                       </Link>
                     </AppShellLinkItem>
                   );
