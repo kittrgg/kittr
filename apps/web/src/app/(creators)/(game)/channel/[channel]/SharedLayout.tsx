@@ -130,7 +130,7 @@ export async function SharedLayout({
                         className={cn(
                           'pl-2 font-medium ',
                           kit.featured
-                            ? 'from-white from-[20px] to-yellow-500 text-transparent bg-clip-text bg-gradient-to-r'
+                            ? 'from-white from-[25px] to-yellow-200 text-transparent bg-clip-text bg-gradient-to-r'
                             : '',
                         )}
                         href={`/channel/${params.channel}/${
@@ -139,7 +139,7 @@ export async function SharedLayout({
                       >
                         {kit.name}
                         {kit.featured ? (
-                          <Star className="text-yellow-500 fill-yellow-500" />
+                          <Star className="relative w-4 h-4 text-yellow-500 !top-1.5 fill-yellow-500" />
                         ) : null}
                       </Link>
                     </AppShellLinkItem>
