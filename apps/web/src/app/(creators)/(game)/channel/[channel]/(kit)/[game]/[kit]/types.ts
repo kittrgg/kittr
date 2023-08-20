@@ -1,4 +1,4 @@
-import type { getKit } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/fetches';
+import type { getKit } from '@/app/(creators)/(game)/channel/[channel]/(kit)/[game]/[kit]/fetches';
 
 export interface Params {
   channel: string;

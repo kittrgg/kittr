@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 import { getTopCreatorPopularities } from '@kittr/metrics';
 import { prisma } from '@kittr/prisma';
 import { notFound } from 'next/navigation';
-import { SharedLayout } from '@/app/(creators)/(game)/channel/[channel]/[game]/SharedLayout';
+import { SharedLayout } from '@/app/(creators)/(game)/channel/[channel]/SharedLayout';
 import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 import type { Params } from '@/app/(creators)/(game)/channel/[channel]/[game]/types';
 import { getChannel } from '@/fetches/getChannel';

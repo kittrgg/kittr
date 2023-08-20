@@ -1,6 +1,5 @@
 export function LightRay({ className }: { className: string }) {
   return (
-    // <div className="absolute -top-[20rem] -left-0 -rotate-12 w-[20rem] h-[50rem] scale-y-150 opacity-50">
     <div className={className}>
       <svg className="absolute w-full h-full" fill="none" viewBox="0 0 100 164">
         <g filter="url(#filter0_f_4003_349)" opacity="0.5">
@@ -11,7 +10,7 @@ export function LightRay({ className }: { className: string }) {
         </g>
         <defs>
           <filter
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
             filterUnits="userSpaceOnUse"
             height="164"
             id="filter0_f_4003_349"
@@ -19,7 +18,7 @@ export function LightRay({ className }: { className: string }) {
             x="0"
             y="0"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               in="SourceGraphic"
               in2="BackgroundImageFix"
@@ -32,7 +31,7 @@ export function LightRay({ className }: { className: string }) {
             />
           </filter>
           <filter
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
             filterUnits="userSpaceOnUse"
             height="140"
             id="filter1_f_4003_349"
@@ -40,7 +39,7 @@ export function LightRay({ className }: { className: string }) {
             x="12"
             y="12"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               in="SourceGraphic"
               in2="BackgroundImageFix"

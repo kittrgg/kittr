@@ -1,11 +1,11 @@
 import { Suspense } from 'react';
 import { typographyVariants } from '@kittr/ui/new';
-import { ExternalContent } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/components/ExternalContent';
-import { MoreKits } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/components/MoreKits';
-import { Options } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/components/Options';
-import type { Kits } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/types';
+import { ExternalContent } from '@/app/(creators)/(game)/channel/[channel]/(kit)/[game]/[kit]/components/ExternalContent';
+import { MoreKits } from '@/app/(creators)/(game)/channel/[channel]/(kit)/[game]/[kit]/components/MoreKits';
+import { Options } from '@/app/(creators)/(game)/channel/[channel]/(kit)/[game]/[kit]/components/Options';
+import type { Kits } from '@/app/(creators)/(game)/channel/[channel]/(kit)/[game]/[kit]/types';
 import type { AllChannelGamesKits } from '@/app/(creators)/(game)/channel/[channel]/[game]/types';
-import { Popularity } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/components/Popularity';
+import { Popularity } from '@/app/(creators)/(game)/channel/[channel]/(kit)/[game]/[kit]/components/Popularity';
 
 export function PageBody({
   kit,

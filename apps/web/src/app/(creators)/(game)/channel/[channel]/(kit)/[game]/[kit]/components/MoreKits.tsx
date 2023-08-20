@@ -1,5 +1,5 @@
 import { cn, typographyVariants } from '@kittr/ui/new';
-import type { Kits } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/fetches';
+import type { Kits } from '@/app/(creators)/(game)/channel/[channel]/(kit)/[game]/[kit]/fetches';
 import { KitCard } from '@/app/(creators)/(game)/channel/[channel]/[game]/components/KitCard';
 import type { AllChannelGamesKits } from '@/app/(creators)/(game)/channel/[channel]/[game]/types';
 

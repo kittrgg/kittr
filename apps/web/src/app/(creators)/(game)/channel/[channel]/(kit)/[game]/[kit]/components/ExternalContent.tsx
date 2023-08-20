@@ -1,8 +1,8 @@
 import { cn, typographyVariants } from '@kittr/ui/new';
 import { LightRay } from '@/app/(creators)/LightRay';
-import { TikTokPlayer } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/components/TikTokPlayer';
-import { YouTubePlayer } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/components/YouTubePlayer';
-import type { Kits } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/fetches';
+import { TikTokPlayer } from '@/app/(creators)/(game)/channel/[channel]/(kit)/[game]/[kit]/components/TikTokPlayer';
+import { YouTubePlayer } from '@/app/(creators)/(game)/channel/[channel]/(kit)/[game]/[kit]/components/YouTubePlayer';
+import type { Kits } from '@/app/(creators)/(game)/channel/[channel]/(kit)/[game]/[kit]/fetches';
 
 type Kit = Kits[number];
 

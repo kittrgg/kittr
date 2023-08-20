@@ -9,7 +9,7 @@ import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 import type { Params } from '@/app/(creators)/(game)/channel/[channel]/[game]/types';
 import { getChannel } from '@/fetches/getChannel';
 import { getKitsByGame } from '@/app/(creators)/(game)/channel/[channel]/[game]/fetches';
-import { SharedLayout } from '@/app/(creators)/(game)/channel/[channel]/[game]/SharedLayout';
+import { SharedLayout } from '@/app/(creators)/(game)/channel/[channel]/SharedLayout';
 
 export const revalidate = 60;
 

@@ -1,6 +1,6 @@
 import { typographyVariants, cn } from '@kittr/ui/new';
 import { MoveVertical, MoveHorizontal } from '@kittr/ui/icons';
-import type { Kits } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/fetches';
+import type { Kits } from '@/app/(creators)/(game)/channel/[channel]/(kit)/[game]/[kit]/fetches';
 
 // Hacking in the types for showing tunings
 type Option = Kits[number]['options'][number] & {

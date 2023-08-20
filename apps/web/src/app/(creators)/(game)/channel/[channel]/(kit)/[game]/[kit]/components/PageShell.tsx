@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import { Button } from '@kittr/ui/new';
-import type { Kits } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/fetches';
-import { PageBody } from '@/app/(creators)/(game)/channel/[channel]/[game]/[kit]/components/PageBody';
+import type { Kits } from '@/app/(creators)/(game)/channel/[channel]/(kit)/[game]/[kit]/fetches';
+import { PageBody } from '@/app/(creators)/(game)/channel/[channel]/(kit)/[game]/[kit]/components/PageBody';
 import type { AllChannelGamesKits } from '@/app/(creators)/(game)/channel/[channel]/[game]/types';
 
 export function PageShell({
