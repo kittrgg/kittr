@@ -14,7 +14,7 @@ export function YouTubePlayer({
   youtubeString.searchParams.append('rel', '0');
 
   return (
-    <div className="relative flex flex-row overflow-hidden max-w-[575px] w-full md:w-[75%] rounded-xl">
+    <div className="relative flex flex-row overflow-hidden max-w-[575px] w-screen sm:w-full md:w-[75%] sm:rounded-xl">
       <div className="w-full max-w-[575px] pb-[75%]">
         <iframe
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"

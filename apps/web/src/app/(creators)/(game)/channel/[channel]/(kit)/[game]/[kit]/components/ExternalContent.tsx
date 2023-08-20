@@ -25,7 +25,7 @@ export function ExternalContent({
       >
         Content
       </h3>
-      <div className="flex flex-row justify-around gap-4">
+      <div className="flex flex-col items-center gap-4 lg:justify-around lg:flex-row">
         {kit.youtubeUrl ? (
           <YouTubePlayer
             autoplay={youTubeAutoplay}
