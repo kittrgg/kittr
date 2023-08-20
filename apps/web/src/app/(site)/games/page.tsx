@@ -1,4 +1,3 @@
-import type { Genre, Platform } from '@kittr/db';
 import { download } from '@kittr/firebase/storage';
 import { GameCard, H1 } from '@kittr/ui/new';
 import Link from 'next/link';
@@ -15,41 +14,43 @@ export const generateMetadata = () =>
 export async function Page() {
   const gamesData = await listGames();
 
+  const gamesWithImages = await Promise.all(
+    gamesData.map(async (game) => ({
+      ...game,
+      titleImageUrl: await download(game.titleImageUrl),
+    })),
+  );
+
   return (
     <>
       <H1>Games</H1>
       <div className="flex flex-row flex-wrap justify-center">
-        {gamesData
+        {gamesWithImages
           .sort((x, y) => Number(y.active) - Number(x.active))
           .map(
-            async ({
-              gameToGenres,
-              gameToPlatforms,
+            ({
               developer,
               active,
               titleImageUrl,
               urlSafeName,
               displayName,
               id,
+              platforms,
+              genres,
             }) => {
               return (
                 <GameCard
                   developer={developer}
                   disabled={!active}
-                  genres={gameToGenres.map(
-                    (genre: { genres: Genre }) => genre.genres.displayName,
-                  )}
-                  href={`/games/${urlSafeName}`}
+                  genres={genres.map((genre) => genre.displayName)}
+                  href={!active ? '#' : `/games/${urlSafeName}`}
                   imageProps={{
-                    src: await download(titleImageUrl),
+                    src: titleImageUrl,
                     alt: `${displayName} cover art`,
                   }}
                   key={id}
                   linkComponent={Link}
-                  platforms={gameToPlatforms.map(
-                    (platform: { platforms: Platform }) =>
-                      platform.platforms.displayName,
-                  )}
+                  platforms={platforms.map((platform) => platform.displayName)}
                   title={displayName}
                 />
               );

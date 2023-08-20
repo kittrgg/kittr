@@ -19,6 +19,9 @@ export const generateKittrMetadata = ({
   const ogTitle = `${title} | kittr`;
 
   return {
+    metadataBase: process.env.VERCEL_URL
+      ? new URL(`https://${process.env.VERCEL_URL}`)
+      : new URL(`http://localhost:${process.env.PORT || 3000}`),
     twitter: {
       images: ogImages,
       title: ogTitle,

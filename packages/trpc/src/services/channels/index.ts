@@ -1,7 +1,7 @@
 import type { Channel, ChannelLink, ChannelProfile } from '@kittr/prisma';
 import { LinkProperty, prisma } from '@kittr/prisma';
 import { headers, grabLoginName } from '@kittr/twitch';
-import type { ITwitchLiveChannels } from '@kittr/types';
+import type { ITwitchLiveChannels } from '@kittr/twitch/types';
 import { fetcher, toURL, badWordFilter } from '@kittr/utils';
 import { TRPCError } from '@trpc/server';
 

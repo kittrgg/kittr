@@ -8,20 +8,21 @@ import { typographyVariants } from '../Typography';
 import { cn } from '../utils';
 import { useBodyScrollLock } from '../../hooks';
 import { Twitter, Discord } from '../../icons';
-import type { NextLinkType } from '../../../utils';
+import type { NextLinkType } from '../../utils';
 import { Floaty } from './Floaty';
 import { useCloseOnNavigate } from './useCloseOnNavigate';
 
-interface AppShellProps {
+export interface AppShellProps {
   children?: ReactNode;
   nav: ReactNode;
   linkComponent: NextLinkType;
-  links: { children: ReactNode; href: string }[];
+  footerLinks: { children: ReactNode; href: string }[];
   footerImage: ReactNode;
   pathnameForCloseHook: string;
 }
 
 export { AppShellLinkItem } from './sidebar/LinkItem';
+export { SidebarHeader } from './sidebar/Header';
 
 export const asideVariants = cva(
   'fixed top-0 left-0 z-40 w-64 h-screen transition-transform bg-zinc-800 sm:translate-x-0 xl:left-[initial]',
@@ -57,7 +58,7 @@ export const AppShell: React.FC<AppShellProps> = ({
   nav,
   footerImage,
   linkComponent,
-  links,
+  footerLinks,
   children,
   pathnameForCloseHook,
 }) => {
@@ -74,7 +75,7 @@ export const AppShell: React.FC<AppShellProps> = ({
         paused={!isOpen}
         focusTrapOptions={{ preventScroll: true }}
       >
-        <div className="me">
+        <div>
           <div
             className={frostedGlassVariants({
               variant: isOpen ? 'visible' : 'hidden',
@@ -82,7 +83,7 @@ export const AppShell: React.FC<AppShellProps> = ({
             onClick={() => setIsOpen(false)}
           />
 
-          <div className="me-too">
+          <div>
             <div
               className={cn(
                 typographyVariants({ presets: 'h5' }),
@@ -102,14 +103,13 @@ export const AppShell: React.FC<AppShellProps> = ({
         </div>
       </FocusTrap>
       <div className="container flex-auto bg-zinc-900 sm:ml-60">
-        <main className="flex flex-col min-h-screen gap-8 p-8 bg-zinc-900">
+        <main className="flex flex-col min-h-[calc(100vh-280px)] gap-8 p-8 bg-zinc-900 relative overflow-x-hidden">
           {children}
         </main>
         <footer className="flex flex-col gap-8 p-8 bg-neutral-900">
           <div className="m-auto">{footerImage}</div>
-          {/* Sorry about the !important for the breakopint but Tailwind isn't playing nice. */}
-          <div className="m-auto grid max-w-lg grid-cols-3 gap-10 md:!grid-cols-6 md:gap-6">
-            {links.slice(0, -2).map((link, ind) => {
+          <div className="grid max-w-lg grid-cols-3 gap-10 m-auto md:grid-cols-6 md:gap-6">
+            {footerLinks.slice(0, -2).map((link, ind) => {
               return (
                 <LinkComponent
                   key={ind}
@@ -120,7 +120,7 @@ export const AppShell: React.FC<AppShellProps> = ({
             })}
           </div>
           <div className="flex flex-row items-center justify-center gap-10 md:gap-10">
-            {links.slice(-2).map((link, ind) => {
+            {footerLinks.slice(-2).map((link, ind) => {
               return (
                 <LinkComponent
                   key={ind}

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createHandler } from '@Middlewares/createHandler';
-import type { NextServerPayload } from '@kittr/types/types';
+import type { NextServerPayload } from '@kittr/types';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import Stripe from 'stripe';
 

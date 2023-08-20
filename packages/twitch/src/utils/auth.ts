@@ -1,5 +1,5 @@
-import type { IOAuthToken, IOAuthRejection } from '@kittr/types/twitch';
 import { fetcher } from '@kittr/utils';
+import type { IOAuthToken, IOAuthRejection } from '../types';
 
 /** Use OAuth to get a token for the Twitch API. */
 export const getAuthToken = async () => {

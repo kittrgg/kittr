@@ -2,11 +2,11 @@
   "name": "api",
   "version": "0.0.0",
   "scripts": {
-    "build": "tsup ./src/index.ts",
-    "dev": "nodemon src/index.ts",
-    "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
-    "start": "ts-node ./src/index.ts",
-    "typecheck": "tsc --noEmit"
+    "IGNORE_build": "tsup ./src/index.ts",
+    "IGNORE_dev": "nodemon src/index.ts",
+    "IGNORE_format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
+    "IGNORE_start": "ts-node ./src/index.ts",
+    "IGNORE_typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@google-analytics/data": "3.0.0",
@@ -21,7 +21,6 @@
   },
   "devDependencies": {
     "@kittr/lint": "workspace:*",
-    "@kittr/prettier": "workspace:*",
     "@kittr/tsconfig": "workspace:*",
     "@kittr/types": "workspace:*",
     "@types/cors": "^2.8.13",

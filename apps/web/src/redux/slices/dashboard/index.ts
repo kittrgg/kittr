@@ -8,7 +8,7 @@ import type {
   WarzoneTwoKitOption,
   WarzoneTwoKitOptionTuning,
 } from '@kittr/prisma';
-import type { DashboardModals, ReduxModalState } from '@kittr/types/types';
+import type { DashboardModals, ReduxModalState } from '@kittr/types';
 import { createSlice } from '@reduxjs/toolkit';
 
 interface KitUpdates extends WarzoneKit {

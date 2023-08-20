@@ -1,23 +1,12 @@
 import { PrismaClient } from '@prisma/client';
 
-export let prisma: PrismaClient;
-
-if (typeof window === 'undefined') {
-  if (process.env.NODE_ENV === 'test') {
-    import(`${__dirname}/mock.ts`).then((mock) => (prisma = mock.prismaMock));
-  } else if (process.env.NODE_ENV === 'production') {
-    prisma = new PrismaClient();
-  } else {
-    if (!(global as any).prisma) {
-      (global as any).prisma = new PrismaClient();
-    }
-
-    prisma = (global as any).prisma;
-  }
+declare global {
+  var prisma: PrismaClient | undefined;
 }
 
-// eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment
-// @ts-ignore
-export default prisma;
+const prisma = global.prisma || new PrismaClient({ log: ['info', 'error'] });
 
+if (process.env.NODE_ENV === 'development') global.prisma = prisma;
+
+export { prisma };
 export * from '@prisma/client';

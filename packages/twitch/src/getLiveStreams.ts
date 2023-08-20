@@ -1,17 +1,14 @@
 import type { Channel, ChannelLink } from '@kittr/prisma';
-import { prisma, LinkProperty } from '@kittr/prisma';
-import type { ITwitchLiveChannels } from '@kittr/types/twitch';
+import { prisma } from '@kittr/prisma';
 import { fetcher } from '@kittr/utils';
+import type { ITwitchLiveChannels } from './types';
+import { getTwitchLink } from './utils';
 import { grabLoginName } from './utils/grabLoginName';
 import { headers } from './utils/auth';
 
 export interface ChannelWithLinks extends Channel {
   links: ChannelLink[];
 }
-
-const getTwitchLink = (channel: ChannelWithLinks) =>
-  channel.links.find((link) => link.property === LinkProperty.TWITCH)?.value ??
-  '';
 
 export const liveChannelsQuery = async () => {
   const popularChannels = await prisma.channel.findMany({
@@ -49,7 +46,6 @@ export const liveChannelsQuery = async () => {
       return url;
     } catch (error) {
       console.error(error);
-      // LogReport.error("Twitch Live Channels API ", error as any)
       return '';
     }
   };

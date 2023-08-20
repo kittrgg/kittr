@@ -1,18 +1,10 @@
-import { db, sql, warzoneKit, warzoneTwoKit } from '@kittr/db';
+import { prisma } from '@kittr/prisma';
 import { Cobe } from './Cobe';
 
 export async function Hero() {
-  const wzKits = await db
-    .select({ count: sql<number>`count(*)`.mapWith(Number) })
-    .from(warzoneKit)
-    .then((res) => res[0].count);
-
-  const wz2Kits = await db
-    .select({ count: sql<number>`count(*)`.mapWith(Number) })
-    .from(warzoneTwoKit)
-    .then((res) => res[0].count);
-
-  const totalNumberOfKits = wzKits + wz2Kits;
+  const wzKitCount = await prisma.warzoneKit.count();
+  const wzTwoKitCount = await prisma.warzoneTwoKit.count();
+  const totalNumberOfKits = wzKitCount + wzTwoKitCount;
 
   return (
     <div className="relative flex flex-row justify-center gap-6 min-h-[600px] -m-8">

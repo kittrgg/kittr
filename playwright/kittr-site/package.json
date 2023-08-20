@@ -10,7 +10,6 @@
   },
   "devDependencies": {
     "@kittr/lint": "workspace:*",
-    "@kittr/prettier": "workspace:*",
     "@kittr/tsconfig": "workspace:*",
     "@playwright/test": "1.33.0",
     "eslint": "^8.42.0"

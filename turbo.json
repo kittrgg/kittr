@@ -2,7 +2,7 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**", "!.next/cache/**", "build/**"],
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"],
       "env": [
         "AXIOM_PERSONAL_TOKEN",
         "AXIOM_ORG_ID",
@@ -66,17 +66,15 @@
       "outputMode": "new-only"
     },
     "lint": {
-      "outputs": ["node_modules/.cache/.eslintcache"],
-      "dependsOn": ["^topo"],
-      "outputMode": "new-only"
+      "dependsOn": ["^build", "^db:generate"],
+      "outputs": ["node_modules/.cache/.eslintcache"]
     },
     "typecheck": {
-      "dependsOn": ["^topo"],
-      "outputs": ["node_modules/.cache/tsbuildinfo.json"],
-      "outputMode": "errors-only"
+      "dependsOn": ["^build", "^db:generate"],
+      "outputs": ["node_modules/.cache/tsbuildinfo.json"]
     },
     "test": {
-      "dependsOn": ["^topo"],
+      "dependsOn": ["^build"],
       "outputs": ["coverage/**"]
     },
     "dev": {

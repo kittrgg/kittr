@@ -1,17 +1,27 @@
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable @typescript-eslint/prefer-ts-expect-error */
+// ^^ This junk is here because of <Avatar />
+
 'use client';
 
 import { Slot } from '@radix-ui/react-slot';
 import { ChevronRight } from 'lucide-icons-react';
+import { Suspense } from 'react';
 import { User } from '../../icons';
 import { Avatar } from '../Avatar';
 import { P, typographyVariants } from '../Typography';
 import { cn } from '../utils';
-import type { NextLinkType } from '../../../utils';
+import type { NextLinkType } from '../../utils';
+import { AvatarShineLoader } from '../Loader';
 
 export interface CreatorListItemProps {
+  id: string;
+  hasAvatar: boolean;
   linkComponent: NextLinkType;
   linkBasePath: string;
-  imageSrc: string;
   name: string;
   urlSafeName: string;
   isLive?: boolean;
@@ -56,9 +66,10 @@ export interface CreatorListItemProps {
 // };
 
 export const CreatorListItem = ({
-  imageSrc,
   name,
   linkComponent,
+  id,
+  hasAvatar,
   linkBasePath,
   urlSafeName,
   isLive,
@@ -75,8 +86,16 @@ export const CreatorListItem = ({
         prefetch={false}
       >
         <div className="relative flex flex-row items-center flex-shrink w-4/5 gap-6 m-w-0">
-          {imageSrc ? (
-            <Avatar imageSrc={imageSrc} username={name} isLive={isLive} />
+          {hasAvatar ? (
+            <Suspense fallback={<AvatarShineLoader />}>
+              {/** @ts-ignore Async component outside of Next.js scope. */}
+              <Avatar
+                id={id}
+                hasProfileImg={hasAvatar}
+                username={name}
+                isLive={isLive}
+              />
+            </Suspense>
           ) : (
             <div className="text-gray-500 flex justify-center items-center overflow-hidden border w-[40px] h-[40px] border-gray-500 rounded-full">
               <User strokeWidth={0.75} width={30} height={30} />

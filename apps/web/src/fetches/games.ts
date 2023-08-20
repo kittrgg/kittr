@@ -1,38 +1,15 @@
-import type { Game, Genre, Platform } from '@kittr/db';
-import { db, eq, games } from '@kittr/db';
+import { prisma } from '@kittr/prisma';
 
-// I'm having to make this type myself
-// because Drizzle isn't inferring correctly
-interface GamesWithPlatformsAndGenres extends Game {
-  gameToGenres: { genres: Genre }[];
-  gameToPlatforms: { platforms: Platform }[];
-}
-
-export const listGames = async (): Promise<GamesWithPlatformsAndGenres[]> => {
-  const gamesData = (await db.query.games.findMany({
-    with: {
-      gameToPlatforms: {
-        with: {
-          platforms: true,
-        },
-      },
-      gameToGenres: {
-        with: {
-          genres: true,
-        },
-      },
+export const listGames = async () => {
+  const games = await prisma.game.findMany({
+    include: {
+      platforms: true,
+      genres: true,
     },
+  });
 
-    // I'm having to make this type myself
-    // because Drizzle isn't inferring correctly
-  })) as GamesWithPlatformsAndGenres[];
-
-  return gamesData;
+  return games;
 };
 
 export const getGameDisplayNameFromUrlSafeName = (urlSafeName: string) =>
-  db
-    .select()
-    .from(games)
-    .where(eq(games.urlSafeName, urlSafeName))
-    .then((res) => res[0]);
+  prisma.game.findFirstOrThrow({ where: { urlSafeName } });

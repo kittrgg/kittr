@@ -8,7 +8,7 @@ import {
 } from '@Redux/slices/dashboard/selectors';
 import { useDispatch } from '@Redux/store';
 import { paragraph } from '@Styles/typography';
-import type { TCommandMethod } from '@kittr/types/types';
+import type { TCommandMethod } from '@kittr/types';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import * as Styled from './style';

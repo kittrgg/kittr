@@ -1,19 +1,34 @@
 import { prisma } from '@kittr/prisma';
 import type { Metadata } from 'next';
 import { CreatorList, H1 } from '@kittr/ui/new';
-import { Suspense } from 'react';
 import { download } from '@kittr/firebase/storage';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight } from '@kittr/ui/icons';
 import { notFound } from 'next/navigation';
 import { countChannels } from '@/fetches/countChannels';
-import { getGameDisplayNameFromUrlSafeName } from '@/fetches/games';
+import { getGameDisplayNameFromUrlSafeName, listGames } from '@/fetches/games';
 import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 
 const CHANNELS_PER_PAGE = 12;
 interface Params {
   pageNumber: string;
   game: string;
+}
+
+export async function generateStaticParams() {
+  const games = await listGames();
+  return games
+    .filter((game) => game.active)
+    .map((game) =>
+      Array.from(
+        { length: process.env.VERCEL_ENV !== 'production' ? 1 : 10 },
+        (_, i) => ({
+          game: game.urlSafeName,
+          pageNumber: String(i + 1),
+        }),
+      ),
+    )
+    .flat();
 }
 
 export const generateMetadata = async ({
@@ -36,7 +51,7 @@ const Page = async ({ params }: { params: Params }) => {
   if (isNaN(pageNumber) || pageNumber < 1) {
     return notFound();
   }
-  const { count } = await countChannels();
+  const count = await countChannels();
 
   const channels = await prisma.channel.findMany({
     where: {
@@ -71,19 +86,18 @@ const Page = async ({ params }: { params: Params }) => {
     <div className="flex flex-col gap-6">
       <H1>Channels</H1>
       <p>Find your favorite creators playing {game.displayName}.</p>
-      <Suspense>
-        <CreatorList
-          creators={channelsWithImages.map((channel) => ({
-            id: channel.id,
-            imageSrc: channel.imageSrc,
-            name: channel.displayName,
-            urlSafeName: channel.urlSafeName,
-          }))}
-          disableResponsive
-          linkBasePath="/channel"
-          linkComponent={Link}
-        />
-      </Suspense>
+      <CreatorList
+        creators={channelsWithImages.map((channel) => ({
+          id: channel.id,
+          imageSrc: channel.imageSrc,
+          hasAvatar: channel.profile?.hasProfileImage ?? false,
+          name: channel.displayName,
+          urlSafeName: channel.urlSafeName,
+        }))}
+        disableResponsive
+        linkBasePath="/channel"
+        linkComponent={Link}
+      />
 
       <p className="font-semibold text-center">
         {pageNumber * CHANNELS_PER_PAGE - CHANNELS_PER_PAGE + 1} -{' '}
@@ -94,7 +108,7 @@ const Page = async ({ params }: { params: Params }) => {
         {pageNumber > 1 ? (
           <Link
             className="flex flex-row hover:underline"
-            href={`/channels/${pageNumber - 1}`}
+            href={`/games/${game.urlSafeName}/${pageNumber - 1}`}
           >
             <ChevronLeft /> Back
           </Link>
@@ -102,7 +116,7 @@ const Page = async ({ params }: { params: Params }) => {
         {pageNumber < totalPages ? (
           <Link
             className="flex flex-row hover:underline"
-            href={`/channels/${pageNumber + 1}`}
+            href={`/games/${game.urlSafeName}/${pageNumber + 1}`}
           >
             Next <ChevronRight />
           </Link>

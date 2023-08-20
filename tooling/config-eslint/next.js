@@ -1,9 +1,5 @@
 const { rules } = require('./utils/rules');
 
-// See: https://github.com/eslint/eslint/issues/3458
-// @ts-expect-error No types package available
-require('@rushstack/eslint-patch/modern-module-resolution');
-
 module.exports = {
   extends: [
     'turbo',

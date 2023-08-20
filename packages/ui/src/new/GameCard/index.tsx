@@ -1,12 +1,11 @@
-import * as React from 'react';
 import { Badge } from '../Badge';
 import { H4, H3, H5, Span } from '../Typography';
 import { cn } from '../utils';
-import type { NextLinkType } from '../../../utils';
+import type { NextLinkType } from '../../utils';
 
 interface GameCardProps {
   title: string;
-  developer: string;
+  developer?: string;
   linkComponent?: NextLinkType;
   href?: string;
   imageProps: React.DetailedHTMLProps<
@@ -15,8 +14,10 @@ interface GameCardProps {
   >;
   /** Use this to indicate if the game is active, also disables the button */
   disabled?: boolean;
-  genres: string[];
-  platforms: string[];
+  genres?: string[];
+  platforms?: string[];
+  /** Any other content to render in card. Will be rendered AFTER content from props. */
+  extraChildren?: React.ReactNode;
 }
 
 export const GameCard: React.FC<GameCardProps> = ({
@@ -28,6 +29,7 @@ export const GameCard: React.FC<GameCardProps> = ({
   genres,
   platforms,
   disabled,
+  extraChildren,
 }) => {
   if (linkComponent && !href) {
     throw new Error('You need to provide an href to this GameCard.');
@@ -69,20 +71,32 @@ export const GameCard: React.FC<GameCardProps> = ({
 
       <div className={cn('mx-8 my-4 flex min-w-[14rem] flex-col text-left')}>
         <H3>{title}</H3>
-        <H5 className={cn('text-gray-400')}>{developer}</H5>
-
-        <Span className="mt-4 block">Genres</Span>
-        <div>
-          {genres.map((genre) => (
-            <Badge>{genre}</Badge>
-          ))}
-        </div>
-        <Span className="mt-2 block">Platforms</Span>
-        <div>
-          {platforms.map((platform) => (
-            <Badge variant="outline">{platform}</Badge>
-          ))}
-        </div>
+        {developer ? (
+          <H5 className={cn('text-gray-400')}>{developer}</H5>
+        ) : null}
+        {genres ? (
+          <>
+            <Span className="block mt-4">Genres</Span>
+            <div>
+              {genres.map((genre) => (
+                <Badge key={genre}>{genre}</Badge>
+              ))}
+            </div>
+          </>
+        ) : null}
+        {platforms ? (
+          <>
+            <Span className="block mt-2">Platforms</Span>
+            <div>
+              {platforms.map((platform) => (
+                <Badge variant="outline" key={platform}>
+                  {platform}
+                </Badge>
+              ))}
+            </div>
+          </>
+        ) : null}
+        {extraChildren}
       </div>
     </Component>
   );

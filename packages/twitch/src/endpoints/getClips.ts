@@ -1,5 +1,5 @@
 import * as Logger from '@kittr/logger/node';
-import type { ITwitchClip } from '@kittr/types/twitch';
+import type { ITwitchClip } from '../types';
 import { getFromApi } from '../utils/getFromApi';
 
 /**

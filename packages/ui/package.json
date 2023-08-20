@@ -8,6 +8,7 @@
     "./new": "./src/new/index.ts",
     "./hooks": "./src/hooks/index.ts",
     "./icons": "./src/icons/index.ts",
+    "./social-icons": "./src/icons/socials.tsx",
     "./styles.css": "./dist/compiled.css"
   },
   "typesVersions": {
@@ -23,10 +24,14 @@
       ],
       "icons": [
         "./src/icons/index.ts"
+      ],
+      "social-icons": [
+        "./src/icons/socials.tsx"
       ]
     }
   },
   "scripts": {
+    "build": "tsc",
     "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
     "lint": "eslint .",
     "test": "vitest",
@@ -56,7 +61,6 @@
     "@babel/core": "7.18.9",
     "@kittr/fixtures": "workspace:*",
     "@kittr/lint": "workspace:*",
-    "@kittr/prettier": "workspace:*",
     "@kittr/tailwind": "workspace:*",
     "@kittr/tsconfig": "workspace:*",
     "@kittr/types": "workspace:*",

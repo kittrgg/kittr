@@ -7,7 +7,7 @@ import type {
   WarzoneKit,
   WarzoneKitBase,
 } from '@kittr/prisma';
-import type { TCommandMethod } from '@kittr/types/types';
+import type { TCommandMethod } from '@kittr/types';
 import { useState } from 'react';
 import * as Styled from './style';
 

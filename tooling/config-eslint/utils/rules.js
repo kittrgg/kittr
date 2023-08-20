@@ -5,6 +5,7 @@ module.exports = {
     'no-floating-decimal': 'warn',
     'react/no-unescaped-entities': 'off',
     'unicorn/filename-case': 'off',
+    'tsdoc/syntax': 'off',
     'turbo/no-undeclared-env-vars': [
       'error',
       {

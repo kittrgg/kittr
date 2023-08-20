@@ -1,4 +1,4 @@
-import type { NextClientEndpointError } from '@kittr/types/types';
+import type { NextClientEndpointError } from '@kittr/types';
 
 export const isFetchError = <T>(
   result: NextClientEndpointError | T,

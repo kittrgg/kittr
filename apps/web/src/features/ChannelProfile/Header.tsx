@@ -100,7 +100,8 @@ const Wrapper = styled.div<{ hasCoverPhoto: boolean; imagePath: string }>`
     props.hasCoverPhoto ? `url("${props.imagePath}-profile-cover-photo")` : ''};
   background-size: cover;
   background-position: center;
-  box-shadow: 0px 15px 15px inset ${colors.middle},
+  box-shadow:
+    0px 15px 15px inset ${colors.middle},
     0px -15px 15px inset ${colors.middle};
   backdrop-filter: blur(12px);
 `;

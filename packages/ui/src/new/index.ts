@@ -1,5 +1,3 @@
-import '../styles.css';
-
 export * from './AppShell';
 export { Floaty } from './AppShell/Floaty';
 export { SidebarHeader } from './AppShell/sidebar/Header';

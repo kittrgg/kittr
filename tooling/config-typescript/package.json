@@ -7,8 +7,5 @@
     "base.json",
     "nextjs.json",
     "react-library.json"
-  ],
-  "devDependencies": {
-    "@kittr/prettier": "workspace:*"
-  }
+  ]
 }

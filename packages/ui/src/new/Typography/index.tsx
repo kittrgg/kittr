@@ -1,11 +1,6 @@
 import { cva } from 'class-variance-authority';
 import { cn } from '../utils';
 
-type HeadingProps = React.DetailedHTMLProps<
-  React.HTMLAttributes<HTMLHeadingElement>,
-  HTMLHeadingElement
->;
-
 export const typographyVariants = cva('', {
   variants: {
     presets: {
@@ -20,23 +15,29 @@ export const typographyVariants = cva('', {
   },
 });
 
+type HeadingProps = React.DetailedHTMLProps<
+  React.HTMLAttributes<HTMLHeadingElement>,
+  HTMLHeadingElement
+> & { preset?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' };
+
 export const H1 = (props: HeadingProps) => {
   return (
     <h1
       {...props}
       className={cn(
-        'scroll-m-20 text-4xl font-extrabold tracking-tight text-white lg:text-5xl',
+        typographyVariants({ presets: props.preset ?? 'h1' }),
         props.className,
       )}
     />
   );
 };
+
 export const H2 = (props: HeadingProps) => {
   return (
     <h2
       {...props}
       className={cn(
-        'scroll-m-20 pb-2 text-3xl font-semibold tracking-tight text-white transition-colors first:mt-0',
+        typographyVariants({ presets: props.preset ?? 'h2' }),
         props.className,
       )}
     />
@@ -47,7 +48,7 @@ export const H3 = (props: HeadingProps) => {
     <h3
       {...props}
       className={cn(
-        'scroll-m-20 text-2xl font-semibold tracking-tight text-white',
+        typographyVariants({ presets: props.preset ?? 'h3' }),
         props.className,
       )}
     />
@@ -58,7 +59,7 @@ export const H4 = (props: HeadingProps) => {
     <h4
       {...props}
       className={cn(
-        'scroll-m-20 text-xl font-semibold tracking-tight text-white',
+        typographyVariants({ presets: props.preset ?? 'h4' }),
         props.className,
       )}
     />
@@ -69,7 +70,7 @@ export const H5 = (props: HeadingProps) => {
     <h5
       {...props}
       className={cn(
-        'scroll-m-20 text-lg font-semibold tracking-tight text-white',
+        typographyVariants({ presets: props.preset ?? 'h5' }),
         props.className,
       )}
     />

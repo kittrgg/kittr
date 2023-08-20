@@ -6,7 +6,7 @@ import {
   useChannelView,
 } from '@Redux/slices/dashboard/selectors';
 import { useDispatch } from '@Redux/store';
-import type { TCommandMethod } from '@kittr/types/types';
+import type { TCommandMethod } from '@kittr/types';
 import { useState } from 'react';
 import TwitchStrategyToggle from './TwitchStrategyToggle';
 import MethodToggle from './MethodToggle';
