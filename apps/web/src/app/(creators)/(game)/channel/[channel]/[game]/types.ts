@@ -3,6 +3,7 @@ import type { getKitsByGame } from '@/app/(creators)/(game)/channel/[channel]/[g
 export interface Params {
   channel: string;
   game: string;
+  kit?: string;
 }
 
 export type AllChannelGamesKits = Awaited<ReturnType<typeof getKitsByGame>>;

@@ -221,7 +221,9 @@ export async function Layout({
                 })}
             </>
           }
-          pathnameForCloseHook={`/channel/${params.channel}/${params.game}`}
+          pathnameForCloseHook={`/channel/${params.channel}/${params.game}/${
+            params.kit ? params.kit : ''
+          }`}
         >
           {children}
         </AppShell>
