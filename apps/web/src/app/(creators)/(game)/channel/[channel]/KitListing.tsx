@@ -28,7 +28,6 @@ export function KitListing({
         .filter((kit) => {
           if (!searchTerm) return true;
 
-          console.log(kit.name, kit.name.includes(searchTerm));
           return kit.name.toUpperCase().includes(searchTerm.toUpperCase());
         })
         .sort((a, b) => a.name.localeCompare(b.name))

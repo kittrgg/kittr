@@ -59,9 +59,9 @@ export const getKit = cache(
                   slotKey: true,
                   displayName: true,
                   id: true,
-                  tuning: true,
                 },
               },
+              tuning: true,
             },
           });
 
