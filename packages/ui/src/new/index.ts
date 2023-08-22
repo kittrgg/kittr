@@ -27,4 +27,5 @@ export {
   SelectValue,
 } from './Select';
 export * from './Typography';
+export * from './Input';
 export { cn } from './utils';

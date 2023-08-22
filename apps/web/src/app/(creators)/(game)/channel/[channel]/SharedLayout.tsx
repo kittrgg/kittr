@@ -7,12 +7,12 @@ import {
   SidebarSeparator,
   SidebarHeader,
   Avatar,
-  cn,
 } from '@kittr/ui/new';
 import Link from 'next/link';
-import { Star, LayoutGrid, Users, Gamepad } from '@kittr/ui/icons';
+import { LayoutGrid, Users, Gamepad } from '@kittr/ui/icons';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import { KitListing } from '@/app/(creators)/(game)/channel/[channel]/KitListing';
 import { inter } from '@/app/fonts';
 import type { Params } from '@/app/(creators)/(game)/channel/[channel]/[game]/types';
 import { getChannel } from '@/fetches/getChannel';
@@ -120,31 +120,11 @@ export async function SharedLayout({
               </AppShellLinkItem>
 
               <SidebarHeader>Kits</SidebarHeader>
-              {kitNames
-                .sort((a, b) => a.name.localeCompare(b.name))
-                .sort((a, b) => Number(b.featured) - Number(a.featured))
-                .map((kit) => {
-                  return (
-                    <AppShellLinkItem key={kit.name}>
-                      <Link
-                        className={cn(
-                          'pl-2 font-medium ',
-                          kit.featured
-                            ? 'from-white from-[25px] to-yellow-200 text-transparent bg-clip-text bg-gradient-to-r'
-                            : '',
-                        )}
-                        href={`/channel/${params.channel}/${
-                          params.game
-                        }/${encodeURI(kit.name)}`}
-                      >
-                        {kit.name}
-                        {kit.featured ? (
-                          <Star className="relative w-4 h-4 text-yellow-500 !top-1.5 fill-yellow-500" />
-                        ) : null}
-                      </Link>
-                    </AppShellLinkItem>
-                  );
-                })}
+              <KitListing
+                channelUrlSafename={params.channel}
+                gameUrlSafeName={params.game}
+                kitNames={kitNames}
+              />
             </>
           }
           pathnameForCloseHook={`/channel/${params.channel}/${params.game}`}
