@@ -10,6 +10,7 @@ export const warzoneSlotsOrder = [
   'Underbarrel',
   'Trigger Action',
   'Bolt Assembly',
+  'Carry Handle',
   'Bolt',
   'Magazine',
   'Rail',
