@@ -104,6 +104,7 @@ export function KitBaseForm({ kitBaseId, gameId, onFinished }: Props) {
       Ammunition: [],
       'Ammo Type': [],
       Loader: [],
+      'Carry Handle': [],
       'Rear Grip': [],
       Lever: [],
       Comb: [],
