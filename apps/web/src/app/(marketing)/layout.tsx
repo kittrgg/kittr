@@ -1,4 +1,5 @@
 import '@/app/globals.css';
+import { Analytics } from '@kittr/analytics';
 import type { GenerateKittrMetadataArgs } from '@/app/generateKittrMetadata';
 import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 import { inter } from '@/app/fonts';
@@ -18,6 +19,7 @@ export const generateMetadata = () => {
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html className={`${inter.variable}`} lang="en">
+      <Analytics />
       <body>{children}</body>
     </html>
   );

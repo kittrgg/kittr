@@ -12,6 +12,7 @@ import Link from 'next/link';
 import { LayoutGrid, Users, Gamepad } from '@kittr/ui/icons';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import { Analytics } from '@kittr/analytics';
 import { KitListing } from '@/app/(creators)/(game)/channel/[channel]/KitListing';
 import { inter } from '@/app/fonts';
 import type { Params } from '@/app/(creators)/(game)/channel/[channel]/[game]/types';
@@ -61,6 +62,7 @@ export async function SharedLayout({
   return (
     <html className={`${inter.variable}`} lang="en">
       <body className="flex flex-row justify-center flex-grow w-full m-auto font-sans antialiased bg-zinc-800">
+        <Analytics />
         <AppShell
           footerImage={<FooterImage />}
           footerLinks={footerLinks}
