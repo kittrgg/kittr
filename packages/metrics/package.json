@@ -20,7 +20,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@axiomhq/axiom-node": "^0.12.0",
+    "@axiomhq/js": "^0.1.3",
     "@kittr/logger": "workspace:*",
     "@kittr/utils": "workspace:*",
     "next-axiom": "^1.0.0-rc.1"
