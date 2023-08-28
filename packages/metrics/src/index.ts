@@ -64,6 +64,8 @@ export const getTopCreatorPopularities = async (
       );
   } catch (error) {
     if (error instanceof Error) {
+      // eslint-disable-next-line no-console
+      console.error('Axiom querying error.');
       throw error;
     }
 
@@ -128,6 +130,8 @@ export const getRisingCreators = async (opts?: GetRisingCreators) => {
     return result;
   } catch (error) {
     if (error instanceof Error) {
+      // eslint-disable-next-line no-console
+      console.error('Axiom querying error.');
       throw error;
     }
 
