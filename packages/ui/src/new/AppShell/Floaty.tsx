@@ -11,7 +11,9 @@ export const Floaty = ({
 }) => {
   return (
     <button
-      onClick={() => setIsOpen(!isOpen)}
+      onClick={() => {
+        setIsOpen(!isOpen);
+      }}
       tabIndex={0}
       className="fixed z-50 p-3 transition-all border-2 rounded-full shadow-md opacity-100 cursor-pointer pointer-events-auto shadow-zinc-400 border-zinc-400 bottom-4 right-4 bg-zinc-800 sm:pointer-events-none sm:opacity-0"
     >

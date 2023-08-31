@@ -1,5 +1,4 @@
-// eslint-disable-next-line eslint-comments/disable-enable-pair
-/* eslint-disable no-console */
+/* eslint-disable no-console -- We want to console. */
 import { captureException, captureMessage } from '@sentry/nextjs';
 
 /** Send exception to the error logger from Nextjs. */

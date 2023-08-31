@@ -21,6 +21,15 @@ module.exports = {
       },
     },
     {
+      files: ['**/og/route.tsx'],
+      rules: {
+        '@next/next/no-img-element': 'off',
+        'jsx-a11y/alt-text': 'off',
+        // This is to allow us to use `tw` as a styling property.
+        'react/no-unknown-property': 'off',
+      },
+    },
+    {
       files: [
         'pages/**',
         'src/pages/**',
@@ -38,5 +47,9 @@ module.exports = {
     tsconfigRootDir: `${__dirname}/tsconfig.json`,
   },
   root: true,
-  rules,
+  rules: {
+    ...rules,
+    // We'll undo this rule after we make it to Vercel Blob
+    "@next/next/no-img-element": "off"
+  },
 };

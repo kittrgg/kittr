@@ -80,7 +80,9 @@ export const AppShell: React.FC<AppShellProps> = ({
             className={frostedGlassVariants({
               variant: isOpen ? 'visible' : 'hidden',
             })}
-            onClick={() => setIsOpen(false)}
+            onClick={() => {
+              setIsOpen(false);
+            }}
           />
 
           <div>

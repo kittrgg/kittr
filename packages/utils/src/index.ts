@@ -86,17 +86,17 @@ const _delete = async <T>({
 const handleResponse = (response: Response) => {
   // Uses .text() so that there is no error for an empty response
   return response.text().then((text) => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- Just really bad code that needs to be deleted, honestly.
     const data = text && JSON.parse(text);
 
     if (!response.ok) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- Just really bad code that needs to be deleted, honestly.
       const error = data || response.statusText;
-      // eslint-disable-next-line prefer-promise-reject-errors, @typescript-eslint/no-unsafe-assignment
+      // eslint-disable-next-line prefer-promise-reject-errors, @typescript-eslint/no-unsafe-assignment -- Just really bad code that needs to be deleted, honesty.
       return Promise.reject({ requestedUrl: response.url, error });
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return -- Just really bad code that needs to be deleted, honestly.
     return data;
   });
 };

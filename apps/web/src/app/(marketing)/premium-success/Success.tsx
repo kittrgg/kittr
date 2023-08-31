@@ -9,8 +9,10 @@ export function Success() {
   const router = useRouter();
 
   useEffect(() => {
-    setTimeout(() => router.push('/dashboard'), 3000);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setTimeout(() => {
+      router.push('/dashboard');
+    }, 3000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- Would cause weird loop
   }, []);
 
   return (

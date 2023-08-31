@@ -9,7 +9,7 @@ export function Cobe() {
   const canvasRef = useRef(null);
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- Just following orders from Cobe.
     if (!canvasRef.current) return;
     let phi = 0;
 

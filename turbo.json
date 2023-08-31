@@ -57,20 +57,37 @@
     "db:push": {
       "cache": false
     },
-    "//#format-root": {
-      "dependsOn": ["^topo"],
-      "outputMode": "new-only"
+    "//#format": {
+      "outputs": ["node_modules/.cache/prettiercache"]
     },
     "format": {
-      "dependsOn": ["^topo"],
-      "outputMode": "new-only"
+      "dependsOn": ["@kittr/prisma#db:generate", "^topo"],
+      "outputs": ["node_modules/.cache/prettiercache"]
+    },
+    "//#format:fix": {
+      "outputs": ["node_modules/.cache/prettiercache"]
+    },
+    "format:fix": {
+      "dependsOn": ["@kittr/prisma#db:generate", "^topo"],
+      "outputs": ["node_modules/.cache/prettiercache"]
+    },
+    "//#lint": {
+      "outputs": ["node_modules/.cache/.eslintcache"]
     },
     "lint": {
-      "dependsOn": ["^build", "^db:generate"],
+      "dependsOn": ["@kittr/prisma#db:generate", "^topo"],
+      "outputs": ["node_modules/.cache/.eslintcache"]
+    },
+    "//#lint:fix": {
+      "dependsOn": ["@kittr/prisma#db:generate", "^topo"],
+      "outputs": ["node_modules/.cache/.eslintcache"]
+    },
+    "lint:fix": {
+      "dependsOn": ["@kittr/prisma#db:generate", "^topo"],
       "outputs": ["node_modules/.cache/.eslintcache"]
     },
     "typecheck": {
-      "dependsOn": ["^build", "^db:generate"],
+      "dependsOn": ["^db:generate"],
       "outputs": ["node_modules/.cache/tsbuildinfo.json"]
     },
     "test": {
