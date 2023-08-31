@@ -124,8 +124,8 @@ interface GetRisingCreators {
 }
 
 /** Skips top 10 creators and gets next 10 by default. */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getRisingCreators = (
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   opts?: GetRisingCreators,
 ):
   | {
