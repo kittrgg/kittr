@@ -10,9 +10,12 @@ export function generateStaticParams() {
   });
 }
 
-function Page({ params }: { params: { component: keyof typeof components } }) {
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-  if (!components[params.component]) return notFound();
+function Page({
+  params,
+}: {
+  params: { component: keyof typeof components | undefined };
+}) {
+  if (!params.component) return notFound();
 
   return (
     <>

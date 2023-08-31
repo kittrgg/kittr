@@ -17,7 +17,7 @@ if (!admin.apps.length) {
       }),
     });
   } catch (err) {
-    // eslint-disable-next-line no-console
+    // eslint-disable-next-line no-console -- We'll get Firebase out of here at some point.
     console.error(err);
     throw new Error('Something is wrong with Firebase.');
   }

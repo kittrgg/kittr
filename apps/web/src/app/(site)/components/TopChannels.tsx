@@ -33,7 +33,7 @@ export const TopChannels = async () => {
       ...channel,
       image: await download(channel.id),
       // We know these channels will be found because the Prisma query uses `in`
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- Because I'm lazy.
       viewCount: popularities.find((pop) => pop.id === channel.id)!
         .pageViewCount,
     })),

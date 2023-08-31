@@ -47,5 +47,9 @@ module.exports = {
     tsconfigRootDir: `${__dirname}/tsconfig.json`,
   },
   root: true,
-  rules,
+  rules: {
+    ...rules,
+    // We'll undo this rule after we make it to Vercel Blob
+    "@next/next/no-img-element": "off"
+  },
 };

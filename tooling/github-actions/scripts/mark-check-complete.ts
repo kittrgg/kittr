@@ -31,6 +31,6 @@ main()
     console.log(`Check ${check.data.id} marked as complete.`);
   })
   .catch((err) => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access -- Yucky types from package.
     setFailed(err.message);
   });

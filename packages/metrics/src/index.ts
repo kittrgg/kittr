@@ -36,7 +36,7 @@ export const logCreatorPopularityMetric = <
 };
 
 export const getTopCreatorPopularities = async (
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- Working here...
   opts?: Partial<GetCreatorPopularities>,
 ): Promise<
   | {
@@ -44,7 +44,7 @@ export const getTopCreatorPopularities = async (
       pageViewCount: number;
     }[]
   | undefined
-  // eslint-disable-next-line @typescript-eslint/require-await
+  // eslint-disable-next-line @typescript-eslint/require-await -- Working here...
 > => {
   // const defaultOptions: GetCreatorPopularities = {
   //   limit: 10,
@@ -116,7 +116,7 @@ export const getTopCreatorPopularities = async (
     //   );
   } catch (error) {
     if (error instanceof Error) {
-      // eslint-disable-next-line no-console
+      // eslint-disable-next-line no-console -- Working here...
       console.error('Axiom querying error.');
       throw error;
     }
@@ -132,7 +132,7 @@ interface GetRisingCreators {
 
 /** Skips top 10 creators and gets next 10 by default. */
 export const getRisingCreators = async (
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- Working here...
   opts?: GetRisingCreators,
 ): Promise<
   | {
@@ -140,7 +140,7 @@ export const getRisingCreators = async (
       pageViewCount: number;
     }[]
   | undefined
-  // eslint-disable-next-line @typescript-eslint/require-await
+  // eslint-disable-next-line @typescript-eslint/require-await -- Working here...
 > => {
   // const defaultOptions: Required<GetRisingCreators> = {
   //   limit: 10,
@@ -231,7 +231,7 @@ export const getRisingCreators = async (
     return result;
   } catch (error) {
     if (error instanceof Error) {
-      // eslint-disable-next-line no-console
+      // eslint-disable-next-line no-console -- Working here...
       console.error('Axiom querying error.');
       throw error;
     }

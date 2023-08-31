@@ -11,8 +11,7 @@ export function DefaultErrorMessage({
   reset: () => void;
 }) {
   useEffect(() => {
-    // Log the error to an error reporting service
-    // eslint-disable-next-line no-console
+    // eslint-disable-next-line no-console -- Because things are still a mess.
     console.error(error);
   }, [error]);
 

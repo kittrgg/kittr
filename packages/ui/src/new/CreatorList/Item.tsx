@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-
-/* eslint-disable @typescript-eslint/prefer-ts-expect-error */
+/* eslint-disable @typescript-eslint/ban-ts-comment -- Async component is weird. */
+/* eslint-disable @typescript-eslint/prefer-ts-expect-error -- Async component is weird.  */
 // ^^ This junk is here because of <Avatar />
 
 'use client';

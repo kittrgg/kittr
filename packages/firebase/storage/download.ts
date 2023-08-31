@@ -10,11 +10,11 @@ export const download = async (
     const storageRef = ref(storage, fileName);
     const path = await getDownloadURL(storageRef);
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return -- I'm bad at TypeScript.
     if (path && handler) return handler(path);
     return path;
   } catch (err) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return -- I'm bad at TypeScript.
     return handler?.(null);
   }
 };

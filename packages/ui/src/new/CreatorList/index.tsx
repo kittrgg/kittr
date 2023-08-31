@@ -1,17 +1,12 @@
 'use client';
 
+import type { NextLinkType } from '../../utils';
 import type { CreatorListItemProps } from './Item';
 import { CreatorListItem } from './Item';
 
 export interface CreatorListProps {
   // Typed copied from next/link internals
-  linkComponent: React.ForwardRefExoticComponent<
-    Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> &
-      React.RefAttributes<HTMLAnchorElement> & {
-        children?: React.ReactNode;
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } & { href: any }
-  >;
+  linkComponent: NextLinkType;
   linkBasePath: string;
   creators: Omit<CreatorListItemProps, 'linkBasePath' | 'linkComponent'>[];
   disableResponsive?: boolean;

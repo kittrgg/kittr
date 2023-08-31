@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable no-console -- We want to console. */
 import { captureException, captureMessage } from '@sentry/node';
 
 /** Send exception to the error logger from node. */

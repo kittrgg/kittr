@@ -14,7 +14,7 @@ export const reauthenticate = async (password: string) => {
 
   // We are forcing the type string here because we only use the email auth provider
   // If in the future we used other auth providers, this may break!
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- We'll get Firebase out of here at some point.
   const authCred = EmailAuthProvider.credential(email!, password);
 
   const authUser = (await signInWithCredential(auth, authCred)).user;
