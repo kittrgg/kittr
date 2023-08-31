@@ -1,7 +1,5 @@
-// eslint-disable-next-line eslint-comments/disable-enable-pair
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 
-// eslint-disable-next-line eslint-comments/disable-enable-pair
 /* eslint-disable @typescript-eslint/prefer-ts-expect-error */
 // ^^ This junk is here because of <Avatar />
 

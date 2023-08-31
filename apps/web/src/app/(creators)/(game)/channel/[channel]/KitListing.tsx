@@ -19,7 +19,9 @@ export function KitListing({
     <>
       <Input
         className="text-zinc-700 bg-zinc-200"
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={(e) => {
+          setSearchTerm(e.target.value);
+        }}
         placeholder="Search..."
         type="text"
         value={searchTerm}

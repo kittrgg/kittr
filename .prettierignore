@@ -12,6 +12,7 @@ monaco-editor.d.ts
 
 pnpm-lock.yaml
 
-!apps/**
-!packages/**
-!tooling/**
+apps/**
+packages/**
+tooling/**
+playwright/**

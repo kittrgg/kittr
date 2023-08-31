@@ -31,7 +31,7 @@
     "@kittr/lint": "workspace:*",
     "@kittr/tsconfig": "workspace:*",
     "@ngneat/falso": "^6.4.0",
-    "typescript": "^5.1.3",
+    "typescript": "^5.2.2",
     "vitest": "^0.28.3"
   }
 }

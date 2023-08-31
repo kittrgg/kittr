@@ -18,7 +18,7 @@
     "@kittr/lint": "workspace:*",
     "@kittr/tsconfig": "workspace:*",
     "eslint": "^8.42.0",
-    "typescript": "^5.1.3",
+    "typescript": "^5.2.2",
     "vite-node": "0.30.0"
   }
 }

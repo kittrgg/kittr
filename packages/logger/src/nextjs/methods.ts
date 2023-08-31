@@ -1,4 +1,3 @@
-// eslint-disable-next-line eslint-comments/disable-enable-pair
 /* eslint-disable no-console */
 import { captureException, captureMessage } from '@sentry/nextjs';
 

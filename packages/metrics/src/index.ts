@@ -32,7 +32,7 @@ export const logCreatorPopularityMetric = <
 >(
   logData: CreatorPopularityMetric<T>,
 ) => {
-  return useLogger().info('Creator popularity', logData);
+  useLogger().info('Creator popularity', logData);
 };
 
 export const getTopCreatorPopularities = async (

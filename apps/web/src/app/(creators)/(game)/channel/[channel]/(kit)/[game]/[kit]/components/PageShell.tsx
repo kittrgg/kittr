@@ -36,7 +36,9 @@ export function PageShell({
                       : 'text-zinc-100 hover:bg-zinc-700'
                   }
                   key={kit.id}
-                  onClick={() => setKitIndex(index)}
+                  onClick={() => {
+                    setKitIndex(index);
+                  }}
                 >
                   {text}
                 </Button>

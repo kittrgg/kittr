@@ -22,7 +22,9 @@ export function DefaultErrorMessage({
       <Button
         onClick={
           // Attempt to recover by trying to re-render the segment
-          () => reset()
+          () => {
+            reset();
+          }
         }
         variant="white"
       >

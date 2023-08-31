@@ -9,7 +9,9 @@ export function Success() {
   const router = useRouter();
 
   useEffect(() => {
-    setTimeout(() => router.push('/dashboard'), 3000);
+    setTimeout(() => {
+      router.push('/dashboard');
+    }, 3000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
