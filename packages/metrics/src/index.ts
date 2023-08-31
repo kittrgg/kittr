@@ -35,10 +35,17 @@ export const logCreatorPopularityMetric = <
   return useLogger().info('Creator popularity', logData);
 };
 
-export const getTopCreatorPopularities = (
+export const getTopCreatorPopularities = async (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   opts?: Partial<GetCreatorPopularities>,
-) => {
+): Promise<
+  | {
+      id: string;
+      pageViewCount: number;
+    }[]
+  | undefined
+  // eslint-disable-next-line @typescript-eslint/require-await
+> => {
   // const defaultOptions: GetCreatorPopularities = {
   //   limit: 10,
   //   field: 'channelId',
@@ -124,15 +131,17 @@ interface GetRisingCreators {
 }
 
 /** Skips top 10 creators and gets next 10 by default. */
-export const getRisingCreators = (
+export const getRisingCreators = async (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   opts?: GetRisingCreators,
-):
+): Promise<
   | {
       id: string;
       pageViewCount: number;
     }[]
-  | undefined => {
+  | undefined
+  // eslint-disable-next-line @typescript-eslint/require-await
+> => {
   // const defaultOptions: Required<GetRisingCreators> = {
   //   limit: 10,
   //   skipTopCreators: 10,
