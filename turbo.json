@@ -87,7 +87,7 @@
       "outputs": ["node_modules/.cache/.eslintcache"]
     },
     "typecheck": {
-      "dependsOn": ["^build", "^db:generate"],
+      "dependsOn": ["^db:generate"],
       "outputs": ["node_modules/.cache/tsbuildinfo.json"]
     },
     "test": {
