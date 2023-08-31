@@ -35,7 +35,8 @@ export const logCreatorPopularityMetric = <
   return useLogger().info('Creator popularity', logData);
 };
 
-export const getTopCreatorPopularities = async (
+export const getTopCreatorPopularities = (
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   opts?: Partial<GetCreatorPopularities>,
 ) => {
   // const defaultOptions: GetCreatorPopularities = {
@@ -123,15 +124,15 @@ interface GetRisingCreators {
 }
 
 /** Skips top 10 creators and gets next 10 by default. */
-export const getRisingCreators = async (
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const getRisingCreators = (
   opts?: GetRisingCreators,
-): Promise<
+):
   | {
       id: string;
       pageViewCount: number;
     }[]
-  | undefined
-> => {
+  | undefined => {
   // const defaultOptions: Required<GetRisingCreators> = {
   //   limit: 10,
   //   skipTopCreators: 10,
