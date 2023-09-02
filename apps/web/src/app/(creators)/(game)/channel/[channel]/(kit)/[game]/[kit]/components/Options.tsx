@@ -28,7 +28,7 @@ export function Options({ options }: { options: Option[] }) {
             <p className={typographyVariants({ presets: 'h4' })}>
               {opt.displayName}
             </p>
-            {opt.tuningHorz ? (
+            {opt.tuningHorz || opt.tuningVert ? (
               <div className="flex flex-row justify-end gap-4">
                 {opt.tuningHorz ? (
                   <p className="flex flex-row gap-1 text-zinc-300">
