@@ -9,6 +9,9 @@ const { withSentryConfig } = require('@sentry/nextjs');
 
 /** @type {import('next').NextConfig} */
 const moduleExports = {
+  experimental: {
+    serverComponentsExternalPackages: ["lucide-icons-react"]
+  },
   transpilePackages: [
     '@kittr/analytics',
     '@kittr/firebase',
