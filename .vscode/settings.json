@@ -1,13 +1,15 @@
 {
-  "eslint.rules.customizations": [{ "rule": "*", "severity": "warn" }],
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "prettier.configPath": ".prettierrc.js",
+  "editor.defaultFormatter": "biomejs.biome",
   "prettier.prettierPath": "node_modules/prettier",
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"
   },
   "typescript.tsdk": "node_modules/typescript/lib",
   "json.schemas": [
+    {
+      "fileMatch": ["biome.json"],
+      "url": "https://biomejs.dev/schemas/1.2.2/schema.json"
+    },
     {
       "fileMatch": ["tsconfig.*.json"],
       "url": "https://json.schemastore.org/tsconfig"

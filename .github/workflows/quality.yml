@@ -16,8 +16,8 @@ env:
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
 jobs:
-  prettier:
-    name: Prettier
+  quality:
+    name: Format + Lint + Typecheck
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
@@ -28,32 +28,32 @@ jobs:
         uses: ./tooling/github-actions/install
 
       - name: Run Prettier
-        run: turbo format --continue
+        run: turbo format lint typecheck --continue
 
-  eslint:
-    name: ESLint
-    timeout-minutes: 15
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+  # eslint:
+  #   name: ESLint
+  #   timeout-minutes: 15
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
 
-      - name: Setup and install
-        uses: ./tooling/github-actions/install
+  #     - name: Setup and install
+  #       uses: ./tooling/github-actions/install
 
-      - name: Lint
-        run: turbo lint --continue
+  #     - name: Lint
+  #       run: turbo lint --continue
 
-  typecheck:
-    name: TypeScript
-    timeout-minutes: 15
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+  # typecheck:
+  #   name: TypeScript
+  #   timeout-minutes: 15
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
 
-      - name: Install
-        uses: ./tooling/github-actions/install
+  #     - name: Install
+  #       uses: ./tooling/github-actions/install
 
-      - name: Run TypeScript type check
-        run: turbo typecheck --continue
+  #     - name: Run TypeScript type check
+  #       run: turbo typecheck --continue
