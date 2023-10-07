@@ -7,26 +7,26 @@ import styled from 'styled-components';
 
 /** Support modal to allow users to find ways to contact us. */
 function SupportModal({ ...props }) {
-  const dispatch = useDispatch();
-  const { data } = useModal();
-  const { isTutorial, page } = data;
+	const dispatch = useDispatch();
+	const { data } = useModal();
+	const { isTutorial, page } = data;
 
-  return (
-    <Modal
-      backgroundClickToClose={!isTutorial}
-      onUserClose={() => {
-        if (isTutorial && page === 7) {
-          dispatch(setModal({ type: 'Tutorial', data: { page: 7 } }));
-        }
-      }}
-      title="NEED SOME HELP?"
-    >
-      <Subheader>GOOD COMMS. WE'VE GOT YOUR BACK.</Subheader>
-      <ContactHelper>
-        <ContactUs />
-      </ContactHelper>
-    </Modal>
-  );
+	return (
+		<Modal
+			backgroundClickToClose={!isTutorial}
+			onUserClose={() => {
+				if (isTutorial && page === 7) {
+					dispatch(setModal({ type: 'Tutorial', data: { page: 7 } }));
+				}
+			}}
+			title="NEED SOME HELP?"
+		>
+			<Subheader>GOOD COMMS. WE'VE GOT YOUR BACK.</Subheader>
+			<ContactHelper>
+				<ContactUs />
+			</ContactHelper>
+		</Modal>
+	);
 }
 
 export default SupportModal;

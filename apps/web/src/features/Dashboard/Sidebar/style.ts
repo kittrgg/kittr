@@ -21,9 +21,9 @@ export const ButtonContainer = styled.div<{ isActive: boolean | string }>`
   height: 90px;
   padding: 10px;
   background: ${(props) =>
-    props.isActive
-      ? `linear-gradient(90deg, ${colors.white} 0%, ${colors.white} 8%, ${colors.light} 8%, ${colors.light} 89%)`
-      : 'transparent'};
+		props.isActive
+			? `linear-gradient(90deg, ${colors.white} 0%, ${colors.white} 8%, ${colors.light} 8%, ${colors.light} 89%)`
+			: 'transparent'};
   text-align: center;
   transition: 0.2s;
 

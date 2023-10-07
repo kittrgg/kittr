@@ -13,18 +13,18 @@ import { getFromApi } from '../utils/getFromApi';
 type IFunc = (broadcaster_id: string) => Promise<ITwitchClip[]>;
 
 export const getClips: IFunc = async (
-  broadcaster_id,
+	broadcaster_id,
 ): Promise<ITwitchClip[]> => {
-  try {
-    const { data } = await getFromApi<ITwitchClip[]>({
-      endpointBaseUrl: 'https://api.twitch.tv/helix/clips',
-      queryParams: { broadcaster_id },
-    });
+	try {
+		const { data } = await getFromApi<ITwitchClip[]>({
+			endpointBaseUrl: 'https://api.twitch.tv/helix/clips',
+			queryParams: { broadcaster_id },
+		});
 
-    return data || [];
-  } catch (error) {
-    Logger.logError(error as Error);
-    console.log({ twitchError: error });
-    throw { twitchError: error };
-  }
+		return data || [];
+	} catch (error) {
+		Logger.logError(error as Error);
+		console.log({ twitchError: error });
+		throw { twitchError: error };
+	}
 };

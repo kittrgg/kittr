@@ -35,15 +35,12 @@ yarn-error.log*
 .turbo
 build/**
 dist/**
-next/**
+.next/**
 
 build
 dist
 .tsbuildinfo
 tsconfig.tsbuildinfo
-volumes
-dev.env.json
-dev.env.local.json
 .vercel
 
 dump.sql
@@ -54,4 +51,3 @@ node_modules/
 **/test-results/**
 **/playwright-report/**
 **/playwright/.cache/**
-.env*.local

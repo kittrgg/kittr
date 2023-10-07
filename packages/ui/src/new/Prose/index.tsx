@@ -1,11 +1,11 @@
 import { cn } from '../utils';
 
 export const Prose = ({
-  children,
-  className,
+	children,
+	className,
 }: {
-  className?: string;
-  children: React.ReactNode;
+	className?: string;
+	children: React.ReactNode;
 }) => {
-  return <div className={cn('prose lg:prose-xl', className)}>{children}</div>;
+	return <div className={cn('prose lg:prose-xl', className)}>{children}</div>;
 };

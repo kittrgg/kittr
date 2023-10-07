@@ -1,114 +1,114 @@
 {
-  "pipeline": {
-    "build": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**", "!.next/cache/**"],
-      "env": [
-        "AXIOM_PERSONAL_TOKEN",
-        "AXIOM_ORG_ID",
-        "DATABASE_URL",
-        "ENVIRONMENT",
-        "FIREBASE_ADMIN_PRIVATE_KEY",
-        "FIREBASE_APP_ID",
-        "FIREBASE_AUTH_DOMAIN",
-        "FIREBASE_CLIENT_EMAIL",
-        "FIREBASE_COOKIE_SECRET_CURRENT",
-        "FIREBASE_COOKIE_SECRET_PREVIOUS",
-        "FIREBASE_DATABASE_URL",
-        "FIREBASE_MEASUREMENT_ID",
-        "FIREBASE_MESSAGING_SENDER_ID",
-        "FIREBASE_PROJECT_ID",
-        "GOOGLE_APPLICATION_CREDENTIALS",
-        "MONTHLY_TIP_PRICE_ID",
-        "NEXT_PUBLIC_ADS_DISABLED",
-        "NEXT_PUBLIC_FIREBASE_API_KEY",
-        "NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET",
-        "NEXT_PUBLIC_GOOGLE_ANALYTICS",
-        "NEXT_PUBLIC_SENTRY_DSN",
-        "NEXT_PUBLIC_SOCKET_HOST",
-        "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
-        "NEXT_PUBLIC_VERCEL_ENV",
-        "NODE_ENV",
-        "POSTGRES_URL",
-        "SENTRY_AUTH_TOKEN",
-        "SENTRY_DSN",
-        "SENTRY_ORG",
-        "SENTRY_PROJECT",
-        "STRIPE_SECRET_KEY",
-        "STRIPE_WEBHOOK_SECRET",
-        "SUBSCRIPTION_PRICE_ID",
-        "TWITCH_CLIENT_ID",
-        "TWITCH_CLIENT_SECRET",
-        "TWITCH_SECRET",
-        "VERCEL_ENV",
-        "VERCEL_URL"
-      ]
-    },
-    "topo": {
-      "dependsOn": ["@kittr/prisma#db:generate", "^topo"]
-    },
-    "db:generate": {
-      "outputs": ["../../node_modules/.prisma/**", "validator/**"],
-      "outputMode": "new-only"
-    },
-    "db:deploy": {
-      "cache": false
-    },
-    "db:push": {
-      "cache": false
-    },
-    "//#format": {
-      "outputs": ["node_modules/.cache/prettiercache"]
-    },
-    "format": {
-      "dependsOn": ["@kittr/prisma#db:generate", "^topo"],
-      "outputs": ["node_modules/.cache/prettiercache"]
-    },
-    "//#format:fix": {
-      "outputs": ["node_modules/.cache/prettiercache"]
-    },
-    "format:fix": {
-      "dependsOn": ["@kittr/prisma#db:generate", "^topo"],
-      "outputs": ["node_modules/.cache/prettiercache"]
-    },
-    "//#lint": {
-      "outputs": ["node_modules/.cache/.eslintcache"]
-    },
-    "lint": {
-      "dependsOn": ["@kittr/prisma#db:generate", "^topo"],
-      "outputs": ["node_modules/.cache/.eslintcache"]
-    },
-    "//#lint:fix": {
-      "dependsOn": ["@kittr/prisma#db:generate", "^topo"],
-      "outputs": ["node_modules/.cache/.eslintcache"]
-    },
-    "lint:fix": {
-      "dependsOn": ["@kittr/prisma#db:generate", "^topo"],
-      "outputs": ["node_modules/.cache/.eslintcache"]
-    },
-    "typecheck": {
-      "dependsOn": ["^db:generate"],
-      "outputs": ["node_modules/.cache/tsbuildinfo.json"]
-    },
-    "test": {
-      "dependsOn": ["^build"],
-      "outputs": ["coverage/**"]
-    },
-    "dev": {
-      "dependsOn": ["db:generate"],
-      "persistent": true,
-      "cache": false
-    },
-    "seed": {
-      "dependsOn": ["db:generate"],
-      "cache": false
-    },
-    "start": {
-      "dependsOn": ["^build", "build"]
-    },
-    "e2e": {
-      "env": ["PLAYWRIGHT_USER_PASSWORD"],
-      "cache": false
-    }
-  }
+	"pipeline": {
+		"build": {
+			"dependsOn": ["^build"],
+			"outputs": ["dist/**", ".next/**", "!.next/cache/**"],
+			"env": [
+				"AXIOM_PERSONAL_TOKEN",
+				"AXIOM_ORG_ID",
+				"DATABASE_URL",
+				"ENVIRONMENT",
+				"FIREBASE_ADMIN_PRIVATE_KEY",
+				"FIREBASE_APP_ID",
+				"FIREBASE_AUTH_DOMAIN",
+				"FIREBASE_CLIENT_EMAIL",
+				"FIREBASE_COOKIE_SECRET_CURRENT",
+				"FIREBASE_COOKIE_SECRET_PREVIOUS",
+				"FIREBASE_DATABASE_URL",
+				"FIREBASE_MEASUREMENT_ID",
+				"FIREBASE_MESSAGING_SENDER_ID",
+				"FIREBASE_PROJECT_ID",
+				"GOOGLE_APPLICATION_CREDENTIALS",
+				"MONTHLY_TIP_PRICE_ID",
+				"NEXT_PUBLIC_ADS_DISABLED",
+				"NEXT_PUBLIC_FIREBASE_API_KEY",
+				"NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET",
+				"NEXT_PUBLIC_GOOGLE_ANALYTICS",
+				"NEXT_PUBLIC_SENTRY_DSN",
+				"NEXT_PUBLIC_SOCKET_HOST",
+				"NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
+				"NEXT_PUBLIC_VERCEL_ENV",
+				"NODE_ENV",
+				"POSTGRES_URL",
+				"SENTRY_AUTH_TOKEN",
+				"SENTRY_DSN",
+				"SENTRY_ORG",
+				"SENTRY_PROJECT",
+				"STRIPE_SECRET_KEY",
+				"STRIPE_WEBHOOK_SECRET",
+				"SUBSCRIPTION_PRICE_ID",
+				"TWITCH_CLIENT_ID",
+				"TWITCH_CLIENT_SECRET",
+				"TWITCH_SECRET",
+				"VERCEL_ENV",
+				"VERCEL_URL"
+			]
+		},
+		"topo": {
+			"dependsOn": ["@kittr/prisma#db:generate", "^topo"]
+		},
+		"db:generate": {
+			"outputs": ["../../node_modules/.prisma/**", "validator/**"],
+			"outputMode": "new-only"
+		},
+		"db:deploy": {
+			"cache": false
+		},
+		"db:push": {
+			"cache": false
+		},
+		"//#format": {
+			"outputs": ["node_modules/.cache/prettiercache"]
+		},
+		"format": {
+			"dependsOn": ["@kittr/prisma#db:generate", "^topo"],
+			"outputs": ["node_modules/.cache/prettiercache"]
+		},
+		"//#format:fix": {
+			"outputs": ["node_modules/.cache/prettiercache"]
+		},
+		"format:fix": {
+			"dependsOn": ["@kittr/prisma#db:generate", "^topo"],
+			"outputs": ["node_modules/.cache/prettiercache"]
+		},
+		"//#lint": {
+			"outputs": ["node_modules/.cache/.eslintcache"]
+		},
+		"lint": {
+			"dependsOn": ["@kittr/prisma#db:generate", "^topo"],
+			"outputs": ["node_modules/.cache/.eslintcache"]
+		},
+		"//#lint:fix": {
+			"dependsOn": ["@kittr/prisma#db:generate", "^topo"],
+			"outputs": ["node_modules/.cache/.eslintcache"]
+		},
+		"lint:fix": {
+			"dependsOn": ["@kittr/prisma#db:generate", "^topo"],
+			"outputs": ["node_modules/.cache/.eslintcache"]
+		},
+		"typecheck": {
+			"dependsOn": ["^db:generate"],
+			"outputs": ["node_modules/.cache/tsbuildinfo.json"]
+		},
+		"test": {
+			"dependsOn": ["^build"],
+			"outputs": ["coverage/**"]
+		},
+		"dev": {
+			"dependsOn": ["db:generate"],
+			"persistent": true,
+			"cache": false
+		},
+		"seed": {
+			"dependsOn": ["db:generate"],
+			"cache": false
+		},
+		"start": {
+			"dependsOn": ["^build", "build"]
+		},
+		"e2e": {
+			"env": ["PLAYWRIGHT_USER_PASSWORD"],
+			"cache": false
+		}
+	}
 }

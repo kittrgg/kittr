@@ -13,21 +13,21 @@ import { useEffect } from 'react';
  * */
 
 export const useLockElementScroll = (
-  ref: any,
-  active = true,
-  initialValue = 'auto',
+	ref: any,
+	active = true,
+	initialValue = 'auto',
 ) => {
-  useEffect(() => {
-    const currentRef = ref.current;
+	useEffect(() => {
+		const currentRef = ref.current;
 
-    if (active && ref.current) {
-      ref.current.style.overflowY = 'hidden';
-    }
+		if (active && ref.current) {
+			ref.current.style.overflowY = 'hidden';
+		}
 
-    return () => {
-      if (currentRef?.style) {
-        currentRef.style.overflowY = initialValue;
-      }
-    };
-  }, [active, initialValue, ref]);
+		return () => {
+			if (currentRef?.style) {
+				currentRef.style.overflowY = initialValue;
+			}
+		};
+	}, [active, initialValue, ref]);
 };

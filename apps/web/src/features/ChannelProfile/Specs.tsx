@@ -6,49 +6,49 @@ import styled from 'styled-components';
 import { GridItem, H2, SpecsGrid } from './style';
 
 const SORT_ORDER = [
-  'Case',
-  'CPU',
-  'CPU Cooler',
-  'Motherboard',
-  'RAM',
-  'GPU',
-  'Storage',
-  'Monitor',
-  'Keyboard',
-  'Mouse',
+	'Case',
+	'CPU',
+	'CPU Cooler',
+	'Motherboard',
+	'RAM',
+	'GPU',
+	'Storage',
+	'Monitor',
+	'Keyboard',
+	'Mouse',
 ];
 
 interface Props {
-  brandColor: string;
-  specs: ChannelPcSpec[];
+	brandColor: string;
+	specs: ChannelPcSpec[];
 }
 
 function Specs({ specs, brandColor }: Props) {
-  if (Object.values(specs || {}).length === 0) return null;
+	if (Object.values(specs || {}).length === 0) return null;
 
-  return (
-    <section id="specs">
-      <H2>SPECS</H2>
-      <SpecsGrid>
-        {specs
-          ? customOrderArray<ChannelPcSpec>({
-              sortingArray: SORT_ORDER,
-              indexToSort: 0,
-              array: specs,
-            }).map((spec) => {
-              const { partName, partType } = spec;
+	return (
+		<section id="specs">
+			<H2>SPECS</H2>
+			<SpecsGrid>
+				{specs
+					? customOrderArray<ChannelPcSpec>({
+							sortingArray: SORT_ORDER,
+							indexToSort: 0,
+							array: specs,
+					  }).map((spec) => {
+							const { partName, partType } = spec;
 
-              return (
-                <GridItem colorHover={brandColor} key={partName}>
-                  <PartName>{partName}</PartName>
-                  <Part>{partType}</Part>
-                </GridItem>
-              );
-            })
-          : null}
-      </SpecsGrid>
-    </section>
-  );
+							return (
+								<GridItem colorHover={brandColor} key={partName}>
+									<PartName>{partName}</PartName>
+									<Part>{partType}</Part>
+								</GridItem>
+							);
+					  })
+					: null}
+			</SpecsGrid>
+		</section>
+	);
 }
 
 export default Specs;

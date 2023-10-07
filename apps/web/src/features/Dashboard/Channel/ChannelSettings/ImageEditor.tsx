@@ -4,8 +4,8 @@ import ProfileImage from '@Components/shared/ProfileImage';
 import { useDashboardChannel } from '@Hooks/api/useDashboardChannel';
 import { setModal } from '@Redux/slices/dashboard';
 import {
-  useChannelData,
-  useProfileImage,
+	useChannelData,
+	useProfileImage,
 } from '@Redux/slices/dashboard/selectors';
 import { useDispatch } from '@Redux/store';
 import { caption } from '@Styles/typography';
@@ -16,76 +16,76 @@ import { trpc } from '@/lib/trpc';
 
 /** Change the channel's profile image */
 function ImageEditor() {
-  const dispatch = useDispatch();
-  const { refetch: refetchDashboard } = useDashboardChannel();
-  const { data } = useChannelData();
-  const profileImage = useProfileImage();
-  const [isUploading, setIsUploading] = useState(false);
+	const dispatch = useDispatch();
+	const { refetch: refetchDashboard } = useDashboardChannel();
+	const { data } = useChannelData();
+	const profileImage = useProfileImage();
+	const [isUploading, setIsUploading] = useState(false);
 
-  const { mutate } = trpc.channels.profile.image.update.useMutation({
-    onSuccess: () => {
-      // Filename is the channelId
-      download(data?.id!, () => {
-        setIsUploading(false);
-      });
-      refetchDashboard();
-    },
-    onError: () => {
-      setIsUploading(false);
-      dispatch(setModal({ type: 'Error Notification', data: {} }));
-    },
-  });
+	const { mutate } = trpc.channels.profile.image.update.useMutation({
+		onSuccess: () => {
+			// Filename is the channelId
+			download(data?.id!, () => {
+				setIsUploading(false);
+			});
+			refetchDashboard();
+		},
+		onError: () => {
+			setIsUploading(false);
+			dispatch(setModal({ type: 'Error Notification', data: {} }));
+		},
+	});
 
-  const handleUpload = async (e: any) => {
-    e.preventDefault();
-    setIsUploading(true);
+	const handleUpload = async (e: any) => {
+		e.preventDefault();
+		setIsUploading(true);
 
-    if (!data?.id) return;
+		if (!data?.id) return;
 
-    const imageFile = e.target.files[0];
-    const fileName = data.id;
+		const imageFile = e.target.files[0];
+		const fileName = data.id;
 
-    if (imageFile) {
-      uploadWithHandlers({
-        fileName,
-        imageFile,
-        onSuccess: async () => {
-          mutate({ channelId: data.id });
-        },
-        onError: () => {
-          setIsUploading(false);
-          dispatch(setModal({ type: 'Error Notification', data: {} }));
-        },
-      });
-    }
-  };
+		if (imageFile) {
+			uploadWithHandlers({
+				fileName,
+				imageFile,
+				onSuccess: async () => {
+					mutate({ channelId: data.id });
+				},
+				onError: () => {
+					setIsUploading(false);
+					dispatch(setModal({ type: 'Error Notification', data: {} }));
+				},
+			});
+		}
+	};
 
-  if (isUploading) return <Spinner width="24px" />;
+	if (isUploading) return <Spinner width="24px" />;
 
-  return (
-    <>
-      <PhotoButtonFlex>
-        <ProfileImage
-          alwaysRefresh
-          hasProfileImage={Boolean(data?.profile?.hasProfileImage)}
-          imagePath={profileImage}
-        />
-        <Label htmlFor="file">
-          CHANGE IMAGE
-          <input
-            id="file"
-            name="file"
-            onChange={(e: any) => handleUpload(e)}
-            style={{ display: 'none' }}
-            type="file"
-          />
-        </Label>
-      </PhotoButtonFlex>
-      <RefreshNote>
-        Note: the dashboard will refresh when you change the image.
-      </RefreshNote>
-    </>
-  );
+	return (
+		<>
+			<PhotoButtonFlex>
+				<ProfileImage
+					alwaysRefresh
+					hasProfileImage={Boolean(data?.profile?.hasProfileImage)}
+					imagePath={profileImage}
+				/>
+				<Label htmlFor="file">
+					CHANGE IMAGE
+					<input
+						id="file"
+						name="file"
+						onChange={(e: any) => handleUpload(e)}
+						style={{ display: 'none' }}
+						type="file"
+					/>
+				</Label>
+			</PhotoButtonFlex>
+			<RefreshNote>
+				Note: the dashboard will refresh when you change the image.
+			</RefreshNote>
+		</>
+	);
 }
 
 export default ImageEditor;

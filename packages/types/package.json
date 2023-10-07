@@ -6,7 +6,7 @@
     ".": "./index.ts"
   },
   "scripts": {
-    "format": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
+    "format_IGNORE": "prettier \"**/*.{ts,tsx,md,mdx,json}\" --check",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {

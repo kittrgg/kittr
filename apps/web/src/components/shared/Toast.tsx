@@ -5,23 +5,23 @@ import { useEffect } from 'react';
 import styled from 'styled-components';
 
 interface Props {
-  visible: boolean;
-  setVisibility: Dispatch<SetStateAction<boolean>>;
-  children: ReactNode | string;
+	visible: boolean;
+	setVisibility: Dispatch<SetStateAction<boolean>>;
+	children: ReactNode | string;
 }
 
 export function Toast({ visible, setVisibility, children }: Props) {
-  const isMounted = useIsMounted();
+	const isMounted = useIsMounted();
 
-  useEffect(() => {
-    setTimeout(() => {
-      if (isMounted() && visible) {
-        setVisibility(false);
-      }
-    }, 1000);
-  }, [visible, isMounted, setVisibility]);
+	useEffect(() => {
+		setTimeout(() => {
+			if (isMounted() && visible) {
+				setVisibility(false);
+			}
+		}, 1000);
+	}, [visible, isMounted, setVisibility]);
 
-  return <Container visible={visible}>{children}</Container>;
+	return <Container visible={visible}>{children}</Container>;
 }
 
 export default Toast;

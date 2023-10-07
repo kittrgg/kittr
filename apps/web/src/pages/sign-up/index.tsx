@@ -6,24 +6,24 @@ import { useEffect } from 'react';
 import SignUpForm from '../../features/SignUpForm';
 
 function SignUp() {
-  const router = useRouter();
-  const user = useUser();
+	const router = useRouter();
+	const user = useUser();
 
-  useEffect(() => {
-    if (user) {
-      router.push(Routes.DASHBOARD);
-    }
-  }, [user, router]);
+	useEffect(() => {
+		if (user) {
+			router.push(Routes.DASHBOARD);
+		}
+	}, [user, router]);
 
-  return (
-    <>
-      <Head
-        description="Create your account on kittr."
-        title="Create Your Account | kittr"
-      />
-      <SignUpForm />
-    </>
-  );
+	return (
+		<>
+			<Head
+				description="Create your account on kittr."
+				title="Create Your Account | kittr"
+			/>
+			<SignUpForm />
+		</>
+	);
 }
 
 export default SignUp;

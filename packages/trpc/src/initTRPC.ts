@@ -6,67 +6,67 @@ import superjson from 'superjson';
 import type { Context } from './context';
 
 export const t = initTRPC.context<Context>().create({
-  transformer: superjson,
-  errorFormatter({ shape, error, path, type, input, ctx }) {
-    captureMessage(path ? `${error.code}: ${path}` : 'Unknown tRPC path', {
-      level: 'error',
-      tags: { isKittr: true },
-      extra: { type },
-      contexts: {
-        error: { ...error },
-        ctx: { ...ctx },
-        input: { input: JSON.stringify(input) },
-      },
-    });
-    return shape;
-  },
+	transformer: superjson,
+	errorFormatter({ shape, error, path, type, input, ctx }) {
+		captureMessage(path ? `${error.code}: ${path}` : 'Unknown tRPC path', {
+			level: 'error',
+			tags: { isKittr: true },
+			extra: { type },
+			contexts: {
+				error: { ...error },
+				ctx: { ...ctx },
+				input: { input: JSON.stringify(input) },
+			},
+		});
+		return shape;
+	},
 });
 export const middleware = t.middleware;
 
 export const authenticateAdmin = middleware(async ({ ctx, next }) => {
-  if (!ctx.userToken) {
-    throw new TRPCError({
-      code: 'UNAUTHORIZED',
-    });
-  }
+	if (!ctx.userToken) {
+		throw new TRPCError({
+			code: 'UNAUTHORIZED',
+		});
+	}
 
-  const firebaseUser = await auth.verifyIdToken(ctx.userToken);
+	const firebaseUser = await auth.verifyIdToken(ctx.userToken);
 
-  const administrator = await prisma.administrator.findFirst({
-    where: {
-      firebaseUserId: firebaseUser.uid,
-    },
-  });
+	const administrator = await prisma.administrator.findFirst({
+		where: {
+			firebaseUserId: firebaseUser.uid,
+		},
+	});
 
-  if (!administrator) {
-    throw new TRPCError({
-      code: 'UNAUTHORIZED',
-      message: "It doesn't look like you're a site administrator.",
-    });
-  }
+	if (!administrator) {
+		throw new TRPCError({
+			code: 'UNAUTHORIZED',
+			message: "It doesn't look like you're a site administrator.",
+		});
+	}
 
-  return next({
-    ctx: {
-      user: firebaseUser,
-      adminUser: administrator,
-    },
-  });
+	return next({
+		ctx: {
+			user: firebaseUser,
+			adminUser: administrator,
+		},
+	});
 });
 
 export const authenticateUser = middleware(async ({ ctx, next }) => {
-  if (!ctx.userToken) {
-    throw new TRPCError({
-      code: 'UNAUTHORIZED',
-    });
-  }
+	if (!ctx.userToken) {
+		throw new TRPCError({
+			code: 'UNAUTHORIZED',
+		});
+	}
 
-  const firebaseUser = await auth.verifyIdToken(ctx.userToken);
+	const firebaseUser = await auth.verifyIdToken(ctx.userToken);
 
-  return next({
-    ctx: {
-      user: firebaseUser,
-    },
-  });
+	return next({
+		ctx: {
+			user: firebaseUser,
+		},
+	});
 });
 
 export const mergeRouters = t.mergeRouters;

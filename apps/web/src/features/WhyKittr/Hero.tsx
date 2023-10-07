@@ -3,34 +3,34 @@ import { header1, header2 } from '@Styles/typography';
 import styled from 'styled-components';
 
 interface Props {
-  totalNumberOfKits: number;
+	totalNumberOfKits: number;
 }
 
 /** The beautiful hero for the mod landing page. */
 function Hero({ totalNumberOfKits }: Props) {
-  return (
-    <Container>
-      <ImageContainer>
-        <img
-          alt=""
-          src="/media/hero.jpg"
-          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-        />
-      </ImageContainer>
-      <Copy>
-        <img
-          alt=""
-          src="/media/logo.svg"
-          style={{ width: '100px', height: '100px' }}
-        />
-        <Headline>get kittd.</Headline>
-        <KitsTotal>{totalNumberOfKits}+ kits</KitsTotal>
-        <Subline>
-          In 15 minutes, your !loadout command can look like this.
-        </Subline>
-      </Copy>
-    </Container>
-  );
+	return (
+		<Container>
+			<ImageContainer>
+				<img
+					alt=""
+					src="/media/hero.jpg"
+					style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+				/>
+			</ImageContainer>
+			<Copy>
+				<img
+					alt=""
+					src="/media/logo.svg"
+					style={{ width: '100px', height: '100px' }}
+				/>
+				<Headline>get kittd.</Headline>
+				<KitsTotal>{totalNumberOfKits}+ kits</KitsTotal>
+				<Subline>
+					In 15 minutes, your !loadout command can look like this.
+				</Subline>
+			</Copy>
+		</Container>
+	);
 }
 
 export default Hero;

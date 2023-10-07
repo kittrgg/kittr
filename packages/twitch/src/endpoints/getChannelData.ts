@@ -14,16 +14,16 @@ type IFunc = (login: string) => Promise<ITwitchChannelData[]>;
 
 /** Get the posted schedule for the user. */
 export const getChannelData: IFunc = async (login) => {
-  try {
-    const { data } = await getFromApi<ITwitchChannelData[]>({
-      endpointBaseUrl: 'https://api.twitch.tv/helix/users',
-      queryParams: { login },
-    });
+	try {
+		const { data } = await getFromApi<ITwitchChannelData[]>({
+			endpointBaseUrl: 'https://api.twitch.tv/helix/users',
+			queryParams: { login },
+		});
 
-    return data;
-  } catch (error) {
-    Logger.logError(error as Error);
-    console.log({ twitchError: error });
-    throw { twitchError: error };
-  }
+		return data;
+	} catch (error) {
+		Logger.logError(error as Error);
+		console.log({ twitchError: error });
+		throw { twitchError: error };
+	}
 };

@@ -10,101 +10,101 @@ import type { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 
 interface Props {
-  isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
+	isOpen: boolean;
+	setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 function MobileNavPane({ isOpen, setIsOpen }: Props) {
-  // UseLockBodyScroll(isOpen)
-  const { pathname } = useRouter();
-  const user = useUser();
-  const isLoggedIn = Boolean(user?.uid);
+	// UseLockBodyScroll(isOpen)
+	const { pathname } = useRouter();
+	const user = useUser();
+	const isLoggedIn = Boolean(user?.uid);
 
-  return (
-    <FullScreen
-      onClick={() => setIsOpen(false)}
-      style={{
-        zIndex: '99999',
-        right: 0,
-        backgroundColor: 'rgba(29,29,31,.6)',
-        opacity: isOpen ? 1 : 0,
-        pointerEvents: isOpen ? 'initial' : 'none',
-        transition: '.2s',
-      }}
-    >
-      <Body isOpen={isOpen}>
-        <CloseButton onClick={() => setIsOpen(false)}>
-          <ImageContainer>
-            <img
-              alt="Kittr Logo"
-              height={40}
-              src="/media/icons/burger.svg"
-              width={40}
-            />
-          </ImageContainer>
-        </CloseButton>
-        <LinksList>
-          <Link href={Routes.ROOT} legacyBehavior passHref>
-            <StyledLink active={pathname === Routes.ROOT}>HOME</StyledLink>
-          </Link>
-          <Link href={Routes.GAMES.LIST} legacyBehavior passHref>
-            <StyledLink
-              active={pathname.startsWith(Routes.GAMES.LIST)}
-              data-cy="mobile-games-link"
-            >
-              GAMES
-            </StyledLink>
-          </Link>
-          <Link href={Routes.CHANNEL.LIST} legacyBehavior passHref>
-            <StyledLink
-              active={
-                pathname.startsWith(Routes.CHANNEL.LIST) ||
-                pathname.startsWith(Routes.CHANNEL.LIST)
-              }
-              data-cy="mobile-channels-link"
-            >
-              CHANNELS
-            </StyledLink>
-          </Link>
-        </LinksList>
-        <LinksList>
-          {!isLoggedIn && (
-            <>
-              <Link href={Routes.SIGN_UP} legacyBehavior passHref>
-                <StyledLink
-                  active={pathname.startsWith(Routes.SIGN_UP)}
-                  data-cy="mobile-sign-up-link"
-                >
-                  SIGN UP
-                </StyledLink>
-              </Link>
-              <Link href={Routes.DASHBOARD} legacyBehavior passHref>
-                <StyledLink
-                  active={pathname.startsWith(Routes.DASHBOARD)}
-                  data-cy="mobile-dashboard-link-no-auth"
-                >
-                  LOG IN
-                </StyledLink>
-              </Link>
-            </>
-          )}
-        </LinksList>
-        {isLoggedIn ? (
-          <Link href={Routes.DASHBOARD} legacyBehavior passHref>
-            <StyledLink
-              active={
-                pathname === Routes.DASHBOARD ||
-                pathname.startsWith(Routes.DASHBOARD)
-              }
-              data-cy="mobile-dashboard-link-authed"
-            >
-              DASHBOARD
-            </StyledLink>
-          </Link>
-        ) : null}
-      </Body>
-    </FullScreen>
-  );
+	return (
+		<FullScreen
+			onClick={() => setIsOpen(false)}
+			style={{
+				zIndex: '99999',
+				right: 0,
+				backgroundColor: 'rgba(29,29,31,.6)',
+				opacity: isOpen ? 1 : 0,
+				pointerEvents: isOpen ? 'initial' : 'none',
+				transition: '.2s',
+			}}
+		>
+			<Body isOpen={isOpen}>
+				<CloseButton onClick={() => setIsOpen(false)}>
+					<ImageContainer>
+						<img
+							alt="Kittr Logo"
+							height={40}
+							src="/media/icons/burger.svg"
+							width={40}
+						/>
+					</ImageContainer>
+				</CloseButton>
+				<LinksList>
+					<Link href={Routes.ROOT} legacyBehavior passHref>
+						<StyledLink active={pathname === Routes.ROOT}>HOME</StyledLink>
+					</Link>
+					<Link href={Routes.GAMES.LIST} legacyBehavior passHref>
+						<StyledLink
+							active={pathname.startsWith(Routes.GAMES.LIST)}
+							data-cy="mobile-games-link"
+						>
+							GAMES
+						</StyledLink>
+					</Link>
+					<Link href={Routes.CHANNEL.LIST} legacyBehavior passHref>
+						<StyledLink
+							active={
+								pathname.startsWith(Routes.CHANNEL.LIST) ||
+								pathname.startsWith(Routes.CHANNEL.LIST)
+							}
+							data-cy="mobile-channels-link"
+						>
+							CHANNELS
+						</StyledLink>
+					</Link>
+				</LinksList>
+				<LinksList>
+					{!isLoggedIn && (
+						<>
+							<Link href={Routes.SIGN_UP} legacyBehavior passHref>
+								<StyledLink
+									active={pathname.startsWith(Routes.SIGN_UP)}
+									data-cy="mobile-sign-up-link"
+								>
+									SIGN UP
+								</StyledLink>
+							</Link>
+							<Link href={Routes.DASHBOARD} legacyBehavior passHref>
+								<StyledLink
+									active={pathname.startsWith(Routes.DASHBOARD)}
+									data-cy="mobile-dashboard-link-no-auth"
+								>
+									LOG IN
+								</StyledLink>
+							</Link>
+						</>
+					)}
+				</LinksList>
+				{isLoggedIn ? (
+					<Link href={Routes.DASHBOARD} legacyBehavior passHref>
+						<StyledLink
+							active={
+								pathname === Routes.DASHBOARD ||
+								pathname.startsWith(Routes.DASHBOARD)
+							}
+							data-cy="mobile-dashboard-link-authed"
+						>
+							DASHBOARD
+						</StyledLink>
+					</Link>
+				) : null}
+			</Body>
+		</FullScreen>
+	);
 }
 
 export default MobileNavPane;

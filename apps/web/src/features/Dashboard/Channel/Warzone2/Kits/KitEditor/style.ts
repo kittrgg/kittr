@@ -60,8 +60,8 @@ export const Header = styled.h3`
 `;
 
 export const HeaderHelper = styled.p<{
-  animate?: boolean;
-  animationDuration?: number;
+	animate?: boolean;
+	animationDuration?: number;
 }>`
   font-weight: 500;
   font-size: 18px;
@@ -69,7 +69,7 @@ export const HeaderHelper = styled.p<{
   transition: 0.2s;
   color: ${(props) => (props.animate ? colors.red : colors.lighter)};
   transform: ${(props) =>
-    props.animate ? 'scale(1.1) rotate(10deg)' : 'scale(1.0) rotate(0deg)'};
+		props.animate ? 'scale(1.1) rotate(10deg)' : 'scale(1.0) rotate(0deg)'};
 `;
 
 export const ParagraphHelper = styled.p`

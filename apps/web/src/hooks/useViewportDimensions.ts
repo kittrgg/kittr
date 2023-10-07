@@ -1,29 +1,29 @@
 import { useEffect, useState } from 'react';
 
 interface WindowSizeType {
-  width: number;
-  height: number;
+	width: number;
+	height: number;
 }
 
 /** Get the current width and height for the client's viewport. */
 export const useViewportDimensions = (): WindowSizeType => {
-  const [windowSize, setWindowSize] = useState<WindowSizeType>({
-    width: 0,
-    height: 0,
-  });
+	const [windowSize, setWindowSize] = useState<WindowSizeType>({
+		width: 0,
+		height: 0,
+	});
 
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    };
+	useEffect(() => {
+		const handleResize = () => {
+			setWindowSize({
+				width: window.innerWidth,
+				height: window.innerHeight,
+			});
+		};
 
-    window.addEventListener('resize', handleResize);
-    handleResize();
+		window.addEventListener('resize', handleResize);
+		handleResize();
 
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-  return windowSize;
+		return () => window.removeEventListener('resize', handleResize);
+	}, []);
+	return windowSize;
 };

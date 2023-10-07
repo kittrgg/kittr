@@ -1,13 +1,13 @@
 import type {
-  WarzoneKit,
-  WarzoneKitBase,
-  WarzoneKitBaseCategory,
+	WarzoneKit,
+	WarzoneKitBase,
+	WarzoneKitBaseCategory,
 } from '@kittr/prisma';
 
 interface KitBaseWithCategory extends WarzoneKitBase {
-  category: WarzoneKitBaseCategory;
+	category: WarzoneKitBaseCategory;
 }
 
 export interface KitWithBaseInDisplayr extends WarzoneKit {
-  base: KitBaseWithCategory;
+	base: KitBaseWithCategory;
 }

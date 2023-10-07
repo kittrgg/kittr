@@ -4,67 +4,67 @@ import type { Game } from '@kittr/prisma';
 import styled from 'styled-components';
 
 interface Props {
-  /** The array of games to render. */
-  data: Game[];
-  /** Do you want the games to do a zoom-in animation when hovered? Defaults to true. */
-  hoverScale?: boolean;
-  /** Function to run when the game is clicked on. */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onClick?: (...args: any) => any;
-  /** Show visit text at the bottom of the game's art. */
-  withVisitText?: true;
+	/** The array of games to render. */
+	data: Game[];
+	/** Do you want the games to do a zoom-in animation when hovered? Defaults to true. */
+	hoverScale?: boolean;
+	/** Function to run when the game is clicked on. */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	onClick?: (...args: any) => any;
+	/** Show visit text at the bottom of the game's art. */
+	withVisitText?: true;
 }
 
 /** List of all of the games on the platform. This component is only a fragment. Therefore, it needs a container or wrapper around it to be given proper alignment. */
 export function GameList({
-  data,
-  hoverScale = true,
-  onClick,
-  withVisitText,
+	data,
+	hoverScale = true,
+	onClick,
+	withVisitText,
 }: Props) {
-  return (
-    <>
-      {data
-        ? [...data]
-            .sort((game) => (game.active ? -1 : 1))
-            .map((elem) => (
-              <ListItem
-                active={elem.active}
-                data-cy={`${elem.urlSafeName}-button`}
-                hoverScale={hoverScale}
-                key={elem.displayName}
-                onClick={() => elem.active && onClick && onClick(elem)}
-                style={{ marginRight: '2rem' }}
-              >
-                <ImageContainer>
-                  <FirebaseStorageResolver
-                    noSpinner
-                    path={elem.titleImageUrl}
-                    render={(data) => (
-                      <img
-                        alt={`${elem.displayName} Cover Art`}
-                        src={data}
-                        style={{ width: '100%' }}
-                      />
-                    )}
-                  />
-                  {!elem.active && (
-                    <ComingSoon>
-                      <p>COMING</p>
-                      <p>SOON</p>
-                    </ComingSoon>
-                  )}
-                  {withVisitText ? (
-                    <VisitTextContainer>
-                      <p>{'Visit >'}</p>
-                    </VisitTextContainer>
-                  ) : null}
-                </ImageContainer>
-              </ListItem>
-            ))
-        : null}
-    </>
-  );
+	return (
+		<>
+			{data
+				? [...data]
+						.sort((game) => (game.active ? -1 : 1))
+						.map((elem) => (
+							<ListItem
+								active={elem.active}
+								data-cy={`${elem.urlSafeName}-button`}
+								hoverScale={hoverScale}
+								key={elem.displayName}
+								onClick={() => elem.active && onClick && onClick(elem)}
+								style={{ marginRight: '2rem' }}
+							>
+								<ImageContainer>
+									<FirebaseStorageResolver
+										noSpinner
+										path={elem.titleImageUrl}
+										render={(data) => (
+											<img
+												alt={`${elem.displayName} Cover Art`}
+												src={data}
+												style={{ width: '100%' }}
+											/>
+										)}
+									/>
+									{!elem.active && (
+										<ComingSoon>
+											<p>COMING</p>
+											<p>SOON</p>
+										</ComingSoon>
+									)}
+									{withVisitText ? (
+										<VisitTextContainer>
+											<p>{'Visit >'}</p>
+										</VisitTextContainer>
+									) : null}
+								</ImageContainer>
+							</ListItem>
+						))
+				: null}
+		</>
+	);
 }
 
 export default GameList;
@@ -72,10 +72,10 @@ export default GameList;
 // Styled Components
 
 interface IListItem {
-  active: boolean;
-  hoverScale: boolean;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onClick: (...args: any) => any;
+	active: boolean;
+	hoverScale: boolean;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	onClick: (...args: any) => any;
 }
 
 const ListItem = styled.div<IListItem>`

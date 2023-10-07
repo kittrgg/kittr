@@ -17,59 +17,59 @@ import Sidebar from './Sidebar';
 import ChannelMain from './Main';
 
 interface Props {
-  channel: NonNullable<RouterOutput['channels']['profile']['get']>;
+	channel: NonNullable<RouterOutput['channels']['profile']['get']>;
 }
 
 const MOBILE_WIDTH = 1050;
 
 function WarzoneProfile({ channel }: Props) {
-  const { query, push } = useRouter();
-  const dispatch = useDispatch();
-  const isSidebarOpen = useSidebarState();
-  const { width } = useViewportSize();
-  // Const activeWeapon = useActiveWeapon()
-  const { observe, height } = useDimensions();
-  const code = channel.gameCreatorCodes.find(
-    (code) => code.game.urlSafeName === query.game,
-  )?.code;
+	const { query, push } = useRouter();
+	const dispatch = useDispatch();
+	const isSidebarOpen = useSidebarState();
+	const { width } = useViewportSize();
+	// Const activeWeapon = useActiveWeapon()
+	const { observe, height } = useDimensions();
+	const code = channel.gameCreatorCodes.find(
+		(code) => code.game.urlSafeName === query.game,
+	)?.code;
 
-  return (
-    <MantineProvider>
-      <div>
-        <NavMenu
-          backFunction={() =>
-            isSidebarOpen
-              ? dispatch(setIsSidebarOpen(false))
-              : push(Routes.CHANNEL.createPath(query.channel as string))
-          }
-          breakpoint={1050}
-          middleComponent={
-            <>
-              <HeaderTitle>{`${query.channel || ('' as string)}`}</HeaderTitle>
-              {code ? <CreatorCode>CODE: {code}</CreatorCode> : null}
-            </>
-          }
-          wrapperRef={observe}
-        />
-        <Drawer
-          onClose={() => dispatch(setIsSidebarOpen(false))}
-          opened={isSidebarOpen || width >= MOBILE_WIDTH}
-          styles={{
-            closeButton: { marginTop: height },
-            drawer: {
-              backgroundColor: '#121212',
-              marginTop: width >= MOBILE_WIDTH ? height : 0,
-            },
-          }}
-          withCloseButton={width <= MOBILE_WIDTH}
-          withOverlay={width <= MOBILE_WIDTH}
-        >
-          <Sidebar />
-        </Drawer>
-        <ChannelMain />
-      </div>
-    </MantineProvider>
-  );
+	return (
+		<MantineProvider>
+			<div>
+				<NavMenu
+					backFunction={() =>
+						isSidebarOpen
+							? dispatch(setIsSidebarOpen(false))
+							: push(Routes.CHANNEL.createPath(query.channel as string))
+					}
+					breakpoint={1050}
+					middleComponent={
+						<>
+							<HeaderTitle>{`${query.channel || ('' as string)}`}</HeaderTitle>
+							{code ? <CreatorCode>CODE: {code}</CreatorCode> : null}
+						</>
+					}
+					wrapperRef={observe}
+				/>
+				<Drawer
+					onClose={() => dispatch(setIsSidebarOpen(false))}
+					opened={isSidebarOpen || width >= MOBILE_WIDTH}
+					styles={{
+						closeButton: { marginTop: height },
+						drawer: {
+							backgroundColor: '#121212',
+							marginTop: width >= MOBILE_WIDTH ? height : 0,
+						},
+					}}
+					withCloseButton={width <= MOBILE_WIDTH}
+					withOverlay={width <= MOBILE_WIDTH}
+				>
+					<Sidebar />
+				</Drawer>
+				<ChannelMain />
+			</div>
+		</MantineProvider>
+	);
 }
 
 export default WarzoneProfile;

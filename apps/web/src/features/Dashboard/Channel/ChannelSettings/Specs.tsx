@@ -10,116 +10,116 @@ import styled from 'styled-components';
 import { trpc } from '@/lib/trpc';
 
 function Specs() {
-  const [copyNotification, setCopyNotification] = useState(false);
-  const dispatch = useDispatch();
-  const specs = useSpecs();
-  const { refetch: refetchDashboard } = useDashboardChannel();
-  const { data } = useChannelData();
+	const [copyNotification, setCopyNotification] = useState(false);
+	const dispatch = useDispatch();
+	const specs = useSpecs();
+	const { refetch: refetchDashboard } = useDashboardChannel();
+	const { data } = useChannelData();
 
-  const { mutate } = trpc.channels.profile['pc-specs'].delete.useMutation({
-    onSuccess: () => {
-      dispatch(setModal({ type: '', data: '' }));
-      refetchDashboard();
-    },
-    onError: () => {
-      dispatch(setModal({ type: 'Error Notification', data: {} }));
-    },
-  });
+	const { mutate } = trpc.channels.profile['pc-specs'].delete.useMutation({
+		onSuccess: () => {
+			dispatch(setModal({ type: '', data: '' }));
+			refetchDashboard();
+		},
+		onError: () => {
+			dispatch(setModal({ type: 'Error Notification', data: {} }));
+		},
+	});
 
-  const rootUrl = new URL(window.location.origin.toString()).host.replace(
-    'www.',
-    '',
-  );
+	const rootUrl = new URL(window.location.origin.toString()).host.replace(
+		'www.',
+		'',
+	);
 
-  const commandString = `!addcom !specs ${rootUrl}/c/${data?.urlSafeName}#specs`;
+	const commandString = `!addcom !specs ${rootUrl}/c/${data?.urlSafeName}#specs`;
 
-  const copyToClipboard = (string: string) => {
-    navigator.clipboard.writeText(string);
-    setCopyNotification(true);
-  };
+	const copyToClipboard = (string: string) => {
+		navigator.clipboard.writeText(string);
+		setCopyNotification(true);
+	};
 
-  return (
-    <div>
-      <Title>
-        <span>
-          PC Specs
-          <SVG.PremiumWithCircle
-            style={{ position: 'relative', top: '6px', marginLeft: '12px' }}
-            width="24px"
-          />
-        </span>
-        {Object.keys(specs || {}).length > 0 && (
-          <Button
-            design="transparent"
-            onClick={() => copyToClipboard(commandString)}
-            startIcon={
-              <SVG.Clipboard style={{ marginRight: '16px' }} width="16px" />
-            }
-            style={{ fontSize: '14px', padding: '16px' }}
-            text="Specs Command"
-          />
-        )}
-      </Title>
-      {specs
-        ? Object.values(data?.profile?.channelPcSpecs || {}).map(
-            (spec, index) => {
-              return (
-                <Spec key={`${spec.id}-${index}`}>
-                  <SpecInfo>
-                    <Label>{spec.partType}</Label>
-                    <span>{spec.partName}</span>
-                  </SpecInfo>
-                  <IconButtons>
-                    <SVG.Pencil
-                      data-cy={`${spec.partType.replace(
-                        / /g,
-                        '-',
-                      )}-update-spec`}
-                      onClick={() =>
-                        dispatch(setModal({ type: 'Add Spec', data: spec }))
-                      }
-                    />
-                    <SVG.X
-                      data-cy={`${spec.partType}-delete-spec`}
-                      onClick={async () =>
-                        mutate({ channelId: data?.id!, pcSpecId: spec.id })
-                      }
-                    />
-                  </IconButtons>
-                </Spec>
-              );
-            },
-          )
-        : null}
-      <Button
-        data-cy="add-a-spec"
-        design="default"
-        onClick={() => dispatch(setModal({ type: 'Add Spec', data: '' }))}
-        startIcon={
-          <span
-            style={{
-              fontWeight: 600,
-              fontSize: '24px',
-              marginRight: '24px',
-              height: '100%',
-            }}
-          >
-            +
-          </span>
-        }
-        text="Spec"
-      />
-      <Toast setVisibility={setCopyNotification} visible={copyNotification}>
-        <img
-          alt="Check Mark"
-          height={11}
-          src="/media/icons/check-mark.svg"
-          width={16}
-        />
-        <p style={{ marginLeft: '44px' }}>!specs copied to clipboard</p>
-      </Toast>
-    </div>
-  );
+	return (
+		<div>
+			<Title>
+				<span>
+					PC Specs
+					<SVG.PremiumWithCircle
+						style={{ position: 'relative', top: '6px', marginLeft: '12px' }}
+						width="24px"
+					/>
+				</span>
+				{Object.keys(specs || {}).length > 0 && (
+					<Button
+						design="transparent"
+						onClick={() => copyToClipboard(commandString)}
+						startIcon={
+							<SVG.Clipboard style={{ marginRight: '16px' }} width="16px" />
+						}
+						style={{ fontSize: '14px', padding: '16px' }}
+						text="Specs Command"
+					/>
+				)}
+			</Title>
+			{specs
+				? Object.values(data?.profile?.channelPcSpecs || {}).map(
+						(spec, index) => {
+							return (
+								<Spec key={`${spec.id}-${index}`}>
+									<SpecInfo>
+										<Label>{spec.partType}</Label>
+										<span>{spec.partName}</span>
+									</SpecInfo>
+									<IconButtons>
+										<SVG.Pencil
+											data-cy={`${spec.partType.replace(
+												/ /g,
+												'-',
+											)}-update-spec`}
+											onClick={() =>
+												dispatch(setModal({ type: 'Add Spec', data: spec }))
+											}
+										/>
+										<SVG.X
+											data-cy={`${spec.partType}-delete-spec`}
+											onClick={async () =>
+												mutate({ channelId: data?.id!, pcSpecId: spec.id })
+											}
+										/>
+									</IconButtons>
+								</Spec>
+							);
+						},
+				  )
+				: null}
+			<Button
+				data-cy="add-a-spec"
+				design="default"
+				onClick={() => dispatch(setModal({ type: 'Add Spec', data: '' }))}
+				startIcon={
+					<span
+						style={{
+							fontWeight: 600,
+							fontSize: '24px',
+							marginRight: '24px',
+							height: '100%',
+						}}
+					>
+						+
+					</span>
+				}
+				text="Spec"
+			/>
+			<Toast setVisibility={setCopyNotification} visible={copyNotification}>
+				<img
+					alt="Check Mark"
+					height={11}
+					src="/media/icons/check-mark.svg"
+					width={16}
+				/>
+				<p style={{ marginLeft: '44px' }}>!specs copied to clipboard</p>
+			</Toast>
+		</div>
+	);
 }
 
 export default Specs;

@@ -11,68 +11,68 @@ import { trpc } from '@/lib/trpc';
 
 /** Modal to allow a user to set a new owner for the channel. */
 function SetNewOwner() {
-  const dispatch = useDispatch();
-  const [newOwner, setNewOwner] = useState('-');
-  const { data: channelData, refetch: refetchDashboard } = useChannelData();
-  const { data, isLoading } = useChannelManagers();
+	const dispatch = useDispatch();
+	const [newOwner, setNewOwner] = useState('-');
+	const { data: channelData, refetch: refetchDashboard } = useChannelData();
+	const { data, isLoading } = useChannelManagers();
 
-  const { mutate: mutateOwner, isLoading: isMutatingOwner } =
-    trpc.channels.managers.owner.edit.useMutation({
-      onSuccess: () => refetchDashboard(),
-    });
+	const { mutate: mutateOwner, isLoading: isMutatingOwner } =
+		trpc.channels.managers.owner.edit.useMutation({
+			onSuccess: () => refetchDashboard(),
+		});
 
-  return (
-    <Modal backgroundClickToClose title="CHOOSE NEW OWNER">
-      <Paragraph>
-        CHOOSE A NEW OWNER FOR THIS CHANNEL'S ACCOUNT BELOW.
-      </Paragraph>
-      {isLoading ? <Spinner /> : null}
-      {data ? (
-        <>
-          <RowFlex>
-            <ColumnFlex>
-              <Select
-                data-cy="selector-new-manager"
-                onChange={(e) => setNewOwner(e.target.value)}
-                style={{ width: '100%' }}
-                value={newOwner}
-              >
-                <option value="">-</option>
-                {data
-                  .filter((manager) => manager.role !== 'OWNER')
-                  .map((elem) => (
-                    <option key={elem.email} value={elem.email}>
-                      {elem.email}
-                    </option>
-                  ))}
-              </Select>
-            </ColumnFlex>
-          </RowFlex>
-          <RowFlex>
-            <Button
-              design="transparent"
-              onClick={() => dispatch(setModal({ type: '', data: {} }))}
-              style={{ margin: '0 auto' }}
-              text="CANCEL"
-            />
-            <Button
-              dataCy="final-change-owner"
-              design="white"
-              disabled={isMutatingOwner || newOwner === '-'}
-              onClick={async () =>
-                mutateOwner({
-                  channelId: channelData?.id!,
-                  newOwnerEmail: newOwner,
-                })
-              }
-              style={{ margin: '0 auto' }}
-              text={isMutatingOwner ? '...' : 'CONFIRM NEW OWNER'}
-            />
-          </RowFlex>
-        </>
-      ) : null}
-    </Modal>
-  );
+	return (
+		<Modal backgroundClickToClose title="CHOOSE NEW OWNER">
+			<Paragraph>
+				CHOOSE A NEW OWNER FOR THIS CHANNEL'S ACCOUNT BELOW.
+			</Paragraph>
+			{isLoading ? <Spinner /> : null}
+			{data ? (
+				<>
+					<RowFlex>
+						<ColumnFlex>
+							<Select
+								data-cy="selector-new-manager"
+								onChange={(e) => setNewOwner(e.target.value)}
+								style={{ width: '100%' }}
+								value={newOwner}
+							>
+								<option value="">-</option>
+								{data
+									.filter((manager) => manager.role !== 'OWNER')
+									.map((elem) => (
+										<option key={elem.email} value={elem.email}>
+											{elem.email}
+										</option>
+									))}
+							</Select>
+						</ColumnFlex>
+					</RowFlex>
+					<RowFlex>
+						<Button
+							design="transparent"
+							onClick={() => dispatch(setModal({ type: '', data: {} }))}
+							style={{ margin: '0 auto' }}
+							text="CANCEL"
+						/>
+						<Button
+							dataCy="final-change-owner"
+							design="white"
+							disabled={isMutatingOwner || newOwner === '-'}
+							onClick={async () =>
+								mutateOwner({
+									channelId: channelData?.id!,
+									newOwnerEmail: newOwner,
+								})
+							}
+							style={{ margin: '0 auto' }}
+							text={isMutatingOwner ? '...' : 'CONFIRM NEW OWNER'}
+						/>
+					</RowFlex>
+				</>
+			) : null}
+		</Modal>
+	);
 }
 
 export default SetNewOwner;

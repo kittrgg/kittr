@@ -13,5 +13,5 @@ type ChannelQuery = () => Promise<number>;
  * Get the total channels on the platform.
  */
 export const totalChannelsQuery: ChannelQuery = async () => {
-  return await prisma.channel.count();
+	return await prisma.channel.count();
 };

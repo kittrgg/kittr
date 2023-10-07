@@ -1,0 +1,25 @@
+{
+	"vcs": {
+		"useIgnoreFile": true
+	},
+	"files": {
+		"ignore": ["**/.next/**", "packages/prisma/validator/**"]
+	},
+	"organizeImports": {
+		"enabled": true
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "single"
+		}
+	},
+	"formatter": {
+		"enabled": true
+	},
+	"linter": {
+		"enabled": false,
+		"rules": {
+			"recommended": true
+		}
+	}
+}

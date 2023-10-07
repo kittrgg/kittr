@@ -10,11 +10,11 @@ import { useEffect, useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 interface Props {
-  _id: string;
-  previewWidth?: number;
-  data?: RouterOutput['channels']['overlay']['get'];
-  activeKit: OverlayKit;
-  setActiveKit: Dispatch<SetStateAction<OverlayKit>>;
+	_id: string;
+	previewWidth?: number;
+	data?: RouterOutput['channels']['overlay']['get'];
+	activeKit: OverlayKit;
+	setActiveKit: Dispatch<SetStateAction<OverlayKit>>;
 }
 
 const DATA_SWITCH_TIMER = 5000;
@@ -22,140 +22,140 @@ const OPTION_SWAP_INTERVAL = 500;
 const OPACITY_DURATION = 0.2;
 
 function BannerTicker({
-  _id,
-  previewWidth,
-  data,
-  activeKit,
-  setActiveKit,
+	_id,
+	previewWidth,
+	data,
+	activeKit,
+	setActiveKit,
 }: Props) {
-  const [isOptionVisible, setIsOptionVisible] = useState(true);
-  const [isBaseVisible, setIsBaseVisible] = useState(true);
-  const [cursor, setCursor] = useState(0);
+	const [isOptionVisible, setIsOptionVisible] = useState(true);
+	const [isBaseVisible, setIsBaseVisible] = useState(true);
+	const [cursor, setCursor] = useState(0);
 
-  const activeKitOptions =
-    (Object.keys(activeKit ?? {}) ?? []).length > 0
-      ? customOrderArray<{ slotKey: string; displayName: string }>({
-          sortingArray: warzoneSlotsOrder,
-          keyToSort: 'slotKey',
-          array: activeKit.options || [],
-        })
-      : [];
+	const activeKitOptions =
+		(Object.keys(activeKit ?? {}) ?? []).length > 0
+			? customOrderArray<{ slotKey: string; displayName: string }>({
+					sortingArray: warzoneSlotsOrder,
+					keyToSort: 'slotKey',
+					array: activeKit.options || [],
+			  })
+			: [];
 
-  const hasAnActiveKit = (Object.keys(activeKit ?? {}) ?? []).length;
+	const hasAnActiveKit = (Object.keys(activeKit ?? {}) ?? []).length;
 
-  useEffect(() => {
-    let interval: any = null;
+	useEffect(() => {
+		let interval: any = null;
 
-    interval = setInterval(async () => {
-      setIsOptionVisible(false);
+		interval = setInterval(async () => {
+			setIsOptionVisible(false);
 
-      await asyncDelay(OPTION_SWAP_INTERVAL);
+			await asyncDelay(OPTION_SWAP_INTERVAL);
 
-      if (hasAnActiveKit) {
-        const length = activeKit.options.length - 1;
+			if (hasAnActiveKit) {
+				const length = activeKit.options.length - 1;
 
-        setCursor((cursor) => {
-          if (cursor < length) {
-            return cursor + 1;
-          }
-          return 0;
-        });
-      }
+				setCursor((cursor) => {
+					if (cursor < length) {
+						return cursor + 1;
+					}
+					return 0;
+				});
+			}
 
-      setIsOptionVisible(true);
-    }, DATA_SWITCH_TIMER);
+			setIsOptionVisible(true);
+		}, DATA_SWITCH_TIMER);
 
-    return () => clearInterval(interval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeKit]);
+		return () => clearInterval(interval);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [activeKit]);
 
-  useEffect(() => {
-    const switchKit = async () => {
-      if (hasAnActiveKit) {
-        if (cursor === 0) {
-          const kitCount = [
-            data?.primaryWzTwoKit,
-            data?.secondaryWzTwoKit,
-          ].filter(
-            (kit) => Boolean(kit) && kit && Object.keys(kit).length > 0,
-          ).length;
+	useEffect(() => {
+		const switchKit = async () => {
+			if (hasAnActiveKit) {
+				if (cursor === 0) {
+					const kitCount = [
+						data?.primaryWzTwoKit,
+						data?.secondaryWzTwoKit,
+					].filter(
+						(kit) => Boolean(kit) && kit && Object.keys(kit).length > 0,
+					).length;
 
-          if (kitCount > 1) {
-            if (activeKit.id === data?.primaryWzTwoKit?.id) {
-              setActiveKit(data?.secondaryWzTwoKit as OverlayKit);
-            } else {
-              setActiveKit(data?.primaryWzTwoKit as OverlayKit);
-            }
-          }
-        }
+					if (kitCount > 1) {
+						if (activeKit.id === data?.primaryWzTwoKit?.id) {
+							setActiveKit(data?.secondaryWzTwoKit as OverlayKit);
+						} else {
+							setActiveKit(data?.primaryWzTwoKit as OverlayKit);
+						}
+					}
+				}
 
-        setIsBaseVisible(true);
-      }
-    };
+				setIsBaseVisible(true);
+			}
+		};
 
-    switchKit();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cursor]);
+		switchKit();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [cursor]);
 
-  useEffect(() => {
-    const resetEndofKitVisiblility = async () => {
-      if (hasAnActiveKit) {
-        const length = activeKit.options.length - 1;
-        if (cursor === length) {
-          await asyncDelay(DATA_SWITCH_TIMER - OPTION_SWAP_INTERVAL);
-          setIsBaseVisible(false);
-        }
-      }
-    };
+	useEffect(() => {
+		const resetEndofKitVisiblility = async () => {
+			if (hasAnActiveKit) {
+				const length = activeKit.options.length - 1;
+				if (cursor === length) {
+					await asyncDelay(DATA_SWITCH_TIMER - OPTION_SWAP_INTERVAL);
+					setIsBaseVisible(false);
+				}
+			}
+		};
 
-    resetEndofKitVisiblility();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cursor]);
+		resetEndofKitVisiblility();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [cursor]);
 
-  if (!data) return null;
+	if (!data) return null;
 
-  const hasAKitSelected =
-    Object.keys(data.primaryWzTwoKit || {}).length > 0 ||
-    Object.keys(data.secondaryWzTwoKit || {}).length > 0;
-  const isRendered = data.isOverlayVisible && hasAKitSelected;
-  const isOverlayVisible = Boolean(previewWidth) || isRendered;
+	const hasAKitSelected =
+		Object.keys(data.primaryWzTwoKit || {}).length > 0 ||
+		Object.keys(data.secondaryWzTwoKit || {}).length > 0;
+	const isRendered = data.isOverlayVisible && hasAKitSelected;
+	const isOverlayVisible = Boolean(previewWidth) || isRendered;
 
-  return (
-    <ThemeProvider
-      theme={{
-        ...data,
-        isOverlayVisible: isOverlayVisible && hasAKitSelected,
-        previewWidth,
-      }}
-    >
-      <Wrapper>
-        <Meta fadeDuration={OPACITY_DURATION}>
-          <BaseName fadeDuration={OPACITY_DURATION} isVisible={isBaseVisible}>
-            {activeKit?.base?.displayName}
-          </BaseName>
-          <CommandInfo
-            fadeDuration={OPACITY_DURATION}
-            isVisible={isBaseVisible}
-          >
-            !{activeKit?.base?.commandCodes[0].code}
-          </CommandInfo>
-        </Meta>
-        <OptionWrapper
-          fadeDuration={OPACITY_DURATION}
-          isVisible={isOptionVisible}
-        >
-          {activeKit ? (
-            <Option key={activeKitOptions[cursor]?.displayName}>
-              <Slot>{activeKitOptions[cursor]?.slotKey}</Slot>
-              <Selection>
-                {activeKitOptions[cursor]?.displayName.toUpperCase()}
-              </Selection>
-            </Option>
-          ) : null}
-        </OptionWrapper>
-      </Wrapper>
-    </ThemeProvider>
-  );
+	return (
+		<ThemeProvider
+			theme={{
+				...data,
+				isOverlayVisible: isOverlayVisible && hasAKitSelected,
+				previewWidth,
+			}}
+		>
+			<Wrapper>
+				<Meta fadeDuration={OPACITY_DURATION}>
+					<BaseName fadeDuration={OPACITY_DURATION} isVisible={isBaseVisible}>
+						{activeKit?.base?.displayName}
+					</BaseName>
+					<CommandInfo
+						fadeDuration={OPACITY_DURATION}
+						isVisible={isBaseVisible}
+					>
+						!{activeKit?.base?.commandCodes[0].code}
+					</CommandInfo>
+				</Meta>
+				<OptionWrapper
+					fadeDuration={OPACITY_DURATION}
+					isVisible={isOptionVisible}
+				>
+					{activeKit ? (
+						<Option key={activeKitOptions[cursor]?.displayName}>
+							<Slot>{activeKitOptions[cursor]?.slotKey}</Slot>
+							<Selection>
+								{activeKitOptions[cursor]?.displayName.toUpperCase()}
+							</Selection>
+						</Option>
+					) : null}
+				</OptionWrapper>
+			</Wrapper>
+		</ThemeProvider>
+	);
 }
 
 export default BannerTicker;
@@ -175,13 +175,13 @@ const Wrapper = styled.div`
   opacity: ${(props) => (props.theme.isOverlayVisible ? 1 : 0)};
   transition: 0.4s;
   background-color: ${(props) =>
-    props.theme.customBackground
-      ? props.theme.customBackground
-      : props.theme.backgroundColorPrimary ?? colors.lightest};
+		props.theme.customBackground
+			? props.theme.customBackground
+			: props.theme.backgroundColorPrimary ?? colors.lightest};
   transform: ${(props) =>
-    props.theme.previewWidth
-      ? `scale(${Math.min(1, props.theme.previewWidth / 640)})`
-      : ''};
+		props.theme.previewWidth
+			? `scale(${Math.min(1, props.theme.previewWidth / 640)})`
+			: ''};
 `;
 
 const Meta = styled.div<{ fadeDuration: number }>`
@@ -195,9 +195,9 @@ const Meta = styled.div<{ fadeDuration: number }>`
   padding: 0 20px;
   white-space: nowrap;
   background-color: ${(props) =>
-    props.theme.customBackground
-      ? props.theme.customBackground
-      : props.theme.backgroundColorSecondary ?? colors.darker};
+		props.theme.customBackground
+			? props.theme.customBackground
+			: props.theme.backgroundColorSecondary ?? colors.darker};
   overflow: hidden;
 `;
 

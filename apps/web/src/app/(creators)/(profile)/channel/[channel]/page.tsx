@@ -14,110 +14,110 @@ import { LightRay } from '@/app/(creators)/LightRay';
 import { SocialLinkButton } from '@/app/(creators)/(profile)/channel/[channel]/components/SocialLinkButton';
 
 export const generateStaticParams = async () => {
-  const limit = process.env.VERCEL_ENV === 'production' ? 30 : 5;
+	const limit = process.env.VERCEL_ENV === 'production' ? 30 : 5;
 
-  const topCreators = await getTopCreatorPopularities({
-    limit,
-    field: 'channelId',
-  });
+	const topCreators = await getTopCreatorPopularities({
+		limit,
+		field: 'channelId',
+	});
 
-  if (!topCreators) {
-    throw new Error('Failed fetching top creators.');
-  }
+	if (!topCreators) {
+		throw new Error('Failed fetching top creators.');
+	}
 
-  const urlSafeNames = await prisma.channel.findMany({
-    where: {
-      id: {
-        in: topCreators.map((creator) => creator.id),
-      },
-    },
-    select: { urlSafeName: true },
-  });
+	const urlSafeNames = await prisma.channel.findMany({
+		where: {
+			id: {
+				in: topCreators.map((creator) => creator.id),
+			},
+		},
+		select: { urlSafeName: true },
+	});
 
-  return urlSafeNames.map((name) => ({ channel: name.urlSafeName }));
+	return urlSafeNames.map((name) => ({ channel: name.urlSafeName }));
 };
 
 export const generateMetadata = async ({
-  params,
+	params,
 }: {
-  params: Params;
+	params: Params;
 }): Promise<Metadata> => {
-  const channel = await getChannel(params.channel);
+	const channel = await getChannel(params.channel);
 
-  if (!channel) {
-    return {
-      title: 'No creator found.',
-      description: "Doesn't look like anyone is here yet",
-      robots: 'noindex',
-    };
-  }
+	if (!channel) {
+		return {
+			title: 'No creator found.',
+			description: "Doesn't look like anyone is here yet",
+			robots: 'noindex',
+		};
+	}
 
-  return generateKittrMetadata({
-    title: `${channel.displayName} - kittr`,
-    description: `${channel.displayName}'s kittr profile.`,
-    canonicalURL: `/channels/${channel.urlSafeName}`,
-  });
+	return generateKittrMetadata({
+		title: `${channel.displayName} - kittr`,
+		description: `${channel.displayName}'s kittr profile.`,
+		canonicalURL: `/channels/${channel.urlSafeName}`,
+	});
 };
 
 async function ChannelProfilePage({ params }: { params: Params }) {
-  const channel = await getChannel(params.channel);
+	const channel = await getChannel(params.channel);
 
-  if (!channel) {
-    return notFound();
-  }
+	if (!channel) {
+		return notFound();
+	}
 
-  const gamesWithImages = await Promise.all(
-    channel.games.map(async (game) => ({
-      ...game,
-      titleImageUrl: await download(game.titleImageUrl),
-    })),
-  );
+	const gamesWithImages = await Promise.all(
+		channel.games.map(async (game) => ({
+			...game,
+			titleImageUrl: await download(game.titleImageUrl),
+		})),
+	);
 
-  return (
-    <>
-      <LogProfileMetrics
-        channelDisplayName={channel.displayName}
-        channelId={channel.id}
-        channelUrlSafeName={channel.urlSafeName}
-      />
-      <Header channelUrlSafeName={channel.urlSafeName} />
-      <LightRay className="absolute -top-[20rem] -left-0 -rotate-12 w-[20rem] h-[50rem] scale-y-150 opacity-50" />
+	return (
+		<>
+			<LogProfileMetrics
+				channelDisplayName={channel.displayName}
+				channelId={channel.id}
+				channelUrlSafeName={channel.urlSafeName}
+			/>
+			<Header channelUrlSafeName={channel.urlSafeName} />
+			<LightRay className="absolute -top-[20rem] -left-0 -rotate-12 w-[20rem] h-[50rem] scale-y-150 opacity-50" />
 
-      <section className="relative z-10 flex flex-row flex-wrap justify-center gap-4">
-        {channel.links.map((link) => {
-          return <SocialLinkButton key={link.id} link={link} />;
-        })}
-      </section>
+			<section className="relative z-10 flex flex-row flex-wrap justify-center gap-4">
+				{channel.links.map((link) => {
+					return <SocialLinkButton key={link.id} link={link} />;
+				})}
+			</section>
 
-      <div className="relative z-10">
-        <H2>Games</H2>
-        <div className="flex flex-row flex-wrap items-center justify-center gap-6">
-          {gamesWithImages.map((game) => {
-            return (
-              <GameCard
-                extraChildren={
-                  <p>
-                    {game.urlSafeName === 'warzone'
-                      ? channel._count.warzoneKits
-                      : channel._count.warzoneTwoKits}{' '}
-                    kits
-                  </p>
-                }
-                href={`/channel/${params.channel}/${game.urlSafeName}`}
-                imageProps={{
-                  src: game.titleImageUrl,
-                  alt: `${game.displayName} cover art`,
-                }}
-                key={game.urlSafeName}
-                linkComponent={Link}
-                title={game.displayName}
-              />
-            );
-          })}
-        </div>
-      </div>
-    </>
-  );
+			<div className="relative z-10">
+				<H2>Games</H2>
+				<div className="flex flex-row flex-wrap items-center justify-center gap-6">
+					{gamesWithImages.map((game) => {
+						return (
+							<GameCard
+								extraChildren={
+									<p>
+										{game.urlSafeName === 'warzone'
+											? channel._count.warzoneKits
+											: channel._count.warzoneTwoKits}{' '}
+										kits
+									</p>
+								}
+								href={`/channel/${params.channel}/${game.urlSafeName}`}
+								imageProps={{
+									src: game.titleImageUrl,
+									alt: `${game.displayName} cover art`,
+								}}
+								key={game.urlSafeName}
+								linkComponent={Link}
+								title={game.displayName}
+							/>
+						);
+					})}
+				</div>
+			</div>
+		</>
+	);
 }
 
 export default ChannelProfilePage;

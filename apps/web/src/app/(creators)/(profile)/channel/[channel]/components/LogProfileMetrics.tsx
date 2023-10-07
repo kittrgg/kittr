@@ -4,24 +4,24 @@ import type { CompleteCreatorPopularityMetric } from '@kittr/metrics';
 import { useLogger } from '@kittr/metrics';
 
 export function LogProfileMetrics({
-  channelDisplayName,
-  channelId,
-  channelUrlSafeName,
+	channelDisplayName,
+	channelId,
+	channelUrlSafeName,
 }: {
-  channelDisplayName: string;
-  channelUrlSafeName: string;
-  channelId: string;
+	channelDisplayName: string;
+	channelUrlSafeName: string;
+	channelId: string;
 }) {
-  const logger = useLogger();
+	const logger = useLogger();
 
-  if (typeof window === 'undefined') return null;
+	if (typeof window === 'undefined') return null;
 
-  logger.info('Creator popularity', {
-    metric: 'profile',
-    channelDisplayName,
-    channelId,
-    channelUrlSafeName,
-  } as CompleteCreatorPopularityMetric<'profile'>);
+	logger.info('Creator popularity', {
+		metric: 'profile',
+		channelDisplayName,
+		channelId,
+		channelUrlSafeName,
+	} as CompleteCreatorPopularityMetric<'profile'>);
 
-  return null;
+	return null;
 }

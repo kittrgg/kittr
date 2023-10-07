@@ -3,69 +3,69 @@ import type { CSSProperties, MutableRefObject } from 'react';
 import styled from 'styled-components';
 
 interface Props {
-  /** HTML5 types for the button. */
-  type?: 'button' | 'reset' | 'submit';
-  /** Button's base design. */
-  design?: 'default' | 'premium' | 'transparent' | 'white';
-  /** Text content of the button. Can also be a React component (use wisely and be careful of resizing issues). */
-  text: string;
-  /** HTML5 disabled attribute. Can this button be disabled by certain application behavior? Use this flag. */
-  disabled?: boolean;
-  /** Function to run on the click of the button. */
-  onClick?: (ev: React.MouseEvent) => void;
-  /** React CSSProperties object to override base design. While this button comes with design presets, you may need to override those styles for certain use cases. */
-  style?: CSSProperties;
-  /** Cypress testing value for targeting button. */
-  dataCy?: string;
-  /** Used to display an icon on the button to the left of the label */
-  startIcon?: React.ReactNode;
-  /** Used to display an icon on the button to the right of the label*/
-  endIcon?: React.ReactNode;
-  /** Change the underlying button html component */
-  as?: 'a' | 'button';
-  /** Used when button is an 'a' tag for linking */
-  href?: string;
-  /** Used when button is an 'a' tag for opening in a new tab */
-  target?: string;
-  /** Used when button is an 'a' tag for opening in a new tab */
-  rel?: string;
-  /** Used to get ref of button */
-  buttonRef?: MutableRefObject<HTMLButtonElement>;
+	/** HTML5 types for the button. */
+	type?: 'button' | 'reset' | 'submit';
+	/** Button's base design. */
+	design?: 'default' | 'premium' | 'transparent' | 'white';
+	/** Text content of the button. Can also be a React component (use wisely and be careful of resizing issues). */
+	text: string;
+	/** HTML5 disabled attribute. Can this button be disabled by certain application behavior? Use this flag. */
+	disabled?: boolean;
+	/** Function to run on the click of the button. */
+	onClick?: (ev: React.MouseEvent) => void;
+	/** React CSSProperties object to override base design. While this button comes with design presets, you may need to override those styles for certain use cases. */
+	style?: CSSProperties;
+	/** Cypress testing value for targeting button. */
+	dataCy?: string;
+	/** Used to display an icon on the button to the left of the label */
+	startIcon?: React.ReactNode;
+	/** Used to display an icon on the button to the right of the label*/
+	endIcon?: React.ReactNode;
+	/** Change the underlying button html component */
+	as?: 'a' | 'button';
+	/** Used when button is an 'a' tag for linking */
+	href?: string;
+	/** Used when button is an 'a' tag for opening in a new tab */
+	target?: string;
+	/** Used when button is an 'a' tag for opening in a new tab */
+	rel?: string;
+	/** Used to get ref of button */
+	buttonRef?: MutableRefObject<HTMLButtonElement>;
 }
 
 /** Button to be used as the default choice for buttons in the application. */
 export function Button({
-  text,
-  dataCy,
-  design = 'default',
-  as = 'button',
-  buttonRef,
-  ...props
+	text,
+	dataCy,
+	design = 'default',
+	as = 'button',
+	buttonRef,
+	...props
 }: Props) {
-  const StyledButton =
-    design === 'premium'
-      ? PremiumButton
-      : design === 'transparent'
-      ? TransparentButton
-      : design === 'white'
-      ? WhiteButton
-      : ButtonBase;
+	const StyledButton =
+		design === 'premium'
+			? PremiumButton
+			: design === 'transparent'
+			? TransparentButton
+			: design === 'white'
+			? WhiteButton
+			: ButtonBase;
 
-  return (
-    <StyledButton
-      as={as}
-      data-cy={dataCy}
-      design={design}
-      ref={buttonRef}
-      {...props}
-    >
-      <ButtonLabelContainer>
-        {props.startIcon}
-        {typeof text === 'string' ? text.toUpperCase() : text}
-        {props.endIcon}
-      </ButtonLabelContainer>
-    </StyledButton>
-  );
+	return (
+		<StyledButton
+			as={as}
+			data-cy={dataCy}
+			design={design}
+			ref={buttonRef}
+			{...props}
+		>
+			<ButtonLabelContainer>
+				{props.startIcon}
+				{typeof text === 'string' ? text.toUpperCase() : text}
+				{props.endIcon}
+			</ButtonLabelContainer>
+		</StyledButton>
+	);
 }
 
 export default Button;

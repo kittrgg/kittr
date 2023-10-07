@@ -9,23 +9,23 @@ import { generateKittrMetadata } from '@/app/generateKittrMetadata';
 export const revalidate = 60;
 
 export const generateMetadata = () =>
-  generateKittrMetadata({
-    title: 'Home',
-    description: 'get kittd.',
-    canonicalURL: '/',
-  });
+	generateKittrMetadata({
+		title: 'Home',
+		description: 'get kittd.',
+		canonicalURL: '/',
+	});
 
 function Page() {
-  return (
-    <div className="relative flex flex-col gap-16">
-      <Hero />
-      <Games />
-      <LiveChannels />
-      <TopChannels />
-      <RisingChannels />
-      <Blurb />
-    </div>
-  );
+	return (
+		<div className="relative flex flex-col gap-16">
+			<Hero />
+			<Games />
+			<LiveChannels />
+			<TopChannels />
+			<RisingChannels />
+			<Blurb />
+		</div>
+	);
 }
 
 export default Page;

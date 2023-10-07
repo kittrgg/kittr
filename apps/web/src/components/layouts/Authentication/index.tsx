@@ -6,28 +6,28 @@ import styled from 'styled-components';
 import BlockArt from './BlockArt';
 
 interface Props {
-  /**
-   * @params
-   * title: Title for content/form.
-   *
-   * children: React children to render.
-   */
-  title: string;
-  children: ReactNode;
+	/**
+	 * @params
+	 * title: Title for content/form.
+	 *
+	 * children: React children to render.
+	 */
+	title: string;
+	children: ReactNode;
 }
 
 /** Layout used for authentication related pages. Signups, logins, etc. */
 function Authentication({ title, children }: Props) {
-  return (
-    <Wrapper>
-      <BlockArt />
-      <NavMenu />
-      <Container>
-        <FormTitle>{title}</FormTitle>
-        {children}
-      </Container>
-    </Wrapper>
-  );
+	return (
+		<Wrapper>
+			<BlockArt />
+			<NavMenu />
+			<Container>
+				<FormTitle>{title}</FormTitle>
+				{children}
+			</Container>
+		</Wrapper>
+	);
 }
 
 export default Authentication;

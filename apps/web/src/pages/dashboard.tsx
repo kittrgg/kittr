@@ -9,15 +9,15 @@ const Socket = createContext<TSocket | null>(null);
 export const useSocket = () => useContext(Socket);
 
 function Dash() {
-  return (
-    <Socket.Provider value={io(process.env.NEXT_PUBLIC_SOCKET_HOST!)}>
-      <Head
-        description="Your portal to kit greatness."
-        title="Dashboard | kittr"
-      />
-      <Dashboard />
-    </Socket.Provider>
-  );
+	return (
+		<Socket.Provider value={io(process.env.NEXT_PUBLIC_SOCKET_HOST!)}>
+			<Head
+				description="Your portal to kit greatness."
+				title="Dashboard | kittr"
+			/>
+			<Dashboard />
+		</Socket.Provider>
+	);
 }
 
 export default Dash;

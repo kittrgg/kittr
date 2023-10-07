@@ -4,24 +4,24 @@ import * as ChannelsProfileImageService from '../../../../services/channels/prof
 import { checkRole } from '../../../../services/users';
 
 const updateProfileImage = authedProcedure
-  .input(
-    z.object({
-      channelId: z.string(),
-    }),
-  )
-  .mutation(async ({ ctx, input }) => {
-    await checkRole({
-      firebaseUserId: ctx.user.uid,
-      channelId: input.channelId,
-      roles: ['OWNER', 'ADMIN'],
-    });
+	.input(
+		z.object({
+			channelId: z.string(),
+		}),
+	)
+	.mutation(async ({ ctx, input }) => {
+		await checkRole({
+			firebaseUserId: ctx.user.uid,
+			channelId: input.channelId,
+			roles: ['OWNER', 'ADMIN'],
+		});
 
-    const channelProfile = await ChannelsProfileImageService.updateProfileImage(
-      input,
-    );
-    return channelProfile;
-  });
+		const channelProfile = await ChannelsProfileImageService.updateProfileImage(
+			input,
+		);
+		return channelProfile;
+	});
 
 export const ChannelsProfileImageController = {
-  updateProfileImage,
+	updateProfileImage,
 };

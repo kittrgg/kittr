@@ -5,17 +5,17 @@ import { caption } from '@Styles/typography';
 import styled from 'styled-components';
 
 function AdTile({ ...props }) {
-  const activeWeapon = useActiveWeapon();
+	const activeWeapon = useActiveWeapon();
 
-  return (
-    <Container>
-      {/* <Ad updateTrigger={activeWeapon} placementType="s300x250" />
+	return (
+		<Container>
+			{/* <Ad updateTrigger={activeWeapon} placementType="s300x250" />
 			<Caption>
 				Ads are annoying but keep this site running. Thank you for understanding.
 				<br />- The Guy That Makes kittr
 			</Caption> */}
-    </Container>
-  );
+		</Container>
+	);
 }
 
 export default AdTile;

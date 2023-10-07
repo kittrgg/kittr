@@ -5,37 +5,37 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 interface Props {
-  /** The type of item that couldn't be found. On kittr, these are the two main distinctions that people would be searching through. */
-  type: 'channel' | 'game';
+	/** The type of item that couldn't be found. On kittr, these are the two main distinctions that people would be searching through. */
+	type: 'channel' | 'game';
 }
 
 /** If a game or channel can't be found, render this component. It is a full-screen so there is no need for any layout with it. */
 export function NoItemFound({ type }: Props) {
-  return (
-    <>
-      <Head
-        description={`Hmm, no ${type} found.`}
-        title={`No ${
-          type.charAt(0).toUpperCase() + type.slice(1)
-        } Found | kittr`}
-      />
-      <Wrapper style={{ alignItems: 'center', justifyContent: 'center' }}>
-        <Body>
-          <Header>OOPS...</Header>
-          <Paragraph>
-            Sorry, but we aren't seeing this {type} on kittr.
-          </Paragraph>
-          <Paragraph>
-            Let's get you back to the {type}s page so you can find what you're
-            looking for.
-          </Paragraph>
-          <Link href={`/${type}s`} legacyBehavior passHref>
-            <StyledLink>BACK TO {type.toUpperCase()}S PAGE</StyledLink>
-          </Link>
-        </Body>
-      </Wrapper>
-    </>
-  );
+	return (
+		<>
+			<Head
+				description={`Hmm, no ${type} found.`}
+				title={`No ${
+					type.charAt(0).toUpperCase() + type.slice(1)
+				} Found | kittr`}
+			/>
+			<Wrapper style={{ alignItems: 'center', justifyContent: 'center' }}>
+				<Body>
+					<Header>OOPS...</Header>
+					<Paragraph>
+						Sorry, but we aren't seeing this {type} on kittr.
+					</Paragraph>
+					<Paragraph>
+						Let's get you back to the {type}s page so you can find what you're
+						looking for.
+					</Paragraph>
+					<Link href={`/${type}s`} legacyBehavior passHref>
+						<StyledLink>BACK TO {type.toUpperCase()}S PAGE</StyledLink>
+					</Link>
+				</Body>
+			</Wrapper>
+		</>
+	);
 }
 
 export default NoItemFound;

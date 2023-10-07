@@ -9,55 +9,55 @@ import styled from 'styled-components';
 import KitButton from './KitButton';
 
 function KitList() {
-  const dispatch = useDispatch();
-  const { data } = useChannelData();
-  const noKits = data?.warzoneTwoKits.length === 0;
+	const dispatch = useDispatch();
+	const { data } = useChannelData();
+	const noKits = data?.warzoneTwoKits.length === 0;
 
-  if (noKits) {
-    return (
-      <Wrapper style={{ alignItems: 'center', justifyContent: 'center' }}>
-        <Message>Creating your first kit?</Message>
-        <Message>We love it.</Message>
-        <Message>
-          Use the editor to the right to build your desired kit.
-        </Message>
-        <Message>And make sure to save using the bottom bar!</Message>
-      </Wrapper>
-    );
-  }
+	if (noKits) {
+		return (
+			<Wrapper style={{ alignItems: 'center', justifyContent: 'center' }}>
+				<Message>Creating your first kit?</Message>
+				<Message>We love it.</Message>
+				<Message>
+					Use the editor to the right to build your desired kit.
+				</Message>
+				<Message>And make sure to save using the bottom bar!</Message>
+			</Wrapper>
+		);
+	}
 
-  return (
-    <Wrapper>
-      <Container>
-        {data?.warzoneTwoKits
-          ? filterKitsByFeature(data.warzoneTwoKits)
-              .sort((a, b) =>
-                sortAlphabetical(a.base.displayName, b.base.displayName),
-              )
-              .map((kit) => <KitButton favorite key={kit.id} kit={kit} />)
-          : null}
-        {data?.warzoneTwoKits &&
-        filterKitsByFeature(data.warzoneTwoKits).length > 0 ? (
-          <hr style={{ width: '88%', borderColor: colors.lightest }} />
-        ) : null}
-        {data?.warzoneTwoKits
-          ? filterKitsByFeature(data.warzoneTwoKits, false)
-              .sort((a, b) =>
-                sortAlphabetical(a.base.displayName, b.base.displayName),
-              )
-              .map((kit) => <KitButton key={kit.id} kit={kit} />)
-          : null}
-      </Container>
-      <ButtonWrapper>
-        <Button
-          design="transparent"
-          onClick={() => dispatch(createNewKit())}
-          style={{ margin: '0 auto' }}
-          text="Create New"
-        />
-      </ButtonWrapper>
-    </Wrapper>
-  );
+	return (
+		<Wrapper>
+			<Container>
+				{data?.warzoneTwoKits
+					? filterKitsByFeature(data.warzoneTwoKits)
+							.sort((a, b) =>
+								sortAlphabetical(a.base.displayName, b.base.displayName),
+							)
+							.map((kit) => <KitButton favorite key={kit.id} kit={kit} />)
+					: null}
+				{data?.warzoneTwoKits &&
+				filterKitsByFeature(data.warzoneTwoKits).length > 0 ? (
+					<hr style={{ width: '88%', borderColor: colors.lightest }} />
+				) : null}
+				{data?.warzoneTwoKits
+					? filterKitsByFeature(data.warzoneTwoKits, false)
+							.sort((a, b) =>
+								sortAlphabetical(a.base.displayName, b.base.displayName),
+							)
+							.map((kit) => <KitButton key={kit.id} kit={kit} />)
+					: null}
+			</Container>
+			<ButtonWrapper>
+				<Button
+					design="transparent"
+					onClick={() => dispatch(createNewKit())}
+					style={{ margin: '0 auto' }}
+					text="Create New"
+				/>
+			</ButtonWrapper>
+		</Wrapper>
+	);
 }
 
 export default KitList;

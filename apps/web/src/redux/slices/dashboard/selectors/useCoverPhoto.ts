@@ -2,7 +2,7 @@ import { useDashboardChannel } from '@Hooks/api/useDashboardChannel';
 
 /** Does the user have a cover photo for their profile? */
 export const useCoverPhoto = () => {
-  const { data } = useDashboardChannel();
+	const { data } = useDashboardChannel();
 
-  return data?.profile?.hasCoverPhoto;
+	return data?.profile?.hasCoverPhoto;
 };

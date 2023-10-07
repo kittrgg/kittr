@@ -1,259 +1,259 @@
 import colors from '@Colors';
 import { useDashboardChannel } from '@Hooks/api/useDashboardChannel';
 import {
-  clearKitEditor,
-  resetToInitialKit,
-  setModal,
+	clearKitEditor,
+	resetToInitialKit,
+	setModal,
 } from '@Redux/slices/dashboard';
 import {
-  useActiveKit,
-  useChannelData,
-  useChannelView,
-  useInitialKit,
-  useModal,
+	useActiveKit,
+	useChannelData,
+	useChannelView,
+	useInitialKit,
+	useModal,
 } from '@Redux/slices/dashboard/selectors';
 import { useDispatch } from '@Redux/store';
 import { paragraph } from '@Styles/typography';
 import { isFetchError } from '@Utils/helpers/typeGuards';
 import type {
-  WarzoneTwoKit,
-  WarzoneTwoKitBase,
-  WarzoneTwoKitOption,
-  WarzoneTwoKitOptionTuning,
+	WarzoneTwoKit,
+	WarzoneTwoKitBase,
+	WarzoneTwoKitOption,
+	WarzoneTwoKitOptionTuning,
 } from '@kittr/prisma';
 import styled from 'styled-components';
 import NamingWarning from './NamingWarning';
 import { trpc } from '@/lib/trpc';
 
 type WarzoneTwoKitOmitID = Omit<WarzoneTwoKit, 'id'> & {
-  id?: string | undefined;
-  base: WarzoneTwoKitBase;
-  options: WarzoneTwoKitOption[];
-  tuning: WarzoneTwoKitOptionTuning[];
+	id?: string | undefined;
+	base: WarzoneTwoKitBase;
+	options: WarzoneTwoKitOption[];
+	tuning: WarzoneTwoKitOptionTuning[];
 };
 
 function EditorSnackbar() {
-  const dispatch = useDispatch();
-  const initialKit = useInitialKit() as WarzoneTwoKitOmitID;
-  const activeKit = useActiveKit() as WarzoneTwoKitOmitID;
-  const { data: channelData } = useChannelData();
-  const { refetch: refetchDashboard } = useDashboardChannel();
-  const { view } = useChannelView();
-  const modal = useModal();
+	const dispatch = useDispatch();
+	const initialKit = useInitialKit() as WarzoneTwoKitOmitID;
+	const activeKit = useActiveKit() as WarzoneTwoKitOmitID;
+	const { data: channelData } = useChannelData();
+	const { refetch: refetchDashboard } = useDashboardChannel();
+	const { view } = useChannelView();
+	const modal = useModal();
 
-  const { data: allKitBases } = trpc.kits.bases.listByGameUrlSafeName.useQuery({
-    gameUrlSafeName: view,
-  });
-  const { mutate, isLoading } = trpc.channels.kits.upsertWz2Kit.useMutation({
-    onMutate: () => {
-      // Grab the existing kit array and map them to just their titles
-      const kitArr = channelData?.warzoneTwoKits.slice() as (Omit<
-        WarzoneTwoKit,
-        'id'
-      > & {
-        id?: string;
-        base: WarzoneTwoKitBase;
-        options: WarzoneTwoKitOption[];
-      })[];
+	const { data: allKitBases } = trpc.kits.bases.listByGameUrlSafeName.useQuery({
+		gameUrlSafeName: view,
+	});
+	const { mutate, isLoading } = trpc.channels.kits.upsertWz2Kit.useMutation({
+		onMutate: () => {
+			// Grab the existing kit array and map them to just their titles
+			const kitArr = channelData?.warzoneTwoKits.slice() as (Omit<
+				WarzoneTwoKit,
+				'id'
+			> & {
+				id?: string;
+				base: WarzoneTwoKitBase;
+				options: WarzoneTwoKitOption[];
+			})[];
 
-      // Grab the new kit's name
-      const newKitName = activeKit.base.displayName + activeKit.customTitle;
+			// Grab the new kit's name
+			const newKitName = activeKit.base.displayName + activeKit.customTitle;
 
-      // Is this an existing kit being updated?
-      const index =
-        channelData?.warzoneTwoKits.findIndex(
-          (kit: WarzoneTwoKit) => kit.id === activeKit.id,
-        ) ?? -1; // -1 means there's no kit
+			// Is this an existing kit being updated?
+			const index =
+				channelData?.warzoneTwoKits.findIndex(
+					(kit: WarzoneTwoKit) => kit.id === activeKit.id,
+				) ?? -1; // -1 means there's no kit
 
-      if (!kitArr) {
-        return;
-      }
+			if (!kitArr) {
+				return;
+			}
 
-      if (index !== -1) {
-        // Replace the existing kit with its new data
-        kitArr[index] = activeKit;
-      } else {
-        // Add the new kit to the array
-        kitArr.push(activeKit);
-      }
+			if (index !== -1) {
+				// Replace the existing kit with its new data
+				kitArr[index] = activeKit;
+			} else {
+				// Add the new kit to the array
+				kitArr.push(activeKit);
+			}
 
-      if (
-        kitArr
-          .map((kit) => ({
-            ...kit,
-            base:
-              allKitBases?.find((allBase) => allBase.id === kit.base.id) ||
-              activeKit.base,
-          }))
-          // Map to just the names
-          .map((kit) => kit.base.displayName + kit.customTitle)
+			if (
+				kitArr
+					.map((kit) => ({
+						...kit,
+						base:
+							allKitBases?.find((allBase) => allBase.id === kit.base.id) ||
+							activeKit.base,
+					}))
+					// Map to just the names
+					.map((kit) => kit.base.displayName + kit.customTitle)
 
-          // Compare to ensure that there are no dupes
-          .filter((existingKitName) => newKitName === existingKitName).length >
-        1
-      ) {
-        return dispatch(setModal({ type: 'Kit Naming Warning', data: {} }));
-      }
-    },
-    onSuccess: (result: any) => {
-      if (isFetchError(result)) {
-        dispatch(setModal({ type: 'Error Notification', data: {} }));
-      } else {
-        dispatch(clearKitEditor());
-      }
-      refetchDashboard();
-    },
-    onError: () => {
-      dispatch(setModal({ type: 'Error Notification', data: {} }));
-    },
-  });
+					// Compare to ensure that there are no dupes
+					.filter((existingKitName) => newKitName === existingKitName).length >
+				1
+			) {
+				return dispatch(setModal({ type: 'Kit Naming Warning', data: {} }));
+			}
+		},
+		onSuccess: (result: any) => {
+			if (isFetchError(result)) {
+				dispatch(setModal({ type: 'Error Notification', data: {} }));
+			} else {
+				dispatch(clearKitEditor());
+			}
+			refetchDashboard();
+		},
+		onError: () => {
+			dispatch(setModal({ type: 'Error Notification', data: {} }));
+		},
+	});
 
-  const hasChanges = () => {
-    const changes = [];
+	const hasChanges = () => {
+		const changes = [];
 
-    if (
-      initialKit.base === activeKit.base &&
-      initialKit.featured === activeKit.featured &&
-      initialKit.customTitle === activeKit.customTitle &&
-      initialKit.blueprint === activeKit.blueprint &&
-      initialKit.youtubeUrl === activeKit.youtubeUrl &&
-      initialKit.tiktokUrl === activeKit.tiktokUrl &&
-      initialKit.quote === activeKit.quote
-    ) {
-      changes.push(false);
-    } else {
-      changes.push(true);
-    }
+		if (
+			initialKit.base === activeKit.base &&
+			initialKit.featured === activeKit.featured &&
+			initialKit.customTitle === activeKit.customTitle &&
+			initialKit.blueprint === activeKit.blueprint &&
+			initialKit.youtubeUrl === activeKit.youtubeUrl &&
+			initialKit.tiktokUrl === activeKit.tiktokUrl &&
+			initialKit.quote === activeKit.quote
+		) {
+			changes.push(false);
+		} else {
+			changes.push(true);
+		}
 
-    if (
-      initialKit.options.length === activeKit.options.length &&
-      initialKit.options.every((elem) =>
-        activeKit.options.some((opt) => opt.id === elem.id),
-      )
-    ) {
-      changes.push(false);
-    } else {
-      changes.push(true);
-    }
+		if (
+			initialKit.options.length === activeKit.options.length &&
+			initialKit.options.every((elem) =>
+				activeKit.options.some((opt) => opt.id === elem.id),
+			)
+		) {
+			changes.push(false);
+		} else {
+			changes.push(true);
+		}
 
-    // Checks if any tunes have changed from initialKit
-    initialKit.tuning.map((tune, idx) => {
-      if (
-        tune.horz !== activeKit.tuning[idx]?.horz ||
-        tune.vert !== activeKit.tuning[idx]?.vert
-      ) {
-        changes.push(true);
-      } else {
-        changes.push(false);
-      }
-    });
+		// Checks if any tunes have changed from initialKit
+		initialKit.tuning.map((tune, idx) => {
+			if (
+				tune.horz !== activeKit.tuning[idx]?.horz ||
+				tune.vert !== activeKit.tuning[idx]?.vert
+			) {
+				changes.push(true);
+			} else {
+				changes.push(false);
+			}
+		});
 
-    if (activeKit.tuning.length > initialKit.tuning.length) {
-      changes.push(true);
-    } else {
-      changes.push(false);
-    }
+		if (activeKit.tuning.length > initialKit.tuning.length) {
+			changes.push(true);
+		} else {
+			changes.push(false);
+		}
 
-    return changes.some((elem) => elem);
-  };
+		return changes.some((elem) => elem);
+	};
 
-  const reset = () => {
-    dispatch(resetToInitialKit());
-  };
+	const reset = () => {
+		dispatch(resetToInitialKit());
+	};
 
-  const upsertKit = () => {
-    // Grab the existing kit array and map them to just their titles
-    const kitArr = channelData?.warzoneTwoKits.slice() as WarzoneTwoKitOmitID[];
+	const upsertKit = () => {
+		// Grab the existing kit array and map them to just their titles
+		const kitArr = channelData?.warzoneTwoKits.slice() as WarzoneTwoKitOmitID[];
 
-    // Grab the new kit's name
-    const newKitName = activeKit.base.displayName + activeKit.customTitle;
+		// Grab the new kit's name
+		const newKitName = activeKit.base.displayName + activeKit.customTitle;
 
-    // Is this an existing kit being updated?
-    const index =
-      channelData?.warzoneTwoKits.findIndex((kit) => kit.id === activeKit.id) ??
-      -1; // -1 means there's no kit
+		// Is this an existing kit being updated?
+		const index =
+			channelData?.warzoneTwoKits.findIndex((kit) => kit.id === activeKit.id) ??
+			-1; // -1 means there's no kit
 
-    if (!kitArr) {
-      return;
-    }
+		if (!kitArr) {
+			return;
+		}
 
-    if (index !== -1) {
-      // Replace the existing kit with its new data
-      kitArr[index] = activeKit;
-    } else {
-      // Add the new kit to the array
-      kitArr.push(activeKit);
-    }
+		if (index !== -1) {
+			// Replace the existing kit with its new data
+			kitArr[index] = activeKit;
+		} else {
+			// Add the new kit to the array
+			kitArr.push(activeKit);
+		}
 
-    if (
-      kitArr
-        .map((kit) => ({
-          ...kit,
-          base:
-            allKitBases?.find((allBase) => allBase.id === kit.base.id) ||
-            activeKit.base,
-        }))
-        // Map to just the names
-        .map((kit) => kit.base.displayName + kit.customTitle)
+		if (
+			kitArr
+				.map((kit) => ({
+					...kit,
+					base:
+						allKitBases?.find((allBase) => allBase.id === kit.base.id) ||
+						activeKit.base,
+				}))
+				// Map to just the names
+				.map((kit) => kit.base.displayName + kit.customTitle)
 
-        // Compare to ensure that there are no dupes
-        .filter((existingKitName) => newKitName === existingKitName).length > 1
-    ) {
-      return dispatch(setModal({ type: 'Kit Naming Warning', data: {} }));
-    }
+				// Compare to ensure that there are no dupes
+				.filter((existingKitName) => newKitName === existingKitName).length > 1
+		) {
+			return dispatch(setModal({ type: 'Kit Naming Warning', data: {} }));
+		}
 
-    mutate({
-      channelId: channelData?.id!,
-      kit: {
-        channelId: channelData?.id!,
-        id: initialKit.id,
-        gameId: activeKit.base.gameId,
-        baseId: activeKit.base.id,
-        customTitle: activeKit.customTitle,
-        options: activeKit.options,
-        tuning: activeKit.tuning,
-        blueprint: activeKit.blueprint,
-        featured: activeKit.featured,
-        youtubeUrl: activeKit.youtubeUrl,
-        tiktokUrl: activeKit.tiktokUrl,
-        quote: activeKit.quote,
-      },
-      gameView: view,
-    });
-  };
+		mutate({
+			channelId: channelData?.id!,
+			kit: {
+				channelId: channelData?.id!,
+				id: initialKit.id,
+				gameId: activeKit.base.gameId,
+				baseId: activeKit.base.id,
+				customTitle: activeKit.customTitle,
+				options: activeKit.options,
+				tuning: activeKit.tuning,
+				blueprint: activeKit.blueprint,
+				featured: activeKit.featured,
+				youtubeUrl: activeKit.youtubeUrl,
+				tiktokUrl: activeKit.tiktokUrl,
+				quote: activeKit.quote,
+			},
+			gameView: view,
+		});
+	};
 
-  const isNewKit = !initialKit.id;
+	const isNewKit = !initialKit.id;
 
-  return (
-    <>
-      {modal.type == 'Kit Naming Warning' && <NamingWarning />}
-      <Container active={isNewKit || hasChanges()}>
-        <HorizFlex>
-          <img
-            alt=""
-            height={25}
-            src="/media/icons/alert-circle.svg"
-            width={25}
-          />
-          <WarningText>
-            {isNewKit
-              ? 'Kit created...but not saved yet.'
-              : 'You have unsaved changes'}
-          </WarningText>
-        </HorizFlex>
-        <HorizFlex>
-          {!isNewKit && <ResetButton onClick={reset}>Reset</ResetButton>}
-          <SaveButton
-            data-cy="save-kit-button"
-            disabled={Object.keys(activeKit.base).length === 0}
-            onClick={upsertKit}
-          >
-            {isLoading ? '...' : 'Save'}
-          </SaveButton>
-        </HorizFlex>
-      </Container>
-    </>
-  );
+	return (
+		<>
+			{modal.type == 'Kit Naming Warning' && <NamingWarning />}
+			<Container active={isNewKit || hasChanges()}>
+				<HorizFlex>
+					<img
+						alt=""
+						height={25}
+						src="/media/icons/alert-circle.svg"
+						width={25}
+					/>
+					<WarningText>
+						{isNewKit
+							? 'Kit created...but not saved yet.'
+							: 'You have unsaved changes'}
+					</WarningText>
+				</HorizFlex>
+				<HorizFlex>
+					{!isNewKit && <ResetButton onClick={reset}>Reset</ResetButton>}
+					<SaveButton
+						data-cy="save-kit-button"
+						disabled={Object.keys(activeKit.base).length === 0}
+						onClick={upsertKit}
+					>
+						{isLoading ? '...' : 'Save'}
+					</SaveButton>
+				</HorizFlex>
+			</Container>
+		</>
+	);
 }
 
 export default EditorSnackbar;

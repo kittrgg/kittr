@@ -2,8 +2,8 @@
 // https://tailwindcss.com/docs/using-with-preprocessors
 
 module.exports = {
-  plugins: {
-    autoprefixer: {},
-    tailwindcss: {},
-  },
+	plugins: {
+		autoprefixer: {},
+		tailwindcss: {},
+	},
 };

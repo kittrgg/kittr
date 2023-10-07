@@ -10,123 +10,123 @@ import { useEffect, useState } from 'react';
 import styled, { keyframes, ThemeProvider } from 'styled-components';
 
 interface Props {
-  previewWidth?: number;
-  data?: RouterOutput['channels']['overlay']['get'];
-  activeKit: OverlayKit;
-  setActiveKit: Dispatch<SetStateAction<OverlayKit>>;
+	previewWidth?: number;
+	data?: RouterOutput['channels']['overlay']['get'];
+	activeKit: OverlayKit;
+	setActiveKit: Dispatch<SetStateAction<OverlayKit>>;
 }
 
 function Banner({ previewWidth, data, activeKit, setActiveKit }: Props) {
-  const [isDataVisible, setIsDataVisible] = useState(true);
+	const [isDataVisible, setIsDataVisible] = useState(true);
 
-  const SWAP_TIMER = (Object.keys(activeKit ?? {}) ?? []).length
-    ? activeKit.options?.length * 3
-    : 0;
-  const NO_SCROLL_SWAP_TIMER = 8000;
-  const OPACITY_TIMER = 2;
+	const SWAP_TIMER = (Object.keys(activeKit ?? {}) ?? []).length
+		? activeKit.options?.length * 3
+		: 0;
+	const NO_SCROLL_SWAP_TIMER = 8000;
+	const OPACITY_TIMER = 2;
 
-  // Handle two kits at once
-  // Use a timeout to switch between multiple kits if needed
-  useEffect(() => {
-    let timeout: any = null;
+	// Handle two kits at once
+	// Use a timeout to switch between multiple kits if needed
+	useEffect(() => {
+		let timeout: any = null;
 
-    const delay = async (period: number) =>
-      await new Promise((resolve) => {
-        timeout = setTimeout(() => {
-          resolve(null);
-          clearTimeout(timeout);
-        }, period);
-      });
+		const delay = async (period: number) =>
+			await new Promise((resolve) => {
+				timeout = setTimeout(() => {
+					resolve(null);
+					clearTimeout(timeout);
+				}, period);
+			});
 
-    const showItem = async () => {
-      setIsDataVisible(true);
+		const showItem = async () => {
+			setIsDataVisible(true);
 
-      if (activeKit.options) {
-        if (activeKit.options.length > 5) {
-          await delay(SWAP_TIMER * 1000 + 1000);
-        } else {
-          await delay(NO_SCROLL_SWAP_TIMER);
-        }
-      }
+			if (activeKit.options) {
+				if (activeKit.options.length > 5) {
+					await delay(SWAP_TIMER * 1000 + 1000);
+				} else {
+					await delay(NO_SCROLL_SWAP_TIMER);
+				}
+			}
 
-      setIsDataVisible(false);
-      await delay(OPACITY_TIMER * 100);
+			setIsDataVisible(false);
+			await delay(OPACITY_TIMER * 100);
 
-      if (activeKit.id === data?.primaryWzTwoKit?.id) {
-        setActiveKit(data?.secondaryWzTwoKit as OverlayKit);
-      } else {
-        setActiveKit(data?.primaryWzTwoKit as OverlayKit);
-      }
-    };
+			if (activeKit.id === data?.primaryWzTwoKit?.id) {
+				setActiveKit(data?.secondaryWzTwoKit as OverlayKit);
+			} else {
+				setActiveKit(data?.primaryWzTwoKit as OverlayKit);
+			}
+		};
 
-    if (data) {
-      const kitCount = [data.primaryWzTwoKit, data.secondaryWzTwoKit].filter(
-        (kit) => Boolean(kit) && Object.keys(kit || {}).length > 0,
-      ).length;
+		if (data) {
+			const kitCount = [data.primaryWzTwoKit, data.secondaryWzTwoKit].filter(
+				(kit) => Boolean(kit) && Object.keys(kit || {}).length > 0,
+			).length;
 
-      if (kitCount > 1) {
-        showItem();
-      }
-    }
+			if (kitCount > 1) {
+				showItem();
+			}
+		}
 
-    return () => clearTimeout(timeout);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, activeKit]);
+		return () => clearTimeout(timeout);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [data, activeKit]);
 
-  if (!data) return null;
+	if (!data) return null;
 
-  const hasAKitSelected =
-    Object.keys(data.primaryWzTwoKit || {}).length > 0 ||
-    Object.keys(data.secondaryWzTwoKit || {}).length > 0;
-  const isRendered = data.isOverlayVisible && hasAKitSelected;
-  const isOverlayVisible = Boolean(previewWidth) || isRendered;
+	const hasAKitSelected =
+		Object.keys(data.primaryWzTwoKit || {}).length > 0 ||
+		Object.keys(data.secondaryWzTwoKit || {}).length > 0;
+	const isRendered = data.isOverlayVisible && hasAKitSelected;
+	const isOverlayVisible = Boolean(previewWidth) || isRendered;
 
-  return (
-    <ThemeProvider
-      theme={{
-        ...data,
-        isOverlayVisible: isOverlayVisible && hasAKitSelected,
-        previewWidth,
-      }}
-    >
-      <VisibilityController opacitySwap={OPACITY_TIMER}>
-        <BackgroundArt />
-        <Main>
-          <Meta isDataVisible={isDataVisible} opacitySwap={OPACITY_TIMER}>
-            <BaseName>{activeKit?.base?.displayName}</BaseName>
-            <CommandInfo>
-              kittr.gg | !{activeKit?.base?.commandCodes[0].code}
-            </CommandInfo>
-          </Meta>
-          <OptionsWrapper
-            isDataVisible={isDataVisible}
-            numOfItems={activeKit?.options?.length || 0}
-            opacitySwap={OPACITY_TIMER}
-          >
-            <Options
-              duration={SWAP_TIMER}
-              numOfItems={activeKit?.options?.length || 0}
-            >
-              {(Object.keys(activeKit ?? {}) ?? []).length > 0 &&
-                customOrderArray<WarzoneKitOption | WarzoneTwoKitOption>({
-                  sortingArray: warzoneSlotsOrder,
-                  keyToSort: 'slotKey',
-                  array: activeKit.options || [],
-                }).map((elem) => (
-                  <div
-                    key={elem.displayName}
-                    style={{ width: '200px', minWidth: '200px' }}
-                  >
-                    <Slot>{elem.slotKey}</Slot>
-                    <Selection>{elem.displayName.toUpperCase()}</Selection>
-                  </div>
-                ))}
-            </Options>
-          </OptionsWrapper>
-        </Main>
-      </VisibilityController>
-    </ThemeProvider>
-  );
+	return (
+		<ThemeProvider
+			theme={{
+				...data,
+				isOverlayVisible: isOverlayVisible && hasAKitSelected,
+				previewWidth,
+			}}
+		>
+			<VisibilityController opacitySwap={OPACITY_TIMER}>
+				<BackgroundArt />
+				<Main>
+					<Meta isDataVisible={isDataVisible} opacitySwap={OPACITY_TIMER}>
+						<BaseName>{activeKit?.base?.displayName}</BaseName>
+						<CommandInfo>
+							kittr.gg | !{activeKit?.base?.commandCodes[0].code}
+						</CommandInfo>
+					</Meta>
+					<OptionsWrapper
+						isDataVisible={isDataVisible}
+						numOfItems={activeKit?.options?.length || 0}
+						opacitySwap={OPACITY_TIMER}
+					>
+						<Options
+							duration={SWAP_TIMER}
+							numOfItems={activeKit?.options?.length || 0}
+						>
+							{(Object.keys(activeKit ?? {}) ?? []).length > 0 &&
+								customOrderArray<WarzoneKitOption | WarzoneTwoKitOption>({
+									sortingArray: warzoneSlotsOrder,
+									keyToSort: 'slotKey',
+									array: activeKit.options || [],
+								}).map((elem) => (
+									<div
+										key={elem.displayName}
+										style={{ width: '200px', minWidth: '200px' }}
+									>
+										<Slot>{elem.slotKey}</Slot>
+										<Selection>{elem.displayName.toUpperCase()}</Selection>
+									</div>
+								))}
+						</Options>
+					</OptionsWrapper>
+				</Main>
+			</VisibilityController>
+		</ThemeProvider>
+	);
 }
 
 export default Banner;
@@ -144,9 +144,9 @@ const VisibilityController = styled.div<{ opacitySwap: number }>`
   background-repeat: no-repeat;
   opacity: ${(props) => (props.theme.isOverlayVisible ? 1 : 0)};
   transform: ${(props) =>
-    props.theme.previewWidth
-      ? `scale(${Math.min(1, props.theme.previewWidth / 1500)})`
-      : ''};
+		props.theme.previewWidth
+			? `scale(${Math.min(1, props.theme.previewWidth / 1500)})`
+			: ''};
 `;
 
 const BackgroundArt = styled.div`
@@ -158,7 +158,7 @@ const BackgroundArt = styled.div`
   height: 90%;
   text-align: center;
   background-color: ${(props) =>
-    props.theme.backgroundColorSecondary ?? colors.darker};
+		props.theme.backgroundColorSecondary ?? colors.darker};
   clip-path: polygon(6% 0, 94% 0, 100% 100%, 0% 100%);
 `;
 
@@ -172,13 +172,13 @@ const Main = styled.div`
   margin: 0 auto;
   padding: 0 6%;
   background: ${(props) =>
-    props.theme.customBackground
-      ? ''
-      : props.theme.backgroundColorPrimary ?? colors.lightest};
+		props.theme.customBackground
+			? ''
+			: props.theme.backgroundColorPrimary ?? colors.lightest};
   clip-path: ${(props) =>
-    props.theme.customBackground
-      ? ''
-      : 'polygon(6% 0, 94% 0, 100% 100%, 0% 100%)'};
+		props.theme.customBackground
+			? ''
+			: 'polygon(6% 0, 94% 0, 100% 100%, 0% 100%)'};
 `;
 
 const Meta = styled.div<{ isDataVisible: boolean; opacitySwap: number }>`
@@ -205,16 +205,16 @@ const CommandInfo = styled.p`
 `;
 
 const OptionsWrapper = styled.div<{
-  numOfItems: number;
-  isDataVisible: boolean;
-  opacitySwap: number;
+	numOfItems: number;
+	isDataVisible: boolean;
+	opacitySwap: number;
 }>`
   flex: 0.95;
   overflow: hidden;
   mask-image: ${(props) =>
-    props.numOfItems > 5
-      ? 'linear-gradient(to left, transparent 0%, black 5%, black 95%, transparent 100%)'
-      : ''};
+		props.numOfItems > 5
+			? 'linear-gradient(to left, transparent 0%, black 5%, black 95%, transparent 100%)'
+			: ''};
   opacity: ${(props) => (props.isDataVisible ? 1 : 0)};
   transition: ${(props) => props.opacitySwap / 10}s;
 `;

@@ -8,64 +8,64 @@ import type { CSSProperties, ReactNode } from 'react';
 import styled from 'styled-components';
 
 interface Props {
-  /** Title to show at the top of the modal. */
-  title?: ReactNode | string;
-  /** Should the modal close if you click on the background dimmer? */
-  backgroundClickToClose?: boolean;
-  /** An optional function to call when the user clicks the X or clicks the background to close it.  */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onUserClose?: (...args: any) => any;
-  /** React children to use as the content of the modal. */
-  children: ReactNode;
-  /** Styles to pass to the body of the modal. */
-  style?: CSSProperties;
+	/** Title to show at the top of the modal. */
+	title?: ReactNode | string;
+	/** Should the modal close if you click on the background dimmer? */
+	backgroundClickToClose?: boolean;
+	/** An optional function to call when the user clicks the X or clicks the background to close it.  */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	onUserClose?: (...args: any) => any;
+	/** React children to use as the content of the modal. */
+	children: ReactNode;
+	/** Styles to pass to the body of the modal. */
+	style?: CSSProperties;
 }
 
 /** Modal utility to be used throughout the app. Comes with a built-in background dimmer to automatically give the view depth. */
 export function Modal({
-  title,
-  backgroundClickToClose,
-  onUserClose,
-  children,
-  style,
+	title,
+	backgroundClickToClose,
+	onUserClose,
+	children,
+	style,
 }: Props) {
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-  return (
-    <FullScreen
-      onClick={() => {
-        if (backgroundClickToClose) {
-          onUserClose
-            ? onUserClose()
-            : dispatch(setModal({ type: '', data: {} }));
-        }
-      }}
-      style={{
-        zIndex: 100,
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'rgba(29,29,31,.8)',
-        cursor: backgroundClickToClose ? 'pointer' : 'default',
-      }}
-    >
-      <Body onClick={(e) => e.stopPropagation()} style={style}>
-        <Xtainer
-          data-cy="modal-x-close"
-          onClick={
-            onUserClose || (() => dispatch(setModal({ type: '', data: {} })))
-          }
-        >
-          <SVG.X fill={colors.light} width="24px" />
-        </Xtainer>
-        <PositionHelper>
-          <Title>{title}</Title>
-          {children}
-        </PositionHelper>
-      </Body>
-    </FullScreen>
-  );
+	return (
+		<FullScreen
+			onClick={() => {
+				if (backgroundClickToClose) {
+					onUserClose
+						? onUserClose()
+						: dispatch(setModal({ type: '', data: {} }));
+				}
+			}}
+			style={{
+				zIndex: 100,
+				display: 'flex',
+				flexDirection: 'row',
+				justifyContent: 'center',
+				alignItems: 'center',
+				backgroundColor: 'rgba(29,29,31,.8)',
+				cursor: backgroundClickToClose ? 'pointer' : 'default',
+			}}
+		>
+			<Body onClick={(e) => e.stopPropagation()} style={style}>
+				<Xtainer
+					data-cy="modal-x-close"
+					onClick={
+						onUserClose || (() => dispatch(setModal({ type: '', data: {} })))
+					}
+				>
+					<SVG.X fill={colors.light} width="24px" />
+				</Xtainer>
+				<PositionHelper>
+					<Title>{title}</Title>
+					{children}
+				</PositionHelper>
+			</Body>
+		</FullScreen>
+	);
 }
 
 export default Modal;

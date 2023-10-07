@@ -12,138 +12,138 @@ const Container = styled.div`
 type FormState = WarzoneTwoKitOption;
 
 interface Props {
-  initialValues: Partial<FormState> | null;
-  onFinished: () => void;
+	initialValues: Partial<FormState> | null;
+	onFinished: () => void;
 }
 
 export const KitBaseOptionForm = ({ initialValues, onFinished }: Props) => {
-  const { mutate: updateOption } =
-    trpc.admin.warzone2.kitBases.options.update.useMutation();
-  const { mutate: createOption } =
-    trpc.admin.warzone2.kitBases.options.create.useMutation();
-  const { mutate: deleteOption } =
-    trpc.admin.warzone2.kitBases.options.delete.useMutation();
+	const { mutate: updateOption } =
+		trpc.admin.warzone2.kitBases.options.update.useMutation();
+	const { mutate: createOption } =
+		trpc.admin.warzone2.kitBases.options.create.useMutation();
+	const { mutate: deleteOption } =
+		trpc.admin.warzone2.kitBases.options.delete.useMutation();
 
-  const [formValues, setFormValues] = useState<Partial<FormState>>(
-    initialValues || {},
-  );
+	const [formValues, setFormValues] = useState<Partial<FormState>>(
+		initialValues || {},
+	);
 
-  const changeTextField = (key: keyof FormState) => (e: any) => {
-    setFormValues((formValues) => ({ ...formValues, [key]: e.target.value }));
-  };
+	const changeTextField = (key: keyof FormState) => (e: any) => {
+		setFormValues((formValues) => ({ ...formValues, [key]: e.target.value }));
+	};
 
-  const changeNumberField = (key: keyof FormState) => (e: any) => {
-    setFormValues((formValues) => ({ ...formValues, [key]: e }));
-  };
+	const changeNumberField = (key: keyof FormState) => (e: any) => {
+		setFormValues((formValues) => ({ ...formValues, [key]: e }));
+	};
 
-  // console.log(option)
+	// console.log(option)
 
-  return (
-    <SubSection
-      title={
-        initialValues?.id
-          ? `Editing Kit Base Option: ${initialValues?.displayName}`
-          : 'Creating Kit Base Option'
-      }
-      action={
-        <>
-          {initialValues?.id && (
-            <Text color="gray">Option ID: {initialValues.id}</Text>
-          )}
-          {initialValues?.kitBaseId && (
-            <Text color="gray">Base ID: {initialValues.kitBaseId}</Text>
-          )}
-          {initialValues?.gameId && (
-            <Text color="gray">Game ID: {initialValues.gameId}</Text>
-          )}
-        </>
-      }
-    >
-      <Container>
-        <TextInput
-          label="Display Name"
-          placeholder="Display Name"
-          value={formValues.displayName}
-          onChange={changeTextField('displayName')}
-        />
-      </Container>
+	return (
+		<SubSection
+			title={
+				initialValues?.id
+					? `Editing Kit Base Option: ${initialValues?.displayName}`
+					: 'Creating Kit Base Option'
+			}
+			action={
+				<>
+					{initialValues?.id && (
+						<Text color="gray">Option ID: {initialValues.id}</Text>
+					)}
+					{initialValues?.kitBaseId && (
+						<Text color="gray">Base ID: {initialValues.kitBaseId}</Text>
+					)}
+					{initialValues?.gameId && (
+						<Text color="gray">Game ID: {initialValues.gameId}</Text>
+					)}
+				</>
+			}
+		>
+			<Container>
+				<TextInput
+					label="Display Name"
+					placeholder="Display Name"
+					value={formValues.displayName}
+					onChange={changeTextField('displayName')}
+				/>
+			</Container>
 
-      <Container>
-        <NumberInput
-          label="Order Placement"
-          placeholder="Order Placement"
-          type="number"
-          value={formValues.orderPlacement}
-          onChange={changeNumberField('orderPlacement')}
-        />
-      </Container>
+			<Container>
+				<NumberInput
+					label="Order Placement"
+					placeholder="Order Placement"
+					type="number"
+					value={formValues.orderPlacement}
+					onChange={changeNumberField('orderPlacement')}
+				/>
+			</Container>
 
-      <Container>
-        <TextInput
-          label="Slot Key"
-          placeholder="Slot Key"
-          value={formValues.slotKey}
-          onChange={changeTextField('slotKey')}
-        />
-      </Container>
+			<Container>
+				<TextInput
+					label="Slot Key"
+					placeholder="Slot Key"
+					value={formValues.slotKey}
+					onChange={changeTextField('slotKey')}
+				/>
+			</Container>
 
-      <div>
-        <Button
-          variant="outline"
-          onClick={onFinished}
-          style={{ margin: '1rem 1rem 0rem 0rem' }}
-        >
-          Cancel
-        </Button>
-        <Button
-          variant="filled"
-          style={{ margin: '1rem 1rem 0rem 0rem' }}
-          onClick={() => {
-            if (formValues.id) {
-              updateOption(formValues as FormState, {
-                onSuccess: onFinished,
-              });
-            } else {
-              if (!formValues.kitBaseId) {
-                console.error(
-                  'You must create the kit first before adding options! We need the kitBaseId to associate them! :)',
-                );
-              } else {
-                console.log({
-                  baseId: formValues.kitBaseId,
-                  option: formValues,
-                });
-                createOption(
-                  {
-                    baseId: formValues.kitBaseId,
-                    option: formValues as FormState,
-                  },
-                  {
-                    onSuccess: onFinished,
-                  },
-                );
-              }
-            }
-          }}
-        >
-          Save
-        </Button>
-        {formValues?.id && (
-          <Button
-            color="red"
-            onClick={() => {
-              deleteOption(
-                { optionId: formValues.id! },
-                {
-                  onSuccess: onFinished,
-                },
-              );
-            }}
-          >
-            Delete
-          </Button>
-        )}
-      </div>
-    </SubSection>
-  );
+			<div>
+				<Button
+					variant="outline"
+					onClick={onFinished}
+					style={{ margin: '1rem 1rem 0rem 0rem' }}
+				>
+					Cancel
+				</Button>
+				<Button
+					variant="filled"
+					style={{ margin: '1rem 1rem 0rem 0rem' }}
+					onClick={() => {
+						if (formValues.id) {
+							updateOption(formValues as FormState, {
+								onSuccess: onFinished,
+							});
+						} else {
+							if (!formValues.kitBaseId) {
+								console.error(
+									'You must create the kit first before adding options! We need the kitBaseId to associate them! :)',
+								);
+							} else {
+								console.log({
+									baseId: formValues.kitBaseId,
+									option: formValues,
+								});
+								createOption(
+									{
+										baseId: formValues.kitBaseId,
+										option: formValues as FormState,
+									},
+									{
+										onSuccess: onFinished,
+									},
+								);
+							}
+						}
+					}}
+				>
+					Save
+				</Button>
+				{formValues?.id && (
+					<Button
+						color="red"
+						onClick={() => {
+							deleteOption(
+								{ optionId: formValues.id! },
+								{
+									onSuccess: onFinished,
+								},
+							);
+						}}
+					>
+						Delete
+					</Button>
+				)}
+			</div>
+		</SubSection>
+	);
 };

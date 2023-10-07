@@ -3,29 +3,29 @@ import { SVG } from '@Components/shared';
 import styled from 'styled-components';
 
 function PremiumCallout({ ...props }) {
-  return (
-    <Container>
-      <SVG.Premium
-        style={{
-          position: 'absolute',
-          transform: 'translateY(-50%)',
-          top: '50%',
-          right: '5%',
-          height: '150px',
-          opacity: 0.3,
-        }}
-        width="100px"
-      />
-      <p>
-        Looking for Recent Clips, Recent Channels, Schedule, Specs, and
-        Affiliates for this channel?
-      </p>
-      <p>
-        If you are a manager of this channel, visit the channel's Dashboard to
-        upgrade to <strong>Premium</strong>.
-      </p>
-    </Container>
-  );
+	return (
+		<Container>
+			<SVG.Premium
+				style={{
+					position: 'absolute',
+					transform: 'translateY(-50%)',
+					top: '50%',
+					right: '5%',
+					height: '150px',
+					opacity: 0.3,
+				}}
+				width="100px"
+			/>
+			<p>
+				Looking for Recent Clips, Recent Channels, Schedule, Specs, and
+				Affiliates for this channel?
+			</p>
+			<p>
+				If you are a manager of this channel, visit the channel's Dashboard to
+				upgrade to <strong>Premium</strong>.
+			</p>
+		</Container>
+	);
 }
 
 export default PremiumCallout;

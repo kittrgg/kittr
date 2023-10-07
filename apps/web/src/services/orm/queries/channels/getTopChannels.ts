@@ -1,17 +1,17 @@
 import { Prisma, prisma } from '@kittr/prisma';
 
 export const ChannelWithIncludes = Prisma.validator<Prisma.ChannelArgs>()({
-  include: {
-    profile: true,
-    links: true,
-  },
+	include: {
+		profile: true,
+		links: true,
+	},
 });
 
 export type TChannelWithIncludes = typeof ChannelWithIncludes;
 
 interface Params {
-  limit: number;
-  skip: number;
+	limit: number;
+	skip: number;
 }
 
 /**
@@ -20,21 +20,21 @@ interface Params {
  * Get channels that are on the platform. Accepts parameters for limit and skip.
  */
 export const getTopChannelsQuery = async (params: Params) => {
-  const result = await prisma.channel.findMany({
-    orderBy: {
-      viewCount: 'desc',
-    },
-    skip: params.skip,
-    take: params.limit,
-    include: {
-      profile: true,
-      links: true,
-    },
-  });
+	const result = await prisma.channel.findMany({
+		orderBy: {
+			viewCount: 'desc',
+		},
+		skip: params.skip,
+		take: params.limit,
+		include: {
+			profile: true,
+			links: true,
+		},
+	});
 
-  return result;
+	return result;
 };
 
 export type getTopChannelsQueryReturnType = Prisma.PromiseReturnType<
-  typeof getTopChannelsQuery
+	typeof getTopChannelsQuery
 >;

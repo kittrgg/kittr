@@ -9,62 +9,62 @@ import validator from 'validator';
 import BackToLogin from './BackToLogin';
 
 interface Props {
-  setStep: Dispatch<SetStateAction<number>>;
+	setStep: Dispatch<SetStateAction<number>>;
 }
 
 /** Within the forgot password user flow, the step for submitting your email. */
 function EmailInput({ setStep }: Props) {
-  const [email, setEmail] = useState('');
-  const [error, setError] = useState('');
+	const [email, setEmail] = useState('');
+	const [error, setError] = useState('');
 
-  const handleClick = async (e: FormEvent) => {
-    e.preventDefault();
+	const handleClick = async (e: FormEvent) => {
+		e.preventDefault();
 
-    if (!validator.isEmail(email))
-      return setError('Must be a valid email address.');
+		if (!validator.isEmail(email))
+			return setError('Must be a valid email address.');
 
-    requestForgotPassword(email)
-      .then(() => setStep(2))
-      .catch((err) => console.error(err));
-  };
+		requestForgotPassword(email)
+			.then(() => setStep(2))
+			.catch((err) => console.error(err));
+	};
 
-  return (
-    <>
-      <FormParagraph>
-        Enter the email address associated with your account and we will send
-        you a message with instructions to reset your password.
-      </FormParagraph>
-      <FormBody>
-        <div style={{ width: '60%' }}>
-          <TextInput
-            label="Email"
-            name="email"
-            onChange={(e) => {
-              setError('');
-              setEmail(e.target.value);
-            }}
-            subline={error}
-            sublineStyles={{ color: colors.red }}
-            topLabel
-            type="email"
-            value={email}
-            width="100%"
-          />
-        </div>
-        <Button
-          design="white"
-          disabled={Boolean(error)}
-          onClick={handleClick}
-          style={{
-            marginTop: '24px',
-            backgroundColor: error ? colors.red : '',
-          }}
-          text="Send Email"
-        />
-      </FormBody>
-      <BackToLogin />
-    </>
-  );
+	return (
+		<>
+			<FormParagraph>
+				Enter the email address associated with your account and we will send
+				you a message with instructions to reset your password.
+			</FormParagraph>
+			<FormBody>
+				<div style={{ width: '60%' }}>
+					<TextInput
+						label="Email"
+						name="email"
+						onChange={(e) => {
+							setError('');
+							setEmail(e.target.value);
+						}}
+						subline={error}
+						sublineStyles={{ color: colors.red }}
+						topLabel
+						type="email"
+						value={email}
+						width="100%"
+					/>
+				</div>
+				<Button
+					design="white"
+					disabled={Boolean(error)}
+					onClick={handleClick}
+					style={{
+						marginTop: '24px',
+						backgroundColor: error ? colors.red : '',
+					}}
+					text="Send Email"
+				/>
+			</FormBody>
+			<BackToLogin />
+		</>
+	);
 }
 
 export default EmailInput;

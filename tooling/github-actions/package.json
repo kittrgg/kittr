@@ -1,24 +1,22 @@
 {
-  "name": "@kittr/github-actions",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "format": "prettier . --check --cache --cache-location=\"node_modules/.cache/prettiercache\"",
-    "format:fix": "prettier . --write --cache --cache-location=\"node_modules/.cache/prettiercache\" --log-level=warn",
-    "lint": "eslint . --cache --cache-location \"node_modules/.cache/.eslintcache\" --max-warnings 0",
-    "lint:fix": "eslint . --fix --cache --cache-location \"node_modules/.cache/.eslintcache\" --max-warnings 0",
-    "typecheck": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@actions/core": "^1.10.0",
-    "@actions/exec": "^1.1.1",
-    "@actions/github": "^5.1.1"
-  },
-  "devDependencies": {
-    "@kittr/lint": "workspace:*",
-    "@kittr/tsconfig": "workspace:*",
-    "eslint": "^8.42.0",
-    "typescript": "^5.2.2",
-    "vite-node": "0.30.0"
-  }
+	"name": "@kittr/github-actions",
+	"version": "1.0.0",
+	"private": true,
+	"scripts": {
+		"lint": "eslint . --cache --cache-location \"node_modules/.cache/.eslintcache\" --max-warnings 0",
+		"lint:fix": "eslint . --fix --cache --cache-location \"node_modules/.cache/.eslintcache\" --max-warnings 0",
+		"typecheck": "tsc --noEmit"
+	},
+	"dependencies": {
+		"@actions/core": "^1.10.0",
+		"@actions/exec": "^1.1.1",
+		"@actions/github": "^5.1.1"
+	},
+	"devDependencies": {
+		"@kittr/lint": "workspace:*",
+		"@kittr/tsconfig": "workspace:*",
+		"eslint": "^8.42.0",
+		"typescript": "^5.2.2",
+		"vite-node": "0.30.0"
+	}
 }

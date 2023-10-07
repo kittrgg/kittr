@@ -16,12 +16,12 @@ export const LinkButton = styled.a<{ design?: string }>`
   margin-top: 32px;
   padding: 20px 32px;
   color: ${(props) =>
-    props.design === 'transparent' ? colors.white : colors.dark};
+		props.design === 'transparent' ? colors.white : colors.dark};
   border-radius: 20px;
   border: ${(props) =>
-    props.design == 'transparent' ? `2px solid ${colors.white}` : ''};
+		props.design == 'transparent' ? `2px solid ${colors.white}` : ''};
   background-color: ${(props) =>
-    props.design === 'transparent' ? 'transparent' : colors.white};
+		props.design === 'transparent' ? 'transparent' : colors.white};
   text-decoration: none;
   ${paragraph};
   font-weight: 600;

@@ -21,60 +21,60 @@ const P = styled.p`
 `;
 
 function KitsPlaceholder() {
-  const dispatch = useDispatch();
-  const buttonRef = useRef() as MutableRefObject<HTMLButtonElement>;
-  const modal = useModal();
+	const dispatch = useDispatch();
+	const buttonRef = useRef() as MutableRefObject<HTMLButtonElement>;
+	const modal = useModal();
 
-  useEffect(() => {
-    if (modal.data?.page === 6 && buttonRef && buttonRef.current) {
-      dispatch(
-        setModal({
-          type: 'Tutorial',
-          data: {
-            page: modal.data.page,
-            ref: buttonRef.current.getBoundingClientRect().top * 0.4,
-          },
-        }),
-      );
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [buttonRef, buttonRef.current, modal.data?.page]);
+	useEffect(() => {
+		if (modal.data?.page === 6 && buttonRef && buttonRef.current) {
+			dispatch(
+				setModal({
+					type: 'Tutorial',
+					data: {
+						page: modal.data.page,
+						ref: buttonRef.current.getBoundingClientRect().top * 0.4,
+					},
+				}),
+			);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [buttonRef, buttonRef.current, modal.data?.page]);
 
-  return (
-    <Container>
-      <img
-        alt=""
-        height={200}
-        src="/media/logo-no-text-square.svg"
-        width={200}
-      />
-      <P>No kits added yet...</P>
-      <Button
-        buttonRef={buttonRef}
-        dataCy="create-first-kit"
-        design="white"
-        onClick={() => {
-          if (modal.type === 'Tutorial') {
-            dispatch(
-              setModal({
-                type: 'Tutorial',
-                data: { page: modal.data?.page + 1 },
-              }),
-            );
-            dispatch(createNewKit());
-          } else {
-            dispatch(createNewKit());
-          }
-        }}
-        style={
-          modal.data?.page === 6
-            ? { position: 'relative', zIndex: 101 }
-            : undefined
-        }
-        text="+ Create New"
-      />
-    </Container>
-  );
+	return (
+		<Container>
+			<img
+				alt=""
+				height={200}
+				src="/media/logo-no-text-square.svg"
+				width={200}
+			/>
+			<P>No kits added yet...</P>
+			<Button
+				buttonRef={buttonRef}
+				dataCy="create-first-kit"
+				design="white"
+				onClick={() => {
+					if (modal.type === 'Tutorial') {
+						dispatch(
+							setModal({
+								type: 'Tutorial',
+								data: { page: modal.data?.page + 1 },
+							}),
+						);
+						dispatch(createNewKit());
+					} else {
+						dispatch(createNewKit());
+					}
+				}}
+				style={
+					modal.data?.page === 6
+						? { position: 'relative', zIndex: 101 }
+						: undefined
+				}
+				text="+ Create New"
+			/>
+		</Container>
+	);
 }
 
 export default KitsPlaceholder;

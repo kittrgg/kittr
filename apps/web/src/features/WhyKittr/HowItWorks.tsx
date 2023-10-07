@@ -5,58 +5,58 @@ import * as Styled from './style';
 import CallToAction from './CallToAction';
 
 const STEPS = [
-  {
-    title: 'STEP 1: CREATE YOUR KITS',
-    titleHelper: '5-13 minutes',
-    image: '/media/kit-editor-example.png',
-    imageWidth: 1679,
-    imageHeight: 977,
-    border: true,
-  },
-  {
-    title: 'STEP 2: UPDATE YOUR COMMANDS',
-    titleHelper: '2-4 minutes',
-    image: '/media/export-commands-example.jpg',
-    imageWidth: 1440,
-    imageHeight: 1022,
-    border: true,
-  },
-  {
-    title: 'STEP 3: TURN THE CHANNEL ON',
-    titleHelper: '!loadouts',
-    image: '/media/kit-stack.png',
-    imageWidth: 1440,
-    imageHeight: 1022,
-    border: false,
-  },
+	{
+		title: 'STEP 1: CREATE YOUR KITS',
+		titleHelper: '5-13 minutes',
+		image: '/media/kit-editor-example.png',
+		imageWidth: 1679,
+		imageHeight: 977,
+		border: true,
+	},
+	{
+		title: 'STEP 2: UPDATE YOUR COMMANDS',
+		titleHelper: '2-4 minutes',
+		image: '/media/export-commands-example.jpg',
+		imageWidth: 1440,
+		imageHeight: 1022,
+		border: true,
+	},
+	{
+		title: 'STEP 3: TURN THE CHANNEL ON',
+		titleHelper: '!loadouts',
+		image: '/media/kit-stack.png',
+		imageWidth: 1440,
+		imageHeight: 1022,
+		border: false,
+	},
 ];
 
 function HowItWorks() {
-  return (
-    <section style={{ maxWidth: '1000px', margin: '0 auto' }}>
-      <Styled.H2>HOW IT WORKS</Styled.H2>
-      {STEPS.map((step) => (
-        <StepContainer key={step.title}>
-          <StepHeaderFlex>
-            <StepHeader>{step.title}</StepHeader>
-            <StepHeaderHelper>{step.titleHelper}</StepHeaderHelper>
-          </StepHeaderFlex>
-          <StepImageContainer border={step.border}>
-            <img
-              alt=""
-              src={step.image}
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            />
-          </StepImageContainer>
-        </StepContainer>
-      ))}
-      <CallToAction
-        header="start sharing today."
-        marginBottom="48px"
-        marginTop="60px"
-      />
-    </section>
-  );
+	return (
+		<section style={{ maxWidth: '1000px', margin: '0 auto' }}>
+			<Styled.H2>HOW IT WORKS</Styled.H2>
+			{STEPS.map((step) => (
+				<StepContainer key={step.title}>
+					<StepHeaderFlex>
+						<StepHeader>{step.title}</StepHeader>
+						<StepHeaderHelper>{step.titleHelper}</StepHeaderHelper>
+					</StepHeaderFlex>
+					<StepImageContainer border={step.border}>
+						<img
+							alt=""
+							src={step.image}
+							style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+						/>
+					</StepImageContainer>
+				</StepContainer>
+			))}
+			<CallToAction
+				header="start sharing today."
+				marginBottom="48px"
+				marginTop="60px"
+			/>
+		</section>
+	);
 }
 
 export default HowItWorks;
@@ -101,6 +101,6 @@ const StepImageContainer = styled.div<{ border: boolean }>`
   margin: 36px auto;
   overflow: hidden;
   box-shadow: ${(props) =>
-    props.border ? '0 0 0 10px rgba(255,255,255, .05)' : ''};
+		props.border ? '0 0 0 10px rgba(255,255,255, .05)' : ''};
   border-radius: 12px;
 `;

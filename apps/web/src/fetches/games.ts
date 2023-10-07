@@ -1,15 +1,15 @@
 import { prisma } from '@kittr/prisma';
 
 export const listGames = async () => {
-  const games = await prisma.game.findMany({
-    include: {
-      platforms: true,
-      genres: true,
-    },
-  });
+	const games = await prisma.game.findMany({
+		include: {
+			platforms: true,
+			genres: true,
+		},
+	});
 
-  return games;
+	return games;
 };
 
 export const getGameDisplayNameFromUrlSafeName = (urlSafeName: string) =>
-  prisma.game.findFirstOrThrow({ where: { urlSafeName } });
+	prisma.game.findFirstOrThrow({ where: { urlSafeName } });

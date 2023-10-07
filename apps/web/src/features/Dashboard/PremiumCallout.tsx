@@ -7,28 +7,28 @@ import { paragraph } from '@Styles/typography';
 import styled from 'styled-components';
 
 interface Props {
-  text: string;
+	text: string;
 }
 
 function PremiumCallout({ text }: Props) {
-  const dispatch = useDispatch();
-  const role = useManagerRole();
+	const dispatch = useDispatch();
+	const role = useManagerRole();
 
-  return (
-    <LearnMore
-      data-cy="premium-learn-more"
-      onClick={() => dispatch(setModal({ type: 'Premium Plans', data: {} }))}
-    >
-      <span>
-        <SVG.Premium
-          style={{ position: 'relative', top: '3px' }}
-          width="24px"
-        />
-        <Text>{text}</Text>
-      </span>
-      {role !== 'EDITOR' && <span>LEARN MORE</span>}
-    </LearnMore>
-  );
+	return (
+		<LearnMore
+			data-cy="premium-learn-more"
+			onClick={() => dispatch(setModal({ type: 'Premium Plans', data: {} }))}
+		>
+			<span>
+				<SVG.Premium
+					style={{ position: 'relative', top: '3px' }}
+					width="24px"
+				/>
+				<Text>{text}</Text>
+			</span>
+			{role !== 'EDITOR' && <span>LEARN MORE</span>}
+		</LearnMore>
+	);
 }
 
 export default PremiumCallout;

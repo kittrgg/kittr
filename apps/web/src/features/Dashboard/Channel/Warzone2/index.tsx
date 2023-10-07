@@ -14,38 +14,38 @@ import AffiliateCode from './AffiliateCode';
 
 /** The Warzone screen for a channel. */
 function Warzone2() {
-  const { gameId } = useChannelView();
-  const { data } = useDashboardChannel();
-  const modal = useSelector((state) => state.dashboard.modal.type);
-  const dispatch = useDispatch();
-  const gameInfo = data?.games.find((game) => game.id === gameId);
+	const { gameId } = useChannelView();
+	const { data } = useDashboardChannel();
+	const modal = useSelector((state) => state.dashboard.modal.type);
+	const dispatch = useDispatch();
+	const gameInfo = data?.games.find((game) => game.id === gameId);
 
-  if (gameInfo) {
-    return (
-      <>
-        {modal === 'Export Bot Commands' && <ExportBotCommands />}
-        <Container>
-          <ChannelTopBar />
-          <HeaderWrap>
-            <Header>{gameInfo.urlSafeName.toUpperCase()}</Header>
-            <HeaderContent>
-              <AffiliateCode />
-              <Button
-                design="transparent"
-                onClick={() =>
-                  dispatch(setModal({ type: 'Export Bot Commands', data: '' }))
-                }
-                text="EXPORT BOT COMMANDS"
-              />
-            </HeaderContent>
-          </HeaderWrap>
-          <Kits />
-        </Container>
-      </>
-    );
-  }
+	if (gameInfo) {
+		return (
+			<>
+				{modal === 'Export Bot Commands' && <ExportBotCommands />}
+				<Container>
+					<ChannelTopBar />
+					<HeaderWrap>
+						<Header>{gameInfo.urlSafeName.toUpperCase()}</Header>
+						<HeaderContent>
+							<AffiliateCode />
+							<Button
+								design="transparent"
+								onClick={() =>
+									dispatch(setModal({ type: 'Export Bot Commands', data: '' }))
+								}
+								text="EXPORT BOT COMMANDS"
+							/>
+						</HeaderContent>
+					</HeaderWrap>
+					<Kits />
+				</Container>
+			</>
+		);
+	}
 
-  return <p>How did you get here?</p>;
+	return <p>How did you get here?</p>;
 }
 
 export default Warzone2;

@@ -2,21 +2,21 @@ import colors from '@Colors';
 import styled from 'styled-components';
 
 interface Props {
-  label: string;
-  number: number;
+	label: string;
+	number: number;
 }
 
 function StatBar({ label, number }: Props) {
-  return (
-    <Container>
-      <FirstLine>
-        <Label>{label}</Label>
-        <Number>{number}</Number>
-      </FirstLine>
-      <BarBackground />
-      <BarFill number={number} />
-    </Container>
-  );
+	return (
+		<Container>
+			<FirstLine>
+				<Label>{label}</Label>
+				<Number>{number}</Number>
+			</FirstLine>
+			<BarBackground />
+			<BarFill number={number} />
+		</Container>
+	);
 }
 
 export default StatBar;

@@ -8,102 +8,102 @@ import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 interface ChannelWithProfile extends Channel {
-  profile: ChannelProfile;
+	profile: ChannelProfile;
 }
 
 interface ChannelWithLinks extends Channel {
-  links: ChannelLink[];
+	links: ChannelLink[];
 }
 
 interface Props {
-  /** Games available on the platform. Includes both active and inactive games. */
-  games?: Game[];
-  /** Top channels sorted by view count on kittr. */
-  popularChannels?: ChannelWithProfile[];
-  /** Channels who aren't quite in the top channels list
-   * but we want to give some recognition and visibility.
-   * */
-  risingStars?: ChannelWithProfile[];
-  liveChannels?: ChannelWithLinks[];
+	/** Games available on the platform. Includes both active and inactive games. */
+	games?: Game[];
+	/** Top channels sorted by view count on kittr. */
+	popularChannels?: ChannelWithProfile[];
+	/** Channels who aren't quite in the top channels list
+	 * but we want to give some recognition and visibility.
+	 * */
+	risingStars?: ChannelWithProfile[];
+	liveChannels?: ChannelWithLinks[];
 }
 
 /** Main content section of the home page. Games, channels, etc. */
 function Body({ games, popularChannels, risingStars, liveChannels }: Props) {
-  const router = useRouter();
+	const router = useRouter();
 
-  const routeChannel = (elem: Channel) =>
-    router.push(Routes.CHANNEL.createPath(elem.urlSafeName));
+	const routeChannel = (elem: Channel) =>
+		router.push(Routes.CHANNEL.createPath(elem.urlSafeName));
 
-  return (
-    <Container>
-      <Section
-        action={
-          <Link href={Routes.GAMES.LIST} legacyBehavior passHref>
-            <StyledLink>SEE ALL</StyledLink>
-          </Link>
-        }
-        title="GAMES"
-        transparent
-      >
-        <SideScroller>
-          {games ? (
-            <GameList
-              data={games}
-              onClick={(elem) =>
-                router.push(Routes.GAMES.createPath(elem.urlSafeName))
-              }
-            />
-          ) : null}
-        </SideScroller>
-      </Section>
+	return (
+		<Container>
+			<Section
+				action={
+					<Link href={Routes.GAMES.LIST} legacyBehavior passHref>
+						<StyledLink>SEE ALL</StyledLink>
+					</Link>
+				}
+				title="GAMES"
+				transparent
+			>
+				<SideScroller>
+					{games ? (
+						<GameList
+							data={games}
+							onClick={(elem) =>
+								router.push(Routes.GAMES.createPath(elem.urlSafeName))
+							}
+						/>
+					) : null}
+				</SideScroller>
+			</Section>
 
-      <SideScroller
-        action={
-          <Link href={Routes.CHANNEL.LIST} legacyBehavior passHref>
-            <StyledLink>SEE ALL</StyledLink>
-          </Link>
-        }
-        title="LIVE NOW"
-      >
-        {liveChannels ? (
-          <ChannelAvatarList
-            channels={liveChannels}
-            isLive
-            onClick={routeChannel}
-          />
-        ) : null}
-      </SideScroller>
+			<SideScroller
+				action={
+					<Link href={Routes.CHANNEL.LIST} legacyBehavior passHref>
+						<StyledLink>SEE ALL</StyledLink>
+					</Link>
+				}
+				title="LIVE NOW"
+			>
+				{liveChannels ? (
+					<ChannelAvatarList
+						channels={liveChannels}
+						isLive
+						onClick={routeChannel}
+					/>
+				) : null}
+			</SideScroller>
 
-      <SideScroller
-        action={
-          <Link href={Routes.CHANNEL.LIST} legacyBehavior passHref>
-            <StyledLink>SEE ALL</StyledLink>
-          </Link>
-        }
-        title="TRENDING CHANNELS"
-      >
-        {popularChannels ? (
-          <ChannelAvatarList
-            channels={popularChannels}
-            onClick={routeChannel}
-          />
-        ) : null}
-      </SideScroller>
+			<SideScroller
+				action={
+					<Link href={Routes.CHANNEL.LIST} legacyBehavior passHref>
+						<StyledLink>SEE ALL</StyledLink>
+					</Link>
+				}
+				title="TRENDING CHANNELS"
+			>
+				{popularChannels ? (
+					<ChannelAvatarList
+						channels={popularChannels}
+						onClick={routeChannel}
+					/>
+				) : null}
+			</SideScroller>
 
-      <SideScroller
-        action={
-          <Link href={Routes.CHANNEL.LIST} legacyBehavior passHref>
-            <StyledLink>SEE ALL</StyledLink>
-          </Link>
-        }
-        title="RISING STARS"
-      >
-        {risingStars ? (
-          <ChannelAvatarList channels={risingStars} onClick={routeChannel} />
-        ) : null}
-      </SideScroller>
-    </Container>
-  );
+			<SideScroller
+				action={
+					<Link href={Routes.CHANNEL.LIST} legacyBehavior passHref>
+						<StyledLink>SEE ALL</StyledLink>
+					</Link>
+				}
+				title="RISING STARS"
+			>
+				{risingStars ? (
+					<ChannelAvatarList channels={risingStars} onClick={routeChannel} />
+				) : null}
+			</SideScroller>
+		</Container>
+	);
 }
 
 export default Body;

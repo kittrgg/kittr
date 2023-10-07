@@ -7,34 +7,34 @@ import styled from 'styled-components';
 type DesignVariants = 'Big Square' | 'Small Circle';
 
 interface Props {
-  onChangeComplete: (color: string | null) => void;
-  defaultColor: string;
-  designVariant: DesignVariants;
+	onChangeComplete: (color: string | null) => void;
+	defaultColor: string;
+	designVariant: DesignVariants;
 }
 
 export function ColorPicker({
-  onChangeComplete,
-  defaultColor,
-  designVariant,
+	onChangeComplete,
+	defaultColor,
+	designVariant,
 }: Props) {
-  const [color, setColor] = useState<string | null>(defaultColor);
-  const debouncedColor = useDebounce(color, 500);
+	const [color, setColor] = useState<string | null>(defaultColor);
+	const debouncedColor = useDebounce(color, 500);
 
-  useDidMountEffect(() => {
-    if (debouncedColor && onChangeComplete) {
-      onChangeComplete(debouncedColor);
-    }
-  }, [debouncedColor]);
+	useDidMountEffect(() => {
+		if (debouncedColor && onChangeComplete) {
+			onChangeComplete(debouncedColor);
+		}
+	}, [debouncedColor]);
 
-  return (
-    <ColorInputWrapper designVariant={designVariant}>
-      <ColorInput
-        onChange={(e) => setColor(e.target.value)}
-        type="color"
-        value={defaultColor}
-      />
-    </ColorInputWrapper>
-  );
+	return (
+		<ColorInputWrapper designVariant={designVariant}>
+			<ColorInput
+				onChange={(e) => setColor(e.target.value)}
+				type="color"
+				value={defaultColor}
+			/>
+		</ColorInputWrapper>
+	);
 }
 
 export default ColorPicker;
@@ -61,8 +61,8 @@ const smallCircleCSS = `
 `;
 
 const designs = {
-  'Big Square': bigSquareCSS,
-  'Small Circle': smallCircleCSS,
+	'Big Square': bigSquareCSS,
+	'Small Circle': smallCircleCSS,
 };
 
 const ColorInputWrapper = styled.span<{ designVariant: DesignVariants }>`

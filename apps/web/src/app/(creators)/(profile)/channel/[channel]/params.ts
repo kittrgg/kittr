@@ -1,3 +1,3 @@
 export interface Params {
-  channel: string;
+	channel: string;
 }

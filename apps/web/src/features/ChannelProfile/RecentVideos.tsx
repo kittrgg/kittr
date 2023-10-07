@@ -7,60 +7,60 @@ import styled from 'styled-components';
 import { H2 } from './style';
 
 interface Props {
-  videos?: ITwitchVideo[];
-  coverPhotoPath: string;
-  profileImagePath: string;
-  hasProfileImage: boolean;
-  brandColor: string;
+	videos?: ITwitchVideo[];
+	coverPhotoPath: string;
+	profileImagePath: string;
+	hasProfileImage: boolean;
+	brandColor: string;
 }
 
 function RecentVideos({
-  videos,
-  coverPhotoPath,
-  profileImagePath,
-  hasProfileImage,
-  brandColor,
+	videos,
+	coverPhotoPath,
+	profileImagePath,
+	hasProfileImage,
+	brandColor,
 }: Props) {
-  // If channel doesn't have any videos.
-  if (videos?.length === 0) return null;
+	// If channel doesn't have any videos.
+	if (videos?.length === 0) return null;
 
-  return (
-    <section id="videos">
-      <H2>RECENT STREAMS</H2>
-      <SideScroller childMargin="10px" wrapperStyles={{ width: '100vw' }}>
-        {videos?.map((clip: any) => {
-          const month = getMonth(new Date(clip.created_at));
-          const day = getDate(new Date(clip.created_at));
-          const year = getYear(new Date(clip.created_at));
+	return (
+		<section id="videos">
+			<H2>RECENT STREAMS</H2>
+			<SideScroller childMargin="10px" wrapperStyles={{ width: '100vw' }}>
+				{videos?.map((clip: any) => {
+					const month = getMonth(new Date(clip.created_at));
+					const day = getDate(new Date(clip.created_at));
+					const year = getYear(new Date(clip.created_at));
 
-          return (
-            <ClipContainer
-              brandColor={brandColor}
-              href={clip.url}
-              image={coverPhotoPath}
-              key={clip.id}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <ProfileImageContainer>
-                <ProfileImage
-                  hasProfileImage={hasProfileImage}
-                  imagePath={profileImagePath}
-                />
-              </ProfileImageContainer>
-              <Duration>{clip.duration}</Duration>
-              <ViewCount>
-                {clip.view_count} {clip.view_count === 1 ? 'view' : 'views'}
-              </ViewCount>
-              <Timestamp>
-                {month}/{day}/{year}
-              </Timestamp>
-            </ClipContainer>
-          );
-        })}
-      </SideScroller>
-    </section>
-  );
+					return (
+						<ClipContainer
+							brandColor={brandColor}
+							href={clip.url}
+							image={coverPhotoPath}
+							key={clip.id}
+							rel="noopener noreferrer"
+							target="_blank"
+						>
+							<ProfileImageContainer>
+								<ProfileImage
+									hasProfileImage={hasProfileImage}
+									imagePath={profileImagePath}
+								/>
+							</ProfileImageContainer>
+							<Duration>{clip.duration}</Duration>
+							<ViewCount>
+								{clip.view_count} {clip.view_count === 1 ? 'view' : 'views'}
+							</ViewCount>
+							<Timestamp>
+								{month}/{day}/{year}
+							</Timestamp>
+						</ClipContainer>
+					);
+				})}
+			</SideScroller>
+		</section>
+	);
 }
 
 export default RecentVideos;

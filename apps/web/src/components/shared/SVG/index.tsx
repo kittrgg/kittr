@@ -33,55 +33,55 @@ import { Youtube as YOUTUBE } from './Youtube';
 export type SVGType = keyof typeof SVG;
 
 export const SVG = {
-  Carat,
-  Pencil,
-  X,
-  EmptyAvatar,
-  Star,
-  TrashCan,
-  QuestionMark,
-  CheckMark,
-  Renew,
-  Export,
-  Search,
-  Arrow,
-  Twitch: TWITCH,
-  TWITCH,
-  Twitter: TWITTER,
-  TWITTER,
-  Youtube: YOUTUBE,
-  YOUTUBE,
-  Instagram: INSTAGRAM,
-  INSTAGRAM,
-  Facebook: FACEBOOK,
-  FACEBOOK,
-  Discord: DISCORD,
-  DISCORD,
-  Tiktok: TIKTOK,
-  TIKTOK,
-  Patreon: PATREON,
-  PATREON,
-  QuotationMark,
-  Circle,
-  Line,
-  Premium,
-  PremiumWithCircle,
-  Link,
-  CogWheel,
-  List,
-  Clipboard,
+	Carat,
+	Pencil,
+	X,
+	EmptyAvatar,
+	Star,
+	TrashCan,
+	QuestionMark,
+	CheckMark,
+	Renew,
+	Export,
+	Search,
+	Arrow,
+	Twitch: TWITCH,
+	TWITCH,
+	Twitter: TWITTER,
+	TWITTER,
+	Youtube: YOUTUBE,
+	YOUTUBE,
+	Instagram: INSTAGRAM,
+	INSTAGRAM,
+	Facebook: FACEBOOK,
+	FACEBOOK,
+	Discord: DISCORD,
+	DISCORD,
+	Tiktok: TIKTOK,
+	TIKTOK,
+	Patreon: PATREON,
+	PATREON,
+	QuotationMark,
+	Circle,
+	Line,
+	Premium,
+	PremiumWithCircle,
+	Link,
+	CogWheel,
+	List,
+	Clipboard,
 };
 
 export default SVG;
 
 interface SVGByTypeProps {
-  type: SVGType;
-  colorHover?: string;
+	type: SVGType;
+	colorHover?: string;
 }
 
 export function SvgByType({
-  type,
-  ...props
+	type,
+	...props
 }: React.AllHTMLAttributes<any> & SVGByTypeProps) {
-  return createElement(SVG[type], props);
+	return createElement(SVG[type], props);
 }

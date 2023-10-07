@@ -9,130 +9,130 @@ import { useEffect, useRef, useState } from 'react';
 import styled, { keyframes, ThemeProvider } from 'styled-components';
 
 interface Props {
-  _id: string;
-  previewWidth?: number;
-  data?: RouterOutput['channels']['overlay']['get'];
-  activeKit: OverlayKit;
-  setActiveKit: Dispatch<SetStateAction<OverlayKit>>;
+	_id: string;
+	previewWidth?: number;
+	data?: RouterOutput['channels']['overlay']['get'];
+	activeKit: OverlayKit;
+	setActiveKit: Dispatch<SetStateAction<OverlayKit>>;
 }
 
 function BannerTicker({
-  _id,
-  previewWidth,
-  data,
-  activeKit,
-  setActiveKit,
+	_id,
+	previewWidth,
+	data,
+	activeKit,
+	setActiveKit,
 }: Props) {
-  const [isDataVisible, setIsDataVisible] = useState(true);
-  const optionsRef = useRef<any>(null);
+	const [isDataVisible, setIsDataVisible] = useState(true);
+	const optionsRef = useRef<any>(null);
 
-  const SCROLL_DURATION = (Object.keys(activeKit || {}) ?? []).length
-    ? activeKit.options.length * 4
-    : 0;
-  const FADE_DURATION = 0.2;
+	const SCROLL_DURATION = (Object.keys(activeKit || {}) ?? []).length
+		? activeKit.options.length * 4
+		: 0;
+	const FADE_DURATION = 0.2;
 
-  // Handle two kits at once
-  // Use a timeout to switch between multiple kits if needed
-  useEffect(() => {
-    let timeout: any = null;
+	// Handle two kits at once
+	// Use a timeout to switch between multiple kits if needed
+	useEffect(() => {
+		let timeout: any = null;
 
-    const delay = async (period: number) =>
-      await new Promise((resolve) => {
-        timeout = setTimeout(() => {
-          resolve(null);
-          clearTimeout(timeout);
-        }, period);
-      });
+		const delay = async (period: number) =>
+			await new Promise((resolve) => {
+				timeout = setTimeout(() => {
+					resolve(null);
+					clearTimeout(timeout);
+				}, period);
+			});
 
-    const showItem = async () => {
-      setIsDataVisible(true);
+		const showItem = async () => {
+			setIsDataVisible(true);
 
-      if (activeKit.options) {
-        await delay(SCROLL_DURATION * 1000);
-      }
+			if (activeKit.options) {
+				await delay(SCROLL_DURATION * 1000);
+			}
 
-      setIsDataVisible(false);
-      await delay(FADE_DURATION * 1000);
+			setIsDataVisible(false);
+			await delay(FADE_DURATION * 1000);
 
-      if (activeKit.id === data?.primaryWzTwoKit?.id) {
-        setActiveKit(data?.secondaryWzTwoKit as OverlayKit);
-      } else {
-        setActiveKit(data?.primaryWzTwoKit as OverlayKit);
-      }
-    };
+			if (activeKit.id === data?.primaryWzTwoKit?.id) {
+				setActiveKit(data?.secondaryWzTwoKit as OverlayKit);
+			} else {
+				setActiveKit(data?.primaryWzTwoKit as OverlayKit);
+			}
+		};
 
-    if (data) {
-      const kitCount = [data.primaryWzTwoKit, data.secondaryWzTwoKit].filter(
-        (kit) => Boolean(kit) && Object.keys(kit || {}).length > 0,
-      ).length;
+		if (data) {
+			const kitCount = [data.primaryWzTwoKit, data.secondaryWzTwoKit].filter(
+				(kit) => Boolean(kit) && Object.keys(kit || {}).length > 0,
+			).length;
 
-      if (kitCount > 1) {
-        showItem();
-      }
-    }
+			if (kitCount > 1) {
+				showItem();
+			}
+		}
 
-    return () => clearTimeout(timeout);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, activeKit]);
+		return () => clearTimeout(timeout);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [data, activeKit]);
 
-  if (!data) return null;
+	if (!data) return null;
 
-  const hasAKitSelected =
-    Object.keys(data.primaryWzTwoKit || {}).length > 0 ||
-    Object.keys(data.secondaryWzTwoKit || {}).length > 0;
-  const isRendered = data.isOverlayVisible && hasAKitSelected;
-  const isOverlayVisible = Boolean(previewWidth) || isRendered;
+	const hasAKitSelected =
+		Object.keys(data.primaryWzTwoKit || {}).length > 0 ||
+		Object.keys(data.secondaryWzTwoKit || {}).length > 0;
+	const isRendered = data.isOverlayVisible && hasAKitSelected;
+	const isOverlayVisible = Boolean(previewWidth) || isRendered;
 
-  return (
-    <ThemeProvider
-      theme={{
-        ...data,
-        isOverlayVisible: isOverlayVisible && hasAKitSelected,
-        previewWidth,
-      }}
-    >
-      <Wrapper>
-        <Meta>
-          <BaseName fadeDuration={FADE_DURATION} isDataVisible={isDataVisible}>
-            {activeKit?.base?.displayName}
-          </BaseName>
-          <CommandInfo
-            fadeDuration={FADE_DURATION}
-            isDataVisible={isDataVisible}
-          >
-            kittr.gg | !{activeKit?.base?.commandCodes[0].code}
-          </CommandInfo>
-        </Meta>
-        <OptionsWrapper>
-          <Options
-            duration={SCROLL_DURATION}
-            fadeDuration={FADE_DURATION}
-            isDataVisible={isDataVisible}
-            ref={optionsRef}
-            scrollValue={
-              optionsRef.current
-                ? optionsRef.current.scrollWidth -
-                  optionsRef.current.clientWidth
-                : 0
-            }
-          >
-            {activeKit
-              ? customOrderArray<{ slotKey: string; displayName: string }>({
-                  sortingArray: warzoneSlotsOrder,
-                  keyToSort: 'slotKey',
-                  array: activeKit.options || [],
-                }).map((elem: any, _: any) => (
-                  <Option key={elem.displayName}>
-                    <Slot>{elem.slotKey}</Slot>
-                    <Selection>{elem.displayName.toUpperCase()}</Selection>
-                  </Option>
-                ))
-              : null}
-          </Options>
-        </OptionsWrapper>
-      </Wrapper>
-    </ThemeProvider>
-  );
+	return (
+		<ThemeProvider
+			theme={{
+				...data,
+				isOverlayVisible: isOverlayVisible && hasAKitSelected,
+				previewWidth,
+			}}
+		>
+			<Wrapper>
+				<Meta>
+					<BaseName fadeDuration={FADE_DURATION} isDataVisible={isDataVisible}>
+						{activeKit?.base?.displayName}
+					</BaseName>
+					<CommandInfo
+						fadeDuration={FADE_DURATION}
+						isDataVisible={isDataVisible}
+					>
+						kittr.gg | !{activeKit?.base?.commandCodes[0].code}
+					</CommandInfo>
+				</Meta>
+				<OptionsWrapper>
+					<Options
+						duration={SCROLL_DURATION}
+						fadeDuration={FADE_DURATION}
+						isDataVisible={isDataVisible}
+						ref={optionsRef}
+						scrollValue={
+							optionsRef.current
+								? optionsRef.current.scrollWidth -
+								  optionsRef.current.clientWidth
+								: 0
+						}
+					>
+						{activeKit
+							? customOrderArray<{ slotKey: string; displayName: string }>({
+									sortingArray: warzoneSlotsOrder,
+									keyToSort: 'slotKey',
+									array: activeKit.options || [],
+							  }).map((elem: any, _: any) => (
+									<Option key={elem.displayName}>
+										<Slot>{elem.slotKey}</Slot>
+										<Selection>{elem.displayName.toUpperCase()}</Selection>
+									</Option>
+							  ))
+							: null}
+					</Options>
+				</OptionsWrapper>
+			</Wrapper>
+		</ThemeProvider>
+	);
 }
 
 export default BannerTicker;
@@ -152,13 +152,13 @@ const Wrapper = styled.div`
   opacity: ${(props) => (props.theme.isOverlayVisible ? 1 : 0)};
   transition: 0.4s;
   background-color: ${(props) =>
-    props.theme.customBackground
-      ? props.theme.customBackground
-      : props.theme.backgroundColorPrimary ?? colors.lightest};
+		props.theme.customBackground
+			? props.theme.customBackground
+			: props.theme.backgroundColorPrimary ?? colors.lightest};
   transform: ${(props) =>
-    props.theme.previewWidth
-      ? `scale(${Math.min(1, props.theme.previewWidth / 1920)})`
-      : ''};
+		props.theme.previewWidth
+			? `scale(${Math.min(1, props.theme.previewWidth / 1920)})`
+			: ''};
 `;
 
 const Meta = styled.div`
@@ -171,9 +171,9 @@ const Meta = styled.div`
   white-space: nowrap;
 
   background-color: ${(props) =>
-    props.theme.customBackground
-      ? props.theme.customBackground
-      : props.theme.backgroundColorSecondary ?? colors.darker};
+		props.theme.customBackground
+			? props.theme.customBackground
+			: props.theme.backgroundColorSecondary ?? colors.darker};
 `;
 
 const BaseName = styled.p<{ isDataVisible: boolean; fadeDuration: number }>`
@@ -197,9 +197,9 @@ const OptionsWrapper = styled.div`
   height: 32px;
   overflow: hidden;
   background-color: ${(props) =>
-    props.theme.customBackground
-      ? props.theme.customBackground
-      : props.theme.backgroundColorPrimary ?? colors.lightest};
+		props.theme.customBackground
+			? props.theme.customBackground
+			: props.theme.backgroundColorPrimary ?? colors.lightest};
 `;
 
 const marquee = (duration: number, scrollValue: number) => keyframes`
@@ -213,10 +213,10 @@ const marquee = (duration: number, scrollValue: number) => keyframes`
 `;
 
 const Options = styled.div<{
-  isDataVisible: boolean;
-  duration: number;
-  scrollValue: number;
-  fadeDuration: number;
+	isDataVisible: boolean;
+	duration: number;
+	scrollValue: number;
+	fadeDuration: number;
 }>`
   display: flex;
   flex-direction: row;

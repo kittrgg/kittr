@@ -5,18 +5,18 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 interface Props {
-  /** If user has profile image. */
-  hasProfileImage: boolean;
-  /** Path for the image. */
-  imagePath?: string | null;
-  /** The width and height of the image. This image is always a square. */
-  size?: string;
-  /** A border color to apply to the image. */
-  border?: string;
-  /** Is this channel live? This information needs to come from the Twitch API. */
-  isLive?: boolean;
-  /** Optional cache bust using Math.random on the path of the image. */
-  alwaysRefresh?: boolean;
+	/** If user has profile image. */
+	hasProfileImage: boolean;
+	/** Path for the image. */
+	imagePath?: string | null;
+	/** The width and height of the image. This image is always a square. */
+	size?: string;
+	/** A border color to apply to the image. */
+	border?: string;
+	/** Is this channel live? This information needs to come from the Twitch API. */
+	isLive?: boolean;
+	/** Optional cache bust using Math.random on the path of the image. */
+	alwaysRefresh?: boolean;
 }
 
 /** The profile image to be used for channels on the platform.
@@ -26,101 +26,101 @@ interface Props {
  * If an image has not been provided, we will render a placeholder.
  */
 export function ProfileImage({
-  imagePath,
-  hasProfileImage,
-  size = '50px',
-  border,
-  isLive = false,
-  alwaysRefresh,
+	imagePath,
+	hasProfileImage,
+	size = '50px',
+	border,
+	isLive = false,
+	alwaysRefresh,
 }: Props) {
-  const [path, setPath] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
-  const [errored, setErrored] = useState(false);
-  const isMounted = useIsMounted();
+	const [path, setPath] = useState('');
+	const [isLoading, setIsLoading] = useState(true);
+	const [errored, setErrored] = useState(false);
+	const isMounted = useIsMounted();
 
-  useEffect(() => {
-    // This is for dev!
-    if (process.env.VERCEL_ENV === 'development' && !hasProfileImage) {
-      setErrored(true);
-      return setIsLoading(false);
-    }
+	useEffect(() => {
+		// This is for dev!
+		if (process.env.VERCEL_ENV === 'development' && !hasProfileImage) {
+			setErrored(true);
+			return setIsLoading(false);
+		}
 
-    // This is for prod!
-    if (!hasProfileImage) {
-      setErrored(true);
-      return setIsLoading(false);
-    }
+		// This is for prod!
+		if (!hasProfileImage) {
+			setErrored(true);
+			return setIsLoading(false);
+		}
 
-    if (imagePath) {
-      const fetchImage = async () => {
-        try {
-          const uri = await download(imagePath);
+		if (imagePath) {
+			const fetchImage = async () => {
+				try {
+					const uri = await download(imagePath);
 
-          if (uri && isMounted()) {
-            setPath(uri);
-            setErrored(false);
-            setIsLoading(false);
-          }
+					if (uri && isMounted()) {
+						setPath(uri);
+						setErrored(false);
+						setIsLoading(false);
+					}
 
-          if (!uri) {
-            setErrored(true);
-            setIsLoading(false);
-          }
-        } catch (err) {
-          setErrored(true);
-          setIsLoading(false);
-        }
-      };
+					if (!uri) {
+						setErrored(true);
+						setIsLoading(false);
+					}
+				} catch (err) {
+					setErrored(true);
+					setIsLoading(false);
+				}
+			};
 
-      fetchImage();
-    }
-  }, [imagePath, isMounted, hasProfileImage]);
+			fetchImage();
+		}
+	}, [imagePath, isMounted, hasProfileImage]);
 
-  if (!imagePath || errored) {
-    return (
-      <Wrapper imageSize={size}>
-        <ImageContainer data-cy="profile-image" imageSize={size}>
-          <img
-            alt="Channel Profile Image"
-            src="/media/icons/empty-avatar.svg"
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-          />
-        </ImageContainer>
-        {isLive ? <LiveBadge>LIVE</LiveBadge> : null}
-      </Wrapper>
-    );
-  }
+	if (!imagePath || errored) {
+		return (
+			<Wrapper imageSize={size}>
+				<ImageContainer data-cy="profile-image" imageSize={size}>
+					<img
+						alt="Channel Profile Image"
+						src="/media/icons/empty-avatar.svg"
+						style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+					/>
+				</ImageContainer>
+				{isLive ? <LiveBadge>LIVE</LiveBadge> : null}
+			</Wrapper>
+		);
+	}
 
-  const cacheBuster = alwaysRefresh ? `/?${Math.random()}` : '';
+	const cacheBuster = alwaysRefresh ? `/?${Math.random()}` : '';
 
-  return (
-    <Wrapper imageSize={size}>
-      <ImageContainer data-cy="profile-image" imageSize={size}>
-        {isLoading ? (
-          <img
-            alt=""
-            loading="lazy"
-            src="/media/shimmer.svg"
-            style={{ width: '100%' }}
-          />
-        ) : (
-          <img
-            alt="Profile image"
-            loading="lazy"
-            src={`${path}${cacheBuster}`}
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              borderRadius: '100%',
-              border: border ? `4px solid ${border}` : '',
-            }}
-          />
-        )}
-      </ImageContainer>
-      {isLive ? <LiveBadge>LIVE</LiveBadge> : null}
-    </Wrapper>
-  );
+	return (
+		<Wrapper imageSize={size}>
+			<ImageContainer data-cy="profile-image" imageSize={size}>
+				{isLoading ? (
+					<img
+						alt=""
+						loading="lazy"
+						src="/media/shimmer.svg"
+						style={{ width: '100%' }}
+					/>
+				) : (
+					<img
+						alt="Profile image"
+						loading="lazy"
+						src={`${path}${cacheBuster}`}
+						style={{
+							width: '100%',
+							height: '100%',
+							objectFit: 'cover',
+							borderRadius: '100%',
+							border: border ? `4px solid ${border}` : '',
+						}}
+					/>
+				)}
+			</ImageContainer>
+			{isLive ? <LiveBadge>LIVE</LiveBadge> : null}
+		</Wrapper>
+	);
 }
 
 export default ProfileImage;
@@ -130,7 +130,7 @@ export default ProfileImage;
 const Wrapper = styled.div<{ imageSize: string | undefined }>`
   position: relative;
   font-size: ${(props) =>
-    props.imageSize?.substring(0, props.imageSize.length - 2)}px;
+		props.imageSize?.substring(0, props.imageSize.length - 2)}px;
   display: flex;
   justify-content: center;
 `;
