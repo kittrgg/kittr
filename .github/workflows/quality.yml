@@ -27,33 +27,5 @@ jobs:
       - name: Install
         uses: ./tooling/github-actions/install
 
-      - name: Run Prettier
+      - name: Run quality tasks
         run: turbo format lint typecheck --continue
-
-  # eslint:
-  #   name: ESLint
-  #   timeout-minutes: 15
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v3
-
-  #     - name: Setup and install
-  #       uses: ./tooling/github-actions/install
-
-  #     - name: Lint
-  #       run: turbo lint --continue
-
-  # typecheck:
-  #   name: TypeScript
-  #   timeout-minutes: 15
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v3
-
-  #     - name: Install
-  #       uses: ./tooling/github-actions/install
-
-  #     - name: Run TypeScript type check
-  #       run: turbo typecheck --continue
