@@ -6,53 +6,53 @@ import type { ReactNode } from 'react';
 import styled from 'styled-components';
 
 interface Props {
-  planType?: 'premium';
-  title: string;
-  price: ReactNode | string;
-  description: string;
-  buttonText: string;
-  buttonStyle: 'default' | 'transparent' | 'white';
-  buttonAction: (...args: any) => any;
+	planType?: 'premium';
+	title: string;
+	price: ReactNode | string;
+	description: string;
+	buttonText: string;
+	buttonStyle: 'default' | 'transparent' | 'white';
+	buttonAction: (...args: any) => any;
 }
 
 function PlanTile({
-  planType,
-  title,
-  price,
-  description,
-  buttonText,
-  buttonStyle,
-  buttonAction,
+	planType,
+	title,
+	price,
+	description,
+	buttonText,
+	buttonStyle,
+	buttonAction,
 }: Props) {
-  const { isPremium } = usePremiumStatus();
+	const { isPremium } = usePremiumStatus();
 
-  const isActive = planType ? Boolean(isPremium) : !planType && !isPremium;
+	const isActive = planType ? Boolean(isPremium) : !planType && !isPremium;
 
-  return (
-    <Container isActive={isActive} isPremium={Boolean(planType)}>
-      <HorizFlex>
-        <Title>{title}</Title>
-        <Price isPremium={Boolean(planType)}>{price}</Price>
-      </HorizFlex>
-      <Description isPremium={Boolean(planType)}>{description}</Description>
-      <Button design={buttonStyle} onClick={buttonAction} text={buttonText} />
-      {isActive ? (
-        <SVG.CheckMark
-          stroke={colors.black}
-          style={{
-            position: 'absolute',
-            top: '-18px',
-            right: '-18px',
-            height: '20px',
-            padding: '8px',
-            backgroundColor: colors.white,
-            borderRadius: '100%',
-          }}
-          width="20px"
-        />
-      ) : null}
-    </Container>
-  );
+	return (
+		<Container isActive={isActive} isPremium={Boolean(planType)}>
+			<HorizFlex>
+				<Title>{title}</Title>
+				<Price isPremium={Boolean(planType)}>{price}</Price>
+			</HorizFlex>
+			<Description isPremium={Boolean(planType)}>{description}</Description>
+			<Button design={buttonStyle} onClick={buttonAction} text={buttonText} />
+			{isActive ? (
+				<SVG.CheckMark
+					stroke={colors.black}
+					style={{
+						position: 'absolute',
+						top: '-18px',
+						right: '-18px',
+						height: '20px',
+						padding: '8px',
+						backgroundColor: colors.white,
+						borderRadius: '100%',
+					}}
+					width="20px"
+				/>
+			) : null}
+		</Container>
+	);
 }
 
 export default PlanTile;
@@ -66,9 +66,9 @@ const Container = styled.div<{ isPremium: boolean; isActive: boolean }>`
   border: 2px solid
     ${(props) => (props.isActive ? colors.white : 'transparent')};
   background: ${(props) =>
-    props.isPremium
-      ? `linear-gradient(106.76deg, ${colors.premium} 17.81%, ${colors.premium} 50.47%, ${colors.premiumDark} 83.13%)`
-      : colors.dark20};
+		props.isPremium
+			? `linear-gradient(106.76deg, ${colors.premium} 17.81%, ${colors.premium} 50.47%, ${colors.premiumDark} 83.13%)`
+			: colors.dark20};
 `;
 
 const HorizFlex = styled.div`

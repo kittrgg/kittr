@@ -4,30 +4,30 @@ import type { CompleteCreatorPopularityMetric } from '@kittr/metrics';
 import { useLogger } from '@kittr/metrics';
 
 export function LogKitMetrics({
-  channelDisplayName,
-  channelId,
-  channelUrlSafeName,
-  gameUrlSafeName,
-  kitBaseDisplayName,
+	channelDisplayName,
+	channelId,
+	channelUrlSafeName,
+	gameUrlSafeName,
+	kitBaseDisplayName,
 }: {
-  channelDisplayName: string;
-  channelId: string;
-  channelUrlSafeName: string;
-  gameUrlSafeName: string;
-  kitBaseDisplayName: string;
+	channelDisplayName: string;
+	channelId: string;
+	channelUrlSafeName: string;
+	gameUrlSafeName: string;
+	kitBaseDisplayName: string;
 }) {
-  const logger = useLogger();
+	const logger = useLogger();
 
-  if (typeof window === 'undefined') return null;
+	if (typeof window === 'undefined') return null;
 
-  logger.info('Creator popularity', {
-    metric: 'kit',
-    channelDisplayName,
-    channelId,
-    channelUrlSafeName,
-    gameUrlSafeName,
-    kitBaseDisplayName,
-  } as CompleteCreatorPopularityMetric<'kit'>);
+	logger.info('Creator popularity', {
+		metric: 'kit',
+		channelDisplayName,
+		channelId,
+		channelUrlSafeName,
+		gameUrlSafeName,
+		kitBaseDisplayName,
+	} as CompleteCreatorPopularityMetric<'kit'>);
 
-  return null;
+	return null;
 }

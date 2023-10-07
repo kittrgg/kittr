@@ -7,15 +7,15 @@ import styled, { keyframes } from 'styled-components';
  * we want to show them where to add their first game.
  * */
 function AddGameNotification({ ...props }) {
-  return (
-    <Wrapper>
-      <SVG.Carat fill={colors.white} width="24px" />
-      <TextContainer>
-        <p>ADD A</p>
-        <p>GAME</p>
-      </TextContainer>
-    </Wrapper>
-  );
+	return (
+		<Wrapper>
+			<SVG.Carat fill={colors.white} width="24px" />
+			<TextContainer>
+				<p>ADD A</p>
+				<p>GAME</p>
+			</TextContainer>
+		</Wrapper>
+	);
 }
 
 export default AddGameNotification;

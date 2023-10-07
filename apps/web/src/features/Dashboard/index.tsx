@@ -19,70 +19,70 @@ import { trpc } from '@/lib/trpc';
 
 /** The kittr dashboard. */
 function Dashboard() {
-  const modal = useModal();
-  const user = useUser();
-  const { width } = useViewportDimensions();
-  const { view } = useDashboardView();
-  const containerRef = useRef(null);
-  const { isLoading: gamesLoading } = trpc.games.list.useQuery();
-  const { isLoading: kitsLoading } = trpc.kits.bases.list.useQuery({
-    commandCodes: true,
-  });
+	const modal = useModal();
+	const user = useUser();
+	const { width } = useViewportDimensions();
+	const { view } = useDashboardView();
+	const containerRef = useRef(null);
+	const { isLoading: gamesLoading } = trpc.games.list.useQuery();
+	const { isLoading: kitsLoading } = trpc.kits.bases.list.useQuery({
+		commandCodes: true,
+	});
 
-  if (width < 1075) {
-    return (
-      <FullScreen
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-start',
-          justifyContent: 'center',
-          height: '100vh',
-          padding: '24px',
-        }}
-      >
-        <img
-          alt="kittr logo"
-          src="/media/logo.svg"
-          style={{ margin: '0 auto 24px' }}
-        />
-        <p>We do not currently support the dashboard on mobile.</p>
-        <p>Please revisit us with a larger screen!</p>
-        <a
-          href={Routes.ROOT}
-          style={{ color: 'white', textDecoration: 'underline' }}
-        >
-          Back to Home
-        </a>
-      </FullScreen>
-    );
-  }
+	if (width < 1075) {
+		return (
+			<FullScreen
+				style={{
+					display: 'flex',
+					flexDirection: 'column',
+					alignItems: 'flex-start',
+					justifyContent: 'center',
+					height: '100vh',
+					padding: '24px',
+				}}
+			>
+				<img
+					alt="kittr logo"
+					src="/media/logo.svg"
+					style={{ margin: '0 auto 24px' }}
+				/>
+				<p>We do not currently support the dashboard on mobile.</p>
+				<p>Please revisit us with a larger screen!</p>
+				<a
+					href={Routes.ROOT}
+					style={{ color: 'white', textDecoration: 'underline' }}
+				>
+					Back to Home
+				</a>
+			</FullScreen>
+		);
+	}
 
-  if (Object.keys(user || {}).length === 0) return <Login />;
+	if (Object.keys(user || {}).length === 0) return <Login />;
 
-  if (user && !user.emailVerified) return <EmailVerification />;
+	if (user && !user.emailVerified) return <EmailVerification />;
 
-  if (gamesLoading || kitsLoading)
-    return <Spinner height="50px" width="100%" />;
+	if (gamesLoading || kitsLoading)
+		return <Spinner height="50px" width="100%" />;
 
-  return (
-    <FullScreen
-      style={{
-        display: 'flex',
-        flexDirection: 'row',
-        height: '100vh',
-      }}
-    >
-      <Sidebar />
-      <Container ref={containerRef}>
-        {modal.type === 'Error Notification' && <ErrorNotification />}
-        {modal.type === 'Tutorial' && <Tutorial />}
-        {view === 'Channel List' && <CreatorList />}
-        {view === 'Profile Settings' && <Profile />}
-        {view === 'Channel' && <Channel containerRef={containerRef} />}
-      </Container>
-    </FullScreen>
-  );
+	return (
+		<FullScreen
+			style={{
+				display: 'flex',
+				flexDirection: 'row',
+				height: '100vh',
+			}}
+		>
+			<Sidebar />
+			<Container ref={containerRef}>
+				{modal.type === 'Error Notification' && <ErrorNotification />}
+				{modal.type === 'Tutorial' && <Tutorial />}
+				{view === 'Channel List' && <CreatorList />}
+				{view === 'Profile Settings' && <Profile />}
+				{view === 'Channel' && <Channel containerRef={containerRef} />}
+			</Container>
+		</FullScreen>
+	);
 }
 
 export default Dashboard;

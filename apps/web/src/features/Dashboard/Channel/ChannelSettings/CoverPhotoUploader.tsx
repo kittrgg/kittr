@@ -3,136 +3,136 @@ import { Button, Spinner, SVG } from '@Components/shared';
 import { useDashboardChannel } from '@Hooks/api/useDashboardChannel';
 import { setModal } from '@Redux/slices/dashboard';
 import {
-  useChannelData,
-  useCoverPhoto,
+	useChannelData,
+	useCoverPhoto,
 } from '@Redux/slices/dashboard/selectors';
 import { useDispatch } from '@Redux/store';
 import {
-  uploadWithHandlers,
-  download,
-  deleteFile,
+	uploadWithHandlers,
+	download,
+	deleteFile,
 } from '@kittr/firebase/storage';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { trpc } from '@/lib/trpc';
 
 function CoverPhotoUploader() {
-  const dispatch = useDispatch();
-  const { refetch: refetchDashboard } = useDashboardChannel();
-  const { data } = useChannelData();
-  const hasCoverPhoto = useCoverPhoto();
-  const [isUploading, setIsUploading] = useState(false);
-  const [image, setImage] = useState('');
+	const dispatch = useDispatch();
+	const { refetch: refetchDashboard } = useDashboardChannel();
+	const { data } = useChannelData();
+	const hasCoverPhoto = useCoverPhoto();
+	const [isUploading, setIsUploading] = useState(false);
+	const [image, setImage] = useState('');
 
-  const fileName = `${data?.id}-profile-cover-photo`;
+	const fileName = `${data?.id}-profile-cover-photo`;
 
-  const { mutate } = trpc.channels.profile['cover-photo'].update.useMutation({
-    onSuccess: (data) => {
-      if (data.profile?.hasCoverPhoto) {
-        download(data.id, (path: string) => {
-          setIsUploading(false);
-        });
-      }
-      refetchDashboard();
-    },
-    onError: () => {
-      setIsUploading(false);
-      dispatch(setModal({ type: 'Error Notification', data: {} }));
-    },
-  });
+	const { mutate } = trpc.channels.profile['cover-photo'].update.useMutation({
+		onSuccess: (data) => {
+			if (data.profile?.hasCoverPhoto) {
+				download(data.id, (path: string) => {
+					setIsUploading(false);
+				});
+			}
+			refetchDashboard();
+		},
+		onError: () => {
+			setIsUploading(false);
+			dispatch(setModal({ type: 'Error Notification', data: {} }));
+		},
+	});
 
-  const handleUpload = async (e: any) => {
-    e.preventDefault();
-    setIsUploading(true);
+	const handleUpload = async (e: any) => {
+		e.preventDefault();
+		setIsUploading(true);
 
-    if (!data?.id) return;
+		if (!data?.id) return;
 
-    const imageFile = e.target.files[0];
+		const imageFile = e.target.files[0];
 
-    if (imageFile) {
-      uploadWithHandlers({
-        fileName,
-        imageFile,
-        onSuccess: async () => {
-          mutate({ channelId: data.id, hasCoverPhoto: true });
-        },
-        onError: () => {
-          setIsUploading(false);
-          dispatch(setModal({ type: 'Error Notification', data: {} }));
-        },
-      });
-    }
-  };
+		if (imageFile) {
+			uploadWithHandlers({
+				fileName,
+				imageFile,
+				onSuccess: async () => {
+					mutate({ channelId: data.id, hasCoverPhoto: true });
+				},
+				onError: () => {
+					setIsUploading(false);
+					dispatch(setModal({ type: 'Error Notification', data: {} }));
+				},
+			});
+		}
+	};
 
-  useEffect(() => {
-    if (hasCoverPhoto) {
-      download(fileName, (path: string) => {
-        setIsUploading(false);
-        setImage(path);
-      });
-    }
-  }, [isUploading, hasCoverPhoto, fileName]);
+	useEffect(() => {
+		if (hasCoverPhoto) {
+			download(fileName, (path: string) => {
+				setIsUploading(false);
+				setImage(path);
+			});
+		}
+	}, [isUploading, hasCoverPhoto, fileName]);
 
-  const handleDelete = async () => {
-    setIsUploading(true);
-    setImage('');
-    await deleteFile({
-      id: fileName,
-      onSuccess: () => {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
-        mutate({ channelId: data?.id!, hasCoverPhoto: false });
-      },
-      onError: () => {
-        dispatch(setModal({ type: 'Error Notification', data: {} }));
-      },
-    });
-  };
+	const handleDelete = async () => {
+		setIsUploading(true);
+		setImage('');
+		await deleteFile({
+			id: fileName,
+			onSuccess: () => {
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
+				mutate({ channelId: data?.id!, hasCoverPhoto: false });
+			},
+			onError: () => {
+				dispatch(setModal({ type: 'Error Notification', data: {} }));
+			},
+		});
+	};
 
-  if (isUploading) return <Spinner width="24px" />;
+	if (isUploading) return <Spinner width="24px" />;
 
-  const cacheBuster = `/?${Math.random()}`;
+	const cacheBuster = `/?${Math.random()}`;
 
-  return (
-    <div>
-      <Title>
-        Cover Photo
-        <SVG.PremiumWithCircle
-          style={{ position: 'relative', top: '6px', marginLeft: '12px' }}
-          width="24px"
-        />
-      </Title>
-      <p style={{ marginBottom: '24px', color: colors.lighter }}>
-        For best results, use an image with dimensions of at least 1440px by
-        300px.
-      </p>
+	return (
+		<div>
+			<Title>
+				Cover Photo
+				<SVG.PremiumWithCircle
+					style={{ position: 'relative', top: '6px', marginLeft: '12px' }}
+					width="24px"
+				/>
+			</Title>
+			<p style={{ marginBottom: '24px', color: colors.lighter }}>
+				For best results, use an image with dimensions of at least 1440px by
+				300px.
+			</p>
 
-      <Grid>
-        {hasCoverPhoto ? (
-          <BackgroundImage backgroundImage={image + cacheBuster} />
-        ) : null}
+			<Grid>
+				{hasCoverPhoto ? (
+					<BackgroundImage backgroundImage={image + cacheBuster} />
+				) : null}
 
-        <ButtonsWrapper>
-          <Label htmlFor="coverPhotoUpload">
-            {hasCoverPhoto ? 'CHANGE IMAGE' : 'ADD COVER'}
-            <input
-              id="coverPhotoUpload"
-              name="coverPhotoUpload"
-              onChange={(e: any) => handleUpload(e)}
-              style={{ display: 'none' }}
-              type="file"
-            />
-          </Label>
-          {hasCoverPhoto ? (
-            <Button
-              design="transparent"
-              onClick={handleDelete}
-              text="REMOVE IMAGE"
-            />
-          ) : null}
-        </ButtonsWrapper>
-      </Grid>
-    </div>
-  );
+				<ButtonsWrapper>
+					<Label htmlFor="coverPhotoUpload">
+						{hasCoverPhoto ? 'CHANGE IMAGE' : 'ADD COVER'}
+						<input
+							id="coverPhotoUpload"
+							name="coverPhotoUpload"
+							onChange={(e: any) => handleUpload(e)}
+							style={{ display: 'none' }}
+							type="file"
+						/>
+					</Label>
+					{hasCoverPhoto ? (
+						<Button
+							design="transparent"
+							onClick={handleDelete}
+							text="REMOVE IMAGE"
+						/>
+					) : null}
+				</ButtonsWrapper>
+			</Grid>
+		</div>
+	);
 }
 
 export default CoverPhotoUploader;

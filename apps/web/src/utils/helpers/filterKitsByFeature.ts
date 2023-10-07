@@ -6,11 +6,11 @@ import type { WarzoneKit } from '@kittr/prisma';
  * Optional second parameter will return the un-featured kits. Defaults to true (featured kits only).
  * */
 export const filterKitsByFeature = <T extends WarzoneKit>(
-  kits: T[],
-  bool = true,
+	kits: T[],
+	bool = true,
 ): T[] => {
-  if (bool) {
-    return kits.filter((kit) => kit.featured);
-  }
-  return kits.filter((kit) => !kit.featured);
+	if (bool) {
+		return kits.filter((kit) => kit.featured);
+	}
+	return kits.filter((kit) => !kit.featured);
 };

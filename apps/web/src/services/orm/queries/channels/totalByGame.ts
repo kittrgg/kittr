@@ -17,23 +17,23 @@ type ChannelsByGameQuery = (gameId: string) => Promise<number | undefined>;
  * Get the total channels for a game.
  */
 export const getTotalChannelsByGameQuery: ChannelsByGameQuery = async (
-  gameId,
+	gameId,
 ) => {
-  const result = await prisma.channel.count({
-    where: {
-      games: {
-        some: {
-          id: gameId,
-        },
-      },
-    },
-  });
+	const result = await prisma.channel.count({
+		where: {
+			games: {
+				some: {
+					id: gameId,
+				},
+			},
+		},
+	});
 
-  if (result === 0) return undefined;
+	if (result === 0) return undefined;
 
-  return result;
+	return result;
 };
 
 export type getTotalChannelsByGameQueryReturnType = Prisma.PromiseReturnType<
-  typeof getTotalChannelsByGameQuery
+	typeof getTotalChannelsByGameQuery
 >;

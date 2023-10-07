@@ -9,25 +9,25 @@ import LogoutButton from './ProfileButtons';
 
 /** Show the user their role within a channel as well as the logout button. */
 function UserIdentity() {
-  const { data } = useDashboardChannel();
-  const role = useManagerRole();
+	const { data } = useDashboardChannel();
+	const role = useManagerRole();
 
-  return (
-    <Wrapper>
-      <Child>
-        <ProfileImage
-          alwaysRefresh
-          hasProfileImage={Boolean(data?.profile?.hasProfileImage)}
-          imagePath={data?.id}
-          size="25px"
-        />
-        <Role>You are an {capitalizeFirstCharacter(role)}</Role>
-      </Child>
-      <Child>
-        <LogoutButton />
-      </Child>
-    </Wrapper>
-  );
+	return (
+		<Wrapper>
+			<Child>
+				<ProfileImage
+					alwaysRefresh
+					hasProfileImage={Boolean(data?.profile?.hasProfileImage)}
+					imagePath={data?.id}
+					size="25px"
+				/>
+				<Role>You are an {capitalizeFirstCharacter(role)}</Role>
+			</Child>
+			<Child>
+				<LogoutButton />
+			</Child>
+		</Wrapper>
+	);
 }
 
 export default UserIdentity;

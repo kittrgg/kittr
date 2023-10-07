@@ -1,7 +1,7 @@
 import ActiveKitController from './ActiveKitController';
 
 function Overlays({ ...props }) {
-  return <ActiveKitController />;
+	return <ActiveKitController />;
 }
 
 export default Overlays;

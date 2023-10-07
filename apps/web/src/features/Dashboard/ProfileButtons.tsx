@@ -16,70 +16,70 @@ import styled from 'styled-components';
  * "View Profile" will only apply if the user has a channel open.
  */
 function ProfileButtons() {
-  const router = useRouter();
-  const { data: channelData } = useChannelData();
-  const [isOpen, setIsOpen] = useState(false);
-  const dispatch = useDispatch();
-  const user = useUser();
+	const router = useRouter();
+	const { data: channelData } = useChannelData();
+	const [isOpen, setIsOpen] = useState(false);
+	const dispatch = useDispatch();
+	const user = useUser();
 
-  return (
-    <Flex>
-      {channelData?.displayName ? (
-        <LinkStyles
-          href={Routes.CHANNEL.createPath(channelData.urlSafeName)}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          VIEW PROFILE
-        </LinkStyles>
-      ) : null}
-      <Container isOpen={isOpen}>
-        <Clickable
-          data-cy="profile-container-button"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          {user?.email}
-          <SVG.Carat
-            style={{
-              position: 'relative',
-              top: '4px',
-              marginLeft: '12px',
-              transform: isOpen ? '' : 'rotate(180deg)',
-              transition: '.2s',
-            }}
-            width="24px"
-          />
-        </Clickable>
-        <Button
-          dataCy="logout-button"
-          design="white"
-          onClick={(e) => {
-            e.stopPropagation();
-            logOut()
-              .then(() => {
-                dispatch(
-                  setActiveView({ channelId: '', view: 'Channel List' }),
-                );
-                dispatch(
-                  setChannelView({ gameId: '', view: 'Channel Settings' }),
-                );
-                router.push(Routes.ROOT);
-              })
-              .catch((err) => {
-                console.error(err);
-              });
-          }}
-          style={{
-            width: '95%',
-            margin: '8px auto 0',
-            padding: '12px',
-            fontSize: '14px',
-          }}
-          text="LOG OUT"
-        />
-      </Container>
-    </Flex>
-  );
+	return (
+		<Flex>
+			{channelData?.displayName ? (
+				<LinkStyles
+					href={Routes.CHANNEL.createPath(channelData.urlSafeName)}
+					rel="noopener noreferrer"
+					target="_blank"
+				>
+					VIEW PROFILE
+				</LinkStyles>
+			) : null}
+			<Container isOpen={isOpen}>
+				<Clickable
+					data-cy="profile-container-button"
+					onClick={() => setIsOpen(!isOpen)}
+				>
+					{user?.email}
+					<SVG.Carat
+						style={{
+							position: 'relative',
+							top: '4px',
+							marginLeft: '12px',
+							transform: isOpen ? '' : 'rotate(180deg)',
+							transition: '.2s',
+						}}
+						width="24px"
+					/>
+				</Clickable>
+				<Button
+					dataCy="logout-button"
+					design="white"
+					onClick={(e) => {
+						e.stopPropagation();
+						logOut()
+							.then(() => {
+								dispatch(
+									setActiveView({ channelId: '', view: 'Channel List' }),
+								);
+								dispatch(
+									setChannelView({ gameId: '', view: 'Channel Settings' }),
+								);
+								router.push(Routes.ROOT);
+							})
+							.catch((err) => {
+								console.error(err);
+							});
+					}}
+					style={{
+						width: '95%',
+						margin: '8px auto 0',
+						padding: '12px',
+						fontSize: '14px',
+					}}
+					text="LOG OUT"
+				/>
+			</Container>
+		</Flex>
+	);
 }
 
 export default ProfileButtons;
@@ -100,8 +100,7 @@ const Flex = styled.div`
 const Container = styled.div<{ isOpen: boolean }>`
   height: ${(props) => (props.isOpen ? '100px' : '44px')};
   padding: 8px;
-  background-color: ${(props) =>
-    props.isOpen ? colors.middle : 'transparent'};
+  background-color: ${(props) => (props.isOpen ? colors.middle : 'transparent')};
   border-radius: 12px;
   transition: 0.2s;
   overflow: hidden;

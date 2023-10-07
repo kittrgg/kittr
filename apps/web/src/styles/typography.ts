@@ -95,12 +95,12 @@ export const paragraph = `
     letter-spacing: 2px;
 `;
 const styles = {
-  montserrat,
-  barlow,
-  header1,
-  header2,
-  header4,
-  caption,
+	montserrat,
+	barlow,
+	header1,
+	header2,
+	header4,
+	caption,
 };
 
 export default styles;

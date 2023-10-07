@@ -9,73 +9,73 @@ import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 interface FullChannel extends Channel {
-  profile?: ChannelProfile | null;
-  links?: ChannelLink[];
+	profile?: ChannelProfile | null;
+	links?: ChannelLink[];
 }
 
 interface Props {
-  /** Array of channels to render. */
-  data: FullChannel[];
-  /** The background color for the channel list item. Defaults to colors.darker */
-  itemBackgroundColor?: string;
-  /** To link to a specific game page for that channel, pass it's URL safe name here. */
-  gameLink?: string;
-  /** Show the social links for the channel in their list item. Defaults to true */
-  withSocialLinks?: boolean;
+	/** Array of channels to render. */
+	data: FullChannel[];
+	/** The background color for the channel list item. Defaults to colors.darker */
+	itemBackgroundColor?: string;
+	/** To link to a specific game page for that channel, pass it's URL safe name here. */
+	gameLink?: string;
+	/** Show the social links for the channel in their list item. Defaults to true */
+	withSocialLinks?: boolean;
 }
 
 /** List of channels shown in a vertical list design. */
 export function CreatorList({
-  data,
-  itemBackgroundColor = colors.darker,
-  gameLink,
-  withSocialLinks = true,
+	data,
+	itemBackgroundColor = colors.darker,
+	gameLink,
+	withSocialLinks = true,
 }: Props) {
-  const router = useRouter();
+	const router = useRouter();
 
-  return (
-    <Container>
-      {data
-        .sort((a, b) => b.viewCount - a.viewCount)
-        .map((elem) => {
-          if (!elem.profile) return;
+	return (
+		<Container>
+			{data
+				.sort((a, b) => b.viewCount - a.viewCount)
+				.map((elem) => {
+					if (!elem.profile) return;
 
-          return (
-            <ListItem
-              backgroundColor={itemBackgroundColor}
-              data-cy="channel-list-item"
-              key={elem.displayName}
-              onClick={() =>
-                router.push(
-                  gameLink
-                    ? Routes.CHANNEL.GAME.createPath(elem.urlSafeName, gameLink)
-                    : Routes.CHANNEL.createPath(elem.urlSafeName),
-                )
-              }
-            >
-              <Identity data-cy={`${elem.urlSafeName}-profile-link`}>
-                <ProfileImage
-                  hasProfileImage={elem.profile.hasProfileImage}
-                  imagePath={elem.id}
-                  size="52px"
-                />
-                <DisplayName>{elem.displayName}</DisplayName>
-              </Identity>
-              {withSocialLinks && elem.links ? (
-                <SocialIconsContainer>
-                  <SocialIcons iconSize={20} links={elem.links} />
-                </SocialIconsContainer>
-              ) : null}
-              <ArrowContainer>
-                <SVG.Carat
-                  style={{ width: '24px', transform: 'rotate(90deg)' }}
-                />
-              </ArrowContainer>
-            </ListItem>
-          );
-        })}
-    </Container>
-  );
+					return (
+						<ListItem
+							backgroundColor={itemBackgroundColor}
+							data-cy="channel-list-item"
+							key={elem.displayName}
+							onClick={() =>
+								router.push(
+									gameLink
+										? Routes.CHANNEL.GAME.createPath(elem.urlSafeName, gameLink)
+										: Routes.CHANNEL.createPath(elem.urlSafeName),
+								)
+							}
+						>
+							<Identity data-cy={`${elem.urlSafeName}-profile-link`}>
+								<ProfileImage
+									hasProfileImage={elem.profile.hasProfileImage}
+									imagePath={elem.id}
+									size="52px"
+								/>
+								<DisplayName>{elem.displayName}</DisplayName>
+							</Identity>
+							{withSocialLinks && elem.links ? (
+								<SocialIconsContainer>
+									<SocialIcons iconSize={20} links={elem.links} />
+								</SocialIconsContainer>
+							) : null}
+							<ArrowContainer>
+								<SVG.Carat
+									style={{ width: '24px', transform: 'rotate(90deg)' }}
+								/>
+							</ArrowContainer>
+						</ListItem>
+					);
+				})}
+		</Container>
+	);
 }
 
 export default CreatorList;

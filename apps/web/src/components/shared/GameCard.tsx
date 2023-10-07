@@ -8,90 +8,90 @@ import { Fragment } from 'react';
 import styled from 'styled-components';
 
 interface GameWithGenresAndPlatforms extends Game {
-  genres: Genre[];
-  platforms: Platform[];
+	genres: Genre[];
+	platforms: Platform[];
 }
 
 interface Props extends GameWithGenresAndPlatforms {
-  /** Optionally display the game without any of it's meta information. */
-  noText?: true;
-  /** Optional function to run when the card is clicked. */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onClick?: (...args: any) => any;
+	/** Optionally display the game without any of it's meta information. */
+	noText?: true;
+	/** Optional function to run when the card is clicked. */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	onClick?: (...args: any) => any;
 }
 
 /** Display a game's cover art along with it's meta information. Meta info can be optionally disabled. */
 export function GameCard({
-  noText,
-  active,
-  displayName,
-  urlSafeName,
-  titleImageUrl,
-  developer,
-  genres,
-  platforms,
-  releaseDate,
-  onClick,
+	noText,
+	active,
+	displayName,
+	urlSafeName,
+	titleImageUrl,
+	developer,
+	genres,
+	platforms,
+	releaseDate,
+	onClick,
 }: Props) {
-  const { width } = useViewportDimensions();
+	const { width } = useViewportDimensions();
 
-  return (
-    <FirebaseStorageResolver
-      noSpinner
-      path={titleImageUrl}
-      render={(img) => (
-        <Container
-          active={active}
-          data-cy={`${urlSafeName}-button`}
-          onClick={onClick}
-          titleImage={img}
-        >
-          {width > 550 && (
-            <ImageContainer>
-              <img alt={displayName} src={img} style={{ width: '100%' }} />
-            </ImageContainer>
-          )}
+	return (
+		<FirebaseStorageResolver
+			noSpinner
+			path={titleImageUrl}
+			render={(img) => (
+				<Container
+					active={active}
+					data-cy={`${urlSafeName}-button`}
+					onClick={onClick}
+					titleImage={img}
+				>
+					{width > 550 && (
+						<ImageContainer>
+							<img alt={displayName} src={img} style={{ width: '100%' }} />
+						</ImageContainer>
+					)}
 
-          {!noText && (
-            <MetaInfo>
-              <H2>{displayName}</H2>
-              <div>
-                <Paragraph>{developer}</Paragraph>
-                <Paragraph>
-                  {genres.map((elem, index) => (
-                    <Fragment key={elem.id}>
-                      {index === genres.length - 1
-                        ? `${elem.displayName}`
-                        : `${elem.displayName}, `}
-                    </Fragment>
-                  ))}
-                </Paragraph>
-                <Paragraph>
-                  {platforms.map((elem, index) => (
-                    <Fragment key={elem.id}>
-                      {index === platforms.length - 1
-                        ? `${elem.displayName}`
-                        : `${elem.displayName}, `}
-                    </Fragment>
-                  ))}
-                </Paragraph>
-                <Paragraph>
-                  Released {toHumanReadableDate(releaseDate)}
-                </Paragraph>
-              </div>
-            </MetaInfo>
-          )}
+					{!noText && (
+						<MetaInfo>
+							<H2>{displayName}</H2>
+							<div>
+								<Paragraph>{developer}</Paragraph>
+								<Paragraph>
+									{genres.map((elem, index) => (
+										<Fragment key={elem.id}>
+											{index === genres.length - 1
+												? `${elem.displayName}`
+												: `${elem.displayName}, `}
+										</Fragment>
+									))}
+								</Paragraph>
+								<Paragraph>
+									{platforms.map((elem, index) => (
+										<Fragment key={elem.id}>
+											{index === platforms.length - 1
+												? `${elem.displayName}`
+												: `${elem.displayName}, `}
+										</Fragment>
+									))}
+								</Paragraph>
+								<Paragraph>
+									Released {toHumanReadableDate(releaseDate)}
+								</Paragraph>
+							</div>
+						</MetaInfo>
+					)}
 
-          {!active && (
-            <ComingSoon>
-              <p style={{ cursor: 'default' }}>COMING</p>
-              <p style={{ cursor: 'default' }}>SOON</p>
-            </ComingSoon>
-          )}
-        </Container>
-      )}
-    />
-  );
+					{!active && (
+						<ComingSoon>
+							<p style={{ cursor: 'default' }}>COMING</p>
+							<p style={{ cursor: 'default' }}>SOON</p>
+						</ComingSoon>
+					)}
+				</Container>
+			)}
+		/>
+	);
 }
 
 export default GameCard;

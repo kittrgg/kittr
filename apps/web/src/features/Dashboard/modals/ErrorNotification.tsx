@@ -4,14 +4,14 @@ import styled from 'styled-components';
 
 /** Notify of any errors that happen. */
 function ErrorNotification() {
-  return (
-    <Modal backgroundClickToClose title="UH OH. WE MESSED UP">
-      <Paragraph>
-        This error has been logged into our systems and we will investigate it
-        as soon as possible.
-      </Paragraph>
-    </Modal>
-  );
+	return (
+		<Modal backgroundClickToClose title="UH OH. WE MESSED UP">
+			<Paragraph>
+				This error has been logged into our systems and we will investigate it
+				as soon as possible.
+			</Paragraph>
+		</Modal>
+	);
 }
 
 export default ErrorNotification;

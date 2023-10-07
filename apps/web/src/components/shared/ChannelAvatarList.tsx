@@ -6,42 +6,42 @@ import { useTheme } from '@kittr/ui';
 import styled from 'styled-components';
 
 interface ChannelWithProfile extends Channel {
-  profile?: ChannelProfile;
+	profile?: ChannelProfile;
 }
 
 interface Props {
-  /** Array of channels to render. */
-  channels: ChannelWithProfile[];
-  /** Do you want to show the live icon for these channels? */
-  isLive?: boolean;
-  /** Function to be ran when user clicks on a channel. */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onClick: (...args: any) => any;
+	/** Array of channels to render. */
+	channels: ChannelWithProfile[];
+	/** Do you want to show the live icon for these channels? */
+	isLive?: boolean;
+	/** Function to be ran when user clicks on a channel. */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	onClick: (...args: any) => any;
 }
 
 /** Renders the list of channels using their profile image and display name. */
 export function ChannelAvatarList({ channels, isLive, onClick }: Props) {
-  const theme = useTheme();
-  return (
-    <>
-      {channels.map((channel) => (
-        <Identity
-          data-cy={`${channel.displayName}-button`}
-          key={channel.id}
-          onClick={() => onClick && onClick(channel)}
-          theme={theme}
-        >
-          <ProfileImage
-            hasProfileImage={Boolean(channel.profile?.hasProfileImage)}
-            imagePath={channel.id}
-            isLive={isLive}
-            size="100px"
-          />
-          <Name>{channel.displayName}</Name>
-        </Identity>
-      ))}
-    </>
-  );
+	const theme = useTheme();
+	return (
+		<>
+			{channels.map((channel) => (
+				<Identity
+					data-cy={`${channel.displayName}-button`}
+					key={channel.id}
+					onClick={() => onClick && onClick(channel)}
+					theme={theme}
+				>
+					<ProfileImage
+						hasProfileImage={Boolean(channel.profile?.hasProfileImage)}
+						imagePath={channel.id}
+						isLive={isLive}
+						size="100px"
+					/>
+					<Name>{channel.displayName}</Name>
+				</Identity>
+			))}
+		</>
+	);
 }
 
 export default ChannelAvatarList;

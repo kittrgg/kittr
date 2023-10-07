@@ -10,20 +10,20 @@ import { headers } from './auth';
  *
  */
 type IFunc = <T>(params: {
-  endpointBaseUrl: string;
-  queryParams: Record<string, string>;
+	endpointBaseUrl: string;
+	queryParams: Record<string, string>;
 }) => Promise<{ data: T }>;
 
 /** Pretty naive implementation for getting data from the Twitch API. */
 export const getFromApi: IFunc = async ({ endpointBaseUrl, queryParams }) => {
-  const params = new URLSearchParams(queryParams);
+	const params = new URLSearchParams(queryParams);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const result = await fetcher.get<any>({
-    url: `${endpointBaseUrl}?${params}`,
-    headers: await headers(),
-    redirect: 'follow',
-  });
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const result = await fetcher.get<any>({
+		url: `${endpointBaseUrl}?${params}`,
+		headers: await headers(),
+		redirect: 'follow',
+	});
 
-  return result;
+	return result;
 };

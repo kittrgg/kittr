@@ -4,12 +4,12 @@ import type { CSSProperties, ReactNode } from 'react';
 import styled from 'styled-components';
 
 interface Props {
-  children: ReactNode | string;
-  style?: CSSProperties;
+	children: ReactNode | string;
+	style?: CSSProperties;
 }
 
 function H3Comp({ children, style }: Props) {
-  return <H3 style={style}>{children}</H3>;
+	return <H3 style={style}>{children}</H3>;
 }
 
 export default H3Comp;

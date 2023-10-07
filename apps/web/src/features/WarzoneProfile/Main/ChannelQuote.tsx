@@ -5,39 +5,39 @@ import { paragraph } from '@Styles/typography';
 import styled from 'styled-components';
 
 function FavoriteBlueprint() {
-  const activeWeapon = useActiveWeapon();
-  const quote = activeWeapon.quote;
+	const activeWeapon = useActiveWeapon();
+	const quote = activeWeapon.quote;
 
-  if (quote) {
-    return (
-      <Container>
-        <SVG.QuotationMark
-          fill={colors.darker}
-          style={{
-            position: 'absolute',
-            zIndex: '-1',
-            top: '12px',
-            left: '36px',
-          }}
-          width="50px"
-        />
-        <SVG.QuotationMark
-          fill={colors.darker}
-          style={{
-            position: 'absolute',
-            zIndex: '-1',
-            bottom: '12px',
-            right: '36px',
-            transform: 'rotate(180deg)',
-          }}
-          width="50px"
-        />
-        <Quote>{quote}</Quote>
-      </Container>
-    );
-  }
+	if (quote) {
+		return (
+			<Container>
+				<SVG.QuotationMark
+					fill={colors.darker}
+					style={{
+						position: 'absolute',
+						zIndex: '-1',
+						top: '12px',
+						left: '36px',
+					}}
+					width="50px"
+				/>
+				<SVG.QuotationMark
+					fill={colors.darker}
+					style={{
+						position: 'absolute',
+						zIndex: '-1',
+						bottom: '12px',
+						right: '36px',
+						transform: 'rotate(180deg)',
+					}}
+					width="50px"
+				/>
+				<Quote>{quote}</Quote>
+			</Container>
+		);
+	}
 
-  return null;
+	return null;
 }
 
 export default FavoriteBlueprint;

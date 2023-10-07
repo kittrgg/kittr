@@ -17,93 +17,93 @@ import Specs from './Specs';
 import { trpc } from '@/lib/trpc';
 
 function ChannelProfile() {
-  const { query } = useRouter();
-  const { channel: urlChannel } = query as { channel: string };
+	const { query } = useRouter();
+	const { channel: urlChannel } = query as { channel: string };
 
-  log.info(`Profile page for creator ${urlChannel}`, {
-    urlChannel,
-    page: 'profile',
-  });
+	log.info(`Profile page for creator ${urlChannel}`, {
+		urlChannel,
+		page: 'profile',
+	});
 
-  const { data: channel } = trpc.channels.profile.get.useQuery(urlChannel, {
-    enabled: Boolean(urlChannel),
-  });
+	const { data: channel } = trpc.channels.profile.get.useQuery(urlChannel, {
+		enabled: Boolean(urlChannel),
+	});
 
-  const twitchLink = channel?.links.find(
-    (channel) => channel.property === 'TWITCH',
-  )?.value;
-  const { data: twitchInfo } = trpc.twitch['profile-page'].useQuery(
-    twitchLink!,
-    {
-      enabled: Boolean(twitchLink),
-      retry: false,
-    },
-  );
+	const twitchLink = channel?.links.find(
+		(channel) => channel.property === 'TWITCH',
+	)?.value;
+	const { data: twitchInfo } = trpc.twitch['profile-page'].useQuery(
+		twitchLink!,
+		{
+			enabled: Boolean(twitchLink),
+			retry: false,
+		},
+	);
 
-  const isPremium = channel?.plan?.type === 'PREMIUM';
-  const hasCoverPhoto = channel?.profile?.hasCoverPhoto;
-  const primaryColor =
-    channel?.profile?.brandColors.find((color) => color.type === 'PRIMARY')
-      ?.value || colors.white;
-  const [coverPhotoPath, setCoverPhotoPath] = useState('');
+	const isPremium = channel?.plan?.type === 'PREMIUM';
+	const hasCoverPhoto = channel?.profile?.hasCoverPhoto;
+	const primaryColor =
+		channel?.profile?.brandColors.find((color) => color.type === 'PRIMARY')
+			?.value || colors.white;
+	const [coverPhotoPath, setCoverPhotoPath] = useState('');
 
-  useEffect(() => {
-    if (isPremium && hasCoverPhoto)
-      download(`${channel.id}-profile-cover-photo`, (path: string) =>
-        setCoverPhotoPath(path),
-      );
-  }, [channel?.id, hasCoverPhoto, isPremium]);
+	useEffect(() => {
+		if (isPremium && hasCoverPhoto)
+			download(`${channel.id}-profile-cover-photo`, (path: string) =>
+				setCoverPhotoPath(path),
+			);
+	}, [channel?.id, hasCoverPhoto, isPremium]);
 
-  if (!channel) return null;
+	if (!channel) return null;
 
-  log.info(`Profile page for creator ${channel.displayName}`, {
-    metric: 'Creator popularity',
-    channelId: channel.id,
-    page: 'profile',
-    displayName: channel.displayName,
-  });
+	log.info(`Profile page for creator ${channel.displayName}`, {
+		metric: 'Creator popularity',
+		channelId: channel.id,
+		page: 'profile',
+		displayName: channel.displayName,
+	});
 
-  return (
-    <Container>
-      <Header
-        {...channel}
-        imagePath={coverPhotoPath}
-        isLive={twitchInfo?.channelData.type === 'live'}
-      />
-      <Games games={channel.games} urlSafeName={channel.urlSafeName} />
-      <FeaturedKits kits={channel.warzoneKits} />
-      {isPremium ? (
-        <>
-          <PopularClips brandColor={primaryColor} clips={twitchInfo?.clips} />
-          <RecentVideos
-            brandColor={primaryColor}
-            coverPhotoPath={coverPhotoPath}
-            hasProfileImage={Boolean(channel.profile?.hasProfileImage)}
-            profileImagePath={
-              channel.profile?.hasProfileImage ? channel.id : ''
-            }
-            videos={twitchInfo?.recentVideos}
-          />
+	return (
+		<Container>
+			<Header
+				{...channel}
+				imagePath={coverPhotoPath}
+				isLive={twitchInfo?.channelData.type === 'live'}
+			/>
+			<Games games={channel.games} urlSafeName={channel.urlSafeName} />
+			<FeaturedKits kits={channel.warzoneKits} />
+			{isPremium ? (
+				<>
+					<PopularClips brandColor={primaryColor} clips={twitchInfo?.clips} />
+					<RecentVideos
+						brandColor={primaryColor}
+						coverPhotoPath={coverPhotoPath}
+						hasProfileImage={Boolean(channel.profile?.hasProfileImage)}
+						profileImagePath={
+							channel.profile?.hasProfileImage ? channel.id : ''
+						}
+						videos={twitchInfo?.recentVideos}
+					/>
 
-          <Schedule brandColor={primaryColor} schedule={twitchInfo?.schedule} />
-          <SetupPhotos
-            id={channel.id}
-            setupPhotos={channel.profile?.setupPhotos || []}
-          />
-          <Specs
-            brandColor={primaryColor}
-            specs={channel.profile?.channelPcSpecs || []}
-          />
-          <Affiliates
-            affiliates={channel.profile?.affiliates || []}
-            brandColor={primaryColor}
-          />
-        </>
-      ) : (
-        <PremiumCallout />
-      )}
-    </Container>
-  );
+					<Schedule brandColor={primaryColor} schedule={twitchInfo?.schedule} />
+					<SetupPhotos
+						id={channel.id}
+						setupPhotos={channel.profile?.setupPhotos || []}
+					/>
+					<Specs
+						brandColor={primaryColor}
+						specs={channel.profile?.channelPcSpecs || []}
+					/>
+					<Affiliates
+						affiliates={channel.profile?.affiliates || []}
+						brandColor={primaryColor}
+					/>
+				</>
+			) : (
+				<PremiumCallout />
+			)}
+		</Container>
+	);
 }
 
 export default ChannelProfile;

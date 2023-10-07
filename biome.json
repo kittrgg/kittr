@@ -1,19 +1,20 @@
 {
-  "organizeImports": {
-    "enabled": true
-  },
-  "javascript": {
-    "formatter": {
-      "quoteStyle": "single"
-    }
-  },
-  "formatter": {
-    "enabled": true
-  },
-  "linter": {
-    "enabled": false,
-    "rules": {
-      "recommended": true
-    }
-  }
+	"organizeImports": {
+		"enabled": true
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "single"
+		}
+	},
+	"formatter": {
+		"enabled": true,
+		"ignore": ["**/*/.next/**", "**/*/dist/**"]
+	},
+	"linter": {
+		"enabled": false,
+		"rules": {
+			"recommended": true
+		}
+	}
 }

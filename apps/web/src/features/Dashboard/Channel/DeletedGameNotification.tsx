@@ -18,17 +18,17 @@ const Paragraph = styled.p`
 
 /** Comes into view when someone deletes a game. */
 function DeletedGameNotification({ ...props }) {
-  return (
-    <Wrapper>
-      <Paragraph>Game deleted.</Paragraph>
-      <Paragraph>Adios.</Paragraph>
-      <Paragraph>Buh-bye.</Paragraph>
-      <Paragraph>Sayonara.</Paragraph>
-      <Paragraph>Arrivederci.</Paragraph>
-      <Paragraph>Aloha.</Paragraph>
-      <Paragraph>Au revoir.</Paragraph>
-    </Wrapper>
-  );
+	return (
+		<Wrapper>
+			<Paragraph>Game deleted.</Paragraph>
+			<Paragraph>Adios.</Paragraph>
+			<Paragraph>Buh-bye.</Paragraph>
+			<Paragraph>Sayonara.</Paragraph>
+			<Paragraph>Arrivederci.</Paragraph>
+			<Paragraph>Aloha.</Paragraph>
+			<Paragraph>Au revoir.</Paragraph>
+		</Wrapper>
+	);
 }
 
 export default DeletedGameNotification;

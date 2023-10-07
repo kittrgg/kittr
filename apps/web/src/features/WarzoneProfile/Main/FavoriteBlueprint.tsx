@@ -5,21 +5,21 @@ import styled from 'styled-components';
 import * as Styled from './style';
 
 function FavoriteBlueprint() {
-  const activeWeapon = useActiveWeapon();
-  const favorite = activeWeapon.blueprint;
+	const activeWeapon = useActiveWeapon();
+	const favorite = activeWeapon.blueprint;
 
-  if (favorite) {
-    return (
-      <Container>
-        <Styled.Header style={{ marginBottom: '24px' }}>
-          FAVORITE BLUEPRINT:
-        </Styled.Header>
-        <Blueprint>{favorite || 'None'}</Blueprint>
-      </Container>
-    );
-  }
+	if (favorite) {
+		return (
+			<Container>
+				<Styled.Header style={{ marginBottom: '24px' }}>
+					FAVORITE BLUEPRINT:
+				</Styled.Header>
+				<Blueprint>{favorite || 'None'}</Blueprint>
+			</Container>
+		);
+	}
 
-  return null;
+	return null;
 }
 
 export default FavoriteBlueprint;

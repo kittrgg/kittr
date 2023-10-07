@@ -1,10 +1,10 @@
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
-  root: true,
-  extends: [require.resolve('@kittr/lint/node')],
-  parserOptions: {
-    project: `${__dirname}/tsconfig.json`,
-    tsoncifgRootDir: __dirname,
-  },
-  ignorePatterns: ['validator/', 'client/'],
+	root: true,
+	extends: [require.resolve('@kittr/lint/node')],
+	parserOptions: {
+		project: `${__dirname}/tsconfig.json`,
+		tsoncifgRootDir: __dirname,
+	},
+	ignorePatterns: ['validator/', 'client/'],
 };

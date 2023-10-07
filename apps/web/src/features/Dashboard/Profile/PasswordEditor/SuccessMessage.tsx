@@ -3,13 +3,13 @@ import { logOut } from '@kittr/firebase/auth';
 import { useEffect } from 'react';
 
 function SucessMessage() {
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-  useEffect(() => {
-    logOut();
-  }, [dispatch]);
+	useEffect(() => {
+		logOut();
+	}, [dispatch]);
 
-  return <p>Your password has been changed!</p>;
+	return <p>Your password has been changed!</p>;
 }
 
 export default SucessMessage;

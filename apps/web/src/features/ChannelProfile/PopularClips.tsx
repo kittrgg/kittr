@@ -7,45 +7,45 @@ import styled from 'styled-components';
 import { H2 } from './style';
 
 interface Props {
-  clips?: ITwitchClip[];
-  brandColor: string;
+	clips?: ITwitchClip[];
+	brandColor: string;
 }
 
 function PopularClips({ clips, brandColor }: Props) {
-  // If channel doesn't have any clips.
-  if (clips?.length === 0) return null;
+	// If channel doesn't have any clips.
+	if (clips?.length === 0) return null;
 
-  return (
-    <section id="clips">
-      <H2>POPULAR CLIPS</H2>
-      <SideScroller childMargin="10px" wrapperStyles={{ width: '100vw' }}>
-        {clips?.map((clip: any) => {
-          const month = getMonth(new Date(clip.created_at));
-          const day = getDate(new Date(clip.created_at));
-          const year = getYear(new Date(clip.created_at));
+	return (
+		<section id="clips">
+			<H2>POPULAR CLIPS</H2>
+			<SideScroller childMargin="10px" wrapperStyles={{ width: '100vw' }}>
+				{clips?.map((clip: any) => {
+					const month = getMonth(new Date(clip.created_at));
+					const day = getDate(new Date(clip.created_at));
+					const year = getYear(new Date(clip.created_at));
 
-          return (
-            <ClipContainer
-              brandColor={brandColor}
-              href={clip.url}
-              image={clip.thumbnail_url}
-              key={clip.id}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <Duration>{clip.duration.toFixed(0)}s</Duration>
-              <ViewCount>
-                {clip.view_count} {clip.view_count === 1 ? 'view' : 'views'}
-              </ViewCount>
-              <Timestamp>
-                {month}/{day}/{year}
-              </Timestamp>
-            </ClipContainer>
-          );
-        })}
-      </SideScroller>
-    </section>
-  );
+					return (
+						<ClipContainer
+							brandColor={brandColor}
+							href={clip.url}
+							image={clip.thumbnail_url}
+							key={clip.id}
+							rel="noopener noreferrer"
+							target="_blank"
+						>
+							<Duration>{clip.duration.toFixed(0)}s</Duration>
+							<ViewCount>
+								{clip.view_count} {clip.view_count === 1 ? 'view' : 'views'}
+							</ViewCount>
+							<Timestamp>
+								{month}/{day}/{year}
+							</Timestamp>
+						</ClipContainer>
+					);
+				})}
+			</SideScroller>
+		</section>
+	);
 }
 
 export default PopularClips;

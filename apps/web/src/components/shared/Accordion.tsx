@@ -6,15 +6,15 @@ import { useState, createContext } from 'react';
 import styled from 'styled-components';
 
 interface IProvider {
-  isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
+	isOpen: boolean;
+	setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 interface Props {
-  /** Title text for the header of the accordion section. */
-  title: string;
-  /** Children passed into the component. These children will be rendered when the accordion is opened up. */
-  children: ReactNode;
+	/** Title text for the header of the accordion section. */
+	title: string;
+	/** Children passed into the component. These children will be rendered when the accordion is opened up. */
+	children: ReactNode;
 }
 
 /** Handles the open/closed state for the accordion.
@@ -22,42 +22,42 @@ interface Props {
  * This allows the interal state to be controlled from outside the component.
  */
 export const { Provider, Consumer } = createContext<IProvider>({
-  isOpen: false,
-  setIsOpen: () => null,
+	isOpen: false,
+	setIsOpen: () => null,
 });
 
 /** Accordion style "dropdown" component. */
 export function Accordion({ title, children }: Props) {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [headerIsHovered, setHeaderIsHovered] = useState<boolean>(false);
+	const [isOpen, setIsOpen] = useState<boolean>(false);
+	const [headerIsHovered, setHeaderIsHovered] = useState<boolean>(false);
 
-  return (
-    <Provider value={{ isOpen, setIsOpen }}>
-      <Container>
-        <Header
-          onClick={() => setIsOpen(!isOpen)}
-          onMouseEnter={() => setHeaderIsHovered(true)}
-          onMouseLeave={() => setHeaderIsHovered(false)}
-        >
-          {title}
-          <SVG.Carat
-            style={{
-              marginLeft: '40px',
-              transform: isOpen
-                ? 'translateY(1px)'
-                : 'rotate(180deg) translateY(-2px)',
-              opacity: headerIsHovered || isOpen ? 1 : 0,
-              transition: '.2s',
-            }}
-            width="20px"
-          />
-        </Header>
-        <Body isOpen={isOpen}>
-          <Children>{children}</Children>
-        </Body>
-      </Container>
-    </Provider>
-  );
+	return (
+		<Provider value={{ isOpen, setIsOpen }}>
+			<Container>
+				<Header
+					onClick={() => setIsOpen(!isOpen)}
+					onMouseEnter={() => setHeaderIsHovered(true)}
+					onMouseLeave={() => setHeaderIsHovered(false)}
+				>
+					{title}
+					<SVG.Carat
+						style={{
+							marginLeft: '40px',
+							transform: isOpen
+								? 'translateY(1px)'
+								: 'rotate(180deg) translateY(-2px)',
+							opacity: headerIsHovered || isOpen ? 1 : 0,
+							transition: '.2s',
+						}}
+						width="20px"
+					/>
+				</Header>
+				<Body isOpen={isOpen}>
+					<Children>{children}</Children>
+				</Body>
+			</Container>
+		</Provider>
+	);
 }
 
 export default Accordion;

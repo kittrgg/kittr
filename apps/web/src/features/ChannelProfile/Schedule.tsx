@@ -4,17 +4,17 @@ import { useViewportDimensions } from '@Hooks/useViewportDimensions';
 import { caption, paragraph } from '@Styles/typography';
 import type { ITwitchScheduleSegment } from '@kittr/types';
 import {
-  getMonth,
-  getDate,
-  getDay,
-  getHours,
-  getMinutes,
-  getSeconds,
-  format,
-  isSameDay,
-  isBefore,
-  isAfter,
-  add,
+	getMonth,
+	getDate,
+	getDay,
+	getHours,
+	getMinutes,
+	getSeconds,
+	format,
+	isSameDay,
+	isBefore,
+	isAfter,
+	add,
 } from 'date-fns';
 import { Fragment } from 'react';
 import styled from 'styled-components';
@@ -22,150 +22,150 @@ import { H2 } from './style';
 import MobileSchedule from './MobileSchedule';
 
 interface Props {
-  schedule?: ITwitchScheduleSegment[];
-  brandColor: string;
+	schedule?: ITwitchScheduleSegment[];
+	brandColor: string;
 }
 
 const DAYS_OF_THE_WEEK = ['Su', 'M', 'Tu', 'W', 'Th', 'F', 'Sa'];
 const SECONDS_IN_A_DAY = 86399;
 
 function Schedule({ schedule, brandColor }: Props) {
-  const { observe, width } = useDimensions();
-  const { width: viewportWidth } = useViewportDimensions();
+	const { observe, width } = useDimensions();
+	const { width: viewportWidth } = useViewportDimensions();
 
-  const advanceDaysFromToday = (days: number) => add(new Date(), { days });
+	const advanceDaysFromToday = (days: number) => add(new Date(), { days });
 
-  const getMonthAndDateString = (days: number) =>
-    format(advanceDaysFromToday(days), 'M/d');
+	const getMonthAndDateString = (days: number) =>
+		format(advanceDaysFromToday(days), 'M/d');
 
-  const convertToCalendarPosition = (
-    channel: any,
-    startOrEnd: 'end_time' | 'start_time',
-    weekIndex: number,
-    right?: boolean,
-  ) => {
-    const endTimeDate = getDate(new Date(channel.end_time));
-    const startTimeDate = getDate(new Date(channel.start_time));
+	const convertToCalendarPosition = (
+		channel: any,
+		startOrEnd: 'end_time' | 'start_time',
+		weekIndex: number,
+		right?: boolean,
+	) => {
+		const endTimeDate = getDate(new Date(channel.end_time));
+		const startTimeDate = getDate(new Date(channel.start_time));
 
-    const hours = getHours(new Date(channel[startOrEnd]));
-    const minutes = getMinutes(new Date(channel[startOrEnd]));
-    const seconds = getSeconds(new Date(channel[startOrEnd]));
+		const hours = getHours(new Date(channel[startOrEnd]));
+		const minutes = getMinutes(new Date(channel[startOrEnd]));
+		const seconds = getSeconds(new Date(channel[startOrEnd]));
 
-    const sum = hours * 3600 + minutes * 60 + seconds + 3600;
+		const sum = hours * 3600 + minutes * 60 + seconds + 3600;
 
-    // Channel started the previous calendar day
-    if (isBefore(startTimeDate, getDate(advanceDaysFromToday(weekIndex)))) {
-      if (right) return `${width - (sum / SECONDS_IN_A_DAY) * width}px`;
-      return '-10px';
-    }
+		// Channel started the previous calendar day
+		if (isBefore(startTimeDate, getDate(advanceDaysFromToday(weekIndex)))) {
+			if (right) return `${width - (sum / SECONDS_IN_A_DAY) * width}px`;
+			return '-10px';
+		}
 
-    // Channel continues to next calendar day
-    if (right && isAfter(endTimeDate, startTimeDate)) return '-10px';
+		// Channel continues to next calendar day
+		if (right && isAfter(endTimeDate, startTimeDate)) return '-10px';
 
-    return right
-      ? `${width - (sum / SECONDS_IN_A_DAY) * width}px`
-      : `${width / (SECONDS_IN_A_DAY / sum)}px`;
-  };
+		return right
+			? `${width - (sum / SECONDS_IN_A_DAY) * width}px`
+			: `${width / (SECONDS_IN_A_DAY / sum)}px`;
+	};
 
-  // If channel has not set a Twitch schedule.
-  if (schedule?.length === 0) return null;
+	// If channel has not set a Twitch schedule.
+	if (schedule?.length === 0) return null;
 
-  return (
-    <section id="schedule">
-      <H2>CHANNEL SCHEDULE</H2>
-      {viewportWidth < 900 ? (
-        <MobileSchedule brandColor={brandColor} schedule={schedule} />
-      ) : (
-        <Wrapper>
-          <CurrentWeek>
-            {getMonth(Date.now())}/{getDate(Date.now())} -{' '}
-            {getMonthAndDateString(7)}
-          </CurrentWeek>
-          <Container>
-            <TimeZone>
-              {
-                new Date()
-                  .toLocaleTimeString(undefined, { timeZoneName: 'short' })
-                  .split(' ')[2]
-              }
-            </TimeZone>
-            {[...Array(12)].map((_: any, index: number) => {
-              return (
-                <TimeOfDay index={index} key={index}>
-                  <span>
-                    {(index * 2) % 12 || 12}
-                    {index === 0 ? 'a' : ''}
-                    {index === 6 ? 'p' : ''}
-                  </span>
-                </TimeOfDay>
-              );
-            })}
-            {[...Array(7)].map((_: any, weekIndex: number) => {
-              return (
-                <Fragment key={weekIndex}>
-                  <DayOfWeek
-                    brandColor={brandColor}
-                    firstOfType={weekIndex === 0}
-                  >
-                    <div>
-                      {
-                        DAYS_OF_THE_WEEK[
-                          getDay(advanceDaysFromToday(weekIndex))
-                        ]
-                      }
-                    </div>
-                    <div>{getMonthAndDateString(weekIndex)}</div>
-                  </DayOfWeek>
-                  <Day firstOfType={weekIndex === 0} ref={observe}>
-                    {schedule
-                      // Filter for any channel where the start time or end time happens today
-                      ?.filter((channel: any) => {
-                        const channelStartsOnDay = isSameDay(
-                          new Date(channel.end_time),
-                          advanceDaysFromToday(weekIndex),
-                        );
-                        const channelEndsOnDay = isSameDay(
-                          new Date(channel.start_time),
-                          advanceDaysFromToday(weekIndex),
-                        );
+	return (
+		<section id="schedule">
+			<H2>CHANNEL SCHEDULE</H2>
+			{viewportWidth < 900 ? (
+				<MobileSchedule brandColor={brandColor} schedule={schedule} />
+			) : (
+				<Wrapper>
+					<CurrentWeek>
+						{getMonth(Date.now())}/{getDate(Date.now())} -{' '}
+						{getMonthAndDateString(7)}
+					</CurrentWeek>
+					<Container>
+						<TimeZone>
+							{
+								new Date()
+									.toLocaleTimeString(undefined, { timeZoneName: 'short' })
+									.split(' ')[2]
+							}
+						</TimeZone>
+						{[...Array(12)].map((_: any, index: number) => {
+							return (
+								<TimeOfDay index={index} key={index}>
+									<span>
+										{(index * 2) % 12 || 12}
+										{index === 0 ? 'a' : ''}
+										{index === 6 ? 'p' : ''}
+									</span>
+								</TimeOfDay>
+							);
+						})}
+						{[...Array(7)].map((_: any, weekIndex: number) => {
+							return (
+								<Fragment key={weekIndex}>
+									<DayOfWeek
+										brandColor={brandColor}
+										firstOfType={weekIndex === 0}
+									>
+										<div>
+											{
+												DAYS_OF_THE_WEEK[
+													getDay(advanceDaysFromToday(weekIndex))
+												]
+											}
+										</div>
+										<div>{getMonthAndDateString(weekIndex)}</div>
+									</DayOfWeek>
+									<Day firstOfType={weekIndex === 0} ref={observe}>
+										{schedule
+											// Filter for any channel where the start time or end time happens today
+											?.filter((channel: any) => {
+												const channelStartsOnDay = isSameDay(
+													new Date(channel.end_time),
+													advanceDaysFromToday(weekIndex),
+												);
+												const channelEndsOnDay = isSameDay(
+													new Date(channel.start_time),
+													advanceDaysFromToday(weekIndex),
+												);
 
-                        return channelStartsOnDay || channelEndsOnDay;
-                      })
-                      .map((channel: any) => {
-                        return (
-                          <ScheduledChannel
-                            brandColor={brandColor}
-                            endPosition={convertToCalendarPosition(
-                              channel,
-                              'end_time',
-                              weekIndex,
-                              true,
-                            )}
-                            key={channel.id}
-                            startPosition={convertToCalendarPosition(
-                              channel,
-                              'start_time',
-                              weekIndex,
-                            )}
-                          >
-                            <ChannelTitle>
-                              {channel.title || 'Untitled Channel'}
-                            </ChannelTitle>
-                            <ChannelCategory>
-                              {channel.category?.name || 'No Category'}
-                            </ChannelCategory>
-                          </ScheduledChannel>
-                        );
-                      })}
-                  </Day>
-                </Fragment>
-              );
-            })}
-          </Container>
-        </Wrapper>
-      )}
-    </section>
-  );
+												return channelStartsOnDay || channelEndsOnDay;
+											})
+											.map((channel: any) => {
+												return (
+													<ScheduledChannel
+														brandColor={brandColor}
+														endPosition={convertToCalendarPosition(
+															channel,
+															'end_time',
+															weekIndex,
+															true,
+														)}
+														key={channel.id}
+														startPosition={convertToCalendarPosition(
+															channel,
+															'start_time',
+															weekIndex,
+														)}
+													>
+														<ChannelTitle>
+															{channel.title || 'Untitled Channel'}
+														</ChannelTitle>
+														<ChannelCategory>
+															{channel.category?.name || 'No Category'}
+														</ChannelCategory>
+													</ScheduledChannel>
+												);
+											})}
+									</Day>
+								</Fragment>
+							);
+						})}
+					</Container>
+				</Wrapper>
+			)}
+		</section>
+	);
 }
 
 export default Schedule;
@@ -215,7 +215,7 @@ const DayOfWeek = styled.span<{ firstOfType: boolean; brandColor: string }>`
   padding-left: 12px;
   padding-right: ${(props) => (props.firstOfType ? '21px' : '24px')};
   border-right: ${(props) =>
-    props.firstOfType ? `3px solid ${props.brandColor}` : ''};
+		props.firstOfType ? `3px solid ${props.brandColor}` : ''};
   background-color: ${(props) => (props.firstOfType ? colors.darker : '')};
 
   & > div:last-of-type {
@@ -235,9 +235,9 @@ const Day = styled.span<{ firstOfType: boolean }>`
 `;
 
 const ScheduledChannel = styled.div<{
-  brandColor: string;
-  startPosition: string;
-  endPosition: string;
+	brandColor: string;
+	startPosition: string;
+	endPosition: string;
 }>`
   position: absolute;
   left: ${(props) => props.startPosition};

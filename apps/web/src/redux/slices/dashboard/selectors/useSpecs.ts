@@ -2,7 +2,7 @@ import { useDashboardChannel } from '@Hooks/api/useDashboardChannel';
 
 /** Get the channel's PC. */
 export const useSpecs = () => {
-  const { data } = useDashboardChannel();
+	const { data } = useDashboardChannel();
 
-  return data?.profile?.channelPcSpecs;
+	return data?.profile?.channelPcSpecs;
 };

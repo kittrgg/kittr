@@ -3,23 +3,23 @@ import { FirebaseStorageResolver } from '@Components/shared/FirebaseStorageResol
 import SVG from '@Components/shared/SVG';
 import { header2 } from '@Styles/typography';
 import type {
-  WarzoneKit,
-  WarzoneKitBase,
-  WarzoneKitOption,
+	WarzoneKit,
+	WarzoneKitBase,
+	WarzoneKitOption,
 } from '@kittr/prisma';
 import styled from 'styled-components';
 
 interface CompleteKit extends WarzoneKit {
-  base: WarzoneKitBase;
-  options: WarzoneKitOption[];
+	base: WarzoneKitBase;
+	options: WarzoneKitOption[];
 }
 
 interface Props {
-  /** Array of kits to render. */
-  data: CompleteKit[];
-  /** OnClick handler for if user click's on a kit's card. */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onClick?: any;
+	/** Array of kits to render. */
+	data: CompleteKit[];
+	/** OnClick handler for if user click's on a kit's card. */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	onClick?: any;
 }
 
 /** Render a list of kits.
@@ -27,52 +27,52 @@ interface Props {
  * This component is currently only being used on the channel's profile page and may not have much more utility to it than that...
  */
 export function KitList({ data, onClick }: Props) {
-  return (
-    <>
-      {data.map((elem) => (
-        <Card key={elem.id} onClick={() => onClick(elem)}>
-          <SVG.Star
-            fill={colors.gold}
-            stroke={colors.gold}
-            style={{ position: 'absolute', top: '12px', right: '12px' }}
-            width="15px"
-          />
-          <div>
-            <KitTitle>
-              {elem.customTitle
-                ? `${elem.base.displayName} - ${elem.customTitle}`
-                : `${elem.base.displayName}`}
-            </KitTitle>
-            <ImageContainer>
-              <FirebaseStorageResolver
-                noSpinner
-                path={elem.base.imageUrl}
-                render={(data) => (
-                  <img
-                    alt={elem.base.displayName}
-                    src={data || '/media/logo.svg'}
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                    }}
-                  />
-                )}
-              />
-            </ImageContainer>
-          </div>
-          <Options>
-            {elem.options.map((option) => (
-              <OptionItem key={option.id}>
-                <OptionSlot>{option.slotKey} - </OptionSlot>
-                <Option>{option.displayName}</Option>
-              </OptionItem>
-            ))}
-          </Options>
-        </Card>
-      ))}
-    </>
-  );
+	return (
+		<>
+			{data.map((elem) => (
+				<Card key={elem.id} onClick={() => onClick(elem)}>
+					<SVG.Star
+						fill={colors.gold}
+						stroke={colors.gold}
+						style={{ position: 'absolute', top: '12px', right: '12px' }}
+						width="15px"
+					/>
+					<div>
+						<KitTitle>
+							{elem.customTitle
+								? `${elem.base.displayName} - ${elem.customTitle}`
+								: `${elem.base.displayName}`}
+						</KitTitle>
+						<ImageContainer>
+							<FirebaseStorageResolver
+								noSpinner
+								path={elem.base.imageUrl}
+								render={(data) => (
+									<img
+										alt={elem.base.displayName}
+										src={data || '/media/logo.svg'}
+										style={{
+											width: '100%',
+											height: '100%',
+											objectFit: 'cover',
+										}}
+									/>
+								)}
+							/>
+						</ImageContainer>
+					</div>
+					<Options>
+						{elem.options.map((option) => (
+							<OptionItem key={option.id}>
+								<OptionSlot>{option.slotKey} - </OptionSlot>
+								<Option>{option.displayName}</Option>
+							</OptionItem>
+						))}
+					</Options>
+				</Card>
+			))}
+		</>
+	);
 }
 
 export default KitList;

@@ -6,11 +6,11 @@ import styled from 'styled-components';
 
 /** Simple link to get back to the /dashboard route */
 function BackToLogin() {
-  return (
-    <Link href={Routes.DASHBOARD} legacyBehavior passHref>
-      <StyledLink>Back to login.</StyledLink>
-    </Link>
-  );
+	return (
+		<Link href={Routes.DASHBOARD} legacyBehavior passHref>
+			<StyledLink>Back to login.</StyledLink>
+		</Link>
+	);
 }
 
 export default BackToLogin;

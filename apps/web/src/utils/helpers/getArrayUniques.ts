@@ -8,10 +8,10 @@
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getArrayUniques = (arr: any[], objectKey: string) => {
-  return arr
-    .map((elem) => elem[objectKey])
-    .filter(
-      (elem: string, index: number, self: string[]) =>
-        self.indexOf(elem) === index,
-    );
+	return arr
+		.map((elem) => elem[objectKey])
+		.filter(
+			(elem: string, index: number, self: string[]) =>
+				self.indexOf(elem) === index,
+		);
 };

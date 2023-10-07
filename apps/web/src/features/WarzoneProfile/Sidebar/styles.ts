@@ -3,8 +3,8 @@ import { caption } from '@Styles/typography';
 import styled from 'styled-components';
 
 export const Wrapper = styled.aside<{
-  isSidebarOpen: boolean;
-  viewportWidth: number;
+	isSidebarOpen: boolean;
+	viewportWidth: number;
 }>`
   position: relative;
   width: 20%;

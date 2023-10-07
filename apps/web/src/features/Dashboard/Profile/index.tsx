@@ -5,14 +5,14 @@ import PasswordEditor from './PasswordEditor';
 
 /** The user's profile settings. */
 function Profile() {
-  return (
-    <>
-      <H1>MY ACCOUNT SETTINGS</H1>
-      <EmailEditor />
-      <PasswordEditor />
-      <LogoutButton />
-    </>
-  );
+	return (
+		<>
+			<H1>MY ACCOUNT SETTINGS</H1>
+			<EmailEditor />
+			<PasswordEditor />
+			<LogoutButton />
+		</>
+	);
 }
 
 export default Profile;

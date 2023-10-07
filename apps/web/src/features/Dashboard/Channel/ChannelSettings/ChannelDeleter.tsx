@@ -25,30 +25,30 @@ const Warning = styled.p`
 
 /** Allows the user to delete the channel. Only available for owners. */
 function ChannelDeleter({ ...props }) {
-  const dispatch = useDispatch();
-  const modalType = useSelector((state) => state.dashboard.modal.type);
+	const dispatch = useDispatch();
+	const modalType = useSelector((state) => state.dashboard.modal.type);
 
-  return (
-    <>
-      {modalType === 'Channel Deleter' && <ChannelDeleteModal />}
-      <Container>
-        <Header>DANGER ZONE</Header>
-        <Warning>
-          You only want to use this button if you want to delete your channel.
-          Serious stuff.
-        </Warning>
-        <Button
-          dataCy="channel-delete"
-          design="white"
-          onClick={() =>
-            dispatch(setModal({ type: 'Channel Deleter', data: {} }))
-          }
-          style={{ backgroundColor: colors.red }}
-          text="DELETE THIS CHANNEL"
-        />
-      </Container>
-    </>
-  );
+	return (
+		<>
+			{modalType === 'Channel Deleter' && <ChannelDeleteModal />}
+			<Container>
+				<Header>DANGER ZONE</Header>
+				<Warning>
+					You only want to use this button if you want to delete your channel.
+					Serious stuff.
+				</Warning>
+				<Button
+					dataCy="channel-delete"
+					design="white"
+					onClick={() =>
+						dispatch(setModal({ type: 'Channel Deleter', data: {} }))
+					}
+					style={{ backgroundColor: colors.red }}
+					text="DELETE THIS CHANNEL"
+				/>
+			</Container>
+		</>
+	);
 }
 
 export default ChannelDeleter;

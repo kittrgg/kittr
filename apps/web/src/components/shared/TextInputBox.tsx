@@ -2,64 +2,64 @@ import colors from '@Colors';
 import styled from 'styled-components';
 
 interface Props {
-  /** Input types for "text" based inputs */
-  type: 'email' | 'number' | 'password' | 'text';
-  /** HTML5 name for the input. */
-  name: string;
-  /** Placeholder for the input field. Optional. */
-  placeholder?: string;
-  /** User's input. */
-  value: number | string;
-  /** A subtext beneath the input field. */
-  subline?: string;
-  /** A width for the element. Important for keeping the label at the same size as the input in certain situations. */
-  width?: string;
-  /** React CSS Properties for the input. */
-  inputStyles?: React.CSSProperties;
-  /** React CSS Properties for the subline. */
-  sublineStyles?: React.CSSProperties;
-  /** OnChange handler for the input. */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onChange: (...args: any) => any;
-  /** Optional onFocus handler for the input. */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onFocus?: (...args: any) => any;
-  /** Optional onBlur handler for the input. */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onBlur?: (...args: any) => any;
+	/** Input types for "text" based inputs */
+	type: 'email' | 'number' | 'password' | 'text';
+	/** HTML5 name for the input. */
+	name: string;
+	/** Placeholder for the input field. Optional. */
+	placeholder?: string;
+	/** User's input. */
+	value: number | string;
+	/** A subtext beneath the input field. */
+	subline?: string;
+	/** A width for the element. Important for keeping the label at the same size as the input in certain situations. */
+	width?: string;
+	/** React CSS Properties for the input. */
+	inputStyles?: React.CSSProperties;
+	/** React CSS Properties for the subline. */
+	sublineStyles?: React.CSSProperties;
+	/** OnChange handler for the input. */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	onChange: (...args: any) => any;
+	/** Optional onFocus handler for the input. */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	onFocus?: (...args: any) => any;
+	/** Optional onBlur handler for the input. */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	onBlur?: (...args: any) => any;
 }
 
 /** Utility text input component. */
 export function TextInputBox({
-  type,
-  name,
-  placeholder,
-  value,
-  subline,
-  width,
-  inputStyles,
-  sublineStyles,
-  onChange,
-  onFocus,
-  onBlur,
+	type,
+	name,
+	placeholder,
+	value,
+	subline,
+	width,
+	inputStyles,
+	sublineStyles,
+	onChange,
+	onFocus,
+	onBlur,
 }: Props) {
-  return (
-    <>
-      <Input
-        autoComplete="off"
-        name={name}
-        onBlur={onBlur}
-        onChange={onChange}
-        onFocus={onFocus}
-        placeholder={placeholder}
-        style={inputStyles}
-        type={type}
-        value={value}
-        width={width}
-      />
-      {subline ? <Subline style={sublineStyles}>{subline}</Subline> : null}
-    </>
-  );
+	return (
+		<>
+			<Input
+				autoComplete="off"
+				name={name}
+				onBlur={onBlur}
+				onChange={onChange}
+				onFocus={onFocus}
+				placeholder={placeholder}
+				style={inputStyles}
+				type={type}
+				value={value}
+				width={width}
+			/>
+			{subline ? <Subline style={sublineStyles}>{subline}</Subline> : null}
+		</>
+	);
 }
 
 export default TextInputBox;

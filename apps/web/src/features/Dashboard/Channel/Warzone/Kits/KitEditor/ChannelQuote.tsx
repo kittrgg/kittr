@@ -7,30 +7,30 @@ import styled from 'styled-components';
 import * as Styled from './style';
 
 function ChannelQuote() {
-  const dispatch = useDispatch();
-  const { quote } = useActiveKit();
+	const dispatch = useDispatch();
+	const { quote } = useActiveKit();
 
-  return (
-    <Styled.Container>
-      <Styled.HorizFlex>
-        <Styled.Header>QUOTE</Styled.Header>
-        <Styled.HeaderHelper>(Optional)</Styled.HeaderHelper>
-      </Styled.HorizFlex>
-      <Styled.ParagraphHelper>
-        Add your tips or comments about this kit.
-      </Styled.ParagraphHelper>
-      <TextArea
-        name="channelQuote"
-        onChange={(e) => {
-          if (e.target.value.length > 350) {
-          } else {
-            dispatch(updateChannelQuote(e.target.value));
-          }
-        }}
-        value={quote ?? ''}
-      />
-    </Styled.Container>
-  );
+	return (
+		<Styled.Container>
+			<Styled.HorizFlex>
+				<Styled.Header>QUOTE</Styled.Header>
+				<Styled.HeaderHelper>(Optional)</Styled.HeaderHelper>
+			</Styled.HorizFlex>
+			<Styled.ParagraphHelper>
+				Add your tips or comments about this kit.
+			</Styled.ParagraphHelper>
+			<TextArea
+				name="channelQuote"
+				onChange={(e) => {
+					if (e.target.value.length > 350) {
+					} else {
+						dispatch(updateChannelQuote(e.target.value));
+					}
+				}}
+				value={quote ?? ''}
+			/>
+		</Styled.Container>
+	);
 }
 
 export default ChannelQuote;

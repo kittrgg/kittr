@@ -4,8 +4,8 @@ import { appRouter } from '..';
 import { createContext } from './context';
 
 export const createSSGHelper = async () =>
-  createServerSideHelpers({
-    router: appRouter,
-    ctx: await createContext(),
-    transformer: superjson,
-  });
+	createServerSideHelpers({
+		router: appRouter,
+		ctx: await createContext(),
+		transformer: superjson,
+	});

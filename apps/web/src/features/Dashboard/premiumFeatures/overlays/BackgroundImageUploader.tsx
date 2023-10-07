@@ -9,128 +9,128 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 interface Props {
-  fileName: string;
-  label: string;
-  imageWidth: number;
-  imageHeight: number;
-  handleChange?: (...args: any) => any;
+	fileName: string;
+	label: string;
+	imageWidth: number;
+	imageHeight: number;
+	handleChange?: (...args: any) => any;
 }
 
 function BackgroundImageUploader({
-  fileName,
-  label,
-  imageWidth,
-  imageHeight,
-  handleChange,
+	fileName,
+	label,
+	imageWidth,
+	imageHeight,
+	handleChange,
 }: Props) {
-  const dispatch = useDispatch();
-  const [image, setImage] = useState('');
-  const [isUploading, setIsUploading] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
+	const dispatch = useDispatch();
+	const [image, setImage] = useState('');
+	const [isUploading, setIsUploading] = useState(false);
+	const [isHovered, setIsHovered] = useState(false);
 
-  const handleUpload = async (e: any) => {
-    e.preventDefault();
+	const handleUpload = async (e: any) => {
+		e.preventDefault();
 
-    const image = e.target.files[0];
+		const image = e.target.files[0];
 
-    if (image) {
-      try {
-        setIsUploading(true);
-        const compressedImage = await compressor(image, { maxIteration: 2 });
-        const result = await upload(fileName, compressedImage);
+		if (image) {
+			try {
+				setIsUploading(true);
+				const compressedImage = await compressor(image, { maxIteration: 2 });
+				const result = await upload(fileName, compressedImage);
 
-        if (result) {
-          download(fileName, (path) => {
-            setIsUploading(false);
-            setImage(path);
-            handleChange ? handleChange() : null;
-          });
-        }
-      } catch (error) {
-        dispatch(setModal({ type: 'Error Notification', data: {} }));
-      }
-    }
-  };
+				if (result) {
+					download(fileName, (path) => {
+						setIsUploading(false);
+						setImage(path);
+						handleChange ? handleChange() : null;
+					});
+				}
+			} catch (error) {
+				dispatch(setModal({ type: 'Error Notification', data: {} }));
+			}
+		}
+	};
 
-  const handleDelete = async () => {
-    try {
-      const result = await deleteFile({ id: fileName });
+	const handleDelete = async () => {
+		try {
+			const result = await deleteFile({ id: fileName });
 
-      if (result) {
-        handleChange ? handleChange() : null;
-        return setImage('');
-      }
-    } catch (error) {
-      dispatch(setModal({ type: 'Error Notification', data: {} }));
-    }
-  };
+			if (result) {
+				handleChange ? handleChange() : null;
+				return setImage('');
+			}
+		} catch (error) {
+			dispatch(setModal({ type: 'Error Notification', data: {} }));
+		}
+	};
 
-  useEffect(() => {
-    download(fileName, (path) => setImage(path));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [download]);
+	useEffect(() => {
+		download(fileName, (path) => setImage(path));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [download]);
 
-  if (isUploading) {
-    return (
-      <CenterSpinner>
-        <Spinner width="32px" />
-      </CenterSpinner>
-    );
-  }
+	if (isUploading) {
+		return (
+			<CenterSpinner>
+				<Spinner width="32px" />
+			</CenterSpinner>
+		);
+	}
 
-  return (
-    <div>
-      <Label
-        htmlFor={fileName}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        style={{
-          backgroundImage: `url("${image}")` || 'transparent',
-          backgroundSize: image ? 'contain' : '',
-          backgroundPosition: 'center',
-          backgroundRepeat: image ? 'no-repeat' : '',
-          border: `2px dashed ${colors.lighter}`,
-        }}
-      >
-        {!image && (
-          <>
-            <SVG.Export
-              stroke={colors.lighter}
-              style={{ marginRight: '24px' }}
-              width="24px"
-            />
-            UPLOAD
-          </>
-        )}
-        <input
-          id={fileName}
-          name={fileName}
-          onChange={(e: any) => {
-            e.preventDefault();
-            handleUpload(e);
-          }}
-          style={{ display: 'none' }}
-          type="file"
-        />
-        {isHovered && image ? (
-          <DeleteGameBubble
-            isHovered={isHovered}
-            onClick={handleDelete}
-            onMouseEnter={() => setIsHovered(true)}
-          >
-            <SVG.X
-              fill={colors.red}
-              style={{ width: '100%', height: '100%' }}
-            />
-          </DeleteGameBubble>
-        ) : null}
-      </Label>
-      <Caption>{label}</Caption>
-      <Caption>
-        {imageWidth}x{imageHeight}px
-      </Caption>
-    </div>
-  );
+	return (
+		<div>
+			<Label
+				htmlFor={fileName}
+				onMouseEnter={() => setIsHovered(true)}
+				onMouseLeave={() => setIsHovered(false)}
+				style={{
+					backgroundImage: `url("${image}")` || 'transparent',
+					backgroundSize: image ? 'contain' : '',
+					backgroundPosition: 'center',
+					backgroundRepeat: image ? 'no-repeat' : '',
+					border: `2px dashed ${colors.lighter}`,
+				}}
+			>
+				{!image && (
+					<>
+						<SVG.Export
+							stroke={colors.lighter}
+							style={{ marginRight: '24px' }}
+							width="24px"
+						/>
+						UPLOAD
+					</>
+				)}
+				<input
+					id={fileName}
+					name={fileName}
+					onChange={(e: any) => {
+						e.preventDefault();
+						handleUpload(e);
+					}}
+					style={{ display: 'none' }}
+					type="file"
+				/>
+				{isHovered && image ? (
+					<DeleteGameBubble
+						isHovered={isHovered}
+						onClick={handleDelete}
+						onMouseEnter={() => setIsHovered(true)}
+					>
+						<SVG.X
+							fill={colors.red}
+							style={{ width: '100%', height: '100%' }}
+						/>
+					</DeleteGameBubble>
+				) : null}
+			</Label>
+			<Caption>{label}</Caption>
+			<Caption>
+				{imageWidth}x{imageHeight}px
+			</Caption>
+		</div>
+	);
 }
 
 export default BackgroundImageUploader;

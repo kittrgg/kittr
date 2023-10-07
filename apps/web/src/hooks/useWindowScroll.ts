@@ -3,19 +3,19 @@ import { useState, useEffect } from 'react';
 
 /** Get the window's current scroll position. */
 export const useWindowScroll = () => {
-  const [scrollTop, setScrollTop] = useState(0);
+	const [scrollTop, setScrollTop] = useState(0);
 
-  useEffect(() => {
-    const handler = () => {
-      setScrollTop(window.pageYOffset);
-    };
+	useEffect(() => {
+		const handler = () => {
+			setScrollTop(window.pageYOffset);
+		};
 
-    window.addEventListener('scroll', handler);
-    return () => window.removeEventListener('scroll', handler);
-  }, []);
+		window.addEventListener('scroll', handler);
+		return () => window.removeEventListener('scroll', handler);
+	}, []);
 
-  if (!isClient()) {
-    return null;
-  }
-  return scrollTop;
+	if (!isClient()) {
+		return null;
+	}
+	return scrollTop;
 };

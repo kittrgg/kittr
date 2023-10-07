@@ -5,25 +5,25 @@ import * as ChannelsProfileCreatorCodesService from '../../../../services/channe
 import { checkRole } from '../../../../services/users';
 
 const upsertCode = authedProcedure
-  .input(
-    z.object({
-      code: ChannelCreatorCodeModel.partial({ id: true }),
-    }),
-  )
-  .mutation(async ({ ctx, input }) => {
-    await checkRole({
-      firebaseUserId: ctx.user.uid,
-      channelId: input.code.channelId,
-      roles: ['OWNER', 'ADMIN'],
-    });
+	.input(
+		z.object({
+			code: ChannelCreatorCodeModel.partial({ id: true }),
+		}),
+	)
+	.mutation(async ({ ctx, input }) => {
+		await checkRole({
+			firebaseUserId: ctx.user.uid,
+			channelId: input.code.channelId,
+			roles: ['OWNER', 'ADMIN'],
+		});
 
-    const channel = await ChannelsProfileCreatorCodesService.upsertCode({
-      codeUpdate: input.code,
-    });
+		const channel = await ChannelsProfileCreatorCodesService.upsertCode({
+			codeUpdate: input.code,
+		});
 
-    return channel;
-  });
+		return channel;
+	});
 
 export const ChannelsProfileCreatorCodesController = {
-  upsertCode,
+	upsertCode,
 };
