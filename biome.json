@@ -1,4 +1,10 @@
 {
+	"vcs": {
+		"useIgnoreFile": true
+	},
+	"files": {
+		"ignore": ["**/.next/**", "packages/prisma/validator/**"]
+	},
 	"organizeImports": {
 		"enabled": true
 	},
@@ -8,8 +14,7 @@
 		}
 	},
 	"formatter": {
-		"enabled": true,
-		"ignore": ["**/*/.next/**", "**/*/dist/**"]
+		"enabled": true
 	},
 	"linter": {
 		"enabled": false,

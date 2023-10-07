@@ -1,83 +1,72 @@
 {
-  "name": "@kittr/ui",
-  "version": "0.0.0",
-  "private": true,
-  "license": "GNU",
-  "exports": {
-    ".": "./src/components/index.ts",
-    "./new": "./src/new/index.ts",
-    "./hooks": "./src/hooks/index.ts",
-    "./icons": "./src/icons/index.ts",
-    "./social-icons": "./src/icons/socials.tsx",
-    "./styles.css": "./dist/compiled.css"
-  },
-  "typesVersions": {
-    "*": {
-      "*": [
-        "./src/components/index.ts"
-      ],
-      "new": [
-        "./src/new/index.ts"
-      ],
-      "hooks": [
-        "./src/hooks/index.ts"
-      ],
-      "icons": [
-        "./src/icons/index.ts"
-      ],
-      "social-icons": [
-        "./src/icons/socials.tsx"
-      ]
-    }
-  },
-  "scripts": {
-    "build": "tsc",
-    "format_IGNORE": "prettier . --check --cache --cache-location=\"node_modules/.cache/prettiercache\"",
-    "format:fix": "prettier . --write --cache --cache-location=\"node_modules/.cache/prettiercache\" --log-level=warn",
-    "lint": "eslint . --cache --cache-location \"node_modules/.cache/.eslintcache\" --max-warnings 0",
-    "lint:fix": "eslint . --fix --cache --cache-location \"node_modules/.cache/.eslintcache\" --max-warnings 0",
-    "test": "vitest",
-    "typecheck": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@kittr/firebase": "workspace:*",
-    "@mantine/core": "^6.0.11",
-    "@mantine/dates": "^6.0.11",
-    "@mantine/hooks": "^6.0.11",
-    "@mantine/next": "^6.0.11",
-    "@mantine/rte": "^5.10.5",
-    "@radix-ui/react-accordion": "^1.1.2",
-    "@radix-ui/react-avatar": "^1.0.2",
-    "@radix-ui/react-select": "^1.2.1",
-    "@radix-ui/react-slot": "^1.0.1",
-    "class-variance-authority": "^0.6.0",
-    "clsx": "^1.2.1",
-    "focus-trap-react": "^10.1.2",
-    "lucide-icons-react": "^1.0.2",
-    "react": "^18.2.0",
-    "react-device-detect": "2.2.2",
-    "react-dom": "^18.2.0",
-    "tailwind-merge": "^1.12.0"
-  },
-  "devDependencies": {
-    "@babel/core": "7.18.9",
-    "@kittr/fixtures": "workspace:*",
-    "@kittr/lint": "workspace:*",
-    "@kittr/tailwind": "workspace:*",
-    "@kittr/tsconfig": "workspace:*",
-    "@kittr/types": "workspace:*",
-    "@kittr/utils": "workspace:*",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^14.0.0",
-    "@testing-library/user-event": "^14.4.3",
-    "@turbo/gen": "^1.9.8",
-    "@types/react": "^18.2.12",
-    "@vitejs/plugin-react": "2.0.0",
-    "concurrently": "^8.0.1",
-    "eslint": "^8.42.0",
-    "happy-dom": "^9.10.9",
-    "typescript": "^5.2.2",
-    "vite": "^4.3.5",
-    "vitest": "^0.31.1"
-  }
+	"name": "@kittr/ui",
+	"version": "0.0.0",
+	"private": true,
+	"license": "GNU",
+	"exports": {
+		".": "./src/components/index.ts",
+		"./new": "./src/new/index.ts",
+		"./hooks": "./src/hooks/index.ts",
+		"./icons": "./src/icons/index.ts",
+		"./social-icons": "./src/icons/socials.tsx",
+		"./styles.css": "./dist/compiled.css"
+	},
+	"typesVersions": {
+		"*": {
+			"*": ["./src/components/index.ts"],
+			"new": ["./src/new/index.ts"],
+			"hooks": ["./src/hooks/index.ts"],
+			"icons": ["./src/icons/index.ts"],
+			"social-icons": ["./src/icons/socials.tsx"]
+		}
+	},
+	"scripts": {
+		"build": "tsc",
+
+		"lint": "eslint . --cache --cache-location \"node_modules/.cache/.eslintcache\" --max-warnings 0",
+		"lint:fix": "eslint . --fix --cache --cache-location \"node_modules/.cache/.eslintcache\" --max-warnings 0",
+		"test": "vitest",
+		"typecheck": "tsc --noEmit"
+	},
+	"dependencies": {
+		"@kittr/firebase": "workspace:*",
+		"@mantine/core": "^6.0.11",
+		"@mantine/dates": "^6.0.11",
+		"@mantine/hooks": "^6.0.11",
+		"@mantine/next": "^6.0.11",
+		"@mantine/rte": "^5.10.5",
+		"@radix-ui/react-accordion": "^1.1.2",
+		"@radix-ui/react-avatar": "^1.0.2",
+		"@radix-ui/react-select": "^1.2.1",
+		"@radix-ui/react-slot": "^1.0.1",
+		"class-variance-authority": "^0.6.0",
+		"clsx": "^1.2.1",
+		"focus-trap-react": "^10.1.2",
+		"lucide-icons-react": "^1.0.2",
+		"react": "^18.2.0",
+		"react-device-detect": "2.2.2",
+		"react-dom": "^18.2.0",
+		"tailwind-merge": "^1.12.0"
+	},
+	"devDependencies": {
+		"@babel/core": "7.18.9",
+		"@kittr/fixtures": "workspace:*",
+		"@kittr/lint": "workspace:*",
+		"@kittr/tailwind": "workspace:*",
+		"@kittr/tsconfig": "workspace:*",
+		"@kittr/types": "workspace:*",
+		"@kittr/utils": "workspace:*",
+		"@testing-library/jest-dom": "^5.16.5",
+		"@testing-library/react": "^14.0.0",
+		"@testing-library/user-event": "^14.4.3",
+		"@turbo/gen": "^1.9.8",
+		"@types/react": "^18.2.12",
+		"@vitejs/plugin-react": "2.0.0",
+		"concurrently": "^8.0.1",
+		"eslint": "^8.42.0",
+		"happy-dom": "^9.10.9",
+		"typescript": "^5.2.2",
+		"vite": "^4.3.5",
+		"vitest": "^0.31.1"
+	}
 }

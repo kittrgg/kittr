@@ -1,39 +1,37 @@
 {
-  "name": "design-react",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "build": "next build",
-    "dev": "next dev -p 3001",
-    "format_IGNORE": "prettier . --check --cache --cache-location=\"node_modules/.cache/prettiercache\"",
-    "format:fix": "prettier . --write --cache --cache-location=\"node_modules/.cache/prettiercache\" --log-level=warn",
-    "lint": "eslint . --cache --cache-location \"node_modules/.cache/.eslintcache\" --max-warnings 0",
-    "lint:fix": "eslint . --fix --cache --cache-location \"node_modules/.cache/.eslintcache\" --max-warnings 0",
-    "start": "next start -p 3001",
-    "typecheck": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@kittr/lint": "workspace:*",
-    "@kittr/prisma": "workspace:*",
-    "@kittr/tailwind": "workspace:*",
-    "@kittr/tsconfig": "workspace:*",
-    "@kittr/types": "workspace:*",
-    "@kittr/ui": "workspace:*",
-    "@types/node": "20.1.0",
-    "@types/react": "^18.2.12",
-    "@types/react-dom": "^18.2.5",
-    "autoprefixer": "10.4.14",
-    "next": "^13.5.4",
-    "postcss": "8.4.23",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "tailwindcss": "3.3.2"
-  },
-  "devDependencies": {
-    "eslint": "^8.42.0",
-    "typescript": "^5.2.2"
-  },
-  "engines": {
-    "node": "18"
-  }
+	"name": "design-react",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"build": "next build",
+		"dev": "next dev -p 3001",
+		"lint": "eslint . --cache --cache-location \"node_modules/.cache/.eslintcache\" --max-warnings 0",
+		"lint:fix": "eslint . --fix --cache --cache-location \"node_modules/.cache/.eslintcache\" --max-warnings 0",
+		"start": "next start -p 3001",
+		"typecheck": "tsc --noEmit"
+	},
+	"dependencies": {
+		"@kittr/lint": "workspace:*",
+		"@kittr/prisma": "workspace:*",
+		"@kittr/tailwind": "workspace:*",
+		"@kittr/tsconfig": "workspace:*",
+		"@kittr/types": "workspace:*",
+		"@kittr/ui": "workspace:*",
+		"@types/node": "20.1.0",
+		"@types/react": "^18.2.12",
+		"@types/react-dom": "^18.2.5",
+		"autoprefixer": "10.4.14",
+		"next": "^13.5.4",
+		"postcss": "8.4.23",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"tailwindcss": "3.3.2"
+	},
+	"devDependencies": {
+		"eslint": "^8.42.0",
+		"typescript": "^5.2.2"
+	},
+	"engines": {
+		"node": "18"
+	}
 }
