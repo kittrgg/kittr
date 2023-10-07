@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    serverComponentsExternalPackages: ["lucide-icons-react"]
+    serverComponentsExternalPackages: ['lucide-icons-react'],
   },
   eslint: {
     ignoreDuringBuilds: true,
